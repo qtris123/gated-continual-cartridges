@@ -7,6 +7,7 @@ Usage:
 
 import argparse
 import os
+import sys
 from pathlib import Path
 
 import fitz
@@ -87,6 +88,7 @@ parser.add_argument(
     help="10-K filing year",
 )
 args, remaining = parser.parse_known_args()
+sys.argv = [sys.argv[0]] + remaining
 
 ensure_text_file(args.company, args.year)
 TEXT_PATH = str(TEXT_DIR / f"{args.company.upper()}_{args.year}_10K.txt")
