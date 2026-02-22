@@ -4,15 +4,15 @@ import pydrantic
 
 from cartridges.initialization import KVFromText
 from cartridges.train import TrainConfig, LossEvalConfig, GenerationEvalConfig
-from cartridges.models import HFModelConfig, FlexQwen3ForCausalLM
+from cartridges.models import HFModelConfig, FlexLlamaForCausalLM
 from cartridges.datasets import DataSource, GenerateEvalDataset, TrainDataset, LossEvalDataset
 
 
 
 config = TrainConfig(
     model=HFModelConfig(
-        pretrained_model_name_or_path="Qwen/Qwen3-4b",
-        model_cls=FlexQwen3ForCausalLM,
+        pretrained_model_name_or_path="meta-llama/Llama-3.2-3B-Instruct",
+        model_cls=FlexLlamaForCausalLM,
     ),
     kv_cache_initializer=KVFromText.Config(
         text_source=os.path.join(os.environ["CARTRIDGES_DIR"], "examples/arxiv/cartridges.tex"),
@@ -28,7 +28,7 @@ config = TrainConfig(
             # TODO: replace below with your own dataset you just synthesized and 
             # remove our huggingface dataset below
             # DataSource(path="path/to/your/dataset.parquet", type="local"),    
-            DataSource(path="hazyresearch/arxiv_synthesize_qwen-qwen3-4b_n8192-0", type="hf"),
+            DataSource(path="/home/phudishp/cartridges/outputs/2026-02-08-06-27-11-arxiv_synthesize/arxiv_synthesize_meta-llama/Llama-3.2-3B-Instruct_n256-0/artifact/dataset.parquet", type="local"),
         ],
         top_k_logits=20,
         packed_seq_length=2048,

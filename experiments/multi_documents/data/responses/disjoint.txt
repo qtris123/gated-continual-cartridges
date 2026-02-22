@@ -1,0 +1,47 @@
+1. Q: Which is larger — AMD's total acquisition-related intangible assets on its balance sheet or PepsiCo's net property, plant and equipment — and by approximately how much?
+   A: PepsiCo's net PP&E ($24,291 million) is slightly larger than AMD's acquisition-related intangibles ($24,118 million) by approximately $173 million.
+
+2. Q: If you combined AMD's total research and development expenses with PepsiCo's total advertising and marketing activities costs for fiscal year 2022, what would the total be?
+   A: Approximately $10.2 billion ($5,005 million from AMD R&D plus $5,200 million from PepsiCo advertising and marketing).
+
+3. Q: How does AMD's entire worldwide headcount compare to the number of PepsiCo employees located only within the United States?
+   A: AMD's approximately 25,000 worldwide employees is far fewer than PepsiCo's approximately 132,000 U.S.-based employees alone.
+
+4. Q: Which is greater — AMD's net cash provided by operating activities or PepsiCo's cash dividends paid to shareholders in fiscal year 2022?
+   A: PepsiCo's cash dividends paid ($6,172 million) exceeded AMD's operating cash flow ($3,565 million) by roughly $2.6 billion.
+
+5. Q: Compare the operating income of AMD's Embedded segment with the operating profit of PepsiCo's entire Quaker Foods North America division in 2022. Which is larger and by how much?
+   A: AMD's Embedded segment operating income ($2,252 million) is roughly 3.7 times larger than QFNA's operating profit ($604 million), exceeding it by about $1,648 million.
+
+6. Q: How does AMD's total inventory balance as of December 31, 2022 compare to PepsiCo's total accounts and notes receivable balance on the same date?
+   A: PepsiCo's accounts and notes receivable ($10,163 million) is about 2.7 times AMD's inventory ($3,771 million).
+
+7. Q: What is the ratio of PepsiCo's long-term debt (net of current portion) to AMD's long-term debt (net of current portion) as of the end of fiscal year 2022?
+   A: Approximately 14.4 to 1 — PepsiCo's $35,657 million versus AMD's $2,467 million.
+
+8. Q: If you divided PepsiCo's 2022 net revenue by AMD's approximate number of worldwide employees, what would the revenue-per-AMD-employee figure be?
+   A: Approximately $3.46 million ($86,392 million divided by 25,000 employees).
+
+9. Q: Which is larger — AMD's total goodwill or PepsiCo's other indefinite-lived intangible assets (excluding goodwill) — and by approximately how much?
+   A: AMD's goodwill ($24,177 million) exceeds PepsiCo's other indefinite-lived intangible assets ($14,309 million) by approximately $9,868 million.
+
+10. Q: How does AMD's interest expense for 2022 compare to PepsiCo's other pension and retiree medical benefits income in the same year?
+   A: PepsiCo's pension and retiree medical benefits income ($132 million) exceeds AMD's interest expense ($88 million) by $44 million.
+
+11. Q: What is the combined total of AMD's stock-based compensation expense (before taxes) and PepsiCo's share repurchases of common stock in fiscal year 2022?
+   A: Approximately $2,581 million ($1,081 million AMD stock-based compensation plus $1,500 million PepsiCo share repurchases).
+
+12. Q: Compare the total amount AMD spent on purchases of property and equipment in 2022 with the net revenue of PepsiCo's QFNA division. Which is larger?
+   A: PepsiCo's QFNA net revenue ($3,160 million) is about 7 times larger than AMD's property and equipment purchases ($450 million).
+
+13. Q: How does PepsiCo's capital spending in 2022 compare to AMD's total net income in the same year?
+   A: PepsiCo's capital spending ($5,207 million) is roughly 3.9 times AMD's net income ($1,320 million).
+
+14. Q: Which is larger — AMD's total owned facility space (in square feet) converted to a dollar figure at $1 per square foot, or PepsiCo's licensing gain? (Trick: compare the raw numbers.)
+   A: AMD has 1 million square feet of owned space. PepsiCo has no licensing gain line item, but AMD's own licensing gain was $102 million — so the licensing gain figure ($102 million) far exceeds the 1 million figure when treated as dollars.
+
+15. Q: What is the difference between AMD's Data Center segment revenue and PepsiCo's AMESA division net revenue in fiscal year 2022?
+   A: PepsiCo's AMESA net revenue ($6,438 million) exceeds AMD's Data Center revenue ($6,043 million) by approximately $395 million.
+
+16. Q: If you added AMD's depreciation expense for 2022 to PepsiCo's depreciation and amortization expense for 2022, what would the combined total be?
+   A: Approximately $3,202 million ($439 million from AMD plus $2,763 million from PepsiCo).

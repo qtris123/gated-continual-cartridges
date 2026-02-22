@@ -21,7 +21,12 @@ dependencies = [
     "peft",
     "evaluate",
     "matplotlib",
-    "markdown"
+    "markdown",
+    "ipykernel>=7.1.0",
+    "fitz>=0.0.1.dev2",
+    "frontend>=0.0.3",
+    "pymupdf>=1.26.7",
+    "dotenv>=0.9.9",
 ]
 
 [project.scripts]

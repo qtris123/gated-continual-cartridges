@@ -1,0 +1,47 @@
+1. Q: How many total pages does the AMD 2022 10-K filing have compared to the PepsiCo 2022 10-K filing?
+   A: The AMD 10-K is 121 pages, while the PepsiCo 10-K is 503 pages — PepsiCo's filing is more than four times longer.
+
+2. Q: How many notes to the consolidated financial statements does each company include, and which company has more?
+   A: AMD includes 17 notes (Note 1 through Note 17) and PepsiCo includes 14 notes (Note 1 through Note 14). AMD has three more notes than PepsiCo.
+
+3. Q: Does either filing include an Item 6 in its table of contents, and if so, how is it handled?
+   A: AMD includes Item 6 marked as "[Reserved]" in its table of contents and filing body. PepsiCo omits Item 6 entirely from its table of contents, skipping directly from Item 4 (Mine Safety Disclosures) to Item 5 in Part II.
+
+4. Q: How do AMD and PepsiCo differently structure their Risk Factors (Item 1A)? Does either use categorical groupings?
+   A: AMD organizes its risk factors into six named categories: Economic and Strategic Risks, Operational and Technology Risks, Legal and Regulatory Risks, Merger Acquisition and Integration Risks, Liquidity and Capital Resources Risks, and General Risks, preceded by a bullet-point summary. PepsiCo uses only two broad categories — Business Risks and Financial Risks — without a summary, and presents each risk as an individually titled subsection with a descriptive heading.
+
+5. Q: How does PepsiCo's MD&A (Item 7) structural organization differ from AMD's MD&A in terms of major section headers?
+   A: PepsiCo's MD&A is organized into three explicitly labeled major sections: "Our Business," "Our Financial Results," and "Our Critical Accounting Policies and Estimates," and includes its own internal table of contents listing page numbers for each subsection. AMD's MD&A flows sequentially with subsections like Introduction, Overview, Critical Accounting Estimates, Results of Operations, and Liquidity and Capital Resources, without a separate internal table of contents or top-level grouping headers.
+
+6. Q: Which of the two filings includes a Glossary section, and where is it located within the document?
+   A: PepsiCo includes a Glossary section at the end of its Item 7 (MD&A), listed in its internal MD&A table of contents on page 114 of the filing. AMD does not include a Glossary anywhere in its 10-K.
+
+7. Q: How many securities does each company register on the cover page of its 10-K under Section 12(b)?
+   A: AMD registers one security — its Common Stock (ticker: AMD) on the NASDAQ Global Select Market. PepsiCo registers 13 securities — its Common Stock (ticker: PEP) plus 12 separate Senior Notes series with individual trading symbols (PEP24 through PEP50), all on The Nasdaq Stock Market LLC.
+
+8. Q: Compare how AMD and PepsiCo present their Properties section (Item 2). How do the formats differ?
+   A: AMD's Properties section is a brief narrative paragraph describing total square footage (6 million total: 5 million leased, 1 million owned) and listing significant operation locations. PepsiCo's Properties section includes a structured table listing significant properties by division, property type, location, and owned/leased status across all seven divisions, providing more granular facility-level detail.
+
+9. Q: Both companies include financial statements in Item 8. What are the five core consolidated financial statements included, and do both companies name them identically?
+   A: Both include the same five types of statements but name them slightly differently. AMD uses: Consolidated Statements of Operations, Consolidated Statements of Comprehensive Income, Consolidated Balance Sheets, Consolidated Statements of Stockholders' Equity, and Consolidated Statements of Cash Flows. PepsiCo uses: Consolidated Statement of Income, Consolidated Statement of Comprehensive Income, Consolidated Balance Sheet, Consolidated Statement of Equity, and Consolidated Statement of Cash Flows. AMD uses plural "Statements/Sheets" while PepsiCo uses singular "Statement/Sheet," and AMD says "Operations" and "Stockholders' Equity" versus PepsiCo's "Income" and "Equity."
+
+10. Q: How does each company handle its Part III items (Items 10–14)? Do they provide substantive content or incorporate by reference?
+    A: Both companies incorporate Part III items by reference to their respective upcoming proxy statements for the 2023 Annual Meeting of Shareholders/Stockholders, rather than providing substantive content within the 10-K itself. AMD states that portions of its 2023 Proxy Statement are incorporated into Part III, and each of its Items 10–14 contains a brief reference to specific proxy statement sections. PepsiCo handles this similarly, with each item referencing its proxy statement.
+
+11. Q: What are the critical audit matters identified by each company's independent auditor, and how do they differ in focus?
+    A: AMD's auditor (Ernst & Young) identified two critical audit matters: (1) Inventory Valuation, due to the judgment involved in estimating net realizable value using demand forecasts, and (2) the Business Combination with Xilinx, due to the complexity of estimating fair value of acquired intangible assets. PepsiCo's auditor (KPMG) identified two different critical audit matters: (1) Sales Incentive Accruals, due to the subjectivity in estimating customer participation and performance levels, and (2) the Carrying Value of Certain Reacquired and Acquired Franchise Rights and SodaStream Brand, due to the judgment in impairment testing of indefinite-lived intangible assets.
+
+12. Q: Does AMD's Item 5 (Market for Registrant's Common Equity) include a stock performance comparison graph, and does PepsiCo include one as well?
+    A: AMD includes a five-year cumulative total return Performance Graph comparing AMD's stock against the S&P 500 Index and the S&P 500 Semiconductor Index within its Item 5 section. PepsiCo's Item 5 does not include a stock performance graph; instead it provides information on the stock trading symbol, exchange listings (including the SIX Swiss Exchange), shareholder count, dividend history, and a quarterly share repurchase table.
+
+13. Q: Where in each filing does the Forward-Looking Statements disclaimer appear?
+    A: In AMD's filing, the "Cautionary Statement Regarding Forward-Looking Statements" appears at the very beginning of Part I, Item 1 (Business), before the company Overview. In PepsiCo's filing, the "Forward-Looking Statements" section appears as a standalone section between the Table of Contents and the start of Part I Item 1, positioned before the Business section but not within it.
+
+14. Q: How many executive officers does PepsiCo name and provide biographies for within its 10-K filing versus AMD?
+    A: PepsiCo lists 11 executive officers with individual biographical descriptions directly within Item 1 of its 10-K (Flavell, Gallagher, Johnston, Krishnan, Laguarta, Popovici, Santilli, Schellekens, Tanner, Willemsen, and Williams). AMD does not provide executive officer biographies in its 10-K; instead, Item 10 incorporates this information by reference to the proxy statement.
+
+15. Q: Where does each filing place its discussion of human capital and workforce matters, and do both companies include such a section?
+    A: Both companies include a Human Capital section within Item 1 (Business). AMD's Human Capital subsection covers its history, mission, culture, diversity, total rewards, and workforce development. PepsiCo's Human Capital section focuses on workforce size, safety, training hours, and employee development programs. Both are placed toward the end of their respective Item 1 Business sections, after the operational and competition discussions.
+
+16. Q: PepsiCo uniquely includes a sustainability strategy framework within its 10-K. In what section is it located, and does AMD have an equivalent?
+    A: PepsiCo presents its pep+ (PepsiCo Positive) sustainability strategy within the "Executive Overview" subsection of its MD&A (Item 7), under the "Our Business" header, detailing three pillars: Positive Agriculture, Positive Value Chain, and Positive Choices. AMD does not include a comparable dedicated sustainability or ESG strategy framework within its 10-K; environmental matters are only briefly addressed through standard regulatory compliance language in Item 1 and the risk factors section.

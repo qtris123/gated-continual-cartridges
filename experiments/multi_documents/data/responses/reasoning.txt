@@ -1,0 +1,47 @@
+1. Q: What was AMD's year-over-year revenue growth rate from 2021 to 2022, and how does it compare to PepsiCo's over the same period?
+   A: AMD's revenue grew approximately 43.6% (from $16,434M to $23,601M), while PepsiCo's grew approximately 8.7% (from $79,474M to $86,392M). AMD's growth rate was roughly 5 times higher than PepsiCo's.
+
+2. Q: Calculate the gross profit margin for both companies in fiscal year 2022. Which company has the higher margin?
+   A: PepsiCo's gross margin was approximately 53.0% ($45,816M/$86,392M), while AMD's was approximately 44.9% ($10,603M/$23,601M). PepsiCo's gross margin was about 8.1 percentage points higher.
+
+3. Q: What is the current ratio for each company as of the end of fiscal year 2022, and what does the comparison suggest?
+   A: AMD's current ratio was approximately 2.36 ($15,019M/$6,369M), while PepsiCo's was approximately 0.80 ($21,539M/$26,785M). AMD has far more short-term liquidity, as PepsiCo's current liabilities actually exceed its current assets by roughly $5,246M.
+
+4. Q: Compute the long-term debt-to-equity ratio for both companies. Which is more leveraged?
+   A: AMD's debt-to-equity ratio is approximately 0.05 ($2,467M/$54,750M), while PepsiCo's is approximately 2.06 ($35,657M/$17,273M). PepsiCo is dramatically more leveraged — roughly 41 times AMD's ratio.
+
+5. Q: How much revenue did each company generate per employee in 2022?
+   A: AMD generated approximately $944,000 per employee ($23,601M/25,000 employees), while PepsiCo generated approximately $274,000 per employee ($86,392M/315,000 employees). AMD's revenue per employee is about 3.4 times higher, reflecting the capital-light, high-value nature of semiconductor design versus PepsiCo's labor-intensive manufacturing and distribution.
+
+6. Q: Which AMD segment had the highest revenue growth rate from 2021 to 2022, and how does it compare to the fastest-growing PepsiCo division?
+   A: AMD's Embedded segment grew approximately 1,750% (from $246M to $4,552M), driven by the Xilinx acquisition. PepsiCo's fastest-growing division was LatAm at approximately 20.6% (from $8,108M to $9,779M). AMD's Embedded growth was roughly 85 times PepsiCo LatAm's rate, though the Embedded growth was largely inorganic.
+
+7. Q: If you combine AMD's total R&D expenditure and PepsiCo's total capital spending in 2022, what is the sum, and what percentage of the two companies' combined revenue does it represent?
+   A: AMD R&D ($5,005M) plus PepsiCo capex ($5,207M) equals $10,212M. Combined revenue is $109,993M ($23,601M + $86,392M). The sum represents approximately 9.3% of combined revenue.
+
+8. Q: Calculate the return on equity (ROE) for both companies in 2022. Which delivers a higher return to shareholders?
+   A: AMD's ROE is approximately 2.4% ($1,320M/$54,750M), while PepsiCo's is approximately 52.0% ($8,910M/$17,149M). PepsiCo's ROE is roughly 22 times higher, partly because its high leverage (debt-funded share repurchases) compresses the equity base.
+
+9. Q: What percentage of AMD's total revenue came from outside the United States in 2022, and what was the dollar amount of international sales? How does this compare to PepsiCo?
+   A: AMD's international revenue was $15,552M ($23,601M minus $8,049M U.S.), representing 65.9% of total revenue. PepsiCo's international operations (LatAm + Europe + AMESA + APAC) generated $33,728M, representing approximately 39.0% of total revenue. AMD is more internationally dependent by percentage, while PepsiCo generates more than double the absolute international dollar amount.
+
+10. Q: By what percentage did AMD's net income decline from 2021 to 2022, and by what percentage did PepsiCo's net income attributable to PepsiCo grow over the same period?
+    A: AMD's net income declined approximately 58.3% (from $3,162M to $1,320M), while PepsiCo's grew approximately 17.0% (from $7,618M to $8,910M). The two companies moved in opposite directions, with a combined swing of approximately 75 percentage points.
+
+11. Q: What was each company's operating cash flow as a percentage of revenue in 2022, and what was the dollar difference between their operating cash flows?
+    A: AMD's operating cash flow margin was 15.1% ($3,565M/$23,601M), slightly higher than PepsiCo's 12.5% ($10,811M/$86,392M). However, in absolute dollars, PepsiCo generated $7,246M more in operating cash flow than AMD.
+
+12. Q: What is the asset turnover ratio (revenue divided by total assets) for each company, and what does this imply about each company's asset efficiency?
+    A: AMD's asset turnover is approximately 0.35 ($23,601M/$67,580M), while PepsiCo's is approximately 0.94 ($86,392M/$92,187M). PepsiCo generates nearly $0.94 of revenue per dollar of assets versus AMD's $0.35, suggesting PepsiCo uses its assets roughly 2.7 times more efficiently. AMD's low ratio reflects the massive goodwill and intangibles from the Xilinx acquisition inflating its asset base.
+
+13. Q: How much total cash did each company return to shareholders in 2022 through dividends and share repurchases combined, and what percentage of operating cash flow did these returns represent?
+    A: PepsiCo returned $7,672M ($6,172M dividends + $1,500M repurchases), representing 71.0% of its operating cash flow. AMD returned $3,702M (entirely through share repurchases; no dividends), representing 103.8% of its operating cash flow. AMD actually returned more than its operating cash flow, funded partly by the cash acquired in the Xilinx transaction.
+
+14. Q: What was AMD's total cost of sales (including amortization of acquisition-related intangibles) as a percentage of revenue in 2022 compared to PepsiCo's cost of sales as a percentage of revenue?
+    A: AMD's total cost of sales was $12,998M, representing 55.1% of revenue. PepsiCo's cost of sales was $40,576M, representing 47.0% of revenue. PepsiCo retains a higher percentage of each revenue dollar after direct costs, despite being in the consumer goods industry.
+
+15. Q: Only one of AMD's four reportable segments experienced a revenue decline from 2021 to 2022, and only one of PepsiCo's seven divisions experienced a revenue decline. Which were they, and what were the respective decline rates?
+    A: AMD's Client segment declined 10.0% (from $6,887M to $6,201M) due to the weak PC market. PepsiCo's Europe division declined 2.4% (from $13,038M to $12,724M), impacted by the Russia-Ukraine conflict and unfavorable currency translation. AMD's declining segment fell at a rate roughly 4 times steeper than PepsiCo's.
+
+16. Q: Calculate the approximate free cash flow for each company in 2022 (defined as operating cash flow minus capital expenditures plus sales of property and equipment). What is the combined free cash flow?
+    A: AMD's free cash flow was approximately $3,115M ($3,565M - $450M; no material PPE sales disclosed). PepsiCo's free cash flow was approximately $5,855M ($10,811M - $5,207M + $251M). Combined free cash flow was approximately $8,970M.

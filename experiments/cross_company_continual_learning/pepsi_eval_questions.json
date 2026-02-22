@@ -1,0 +1,212 @@
+[
+  {
+    "question_id": "0",
+    "question": "Where is PepsiCo's principal executive office located?",
+    "reference_answer": "700 Anderson Hill Road, Purchase, New York 10577",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "1",
+    "question": "In which state is PepsiCo currently incorporated?",
+    "reference_answer": "North Carolina (originally incorporated in Delaware in 1919, reincorporated in North Carolina in 1986)",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "2",
+    "question": "On which stock exchange is PepsiCo's common stock listed, and what is its trading symbol?",
+    "reference_answer": "The Nasdaq Stock Market LLC, under the symbol PEP",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "3",
+    "question": "What is the par value per share of PepsiCo's common stock?",
+    "reference_answer": "1-2/3 cents (one and two-thirds cents) per share",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "4",
+    "question": "What is PepsiCo's registrant telephone number?",
+    "reference_answer": "(914) 253-2000",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "5",
+    "question": "What is PepsiCo's Commission File Number?",
+    "reference_answer": "1-1183",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "6",
+    "question": "What is PepsiCo's IRS Employer Identification Number?",
+    "reference_answer": "13-1584302",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "7",
+    "question": "Who is PepsiCo's Chairman and Chief Executive Officer?",
+    "reference_answer": "Ramon L. Laguarta",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "8",
+    "question": "Who serves as PepsiCo's independent registered public accounting firm, and since what year?",
+    "reference_answer": "KPMG LLP, serving since 1990",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "9",
+    "question": "How many shares of common stock is PepsiCo authorized to issue?",
+    "reference_answer": "3,600,000,000 (3.6 billion) shares",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "10",
+    "question": "Does PepsiCo pay dividends on its common stock, and if so, since when?",
+    "reference_answer": "Yes, PepsiCo has paid consecutive quarterly cash dividends since 1965.",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "11",
+    "question": "What was PepsiCo's total net revenue for fiscal year 2022?",
+    "reference_answer": "$86,392 million (approximately $86.4 billion)",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "12",
+    "question": "What was PepsiCo's net income attributable to PepsiCo for fiscal year 2022?",
+    "reference_answer": "$8,910 million",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "13",
+    "question": "What was PepsiCo's gross profit for fiscal year 2022?",
+    "reference_answer": "$45,816 million",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "14",
+    "question": "What was PepsiCo's operating profit for fiscal year 2022?",
+    "reference_answer": "$11,512 million (operating margin of 13.3%)",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "15",
+    "question": "What was PepsiCo's diluted earnings per share for fiscal year 2022?",
+    "reference_answer": "$6.42",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "16",
+    "question": "What was PepsiCo's annual effective tax rate for fiscal year 2022?",
+    "reference_answer": "16.1%",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "17",
+    "question": "What was PepsiCo's total assets at the end of fiscal year 2022?",
+    "reference_answer": "$92,187 million",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "18",
+    "question": "What was PepsiCo's goodwill on the balance sheet at the end of fiscal year 2022?",
+    "reference_answer": "$18,202 million",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "19",
+    "question": "What was PepsiCo's net property, plant and equipment at the end of fiscal year 2022?",
+    "reference_answer": "$24,291 million",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "20",
+    "question": "What was PepsiCo's long-term debt (net of current portion) at the end of fiscal year 2022?",
+    "reference_answer": "$35,657 million",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "21",
+    "question": "What was PepsiCo's cash and cash equivalents at the end of fiscal year 2022?",
+    "reference_answer": "$4,954 million",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "22",
+    "question": "How many reportable segments (divisions) does PepsiCo have, and what are they named?",
+    "reference_answer": "Seven: Frito-Lay North America (FLNA), Quaker Foods North America (QFNA), PepsiCo Beverages North America (PBNA), Latin America (LatAm), Europe, Africa Middle East and South Asia (AMESA), and Asia Pacific Australia and New Zealand and China Region (APAC).",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "23",
+    "question": "Approximately how many employees did PepsiCo have worldwide as of December 31, 2022?",
+    "reference_answer": "Approximately 315,000 employees worldwide, including approximately 132,000 in the United States.",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "24",
+    "question": "What was PepsiCo's net cash provided by operating activities for fiscal year 2022?",
+    "reference_answer": "$10,811 million",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "25",
+    "question": "What was PepsiCo's capital spending for fiscal year 2022?",
+    "reference_answer": "$5,207 million",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "26",
+    "question": "How much did PepsiCo pay in cash dividends during fiscal year 2022?",
+    "reference_answer": "$6,172 million",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "27",
+    "question": "How much did PepsiCo spend on share repurchases of common stock during fiscal year 2022?",
+    "reference_answer": "$1,500 million",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "28",
+    "question": "What percentage of PepsiCo's consolidated net revenue came from operations outside the United States in 2022?",
+    "reference_answer": "43%",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "29",
+    "question": "What was PepsiCo's largest customer, and what percentage of consolidated net revenue did they represent?",
+    "reference_answer": "Walmart Inc. and its affiliates (including Sam's Club), representing approximately 14% of consolidated net revenue.",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "30",
+    "question": "What was the Juice Transaction that PepsiCo completed in 2022?",
+    "reference_answer": "PepsiCo sold its Tropicana, Naked and other select juice brands to PAI Partners in Q1 2022, while retaining a 39% noncontrolling interest in Tropicana Brands Group (TBG).",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "31",
+    "question": "What is PepsiCo's sustainability strategy called, and what are its three pillars?",
+    "reference_answer": "pep+ (PepsiCo Positive), with three pillars: Positive Agriculture, Positive Value Chain, and Positive Choices.",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "32",
+    "question": "What was PepsiCo's cash dividends declared per common share for fiscal year 2022?",
+    "reference_answer": "$4.5250 per share",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "33",
+    "question": "Which PepsiCo division had the highest net revenue in fiscal year 2022, and what was the amount?",
+    "reference_answer": "PepsiCo Beverages North America (PBNA) with $26,213 million in net revenue.",
+    "category": "pepsi_factual"
+  },
+  {
+    "question_id": "34",
+    "question": "Which PepsiCo division had the highest operating profit in fiscal year 2022, and what was the amount?",
+    "reference_answer": "Frito-Lay North America (FLNA) with $6,135 million in operating profit.",
+    "category": "pepsi_factual"
+  }
+]

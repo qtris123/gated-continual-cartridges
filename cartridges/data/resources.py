@@ -31,7 +31,9 @@ class Resource(abc.ABC):
         raise NotImplementedError("This resource does not implement a string representation.")
 
 SEED_TYPES = Literal[
-    "structuring", "summarization", "aggregation", "question", "use_case", "creative", 'generic'
+    "structuring", "summarization", "aggregation", "question", "use_case", "creative", "generic",
+    "genconvo_factual", "genconvo_knowledge", "genconvo_disjoint", "genconvo_synthesize",
+    "genconvo_structure", "genconvo_creative", "genconvo_counting", "genconvo_reasoning",
 ]
 
 
@@ -295,6 +297,113 @@ def generic_seed_prompt(**kwargs):
     )
 
 
+def genconvo_factual_seed_prompt(**kwargs):
+    return (
+        """
+        Please generate a question to test someone’s ability to remember factual details from the document. The
+        answer should be a few tokens long and be a factual detail from the statement, such as a number, entity,
+        date, title, or name.
+        This question should not be common knowledge: instead, it should be something that is only answerable
+        via information in the document.
+        Do NOT include any other text or explanation other than the question        
+        """ 
+    )
+
+
+def genconvo_knowledge_seed_prompt(**kwargs):
+    return (
+        """
+        Please generate a question that requires combining information mentioned both inside and outside the
+        document.
+        This question should require using a fact from the document and also a fact that you are confident about,
+        but is not mentioned in the document. For instance: - What are the founding dates of the companies
+        that got acquired this year? This is a good question because the names of the acquired companies are
+        mentioned in the document and the founding dates are not mentioned. - What is the name of the CEO’s
+        spouse? This is a good question because the name of the CEO is mentioned in the document and the
+        spouse’s name is not mentioned.
+        Do NOT include any other text or explanation other than the question        
+        """
+
+    )
+
+
+def genconvo_disjoint_seed_prompt(**kwargs):
+    return (
+        """
+        Please generate a multi-hop question that tests someone’s ability to use factual information mentioned
+        in at least two very different sub-sections of the document.
+        This question shouldn’t be a standard question about this kind of document. Instead, it should ask
+        about two particularly disconnected ideas, like comparing information about the amount of owned space
+        for the company headquarters with the amount of dollars of estimated liability or comparing the revenue
+        number with the number of employees.
+        This question should also test one’s ability to do retrieval: do not give away part of the answer in
+        the question. Ensure that for one to get the correct answer to the question, they need to understand
+        the document.
+        Do NOT include any other text or explanation other than the question        
+        """
+    )
+
+
+def genconvo_synthesize_seed_prompt(**kwargs):
+    return (
+        """
+        Please generate a question that requires synthesizing and aggregating information in the document.
+        For instance, you could ask someone to summarize a page of the document, list all the key competitors
+        mentioned in the document, or summarize the company’s business model
+        Do NOT include any other text or explanation other than the question        
+        """
+    )
+
+
+def genconvo_structure_seed_prompt(**kwargs):
+    return (
+        """
+        Please generate a question that requires understanding the structure of the document.
+        This question should be more about the structure of the document, rather than the precise statement
+        details. For instance, you could ask someone to list the titles of all the sections in the document,
+        describe the document structure, report the total number of pages, ask which section amongst two sections
+        comes first, or report the section with the largest number of tables.
+        Do NOT include any other text or explanation other than the question        
+        """
+    )
+
+
+def genconvo_creative_seed_prompt(**kwargs):
+    return (
+        """
+        Please generate a question about the document to test someone’s ability to comprehend the content of the
+        document. This question specifically should be focused on their ability to generalize the information
+        about the document to a strange question of sorts.
+        This question shouldn’t be a standard question about this kind of document, it should ask to do something
+        abnormal and creative, like writing a poem about a financial document.
+        Do NOT include any other text or explanation other than the question        
+        """
+    )
+
+
+def genconvo_counting_seed_prompt(**kwargs):
+    return (
+        """
+        Please generate a question that requires counting how frequently different events occur in the document.
+        This question should be about statistical properties of the document, rather than the statement details.
+        For instance, you could ask someone to count the number of times the word "million" is mentioned or
+        count the length of the shortest section title.
+        Do NOT include any other text or explanation other than the question        
+        """
+    )
+
+
+def genconvo_reasoning_seed_prompt(**kwargs):
+    return (
+        """
+        Please generate a question that requires mathematical reasoning over the values in the document.
+        This question should require going beyond the facts directly mentioned in the statement, such as asking
+        to compute the percentage increase in revenue between two years, find the largest expense category, or
+        calculate difference in profit between two years.
+        Do NOT include any other text or explanation other than the question        
+        """
+    )
+
 
 SEED_PROMPT_REGISTRY: dict[SEED_TYPES, Callable] = {
     "structuring": structuring_seed_prompt,
@@ -303,6 +412,14 @@ SEED_PROMPT_REGISTRY: dict[SEED_TYPES, Callable] = {
     "use_case": use_case_seed_prompt,
     "creative": creative_seed_prompt,
     "generic": generic_seed_prompt,
+    "genconvo_factual": genconvo_factual_seed_prompt,
+    "genconvo_knowledge": genconvo_knowledge_seed_prompt,
+    "genconvo_disjoint": genconvo_disjoint_seed_prompt,
+    "genconvo_synthesize": genconvo_synthesize_seed_prompt,
+    "genconvo_structure": genconvo_structure_seed_prompt,
+    "genconvo_creative": genconvo_creative_seed_prompt,
+    "genconvo_counting": genconvo_counting_seed_prompt,
+    "genconvo_reasoning": genconvo_reasoning_seed_prompt,
 }
 
 def sample_seed_prompts(seed_types: List[SEED_TYPES], batch_size: int) -> List[str]:

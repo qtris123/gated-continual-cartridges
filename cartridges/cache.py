@@ -239,7 +239,7 @@ class TrainableCache(nn.Module):
         # Here, num_tokens is inferred from trainable keys, but note that the total tokens may be different if fixed tokens exist.
         # The number of fixed tokens can be inferred from frozen_keys if available.
         num_frozen_tokens = (
-            checkpoint["frozen_keys"][0].size(1) if checkpoint["frozen_keys"] else 0
+            checkpoint["frozen_keys"][0].size(2) if checkpoint["frozen_keys"] else 0
         )
 
         return cls(
