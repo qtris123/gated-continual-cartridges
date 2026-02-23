@@ -2,7 +2,7 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-CARTRIDGES_DIR="${CARTRIDGES_DIR:-$SCRIPT_DIR/../..}"
+CARTRIDGES_DIR="${CARTRIDGES_DIR:-$HOME/continual-cartridges}"
 
 # Clone continual-cartridges repo if not found
 if [ ! -d "$CARTRIDGES_DIR/.git" ]; then
