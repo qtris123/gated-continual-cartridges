@@ -87,6 +87,12 @@ parser.add_argument(
     required=True,
     help="10-K filing year",
 )
+parser.add_argument(
+    "--include-year",
+    action="store_true",
+    default=False,
+    help="Include explicit year in number-related prompts",
+)
 args, remaining = parser.parse_known_args()
 sys.argv = [sys.argv[0]] + remaining
 
@@ -107,6 +113,8 @@ config = SynthesizeConfig(
         resources=[
             TextFileResource.Config(
                 path=TEXT_PATH,
+                year=args.year,
+                include_year=args.include_year,
                 seed_prompts=[
                     "genconvo_factual",
                     "genconvo_knowledge",

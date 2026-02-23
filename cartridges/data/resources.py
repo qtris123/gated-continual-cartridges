@@ -15,6 +15,8 @@ class Resource(abc.ABC):
 
     class Config(ObjectConfig):
         _pass_as_config = True
+        year: Optional[int] = None
+        include_year: bool = False
     
     async def setup(self):
         """This is an optional method that can be used to setup the resource.
@@ -58,7 +60,7 @@ class TextResource(Resource):
             raise ValueError("Chunker not initialized. Call setup() first.")
         
         chunk = self.chunker.sample_chunk()
-        seed_prompts = sample_seed_prompts(self.config.seed_prompts, batch_size)
+        seed_prompts = sample_seed_prompts(self.config.seed_prompts, batch_size, year=self.config.year, include_year=self.config.include_year)
         return chunk, seed_prompts
 
 class TextFileResource(TextResource):
@@ -297,17 +299,21 @@ def generic_seed_prompt(**kwargs):
     )
 
 
-def genconvo_factual_seed_prompt(**kwargs):
-    return (
-        """
+def genconvo_factual_seed_prompt(year=None, include_year=False, **kwargs):
+    base_prompt = """
         Please generate a question to test someone’s ability to remember factual details from the document. The
         answer should be a few tokens long and be a factual detail from the statement, such as a number, entity,
         date, title, or name.
         This question should not be common knowledge: instead, it should be something that is only answerable
         via information in the document.
-        Do NOT include any other text or explanation other than the question        
-        """ 
-    )
+        Do NOT include any other text or explanation other than the question
+        """
+    if year is not None:
+        if include_year:
+            return base_prompt + f"\nIf the question involves numerical values, make sure to mention that the data is from the {year} document."
+        else:
+            return base_prompt + "\nIf the question involves numerical values, make sure to mention that the data is from this year’s document."
+    return base_prompt
 
 
 def genconvo_knowledge_seed_prompt(**kwargs):
@@ -327,9 +333,8 @@ def genconvo_knowledge_seed_prompt(**kwargs):
     )
 
 
-def genconvo_disjoint_seed_prompt(**kwargs):
-    return (
-        """
+def genconvo_disjoint_seed_prompt(year=None, include_year=False, **kwargs):
+    base_prompt = """
         Please generate a multi-hop question that tests someone’s ability to use factual information mentioned
         in at least two very different sub-sections of the document.
         This question shouldn’t be a standard question about this kind of document. Instead, it should ask
@@ -339,9 +344,14 @@ def genconvo_disjoint_seed_prompt(**kwargs):
         This question should also test one’s ability to do retrieval: do not give away part of the answer in
         the question. Ensure that for one to get the correct answer to the question, they need to understand
         the document.
-        Do NOT include any other text or explanation other than the question        
+        Do NOT include any other text or explanation other than the question
         """
-    )
+    if year is not None:
+        if include_year:
+            return base_prompt + f"\nIf the question involves numerical values, make sure to mention that the data is from the {year} document."
+        else:
+            return base_prompt + "\nIf the question involves numerical values, make sure to mention that the data is from this year’s document."
+    return base_prompt
 
 
 def genconvo_synthesize_seed_prompt(**kwargs):
@@ -381,28 +391,36 @@ def genconvo_creative_seed_prompt(**kwargs):
     )
 
 
-def genconvo_counting_seed_prompt(**kwargs):
-    return (
-        """
+def genconvo_counting_seed_prompt(year=None, include_year=False, **kwargs):
+    base_prompt = """
         Please generate a question that requires counting how frequently different events occur in the document.
         This question should be about statistical properties of the document, rather than the statement details.
         For instance, you could ask someone to count the number of times the word "million" is mentioned or
         count the length of the shortest section title.
-        Do NOT include any other text or explanation other than the question        
+        Do NOT include any other text or explanation other than the question
         """
-    )
+    if year is not None:
+        if include_year:
+            return base_prompt + f"\nIf the question involves numerical values, make sure to mention that the data is from the {year} document."
+        else:
+            return base_prompt + "\nIf the question involves numerical values, make sure to mention that the data is from this year's document."
+    return base_prompt
 
 
-def genconvo_reasoning_seed_prompt(**kwargs):
-    return (
-        """
+def genconvo_reasoning_seed_prompt(year=None, include_year=False, **kwargs):
+    base_prompt = """
         Please generate a question that requires mathematical reasoning over the values in the document.
         This question should require going beyond the facts directly mentioned in the statement, such as asking
         to compute the percentage increase in revenue between two years, find the largest expense category, or
         calculate difference in profit between two years.
-        Do NOT include any other text or explanation other than the question        
+        Do NOT include any other text or explanation other than the question
         """
-    )
+    if year is not None:
+        if include_year:
+            return base_prompt + f"\nIf the question involves numerical values, make sure to mention that the data is from the {year} document."
+        else:
+            return base_prompt + "\nIf the question involves numerical values, make sure to mention that the data is from this year's document."
+    return base_prompt
 
 
 SEED_PROMPT_REGISTRY: dict[SEED_TYPES, Callable] = {
@@ -422,8 +440,8 @@ SEED_PROMPT_REGISTRY: dict[SEED_TYPES, Callable] = {
     "genconvo_reasoning": genconvo_reasoning_seed_prompt,
 }
 
-def sample_seed_prompts(seed_types: List[SEED_TYPES], batch_size: int) -> List[str]:
+def sample_seed_prompts(seed_types: List[SEED_TYPES], batch_size: int, **kwargs) -> List[str]:
     seed_types = random.choices(seed_types, k=batch_size)
-    return [SEED_PROMPT_REGISTRY[seed_type]() for seed_type in seed_types]
+    return [SEED_PROMPT_REGISTRY[seed_type](**kwargs) for seed_type in seed_types]
 
 # --- end generators for 
