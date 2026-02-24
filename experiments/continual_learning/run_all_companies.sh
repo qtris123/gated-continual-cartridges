@@ -101,14 +101,15 @@ export CARTRIDGES_TOKASAURUS_URL="${CARTRIDGES_TOKASAURUS_URL:-http://localhost:
 # ── 4. Run synthesis for all companies ─────────────────────────────────
 declare -A COMPANY_YEARS
 COMPANY_YEARS=(
-  ["AMD"]="2015 2016 2017 2018 2019 2020"
-  ["Pepsi"]="2015 2016 2017 2018 2019 2020 2021"
+  ["AMD"]="2015 2016 2017 2018 2019 2020 2021 2022"
+  ["Pepsi"]="2015 2016 2017 2018 2019 2020 2021 2022"
   ["Apple"]="2015 2016 2017 2018 2019 2020 2021 2022"
   ["Netflix"]="2015 2016 2017 2018 2019 2020 2021 2022"
 )
 
+# ── Pass 1: WITHOUT --include-year ──
 echo ""
-echo "=== Continual Learning Synthesis ==="
+echo "=== Continual Learning Synthesis (without --include-year) ==="
 echo "Companies: ${!COMPANY_YEARS[*]}"
 echo "Output:    $CARTRIDGES_OUTPUT_DIR"
 echo "====================================="
@@ -118,11 +119,29 @@ for COMPANY in "${!COMPANY_YEARS[@]}"; do
   echo ""
   echo "=== Company: $COMPANY | Years: $YEARS ==="
   for year in $YEARS; do
-    echo ""
     echo "=== Synthesizing $COMPANY $year ==="
     python experiments/continual_learning/synthesize_data.py \
       --company $COMPANY --year $year
     echo "=== Done: $COMPANY $year ==="
+  done
+done
+
+echo ""
+echo "=== Pass 1 complete (without --include-year) ==="
+
+# ── Pass 2: WITH --include-year ──
+echo ""
+echo "=== Continual Learning Synthesis (with --include-year) ==="
+
+for COMPANY in "${!COMPANY_YEARS[@]}"; do
+  YEARS="${COMPANY_YEARS[$COMPANY]}"
+  echo ""
+  echo "=== Company: $COMPANY | Years: $YEARS (include-year) ==="
+  for year in $YEARS; do
+    echo "=== Synthesizing $COMPANY $year (include-year) ==="
+    python experiments/continual_learning/synthesize_data.py \
+      --company $COMPANY --year $year --include-year
+    echo "=== Done: $COMPANY $year (include-year) ==="
   done
 done
 
