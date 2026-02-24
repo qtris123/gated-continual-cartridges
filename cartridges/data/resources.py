@@ -312,13 +312,12 @@ def genconvo_factual_seed_prompt(year=None, include_year=False, **kwargs):
         if include_year:
             return base_prompt + f"\nIf the question involves numerical values, make sure to mention that the data is from the {year} document."
         else:
-            return base_prompt + "\nIf the question involves numerical values, make sure to mention that the data is from this year’s document."
+            return base_prompt + "\nIMPORTANT: If the question involves numerical values, refer to them as being from \"this year’s\" document. Do NOT mention any specific year number in the question — use \"this year\" instead."
     return base_prompt
 
 
-def genconvo_knowledge_seed_prompt(**kwargs):
-    return (
-        """
+def genconvo_knowledge_seed_prompt(year=None, include_year=False, **kwargs):
+    base_prompt = """
         Please generate a question that requires combining information mentioned both inside and outside the
         document.
         This question should require using a fact from the document and also a fact that you are confident about,
@@ -327,10 +326,14 @@ def genconvo_knowledge_seed_prompt(**kwargs):
         mentioned in the document and the founding dates are not mentioned. - What is the name of the CEO’s
         spouse? This is a good question because the name of the CEO is mentioned in the document and the
         spouse’s name is not mentioned.
-        Do NOT include any other text or explanation other than the question        
+        Do NOT include any other text or explanation other than the question
         """
-
-    )
+    if year is not None:
+        if include_year:
+            return base_prompt + f"\nIf the question involves numerical values, make sure to mention that the data is from the {year} document."
+        else:
+            return base_prompt + "\nIMPORTANT: If the question involves numerical values, refer to them as being from \"this year’s\" document. Do NOT mention any specific year number in the question — use \"this year\" instead."
+    return base_prompt
 
 
 def genconvo_disjoint_seed_prompt(year=None, include_year=False, **kwargs):
@@ -350,45 +353,57 @@ def genconvo_disjoint_seed_prompt(year=None, include_year=False, **kwargs):
         if include_year:
             return base_prompt + f"\nIf the question involves numerical values, make sure to mention that the data is from the {year} document."
         else:
-            return base_prompt + "\nIf the question involves numerical values, make sure to mention that the data is from this year’s document."
+            return base_prompt + "\nIMPORTANT: If the question involves numerical values, refer to them as being from \"this year’s\" document. Do NOT mention any specific year number in the question — use \"this year\" instead."
     return base_prompt
 
 
-def genconvo_synthesize_seed_prompt(**kwargs):
-    return (
-        """
+def genconvo_synthesize_seed_prompt(year=None, include_year=False, **kwargs):
+    base_prompt = """
         Please generate a question that requires synthesizing and aggregating information in the document.
         For instance, you could ask someone to summarize a page of the document, list all the key competitors
         mentioned in the document, or summarize the company’s business model
-        Do NOT include any other text or explanation other than the question        
+        Do NOT include any other text or explanation other than the question
         """
-    )
+    if year is not None:
+        if include_year:
+            return base_prompt + f"\nIf the question involves numerical values, make sure to mention that the data is from the {year} document."
+        else:
+            return base_prompt + "\nIMPORTANT: If the question involves numerical values, refer to them as being from \"this year’s\" document. Do NOT mention any specific year number in the question — use \"this year\" instead."
+    return base_prompt
 
 
-def genconvo_structure_seed_prompt(**kwargs):
-    return (
-        """
+def genconvo_structure_seed_prompt(year=None, include_year=False, **kwargs):
+    base_prompt = """
         Please generate a question that requires understanding the structure of the document.
         This question should be more about the structure of the document, rather than the precise statement
         details. For instance, you could ask someone to list the titles of all the sections in the document,
         describe the document structure, report the total number of pages, ask which section amongst two sections
         comes first, or report the section with the largest number of tables.
-        Do NOT include any other text or explanation other than the question        
+        Do NOT include any other text or explanation other than the question
         """
-    )
+    if year is not None:
+        if include_year:
+            return base_prompt + f"\nIf the question involves numerical values, make sure to mention that the data is from the {year} document."
+        else:
+            return base_prompt + "\nIMPORTANT: If the question involves numerical values, refer to them as being from \"this year's\" document. Do NOT mention any specific year number in the question — use \"this year\" instead."
+    return base_prompt
 
 
-def genconvo_creative_seed_prompt(**kwargs):
-    return (
-        """
+def genconvo_creative_seed_prompt(year=None, include_year=False, **kwargs):
+    base_prompt = """
         Please generate a question about the document to test someone’s ability to comprehend the content of the
         document. This question specifically should be focused on their ability to generalize the information
         about the document to a strange question of sorts.
         This question shouldn’t be a standard question about this kind of document, it should ask to do something
         abnormal and creative, like writing a poem about a financial document.
-        Do NOT include any other text or explanation other than the question        
+        Do NOT include any other text or explanation other than the question
         """
-    )
+    if year is not None:
+        if include_year:
+            return base_prompt + f"\nIf the question involves numerical values, make sure to mention that the data is from the {year} document."
+        else:
+            return base_prompt + "\nIMPORTANT: If the question involves numerical values, refer to them as being from \"this year’s\" document. Do NOT mention any specific year number in the question — use \"this year\" instead."
+    return base_prompt
 
 
 def genconvo_counting_seed_prompt(year=None, include_year=False, **kwargs):
@@ -403,7 +418,7 @@ def genconvo_counting_seed_prompt(year=None, include_year=False, **kwargs):
         if include_year:
             return base_prompt + f"\nIf the question involves numerical values, make sure to mention that the data is from the {year} document."
         else:
-            return base_prompt + "\nIf the question involves numerical values, make sure to mention that the data is from this year's document."
+            return base_prompt + "\nIMPORTANT: If the question involves numerical values, refer to them as being from \"this year's\" document. Do NOT mention any specific year number in the question — use \"this year\" instead."
     return base_prompt
 
 
@@ -419,7 +434,7 @@ def genconvo_reasoning_seed_prompt(year=None, include_year=False, **kwargs):
         if include_year:
             return base_prompt + f"\nIf the question involves numerical values, make sure to mention that the data is from the {year} document."
         else:
-            return base_prompt + "\nIf the question involves numerical values, make sure to mention that the data is from this year's document."
+            return base_prompt + "\nIMPORTANT: If the question involves numerical values, refer to them as being from \"this year's\" document. Do NOT mention any specific year number in the question — use \"this year\" instead."
     return base_prompt
 
 

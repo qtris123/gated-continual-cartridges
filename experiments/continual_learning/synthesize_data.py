@@ -133,7 +133,7 @@ config = SynthesizeConfig(
             )
         ],
     ),
-    num_samples=65536,
+    num_samples=256,
     batch_size=4,
     max_num_batches_in_parallel=64,
     name=FormatStringVariable(
