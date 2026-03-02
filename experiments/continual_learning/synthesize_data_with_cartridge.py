@@ -160,9 +160,9 @@ config = SynthesizeConfig(
             )
         ],
     ),
-    num_samples=256,
+    num_samples=64,
     batch_size=4,
-    max_num_batches_in_parallel=64,
+    max_num_batches_in_parallel=4,
     name=FormatStringVariable(
         f"synthesize_{args.company.lower()}_{args.year}_{{synthesizer.client.model_name}}_n{{num_samples}}_with_cartridge"
     ),

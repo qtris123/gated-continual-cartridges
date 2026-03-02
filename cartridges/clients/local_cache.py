@@ -11,6 +11,7 @@ Supports:
 from __future__ import annotations
 
 import asyncio
+import threading
 from typing import Any, Dict, List, Optional
 
 import torch
@@ -44,6 +45,7 @@ class LocalCacheClient(Client):
         self._model = None
         self._tokenizer = None
         self._cache: Optional[TrainableCache] = None
+        self._generate_lock = threading.Lock()
 
     def _setup(self):
         """Lazy initialisation: load model, tokenizer, and optional cartridge."""
@@ -135,57 +137,58 @@ class LocalCacheClient(Client):
         max_new_tokens: int,
         temperature: float,
     ) -> ClientResponse:
-        device = self.config.device
-        dtype = getattr(torch, self.config.dtype)
+        with self._generate_lock:
+            device = self.config.device
+            dtype = getattr(torch, self.config.dtype)
 
-        # --- Build flat (input_ids, seq_ids, position_ids) tensors ---
-        all_input_ids: List[torch.Tensor] = []
-        all_seq_ids: List[torch.Tensor] = []
-        all_position_ids: List[torch.Tensor] = []
+            # --- Build flat (input_ids, seq_ids, position_ids) tensors ---
+            all_input_ids: List[torch.Tensor] = []
+            all_seq_ids: List[torch.Tensor] = []
+            all_position_ids: List[torch.Tensor] = []
 
-        for idx, chat in enumerate(chats):
-            ids = self._tokenizer.apply_chat_template(
-                chat,
-                tokenize=True,
-                add_generation_prompt=True,
-                return_tensors="pt",
-            ).to(device)  # shape: (1, seq_len)
-            flat = ids.flatten()
-            n = flat.shape[0]
-            all_input_ids.append(flat)
-            all_seq_ids.append(torch.full((n,), idx, dtype=torch.long, device=device))
-            all_position_ids.append(torch.arange(n, device=device))
+            for idx, chat in enumerate(chats):
+                ids = self._tokenizer.apply_chat_template(
+                    chat,
+                    tokenize=True,
+                    add_generation_prompt=True,
+                    return_tensors="pt",
+                ).to(device)  # shape: (1, seq_len)
+                flat = ids.flatten()
+                n = flat.shape[0]
+                all_input_ids.append(flat)
+                all_seq_ids.append(torch.full((n,), idx, dtype=torch.long, device=device))
+                all_position_ids.append(torch.arange(n, device=device))
 
-        input_ids = torch.cat(all_input_ids, dim=0)
-        seq_ids = torch.cat(all_seq_ids, dim=0)
-        position_ids = torch.cat(all_position_ids, dim=0)
+            input_ids = torch.cat(all_input_ids, dim=0)
+            seq_ids = torch.cat(all_seq_ids, dim=0)
+            position_ids = torch.cat(all_position_ids, dim=0)
 
-        # --- Generate ---
-        with torch.amp.autocast(device_type="cuda", dtype=dtype):
-            generated: Dict[int, List[int]] = flex_generate(
-                model=self._model,
-                tokenizer=self._tokenizer,
-                input_ids=input_ids,
-                seq_ids=seq_ids,
-                position_ids=position_ids,
-                cache=self._cache,
-                max_new_tokens=max_new_tokens,
-                temperature=temperature,
+            # --- Generate ---
+            with torch.amp.autocast(device_type="cuda", dtype=dtype):
+                generated: Dict[int, List[int]] = flex_generate(
+                    model=self._model,
+                    tokenizer=self._tokenizer,
+                    input_ids=input_ids,
+                    seq_ids=seq_ids,
+                    position_ids=position_ids,
+                    cache=self._cache,
+                    max_new_tokens=max_new_tokens,
+                    temperature=temperature,
+                )
+
+            # --- Build ClientResponse ---
+            samples: List[ClientSample] = []
+            total_completion_tokens = 0
+            total_prompt_tokens = input_ids.shape[0]
+
+            for idx in range(len(chats)):
+                token_ids = generated.get(idx, [])
+                text = self._tokenizer.decode(token_ids, skip_special_tokens=True)
+                samples.append(ClientSample(text=text, token_ids=token_ids))
+                total_completion_tokens += len(token_ids)
+
+            usage = Usage(
+                prompt_tokens=total_prompt_tokens,
+                completion_tokens=total_completion_tokens,
             )
-
-        # --- Build ClientResponse ---
-        samples: List[ClientSample] = []
-        total_completion_tokens = 0
-        total_prompt_tokens = input_ids.shape[0]
-
-        for idx in range(len(chats)):
-            token_ids = generated.get(idx, [])
-            text = self._tokenizer.decode(token_ids, skip_special_tokens=True)
-            samples.append(ClientSample(text=text, token_ids=token_ids))
-            total_completion_tokens += len(token_ids)
-
-        usage = Usage(
-            prompt_tokens=total_prompt_tokens,
-            completion_tokens=total_completion_tokens,
-        )
-        return ClientResponse(samples=samples, usage=usage)
+            return ClientResponse(samples=samples, usage=usage)

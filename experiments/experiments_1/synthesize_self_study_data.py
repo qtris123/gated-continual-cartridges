@@ -93,6 +93,30 @@ parser.add_argument(
     default=False,
     help="Include explicit year in number-related prompts",
 )
+parser.add_argument(
+    "--model",
+    type=str, 
+    required=True,
+    help="Model use to generate the self-study-data",
+)
+parser.add_argument(
+    "--num_samples",
+    type=int,
+    required=True,
+    help="number of samples to generate",
+)
+parser.add_argument(
+    "--batch_size",
+    type=int,
+    required=True,
+    help="Batch size"
+)
+parser.add_argument(
+    "--max_num_batches",
+    type=int,
+    required=True,
+    help="Max number of batches"
+)
 args, remaining = parser.parse_known_args()
 sys.argv = [sys.argv[0]] + remaining
 
@@ -101,7 +125,7 @@ TEXT_PATH = str(TEXT_DIR / f"{args.company.upper()}_{args.year}_10K.txt")
 
 client = TokasaurusClient.Config(
     url=os.environ.get("CARTRIDGES_TOKASAURUS_URL", "http://localhost:8000"),
-    model_name="meta-llama/Llama-3.2-3B-Instruct",
+    model_name=args.model,
 )
 
 config = SynthesizeConfig(
@@ -133,9 +157,9 @@ config = SynthesizeConfig(
             )
         ],
     ),
-    num_samples=64,
-    batch_size=4,
-    max_num_batches_in_parallel=4,
+    num_samples=args.num_samples,
+    batch_size=args.batch_size,
+    max_num_batches_in_parallel=args.max_num_batches,
     name=FormatStringVariable(
         f"synthesize_{args.company.lower()}_{args.year}_{{synthesizer.client.model_name}}_n{{num_samples}}"
     ),
