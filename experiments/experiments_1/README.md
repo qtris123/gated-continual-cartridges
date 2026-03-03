@@ -89,7 +89,8 @@ Train a KV-cache cartridge on the Step 1 synthesized data.
 
 ```bash
 SYNTH_DATA_PATH_PHASE1=/path/to/step1/dataset_clean.parquet \
-python experiments/experiments_1/train_initial.py
+torchrun --standalone --nproc_per_node=1 \
+    experiments/experiments_1/train_initial.py
 ```
 
 Optional env vars:
@@ -98,6 +99,7 @@ Optional env vars:
 | `SYNTH_DATA_PATH_PHASE1` | *(required)* | Path to Step 1 parquet |
 | `TEXT_PATH` | `data/texts/AMD_2021_10K.txt` | Source 10-K text used for KV init |
 | `NUM_TOKENS` | `4096` | Cartridge capacity in tokens |
+| `NUM_GPUS` | `1` | GPUs for DDP training (passed to `--nproc_per_node`) |
 
 Output: `$CARTRIDGES_OUTPUT_DIR/<timestamp>-train_initial/<uuid>/cache-step<N>.pt`
 and `config.yaml` in the same directory.
@@ -152,3 +154,71 @@ The first run of this pipeline used:
 - Year Y+1: AMD 2022 10-K
 - Cartridge: `Phudish/amd-2021-cartridge-without-year-experiment-1` (4096 tokens)
 - Year excluded from prompts (`--include-year` not set)
+
+---
+
+## Automated Run (run_experiment_1.sh)
+
+`experiments/experiments_1/run_experiment_1.sh` runs the full pipeline end-to-end,
+including server lifecycle management, automatic parquet discovery between steps,
+and multi-model execution.
+
+### Single-GPU (default)
+
+```bash
+HF_REPO_ID=<hf-username>/<repo-name> \
+HF_REPO_ID_2=<hf-username>/<repo-name-2> \
+bash experiments/experiments_1/run_experiment_1.sh
+```
+
+### Multi-GPU (DDP training + multi-replica Tokasaurus)
+
+```bash
+NUM_GPUS=4 \
+HF_REPO_ID=<hf-username>/<repo-name> \
+HF_REPO_ID_2=<hf-username>/<repo-name-2> \
+bash experiments/experiments_1/run_experiment_1.sh
+```
+
+Setting `NUM_GPUS=N` will:
+- Pass `--nproc_per_node=N` to `torchrun` for DDP cartridge training (Step 2)
+- Set `DP_SIZE=N` for the Tokasaurus server (unless `DP_SIZE` is overridden separately)
+
+### Key configurable env vars
+
+| Variable | Default | Description |
+|---|---|---|
+| `NUM_GPUS` | `1` | GPUs for DDP training and Tokasaurus `dp_size` |
+| `DP_SIZE` | `$NUM_GPUS` | Tokasaurus data-parallel replicas (override to decouple from training GPUs) |
+| `DISTRIBUTED_BACKEND` | `gloo` | PyTorch distributed backend for cartridge training |
+| `MODEL_NAME` | `meta-llama/Llama-3.2-3B-Instruct` | Primary model for pipeline run |
+| `MODEL_NAME_2` | `Qwen/Qwen3-4B` | Secondary model for pipeline run |
+| `HF_REPO_ID` | *(required)* | HuggingFace repo to upload primary model cartridge |
+| `HF_REPO_ID_2` | *(required)* | HuggingFace repo to upload secondary model cartridge |
+| `COMPANY` | `AMD` | Company name for year-Y document |
+| `YEAR_Y` | `2021` | Year Y (cartridge training year) |
+| `COMPANY_2` | `PEPSICO` | Company name for cross-company synthesis |
+| `YEAR_2` | `2021` | Year for cross-company synthesis |
+| `NUM_TOKENS` | `1024` | Cartridge capacity in tokens |
+| `LR` | `2e-2` | Learning rate for cartridge training |
+| `EPOCHS` | `1` | Training epochs |
+| `GLOBAL_BATCH_SIZE` | `32` | Global batch size for training |
+| `NUM_SAMPLES` | `8192` | Synthesis samples per run |
+| `PORT` | `8000` | Tokasaurus server port |
+| `CARTRIDGES_DIR` | `~/continual-cartridges` | Path to continual-cartridges repo |
+| `TOKA_DIR` | `~/tokasaurus` | Path to Tokasaurus installation |
+
+### NCCL vs gloo
+
+| Backend | When to use |
+|---|---|
+| `gloo` (default) | CPU-based fallback; works on any machine including single-GPU setups |
+| `nccl` | GPU-optimized collective ops; recommended for multi-GPU training on NVIDIA hardware |
+
+To use NCCL on a multi-GPU machine:
+
+```bash
+DISTRIBUTED_BACKEND=nccl NUM_GPUS=4 \
+HF_REPO_ID=<repo> HF_REPO_ID_2=<repo2> \
+bash experiments/experiments_1/run_experiment_1.sh
+```
