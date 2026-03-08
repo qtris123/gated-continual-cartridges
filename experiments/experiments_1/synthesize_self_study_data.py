@@ -132,7 +132,7 @@ config = SynthesizeConfig(
     synthesizer=SelfStudySynthesizer.Config(
         client=client,
         max_rounds=1,
-        prob_thinking=0.2,
+        prob_thinking=1.0,
         tools=[],
         resources=[
             TextFileResource.Config(
@@ -142,11 +142,9 @@ config = SynthesizeConfig(
                 seed_prompts=[
                     "genconvo_factual",
                     "genconvo_knowledge",
-                    "genconvo_disjoint",
                     "genconvo_synthesize",
                     "genconvo_structure",
                     "genconvo_creative",
-                    "genconvo_counting",
                     "genconvo_reasoning",
                 ],
                 chunker=TokenChunker.Config(

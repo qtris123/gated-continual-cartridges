@@ -252,16 +252,16 @@ run_cross_company() {
 
   start_server "$MODEL"
 
-  echo ""
-  echo "=== Step CC-a: Synthesize $COMPANY_2 $YEAR_2 (no cartridge, baseline) ==="
-  python experiments/experiments_1/synthesize_self_study_data.py \
-    --company "$COMPANY_2" \
-    --year "$YEAR_2" \
-    --model "$MODEL" \
-    --num_samples "$NUM_SAMPLES" \
-    --batch_size "$BATCH_SIZE" \
-    --max_num_batches "$MAX_NUM_BATCHES"
-  echo "=== Step CC-a complete ==="
+  # echo ""
+  # echo "=== Step CC-a: Synthesize $COMPANY_2 $YEAR_2 (no cartridge, baseline) ==="
+  # python experiments/experiments_1/synthesize_self_study_data.py \
+  #   --company "$COMPANY_2" \
+  #   --year "$YEAR_2" \
+  #   --model "$MODEL" \
+  #   --num_samples "$NUM_SAMPLES" \
+  #   --batch_size "$BATCH_SIZE" \
+  #   --max_num_batches "$MAX_NUM_BATCHES"
+  # echo "=== Step CC-a complete ==="
 
   echo ""
   echo "=== Step CC-b: Synthesize $COMPANY_2 $YEAR_2 (with AMD cartridge $HF_REPO) ==="

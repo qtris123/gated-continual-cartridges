@@ -32,7 +32,7 @@ from pydrantic.variables import FormatStringVariable
 
 from cartridges.datasets import DataSource, TrainDataset
 from cartridges.initialization import KVFromText
-from cartridges.models import FlexLlamaForCausalLM, HFModelConfig
+from cartridges.models import FlexLlamaForCausalLM, FlexQwen3ForCausalLM, HFModelConfig
 from cartridges.train import TrainConfig
 from cartridges.utils.wandb import WandBConfig
 
@@ -54,10 +54,12 @@ DISTRIBUTED_BACKEND = os.environ.get("DISTRIBUTED_BACKEND", "gloo")
 COMPANY         = os.environ.get("COMPANY",  "unknown")
 YEAR_Y          = os.environ.get("YEAR_Y",   "unknown")
 
+_model_cls = FlexQwen3ForCausalLM if "qwen" in MODEL_NAME.lower() else FlexLlamaForCausalLM
+
 config = TrainConfig(
     model=HFModelConfig(
         pretrained_model_name_or_path=MODEL_NAME,
-        model_cls=FlexLlamaForCausalLM,
+        model_cls=_model_cls,
     ),
     kv_cache_initializer=KVFromText.Config(
         text_source=TEXT_PATH,
