@@ -22,6 +22,7 @@ Env vars:
     DISTRIBUTED_BACKEND     — distributed training backend (default: gloo)
     COMPANY                 — company name for run naming (default: unknown)
     YEAR_Y                  — year for run naming (default: unknown)
+    PROVENANCE_TAG          — tag appended to last user message per convo, e.g. "AMD 2021" (default: no tag)
 """
 
 import os
@@ -53,6 +54,7 @@ SAVE_EVERY_N_STEPS = int(os.environ.get("SAVE_EVERY_N_STEPS", "256"))
 DISTRIBUTED_BACKEND = os.environ.get("DISTRIBUTED_BACKEND", "gloo")
 COMPANY         = os.environ.get("COMPANY",  "unknown")
 YEAR_Y          = os.environ.get("YEAR_Y",   "unknown")
+PROVENANCE_TAG  = os.environ.get("PROVENANCE_TAG", "")
 
 _model_cls = FlexQwen3ForCausalLM if "qwen" in MODEL_NAME.lower() else FlexLlamaForCausalLM
 
@@ -70,7 +72,11 @@ config = TrainConfig(
     global_batch_size=GLOBAL_BATCH_SIZE,
     dataset=TrainDataset.Config(
         data_sources=[
-            DataSource(path=SYNTH_DATA_PATH, type="local"),
+            DataSource(
+                path=SYNTH_DATA_PATH,
+                type="local",
+                source_tag=PROVENANCE_TAG if PROVENANCE_TAG else None,
+            ),
         ],
         top_k_logits=TOP_K_LOGITS,
         packed_seq_length=PACKED_SEQ_LENGTH,

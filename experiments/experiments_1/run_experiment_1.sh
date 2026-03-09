@@ -18,10 +18,12 @@ COMPANY_2="${COMPANY_2:-PEPSICO}"
 YEAR_2="${YEAR_2:-2021}"
 NUM_SAMPLES="${NUM_SAMPLES:-8192}"
 BATCH_SIZE="${BATCH_SIZE:-1}"
-MAX_NUM_BATCHES="${MAX_NUM_BATCHES:-64}"
+MAX_NUM_BATCHES="${MAX_NUM_BATCHES:-256}"
 NUM_TOKENS="${NUM_TOKENS:-1024}"
 HF_REPO_ID="${HF_REPO_ID:-Phudish/amd-2021-llama-3.2-3b-cartridge-without-year-experiment-1}"
 HF_REPO_ID_2="${HF_REPO_ID_2:-Phudish/amd-2021-qwen3-4b-cartridge-without-year-experiment-1}"
+HF_REPO_ID_TAGGED="${HF_REPO_ID_TAGGED:-}"    # Phase 2 tagged cartridge — model 1
+HF_REPO_ID_2_TAGGED="${HF_REPO_ID_2_TAGGED:-}" # Phase 2 tagged cartridge — model 2
 LR="${LR:-2e-2}"
 EPOCHS="${EPOCHS:-1}"
 GLOBAL_BATCH_SIZE="${GLOBAL_BATCH_SIZE:-32}"
@@ -30,12 +32,15 @@ PACKED_SEQ_LENGTH="${PACKED_SEQ_LENGTH:-2048}"
 LOSS_EVAL_EVERY_N_STEPS="${LOSS_EVAL_EVERY_N_STEPS:-1}"
 SAVE_EVERY_N_STEPS="${SAVE_EVERY_N_STEPS:-256}"
 DISTRIBUTED_BACKEND="${DISTRIBUTED_BACKEND:-gloo}"
+PROVENANCE_TAG="${PROVENANCE_TAG:-}"   # empty = no tag; set e.g. "AMD 2021" for A→B runs
 
 TEXT_PATH="${TEXT_PATH:-$SCRIPT_DIR/data/texts/${COMPANY}_${YEAR_Y}_10K.txt}"
 
 # ── Validate required vars ─────────────────────────────────────────────
-if [ -z "$HF_REPO_ID" ] || [ -z "$HF_REPO_ID_2" ]; then
-  echo "Error: HF_REPO_ID and HF_REPO_ID_2 are required."
+if [ -z "$HF_REPO_ID" ] || [ -z "$HF_REPO_ID_2" ] || \
+   [ -z "$HF_REPO_ID_TAGGED" ] || [ -z "$HF_REPO_ID_2_TAGGED" ] || \
+   [ -z "$PROVENANCE_TAG" ]; then
+  echo "Error: HF_REPO_ID, HF_REPO_ID_2, HF_REPO_ID_TAGGED, HF_REPO_ID_2_TAGGED, and PROVENANCE_TAG are required."
   exit 1
 fi
 
@@ -185,6 +190,7 @@ run_for_model() {
   LOSS_EVAL_EVERY_N_STEPS="$LOSS_EVAL_EVERY_N_STEPS" \
   SAVE_EVERY_N_STEPS="$SAVE_EVERY_N_STEPS" \
   DISTRIBUTED_BACKEND="$DISTRIBUTED_BACKEND" \
+  PROVENANCE_TAG="$PROVENANCE_TAG" \
   torchrun --standalone --nproc_per_node="$NUM_GPUS" \
     experiments/experiments_1/train_initial.py
 
@@ -239,32 +245,68 @@ run_for_model() {
   echo "=== Model $MODEL complete. Cartridge: $HF_REPO ==="
 }
 
-# ── Cross-company synthesis (no training — reuses cartridge from run_for_model) ──
-run_cross_company() {
+# ── Phase 2: A→B pipeline (re-train with PROVENANCE_TAG, then synth B) ──
+run_for_model_b() {
   local MODEL="$1"
-  local HF_REPO="$2"
+  local HF_REPO_TAGGED="$2"
 
   echo ""
   echo "======================================================================"
-  echo "=== Cross-company synthesis: $COMPANY_2 $YEAR_2 using $MODEL cartridge ==="
-  echo "=== Source cartridge: $HF_REPO ==="
+  echo "=== Phase 2 (A→B): Re-train with tag, then synth $COMPANY_2 $YEAR_2 ==="
+  echo "=== Tagged HF repo: $HF_REPO_TAGGED ==="
   echo "======================================================================"
 
+  # Locate Phase 1 parquet (produced by run_for_model Step 1)
+  STEP1_PARQUET=$(find "$CARTRIDGES_OUTPUT_DIR" \
+    -path "*synthesize_${COMPANY,,}_${YEAR_Y}*" -name "dataset.parquet" | sort | tail -1)
+  if [ -z "$STEP1_PARQUET" ]; then
+    echo "Error: Phase 1 parquet not found; run Phase 1 (run_for_model) first."
+    exit 1
+  fi
+  echo "=== Using Phase 1 parquet: $STEP1_PARQUET ==="
+
+  # Step B1: Re-train cartridge with PROVENANCE_TAG stamped
+  echo ""
+  echo "=== Step B1: Train tagged cartridge (PROVENANCE_TAG='$PROVENANCE_TAG') ==="
+  MODEL_NAME="$MODEL" \
+  SYNTH_DATA_PATH_PHASE1="$STEP1_PARQUET" \
+  COMPANY="$COMPANY" \
+  YEAR_Y="$YEAR_Y" \
+  TEXT_PATH="$TEXT_PATH" \
+  NUM_TOKENS="$NUM_TOKENS" \
+  LR="$LR" \
+  EPOCHS="$EPOCHS" \
+  GLOBAL_BATCH_SIZE="$GLOBAL_BATCH_SIZE" \
+  TOP_K_LOGITS="$TOP_K_LOGITS" \
+  PACKED_SEQ_LENGTH="$PACKED_SEQ_LENGTH" \
+  LOSS_EVAL_EVERY_N_STEPS="$LOSS_EVAL_EVERY_N_STEPS" \
+  SAVE_EVERY_N_STEPS="$SAVE_EVERY_N_STEPS" \
+  DISTRIBUTED_BACKEND="$DISTRIBUTED_BACKEND" \
+  PROVENANCE_TAG="$PROVENANCE_TAG" \
+  torchrun --standalone --nproc_per_node="$NUM_GPUS" \
+    experiments/experiments_1/train_initial.py
+
+  CARTRIDGE_PT=$(find "$CARTRIDGES_OUTPUT_DIR" -path "*train_initial*" \
+    -name "cache_last.pt" | sort | tail -1)
+  if [ -z "$CARTRIDGE_PT" ]; then
+    echo "Error: Tagged cartridge .pt not found"
+    exit 1
+  fi
+  echo "=== Step B1 complete: $CARTRIDGE_PT ==="
+
+  # Step B2: Upload tagged cartridge to HF
+  echo ""
+  echo "=== Step B2: Upload tagged cartridge to HuggingFace ($HF_REPO_TAGGED) ==="
+  python experiments/experiments_1/upload_cartridge_to_hf.py \
+    --cartridge-path "$CARTRIDGE_PT" \
+    --hf-repo-id "$HF_REPO_TAGGED" \
+    --model-name "$MODEL"
+  echo "=== Step B2 complete: uploaded to $HF_REPO_TAGGED ==="
+
+  # Step B3: Synth self-study for Company B using tagged cartridge
+  echo ""
+  echo "=== Step B3: Synthesize self-study for $COMPANY_2 $YEAR_2 (tagged cartridge) ==="
   start_server "$MODEL"
-
-  # echo ""
-  # echo "=== Step CC-a: Synthesize $COMPANY_2 $YEAR_2 (no cartridge, baseline) ==="
-  # python experiments/experiments_1/synthesize_self_study_data.py \
-  #   --company "$COMPANY_2" \
-  #   --year "$YEAR_2" \
-  #   --model "$MODEL" \
-  #   --num_samples "$NUM_SAMPLES" \
-  #   --batch_size "$BATCH_SIZE" \
-  #   --max_num_batches "$MAX_NUM_BATCHES"
-  # echo "=== Step CC-a complete ==="
-
-  echo ""
-  echo "=== Step CC-b: Synthesize $COMPANY_2 $YEAR_2 (with AMD cartridge $HF_REPO) ==="
   python experiments/experiments_1/synthesize_self_study_data_with_cartridge.py \
     --company "$COMPANY_2" \
     --year "$YEAR_2" \
@@ -272,28 +314,24 @@ run_cross_company() {
     --num_samples "$NUM_SAMPLES" \
     --batch_size "$BATCH_SIZE" \
     --max_num_batches "$MAX_NUM_BATCHES" \
-    --cartridge-hf-id "$HF_REPO"
-  echo "=== Step CC-b complete ==="
+    --cartridge-hf-id "$HF_REPO_TAGGED"
+  echo "=== Step B3 complete ==="
 
   stop_server
 
   echo ""
-  echo "=== Cross-company run for $MODEL complete ==="
+  echo "=== Phase 2 for $MODEL complete. Tagged cartridge: $HF_REPO_TAGGED ==="
 }
 
 # ── Main execution ─────────────────────────────────────────────────────
-#run_for_model "$MODEL_NAME"   "$HF_REPO_ID"
-#run_for_model "$MODEL_NAME_2" "$HF_REPO_ID_2"
 
-# ── Cross-company context shift ────────────────────────────────────────────
-run_cross_company "$MODEL_NAME"   "$HF_REPO_ID"
-#run_cross_company "$MODEL_NAME_2" "$HF_REPO_ID_2"
+# ── Phase 1: A + δA (no tag) ───────────────────────────────────────────
+run_for_model "$MODEL_NAME"   "$HF_REPO_ID"
+run_for_model "$MODEL_NAME_2" "$HF_REPO_ID_2"
 
-COMPANY_LOWER="${COMPANY,,}"
-COMPANY_2_LOWER="${COMPANY_2,,}"
+# ── Phase 2: A→B (re-train with PROVENANCE_TAG, synth B) ───────────────
+run_for_model_b "$MODEL_NAME"   "$HF_REPO_ID_TAGGED"
+run_for_model_b "$MODEL_NAME_2" "$HF_REPO_ID_2_TAGGED"
+
 echo ""
 echo "=== Experiment 1 complete ==="
-echo "Llama CC baseline:  $(find "$CARTRIDGES_OUTPUT_DIR" -path "*synthesize_${COMPANY_2_LOWER}_${YEAR_2}*" -not -path "*cartridge*" -name "dataset_clean.parquet" | sort | tail -1)"
-echo "Llama CC cartridge: $(find "$CARTRIDGES_OUTPUT_DIR" -path "*synthesize_${COMPANY_2_LOWER}_${YEAR_2}*cartridge*" -name "dataset_clean.parquet" | sort | head -1)"
-echo "Qwen  CC baseline:  $(find "$CARTRIDGES_OUTPUT_DIR" -path "*synthesize_${COMPANY_2_LOWER}_${YEAR_2}*" -not -path "*cartridge*" -name "dataset_clean.parquet" | sort | tail -1)"
-echo "Qwen  CC cartridge: $(find "$CARTRIDGES_OUTPUT_DIR" -path "*synthesize_${COMPANY_2_LOWER}_${YEAR_2}*cartridge*" -name "dataset_clean.parquet" | sort | tail -1)"

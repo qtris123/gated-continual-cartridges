@@ -258,12 +258,13 @@ class DataSource(BaseConfig):
     path: str
     type: Literal["local", "wandb", "hf"]
     limit: int | None = None
+    source_tag: str | None = None
 
 def _prepare_data_source(source: str | DataSource) -> list[Conversation]:
     if isinstance(source, str):
         is_local = ".pkl" in source or ".parquet" in source
         source = DataSource(path=source, type="local" if is_local else "wandb")
-    
+
     if source.type == "local":
         data = read_conversations(source.path)
     elif source.type == "wandb":
@@ -272,6 +273,16 @@ def _prepare_data_source(source: str | DataSource) -> list[Conversation]:
         data = read_conversations_from_hf(source.path)
     else:
         raise ValueError(f"Unsupported data source type: {source.type}")
+
+    if isinstance(source, DataSource) and source.source_tag:
+        tag_suffix = f"\n\n[Source: {source.source_tag}]"
+        for convo in data:
+            for i in range(len(convo.messages) - 1, -1, -1):
+                if convo.messages[i].role == "user":
+                    convo.messages[i].content += tag_suffix
+                    convo.messages[i].token_ids = None
+                    convo.messages[i].top_logprobs = None
+                    break
 
     return data[:source.limit] if source.limit is not None else data
 
