@@ -1,0 +1,189 @@
+{
+  "description": "Eval questions for AMD 10-K continual training experiment (forced without year). Phase 1 = after training on AMD 2021. Phase 2 = after sequential training on AMD 2022 on top of 2021 cartridge.",
+  "doc_a": "AMD_2021_10K",
+  "doc_b": "AMD_2022_10K",
+  "phase_2": {
+    "description": "Evaluate cartridge after sequential training: AMD 2021 then AMD 2022. Answers should reflect AMD 2022 knowledge.",
+    "stable": [
+      {
+        "id": "S01",
+        "question": "Where is AMD's principal executive office located?",
+        "golden_answer": "Santa Clara, California 95054"
+      },
+      {
+        "id": "S02",
+        "question": "What is AMD's Commission File Number?",
+        "golden_answer": "001-07882"
+      },
+      {
+        "id": "S03",
+        "question": "What stock exchange is AMD's common stock listed on?",
+        "golden_answer": "The NASDAQ Global Select Market"
+      },
+      {
+        "id": "S04",
+        "question": "What is the par value of AMD's common stock?",
+        "golden_answer": "$0.01 per share"
+      },
+      {
+        "id": "S05",
+        "question": "What is AMD's ticker symbol?",
+        "golden_answer": "AMD"
+      },
+      {
+        "id": "S06",
+        "question": "Who is AMD's principal executive officer?",
+        "golden_answer": "Lisa T. Su"
+      },
+      {
+        "id": "S07",
+        "question": "When was AMD originally founded?",
+        "golden_answer": "1969"
+      },
+      {
+        "id": "S08",
+        "question": "Who is AMD's primary competitor in the supply of microprocessors?",
+        "golden_answer": "Intel Corporation (Intel)"
+      },
+      {
+        "id": "S09",
+        "question": "In which half of the year does AMD's net revenue tend to be generally higher?",
+        "golden_answer": "The second half of the year"
+      },
+      {
+        "id": "S10",
+        "question": "What is AMD's state of incorporation?",
+        "golden_answer": "Delaware"
+      }
+    ],
+    "updated": [
+      {
+        "id": "U01",
+        "question": "What was AMD's total net revenue?",
+        "golden_answer": "$23,601 million ($23.6 billion)"
+      },
+      {
+        "id": "U02",
+        "question": "What was AMD's net income?",
+        "golden_answer": "$1,320 million ($1.3 billion)"
+      },
+      {
+        "id": "U03",
+        "question": "What was AMD's total assets?",
+        "golden_answer": "$67,580 million"
+      },
+      {
+        "id": "U04",
+        "question": "What was AMD's cash and cash equivalents?",
+        "golden_answer": "$4,835 million"
+      },
+      {
+        "id": "U05",
+        "question": "How many employees did AMD have approximately?",
+        "golden_answer": "Approximately 25,000 employees"
+      },
+      {
+        "id": "U06",
+        "question": "What was AMD's total operating income?",
+        "golden_answer": "$1,264 million ($1.3 billion)"
+      },
+      {
+        "id": "U07",
+        "question": "What was AMD's gross margin as a percentage of net revenue?",
+        "golden_answer": "45%"
+      },
+      {
+        "id": "U08",
+        "question": "What was AMD's total stockholders' equity?",
+        "golden_answer": "$54,750 million"
+      },
+      {
+        "id": "U09",
+        "question": "What was AMD's diluted earnings per share?",
+        "golden_answer": "$0.84"
+      },
+      {
+        "id": "U10",
+        "question": "What was AMD's total debt principal amount outstanding?",
+        "golden_answer": "$2.5 billion"
+      },
+      {
+        "id": "U11",
+        "question": "What was the carrying amount of AMD's goodwill?",
+        "golden_answer": "$24.2 billion"
+      },
+      {
+        "id": "U12",
+        "question": "What was international sales as a percentage of net revenue?",
+        "golden_answer": "66%"
+      },
+      {
+        "id": "U13",
+        "question": "What was AMD's net inventory balance?",
+        "golden_answer": "$3,771 million"
+      },
+      {
+        "id": "U14",
+        "question": "What was AMD's stock-based compensation expense?",
+        "golden_answer": "$1,081 million"
+      },
+      {
+        "id": "U15",
+        "question": "How many reportable segments does AMD have and what are they?",
+        "golden_answer": "Four reportable segments: Data Center, Client, Gaming, and Embedded"
+      },
+      {
+        "id": "U16",
+        "question": "What was AMD's total unconditional purchase commitments?",
+        "golden_answer": "$8,610 million ($8.6 billion)"
+      },
+      {
+        "id": "U17",
+        "question": "What was AMD's cash, cash equivalents and short-term investments combined?",
+        "golden_answer": "$5.9 billion"
+      },
+      {
+        "id": "U18",
+        "question": "What was AMD's operating lease expense?",
+        "golden_answer": "$118 million"
+      },
+      {
+        "id": "U19",
+        "question": "What was AMD's research and development expenses?",
+        "golden_answer": "$5.0 billion"
+      },
+      {
+        "id": "U20",
+        "question": "How many shares of common stock were outstanding?",
+        "golden_answer": "1,611,388,217 shares"
+      }
+    ],
+    "new_knowledge": [
+      {
+        "id": "N01",
+        "question": "What is the status of AMD's acquisition of Xilinx?",
+        "golden_answer": "AMD completed the acquisition of Xilinx on February 14, 2022."
+      },
+      {
+        "id": "N02",
+        "question": "What are AMD's Data Center segment revenue and operating income?",
+        "golden_answer": "Data Center segment revenue was $6,043 million and operating income was $1,848 million."
+      },
+      {
+        "id": "N03",
+        "question": "Did AMD acquire Pensando Systems?",
+        "golden_answer": "Yes, AMD completed the acquisition of Pensando Systems on May 26, 2022. Pensando is a leader in next-generation distributed computing."
+      },
+      {
+        "id": "N04",
+        "question": "What was AMD's Embedded segment revenue?",
+        "golden_answer": "$4,552 million"
+      },
+      {
+        "id": "N05",
+        "question": "What was AMD's Client segment revenue?",
+        "golden_answer": "$6,201 million"
+      }
+    ]
+  }
+}
