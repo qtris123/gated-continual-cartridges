@@ -132,7 +132,7 @@ config = SynthesizeConfig(
     synthesizer=SelfStudySynthesizer.Config(
         client=client,
         max_rounds=1,
-        prob_thinking=1.0,
+        prob_thinking=0.2,
         tools=[],
         resources=[
             TextFileResource.Config(

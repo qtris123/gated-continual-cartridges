@@ -1,26 +1,15 @@
-"""Evaluate plasticity by comparing continual and fresh cartridges on the same phase 2 eval set.
-
-Evaluation matrix:
-  Phase 1 cache  + eval_phase1.parquet → Baseline (pre-update)
-  Phase 2 cache  + eval_phase2.parquet → Continual cartridge (sequential training)
-  Fresh cache    + eval_phase2.parquet → Fresh cartridge (trained directly on A+B)
-
-Comparing phase2 vs fresh on the same eval set measures plasticity: if fresh > phase2,
-the continual cartridge has reduced ability to absorb new information.
+"""Evaluate a single cartridge on a single eval dataset.
 
 Usage:
     python experiments/experiments_2/evaluate_plasticity.py \\
-        --phase1-cache path/to/phase1/cache_last.pt \\
-        --phase2-cache path/to/continual/cache_last.pt \\
-        --fresh-cache  path/to/fresh/cache_last.pt \\
-        --eval-phase2  data/eval/eval_phase2.parquet
+        --cache path/to/cache_last.pt \\
+        --eval-data data/eval/eval.parquet
 """
 
 import argparse
 import json
 import os
 from pathlib import Path
-from typing import Optional
 
 import torch
 import torch.nn.functional as F
@@ -31,7 +20,7 @@ from transformers import AutoTokenizer
 from cartridges.cache import AttnConfig, TrainableCache
 from cartridges.datasets import DataSource, GenerateEvalDataset, LossEvalDataset
 from cartridges.generation import flex_generate
-from cartridges.models import FlexLlamaForCausalLM, HFModelConfig
+from cartridges.models import FlexLlamaForCausalLM, FlexQwen3ForCausalLM, HFModelConfig
 from cartridges.train import CacheAndModel
 
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -39,7 +28,6 @@ MODEL_NAME = "meta-llama/Llama-3.2-3B-Instruct"
 
 
 def load_cache(path: str, device: str) -> TrainableCache:
-    """Load a cartridge checkpoint and move to device."""
     print(f"  Loading cache: {path}")
     cache = TrainableCache.from_pretrained(path, device=device)
     cache = cache.to(device)
@@ -50,11 +38,10 @@ def load_cache(path: str, device: str) -> TrainableCache:
 
 def evaluate_loss(
     model: torch.nn.Module,
-    cache: Optional[TrainableCache],
+    cache: TrainableCache,
     eval_dataset: LossEvalDataset,
     device: str = "cuda",
 ) -> dict:
-    """Compute mean cross-entropy loss on an evaluation dataset."""
     dataloader = DataLoader(
         eval_dataset,
         batch_size=1,
@@ -62,21 +49,7 @@ def evaluate_loss(
         num_workers=0,
     )
 
-    if cache is not None:
-        wrapped = CacheAndModel(cache, model)
-    else:
-        empty_cache = TrainableCache(config=AttnConfig(
-            n_layers=model.config.num_hidden_layers,
-            n_heads=model.config.num_key_value_heads,
-            head_dim=(
-                model.config.head_dim
-                if hasattr(model.config, "head_dim")
-                else model.config.hidden_size // model.config.num_attention_heads
-            ),
-        ))
-        empty_cache = empty_cache.to(device)
-        wrapped = CacheAndModel(empty_cache, model)
-
+    wrapped = CacheAndModel(cache, model)
     total_loss = 0.0
     total_tokens = 0
 
@@ -102,10 +75,7 @@ def evaluate_loss(
                 total_loss += ce_by_token.sum().item()
                 total_tokens += ce_by_token.shape[0]
 
-            if cache is not None:
-                cache.clear()
-            else:
-                empty_cache.clear()
+            cache.clear()
 
     mean_loss = total_loss / max(total_tokens, 1)
     return {
@@ -121,14 +91,12 @@ def generate_for_dataset(
     tokenizer: AutoTokenizer,
     cache: TrainableCache,
     eval_dataset: GenerateEvalDataset,
-    phase_label: str,
     device: str,
     max_new_tokens: int = 256,
 ) -> list[dict]:
-    """Generate responses for all questions in an eval dataset."""
     results = []
 
-    for idx in tqdm(range(len(eval_dataset)), desc=f"Generating ({phase_label})"):
+    for idx in tqdm(range(len(eval_dataset)), desc="Generating"):
         element = eval_dataset[idx]
 
         input_ids = element.input_ids.flatten().to(device)
@@ -159,7 +127,6 @@ def generate_for_dataset(
             "question": question_text,
             "generated_answer": generated_text,
             "reference_answer": element.answer,
-            "phase": phase_label,
             **element.metadata,
         })
 
@@ -167,125 +134,82 @@ def generate_for_dataset(
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Evaluate plasticity: compare continual vs fresh cartridges on phase 2 eval"
-    )
+    parser = argparse.ArgumentParser(description="Evaluate a single cartridge on a single eval dataset")
+    parser.add_argument("--cache", type=str, required=True, help="Path to cartridge checkpoint")
     parser.add_argument(
-        "--phase1-cache", type=str, required=True,
-        help="Path to phase 1 cartridge checkpoint (evaluated on eval_phase1.parquet)",
+        "--eval-data", type=str,
+        default=str(SCRIPT_DIR / "data" / "eval" / "eval.parquet"),
+        help="Path to eval parquet",
     )
-    parser.add_argument(
-        "--phase2-cache", type=str, default=None,
-        help="Path to continual phase 2 cartridge checkpoint (evaluated on eval_phase2.parquet)",
-    )
-    parser.add_argument(
-        "--fresh-cache", type=str, default=None,
-        help="Path to fresh cartridge checkpoint trained directly on A+B (evaluated on eval_phase2.parquet)",
-    )
-    parser.add_argument(
-        "--eval-phase1", type=str,
-        default=str(SCRIPT_DIR / "data" / "eval" / "eval_phase1.parquet"),
-        help="Path to phase 1 eval parquet",
-    )
-    parser.add_argument(
-        "--eval-phase2", type=str,
-        default=str(SCRIPT_DIR / "data" / "eval" / "eval_phase2.parquet"),
-        help="Path to phase 2 eval parquet",
-    )
+    parser.add_argument("--model", type=str, default=MODEL_NAME, help="HuggingFace model ID")
     parser.add_argument("--device", type=str, default="cuda")
     parser.add_argument(
         "--output-dir", type=str,
         default=os.environ.get("CARTRIDGES_OUTPUT_DIR", "."),
         help="Directory to save evaluation results",
     )
-    parser.add_argument(
-        "--max-new-tokens", type=int, default=256,
-        help="Maximum number of tokens to generate per question",
-    )
+    parser.add_argument("--max-new-tokens", type=int, default=256)
     args = parser.parse_args()
 
     device = args.device
 
-    # Load model
-    print(f"Loading model: {MODEL_NAME}")
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+    model_name = args.model
+    model_cls = FlexQwen3ForCausalLM if "qwen" in model_name.lower() else FlexLlamaForCausalLM
+
+    print(f"Loading model: {model_name}")
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = HFModelConfig(
-        pretrained_model_name_or_path=MODEL_NAME,
-        model_cls=FlexLlamaForCausalLM,
+        pretrained_model_name_or_path=model_name,
+        model_cls=model_cls,
     ).instantiate()
     model = model.to(device).to(torch.bfloat16)
     for param in model.parameters():
         param.requires_grad = False
 
-    # Build evaluation pairs: (label, cache_path, eval_path)
-    eval_pairs = [("phase1", args.phase1_cache, args.eval_phase1)]
-    if args.phase2_cache is not None:
-        eval_pairs.append(("phase2", args.phase2_cache, args.eval_phase2))
-    if args.fresh_cache is not None:
-        eval_pairs.append(("fresh", args.fresh_cache, args.eval_phase2))
+    cache = load_cache(args.cache, device)
+    cartridge_size = cache.num_cartridge_tokens()
 
-    all_perplexity = {}
-    all_generations = []
-    cartridge_size = None
+    # --- Log-perplexity ---
+    print("\nComputing log-perplexity...")
+    loss_dataset = LossEvalDataset.Config(
+        data_source=DataSource(path=args.eval_data, type="local"),
+    ).instantiate(tokenizer=tokenizer, seed=42)
+    print(f"  {len(loss_dataset)} loss-eval samples")
 
-    for phase_label, cache_path, eval_path in eval_pairs:
-        if not os.path.exists(eval_path):
-            print(f"WARNING: {phase_label} eval data not found at {eval_path}, skipping")
-            continue
+    ppl_result = evaluate_loss(model, cache, loss_dataset, device=device)
+    ppl_result["cache"] = args.cache
+    ppl_result["eval_set"] = args.eval_data
+    print(f"  log-perplexity: {ppl_result['log_perplexity']:.4f} ({ppl_result['num_tokens']} tokens)")
 
-        print(f"\n{'='*60}")
-        print(f"Evaluating: {phase_label} cache on {Path(eval_path).name}")
-        print(f"{'='*60}")
+    # --- Generation ---
+    print("\nGenerating responses...")
+    gen_dataset = GenerateEvalDataset.Config(
+        data_source=DataSource(path=args.eval_data, type="local"),
+    ).instantiate(tokenizer=tokenizer, seed=42)
+    print(f"  {len(gen_dataset)} generation questions")
 
-        cache = load_cache(cache_path, device)
-
-        if cartridge_size is None:
-            cartridge_size = cache.num_cartridge_tokens()
-
-        # --- Log-perplexity ---
-        print(f"\n[{phase_label}] Computing log-perplexity...")
-        loss_dataset = LossEvalDataset.Config(
-            data_source=DataSource(path=eval_path, type="local"),
-        ).instantiate(tokenizer=tokenizer, seed=42)
-        print(f"  {len(loss_dataset)} loss-eval samples")
-
-        ppl_result = evaluate_loss(model, cache, loss_dataset, device=device)
-        ppl_result["cache"] = cache_path
-        ppl_result["eval_set"] = eval_path
-        all_perplexity[phase_label] = ppl_result
-        print(f"  log-perplexity: {ppl_result['log_perplexity']:.4f} ({ppl_result['num_tokens']} tokens)")
-
-        # --- Generation ---
-        print(f"\n[{phase_label}] Generating responses...")
-        gen_dataset = GenerateEvalDataset.Config(
-            data_source=DataSource(path=eval_path, type="local"),
-        ).instantiate(tokenizer=tokenizer, seed=42)
-        print(f"  {len(gen_dataset)} generation questions")
-
-        generations = generate_for_dataset(
-            model=model,
-            tokenizer=tokenizer,
-            cache=cache,
-            eval_dataset=gen_dataset,
-            phase_label=phase_label,
-            device=device,
-            max_new_tokens=args.max_new_tokens,
-        )
-        all_generations.extend(generations)
+    generations = generate_for_dataset(
+        model=model,
+        tokenizer=tokenizer,
+        cache=cache,
+        eval_dataset=gen_dataset,
+        device=device,
+        max_new_tokens=args.max_new_tokens,
+    )
 
     # Save results
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    ppl_path = output_dir / f"plasticity_eval_perplexity_{cartridge_size}tok.json"
+    ppl_path = output_dir / f"eval_perplexity_{cartridge_size}tok.json"
     with open(ppl_path, "w") as f:
-        json.dump(all_perplexity, f, indent=2)
+        json.dump(ppl_result, f, indent=2)
     print(f"\nSaved perplexity results to {ppl_path}")
 
-    gen_path = output_dir / f"plasticity_eval_generations_{cartridge_size}tok.json"
+    gen_path = output_dir / f"eval_generations_{cartridge_size}tok.json"
     with open(gen_path, "w") as f:
-        json.dump(all_generations, f, indent=2)
-    print(f"Saved {len(all_generations)} generations to {gen_path}")
+        json.dump(generations, f, indent=2)
+    print(f"Saved {len(generations)} generations to {gen_path}")
 
 
 if __name__ == "__main__":

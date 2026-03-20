@@ -25,6 +25,7 @@ dependencies = [
     "ipykernel>=7.1.0",
     "pymupdf>=1.26.7",
     "python-dotenv>=0.9.9",
+    "sentence-transformers>=5.3.0",
 ]
 
 [project.scripts]

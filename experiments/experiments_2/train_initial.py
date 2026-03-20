@@ -1,28 +1,22 @@
-"""Phase 1: Train initial cartridge.
+"""Phase 1: Train initial cartridge on synthetic data.
 
 Usage:
-    SYNTH_DATA_PATH_PHASE1=/path/to/dataset_clean.parquet \
-    python experiments/continual_learning/train_initial.py
+    SYNTH_DATA_PATH=/path/to/dataset_clean.parquet \
+    python experiments/experiments_2/train_initial.py
 
     # Or with torchrun for multi-GPU:
-    SYNTH_DATA_PATH_PHASE1=/path/to/dataset_clean.parquet \
-    torchrun --nproc_per_node=2 experiments/continual_learning/train_initial.py
+    SYNTH_DATA_PATH=/path/to/dataset_clean.parquet \
+    torchrun --nproc_per_node=2 experiments/experiments_2/train_initial.py
 
 Env vars:
-    SYNTH_DATA_PATH_PHASE1  (required) — path to Phase 1 synthesized training data parquet
-    TEXT_PATH               — path to source text (default: data/texts/AMD_2021_10K.txt)
-    NUM_TOKENS              — cartridge size (default: 4096)
-    MODEL_NAME              — HF model name (default: meta-llama/Llama-3.2-3B-Instruct)
-    LR                      — learning rate (default: 2e-2)
-    EPOCHS                  — number of epochs (default: 1)
-    GLOBAL_BATCH_SIZE       — global batch size (default: 32)
-    TOP_K_LOGITS            — top-k logits to store (default: 20)
-    PACKED_SEQ_LENGTH       — packed sequence length (default: 2048)
-    SAVE_EVERY_N_STEPS      — save checkpoint every N steps (default: 256)
-    DISTRIBUTED_BACKEND     — distributed training backend (default: gloo)
-    COMPANY                 — company name for run naming (default: unknown)
-    YEAR_Y                  — year for run naming (default: unknown)
-    PROVENANCE_TAG          — tag appended to last user message per convo, e.g. "AMD 2021" (default: no tag)
+    SYNTH_DATA_PATH  (required) — path to synthesized training data parquet
+    TEXT_PATH        — path to source text (default: data/texts/AMD_2022_10K.txt)
+    EVAL_PHASE1_PATH — path to phase 1 eval parquet (default: data/eval/eval_phase1.parquet)
+    NUM_TOKENS       — cartridge size (default: 4096)
+    MODEL_NAME       — HuggingFace model ID (default: meta-llama/Llama-3.2-3B-Instruct; use Qwen/Qwen3-* for Qwen)
+    COMPANY          — company name for run naming (default: unknown)
+    YEAR_Y           — year for run naming (default: unknown)
+    PROVENANCE_TAG   — tag appended to last user message per convo, e.g. "AMD 2022" (default: no tag)
 """
 
 import os
@@ -39,22 +33,13 @@ from cartridges.utils.wandb import WandBConfig
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 
-TEXT_PATH = os.environ.get(
-    "TEXT_PATH", str(SCRIPT_DIR / "data" / "texts" / "AMD_2021_10K.txt")
-)
-SYNTH_DATA_PATH = os.environ["SYNTH_DATA_PATH_PHASE1"]
-NUM_TOKENS = int(os.environ.get("NUM_TOKENS", "4096"))
-MODEL_NAME      = os.environ.get("MODEL_NAME",      "meta-llama/Llama-3.2-3B-Instruct")
-LR              = float(os.environ.get("LR",         "2e-2"))
-EPOCHS          = int(os.environ.get("EPOCHS",       "1"))
-GLOBAL_BATCH_SIZE     = int(os.environ.get("GLOBAL_BATCH_SIZE",      "32"))
-TOP_K_LOGITS    = int(os.environ.get("TOP_K_LOGITS", "20"))
-PACKED_SEQ_LENGTH = int(os.environ.get("PACKED_SEQ_LENGTH", "2048"))
-SAVE_EVERY_N_STEPS = int(os.environ.get("SAVE_EVERY_N_STEPS", "256"))
-DISTRIBUTED_BACKEND = os.environ.get("DISTRIBUTED_BACKEND", "gloo")
-COMPANY         = os.environ.get("COMPANY",  "unknown")
-YEAR_Y          = os.environ.get("YEAR_Y",   "unknown")
-PROVENANCE_TAG  = os.environ.get("PROVENANCE_TAG", "")
+SYNTH_DATA_PATH = os.environ.get("SYNTH_DATA_PATH")
+TEXT_PATH = os.environ.get("TEXT_PATH", str(SCRIPT_DIR / "data" / "texts" / "AMD_2021_10K.txt"))
+MODEL_NAME = os.environ.get("MODEL_NAME", "meta-llama/Llama-3.2-3B-Instruct")
+NUM_TOKENS = int(os.environ.get("NUM_TOKENS", "1024"))
+COMPANY = os.environ.get("COMPANY", "unknown")
+YEAR_Y  = os.environ.get("YEAR_Y",  "unknown")
+PROVENANCE_TAG = os.environ.get("PROVENANCE_TAG", "")
 
 _model_cls = FlexQwen3ForCausalLM if "qwen" in MODEL_NAME.lower() else FlexLlamaForCausalLM
 
@@ -67,9 +52,9 @@ config = TrainConfig(
         text_source=TEXT_PATH,
         max_tokens=NUM_TOKENS,
     ),
-    lr=LR,
-    epochs=EPOCHS,
-    global_batch_size=GLOBAL_BATCH_SIZE,
+    lr=2e-2,
+    epochs=1,
+    global_batch_size=32,
     dataset=TrainDataset.Config(
         data_sources=[
             DataSource(
@@ -78,16 +63,16 @@ config = TrainConfig(
                 source_tag=PROVENANCE_TAG if PROVENANCE_TAG else None,
             ),
         ],
-        top_k_logits=TOP_K_LOGITS,
-        packed_seq_length=PACKED_SEQ_LENGTH,
+        top_k_logits=20,
+        packed_seq_length=2048,
         packing_mode="truncate",
     ),
-    save_every_n_steps=SAVE_EVERY_N_STEPS,
-    distributed_backend=DISTRIBUTED_BACKEND,
-    wandb=WandBConfig(tags=["train", "continual_learning", "phase1"]),
+    save_every_n_steps=256,
+    distributed_backend="gloo",
+    wandb=WandBConfig(tags=["train", "experimen_2", "phase1"]),
     output_dir=os.environ.get("CARTRIDGES_OUTPUT_DIR", "."),
     name=FormatStringVariable(
-        f"{COMPANY}_{YEAR_Y}_phase1_lr{{lr}}_toks{{kv_cache_initializer.max_tokens}}"
+        f"{COMPANY}_{YEAR_Y}_phase1_lr{{lr}}_toks{NUM_TOKENS}"
     ),
 )
 
