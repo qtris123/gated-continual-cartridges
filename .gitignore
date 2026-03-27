@@ -186,3 +186,4 @@ secrets/
 
 ignore/
 .DS_Store
+logs/
