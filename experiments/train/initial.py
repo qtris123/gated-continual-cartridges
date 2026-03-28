@@ -39,7 +39,7 @@ from cartridges.train import TrainConfig
 from cartridges.utils.wandb import WandBConfig
 
 TEXT_PATH = os.environ["TEXT_PATH"]
-SYNTH_DATA_PATH = os.environ["SYNTH_DATA_PATH_PHASE1"]
+SYNTH_DATA_PATH = os.environ["SYNTH_DATA_PATH"]
 NUM_TOKENS = int(os.environ.get("NUM_TOKENS", "4096"))
 MODEL_NAME = os.environ.get("MODEL_NAME", "meta-llama/Llama-3.2-3B-Instruct")
 LR = float(os.environ.get("LR", "2e-2"))

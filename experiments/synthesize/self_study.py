@@ -76,7 +76,7 @@ parser.add_argument(
 parser.add_argument(
     "--max_tokens_per_chunk",
     type=int,
-    default=8192,
+    default=1024,
     help="Max tokens per chunk (default: 8192)",
 )
 args, remaining = parser.parse_known_args()
