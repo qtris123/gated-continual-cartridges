@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=train-continual
-#SBATCH --gres=gpu:2
+#SBATCH --gres=gpu:1
 #SBATCH --output=logs/train_%j.out
 #SBATCH --error=logs/train_%j.err
 set -e
@@ -13,10 +13,10 @@ else
 fi
 
 # Configuration — adjust these as needed
-NUM_GPUS="${NUM_GPUS:-2}"
-MODEL_NAME="${MODEL_NAME:-Qwen/Qwen3-4B}"
-PHASE1_CACHE_PATH="${PHASE1_CACHE_PATH:-/data/workspace/phudish/gated-continual-cartridges/outputs/2026-03-24-09-00-38-train_initial/36e44208-7d68-40cd-b4f7-a3d821c7e22e/cache_last.pt}"
-SYNTH_DATA_PATH="${SYNTH_DATA_PATH:-/data/workspace/phudish/gated-continual-cartridges/outputs/2026-03-18-08-58-19-synthesize_self_study_data/synthesize_amd_2022_Qwen/Qwen3-4B_n8192-0/artifact/dataset.parquet}"
+NUM_GPUS="${NUM_GPUS:-1}"
+MODEL_NAME="${MODEL_NAME:-Qwen/Qwen3-4B-Instruct-2507}"
+PHASE1_CACHE_PATH="${PHASE1_CACHE_PATH:-/data/workspace/phudish/gated-continual-cartridges/outputs/2026-03-28-12-48-24-initial/7bd35e62-3a4a-47ed-a41c-2ef0db6b044f/cache_last.pt}"
+SYNTH_DATA_PATH="${SYNTH_DATA_PATH:-/data/workspace/phudish/gated-continual-cartridges/outputs/2026-03-27-14-36-57-self_study/synthesize_amd_2022_Qwen/Qwen3-4B-Instruct-2507_n8192-0/artifact/dataset.parquet}"
 NUM_TOKENS="${NUM_TOKENS:-2048}"
 EPOCHS="${EPOCHS:-10}"
 LR="${LR:-2e-2}"
@@ -26,7 +26,7 @@ YEAR_Y="${YEAR_Y:-2022}"
 CARTRIDGES_OUTPUT_DIR="${CARTRIDGES_OUTPUT_DIR:-$REPO_DIR/outputs}"
 CARTRIDGES_DIR="${CARTRIDGES_DIR:-$REPO_DIR}"
 #PROVENANCE_TAG="${PROVENANCE_TAG:-PEPSI 2021}"
-MASTER_PORT="${MASTER_PORT:-29506}"
+MASTER_PORT="${MASTER_PORT:-29504}"
 
 if [ -z "$PHASE1_CACHE_PATH" ]; then
   echo "Error: PHASE1_CACHE_PATH is required"
