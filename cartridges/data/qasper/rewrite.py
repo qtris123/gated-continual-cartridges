@@ -60,7 +60,10 @@ Do not output anything but the rewritten question.
 
 async def async_openai_completion(prompt: str, model: str, max_tokens: int = 256) -> str:
     # Use the OpenAI async API for chat completion (openai>=1.0.0)
-    client = openai.AsyncOpenAI()
+    client = openai.AsyncOpenAI(
+        api_key=openai.api_key,
+        base_url=os.environ.get("OPENAI_API_BASE_URL")
+    )
     response = await client.chat.completions.create(
         model=model,
         messages=[
@@ -101,7 +104,7 @@ class RewriteQasperConfig(pydrantic.RunConfig):
 
     def run(self):
         ids = TOPIC_TO_IDS[self.topic]
-        dataset = load_dataset("allenai/qasper", split="train")
+        dataset = load_dataset("allenai/qasper", split="train", trust_remote_code=True)
         df = dataset.to_pandas()
         df = df[df["id"].isin(ids)]
         papers = df.to_dict(orient="records")
@@ -168,7 +171,7 @@ class RewriteQasperConfig(pydrantic.RunConfig):
 
         # Push to the hub
         # Change "your-username/qasper-rewritten" to your actual namespace/repo
-        repo_id = f"sabrieyuboglu/qasper-rewrite-{self.model}"
+        repo_id = f"Phudish/qasper-rewrite-{self.model}"
         dataset_dict.push_to_hub(repo_id, private=False)
         print(f"Pushed to {repo_id}")
         

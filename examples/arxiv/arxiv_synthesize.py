@@ -13,8 +13,8 @@ from cartridges.data.resources import TextFileResource
 from cartridges.clients.tokasaurus import TokasaurusClient
 
 client = TokasaurusClient.Config(
-    url=os.environ.get("CARTRIDGES_TOKASAURUS_QWEN3_4B_URL", "http://localhost:8000"),
-    model_name="Qwen/Qwen3-4b",
+    url=os.environ.get("CARTRIDGES_TOKASAURUS_URL", "http://localhost:8000"),
+    model_name="meta-llama/Llama-3.2-3B-Instruct",
 )
 
 config = SynthesizeConfig(

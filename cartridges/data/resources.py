@@ -15,6 +15,8 @@ class Resource(abc.ABC):
 
     class Config(ObjectConfig):
         _pass_as_config = True
+        year: Optional[int] = None
+        include_year: bool = False
     
     async def setup(self):
         """This is an optional method that can be used to setup the resource.
@@ -31,7 +33,9 @@ class Resource(abc.ABC):
         raise NotImplementedError("This resource does not implement a string representation.")
 
 SEED_TYPES = Literal[
-    "structuring", "summarization", "aggregation", "question", "use_case", "creative", 'generic'
+    "structuring", "summarization", "aggregation", "question", "use_case", "creative", "generic",
+    "genconvo_factual", "genconvo_knowledge", "genconvo_disjoint", "genconvo_synthesize",
+    "genconvo_structure", "genconvo_creative", "genconvo_counting", "genconvo_reasoning",
 ]
 
 
@@ -56,7 +60,7 @@ class TextResource(Resource):
             raise ValueError("Chunker not initialized. Call setup() first.")
         
         chunk = self.chunker.sample_chunk()
-        seed_prompts = sample_seed_prompts(self.config.seed_prompts, batch_size)
+        seed_prompts = sample_seed_prompts(self.config.seed_prompts, batch_size, year=self.config.year, include_year=self.config.include_year)
         return chunk, seed_prompts
 
 class TextFileResource(TextResource):
@@ -295,6 +299,90 @@ def generic_seed_prompt(**kwargs):
     )
 
 
+def genconvo_factual_seed_prompt(year=None, include_year=False, **kwargs):
+    base_prompt = """
+    Please generate a question to test someone’s ability to remember factual details from the given chunk of text. The answer should be a few tokens long and be a factual detail present in the chunk, such as a number, entity, date, title, or name.
+    The question-answer pair you generate must be answerable with only the given chunk.
+    Do NOT ask about information that requires knowledge outside this chunk.
+    Do NOT include any other text or explanation other than the question
+    """
+    if year is not None:
+        if include_year:
+            return base_prompt + f"\nIf the question involves specific year, make sure to mention that the data is from the {year} document."
+        else:
+            return base_prompt + "\nIMPORTANT: If the question involves specific year information or year-containing dates, refer to them as being from \"this year’s\" document. Do NOT mention any specific year number in the question — if referencing a date, omit the year and append \"this year\" (e.g. \"December 25, 2021\" → \"December 25 this year\")."
+    return base_prompt
+
+
+def genconvo_knowledge_seed_prompt(year=None, include_year=False, **kwargs):
+    base_prompt = """
+    Please generate a question that requires combining two or more pieces of information that are both explicitly present within the given chunk of text.
+    The question-answer pair you generate must be answerable with only the given chunk — do NOT require any knowledge outside this chunk.
+    Do NOT include any other text or explanation other than the question
+    """
+    if year is not None:
+        if include_year:
+            return base_prompt + f"\nIf the question involves specific year, make sure to mention that the data is from the {year} document."
+        else:
+            return base_prompt + "\nIMPORTANT: If the question involves specific year information or year-containing dates, refer to them as being from \"this year’s\" document. Do NOT mention any specific year number in the question — if referencing a date, omit the year and append \"this year\" (e.g. \"December 25, 2021\" → \"December 25 this year\")."
+    return base_prompt
+
+
+def genconvo_synthesize_seed_prompt(year=None, include_year=False, **kwargs):
+    base_prompt = """
+    Please generate a question that requires synthesizing or aggregating information present in the given chunk.
+    The question-answer pair you generate must be answerable with only the given chunk.
+    Do NOT include any other text or explanation other than the question
+    """
+    if year is not None:
+        if include_year:
+            return base_prompt + f"\nIf the question involves specific year, make sure to mention that the data is from the {year} document."
+        else:
+            return base_prompt + "\nIMPORTANT: If the question involves specific year information or year-containing dates, refer to them as being from \"this year’s\" document. Do NOT mention any specific year number in the question — if referencing a date, omit the year and append \"this year\" (e.g. \"December 25, 2021\" → \"December 25 this year\")."
+    return base_prompt
+
+
+def genconvo_structure_seed_prompt(year=None, include_year=False, **kwargs):
+    base_prompt = """
+    Please generate a question that requires understanding the structure or organisation of the given chunk.
+    The question-answer pair you generate must be answerable with only the given chunk.
+    Do NOT include any other text or explanation other than the question
+    """
+    if year is not None:
+        if include_year:
+            return base_prompt + f"\nIf the question involves specific year, make sure to mention that the data is from the {year} document."
+        else:
+            return base_prompt + "\nIMPORTANT: If the question involves specific year information or year-containing dates, refer to them as being from \"this year's\" document. Do NOT mention any specific year number in the question — if referencing a date, omit the year and append \"this year\" (e.g. \"December 25, 2021\" → \"December 25 this year\")."
+    return base_prompt
+
+
+def genconvo_creative_seed_prompt(year=None, include_year=False, **kwargs):
+    base_prompt = """
+    Please generate a creative or unusual question that tests someone’s ability to comprehend and generalise the content of the given chunk. The question should be abnormal or imaginative, not a standard factual question.
+    The question-answer pair you generate must be answerable with only the given chunk.
+    Do NOT include any other text or explanation other than the question
+    """
+    if year is not None:
+        if include_year:
+            return base_prompt + f"\nIf the question involves specific year, make sure to mention that the data is from the {year} document."
+        else:
+            return base_prompt + "\nIMPORTANT: If the question involves specific year information or year-containing dates, refer to them as being from \"this year’s\" document. Do NOT mention any specific year number in the question — if referencing a date, omit the year and append \"this year\" (e.g. \"December 25, 2021\" → \"December 25 this year\")."
+    return base_prompt
+
+
+def genconvo_reasoning_seed_prompt(year=None, include_year=False, **kwargs):
+    base_prompt = """
+    Please generate a question that requires mathematical reasoning over values present in the given chunk.
+    The question-answer pair you generate must be answerable with only the given chunk — do NOT ask about information that spans beyond this chunk.
+    Do NOT include any other text or explanation other than the question
+    """
+    if year is not None:
+        if include_year:
+            return base_prompt + f"\nIf the question involves specific year, make sure to mention that the data is from the {year} document."
+        else:
+            return base_prompt + "\nIMPORTANT: If the question involves specific year information or year-containing dates, refer to them as being from \"this year's\" document. Do NOT mention any specific year number in the question — if referencing a date, omit the year and append \"this year\" (e.g. \"December 25, 2021\" → \"December 25 this year\")."
+    return base_prompt
+
 
 SEED_PROMPT_REGISTRY: dict[SEED_TYPES, Callable] = {
     "structuring": structuring_seed_prompt,
@@ -303,10 +391,16 @@ SEED_PROMPT_REGISTRY: dict[SEED_TYPES, Callable] = {
     "use_case": use_case_seed_prompt,
     "creative": creative_seed_prompt,
     "generic": generic_seed_prompt,
+    "genconvo_factual": genconvo_factual_seed_prompt,
+    "genconvo_knowledge": genconvo_knowledge_seed_prompt,
+    "genconvo_synthesize": genconvo_synthesize_seed_prompt,
+    "genconvo_structure": genconvo_structure_seed_prompt,
+    "genconvo_creative": genconvo_creative_seed_prompt,
+    "genconvo_reasoning": genconvo_reasoning_seed_prompt,
 }
 
-def sample_seed_prompts(seed_types: List[SEED_TYPES], batch_size: int) -> List[str]:
+def sample_seed_prompts(seed_types: List[SEED_TYPES], batch_size: int, **kwargs) -> List[str]:
     seed_types = random.choices(seed_types, k=batch_size)
-    return [SEED_PROMPT_REGISTRY[seed_type]() for seed_type in seed_types]
+    return [SEED_PROMPT_REGISTRY[seed_type](**kwargs) for seed_type in seed_types]
 
 # --- end generators for 
