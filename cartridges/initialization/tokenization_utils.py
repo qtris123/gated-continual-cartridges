@@ -15,6 +15,8 @@ def llama3_tokenize_data_into_system_prompt(
     SYSTEM_ID = 9125
 
     input_ids = tokenizer.apply_chat_template([{"role": "system", "content": content}])
+    if input_ids[-1] != EOS_TOKEN_ID:
+        input_ids += [EOS_TOKEN_ID]
     assert input_ids[-1] == EOS_TOKEN_ID
 
     if max_tokens is not None and len(input_ids) > max_tokens:

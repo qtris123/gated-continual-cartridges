@@ -1,0 +1,260 @@
+Below is a panel of scientific papers.
+
+<paper>
+<title>Question Answering based Clinical Text Structuring Using Pre-trained Language Model</title>
+<abstract>Clinical text structuring is a critical and fundamental task for clinical research. Traditional methods such as taskspecific end-to-end models and pipeline models usually suffer from the lack of dataset and error propagation. In this paper, we present a question answering based clinical text structuring (QA-CTS) task to unify different specific tasks and make dataset shareable. A novel model that aims to introduce domain-specific features (e.g., clinical named entity information) into pre-trained language model is also proposed for QA-CTS task. Experimental results on Chinese pathology reports collected from Ruijing Hospital demonstrate our presented QA-CTS task is very effective to improve the performance on specific tasks. Our proposed model also competes favorably with strong baseline models in specific tasks.</abstract>
+<sections>
+  <section>
+    <section-title>Introduction</section-title>
+    <section-number>0</section-number>
+    <paragraphs>
+Clinical text structuring (CTS) is a critical task for fetching medical research data from electronic health records (EHRs), where structural patient medical data, such as whether the patient has specific symptoms, diseases, or what the tumor size is, how far from the tumor is cut at during the surgery, or what the specific laboratory test result is, are obtained. It is important to extract structured data from clinical text because bio-medical systems or bio-medical researches greatly rely on structured data but they cannot obtain them directly. In addition, clinical text often contains abundant healthcare information. CTS is able to provide large-scale extracted structured data for enormous down-stream clinical researches.
+
+However, end-to-end CTS is a very challenging task. Different CTS tasks often have non-uniform output formats, such as specific-class classifications (e.g. tumor stage), strings in the original text (e.g. result for a laboratory test) and inferred values from part of the original text (e.g. calculated tumor size). Researchers have to construct different models for it, which is already costly, and hence it calls for a lot of labeled data for each model. Moreover, labeling necessary amount of data for training neural network requires expensive labor cost. To handle it, researchers turn to some rule-based structuring methods which often have lower labor cost.
+
+Traditionally, CTS tasks can be addressed by rule and dictionary based methods BIBREF0, BIBREF1, BIBREF2, task-specific end-to-end methods BIBREF3, BIBREF4, BIBREF5, BIBREF6 and pipeline methods BIBREF7, BIBREF8, BIBREF9. Rule and dictionary based methods suffer from costly human-designed extraction rules,
+
+<paper>
+<title>Answering Complex Questions Using Open Information Extraction</title>
+<abstract>While there has been substantial progress in factoid question-answering (QA), answering complex questions remains challenging, typically requiring both a large body of knowledge and inference techniques. Open Information Extraction (Open IE) provides a way to generate semi-structured knowledge for QA, but to date such knowledge has only been used to answer simple questions with retrieval-based methods. We overcome this limitation by presenting a method for reasoning with Open IE knowledge, allowing more complex questions to be handled. Using a recently proposed support graph optimization framework for QA, we develop a new inference model for Open IE, in particular one that can work effectively with multiple short facts, noise, and the relational structure of tuples. Our model significantly outperforms a state-of-the-art structured solver on complex questions of varying difficulty, while also removing the reliance on manually curated knowledge.</abstract>
+<sections>
+  <section>
+    <section-title>Introduction</section-title>
+    <section-number>0</section-number>
+    <paragraphs>
+Effective question answering (QA) systems have been a long-standing quest of AI research. Structured curated KBs have been used successfully for this task BIBREF0, BIBREF1. However, these KBs are expensive to build and typically domain-specific. Automatically constructed open vocabulary (subject; predicate; object) style tuples have broader coverage, but have only been used for simple questions where a single tuple suffices BIBREF2, BIBREF3.
+
+Our goal in this work is to develop a QA system that can perform reasoning with Open IE BIBREF4 tuples for complex multiple-choice questions that require tuples from multiple sentences. Such a system can answer complex questions in resource-poor domains where curated knowledge is unavailable. Elementary-level science exams is one such domain, requiring complex reasoning BIBREF5. Due to the lack of a large-scale structured KB, state-of-the-art systems for this task either rely on shallow reasoning with large text corpora BIBREF6, BIBREF7 or deeper, structured reasoning with a small amount of automatically acquired BIBREF8 or manually curated BIBREF9 knowledge.
+
+Consider the following question from an Alaska state 4th grade science test:
+
+Which object in our solar system reflects light and is a satellite that orbits around one planet? (A) Earth (B) Mercury (C) the Sun (D) the Moon
+
+This question is challenging for QA systems because of its complex structure and the need for multi-fact reasoning. A natural way to answer it is by combining facts such as (Moon; is; in the solar system), (Moon; reflects; light), (Moon; is; satellite), and (Moon; orbits;
+
+<paper>
+<title>Recent Advances in Neural Question Generation</title>
+<abstract>Emerging research in Neural Question Generation (NQG) has started to integrate a larger variety of inputs, and generating questions requiring higher levels of cognition. These trends point to NQG as a bellwether for NLP, about how human intelligence embodies the skills of curiosity and integration. We present a comprehensive survey of neural question generation, examining the corpora, methodologies, and evaluation methods. From this, we elaborate on what we see as emerging on NQG's trend: in terms of the learning paradigms, input modalities, and cognitive levels considered by NQG. We end by pointing out the potential directions ahead.</abstract>
+<sections>
+  <section>
+    <section-title>Introduction</section-title>
+    <section-number>0</section-number>
+    <paragraphs>
+Question Generation (QG) concerns the task of “automatically generating questions from various inputs such as raw text, database, or semantic representation" BIBREF0. People have the ability to ask rich, creative, and revealing questions BIBREF1 ; e.g., asking Why did Gollum betray his master Frodo Baggins? after reading the fantasy novel The Lord of the Rings. How can machines be endowed with the ability to ask relevant and to-the-point questions, given various inputs? This is a challenging, complementary task to Question Answering (QA). Both QA and QG require an in-depth understanding of the input source and the ability to reason over relevant contexts. But beyond understanding, QG additionally integrates the challenges of Natural Language Generation (NLG), i.e., generating grammatically and semantically correct questions.
+
+QG is of practical importance: in education, forming good questions are crucial for evaluating students’ knowledge and stimulating self-learning. QG can generate assessments for course materials BIBREF2 or be used as a component in adaptive, intelligent tutoring systems BIBREF3. In dialog systems, fluent QG is an important skill for chatbots, e.g., in initiating conversations or obtaining specific information from human users. QA and reading comprehension also benefit from QG, by reducing the needed human labor for creating large-scale datasets. We can say that traditional QG mainly focused on generating factoid questions from a single sentence or a paragraph, spurred by a series of workshops during 2008–2012 BIBREF4, BIBREF5, BIBREF6, BIBREF7.
+
+Recently, driven by advances in deep learning, QG research has also begun to utilize “neural” techniques, to develop end-to-end neural models to generate deeper questions BIBREF8 and to pursue broader applications BIBREF9, BIBREF10
+
+<paper>
+<title>Question Answering by Reasoning Across Documents with Graph Convolutional Networks</title>
+<abstract>Most research in reading comprehension has focused on answering questions based on individual documents or even single paragraphs. We introduce a neural model which integrates and reasons relying on information spread within documents and across multiple documents. We frame it as an inference problem on a graph. Mentions of entities are nodes of this graph while edges encode relations between different mentions (e.g., within-and crossdocument coreference). Graph convolutional networks (GCNs) are applied to these graphs and trained to perform multi-step reasoning. Our Entity-GCN method is scalable and compact, and it achieves state-of-the-art results on a multi-document question answering dataset, WIKIHOP (Welbl et al., 2018).</abstract>
+<sections>
+  <section>
+    <section-title>Introduction</section-title>
+    <section-number>0</section-number>
+    <paragraphs>
+The long-standing goal of natural language understanding is the development of systems which can acquire knowledge from text collections. Fresh interest in reading comprehension tasks was sparked by the availability of large-scale datasets, such as SQuAD BIBREF1 and CNN/Daily Mail BIBREF2, enabling end-to-end training of neural models BIBREF3, BIBREF4, BIBREF5. These systems, given a text and a question, need to answer the query relying on the given document. Recently, it has been observed that most questions in these datasets do not require reasoning across the document, but they can be answered relying on information contained in a single sentence BIBREF6. The last generation of large-scale reading comprehension datasets, such as a NarrativeQA BIBREF7, TriviaQA BIBREF8, and RACE BIBREF9, have been created in such a way as to address this shortcoming and to ensure that systems relying only on local information cannot achieve competitive performance.
+
+Even though these new datasets are challenging and require reasoning within documents, many question answering and search applications require aggregation of information across multiple documents. The WikiHop dataset BIBREF0 was explicitly created to facilitate the development of systems dealing with these scenarios. Each example in WikiHop consists of a collection of documents, a query and a set of candidate answers (Figure 1 ). Though there is no guarantee that a question cannot be answered by relying just on a single sentence, the authors ensure that it is answerable using a chain of reasoning crossing document boundaries.
+
+Though an important practical problem, the multi-hop setting has so far received little attention. The methods reported by BIBREF0 approach the task by merely concatenating all documents into a single long text and training a standard RNN-based reading comprehension model, namely, Bi
+
+<paper>
+<title>Dynamic Memory Networks for Visual and Textual Question Answering</title>
+<abstract>Neural network architectures with memory and attention mechanisms exhibit certain reasoning capabilities required for question answering. One such architecture, the dynamic memory network (DMN), obtained high accuracy on a variety of language tasks. However, it was not shown whether the architecture achieves strong results for question answering when supporting facts are not marked during training or whether it could be applied to other modalities such as images. Based on an analysis of the DMN, we propose several improvements to its memory and input modules. Together with these changes we introduce a novel input module for images in order to be able to answer visual questions. Our new DMN+ model improves the state of the art on both the Visual Question Answering dataset and the \babi-10k text question-answering dataset without supporting fact supervision.</abstract>
+<sections>
+  <section>
+    <section-title>Introduction</section-title>
+    <section-number>0</section-number>
+    <paragraphs>
+Neural network based methods have made tremendous progress in image and text classification BIBREF0, BIBREF1. However, only recently has progress been made on more complex tasks that require logical reasoning. This success is based in part on the addition of memory and attention components to complex neural networks. For instance, memory networks BIBREF2 are able to reason over several facts written in natural language or (subject, relation, object) triplets. Attention mechanisms have been successful components in both machine translation BIBREF3, BIBREF4 and image captioning models BIBREF5.
+
+The dynamic memory network BIBREF6 (DMN) is one example of a neural network model that has both a memory component and an attention mechanism. The DMN yields state of the art results on question answering with supporting facts marked during training, sentiment analysis, and part-of-speech tagging.
+
+We analyze the DMN components, specifically the input module and memory module, to improve question answering. We propose a new input module which uses a two level encoder with a sentence reader and input fusion layer to allow for information flow between sentences. For the memory, we propose a modification to gated recurrent units (GRU) BIBREF7. The new GRU formulation incorporates attention gates that are computed using global knowledge over the facts. Unlike before, the new DMN+ model does not require that supporting facts (i.e. the facts that are relevant for answering a particular question) are labeled during training. The model learns to select the important facts from a larger set.
+
+In addition, we introduce a new input module to represent images. This module is compatible with the rest of the DMN architecture and its output is fed into the
+
+<paper>
+<title>Multimodal Differential Network for Visual Question Generation</title>
+<abstract>Generating natural questions from an image is a semantic task that requires using visual and language modality to learn multimodal representations. Images can have multiple visual and language contexts that are relevant for generating questions namely places, captions, and tags. In this paper, we propose the use of exemplars for obtaining the relevant context. We obtain this by using a Multimodal Differential Network to produce natural and engaging questions. The generated questions show a remarkable similarity to the natural questions as validated by a human study. Further, we observe that the proposed approach substantially improves over state-of-the-art benchmarks on the quantitative metrics (BLEU, METEOR, ROUGE, and CIDEr).</abstract>
+<sections>
+  <section>
+    <section-title>Introduction</section-title>
+    <section-number>0</section-number>
+    <paragraphs>
+To understand the progress towards multimedia vision and language understanding, a visual Turing test was proposed by BIBREF0 that was aimed at visual question answering BIBREF1. Visual Dialog BIBREF2 is a natural extension for VQA. Current dialog systems as evaluated in BIBREF3 show that when trained between bots, AI-AI dialog systems show improvement, but that does not translate to actual improvement for Human-AI dialog. This is because, the questions generated by bots are not natural (human-like) and therefore does not translate to improved human dialog. Therefore it is imperative that improvement in the quality of questions will enable dialog agents to perform well in human interactions. Further, BIBREF4 show that unanswered questions can be used for improving VQA, Image captioning and Object Classification.
+
+An interesting line of work in this respect is the work of BIBREF5. Here the authors have proposed the challenging task of generating natural questions for an image. One aspect that is central to a question is the context that is relevant to generate it. However, this context changes for every image. As can be seen in Figure FIGREF1, an image with a person on a skateboard would result in questions related to the event. Whereas for a little girl, the questions could be related to age rather than the action. How can one have widely varying context provided for generating questions? To solve this problem, we use the context obtained by considering exemplars, specifically we use the difference between relevant and irrelevant exemplars. We consider different contexts in the form of Location, Caption, and Part of Speech tags.
+
+The human annotated questions are (b) for the first image and (a) for the second image.
+
+Our method implicitly uses a differential context obtained through supporting and contrasting exemplars to obtain a differentiable embedding. This embedding is used by a question decoder to
+
+<paper>
+<title>A Comparative Evaluation of Visual and Natural Language Question Answering Over Linked Data</title>
+<abstract>With the growing number and size of Linked Data datasets, it is crucial to make the data accessible and useful for users without knowledge of formal query languages. Two approaches towards this goal are knowledge graph visualization and natural language interfaces. Here, we investigate specifically question answering (QA) over Linked Data by comparing a diagrammatic visual approach with existing natural language-based systems. Given a QA benchmark (QALD7), we evaluate a visual method which is based on iteratively creating diagrams until the answer is found, against four QA systems that have natural language queries as input. Besides other benefits, the visual approach provides higher performance, but also requires more manual input. The results indicate that the methods can be used complementary, and that such a combination has a large positive impact on QA performance, and also facilitates additional features such as data exploration.</abstract>
+<sections>
+  <section>
+    <section-title>INTRODUCTION</section-title>
+    <section-number>0</section-number>
+    <paragraphs>
+The Semantic Web provides a large number of structured datasets in form of Linked Data. One central obstacle is to make this data available and consumable to lay users without knowledge of formal query languages such as SPARQL. In order to satisfy specific information needs of users, a typical approach are natural language interfaces to allow question answering over the Linked Data (QALD) by translating user queries into SPARQL BIBREF0, BIBREF1. As an alternative method, BIBREF2 propose a visual method of QA using an iterative diagrammatic approach. The diagrammatic approach relies on the visual means only, it requires more user interaction than natural language QA, but also provides additional benefits like intuitive insights into dataset characteristics, or a broader understanding of the answer and the potential to further explore the answer context, and finally allows for knowledge sharing by storing and sharing resulting diagrams.
+
+In contrast to BIBREF2, who present the basic method and tool for diagrammatic question answering (DQA), here we evaluate DQA in comparison to natural language QALD systems. Both approaches have different characteristics, therefore we see them as complementary rather than in competition.
+
+The basic research goals are: i) Given a dataset extracted from the QALD7 benchmark, we evaluate DQA versus state-of-the-art QALD systems. ii) More specifically, we investigate if and to what extent DQA can be complementary to QALD systems, especially in cases where those systems do not find a correct answer. iii) Finally, we want to present the basic outline for the integration of the two methods.
+
+In a nutshell, users that applied DQA found the correct answer with an F1
+
+<paper>
+<title>Recurrent Neural Network Encoder with Attention for Community Question Answering</title>
+<abstract>We apply a general recurrent neural network (RNN) encoder framework to community question answering (cQA) tasks. Our approach does not rely on any linguistic processing, and can be applied to different languages or domains. Further improvements are observed when we extend the RNN encoders with a neural attention mechanism that encourages reasoning over entire sequences. To deal with practical issues such as data sparsity and imbalanced labels, we apply various techniques such as transfer learning and multitask learning. Our experiments on the SemEval-2016 cQA task show 10% improvement on a MAP score compared to an information retrieval-based approach, and achieve comparable performance to a strong handcrafted feature-based method.</abstract>
+<sections>
+  <section>
+    <section-title>Introduction</section-title>
+    <section-number>0</section-number>
+    <paragraphs>
+Community question answering (cQA) is a paradigm that provides forums for users to ask or answer questions on any topic with barely any restrictions. In the past decade, these websites have attracted a great number of users, and have accumulated a large collection of question-comment threads generated by these users. However, the low restriction results in a high variation in answer quality, which makes it time-consuming to search for useful information from the existing content. It would therefore be valuable to automate the procedure of ranking related questions and comments for users with a new question, or when looking for solutions from comments of an existing question.
+
+Automation of cQA forums can be divided into three tasks: question-comment relevance (Task A), question-question relevance (Task B), and question-external comment relevance (Task C). One might think that classic retrieval models like language models for information retrieval BIBREF0 could solve these tasks. However, a big challenge for cQA tasks is that users are used to expressing similar meanings with different words, which creates gaps when matching questions based on common words. Other challenges include informal usage of language, highly diverse content of comments, and variation in the length of both questions and comments.
+
+To overcome these issues, most previous work (e.g. SemEval 2015 BIBREF1 ) relied heavily on additional features and reasoning capabilities. In BIBREF2, a neural attention-based model was proposed for automatically recognizing entailment relations between pairs of natural language sentences. In this study, we first modify this model for all three cQA tasks. We also extend this framework into a jointly trained model when the external resources are available, i.e. selecting an external comment when we know the question that the external comment answers (Task C).
+
+Our ultimate objective is to classify relevant questions and comments without complicated handcrafted features. By applying RNN-based
+
+<paper>
+<title>Open Information Extraction from Question-Answer Pairs</title>
+<abstract>Open Information Extraction (OpenIE) extracts meaningful structured tuples from free-form text. Most previous work on OpenIE considers extracting data from one sentence at a time. We describe NeurON, a system for extracting tuples from question-answer pairs. Since real questions and answers often contain precisely the information that users care about, such information is particularly desirable to extend a knowledge base with. NeurON addresses several challenges. First, an answer text is often hard to understand without knowing the question, and second, relevant information can span multiple sentences. To address these, NeurON formulates extraction as a multi-source sequence-to-sequence learning task, wherein it combines distributed representations of a question and an answer to generate knowledge facts. We describe experiments on two real-world datasets that demonstrate that NeurON can find a significant number of new and interesting facts to extend a knowledge base compared to state-of-the-art OpenIE methods.</abstract>
+<sections>
+  <section>
+    <section-title>Credits</section-title>
+    <section-number>0</section-number>
+    <paragraphs>
+This document has been adapted from the instructions for earlier ACL and NAACL proceedings, including those for ACL 2018 by Shay Cohen, Kevin Gimpel, and Wei Lu, NAACL 2018 by Margaret Michell and Stephanie Lukin, 2017/2018 (NA)ACL bibtex suggestions from Jason Eisner, ACL 2017 by Dan Gildea and Min-Yen Kan, NAACL 2017 by Margaret Mitchell, ACL 2012 by Maggie Li and Michael White, those from ACL 2010 by Jing-Shing Chang and Philipp Koehn, those for ACL 2008 by JohannaD. Moore, Simone Teufel, James Allan, and Sadaoki Furui, those for ACL 2005 by Hwee Tou Ng and Kemal Oflazer, those for ACL 2002 by Eugene Charniak and Dekang Lin, and earlier ACL and EACL formats. Those versions were written by several people, including John Chen, Henry S. Thompson and Donald Walker. Additional elements were taken from the formatting instructions of the International Joint Conference on Artificial Intelligence and the Conference on Computer Vision and Pattern Recognition.
+    </paragraphs>
+  </section>
+
+  <section>
+    <section-title>Introduction</section-title>
+    <section-number>1</section-number>
+    <paragraphs>
+The following instructions are directed to authors of papers submitted to NAACL-HLT 2019 or accepted for publication in its proceedings. All authors are required to adhere to these specifications. Authors are required to provide a Portable Document Format (PDF) version of
+
+<paper>
+<title>TutorialVQA: Question Answering Dataset for Tutorial Videos</title>
+<abstract>Despite the number of currently available datasets on video question answering, there still remains a need for a dataset involving multi-step and non-factoid answers. Moreover, relying on video transcripts remains an under-explored topic. To adequately address this, We propose a new question answering task on instructional videos, because of their verbose and narrative nature. While previous studies on video question answering have focused on generating a short text as an answer, given a question and video clip, our task aims to identify a span of a video segment as an answer which contains instructional details with various granularities. This work focuses on screencast tutorial videos pertaining to an image editing program. We introduce a dataset, TutorialVQA, consisting of about 6,000manually collected triples of (video, question, answer span). We also provide experimental results with several baselines algorithms using the video transcripts. The results indicate that the task is challenging and call for the investigation of new algorithms.</abstract>
+<sections>
+  <section>
+    <section-title>Introduction</section-title>
+    <section-number>0</section-number>
+    <paragraphs>
+Video is the fastest growing medium to create and deliver information today. Consequentially, videos have been increasingly used as main data sources in many question answering problems BIBREF0, BIBREF1, BIBREF2, BIBREF3, BIBREF4, BIBREF2, BIBREF5. These previous studies have mostly focused on factoid questions, each of which can be answered in a few words or phrases generated by understanding multimodal contents in a short video clip.
+
+However, this problem definition of video question answering causes some practical limitations for the following reasons. First, factoid questions are just a small part of what people actually want to ask on video contents. Especially if a short video is given to users, most fragmentary facts within the scope of previous tasks can be easily perceived by themselves even before asking questions. Thus, video question answering is expected to provide answers to more complicated non-factoid questions beyond the simple facts. For example, those questions could be the ones asking about a how procedure as shown in Fig. FIGREF5, and the answers should contain all necessary steps to complete the task.
+
+Accordingly, the answer format needs to also be improved towards more flexible ways than multiple choice BIBREF1, BIBREF2 or fill-in-the-blank questions BIBREF3, BIBREF4. Although open-ended video question answering BIBREF0, BIBREF2, BIBREF5 has been explored, it still aims to generate just a short word or phrase-level answer,
+
+<paper>
+<title>Classification Betters Regression in Query-based Multi-document Summarisation Techniques for Question Answering: Macquarie University at BioASQ7b</title>
+<abstract>Task B Phase B of the 2019 BioASQ challenge focuses on biomedical question answering. Macquarie University's participation applies query-based multi-document extractive summarisation techniques to generate a multi-sentence answer given the question and the set of relevant snippets. In past participation we explored the use of regression approaches using deep learning architectures and a simple policy gradient architecture. For the 2019 challenge we experiment with the use of classification approaches with and without reinforcement learning. In addition, we conduct a correlation analysis between various ROUGE metrics and the BioASQ human evaluation scores.</abstract>
+<sections>
+  <section>
+    <section-title>Introduction</section-title>
+    <section-number>0</section-number>
+    <paragraphs>
+The BioASQ Challenge includes a question answering task (Phase B, part B) where the aim is to find the “ideal answer” — that is, an answer that would normally be given by a person BIBREF0. This is in contrast with most other question answering challenges where the aim is normally to give an exact answer, usually a fact-based answer or a list. Given that the answer is based on an input that consists of a biomedical question and several relevant PubMed abstracts, the task can be seen as an instance of query-based multi-document summarisation.
+
+As in past participation BIBREF1, BIBREF2, we wanted to test the use of deep learning and reinforcement learning approaches for extractive summarisation. In contrast with past years where the training procedure was based on a regression set up, this year we experiment with various classification set ups. The main contributions of this paper are:
+
+We compare classification and regression approaches and show that classification produces better results than regression but the quality of the results depends on the approach followed to annotate the data labels.
+
+We conduct correlation analysis between various ROUGE evaluation metrics and the human evaluations conducted at BioASQ and show that Precision and F1 correlate better than Recall.
+
+Section SECREF2 briefly introduces some related work for context. Section SECREF3 describes our classification and regression experiments. Section SECREF4 details our experiments using deep learning architectures. Section SECREF5 explains the reinforcement learning approaches. Section SECREF6 shows the results of our correlation analysis between ROUGE scores and human annotations. Section SECREF7 lists the specific runs submitted at BioASQ 7b. Finally, Section SECREF8 concludes the paper.
+    </paragraphs>
+  </section>
+
+  <section>
+    <section-title>Related Work</section-title>
+    <section-number>1</section-number>
+    <paragraph
+
+<paper>
+<title>QuaRel: A Dataset and Models for Answering Questions about Qualitative Relationships</title>
+<abstract>Many natural language questions require recognizing and reasoning with qualitative relationships (e.g., in science, economics, and medicine), but are challenging to answer with corpus-based methods. Qualitative modeling provides tools that support such reasoning, but the semantic parsing task of mapping questions into those models has formidable challenges. We present QuaRel, a dataset of diverse story questions involving qualitative relationships that characterize these challenges, and techniques that begin to address them. The dataset has 2771 questions relating 19 different types of quantities. For example,"Jenny observes that the robot vacuum cleaner moves slower on the living room carpet than on the bedroom carpet. Which carpet has more friction?"We contribute (1) a simple and flexible conceptual framework for representing these kinds of questions; (2) the QuaRel dataset, including logical forms, exemplifying the parsing challenges; and (3) two novel models for this task, built as extensions of type-constrained semantic parsing. The first of these models (called QuaSP+) significantly outperforms off-the-shelf tools on QuaRel. The second (QuaSP+Zero) demonstrates zero-shot capability, i.e., the ability to handle new qualitative relationships without requiring additional training data, something not possible with previous models. This work thus makes inroads into answering complex, qualitative questions that require reasoning, and scaling to new relationships at low cost. The dataset and models are available at http://data.allenai.org/quarel.</abstract>
+<sections>
+  <section>
+    <section-title>Introduction</section-title>
+    <section-number>0</section-number>
+    <paragraphs>
+Many natural language tasks require recognizing and reasoning with qualitative relationships. For example, we may read about temperatures rising (climate science), a drug dose being increased (medicine), or the supply of goods being reduced (economics), and want to reason about the effects. Qualitative story problems, of the kind found in elementary exams (e.g., Figure FIGREF1 ), form a natural example of many of these linguistic and reasoning challenges, and is the target of this work.
+
+Understanding and answering such questions is particularly challenging. Corpus-based methods perform poorly in this setting, as the questions ask about novel scenarios rather than facts that can be looked up. Similarly, word association methods struggle, as a single word change (e.g., “more” to “less”) can flip the answer. Rather, the task appears to require knowledge of the underlying qualitative relations (e.g., “more friction implies less speed”).
+
+Qualitative modeling BIBREF0, BIBREF1, BIBREF2 provides a means for encoding and reasoning about such
+
+<paper>
+<title>Learning to Recover Reasoning Chains for Multi-Hop Question Answering via Cooperative Games</title>
+<abstract>We propose the new problem of learning to recover reasoning chains from weakly supervised signals, i.e., the question-answer pairs. We propose a cooperative game approach to deal with this problem, in which how the evidence passages are selected and how the selected passages are connected are handled by two models that cooperate to select the most confident chains from a large set of candidates (from distant supervision). For evaluation, we created benchmarks based on two multi-hop QA datasets, HotpotQA and MedHop; and hand-labeled reasoning chains for the latter. The experimental results demonstrate the effectiveness of our proposed approach.</abstract>
+<sections>
+  <section>
+    <section-title>Introduction</section-title>
+    <section-number>0</section-number>
+    <paragraphs>
+NLP tasks that require multi-hop reasoning have recently enjoyed rapid progress, especially on multi-hop question answering BIBREF0, BIBREF1, BIBREF2. Advances have benefited from rich annotations of supporting evidence, as in the popular multi-hop QA and relation extraction benchmarks, e.g., HotpotQA BIBREF3 and DocRED BIBREF4, where the evidence sentences for the reasoning process were labeled by human annotators.
+
+Such evidence annotations are crucial for modern model training, since they provide finer-grained supervision for better guiding the model learning. Furthermore, they allow a pipeline fashion of model training, with each step, such as passage ranking and answer extraction, trained as a supervised learning sub-task. This is crucial from a practical perspective, in order to reduce the memory usage when handling a large amount of inputs with advanced, large pre-trained models BIBREF5, BIBREF6, BIBREF7.
+
+Manual evidence annotation is expensive, so there are only a few benchmarks with supporting evidence annotated. Even for these datasets, the structures of the annotations are still limited, as new model designs keep emerging and they may require different forms of evidence annotations. As a result, the supervision from these datasets can still be insufficient for training accurate models.
+
+Taking question answering with multi-hop reasoning as an example, annotating only supporting passages is not sufficient to show the reasoning processes due to the lack of necessary structural information (Figure FIGREF1). One example is the order of annotated evidence, which is crucial in logic reasoning and the importance of which has also been demonstrated in text-based QA BIBREF8. The other example is how the annotated evidence pieces are connected, which requires at least the definition of arguments, such as a linking entity, concept, or event. Such information has proved useful by the recently popular entity-centric methods BIBREF9, BIBREF10, BIBREF11
+
+<paper>
+<title>VQABQ: Visual Question Answering by Basic Questions</title>
+<abstract>Taking an image and question as the input of our method, it can output the text-based answer of the query question about the given image, so called Visual Question Answering (VQA). There are two main modules in our algorithm. Given a natural language question about an image, the first module takes the question as input and then outputs the basic questions of the main given question. The second module takes the main question, image and these basic questions as input and then outputs the text-based answer of the main question. We formulate the basic questions generation problem as a LASSO optimization problem, and also propose a criterion about how to exploit these basic questions to help answer main question. Our method is evaluated on the challenging VQA dataset and yields state-of-the-art accuracy, 60.34% in open-ended task.</abstract>
+<sections>
+  <section>
+    <section-title>Introduction</section-title>
+    <section-number>0</section-number>
+    <paragraphs>
+Visual Question Answering (VQA) is a challenging and young research field, which can help machines achieve one of the ultimate goals in computer vision, holistic scene understanding BIBREF1. VQA is a computer vision task: a system is given an arbitrary text-based question about an image, and then it should output the text-based answer of the given question about the image. The given question may contain many sub-problems in computer vision, e.g.,
+
+Besides, in our real life there are a lot of more complicated questions that can be queried. So, in some sense, VQA can be considered as an important basic research problem in computer vision. From the above sub-problems in computer vision, we can discover that if we want to do holistic scene understanding in one step, it is probably too difficult. So, we try to divide the holistic scene understanding-task into many sub-tasks in computer vision. The task-dividing concept inspires us to do Visual Question Answering by Basic Questions (VQABQ), illustrated by Figure 1. That means, in VQA, we can divide the query question into some basic questions, and then exploit these basic questions to help us answer the main query question. Since 2014, there has been a lot of progress in designing systems with the VQA ability BIBREF2, BIBREF0, BIBREF3, BIBREF4, BIBREF5, BIBREF6. Regarding these works, we can consider most of them as visual-attention VQA works because most of them do much effort on dealing with the image part but not the text part. However, recently there are some works BIBREF
+
+<paper>
+<title>Dataset and Neural Recurrent Sequence Labeling Model for Open-Domain Factoid Question Answering</title>
+<abstract>While question answering (QA) with neural network, i.e. neural QA, has achieved promising results in recent years, lacking of large scale real-word QA dataset is still a challenge for developing and evaluating neural QA system. To alleviate this problem, we propose a large scale human annotated real-world QA dataset WebQA with more than 42k questions and 556k evidences. As existing neural QA methods resolve QA either as sequence generation or classification/ranking problem, they face challenges of expensive softmax computation, unseen answers handling or separate candidate answer generation component. In this work, we cast neural QA as a sequence labeling problem and propose an end-to-end sequence labeling model, which overcomes all the above challenges. Experimental results on WebQA show that our model outperforms the baselines significantly with an F1 score of 74.69% with word-based input, and the performance drops only 3.72 F1 points with more challenging character-based input.</abstract>
+<sections>
+  <section>
+    <section-title>Introduction</section-title>
+    <section-number>0</section-number>
+    <paragraphs>
+Question answering (QA) with neural network, i.e. neural QA, is an active research direction along the road towards the long-term AI goal of building general dialogue agents BIBREF0. Unlike conventional methods, neural QA does not rely on feature engineering and is (at least nearly) end-to-end trainable. It reduces the requirement for domain specific knowledge significantly and makes domain adaption easier. Therefore, it has attracted intensive attention in recent years.
+
+Resolving QA problem requires several fundamental abilities including reasoning, memorization, etc. Various neural methods have been proposed to improve such abilities, including neural tensor networks BIBREF1, recursive networks BIBREF2, convolution neural networks BIBREF3, BIBREF4, BIBREF5, attention models BIBREF6, BIBREF5, BIBREF7, and memories BIBREF8, BIBREF9, BIBREF10, BIBREF11, BIBREF12, etc. These methods achieve promising results on various datasets, which demonstrates the high potential of neural QA. However, we believe there are still two major challenges for neural QA:
+
+System development and/or evaluation on real-world data: Although several high quality and well-designed QA datasets have been proposed in recent years, there are still problems about using them to develop and/or evaluate QA system under real-world settings due to data size and the way they are created. For example, bAbI BIBREF0 and the 30M Factoid Question-Answer Corpus B
+
+<paper>
+<title>Exploring Question Understanding and Adaptation in Neural-Network-Based Question Answering</title>
+<abstract>The last several years have seen intensive interest in exploring neural-network-based models for machine comprehension (MC) and question answering (QA). In this paper, we approach the problems by closely modelling questions in a neural network framework. We first introduce syntactic information to help encode questions. We then view and model different types of questions and the information shared among them as an adaptation task and proposed adaptation models for them. On the Stanford Question Answering Dataset (SQuAD), we show that these approaches can help attain better results over a competitive baseline.</abstract>
+<sections>
+  <section>
+    <section-title>Introduction</section-title>
+    <section-number>0</section-number>
+    <paragraphs>
+Enabling computers to understand given documents and answer questions about their content has recently attracted intensive interest, including but not limited to the efforts as in BIBREF0, BIBREF1, BIBREF2, BIBREF3, BIBREF4, BIBREF5. Many specific problems such as machine comprehension and question answering often involve modeling such question-document pairs.
+
+The recent availability of relatively large training datasets (see Section "Related Work" for more details) has made it more feasible to train and estimate rather complex models in an end-to-end fashion for these problems, in which a whole model is fit directly with given question-answer tuples and the resulting model has shown to be rather effective.
+
+In this paper, we take a closer look at modeling questions in such an end-to-end neural network framework, since we regard question understanding is of importance for such problems. We first introduced syntactic information to help encode questions. We then viewed and modelled different types of questions and the information shared among them as an adaptation problem and proposed adaptation models for them. On the Stanford Question Answering Dataset (SQuAD), we show that these approaches can help attain better results on our competitive baselines.
+    </paragraphs>
+  </section>
+
+  <section>
+    <section-title>Related Work</section-title>
+    <section-number>1</section-number>
+    <paragraphs>
+Recent advance on reading comprehension and question answering has been closely associated with the availability of various datasets. BIBREF0 released the MCTest data consisting of 500 short, fictional open-domain stories and 2000 questions. The CNN/Daily Mail dataset BIBREF1 contains news articles for close style machine comprehension, in which only entities are removed and tested for comprehension. Children's Book Test (CBT) BIBREF2 leverages named entities, common nouns, verbs, and prepositions to test reading comprehension. The Stanford Question Answering Dataset (SQuAD)

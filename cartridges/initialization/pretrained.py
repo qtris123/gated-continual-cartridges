@@ -41,9 +41,9 @@ def _list_cache_files(run_id: str) -> list[str]:
 
 class KVFromPretrained(KVCacheFactory):
     class Config(KVCacheFactory.Config):
-        # path: Path
+        local_path: Optional[str] = None
 
-        wandb_run_id: str
+        wandb_run_id: Optional[str] = None
         filename: Optional[str] = None
 
     def __init__(self, config: Config):
@@ -55,33 +55,55 @@ class KVFromPretrained(KVCacheFactory):
         model: Optional[torch.nn.Module]=None,
         attn_config: Optional[AttnConfig]=None,
     ) -> TrainableCache:
+        if self.config.local_path is not None:
+            return self._load_from_local()
+        if self.config.wandb_run_id is not None:
+            return self._load_from_wandb()
+        raise ValueError("KVFromPretrained requires either 'local_path' or 'wandb_run_id'")
+
+    def _load_from_local(self) -> TrainableCache:
+        path = self.config.local_path
+        logger.info(f"Loading cache from local path: {path}")
+        if not Path(path).exists():
+            raise FileNotFoundError(f"Cache file not found: {path}")
+
+        is_ddp = "LOCAL_RANK" in os.environ
+        if is_ddp:
+            dist.barrier()
+
+        cache = TrainableCache.from_pretrained(str(path), device="cuda")
+        return cache
+
+    def _load_from_wandb(self) -> TrainableCache:
         is_ddp = "LOCAL_RANK" in os.environ
         print(f"is_ddp: {is_ddp}")
         is_rank_zero = (not is_ddp) or (dist.get_rank() == 0)
 
         logger.info(f"Restoring cache from wandb run {self.config.wandb_run_id}")
-        filename = ...
+        filename = ... 
 
         cache_files = _list_cache_files(self.config.wandb_run_id)
         if len(cache_files) == 0:
             raise ValueError(f"No cache checkpoints found for wandb run {self.config.wandb_run_id}")
-        
+
         if self.config.filename is not None:
-            assert self.config.filename in cache_files, f"Cache file {self.config.filename} not found in wandb run {self.config.wandb_run_id}"
+            assert self.config.filename in cache_files, (
+                f"Cache file {self.config.filename} not found in wandb run {self.config.wandb_run_id}"
+            )
             filename = self.config.filename
         else:
             filename = cache_files[0]
 
         cache_dir = Path(os.environ["CARTRIDGES_OUTPUT_DIR"]) / "checkpoints" / self.config.wandb_run_id
         cache_dir.mkdir(parents=True, exist_ok=True)
-        
+
         path = cache_dir / filename
         if not path.exists():
             logger.info(f"Downloading cache from wandb run {self.config.wandb_run_id} to {cache_dir}")
             if is_rank_zero:
                 out = wandb.restore(
-                    filename, 
-                    run_path=self.config.wandb_run_id, 
+                    filename,
+                    run_path=self.config.wandb_run_id,
                     root=cache_dir,
                 )
         if is_ddp:
@@ -89,7 +111,6 @@ class KVFromPretrained(KVCacheFactory):
 
         logger.info(f"Loading cache from {cache_dir / filename}")
         cache = TrainableCache.from_pretrained(
-            str(cache_dir / filename), device='cuda'
+            str(cache_dir / filename), device="cuda"
         )
-                
         return cache
