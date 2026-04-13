@@ -1,0 +1,65 @@
+Below is a panel of scientific papers.
+
+<paper>
+<title>Question Answering based Clinical Text Structuring Using Pre-trained Language Model</title>
+<abstract>Clinical text structuring is a critical and fundamental task for clinical research. Traditional methods such as taskspecific end-to-end models and pipeline models usually suffer from the lack of dataset and error propagation. In this paper, we present a question answering based clinical text structuring (QA-CTS)
+
+<paper>
+<title>Answering Complex Questions Using Open Information Extraction</title>
+<abstract>While there has been substantial progress in factoid question-answering (QA), answering complex questions remains challenging, typically requiring both a large body of knowledge and inference techniques. Open Information Extraction (Open IE) provides a way to generate semi-structured knowledge for QA, but to date such knowledge has only been used
+
+<paper>
+<title>Recent Advances in Neural Question Generation</title>
+<abstract>Emerging research in Neural Question Generation (NQG) has started to integrate a larger variety of inputs, and generating questions requiring higher levels of cognition. These trends point to NQG as a bellwether for NLP, about how human intelligence embodies the skills of curiosity and integration. We present a comprehensive survey of
+
+<paper>
+<title>Question Answering by Reasoning Across Documents with Graph Convolutional Networks</title>
+<abstract>Most research in reading comprehension has focused on answering questions based on individual documents or even single paragraphs. We introduce a neural model which integrates and reasons relying on information spread within documents and across multiple documents. We frame it as an inference problem on a graph. Mentions of entities are nodes of
+
+<paper>
+<title>Dynamic Memory Networks for Visual and Textual Question Answering</title>
+<abstract>Neural network architectures with memory and attention mechanisms exhibit certain reasoning capabilities required for question answering. One such architecture, the dynamic memory network (DMN), obtained high accuracy on a variety of language tasks. However, it was not shown whether the architecture achieves strong results for question answering when supporting facts are not
+
+<paper>
+<title>Multimodal Differential Network for Visual Question Generation</title>
+<abstract>Generating natural questions from an image is a semantic task that requires using visual and language modality to learn multimodal representations. Images can have multiple visual and language contexts that are relevant for generating questions namely places, captions, and tags. In this paper, we propose the use of exemplars for obtaining the relevant context
+
+<paper>
+<title>A Comparative Evaluation of Visual and Natural Language Question Answering Over Linked Data</title>
+<abstract>With the growing number and size of Linked Data datasets, it is crucial to make the data accessible and useful for users without knowledge of formal query languages. Two approaches towards this goal are knowledge graph visualization and natural language interfaces. Here, we investigate specifically question answering (QA) over Linked Data by
+
+<paper>
+<title>Recurrent Neural Network Encoder with Attention for Community Question Answering</title>
+<abstract>We apply a general recurrent neural network (RNN) encoder framework to community question answering (cQA) tasks. Our approach does not rely on any linguistic processing, and can be applied to different languages or domains. Further improvements are observed when we extend the RNN encoders with a neural attention mechanism
+
+<paper>
+<title>Open Information Extraction from Question-Answer Pairs</title>
+<abstract>Open Information Extraction (OpenIE) extracts meaningful structured tuples from free-form text. Most previous work on OpenIE considers extracting data from one sentence at a time. We describe NeurON, a system for extracting tuples from question-answer pairs. Since real questions and answers often contain precisely the information that users care about
+
+<paper>
+<title>TutorialVQA: Question Answering Dataset for Tutorial Videos</title>
+<abstract>Despite the number of currently available datasets on video question answering, there still remains a need for a dataset involving multi-step and non-factoid answers. Moreover, relying on video transcripts remains an under-explored topic. To adequately address this, We propose a new question answering task on instructional videos,
+
+<paper>
+<title>Classification Betters Regression in Query-based Multi-document Summarisation Techniques for Question Answering: Macquarie University at BioASQ7b</title>
+<abstract>Task B Phase B of the 2019 BioASQ challenge focuses on biomedical question answering. Macquarie University's participation applies query-based multi-document extractive summarisation techniques to generate a multi-sentence answer given
+
+<paper>
+<title>QuaRel: A Dataset and Models for Answering Questions about Qualitative Relationships</title>
+<abstract>Many natural language questions require recognizing and reasoning with qualitative relationships (e.g., in science, economics, and medicine), but are challenging to answer with corpus-based methods. Qualitative modeling provides tools that support such reasoning, but the semantic parsing task of mapping questions into those models has
+
+<paper>
+<title>Learning to Recover Reasoning Chains for Multi-Hop Question Answering via Cooperative Games</title>
+<abstract>We propose the new problem of learning to recover reasoning chains from weakly supervised signals, i.e., the question-answer pairs. We propose a cooperative game approach to deal with this problem, in which how the evidence passages are selected and how the selected passages are connected are handled by two
+
+<paper>
+<title>VQABQ: Visual Question Answering by Basic Questions</title>
+<abstract>Taking an image and question as the input of our method, it can output the text-based answer of the query question about the given image, so called Visual Question Answering (VQA). There are two main modules in our algorithm. Given a natural language question about an image, the first module takes
+
+<paper>
+<title>Dataset and Neural Recurrent Sequence Labeling Model for Open-Domain Factoid Question Answering</title>
+<abstract>While question answering (QA) with neural network, i.e. neural QA, has achieved promising results in recent years, lacking of large scale real-word QA dataset is still a challenge for developing and evaluating neural QA system. To alleviate this problem, we propose a large
+
+<paper>
+<title>Exploring Question Understanding and Adaptation in Neural-Network-Based Question Answering</title>
+<abstract>The last several years have seen intensive interest in exploring neural-network-based models for machine comprehension (MC) and question answering (QA). In this paper, we approach the problems by closely modelling questions in a neural network framework. We first introduce syntactic information to help encode questions. We then

@@ -104,7 +104,7 @@ def generate_qasper_init_text(
         Concatenated text, each paper trimmed to floor(p / n) tokens.
     """
     if paper_ids is None:
-        paper_ids = TOPIC_TO_IDS["question"]
+        paper_ids = TOPIC_TO_IDS["QA"]
     if not paper_ids:
         raise ValueError("paper_ids is empty — add at least one ArXiv ID to DEFAULT_PAPER_IDS.")
     n = len(paper_ids)
