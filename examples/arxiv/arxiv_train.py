@@ -31,26 +31,13 @@ config = TrainConfig(
         text_source="/home/vo43/cartridges/examples/arxiv/longhealth_context.txt", #saved_path,
         max_tokens= P_KV # p : the number of tokens to use for constructing the initial KV cache. 
     ),
-    # kv_cache_initializer=KVFromText.Config( # QASPER
-    #     text_source="/home/vo43/cartridges/examples/qasper/qasper_context.txt",
-    #     max_tokens= 2048 # p : the number of tokens to use for constructing the initial KV cache. 
-    # ),
-    # kv_cache_initializer=KVFromText.Config( # LongHealth
-    #     text_source=os.path.join(os.environ["CARTRIDGES_DIR"], "examples/arxiv/longhealth_context.txt"),
-    #     max_tokens=512 # p : the number of tokens to use for constructing the initial KV cache. 
-    # ),
-    # kv_cache_initializer=KVFromText.Config( # MTOB
-    #     text_source=os.path.join(os.environ["CARTRIDGES_DIR"], "cartridges/data/mtob/_data/grammar_book_for_claude_medium.txt"),
-    #     max_tokens=512  # p : the number of tokens to use for constructing the initial KV cache.
-    # ),
-    
+
     lr=2e-2, #OG: 2e-2
     epochs=1,
     global_batch_size=32, 
 
     dataset=TrainDataset.Config(
         data_sources=[
-            #DataSource(path="/home/phudishp/cartridges/outputs/2026-02-08-06-27-11-arxiv_synthesize/arxiv_synthesize_meta-llama/Llama-3.2-3B-Instruct_n256-0/artifact/dataset.parquet", type="local"),
             DataSource(path="/scratch/scholar/vo43/longhealth_p1-10_qwen_n8192.parquet", type="local"),
         ],
         top_k_logits=20,
