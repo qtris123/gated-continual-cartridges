@@ -1,0 +1,1579 @@
+{
+  "description": "MCQ eval questions from pepsi_2021_120_batch-mcq.csv",
+  "doc_source": "pepsi_2021",
+  "question_type": "mcq",
+  "questions": {
+    "factual": [
+      {
+        "id": "factual_F01",
+        "question": "What was PepsiCo's aggregate market value of common stock held by nonaffiliates as of June 11, 2021?",
+        "golden_answer": "B",
+        "original_question": "What was PepsiCo's aggregate market value of common stock held by nonaffiliates as of June 11, 2021?",
+        "original_answer": "$203.9 billion",
+        "options": {
+          "A": "$150.2 billion",
+          "B": "$203.9 billion",
+          "C": "$112.3 billion",
+          "D": "$89.7 billion"
+        }
+      },
+      {
+        "id": "factual_F02",
+        "question": "How many shares of PepsiCo common stock were outstanding as of February 3, 2022?",
+        "golden_answer": "A",
+        "original_question": "How many shares of PepsiCo common stock were outstanding as of February 3, 2022?",
+        "original_answer": "1,383,451,400",
+        "options": {
+          "A": "1,383,451,400",
+          "B": "383,451,400",
+          "C": "13,834,514",
+          "D": "138,345,140"
+        }
+      },
+      {
+        "id": "factual_F03",
+        "question": "What is PepsiCo's commission file number?",
+        "golden_answer": "A",
+        "original_question": "What is PepsiCo's commission file number?",
+        "original_answer": "1-1183",
+        "options": {
+          "A": "1-1183",
+          "B": "3-2212",
+          "C": "4-3105",
+          "D": "2-4567"
+        }
+      },
+      {
+        "id": "factual_F04",
+        "question": "According to the filing cover page, in which state is PepsiCo incorporated?",
+        "golden_answer": "A",
+        "original_question": "In which state is PepsiCo incorporated according to the filing cover page?",
+        "original_answer": "North Carolina",
+        "options": {
+          "A": "North Carolina",
+          "B": "California",
+          "C": "New York",
+          "D": "Texas"
+        }
+      },
+      {
+        "id": "factual_F05",
+        "question": "What is PepsiCo's I.R.S. Employer Identification No.?",
+        "golden_answer": "A",
+        "original_question": "What is PepsiCo's I.R.S. Employer Identification No.?",
+        "original_answer": "13-1584302",
+        "options": {
+          "A": "13-1584302",
+          "B": "12-3456789",
+          "C": "98-7654321",
+          "D": "10-6543210"
+        }
+      },
+      {
+        "id": "factual_F06",
+        "question": "Which of the following is the trading symbol for PepsiCo common stock?",
+        "golden_answer": "B",
+        "original_question": "What is the trading symbol for PepsiCo common stock?",
+        "original_answer": "PEP",
+        "options": {
+          "A": "KO",
+          "B": "PEP",
+          "C": "PEPC",
+          "D": "PSI"
+        }
+      },
+      {
+        "id": "factual_F07",
+        "question": "Which of the following is the address of PepsiCo's principal executive offices?",
+        "golden_answer": "A",
+        "original_question": "What is the address of PepsiCo's principal executive offices?",
+        "original_answer": "700 Anderson Hill Road, Purchase, New York 10577",
+        "options": {
+          "A": "700 Anderson Hill Road, Purchase, New York 10577",
+          "B": "1 Pepsi Way, Chicago, Illinois 60601",
+          "C": "1600 Pennsylvania Avenue, Washington, DC 20500",
+          "D": "123 Main Street, White Plains, New York 10601"
+        }
+      },
+      {
+        "id": "factual_F08",
+        "question": "What was PepsiCo's 2021 consolidated net revenue?",
+        "golden_answer": "A",
+        "original_question": "What was PepsiCo's 2021 consolidated net revenue?",
+        "original_answer": "$79,474 million",
+        "options": {
+          "A": "$79,474 million",
+          "B": "$55,232 million",
+          "C": "$68,500 million",
+          "D": "$81,900 million"
+        }
+      },
+      {
+        "id": "factual_F09",
+        "question": "What was PepsiCo's operating profit in 2021?",
+        "golden_answer": "B",
+        "original_question": "What was PepsiCo's 2021 operating profit?",
+        "original_answer": "$11,162 million",
+        "options": {
+          "A": "$8,912 million",
+          "B": "$11,162 million",
+          "C": "$9,975 million",
+          "D": "$12,304 million"
+        }
+      },
+      {
+        "id": "factual_F10",
+        "question": "What was the diluted net income attributable to PepsiCo per common share in 2021?",
+        "golden_answer": "B",
+        "original_question": "What was diluted net income attributable to PepsiCo per common share in 2021?",
+        "original_answer": "$5.49",
+        "options": {
+          "A": "$4.92",
+          "B": "$5.49",
+          "C": "$6.00",
+          "D": "$5.01"
+        }
+      },
+      {
+        "id": "factual_F11",
+        "question": "What was PepsiCo's annual tax rate in 2021?",
+        "golden_answer": "A",
+        "original_question": "What was PepsiCo's annual tax rate in 2021?",
+        "original_answer": "21.8%",
+        "options": {
+          "A": "21.8%",
+          "B": "18.5%",
+          "C": "25.0%",
+          "D": "15.2%"
+        }
+      },
+      {
+        "id": "factual_F12",
+        "question": "How many reportable segments does PepsiCo have?",
+        "golden_answer": "C",
+        "original_question": "How many reportable segments does PepsiCo have?",
+        "original_answer": "7",
+        "options": {
+          "A": "5",
+          "B": "6",
+          "C": "7",
+          "D": "8"
+        }
+      },
+      {
+        "id": "factual_F13",
+        "question": "Which of the following segments includes beverage businesses in the United States and Canada?",
+        "golden_answer": "A",
+        "original_question": "Which segment includes beverage businesses in the United States and Canada?",
+        "original_answer": "PBNA",
+        "options": {
+          "A": "PBNA",
+          "B": "FLNA",
+          "C": "AMESA",
+          "D": "APAC"
+        }
+      },
+      {
+        "id": "factual_F14",
+        "question": "What percentage of consolidated net revenue came from Walmart and its affiliates in 2021?",
+        "golden_answer": "B",
+        "original_question": "What percentage of consolidated net revenue came from Walmart and its affiliates in 2021?",
+        "original_answer": "13%",
+        "options": {
+          "A": "10%",
+          "B": "13%",
+          "C": "17%",
+          "D": "20%"
+        }
+      },
+      {
+        "id": "factual_F15",
+        "question": "How many employees did PepsiCo have worldwide as of December 25, 2021?",
+        "golden_answer": "B",
+        "original_question": "How many employees did PepsiCo have worldwide as of December 25, 2021?",
+        "original_answer": "309,000",
+        "options": {
+          "A": "250,000",
+          "B": "309,000",
+          "C": "400,000",
+          "D": "150,000"
+        }
+      },
+      {
+        "id": "factual_F16",
+        "question": "Approximately how many hours of training did PepsiCo employees complete in 2021?",
+        "golden_answer": "A",
+        "original_question": "How many hours of training did PepsiCo employees complete in 2021?",
+        "original_answer": "over 1,000,000 hours",
+        "options": {
+          "A": "Over 1,000,000 hours",
+          "B": "500,000 hours",
+          "C": "250,000 hours",
+          "D": "100,000 hours"
+        }
+      },
+      {
+        "id": "factual_F17",
+        "question": "Who was appointed Executive Vice President, General Counsel and Corporate Secretary in March 2021?",
+        "golden_answer": "A",
+        "original_question": "Who was appointed Executive Vice President, General Counsel and Corporate Secretary in March 2021?",
+        "original_answer": "David J. Flavell",
+        "options": {
+          "A": "David J. Flavell",
+          "B": "Jane Smith",
+          "C": "Michael Brown",
+          "D": "Sarah Johnson"
+        }
+      },
+      {
+        "id": "factual_F18",
+        "question": "What was the quarterly dividend declared on February 2, 2022?",
+        "golden_answer": "A",
+        "original_question": "What was the quarterly dividend declared on February 2, 2022?",
+        "original_answer": "$1.075 per share",
+        "options": {
+          "A": "$1.075 per share",
+          "B": "$1.25 per share",
+          "C": "$0.95 per share",
+          "D": "$2.00 per share"
+        }
+      },
+      {
+        "id": "factual_F19",
+        "question": "What was the size of the 2022 share repurchase program announced on February 10, 2022?",
+        "golden_answer": "C",
+        "original_question": "What was the size of the 2022 share repurchase program announced on February 10, 2022?",
+        "original_answer": "$10.0 billion",
+        "options": {
+          "A": "$5.0 billion",
+          "B": "$8.0 billion",
+          "C": "$10.0 billion",
+          "D": "$12.0 billion"
+        }
+      },
+      {
+        "id": "factual_F20",
+        "question": "Which independent registered public accounting firm audited PepsiCo's 2021 financial statements?",
+        "golden_answer": "A",
+        "original_question": "Which independent registered public accounting firm audited PepsiCo's 2021 financial statements?",
+        "original_answer": "KPMG LLP",
+        "options": {
+          "A": "KPMG LLP",
+          "B": "Ernst & Young",
+          "C": "Deloitte",
+          "D": "PricewaterhouseCoopers"
+        }
+      }
+    ],
+    "knowledge": [
+      {
+        "id": "knowledge_K01",
+        "question": "In what year did Delaware become the first U.S. state to ratify the Constitution?",
+        "golden_answer": "B",
+        "original_question": "PepsiCo says it was incorporated in Delaware in 1919. In what year was Delaware the first U.S. state to ratify the Constitution?",
+        "original_answer": "1787",
+        "options": {
+          "A": "1865",
+          "B": "1787",
+          "C": "1919",
+          "D": "1776"
+        }
+      },
+      {
+        "id": "knowledge_K02",
+        "question": "In which New York county is Purchase, the location of PepsiCo's principal executive office, situated?",
+        "golden_answer": "B",
+        "original_question": "PepsiCo says its principal executive office is in Purchase, New York. In which New York county is Purchase located?",
+        "original_answer": "Westchester County",
+        "options": {
+          "A": "Nassau County",
+          "B": "Westchester County",
+          "C": "Queens County",
+          "D": "Suffolk County"
+        }
+      },
+      {
+        "id": "knowledge_K03",
+        "question": "In which country was PepsiCo CEO Ramon L. Laguarta born?",
+        "golden_answer": "A",
+        "original_question": "PepsiCo identifies Ramon L. Laguarta as CEO. What country was he born in?",
+        "original_answer": "Spain",
+        "options": {
+          "A": "Spain",
+          "B": "Italy",
+          "C": "France",
+          "D": "Mexico"
+        }
+      },
+      {
+        "id": "knowledge_K04",
+        "question": "In what year was The Coca-Cola Company founded?",
+        "golden_answer": "B",
+        "original_question": "PepsiCo notes that The Coca-Cola Company is its primary beverage competitor. In what year was The Coca-Cola Company founded?",
+        "original_answer": "1892",
+        "options": {
+          "A": "1886",
+          "B": "1892",
+          "C": "1905",
+          "D": "1919"
+        }
+      },
+      {
+        "id": "knowledge_K05",
+        "question": "In what year was Starbucks founded?",
+        "golden_answer": "B",
+        "original_question": "PepsiCo mentions a ready-to-drink coffee joint venture with Starbucks. In what year was Starbucks founded?",
+        "original_answer": "1971",
+        "options": {
+          "A": "1965",
+          "B": "1971",
+          "C": "1987",
+          "D": "1992"
+        }
+      },
+      {
+        "id": "knowledge_K06",
+        "question": "In what year was Unilever formed?",
+        "golden_answer": "B",
+        "original_question": "PepsiCo refers to a joint venture with Unilever under the Lipton brand. In what year was Unilever formed?",
+        "original_answer": "1929",
+        "options": {
+          "A": "1885",
+          "B": "1929",
+          "C": "1945",
+          "D": "1971"
+        }
+      },
+      {
+        "id": "knowledge_K07",
+        "question": "In which city is the SIX Swiss Exchange located?",
+        "golden_answer": "A",
+        "original_question": "PepsiCo states that its common stock is listed on the SIX Swiss Exchange. In which city is the SIX Swiss Exchange based?",
+        "original_answer": "Zurich",
+        "options": {
+          "A": "Zurich",
+          "B": "Geneva",
+          "C": "Basel",
+          "D": "Bern"
+        }
+      },
+      {
+        "id": "knowledge_K08",
+        "question": "In which country is PAI Partners, the buyer of Tropicana brands from PepsiCo, headquartered?",
+        "golden_answer": "C",
+        "original_question": "PepsiCo says it sold Tropicana brands to PAI Partners. In what country is PAI Partners headquartered?",
+        "original_answer": "France",
+        "options": {
+          "A": "United Kingdom",
+          "B": "United States",
+          "C": "France",
+          "D": "Germany"
+        }
+      },
+      {
+        "id": "knowledge_K09",
+        "question": "In which district of Israel is Lehavim located?",
+        "golden_answer": "C",
+        "original_question": "PepsiCo lists a manufacturing plant in Lehavim, Israel. In which district of Israel is Lehavim located?",
+        "original_answer": "Southern District",
+        "options": {
+          "A": "Central District",
+          "B": "Northern District",
+          "C": "Southern District",
+          "D": "Haifa District"
+        }
+      },
+      {
+        "id": "knowledge_K10",
+        "question": "Which university is historically associated with Winston-Salem through the Reynolds tobacco fortune?",
+        "golden_answer": "A",
+        "original_question": "PepsiCo lists Winston-Salem, North Carolina as a shared service center location. What university is historically associated with Winston-Salem through the Reynolds tobacco fortune?",
+        "original_answer": "Wake Forest University",
+        "options": {
+          "A": "Wake Forest University",
+          "B": "Duke University",
+          "C": "University of North Carolina at Chapel Hill",
+          "D": "North Carolina State University"
+        }
+      },
+      {
+        "id": "knowledge_K11",
+        "question": "In which country was SodaStream founded?",
+        "golden_answer": "A",
+        "original_question": "PepsiCo describes SodaStream as already sold in more than 40 countries. In what country was SodaStream founded?",
+        "original_answer": "United Kingdom",
+        "options": {
+          "A": "United Kingdom",
+          "B": "United States",
+          "C": "Germany",
+          "D": "France"
+        }
+      },
+      {
+        "id": "knowledge_K12",
+        "question": "Which snack brand is BFY Brands best known for owning?",
+        "golden_answer": "B",
+        "original_question": "PepsiCo mentions BFY Brands as an acquisition. What snack brand is BFY Brands best known for owning?",
+        "original_answer": "PopCorners",
+        "options": {
+          "A": "Doritos",
+          "B": "PopCorners",
+          "C": "Lays",
+          "D": "Pringles"
+        }
+      },
+      {
+        "id": "knowledge_K13",
+        "question": "What industry is Rockstar primarily known for?",
+        "golden_answer": "A",
+        "original_question": "PepsiCo says Rockstar was acquired in 2020. What industry is Rockstar primarily known for?",
+        "original_answer": "energy drinks",
+        "options": {
+          "A": "Energy drinks",
+          "B": "Video games",
+          "C": "Clothing",
+          "D": "Mobile phones"
+        }
+      },
+      {
+        "id": "knowledge_K14",
+        "question": "What does the acronym 'VPX' in Vital Pharmaceuticals' brand stand for?",
+        "golden_answer": "A",
+        "original_question": "PepsiCo refers to Bang Energy distributed by Vital Pharmaceuticals. What does the acronym in Vital Pharmaceuticals' brand VPX stand for?",
+        "original_answer": "Vital Pharmaceuticals",
+        "options": {
+          "A": "Vital Pharmaceuticals",
+          "B": "Very Powerful eXercise",
+          "C": "Vegan Protein Xtreme",
+          "D": "Vitamin Power X"
+        }
+      },
+      {
+        "id": "knowledge_K15",
+        "question": "On which primary U.S. stock exchange is Visa Inc. listed?",
+        "golden_answer": "A",
+        "original_question": "PepsiCo names Visa Inc. as a board affiliation for Ramon Laguarta. What is Visa's primary stock exchange in the U.S.?",
+        "original_answer": "NYSE",
+        "options": {
+          "A": "NYSE",
+          "B": "NASDAQ",
+          "C": "AMEX",
+          "D": "OTC"
+        }
+      },
+      {
+        "id": "knowledge_K16",
+        "question": "How many sovereign states are members of the United Nations today?",
+        "golden_answer": "A",
+        "original_question": "PepsiCo says it serves consumers in more than 200 countries and territories. Roughly how many sovereign states are members of the United Nations today?",
+        "original_answer": "193",
+        "options": {
+          "A": "193",
+          "B": "202",
+          "C": "175",
+          "D": "220"
+        }
+      },
+      {
+        "id": "knowledge_K17",
+        "question": "Which river runs through Cedar Rapids, Iowa?",
+        "golden_answer": "D",
+        "original_question": "PepsiCo lists Cedar Rapids, Iowa as a QFNA plant location. What U.S. river runs through Cedar Rapids?",
+        "original_answer": "Cedar River",
+        "options": {
+          "A": "Mississippi River",
+          "B": "Des Moines River",
+          "C": "Iowa River",
+          "D": "Cedar River"
+        }
+      },
+      {
+        "id": "knowledge_K18",
+        "question": "What does KPMG stand for in its current name?",
+        "golden_answer": "A",
+        "original_question": "PepsiCo says KPMG has served as auditor since 1990. What does KPMG stand for in its current name?",
+        "original_answer": "Klynveld Peat Marwick Goerdeler",
+        "options": {
+          "A": "Klynveld Peat Marwick Goerdeler",
+          "B": "Key Projects Management Group",
+          "C": "Knowledge, Planning, Management, Growth",
+          "D": "Korean Petroleum Manufacturing Group"
+        }
+      },
+      {
+        "id": "knowledge_K19",
+        "question": "Hyderabad is the capital of which Indian state?",
+        "golden_answer": "C",
+        "original_question": "PepsiCo lists Hyderabad, India as a shared service center. Hyderabad is the capital of which Indian state?",
+        "original_answer": "Telangana",
+        "options": {
+          "A": "Karnataka",
+          "B": "Andhra Pradesh",
+          "C": "Telangana",
+          "D": "Punjab"
+        }
+      },
+      {
+        "id": "knowledge_K20",
+        "question": "Which of the following is the flagship beer brand of the Boston Beer Company?",
+        "golden_answer": "A",
+        "original_question": "PepsiCo mentions the Boston Beer Company as manufacturer of Hard MTN Dew. What is Boston Beer Company's flagship beer brand?",
+        "original_answer": "Samuel Adams",
+        "options": {
+          "A": "Samuel Adams",
+          "B": "Budweiser",
+          "C": "Coors Light",
+          "D": "Blue Moon"
+        }
+      }
+    ],
+    "synthesize": [
+      {
+        "id": "synthesize_SY01",
+        "question": "Which of the following is NOT one of PepsiCo's seven reportable segments?",
+        "golden_answer": "D",
+        "original_question": "Summarize PepsiCo's seven reportable segments named in the filing.",
+        "original_answer": "FLNA, QFNA, PBNA, LatAm, Europe, AMESA, APAC",
+        "options": {
+          "A": "PBNA",
+          "B": "LatAm",
+          "C": "AMESA",
+          "D": "Asia Foods"
+        }
+      },
+      {
+        "id": "synthesize_SY02",
+        "question": "Which of the following is NOT a main route to market used by PepsiCo to distribute its products?",
+        "golden_answer": "D",
+        "original_question": "List the main routes to market PepsiCo says it uses to distribute products.",
+        "original_answer": "DSD, customer warehouse, distributor networks, e-commerce",
+        "options": {
+          "A": "DSD",
+          "B": "E-commerce",
+          "C": "Customer warehouse",
+          "D": "Direct farm delivery"
+        }
+      },
+      {
+        "id": "synthesize_SY03",
+        "question": "Which of the following is NOT one of the three key pillars of PepsiCo Positive (pep+)?",
+        "golden_answer": "C",
+        "original_question": "Name the three key pillars of PepsiCo Positive (pep+).",
+        "original_answer": "Positive Agriculture, Positive Value Chain, Positive Choices",
+        "options": {
+          "A": "Positive Agriculture",
+          "B": "Positive Value Chain",
+          "C": "Positive Leadership",
+          "D": "Positive Choices"
+        }
+      },
+      {
+        "id": "synthesize_SY04",
+        "question": "Which of the following was NOT a major category of PepsiCo's 2021 acquisition and divestiture-related charges?",
+        "golden_answer": "D",
+        "original_question": "Summarize the major categories of PepsiCo's 2021 acquisition and divestiture-related charges by transaction type.",
+        "original_answer": "inventory fair value, merger and integration charges, divestiture costs",
+        "options": {
+          "A": "Inventory fair value",
+          "B": "Merger and integration charges",
+          "C": "Divestiture costs",
+          "D": "Legal settlement expenses"
+        }
+      },
+      {
+        "id": "synthesize_SY05",
+        "question": "Which of the following is NOT a major customer type that PepsiCo identifies in the Business section?",
+        "golden_answer": "D",
+        "original_question": "List the major customer types PepsiCo identifies in the Business section.",
+        "original_answer": "distributors, foodservice customers, grocery stores, drug stores, convenience stores, discount/dollar stores, mass merchandisers, membership stores, hard discounters, e-commerce retailers, bottlers",
+        "options": {
+          "A": "Distributors",
+          "B": "Drug stores",
+          "C": "Hard discounters",
+          "D": "Automobile manufacturers"
+        }
+      },
+      {
+        "id": "synthesize_SY06",
+        "question": "Which of the following is NOT mentioned by PepsiCo as a main competitive factor for its products?",
+        "golden_answer": "B",
+        "original_question": "Summarize the main competitive factors PepsiCo says its products compete on.",
+        "original_answer": "brand, taste, price, value, quality, variety, innovation, distribution, marketing, packaging, convenience, service",
+        "options": {
+          "A": "Variety",
+          "B": "Government regulation",
+          "C": "Marketing",
+          "D": "Quality"
+        }
+      },
+      {
+        "id": "synthesize_SY07",
+        "question": "Which of the following is NOT listed as a principal ingredient PepsiCo uses in its beverage and convenient food products?",
+        "golden_answer": "D",
+        "original_question": "List the principal ingredients PepsiCo says it uses in beverage and convenient food products.",
+        "original_answer": "juice concentrates, aspartame, corn, sweeteners, flavorings, flour, fruits, oats, potatoes, milk, rice, seasonings, sucralose, sugar, oils, wheat, water",
+        "options": {
+          "A": "Aspartame",
+          "B": "Milk",
+          "C": "Rice",
+          "D": "Chicken"
+        }
+      },
+      {
+        "id": "synthesize_SY08",
+        "question": "Which of the following is NOT identified by PepsiCo as a key commodity or packaging input for its business?",
+        "golden_answer": "C",
+        "original_question": "Summarize the key packaging and commodity inputs PepsiCo highlights as important to its business.",
+        "original_answer": "PET, polypropylene, aluminum, glass, closures, cardboard, paperboard, fuel, electricity, natural gas",
+        "options": {
+          "A": "Aluminum",
+          "B": "Cardboard",
+          "C": "Plastic strapping",
+          "D": "Polypropylene"
+        }
+      },
+      {
+        "id": "synthesize_SY09",
+        "question": "Which of the following countries is NOT identified by PepsiCo as one of its largest operations in the Business section?",
+        "golden_answer": "D",
+        "original_question": "List the countries PepsiCo identifies as its largest operations in the Business section.",
+        "original_answer": "United States, Mexico, Russia, Canada, China, United Kingdom, South Africa",
+        "options": {
+          "A": "Canada",
+          "B": "Mexico",
+          "C": "Russia",
+          "D": "Japan"
+        }
+      },
+      {
+        "id": "synthesize_SY10",
+        "question": "Which of the following is NOT listed as a key human capital priority by PepsiCo?",
+        "golden_answer": "B",
+        "original_question": "Summarize the key human capital priorities PepsiCo highlights.",
+        "original_answer": "safety, health, diversity, equity and inclusion, talent attraction, retention, development, training",
+        "options": {
+          "A": "Talent attraction",
+          "B": "Product innovation",
+          "C": "Diversity, equity, and inclusion",
+          "D": "Health and safety"
+        }
+      },
+      {
+        "id": "synthesize_SY11",
+        "question": "Which of the following companies is explicitly named by PepsiCo as a key beverage or food competitor besides Coca-Cola?",
+        "golden_answer": "A",
+        "original_question": "List the companies PepsiCo explicitly names as key beverage or food competitors besides Coca-Cola.",
+        "original_answer": "Campbell Soup, Conagra, Hormel, Kellogg, Keurig Dr Pepper, Kraft Heinz, Link Snacks, Mondelēz, Monster, Nestlé, Red Bull, Utz",
+        "options": {
+          "A": "Kellogg",
+          "B": "General Mills",
+          "C": "Mars",
+          "D": "Danone"
+        }
+      },
+      {
+        "id": "synthesize_SY12",
+        "question": "Which of the following is NOT mentioned as a type of research and development activity by PepsiCo?",
+        "golden_answer": "B",
+        "original_question": "Summarize the main types of research and development activities PepsiCo describes.",
+        "original_answer": "product innovation, process improvement, nutrition reformulation, sustainable packaging, dispensing equipment, SodaStream innovation, digital technology, e-commerce, environmental reduction",
+        "options": {
+          "A": "Product innovation",
+          "B": "Automobile manufacturing",
+          "C": "Nutrition reformulation",
+          "D": "Sustainable packaging"
+        }
+      },
+      {
+        "id": "synthesize_SY13",
+        "question": "Which of the following was NOT identified by PepsiCo as a category of COVID-19-related charges in 2021?",
+        "golden_answer": "C",
+        "original_question": "List the categories of COVID-19-related charges PepsiCo identified by division in 2021.",
+        "original_answer": "credit losses, upfront payments to customers, inventory write-downs and returns, employee compensation, employee protection costs, other",
+        "options": {
+          "A": "Credit losses",
+          "B": "Upfront payments to customers",
+          "C": "Advertising expenses",
+          "D": "Inventory write-downs and returns"
+        }
+      },
+      {
+        "id": "synthesize_SY14",
+        "question": "Which of the following is NOT listed by PepsiCo as a principal source of liquidity?",
+        "golden_answer": "C",
+        "original_question": "Summarize the principal sources of liquidity PepsiCo identifies.",
+        "original_answer": "cash from operations, Juice Transaction proceeds, commercial paper, long-term debt, cash and cash equivalents",
+        "options": {
+          "A": "Commercial paper",
+          "B": "Long-term debt",
+          "C": "Equity investments",
+          "D": "Cash from operations"
+        }
+      },
+      {
+        "id": "synthesize_SY15",
+        "question": "Which of the following is NOT listed as a major current liability by PepsiCo on its 2021 balance sheet?",
+        "golden_answer": "D",
+        "original_question": "List the major current liabilities PepsiCo reports on its 2021 balance sheet detail.",
+        "original_answer": "accounts payable, accrued marketplace spending, accrued compensation and benefits, dividends payable, current lease liabilities, other current liabilities",
+        "options": {
+          "A": "Accounts payable",
+          "B": "Accrued compensation and benefits",
+          "C": "Dividends payable",
+          "D": "Goodwill"
+        }
+      },
+      {
+        "id": "synthesize_SY16",
+        "question": "Which of the following is NOT a main form of share-based compensation used by PepsiCo?",
+        "golden_answer": "C",
+        "original_question": "Summarize the main forms of share-based compensation PepsiCo uses.",
+        "original_answer": "stock options, RSUs, PSUs, long-term cash awards",
+        "options": {
+          "A": "Stock options",
+          "B": "RSUs",
+          "C": "Profit sharing",
+          "D": "PSUs"
+        }
+      },
+      {
+        "id": "synthesize_SY17",
+        "question": "Which of the following was a key 2021 debt issuance completed by PepsiCo by maturity?",
+        "golden_answer": "A",
+        "original_question": "List the key 2021 debt issuances PepsiCo completed by maturity.",
+        "original_answer": "0.750% 2033 euro notes, 1.950% 2031 notes, 2.625% 2041 notes, 2.750% 2051 notes",
+        "options": {
+          "A": "0.750% 2033 euro notes",
+          "B": "1.500% 2029 notes",
+          "C": "3.000% 2030 notes",
+          "D": "2.000% 2026 notes"
+        }
+      },
+      {
+        "id": "synthesize_SY18",
+        "question": "Which of the following lists PepsiCo's principal executive corporate properties as mentioned in Item 2?",
+        "golden_answer": "A",
+        "original_question": "Summarize PepsiCo's principal executive corporate properties named in Item 2.",
+        "original_answer": "principal executive office in Purchase, New York and facilities in Plano, Texas",
+        "options": {
+          "A": "Principal executive office in Purchase, New York and facilities in Plano, Texas",
+          "B": "Headquarters in Atlanta, Georgia and a plant in Orlando, Florida",
+          "C": "Office in Chicago, Illinois and facilities in Miami, Florida",
+          "D": "Company headquarters in Dallas, Texas and office in Seattle, Washington"
+        }
+      },
+      {
+        "id": "synthesize_SY19",
+        "question": "Which of the following are locations identified as shared service centers by PepsiCo in Item 2?",
+        "golden_answer": "A",
+        "original_question": "List the shared service center locations PepsiCo identifies in Item 2.",
+        "original_answer": "Winston Salem, North Carolina; Hyderabad, India",
+        "options": {
+          "A": "Winston Salem, North Carolina; Hyderabad, India",
+          "B": "Chicago, Illinois; Toronto, Canada",
+          "C": "Dallas, Texas; London, UK",
+          "D": "Miami, Florida; Tokyo, Japan"
+        }
+      },
+      {
+        "id": "synthesize_SY20",
+        "question": "Which of the following best describes free cash flow for PepsiCo as indicated in this filing?",
+        "golden_answer": "B",
+        "original_question": "Summarize what free cash flow means for PepsiCo in this filing.",
+        "original_answer": "net cash from operating activities less capital spending plus sales of property, plant and equipment",
+        "options": {
+          "A": "Net income plus depreciation and amortization",
+          "B": "Net cash from operating activities less capital spending plus sales of property, plant and equipment",
+          "C": "Total revenues minus total expenses",
+          "D": "Net cash from investing activities plus net cash from financing activities"
+        }
+      }
+    ],
+    "structure": [
+      {
+        "id": "structure_ST01",
+        "question": "Which item appears first in Part I?",
+        "golden_answer": "A",
+        "original_question": "Which item appears first in Part I: Business or Risk Factors?",
+        "original_answer": "Business",
+        "options": {
+          "A": "Business",
+          "B": "Risk Factors",
+          "C": "Management's Discussion and Analysis",
+          "D": "Financial Statements"
+        }
+      },
+      {
+        "id": "structure_ST02",
+        "question": "On which page does Item 1A, Risk Factors, begin according to the table of contents?",
+        "golden_answer": "B",
+        "original_question": "On what page does Item 1A, Risk Factors, begin according to the table of contents?",
+        "original_answer": "11",
+        "options": {
+          "A": "8",
+          "B": "11",
+          "C": "15",
+          "D": "22"
+        }
+      },
+      {
+        "id": "structure_ST03",
+        "question": "Which item in Part II includes Management's Discussion and Analysis of Financial Condition and Results of Operations?",
+        "golden_answer": "C",
+        "original_question": "Which item in Part II includes Management's Discussion and Analysis of Financial Condition and Results of Operations?",
+        "original_answer": "Item 7",
+        "options": {
+          "A": "Item 6",
+          "B": "Item 8",
+          "C": "Item 7",
+          "D": "Item 9"
+        }
+      },
+      {
+        "id": "structure_ST04",
+        "question": "Which item appears later in the document?",
+        "golden_answer": "C",
+        "original_question": "Which comes later in the document: Item 9A Controls and Procedures or Item 9C Disclosure Regarding Foreign Jurisdictions that Prevent Inspections?",
+        "original_answer": "Item 9C",
+        "options": {
+          "A": "Item 9A Controls and Procedures",
+          "B": "Item 9B Other Information",
+          "C": "Item 9C Disclosure Regarding Foreign Jurisdictions that Prevent Inspections",
+          "D": "Item 8 Financial Statements"
+        }
+      },
+      {
+        "id": "structure_ST05",
+        "question": "Under which Part of the 10-K are Directors, Executive Officers, and Corporate Governance listed?",
+        "golden_answer": "C",
+        "original_question": "Under which Part of the 10-K are Directors, Executive Officers and Corporate Governance listed?",
+        "original_answer": "Part III",
+        "options": {
+          "A": "Part I",
+          "B": "Part II",
+          "C": "Part III",
+          "D": "Part IV"
+        }
+      },
+      {
+        "id": "structure_ST06",
+        "question": "Which of the following items is associated with Exhibits and Financial Statement Schedules?",
+        "golden_answer": "C",
+        "original_question": "Which item is associated with Exhibits and Financial Statement Schedules?",
+        "original_answer": "Item 15",
+        "options": {
+          "A": "Item 13",
+          "B": "Item 14",
+          "C": "Item 15",
+          "D": "Item 16"
+        }
+      },
+      {
+        "id": "structure_ST07",
+        "question": "Which of the following is the final numbered item in the table of contents?",
+        "golden_answer": "C",
+        "original_question": "What is the final numbered item in the table of contents?",
+        "original_answer": "Item 16. Form 10-K Summary",
+        "options": {
+          "A": "Item 14. Principal Accounting Fees and Services",
+          "B": "Item 15. Exhibits and Financial Statement Schedules",
+          "C": "Item 16. Form 10-K Summary",
+          "D": "Item 13. Certain Relationships and Related Transactions, and Director Independence"
+        }
+      },
+      {
+        "id": "structure_ST08",
+        "question": "Which of the following sections comes immediately before Part I in the report body?",
+        "golden_answer": "A",
+        "original_question": "Which section immediately precedes Part I in the report body?",
+        "original_answer": "Forward-Looking Statements",
+        "options": {
+          "A": "Forward-Looking Statements",
+          "B": "Executive Summary",
+          "C": "Management's Discussion and Analysis",
+          "D": "Financial Statements"
+        }
+      },
+      {
+        "id": "structure_ST09",
+        "question": "Where does the Glossary appear relative to the Report of Independent Registered Public Accounting Firm in Item 7?",
+        "golden_answer": "B",
+        "original_question": "Where does the Glossary appear relative to the Report of Independent Registered Public Accounting Firm in Item 7?",
+        "original_answer": "after it",
+        "options": {
+          "A": "before it",
+          "B": "after it",
+          "C": "in place of it",
+          "D": "it does not appear at all"
+        }
+      },
+      {
+        "id": "structure_ST10",
+        "question": "Which note covers Acquisitions and Divestitures in the notes to the consolidated financial statements?",
+        "golden_answer": "B",
+        "original_question": "Which note number covers Acquisitions and Divestitures in the notes to the consolidated financial statements?",
+        "original_answer": "Note 13",
+        "options": {
+          "A": "Note 10",
+          "B": "Note 13",
+          "C": "Note 7",
+          "D": "Note 22"
+        }
+      },
+      {
+        "id": "structure_ST11",
+        "question": "Which of the following comes first in Item 7's internal table of contents?",
+        "golden_answer": "A",
+        "original_question": "Which comes first in Item 7's internal table of contents: Consolidated Statement of Cash Flows or Consolidated Balance Sheet?",
+        "original_answer": "Consolidated Statement of Cash Flows",
+        "options": {
+          "A": "Consolidated Statement of Cash Flows",
+          "B": "Consolidated Balance Sheet",
+          "C": "Consolidated Statement of Stockholders’ Equity",
+          "D": "Notes to Consolidated Financial Statements"
+        }
+      },
+      {
+        "id": "structure_ST12",
+        "question": "On which page does Item 5 begin in the table of contents?",
+        "golden_answer": "C",
+        "original_question": "What page does Item 5 begin on in the table of contents?",
+        "original_answer": "28",
+        "options": {
+          "A": "15",
+          "B": "22",
+          "C": "28",
+          "D": "35"
+        }
+      },
+      {
+        "id": "structure_ST13",
+        "question": "Which item in Part I is labeled Mine Safety Disclosures?",
+        "golden_answer": "D",
+        "original_question": "Which item in Part I is labeled Mine Safety Disclosures?",
+        "original_answer": "Item 4",
+        "options": {
+          "A": "Item 1",
+          "B": "Item 2",
+          "C": "Item 3",
+          "D": "Item 4"
+        }
+      },
+      {
+        "id": "structure_ST14",
+        "question": "Which of the following appears first in Part II of the document?",
+        "golden_answer": "A",
+        "original_question": "Which appears first in Part II: Item 7A Quantitative and Qualitative Disclosures About Market Risk or Item 8 Financial Statements and Supplementary Data?",
+        "original_answer": "Item 7A",
+        "options": {
+          "A": "Item 7A Quantitative and Qualitative Disclosures About Market Risk",
+          "B": "Item 8 Financial Statements and Supplementary Data",
+          "C": "Item 9 Changes in and Disagreements With Accountants on Accounting and Financial Disclosure",
+          "D": "Item 7 Management’s Discussion and Analysis of Financial Condition and Results of Operations"
+        }
+      },
+      {
+        "id": "structure_ST15",
+        "question": "What is the section title that directly follows Item 4 in the report body?",
+        "golden_answer": "A",
+        "original_question": "What section title directly follows Item 4 in the report body?",
+        "original_answer": "Information About Our Executive Officers",
+        "options": {
+          "A": "Information About Our Executive Officers",
+          "B": "Legal Proceedings",
+          "C": "Financial Statements",
+          "D": "Management's Discussion and Analysis"
+        }
+      },
+      {
+        "id": "structure_ST16",
+        "question": "How many parts are listed in the main table of contents?",
+        "golden_answer": "C",
+        "original_question": "How many parts are listed in the main table of contents?",
+        "original_answer": "4",
+        "options": {
+          "A": "2",
+          "B": "3",
+          "C": "4",
+          "D": "5"
+        }
+      },
+      {
+        "id": "structure_ST17",
+        "question": "Which of the following notes comes immediately after Note 8 Debt Obligations in the notes list?",
+        "golden_answer": "A",
+        "original_question": "Which note follows Note 8 Debt Obligations in the notes list?",
+        "original_answer": "Note 9 – Financial Instruments",
+        "options": {
+          "A": "Note 9 – Financial Instruments",
+          "B": "Note 7 – Revenue Recognition",
+          "C": "Note 10 – Subsequent Events",
+          "D": "Note 11 – Related Parties"
+        }
+      },
+      {
+        "id": "structure_ST18",
+        "question": "On what page is Item 15 listed in the table of contents?",
+        "golden_answer": "C",
+        "original_question": "In the table of contents, what page is Item 15 listed on?",
+        "original_answer": "117",
+        "options": {
+          "A": "105",
+          "B": "112",
+          "C": "117",
+          "D": "123"
+        }
+      },
+      {
+        "id": "structure_ST19",
+        "question": "Which of the following comes earlier in Item 7's outline?",
+        "golden_answer": "A",
+        "original_question": "Which comes earlier in Item 7's outline: Non-GAAP Measures or Items Affecting Comparability?",
+        "original_answer": "Non-GAAP Measures",
+        "options": {
+          "A": "Non-GAAP Measures",
+          "B": "Items Affecting Comparability",
+          "C": "Both appear simultaneously",
+          "D": "Neither is in Item 7's outline"
+        }
+      },
+      {
+        "id": "structure_ST20",
+        "question": "What is the page number shown for Item 1 Business in the main table of contents?",
+        "golden_answer": "B",
+        "original_question": "What page number is shown for Item 1 Business in the main table of contents?",
+        "original_answer": "2",
+        "options": {
+          "A": "1",
+          "B": "2",
+          "C": "3",
+          "D": "4"
+        }
+      }
+    ],
+    "reasoning": [
+      {
+        "id": "reasoning_R01",
+        "question": "What was the difference between PepsiCo's 2021 and 2020 net revenue, in millions?",
+        "golden_answer": "A",
+        "original_question": "What is the difference between PepsiCo's 2021 and 2020 net revenue, in millions?",
+        "original_answer": "9102",
+        "options": {
+          "A": "9102",
+          "B": "8500",
+          "C": "12000",
+          "D": "7000"
+        }
+      },
+      {
+        "id": "reasoning_R02",
+        "question": "By how many millions did operating profit increase from 2020 to 2021?",
+        "golden_answer": "C",
+        "original_question": "By how many millions did operating profit increase from 2020 to 2021?",
+        "original_answer": "1082",
+        "options": {
+          "A": "800",
+          "B": "950",
+          "C": "1082",
+          "D": "1200"
+        }
+      },
+      {
+        "id": "reasoning_R03",
+        "question": "As of December 25, 2021, by how many more employees did PepsiCo have outside the United States compared to inside the United States?",
+        "golden_answer": "C",
+        "original_question": "How many more employees did PepsiCo have outside the United States than inside the United States as of December 25, 2021?",
+        "original_answer": "180000",
+        "options": {
+          "A": "50,000",
+          "B": "100,000",
+          "C": "180,000",
+          "D": "250,000"
+        }
+      },
+      {
+        "id": "reasoning_R04",
+        "question": "What was the difference between total assets and total liabilities as of December 25, 2021, in millions?",
+        "golden_answer": "B",
+        "original_question": "What was the difference between total assets and total liabilities as of December 25, 2021, in millions?",
+        "original_answer": "16151",
+        "options": {
+          "A": "12,000",
+          "B": "16,151",
+          "C": "20,000",
+          "D": "14,500"
+        }
+      },
+      {
+        "id": "reasoning_R05",
+        "question": "By how much did 2021 dividend payments exceed 2021 share repurchases, in millions?",
+        "golden_answer": "B",
+        "original_question": "How much greater were 2021 dividend payments than 2021 share repurchases, in millions?",
+        "original_answer": "5709",
+        "options": {
+          "A": "3,200",
+          "B": "5,709",
+          "C": "4,180",
+          "D": "6,400"
+        }
+      },
+      {
+        "id": "reasoning_R06",
+        "question": "What was the total operating profit (in millions) for 2021 FLNA and PBNA combined?",
+        "golden_answer": "A",
+        "original_question": "What is the sum of 2021 FLNA and PBNA operating profit, in millions?",
+        "original_answer": "8075",
+        "options": {
+          "A": "8075",
+          "B": "6543",
+          "C": "9500",
+          "D": "7300"
+        }
+      },
+      {
+        "id": "reasoning_R07",
+        "question": "By how many millions did free cash flow increase from 2020 to 2021?",
+        "golden_answer": "C",
+        "original_question": "By how many millions did free cash flow increase from 2020 to 2021?",
+        "original_answer": "729",
+        "options": {
+          "A": "590",
+          "B": "700",
+          "C": "729",
+          "D": "810"
+        }
+      },
+      {
+        "id": "reasoning_R08",
+        "question": "What percentage of PepsiCo's 2021 global workforce was based in the United States, rounded to the nearest whole percent?",
+        "golden_answer": "B",
+        "original_question": "What percentage of PepsiCo's 2021 global workforce was based in the United States, rounded to the nearest whole percent?",
+        "original_answer": "42",
+        "options": {
+          "A": "32%",
+          "B": "42%",
+          "C": "52%",
+          "D": "62%"
+        }
+      },
+      {
+        "id": "reasoning_R09",
+        "question": "What was the absolute value of the difference in millions between 2021 net cash provided by operating activities and 2021 net cash used for investing activities?",
+        "golden_answer": "C",
+        "original_question": "How many millions greater was 2021 net cash provided by operating activities than 2021 net cash used for investing activities in absolute terms?",
+        "original_answer": "8347",
+        "options": {
+          "A": "5,682",
+          "B": "7,495",
+          "C": "8,347",
+          "D": "9,120"
+        }
+      },
+      {
+        "id": "reasoning_R10",
+        "question": "What was the combined operating profit, in millions, of LatAm, Europe, and AMESA in 2021?",
+        "golden_answer": "B",
+        "original_question": "What is the total 2021 operating profit of LatAm, Europe, and AMESA combined, in millions?",
+        "original_answer": "3519",
+        "options": {
+          "A": "3250",
+          "B": "3519",
+          "C": "3790",
+          "D": "4100"
+        }
+      },
+      {
+        "id": "reasoning_R11",
+        "question": "By how many millions did cash and cash equivalents decline from 2020 to 2021?",
+        "golden_answer": "C",
+        "original_question": "By how many millions did cash and cash equivalents decline from 2020 to 2021?",
+        "original_answer": "2589",
+        "options": {
+          "A": "1,500",
+          "B": "2,000",
+          "C": "2,589",
+          "D": "3,250"
+        }
+      },
+      {
+        "id": "reasoning_R12",
+        "question": "What is the difference between 2021 long-term debt obligations and 2021 short-term debt obligations, in millions?",
+        "golden_answer": "A",
+        "original_question": "What is the difference between 2021 long-term debt obligations and 2021 short-term debt obligations, in millions?",
+        "original_answer": "31718",
+        "options": {
+          "A": "31,718",
+          "B": "25,000",
+          "C": "20,500",
+          "D": "40,200"
+        }
+      },
+      {
+        "id": "reasoning_R13",
+        "question": "By how much did PBNA net revenue exceed FLNA net revenue in 2021, in millions?",
+        "golden_answer": "A",
+        "original_question": "How much larger was PBNA net revenue than FLNA net revenue in 2021, in millions?",
+        "original_answer": "5668",
+        "options": {
+          "A": "5668",
+          "B": "4321",
+          "C": "1234",
+          "D": "7890"
+        }
+      },
+      {
+        "id": "reasoning_R14",
+        "question": "What was the total of 2021 capital spending and sales of property, plant and equipment, counting sales as positive, in millions?",
+        "golden_answer": "A",
+        "original_question": "What was the total of 2021 capital spending and sales of property, plant and equipment, counting sales as positive, in millions?",
+        "original_answer": "4791",
+        "options": {
+          "A": "4791",
+          "B": "5890",
+          "C": "3200",
+          "D": "2511"
+        }
+      },
+      {
+        "id": "reasoning_R15",
+        "question": "By how many basis points did the annual tax rate increase from 2020 to 2021?",
+        "golden_answer": "C",
+        "original_question": "By how many basis points did the annual tax rate increase from 2020 to 2021?",
+        "original_answer": "90",
+        "options": {
+          "A": "50",
+          "B": "75",
+          "C": "90",
+          "D": "120"
+        }
+      },
+      {
+        "id": "reasoning_R16",
+        "question": "What was the spread between ROIC and core net ROIC in 2021, in percentage points?",
+        "golden_answer": "B",
+        "original_question": "What was the spread between ROIC and core net ROIC in 2021, in percentage points?",
+        "original_answer": "2.4",
+        "options": {
+          "A": "1.2",
+          "B": "2.4",
+          "C": "3.6",
+          "D": "4.8"
+        }
+      },
+      {
+        "id": "reasoning_R17",
+        "question": "How many more shares were used in diluted weighted-average common shares outstanding than basic in 2021, in millions?",
+        "golden_answer": "C",
+        "original_question": "How many more shares were used in diluted weighted-average common shares outstanding than basic in 2021, in millions?",
+        "original_answer": "7",
+        "options": {
+          "A": "5",
+          "B": "6",
+          "C": "7",
+          "D": "8"
+        }
+      },
+      {
+        "id": "reasoning_R18",
+        "question": "What was the combined 2021 net revenue of AMESA and APAC, in millions?",
+        "golden_answer": "C",
+        "original_question": "What is the combined 2021 net revenue of AMESA and APAC, in millions?",
+        "original_answer": "10693",
+        "options": {
+          "A": "9,786",
+          "B": "12,842",
+          "C": "10,693",
+          "D": "8,453"
+        }
+      },
+      {
+        "id": "reasoning_R19",
+        "question": "By how much did gross profit exceed selling, general and administrative expenses in 2021, in millions?",
+        "golden_answer": "C",
+        "original_question": "How much did gross profit exceed selling, general and administrative expenses in 2021, in millions?",
+        "original_answer": "11162",
+        "options": {
+          "A": "8,240",
+          "B": "10,000",
+          "C": "11,162",
+          "D": "13,500"
+        }
+      },
+      {
+        "id": "reasoning_R20",
+        "question": "What was the difference between 2021 and 2020 diluted EPS, in dollars?",
+        "golden_answer": "B",
+        "original_question": "What was the difference between 2021 and 2020 diluted EPS, in dollars?",
+        "original_answer": "0.37",
+        "options": {
+          "A": "0.25",
+          "B": "0.37",
+          "C": "0.50",
+          "D": "1.00"
+        }
+      }
+    ],
+    "multi_hop": [
+      {
+        "id": "multi_hop_M01",
+        "question": "Which of the following is greater for PepsiCo?",
+        "golden_answer": "B",
+        "original_question": "Which is larger: PepsiCo's number of countries and territories served or its number of worldwide employees divided by 1,000?",
+        "original_answer": "worldwide employees/1,000",
+        "options": {
+          "A": "The number of countries and territories served",
+          "B": "The number of worldwide employees divided by 1,000",
+          "C": "The number of brands owned",
+          "D": "The number of years since PepsiCo was founded"
+        }
+      },
+      {
+        "id": "multi_hop_M02",
+        "question": "What is the ratio of Walmart's share of 2021 consolidated net revenue to the percentage of the U.S. liquid refreshment beverage category represented by PepsiCo, rounded to two decimals?",
+        "golden_answer": "B",
+        "original_question": "What is the ratio of Walmart's share of 2021 consolidated net revenue to the percentage of the U.S. liquid refreshment beverage category represented by PepsiCo, rounded to two decimals?",
+        "original_answer": "0.59",
+        "options": {
+          "A": "0.35",
+          "B": "0.59",
+          "C": "0.80",
+          "D": "1.11"
+        }
+      },
+      {
+        "id": "multi_hop_M03",
+        "question": "What is the total when you add the page number where Item 1A Risk Factors begins to the age of CEO Ramon L. Laguarta?",
+        "golden_answer": "C",
+        "original_question": "If you combine the page number where Item 1A Risk Factors begins and the age of CEO Ramon L. Laguarta, what total do you get?",
+        "original_answer": "69",
+        "options": {
+          "A": "62",
+          "B": "67",
+          "C": "69",
+          "D": "73"
+        }
+      },
+      {
+        "id": "multi_hop_M04",
+        "question": "What is the result if you subtract the number of reportable segments from the number of current executive officers listed?",
+        "golden_answer": "C",
+        "original_question": "What do you get if you subtract the number of reportable segments from the number of current executive officers listed?",
+        "original_answer": "4",
+        "options": {
+          "A": "2",
+          "B": "3",
+          "C": "4",
+          "D": "5"
+        }
+      },
+      {
+        "id": "multi_hop_M05",
+        "question": "What is the difference between the number of countries listed in the net revenue by country table (including 'All other countries' as one entry) and the number of shared service center locations in Item 2?",
+        "golden_answer": "B",
+        "original_question": "How many more countries are listed in the net revenue by country table (including 'All other countries' as one entry) than shared service center locations in Item 2?",
+        "original_answer": "6",
+        "options": {
+          "A": "3",
+          "B": "6",
+          "C": "8",
+          "D": "9"
+        }
+      },
+      {
+        "id": "multi_hop_M06",
+        "question": "What is the difference in shares between the number of shares outstanding as of February 3, 2022 and the diluted weighted-average common shares outstanding in 2021?",
+        "golden_answer": "B",
+        "original_question": "What is the difference between the number of shares outstanding as of February 3, 2022 and the diluted weighted-average common shares outstanding in 2021, in shares?",
+        "original_answer": "-5548600",
+        "options": {
+          "A": "5,548,600",
+          "B": "-5,548,600",
+          "C": "554,860",
+          "D": "-554,860"
+        }
+      },
+      {
+        "id": "multi_hop_M07",
+        "question": "Which of the following is greater: the 2021 capital spending amount in billions or the number of principal executive corporate property locations named in Item 2?",
+        "golden_answer": "A",
+        "original_question": "Which is greater: the 2021 capital spending amount in billions or the number of principal executive corporate property locations named in Item 2?",
+        "original_answer": "capital spending",
+        "options": {
+          "A": "2021 capital spending amount in billions",
+          "B": "Number of principal executive corporate property locations",
+          "C": "Both are equal",
+          "D": "Neither can be determined"
+        }
+      },
+      {
+        "id": "multi_hop_M08",
+        "question": "What is the combined total when you add the number of pages in the main table of contents devoted to Item 1A starting page and the number of members of the Board who signed the report, excluding executive officers who are not directors?",
+        "golden_answer": "C",
+        "original_question": "What is the combined total when you add the number of pages in the main table of contents devoted to Item 1A starting page and the number of members of the Board who signed the report, excluding executive officers who are not directors?",
+        "original_answer": "26",
+        "options": {
+          "A": "14",
+          "B": "19",
+          "C": "26",
+          "D": "33"
+        }
+      },
+      {
+        "id": "multi_hop_M09",
+        "question": "What was the difference in percentage points of consolidated net revenue between convenient foods and beverages in 2021?",
+        "golden_answer": "C",
+        "original_question": "How many more percentage points of consolidated net revenue came from convenient foods than beverages in 2021?",
+        "original_answer": "10",
+        "options": {
+          "A": "5",
+          "B": "7",
+          "C": "10",
+          "D": "15"
+        }
+      },
+      {
+        "id": "multi_hop_M10",
+        "question": "What is the sum of the employee count in the United States (in thousands) and the number of shareholders of record (rounded to the nearest thousand)?",
+        "golden_answer": "C",
+        "original_question": "What is the sum of the employee count in the United States (in thousands) and the number of shareholders of record (rounded to the nearest thousand)?",
+        "original_answer": "231",
+        "options": {
+          "A": "200",
+          "B": "215",
+          "C": "231",
+          "D": "250"
+        }
+      },
+      {
+        "id": "multi_hop_M11",
+        "question": "Which of the following is larger?",
+        "golden_answer": "A",
+        "original_question": "Which is larger: the number of countries and territories served divided by 10, or the number of current executive officers listed?",
+        "original_answer": "countries served/10",
+        "options": {
+          "A": "The number of countries and territories served divided by 10",
+          "B": "The number of current executive officers listed",
+          "C": "Both are equal",
+          "D": "There is not enough information to tell"
+        }
+      },
+      {
+        "id": "multi_hop_M12",
+        "question": "By how many millions of dollars did the 2021 free cash flow differ from the expected 2022 shareholder returns announced?",
+        "golden_answer": "B",
+        "original_question": "How many millions of dollars separated the 2021 free cash flow from the expected 2022 shareholder returns announced?",
+        "original_answer": "-543",
+        "options": {
+          "A": "543",
+          "B": "-543",
+          "C": "0",
+          "D": "1,086"
+        }
+      },
+      {
+        "id": "multi_hop_M13",
+        "question": "What is the total when you add the number of women executives directly reporting to the CEO who are racially/ethnically diverse and/or female to the number of reportable segments?",
+        "golden_answer": "C",
+        "original_question": "Add the number of women executives directly reporting to the CEO who are racially/ethnically diverse and/or female to the number of reportable segments. What is the total?",
+        "original_answer": "14",
+        "options": {
+          "A": "10",
+          "B": "12",
+          "C": "14",
+          "D": "16"
+        }
+      },
+      {
+        "id": "multi_hop_M14",
+        "question": "By how many millions did the United States' 2021 net revenue exceed the combined net revenue of Mexico and Canada?",
+        "golden_answer": "C",
+        "original_question": "How many more millions of 2021 net revenue did the United States contribute than the combined net revenue of Mexico and Canada?",
+        "original_answer": "36560",
+        "options": {
+          "A": "15,200",
+          "B": "24,800",
+          "C": "36,560",
+          "D": "42,310"
+        }
+      },
+      {
+        "id": "multi_hop_M15",
+        "question": "What is the difference between the age of CFO Hugh F. Johnston and the page number for Item 5 in the table of contents?",
+        "golden_answer": "B",
+        "original_question": "What is the difference between the age of CFO Hugh F. Johnston and the page number for Item 5 in the table of contents?",
+        "original_answer": "32",
+        "options": {
+          "A": "25",
+          "B": "32",
+          "C": "40",
+          "D": "18"
+        }
+      },
+      {
+        "id": "multi_hop_M16",
+        "question": "What is the result when you add the 2021 number of employees in the U.S. (in thousands) to the annualized dividend per share announced on February 10, 2022?",
+        "golden_answer": "B",
+        "original_question": "If you add the 2021 number of employees in the U.S. (in thousands) to the annualized dividend per share announced on February 10, 2022, what do you get?",
+        "original_answer": "133.6",
+        "options": {
+          "A": "120.5",
+          "B": "133.6",
+          "C": "145.2",
+          "D": "128.8"
+        }
+      },
+      {
+        "id": "multi_hop_M17",
+        "question": "What was the difference in millions between 2021 long-term debt obligations and 2021 goodwill?",
+        "golden_answer": "A",
+        "original_question": "How many more millions were in 2021 long-term debt obligations than in 2021 goodwill?",
+        "original_answer": "17645",
+        "options": {
+          "A": "17,645",
+          "B": "12,300",
+          "C": "21,500",
+          "D": "9,890"
+        }
+      },
+      {
+        "id": "multi_hop_M18",
+        "question": "What is the total when you add the number of countries specifically named as PepsiCo's largest operations to the number of reportable segments?",
+        "golden_answer": "C",
+        "original_question": "What is the total of the number of countries specifically named as PepsiCo's largest operations and the number of reportable segments?",
+        "original_answer": "14",
+        "options": {
+          "A": "10",
+          "B": "12",
+          "C": "14",
+          "D": "16"
+        }
+      },
+      {
+        "id": "multi_hop_M19",
+        "question": "Which of the following is larger: the 2021 operating margin percentage or the percentage of women in management roles?",
+        "golden_answer": "B",
+        "original_question": "Which is larger: the 2021 operating margin percentage or the percentage of women in management roles?",
+        "original_answer": "women in management roles",
+        "options": {
+          "A": "2021 operating margin percentage",
+          "B": "percentage of women in management roles",
+          "C": "They are the same",
+          "D": "Cannot be determined"
+        }
+      },
+      {
+        "id": "multi_hop_M20",
+        "question": "What is the difference between the page where Management's Discussion and Analysis begins and the age of Chief Executive Officer, Europe Silviu Popovici?",
+        "golden_answer": "C",
+        "original_question": "What is the difference between the page where Management's Discussion and Analysis begins and the age of Chief Executive Officer, Europe Silviu Popovici?",
+        "original_answer": "-24",
+        "options": {
+          "A": "24",
+          "B": "0",
+          "C": "-24",
+          "D": "12"
+        }
+      }
+    ]
+  }
+}
