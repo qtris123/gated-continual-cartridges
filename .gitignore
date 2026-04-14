@@ -187,3 +187,8 @@ secrets/
 ignore/
 .DS_Store
 logs/
+
+credentials.txt
+*.slurm
+*.out 
+*.err

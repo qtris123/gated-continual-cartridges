@@ -113,7 +113,9 @@ class SynthesizeConfig(RunConfig):
         logger.info(f"Final output saved to {final_output_path}")
 
         if self.upload_to_wandb:
-            artifact = wandb.Artifact(name=self.name, type="dataset")
+            import re
+            sanitized_name = re.sub(r'[^a-zA-Z0-9_\-.]', '_', self.name)
+            artifact = wandb.Artifact(name=sanitized_name, type="dataset")
             artifact.add_dir(local_path=str(output_dir.absolute()), name="dataset")
             wandb.log_artifact(artifact)
 
@@ -136,12 +138,32 @@ class SynthesizeConfig(RunConfig):
         """Run batches using a queue for better control."""
         all_rows: list[Conversation] = []
         
-        # Create queue of batch indices
+        checkpoint_dir = self.run_dir / "checkpoints"
+        checkpoint_dir.mkdir(exist_ok=True)
+        
+        completed_batch_indices = set()
+        if checkpoint_dir.exists():
+            import pandas as pd
+            for checkpoint_file in sorted(checkpoint_dir.glob("batch_*.parquet")):
+                try:
+                    batch_idx = int(checkpoint_file.stem.split("_")[1])
+                    completed_batch_indices.add(batch_idx)
+                    
+                    df = pd.read_parquet(checkpoint_file)
+                    batch_rows = [Conversation.from_dict(row) for _, row in df.iterrows()]
+                    all_rows.extend(batch_rows)
+                    logger.info(f"Resumed from checkpoint: batch {batch_idx} ({len(batch_rows)} samples)")
+                except Exception as e:
+                    logger.warning(f"Failed to load checkpoint {checkpoint_file}: {e}")
+        
+        batches_to_process = [i for i in range(total_batches) if i not in completed_batch_indices]
+        logger.info(f"Resuming synthesis: {len(completed_batch_indices)} batches already completed, {len(batches_to_process)} remaining")
+        
+        # Create queue of batch indices (only unprocessed batches)
         batch_queue = asyncio.Queue()
-        for batch_idx in range(total_batches):
+        for batch_idx in batches_to_process:
             batch_queue.put_nowait(batch_idx)
         
-        # Results queue
         results_queue = asyncio.Queue()
         
         logger.info(f"Instantiating convo generator...")
@@ -181,13 +203,22 @@ class SynthesizeConfig(RunConfig):
         
         # Collect results with progress tracking
         completed_batches = 0
-        with tqdm.tqdm(total=total_batches, desc="Processing batches") as pbar:
-            while completed_batches < total_batches:
+        with tqdm.tqdm(total=len(batches_to_process), desc="Processing batches", initial=0) as pbar:
+            while completed_batches < len(batches_to_process):
                 batch_idx, batch_rows = await asyncio.wait_for(
                     results_queue.get(),
                     timeout=self.worker_timeout
                 )
                 all_rows.extend(batch_rows)
+                
+                # Save checkpoint immediately after batch completion
+                from dataclasses import asdict
+                import pandas as pd
+                checkpoint_file = checkpoint_dir / f"batch_{batch_idx:04d}.parquet"
+                df = pd.DataFrame([asdict(row) for row in batch_rows])
+                df.to_parquet(checkpoint_file, index=False)
+                logger.info(f"Saved checkpoint for batch {batch_idx} to {checkpoint_file.name} ({len(batch_rows)} samples)")
+                
                 completed_batches += 1
                 pbar.update(1)
 
@@ -214,7 +245,7 @@ async def _process_batch_async(
 
     try:
         convos = await synthesizer.sample_convos(batch_idx, batch_size, total_batches)
-    except Exception as e:
+    except Exception as e:  
         logger.error(
             f"\n{'='*60}\n"
             f"Error processing batch {batch_idx + 1}/{total_batches}\n"
