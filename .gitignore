@@ -187,3 +187,4 @@ secrets/
 ignore/
 .DS_Store
 logs/
+data/eval_data_json

@@ -15,16 +15,16 @@ fi
 OUTPUTS="$REPO_DIR/outputs"
 EVAL_DATA="$REPO_DIR/data/financebench/eval"
 
-AMD_P1="$EVAL_DATA/amd_eval_questions_phase1.parquet"
-AMD_P2="$EVAL_DATA/amd_eval_questions_phase2.parquet"
-#PEPSI_P1="$EVAL_DATA/amd_pepsi_eval_questions_phase1.parquet"
-#PEPSI_P2="$EVAL_DATA/amd_pepsi_eval_questions_phase2.parquet"
+#PHASE1_EVAL="$EVAL_DATA/amd_eval_questions_phase1.parquet"
+#PHASE1_EVAL="$EVAL_DATA/amd_eval_questions_phase2.parquet"
+PHASE1_EVAL="$EVAL_DATA/amd_pepsi_eval_questions_phase1.parquet"
+PHASE2_EVAL="$EVAL_DATA/amd_pepsi_eval_questions_phase2.parquet"
 
 
-MODEL="Qwen/Qwen3-4B-Instruct-2507"
-INITIAL_CACHE="$OUTPUTS/2026-03-28-12-48-24-initial/7bd35e62-3a4a-47ed-a41c-2ef0db6b044f/cache_last.pt"
-CONTINUAL_CACHE="$OUTPUTS/2026-03-28-19-07-49-continual/0828cdb8-8c62-4b81-8fae-e3d28d928d1e/cache_last.pt"
-OUTPUT_DIR="$REPO_DIR/outputs/eval_amd_qwen3_4b_instruct/toks2048"
+MODEL="meta-llama/Llama-3.2-3B-Instruct"
+INITIAL_CACHE="$OUTPUTS/2026-03-24-02-12-18-train_initial/859804cb-7529-4500-9a4d-a0de831180d8/cache_last.pt"
+CONTINUAL_CACHE="$OUTPUTS/2026-04-07-08-04-39-continual_frozen_layers/f620a3c7-754e-4560-a12a-41ce04746b3c/cache_last.pt"
+OUTPUT_DIR="$REPO_DIR/outputs/eval_amd_llama_3.2_3b_instruct/toks512_frozen14-27_both"
 
 source "$REPO_DIR/.venv/bin/activate"
 if [ -f "$REPO_DIR/.env" ]; then source "$REPO_DIR/.env"; fi
@@ -40,8 +40,8 @@ ARGS=(
   --model "$MODEL"
   --initial-cache "$INITIAL_CACHE"
   --cache "$CONTINUAL_CACHE"
-  --phase1-eval "$AMD_P1"
-  --phase2-eval "$AMD_P2"
+  --phase1-eval "$PHASE1_EVAL"
+  --phase2-eval "$PHASE2_EVAL"
   --output-dir "$OUTPUT_DIR"
   --max-new-tokens 512
   --check-forgetting
