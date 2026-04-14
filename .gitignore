@@ -192,3 +192,4 @@ credentials.txt
 *.slurm
 *.out 
 *.err
+data/eval_data_json
