@@ -61,7 +61,7 @@ parser.add_argument(
     help="Upload dataset artifact to W&B",
 )
 parser.add_argument(
-    "--run-name-prefix",
+    "--run-name",
     type=str,
     default="qasper_self_study",
     help="Prefix for run name / output folder pattern",
@@ -92,9 +92,9 @@ config = SynthesizeConfig(
     batch_size=args.batch_size,
     max_num_batches_in_parallel=args.max_num_batches,
     name=FormatStringVariable(
-        f"{args.run_name_prefix}_{{synthesizer.client.model_name}}_n{{num_samples}}"
+        f"{args.run_name}_{{synthesizer.client.model_name}}_n{{num_samples}}"
     ),
-    run_id=FormatStringVariable("{name}"),
+    run_id= args.run_name,
     output_dir=os.environ.get("CARTRIDGES_OUTPUT_DIR", "."),
     wandb=WandBConfig(tags=["qasper", "synthesis", "self_study"]),
     upload_to_wandb=args.upload_to_wandb,

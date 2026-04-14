@@ -25,9 +25,6 @@ Env vars:
     PACKED_SEQ_LENGTH       — packed sequence length (default: 2048)
     SAVE_EVERY_N_STEPS      — save checkpoint every N steps (default: 256)
     DISTRIBUTED_BACKEND     — distributed training backend (default: gloo)
-    COMPANY                 — company name for run naming (default: unknown)
-    YEAR_Y                  — year for run naming (default: unknown)
-    PROVENANCE_TAG          — tag appended to last user message per convo (default: no tag)
 """
 
 import os
@@ -52,7 +49,7 @@ GLOBAL_BATCH_SIZE = int(os.environ.get("GLOBAL_BATCH_SIZE", "32"))
 EVAL_EVERY_N_STEPS = int(os.environ.get("EVAL_EVERY_N_STEPS", "128"))
 SAVE_EVERY_N_STEPS = int(os.environ.get("SAVE_EVERY_N_STEPS", "256"))
 DISTRIBUTED_BACKEND = os.environ.get("DISTRIBUTED_BACKEND", "gloo")
-
+RUN_NAME = os.environ.get("RUN_NAME", "qasper_phase1")
 _model_cls = FlexQwen3ForCausalLM if "qwen" in MODEL_NAME.lower() else FlexLlamaForCausalLM
 
 config = TrainConfig(
@@ -95,9 +92,7 @@ config = TrainConfig(
     distributed_backend=DISTRIBUTED_BACKEND,
     wandb=WandBConfig(tags=["train", "qasper", "phase1"]),
     output_dir=os.environ.get("CARTRIDGES_OUTPUT_DIR", "."),
-    name=FormatStringVariable(
-        f"qasper_phase1_{MODEL_NAME.split('/')[-1]}_toks{NUM_TOKENS}"
-    ),
+    name=RUN_NAME,
 )
 
 if __name__ == "__main__":

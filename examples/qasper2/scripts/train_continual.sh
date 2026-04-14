@@ -31,14 +31,15 @@ NUM_GPUS="${NUM_GPUS:-2}"
 MODEL_NAME="${MODEL_NAME:-meta-llama/Llama-3.2-3B-Instruct}" # Qwen/Qwen3-4B-Instruct-2507
 PHASE1_CACHE_PATH="${PHASE1_CACHE_PATH:-/home/vo43/cartridges/outputs/2026-04-01-01-31-37-arxiv_train/1d73d4d2-fe47-45ff-b68e-d3443c2d530c/cache_last.pt}"
 SYNTH_DATA_PATH="${SYNTH_DATA_PATH:-/scratch/scholar/vo43/qasper-MT_8192_off-policy.parquet}"
-EVAL_DATA_PATH="${EVAL_DATA_PATH:-/home/vo43/cartridges/examples/qasper2/qasper_eval_QA.parquet}"
+EVAL_DATA_PATH="${EVAL_DATA_PATH:-/home/vo43/cartridges/examples/qasper2/data/qasper-MT_8192_off-policy.parquet}"
 NUM_TOKENS="${NUM_TOKENS:-2048}" # check phase 1 cache size for setting this
 EPOCHS="${EPOCHS:-1}"
 LR="${LR:-2e-2}"
 GLOBAL_BATCH_SIZE="${GLOBAL_BATCH_SIZE:-32}"
 MASTER_PORT="${MASTER_PORT:-29507}"
 EVAL_EVERY_N_STEPS="${EVAL_EVERY_N_STEPS:-15}" # original is 128
-
+RUN_NAME="${RUN_NAME:-qasper_phase2}"
+SAVE_EVERY_N_STEPS="${SAVE_EVERY_N_STEPS:-256}"
 echo "=========================================="
 echo "Qasper Synthesis with Tokasaurus Server"
 echo "=========================================="
@@ -148,6 +149,8 @@ GLOBAL_BATCH_SIZE="$GLOBAL_BATCH_SIZE" \
 MODEL_NAME="$MODEL_NAME" \
 CARTRIDGES_OUTPUT_DIR="$CARTRIDGES_OUTPUT_DIR" \
 EVAL_EVERY_N_STEPS="$EVAL_EVERY_N_STEPS" \
+SAVE_EVERY_N_STEPS="$SAVE_EVERY_N_STEPS" \
+RUN_NAME="$RUN_NAME" \
 torchrun --nproc_per_node="$NUM_GPUS" --master_port="$MASTER_PORT" \
   "$CARTRIDGES_DIR/examples/qasper2/train/continual.py"
 

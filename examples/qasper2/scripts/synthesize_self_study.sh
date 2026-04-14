@@ -111,6 +111,7 @@ BATCH_SIZE="${BATCH_SIZE:-1}"
 MAX_NUM_BATCHES="${MAX_NUM_BATCHES:-64}"
 PROB_THINKING="${PROB_THINKING:-0.2}"
 TOPIC_ID="${TOPIC_ID:-QA}" # QA (PHASE1), MT (PHASE2), SA (PHASE2)
+RUN_NAME="${RUN_NAME:-qasper_self_study}"
 
 echo "=== Starting Tokasaurus on :$PORT model=$MODEL_NAME ==="
 tksrs \
@@ -147,6 +148,7 @@ python "$CARTRIDGES_DIR/examples/qasper2/synthesize/self_study.py" \
   --batch-size "$BATCH_SIZE" \
   --max-num-batches "$MAX_NUM_BATCHES" \
   --prob-thinking "$PROB_THINKING" \
-  --topic "$TOPIC_ID"
+  --topic "$TOPIC_ID" \
+  --run-name "$RUN_NAME"
 
 echo "=== Done ==="
