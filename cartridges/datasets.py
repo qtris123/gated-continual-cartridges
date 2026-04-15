@@ -585,14 +585,14 @@ class GenerateEvalDataset(Dataset):
         )
 
         return GenerateEvalDatasetElement(
-            input_ids=input_ids,    
+            input_ids=input_ids,
             prompt=[
                 {"role": msg.role, "content": msg.content}
                 for msg in convo.messages[:-1]
             ],
             answer=convo.messages[-1].content,
-            convo_id=str(index),
-            metadata={"idx": index}
+            convo_id=convo.metadata.get("question_id", str(index)),
+            metadata={**convo.metadata, "idx": index},
         )
     
     def __len__(self):

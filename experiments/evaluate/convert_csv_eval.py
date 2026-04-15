@@ -48,11 +48,14 @@ def extract_doc_source(filename: str) -> str:
     raise ValueError(f"Cannot extract doc_source from filename: {filename}")
 
 
+MCQ_SUFFIX = "\n\nExplain your reasoning, then end your response with 'Answer: X' where X is the letter (A, B, C, or D)."
+YESNO_SUFFIX = "\n\nExplain your reasoning, then end your response with 'Answer: Yes' or 'Answer: No'."                 
+
 def format_mcq_question(row: pd.Series) -> str:
-    """Format MCQ question with options."""
+    """Format MCQ question with options and constrained-answer instruction."""
     q = row["mcq_question"]
     options = f"\nA) {row['option_a']}\nB) {row['option_b']}\nC) {row['option_c']}\nD) {row['option_d']}"
-    return q + options
+    return q + options + MCQ_SUFFIX
 
 
 def make_conversation(
@@ -153,7 +156,7 @@ def convert_yesno_csv(df: pd.DataFrame, doc_source: str, filename: str):
             "original_answer": row["original_answer"],
         }
         conversations.append(make_conversation(
-            question=row["yes_no_question"],
+            question=row["yes_no_question"] + YESNO_SUFFIX,
             answer=str(row["answer"]),
             metadata=metadata,
         ))
