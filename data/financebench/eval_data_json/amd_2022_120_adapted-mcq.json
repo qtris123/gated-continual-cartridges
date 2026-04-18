@@ -7,157 +7,157 @@
       {
         "id": "factual_F01",
         "question": "What was AMD’s aggregate market value of common stock held by non-affiliates as of June 24, 2022?",
-        "golden_answer": "B",
+        "golden_answer": "A",
         "original_question": "What was AMD’s aggregate market value of common stock held by non-affiliates as of June 24, 2022?",
         "original_answer": "$139.8 billion",
         "options": {
-          "A": "$100.5 billion",
-          "B": "$139.8 billion",
-          "C": "$120.3 billion",
-          "D": "$200.0 billion"
+          "A": "$139.8 billion",
+          "B": "$200 billion",
+          "C": "$95.2 billion",
+          "D": "$120.5 billion"
         }
       },
       {
         "id": "factual_F02",
         "question": "How many shares of AMD common stock were outstanding as of February 22, 2023?",
-        "golden_answer": "C",
+        "golden_answer": "D",
         "original_question": "How many shares of AMD common stock were outstanding as of February 22, 2023?",
         "original_answer": "1,611,388,217",
         "options": {
-          "A": "1,000,000,000",
-          "B": "1,200,000,500",
-          "C": "1,611,388,217",
-          "D": "2,000,000,000"
+          "A": "2,100,500,000",
+          "B": "1,211,388,217",
+          "C": "900,000,000",
+          "D": "1,611,388,217"
         }
       },
       {
         "id": "factual_F03",
-        "question": "What is the NASDAQ trading symbol for AMD?",
-        "golden_answer": "A",
+        "question": "Which of the following is AMD’s NASDAQ trading symbol?",
+        "golden_answer": "B",
         "original_question": "What is AMD’s NASDAQ trading symbol?",
         "original_answer": "AMD",
         "options": {
-          "A": "AMD",
-          "B": "INTC",
+          "A": "INTC",
+          "B": "AMD",
           "C": "NVDA",
-          "D": "TSLA"
+          "D": "AAPL"
         }
       },
       {
         "id": "factual_F04",
-        "question": "What was the fiscal year end date for this annual report?",
+        "question": "Which of the following was the fiscal year end date for this annual report?",
         "golden_answer": "C",
         "original_question": "What was the fiscal year end date for this annual report?",
         "original_answer": "December 31, 2022",
         "options": {
-          "A": "March 31, 2022",
+          "A": "June 30, 2022",
           "B": "September 30, 2022",
           "C": "December 31, 2022",
-          "D": "June 30, 2022"
+          "D": "March 31, 2022"
         }
       },
       {
         "id": "factual_F05",
         "question": "In which state was AMD incorporated?",
-        "golden_answer": "A",
+        "golden_answer": "B",
         "original_question": "In what state was AMD incorporated?",
         "original_answer": "Delaware",
         "options": {
-          "A": "Delaware",
-          "B": "California",
+          "A": "California",
+          "B": "Delaware",
           "C": "Texas",
           "D": "New York"
         }
       },
       {
         "id": "factual_F06",
-        "question": "What is AMD’s I.R.S. Employer Identification Number?",
-        "golden_answer": "A",
+        "question": "What is AMD’s I.R.S. Employer Identification No.?",
+        "golden_answer": "C",
         "original_question": "What is AMD’s I.R.S. Employer Identification No.?",
         "original_answer": "94-1692300",
         "options": {
-          "A": "94-1692300",
-          "B": "11-9876543",
-          "C": "56-1234567",
-          "D": "22-3344556"
+          "A": "80-8765432",
+          "B": "52-1234567",
+          "C": "94-1692300",
+          "D": "12-3456789"
         }
       },
       {
         "id": "factual_F07",
         "question": "Which of the following is the address of AMD’s principal executive offices?",
-        "golden_answer": "A",
+        "golden_answer": "C",
         "original_question": "What is the address of AMD’s principal executive offices?",
         "original_answer": "2485 Augustine Drive, Santa Clara, California 95054",
         "options": {
-          "A": "2485 Augustine Drive, Santa Clara, California 95054",
-          "B": "1 Microsoft Way, Redmond, Washington 98052",
-          "C": "1600 Amphitheatre Parkway, Mountain View, California 94043",
-          "D": "3500 Deer Creek Road, Palo Alto, California 94304"
+          "A": "1234 Main Street, San Jose, California 95112",
+          "B": "1 Infinite Loop, Cupertino, California 95014",
+          "C": "2485 Augustine Drive, Santa Clara, California 95054",
+          "D": "1600 Amphitheatre Parkway, Mountain View, California 94043"
         }
       },
       {
         "id": "factual_F08",
-        "question": "Which of the following telephone numbers is listed for AMD in the report cover?",
+        "question": "Which of the following is the telephone number listed for AMD in the report cover?",
         "golden_answer": "A",
         "original_question": "What telephone number is listed for AMD in the report cover?",
         "original_answer": "(408) 749-4000",
         "options": {
           "A": "(408) 749-4000",
-          "B": "(212) 555-1234",
-          "C": "(650) 123-4567",
-          "D": "(408) 555-6789"
+          "B": "(650) 321-6000",
+          "C": "(510) 123-4567",
+          "D": "(213) 555-0198"
         }
       },
       {
         "id": "factual_F09",
-        "question": "On which exchange is AMD's common stock listed?",
-        "golden_answer": "B",
+        "question": "On which exchange is AMD’s common stock listed?",
+        "golden_answer": "C",
         "original_question": "What exchange is AMD’s common stock listed on?",
         "original_answer": "The NASDAQ Global Select Market",
         "options": {
-          "A": "New York Stock Exchange (NYSE)",
-          "B": "NASDAQ Global Select Market",
-          "C": "London Stock Exchange (LSE)",
-          "D": "Tokyo Stock Exchange (TSE)"
+          "A": "Toronto Stock Exchange",
+          "B": "NYSE Arca",
+          "C": "Nasdaq Global Select Market",
+          "D": "London Stock Exchange"
         }
       },
       {
         "id": "factual_F10",
         "question": "What was the reported closing sale price per share on June 24, 2022 used to calculate market value?",
-        "golden_answer": "A",
+        "golden_answer": "B",
         "original_question": "What was the reported closing sale price per share on June 24, 2022 used to calculate market value?",
         "original_answer": "$87.08",
         "options": {
-          "A": "$87.08",
-          "B": "$85.50",
-          "C": "$90.00",
-          "D": "$88.25"
+          "A": "$90.50",
+          "B": "$87.08",
+          "C": "$89.76",
+          "D": "$85.32"
         }
       },
       {
         "id": "factual_F11",
-        "question": "What was AMD's total net revenue for 2022?",
-        "golden_answer": "C",
+        "question": "What was AMD’s total net revenue for 2022?",
+        "golden_answer": "D",
         "original_question": "What was AMD’s total net revenue for 2022?",
         "original_answer": "$23.6 billion",
         "options": {
-          "A": "$19.3 billion",
-          "B": "$21.1 billion",
-          "C": "$23.6 billion",
-          "D": "$27.4 billion"
+          "A": "$17.8 billion",
+          "B": "$15 billion",
+          "C": "$20 billion",
+          "D": "$23.6 billion"
         }
       },
       {
         "id": "factual_F12",
         "question": "What was AMD’s gross margin percentage in 2022?",
-        "golden_answer": "B",
+        "golden_answer": "C",
         "original_question": "What was AMD’s gross margin percentage in 2022?",
         "original_answer": "45%",
         "options": {
-          "A": "40%",
-          "B": "45%",
-          "C": "50%",
-          "D": "55%"
+          "A": "51%",
+          "B": "32%",
+          "C": "45%",
+          "D": "39%"
         }
       },
       {
@@ -168,100 +168,100 @@
         "original_answer": "$1.3 billion",
         "options": {
           "A": "$1.3 billion",
-          "B": "$3.4 billion",
-          "C": "$5 billion",
-          "D": "$900 million"
+          "B": "$700 million",
+          "C": "$2.5 billion",
+          "D": "$4 billion"
         }
       },
       {
         "id": "factual_F14",
-        "question": "What was AMD’s net income in 2022?",
-        "golden_answer": "A",
+        "question": "What was AMD’s 2022 net income?",
+        "golden_answer": "B",
         "original_question": "What was AMD’s 2022 net income?",
         "original_answer": "$1.3 billion",
         "options": {
-          "A": "$1.3 billion",
-          "B": "$3.2 billion",
-          "C": "$750 million",
-          "D": "$5 billion"
+          "A": "$3.2 billion",
+          "B": "$1.3 billion",
+          "C": "$2.7 billion",
+          "D": "$500 million"
         }
       },
       {
         "id": "factual_F15",
-        "question": "As of December 31, 2022, about how many employees did AMD have?",
+        "question": "How many employees did AMD have as of December 31, 2022?",
         "golden_answer": "C",
         "original_question": "How many employees did AMD have as of December 31, 2022?",
         "original_answer": "approximately 25,000",
         "options": {
-          "A": "10,000",
-          "B": "15,000",
-          "C": "25,000",
-          "D": "35,000"
+          "A": "Approximately 10,000",
+          "B": "Approximately 100,000",
+          "C": "Approximately 25,000",
+          "D": "Approximately 50,000"
         }
       },
       {
         "id": "factual_F16",
-        "question": "Which AMD processor family is identified as the server CPU lineup built on the “Zen 4” core architecture?",
-        "golden_answer": "B",
+        "question": "Which of the following processor families did AMD identify as its server CPU lineup including products built on the “Zen 4” core architecture?",
+        "golden_answer": "D",
         "original_question": "Which processor family did AMD identify in the report as its server CPU lineup including products built on the “Zen 4” core architecture?",
         "original_answer": "AMD EPYC 9004 Series",
         "options": {
-          "A": "AMD Ryzen 7000 Series",
-          "B": "AMD EPYC 9004 Series",
-          "C": "AMD Threadripper PRO Series",
-          "D": "AMD Athlon Series"
+          "A": "AMD FX Series",
+          "B": "AMD Athlon 3000 Series",
+          "C": "AMD Ryzen 7000 Series",
+          "D": "AMD EPYC 9004 Series"
         }
       },
       {
         "id": "factual_F17",
-        "question": "According to the report, which AMD mobile processor family is identified as having up to 16 “Zen 4” architecture cores?",
-        "golden_answer": "C",
+        "question": "Which mobile processor family does AMD identify in the report as having up to 16 “Zen 4” architecture cores?",
+        "golden_answer": "B",
         "original_question": "What mobile processor family does AMD identify in the report as having up to 16 “Zen 4” architecture cores?",
         "original_answer": "AMD Ryzen 7000 Series processors for mobile applications",
         "options": {
           "A": "AMD Ryzen 5000 Series processors for mobile applications",
-          "B": "AMD Ryzen 6000 Series processors for mobile applications",
-          "C": "AMD Ryzen 7000 Series processors for mobile applications",
-          "D": "AMD EPYC Series processors"
+          "B": "AMD Ryzen 7000 Series processors for mobile applications",
+          "C": "AMD EPYC Series processors for servers",
+          "D": "AMD Athlon Series processors"
         }
       },
       {
         "id": "factual_F18",
-        "question": "What does the document state about the exchange ratio for each outstanding share of Xilinx common stock in the merger?",
-        "golden_answer": "C",
+        "question": "Based on the document, what is the exchange ratio that each outstanding share of Xilinx common stock will receive in the merger?",
+        "golden_answer": "D",
         "original_question": "What exchange ratio will each outstanding share of Xilinx common stock receive in the merger?",
         "original_answer": "This question cannot be answered from the document.",
         "options": {
-          "A": "The exact exchange ratio is specified in detail.",
-          "B": "The exchange ratio is provided as an approximate value.",
-          "C": "The document does not contain information about the exchange ratio.",
-          "D": "The exchange ratio is given as a range."
+          "A": "0.7 shares for each Xilinx share",
+          "B": "1.5 shares for each Xilinx share",
+          "C": "2 shares for each Xilinx share",
+          "D": "The document does not specify the exchange ratio"
         }
       },
       {
         "id": "factual_F19",
-        "question": "What was the transaction with Xilinx valued at, according to the document?",
-        "golden_answer": "C",
+        "question": "What is known about the value of the transaction with Xilinx from the document?",
+        "golden_answer": "A",
         "original_question": "As of the signing of the merger agreement, what was the transaction with Xilinx valued at?",
         "original_answer": "This question cannot be answered from the document.",
         "options": {
-          "A": "$30 billion",
-          "B": "$35 billion",
-          "C": "This question cannot be answered from the document.",
-          "D": "$40 billion"
+          "A": "The value was not provided in the document.",
+          "B": "The value was $50 billion.",
+          "C": "The value was $30 billion.",
+          "D": "The value was $10 billion."
         }
       },
       {
         "id": "factual_F20",
-        "question": "As of December 31, 2022, what was the remaining dollar value available under AMD’s stock repurchase program?",
-        "golden_answer": "B",
+        "question": "What was the remaining dollar value available under AMD’s stock repurchase program as of December 31, 2022?",
+        "golden_answer": "A",
         "original_question": "What was the remaining dollar value available under AMD’s stock repurchase program as of December 31, 2022?",
         "original_answer": "$6.540 billion",
         "options": {
-          "A": "$4.250 billion",
-          "B": "$6.540 billion",
-          "C": "$3.700 billion",
-          "D": "$2.900 billion"
+          "A": "$6.540 billion",
+          "B": "$5.000 billion",
+          "C": "$8.100 billion",
+          "D": "$4.200 billion"
         }
       }
     ],
@@ -269,261 +269,261 @@
       {
         "id": "knowledge_K01",
         "question": "In what decade was AMD founded?",
-        "golden_answer": "B",
+        "golden_answer": "C",
         "original_question": "AMD states it was incorporated on May 1, 1969. In what decade was the company founded?",
         "original_answer": "1960s",
         "options": {
-          "A": "1950s",
-          "B": "1960s",
-          "C": "1970s",
+          "A": "1970s",
+          "B": "1950s",
+          "C": "1960s",
           "D": "1980s"
         }
       },
       {
         "id": "knowledge_K02",
-        "question": "In which U.S. state is Santa Clara located?",
-        "golden_answer": "A",
+        "question": "In which U.S. state is Santa Clara, the headquarters of AMD, located?",
+        "golden_answer": "B",
         "original_question": "The report says AMD is headquartered in Santa Clara, California. What U.S. state is Santa Clara located in?",
         "original_answer": "California",
         "options": {
-          "A": "California",
-          "B": "Texas",
-          "C": "New York",
-          "D": "Florida"
+          "A": "Florida",
+          "B": "California",
+          "C": "Texas",
+          "D": "New York"
         }
       },
       {
         "id": "knowledge_K03",
-        "question": "What does the acronym NASDAQ stand for?",
-        "golden_answer": "A",
+        "question": "What does NASDAQ stand for?",
+        "golden_answer": "C",
         "original_question": "AMD’s stock trades on NASDAQ under the symbol AMD. What does NASDAQ stand for?",
         "original_answer": "National Association of Securities Dealers Automated Quotations",
         "options": {
-          "A": "National Association of Securities Dealers Automated Quotations",
-          "B": "National American Securities Dealers Account Quotations",
-          "C": "North American Stock Dealers Automated Quotes",
-          "D": "National Association of Share Dealers and Quotes"
+          "A": "North American Stock Dealers and Quotations",
+          "B": "New American Securities Data Quotations",
+          "C": "National Association of Securities Dealers Automated Quotations",
+          "D": "National Association of Stock Dealer Annual Quotes"
         }
       },
       {
         "id": "knowledge_K04",
         "question": "Which larger U.S. region is Santa Clara commonly associated with in the tech industry?",
-        "golden_answer": "A",
+        "golden_answer": "D",
         "original_question": "The report notes AMD’s principal executive offices are in Santa Clara. Which larger U.S. region is Santa Clara commonly associated with in the tech industry?",
         "original_answer": "Silicon Valley",
         "options": {
-          "A": "Silicon Valley",
-          "B": "Silicon Prairie",
-          "C": "Research Triangle",
-          "D": "Wall Street"
+          "A": "Silicon Alley",
+          "B": "Research Triangle",
+          "C": "Wall Street",
+          "D": "Silicon Valley"
         }
       },
       {
         "id": "knowledge_K05",
-        "question": "What was Xilinx's stock ticker symbol on NASDAQ prior to its acquisition by AMD in February 2022?",
-        "golden_answer": "A",
+        "question": "Before its acquisition by AMD in February 2022, under which ticker symbol was Xilinx listed on NASDAQ?",
+        "golden_answer": "D",
         "original_question": "The report says AMD completed the acquisition of Xilinx in February 2022. Before that deal closed, what stock ticker was Xilinx known by on NASDAQ?",
         "original_answer": "XLNX",
         "options": {
-          "A": "XLNX",
-          "B": "XLIN",
+          "A": "XNIX",
+          "B": "XILX",
           "C": "AMD",
-          "D": "XNXL"
+          "D": "XLNX"
         }
       },
       {
         "id": "knowledge_K06",
-        "question": "What is the commonly used title abbreviation for Lisa T. Su, as identified in the report about AMD?",
+        "question": "What is the commonly used title abbreviation for the President and Chief Executive Officer of AMD, Lisa T. Su?",
         "golden_answer": "C",
         "original_question": "The report identifies Lisa T. Su as AMD’s President and Chief Executive Officer. What is her commonly used title abbreviation?",
         "original_answer": "CEO",
         "options": {
-          "A": "CFO",
-          "B": "CTO",
+          "A": "COO",
+          "B": "CFO",
           "C": "CEO",
-          "D": "COO"
+          "D": "CTO"
         }
       },
       {
         "id": "knowledge_K07",
-        "question": "Which U.S. city is most closely associated with Delaware's Court of Chancery?",
-        "golden_answer": "A",
+        "question": "Which U.S. city is most closely associated with Delaware’s Court of Chancery?",
+        "golden_answer": "D",
         "original_question": "AMD says it is incorporated in Delaware. What U.S. city is Delaware’s Court of Chancery most closely associated with?",
         "original_answer": "Wilmington",
         "options": {
-          "A": "Wilmington",
-          "B": "Newark",
+          "A": "Newark",
+          "B": "Georgetown",
           "C": "Dover",
-          "D": "Georgetown"
+          "D": "Wilmington"
         }
       },
       {
         "id": "knowledge_K08",
         "question": "Which major U.S. securities regulator receives Form 10-K filings?",
-        "golden_answer": "A",
+        "golden_answer": "C",
         "original_question": "The filing states AMD became a publicly held company in 1972. Which major U.S. securities regulator receives Form 10-K filings?",
         "original_answer": "SEC",
         "options": {
-          "A": "SEC",
-          "B": "FDIC",
-          "C": "Federal Reserve",
-          "D": "FINRA"
+          "A": "Federal Reserve",
+          "B": "IRS",
+          "C": "SEC",
+          "D": "FDIC"
         }
       },
       {
         "id": "knowledge_K09",
-        "question": "In which country is the NASDAQ stock exchange based?",
-        "golden_answer": "A",
+        "question": "In which country is NASDAQ based?",
+        "golden_answer": "C",
         "original_question": "AMD lists The NASDAQ Global Select Market as its exchange. What country is NASDAQ based in?",
         "original_answer": "United States",
         "options": {
-          "A": "United States",
-          "B": "United Kingdom",
-          "C": "Japan",
-          "D": "Germany"
+          "A": "Germany",
+          "B": "Canada",
+          "C": "United States",
+          "D": "Japan"
         }
       },
       {
         "id": "knowledge_K10",
-        "question": "Which company manufactures the PlayStation brand?",
-        "golden_answer": "A",
+        "question": "Which company makes the PlayStation brand?",
+        "golden_answer": "C",
         "original_question": "The report mentions the PlayStation 5 and Xbox Series X|S. Which company makes the PlayStation brand?",
         "original_answer": "Sony",
         "options": {
-          "A": "Sony",
-          "B": "Microsoft",
-          "C": "Nintendo",
+          "A": "Microsoft",
+          "B": "Nintendo",
+          "C": "Sony",
           "D": "Sega"
         }
       },
       {
         "id": "knowledge_K11",
-        "question": "Which of the following companies makes the Xbox brand?",
-        "golden_answer": "A",
+        "question": "Which company is responsible for making the Xbox brand?",
+        "golden_answer": "B",
         "original_question": "The report mentions Xbox Series X and Xbox Series S. Which company makes the Xbox brand?",
         "original_answer": "Microsoft",
         "options": {
-          "A": "Microsoft",
-          "B": "Sony",
-          "C": "Nintendo",
-          "D": "Apple"
+          "A": "Apple",
+          "B": "Microsoft",
+          "C": "Sony",
+          "D": "Nintendo"
         }
       },
       {
         "id": "knowledge_K12",
         "question": "What does ARM originally stand for?",
-        "golden_answer": "A",
+        "golden_answer": "D",
         "original_question": "AMD discusses ARM-based competition. What does ARM originally stand for?",
         "original_answer": "Advanced RISC Machines",
         "options": {
-          "A": "Advanced RISC Machines",
-          "B": "Automated Random Memory",
-          "C": "Application Ready Module",
-          "D": "Asynchronous Routing Mechanism"
+          "A": "Arithmetic Register Model",
+          "B": "Automated Robotic Mechanisms",
+          "C": "Almost Realistic Microprocessors",
+          "D": "Advanced RISC Machines"
         }
       },
       {
         "id": "knowledge_K13",
         "question": "Which company originally introduced the 8086 processor that gave x86 its name?",
-        "golden_answer": "A",
+        "golden_answer": "D",
         "original_question": "The report refers to the x86 instruction set architecture. Which company originally introduced the 8086 processor that gave x86 its name?",
         "original_answer": "Intel",
         "options": {
-          "A": "Intel",
-          "B": "AMD",
-          "C": "IBM",
-          "D": "Motorola"
+          "A": "IBM",
+          "B": "Motorola",
+          "C": "AMD",
+          "D": "Intel"
         }
       },
       {
         "id": "knowledge_K14",
-        "question": "How many months are there in a year according to the standard Gregorian calendar?",
-        "golden_answer": "C",
+        "question": "According to the standard Gregorian calendar, how many months are there in a year?",
+        "golden_answer": "D",
         "original_question": "AMD’s report says it uses a 52 or 53 week fiscal year ending on the last Saturday in December. In the standard Gregorian calendar, how many months are in a year?",
         "original_answer": "12",
         "options": {
-          "A": "10",
-          "B": "11",
-          "C": "12",
-          "D": "13"
+          "A": "11",
+          "B": "13",
+          "C": "10",
+          "D": "12"
         }
       },
       {
         "id": "knowledge_K15",
         "question": "Which operating system family does Linux belong to?",
-        "golden_answer": "C",
+        "golden_answer": "D",
         "original_question": "The report mentions Linux as a registered trademark of Linus Torvalds. What operating system family is Linux part of?",
         "original_answer": "Unix-like",
         "options": {
-          "A": "Windows",
-          "B": "macOS",
-          "C": "Unix-like",
-          "D": "DOS"
+          "A": "MacOS",
+          "B": "DOS",
+          "C": "Windows",
+          "D": "Unix-like"
         }
       },
       {
         "id": "knowledge_K16",
         "question": "Where is TSMC headquartered?",
-        "golden_answer": "C",
+        "golden_answer": "A",
         "original_question": "AMD identifies TSMC as a foundry partner. What country is TSMC headquartered in?",
         "original_answer": "Taiwan",
         "options": {
-          "A": "China",
-          "B": "South Korea",
-          "C": "Taiwan",
-          "D": "Singapore"
+          "A": "Taiwan",
+          "B": "Singapore",
+          "C": "China",
+          "D": "South Korea"
         }
       },
       {
         "id": "knowledge_K17",
-        "question": "In which country are both Bangalore and Hyderabad located?",
+        "question": "In which country are Bangalore and Hyderabad located?",
         "golden_answer": "A",
         "original_question": "The report lists Bangalore and Hyderabad as significant operations locations. In which country are both cities located?",
         "original_answer": "India",
         "options": {
           "A": "India",
           "B": "China",
-          "C": "Australia",
+          "C": "South Africa",
           "D": "Brazil"
         }
       },
       {
         "id": "knowledge_K18",
-        "question": "Based on the document, can you tell which company makes the Mac Pro?",
+        "question": "According to the document, which company makes the Mac Pro?",
         "golden_answer": "B",
         "original_question": "AMD mentions the Radeon PRO W6000X series for the Mac Pro. Which company makes the Mac Pro?",
         "original_answer": "This question cannot be answered from the document.",
         "options": {
-          "A": "Yes, the document states the company.",
-          "B": "No, the document does not provide this information.",
-          "C": "The company is Microsoft.",
-          "D": "The company is AMD."
+          "A": "AMD",
+          "B": "The document does not specify",
+          "C": "Apple",
+          "D": "Microsoft"
         }
       },
       {
         "id": "knowledge_K19",
-        "question": "In which year was the Sarbanes-Oxley Act enacted?",
-        "golden_answer": "B",
+        "question": "In what year was the Sarbanes-Oxley Act enacted?",
+        "golden_answer": "A",
         "original_question": "The filing references the Sarbanes-Oxley Act. In what year was Sarbanes-Oxley enacted?",
         "original_answer": "2002",
         "options": {
-          "A": "1996",
-          "B": "2002",
-          "C": "2010",
-          "D": "2008"
+          "A": "2002",
+          "B": "2004",
+          "C": "1996",
+          "D": "2000"
         }
       },
       {
         "id": "knowledge_K20",
-        "question": "Which Apollo mission landed on the moon in 1969, the same year AMD was founded?",
-        "golden_answer": "C",
+        "question": "Which Apollo moon landing occurred in 1969, the same year AMD was founded?",
+        "golden_answer": "A",
         "original_question": "AMD says it was founded in 1969. Which Apollo moon landing occurred that same year?",
         "original_answer": "Apollo 11",
         "options": {
-          "A": "Apollo 8",
-          "B": "Apollo 10",
-          "C": "Apollo 11",
-          "D": "Apollo 12"
+          "A": "Apollo 11",
+          "B": "Apollo 12",
+          "C": "Apollo 14",
+          "D": "Apollo 13"
         }
       }
     ],
@@ -531,40 +531,40 @@
       {
         "id": "synthesize_SY01",
         "question": "Which of the following is NOT listed as one of AMD's primary product categories in the Business section?",
-        "golden_answer": "C",
+        "golden_answer": "D",
         "original_question": "Summarize AMD’s primary product categories described in the Business section.",
         "original_answer": "Server CPUs, GPUs, DPUs, FPGAs and Adaptive SoCs for data centers; CPUs, APUs and chipsets for PCs; discrete GPUs, semi-custom SoCs and development services; and embedded CPUs, GPUs, APUs, FPGAs and Adaptive SoCs",
         "options": {
           "A": "Server CPUs, GPUs, DPUs, FPGAs and Adaptive SoCs for data centers",
-          "B": "CPUs, APUs and chipsets for PCs",
-          "C": "Smartphones and wearable fitness devices",
-          "D": "Discrete GPUs, semi-custom SoCs and development services"
+          "B": "Discrete GPUs and semi-custom SoCs",
+          "C": "Embedded CPUs, GPUs, APUs, FPGAs and Adaptive SoCs",
+          "D": "Smartphones and mobile operating systems"
         }
       },
       {
         "id": "synthesize_SY02",
-        "question": "Which of the following is NOT listed as a major customer type that AMD sells to across its microprocessor and graphics businesses?",
-        "golden_answer": "C",
+        "question": "Which of the following is NOT a major customer type that AMD sells to across its microprocessor and graphics businesses?",
+        "golden_answer": "B",
         "original_question": "Which major customer types does AMD say it sells to across its microprocessor and graphics businesses?",
         "original_answer": "OEMs, cloud providers, ODMs, system integrators, distributors, retailers, and AIB manufacturers",
         "options": {
-          "A": "OEMs",
-          "B": "AIB manufacturers",
-          "C": "End consumers",
-          "D": "Cloud providers"
+          "A": "System integrators",
+          "B": "Software developers only",
+          "C": "Cloud providers",
+          "D": "AIB manufacturers"
         }
       },
       {
         "id": "synthesize_SY03",
-        "question": "Which of the following groups lists all four current reportable business segments that AMD uses for financial reporting?",
-        "golden_answer": "A",
+        "question": "Which of the following is NOT one of AMD's four reportable business segments for financial reporting?",
+        "golden_answer": "B",
         "original_question": "List the four reportable business segments AMD uses for financial reporting.",
         "original_answer": "Data Center; Client; Gaming; Embedded",
         "options": {
-          "A": "Data Center, Client, Gaming, Embedded",
-          "B": "Client, Consumer Electronics, Gaming, Data Center",
-          "C": "Graphics, Embedded, Client, Gaming",
-          "D": "Data Center, Graphics, Networking, Client"
+          "A": "Client",
+          "B": "Consumer Electronics",
+          "C": "Gaming",
+          "D": "Embedded"
         }
       },
       {
@@ -575,243 +575,243 @@
         "original_answer": "High-performance and adaptive computing technology, software and product leadership, focused on compute technology leadership, expanding data center leadership, enabling pervasive AI, providing software platforms and developer enablement, and designing custom silicon and solutions",
         "options": {
           "A": "High-performance and adaptive computing technology, software and product leadership, focused on compute technology leadership, expanding data center leadership, enabling pervasive AI, providing software platforms and developer enablement, and designing custom silicon and solutions",
-          "B": "Developing low-power mobile phones and home appliances",
-          "C": "Expanding into fashion and textile industries with custom clothing solutions",
-          "D": "Focusing on agricultural and food processing advancements"
+          "B": "Diversification into consumer electronic goods, focusing on retail marketing and expanding smartphone manufacturing",
+          "C": "Reducing research and development, outsourcing core technology, and concentrating on legacy markets",
+          "D": "Emphasizing environmental initiatives as the sole strategy, without investing in compute technologies or AI"
         }
       },
       {
         "id": "synthesize_SY05",
-        "question": "Which of the following best describes the end markets highlighted for AMD’s data center graphics and accelerator products?",
+        "question": "Which of the following are highlighted end markets for AMD’s data center graphics and accelerator products?",
         "golden_answer": "A",
         "original_question": "Which end markets are highlighted for AMD’s data center graphics and accelerator products?",
         "original_answer": "HPC, AI/ML, cloud gaming, cloud visualization, and enterprise data centers",
         "options": {
           "A": "HPC, AI/ML, cloud gaming, cloud visualization, and enterprise data centers",
-          "B": "Mobile devices and home entertainment systems",
-          "C": "Consumer desktop PCs only",
-          "D": "Automotive and wearable technology"
+          "B": "Smartphones, wearables, and tablets",
+          "C": "Networking equipment and embedded systems",
+          "D": "Automotive, IoT, and desktops"
         }
       },
       {
         "id": "synthesize_SY06",
-        "question": "Which of the following are major PC processor subcategories that AMD describes within its client products?",
-        "golden_answer": "A",
+        "question": "Which of the following are the major PC processor subcategories AMD describes within its client products?",
+        "golden_answer": "D",
         "original_question": "Name the major PC processor subcategories AMD describes within its client products.",
         "original_answer": "Desktop CPUs, notebook CPUs, and commercial CPUs",
         "options": {
-          "A": "Desktop CPUs, notebook CPUs, and commercial CPUs",
-          "B": "Gaming GPUs, workstation GPUs, and server CPUs",
-          "C": "Mobile GPUs, embedded processors, and server CPUs",
-          "D": "Server CPUs, mobile GPUs, and embedded processors"
+          "A": "Mobile GPUs, desktop GPUs, and datacenter GPUs",
+          "B": "Application processors, graphics accelerators, and FPGA chips",
+          "C": "Server CPUs, embedded CPUs, and wearable CPUs",
+          "D": "Desktop CPUs, notebook CPUs, and commercial CPUs"
         }
       },
       {
         "id": "synthesize_SY07",
-        "question": "Which of the following are the main types of graphics offerings AMD groups under its gaming and data center graphics discussions?",
-        "golden_answer": "A",
+        "question": "Which of the following are main types of graphics offerings AMD groups under its gaming and data center graphics discussions?",
+        "golden_answer": "B",
         "original_question": "What are the main types of graphics offerings AMD groups under its gaming and data center graphics discussions?",
         "original_answer": "Discrete desktop and notebook GPUs, professional GPUs, data center GPUs/accelerators, and visual cloud or cloud gaming/remote visualization GPUs",
         "options": {
-          "A": "Discrete desktop and notebook GPUs, professional GPUs, data center GPUs/accelerators, and visual cloud or cloud gaming/remote visualization GPUs",
-          "B": "Smartphones and tablets",
-          "C": "Integrated graphics only",
-          "D": "Printers and scanners"
+          "A": "Integrated GPUs only",
+          "B": "Discrete desktop and notebook GPUs, professional GPUs, data center GPUs/accelerators, and visual cloud GPUs",
+          "C": "CPUs and APUs only",
+          "D": "Mobile chipsets and embedded processors"
         }
       },
       {
         "id": "synthesize_SY08",
-        "question": "Which of the following is NOT emphasized as a technology or innovation priority in AMD’s research and development discussion?",
+        "question": "Which of the following is NOT emphasized as a key priority in AMD’s research and development discussion?",
         "golden_answer": "C",
         "original_question": "What key technology and innovation priorities are emphasized in AMD’s research and development discussion?",
         "original_answer": "Next-generation CPUs, GPUs, FPGAs, Adaptive SoCs, accelerators, SOMs and SmartNICs, improved performance and performance-per-watt, advanced process technologies, logic and interface IP, advanced packaging, heterogeneous integration, and enabling software platforms and tools",
         "options": {
-          "A": "Next-generation CPUs, GPUs, and accelerators",
-          "B": "Advanced packaging and heterogeneous integration",
-          "C": "Mobile phone manufacturing",
-          "D": "Improved performance-per-watt and enabling software platforms"
+          "A": "Advanced packaging and heterogeneous integration",
+          "B": "Next-generation CPUs, GPUs, and FPGAs",
+          "C": "Exclusive focus on memory chip manufacturing",
+          "D": "Improved performance-per-watt"
         }
       },
       {
         "id": "synthesize_SY09",
         "question": "According to the report, which of the following manufacturing stages does AMD mainly outsource to third parties?",
-        "golden_answer": "A",
+        "golden_answer": "C",
         "original_question": "Which manufacturing stages does AMD mainly outsource to third parties according to the report?",
         "original_answer": "Wafer fabrication, board manufacturing, and assembly/test/mark/packaging",
         "options": {
-          "A": "Wafer fabrication, board manufacturing, and assembly/test/mark/packaging",
-          "B": "Research and design, distribution, and marketing",
-          "C": "Customer support, product planning, and logistics",
-          "D": "Sales, retail, and after-sales service"
+          "A": "Marketing, customer service, and software development",
+          "B": "Research and design, sales, and support",
+          "C": "Wafer fabrication, board manufacturing, and assembly/test/mark/packaging",
+          "D": "Logistics, distribution, and warehousing"
         }
       },
       {
         "id": "synthesize_SY10",
-        "question": "Which of the following is NOT listed as a main competitive threat by AMD across its main business segments?",
-        "golden_answer": "D",
+        "question": "Which of the following companies or types of competitors are considered main competitive threats by AMD in their Data Center, Client, Gaming, and Embedded segments?",
+        "golden_answer": "A",
         "original_question": "Summarize the main competitive threats AMD identifies across its Data Center, Client, Gaming, and Embedded segments.",
         "original_answer": "Intel, NVIDIA, ARM-based competitors, FPGA and ASIC/ASSP competitors, and competition from integrated and discrete graphics suppliers",
         "options": {
-          "A": "Intel",
-          "B": "NVIDIA",
-          "C": "ARM-based competitors",
-          "D": "Small local retailers"
+          "A": "Intel, NVIDIA, ARM-based companies, FPGA and ASIC/ASSP competitors, and integrated/discrete graphics suppliers",
+          "B": "Only small start-up companies",
+          "C": "Only companies producing mobile phones",
+          "D": "Automotive parts suppliers"
         }
       },
       {
         "id": "synthesize_SY11",
-        "question": "Which of the following is NOT one of the principal areas of employee focus under AMD’s Human Capital section?",
-        "golden_answer": "D",
+        "question": "Which of the following is NOT a principal area of employee focus described under AMD’s Human Capital section?",
+        "golden_answer": "B",
         "original_question": "What principal areas of employee focus are described under AMD’s Human Capital section?",
         "original_answer": "Mission, culture and engagement; diversity, belonging and inclusion; total rewards; and development",
         "options": {
-          "A": "Mission, culture and engagement",
-          "B": "Total rewards",
-          "C": "Development",
-          "D": "Financial accounting and reporting"
+          "A": "Total rewards",
+          "B": "Product engineering",
+          "C": "Diversity, belonging and inclusion",
+          "D": "Mission, culture and engagement"
         }
       },
       {
         "id": "synthesize_SY12",
-        "question": "Which of the following is NOT listed as a major risk tied to supply chain dependence in the Risk Factors section?",
-        "golden_answer": "B",
+        "question": "Which of the following are major risks tied to supply chain dependence highlighted in the Risk Factors section?",
+        "golden_answer": "D",
         "original_question": "What major risks tied to supply chain dependence are highlighted in the Risk Factors section?",
         "original_answer": "Foundry reliance, capacity shortages, limited suppliers, material constraints, and yield issues",
         "options": {
-          "A": "Foundry reliance",
-          "B": "Abundance of suppliers",
-          "C": "Capacity shortages",
-          "D": "Yield issues"
+          "A": "Tax policy changes, trade tariffs, customer reviews, and product recalls",
+          "B": "Cybersecurity threats, data privacy violations, employee turnover, and software bugs",
+          "C": "Marketing challenges, customer loyalty, competitive pricing, and advertising expenses",
+          "D": "Foundry reliance, capacity shortages, limited suppliers, material constraints, and yield issues"
         }
       },
       {
         "id": "synthesize_SY13",
         "question": "What types of products and technologies power AMD’s semi-custom business according to the report?",
-        "golden_answer": "A",
+        "golden_answer": "B",
         "original_question": "Which types of products and technologies power AMD’s semi-custom business according to the report?",
         "original_answer": "Customer-specific SoCs based on AMD CPU, GPU, and multimedia technologies",
         "options": {
-          "A": "Customer-specific SoCs based on AMD CPU, GPU, and multimedia technologies",
-          "B": "Standard desktop processors only",
-          "C": "Third-party networking chips",
-          "D": "Generic memory modules"
+          "A": "Standardized external storage devices",
+          "B": "Customer-specific SoCs based on AMD CPU, GPU, and multimedia technologies",
+          "C": "General-purpose CPUs and memory modules",
+          "D": "Off-the-shelf graphics cards"
         }
       },
       {
         "id": "synthesize_SY14",
-        "question": "Which of the following is NOT one of the principal operating expense categories in AMD’s consolidated statements of operations?",
+        "question": "Which of the following are principal operating expense categories in AMD's consolidated statements of operations?",
         "golden_answer": "D",
         "original_question": "What are the principal operating expense categories in AMD’s consolidated statements of operations?",
         "original_answer": "Research and development; marketing, general and administrative; and amortization of acquisition-related intangibles",
         "options": {
-          "A": "Research and development",
-          "B": "Marketing, general and administrative",
-          "C": "Amortization of acquisition-related intangibles",
-          "D": "Cost of goods sold"
+          "A": "Net income; earnings per share; and dividends",
+          "B": "Cost of goods sold; interest expense; and depreciation",
+          "C": "Sales revenue; taxes; and investment income",
+          "D": "Research and development; marketing, general and administrative; and amortization of acquisition-related intangibles"
         }
       },
       {
         "id": "synthesize_SY15",
-        "question": "Which of the following is NOT mentioned by AMD as a key factor determining product competitiveness in its markets?",
-        "golden_answer": "D",
+        "question": "Which of the following is NOT listed by AMD as a key factor in determining product competitiveness in its markets?",
+        "golden_answer": "A",
         "original_question": "What key factors does AMD say determine product competitiveness in its markets?",
         "original_answer": "Timely introductions, quality, features, efficiency, reliability, performance, price, integration, compatibility, security, and brand",
         "options": {
-          "A": "Brand",
-          "B": "Price",
-          "C": "Timely introductions",
-          "D": "Geographical location"
+          "A": "Weather conditions",
+          "B": "Integration",
+          "C": "Price",
+          "D": "Reliability"
         }
       },
       {
         "id": "synthesize_SY16",
-        "question": "Which of the following is NOT listed by AMD as a broad category of legal and regulatory exposure in its risk factors?",
-        "golden_answer": "C",
+        "question": "Which of the following is NOT a broad category of legal and regulatory exposure described by AMD in its risk factors?",
+        "golden_answer": "B",
         "original_question": "What broad categories of legal and regulatory exposure does AMD describe in its risk factors?",
         "original_answer": "Export controls, tariffs, taxes, litigation, environmental laws, and conflict minerals rules",
         "options": {
-          "A": "Export controls",
-          "B": "Tariffs",
-          "C": "Workplace safety",
-          "D": "Environmental laws"
+          "A": "Tariffs",
+          "B": "Patent expiration",
+          "C": "Litigation",
+          "D": "Export controls"
         }
       },
       {
         "id": "synthesize_SY17",
-        "question": "Which of the following summarizes the major financial changes AMD reported for 2022 compared to 2021 in the MD&A overview?",
-        "golden_answer": "A",
+        "question": "Which of the following best summarizes the major financial changes AMD reported for 2022 versus 2021 in the MD&A overview?",
+        "golden_answer": "D",
         "original_question": "What major financial changes does AMD report for 2022 versus 2021 in the MD&A overview?",
         "original_answer": "Higher revenue and cash, lower gross margin, lower operating income and net income, and higher debt",
         "options": {
-          "A": "Higher revenue and cash, lower gross margin, lower operating income and net income, and higher debt.",
-          "B": "Lower revenue and cash, higher gross margin, higher operating income and net income, and lower debt.",
-          "C": "No significant changes in revenue, operating income, margin, or debt.",
-          "D": "Higher revenue, higher gross margin, and net income, but lower cash and debt."
+          "A": "Higher net income and lower revenue, with operating income and debt remaining the same.",
+          "B": "No significant change in revenue or cash, but higher gross margin and lower debt.",
+          "C": "Lower revenue and cash, higher gross margin, higher operating income and net income, and lower debt.",
+          "D": "Higher revenue and cash, lower gross margin, lower operating income and net income, and higher debt."
         }
       },
       {
         "id": "synthesize_SY18",
-        "question": "Which of the following groups includes product families repeatedly emphasized as growth drivers in 2022 across client, server, graphics, and adaptive computing markets?",
+        "question": "Which of the following sets of product families are consistently mentioned as key growth drivers in 2022 across client, server, graphics, and adaptive computing markets?",
         "golden_answer": "A",
         "original_question": "Which product families are repeatedly emphasized as growth drivers in 2022 across client, server, graphics, and adaptive computing markets?",
         "original_answer": "Ryzen, Radeon, Instinct, EPYC, Versal, and Pensando DPUs",
         "options": {
           "A": "Ryzen, Radeon, Instinct, EPYC, Versal, and Pensando DPUs",
-          "B": "Threadripper, FirePro, and Athlon",
-          "C": "GeForce, Tegra, and Quadro",
-          "D": "Core i9, Xeon, and Iris Xe"
+          "B": "Core, Xeon, Quadro, Alveo, and Jetson",
+          "C": "Threadripper, GeForce, PowerEdge, Tesla, and M1",
+          "D": "Atom, Radeon Pro, PowerPC, FPGA Stratix, and BlueField"
         }
       },
       {
         "id": "synthesize_SY19",
-        "question": "Which of the following are benefits that AMD claims customers receive from an all-AMD platform?",
+        "question": "Which of the following are benefits AMD claims customers receive from an all-AMD platform?",
         "golden_answer": "A",
         "original_question": "What broad benefits does AMD claim customers receive from an all-AMD platform?",
         "original_answer": "Optimized interoperability, single point of contact, and faster time to market",
         "options": {
           "A": "Optimized interoperability, single point of contact, and faster time to market",
-          "B": "Increased hardware incompatibility and slower time to market",
-          "C": "Multiple points of contact and reduced performance",
-          "D": "Limited interoperability and longer product cycles"
+          "B": "Fragmented support and delayed market entry",
+          "C": "Increased hardware incompatibility and longer wait times",
+          "D": "Multiple points of contact and higher costs"
         }
       },
       {
         "id": "synthesize_SY20",
-        "question": "Which of the following statements best summarizes the main conditions and economics of AMD’s completed Xilinx acquisition?",
-        "golden_answer": "A",
+        "question": "Which of the following best summarizes the main conditions and economics of AMD’s completed Xilinx acquisition?",
+        "golden_answer": "B",
         "original_question": "Summarize the main conditions and economics of AMD’s completed Xilinx acquisition described in the filing.",
         "original_answer": "AMD completed the all-stock acquisition of Xilinx on February 14, 2022 for about $48.8 billion of purchase consideration, issuing about 429 million AMD shares and assuming Xilinx equity awards",
         "options": {
-          "A": "AMD completed an all-stock acquisition of Xilinx worth about $48.8 billion, issuing approximately 429 million AMD shares and assuming Xilinx equity awards.",
-          "B": "AMD acquired Xilinx for $48.8 billion in cash and issued no new shares.",
-          "C": "AMD completed the acquisition by issuing $48.8 billion in bonds and did not assume any Xilinx equity awards.",
-          "D": "AMD completed a partial cash and partial stock acquisition of Xilinx for $20 billion, issuing 200 million AMD shares."
+          "A": "AMD acquired Xilinx through a debt-financed transaction on January 10, 2021, paying $25 billion in cash.",
+          "B": "AMD completed the all-stock acquisition of Xilinx on February 14, 2022, for about $48.8 billion, issuing about 429 million AMD shares and assuming Xilinx equity awards.",
+          "C": "Xilinx acquired AMD for $48.8 billion using a combination of cash and stock.",
+          "D": "AMD completed a hostile takeover of Xilinx, paying $48.8 billion in cash and not issuing any new shares."
         }
       }
     ],
     "structure": [
       {
         "id": "structure_ST01",
-        "question": "Which item appears first in Part I?",
-        "golden_answer": "A",
+        "question": "Which of the following appears first in Part I of a standard annual report?",
+        "golden_answer": "D",
         "original_question": "Which item appears first in Part I: Business or Risk Factors?",
         "original_answer": "Business",
         "options": {
-          "A": "Business",
-          "B": "Risk Factors",
-          "C": "Management's Discussion",
-          "D": "Financial Statements"
+          "A": "Risk Factors",
+          "B": "Legal Proceedings",
+          "C": "Financial Statements",
+          "D": "Business"
         }
       },
       {
         "id": "structure_ST02",
-        "question": "In which part of the Form 10-K can you find Management’s Discussion and Analysis?",
-        "golden_answer": "B",
+        "question": "Under which Part of the Form 10-K is Management’s Discussion and Analysis located?",
+        "golden_answer": "A",
         "original_question": "Under which Part of the Form 10-K is Management’s Discussion and Analysis located?",
         "original_answer": "Part II",
         "options": {
-          "A": "Part I",
-          "B": "Part II",
+          "A": "Part II",
+          "B": "Part I",
           "C": "Part III",
           "D": "Part IV"
         }
@@ -819,53 +819,53 @@
       {
         "id": "structure_ST03",
         "question": "Which item number is assigned to Legal Proceedings?",
-        "golden_answer": "B",
+        "golden_answer": "D",
         "original_question": "What item number is assigned to Legal Proceedings?",
         "original_answer": "Item 3",
         "options": {
-          "A": "Item 2",
-          "B": "Item 3",
+          "A": "Item 1",
+          "B": "Item 2",
           "C": "Item 4",
-          "D": "Item 5"
+          "D": "Item 3"
         }
       },
       {
         "id": "structure_ST04",
         "question": "Which item number is assigned to Properties?",
-        "golden_answer": "B",
+        "golden_answer": "D",
         "original_question": "What item number is assigned to Properties?",
         "original_answer": "Item 2",
         "options": {
-          "A": "Item 1",
-          "B": "Item 2",
-          "C": "Item 3",
-          "D": "Item 4"
+          "A": "Item 3",
+          "B": "Item 4",
+          "C": "Item 1",
+          "D": "Item 2"
         }
       },
       {
         "id": "structure_ST05",
-        "question": "Which item is marked as [Reserved] in the index?",
-        "golden_answer": "C",
+        "question": "Which of the following items is marked as [Reserved] in the index?",
+        "golden_answer": "D",
         "original_question": "Which item is marked as [Reserved] in the index?",
         "original_answer": "Item 6",
         "options": {
           "A": "Item 2",
           "B": "Item 4",
-          "C": "Item 6",
-          "D": "Item 8"
+          "C": "Item 8",
+          "D": "Item 6"
         }
       },
       {
         "id": "structure_ST06",
-        "question": "In Part II, where does Item 9A appear in relation to Item 9?",
-        "golden_answer": "B",
+        "question": "In Part II, where does Item 9A appear relative to Item 9?",
+        "golden_answer": "C",
         "original_question": "Does Item 9A come before or after Item 9 in Part II?",
         "original_answer": "After",
         "options": {
           "A": "Before Item 9",
-          "B": "After Item 9",
-          "C": "At the same position as Item 9",
-          "D": "Nowhere in Part II"
+          "B": "It does not appear in Part II",
+          "C": "After Item 9",
+          "D": "At the same place as Item 9"
         }
       },
       {
@@ -876,7 +876,7 @@
         "original_answer": "Item 16. Form 10-K Summary",
         "options": {
           "A": "Item 13. Certain Relationships and Related Transactions",
-          "B": "Item 14. Principal Accountant Fees and Services",
+          "B": "Item 14. Principal Accounting Fees and Services",
           "C": "Item 16. Form 10-K Summary",
           "D": "Item 15. Exhibits and Financial Statement Schedules"
         }
@@ -888,220 +888,220 @@
         "original_question": "Which section of the report incorporates portions of the 2023 Proxy Statement by reference?",
         "original_answer": "Part III",
         "options": {
-          "A": "Part I",
-          "B": "Part II",
+          "A": "Part IV",
+          "B": "Part I",
           "C": "Part III",
-          "D": "Part IV"
+          "D": "Part II"
         }
       },
       {
         "id": "structure_ST09",
         "question": "According to the index, on which page does Item 1A, Risk Factors, begin?",
-        "golden_answer": "B",
+        "golden_answer": "A",
         "original_question": "What page does Item 1A, Risk Factors, begin on according to the index?",
         "original_answer": "13",
         "options": {
-          "A": "10",
-          "B": "13",
-          "C": "20",
-          "D": "25"
+          "A": "13",
+          "B": "15",
+          "C": "10",
+          "D": "12"
         }
       },
       {
         "id": "structure_ST10",
         "question": "According to the index, on which page does Item 7, Management’s Discussion and Analysis, begin?",
-        "golden_answer": "B",
+        "golden_answer": "C",
         "original_question": "What page does Item 7, Management’s Discussion and Analysis, begin on according to the index?",
         "original_answer": "40",
         "options": {
-          "A": "35",
-          "B": "40",
-          "C": "47",
-          "D": "52"
+          "A": "45",
+          "B": "32",
+          "C": "40",
+          "D": "36"
         }
       },
       {
         "id": "structure_ST11",
         "question": "According to the index, on which page does Item 8, Financial Statements and Supplementary Data, begin?",
-        "golden_answer": "C",
+        "golden_answer": "B",
         "original_question": "What page does Item 8, Financial Statements and Supplementary Data, begin on according to the index?",
         "original_answer": "51",
         "options": {
-          "A": "45",
-          "B": "48",
-          "C": "51",
-          "D": "60"
+          "A": "35",
+          "B": "51",
+          "C": "67",
+          "D": "44"
         }
       },
       {
         "id": "structure_ST12",
-        "question": "Which section appears first in Part II?\nA) Quantitative and Qualitative Disclosure About Market Risk\nB) Financial Statements and Supplementary Data\nC) Notes to Consolidated Financial Statements\nD) Changes in and Disagreements with Accountants on Accounting and Financial Disclosure",
-        "golden_answer": "A",
+        "question": "Which section is listed first in Part II?\nA) Quantitative and Qualitative Disclosure About Market Risk\nB) Financial Statements and Supplementary Data\nC) Management's Discussion and Analysis\nD) Controls and Procedures",
+        "golden_answer": "C",
         "original_question": "Which comes first in Part II: Quantitative and Qualitative Disclosure About Market Risk or Financial Statements and Supplementary Data?",
         "original_answer": "Quantitative and Qualitative Disclosure About Market Risk",
         "options": {
-          "A": "Quantitative and Qualitative Disclosure About Market Risk",
+          "A": "Management's Discussion and Analysis",
           "B": "Financial Statements and Supplementary Data",
-          "C": "Notes to Consolidated Financial Statements",
-          "D": "Changes in and Disagreements with Accountants on Accounting and Financial Disclosure"
+          "C": "Quantitative and Qualitative Disclosure About Market Risk",
+          "D": "Controls and Procedures"
         }
       },
       {
         "id": "structure_ST13",
-        "question": "According to the index, on which page does Part III begin?",
-        "golden_answer": "C",
+        "question": "On which page does Part III begin according to the index?",
+        "golden_answer": "D",
         "original_question": "What page does Part III begin on according to the index?",
         "original_answer": "97",
         "options": {
-          "A": "89",
-          "B": "94",
-          "C": "97",
-          "D": "103"
+          "A": "120",
+          "B": "83",
+          "C": "145",
+          "D": "97"
         }
       },
       {
         "id": "structure_ST14",
-        "question": "According to the index, on what page does Part IV begin?",
-        "golden_answer": "C",
+        "question": "According to the index, on which page does Part IV begin?",
+        "golden_answer": "D",
         "original_question": "What page does Part IV begin on according to the index?",
         "original_answer": "98",
         "options": {
-          "A": "88",
-          "B": "95",
-          "C": "98",
-          "D": "104"
+          "A": "72",
+          "B": "85",
+          "C": "105",
+          "D": "98"
         }
       },
       {
         "id": "structure_ST15",
-        "question": "What is the page number associated with Signatures in the index?",
+        "question": "What page number is associated with Signatures in the index?",
         "golden_answer": "C",
         "original_question": "What page number is associated with Signatures in the index?",
         "original_answer": "105",
         "options": {
-          "A": "89",
-          "B": "92",
+          "A": "110",
+          "B": "97",
           "C": "105",
-          "D": "115"
+          "D": "102"
         }
       },
       {
         "id": "structure_ST16",
-        "question": "Which item immediately follows 'Unresolved Staff Comments' in Part I?",
-        "golden_answer": "B",
+        "question": "Which of the following items immediately follows Unresolved Staff Comments in Part I?",
+        "golden_answer": "D",
         "original_question": "Which item in Part I immediately follows Unresolved Staff Comments?",
         "original_answer": "Properties",
         "options": {
           "A": "Legal Proceedings",
-          "B": "Properties",
-          "C": "Market for Registrant’s Common Equity",
-          "D": "Risk Factors"
+          "B": "Management’s Discussion and Analysis",
+          "C": "Risk Factors",
+          "D": "Properties"
         }
       },
       {
         "id": "structure_ST17",
-        "question": "Which major heading appears before Item 1 in the body of the filing?",
+        "question": "Which of the following is the major heading that appears before Item 1 in the body of the filing?",
         "golden_answer": "C",
         "original_question": "What major heading appears before Item 1 in the body of the filing?",
         "original_answer": "PART I",
         "options": {
-          "A": "PART II",
-          "B": "PART III",
+          "A": "INTRODUCTION",
+          "B": "SUMMARY",
           "C": "PART I",
-          "D": "ITEM 1"
+          "D": "PART II"
         }
       },
       {
         "id": "structure_ST18",
-        "question": "Which section is listed earlier in the report structure?",
+        "question": "Which section appears first in the report structure?",
         "golden_answer": "A",
         "original_question": "Which comes earlier in the report structure: Market for Registrant’s Common Equity or Controls and Procedures?",
         "original_answer": "Market for Registrant’s Common Equity",
         "options": {
           "A": "Market for Registrant’s Common Equity",
-          "B": "Controls and Procedures",
-          "C": "Risk Factors",
+          "B": "Risk Factors",
+          "C": "Controls and Procedures",
           "D": "Financial Statements"
         }
       },
       {
         "id": "structure_ST19",
         "question": "Under which item is the company’s business overview discussed?",
-        "golden_answer": "A",
+        "golden_answer": "C",
         "original_question": "Under which item is the company’s business overview discussed?",
         "original_answer": "Item 1",
         "options": {
-          "A": "Item 1",
-          "B": "Item 2",
-          "C": "Item 3",
-          "D": "Item 7"
+          "A": "Item 2",
+          "B": "Item 7",
+          "C": "Item 1",
+          "D": "Item 10"
         }
       },
       {
         "id": "structure_ST20",
-        "question": "Which item number covers disclosures regarding foreign jurisdictions that prevent inspections?",
+        "question": "Which item covers disclosures regarding foreign jurisdictions that prevent inspections?",
         "golden_answer": "C",
         "original_question": "Which item number covers disclosures regarding foreign jurisdictions that prevent inspections?",
         "original_answer": "Item 9C",
         "options": {
-          "A": "Item 7A",
-          "B": "Item 9A",
+          "A": "Item 10B",
+          "B": "Item 7",
           "C": "Item 9C",
-          "D": "Item 10B"
+          "D": "Item 8C"
         }
       }
     ],
     "reasoning": [
       {
         "id": "reasoning_R01",
-        "question": "By how many billions of dollars did AMD’s net revenue increase from 2021 to 2022?",
+        "question": "By approximately how many billions of dollars did AMD’s net revenue increase from 2021 to 2022?",
         "golden_answer": "C",
         "original_question": "By how many billions of dollars did AMD’s net revenue increase from 2021 to 2022?",
         "original_answer": "7.167",
         "options": {
-          "A": "5.142",
-          "B": "6.800",
+          "A": "5.2",
+          "B": "10.1",
           "C": "7.167",
-          "D": "8.256"
+          "D": "3.5"
         }
       },
       {
         "id": "reasoning_R02",
         "question": "What was the difference between AMD’s 2022 gross profit and 2022 operating income, in billions of dollars?",
-        "golden_answer": "C",
+        "golden_answer": "A",
         "original_question": "What was the difference between AMD’s 2022 gross profit and 2022 operating income, in billions of dollars?",
         "original_answer": "9.339",
         "options": {
-          "A": "3.456",
-          "B": "6.127",
-          "C": "9.339",
-          "D": "12.504"
+          "A": "9.339",
+          "B": "7.5",
+          "C": "11.8",
+          "D": "4.2"
         }
       },
       {
         "id": "reasoning_R03",
-        "question": "By how many millions of dollars did the 2022 research and development expense exceed the 2021 expense?",
+        "question": "By how many millions of dollars did the research and development expense in 2022 exceed that of 2021?",
         "golden_answer": "B",
         "original_question": "How many millions of dollars higher was 2022 research and development expense than 2021?",
         "original_answer": "2160",
         "options": {
           "A": "1200",
           "B": "2160",
-          "C": "1750",
-          "D": "3100"
+          "C": "1800",
+          "D": "2500"
         }
       },
       {
         "id": "reasoning_R04",
         "question": "What was the sum of 2022 research and development expense and marketing, general and administrative expense, in millions?",
-        "golden_answer": "A",
+        "golden_answer": "B",
         "original_question": "What was the sum of 2022 research and development expense and marketing, general and administrative expense, in millions?",
         "original_answer": "7341",
         "options": {
-          "A": "7,341",
-          "B": "8,125",
-          "C": "6,950",
-          "D": "7,800"
+          "A": "5000",
+          "B": "7341",
+          "C": "9000",
+          "D": "6500"
         }
       },
       {
@@ -1111,127 +1111,127 @@
         "original_question": "By how many percentage points did AMD’s gross margin change from 2021 to 2022?",
         "original_answer": "-3",
         "options": {
-          "A": "+1",
-          "B": "0",
+          "A": "+3",
+          "B": "+5",
           "C": "-3",
-          "D": "-8"
+          "D": "0"
         }
       },
       {
         "id": "reasoning_R06",
         "question": "By how many millions of dollars did Client segment revenue exceed Data Center segment revenue in 2022?",
-        "golden_answer": "C",
+        "golden_answer": "D",
         "original_question": "How many millions of dollars did Client segment revenue exceed Data Center segment revenue in 2022?",
         "original_answer": "158",
         "options": {
-          "A": "100",
-          "B": "120",
-          "C": "158",
-          "D": "200"
+          "A": "90",
+          "B": "200",
+          "C": "120",
+          "D": "158"
         }
       },
       {
         "id": "reasoning_R07",
         "question": "What was the year-over-year increase in Embedded operating income from 2021 to 2022, in millions?",
-        "golden_answer": "B",
+        "golden_answer": "C",
         "original_question": "What was the year-over-year increase in Embedded operating income from 2021 to 2022, in millions?",
         "original_answer": "2208",
         "options": {
-          "A": "1200",
-          "B": "2208",
-          "C": "1800",
-          "D": "3200"
+          "A": "3000",
+          "B": "1500",
+          "C": "2208",
+          "D": "1800"
         }
       },
       {
         "id": "reasoning_R08",
-        "question": "What was AMD’s total operating expense in 2022 when research and development and marketing, general and administrative are added together, in billions of dollars?",
+        "question": "What was AMD’s total operating expense in 2022 if you combine research and development with marketing, general and administrative, in billions?",
         "golden_answer": "B",
         "original_question": "What was AMD’s total operating expense in 2022 if you add research and development and marketing, general and administrative, in billions?",
         "original_answer": "7.341",
         "options": {
-          "A": "5.812",
+          "A": "6.5",
           "B": "7.341",
-          "C": "8.950",
-          "D": "6.227"
+          "C": "7.95",
+          "D": "8.2"
         }
       },
       {
         "id": "reasoning_R09",
-        "question": "How many millions of dollars did accounts receivable increase from December 25, 2021 to December 31, 2022?",
-        "golden_answer": "C",
+        "question": "By how many millions of dollars did accounts receivable increase from December 25, 2021 to December 31, 2022?",
+        "golden_answer": "A",
         "original_question": "How many millions of dollars did accounts receivable increase from December 25, 2021 to December 31, 2022?",
         "original_answer": "1420",
         "options": {
-          "A": "900",
-          "B": "1150",
-          "C": "1420",
-          "D": "1720"
+          "A": "1,420",
+          "B": "3,420",
+          "C": "2,420",
+          "D": "420"
         }
       },
       {
         "id": "reasoning_R10",
         "question": "By how many millions did inventories increase year over year at December 31, 2022 compared with December 25, 2021?",
-        "golden_answer": "C",
+        "golden_answer": "A",
         "original_question": "By how many millions did inventories increase year over year at December 31, 2022 compared with December 25, 2021?",
         "original_answer": "1816",
         "options": {
-          "A": "900",
-          "B": "1,200",
-          "C": "1,816",
-          "D": "2,400"
+          "A": "1,816 million",
+          "B": "2,500 million",
+          "C": "1,200 million",
+          "D": "900 million"
         }
       },
       {
         "id": "reasoning_R11",
-        "question": "What was the difference between cash and cash equivalents and short-term investments combined at year-end 2022 versus year-end 2021, in millions?",
-        "golden_answer": "C",
+        "question": "What was the difference, in millions, between cash and cash equivalents and short-term investments combined at year-end 2022 versus year-end 2021?",
+        "golden_answer": "A",
         "original_question": "What was the difference between cash and cash equivalents and short-term investments combined at year-end 2022 versus year-end 2021, in millions?",
         "original_answer": "2247",
         "options": {
-          "A": "500",
-          "B": "1500",
-          "C": "2247",
-          "D": "3000"
+          "A": "2247",
+          "B": "3150",
+          "C": "1700",
+          "D": "1050"
         }
       },
       {
         "id": "reasoning_R12",
-        "question": "How many millions of dollars did AMD spend on common stock repurchases under its repurchase program during 2022?",
-        "golden_answer": "C",
+        "question": "How much did AMD spend on common stock repurchases under its repurchase program during 2022?",
+        "golden_answer": "B",
         "original_question": "How many millions of dollars did AMD spend on common stock repurchases under its repurchase program during 2022?",
         "original_answer": "3702",
         "options": {
-          "A": "1500",
-          "B": "2500",
-          "C": "3702",
-          "D": "4500"
+          "A": "2,500 million dollars",
+          "B": "3,702 million dollars",
+          "C": "1,600 million dollars",
+          "D": "4,500 million dollars"
         }
       },
       {
         "id": "reasoning_R13",
-        "question": "What was the average repurchase price per share across all 36,326,137 shares repurchased in 2022 under the public program, rounded to two decimals?",
-        "golden_answer": "A",
+        "question": "What was the average repurchase price per share for all shares repurchased in 2022 under the public program, rounded to two decimals?",
+        "golden_answer": "D",
         "original_question": "What was the average repurchase price per share across all 36,326,137 shares repurchased in 2022 under the public program, rounded to two decimals?",
         "original_answer": "101.93",
         "options": {
-          "A": "$101.93",
-          "B": "$98.25",
-          "C": "$105.60",
-          "D": "$99.99"
+          "A": "105.40",
+          "B": "100.25",
+          "C": "98.50",
+          "D": "101.93"
         }
       },
       {
         "id": "reasoning_R14",
-        "question": "By how many millions of dollars was total debt principal higher at December 31, 2022 compared to December 25, 2021?",
-        "golden_answer": "B",
+        "question": "By how many millions of dollars was the total debt principal higher at December 31, 2022 than at December 25, 2021?",
+        "golden_answer": "A",
         "original_question": "How many millions of dollars higher was total debt principal at December 31, 2022 than at December 25, 2021?",
         "original_answer": "2188",
         "options": {
-          "A": "1,250",
-          "B": "2,188",
-          "C": "3,500",
-          "D": "900"
+          "A": "2188",
+          "B": "1094",
+          "C": "500",
+          "D": "3100"
         }
       },
       {
@@ -1242,47 +1242,47 @@
         "original_answer": "0.92",
         "options": {
           "A": "0.92",
-          "B": "1.08",
-          "C": "1.25",
-          "D": "0.85"
+          "B": "1.25",
+          "C": "0.75",
+          "D": "1.08"
         }
       },
       {
         "id": "reasoning_R16",
         "question": "By how many millions of dollars did net cash provided by operating activities increase from 2021 to 2022?",
-        "golden_answer": "B",
+        "golden_answer": "A",
         "original_question": "How many millions of dollars did net cash provided by operating activities increase from 2021 to 2022?",
         "original_answer": "44",
         "options": {
-          "A": "30",
-          "B": "44",
-          "C": "38",
-          "D": "50"
+          "A": "44",
+          "B": "30",
+          "C": "50",
+          "D": "25"
         }
       },
       {
         "id": "reasoning_R17",
         "question": "What was the total of current liabilities and long-term operating lease liabilities at December 31, 2022, in millions?",
-        "golden_answer": "B",
+        "golden_answer": "A",
         "original_question": "What was the total of current liabilities and long-term operating lease liabilities at December 31, 2022, in millions?",
         "original_answer": "6765",
         "options": {
-          "A": "4,210",
-          "B": "6,765",
-          "C": "8,000",
-          "D": "5,420"
+          "A": "6,765",
+          "B": "8,100",
+          "C": "7,900",
+          "D": "5,234"
         }
       },
       {
         "id": "reasoning_R18",
         "question": "By how many millions did stock-based compensation expense increase from 2021 to 2022?",
-        "golden_answer": "C",
+        "golden_answer": "B",
         "original_question": "By how many millions did stock-based compensation expense increase from 2021 to 2022?",
         "original_answer": "702",
         "options": {
           "A": "500",
-          "B": "650",
-          "C": "702",
+          "B": "702",
+          "C": "650",
           "D": "800"
         }
       },
@@ -1293,285 +1293,285 @@
         "original_question": "What was the difference between 2022 basic EPS and diluted EPS?",
         "original_answer": "0.01",
         "options": {
-          "A": "0.03",
+          "A": "0.02",
           "B": "0.01",
-          "C": "0.00",
-          "D": "0.05"
+          "C": "0.05",
+          "D": "0.10"
         }
       },
       {
         "id": "reasoning_R20",
-        "question": "What is the difference between the number of registered holders of common stock on February 22, 2023, and AMD’s 2022 one customer accounting for over 10% of consolidated net revenue?",
+        "question": "By how many did the registered holders of common stock on February 22, 2023 exceed the number of AMD’s 2022 customer accounting for over 10% of consolidated net revenue (assuming just one such customer)?",
         "golden_answer": "A",
         "original_question": "How many more registered holders of common stock were there on February 22, 2023 than AMD’s 2022 one customer accounting for over 10% of consolidated net revenue, assuming just that one customer, not holders?",
         "original_answer": "5013",
         "options": {
           "A": "5013",
-          "B": "1200",
-          "C": "7000",
-          "D": "1000"
+          "B": "500",
+          "C": "1000",
+          "D": "10000"
         }
       }
     ],
     "multi_hop": [
       {
         "id": "multi_hop_M01",
-        "question": "If AMD's customer A accounted for 16% of its 2022 revenue, and the total net revenue was $23.601 billion, how much revenue did customer A represent?",
-        "golden_answer": "A",
+        "question": "AMD says customer A accounted for 16% of 2022 revenue, and total 2022 net revenue was $23.601 billion. Approximately how much revenue did that customer represent?",
+        "golden_answer": "B",
         "original_question": "AMD says customer A accounted for 16% of 2022 revenue, and total 2022 net revenue was $23.601 billion. Approximately how much revenue did that customer represent?",
         "original_answer": "$3.776 billion",
         "options": {
-          "A": "$3.776 billion",
-          "B": "$2.592 billion",
-          "C": "$1.896 billion",
-          "D": "$4.728 billion"
+          "A": "$2.30 billion",
+          "B": "$3.78 billion",
+          "C": "$4.80 billion",
+          "D": "$1.44 billion"
         }
       },
       {
         "id": "multi_hop_M02",
-        "question": "What was AMD’s approximate revenue per employee in 2022 using the 2022 net revenue and about 25,000 employees?",
-        "golden_answer": "A",
+        "question": "What was AMD's approximate revenue per employee in 2022, based on 2022 net revenue and about 25,000 employees?",
+        "golden_answer": "B",
         "original_question": "Using the 2022 net revenue and the approximately 25,000 employees reported in Human Capital, what was AMD’s approximate revenue per employee in 2022?",
         "original_answer": "$0.94 million",
         "options": {
-          "A": "$0.94 million",
-          "B": "$1.5 million",
-          "C": "$0.65 million",
-          "D": "$2.2 million"
+          "A": "$1.5 million",
+          "B": "$0.94 million",
+          "C": "$2.1 million",
+          "D": "$0.50 million"
         }
       },
       {
         "id": "multi_hop_M03",
-        "question": "What is the approximate net income per outstanding AMD share in 2022?",
-        "golden_answer": "A",
+        "question": "Based on AMD's 2022 net income of $1.320 billion and 1,611,388,217 common shares outstanding, what is the approximate net income per outstanding share?",
+        "golden_answer": "D",
         "original_question": "AMD reported 2022 net income of $1.320 billion and 1,611,388,217 common shares outstanding as of February 22, 2023. About how much net income per outstanding share does that imply?",
         "original_answer": "$0.82",
         "options": {
-          "A": "$0.82",
-          "B": "$1.32",
-          "C": "$2.00",
-          "D": "$1.00"
+          "A": "$2.00",
+          "B": "$1.20",
+          "C": "$0.10",
+          "D": "$0.82"
         }
       },
       {
         "id": "multi_hop_M04",
-        "question": "According to the report, about how many square feet leased per employee does AMD have if they leased 5 million square feet and had about 25,000 employees?",
-        "golden_answer": "A",
+        "question": "About how many square feet per employee did AMD lease if the total was 5 million square feet for 25,000 employees?",
+        "golden_answer": "D",
         "original_question": "The report says AMD leased 5 million square feet and had approximately 25,000 employees. About how many square feet leased per employee does that equal?",
         "original_answer": "200",
         "options": {
-          "A": "200",
-          "B": "20",
-          "C": "500",
-          "D": "1000"
+          "A": "100",
+          "B": "250",
+          "C": "150",
+          "D": "200"
         }
       },
       {
         "id": "multi_hop_M05",
-        "question": "By approximately how much did AMD's 2022 liquidity exceed its total debt principal?",
+        "question": "By approximately how much did AMD's 2022 liquidity (cash, cash equivalents, and short-term investments) exceed its total debt principal?",
         "golden_answer": "B",
         "original_question": "AMD reported 2022 cash, cash equivalents and short-term investments of $5.855 billion and total debt principal of $2.501 billion. Approximately how much did liquidity exceed debt by?",
         "original_answer": "$3.354 billion",
         "options": {
-          "A": "$2.501 billion",
+          "A": "$2.001 billion",
           "B": "$3.354 billion",
           "C": "$5.855 billion",
-          "D": "$1.200 billion"
+          "D": "$2.501 billion"
         }
       },
       {
         "id": "multi_hop_M06",
-        "question": "Using AMD’s February 22, 2023 outstanding share count of 1,611,388,217, what is 1% of AMD’s outstanding shares, approximately?",
-        "golden_answer": "B",
+        "question": "If AMD has 1,611,388,217 outstanding shares as of February 22, 2023, approximately how many shares is 1% of the outstanding shares?",
+        "golden_answer": "C",
         "original_question": "Using AMD’s February 22, 2023 outstanding share count of 1,611,388,217, what is 1% of AMD’s outstanding shares, approximately?",
         "original_answer": "16.11 million",
         "options": {
-          "A": "1.6 million",
-          "B": "16.11 million",
-          "C": "161.1 million",
-          "D": "611,000"
+          "A": "1.61 million",
+          "B": "611,388",
+          "C": "16.11 million",
+          "D": "161.1 million"
         }
       },
       {
         "id": "multi_hop_M07",
-        "question": "If AMD reported 2022 U.S. sales of $8.049 billion and international sales were 66% of net revenue, approximately what dollar amount of 2022 revenue was international?",
-        "golden_answer": "C",
+        "question": "Approximately how much was AMD's 2022 international revenue, given that international sales were 66% of net revenue and U.S. sales were $8.049 billion?",
+        "golden_answer": "B",
         "original_question": "AMD reported 2022 U.S. sales of $8.049 billion and said international sales were 66% of net revenue. What approximate dollar amount of 2022 revenue was international?",
         "original_answer": "$15.552 billion",
         "options": {
-          "A": "$5.3 billion",
-          "B": "$8.049 billion",
-          "C": "$15.552 billion",
-          "D": "$18.1 billion"
+          "A": "$12 billion",
+          "B": "$15.552 billion",
+          "C": "$8.049 billion",
+          "D": "$20 billion"
         }
       },
       {
         "id": "multi_hop_M08",
-        "question": "Approximately how many combined U.S. patents and patent applications per employee did AMD have as of December 31, 2022?",
-        "golden_answer": "A",
+        "question": "AMD had about 8,200 U.S. patents and 2,200 U.S. patent applications pending as of December 31, 2022, and about 25,000 employees. What was the approximate combined total of those U.S. patent matters per employee?",
+        "golden_answer": "D",
         "original_question": "The filing states AMD had approximately 8,200 U.S. patents and approximately 2,200 U.S. patent applications pending as of December 31, 2022. Compared with approximately 25,000 employees, what is the combined total of those U.S. patent matters per employee, approximately?",
         "original_answer": "0.42",
         "options": {
-          "A": "0.42",
-          "B": "1.00",
-          "C": "2.50",
-          "D": "3.20"
+          "A": "0.10",
+          "B": "2.2",
+          "C": "1.2",
+          "D": "0.42"
         }
       },
       {
         "id": "multi_hop_M09",
-        "question": "Based on AMD’s 2022 market value of non-affiliate stock ($139.8 billion) and a share price of $87.08, approximately how many non-affiliate shares were implied?",
-        "golden_answer": "C",
+        "question": "Based on AMD’s 2022 market value of non-affiliate stock being about $139.8 billion and a closing price of $87.08, approximately how many non-affiliate shares does that imply?",
+        "golden_answer": "D",
         "original_question": "AMD’s 2022 market value of non-affiliate stock was about $139.8 billion based on a June 24, 2022 closing price of $87.08. Approximately how many non-affiliate shares does that imply?",
         "original_answer": "1.605 billion",
         "options": {
-          "A": "0.9 billion",
-          "B": "1.2 billion",
-          "C": "1.605 billion",
-          "D": "2.3 billion"
+          "A": "800 million",
+          "B": "2.5 billion",
+          "C": "3.3 billion",
+          "D": "1.605 billion"
         }
       },
       {
         "id": "multi_hop_M10",
-        "question": "Using the 2022 operating income of $1.264 billion and a total $12.0 billion repurchase authorization, what percentage of the authorization would one year of operating income cover, approximately?",
-        "golden_answer": "A",
+        "question": "Using the 2022 operating income of $1.264 billion and the $12.0 billion repurchase authorization, approximately what percentage of the authorization would one year of operating income cover?",
+        "golden_answer": "C",
         "original_question": "Using the 2022 operating income of $1.264 billion and the total $12.0 billion repurchase authorization in place after the additional program approved in February 2022, what percentage of the authorization would one year of operating income cover, approximately?",
         "original_answer": "10.5%",
         "options": {
-          "A": "10.5%",
-          "B": "15%",
-          "C": "5%",
-          "D": "20%"
+          "A": "5.2%",
+          "B": "8.0%",
+          "C": "10.5%",
+          "D": "15.2%"
         }
       },
       {
         "id": "multi_hop_M11",
-        "question": "What is the difference, in millions of shares, between the 2022 basic weighted-average shares (1,561 million) and year-end treasury stock held (33 million)?",
-        "golden_answer": "A",
+        "question": "What is the difference, in millions of shares, between 1,561 million basic weighted-average shares and 33 million shares of year-end treasury stock?",
+        "golden_answer": "D",
         "original_question": "The report gives 2022 basic weighted-average shares of 1,561 million and year-end treasury stock of 33 million shares held. What is the difference between those figures, in millions of shares?",
         "original_answer": "1528",
         "options": {
-          "A": "1,528",
-          "B": "1,594",
-          "C": "1,561",
-          "D": "1,533"
+          "A": "1,561",
+          "B": "1,494",
+          "C": "1,600",
+          "D": "1,528"
         }
       },
       {
         "id": "multi_hop_M12",
-        "question": "In 2022, AMD reported $450 million in property and equipment purchases and leased 5 million square feet. About how much capital spending per leased square foot does this represent?",
+        "question": "AMD reported $450 million of property and equipment purchases in 2022 and leased 5 million square feet. What is the approximate capital spending per leased square foot?",
         "golden_answer": "B",
         "original_question": "AMD reported $450 million of property and equipment purchases in 2022 and leased 5 million square feet. About how much capital spending per leased square foot does that represent?",
         "original_answer": "$90",
         "options": {
-          "A": "$45",
+          "A": "$120",
           "B": "$90",
-          "C": "$180",
-          "D": "$225"
+          "C": "$60",
+          "D": "$75"
         }
       },
       {
         "id": "multi_hop_M13",
-        "question": "How many major locations (headquarters plus significant operations) are explicitly highlighted in the report?",
-        "golden_answer": "C",
+        "question": "How many major locations are explicitly highlighted in the report, including the Santa Clara headquarters and significant operations?",
+        "golden_answer": "D",
         "original_question": "The report lists Santa Clara headquarters and says AMD had significant operations in Austin, San Jose, Shanghai, Markham, Longmont, Dublin, Singapore, and Bangalore and Hyderabad. Counting headquarters plus those significant operations, how many major locations are explicitly highlighted?",
         "original_answer": "10",
         "options": {
-          "A": "8",
-          "B": "9",
-          "C": "10",
-          "D": "11"
+          "A": "11",
+          "B": "8",
+          "C": "9",
+          "D": "10"
         }
       },
       {
         "id": "multi_hop_M14",
-        "question": "Approximately how many employees per patent matter did AMD have, given 19,800 patent matters worldwide and approximately 25,000 employees?",
-        "golden_answer": "A",
+        "question": "At AMD, how many employees were there per patent matter based on around 19,800 patent matters and approximately 25,000 employees?",
+        "golden_answer": "B",
         "original_question": "AMD had about 19,800 patent matters worldwide and approximately 25,000 employees. Roughly how many employees were there per patent matter?",
         "original_answer": "1.26",
         "options": {
-          "A": "1.26",
-          "B": "0.79",
-          "C": "7.89",
-          "D": "12.6"
+          "A": "10.10",
+          "B": "1.26",
+          "C": "0.79",
+          "D": "2.50"
         }
       },
       {
         "id": "multi_hop_M15",
-        "question": "In 2022, AMD repurchased 36,326,137 shares, and had 1,612 million shares outstanding at year-end. Approximately what percentage of the year-end shares did these repurchases represent?",
-        "golden_answer": "B",
+        "question": "Approximately what percentage of AMD's year-end shares did the 2022 repurchases represent?",
+        "golden_answer": "A",
         "original_question": "The report states AMD repurchased 36,326,137 shares in 2022 and had 1,612 million shares outstanding at year-end. What percentage of year-end shares did those repurchases represent, approximately?",
         "original_answer": "2.25%",
         "options": {
-          "A": "0.22%",
-          "B": "2.25%",
+          "A": "2.25%",
+          "B": "1%",
           "C": "5%",
           "D": "10%"
         }
       },
       {
         "id": "multi_hop_M16",
-        "question": "If AMD's 2022 gross profit was $10.603 billion and Customer A accounted for 16% of total revenue, assuming uniform gross margins, what would Customer A's share of gross profit be?",
-        "golden_answer": "C",
+        "question": "If AMD's total 2022 gross profit was $10.603 billion and Customer A represented 16% of total revenue, what is the approximate gross profit representing that share, assuming margins were uniform?",
+        "golden_answer": "A",
         "original_question": "AMD says its 2022 gross profit was $10.603 billion and that Customer A represented 16% of revenue. Approximately how much gross profit would correspond to that same share of gross profit if margins were uniform?",
         "original_answer": "$1.696 billion",
         "options": {
-          "A": "$0.850 billion",
-          "B": "$1.464 billion",
-          "C": "$1.696 billion",
-          "D": "$2.100 billion"
+          "A": "$1.696 billion",
+          "B": "$2.560 billion",
+          "C": "$3.200 billion",
+          "D": "$1.060 billion"
         }
       },
       {
         "id": "multi_hop_M17",
-        "question": "Approximately how many times AMD’s 2022 net revenue was the purchase consideration for the Xilinx acquisition?",
-        "golden_answer": "C",
+        "question": "The filing says the Xilinx acquisition had total purchase consideration of $48.793 billion and AMD’s 2022 net revenue was $23.601 billion. Approximately how many times 2022 revenue was the purchase consideration?",
+        "golden_answer": "A",
         "original_question": "The filing says the Xilinx acquisition had total purchase consideration of $48.793 billion and AMD’s 2022 net revenue was $23.601 billion. Approximately how many times 2022 revenue was the purchase consideration?",
         "original_answer": "2.07",
         "options": {
-          "A": "0.5 times",
-          "B": "1.2 times",
-          "C": "2.07 times",
-          "D": "3.8 times"
+          "A": "2.07",
+          "B": "1.1",
+          "C": "2.5",
+          "D": "1.5"
         }
       },
       {
         "id": "multi_hop_M18",
-        "question": "What is the approximate environmental liability per Sunnyvale Superfund site as reported by AMD if the total is $3.9 million across three sites?",
-        "golden_answer": "A",
+        "question": "According to AMD’s report, what is the approximate environmental liability per Sunnyvale Superfund site?",
+        "golden_answer": "B",
         "original_question": "AMD’s report lists three Sunnyvale Superfund sites and approximately $3.9 million in estimated environmental liability. What is the approximate liability per site?",
         "original_answer": "$1.30 million",
         "options": {
-          "A": "$1.30 million",
-          "B": "$0.39 million",
-          "C": "$3.00 million",
-          "D": "$2.00 million"
+          "A": "$3.90 million",
+          "B": "$1.30 million",
+          "C": "$1.95 million",
+          "D": "$0.65 million"
         }
       },
       {
         "id": "multi_hop_M19",
         "question": "What was AMD’s working capital at December 31, 2022, given total current assets of $15.019 billion and total current liabilities of $6.369 billion?",
-        "golden_answer": "C",
+        "golden_answer": "D",
         "original_question": "Given AMD’s total current assets of $15.019 billion and total current liabilities of $6.369 billion at December 31, 2022, what was working capital?",
         "original_answer": "$8.650 billion",
         "options": {
           "A": "$6.369 billion",
           "B": "$21.388 billion",
-          "C": "$8.650 billion",
-          "D": "$9.650 billion"
+          "C": "$15.019 billion",
+          "D": "$8.650 billion"
         }
       },
       {
         "id": "multi_hop_M20",
-        "question": "Using AMD's 2022 basic EPS of $0.85 and a February 22, 2023 closing stock price of $76.61, what is the approximate price-to-earnings ratio?",
-        "golden_answer": "C",
+        "question": "Given AMD's 2022 basic EPS of $0.85 and a stock price of $76.61 on February 22, 2023, what is the approximate price-to-earnings (P/E) ratio?",
+        "golden_answer": "D",
         "original_question": "AMD reported 2022 basic EPS of $0.85 and a February 22, 2023 closing stock price of $76.61. What approximate price-to-earnings ratio does that imply using basic EPS?",
         "original_answer": "90.1",
         "options": {
-          "A": "30.4",
-          "B": "50.0",
-          "C": "90.1",
-          "D": "120.2"
+          "A": "10.5",
+          "B": "150.0",
+          "C": "30.2",
+          "D": "90.1"
         }
       }
     ]
