@@ -1,0 +1,862 @@
+id,category,original_question,original_answer,mcq_question,option_a,option_b,option_c,option_d,answer
+1908.06606,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Question Answering based Clinical Text Structuring Using Pre-trained Language Model,"" what dataset is used to pretrain the language model?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Chinese general corpus,Which dataset is used to pretrain the language model in the paper 'Question Answering based Clinical Text Structuring Using Pre-trained Language Model'?,Chinese general corpus,MIMIC-III,English Wikipedia,BioASQ,A
+1908.06606,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Question Answering based Clinical Text Structuring Using Pre-trained Language Model,"" what baseline methods are used for comparison with the proposed model?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","BERT-Base, QANet",Which of the following baseline methods are used for comparison with the proposed model in the paper 'Question Answering based Clinical Text Structuring Using Pre-trained Language Model'?,"LSTM, GRU","Transformer-XL, XLNet","ResNet, VGG","BERT-Base, QANet",D
+1908.06606,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Question Answering based Clinical Text Structuring Using Pre-trained Language Model,"" how do the authors define the clinical text structuring task?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Extracting structured patient medical data (e.g., symptoms, diseases, tumor size, surgical details, lab results) from unstructured clinical text in electronic health records (EHRs); specifically, their QA-CTS task frames this as discovering the most relevant text spans from original paragraphs to answer clinical questions, unifying output formats and enabling data sharing.","According to the authors, how is the clinical text structuring task defined in the paper 'Question Answering based Clinical Text Structuring Using Pre-trained Language Model'?",Predicting patient outcomes based on historical medical data.,Summarizing clinical documents for easier reading by healthcare professionals.,Extracting structured patient medical data from unstructured clinical text in EHRs by discovering relevant text spans to answer clinical questions.,Translating medical terms into plain language for patients.,C
+1908.06606,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Question Answering based Clinical Text Structuring Using Pre-trained Language Model,"" what specific clinical text structuring tasks are unified by the proposed question answering framework?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Tumor size, proximal resection margin, distal resection margin.",Which of the following clinical text structuring tasks are unified by the proposed question answering framework in the paper?,"Patient age, gender, blood pressure","Medication dosage, lab test ordering, allergy information","Doctor's notes, billing codes, insurance information","Tumor size, proximal resection margin, distal resection margin",D
+1908.06606,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Question Answering based Clinical Text Structuring Using Pre-trained Language Model,"" does the dataset used consist solely of questions, or does it also include unrelated sentences interspersed between the questions?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Includes both questions and unrelated sentences; dataset consists of pathology reports with sentences interspersed between question-answer pairs.,What does the dataset in the paper 'Question Answering based Clinical Text Structuring Using Pre-trained Language Model' consist of?,Both questions and unrelated sentences interspersed between them.,Only answers to clinical questions with no context.,Only unrelated sentences with no questions.,Only questions and no other text.,A
+1908.06606,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Question Answering based Clinical Text Structuring Using Pre-trained Language Model,"" how many questions are included in the dataset used for their experiments?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","2,714 question-answer pairs",How many question-answer pairs are included in the dataset used for the experiments in the paper?,"3,800","1,500","2,714","5,000",C
+1908.06606,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Question Answering based Clinical Text Structuring Using Pre-trained Language Model,"" how do the authors introduce domain-specific features into the pre-trained language model?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Integrate clinical named entity information (from CNER model with BIEOS tagging) as one-hot output sequences into the pre-trained language model, combining these features with contextualized representations before answer prediction.",How do the authors introduce domain-specific features into the pre-trained language model?,"By integrating clinical named entity information (from a CNER model with BIEOS tagging) as one-hot output sequences into the model, combining these with contextualized representations.",By only using general language pre-training without any clinical adaptation.,By manually annotating all clinical text data with domain-specific notes before training.,By using rule-based methods to identify entities and exclude them from the model.,A
+1908.06606,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Question Answering based Clinical Text Structuring Using Pre-trained Language Model,"" what is the size of the QA-CTS task dataset?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","17,833 sentences, 826,987 characters, and 2,714 question-answer pairs.",Which of the following best describes the size of the QA-CTS task dataset in the paper 'Question Answering based Clinical Text Structuring Using Pre-trained Language Model'?,"17,833 sentences, 826,987 characters, and 2,714 question-answer pairs","5,500 sentences, 200,000 characters, and 800 question-answer pairs","10,000 sentences, 350,000 characters, and 1,200 question-answer pairs","25,000 sentences, 1,000,000 characters, and 4,000 question-answer pairs",A
+1908.06606,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Question Answering based Clinical Text Structuring Using Pre-trained Language Model,"" how many pathology reports were collected from Ruijing Hospital for the dataset?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Number of pathology reports collected from Ruijin Hospital not explicitly stated; dataset contains 17,833 sentences, 826,987 characters, and 2,714 question-answer pairs.",Which of the following is true about the dataset from Ruijin Hospital in the paper 'Question Answering based Clinical Text Structuring Using Pre-trained Language Model'?,"It has 100,000 question-answer pairs.",It is composed entirely of radiology reports.,"It contains 17,833 sentences.","It contains 50,000 pathology reports.",C
+1908.06606,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Question Answering based Clinical Text Structuring Using Pre-trained Language Model,"" what strong baseline models are used for the specific tasks addressed in the study?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",state-of-the-art question answering models (i.e. QANet) and BERT-Base,Which strong baseline models were used in the study for the specific tasks addressed?,Naive Bayes and Decision Trees,AlexNet and ResNet,LSTM and GRU,QANet and BERT-Base,D
+1909.00542,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Classification Betters Regression in Query-based Multi-document Summarisation Techniques for Question Answering: Macquarie University at BioASQ7b,"" what approaches were tried that did not use reinforcement learning?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","classification (Support Vector Classification), regression (Support Vector Regression), neural regressor, neural classifier",Which of the following approaches were tried without using reinforcement learning in the paper?,Only neural networks,Only reinforcement learning approaches,Reinforcement learning and Support Vector Regression,"Support Vector Classification, Support Vector Regression, neural regressor, neural classifier",D
+1909.00542,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Classification Betters Regression in Query-based Multi-document Summarisation Techniques for Question Answering: Macquarie University at BioASQ7b,"" which classification approaches did the authors experiment with for the summarisation task?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Support Vector Classification (SVC), neural classifier (NNC) with ""top 5"" classification labels, neural classifier (NNC) with ROUGE-SU4 F1 regression labels (""NNC SU4 F1"").",Which of the following classification approaches did the authors experiment with for the summarisation task in their paper?,"Decision Trees, AdaBoost, Naive Bayes","Gradient Boosting, Linear Regression, Bayesian Networks","Support Vector Classification (SVC), neural classifier with 'top 5' classification labels, neural classifier with ROUGE-SU4 F1 regression labels","Random Forests, k-Nearest Neighbors, Logistic Regression",C
+1909.00542,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Classification Betters Regression in Query-based Multi-document Summarisation Techniques for Question Answering: Macquarie University at BioASQ7b,"" did the classification models outperform the regression models used in previous approaches?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Yes. Classification models outperformed regression models, though results depended on the data annotation approach.","According to the paper by Macquarie University at BioASQ7b, which type of model outperformed the other in query-based multi-document summarisation for question answering?",Both models performed equally poorly,There was no difference between classification and regression models,Regression models outperformed classification models,Classification models outperformed regression models,D
+1703.04617,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Exploring Question Understanding and Adaptation in Neural-Network-Based Question Answering,"" what does the abbreviation ""MC"" stand for?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",MC stands for machine comprehension.,"In the paper 'Exploring Question Understanding and Adaptation in Neural-Network-Based Question Answering,' what does 'MC' stand for?",Model component,Memory controller,Machine comprehension,Multiple choice,C
+1703.04617,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Exploring Question Understanding and Adaptation in Neural-Network-Based Question Answering,"" what is the reported improvement in performance achieved by the adaptation model compared to the baseline?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",69.10% EM / 78.38% F1 (adaptation model) vs. 68.00% EM / 77.36% F1 (baseline); improvement of 1.10% EM and 1.02% F1.,What is the reported improvement in EM and F1 metrics achieved by the adaptation model over the baseline in the paper?,2.00% EM and 2.00% F1,1.50% EM and 1.50% F1,0.50% EM and 0.60% F1,1.10% EM and 1.02% F1,D
+1703.04617,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Exploring Question Understanding and Adaptation in Neural-Network-Based Question Answering,"" what is the architecture of the baseline model proposed by the authors?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","word embedding, input encoder, alignment, aggregation, and prediction.",Which of the following components are included in the architecture of the baseline model proposed in the paper?,"Bag-of-words features, attention over sentences, and output decoder",Only recurrent neural networks and convolutional layers,"Word embedding, input encoder, alignment, aggregation, and prediction","Lexical analysis, parsing tree generator, and answer ranking",C
+1703.04617,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Exploring Question Understanding and Adaptation in Neural-Network-Based Question Answering,"" what is the exact performance reported on the SQuAD dataset?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","68.73% EM score, 77.39% F1 score on SQuAD.","What was the exact performance reported on the SQuAD dataset in the paper ""Exploring Question Understanding and Adaptation in Neural-Network-Based Question Answering""?","68.73% EM score, 77.39% F1 score","75.30% EM score, 85.12% F1 score","72.50% EM score, 80.00% F1 score","65.00% EM score, 70.00% F1 score",A
+1704.05572,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Answering Complex Questions Using Open Information Extraction,"" what corpus did the authors use as the source for their OpenIE extractions?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Domain-targeted ~80K sentences and 280 GB of plain text extracted from web pages used by Aristo (Clark et al., 2016).",Which corpus did the authors use as the source for their OpenIE extractions in the paper 'Answering Complex Questions Using Open Information Extraction'?,Only Wikipedia articles from the English Wikipedia dump.,A random selection of pages from the Common Crawl dataset.,A collection of newswire articles from the Reuters corpus.,"A domain-targeted set of ~80K sentences and 280 GB of plain text from web pages used by Aristo (Clark et al., 2016).",D
+1704.05572,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Answering Complex Questions Using Open Information Extraction,"" what is the reported accuracy of the proposed technique?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",51.7% and 51.6% accuracy on 4th and 8th grade question sets with no curated knowledge; 47.5% and 48.0% when both solvers are given the same knowledge.,What is the reported accuracy of the proposed technique according to the paper 'Answering Complex Questions Using Open Information Extraction'?,"45% and 44% on 4th and 8th grade question sets, regardless of knowledge used.",55% and 54% on 4th and 8th grade question sets with curated knowledge only.,60% on both 4th and 8th grade question sets.,51.7% and 51.6% on 4th and 8th grade question sets with no curated knowledge; 47.5% and 48.0% when both solvers are given the same knowledge.,D
+1704.05572,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Answering Complex Questions Using Open Information Extraction,"" do the authors employ an entity linking process as part of their approach?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",No evidence of entity linking; approach relies on token overlap and TF-IDF for tuple selection.,Which of the following best describes the selection method used in the paper 'Answering Complex Questions Using Open Information Extraction'?,They use neural network-based entity matching.,They manually annotate all entities.,They rely on token overlap and TF-IDF for tuple selection.,They use an entity linking process to select tuples.,C
+1704.05572,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Answering Complex Questions Using Open Information Extraction,"" are all of the OpenIE extractions represented as triples?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","No; OpenIE extractions with multiple objects are converted into multiple triples, each with a single object.","In the paper ""Answering Complex Questions Using Open Information Extraction,"" how are OpenIE extractions with multiple objects represented?",As triples with multiple objects in the object position.,As a single triple containing all objects together.,They are ignored in the extraction process.,"As multiple triples, each with a single object.",D
+1704.05572,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Answering Complex Questions Using Open Information Extraction,"" what specific OpenIE system or approach did the authors use to generate the extractions utilized in their experiments?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Open IE v4.,Which OpenIE system did the authors use to generate the extractions utilized in their experiments?,Open IE v4,OLLIE,Open IE v2,ReVerb,A
+1704.05572,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Answering Complex Questions Using Open Information Extraction,"" is the proposed method capable of answering multi-hop questions?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","No; the proposed method is not capable of reliable multi-hop reasoning, as learning rules for multi-hop reasoning remains an open problem and future work.","According to the paper 'Answering Complex Questions Using Open Information Extraction,' what is true about the proposed method's ability to answer multi-hop questions?",It is not capable of reliable multi-hop reasoning; this remains an open problem.,It is fully capable of reliable multi-hop reasoning.,It outperforms all previous methods on multi-hop reasoning tasks.,It is partially capable of multi-hop reasoning.,A
+1704.05572,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Answering Complex Questions Using Open Information Extraction,"" what textual corpus was used as the source for applying OpenIE?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Domain-targeted ~80K sentences and 280 GB of plain text extracted from web pages used by Aristo (aristo2016:combining).,"Which textual corpus was used as the source for applying OpenIE in the paper ""Answering Complex Questions Using Open Information Extraction""?",A small subset of medical case reports,Only Wikipedia articles,~80K domain-targeted sentences and 280 GB of web text extracted from Aristo's sources,A collection of newswire documents,C
+1704.05572,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Answering Complex Questions Using Open Information Extraction,"" which OpenIE system was employed to generate the information extractions used in their experiments?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Open IE v4,Which Open Information Extraction (OpenIE) system was employed to generate the information extractions used in the experiments in the paper?,ReVerb,Open IE v4,ClausIE,OLLIE,B
+1704.05572,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Answering Complex Questions Using Open Information Extraction,"" is the proposed method capable of performing multi-hop reasoning?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","No; the proposed method is not capable of reliable multi-hop reasoning, as learning inter-tuple connections for multi-hop reasoning is identified as an open problem and future work.","According to the paper 'Answering Complex Questions Using Open Information Extraction,' what is said about the method’s ability to perform multi-hop reasoning?",The method cannot perform simple reasoning tasks.,The method ignores reasoning altogether.,Multi-hop reasoning remains an open problem and is suggested as future work.,The method reliably performs multi-hop reasoning.,C
+1603.07044,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Recurrent Neural Network Encoder with Attention for Community Question Answering,"" what supplemental tasks are incorporated into the multitask learning framework?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Predicting relevance between the original question and related question (oriQ/relQ), between the original question and related comment (oriQ/relC), and between the related question and related comment (relQ/relC).",Which of the following supplemental tasks are incorporated into the multitask learning framework in the paper?,Speech recognition and object detection.,"Predicting relevance between original question and related question, original question and related comment, and related question and related comment.",Machine translation and summarization.,Image classification and sentiment analysis.,B
+1603.07044,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Recurrent Neural Network Encoder with Attention for Community Question Answering,"" is the observed improvement in performance primarily attributed to the use of a Recurrent Neural Network (RNN) encoder?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","No; the observed improvement is primarily attributed to the incorporation of the attention mechanism alongside the RNN encoder, rather than the RNN encoder alone.","According to the paper, what is mainly responsible for the observed improvement in performance in community question answering?",The attention mechanism alone,The combination of the RNN encoder and the attention mechanism,Preprocessing of the data,The RNN encoder alone,B
+1603.07044,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Recurrent Neural Network Encoder with Attention for Community Question Answering,"" what is the reported performance gap between their RNN encoder with attention approach and the strong handcrafted feature-based method?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","0.007 MAP on Task A, 0.032 MAP on Task B, 0.055 MAP on Task C","According to the paper, what is the reported performance gap between their RNN encoder with attention approach and the strong handcrafted feature-based method?","0.1 MAP on Task A, 0.2 MAP on Task B, 0.3 MAP on Task C","0.02 MAP on Task A, 0.01 MAP on Task B, 0.025 MAP on Task C","0.007 MAP on Task A, 0.032 MAP on Task B, 0.055 MAP on Task C","0.05 MAP on Task A, 0.05 MAP on Task B, 0.05 MAP on Task C",C
+1603.07044,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Recurrent Neural Network Encoder with Attention for Community Question Answering,"" did the authors conduct experiments on datasets in languages other than English?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Yes; the authors conducted preliminary experiments on the Arabic portion of the SemEval-2016 cQA task.,Which languages did the authors of 'Recurrent Neural Network Encoder with Attention for Community Question Answering' conduct experiments on?,Neither English nor Arabic datasets.,Both English and Arabic datasets.,Only Arabic datasets.,Only English datasets.,B
+1905.08949,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Recent Advances in Neural Question Generation,"" do the authors discuss research on data augmentation methods for neural question generation?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Yes, the authors discuss research on data augmentation methods for neural question generation.",Which of the following topics is discussed by the authors in 'Recent Advances in Neural Question Generation'?,Computer vision techniques for object detection,Mathematical optimization for scheduling problems,Data augmentation methods for neural question generation,Climate change impact assessment,C
+1905.08949,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the survey ""Recent Advances in Neural Question Generation,"" what is the most recent paper discussed, including its title and publication year?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Kim et al. (2019),"Which of the following is the most recent paper discussed in the survey ""Recent Advances in Neural Question Generation""?",Kim et al. (2019),Zhou et al. (2016),Li et al. (2018),Wang et al. (2017),A
+1905.08949,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Recent Advances in Neural Question Generation,"" do the authors discuss or survey research related to visual question generation?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Yes; the authors discuss and survey research related to visual question generation (VQG), including both grounded and open-ended VQG approaches.","According to 'Recent Advances in Neural Question Generation,' what is one of the areas surveyed by the authors?","Visual question generation, including grounded and open-ended approaches",Historical overview of question answering systems from the 1980s,Applications of neural models in purely statistical data analysis,Only natural language processing with no mention of visual tasks,A
+1905.08949,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Recent Advances in Neural Question Generation,"" do the authors survey multilingual aspects of neural question generation?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Yes; the authors discuss multilingual aspects of neural question generation, including challenges and approaches for generating questions in multiple languages.",Which of the following aspects do the authors discuss in 'Recent Advances in Neural Question Generation'?,Historical aspects of question answering,Multilingual aspects of neural question generation,Only English language question generation,Hardware implementation of neural networks,B
+1905.08949,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Recent Advances in Neural Question Generation,"" what learning paradigms are discussed as being used for neural question generation?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Reductionist (separate content selection and question construction); end-to-end (joint optimization of both in unified neural frameworks, typically sequence-to-sequence models).",Which learning paradigms for neural question generation are discussed in 'Recent Advances in Neural Question Generation'?,Transfer learning and multitask learning,Supervised and unsupervised only,Reductionist and end-to-end,Reinforcement learning only,C
+1905.08949,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Recent Advances in Neural Question Generation,"" what input modalities are discussed as having been considered in prior work on question generation?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Textual inputs, knowledge bases, and images.","According to the paper ""Recent Advances in Neural Question Generation,"" which of the following input modalities have been considered in prior work on question generation?","Textual inputs, knowledge bases, and images.","Knowledge bases, tactile data, and speech.","Textual inputs, audio, and videos.","Textual inputs, audio, and sensor data.",A
+1905.08949,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Recent Advances in Neural Question Generation,"" do the authors discuss or survey non-neural methods for question generation?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Yes; the authors briefly mention non-neural methods for question generation, typically as background or in comparison to neural approaches, but the main focus is on neural methods.","In 'Recent Advances in Neural Question Generation,' how do the authors address non-neural methods for question generation?",They do not mention non-neural methods at all.,They focus the entire paper on non-neural methods.,They conduct experiments only using non-neural methods.,They briefly mention non-neural methods as background or for comparison.,D
+1603.01417,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Dynamic Memory Networks for Visual and Textual Question Answering,"" why is supporting fact supervision necessary for training the DMN model?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Supporting fact supervision is necessary because the GRU only allows sentences to have context from previous sentences (not future ones), limiting information flow, and supporting sentences may be too far apart at the word level for effective interaction through the GRU.",Why is supporting fact supervision necessary for training the DMN model according to the paper?,Because the DMN model ignores sequence information without it.,"Because the GRU only allows sentences to have context from previous sentences, limiting information flow, and supporting sentences may be too far apart for effective interaction.","Because the GRU allows all sentences to equally access both past and future context, making supervision redundant.",Because supporting fact supervision slows down the training process.,B
+1603.01417,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Dynamic Memory Networks for Visual and Textual Question Answering,"" what does supporting fact supervision refer to?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Supporting fact supervision refers to labeling the facts that are relevant for answering a particular question during training.,"In the context of 'Dynamic Memory Networks for Visual and Textual Question Answering,' what does supporting fact supervision involve?",Providing answers to questions directly without using facts.,Labeling the facts that are relevant for answering a particular question during training.,Ignoring all facts during training.,Labeling images instead of facts during training.,B
+1603.01417,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Dynamic Memory Networks for Visual and Textual Question Answering,"" what modifications did the authors make to the input module compared to previous architectures?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Replaced the single GRU with two components: a sentence reader for encoding words into sentence embeddings, and an input fusion layer (bi-directional GRU) for interactions between sentences.",What modification did the authors make to the input module in 'Dynamic Memory Networks for Visual and Textual Question Answering'?,They added a convolutional layer before the GRU but did not change its structure.,"They split the input into two separate pipelines, one for text and one for images, without changing the textual input module.",They removed the GRU entirely and used only a simple averaging of word embeddings.,They replaced the single GRU with a sentence reader and an input fusion layer (bi-directional GRU).,D
+1603.01417,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Dynamic Memory Networks for Visual and Textual Question Answering,"" what specific improvements did the authors introduce to the original Dynamic Memory Network (DMN) architecture?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","- DMN+ model does not require labeled supporting facts during training; learns to select relevant facts automatically.
+- Introduced a new input module for images, enabling visual question answering.
+- Improved input module for text with a two-level encoder (sentence reader and input fusion layer) for better information flow.
+- Modified memory module with attention gates in GRUs using global knowledge over facts.",Which of the following is NOT an improvement introduced in the DMN+ model according to the paper 'Dynamic Memory Networks for Visual and Textual Question Answering'?,The input module for text was improved using a two-level encoder with a sentence reader and an input fusion layer.,A reinforcement learning module was added for policy optimization.,A new input module was introduced for images to enable visual question answering.,The memory module was modified to use attention gates in GRUs with global knowledge over facts.,B
+1603.01417,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Dynamic Memory Networks for Visual and Textual Question Answering,"" how does the proposed Dynamic Memory Network model address the challenge of not having supporting facts provided during training?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Input fusion layer enables interactions between input facts; attention-based GRU allows logical reasoning over ordered inputs—together, these modules let the model perform well without supervision of supporting facts.",How does the Dynamic Memory Network model address the absence of supporting facts during training in the 'Dynamic Memory Networks for Visual and Textual Question Answering' paper?,By using an input fusion layer and attention-based GRU for reasoning over inputs without needing supervised supporting facts.,By ignoring input facts and focusing only on final answers.,By relying solely on explicit supervision of supporting facts for correct answers.,By memorizing all possible answers during training.,A
+1603.01417,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Dynamic Memory Networks for Visual and Textual Question Answering,"" does the DMN+ model achieve state-of-the-art performance on any benchmark datasets?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Yes; DMN+ achieves state-of-the-art results on both the VQA dataset and the bAbI-10k text question-answering dataset.,On which datasets does the DMN+ model achieve state-of-the-art performance as mentioned in the 'Dynamic Memory Networks for Visual and Textual Question Answering' paper?,VQA and bAbI-10k,MSCOCO and MNIST,SQuAD and SNLI,ImageNet and CIFAR-10,A
+1607.06275,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Dataset and Neural Recurrent Sequence Labeling Model for Open-Domain Factoid Question Answering,"" which languages do the authors conduct experiments on?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Chinese,"Which language did the authors conduct experiments on in the paper ""Dataset and Neural Recurrent Sequence Labeling Model for Open-Domain Factoid Question Answering""?",English,French,Chinese,Spanish,C
+1607.06275,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Dataset and Neural Recurrent Sequence Labeling Model for Open-Domain Factoid Question Answering,"" what baseline methods do the authors compare their proposed model against?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",MemN2N (end-to-end memory networks) and Attentive/Impatient Readers (bidirectional LSTM-based models).,Which of the following methods do the authors compare their proposed model against in 'Dataset and Neural Recurrent Sequence Labeling Model for Open-Domain Factoid Question Answering'?,Random Forest and SVM,Convolutional Neural Networks and Decision Trees,MemN2N and Attentive/Impatient Readers,Transformer and BERT,C
+1607.06275,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Dataset and Neural Recurrent Sequence Labeling Model for Open-Domain Factoid Question Answering,"" what was the reported inter-annotator agreement?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Verified by at least two annotators; specific inter-annotator agreement score not reported.,"In the paper 'Dataset and Neural Recurrent Sequence Labeling Model for Open-Domain Factoid Question Answering,' how was the dataset verification described?",Verified by a panel of experts; specific agreement score was reported.,Verified by only one annotator; specific inter-annotator agreement score was 0.95.,Verified by at least two annotators; no specific inter-annotator agreement score reported.,Not verified by any annotator; agreement score was 0.80.,C
+1907.08501,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""A Comparative Evaluation of Visual and Natural Language Question Answering Over Linked Data,"" how do the authors measure the performance of the question answering systems?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","average INLINEFORM0, INLINEFORM1, and INLINEFORM2 values over four evaluators per question",How did the authors measure the performance of the question answering systems in the paper?,By counting the total number of questions answered correctly by each system,By measuring the speed of each system in answering questions,"By averaging INLINEFORM0, INLINEFORM1, and INLINEFORM2 values over four evaluators per question",By comparing the answers to a gold standard provided by the authors,C
+1907.08501,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""A Comparative Evaluation of Visual and Natural Language Question Answering Over Linked Data,"" which four question answering (QA) systems are evaluated?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","WDAqua, QAKiS, gAnswer, Platypus","Which of the following is NOT one of the QA systems evaluated in the paper ""A Comparative Evaluation of Visual and Natural Language Question Answering Over Linked Data""?",gAnswer,QAKiS,Watson,WDAqua,C
+1907.08501,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""A Comparative Evaluation of Visual and Natural Language Question Answering Over Linked Data,"" do the authors evaluate the performance of their approaches using human judgments?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Yes.,How did the authors of the paper evaluate the performance of their approaches?,By only using automated metrics,By running simulations without real users,By not evaluating their approaches at all,By using human judgments,D
+2004.02393,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Learning to Recover Reasoning Chains for Multi-Hop Question Answering via Cooperative Games,"" what are the architectures of the two models proposed in the solution?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Ranker model; Reasoner model (implemented with MatchLSTM architecture).,Which two models are proposed in the paper for multi-hop question answering?,Attention model and Memory Network model,Ranker model and Reasoner model (implemented with MatchLSTM architecture),Contextualizer model and Retriever model,Encoder model and Decoder model (implemented with Transformer architecture),B
+2004.02393,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Learning to Recover Reasoning Chains for Multi-Hop Question Answering via Cooperative Games,"" how do the two models cooperate to select the most confident reasoning chains?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Reasoner extracts linking entities from chains selected by a well-trained Ranker; Ranker benefits from extra rewards provided by the Reasoner, and both models are trained cooperatively to improve confident chain selection.",How do the two models cooperate to select the most confident reasoning chains in the paper 'Learning to Recover Reasoning Chains for Multi-Hop Question Answering via Cooperative Games'?,Both models randomly select reasoning chains and do not interact during training.,The Reasoner and Ranker compete against each other to select reasoning chains.,The Ranker generates the final answer independently without any input from the Reasoner.,"The Reasoner extracts linking entities from chains selected by the Ranker, while the Ranker benefits from extra rewards from the Reasoner, and both are trained cooperatively.",D
+2004.02393,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Learning to Recover Reasoning Chains for Multi-Hop Question Answering via Cooperative Games,"" what benchmarks do the authors introduce?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","HotpotQA (2-hop) and MedHop (3-hop) reasoning chain benchmarks, with accuracy defined as the ratio of correct chains predicted to evaluation samples.",Which benchmarks do the authors introduce in the paper 'Learning to Recover Reasoning Chains for Multi-Hop Question Answering via Cooperative Games'?,HotpotQA (2-hop) and MedHop (3-hop) reasoning chain benchmarks,DROP and QAngaroo datasets,BioASQ and NarrativeQA benchmarks,SQuAD and TriviaQA datasets,A
+1811.08048,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""QuaRel: A Dataset and Models for Answering Questions about Qualitative Relationships,"" how does the QuaSP+Zero model function?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Considers both question tokens and their relationship to properties in the qualitative model when selecting properties during parsing, using an entity-linking score based on the similarity between question tokens and property words.",How does the QuaSP+Zero model function in the QuaRel paper?,It selects properties based on the frequency of words in the training corpus.,"It selects properties using only question tokens, without considering their relationship to qualitative properties.",It randomly assigns properties to question tokens.,"It considers both question tokens and their relationship to properties in the qualitative model, using an entity-linking score based on the similarity between question tokens and property words.",D
+1811.08048,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+Which off-the-shelf tools do the authors use in the paper ""QuaRel: A Dataset and Models for Answering Questions about Qualitative Relationships""?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","information retrieval system, word-association method, state-of-the-art neural semantic parser","Which of the following tools did the authors use in the paper ""QuaRel: A Dataset and Models for Answering Questions about Qualitative Relationships""?",Support vector machine,Decision tree regressor,Information retrieval system,Random forest classifier,C
+1811.08048,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""QuaRel: A Dataset and Models for Answering Questions about Qualitative Relationships,"" how do the authors obtain the logical forms for the questions in their dataset?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Logical forms were obtained by reverse-engineering them from a set of follow-up questions answered by crowdworkers, without exposing workers to the formalism; this was possible due to the constrained space of logical forms.",How were the logical forms for questions in the QuaRel dataset obtained?,"By reverse-engineering them from answers to follow-up questions answered by crowdworkers, without exposing them to the formalism.",By having crowdworkers write the logical forms directly using the formalism.,By translating existing logical forms from a different dataset.,By automatically generating logical forms using a pre-trained model.,A
+1811.08048,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""QuaRel: A Dataset and Models for Answering Questions about Qualitative Relationships,"" do all questions in the QuaRel dataset provide exactly two answer options to choose from?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Yes.,How many answer options does each question in the QuaRel dataset provide?,Exactly two,A variable number,Exactly three,Exactly four,A
+1808.03986,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Multimodal Differential Network for Visual Question Generation,"" what were the previous state-of-the-art benchmarks for visual question generation that the authors compared their method against?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",BIBREF35 for VQA dataset; BIBREF5 and BIBREF36 for VQG-COCO dataset.,Which benchmarks did the authors compare their method against for visual question generation in the included paper?,BIBREF45 for VQA dataset; BIBREF7 and BIBREF38 for VQG-COCO dataset.,BIBREF35 for VQA dataset; BIBREF5 and BIBREF36 for VQG-COCO dataset.,BIBREF10 for VQA dataset; BIBREF2 and BIBREF16 for VQG-COCO dataset.,BIBREF25 for VQA dataset; BIBREF15 and BIBREF26 for VQG-COCO dataset.,B
+1808.03986,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Multimodal Differential Network for Visual Question Generation,"" how and where are the natural questions generated according to the authors' proposed method?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Natural questions are generated by the Decoder module, which uses an LSTM-based language model after multimodal features are extracted and fused.","In the 'Multimodal Differential Network for Visual Question Generation,' where and how are natural questions generated?",They are generated by the Decoder module using an LSTM-based language model after multimodal feature fusion.,They are generated manually by the authors.,They are generated by a rule-based system after image processing.,They are generated by the Encoder module before feature fusion.,A
+1808.03986,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Multimodal Differential Network for Visual Question Generation,"" what is used as the input to the differential network?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",image,What is used as the input to the differential network in the paper 'Multimodal Differential Network for Visual Question Generation'?,text paragraph,image,audio clip,video,B
+1808.03986,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Multimodal Differential Network for Visual Question Generation,"" how do the authors define a differential network?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Differential network defined as a triplet network with target, supporting, and contrasting branches (sharing parameters) to learn multimodal representations; includes a representation module (extracts image and caption embeddings) and a joint mixture module (fuses embeddings into a shared space).",How do the authors of the paper define a differential network?,As a simple feedforward neural network for processing only image data.,As a recurrent network for generating captions from images only.,As an ensemble of unrelated models with no shared components.,"As a triplet network with target, supporting, and contrasting branches sharing parameters, and modules for extracting and fusing image and caption embeddings.",D
+1808.03986,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Multimodal Differential Network for Visual Question Generation,"" how do the authors define exemplars?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Exemplars provide appropriate context; supporting exemplars are defined as those whose joint image-caption embeddings are closer to the target image-caption, helping generate relevant questions.","According to the paper, how are supporting exemplars defined?",They are exemplars that only share similar visual features with the target image.,They are images chosen at random from the dataset.,They are exemplars whose joint image-caption embeddings are closer to the target image-caption.,They are any images chosen from unrelated domains.,C
+1808.09920,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Question Answering by Reasoning Across Documents with Graph Convolutional Networks,"" what baseline model did the authors compare Entity-GCN to?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Human, FastQA, BiDAF, Coref-GRU, MHPGM, Weaver/Jenga, MHQA-GRN",Which of the following was NOT used as a baseline model compared to Entity-GCN in the paper 'Question Answering by Reasoning Across Documents with Graph Convolutional Networks'?,FastQA,BERT-Base,Weaver/Jenga,BiDAF,B
+1808.09920,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Question Answering by Reasoning Across Documents with Graph Convolutional Networks,"" did the authors use a relation extraction method to construct the edges in their graph?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Edges constructed using document co-occurrence, exact match of named entity mentions, and coreference chains predicted by an external coreference system; no dedicated relation extraction method used.",Which of the following methods did the authors NOT use to construct the edges in their graph for the paper 'Question Answering by Reasoning Across Documents with Graph Convolutional Networks'?,Exact match of named entity mentions,Coreference chains predicted by an external system,Dedicated relation extraction method,Document co-occurrence,C
+1808.09920,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Question Answering by Reasoning Across Documents with Graph Convolutional Networks,"" how did the authors obtain relations between entity mentions for constructing the graph used in their model?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Connect entity mentions if they (i) co-occur in the same document (DOC-BASED edges), (ii) are identical (MATCH edges), or (iii) are in the same coreference chain as predicted by an external coreference system (COREF edges).",Which of the following was NOT a criterion used by the authors to connect entity mentions in their graph construction?,Entity mentions that are identical.,Entity mentions predicted to be in the same coreference chain.,Entity mentions in the same sentence position.,Entity mentions co-occurring in the same document.,C
+1808.09920,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Question Answering by Reasoning Across Documents with Graph Convolutional Networks,"" how did the authors detect entity mentions?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Exact string matches to entity names and predictions from a coreference resolution system (including noun phrases and pronouns); ambiguous coreference cases were discarded.,How did the authors detect entity mentions in the paper 'Question Answering by Reasoning Across Documents with Graph Convolutional Networks'?,"By exact string matches to entity names and coreference resolution predictions, including noun phrases and pronouns (ambiguous coreferences were discarded).",By manually annotating all the entity mentions in the documents.,Using only exact string matches to pre-selected entity names.,With a named entity recognition system trained specifically for their dataset.,A
+1808.09920,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Question Answering by Reasoning Across Documents with Graph Convolutional Networks,"" what evaluation metric is used to assess performance on the WIKIHOP dataset?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Accuracy,Which evaluation metric is used to assess performance on the WIKIHOP dataset in the paper 'Question Answering by Reasoning Across Documents with Graph Convolutional Networks'?,F1 Score,Accuracy,Precision,Recall,B
+1808.09920,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Question Answering by Reasoning Across Documents with Graph Convolutional Networks,"" what is the performance (in terms of accuracy) achieved by the Entity-GCN model on the WIKIHOP dataset?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","67.6% accuracy for single model without coreference, 66.4% for single model with coreference, 71.2% for ensemble of 5 models on WIKIHOP test set.",What was the accuracy achieved by the Entity-GCN ensemble of 5 models on the WIKIHOP test set according to the paper?,66.4%,71.2%,67.6%,73.0%,B
+1912.01046,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""TutorialVQA: Question Answering Dataset for Tutorial Videos,"" which evaluation metrics were used to assess the performance of the proposed models in the experiments?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Tolerance accuracy for sentence-level prediction; accuracy and MRR (Mean Reciprocal Ranking) for segment retrieval; overall accuracy (after filtering) and accuracy when the segment is in the top 10 videos for the pipeline approach.,Which of the following metrics were used to assess model performance in the TutorialVQA experiments?,"BLEU, ROUGE, and CIDEr","Precision, recall, and F1 score","Log-loss, AUC, and MAE","Tolerance accuracy, accuracy, and MRR",D
+1912.01046,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""TutorialVQA: Question Answering Dataset for Tutorial Videos,"" what types of instructional videos are included in the TutorialVQA dataset?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",screencast tutorial videos with spoken narratives for a photo-editing software,Which type of instructional videos are included in the TutorialVQA dataset?,Cooking tutorials without any narration,Screencast tutorial videos with spoken narratives for a photo-editing software,Live classroom lectures on science subjects,Animated explainer videos about history,B
+1912.01046,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""TutorialVQA: Question Answering Dataset for Tutorial Videos,"" which baseline algorithms do the authors present for evaluating their dataset?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","sentence-level prediction algorithm, segment retrieval algorithm, pipeline segment retrieval algorithm",Which of the following algorithms is NOT listed as a baseline by the authors in 'TutorialVQA: Question Answering Dataset for Tutorial Videos'?,Pipeline segment retrieval algorithm,Segment retrieval algorithm,Visual object detection algorithm,Sentence-level prediction algorithm,C
+1912.01046,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""TutorialVQA: Question Answering Dataset for Tutorial Videos,"" what is the source of the triples used in the dataset?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",a tutorial website about an image editing program,What is the source of the triples used in the TutorialVQA dataset according to the paper?,A government statistics portal,A tutorial website about an image editing program,An online encyclopedia,A news website about current events,B
+1903.00172,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Open Information Extraction from Question-Answer Pairs,"" where did the authors obtain their training data?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",AmazonQA and ConciergeQA datasets,Which datasets did the authors use for training in the paper 'Open Information Extraction from Question-Answer Pairs'?,Natural Questions and CoQA datasets,AmazonQA and ConciergeQA datasets,SQuAD and TriviaQA datasets,WikiQA and WebQuestions datasets,B
+1903.00172,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Open Information Extraction from Question-Answer Pairs,"" what extraction model do the authors propose and utilize for their approach?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Multi-Encoder, Constrained-Decoder model",Which extraction model do the authors propose in the paper 'Open Information Extraction from Question-Answer Pairs'?,"Multi-Encoder, Constrained-Decoder model","Single-Encoder, Unconstrained-Decoder model",Generative Adversarial Network model,Transformer-Only model,A
+1903.00172,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Open Information Extraction from Question-Answer Pairs,"" which datasets did the authors use for their experiments?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",ConciergeQA and AmazonQA,Which of the following datasets were used by the authors for their experiments in the paper 'Open Information Extraction from Question-Answer Pairs'?,ConciergeQA and AmazonQA,CoQA and HotpotQA,TriviaQA and NaturalQuestions,SQuAD and WikiQA,A
+1703.06492,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""VQABQ: Visual Question Answering by Basic Questions,"" on which dataset do the authors achieve state-of-the-art performance?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","VQA dataset (open-ended task, especially for counting-type questions)",On which dataset did the authors of 'VQABQ: Visual Question Answering by Basic Questions' achieve state-of-the-art performance?,VQA dataset,MNIST,COCO Caption dataset,ImageNet,A
+1703.06492,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""VQABQ: Visual Question Answering by Basic Questions,"" what accuracy does their proposed method achieve?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",60.34% accuracy.,What accuracy does the method proposed in the paper 'VQABQ: Visual Question Answering by Basic Questions' achieve?,72.11%,68.79%,55.21%,60.34%,D
+1703.06492,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""VQABQ: Visual Question Answering by Basic Questions,"" how do the authors formulate the question generation task?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",LASSO optimization problem,How do the authors of 'VQABQ: Visual Question Answering by Basic Questions' formulate the question generation task?,As a sequence labeling task,As a LASSO optimization problem,As a classification problem,As a clustering problem,B
+1703.06492,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""VQABQ: Visual Question Answering by Basic Questions,"" what are the two main modules that their proposed approach consists of?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",the basic question generation module (Module 1) and co-attention visual question answering module (Module 2),Which two main modules does the VQABQ approach consist of?,The question parsing module and visual reconstruction module,The visual encoding module and language modeling module,The answer retrieval module and image segmentation module,The basic question generation module and co-attention visual question answering module,D

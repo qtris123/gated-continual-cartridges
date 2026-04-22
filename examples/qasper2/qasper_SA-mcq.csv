@@ -1,0 +1,764 @@
+id,category,original_question,original_answer,mcq_question,option_a,option_b,option_c,option_d,answer
+1906.00378,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Unsupervised Bilingual Lexicon Induction from Mono-lingual Multimodal Data,"" which vision-based approaches does the proposed method outperform?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","CNN-mean, CNN-avgmax",Which vision-based approaches does the proposed method outperform according to the paper 'Unsupervised Bilingual Lexicon Induction from Mono-lingual Multimodal Data'?,"CNN-mean, CNN-avgmax","CNN-max, LSTM-attn","RNN-mean, CNN-avg","SVM-based, Transformer-based",A
+1906.00378,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Unsupervised Bilingual Lexicon Induction from Mono-lingual Multimodal Data,"" what baseline method is used in the experimental setup?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","CNN-mean, CNN-avgmax",Which of the following methods were used as baseline methods in the experimental setup of the paper 'Unsupervised Bilingual Lexicon Induction from Mono-lingual Multimodal Data'?,RNN and SVM,LSTM and KNN,CNN-mean and CNN-avgmax,Transformer and BERT,C
+1906.00378,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Unsupervised Bilingual Lexicon Induction from Mono-lingual Multimodal Data,"" which two languages are used in the multi-lingual caption model?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","German-English, French-English, Japanese-English","Which of the following language pairs are used in the multi-lingual caption model in the paper ""Unsupervised Bilingual Lexicon Induction from Mono-lingual Multimodal Data""?","German-English, French-English, Japanese-English","Spanish-German, Italian-French, Chinese-English","Italian-English, Portuguese-French, Japanese-German","Russian-English, Spanish-English, Dutch-German",A
+1905.11901,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Revisiting Low-Resource Neural Machine Translation: A Case Study,"" what dataset sizes were used for the German-English translation experiments?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Training data sizes: 159,000; 80,000; 40,000; 20,000; 10,000; and 5,000 sentences. Development set: 7,584 sentences.","Which of the following was NOT one of the training data sizes used in the German-English translation experiments in the paper ""Revisiting Low-Resource Neural Machine Translation: A Case Study""?","1,000,000 sentences","159,000 sentences","20,000 sentences","5,000 sentences",A
+1905.11901,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Revisiting Low-Resource Neural Machine Translation: A Case Study,"" what were the main findings regarding experimental results on the low-resource dataset?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Achieved 10.37 BLEU on the low-resource Korean–English dataset, outperforming previous results (5.97 BLEU); applied techniques were effective across datasets.",What did the paper 'Revisiting Low-Resource Neural Machine Translation: A Case Study' find in its experiments on a low-resource dataset?,It only applied techniques to high-resource datasets.,"It achieved 10.37 BLEU on Korean–English, outperforming previous results of 5.97 BLEU.",It showed no improvement over prior work in BLEU scores.,It found that techniques did not generalize across datasets.,B
+1905.11901,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Revisiting Low-Resource Neural Machine Translation: A Case Study,"" which methods do the authors compare with on the Korean-English dataset?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",gu-EtAl:2018:EMNLP1,Which baseline did the authors compare their methods with on the Korean-English dataset in the paper?,sennrichEtAl:2016:WMT,gu-EtAl:2018:EMNLP1,ottEtAl:2018:ICLR,vaswaniEtAl:2017:NIPS,B
+1905.11901,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Revisiting Low-Resource Neural Machine Translation: A Case Study,"" what specific pitfalls do the authors identify in the context of low-resource neural machine translation?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",highly data-inefficient; underperform phrase-based statistical machine translation in low-data conditions,"According to the paper, which of the following is a pitfall identified for low-resource neural machine translation models?",They outperform all other models in every scenario.,They do not require any data for training.,They have better translation quality than phrase-based models in all cases.,They are highly data-inefficient and underperform phrase-based statistical models in low-data conditions.,D
+1911.03310,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""How Language-Neutral is Multilingual BERT?"", how do the authors demonstrate that the language-neutral component of multilingual BERT is sufficiently general in modeling semantics to enable high-accuracy word alignment?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Word-alignment using mBERT representations achieves higher accuracy than the FastAlign tool, even without large parallel corpora, indicating that mBERT’s language-neutral component effectively models word-level semantics for high-accuracy alignment; explicit projection learning adds negligible improvement.","According to the paper ""How Language-Neutral is Multilingual BERT?"", how do the authors show that mBERT's language-neutral component is effective at modeling semantics for word alignment?",By showing projection learning greatly improves mBERT’s alignment accuracy.,"By demonstrating that word alignment using mBERT representations is more accurate than the FastAlign tool, even without large parallel corpora.",By proving that FastAlign outperforms mBERT on all tested languages.,By training mBERT exclusively on monolingual data and comparing to FastAlign results.,B
+1911.03310,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""How Language-Neutral is Multilingual BERT?"", are the language-specific and language-neutral components of mBERT found to be disjunctive according to the authors' analysis?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","No; the authors' analysis suggests that language-specific and language-neutral components in mBERT are not fully disjunctive, as language-specific information can be removed by centering representations, indicating overlap.",What did the authors find regarding the relationship between language-specific and language-neutral components in mBERT?,They found overlap between the language-specific and language-neutral components.,They found that both components cannot be separated at all.,They found the components are fully disjunctive.,They found that language-neutral components dominate entirely.,A
+1911.03310,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""How Language-Neutral is Multilingual BERT?"", how do the authors demonstrate that mBERT representations can be decomposed into a language-specific component and a language-neutral component?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","By centering the mBERT sentence representations for each language (subtracting the language-specific centroid so the average is at the origin), the authors remove language-specific information and analyze the resulting representations with probing tasks to show that mBERT representations can be decomposed into language-specific and language-neutral components.","How did the authors of the paper ""How Language-Neutral is Multilingual BERT?"" demonstrate that mBERT representations could be decomposed into language-specific and language-neutral components?",They removed all language identifiers from the training data and compared results.,They centered the mBERT sentence representations for each language and used probing tasks to analyze the components.,They applied word-level attention masking only for language-neutral words.,They trained a new model from scratch for each language.,B
+1911.03310,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""How Language-Neutral is Multilingual BERT?"", what specific challenges do the authors identify that must be addressed in order to develop more effective language-neutral representations?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","contextual embeddings do not represent similar semantic phenomena similarly across languages, making them not directly usable for zero-shot cross-lingual tasks; thus, developing more effective language-neutral representations requires addressing this inconsistency in semantic representation.",What challenge do the authors of 'How Language-Neutral is Multilingual BERT?' highlight for achieving more effective language-neutral representations?,Semantic representations in multilingual BERT are completely language-independent.,Multilingual BERT embeddings require no further improvement for cross-lingual tasks.,All languages are equally well represented by multilingual BERT embeddings.,"Contextual embeddings do not represent similar semantic phenomena similarly across languages, leading to issues with language-neutral representations.",D
+1910.11471,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Machine Translation from Natural Language to Code using Long-Short Term Memory,"" which dataset do the authors use for training and evaluating their model?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","A parallel corpus of 18,805 aligned pairs, with English expressions as source and Python code as target.",Which dataset did the authors use for training and evaluating their model in the paper 'Machine Translation from Natural Language to Code using Long-Short Term Memory'?,A dataset of Java code and translations into English.,"A parallel corpus of 18,805 aligned pairs, with English expressions as source and Python code as target.",The Penn Treebank corpus of annotated English sentences.,The Europarl corpus of multilingual parliamentary proceedings.,B
+1910.11471,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Machine Translation from Natural Language to Code using Long-Short Term Memory,"" do the authors compare their LSTM-based model to any other models? If so, which models do they use for comparison?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Yes; the authors compare their LSTM-based model to phrase-based statistical machine translation (SMT) models.,Which model do the authors compare their LSTM-based model to in the paper?,Support vector machine (SVM) models,Convolutional neural network (CNN) models,Reinforcement learning models,Phrase-based statistical machine translation (SMT) models,D
+1910.11471,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Machine Translation from Natural Language to Code using Long-Short Term Memory,"" what is the architecture of the proposed system for translating natural language to code?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","LSTM-based sequence-to-sequence architecture with encoder, decoder, and output layers.","According to the paper, what architecture is used for translating natural language to code?",Feedforward neural network without sequence modeling,"LSTM-based sequence-to-sequence with encoder, decoder, and output layers",Convolutional Neural Network (CNN),Rule-based expert system,B
+1910.11471,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Machine Translation from Natural Language to Code using Long-Short Term Memory,"" what additional techniques do the authors suggest could be incorporated to further improve accuracy?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Phrase-based word embedding; Abstract Syntax Tree (AST).,"Which of the following techniques do the authors suggest could be incorporated to further improve accuracy in machine translation from natural language to code, according to the paper?",Phrase-based word embedding and Abstract Syntax Tree (AST),Ensembling multiple LSTM models,Backpropagation and batch normalization,Convolutional Neural Networks (CNN) and attention mechanism,A
+1910.11471,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Machine Translation from Natural Language to Code using Long-Short Term Memory,"" which programming language is used as the target language for code generation?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Python,Which programming language is used as the target for code generation in the paper 'Machine Translation from Natural Language to Code using Long-Short Term Memory'?,JavaScript,C++,Python,Java,C
+1910.11471,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Machine Translation from Natural Language to Code using Long-Short Term Memory,"" which dataset is used to evaluate the accuracy of the proposed model?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",500 validation data from the source corpus.,Which dataset is used to evaluate the accuracy of the proposed model in the paper 'Machine Translation from Natural Language to Code using Long-Short Term Memory'?,A publicly available code summarization dataset.,A standard machine translation benchmark dataset.,Data collected from GitHub repositories only.,500 validation data from the source corpus.,D
+1903.03467,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+What conclusions are drawn from the syntactic analysis in the paper ""Filling Gender&Number Gaps in Neural Machine Translation with Black-box Context Injection""?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","enables control over the morphological realization of first and second-person pronouns, as well as related verbs and adjectives","According to the syntactic analysis in the paper, what is made possible by black-box context injection in neural machine translation?","Controlling the morphological realization of first and second-person pronouns, verbs, and adjectives",Improving sentence length in translations,Automatically detecting translation errors,Translating slang more accurately,A
+1903.03467,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Filling Gender&Number Gaps in Neural Machine Translation with Black-box Context Injection,"" what type of syntactic analysis do the authors perform?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Speaker's Gender Effects: analyze first-person singular pronouns and the gender of their governing verbs/adjectives; Interlocutors' Gender and Number Effects: analyze second-person pronouns and their gender/number, including governing verbs/adjectives.",Which syntactic elements did the authors analyze in their study to address gender and number gaps in neural machine translation?,Only the usage of definite and indefinite articles.,"First-person singular pronouns, their governing verbs/adjectives (for speaker's gender); and second-person pronouns, their gender/number and governing verbs/adjectives (for interlocutors' gender and number).",Analysis limited to subject-object agreement in complex sentences.,Third-person plural pronouns and the tense of sentences.,B
+1903.03467,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Filling Gender&Number Gaps in Neural Machine Translation with Black-box Context Injection,"" how do the authors demonstrate that their system successfully injects the correct gender and number information into neural machine translation outputs?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","- Show that providing correct gender and number information as prefixes increases BLEU scores by up to 2.3 over the baseline.
+- Demonstrate that adding “She said” prefixes substantially increases the proportion of feminine-marked verbs in translations, bringing them much closer to the reference.",How do the authors of the paper demonstrate that their system can successfully inject the correct gender and number information into neural machine translation outputs?,By manually editing translation outputs after generation.,By only evaluating the system on English-to-English translation tasks.,By showing that providing correct gender and number prefixes increases BLEU scores and that 'She said' prefixes boost feminine-marked verbs in translations.,By ignoring gender and number in the test inputs.,C
+1903.03467,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+Which neural machine translation system is used in the paper ""Filling Gender&Number Gaps in Neural Machine Translation with Black-box Context Injection""?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Google's machine translation system (GMT),Which neural machine translation system is used in the paper 'Filling Gender&Number Gaps in Neural Machine Translation with Black-box Context Injection'?,Microsoft Translator,Facebook's Fairseq system,Google's machine translation system (GMT),Amazon Translate,C
+1903.03467,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Filling Gender&Number Gaps in Neural Machine Translation with Black-box Context Injection,"" what are the components of the black-box context injection system described by the authors?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Components:  
+- Black-box context injection by prepending context phrases to the input (e.g., “He said:”, “She said:”, “I said to them:”)
+- Context phrases encode information about speaker gender and audience number/gender
+- No modification to the NMT system internals or training; operates solely by modifying input text",Which of the following is NOT a component of the black-box context injection system described by the authors?,Context phrases convey speaker and audience gender/number information.,Modification of the NMT system's internal architecture and training.,Prepending context phrases (like 'He said:') to the input to encode gender and number.,No alteration to the NMT system internals; the method only changes input text.,B
+1911.00069,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Neural Cross-Lingual Relation Extraction Based on Bilingual Word Embedding Mapping,"" do the authors train their own relation extraction (RE) model?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Yes.,"In the paper 'Neural Cross-Lingual Relation Extraction Based on Bilingual Word Embedding Mapping,' what did the authors do regarding the relation extraction (RE) model?",They only used publicly available pre-trained models.,They trained their own relation extraction model.,They conducted no experiments with relation extraction models.,They used rule-based extraction methods only.,B
+1911.00069,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Neural Cross-Lingual Relation Extraction Based on Bilingual Word Embedding Mapping,"" what are the sizes of the datasets used in the experiments?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",In-house dataset: 3716 documents; ACE05 dataset: 1635 documents.,"According to the paper, what are the sizes of the datasets used in the experiments?",In-house dataset: 3716 documents; ACE05 dataset: 2000 documents.,In-house dataset: 4000 documents; ACE05 dataset: 1700 documents.,In-house dataset: 3000 documents; ACE05 dataset: 1635 documents.,In-house dataset: 3716 documents; ACE05 dataset: 1635 documents.,D
+1911.00069,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Neural Cross-Lingual Relation Extraction Based on Bilingual Word Embedding Mapping,"" which languages are used in the experiments?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","English, German, Spanish, Italian, Japanese, Portuguese, Arabic, Chinese",Which of the following languages is NOT used in the experiments in the paper 'Neural Cross-Lingual Relation Extraction Based on Bilingual Word Embedding Mapping'?,English,Portuguese,French,Arabic,C
+1911.00069,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Neural Cross-Lingual Relation Extraction Based on Bilingual Word Embedding Mapping,"" which datasets are utilized for training and evaluation?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","in-house dataset (English, German, Spanish, Italian, Japanese, Portuguese); ACE05 dataset (English, Arabic, Chinese)",Which of the following datasets are utilized for training and evaluation in the paper 'Neural Cross-Lingual Relation Extraction Based on Bilingual Word Embedding Mapping'?,CoNLL-2003 dataset and ACE05 dataset,OntoNotes dataset and ACE05 dataset,in-house dataset and ACE05 dataset,SemEval-2010 Task 8 dataset and in-house dataset,C
+2001.01589,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Morphological Word Segmentation on Agglutinative Languages for Neural Machine Translation,"" how is morphological knowledge incorporated into the proposed segmentation method?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Morphological segmentation is first applied to extract stems and morphemes; then, a BPE model is learned and applied specifically to the stem units, combining morpheme boundaries with subword segmentation.",How is morphological knowledge incorporated into the segmentation method in the discussed paper?,"Morphological segmentation is applied first to extract stems and morphemes, followed by learning and applying BPE on stems, combining morpheme boundaries with subword segmentation.",BPE is applied globally across all words without respecting any morpheme boundaries.,Characters are randomly shuffled before segmentation to test robustness.,Word segmentation is performed solely by frequency analysis of full words.,A
+2001.01589,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+How does the word segmentation method proposed in ""Morphological Word Segmentation on Agglutinative Languages for Neural Machine Translation"" operate, and what are its key steps?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Morpheme segmentation and Byte Pair Encoding (BPE); use Zemberek for Turkish and a morphology analysis tool for Uyghur; after segmentation, add a specific symbol after each subword unit to mark morpheme boundaries and aid semantic capture.",Which of the following best describes the key steps in the word segmentation method proposed for Neural Machine Translation in agglutinative languages?,It avoids any morphological analysis and uses raw words as input.,"It uses morpheme segmentation, Byte Pair Encoding (BPE), language-specific morphology analysis tools, and adds a symbol after each subword unit.",It only uses Byte Pair Encoding (BPE) for all languages without additional segmentation or annotation.,It relies on manual word splitting without automated tools or symbols.,B
+2001.01589,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Morphological Word Segmentation on Agglutinative Languages for Neural Machine Translation,"" is the proposed word segmentation method evaluated independently from the neural machine translation system?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",The proposed word segmentation method is not evaluated independently; it is assessed within the context of neural machine translation performance.,How is the proposed word segmentation method evaluated in the paper on morphological segmentation for neural machine translation?,It is only evaluated using human judgment.,It is evaluated within the context of neural machine translation performance.,It is evaluated independently from any neural machine translation system.,It is not evaluated at all in the paper.,B
+1806.00722,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Dense Information Flow for Neural Machine Translation,"" which baseline models are used for comparison in the experimental evaluation?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","4-layer encoder, 4-layer decoder, residual-connected model, with embedding and hidden size set as 256.",Which of the following configurations were used as baseline models for comparison in the experimental evaluation of the paper 'Dense Information Flow for Neural Machine Translation'?,"2-layer encoder, 2-layer decoder, without residual connections, embedding size 512.","4-layer encoder, 4-layer decoder, residual-connected model, embedding and hidden size 256.","Single-layer encoder and decoder, no residual connections, embedding and hidden size 128.","6-layer encoder, 6-layer decoder, with attention mechanism, embedding size 256.",B
+1806.00722,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+Did the authors of ""Dense Information Flow for Neural Machine Translation"" demonstrate that their proposed method outperformed previous neural machine translation approaches in terms of translation quality?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Yes; in almost all genres, DenseNMT models are significantly better than the baselines.",What did the authors of 'Dense Information Flow for Neural Machine Translation' conclude about their method's translation quality compared to previous approaches?,Their proposed method outperformed previous neural machine translation approaches in translation quality.,Their proposed method was not evaluated against previous approaches.,Their proposed method performed the same as previous neural machine translation approaches.,Their proposed method performed worse than previous neural machine translation approaches.,A
+1806.00722,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+Which language pairs are explored in the experiments of the paper ""Dense Information Flow for Neural Machine Translation""?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","German-English, Turkish-English, English-German",Which of the following language pairs is NOT explored in the experiments of the paper 'Dense Information Flow for Neural Machine Translation'?,Turkish-English,French-English,English-German,German-English,B
+1806.00722,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+Which datasets were used in the experiments described in the paper ""Dense Information Flow for Neural Machine Translation""?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","IWSLT14 German-English, IWSLT14 Turkish-English, WMT14 English-German","Which of the following datasets was used in the experiments described in the paper ""Dense Information Flow for Neural Machine Translation""?",WikiText-103,CIFAR-10,IWSLT14 German-English,ImageNet,C
+1909.01013,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Duality Regularization for Unsupervised Bilingual Lexicon Induction,"" what specific regularizers were introduced to enforce consistency in back translation cycles?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",an adversarial loss ($\ell_{adv}$) for each model; a cycle consistency loss ($\ell_{cycle}$) on each side to enforce consistency in back translation cycles.,Which regularizers were introduced in the paper to enforce consistency in back translation cycles for unsupervised bilingual lexicon induction?,A regular cross-entropy loss for each direction.,An adversarial loss for each model and a cycle consistency loss on each side.,Only a reconstruction loss on the translated words.,No specific regularizer was introduced.,B
+1909.01013,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Duality Regularization for Unsupervised Bilingual Lexicon Induction,"" what new best results does the proposed method achieve on standard bilingual lexicon induction benchmarks?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","New best accuracy (P@1) on Vecmap: EN-IT 50.00, IT-EN 42.67, EN-DE 51.60, DE-EN 47.22, FI-EN 39.62, EN-ES 39.47, ES-EN 36.43.",Which of the following is a new best P@1 accuracy reported in 'Duality Regularization for Unsupervised Bilingual Lexicon Induction' on Vecmap benchmarks?,EN-RU 30.00,EN-FR 60.00,EN-PT 45.00,EN-IT 50.00,D
+1909.01013,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Duality Regularization for Unsupervised Bilingual Lexicon Induction,"" how does the proposed method's performance compare to competitive baselines in terms of bilingual lexicon induction accuracy?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Proposed method achieves comparable or slightly better accuracy (P@1) than the best competitive baselines on most language pairs, consistently outperforming some baselines and matching or narrowly trailing others (e.g., EN-IT: 50 vs 50, EN-DE: 51.6 vs 51.47, EN-FI: 35.88 vs 36.24), demonstrating robust and competitive performance.","According to the paper 'Duality Regularization for Unsupervised Bilingual Lexicon Induction,' how does the proposed method perform relative to competitive baselines in bilingual lexicon induction accuracy?",It achieves comparable or slightly better accuracy than the best baselines on most language pairs.,It consistently underperforms all competitive baselines.,It performs substantially worse on all language pairs tested.,It achieves far lower accuracy than all other methods.,A
+1909.01013,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Duality Regularization for Unsupervised Bilingual Lexicon Induction,"" which 6 language pairs are used in the experiments?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","EN↔ES, EN↔DE, EN↔IT, EN↔EO, EN↔MS, EN↔FI",Which of the following is NOT one of the six language pairs used in the experiments in 'Duality Regularization for Unsupervised Bilingual Lexicon Induction'?,EN↔IT,EN↔RU,EN↔ES,EN↔FI,B
+1909.01013,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+According to the paper ""Duality Regularization for Unsupervised Bilingual Lexicon Induction,"" what are the current state-of-the-art methods that consider the two tasks of bilingual lexicon induction independently?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Procrustes, GPA, GeoMM, GeoMM$_{semi}$, Adv-C-Procrustes, Unsup-SL, Sinkhorn-BT",Which of the following is NOT listed as a state-of-the-art method that considers bilingual lexicon induction tasks independently according to the paper 'Duality Regularization for Unsupervised Bilingual Lexicon Induction'?,Procrustes,BERT,Sinkhorn-BT,GeoMM$_{semi}$,B
+1910.10408,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Controlling the Output Length of Neural Machine Translation,"" do the authors conduct any human evaluation?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Yes; the authors conduct a manual (human) evaluation for the En-It task.,Which of the following best describes the evaluation conducted by the authors in the En-It task in the paper 'Controlling the Output Length of Neural Machine Translation'?,They conducted a manual (human) evaluation.,They only performed automatic evaluation metrics.,They used only BLEU scores for all evaluations.,They did not conduct any evaluation.,A
+1910.10408,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Controlling the Output Length of Neural Machine Translation,"" which dataset do the authors use for their experiments?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","English→Italian and English→German portions of the MuST-C corpus (TED talks), plus additional data: ~16 million public and proprietary sentence pairs for English-Italian and 4.4 million WMT14 sentence pairs for English-German.",Which datasets did the authors use for their experiments in 'Controlling the Output Length of Neural Machine Translation'?,Only publicly available English-Spanish corpus data.,Only the English→French portion of the MuST-C corpus.,"English→Italian and English→German portions of the MuST-C corpus, ~16 million public/proprietary English-Italian pairs, and 4.4 million WMT14 English-German pairs.",The IWSLT14 German-English dataset exclusively.,C
+1910.10408,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Controlling the Output Length of Neural Machine Translation,"" how do the authors enrich the positional embedding with length information?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","They introduce new trigonometric positional encodings that incorporate both position and length information (absolute or relative), encoding the remaining length of the sequence during decoding.",How do the authors enrich positional embedding with length information in their neural machine translation model?,They use new trigonometric positional encodings that also encode remaining length information.,They replace positional embeddings with a fixed vector for all positions.,They ignore positional embeddings altogether and rely solely on recurrent connections.,They add random noise to the positional embeddings to simulate length variation.,A
+1910.10408,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Controlling the Output Length of Neural Machine Translation,"" how do the authors condition the output to a given target-source length class?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Prepend a length token (<short>, <normal>, <long>) to each source sentence based on target/source length ratio during training; at inference, use the desired length token to bias output length.",How do the authors in 'Controlling the Output Length of Neural Machine Translation' bias the output length of translations?,"They prepend a length token (<short>, <normal>, <long>) to each source sentence based on the target/source length ratio.",They use reinforcement learning to reward correct output length.,They train the model with variable beam search sizes based on sentence length.,They prune vocabulary words based on length constraints.,A
+1910.10408,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Controlling the Output Length of Neural Machine Translation,"" which languages are used in the experiments?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",English–Italian (En-It) and English–German (En-De),Which language pairs were used in the experiments for controlling the output length in neural machine translation?,English–Italian (En-It) and English–German (En-De),English–Chinese (En-Zh) and English–French (En-Fr),German–Spanish (De-Es) and French–Italian (Fr-It),French–German (Fr-De) and English–Spanish (En-Es),A
+1910.10408,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Controlling the Output Length of Neural Machine Translation,"" which dataset do the authors use for their experiments?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","English→Italian and English→German portions of the MuST-C corpus (TED talks), plus additional data: ~16 million public and proprietary sentence pairs for English-Italian and 4.4 million WMT14 sentence pairs for English-German.",Which datasets did the authors use for their experiments in 'Controlling the Output Length of Neural Machine Translation'?,"English→French and English→Spanish portions of the MuST-C corpus, with additional WMT14 French data",The Gigaword English news dataset,"English→Italian and English→German portions of the MuST-C corpus, plus public/proprietary English-Italian and WMT14 English-German data",Only the English→German portion of the WMT14 dataset,C
+1910.10408,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Controlling the Output Length of Neural Machine Translation,"" do the authors experiment with combining the two proposed methods for output length control?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Yes, the authors experiment with combining the two proposed methods for output length control.","In 'Controlling the Output Length of Neural Machine Translation', what do the authors do regarding the two proposed methods for output length control?",They experiment with combining the two methods.,They propose methods but do not perform any experiments.,They abandon both methods before experimentation.,"They only use one method at a time, never combining them.",A
+1903.00058,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Non-Parametric Adaptation for Neural Machine Translation,"" from where do the authors retrieve neighbor n-grams in their proposed approach?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Neighbor n-grams are retrieved from the training set by representing each sentence as a reduced n-gram set and finding the closest n-gram in the training set using IDF similarity.,"From where do the authors retrieve neighbor n-grams in their proposed approach in the paper ""Non-Parametric Adaptation for Neural Machine Translation""?",From the training set using IDF similarity.,From the test set using random sampling.,From an external bilingual dictionary.,From monolingual data unrelated to the training set.,A
+1903.00058,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Non-Parametric Adaptation for Neural Machine Translation,"" which baseline systems do the authors use for comparison in their experiments?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",standard Transformer Base model,"Which baseline system did the authors use for comparison in their experiments in the paper ""Non-Parametric Adaptation for Neural Machine Translation""?",Convolutional Neural Network model,Phrase-based Statistical Machine Translation (SMT),LSTM-based model,standard Transformer Base model,D
+1903.00058,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Non-Parametric Adaptation for Neural Machine Translation,"" is the combination of the non-parametric retrieval mechanism and the neural network trained end-to-end?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Yes. The combination is trained end-to-end: ""The semi-parametric models were trained on 32 GPUs with each replica split over 2 GPUs, one to train the translation model and the other for computing the CSTM.""","According to the paper 'Non-Parametric Adaptation for Neural Machine Translation', how is the combination of the non-parametric retrieval mechanism and the neural network trained?",They are trained end-to-end together.,"Only the neural network is trained, the retrieval mechanism is fixed.",The retrieval mechanism is not used during training.,They are trained independently and then combined.,A
+1903.00058,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Non-Parametric Adaptation for Neural Machine Translation,"" which similarity measure is used for their n-gram retrieval approach?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Inverse document frequency (IDF) based similarity score.,Which similarity measure is used for n-gram retrieval in the paper 'Non-Parametric Adaptation for Neural Machine Translation'?,Euclidean distance.,Cosine similarity score.,Inverse document frequency (IDF) based similarity score.,Jaccard similarity coefficient.,C
+2002.08899,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Compositional Neural Machine Translation by Removing the Lexicon from Syntax,"" does the use of constrained neural units mean that word meanings are fixed across different contexts?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","No; constrained neural units separate word meaning from syntax, preventing context-invariant (fixed) meanings from being encoded in syntax representations, so word meanings are not fixed across contexts.","According to the paper, what effect does the use of constrained neural units have on word meanings across different contexts?","They separate word meaning from syntax, so meanings are not fixed across contexts.",They merge syntax and meaning into a single vector.,They eliminate context sensitivity from the neural model.,They ensure that word meanings are fixed across all contexts.,A
+2002.08899,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Compositional Neural Machine Translation by Removing the Lexicon from Syntax,"" do the authors present a quantitative analysis demonstrating knowledge distortions in their model?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Yes; the authors present quantitative analysis, including corpus-level results (mean precision on test sets) from damaged models, demonstrating knowledge distortions analogous to human aphasia.","Which of the following best describes the authors' approach to demonstrating knowledge distortions in their model in the paper ""Compositional Neural Machine Translation by Removing the Lexicon from Syntax""?",They present a completely new model without referencing knowledge distortions or providing analysis.,They discuss related work but do not analyze knowledge distortions in their own model.,"They present quantitative analysis, including corpus-level results from damaged models, showing knowledge distortions analogous to human aphasia.",They only provide qualitative observations without any quantitative analysis.,C
+2002.08899,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Compositional Neural Machine Translation by Removing the Lexicon from Syntax,"" how do the authors damage the different neural modules during their experiments?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Randomly initializing the weights of neural modules, resulting in loss of all learned information.",How do the authors damage the different neural modules in their experiments in the paper 'Compositional Neural Machine Translation by Removing the Lexicon from Syntax'?,By freezing the weights so they cannot be updated.,"By randomly initializing the weights, resulting in the loss of all learned information.",By deleting the modules entirely from the model.,By reducing the training data available to the modules.,B
+2002.02427,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Irony Detection in a Multilingual Context,"" which multilingual word representations are utilized for the irony detection task?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Multilingual word representation that learns a linear mapping from a source to a target embedding space; specifically, Conneau et al.'s approach for aligning embedding spaces across languages.",Which multilingual word representation is utilized for the irony detection task in the paper 'Irony Detection in a Multilingual Context'?,ELMo contextual embeddings,Conneau et al.'s approach for aligning embedding spaces across languages,GloVe embeddings without alignment,Word2Vec monolingual embeddings,B
+2002.02427,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Irony Detection in a Multilingual Context,"" do the authors discuss any cultural differences in the use of irony?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Yes; the authors discuss cultural differences, noting both shared pragmatic devices and similar text-based patterns in ironic tweets across European and non-European languages, but also highlight challenges due to informal language, dialects, and differences in language presentation.",What do the authors of 'Irony Detection in a Multilingual Context' say about cultural differences in the use of irony?,They focus only on technical aspects without addressing cultural context.,They discuss cultural differences and note both shared and unique aspects across languages.,They do not mention cultural differences at all.,They state that irony is used identically across all cultures.,B
+2002.02427,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Irony Detection in a Multilingual Context,"" which neural architectures are employed for irony detection?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Convolutional Neural Network (CNN),Which neural architecture is employed for irony detection in the paper 'Irony Detection in a Multilingual Context'?,Convolutional Neural Network (CNN),Recurrent Neural Network (RNN),Transformer,Long Short-Term Memory (LSTM),A
+2002.02427,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Irony Detection in a Multilingual Context,"" what specific text-based features are utilized for irony detection?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Language-independent features: punctuation marks, positive and negative emoticons, quotations, personal pronouns, tweet's length, named entities; language-dependent features: negation, opinion lexicons, opposition words.","Which of the following is NOT mentioned as a text-based feature for irony detection in the paper ""Irony Detection in a Multilingual Context""?",Punctuation marks,Positive and negative emoticons,Negation,Hashtag frequency,D
+2002.02427,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Irony Detection in a Multilingual Context,"" which monolingual word representations are utilized for the irony detection task?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","AraVec for Arabic, FastText for French, and Word2vec Google News for English.","Which combination of monolingual word representations was used for irony detection in the paper ""Irony Detection in a Multilingual Context""?","Word2vec for Arabic, BERT for French, and GloVe for English","GloVe for Arabic, FastText for French, and Word2vec for English","AraVec for Arabic, ELMo for French, and FastText for English","AraVec for Arabic, FastText for French, and Word2vec Google News for English",D
+1610.05243,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+Which dataset is used in the paper ""Pre-Translation for Neural Machine Translation""?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","All parallel data available for the WMT 2016, including the news commentary corpus, European parliament proceedings, and common crawl corpus.",Which dataset is used in the paper 'Pre-Translation for Neural Machine Translation'?,"All parallel data available for the WMT 2016, including the news commentary corpus, European parliament proceedings, and common crawl corpus.",Only the news commentary corpus from WMT 2016.,Randomly generated parallel corpora.,Only monolingual English data from WMT 2016.,A
+1610.05243,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Pre-Translation for Neural Machine Translation,"" how is the phrase-based machine translation (PBMT) system trained?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",systems were optimized on the tst2014 using Minimum error rate training (MERT),How was the PBMT system trained in the paper 'Pre-Translation for Neural Machine Translation'?,It was trained using cross-entropy loss on random data.,It was fine-tuned using reinforcement learning techniques.,It was optimized on tst2014 using Minimum error rate training (MERT).,It was optimized using grid search on the validation set.,C
+1610.05243,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+Which neural machine translation (NMT) architecture is used in the paper ""Pre-Translation for Neural Machine Translation""?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","trained using Nematus, default configuration",Which NMT architecture is used in the paper 'Pre-Translation for Neural Machine Translation'?,Nematus,Transformer,Fairseq,Marian,A
+1610.05243,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Pre-Translation for Neural Machine Translation,"" do the authors train their Neural Machine Translation (NMT) model using outputs generated by a Phrase-Based Machine Translation (PBMT) system?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",Yes.,"In the paper 'Pre-Translation for Neural Machine Translation,' how do the authors augment the training of their Neural Machine Translation (NMT) model?",They use outputs generated by a Phrase-Based Machine Translation (PBMT) system.,They only use human-translated data for training.,They train the NMT model without any additional augmentation.,They use outputs generated by an Automatic Speech Recognition (ASR) system.,A
+1910.11768,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Exploring Multilingual Syntactic Sentence Representations,"" which evaluation metrics do the authors use for language modelling?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","functional dissimilarity score, nearest neighbours experiment",Which of the following evaluation metrics do the authors use for language modelling in the paper 'Exploring Multilingual Syntactic Sentence Representations'?,Functional dissimilarity score and nearest neighbours experiment,ROUGE score and accuracy,Mean squared error and F1 score,BLEU score and perplexity,A
+1910.11768,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Exploring Multilingual Syntactic Sentence Representations,"" do the authors perform a quantitative analysis to evaluate the quality of the learned sentence embeddings?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Yes; the authors perform a quantitative analysis, as shown by high nearest neighbours accuracy indicating that syntactic information was successfully captured by the embeddings.",How did the authors of 'Exploring Multilingual Syntactic Sentence Representations' evaluate the quality of the learned sentence embeddings?,"They performed a quantitative analysis, such as measuring nearest neighbours accuracy.",They did not evaluate the embeddings at all.,They used a user study with human judges but did not report any numerical metrics.,They only provided anecdotal evidence without quantitative results.,A
+1910.11768,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Exploring Multilingual Syntactic Sentence Representations,"" do the authors evaluate their proposed sentence representations on any downstream tasks?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Yes; the authors evaluate their proposed sentence representations on downstream tasks via zero-shot transfer experiments, reporting 1-NN and 5-NN accuracies for multiple languages.",How did the authors of 'Exploring Multilingual Syntactic Sentence Representations' evaluate their proposed sentence representations?,They did not conduct any experimental evaluation.,They relied solely on qualitative analysis without any empirical evaluation.,They only compared their methods to word-level embeddings.,They evaluated their representations on downstream tasks using zero-shot transfer experiments across multiple languages.,D
+1910.11768,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+Which corpus is used in the paper ""Exploring Multilingual Syntactic Sentence Representations""?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Translations from Tatoeba and OpenSubtitles; 6 languages: English, Spanish, German, Dutch, Korean, Chinese Mandarin.",Which languages are included in the corpus used in the paper 'Exploring Multilingual Syntactic Sentence Representations'?,"English, Spanish, German, Dutch, Korean, Chinese Mandarin","German, Dutch, Russian, Hindi, Chinese Mandarin, Italian","English, Spanish, French, German, Italian, Korean","English, French, Italian, Portuguese, Japanese, Russian",A
+1810.03459,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Multilingual sequence-to-sequence speech recognition: architecture, transfer learning, and language modeling,"" what data do the authors use to train the language models?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}",BABEL speech corpus collected from the IARPA Babel program.,"Which data did the authors use to train the language models in the paper 'Multilingual sequence-to-sequence speech recognition: architecture, transfer learning, and language modeling'?",Common Voice dataset,BABEL speech corpus collected from the IARPA Babel program.,TIMIT corpus,LibriSpeech corpus,B
+1810.03459,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Multilingual sequence-to-sequence speech recognition: architecture, transfer learning, and language modeling,"" do the authors report BLEU scores as part of their evaluation metrics?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","No, the authors do not report BLEU scores as part of their evaluation metrics; they primarily use word error rate (WER) for assessment.","Which evaluation metric do the authors primarily use in the paper ""Multilingual sequence-to-sequence speech recognition: architecture, transfer learning, and language modeling""?",ROUGE Score,F1 Score,Word Error Rate (WER),BLEU Score,C
+1810.03459,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Multilingual sequence-to-sequence speech recognition: architecture, transfer learning, and language modeling,"" which languages are included in their experiments?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","Train languages: Cantonese, Bengali, Pashto, Turkish, Vietnamese, Haitian, Tamil, Kurdish, Tokpisin, Georgian; target languages: Assamese, Tagalog, Swahili, Lao.","Which of the following languages is listed as a train language in the experiments in the paper 'Multilingual sequence-to-sequence speech recognition: architecture, transfer learning, and language modeling'?",Assamese,Bengali,Swahili,French,B
+1810.03459,,"Please write a succinct answer to the following question.
+You do not need to restate the paper name or answer in complete sentences.
+
+<question>
+In the paper ""Multilingual sequence-to-sequence speech recognition: architecture, transfer learning, and language modeling,"" which specific architectures are investigated to enhance the sequence-to-sequence speech recognition model?
+</question>
+
+Provide your answer in the following format (output nothing else):
+
+
+{your answer here}","VGG-BLSTM, BLSTMP, character-level RNNLM (2-layer LSTM).",Which architectures are investigated in the paper to enhance sequence-to-sequence speech recognition?,"Multi-head Attention, ConvS2S, and Feedforward RNN","VGG-BLSTM, BLSTMP, and character-level RNNLM (2-layer LSTM)","ResNet, GRU, and phoneme-level LSTM","Transformer, CNN-TDNN, and Word-level RNNLM",B
