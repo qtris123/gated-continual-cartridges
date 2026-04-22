@@ -40,6 +40,17 @@ def multiple_choice(prediction: str, ground_truth: str, **kwargs) -> float:
     return float(pred_letter == gt_letter)
 
 
+def yes_no_match(prediction: str, ground_truth: str, **kwargs) -> float:
+    """Score yes/no answers by extracting yes or no from the prediction."""
+    pred = _extract_yes_no(prediction)
+    gt = ground_truth.strip().lower()
+    if gt not in ("yes", "no"):
+        gt = _extract_yes_no(ground_truth)
+    if pred is None or gt is None:
+        return exact_match(prediction, ground_truth)
+    return float(pred == gt)
+
+
 def longhealth_mc(prediction: str, ground_truth: str, **kwargs) -> float:
     """Scoring logic from cartridges.data.longhealth.evals — extract from <answer>
     tags, fuzzy-match against the option list, compare to ground truth."""
@@ -79,12 +90,34 @@ def _find_best_match(reference: str, candidates: list[str]) -> str:
 
 def _extract_mc_letter(text: str) -> str | None:
     text = text.strip()
+    # Try "Answer: X" format first (most reliable when model follows instructions)
+    match = re.search(r'[Aa]nswer:\s*([A-E])\b', text)
+    if match:
+        return match.group(1).upper()
+    # Fallback: any standalone letter A-E
     match = re.search(r'\b([A-E])\b', text.upper())
     if match:
         return match.group(1)
     if len(text) == 1 and text.upper() in "ABCDE":
         return text.upper()
     return None
+
+
+def _extract_yes_no(text: str) -> str | None:
+    text = text.strip()
+    # Try "Answer: Yes/No" format first
+    match = re.search(r'[Aa]nswer:\s*(yes|no)\b', text, re.IGNORECASE)
+    if match:
+        return match.group(1).lower()
+    # Fallback: starts with yes/no
+    lower = text.lower()
+    if lower.startswith("yes"):
+        return "yes"
+    if lower.startswith("no"):
+        return "no"
+    # Fallback: any yes/no in text
+    match = re.search(r'\b(yes|no)\b', text, re.IGNORECASE)
+    return match.group(1).lower() if match else None
 
 
 def _normalize_and_tokenize(text: str) -> list[str]:
@@ -100,5 +133,6 @@ SCORER_REGISTRY: dict[str, ScorerFn] = {
     "contains": contains_match,
     "f1": f1_score,
     "multiple_choice": multiple_choice,
+    "yes_no": yes_no_match,
     "longhealth_mc": longhealth_mc,
 }

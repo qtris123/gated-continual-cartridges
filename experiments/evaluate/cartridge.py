@@ -33,7 +33,8 @@ from torch.utils.data import DataLoader
 from tqdm.auto import tqdm
 from transformers import AutoTokenizer
 
-from cartridges.cache import AttnConfig, TrainableCache
+from cartridges.benchmark.scorers import multiple_choice, yes_no_match
+from cartridges.cache import TrainableCache
 from cartridges.datasets import DataSource, GenerateEvalDataset, LossEvalDataset
 from cartridges.generation import flex_generate
 from cartridges.models import FlexLlamaForCausalLM, FlexQwen3ForCausalLM, HFModelConfig
@@ -101,6 +102,41 @@ def evaluate_loss(
     }
 
 
+def _get_choice_token_ids(tokenizer: AutoTokenizer, question_type: str) -> dict[str, int]:
+    """Get token IDs for choice labels based on question type.
+
+    Encodes with a leading space because the model predicts ' B' (not 'B')
+    after 'Answer:' and ' Yes'/' No' as the first generated token.
+    """
+    if question_type == "mcq":
+        labels = [" A", " B", " C", " D"]
+    elif question_type == "yes_no":
+        labels = [" Yes", " No"]
+    else:
+        return {}
+    return {label.strip(): tokenizer.encode(label, add_special_tokens=False)[0] for label in labels}
+
+
+def _find_answer_token_position(gen_token_ids: list[int], tokenizer: AutoTokenizer) -> int | None:
+    """Find the position of 'Answer:' in generated tokens.
+
+    Returns the index of the last token of 'Answer:' so that logits at that
+    position predict the choice token (A/B/C/D or Yes/No).
+    """
+    # Encode "Answer:" — may be 1 or more tokens depending on tokenizer
+    answer_tokens = tokenizer.encode("Answer:", add_special_tokens=False)
+    answer_len = len(answer_tokens)
+    # Search from the end (the final "Answer:" is the one that matters)
+    for i in range(len(gen_token_ids) - answer_len, -1, -1):
+        if gen_token_ids[i:i + answer_len] == answer_tokens:
+            # Return position of last token of "Answer:"
+            # Logits at this position predicts it so low then 
+            # the next token (the choice)
+            return i + answer_len - 1
+    return None
+
+
+
 def generate_for_dataset(
     model: torch.nn.Module,
     tokenizer: AutoTokenizer,
@@ -108,42 +144,139 @@ def generate_for_dataset(
     eval_dataset: GenerateEvalDataset,
     device: str,
     max_new_tokens: int = 256,
+    eval_mode: str = "generate",
+    max_samples: int | None = None,
+    batch_size: int = 1,
 ) -> list[dict]:
+    # Pre-compute choice token IDs per question type (cached across questions)
+    choice_tokens_cache: dict[str, dict[str, int]] = {}
+
     results = []
+    n = min(len(eval_dataset), max_samples) if max_samples else len(eval_dataset)
+    print(f"  batch_size={batch_size}, total={n}, num_batches={-(-n // batch_size)}")
+    if device == "cuda":
+        torch.cuda.reset_peak_memory_stats()
+        print(f"  GPU memory before generation: {torch.cuda.memory_allocated() / 1024**3:.2f} GB")
 
-    for idx in tqdm(range(len(eval_dataset)), desc="Generating"):
-        element = eval_dataset[idx]
+    # Determine question type and choice token IDs for logprob collection
+    first_question_type = eval_dataset[0].metadata.get("question_type", "original") if n > 0 else "original"
+    collect_token_ids = None
+    if eval_mode == "generate-score" and first_question_type in ("mcq", "yes_no"):
+        if first_question_type not in choice_tokens_cache:
+            choice_tokens_cache[first_question_type] = _get_choice_token_ids(tokenizer, first_question_type)
+        # Map label -> token_id, we need the raw token IDs for collection
+        choice_map = choice_tokens_cache[first_question_type]  # e.g. {"A": 362, "B": 426, ...}
+        collect_token_ids = list(choice_map.values())
 
-        input_ids = element.input_ids.flatten().to(device)
-        seq_ids = torch.zeros_like(input_ids)
-        position_ids = torch.arange(len(input_ids), device=device)
+    for batch_start in tqdm(range(0, n, batch_size), desc="Generating"):
+        batch_end = min(batch_start + batch_size, n)
+        batch_elements = [eval_dataset[idx] for idx in range(batch_start, batch_end)]
+
+        # --- Batched generation: pack all questions with different seq_ids ---
+        all_input_ids = []
+        all_seq_ids = []
+        all_position_ids = []
+
+        for i, element in enumerate(batch_elements):
+            input_ids = element.input_ids.flatten().to(device)
+            all_input_ids.append(input_ids)
+            all_seq_ids.append(torch.full_like(input_ids, i))
+            all_position_ids.append(torch.arange(len(input_ids), device=device))
+
+        batched_input_ids = torch.cat(all_input_ids)
+        batched_seq_ids = torch.cat(all_seq_ids)
+        batched_position_ids = torch.cat(all_position_ids)
 
         with torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
-            generated_tokens = flex_generate(
+            gen_result = flex_generate(
                 model=model,
                 tokenizer=tokenizer,
-                input_ids=input_ids,
-                seq_ids=seq_ids,
-                position_ids=position_ids,
+                input_ids=batched_input_ids,
+                seq_ids=batched_seq_ids,
+                position_ids=batched_position_ids,
                 cache=cache,
                 max_new_tokens=max_new_tokens,
+                collect_token_ids=collect_token_ids,
             )
 
-        gen_token_ids = generated_tokens.get(0, [])
-        generated_text = tokenizer.decode(gen_token_ids, skip_special_tokens=True)
-
-        if isinstance(element.prompt, list):
-            question_text = element.prompt[-1].get("content", "") if element.prompt else ""
+        if collect_token_ids is not None:
+            generated_tokens, collected_logprobs = gen_result
         else:
-            question_text = element.prompt
+            generated_tokens = gen_result
+            collected_logprobs = None
 
-        results.append({
-            "question_id": element.convo_id,
-            "question": question_text,
-            "generated_answer": generated_text,
-            "reference_answer": element.answer,
-            **element.metadata,
-        })
+        # --- Post-generation processing per sample ---
+        for i, element in enumerate(batch_elements):
+            question_type = element.metadata.get("question_type", "original")
+            gen_token_ids = generated_tokens.get(i, [])
+            generated_text = tokenizer.decode(gen_token_ids, skip_special_tokens=True)
+
+            choice_logprobs = None
+            predicted_from_logits = None
+
+            # MCQ / Yes-No: look up logprobs at "Answer:" position from collected logits
+            if eval_mode == "generate-score" and question_type in ("mcq", "yes_no") and collected_logprobs is not None:
+                answer_pos = _find_answer_token_position(gen_token_ids, tokenizer)
+                # answer_pos is the index of the last token of "Answer:" in gen_token_ids.
+                # collected_logprobs[k] predicts gen_token_ids[k], so we need
+                # answer_pos + 1 to get logprobs predicting the choice token.
+                choice_pos = answer_pos + 1 if answer_pos is not None else None
+                if choice_pos is not None and choice_pos < len(collected_logprobs.get(i, [])):
+                    step_logprobs = collected_logprobs[i][choice_pos]
+                    # Convert from {token_id: logprob} to {label: logprob}
+                    choice_logprobs = {
+                        label: step_logprobs[tid]
+                        for label, tid in choice_map.items()
+                    }
+                    predicted_from_logits = max(choice_logprobs, key=choice_logprobs.get)
+
+            if isinstance(element.prompt, list):
+                question_text = element.prompt[-1].get("content", "") if element.prompt else ""
+            else:
+                question_text = element.prompt
+
+            result = {
+                "question_id": element.convo_id,
+                "question": question_text,
+                "generated_answer": generated_text,
+                "reference_answer": element.answer,
+                **element.metadata,
+            }
+
+            # --- Scoring (MCQ / Yes-No only, generate-score mode) ---
+            if eval_mode == "generate-score" and question_type == "mcq":
+                result["score"] = multiple_choice(generated_text, element.answer)
+                result["correct"] = result["score"] == 1.0
+                result["scorer"] = "multiple_choice"
+            elif eval_mode == "generate-score" and question_type == "yes_no":
+                result["score"] = yes_no_match(generated_text, element.answer)
+                result["correct"] = result["score"] == 1.0
+                result["scorer"] = "yes_no"
+
+            if choice_logprobs is not None:
+                result["choice_logprobs"] = choice_logprobs
+                result["predicted_choice_from_logits"] = predicted_from_logits
+
+            results.append(result)
+
+    if device == "cuda":
+        print(f"  GPU peak memory during generation: {torch.cuda.max_memory_allocated() / 1024**3:.2f} GB")
+
+    # --- Print accuracy summary for scored questions ---
+    if eval_mode == "generate-score":
+        scored = [r for r in results if "score" in r]
+        if scored:
+            total_score = sum(r["score"] for r in scored)
+            print(f"\n  Accuracy: {total_score}/{len(scored)} = {total_score/len(scored):.2%}")
+
+            # Breakdown by category
+            from collections import defaultdict
+            by_cat = defaultdict(list)
+            for r in scored:
+                by_cat[r.get("category", "unknown")].append(r["score"])
+            for cat, scores in sorted(by_cat.items()):
+                acc = sum(scores) / len(scores)
+                print(f"    {cat}: {sum(scores):.0f}/{len(scores)} = {acc:.2%}")
 
     return results
 
@@ -158,6 +291,9 @@ def run_eval(
     output_dir: Path,
     label: str,
     model_name: str,
+    eval_mode: str = "generate",
+    max_samples: int | None = None,
+    batch_size: int = 1,
 ) -> dict:
     """Run loss + generation eval for one (cache, eval_set) pair. Returns perplexity result dict."""
     print(f"\n--- {label} ---")
@@ -193,7 +329,51 @@ def run_eval(
         eval_dataset=gen_dataset,
         device=device,
         max_new_tokens=max_new_tokens,
+        eval_mode=eval_mode,
+        max_samples=max_samples,
+        batch_size=batch_size,
     )
+
+    # Compute accuracy breakdown and add to ppl_result
+    if eval_mode == "generate-score":
+        from collections import defaultdict
+        scored = [r for r in generations if "score" in r]
+        if scored:
+            total_correct = sum(r["score"] for r in scored)
+            ppl_result["accuracy"] = total_correct / len(scored)
+            ppl_result["num_correct"] = int(total_correct)
+            ppl_result["num_scored"] = len(scored)
+
+            # Breakdown by category
+            by_cat = defaultdict(list)
+            for r in scored:
+                by_cat[r.get("category", "unknown")].append(r["score"])
+            ppl_result["accuracy_by_category"] = {
+                cat: {
+                    "accuracy": sum(scores) / len(scores),
+                    "num_correct": int(sum(scores)),
+                    "num_total": len(scores),
+                }
+                for cat, scores in sorted(by_cat.items())
+            }
+
+            # Breakdown by question_type (useful for mixed eval sets)
+            by_type = defaultdict(list)
+            for r in scored:
+                by_type[r.get("question_type", "unknown")].append(r["score"])
+            ppl_result["accuracy_by_question_type"] = {
+                qtype: {
+                    "accuracy": sum(scores) / len(scores),
+                    "num_correct": int(sum(scores)),
+                    "num_total": len(scores),
+                }
+                for qtype, scores in sorted(by_type.items())
+            }
+
+    # Remove verbose cache repr, keep just the token counts
+    ppl_result.pop("cache", None)
+    ppl_result["cache_frozen_tokens"] = cache._num_frozen_tokens
+    ppl_result["cache_trainable_tokens"] = cache._num_trainable_tokens
 
     ppl_path = output_dir / f"perplexity_{file_tag}.json"
     gen_path = output_dir / f"generations_{file_tag}.json"
@@ -208,56 +388,56 @@ def run_eval(
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Evaluate cartridges on plasticity and/or forgetting eval sets",
+        description="Evaluate a cartridge on an eval set.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""Examples:
+  # Simple eval
+  python cartridge.py --cache path/to/cache.pt --eval-data path/to/eval.parquet --model meta-llama/Llama-3.2-3B-Instruct
+
+  # Multiple eval sets at once
+  python cartridge.py --cache path/to/cache.pt --eval-data a.parquet b.parquet --model meta-llama/Llama-3.2-3B-Instruct
+
+  # Custom label for output filenames
+  python cartridge.py --cache path/to/cache.pt --eval-data eval.parquet --model ... --label initial_amd2021
+""",
     )
     parser.add_argument(
-        "--cache", type=str, default=None,
-        help="Path to continual (phase 2) cartridge checkpoint",
+        "--cache", type=str, required=True,
+        help="Path to cartridge checkpoint (.pt file)",
     )
     parser.add_argument(
-        "--initial-cache", type=str, default=None,
-        help="Path to initial (phase 1) cartridge checkpoint",
+        "--eval-data", type=str, nargs="+", required=True,
+        help="Path(s) to eval parquet file(s). Can pass multiple.",
     )
     parser.add_argument(
-        "--eval-data", type=str,
-        default=os.environ.get("EVAL_DATA_PATH"),
-        help="Alias for --phase2-eval (backward compat)",
+        "--model", type=str, default=MODEL_NAME,
+        required=MODEL_NAME is None,
+        help="HuggingFace model ID (or set MODEL_NAME env var)",
     )
-    parser.add_argument(
-        "--phase1-eval", type=str, default=None,
-        help="Path to phase-1 eval parquet (forgetting detection, doc_a only)",
-    )
-    parser.add_argument(
-        "--phase2-eval", type=str, default=None,
-        help="Path to phase-2 eval parquet (plasticity, doc_a + doc_b)",
-    )
-    parser.add_argument("--model", type=str, default=MODEL_NAME, required=MODEL_NAME is None, help="HuggingFace model ID (or set MODEL_NAME env var)")
     parser.add_argument("--device", type=str, default="cuda")
     parser.add_argument(
         "--output-dir", type=str,
         default=os.environ.get("CARTRIDGES_OUTPUT_DIR", "."),
         help="Directory to save evaluation results",
     )
-    parser.add_argument("--max-new-tokens", type=int, default=8192)
+    parser.add_argument("--max-new-tokens", type=int, default=2048)
+    parser.add_argument("--max-samples", type=int, default=None,
+                        help="Limit number of generation samples (for quick testing)")
+    parser.add_argument("--batch-size", type=int, default=8,
+                        help="Number of questions to generate in parallel (default: 8)")
     parser.add_argument(
-        "--check-forgetting", action="store_true",
+        "--eval-mode", type=str, default="generate-score",
+        choices=["generate", "generate-score"],
         help=(
-            "Also run continual × phase1 (forgetting check). "
-            "Useful for A→B experiments (e.g. AMD→Pepsi) where domains are disjoint. "
-            "Not needed for A→delta_A (e.g. AMD2021→AMD2022) where phase1 answers change."
+            "'generate': text generation only. "
+            "'generate-score': generation + scoring + first-token logits (default)."
         ),
     )
+    parser.add_argument(
+        "--label", type=str, default=None,
+        help="Optional label for output filenames. Defaults to the eval parquet stem.",
+    )
     args = parser.parse_args()
-
-    # --phase2-eval / --eval-data aliasing
-    phase2_eval = args.phase2_eval or args.eval_data
-    phase1_eval = args.phase1_eval
-
-    if not args.cache and not args.initial_cache:
-        parser.error("At least one of --cache or --initial-cache is required.")
-    if not phase1_eval and not phase2_eval:
-        parser.error("At least one of --phase1-eval / --phase2-eval / --eval-data is required.")
 
     device = args.device
     model_name = args.model
@@ -276,29 +456,11 @@ def main():
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    cache = load_cache(args.cache, device)
+
     all_results: list[dict] = []
-
-    # Build list of (cache_path, cache_label, eval_path, eval_label) to run
-    runs: list[tuple[str, str, str, str]] = []
-
-    if args.initial_cache and phase1_eval:
-        runs.append((args.initial_cache, "initial", phase1_eval, "phase1_baseline"))
-    if args.cache and phase1_eval and args.check_forgetting:
-        runs.append((args.cache, "continual", phase1_eval, "phase1_forgetting"))
-    if args.cache and phase2_eval:
-        runs.append((args.cache, "continual", phase2_eval, "phase2_plasticity"))
-    # Fallback: single cache + single eval (original behaviour)
-    if not runs:
-        cache_path = args.cache or args.initial_cache
-        eval_path = phase2_eval or phase1_eval
-        runs.append((cache_path, "cache", eval_path, "eval"))
-
-    loaded_caches: dict[str, TrainableCache] = {}
-    for cache_path, cache_label, eval_path, eval_label in runs:
-        if cache_path not in loaded_caches:
-            loaded_caches[cache_path] = load_cache(cache_path, device)
-        cache = loaded_caches[cache_path]
-        label = f"{cache_label}_x_{eval_label}"
+    for eval_path in args.eval_data:
+        label = args.label or Path(eval_path).stem
         result = run_eval(
             model=model,
             tokenizer=tokenizer,
@@ -309,6 +471,9 @@ def main():
             output_dir=output_dir,
             label=label,
             model_name=model_name,
+            eval_mode=args.eval_mode,
+            max_samples=args.max_samples,
+            batch_size=args.batch_size,
         )
         all_results.append(result)
 
@@ -320,18 +485,9 @@ def main():
         print(f"{'Label':<40} {'log-ppl':>8}  {'tokens':>8}")
         print("-" * 60)
         for r in all_results:
-            print(f"  {r['label']:<38} {r['log_perplexity']:>8.4f}  {r['num_tokens']:>8}")
+            acc_str = f"  acc={r['accuracy']:.2%}" if "accuracy" in r else ""
+            print(f"  {r['label']:<38} {r['log_perplexity']:>8.4f}  {r['num_tokens']:>8}{acc_str}")
         print("=" * 60)
-
-        model_short = model_name.split("/")[-1]
-        cartridge_size = all_results[0].get("cartridge_tokens", "unknown")
-        eval_stems = "_".join(dict.fromkeys(
-            Path(r["eval_set"]).stem for r in all_results
-        ))
-        summary_path = output_dir / f"summary_{model_short}_{cartridge_size}tok_{eval_stems}.json"
-        with open(summary_path, "w") as f:
-            json.dump(all_results, f, indent=2)
-        print(f"\nSummary saved to {summary_path}")
 
 
 if __name__ == "__main__":

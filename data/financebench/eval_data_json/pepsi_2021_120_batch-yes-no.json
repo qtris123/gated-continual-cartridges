@@ -1,0 +1,1699 @@
+{
+  "description": "Yes-No eval questions from pepsi_2021_120_batch-yes-no.csv",
+  "doc_source": "pepsi_2021",
+  "question_type": "yes_no",
+  "questions": {
+    "factual": [
+      {
+        "id": "factual_F01",
+        "question": "Was PepsiCo's aggregate market value of common stock held by nonaffiliates as of June 11, 2021, $203.9 billion?",
+        "golden_answer": "Yes",
+        "original_question": "What was PepsiCo's aggregate market value of common stock held by nonaffiliates as of June 11, 2021?",
+        "original_answer": "$203.9 billion"
+      },
+      {
+        "id": "factual_F01",
+        "question": "Was PepsiCo's aggregate market value of common stock held by nonaffiliates as of June 11, 2021, less than $100 billion?",
+        "golden_answer": "No",
+        "original_question": "What was PepsiCo's aggregate market value of common stock held by nonaffiliates as of June 11, 2021?",
+        "original_answer": "$203.9 billion"
+      },
+      {
+        "id": "factual_F02",
+        "question": "As of February 3, 2022, were more than one billion shares of PepsiCo common stock outstanding?",
+        "golden_answer": "Yes",
+        "original_question": "How many shares of PepsiCo common stock were outstanding as of February 3, 2022?",
+        "original_answer": "1,383,451,400"
+      },
+      {
+        "id": "factual_F02",
+        "question": "As of February 3, 2022, were fewer than one million shares of PepsiCo common stock outstanding?",
+        "golden_answer": "No",
+        "original_question": "How many shares of PepsiCo common stock were outstanding as of February 3, 2022?",
+        "original_answer": "1,383,451,400"
+      },
+      {
+        "id": "factual_F03",
+        "question": "Is PepsiCo's commission file number 1-1183?",
+        "golden_answer": "Yes",
+        "original_question": "What is PepsiCo's commission file number?",
+        "original_answer": "1-1183"
+      },
+      {
+        "id": "factual_F03",
+        "question": "Is PepsiCo's commission file number 2-4567?",
+        "golden_answer": "No",
+        "original_question": "What is PepsiCo's commission file number?",
+        "original_answer": "1-1183"
+      },
+      {
+        "id": "factual_F04",
+        "question": "Is PepsiCo incorporated in North Carolina according to the filing cover page?",
+        "golden_answer": "Yes",
+        "original_question": "In which state is PepsiCo incorporated according to the filing cover page?",
+        "original_answer": "North Carolina"
+      },
+      {
+        "id": "factual_F04",
+        "question": "Is PepsiCo incorporated in California according to the filing cover page?",
+        "golden_answer": "No",
+        "original_question": "In which state is PepsiCo incorporated according to the filing cover page?",
+        "original_answer": "North Carolina"
+      },
+      {
+        "id": "factual_F05",
+        "question": "Is PepsiCo's I.R.S. Employer Identification No. 13-1584302?",
+        "golden_answer": "Yes",
+        "original_question": "What is PepsiCo's I.R.S. Employer Identification No.?",
+        "original_answer": "13-1584302"
+      },
+      {
+        "id": "factual_F05",
+        "question": "Is PepsiCo's I.R.S. Employer Identification No. 12-3456789?",
+        "golden_answer": "No",
+        "original_question": "What is PepsiCo's I.R.S. Employer Identification No.?",
+        "original_answer": "13-1584302"
+      },
+      {
+        "id": "factual_F06",
+        "question": "Is PEP the trading symbol for PepsiCo common stock?",
+        "golden_answer": "Yes",
+        "original_question": "What is the trading symbol for PepsiCo common stock?",
+        "original_answer": "PEP"
+      },
+      {
+        "id": "factual_F06",
+        "question": "Is KO the trading symbol for PepsiCo common stock?",
+        "golden_answer": "No",
+        "original_question": "What is the trading symbol for PepsiCo common stock?",
+        "original_answer": "PEP"
+      },
+      {
+        "id": "factual_F07",
+        "question": "Is 700 Anderson Hill Road, Purchase, New York 10577 the address of PepsiCo's principal executive offices?",
+        "golden_answer": "Yes",
+        "original_question": "What is the address of PepsiCo's principal executive offices?",
+        "original_answer": "700 Anderson Hill Road, Purchase, New York 10577"
+      },
+      {
+        "id": "factual_F07",
+        "question": "Is PepsiCo's principal executive office located at 1 Pepsi Way, Chicago, Illinois 60601?",
+        "golden_answer": "No",
+        "original_question": "What is the address of PepsiCo's principal executive offices?",
+        "original_answer": "700 Anderson Hill Road, Purchase, New York 10577"
+      },
+      {
+        "id": "factual_F08",
+        "question": "Was PepsiCo's 2021 consolidated net revenue $79,474 million?",
+        "golden_answer": "Yes",
+        "original_question": "What was PepsiCo's 2021 consolidated net revenue?",
+        "original_answer": "$79,474 million"
+      },
+      {
+        "id": "factual_F08",
+        "question": "Was PepsiCo's 2021 consolidated net revenue $50,000 million?",
+        "golden_answer": "No",
+        "original_question": "What was PepsiCo's 2021 consolidated net revenue?",
+        "original_answer": "$79,474 million"
+      },
+      {
+        "id": "factual_F09",
+        "question": "Was PepsiCo's 2021 operating profit $11,162 million?",
+        "golden_answer": "Yes",
+        "original_question": "What was PepsiCo's 2021 operating profit?",
+        "original_answer": "$11,162 million"
+      },
+      {
+        "id": "factual_F09",
+        "question": "Was PepsiCo's 2021 operating profit $5,000 million?",
+        "golden_answer": "No",
+        "original_question": "What was PepsiCo's 2021 operating profit?",
+        "original_answer": "$11,162 million"
+      },
+      {
+        "id": "factual_F10",
+        "question": "Was the diluted net income attributable to PepsiCo per common share in 2021 $5.49?",
+        "golden_answer": "Yes",
+        "original_question": "What was diluted net income attributable to PepsiCo per common share in 2021?",
+        "original_answer": "$5.49"
+      },
+      {
+        "id": "factual_F10",
+        "question": "Was the diluted net income attributable to PepsiCo per common share in 2021 $6.10?",
+        "golden_answer": "No",
+        "original_question": "What was diluted net income attributable to PepsiCo per common share in 2021?",
+        "original_answer": "$5.49"
+      },
+      {
+        "id": "factual_F11",
+        "question": "Was PepsiCo's annual tax rate in 2021 higher than 20%?",
+        "golden_answer": "Yes",
+        "original_question": "What was PepsiCo's annual tax rate in 2021?",
+        "original_answer": "21.8%"
+      },
+      {
+        "id": "factual_F11",
+        "question": "Was PepsiCo's annual tax rate in 2021 below 15%?",
+        "golden_answer": "No",
+        "original_question": "What was PepsiCo's annual tax rate in 2021?",
+        "original_answer": "21.8%"
+      },
+      {
+        "id": "factual_F12",
+        "question": "Is the number of reportable segments that PepsiCo has greater than 5?",
+        "golden_answer": "Yes",
+        "original_question": "How many reportable segments does PepsiCo have?",
+        "original_answer": "7"
+      },
+      {
+        "id": "factual_F12",
+        "question": "Does PepsiCo have 4 reportable segments?",
+        "golden_answer": "No",
+        "original_question": "How many reportable segments does PepsiCo have?",
+        "original_answer": "7"
+      },
+      {
+        "id": "factual_F13",
+        "question": "Does the PBNA segment include beverage businesses in the United States and Canada?",
+        "golden_answer": "Yes",
+        "original_question": "Which segment includes beverage businesses in the United States and Canada?",
+        "original_answer": "PBNA"
+      },
+      {
+        "id": "factual_F13",
+        "question": "Is the PBNA segment unrelated to beverage businesses in the United States and Canada?",
+        "golden_answer": "No",
+        "original_question": "Which segment includes beverage businesses in the United States and Canada?",
+        "original_answer": "PBNA"
+      },
+      {
+        "id": "factual_F14",
+        "question": "Was 13% of consolidated net revenue from Walmart and its affiliates in 2021?",
+        "golden_answer": "Yes",
+        "original_question": "What percentage of consolidated net revenue came from Walmart and its affiliates in 2021?",
+        "original_answer": "13%"
+      },
+      {
+        "id": "factual_F14",
+        "question": "Did more than 20% of consolidated net revenue come from Walmart and its affiliates in 2021?",
+        "golden_answer": "No",
+        "original_question": "What percentage of consolidated net revenue came from Walmart and its affiliates in 2021?",
+        "original_answer": "13%"
+      },
+      {
+        "id": "factual_F15",
+        "question": "As of December 25, 2021, did PepsiCo have more than 300,000 employees worldwide?",
+        "golden_answer": "Yes",
+        "original_question": "How many employees did PepsiCo have worldwide as of December 25, 2021?",
+        "original_answer": "309,000"
+      },
+      {
+        "id": "factual_F15",
+        "question": "As of December 25, 2021, did PepsiCo have less than 200,000 employees worldwide?",
+        "golden_answer": "No",
+        "original_question": "How many employees did PepsiCo have worldwide as of December 25, 2021?",
+        "original_answer": "309,000"
+      },
+      {
+        "id": "factual_F16",
+        "question": "Did PepsiCo employees complete over 1,000,000 hours of training in 2021?",
+        "golden_answer": "Yes",
+        "original_question": "How many hours of training did PepsiCo employees complete in 2021?",
+        "original_answer": "over 1,000,000 hours"
+      },
+      {
+        "id": "factual_F16",
+        "question": "Did PepsiCo employees complete less than 500,000 hours of training in 2021?",
+        "golden_answer": "No",
+        "original_question": "How many hours of training did PepsiCo employees complete in 2021?",
+        "original_answer": "over 1,000,000 hours"
+      },
+      {
+        "id": "factual_F17",
+        "question": "Was David J. Flavell appointed Executive Vice President, General Counsel and Corporate Secretary in March 2021?",
+        "golden_answer": "Yes",
+        "original_question": "Who was appointed Executive Vice President, General Counsel and Corporate Secretary in March 2021?",
+        "original_answer": "David J. Flavell"
+      },
+      {
+        "id": "factual_F17",
+        "question": "Was Jane Smith appointed Executive Vice President, General Counsel and Corporate Secretary in March 2021?",
+        "golden_answer": "No",
+        "original_question": "Who was appointed Executive Vice President, General Counsel and Corporate Secretary in March 2021?",
+        "original_answer": "David J. Flavell"
+      },
+      {
+        "id": "factual_F18",
+        "question": "Was the quarterly dividend declared on February 2, 2022, $1.075 per share?",
+        "golden_answer": "Yes",
+        "original_question": "What was the quarterly dividend declared on February 2, 2022?",
+        "original_answer": "$1.075 per share"
+      },
+      {
+        "id": "factual_F18",
+        "question": "Was the quarterly dividend declared on February 2, 2022, $2.00 per share?",
+        "golden_answer": "No",
+        "original_question": "What was the quarterly dividend declared on February 2, 2022?",
+        "original_answer": "$1.075 per share"
+      },
+      {
+        "id": "factual_F19",
+        "question": "Was the size of the 2022 share repurchase program announced on February 10, 2022 $10.0 billion?",
+        "golden_answer": "Yes",
+        "original_question": "What was the size of the 2022 share repurchase program announced on February 10, 2022?",
+        "original_answer": "$10.0 billion"
+      },
+      {
+        "id": "factual_F19",
+        "question": "Was the 2022 share repurchase program announced on February 10, 2022 valued at $5.0 billion?",
+        "golden_answer": "No",
+        "original_question": "What was the size of the 2022 share repurchase program announced on February 10, 2022?",
+        "original_answer": "$10.0 billion"
+      },
+      {
+        "id": "factual_F20",
+        "question": "Is KPMG LLP the independent registered public accounting firm that audited PepsiCo's 2021 financial statements?",
+        "golden_answer": "Yes",
+        "original_question": "Which independent registered public accounting firm audited PepsiCo's 2021 financial statements?",
+        "original_answer": "KPMG LLP"
+      },
+      {
+        "id": "factual_F20",
+        "question": "Was Deloitte the independent registered public accounting firm that audited PepsiCo's 2021 financial statements?",
+        "golden_answer": "No",
+        "original_question": "Which independent registered public accounting firm audited PepsiCo's 2021 financial statements?",
+        "original_answer": "KPMG LLP"
+      }
+    ],
+    "knowledge": [
+      {
+        "id": "knowledge_K01",
+        "question": "Was Delaware the first U.S. state to ratify the Constitution in 1787?",
+        "golden_answer": "Yes",
+        "original_question": "PepsiCo says it was incorporated in Delaware in 1919. In what year was Delaware the first U.S. state to ratify the Constitution?",
+        "original_answer": "1787"
+      },
+      {
+        "id": "knowledge_K01",
+        "question": "Did Delaware ratify the Constitution after 1800?",
+        "golden_answer": "No",
+        "original_question": "PepsiCo says it was incorporated in Delaware in 1919. In what year was Delaware the first U.S. state to ratify the Constitution?",
+        "original_answer": "1787"
+      },
+      {
+        "id": "knowledge_K02",
+        "question": "Is Purchase located in Westchester County, New York?",
+        "golden_answer": "Yes",
+        "original_question": "PepsiCo says its principal executive office is in Purchase, New York. In which New York county is Purchase located?",
+        "original_answer": "Westchester County"
+      },
+      {
+        "id": "knowledge_K02",
+        "question": "Is Purchase located in Kings County, New York?",
+        "golden_answer": "No",
+        "original_question": "PepsiCo says its principal executive office is in Purchase, New York. In which New York county is Purchase located?",
+        "original_answer": "Westchester County"
+      },
+      {
+        "id": "knowledge_K03",
+        "question": "Was Ramon L. Laguarta, the CEO of PepsiCo, born in Spain?",
+        "golden_answer": "Yes",
+        "original_question": "PepsiCo identifies Ramon L. Laguarta as CEO. What country was he born in?",
+        "original_answer": "Spain"
+      },
+      {
+        "id": "knowledge_K03",
+        "question": "Was Ramon L. Laguarta, the CEO of PepsiCo, born in Italy?",
+        "golden_answer": "No",
+        "original_question": "PepsiCo identifies Ramon L. Laguarta as CEO. What country was he born in?",
+        "original_answer": "Spain"
+      },
+      {
+        "id": "knowledge_K04",
+        "question": "Was The Coca-Cola Company founded in the 19th century?",
+        "golden_answer": "Yes",
+        "original_question": "PepsiCo notes that The Coca-Cola Company is its primary beverage competitor. In what year was The Coca-Cola Company founded?",
+        "original_answer": "1892"
+      },
+      {
+        "id": "knowledge_K04",
+        "question": "Was The Coca-Cola Company founded in 1912?",
+        "golden_answer": "No",
+        "original_question": "PepsiCo notes that The Coca-Cola Company is its primary beverage competitor. In what year was The Coca-Cola Company founded?",
+        "original_answer": "1892"
+      },
+      {
+        "id": "knowledge_K05",
+        "question": "Was Starbucks founded in the 20th century?",
+        "golden_answer": "Yes",
+        "original_question": "PepsiCo mentions a ready-to-drink coffee joint venture with Starbucks. In what year was Starbucks founded?",
+        "original_answer": "1971"
+      },
+      {
+        "id": "knowledge_K05",
+        "question": "Was Starbucks founded in the year 1995?",
+        "golden_answer": "No",
+        "original_question": "PepsiCo mentions a ready-to-drink coffee joint venture with Starbucks. In what year was Starbucks founded?",
+        "original_answer": "1971"
+      },
+      {
+        "id": "knowledge_K06",
+        "question": "Was Unilever formed in the 20th century?",
+        "golden_answer": "Yes",
+        "original_question": "PepsiCo refers to a joint venture with Unilever under the Lipton brand. In what year was Unilever formed?",
+        "original_answer": "1929"
+      },
+      {
+        "id": "knowledge_K06",
+        "question": "Was Unilever formed after the year 1950?",
+        "golden_answer": "No",
+        "original_question": "PepsiCo refers to a joint venture with Unilever under the Lipton brand. In what year was Unilever formed?",
+        "original_answer": "1929"
+      },
+      {
+        "id": "knowledge_K07",
+        "question": "Is the SIX Swiss Exchange based in Zurich?",
+        "golden_answer": "Yes",
+        "original_question": "PepsiCo states that its common stock is listed on the SIX Swiss Exchange. In which city is the SIX Swiss Exchange based?",
+        "original_answer": "Zurich"
+      },
+      {
+        "id": "knowledge_K07",
+        "question": "Is the SIX Swiss Exchange based in Geneva?",
+        "golden_answer": "No",
+        "original_question": "PepsiCo states that its common stock is listed on the SIX Swiss Exchange. In which city is the SIX Swiss Exchange based?",
+        "original_answer": "Zurich"
+      },
+      {
+        "id": "knowledge_K08",
+        "question": "Is PAI Partners headquartered in France?",
+        "golden_answer": "Yes",
+        "original_question": "PepsiCo says it sold Tropicana brands to PAI Partners. In what country is PAI Partners headquartered?",
+        "original_answer": "France"
+      },
+      {
+        "id": "knowledge_K08",
+        "question": "Is PAI Partners headquartered in Germany?",
+        "golden_answer": "No",
+        "original_question": "PepsiCo says it sold Tropicana brands to PAI Partners. In what country is PAI Partners headquartered?",
+        "original_answer": "France"
+      },
+      {
+        "id": "knowledge_K09",
+        "question": "Is Lehavim located in the Southern District of Israel?",
+        "golden_answer": "Yes",
+        "original_question": "PepsiCo lists a manufacturing plant in Lehavim, Israel. In which district of Israel is Lehavim located?",
+        "original_answer": "Southern District"
+      },
+      {
+        "id": "knowledge_K09",
+        "question": "Is Lehavim located in the Northern District of Israel?",
+        "golden_answer": "No",
+        "original_question": "PepsiCo lists a manufacturing plant in Lehavim, Israel. In which district of Israel is Lehavim located?",
+        "original_answer": "Southern District"
+      },
+      {
+        "id": "knowledge_K10",
+        "question": "Is Wake Forest University historically associated with Winston-Salem through the Reynolds tobacco fortune?",
+        "golden_answer": "Yes",
+        "original_question": "PepsiCo lists Winston-Salem, North Carolina as a shared service center location. What university is historically associated with Winston-Salem through the Reynolds tobacco fortune?",
+        "original_answer": "Wake Forest University"
+      },
+      {
+        "id": "knowledge_K10",
+        "question": "Is Duke University historically associated with Winston-Salem through the Reynolds tobacco fortune?",
+        "golden_answer": "No",
+        "original_question": "PepsiCo lists Winston-Salem, North Carolina as a shared service center location. What university is historically associated with Winston-Salem through the Reynolds tobacco fortune?",
+        "original_answer": "Wake Forest University"
+      },
+      {
+        "id": "knowledge_K11",
+        "question": "Was SodaStream founded in the United Kingdom?",
+        "golden_answer": "Yes",
+        "original_question": "PepsiCo describes SodaStream as already sold in more than 40 countries. In what country was SodaStream founded?",
+        "original_answer": "United Kingdom"
+      },
+      {
+        "id": "knowledge_K11",
+        "question": "Was SodaStream founded in the United States?",
+        "golden_answer": "No",
+        "original_question": "PepsiCo describes SodaStream as already sold in more than 40 countries. In what country was SodaStream founded?",
+        "original_answer": "United Kingdom"
+      },
+      {
+        "id": "knowledge_K12",
+        "question": "Is PopCorners a snack brand owned by BFY Brands?",
+        "golden_answer": "Yes",
+        "original_question": "PepsiCo mentions BFY Brands as an acquisition. What snack brand is BFY Brands best known for owning?",
+        "original_answer": "PopCorners"
+      },
+      {
+        "id": "knowledge_K12",
+        "question": "Is Cheetos the snack brand BFY Brands is best known for owning?",
+        "golden_answer": "No",
+        "original_question": "PepsiCo mentions BFY Brands as an acquisition. What snack brand is BFY Brands best known for owning?",
+        "original_answer": "PopCorners"
+      },
+      {
+        "id": "knowledge_K13",
+        "question": "Is Rockstar primarily known for energy drinks?",
+        "golden_answer": "Yes",
+        "original_question": "PepsiCo says Rockstar was acquired in 2020. What industry is Rockstar primarily known for?",
+        "original_answer": "energy drinks"
+      },
+      {
+        "id": "knowledge_K13",
+        "question": "Is Rockstar primarily known for producing electronic devices?",
+        "golden_answer": "No",
+        "original_question": "PepsiCo says Rockstar was acquired in 2020. What industry is Rockstar primarily known for?",
+        "original_answer": "energy drinks"
+      },
+      {
+        "id": "knowledge_K14",
+        "question": "Does the acronym 'VPX' in Vital Pharmaceuticals' brand stand for 'Vital Pharmaceuticals'?",
+        "golden_answer": "Yes",
+        "original_question": "PepsiCo refers to Bang Energy distributed by Vital Pharmaceuticals. What does the acronym in Vital Pharmaceuticals' brand VPX stand for?",
+        "original_answer": "Vital Pharmaceuticals"
+      },
+      {
+        "id": "knowledge_K14",
+        "question": "Does the acronym 'VPX' in Vital Pharmaceuticals' brand stand for 'Very Powerful eXercise'?",
+        "golden_answer": "No",
+        "original_question": "PepsiCo refers to Bang Energy distributed by Vital Pharmaceuticals. What does the acronym in Vital Pharmaceuticals' brand VPX stand for?",
+        "original_answer": "Vital Pharmaceuticals"
+      },
+      {
+        "id": "knowledge_K15",
+        "question": "Is NYSE the primary stock exchange in the U.S. where Visa Inc. is listed?",
+        "golden_answer": "Yes",
+        "original_question": "PepsiCo names Visa Inc. as a board affiliation for Ramon Laguarta. What is Visa's primary stock exchange in the U.S.?",
+        "original_answer": "NYSE"
+      },
+      {
+        "id": "knowledge_K15",
+        "question": "Is NASDAQ the primary stock exchange in the U.S. where Visa Inc. is listed?",
+        "golden_answer": "No",
+        "original_question": "PepsiCo names Visa Inc. as a board affiliation for Ramon Laguarta. What is Visa's primary stock exchange in the U.S.?",
+        "original_answer": "NYSE"
+      },
+      {
+        "id": "knowledge_K16",
+        "question": "Is the number of United Nations member states less than 200?",
+        "golden_answer": "Yes",
+        "original_question": "PepsiCo says it serves consumers in more than 200 countries and territories. Roughly how many sovereign states are members of the United Nations today?",
+        "original_answer": "193"
+      },
+      {
+        "id": "knowledge_K16",
+        "question": "Are there more than 200 sovereign states that are members of the United Nations today?",
+        "golden_answer": "No",
+        "original_question": "PepsiCo says it serves consumers in more than 200 countries and territories. Roughly how many sovereign states are members of the United Nations today?",
+        "original_answer": "193"
+      },
+      {
+        "id": "knowledge_K17",
+        "question": "Is the Cedar River the river that runs through Cedar Rapids, Iowa?",
+        "golden_answer": "Yes",
+        "original_question": "PepsiCo lists Cedar Rapids, Iowa as a QFNA plant location. What U.S. river runs through Cedar Rapids?",
+        "original_answer": "Cedar River"
+      },
+      {
+        "id": "knowledge_K17",
+        "question": "Is the Mississippi River the river that runs through Cedar Rapids, Iowa?",
+        "golden_answer": "No",
+        "original_question": "PepsiCo lists Cedar Rapids, Iowa as a QFNA plant location. What U.S. river runs through Cedar Rapids?",
+        "original_answer": "Cedar River"
+      },
+      {
+        "id": "knowledge_K18",
+        "question": "Does KPMG stand for Klynveld Peat Marwick Goerdeler in its current name?",
+        "golden_answer": "Yes",
+        "original_question": "PepsiCo says KPMG has served as auditor since 1990. What does KPMG stand for in its current name?",
+        "original_answer": "Klynveld Peat Marwick Goerdeler"
+      },
+      {
+        "id": "knowledge_K18",
+        "question": "Does KPMG stand for Key Products Marketing Group in its current name?",
+        "golden_answer": "No",
+        "original_question": "PepsiCo says KPMG has served as auditor since 1990. What does KPMG stand for in its current name?",
+        "original_answer": "Klynveld Peat Marwick Goerdeler"
+      },
+      {
+        "id": "knowledge_K19",
+        "question": "Is Hyderabad the capital of Telangana?",
+        "golden_answer": "Yes",
+        "original_question": "PepsiCo lists Hyderabad, India as a shared service center. Hyderabad is the capital of which Indian state?",
+        "original_answer": "Telangana"
+      },
+      {
+        "id": "knowledge_K19",
+        "question": "Is Hyderabad the capital of Maharashtra?",
+        "golden_answer": "No",
+        "original_question": "PepsiCo lists Hyderabad, India as a shared service center. Hyderabad is the capital of which Indian state?",
+        "original_answer": "Telangana"
+      },
+      {
+        "id": "knowledge_K20",
+        "question": "Is Samuel Adams the flagship beer brand of the Boston Beer Company?",
+        "golden_answer": "Yes",
+        "original_question": "PepsiCo mentions the Boston Beer Company as manufacturer of Hard MTN Dew. What is Boston Beer Company's flagship beer brand?",
+        "original_answer": "Samuel Adams"
+      },
+      {
+        "id": "knowledge_K20",
+        "question": "Is Budweiser the flagship beer brand of the Boston Beer Company?",
+        "golden_answer": "No",
+        "original_question": "PepsiCo mentions the Boston Beer Company as manufacturer of Hard MTN Dew. What is Boston Beer Company's flagship beer brand?",
+        "original_answer": "Samuel Adams"
+      }
+    ],
+    "synthesize": [
+      {
+        "id": "synthesize_SY01",
+        "question": "Does PepsiCo have a reportable segment named FLNA?",
+        "golden_answer": "Yes",
+        "original_question": "Summarize PepsiCo's seven reportable segments named in the filing.",
+        "original_answer": "FLNA, QFNA, PBNA, LatAm, Europe, AMESA, APAC"
+      },
+      {
+        "id": "synthesize_SY01",
+        "question": "Is Africa a reportable segment name used by PepsiCo in their filings?",
+        "golden_answer": "No",
+        "original_question": "Summarize PepsiCo's seven reportable segments named in the filing.",
+        "original_answer": "FLNA, QFNA, PBNA, LatAm, Europe, AMESA, APAC"
+      },
+      {
+        "id": "synthesize_SY02",
+        "question": "Does PepsiCo use distributor networks as one of its main routes to market?",
+        "golden_answer": "Yes",
+        "original_question": "List the main routes to market PepsiCo says it uses to distribute products.",
+        "original_answer": "DSD, customer warehouse, distributor networks, e-commerce"
+      },
+      {
+        "id": "synthesize_SY02",
+        "question": "Is direct farm delivery one of the main routes to market used by PepsiCo?",
+        "golden_answer": "No",
+        "original_question": "List the main routes to market PepsiCo says it uses to distribute products.",
+        "original_answer": "DSD, customer warehouse, distributor networks, e-commerce"
+      },
+      {
+        "id": "synthesize_SY03",
+        "question": "Are Positive Agriculture, Positive Value Chain, and Positive Choices the three key pillars of PepsiCo Positive (pep+)?",
+        "golden_answer": "Yes",
+        "original_question": "Name the three key pillars of PepsiCo Positive (pep+).",
+        "original_answer": "Positive Agriculture, Positive Value Chain, Positive Choices"
+      },
+      {
+        "id": "synthesize_SY03",
+        "question": "Is Positive Marketing one of the three key pillars of PepsiCo Positive (pep+)?",
+        "golden_answer": "No",
+        "original_question": "Name the three key pillars of PepsiCo Positive (pep+).",
+        "original_answer": "Positive Agriculture, Positive Value Chain, Positive Choices"
+      },
+      {
+        "id": "synthesize_SY04",
+        "question": "Does inventory fair value represent a major category of PepsiCo's 2021 acquisition and divestiture-related charges?",
+        "golden_answer": "Yes",
+        "original_question": "Summarize the major categories of PepsiCo's 2021 acquisition and divestiture-related charges by transaction type.",
+        "original_answer": "inventory fair value, merger and integration charges, divestiture costs"
+      },
+      {
+        "id": "synthesize_SY04",
+        "question": "Is goodwill impairment considered a major category of PepsiCo's 2021 acquisition and divestiture-related charges?",
+        "golden_answer": "No",
+        "original_question": "Summarize the major categories of PepsiCo's 2021 acquisition and divestiture-related charges by transaction type.",
+        "original_answer": "inventory fair value, merger and integration charges, divestiture costs"
+      },
+      {
+        "id": "synthesize_SY05",
+        "question": "Is 'distributors' identified as a major customer type by PepsiCo in the Business section?",
+        "golden_answer": "Yes",
+        "original_question": "List the major customer types PepsiCo identifies in the Business section.",
+        "original_answer": "distributors, foodservice customers, grocery stores, drug stores, convenience stores, discount/dollar stores, mass merchandisers, membership stores, hard discounters, e-commerce retailers, bottlers"
+      },
+      {
+        "id": "synthesize_SY05",
+        "question": "Is 'automobile manufacturers' identified as a major customer type by PepsiCo in the Business section?",
+        "golden_answer": "No",
+        "original_question": "List the major customer types PepsiCo identifies in the Business section.",
+        "original_answer": "distributors, foodservice customers, grocery stores, drug stores, convenience stores, discount/dollar stores, mass merchandisers, membership stores, hard discounters, e-commerce retailers, bottlers"
+      },
+      {
+        "id": "synthesize_SY06",
+        "question": "Do PepsiCo's products compete on the factor of packaging?",
+        "golden_answer": "Yes",
+        "original_question": "Summarize the main competitive factors PepsiCo says its products compete on.",
+        "original_answer": "brand, taste, price, value, quality, variety, innovation, distribution, marketing, packaging, convenience, service"
+      },
+      {
+        "id": "synthesize_SY06",
+        "question": "Do PepsiCo's products compete primarily on government regulation as a main competitive factor?",
+        "golden_answer": "No",
+        "original_question": "Summarize the main competitive factors PepsiCo says its products compete on.",
+        "original_answer": "brand, taste, price, value, quality, variety, innovation, distribution, marketing, packaging, convenience, service"
+      },
+      {
+        "id": "synthesize_SY07",
+        "question": "Is sugar one of the principal ingredients used by PepsiCo in their beverage and convenient food products?",
+        "golden_answer": "Yes",
+        "original_question": "List the principal ingredients PepsiCo says it uses in beverage and convenient food products.",
+        "original_answer": "juice concentrates, aspartame, corn, sweeteners, flavorings, flour, fruits, oats, potatoes, milk, rice, seasonings, sucralose, sugar, oils, wheat, water"
+      },
+      {
+        "id": "synthesize_SY07",
+        "question": "Is beef one of the principal ingredients used by PepsiCo in their beverage and convenient food products?",
+        "golden_answer": "No",
+        "original_question": "List the principal ingredients PepsiCo says it uses in beverage and convenient food products.",
+        "original_answer": "juice concentrates, aspartame, corn, sweeteners, flavorings, flour, fruits, oats, potatoes, milk, rice, seasonings, sucralose, sugar, oils, wheat, water"
+      },
+      {
+        "id": "synthesize_SY08",
+        "question": "Is aluminum considered a key commodity input for PepsiCo's business?",
+        "golden_answer": "Yes",
+        "original_question": "Summarize the key packaging and commodity inputs PepsiCo highlights as important to its business.",
+        "original_answer": "PET, polypropylene, aluminum, glass, closures, cardboard, paperboard, fuel, electricity, natural gas"
+      },
+      {
+        "id": "synthesize_SY08",
+        "question": "Is plastic strapping mentioned as a key packaging input in PepsiCo's business?",
+        "golden_answer": "No",
+        "original_question": "Summarize the key packaging and commodity inputs PepsiCo highlights as important to its business.",
+        "original_answer": "PET, polypropylene, aluminum, glass, closures, cardboard, paperboard, fuel, electricity, natural gas"
+      },
+      {
+        "id": "synthesize_SY09",
+        "question": "Is South Africa one of the countries PepsiCo identifies as its largest operations?",
+        "golden_answer": "Yes",
+        "original_question": "List the countries PepsiCo identifies as its largest operations in the Business section.",
+        "original_answer": "United States, Mexico, Russia, Canada, China, United Kingdom, South Africa"
+      },
+      {
+        "id": "synthesize_SY09",
+        "question": "Is Japan one of the countries PepsiCo identifies as its largest operations?",
+        "golden_answer": "No",
+        "original_question": "List the countries PepsiCo identifies as its largest operations in the Business section.",
+        "original_answer": "United States, Mexico, Russia, Canada, China, United Kingdom, South Africa"
+      },
+      {
+        "id": "synthesize_SY10",
+        "question": "Is talent attraction one of the key human capital priorities highlighted by PepsiCo?",
+        "golden_answer": "Yes",
+        "original_question": "Summarize the key human capital priorities PepsiCo highlights.",
+        "original_answer": "safety, health, diversity, equity and inclusion, talent attraction, retention, development, training"
+      },
+      {
+        "id": "synthesize_SY10",
+        "question": "Does PepsiCo's list of key human capital priorities exclude diversity, equity, and inclusion?",
+        "golden_answer": "No",
+        "original_question": "Summarize the key human capital priorities PepsiCo highlights.",
+        "original_answer": "safety, health, diversity, equity and inclusion, talent attraction, retention, development, training"
+      },
+      {
+        "id": "synthesize_SY11",
+        "question": "Is Red Bull one of the companies PepsiCo explicitly names as a key competitor besides Coca-Cola?",
+        "golden_answer": "Yes",
+        "original_question": "List the companies PepsiCo explicitly names as key beverage or food competitors besides Coca-Cola.",
+        "original_answer": "Campbell Soup, Conagra, Hormel, Kellogg, Keurig Dr Pepper, Kraft Heinz, Link Snacks, Mondelēz, Monster, Nestlé, Red Bull, Utz"
+      },
+      {
+        "id": "synthesize_SY11",
+        "question": "Is General Mills one of the companies PepsiCo explicitly names as a key competitor besides Coca-Cola?",
+        "golden_answer": "No",
+        "original_question": "List the companies PepsiCo explicitly names as key beverage or food competitors besides Coca-Cola.",
+        "original_answer": "Campbell Soup, Conagra, Hormel, Kellogg, Keurig Dr Pepper, Kraft Heinz, Link Snacks, Mondelēz, Monster, Nestlé, Red Bull, Utz"
+      },
+      {
+        "id": "synthesize_SY12",
+        "question": "Does PepsiCo's research and development activities include product innovation?",
+        "golden_answer": "Yes",
+        "original_question": "Summarize the main types of research and development activities PepsiCo describes.",
+        "original_answer": "product innovation, process improvement, nutrition reformulation, sustainable packaging, dispensing equipment, SodaStream innovation, digital technology, e-commerce, environmental reduction"
+      },
+      {
+        "id": "synthesize_SY12",
+        "question": "Does PepsiCo's research and development activities include automobile manufacturing?",
+        "golden_answer": "No",
+        "original_question": "Summarize the main types of research and development activities PepsiCo describes.",
+        "original_answer": "product innovation, process improvement, nutrition reformulation, sustainable packaging, dispensing equipment, SodaStream innovation, digital technology, e-commerce, environmental reduction"
+      },
+      {
+        "id": "synthesize_SY13",
+        "question": "Did PepsiCo identify employee compensation as a category of COVID-19-related charges in 2021?",
+        "golden_answer": "Yes",
+        "original_question": "List the categories of COVID-19-related charges PepsiCo identified by division in 2021.",
+        "original_answer": "credit losses, upfront payments to customers, inventory write-downs and returns, employee compensation, employee protection costs, other"
+      },
+      {
+        "id": "synthesize_SY13",
+        "question": "Did PepsiCo identify advertising expenses as a category of COVID-19-related charges in 2021?",
+        "golden_answer": "No",
+        "original_question": "List the categories of COVID-19-related charges PepsiCo identified by division in 2021.",
+        "original_answer": "credit losses, upfront payments to customers, inventory write-downs and returns, employee compensation, employee protection costs, other"
+      },
+      {
+        "id": "synthesize_SY14",
+        "question": "Is commercial paper identified as one of the principal sources of liquidity by PepsiCo?",
+        "golden_answer": "Yes",
+        "original_question": "Summarize the principal sources of liquidity PepsiCo identifies.",
+        "original_answer": "cash from operations, Juice Transaction proceeds, commercial paper, long-term debt, cash and cash equivalents"
+      },
+      {
+        "id": "synthesize_SY14",
+        "question": "Does PepsiCo identify equity investments as a principal source of liquidity?",
+        "golden_answer": "No",
+        "original_question": "Summarize the principal sources of liquidity PepsiCo identifies.",
+        "original_answer": "cash from operations, Juice Transaction proceeds, commercial paper, long-term debt, cash and cash equivalents"
+      },
+      {
+        "id": "synthesize_SY15",
+        "question": "Is 'accounts payable' a major current liability reported by PepsiCo on its 2021 balance sheet?",
+        "golden_answer": "Yes",
+        "original_question": "List the major current liabilities PepsiCo reports on its 2021 balance sheet detail.",
+        "original_answer": "accounts payable, accrued marketplace spending, accrued compensation and benefits, dividends payable, current lease liabilities, other current liabilities"
+      },
+      {
+        "id": "synthesize_SY15",
+        "question": "Is 'goodwill' a major current liability reported by PepsiCo on its 2021 balance sheet?",
+        "golden_answer": "No",
+        "original_question": "List the major current liabilities PepsiCo reports on its 2021 balance sheet detail.",
+        "original_answer": "accounts payable, accrued marketplace spending, accrued compensation and benefits, dividends payable, current lease liabilities, other current liabilities"
+      },
+      {
+        "id": "synthesize_SY16",
+        "question": "Does PepsiCo use RSUs as a form of share-based compensation?",
+        "golden_answer": "Yes",
+        "original_question": "Summarize the main forms of share-based compensation PepsiCo uses.",
+        "original_answer": "stock options, RSUs, PSUs, long-term cash awards"
+      },
+      {
+        "id": "synthesize_SY16",
+        "question": "Does PepsiCo use profit sharing as a main form of share-based compensation?",
+        "golden_answer": "No",
+        "original_question": "Summarize the main forms of share-based compensation PepsiCo uses.",
+        "original_answer": "stock options, RSUs, PSUs, long-term cash awards"
+      },
+      {
+        "id": "synthesize_SY17",
+        "question": "Did PepsiCo issue debt notes in 2031 and 2051 in 2021?",
+        "golden_answer": "Yes",
+        "original_question": "List the key 2021 debt issuances PepsiCo completed by maturity.",
+        "original_answer": "0.750% 2033 euro notes, 1.950% 2031 notes, 2.625% 2041 notes, 2.750% 2051 notes"
+      },
+      {
+        "id": "synthesize_SY17",
+        "question": "Did PepsiCo issue 2.000% 2029 notes in 2021?",
+        "golden_answer": "No",
+        "original_question": "List the key 2021 debt issuances PepsiCo completed by maturity.",
+        "original_answer": "0.750% 2033 euro notes, 1.950% 2031 notes, 2.625% 2041 notes, 2.750% 2051 notes"
+      },
+      {
+        "id": "synthesize_SY18",
+        "question": "Is the principal executive office of PepsiCo located in Purchase, New York?",
+        "golden_answer": "Yes",
+        "original_question": "Summarize PepsiCo's principal executive corporate properties named in Item 2.",
+        "original_answer": "principal executive office in Purchase, New York and facilities in Plano, Texas"
+      },
+      {
+        "id": "synthesize_SY18",
+        "question": "Is PepsiCo's principal executive office located in Los Angeles, California?",
+        "golden_answer": "No",
+        "original_question": "Summarize PepsiCo's principal executive corporate properties named in Item 2.",
+        "original_answer": "principal executive office in Purchase, New York and facilities in Plano, Texas"
+      },
+      {
+        "id": "synthesize_SY19",
+        "question": "Is Hyderabad, India one of the shared service center locations identified by PepsiCo in Item 2?",
+        "golden_answer": "Yes",
+        "original_question": "List the shared service center locations PepsiCo identifies in Item 2.",
+        "original_answer": "Winston Salem, North Carolina; Hyderabad, India"
+      },
+      {
+        "id": "synthesize_SY19",
+        "question": "Is Chicago, Illinois listed as a shared service center location by PepsiCo in Item 2?",
+        "golden_answer": "No",
+        "original_question": "List the shared service center locations PepsiCo identifies in Item 2.",
+        "original_answer": "Winston Salem, North Carolina; Hyderabad, India"
+      },
+      {
+        "id": "synthesize_SY20",
+        "question": "Is free cash flow for PepsiCo defined as net cash from operating activities minus capital spending plus sales of property, plant and equipment?",
+        "golden_answer": "Yes",
+        "original_question": "Summarize what free cash flow means for PepsiCo in this filing.",
+        "original_answer": "net cash from operating activities less capital spending plus sales of property, plant and equipment"
+      },
+      {
+        "id": "synthesize_SY20",
+        "question": "Does free cash flow for PepsiCo in this filing exclude sales of property, plant and equipment from its calculation?",
+        "golden_answer": "No",
+        "original_question": "Summarize what free cash flow means for PepsiCo in this filing.",
+        "original_answer": "net cash from operating activities less capital spending plus sales of property, plant and equipment"
+      }
+    ],
+    "structure": [
+      {
+        "id": "structure_ST01",
+        "question": "Does 'Business' appear before 'Risk Factors' in Part I?",
+        "golden_answer": "Yes",
+        "original_question": "Which item appears first in Part I: Business or Risk Factors?",
+        "original_answer": "Business"
+      },
+      {
+        "id": "structure_ST01",
+        "question": "Does 'Risk Factors' appear before 'Business' in Part I?",
+        "golden_answer": "No",
+        "original_question": "Which item appears first in Part I: Business or Risk Factors?",
+        "original_answer": "Business"
+      },
+      {
+        "id": "structure_ST02",
+        "question": "According to the table of contents, does Item 1A, Risk Factors, begin on page 11?",
+        "golden_answer": "Yes",
+        "original_question": "On what page does Item 1A, Risk Factors, begin according to the table of contents?",
+        "original_answer": "11"
+      },
+      {
+        "id": "structure_ST02",
+        "question": "According to the table of contents, does Item 1A, Risk Factors, begin on page 25?",
+        "golden_answer": "No",
+        "original_question": "On what page does Item 1A, Risk Factors, begin according to the table of contents?",
+        "original_answer": "11"
+      },
+      {
+        "id": "structure_ST03",
+        "question": "Does Item 7 in Part II include Management's Discussion and Analysis of Financial Condition and Results of Operations?",
+        "golden_answer": "Yes",
+        "original_question": "Which item in Part II includes Management's Discussion and Analysis of Financial Condition and Results of Operations?",
+        "original_answer": "Item 7"
+      },
+      {
+        "id": "structure_ST03",
+        "question": "Is Management's Discussion and Analysis of Financial Condition and Results of Operations included in Item 8 of Part II?",
+        "golden_answer": "No",
+        "original_question": "Which item in Part II includes Management's Discussion and Analysis of Financial Condition and Results of Operations?",
+        "original_answer": "Item 7"
+      },
+      {
+        "id": "structure_ST04",
+        "question": "Is Item 9C Disclosure Regarding Foreign Jurisdictions that Prevent Inspections later in the document than Item 9A Controls and Procedures?",
+        "golden_answer": "Yes",
+        "original_question": "Which comes later in the document: Item 9A Controls and Procedures or Item 9C Disclosure Regarding Foreign Jurisdictions that Prevent Inspections?",
+        "original_answer": "Item 9C"
+      },
+      {
+        "id": "structure_ST04",
+        "question": "Is Item 9A Controls and Procedures later in the document than Item 9C Disclosure Regarding Foreign Jurisdictions that Prevent Inspections?",
+        "golden_answer": "No",
+        "original_question": "Which comes later in the document: Item 9A Controls and Procedures or Item 9C Disclosure Regarding Foreign Jurisdictions that Prevent Inspections?",
+        "original_answer": "Item 9C"
+      },
+      {
+        "id": "structure_ST05",
+        "question": "Are Directors, Executive Officers, and Corporate Governance listed under Part III of the 10-K?",
+        "golden_answer": "Yes",
+        "original_question": "Under which Part of the 10-K are Directors, Executive Officers and Corporate Governance listed?",
+        "original_answer": "Part III"
+      },
+      {
+        "id": "structure_ST05",
+        "question": "Are Directors, Executive Officers, and Corporate Governance listed under Part II of the 10-K?",
+        "golden_answer": "No",
+        "original_question": "Under which Part of the 10-K are Directors, Executive Officers and Corporate Governance listed?",
+        "original_answer": "Part III"
+      },
+      {
+        "id": "structure_ST06",
+        "question": "Is Item 15 associated with Exhibits and Financial Statement Schedules?",
+        "golden_answer": "Yes",
+        "original_question": "Which item is associated with Exhibits and Financial Statement Schedules?",
+        "original_answer": "Item 15"
+      },
+      {
+        "id": "structure_ST06",
+        "question": "Is Item 12 associated with Exhibits and Financial Statement Schedules?",
+        "golden_answer": "No",
+        "original_question": "Which item is associated with Exhibits and Financial Statement Schedules?",
+        "original_answer": "Item 15"
+      },
+      {
+        "id": "structure_ST07",
+        "question": "Is 'Form 10-K Summary' the final numbered item in the table of contents?",
+        "golden_answer": "Yes",
+        "original_question": "What is the final numbered item in the table of contents?",
+        "original_answer": "Item 16. Form 10-K Summary"
+      },
+      {
+        "id": "structure_ST07",
+        "question": "Is 'Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Stockholder Matters' the final numbered item in the table of contents?",
+        "golden_answer": "No",
+        "original_question": "What is the final numbered item in the table of contents?",
+        "original_answer": "Item 16. Form 10-K Summary"
+      },
+      {
+        "id": "structure_ST08",
+        "question": "Is the section that immediately precedes Part I in the report body called 'Forward-Looking Statements'?",
+        "golden_answer": "Yes",
+        "original_question": "Which section immediately precedes Part I in the report body?",
+        "original_answer": "Forward-Looking Statements"
+      },
+      {
+        "id": "structure_ST08",
+        "question": "Does the section titled 'Management's Discussion and Analysis' immediately precede Part I in the report body?",
+        "golden_answer": "No",
+        "original_question": "Which section immediately precedes Part I in the report body?",
+        "original_answer": "Forward-Looking Statements"
+      },
+      {
+        "id": "structure_ST09",
+        "question": "Does the Glossary appear after the Report of Independent Registered Public Accounting Firm in Item 7?",
+        "golden_answer": "Yes",
+        "original_question": "Where does the Glossary appear relative to the Report of Independent Registered Public Accounting Firm in Item 7?",
+        "original_answer": "after it"
+      },
+      {
+        "id": "structure_ST09",
+        "question": "Does the Glossary appear before the Report of Independent Registered Public Accounting Firm in Item 7?",
+        "golden_answer": "No",
+        "original_question": "Where does the Glossary appear relative to the Report of Independent Registered Public Accounting Firm in Item 7?",
+        "original_answer": "after it"
+      },
+      {
+        "id": "structure_ST10",
+        "question": "Is Note 13 the note that covers Acquisitions and Divestitures in the notes to the consolidated financial statements?",
+        "golden_answer": "Yes",
+        "original_question": "Which note number covers Acquisitions and Divestitures in the notes to the consolidated financial statements?",
+        "original_answer": "Note 13"
+      },
+      {
+        "id": "structure_ST10",
+        "question": "Is Note 10 the note that covers Acquisitions and Divestitures in the notes to the consolidated financial statements?",
+        "golden_answer": "No",
+        "original_question": "Which note number covers Acquisitions and Divestitures in the notes to the consolidated financial statements?",
+        "original_answer": "Note 13"
+      },
+      {
+        "id": "structure_ST11",
+        "question": "Does the Consolidated Statement of Cash Flows come before the Consolidated Balance Sheet in Item 7's internal table of contents?",
+        "golden_answer": "Yes",
+        "original_question": "Which comes first in Item 7's internal table of contents: Consolidated Statement of Cash Flows or Consolidated Balance Sheet?",
+        "original_answer": "Consolidated Statement of Cash Flows"
+      },
+      {
+        "id": "structure_ST11",
+        "question": "Does the Consolidated Balance Sheet come before the Consolidated Statement of Cash Flows in Item 7's internal table of contents?",
+        "golden_answer": "No",
+        "original_question": "Which comes first in Item 7's internal table of contents: Consolidated Statement of Cash Flows or Consolidated Balance Sheet?",
+        "original_answer": "Consolidated Statement of Cash Flows"
+      },
+      {
+        "id": "structure_ST12",
+        "question": "Does Item 5 begin on page 28 in the table of contents?",
+        "golden_answer": "Yes",
+        "original_question": "What page does Item 5 begin on in the table of contents?",
+        "original_answer": "28"
+      },
+      {
+        "id": "structure_ST12",
+        "question": "Does Item 5 begin on page 35 in the table of contents?",
+        "golden_answer": "No",
+        "original_question": "What page does Item 5 begin on in the table of contents?",
+        "original_answer": "28"
+      },
+      {
+        "id": "structure_ST13",
+        "question": "Is Item 4 in Part I labeled Mine Safety Disclosures?",
+        "golden_answer": "Yes",
+        "original_question": "Which item in Part I is labeled Mine Safety Disclosures?",
+        "original_answer": "Item 4"
+      },
+      {
+        "id": "structure_ST13",
+        "question": "Is Item 3 in Part I labeled Mine Safety Disclosures?",
+        "golden_answer": "No",
+        "original_question": "Which item in Part I is labeled Mine Safety Disclosures?",
+        "original_answer": "Item 4"
+      },
+      {
+        "id": "structure_ST14",
+        "question": "Does Item 7A Quantitative and Qualitative Disclosures About Market Risk appear before Item 8 Financial Statements and Supplementary Data in Part II?",
+        "golden_answer": "Yes",
+        "original_question": "Which appears first in Part II: Item 7A Quantitative and Qualitative Disclosures About Market Risk or Item 8 Financial Statements and Supplementary Data?",
+        "original_answer": "Item 7A"
+      },
+      {
+        "id": "structure_ST14",
+        "question": "Does Item 8 Financial Statements and Supplementary Data appear before Item 7A Quantitative and Qualitative Disclosures About Market Risk in Part II?",
+        "golden_answer": "No",
+        "original_question": "Which appears first in Part II: Item 7A Quantitative and Qualitative Disclosures About Market Risk or Item 8 Financial Statements and Supplementary Data?",
+        "original_answer": "Item 7A"
+      },
+      {
+        "id": "structure_ST15",
+        "question": "Is the section title that directly follows Item 4 in the report body 'Information About Our Executive Officers'?",
+        "golden_answer": "Yes",
+        "original_question": "What section title directly follows Item 4 in the report body?",
+        "original_answer": "Information About Our Executive Officers"
+      },
+      {
+        "id": "structure_ST15",
+        "question": "Is the section title that directly follows Item 4 in the report body 'Financial Statements'?",
+        "golden_answer": "No",
+        "original_question": "What section title directly follows Item 4 in the report body?",
+        "original_answer": "Information About Our Executive Officers"
+      },
+      {
+        "id": "structure_ST16",
+        "question": "Is the number of parts listed in the main table of contents 4?",
+        "golden_answer": "Yes",
+        "original_question": "How many parts are listed in the main table of contents?",
+        "original_answer": "4"
+      },
+      {
+        "id": "structure_ST16",
+        "question": "Are there more than 5 parts listed in the main table of contents?",
+        "golden_answer": "No",
+        "original_question": "How many parts are listed in the main table of contents?",
+        "original_answer": "4"
+      },
+      {
+        "id": "structure_ST17",
+        "question": "Is Note 9 – Financial Instruments the note that follows Note 8 Debt Obligations in the notes list?",
+        "golden_answer": "Yes",
+        "original_question": "Which note follows Note 8 Debt Obligations in the notes list?",
+        "original_answer": "Note 9 – Financial Instruments"
+      },
+      {
+        "id": "structure_ST17",
+        "question": "Does Note 10 – Subsequent Events follow Note 8 Debt Obligations in the notes list?",
+        "golden_answer": "No",
+        "original_question": "Which note follows Note 8 Debt Obligations in the notes list?",
+        "original_answer": "Note 9 – Financial Instruments"
+      },
+      {
+        "id": "structure_ST18",
+        "question": "Is Item 15 listed on page 117 in the table of contents?",
+        "golden_answer": "Yes",
+        "original_question": "In the table of contents, what page is Item 15 listed on?",
+        "original_answer": "117"
+      },
+      {
+        "id": "structure_ST18",
+        "question": "Is Item 15 listed on page 98 in the table of contents?",
+        "golden_answer": "No",
+        "original_question": "In the table of contents, what page is Item 15 listed on?",
+        "original_answer": "117"
+      },
+      {
+        "id": "structure_ST19",
+        "question": "Does Non-GAAP Measures come earlier than Items Affecting Comparability in Item 7's outline?",
+        "golden_answer": "Yes",
+        "original_question": "Which comes earlier in Item 7's outline: Non-GAAP Measures or Items Affecting Comparability?",
+        "original_answer": "Non-GAAP Measures"
+      },
+      {
+        "id": "structure_ST19",
+        "question": "Does Items Affecting Comparability come before Non-GAAP Measures in Item 7's outline?",
+        "golden_answer": "No",
+        "original_question": "Which comes earlier in Item 7's outline: Non-GAAP Measures or Items Affecting Comparability?",
+        "original_answer": "Non-GAAP Measures"
+      },
+      {
+        "id": "structure_ST20",
+        "question": "Is the page number shown for Item 1 Business in the main table of contents 2?",
+        "golden_answer": "Yes",
+        "original_question": "What page number is shown for Item 1 Business in the main table of contents?",
+        "original_answer": "2"
+      },
+      {
+        "id": "structure_ST20",
+        "question": "Is the page number shown for Item 1 Business in the main table of contents 5?",
+        "golden_answer": "No",
+        "original_question": "What page number is shown for Item 1 Business in the main table of contents?",
+        "original_answer": "2"
+      }
+    ],
+    "reasoning": [
+      {
+        "id": "reasoning_R01",
+        "question": "Is the difference between PepsiCo's 2021 and 2020 net revenue greater than 9000 million?",
+        "golden_answer": "Yes",
+        "original_question": "What is the difference between PepsiCo's 2021 and 2020 net revenue, in millions?",
+        "original_answer": "9102"
+      },
+      {
+        "id": "reasoning_R01",
+        "question": "Is the difference between PepsiCo's 2021 and 2020 net revenue less than 9000 million?",
+        "golden_answer": "No",
+        "original_question": "What is the difference between PepsiCo's 2021 and 2020 net revenue, in millions?",
+        "original_answer": "9102"
+      },
+      {
+        "id": "reasoning_R02",
+        "question": "Did the operating profit increase by more than 1000 million from 2020 to 2021?",
+        "golden_answer": "Yes",
+        "original_question": "By how many millions did operating profit increase from 2020 to 2021?",
+        "original_answer": "1082"
+      },
+      {
+        "id": "reasoning_R02",
+        "question": "Did the operating profit increase by less than 1000 million from 2020 to 2021?",
+        "golden_answer": "No",
+        "original_question": "By how many millions did operating profit increase from 2020 to 2021?",
+        "original_answer": "1082"
+      },
+      {
+        "id": "reasoning_R03",
+        "question": "As of December 25, 2021, did PepsiCo have more employees outside the United States than inside the United States by a difference of 180,000?",
+        "golden_answer": "Yes",
+        "original_question": "How many more employees did PepsiCo have outside the United States than inside the United States as of December 25, 2021?",
+        "original_answer": "180000"
+      },
+      {
+        "id": "reasoning_R03",
+        "question": "As of December 25, 2021, did PepsiCo have fewer employees outside the United States than inside the United States?",
+        "golden_answer": "No",
+        "original_question": "How many more employees did PepsiCo have outside the United States than inside the United States as of December 25, 2021?",
+        "original_answer": "180000"
+      },
+      {
+        "id": "reasoning_R04",
+        "question": "Is the difference between total assets and total liabilities as of December 25, 2021 equal to 16,151 million dollars?",
+        "golden_answer": "Yes",
+        "original_question": "What was the difference between total assets and total liabilities as of December 25, 2021, in millions?",
+        "original_answer": "16151"
+      },
+      {
+        "id": "reasoning_R04",
+        "question": "Is the difference between total assets and total liabilities as of December 25, 2021 equal to 20,000 million dollars?",
+        "golden_answer": "No",
+        "original_question": "What was the difference between total assets and total liabilities as of December 25, 2021, in millions?",
+        "original_answer": "16151"
+      },
+      {
+        "id": "reasoning_R05",
+        "question": "Were 2021 dividend payments greater than 2021 share repurchases by 5,709 million?",
+        "golden_answer": "Yes",
+        "original_question": "How much greater were 2021 dividend payments than 2021 share repurchases, in millions?",
+        "original_answer": "5709"
+      },
+      {
+        "id": "reasoning_R05",
+        "question": "Were 2021 dividend payments greater than 2021 share repurchases by 3,000 million?",
+        "golden_answer": "No",
+        "original_question": "How much greater were 2021 dividend payments than 2021 share repurchases, in millions?",
+        "original_answer": "5709"
+      },
+      {
+        "id": "reasoning_R06",
+        "question": "Is the sum of 2021 FLNA and PBNA operating profit 8075 million dollars?",
+        "golden_answer": "Yes",
+        "original_question": "What is the sum of 2021 FLNA and PBNA operating profit, in millions?",
+        "original_answer": "8075"
+      },
+      {
+        "id": "reasoning_R06",
+        "question": "Is the sum of 2021 FLNA and PBNA operating profit 9000 million dollars?",
+        "golden_answer": "No",
+        "original_question": "What is the sum of 2021 FLNA and PBNA operating profit, in millions?",
+        "original_answer": "8075"
+      },
+      {
+        "id": "reasoning_R07",
+        "question": "Did free cash flow increase by 729 million from 2020 to 2021?",
+        "golden_answer": "Yes",
+        "original_question": "By how many millions did free cash flow increase from 2020 to 2021?",
+        "original_answer": "729"
+      },
+      {
+        "id": "reasoning_R07",
+        "question": "Did free cash flow increase by 500 million from 2020 to 2021?",
+        "golden_answer": "No",
+        "original_question": "By how many millions did free cash flow increase from 2020 to 2021?",
+        "original_answer": "729"
+      },
+      {
+        "id": "reasoning_R08",
+        "question": "Is 42% of PepsiCo's 2021 global workforce based in the United States?",
+        "golden_answer": "Yes",
+        "original_question": "What percentage of PepsiCo's 2021 global workforce was based in the United States, rounded to the nearest whole percent?",
+        "original_answer": "42"
+      },
+      {
+        "id": "reasoning_R08",
+        "question": "Was more than half of PepsiCo's 2021 global workforce based in the United States?",
+        "golden_answer": "No",
+        "original_question": "What percentage of PepsiCo's 2021 global workforce was based in the United States, rounded to the nearest whole percent?",
+        "original_answer": "42"
+      },
+      {
+        "id": "reasoning_R09",
+        "question": "Is the difference in millions between 2021 net cash provided by operating activities and 2021 net cash used for investing activities 8,347 in absolute terms?",
+        "golden_answer": "Yes",
+        "original_question": "How many millions greater was 2021 net cash provided by operating activities than 2021 net cash used for investing activities in absolute terms?",
+        "original_answer": "8347"
+      },
+      {
+        "id": "reasoning_R09",
+        "question": "Was the absolute difference between 2021 net cash provided by operating activities and 2021 net cash used for investing activities less than 8,000 million?",
+        "golden_answer": "No",
+        "original_question": "How many millions greater was 2021 net cash provided by operating activities than 2021 net cash used for investing activities in absolute terms?",
+        "original_answer": "8347"
+      },
+      {
+        "id": "reasoning_R10",
+        "question": "Is the total 2021 operating profit of LatAm, Europe, and AMESA combined 3519 million?",
+        "golden_answer": "Yes",
+        "original_question": "What is the total 2021 operating profit of LatAm, Europe, and AMESA combined, in millions?",
+        "original_answer": "3519"
+      },
+      {
+        "id": "reasoning_R10",
+        "question": "Is the total 2021 operating profit of LatAm, Europe, and AMESA combined 4100 million?",
+        "golden_answer": "No",
+        "original_question": "What is the total 2021 operating profit of LatAm, Europe, and AMESA combined, in millions?",
+        "original_answer": "3519"
+      },
+      {
+        "id": "reasoning_R11",
+        "question": "Did cash and cash equivalents decline by 2,589 million from 2020 to 2021?",
+        "golden_answer": "Yes",
+        "original_question": "By how many millions did cash and cash equivalents decline from 2020 to 2021?",
+        "original_answer": "2589"
+      },
+      {
+        "id": "reasoning_R11",
+        "question": "Did cash and cash equivalents decline by 1,000 million from 2020 to 2021?",
+        "golden_answer": "No",
+        "original_question": "By how many millions did cash and cash equivalents decline from 2020 to 2021?",
+        "original_answer": "2589"
+      },
+      {
+        "id": "reasoning_R12",
+        "question": "Is the difference between 2021 long-term debt obligations and 2021 short-term debt obligations 31,718 million?",
+        "golden_answer": "Yes",
+        "original_question": "What is the difference between 2021 long-term debt obligations and 2021 short-term debt obligations, in millions?",
+        "original_answer": "31718"
+      },
+      {
+        "id": "reasoning_R12",
+        "question": "Is the difference between 2021 long-term debt obligations and 2021 short-term debt obligations 20,000 million?",
+        "golden_answer": "No",
+        "original_question": "What is the difference between 2021 long-term debt obligations and 2021 short-term debt obligations, in millions?",
+        "original_answer": "31718"
+      },
+      {
+        "id": "reasoning_R13",
+        "question": "Was PBNA net revenue larger than FLNA net revenue in 2021?",
+        "golden_answer": "Yes",
+        "original_question": "How much larger was PBNA net revenue than FLNA net revenue in 2021, in millions?",
+        "original_answer": "5668"
+      },
+      {
+        "id": "reasoning_R13",
+        "question": "Was PBNA net revenue smaller than FLNA net revenue in 2021?",
+        "golden_answer": "No",
+        "original_question": "How much larger was PBNA net revenue than FLNA net revenue in 2021, in millions?",
+        "original_answer": "5668"
+      },
+      {
+        "id": "reasoning_R14",
+        "question": "Was the total of 2021 capital spending and sales of property, plant and equipment, counting sales as positive, 4791 million?",
+        "golden_answer": "Yes",
+        "original_question": "What was the total of 2021 capital spending and sales of property, plant and equipment, counting sales as positive, in millions?",
+        "original_answer": "4791"
+      },
+      {
+        "id": "reasoning_R14",
+        "question": "Was the total of 2021 capital spending and sales of property, plant and equipment, counting sales as positive, 3000 million?",
+        "golden_answer": "No",
+        "original_question": "What was the total of 2021 capital spending and sales of property, plant and equipment, counting sales as positive, in millions?",
+        "original_answer": "4791"
+      },
+      {
+        "id": "reasoning_R15",
+        "question": "Did the annual tax rate increase by exactly 90 basis points from 2020 to 2021?",
+        "golden_answer": "Yes",
+        "original_question": "By how many basis points did the annual tax rate increase from 2020 to 2021?",
+        "original_answer": "90"
+      },
+      {
+        "id": "reasoning_R15",
+        "question": "Did the annual tax rate increase by more than 100 basis points from 2020 to 2021?",
+        "golden_answer": "No",
+        "original_question": "By how many basis points did the annual tax rate increase from 2020 to 2021?",
+        "original_answer": "90"
+      },
+      {
+        "id": "reasoning_R16",
+        "question": "Was the spread between ROIC and core net ROIC in 2021 greater than 2 percentage points?",
+        "golden_answer": "Yes",
+        "original_question": "What was the spread between ROIC and core net ROIC in 2021, in percentage points?",
+        "original_answer": "2.4"
+      },
+      {
+        "id": "reasoning_R16",
+        "question": "Was the spread between ROIC and core net ROIC in 2021 equal to 1.2 percentage points?",
+        "golden_answer": "No",
+        "original_question": "What was the spread between ROIC and core net ROIC in 2021, in percentage points?",
+        "original_answer": "2.4"
+      },
+      {
+        "id": "reasoning_R17",
+        "question": "Is the number of additional shares used in diluted weighted-average common shares outstanding compared to basic in 2021 equal to 7 million?",
+        "golden_answer": "Yes",
+        "original_question": "How many more shares were used in diluted weighted-average common shares outstanding than basic in 2021, in millions?",
+        "original_answer": "7"
+      },
+      {
+        "id": "reasoning_R17",
+        "question": "Were fewer than 7 million additional shares used in diluted weighted-average common shares outstanding compared to basic in 2021?",
+        "golden_answer": "No",
+        "original_question": "How many more shares were used in diluted weighted-average common shares outstanding than basic in 2021, in millions?",
+        "original_answer": "7"
+      },
+      {
+        "id": "reasoning_R18",
+        "question": "Is the combined 2021 net revenue of AMESA and APAC equal to 10,693 million?",
+        "golden_answer": "Yes",
+        "original_question": "What is the combined 2021 net revenue of AMESA and APAC, in millions?",
+        "original_answer": "10693"
+      },
+      {
+        "id": "reasoning_R18",
+        "question": "Is the combined 2021 net revenue of AMESA and APAC less than 10,000 million?",
+        "golden_answer": "No",
+        "original_question": "What is the combined 2021 net revenue of AMESA and APAC, in millions?",
+        "original_answer": "10693"
+      },
+      {
+        "id": "reasoning_R19",
+        "question": "Did gross profit exceed selling, general and administrative expenses by more than 11,000 million in 2021?",
+        "golden_answer": "Yes",
+        "original_question": "How much did gross profit exceed selling, general and administrative expenses in 2021, in millions?",
+        "original_answer": "11162"
+      },
+      {
+        "id": "reasoning_R19",
+        "question": "Did gross profit exceed selling, general and administrative expenses by less than 10,000 million in 2021?",
+        "golden_answer": "No",
+        "original_question": "How much did gross profit exceed selling, general and administrative expenses in 2021, in millions?",
+        "original_answer": "11162"
+      },
+      {
+        "id": "reasoning_R20",
+        "question": "Was the difference between 2021 and 2020 diluted EPS greater than 0.3 dollars?",
+        "golden_answer": "Yes",
+        "original_question": "What was the difference between 2021 and 2020 diluted EPS, in dollars?",
+        "original_answer": "0.37"
+      },
+      {
+        "id": "reasoning_R20",
+        "question": "Was the difference between 2021 and 2020 diluted EPS equal to 1 dollar?",
+        "golden_answer": "No",
+        "original_question": "What was the difference between 2021 and 2020 diluted EPS, in dollars?",
+        "original_answer": "0.37"
+      }
+    ],
+    "multi_hop": [
+      {
+        "id": "multi_hop_M01",
+        "question": "Is PepsiCo's number of worldwide employees divided by 1,000 greater than the number of countries and territories it serves?",
+        "golden_answer": "Yes",
+        "original_question": "Which is larger: PepsiCo's number of countries and territories served or its number of worldwide employees divided by 1,000?",
+        "original_answer": "worldwide employees/1,000"
+      },
+      {
+        "id": "multi_hop_M01",
+        "question": "Is PepsiCo's number of countries and territories served greater than its number of worldwide employees divided by 1,000?",
+        "golden_answer": "No",
+        "original_question": "Which is larger: PepsiCo's number of countries and territories served or its number of worldwide employees divided by 1,000?",
+        "original_answer": "worldwide employees/1,000"
+      },
+      {
+        "id": "multi_hop_M02",
+        "question": "Is the ratio of Walmart's share of 2021 consolidated net revenue to the percentage of the U.S. liquid refreshment beverage category represented by PepsiCo less than 1?",
+        "golden_answer": "Yes",
+        "original_question": "What is the ratio of Walmart's share of 2021 consolidated net revenue to the percentage of the U.S. liquid refreshment beverage category represented by PepsiCo, rounded to two decimals?",
+        "original_answer": "0.59"
+      },
+      {
+        "id": "multi_hop_M02",
+        "question": "Is the ratio of Walmart's share of 2021 consolidated net revenue to the percentage of the U.S. liquid refreshment beverage category represented by PepsiCo greater than 0.7?",
+        "golden_answer": "No",
+        "original_question": "What is the ratio of Walmart's share of 2021 consolidated net revenue to the percentage of the U.S. liquid refreshment beverage category represented by PepsiCo, rounded to two decimals?",
+        "original_answer": "0.59"
+      },
+      {
+        "id": "multi_hop_M03",
+        "question": "Is the sum of the page number where Item 1A Risk Factors begins and the age of CEO Ramon L. Laguarta equal to 69?",
+        "golden_answer": "Yes",
+        "original_question": "If you combine the page number where Item 1A Risk Factors begins and the age of CEO Ramon L. Laguarta, what total do you get?",
+        "original_answer": "69"
+      },
+      {
+        "id": "multi_hop_M03",
+        "question": "Is the sum of the page number where Item 1A Risk Factors begins and the age of CEO Ramon L. Laguarta equal to 75?",
+        "golden_answer": "No",
+        "original_question": "If you combine the page number where Item 1A Risk Factors begins and the age of CEO Ramon L. Laguarta, what total do you get?",
+        "original_answer": "69"
+      },
+      {
+        "id": "multi_hop_M04",
+        "question": "Is the result 4 when you subtract the number of reportable segments from the number of current executive officers listed?",
+        "golden_answer": "Yes",
+        "original_question": "What do you get if you subtract the number of reportable segments from the number of current executive officers listed?",
+        "original_answer": "4"
+      },
+      {
+        "id": "multi_hop_M04",
+        "question": "Is the result 7 when you subtract the number of reportable segments from the number of current executive officers listed?",
+        "golden_answer": "No",
+        "original_question": "What do you get if you subtract the number of reportable segments from the number of current executive officers listed?",
+        "original_answer": "4"
+      },
+      {
+        "id": "multi_hop_M05",
+        "question": "Is the difference between the number of countries listed in the net revenue by country table and the number of shared service center locations in Item 2 equal to 6?",
+        "golden_answer": "Yes",
+        "original_question": "How many more countries are listed in the net revenue by country table (including 'All other countries' as one entry) than shared service center locations in Item 2?",
+        "original_answer": "6"
+      },
+      {
+        "id": "multi_hop_M05",
+        "question": "Is the difference between the number of countries listed in the net revenue by country table and the number of shared service center locations in Item 2 equal to 4?",
+        "golden_answer": "No",
+        "original_question": "How many more countries are listed in the net revenue by country table (including 'All other countries' as one entry) than shared service center locations in Item 2?",
+        "original_answer": "6"
+      },
+      {
+        "id": "multi_hop_M06",
+        "question": "Is the difference between the number of shares outstanding as of February 3, 2022 and the diluted weighted-average common shares outstanding in 2021 a negative number?",
+        "golden_answer": "Yes",
+        "original_question": "What is the difference between the number of shares outstanding as of February 3, 2022 and the diluted weighted-average common shares outstanding in 2021, in shares?",
+        "original_answer": "-5548600"
+      },
+      {
+        "id": "multi_hop_M06",
+        "question": "Is the difference between the number of shares outstanding as of February 3, 2022 and the diluted weighted-average common shares outstanding in 2021 equal to 5,548,600?",
+        "golden_answer": "No",
+        "original_question": "What is the difference between the number of shares outstanding as of February 3, 2022 and the diluted weighted-average common shares outstanding in 2021, in shares?",
+        "original_answer": "-5548600"
+      },
+      {
+        "id": "multi_hop_M07",
+        "question": "Is the 2021 capital spending amount in billions greater than the number of principal executive corporate property locations named in Item 2?",
+        "golden_answer": "Yes",
+        "original_question": "Which is greater: the 2021 capital spending amount in billions or the number of principal executive corporate property locations named in Item 2?",
+        "original_answer": "capital spending"
+      },
+      {
+        "id": "multi_hop_M07",
+        "question": "Is the number of principal executive corporate property locations named in Item 2 greater than the 2021 capital spending amount in billions?",
+        "golden_answer": "No",
+        "original_question": "Which is greater: the 2021 capital spending amount in billions or the number of principal executive corporate property locations named in Item 2?",
+        "original_answer": "capital spending"
+      },
+      {
+        "id": "multi_hop_M08",
+        "question": "Is the combined total 26 when you add the number of pages in the main table of contents devoted to Item 1A starting page and the number of members of the Board who signed the report, excluding executive officers who are not directors?",
+        "golden_answer": "Yes",
+        "original_question": "What is the combined total when you add the number of pages in the main table of contents devoted to Item 1A starting page and the number of members of the Board who signed the report, excluding executive officers who are not directors?",
+        "original_answer": "26"
+      },
+      {
+        "id": "multi_hop_M08",
+        "question": "Is the combined total 14 when you add the number of pages in the main table of contents devoted to Item 1A starting page and the number of members of the Board who signed the report, excluding executive officers who are not directors?",
+        "golden_answer": "No",
+        "original_question": "What is the combined total when you add the number of pages in the main table of contents devoted to Item 1A starting page and the number of members of the Board who signed the report, excluding executive officers who are not directors?",
+        "original_answer": "26"
+      },
+      {
+        "id": "multi_hop_M09",
+        "question": "Is the difference in percentage points of consolidated net revenue between convenient foods and beverages in 2021 equal to 10?",
+        "golden_answer": "Yes",
+        "original_question": "How many more percentage points of consolidated net revenue came from convenient foods than beverages in 2021?",
+        "original_answer": "10"
+      },
+      {
+        "id": "multi_hop_M09",
+        "question": "Is the difference in percentage points of consolidated net revenue between convenient foods and beverages in 2021 equal to 5?",
+        "golden_answer": "No",
+        "original_question": "How many more percentage points of consolidated net revenue came from convenient foods than beverages in 2021?",
+        "original_answer": "10"
+      },
+      {
+        "id": "multi_hop_M10",
+        "question": "Is the sum of the employee count in the United States (in thousands) and the number of shareholders of record (rounded to the nearest thousand) equal to 231?",
+        "golden_answer": "Yes",
+        "original_question": "What is the sum of the employee count in the United States (in thousands) and the number of shareholders of record (rounded to the nearest thousand)?",
+        "original_answer": "231"
+      },
+      {
+        "id": "multi_hop_M10",
+        "question": "Is the sum of the employee count in the United States (in thousands) and the number of shareholders of record (rounded to the nearest thousand) equal to 300?",
+        "golden_answer": "No",
+        "original_question": "What is the sum of the employee count in the United States (in thousands) and the number of shareholders of record (rounded to the nearest thousand)?",
+        "original_answer": "231"
+      },
+      {
+        "id": "multi_hop_M11",
+        "question": "Is the number of countries and territories served divided by 10 greater than the number of current executive officers listed?",
+        "golden_answer": "Yes",
+        "original_question": "Which is larger: the number of countries and territories served divided by 10, or the number of current executive officers listed?",
+        "original_answer": "countries served/10"
+      },
+      {
+        "id": "multi_hop_M11",
+        "question": "Is the number of current executive officers listed greater than the number of countries and territories served divided by 10?",
+        "golden_answer": "No",
+        "original_question": "Which is larger: the number of countries and territories served divided by 10, or the number of current executive officers listed?",
+        "original_answer": "countries served/10"
+      },
+      {
+        "id": "multi_hop_M12",
+        "question": "Was there a negative difference between the 2021 free cash flow and the expected 2022 shareholder returns announced?",
+        "golden_answer": "Yes",
+        "original_question": "How many millions of dollars separated the 2021 free cash flow from the expected 2022 shareholder returns announced?",
+        "original_answer": "-543"
+      },
+      {
+        "id": "multi_hop_M12",
+        "question": "Did the 2021 free cash flow exceed the expected 2022 shareholder returns announced by over 500 million dollars?",
+        "golden_answer": "No",
+        "original_question": "How many millions of dollars separated the 2021 free cash flow from the expected 2022 shareholder returns announced?",
+        "original_answer": "-543"
+      },
+      {
+        "id": "multi_hop_M13",
+        "question": "Is the total sum of racially/ethnically diverse and/or female women executives reporting to the CEO plus the number of reportable segments equal to 14?",
+        "golden_answer": "Yes",
+        "original_question": "Add the number of women executives directly reporting to the CEO who are racially/ethnically diverse and/or female to the number of reportable segments. What is the total?",
+        "original_answer": "14"
+      },
+      {
+        "id": "multi_hop_M13",
+        "question": "Is the total sum of racially/ethnically diverse and/or female women executives reporting to the CEO plus the number of reportable segments equal to 10?",
+        "golden_answer": "No",
+        "original_question": "Add the number of women executives directly reporting to the CEO who are racially/ethnically diverse and/or female to the number of reportable segments. What is the total?",
+        "original_answer": "14"
+      },
+      {
+        "id": "multi_hop_M14",
+        "question": "Did the United States contribute more millions of 2021 net revenue than the combined net revenue of Mexico and Canada by 36,560 million?",
+        "golden_answer": "Yes",
+        "original_question": "How many more millions of 2021 net revenue did the United States contribute than the combined net revenue of Mexico and Canada?",
+        "original_answer": "36560"
+      },
+      {
+        "id": "multi_hop_M14",
+        "question": "Did the United States contribute less millions of 2021 net revenue than the combined net revenue of Mexico and Canada in 2021?",
+        "golden_answer": "No",
+        "original_question": "How many more millions of 2021 net revenue did the United States contribute than the combined net revenue of Mexico and Canada?",
+        "original_answer": "36560"
+      },
+      {
+        "id": "multi_hop_M15",
+        "question": "Is the difference between the age of CFO Hugh F. Johnston and the page number for Item 5 in the table of contents equal to 32?",
+        "golden_answer": "Yes",
+        "original_question": "What is the difference between the age of CFO Hugh F. Johnston and the page number for Item 5 in the table of contents?",
+        "original_answer": "32"
+      },
+      {
+        "id": "multi_hop_M15",
+        "question": "Is the difference between the age of CFO Hugh F. Johnston and the page number for Item 5 in the table of contents equal to 25?",
+        "golden_answer": "No",
+        "original_question": "What is the difference between the age of CFO Hugh F. Johnston and the page number for Item 5 in the table of contents?",
+        "original_answer": "32"
+      },
+      {
+        "id": "multi_hop_M16",
+        "question": "Is the result of adding the 2021 number of employees in the U.S. (in thousands) to the annualized dividend per share announced on February 10, 2022 equal to 133.6?",
+        "golden_answer": "Yes",
+        "original_question": "If you add the 2021 number of employees in the U.S. (in thousands) to the annualized dividend per share announced on February 10, 2022, what do you get?",
+        "original_answer": "133.6"
+      },
+      {
+        "id": "multi_hop_M16",
+        "question": "Is the sum of the 2021 number of employees in the U.S. (in thousands) and the annualized dividend per share announced on February 10, 2022 equal to 150?",
+        "golden_answer": "No",
+        "original_question": "If you add the 2021 number of employees in the U.S. (in thousands) to the annualized dividend per share announced on February 10, 2022, what do you get?",
+        "original_answer": "133.6"
+      },
+      {
+        "id": "multi_hop_M17",
+        "question": "Is the difference between 2021 long-term debt obligations and 2021 goodwill equal to 17,645 million?",
+        "golden_answer": "Yes",
+        "original_question": "How many more millions were in 2021 long-term debt obligations than in 2021 goodwill?",
+        "original_answer": "17645"
+      },
+      {
+        "id": "multi_hop_M17",
+        "question": "Was the difference between 2021 long-term debt obligations and 2021 goodwill less than 10,000 million?",
+        "golden_answer": "No",
+        "original_question": "How many more millions were in 2021 long-term debt obligations than in 2021 goodwill?",
+        "original_answer": "17645"
+      },
+      {
+        "id": "multi_hop_M18",
+        "question": "Is the total of the number of countries specifically named as PepsiCo's largest operations and the number of reportable segments equal to 14?",
+        "golden_answer": "Yes",
+        "original_question": "What is the total of the number of countries specifically named as PepsiCo's largest operations and the number of reportable segments?",
+        "original_answer": "14"
+      },
+      {
+        "id": "multi_hop_M18",
+        "question": "Is the total of the number of countries specifically named as PepsiCo's largest operations and the number of reportable segments 12?",
+        "golden_answer": "No",
+        "original_question": "What is the total of the number of countries specifically named as PepsiCo's largest operations and the number of reportable segments?",
+        "original_answer": "14"
+      },
+      {
+        "id": "multi_hop_M19",
+        "question": "Is the percentage of women in management roles larger than the 2021 operating margin percentage?",
+        "golden_answer": "Yes",
+        "original_question": "Which is larger: the 2021 operating margin percentage or the percentage of women in management roles?",
+        "original_answer": "women in management roles"
+      },
+      {
+        "id": "multi_hop_M19",
+        "question": "Is the 2021 operating margin percentage larger than the percentage of women in management roles?",
+        "golden_answer": "No",
+        "original_question": "Which is larger: the 2021 operating margin percentage or the percentage of women in management roles?",
+        "original_answer": "women in management roles"
+      },
+      {
+        "id": "multi_hop_M20",
+        "question": "Is the difference between the page where Management's Discussion and Analysis begins and the age of Chief Executive Officer, Europe Silviu Popovici negative?",
+        "golden_answer": "Yes",
+        "original_question": "What is the difference between the page where Management's Discussion and Analysis begins and the age of Chief Executive Officer, Europe Silviu Popovici?",
+        "original_answer": "-24"
+      },
+      {
+        "id": "multi_hop_M20",
+        "question": "Is the difference between the page where Management's Discussion and Analysis begins and the age of Chief Executive Officer, Europe Silviu Popovici a positive number?",
+        "golden_answer": "No",
+        "original_question": "What is the difference between the page where Management's Discussion and Analysis begins and the age of Chief Executive Officer, Europe Silviu Popovici?",
+        "original_answer": "-24"
+      }
+    ]
+  }
+}
