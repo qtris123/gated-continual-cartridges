@@ -136,65 +136,6 @@ def _find_answer_token_position(gen_token_ids: list[int], tokenizer: AutoTokeniz
     return None
 
 
-def _extract_answer_position_logprobs(
-    model: torch.nn.Module,
-    cache: TrainableCache,
-    prompt_ids: torch.Tensor,
-    gen_token_ids: list[int],
-    answer_pos: int,
-    choice_token_ids: dict[str, int],
-    device: str,
-) -> dict[str, float]:
-    """Forward pass on prompt + generated tokens up to 'Answer:', extract choice logprobs."""
-    # Build full sequence: prompt + generated tokens up to and including "Answer:"
-    gen_tensor = torch.tensor(gen_token_ids[:answer_pos + 1], device=device, dtype=torch.long)
-    full_ids = torch.cat([prompt_ids, gen_tensor])
-    seq_ids = torch.zeros_like(full_ids)
-    position_ids = torch.arange(len(full_ids), device=device)
-
-    wrapped = CacheAndModel(cache, model)
-    with torch.no_grad():
-        outputs = wrapped(
-            input_ids=full_ids,
-            seq_ids=seq_ids,
-            position_ids=position_ids,
-        )
-
-    # Logits at the last position predict the token after "Answer:"
-    logits = outputs.logits
-    if logits.dim() == 3:
-        answer_logits = logits[0, -1, :]
-    else:
-        answer_logits = logits[-1, :]
-    log_probs = F.log_softmax(answer_logits.float(), dim=-1)
-    choice_logprobs = {label: log_probs[tid].item() for label, tid in choice_token_ids.items()}
-    cache.clear()
-    return choice_logprobs
-
-
-def _extract_first_token_logprobs(
-    model: torch.nn.Module,
-    cache: TrainableCache,
-    input_ids: torch.Tensor,
-    seq_ids: torch.Tensor,
-    position_ids: torch.Tensor,
-    choice_token_ids: dict[str, int],
-) -> dict[str, float]:
-    """Forward pass on prompt to get log-probs of the first generated token."""
-    wrapped = CacheAndModel(cache, model)
-    with torch.no_grad():
-        outputs = wrapped(
-            input_ids=input_ids,
-            seq_ids=seq_ids,
-            position_ids=position_ids,
-        )
-    logits = outputs.logits
-    first_logits = logits[0, -1, :] if logits.dim() == 3 else logits[-1, :]
-    log_probs = F.log_softmax(first_logits.float(), dim=-1)
-    choice_logprobs = {label: log_probs[tid].item() for label, tid in choice_token_ids.items()}
-    cache.clear()
-    return choice_logprobs
-
 
 def generate_for_dataset(
     model: torch.nn.Module,
@@ -205,92 +146,121 @@ def generate_for_dataset(
     max_new_tokens: int = 256,
     eval_mode: str = "generate",
     max_samples: int | None = None,
+    batch_size: int = 1,
 ) -> list[dict]:
     # Pre-compute choice token IDs per question type (cached across questions)
     choice_tokens_cache: dict[str, dict[str, int]] = {}
 
     results = []
     n = min(len(eval_dataset), max_samples) if max_samples else len(eval_dataset)
+    print(f"  batch_size={batch_size}, total={n}, num_batches={-(-n // batch_size)}")
+    if device == "cuda":
+        torch.cuda.reset_peak_memory_stats()
+        print(f"  GPU memory before generation: {torch.cuda.memory_allocated() / 1024**3:.2f} GB")
 
-    for idx in tqdm(range(n), desc="Generating"):
-        element = eval_dataset[idx]
-        question_type = element.metadata.get("question_type", "original")
+    # Determine question type and choice token IDs for logprob collection
+    first_question_type = eval_dataset[0].metadata.get("question_type", "original") if n > 0 else "original"
+    collect_token_ids = None
+    if eval_mode == "generate-score" and first_question_type in ("mcq", "yes_no"):
+        if first_question_type not in choice_tokens_cache:
+            choice_tokens_cache[first_question_type] = _get_choice_token_ids(tokenizer, first_question_type)
+        # Map label -> token_id, we need the raw token IDs for collection
+        choice_map = choice_tokens_cache[first_question_type]  # e.g. {"A": 362, "B": 426, ...}
+        collect_token_ids = list(choice_map.values())
 
-        input_ids = element.input_ids.flatten().to(device)
-        seq_ids = torch.zeros_like(input_ids)
-        position_ids = torch.arange(len(input_ids), device=device)
+    for batch_start in tqdm(range(0, n, batch_size), desc="Generating"):
+        batch_end = min(batch_start + batch_size, n)
+        batch_elements = [eval_dataset[idx] for idx in range(batch_start, batch_end)]
 
-        # --- Yes-No: extract first-token logits BEFORE generation ---
-        choice_logprobs = None
-        predicted_from_logits = None
-        if eval_mode == "generate-score" and question_type == "yes_no":
-            if question_type not in choice_tokens_cache:
-                choice_tokens_cache[question_type] = _get_choice_token_ids(tokenizer, question_type)
-            with torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
-                choice_logprobs = _extract_first_token_logprobs(
-                    model, cache, input_ids, seq_ids, position_ids,
-                    choice_tokens_cache[question_type],
-                )
-            predicted_from_logits = max(choice_logprobs, key=choice_logprobs.get)
+        # --- Batched generation: pack all questions with different seq_ids ---
+        all_input_ids = []
+        all_seq_ids = []
+        all_position_ids = []
 
-        # --- Generation ---
+        for i, element in enumerate(batch_elements):
+            input_ids = element.input_ids.flatten().to(device)
+            all_input_ids.append(input_ids)
+            all_seq_ids.append(torch.full_like(input_ids, i))
+            all_position_ids.append(torch.arange(len(input_ids), device=device))
+
+        batched_input_ids = torch.cat(all_input_ids)
+        batched_seq_ids = torch.cat(all_seq_ids)
+        batched_position_ids = torch.cat(all_position_ids)
+
         with torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
-            generated_tokens = flex_generate(
+            gen_result = flex_generate(
                 model=model,
                 tokenizer=tokenizer,
-                input_ids=input_ids,
-                seq_ids=seq_ids,
-                position_ids=position_ids,
+                input_ids=batched_input_ids,
+                seq_ids=batched_seq_ids,
+                position_ids=batched_position_ids,
                 cache=cache,
                 max_new_tokens=max_new_tokens,
+                collect_token_ids=collect_token_ids,
             )
 
-        gen_token_ids = generated_tokens.get(0, [])
-        generated_text = tokenizer.decode(gen_token_ids, skip_special_tokens=True)
-
-        # --- MCQ: extract logits at "Answer:" position AFTER generation ---
-        if eval_mode == "generate-score" and question_type == "mcq":
-            if question_type not in choice_tokens_cache:
-                choice_tokens_cache[question_type] = _get_choice_token_ids(tokenizer, question_type)
-            choice_token_ids = choice_tokens_cache[question_type]
-
-            answer_pos = _find_answer_token_position(gen_token_ids, tokenizer)
-            if answer_pos is not None:
-                with torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
-                    choice_logprobs = _extract_answer_position_logprobs(
-                        model, cache, input_ids, gen_token_ids,
-                        answer_pos, choice_token_ids, device,
-                    )
-                predicted_from_logits = max(choice_logprobs, key=choice_logprobs.get)
-
-        if isinstance(element.prompt, list):
-            question_text = element.prompt[-1].get("content", "") if element.prompt else ""
+        if collect_token_ids is not None:
+            generated_tokens, collected_logprobs = gen_result
         else:
-            question_text = element.prompt
+            generated_tokens = gen_result
+            collected_logprobs = None
 
-        result = {
-            "question_id": element.convo_id,
-            "question": question_text,
-            "generated_answer": generated_text,
-            "reference_answer": element.answer,
-            **element.metadata,
-        }
+        # --- Post-generation processing per sample ---
+        for i, element in enumerate(batch_elements):
+            question_type = element.metadata.get("question_type", "original")
+            gen_token_ids = generated_tokens.get(i, [])
+            generated_text = tokenizer.decode(gen_token_ids, skip_special_tokens=True)
 
-        # --- Scoring (MCQ / Yes-No only, generate-score mode) ---
-        if eval_mode == "generate-score" and question_type == "mcq":
-            result["score"] = multiple_choice(generated_text, element.answer)
-            result["correct"] = result["score"] == 1.0
-            result["scorer"] = "multiple_choice"
-        elif eval_mode == "generate-score" and question_type == "yes_no":
-            result["score"] = yes_no_match(generated_text, element.answer)
-            result["correct"] = result["score"] == 1.0
-            result["scorer"] = "yes_no"
+            choice_logprobs = None
+            predicted_from_logits = None
 
-        if choice_logprobs is not None:
-            result["choice_logprobs"] = choice_logprobs
-            result["predicted_choice_from_logits"] = predicted_from_logits
+            # MCQ / Yes-No: look up logprobs at "Answer:" position from collected logits
+            if eval_mode == "generate-score" and question_type in ("mcq", "yes_no") and collected_logprobs is not None:
+                answer_pos = _find_answer_token_position(gen_token_ids, tokenizer)
+                # answer_pos is the index of the last token of "Answer:" in gen_token_ids.
+                # collected_logprobs[k] predicts gen_token_ids[k], so we need
+                # answer_pos + 1 to get logprobs predicting the choice token.
+                choice_pos = answer_pos + 1 if answer_pos is not None else None
+                if choice_pos is not None and choice_pos < len(collected_logprobs.get(i, [])):
+                    step_logprobs = collected_logprobs[i][choice_pos]
+                    # Convert from {token_id: logprob} to {label: logprob}
+                    choice_logprobs = {
+                        label: step_logprobs[tid]
+                        for label, tid in choice_map.items()
+                    }
+                    predicted_from_logits = max(choice_logprobs, key=choice_logprobs.get)
 
-        results.append(result)
+            if isinstance(element.prompt, list):
+                question_text = element.prompt[-1].get("content", "") if element.prompt else ""
+            else:
+                question_text = element.prompt
+
+            result = {
+                "question_id": element.convo_id,
+                "question": question_text,
+                "generated_answer": generated_text,
+                "reference_answer": element.answer,
+                **element.metadata,
+            }
+
+            # --- Scoring (MCQ / Yes-No only, generate-score mode) ---
+            if eval_mode == "generate-score" and question_type == "mcq":
+                result["score"] = multiple_choice(generated_text, element.answer)
+                result["correct"] = result["score"] == 1.0
+                result["scorer"] = "multiple_choice"
+            elif eval_mode == "generate-score" and question_type == "yes_no":
+                result["score"] = yes_no_match(generated_text, element.answer)
+                result["correct"] = result["score"] == 1.0
+                result["scorer"] = "yes_no"
+
+            if choice_logprobs is not None:
+                result["choice_logprobs"] = choice_logprobs
+                result["predicted_choice_from_logits"] = predicted_from_logits
+
+            results.append(result)
+
+    if device == "cuda":
+        print(f"  GPU peak memory during generation: {torch.cuda.max_memory_allocated() / 1024**3:.2f} GB")
 
     # --- Print accuracy summary for scored questions ---
     if eval_mode == "generate-score":
@@ -323,6 +293,7 @@ def run_eval(
     model_name: str,
     eval_mode: str = "generate",
     max_samples: int | None = None,
+    batch_size: int = 1,
 ) -> dict:
     """Run loss + generation eval for one (cache, eval_set) pair. Returns perplexity result dict."""
     print(f"\n--- {label} ---")
@@ -360,6 +331,7 @@ def run_eval(
         max_new_tokens=max_new_tokens,
         eval_mode=eval_mode,
         max_samples=max_samples,
+        batch_size=batch_size,
     )
 
     # Compute accuracy breakdown and add to ppl_result
@@ -451,6 +423,8 @@ def main():
     parser.add_argument("--max-new-tokens", type=int, default=2048)
     parser.add_argument("--max-samples", type=int, default=None,
                         help="Limit number of generation samples (for quick testing)")
+    parser.add_argument("--batch-size", type=int, default=8,
+                        help="Number of questions to generate in parallel (default: 8)")
     parser.add_argument(
         "--eval-mode", type=str, default="generate-score",
         choices=["generate", "generate-score"],
@@ -499,6 +473,7 @@ def main():
             model_name=model_name,
             eval_mode=args.eval_mode,
             max_samples=args.max_samples,
+            batch_size=args.batch_size,
         )
         all_results.append(result)
 

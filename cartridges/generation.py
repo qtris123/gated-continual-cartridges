@@ -3,6 +3,7 @@ import os
 from typing import Any, Dict, List, Optional
 from transformers import DynamicCache, AutoTokenizer
 import torch
+import torch.nn.functional as F
 from tqdm import tqdm
 
 from cartridges.cache import AttnConfig, TrainableCache
@@ -22,12 +23,14 @@ def flex_generate(
     max_new_tokens: int = 32,
     temperature: float = 0.0,
     show_progress: bool = False,
-) -> Dict[int, List[int]]:
+    collect_token_ids: Optional[List[int]] = None,
+    collect_logits: bool = False,
+) -> Dict[int, Any]:
     """Autoregressive generation with FlexAttention (e.g. FlexLlamaModel, FlexQwen3Model).
-    
+
     Args:
         model: The model to use for generation
-        input_ids: (N,) tensor of input ids where N is the total number of tokens across 
+        input_ids: (N,) tensor of input ids where N is the total number of tokens across
             the sequences.
         seq_ids: (N,) tensor specifying the membership of each token to a sequence
         position_ids: (N,) tensor of position of a token within it's sequence
@@ -36,7 +39,14 @@ def flex_generate(
         max_new_tokens: maximum number of new tokens to generate.
         temperature: temperature for sampling
         show_progress: whether to show a progress bar during generation
-    
+        collect_token_ids: if set, collect log-probs for these token IDs at each step.
+
+    Returns:
+        If collect_token_ids is None: Dict[int, List[int]] mapping seq_id to generated tokens.
+        If collect_token_ids is set: tuple of (generated_tokens, collected_logprobs) where
+            collected_logprobs is Dict[int, List[Dict[int, float]]] mapping seq_id to
+            per-step log-probs for the requested token IDs.
+
     This implementation relies on the PackedCache above.
     """
             
@@ -56,6 +66,7 @@ def flex_generate(
         
     # Initialize generated sequences
     generated_tokens: Dict[int, List[int]] = defaultdict(list)
+    collected_logprobs: Dict[int, List[Dict[int, float]]] = defaultdict(list) if collect_token_ids is not None else None
     
     # Current state
     current_input_ids = input_ids
@@ -97,7 +108,25 @@ def flex_generate(
             # Get the last token's logits for this sequence
             last_token_idx = token_indices[-1]
             token_logits = last_logits[last_token_idx]
-            
+
+            # Collect log-probs (and optionally raw logits) for requested token IDs
+            if collect_token_ids is not None:
+                step_logprobs = F.log_softmax(token_logits.double(), dim=-1)
+                if collect_logits:
+                    collected_logprobs[seq_id].append(
+                        {
+                            tid: {
+                                "logit": token_logits[tid].item(),
+                                "logprob": step_logprobs[tid].item(),
+                            }
+                            for tid in collect_token_ids
+                        }
+                    )
+                else:
+                    collected_logprobs[seq_id].append(
+                        {tid: step_logprobs[tid].item() for tid in collect_token_ids}
+                    )
+
             # Apply temperature
             if temperature > 0:
                 token_logits = token_logits / temperature
@@ -129,7 +158,9 @@ def flex_generate(
     # training on multiple GPUs. We get a crash on flex attention I guess because the 
     # cache sizes differ between GPUs.
     cache.clear()
-    
+
+    if collect_token_ids is not None:
+        return generated_tokens, collected_logprobs
     return generated_tokens
     
     
