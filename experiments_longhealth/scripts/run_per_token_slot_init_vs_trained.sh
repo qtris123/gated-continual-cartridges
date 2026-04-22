@@ -34,6 +34,7 @@ for MODEL in "qwen3-4b-instruct" "llama-3.2-3b-instruct"; do
       --cache-b "$UNTR" \
       --eval "$EVAL" \
       --batch-size 32 \
+      #--per-question \
       --output-dir "$CARTRIDGES_OUTPUT_DIR/per_token_slot_${model_prefix}_toks${TOKS}_init_vs_trained_A_into_B"
 
   done
