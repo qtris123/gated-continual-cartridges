@@ -1,0 +1,3847 @@
+id,category,original_question,original_answer,mcq_question,option_a,option_b,option_c,option_d,answer
+patient_17_11,,"Please answer the question below about the following patient: ID patient_17, Name: Brian Carter, Birthday: 04/24/1956, Diagnosis: ARDS
+
+<question>
+Regarding Mr. Carter, what was the primary reason for initiating therapy with Methotrexate (Trexall) 25 mg upon admission?
+</question>
+
+<options>
+COVID-19 infection
+Retinal central serous chorioretinopathy
+Uveitis
+Rheumatoid arthritis
+Depression
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Rheumatoid arthritis,"Regarding Mr. Carter, what was the primary reason for initiating therapy with Methotrexate (Trexall) 25 mg upon admission?",COVID-19 infection,Retinal central serous chorioretinopathy,Uveitis,Rheumatoid arthritis,D
+patient_20_1,,"Please answer the question below about the following patient: ID patient_20, Name: Hilary Sanders, Birthday: 08/24/1976, Diagnosis: Common Variable Immunodeficiency Syndrome
+
+<question>
+As of 2016, how long had Mrs. Sanders experienced recurrent respiratory infections?
+</question>
+
+<options>
+1 year
+2 years
+3 years
+4 years
+5 years
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",3 years,"As of 2016, how long had Mrs. Sanders experienced recurrent respiratory infections?",1 year,2 years,3 years,4 years,C
+patient_12_2,,"Please answer the question below about the following patient: ID patient_12, Name: Alan Fisher, Birthday: 1953-09-12 00:00:00, Diagnosis: Chronic kidney disease
+
+<question>
+What was the outcome of the histological examination after Mr. Fisher's right laparoscopic nephrectomy?
+</question>
+
+<options>
+Confirmed renal cell carcinoma
+Chronic pyelonephritis identified
+No evidence of malignancy
+Nephrolithiasis confirmed
+Secondary hyperparathyroidism diagnosis
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",No evidence of malignancy,What was the outcome of the histological examination after Mr. Fisher's right laparoscopic nephrectomy?,Confirmed renal cell carcinoma,Chronic pyelonephritis identified,No evidence of malignancy,Nephrolithiasis confirmed,C
+patient_19_12,,"Please answer the question below about the following patient: ID patient_19, Name: Emil Nilsson, Birthday: 2004-04-12 00:00:00, Diagnosis: Hypoplastic Left Heart Syndrome
+
+<question>
+What abnormality was noted in Mr. Nilsson's ECG on 11/20/2021?
+</question>
+
+<options>
+Bradycardia
+ST-elevation myocardial infarction
+Atrial fibrillation
+Ventricular tachycardia
+Intraventricular conduction disorder
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Intraventricular conduction disorder,What abnormality was noted in Mr. Nilsson's ECG on 11/20/2021?,Bradycardia,ST-elevation myocardial infarction,Atrial fibrillation,Intraventricular conduction disorder,D
+patient_18_4,,"Please answer the question below about the following patient: ID patient_18, Name: David Romero, Birthday: 02/16/1942, Diagnosis: Cardiomyopathy
+
+<question>
+Considering the lab results upon discharge in March 2016 and June 2016 in Mr. Romero, which of the following renal function markers showed a consistent formal increase above the normal range?
+</question>
+
+<options>
+Sodium
+Urea
+Creatinine
+Creatinine, not Urea
+Both B) Urea and C) Creatinine
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Both B) Urea and C) Creatinine,"Considering the lab results upon discharge in March 2016 and June 2016 in Mr. Romero, which of the following renal function markers showed a consistent formal increase above the normal range?",Sodium,Urea,Creatinine,Both B) Urea and C) Creatinine,D
+patient_15_12,,"Please answer the question below about the following patient: ID patient_15, Name: George Davies, Birthday: 07/25/1979, Diagnosis: Galactosemia
+
+<question>
+In Mr. Davies' 2019 lab results, which parameter was outside the reference range?
+</question>
+
+<options>
+Hemoglobin
+White Blood Cells
+Platelets
+Eosinophils
+Creatinine
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Eosinophils,"In Mr. Davies' 2019 lab results, which parameter was outside the reference range?",Hemoglobin,White Blood Cells,Platelets,Eosinophils,D
+patient_15_17,,"Please answer the question below about the following patient: ID patient_15, Name: George Davies, Birthday: 07/25/1979, Diagnosis: Galactosemia
+
+<question>
+Which of these events occurred first in Mr. Davies' life?
+</question>
+
+<options>
+Diagnosis of galactosemia
+Appendectomy
+Elbow fracture
+Onset of hyperbilirubinemia and hepatopathy
+Initiation of a lactose-free and low-galactose diet
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Onset of hyperbilirubinemia and hepatopathy,Which of these events occurred first in Mr. Davies' life?,Diagnosis of galactosemia,Appendectomy,Elbow fracture,Onset of hyperbilirubinemia and hepatopathy,D
+patient_20_7,,"Please answer the question below about the following patient: ID patient_20, Name: Hilary Sanders, Birthday: 08/24/1976, Diagnosis: Common Variable Immunodeficiency Syndrome
+
+<question>
+In 2019, what treatment was continued for Mrs. Sanders despite gastrointestinal issues?
+</question>
+
+<options>
+Antibiotic therapy
+Oral corticosteroids
+Subcutaneous immunoglobulin therapy
+Intravenous iron supplementation
+Antihypertensive medication
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Subcutaneous immunoglobulin therapy,"In 2019, what treatment was continued for Mrs. Sanders despite gastrointestinal issues?",Antibiotic therapy,Oral corticosteroids,Subcutaneous immunoglobulin therapy,Intravenous iron supplementation,C
+patient_13_18,,"Please answer the question below about the following patient: ID patient_13, Name: Ben Harder, Birthday: 1940-02-08 00:00:00, Diagnosis: Prostate cancer 
+
+<question>
+Which of the following statements accurately reflects the trend in Mr. Ben Harder's lab results from December 2015 to June 2023?
+</question>
+
+<options>
+Creatinine levels remained consistent, indicating stable kidney function over the years.
+Potassium levels normalized from a high of 5.1 mEq/L to within the reference range at 4.2 mEq/L.
+Hemoglobin levels showed a significant increase, moving from below to within the normal range.
+The patient's estimated GFR (eGFR) values were indicative of improved kidney function by June 2023.
+Platelet count increased significantly, moving from below the reference range to well within it by June 2023.
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Potassium levels normalized from a high of 5.1 mEq/L to within the reference range at 4.2 mEq/L.,Which of the following statements accurately reflects the trend in Mr. Ben Harder's lab results from December 2015 to June 2023?,"Creatinine levels remained consistent, indicating stable kidney function over the years.",Potassium levels normalized from a high of 5.1 mEq/L to within the reference range at 4.2 mEq/L.,"Hemoglobin levels showed a significant increase, moving from below to within the normal range.",The patient's estimated GFR (eGFR) values were indicative of improved kidney function by June 2023.,B
+patient_15_13,,"Please answer the question below about the following patient: ID patient_15, Name: George Davies, Birthday: 07/25/1979, Diagnosis: Galactosemia
+
+<question>
+What was the result of Mr. Davies' Taurine EDTA level in the 2017 lab report?
+</question>
+
+<options>
+Below normal range
+At the lower end of the normal range
+Within the normal range
+At the higher end of the normal range
+Above the normal range
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Within the normal range,What was the result of Mr. Davies' Taurine EDTA level in the 2017 lab report?,Below normal range,At the lower end of the normal range,Within the normal range,At the higher end of the normal range,C
+patient_11_6,,"Please answer the question below about the following patient: ID patient_11, Name: Bruno Hurley, Birthday: 12/24/1965, Diagnosis: AML
+
+<question>
+Which imaging study, done on 01/04/20, indicated progression of Mr. Hurley's tuberculosis?
+</question>
+
+<options>
+Neck Ultrasound
+Chest CT
+Neck/Thorax/Abdomen/Pelvis CT
+Abdominal CT
+Chest X-ray
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Chest CT,"Which imaging study, done on 01/04/20, indicated progression of Mr. Hurley's tuberculosis?",Neck Ultrasound,Chest CT,Neck/Thorax/Abdomen/Pelvis CT,Abdominal CT,B
+patient_14_10,,"Please answer the question below about the following patient: ID patient_14, Name: John Havers, Birthday: 05/29/1953, Diagnosis: Liposarcoma
+
+<question>
+Considering Mr. Havers' medical interventions, select the sequence that includes the correct chronological order of the administered medications from his first admission to his discharge post-pulmonary metastasis surgery.
+</question>
+
+<options>
+Empagliflozin, Metformin, Atorvastatin, Metoprolol, Aspirin, Pantoprazole initially - Enoxaparin added postoperatively - No changes upon discharge
+Empagliflozin, Metformin, Atorvastatin, Metoprolol, Aspirin, Pantoprazole consistently - Introduction of Enoxaparin and Acetaminophen  - Same regimen upon discharge
+Empagliflozin, Metformin, Atorvastatin, Metoprolol, Aspirin, Pantoprazole consistently - Introduction of Enoxaparin and Acetaminophen (Aspirin discontinued) - Same regimen upon discharge
+Metformin, Atorvastatin, Metoprolol, Aspirin, Pantoprazole initially - Empagliflozin added post-biopsy - Enoxaparin and Acetaminophen post-tumor excision
+Aspirin, Atorvastatin, Pantoprazole initially - Empagliflozin and Metformin added post-biopsy - Enoxaparin post-tumor excision - Acetaminophen introduced for postoperative pain
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>","Empagliflozin, Metformin, Atorvastatin, Metoprolol, Aspirin, Pantoprazole consistently - Introduction of Enoxaparin and Acetaminophen (Aspirin discontinued) - Same regimen upon discharge","Considering Mr. Havers' medical interventions, select the sequence that includes the correct chronological order of the administered medications from his first admission to his discharge post-pulmonary metastasis surgery.","Empagliflozin, Metformin, Atorvastatin, Metoprolol, Aspirin, Pantoprazole initially - Enoxaparin added postoperatively - No changes upon discharge","Empagliflozin, Metformin, Atorvastatin, Metoprolol, Aspirin, Pantoprazole consistently - Introduction of Enoxaparin and Acetaminophen  - Same regimen upon discharge","Empagliflozin, Metformin, Atorvastatin, Metoprolol, Aspirin, Pantoprazole consistently - Introduction of Enoxaparin and Acetaminophen (Aspirin discontinued) - Same regimen upon discharge","Metformin, Atorvastatin, Metoprolol, Aspirin, Pantoprazole initially - Empagliflozin added post-biopsy - Enoxaparin and Acetaminophen post-tumor excision",C
+patient_16_6,,"Please answer the question below about the following patient: ID patient_16, Name: John Chapman, Birthday: 11/16/1994, Diagnosis: Polytrauma
+
+<question>
+Which antibiotic was Mr. Chapman NOT prescribed during his ICU stay?
+</question>
+
+<options>
+Piperacillin/Tazobactam
+Meropenem
+Ciprofloxacin
+Aspirin
+Vancomycin
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Vancomycin,Which antibiotic was Mr. Chapman NOT prescribed during his ICU stay?,Vancomycin,Meropenem,Ciprofloxacin,Aspirin,A
+patient_14_8,,"Please answer the question below about the following patient: ID patient_14, Name: John Havers, Birthday: 05/29/1953, Diagnosis: Liposarcoma
+
+<question>
+On Mr. Havers' MRI of the right thigh dated 08/01/2018, what was the maximum diameter of the two confluent nodules?
+</question>
+
+<options>
+33 mm
+36 mm
+53 mm
+60 mm
+Not specified.
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",53 mm,"On Mr. Havers' MRI of the right thigh dated 08/01/2018, what was the maximum diameter of the two confluent nodules?",33 mm,36 mm,53 mm,60 mm,C
+patient_18_13,,"Please answer the question below about the following patient: ID patient_18, Name: David Romero, Birthday: 02/16/1942, Diagnosis: Cardiomyopathy
+
+<question>
+On Mr. Romero's ECG at discharge on 05/21/2023, what was the QRS duration?
+</question>
+
+<options>
+135 ms
+122 ms
+126 ms
+432 ms
+Not specified
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",122 ms,"On Mr. Romero's ECG at discharge on 05/21/2023, what was the QRS duration?",135 ms,122 ms,126 ms,432 ms,B
+patient_19_8,,"Please answer the question below about the following patient: ID patient_19, Name: Emil Nilsson, Birthday: 2004-04-12 00:00:00, Diagnosis: Hypoplastic Left Heart Syndrome
+
+<question>
+What was Mr. Nilsson's oxygen saturation level in January 2005?
+</question>
+
+<options>
+93%
+76%
+85%
+95%
+78%
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",85%,What was Mr. Nilsson's oxygen saturation level in January 2005?,93%,76%,85%,95%,C
+patient_19_19,,"Please answer the question below about the following patient: ID patient_19, Name: Emil Nilsson, Birthday: 2004-04-12 00:00:00, Diagnosis: Hypoplastic Left Heart Syndrome
+
+<question>
+Please select the correct chronological order of imaging examinations that Mr. Nilsson received: 
+</question>
+
+<options>
+Echocardiography < Chest X-ray < Echocardiography  < Cardiac Catheterization < Abdominal Ultrasound < Echocardiography < Cardiac MRI
+Echocardiography < Chest X-ray < Echocardiography < ECG < ECG < Cardiac Catheterization < Abdominal Ultrasound < Echocardiography < Cardiac MRI < Abdominal Ultrasound
+Echocardiography < Chest X-ray < Echocardiography < ECG < ECG < Cardiac Catheterization < Abdominal Ultrasound < Echocardiography < Cardiac MRI
+Echocardiography < Chest X-ray < Echocardiography < Echocardiography  < Echocardiography <  Abdominal Ultrasound < Cardiac Angiography and Catheterization < Abdominal Ultrasound < Cardiac MRI
+Echocardiography < ECG < ECG < Cardiac Catheterization < Abdominal Ultrasound < Echocardiography < Cardiac MRI  Abdominal Ultrasound < Cardiac MRI
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Echocardiography < Chest X-ray < Echocardiography < Echocardiography  < Echocardiography <  Abdominal Ultrasound < Cardiac Angiography and Catheterization < Abdominal Ultrasound < Cardiac MRI,Please select the correct chronological order of imaging examinations that Mr. Nilsson received:,Echocardiography < Chest X-ray < Echocardiography  < Cardiac Catheterization < Abdominal Ultrasound < Echocardiography < Cardiac MRI,Echocardiography < Chest X-ray < Echocardiography < ECG < ECG < Cardiac Catheterization < Abdominal Ultrasound < Echocardiography < Cardiac MRI < Abdominal Ultrasound,Echocardiography < Chest X-ray < Echocardiography < ECG < ECG < Cardiac Catheterization < Abdominal Ultrasound < Echocardiography < Cardiac MRI,Echocardiography < Chest X-ray < Echocardiography < Echocardiography  < Echocardiography <  Abdominal Ultrasound < Cardiac Angiography and Catheterization < Abdominal Ultrasound < Cardiac MRI,D
+patient_20_19,,"Please answer the question below about the following patient: ID patient_20, Name: Hilary Sanders, Birthday: 08/24/1976, Diagnosis: Common Variable Immunodeficiency Syndrome
+
+<question>
+Which of the following findings were noted in Mrs. Sanders' esophagogastroduodenoscopy (EGD) report from 04/01/2023?
+</question>
+
+<options>
+Unremarkable mucosa in the bulb and descending part of the duodenum.
+Evidence of a hiatal hernia at the Z-line.
+Multiple peptic ulcers in the fundus and corpus.
+Irregular mucosal area in the distal esophagus.
+Significant mucosal erosion in the upper esophageal sphincter.
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Unremarkable mucosa in the bulb and descending part of the duodenum.,Which of the following findings were noted in Mrs. Sanders' esophagogastroduodenoscopy (EGD) report from 04/01/2023?,Unremarkable mucosa in the bulb and descending part of the duodenum.,Evidence of a hiatal hernia at the Z-line.,Multiple peptic ulcers in the fundus and corpus.,Irregular mucosal area in the distal esophagus.,A
+patient_12_9,,"Please answer the question below about the following patient: ID patient_12, Name: Alan Fisher, Birthday: 1953-09-12 00:00:00, Diagnosis: Chronic kidney disease
+
+<question>
+Which of the following was NOT part of Mr. Fisher's medical history as of 2009?
+</question>
+
+<options>
+Hepatitis B infection
+Secondary hyperparathyroidism
+COPD GOLD Stage II
+Cholecystolithiasis
+Diabetic nephropathy
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Diabetic nephropathy,Which of the following was NOT part of Mr. Fisher's medical history as of 2009?,Hepatitis B infection,Secondary hyperparathyroidism,COPD GOLD Stage II,Diabetic nephropathy,D
+patient_13_6,,"Please answer the question below about the following patient: ID patient_13, Name: Ben Harder, Birthday: 1940-02-08 00:00:00, Diagnosis: Prostate cancer 
+
+<question>
+What treatment did Mr. Harder receive immediately after the discovery of lymph node metastasis in November 2022?
+</question>
+
+<options>
+Radical prostatectomy
+Anti-hormonal therapy
+Lutetium PSMA-Therapy
+Cabazitaxel chemotherapy
+Radiotherapy
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Radiotherapy,What treatment did Mr. Harder receive immediately after the discovery of lymph node metastasis in November 2022?,Radical prostatectomy,Anti-hormonal therapy,Lutetium PSMA-Therapy,Radiotherapy,D
+patient_11_9,,"Please answer the question below about the following patient: ID patient_11, Name: Bruno Hurley, Birthday: 12/24/1965, Diagnosis: AML
+
+<question>
+What was Mr. Hurley's Hemoglobin level upon last recorded discharge?
+</question>
+
+<options>
+6.6 g/dL
+9.5 g/dL
+11.3 g/dL
+14.0 g/dL
+7.2 g/dL
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",14.0 g/dL,What was Mr. Hurley's Hemoglobin level upon last recorded discharge?,6.6 g/dL,9.5 g/dL,11.3 g/dL,14.0 g/dL,D
+patient_18_2,,"Please answer the question below about the following patient: ID patient_18, Name: David Romero, Birthday: 02/16/1942, Diagnosis: Cardiomyopathy
+
+<question>
+What is the correct dosage of Ramipril (Altace) prescribed upon Mr. Romero's discharge in May 2023?
+</question>
+
+<options>
+2.5 mg once daily
+12.5 mg twice daily
+5 mg once daily
+25 mg twice daily
+2.5 mg twice daily
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",2.5 mg once daily,What is the correct dosage of Ramipril (Altace) prescribed upon Mr. Romero's discharge in May 2023?,2.5 mg once daily,12.5 mg twice daily,5 mg once daily,25 mg twice daily,A
+patient_17_14,,"Please answer the question below about the following patient: ID patient_17, Name: Brian Carter, Birthday: 04/24/1956, Diagnosis: ARDS
+
+<question>
+Which medication was Mr. Carter prescribed upon his last recorded discharge that was not part of his initial medication upon admission?
+</question>
+
+<options>
+Trexall
+Toprol XL
+Atacand
+Singulair
+Clarinex
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Toprol XL,Which medication was Mr. Carter prescribed upon his last recorded discharge that was not part of his initial medication upon admission?,Trexall,Toprol XL,Atacand,Singulair,B
+patient_15_8,,"Please answer the question below about the following patient: ID patient_15, Name: George Davies, Birthday: 07/25/1979, Diagnosis: Galactosemia
+
+<question>
+What was Mr. Davies' bone density T-score in the lumbar spine (L2-4) in his last measurement?
+</question>
+
+<options>
+-0.8
+-0.5
+-0.2
+-1.5
+-2.5
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",-0.2,What was Mr. Davies' bone density T-score in the lumbar spine (L2-4) in his last measurement?,-0.8,-0.5,-0.2,-1.5,C
+patient_20_13,,"Please answer the question below about the following patient: ID patient_20, Name: Hilary Sanders, Birthday: 08/24/1976, Diagnosis: Common Variable Immunodeficiency Syndrome
+
+<question>
+In March 2023, what was observed during Mrs. Sanders' esophagogastroduodenoscopy (EGD)?
+</question>
+
+<options>
+Duodenal Ulcers
+Erythematous Antral Gastritis
+Esophageal Varices
+Gastric Polyps
+Barrett's Esophagus
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Erythematous Antral Gastritis,"In March 2023, what was observed during Mrs. Sanders' esophagogastroduodenoscopy (EGD)?",Duodenal Ulcers,Erythematous Antral Gastritis,Esophageal Varices,Gastric Polyps,B
+patient_16_10,,"Please answer the question below about the following patient: ID patient_16, Name: John Chapman, Birthday: 11/16/1994, Diagnosis: Polytrauma
+
+<question>
+On what date was Mr. Chapman's cerebral digital subtraction angiography performed?
+</question>
+
+<options>
+05/26/2019
+08/08/2018
+07/04/20017
+05/04/2017
+05/25/2019
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",05/25/2019,On what date was Mr. Chapman's cerebral digital subtraction angiography performed?,05/26/2019,08/08/2018,07/04/20017,05/25/2019,D
+patient_12_6,,"Please answer the question below about the following patient: ID patient_12, Name: Alan Fisher, Birthday: 1953-09-12 00:00:00, Diagnosis: Chronic kidney disease
+
+<question>
+What was a notable finding in Mr. Fisher's kidney biopsy on 04/19/2009?
+</question>
+
+<options>
+Significant flattening of cells
+Isometric tubular epithelial vacuolization
+Inflammation in glomeruli
+Medullary tissue damage
+Cell necrosis
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Isometric tubular epithelial vacuolization,What was a notable finding in Mr. Fisher's kidney biopsy on 04/19/2009?,Significant flattening of cells,Isometric tubular epithelial vacuolization,Inflammation in glomeruli,Medullary tissue damage,B
+patient_12_12,,"Please answer the question below about the following patient: ID patient_12, Name: Alan Fisher, Birthday: 1953-09-12 00:00:00, Diagnosis: Chronic kidney disease
+
+<question>
+In March 2007, Mr. Fisher underwent a surgical procedure on his right leg. What was it?
+</question>
+
+<options>
+Femoral artery bypass
+Profundaplasty
+Vein stripping
+Arterial stenting
+Varicose vein treatment
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Profundaplasty,"In March 2007, Mr. Fisher underwent a surgical procedure on his right leg. What was it?",Femoral artery bypass,Profundaplasty,Vein stripping,Arterial stenting,B
+patient_16_17,,"Please answer the question below about the following patient: ID patient_16, Name: John Chapman, Birthday: 11/16/1994, Diagnosis: Polytrauma
+
+<question>
+Which complication did Mr. Chapman NOT experience during his ICU stay?
+</question>
+
+<options>
+Rhabdomyolysis
+Diabetes insipidus
+Malresorptive hydrocephalus
+Infarct areas in the MCA-ACA border zones
+Subarachnoid hemorrhage
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Diabetes insipidus,Which complication did Mr. Chapman NOT experience during his ICU stay?,Rhabdomyolysis,Diabetes insipidus,Malresorptive hydrocephalus,Infarct areas in the MCA-ACA border zones,B
+patient_16_12,,"Please answer the question below about the following patient: ID patient_16, Name: John Chapman, Birthday: 11/16/1994, Diagnosis: Polytrauma
+
+<question>
+Which medication was NOT part of Mr. Chapman's regimen post-transfer?
+</question>
+
+<options>
+Bisoprolol
+Diazepam
+Ciprofloxacin
+Meropenem
+Aspirin
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Diazepam,Which medication was NOT part of Mr. Chapman's regimen post-transfer?,Bisoprolol,Diazepam,Ciprofloxacin,Meropenem,B
+patient_11_17,,"Please answer the question below about the following patient: ID patient_11, Name: Bruno Hurley, Birthday: 12/24/1965, Diagnosis: AML
+
+<question>
+When was Mr. Hurley's Myelodysplastic Syndrome diagnosed as having ring sideroblasts?
+</question>
+
+<options>
+Jul 10
+Aug 20
+Dec 19
+Jan 20
+Jul 21
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Aug 20,When was Mr. Hurley's Myelodysplastic Syndrome diagnosed as having ring sideroblasts?,Jul 10,Aug 20,Dec 19,Jan 20,B
+patient_12_19,,"Please answer the question below about the following patient: ID patient_12, Name: Alan Fisher, Birthday: 1953-09-12 00:00:00, Diagnosis: Chronic kidney disease
+
+<question>
+What change occurred in Mr. Fisher's hemoglobin levels from April 2009 to March 2020?
+</question>
+
+<options>
+Levels increased within the normal range
+Levels decreased but remained within the normal range
+Levels decreased below the normal range
+Levels increased above the normal range
+Levels remained stable within the reference range
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Levels decreased below the normal range,What change occurred in Mr. Fisher's hemoglobin levels from April 2009 to March 2020?,Levels increased within the normal range,Levels decreased but remained within the normal range,Levels decreased below the normal range,Levels increased above the normal range,C
+patient_19_6,,"Please answer the question below about the following patient: ID patient_19, Name: Emil Nilsson, Birthday: 2004-04-12 00:00:00, Diagnosis: Hypoplastic Left Heart Syndrome
+
+<question>
+What abnormality was observed in Mr. Nilsson's ECG on July 2nd 2008?
+</question>
+
+<options>
+Complete heart block
+ST depression and T-wave positivity
+Ventricular tachycardia
+Prolonged QT interval
+Left bundle branch block
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",ST depression and T-wave positivity,What abnormality was observed in Mr. Nilsson's ECG on July 2nd 2008?,Complete heart block,ST depression and T-wave positivity,Ventricular tachycardia,Prolonged QT interval,B
+patient_11_13,,"Please answer the question below about the following patient: ID patient_11, Name: Bruno Hurley, Birthday: 12/24/1965, Diagnosis: AML
+
+<question>
+Which combination therapy was started in March 2021 for Mr. Hurley?
+</question>
+
+<options>
+R-CHOP
+Venetoclax/Vidaza
+Cyclophosphamide and Prednisone
+Imatinib and Dasatinib
+Bortezomib and Dexamethasone
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Venetoclax/Vidaza,Which combination therapy was started in March 2021 for Mr. Hurley?,R-CHOP,Venetoclax/Vidaza,Cyclophosphamide and Prednisone,Imatinib and Dasatinib,B
+patient_15_14,,"Please answer the question below about the following patient: ID patient_15, Name: George Davies, Birthday: 07/25/1979, Diagnosis: Galactosemia
+
+<question>
+What was a consistent finding in Mr. Davies' ophthalmological examinations?
+</question>
+
+<options>
+Cataracts
+Myopic astigmatism
+Glaucoma
+Retinopathy
+No abnormalities
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Myopic astigmatism,What was a consistent finding in Mr. Davies' ophthalmological examinations?,Cataracts,Myopic astigmatism,Glaucoma,Retinopathy,B
+patient_17_18,,"Please answer the question below about the following patient: ID patient_17, Name: Brian Carter, Birthday: 04/24/1956, Diagnosis: ARDS
+
+<question>
+What change in Mr. Carter's blood profile from November 2021 to February 2022 might suggest an improvement in his hepatic function?
+</question>
+
+<options>
+Increase in Hemoglobin from 11.6 g/dL to 15.8 g/dL
+Decrease in Gamma-GT from 200 U/L to 38 U/L
+Increase in Sodium from 138 mEq/L to 139 mEq/L
+Decrease in Creatinine from 0.61 mg/dL to 0.99 mg/dL
+Increase in White Blood Cells from 9.56 K/µL to 7.62 K/µL
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Decrease in Gamma-GT from 200 U/L to 38 U/L,What change in Mr. Carter's blood profile from November 2021 to February 2022 might suggest an improvement in his hepatic function?,Increase in Hemoglobin from 11.6 g/dL to 15.8 g/dL,Decrease in Gamma-GT from 200 U/L to 38 U/L,Increase in Sodium from 138 mEq/L to 139 mEq/L,Decrease in Creatinine from 0.61 mg/dL to 0.99 mg/dL,B
+patient_16_9,,"Please answer the question below about the following patient: ID patient_16, Name: John Chapman, Birthday: 11/16/1994, Diagnosis: Polytrauma
+
+<question>
+During Mr. Chapman's stay from 05/25/2019 to 05/26/2019, what was the indication for angiography?
+</question>
+
+<options>
+Pseudoaneurysm of the left ICA
+Deep vein thrombosis
+Cardiac evaluation
+Pulmonary embolism
+Aortic aneurysm
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Pseudoaneurysm of the left ICA,"During Mr. Chapman's stay from 05/25/2019 to 05/26/2019, what was the indication for angiography?",Pseudoaneurysm of the left ICA,Deep vein thrombosis,Cardiac evaluation,Pulmonary embolism,A
+patient_18_7,,"Please answer the question below about the following patient: ID patient_18, Name: David Romero, Birthday: 02/16/1942, Diagnosis: Cardiomyopathy
+
+<question>
+What was Mr. Romero's blood pressure response during the stress echocardiography test?
+</question>
+
+<options>
+Decreased from 150/90 mmHg to 120/70 mmHg
+No change
+Increased from 120/80 mmHg to 160/100 mmHg
+Decreased from 140/90 mmHg to 110/70 mmHg
+Increased from 112/80 mmHg to 175/90 mmHg
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Increased from 112/80 mmHg to 175/90 mmHg,What was Mr. Romero's blood pressure response during the stress echocardiography test?,Decreased from 150/90 mmHg to 120/70 mmHg,No change,Increased from 120/80 mmHg to 160/100 mmHg,Increased from 112/80 mmHg to 175/90 mmHg,D
+patient_13_11,,"Please answer the question below about the following patient: ID patient_13, Name: Ben Harder, Birthday: 1940-02-08 00:00:00, Diagnosis: Prostate cancer 
+
+<question>
+Regarding Mr. Harder, in which month and year was a PSA level of 5.42 ng/ml recorded? 
+</question>
+
+<options>
+Oct 15
+Nov 15
+Dec 15
+Jan 16
+Feb 16
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Oct 15,"Regarding Mr. Harder, in which month and year was a PSA level of 5.42 ng/ml recorded?",Oct 15,Nov 15,Dec 15,Jan 16,A
+patient_16_1,,"Please answer the question below about the following patient: ID patient_16, Name: John Chapman, Birthday: 11/16/1994, Diagnosis: Polytrauma
+
+<question>
+What condition did Mr. Chapman NOT have a history of prior to his admission on 04/03/2017?
+</question>
+
+<options>
+Rib fracture
+Appendectomy
+Diabetes Mellitus
+Distal radius fracture
+Elbow fracture
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Diabetes Mellitus,What condition did Mr. Chapman NOT have a history of prior to his admission on 04/03/2017?,Rib fracture,Appendectomy,Diabetes Mellitus,Distal radius fracture,C
+patient_13_19,,"Please answer the question below about the following patient: ID patient_13, Name: Ben Harder, Birthday: 1940-02-08 00:00:00, Diagnosis: Prostate cancer 
+
+<question>
+Regarding Mr. Harder, what was the correct chronological order of radiological and nuclear medicine imaging studies?
+</question>
+
+<options>
+PSMA PET-CT + MRI < Cystogram < Ultrasound < Cystogram < CT scan abdomen/pelvis < PSMA PET scan < CT scan chest/abdomen < PSMA PET scan
+PSMA PET-CT + MRI < Cystogram < Ultrasound < Cystogram < CT scan abdomen/pelvis < PSMA PET scan < CT scan chest/abdomen < PSMA PET scan
+CT Scan Abdomen/Pelvis < PSMA PET-CT Scan < Abdominal MRI < CT Scan of Chest and Abdomen < PSMA PET-CT Scan.
+PSMA PET-CT + MRI < MRI lumbar spine < Cystogram < Ultrasound < Cystogram < Ultrasound < CT scan abdomen/pelvis < MRI lumbar spine < PSMA PET scan < PSMA PET-CT + MRI < Cystogram < Ultrasound < Cystogram < Ultrasound < CT scan abdomen/pelvis < PSMA PET scan < CT scan chest/abdomen < PSMA PET scan < CT scan chest/abdomen < PSMA PET scan
+PSMA PET-CT + MRI < Cystogram < Ultrasound < Cystogram < Ultrasound of the abdomen < CT scan abdomen/pelvis < MRI lumbar spine < CT scan < PSMA PET-CT  <  CT scan chest/abdomen < PSMA PET scan < CT scan chest/abdomen < PSMA PET scan
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",PSMA PET-CT + MRI < Cystogram < Ultrasound < Cystogram < Ultrasound of the abdomen < CT scan abdomen/pelvis < MRI lumbar spine < CT scan < PSMA PET-CT  <  CT scan chest/abdomen < PSMA PET scan < CT scan chest/abdomen < PSMA PET scan,"Regarding Mr. Harder, what was the correct chronological order of radiological and nuclear medicine imaging studies?",PSMA PET-CT + MRI < Cystogram < Ultrasound < Cystogram < CT scan abdomen/pelvis < PSMA PET scan < CT scan chest/abdomen < PSMA PET scan,PSMA PET-CT + MRI < Cystogram < Ultrasound < Cystogram < CT scan abdomen/pelvis < PSMA PET scan < CT scan chest/abdomen < PSMA PET scan,CT Scan Abdomen/Pelvis < PSMA PET-CT Scan < Abdominal MRI < CT Scan of Chest and Abdomen < PSMA PET-CT Scan.,PSMA PET-CT + MRI < Cystogram < Ultrasound < Cystogram < Ultrasound of the abdomen < CT scan abdomen/pelvis < MRI lumbar spine < CT scan < PSMA PET-CT  <  CT scan chest/abdomen < PSMA PET scan < CT scan chest/abdomen < PSMA PET scan,D
+patient_20_8,,"Please answer the question below about the following patient: ID patient_20, Name: Hilary Sanders, Birthday: 08/24/1976, Diagnosis: Common Variable Immunodeficiency Syndrome
+
+<question>
+What was an important finding from Mrs. Sanders' liver biopsy in 2023?
+</question>
+
+<options>
+Granulomas
+Nodular regenerative hyperplasia
+Severe acute hepatitis
+Steatosis
+Cirrhosis
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Nodular regenerative hyperplasia,What was an important finding from Mrs. Sanders' liver biopsy in 2023?,Granulomas,Nodular regenerative hyperplasia,Severe acute hepatitis,Steatosis,B
+patient_16_16,,"Please answer the question below about the following patient: ID patient_16, Name: John Chapman, Birthday: 11/16/1994, Diagnosis: Polytrauma
+
+<question>
+Which sedative was Mr. Chapman on during the weaning process?
+</question>
+
+<options>
+Midazolam
+Propofol
+Clonidine
+Lorazepam
+Dexmedetomidine
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Clonidine,Which sedative was Mr. Chapman on during the weaning process?,Midazolam,Propofol,Clonidine,Lorazepam,C
+patient_11_5,,"Please answer the question below about the following patient: ID patient_11, Name: Bruno Hurley, Birthday: 12/24/1965, Diagnosis: AML
+
+<question>
+What is the initial imaging finding suggestive of tuberculosis in Mr. Hurley?
+</question>
+
+<options>
+Splenomegaly
+Mediastinal lymph node conglomerate
+Liver tuberculosis
+Bronchial and vascular stenosis
+Neck/Thorax CT showing regression of pulmonary infiltrates
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Mediastinal lymph node conglomerate,What is the initial imaging finding suggestive of tuberculosis in Mr. Hurley?,Splenomegaly,Mediastinal lymph node conglomerate,Liver tuberculosis,Bronchial and vascular stenosis,B
+patient_19_10,,"Please answer the question below about the following patient: ID patient_19, Name: Emil Nilsson, Birthday: 2004-04-12 00:00:00, Diagnosis: Hypoplastic Left Heart Syndrome
+
+<question>
+What was the finding regarding Mr. Nilsson's aortic valve during the cardiac catheterization?
+</question>
+
+<options>
+Stenosis was present
+Regurgitation was noted
+Atretic
+Normal function
+Moderate insufficiency
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Atretic,What was the finding regarding Mr. Nilsson's aortic valve during the cardiac catheterization?,Stenosis was present,Regurgitation was noted,Atretic,Normal function,C
+patient_15_19,,"Please answer the question below about the following patient: ID patient_15, Name: George Davies, Birthday: 07/25/1979, Diagnosis: Galactosemia
+
+<question>
+Which is the best reflection of the chronological order of radiology imaging examinations in Mr. Davies?
+</question>
+
+<options>
+Abdominal sonography < Bone density measurement < Abdominal Sonography < Abdominal Sonography < Abdominal Sonography < Bone density measurement < Abdominal Sonography
+Abdominal sonography < Bone density measurement < Abdominal Sonography < Abdominal Sonography < Abdominal Sonography <  Abdominal Sonography < Bone density measurement
+Chest X-ray < Abdominal sonography < Bone density measurement < Abdominal Sonography < Abdominal Sonography < Abdominal Sonography < Bone density measurement < Abdominal Sonography
+Abdominal sonography < Eye Examination < Abdominal Sonography < Eye Examination < Bone density measurement  < Abdominal Sonography < Abdominal Sonography < Bone density measurement < Abdominal Sonography < Eye Examination
+Abdominal sonography < Bone density measurement < Eye Examination < Abdominal Sonography < Eye Examination < Abdominal Sonography < Abdominal Sonography < Bone density measurement < Eye Examination < Abdominal Sonography
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Chest X-ray < Abdominal sonography < Bone density measurement < Abdominal Sonography < Abdominal Sonography < Abdominal Sonography < Bone density measurement < Abdominal Sonography,Which is the best reflection of the chronological order of radiology imaging examinations in Mr. Davies?,Abdominal sonography < Bone density measurement < Abdominal Sonography < Abdominal Sonography < Abdominal Sonography < Bone density measurement < Abdominal Sonography,Abdominal sonography < Bone density measurement < Abdominal Sonography < Abdominal Sonography < Abdominal Sonography <  Abdominal Sonography < Bone density measurement,Chest X-ray < Abdominal sonography < Bone density measurement < Abdominal Sonography < Abdominal Sonography < Abdominal Sonography < Bone density measurement < Abdominal Sonography,Abdominal sonography < Eye Examination < Abdominal Sonography < Eye Examination < Bone density measurement  < Abdominal Sonography < Abdominal Sonography < Bone density measurement < Abdominal Sonography < Eye Examination,C
+patient_16_0,,"Please answer the question below about the following patient: ID patient_16, Name: John Chapman, Birthday: 11/16/1994, Diagnosis: Polytrauma
+
+<question>
+What was the cause of Mr. John Chapman's admission to the clinic on 04/03/2017?
+</question>
+
+<options>
+Motor vehicle accident
+Fall from a height
+Motocross accident
+Assault
+Stroke
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Motocross accident,What was the cause of Mr. John Chapman's admission to the clinic on 04/03/2017?,Motor vehicle accident,Fall from a height,Motocross accident,Assault,C
+patient_19_7,,"Please answer the question below about the following patient: ID patient_19, Name: Emil Nilsson, Birthday: 2004-04-12 00:00:00, Diagnosis: Hypoplastic Left Heart Syndrome
+
+<question>
+What was Mr. Nilsson's weight and height in December 2021?
+</question>
+
+<options>
+55 kg and 172 cm
+50 kg and 160 cm
+47 kg and 169 cm
+42 kg and 165 cm
+45 kg and 170 cm
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",47 kg and 169 cm,What was Mr. Nilsson's weight and height in December 2021?,55 kg and 172 cm,50 kg and 160 cm,47 kg and 169 cm,42 kg and 165 cm,C
+patient_20_0,,"Please answer the question below about the following patient: ID patient_20, Name: Hilary Sanders, Birthday: 08/24/1976, Diagnosis: Common Variable Immunodeficiency Syndrome
+
+<question>
+Which immunoglobulin class showed a complete deficiency in Mrs. Sanders?
+</question>
+
+<options>
+IgE
+IgD
+IgG
+IgB
+None of the above
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",IgG,Which immunoglobulin class showed a complete deficiency in Mrs. Sanders?,IgE,IgD,IgG,IgB,C
+patient_18_6,,"Please answer the question below about the following patient: ID patient_18, Name: David Romero, Birthday: 02/16/1942, Diagnosis: Cardiomyopathy
+
+<question>
+What was the diagnosis related to the myocardial biopsy findings on 01/27/2014 in Mr. Romero?
+</question>
+
+<options>
+Active myocarditis
+Acute inflammation-associated myocardial cell necrosis
+No significant myocardial damage
+Interstitial fibrosis
+Lipomatosis
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",No significant myocardial damage,What was the diagnosis related to the myocardial biopsy findings on 01/27/2014 in Mr. Romero?,Active myocarditis,Acute inflammation-associated myocardial cell necrosis,No significant myocardial damage,Interstitial fibrosis,C
+patient_14_5,,"Please answer the question below about the following patient: ID patient_14, Name: John Havers, Birthday: 05/29/1953, Diagnosis: Liposarcoma
+
+<question>
+What was the primary clinical finding in Mr. Havers' chest X-ray performed on 04/23/2017 as part of the pulmonary follow-up?
+</question>
+
+<options>
+Pleural effusion
+Pneumothorax
+Pulmonary nodules
+Pneumonic infiltrate
+No acute findings.
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",No acute findings.,What was the primary clinical finding in Mr. Havers' chest X-ray performed on 04/23/2017 as part of the pulmonary follow-up?,No acute findings.,Pneumothorax,Pulmonary nodules,Pneumonic infiltrate,A
+patient_11_1,,"Please answer the question below about the following patient: ID patient_11, Name: Bruno Hurley, Birthday: 12/24/1965, Diagnosis: AML
+
+<question>
+Which medication was initially omitted from Mr. Hurley's tuberculosis treatment due to pancytopenia?
+</question>
+
+<options>
+Isoniazid
+Rifampicin
+Ethambutol
+Moxifloxacin
+Pyrazinamide
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Pyrazinamide,Which medication was initially omitted from Mr. Hurley's tuberculosis treatment due to pancytopenia?,Isoniazid,Rifampicin,Ethambutol,Pyrazinamide,D
+patient_16_4,,"Please answer the question below about the following patient: ID patient_16, Name: John Chapman, Birthday: 11/16/1994, Diagnosis: Polytrauma
+
+<question>
+On which date was Mr. Chapman's ventriculoperitoneal shunt placed?
+</question>
+
+<options>
+03/04/2017
+08/04/2017
+04/13/2017
+05/01/2017
+05/25/2019
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",05/01/2017,On which date was Mr. Chapman's ventriculoperitoneal shunt placed?,03/04/2017,08/04/2017,04/13/2017,05/01/2017,D
+patient_13_3,,"Please answer the question below about the following patient: ID patient_13, Name: Ben Harder, Birthday: 1940-02-08 00:00:00, Diagnosis: Prostate cancer 
+
+<question>
+What significant change in Mr. Harder's bone metastasis was reported in the PSMA-PET-CT scan in July 2023 compared to earlier scans?
+</question>
+
+<options>
+Decrease in metabolic activity
+New extensive metastasis in the sacrum
+New small metastasis in the sacrum
+Remission of iliac metastases
+Increase in the size of known iliac metastases
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",New extensive metastasis in the sacrum,What significant change in Mr. Harder's bone metastasis was reported in the PSMA-PET-CT scan in July 2023 compared to earlier scans?,Decrease in metabolic activity,New extensive metastasis in the sacrum,New small metastasis in the sacrum,Remission of iliac metastases,B
+patient_12_18,,"Please answer the question below about the following patient: ID patient_12, Name: Alan Fisher, Birthday: 1953-09-12 00:00:00, Diagnosis: Chronic kidney disease
+
+<question>
+Mr. Fisher's C-reactive Protein (CRP) levels showed what trend from April 2009 to March 2020?
+</question>
+
+<options>
+Increased significantly
+Decreased significantly
+Remained within the normal range
+Transitioned from high to normal range
+Transitioned from normal to high range
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Transitioned from normal to high range,Mr. Fisher's C-reactive Protein (CRP) levels showed what trend from April 2009 to March 2020?,Increased significantly,Decreased significantly,Remained within the normal range,Transitioned from normal to high range,D
+patient_20_4,,"Please answer the question below about the following patient: ID patient_20, Name: Hilary Sanders, Birthday: 08/24/1976, Diagnosis: Common Variable Immunodeficiency Syndrome
+
+<question>
+What additional therapy was discussed for Mr. Sanders due to skin hardening at injection sites in 2017?
+</question>
+
+<options>
+Slower infusion time
+Change in medication
+Oral steroids
+Antihistamines
+Antibiotics
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Slower infusion time,What additional therapy was discussed for Mr. Sanders due to skin hardening at injection sites in 2017?,Slower infusion time,Change in medication,Oral steroids,Antihistamines,A
+patient_17_3,,"Please answer the question below about the following patient: ID patient_17, Name: Brian Carter, Birthday: 04/24/1956, Diagnosis: ARDS
+
+<question>
+What therapy was initiated in Mr. Carter on 09/30/2021 due to radiological suspicion of atypical pneumonia?
+</question>
+
+<options>
+Methotrexate
+Dexamethasone
+Piperacillin/Tazobactam, Clarithromycin, and Cotrimoxazole
+Meropenem
+Voriconazole
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>","Piperacillin/Tazobactam, Clarithromycin, and Cotrimoxazole",What therapy was initiated in Mr. Carter on 09/30/2021 due to radiological suspicion of atypical pneumonia?,Methotrexate,Dexamethasone,"Piperacillin/Tazobactam, Clarithromycin, and Cotrimoxazole",Meropenem,C
+patient_19_11,,"Please answer the question below about the following patient: ID patient_19, Name: Emil Nilsson, Birthday: 2004-04-12 00:00:00, Diagnosis: Hypoplastic Left Heart Syndrome
+
+<question>
+Regarding Mr. Nilsson, what was the primary reason for increasing Captopril dosage post Glenn procedure in 2006?
+</question>
+
+<options>
+Ventricular dysfunction
+Hypertension
+Tricuspid regurgitation
+Fluid retention
+Arrhythmias
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Ventricular dysfunction,"Regarding Mr. Nilsson, what was the primary reason for increasing Captopril dosage post Glenn procedure in 2006?",Ventricular dysfunction,Hypertension,Tricuspid regurgitation,Fluid retention,A
+patient_17_17,,"Please answer the question below about the following patient: ID patient_17, Name: Brian Carter, Birthday: 04/24/1956, Diagnosis: ARDS
+
+<question>
+According to the reports, how long was Mr. Carter's initial intubation period?
+</question>
+
+<options>
+From 09/18 to 10/08
+From 09/29 to 10/13
+From 09/30 to 10/13
+From 10/07 to 10/21
+From 10/12 to 10/21
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",From 09/30 to 10/13,"According to the reports, how long was Mr. Carter's initial intubation period?",From 09/18 to 10/08,From 09/29 to 10/13,From 09/30 to 10/13,From 10/07 to 10/21,C
+patient_19_2,,"Please answer the question below about the following patient: ID patient_19, Name: Emil Nilsson, Birthday: 2004-04-12 00:00:00, Diagnosis: Hypoplastic Left Heart Syndrome
+
+<question>
+What was Mr. Nilsson's body weight at discharge in 02/02/05?
+</question>
+
+<options>
+4830 g
+4765 g
+5060 g
+12.4 kg
+6050 g
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",5060 g,What was Mr. Nilsson's body weight at discharge in 02/02/05?,4830 g,4765 g,5060 g,12.4 kg,C
+patient_14_11,,"Please answer the question below about the following patient: ID patient_14, Name: John Havers, Birthday: 05/29/1953, Diagnosis: Liposarcoma
+
+<question>
+On what date was a follow-up MRI performed in Mr. Havers that showed no indication of local recurrence?
+</question>
+
+<options>
+02/19/2017
+10/03/2017
+01/04/2017
+04/23/2017
+03/29/2017
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",04/23/2017,On what date was a follow-up MRI performed in Mr. Havers that showed no indication of local recurrence?,02/19/2017,10/03/2017,01/04/2017,04/23/2017,D
+patient_13_4,,"Please answer the question below about the following patient: ID patient_13, Name: Ben Harder, Birthday: 1940-02-08 00:00:00, Diagnosis: Prostate cancer 
+
+<question>
+What was the first imaging study performed on Mr. Harder that confirmed the infiltration of seminal vesicles by prostate cancer?
+</question>
+
+<options>
+Ultrasound upon admission
+CT Scan of the Abdomen/Pelvis
+PSMA PET-CT + MRI
+Salivary Gland Scintigraphy
+PET/CT combination scanner
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",PSMA PET-CT + MRI,What was the first imaging study performed on Mr. Harder that confirmed the infiltration of seminal vesicles by prostate cancer?,Ultrasound upon admission,CT Scan of the Abdomen/Pelvis,PSMA PET-CT + MRI,Salivary Gland Scintigraphy,C
+patient_15_15,,"Please answer the question below about the following patient: ID patient_15, Name: George Davies, Birthday: 07/25/1979, Diagnosis: Galactosemia
+
+<question>
+What was a notable complication immediately after Mr. Davies' birth?
+</question>
+
+<options>
+Congenital heart defect
+Respiratory distress syndrome
+Jaundice
+Bone fracture
+Amnion infection syndrome
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Amnion infection syndrome,What was a notable complication immediately after Mr. Davies' birth?,Congenital heart defect,Respiratory distress syndrome,Jaundice,Amnion infection syndrome,D
+patient_19_14,,"Please answer the question below about the following patient: ID patient_19, Name: Emil Nilsson, Birthday: 2004-04-12 00:00:00, Diagnosis: Hypoplastic Left Heart Syndrome
+
+<question>
+Which medication was added to Mr. Nilsson's regimen upon discharge on 01/27/2005?
+</question>
+
+<options>
+Iron Supplement
+Hydrochlorothiazide
+Furosemide
+Aspirin
+Spironolactone
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Iron Supplement,Which medication was added to Mr. Nilsson's regimen upon discharge on 01/27/2005?,Iron Supplement,Hydrochlorothiazide,Furosemide,Aspirin,A
+patient_11_12,,"Please answer the question below about the following patient: ID patient_11, Name: Bruno Hurley, Birthday: 12/24/1965, Diagnosis: AML
+
+<question>
+What was the percentage of blasts detected in Mr. Hurley's bone marrow biopsy in January 2021?
+</question>
+
+<options>
+15%
+0.8%
+14.5%
+26%
+36%
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",26%,What was the percentage of blasts detected in Mr. Hurley's bone marrow biopsy in January 2021?,15%,0.8%,14.5%,26%,D
+patient_11_7,,"Please answer the question below about the following patient: ID patient_11, Name: Bruno Hurley, Birthday: 12/24/1965, Diagnosis: AML
+
+<question>
+What was the significant finding in Mr. Hurley's chest CT done on 10/02/20?
+</question>
+
+<options>
+Regressive pulmonary infiltrates
+Progressive right pleural effusion
+Regressive lymph nodes
+All of the above
+None of the above
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",All of the above,What was the significant finding in Mr. Hurley's chest CT done on 10/02/20?,Regressive pulmonary infiltrates,Progressive right pleural effusion,Regressive lymph nodes,All of the above,D
+patient_13_14,,"Please answer the question below about the following patient: ID patient_13, Name: Ben Harder, Birthday: 1940-02-08 00:00:00, Diagnosis: Prostate cancer 
+
+<question>
+What genetic analysis was planned for Mr. Harder for the end of January according to the report from the outpatient clinic visit on 1/8/2023?
+</question>
+
+<options>
+Whole-genome sequencing
+Re-genetic sequencing of a subdiaphragmatic lymph node metastasis
+Genetic testing for BRCA mutations
+Genetic sequencing for DNA repair gene alterations
+PSMA-related gene sequencing
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Re-genetic sequencing of a subdiaphragmatic lymph node metastasis,What genetic analysis was planned for Mr. Harder for the end of January according to the report from the outpatient clinic visit on 1/8/2023?,Whole-genome sequencing,Re-genetic sequencing of a subdiaphragmatic lymph node metastasis,Genetic testing for BRCA mutations,Genetic sequencing for DNA repair gene alterations,B
+patient_18_12,,"Please answer the question below about the following patient: ID patient_18, Name: David Romero, Birthday: 02/16/1942, Diagnosis: Cardiomyopathy
+
+<question>
+What was the maximum workload Mr. Romero achieved during the stress echocardiography?
+</question>
+
+<options>
+50 watts
+100 watts
+150 watts
+175 watts
+200 watts
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",150 watts,What was the maximum workload Mr. Romero achieved during the stress echocardiography?,50 watts,100 watts,150 watts,175 watts,C
+patient_12_1,,"Please answer the question below about the following patient: ID patient_12, Name: Alan Fisher, Birthday: 1953-09-12 00:00:00, Diagnosis: Chronic kidney disease
+
+<question>
+What significant cardiac intervention did Mr. Fisher undergo in May 1995?
+</question>
+
+<options>
+PTCA + stent in RCA
+Drug-eluting stent in RIVA
+Thrombolysis for anterior wall infarction
+PTCA + stent in RIVA
+Genous in RIVA
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",PTCA + stent in RIVA,What significant cardiac intervention did Mr. Fisher undergo in May 1995?,PTCA + stent in RCA,Drug-eluting stent in RIVA,Thrombolysis for anterior wall infarction,PTCA + stent in RIVA,D
+patient_13_7,,"Please answer the question below about the following patient: ID patient_13, Name: Ben Harder, Birthday: 1940-02-08 00:00:00, Diagnosis: Prostate cancer 
+
+<question>
+When was Mr. Harder's decompressive hemilaminectomy with microsurgical tumor resection from the epidural space performed?
+</question>
+
+<options>
+Apr 21
+Feb 21
+Feb 22
+Apr 21
+Sep 21
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Feb 21,When was Mr. Harder's decompressive hemilaminectomy with microsurgical tumor resection from the epidural space performed?,Apr 21,Feb 21,Feb 22,Apr 21,B
+patient_12_8,,"Please answer the question below about the following patient: ID patient_12, Name: Alan Fisher, Birthday: 1953-09-12 00:00:00, Diagnosis: Chronic kidney disease
+
+<question>
+Mr. Fisher had a history of which type of sleep disorder diagnosed in January 2005?
+</question>
+
+<options>
+Insomnia
+Narcolepsy
+Sleep apnea syndrome
+Restless leg syndrome
+Circadian rhythm disorder
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Sleep apnea syndrome,Mr. Fisher had a history of which type of sleep disorder diagnosed in January 2005?,Insomnia,Narcolepsy,Sleep apnea syndrome,Restless leg syndrome,C
+patient_19_16,,"Please answer the question below about the following patient: ID patient_19, Name: Emil Nilsson, Birthday: 2004-04-12 00:00:00, Diagnosis: Hypoplastic Left Heart Syndrome
+
+<question>
+What can be inferred about Spironolactone in Mr. Nilsson's treatment from 2005 to 2008?
+</question>
+
+<options>
+It was consistently used at the same dosage and frequency.
+Its frequency of use increased over time.
+It was not included in the medication regimen in March 2008.
+The dosage was increased by July 2008.
+Only used during hospital admissions.
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",It was not included in the medication regimen in March 2008.,What can be inferred about Spironolactone in Mr. Nilsson's treatment from 2005 to 2008?,It was consistently used at the same dosage and frequency.,Its frequency of use increased over time.,It was not included in the medication regimen in March 2008.,The dosage was increased by July 2008.,C
+patient_12_14,,"Please answer the question below about the following patient: ID patient_12, Name: Alan Fisher, Birthday: 1953-09-12 00:00:00, Diagnosis: Chronic kidney disease
+
+<question>
+What was Mr. Fisher's history regarding liver issues?
+</question>
+
+<options>
+Hepatic cirrhosis
+Fatty liver disease
+Hepatitis B infection
+Liver transplant
+Cholelithiasis
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Hepatitis B infection,What was Mr. Fisher's history regarding liver issues?,Hepatic cirrhosis,Fatty liver disease,Hepatitis B infection,Liver transplant,C
+patient_11_2,,"Please answer the question below about the following patient: ID patient_11, Name: Bruno Hurley, Birthday: 12/24/1965, Diagnosis: AML
+
+<question>
+As of 01/02/20, which of the following was last detected in Mr. Hurley's sputum?
+</question>
+
+<options>
+Acid-fast bacilli
+Mycobacterium tuberculosis
+Nontuberculous mycobacteria
+Fungal pathogens
+Staphylococcus aureus
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Mycobacterium tuberculosis,"As of 01/02/20, which of the following was last detected in Mr. Hurley's sputum?",Acid-fast bacilli,Mycobacterium tuberculosis,Nontuberculous mycobacteria,Fungal pathogens,B
+patient_17_12,,"Please answer the question below about the following patient: ID patient_17, Name: Brian Carter, Birthday: 04/24/1956, Diagnosis: ARDS
+
+<question>
+Which of the following was NOT listed under Mr. Carter's ""Other Diagnoses""?
+</question>
+
+<options>
+Uveitis
+Depression
+Bronchial asthma
+Pulmonary embolism
+Arterial hypertension
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Pulmonary embolism,"Which of the following was NOT listed under Mr. Carter's ""Other Diagnoses""?",Uveitis,Depression,Bronchial asthma,Pulmonary embolism,D
+patient_16_18,,"Please answer the question below about the following patient: ID patient_16, Name: John Chapman, Birthday: 11/16/1994, Diagnosis: Polytrauma
+
+<question>
+Comparing the laboratory results of Mr. John Chapman between 2018 and 2019, which of the following statements is correct?
+
+</question>
+
+<options>
+The creatinine level normalized from a previously low value to within the reference range.
+Hemoglobin levels decreased further outside the reference range.
+White blood cell count showed a significant increase from 2018 to 2019.
+Platelet count remained consistently above the reference range in both years.
+The patient's RDW-CV (Red Cell Distribution Width-Coefficient of Variation) levels decreased from 2018 to 2019.
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",The creatinine level normalized from a previously low value to within the reference range.,"Comparing the laboratory results of Mr. John Chapman between 2018 and 2019, which of the following statements is correct?",The creatinine level normalized from a previously low value to within the reference range.,Hemoglobin levels decreased further outside the reference range.,White blood cell count showed a significant increase from 2018 to 2019.,Platelet count remained consistently above the reference range in both years.,A
+patient_13_2,,"Please answer the question below about the following patient: ID patient_13, Name: Ben Harder, Birthday: 1940-02-08 00:00:00, Diagnosis: Prostate cancer 
+
+<question>
+Given Mr. Harder's diagnosis of mCRPC, which of the following is a potential next step in his treatment plan as of the latest update?
+</question>
+
+<options>
+Increase the dose of aspirin
+Continue with the same regimen of Lutetium PSMA-Therapy
+Initiate Abiraterone + Prednisolone therapy
+Discontinue all treatments and monitor PSA levels
+Start a new cycle of chemotherapy
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Initiate Abiraterone + Prednisolone therapy,"Given Mr. Harder's diagnosis of mCRPC, which of the following is a potential next step in his treatment plan as of the latest update?",Increase the dose of aspirin,Continue with the same regimen of Lutetium PSMA-Therapy,Initiate Abiraterone + Prednisolone therapy,Discontinue all treatments and monitor PSA levels,C
+patient_20_9,,"Please answer the question below about the following patient: ID patient_20, Name: Hilary Sanders, Birthday: 08/24/1976, Diagnosis: Common Variable Immunodeficiency Syndrome
+
+<question>
+What was the result of Mrs. Sanders' capsule endoscopy in 2023?
+</question>
+
+<options>
+Evidence of Crohn's disease
+Ulcerative colitis
+Inflammatory changes
+Hyperemia and blurry vascular pattern
+Normal findings
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Hyperemia and blurry vascular pattern,What was the result of Mrs. Sanders' capsule endoscopy in 2023?,Evidence of Crohn's disease,Ulcerative colitis,Inflammatory changes,Hyperemia and blurry vascular pattern,D
+patient_18_10,,"Please answer the question below about the following patient: ID patient_18, Name: David Romero, Birthday: 02/16/1942, Diagnosis: Cardiomyopathy
+
+<question>
+Which of the following was NOT a finding in Mr. Romero's myocardial biopsy on 01/27/2014?
+</question>
+
+<options>
+Positive HCV-mRNA detection in myocardial tissue
+No evidence of myocardial infection with enteroviruses
+Immunohistochemically examined native preparations showed CD3-positive lymphocytes
+No increased perforin-positive cytotoxic T cells
+Evidence of acute inflammation-associated myocardial cell necrosis
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Evidence of acute inflammation-associated myocardial cell necrosis,Which of the following was NOT a finding in Mr. Romero's myocardial biopsy on 01/27/2014?,Positive HCV-mRNA detection in myocardial tissue,No evidence of myocardial infection with enteroviruses,Immunohistochemically examined native preparations showed CD3-positive lymphocytes,Evidence of acute inflammation-associated myocardial cell necrosis,D
+patient_11_14,,"Please answer the question below about the following patient: ID patient_11, Name: Bruno Hurley, Birthday: 12/24/1965, Diagnosis: AML
+
+<question>
+Regarding Mr. Hurley, what was the source of stem cells for the allogeneic transplantation performed in July 2021?
+</question>
+
+<options>
+Sibling donor
+Autologous stem cells
+HLA-identical unrelated donor
+Cord blood
+HLA-mismatched unrelated donor
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",HLA-identical unrelated donor,"Regarding Mr. Hurley, what was the source of stem cells for the allogeneic transplantation performed in July 2021?",Sibling donor,Autologous stem cells,HLA-identical unrelated donor,Cord blood,C
+patient_19_5,,"Please answer the question below about the following patient: ID patient_19, Name: Emil Nilsson, Birthday: 2004-04-12 00:00:00, Diagnosis: Hypoplastic Left Heart Syndrome
+
+<question>
+What type of heart murmur was noted in Mr. Nilsson's physical examination in January 2005?
+</question>
+
+<options>
+3/6 systolic murmur auscultated on the left parasternal side
+1/6 diastolic murmur
+4/6 pansystolic murmur
+2/6 ejection murmur
+Continuous murmur
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",3/6 systolic murmur auscultated on the left parasternal side,What type of heart murmur was noted in Mr. Nilsson's physical examination in January 2005?,3/6 systolic murmur auscultated on the left parasternal side,1/6 diastolic murmur,4/6 pansystolic murmur,2/6 ejection murmur,A
+patient_13_1,,"Please answer the question below about the following patient: ID patient_13, Name: Ben Harder, Birthday: 1940-02-08 00:00:00, Diagnosis: Prostate cancer 
+
+<question>
+Considering Mr. Harder's treatment history, which medication was initiated for lymph node and bone metastatic prostate cancer?
+</question>
+
+<options>
+Docetaxel
+Lutetium PSMA-Therapy
+Zometa
+Trenantone
+Cabazitaxel
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Lutetium PSMA-Therapy,"Considering Mr. Harder's treatment history, which medication was initiated for lymph node and bone metastatic prostate cancer?",Docetaxel,Lutetium PSMA-Therapy,Zometa,Trenantone,B
+patient_20_12,,"Please answer the question below about the following patient: ID patient_20, Name: Hilary Sanders, Birthday: 08/24/1976, Diagnosis: Common Variable Immunodeficiency Syndrome
+
+<question>
+Which of the following was NOT a component of Mrs. Sanders' lab results in October 2017?
+</question>
+
+<options>
+Elevated s-IL-2
+Normal s-IL-2
+High ß-2-Microglobulin
+Normal CRP
+Increased CRP
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Normal CRP,Which of the following was NOT a component of Mrs. Sanders' lab results in October 2017?,Elevated s-IL-2,Normal s-IL-2,High ß-2-Microglobulin,Normal CRP,D
+patient_13_5,,"Please answer the question below about the following patient: ID patient_13, Name: Ben Harder, Birthday: 1940-02-08 00:00:00, Diagnosis: Prostate cancer 
+
+<question>
+When did Mr. Harder first start experiencing symptoms related to urinary tract infection post-surgery?
+</question>
+
+<options>
+2013-01-01 00:00:00
+Dec 15
+dec 16
+Jun 23
+Sep 23
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",2013-01-01 00:00:00,When did Mr. Harder first start experiencing symptoms related to urinary tract infection post-surgery?,2013-01-01 00:00:00,Dec 15,dec 16,Jun 23,A
+patient_15_2,,"Please answer the question below about the following patient: ID patient_15, Name: George Davies, Birthday: 07/25/1979, Diagnosis: Galactosemia
+
+<question>
+What symptom was NOT reported by Mr. Davies prior to his September 2009 admission?
+</question>
+
+<options>
+Daily fevers
+Yellowish-tinged sputum
+Difficulty sleeping due to coughing
+Vomiting
+Weight loss
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Vomiting,What symptom was NOT reported by Mr. Davies prior to his September 2009 admission?,Daily fevers,Yellowish-tinged sputum,Difficulty sleeping due to coughing,Vomiting,D
+patient_17_8,,"Please answer the question below about the following patient: ID patient_17, Name: Brian Carter, Birthday: 04/24/1956, Diagnosis: ARDS
+
+<question>
+Which therapy was discontinued and replaced with Dexamethasone 10 mg upon the deterioration of Mr. Carter's oxygenation on 09/30/2021?
+</question>
+
+<options>
+Methotrexate
+Prednisolone
+Montelukast
+Candesartan
+Quetiapine
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Prednisolone,Which therapy was discontinued and replaced with Dexamethasone 10 mg upon the deterioration of Mr. Carter's oxygenation on 09/30/2021?,Methotrexate,Prednisolone,Montelukast,Candesartan,B
+patient_14_3,,"Please answer the question below about the following patient: ID patient_14, Name: John Havers, Birthday: 05/29/1953, Diagnosis: Liposarcoma
+
+<question>
+On which date did Mr. Havers undergo en bloc tumor excision surgery?
+</question>
+
+<options>
+03/10/2017
+04/01/2017
+03/29/2017
+11/04/2017
+04/05/2017
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",03/29/2017,On which date did Mr. Havers undergo en bloc tumor excision surgery?,03/10/2017,04/01/2017,03/29/2017,11/04/2017,C
+patient_13_17,,"Please answer the question below about the following patient: ID patient_13, Name: Ben Harder, Birthday: 1940-02-08 00:00:00, Diagnosis: Prostate cancer 
+
+<question>
+What complication was identified in Mr. Harder during the neurological consultation on 06/25/2023?
+</question>
+
+<options>
+Polyneuropathy syndrome of the upper extremities
+Acute renal failure
+Polyneuropathy syndrome of the lower extremities
+Myocardial infarction
+Stroke
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Polyneuropathy syndrome of the lower extremities,What complication was identified in Mr. Harder during the neurological consultation on 06/25/2023?,Polyneuropathy syndrome of the upper extremities,Acute renal failure,Polyneuropathy syndrome of the lower extremities,Myocardial infarction,C
+patient_20_17,,"Please answer the question below about the following patient: ID patient_20, Name: Hilary Sanders, Birthday: 08/24/1976, Diagnosis: Common Variable Immunodeficiency Syndrome
+
+<question>
+How did Mrs. Sanders' platelet count on 11/15/2019 compare to her platelet count on 03/04/2017?
+</question>
+
+<options>
+Increased significantly
+Decreased significantly
+Remained the same
+Fluctuated within the reference range
+Not enough information to determine
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Decreased significantly,How did Mrs. Sanders' platelet count on 11/15/2019 compare to her platelet count on 03/04/2017?,Increased significantly,Decreased significantly,Remained the same,Fluctuated within the reference range,B
+patient_19_0,,"Please answer the question below about the following patient: ID patient_19, Name: Emil Nilsson, Birthday: 2004-04-12 00:00:00, Diagnosis: Hypoplastic Left Heart Syndrome
+
+<question>
+What congenital heart condition was Mr. Nilsson diagnosed with?
+</question>
+
+<options>
+Atrial Septal Defect
+Ventricular Septal Defect
+Hypoplastic Left Heart Syndrome
+Tetralogy of Fallot
+Transposition of the Great Arteries
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Hypoplastic Left Heart Syndrome,What congenital heart condition was Mr. Nilsson diagnosed with?,Atrial Septal Defect,Ventricular Septal Defect,Hypoplastic Left Heart Syndrome,Tetralogy of Fallot,C
+patient_13_13,,"Please answer the question below about the following patient: ID patient_13, Name: Ben Harder, Birthday: 1940-02-08 00:00:00, Diagnosis: Prostate cancer 
+
+<question>
+Which of the following side effects did Mr. Harder not experience after his last treatment cycle as per the information provided?
+</question>
+
+<options>
+Fatigue
+Dyspnea
+Swallowing difficulties
+Vomiting
+Diarrhea
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Diarrhea,Which of the following side effects did Mr. Harder not experience after his last treatment cycle as per the information provided?,Fatigue,Dyspnea,Swallowing difficulties,Diarrhea,D
+patient_14_15,,"Please answer the question below about the following patient: ID patient_14, Name: John Havers, Birthday: 05/29/1953, Diagnosis: Liposarcoma
+
+<question>
+As per Mr. Havers' discharge lab results in September 2022, which parameter is outside its reference range?
+</question>
+
+<options>
+Sodium level
+Potassium level
+Creatinine level
+Hemoglobin level
+White Blood Cell count
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Sodium level,"As per Mr. Havers' discharge lab results in September 2022, which parameter is outside its reference range?",Sodium level,Potassium level,Creatinine level,Hemoglobin level,A
+patient_16_8,,"Please answer the question below about the following patient: ID patient_16, Name: John Chapman, Birthday: 11/16/1994, Diagnosis: Polytrauma
+
+<question>
+On which date was a Doppler ultrasound performed in Mr. Chapman to check the groin puncture site after angiography?
+</question>
+
+<options>
+05/24/2019
+05/26/2019
+05/25/2019
+03/04/2017
+05/04/2017
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",05/26/2019,On which date was a Doppler ultrasound performed in Mr. Chapman to check the groin puncture site after angiography?,05/24/2019,05/26/2019,05/25/2019,03/04/2017,B
+patient_17_15,,"Please answer the question below about the following patient: ID patient_17, Name: Brian Carter, Birthday: 04/24/1956, Diagnosis: ARDS
+
+<question>
+Mr. Carter's transesophageal echocardiogram on 11/26/2020 revealed hypokinesia of which cardiac region?
+</question>
+
+<options>
+Left ventricle
+Right ventricle
+Anterior wall
+RIVA area
+Lateral wall
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",RIVA area,Mr. Carter's transesophageal echocardiogram on 11/26/2020 revealed hypokinesia of which cardiac region?,Left ventricle,Right ventricle,Anterior wall,RIVA area,D
+patient_17_1,,"Please answer the question below about the following patient: ID patient_17, Name: Brian Carter, Birthday: 04/24/1956, Diagnosis: ARDS
+
+<question>
+Which medication was Mr. Carter taking upon admission for bronchial asthma?
+</question>
+
+<options>
+Prednisone
+Methotrexate
+Montelukast
+Desloratadine
+Candesartan
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Montelukast,Which medication was Mr. Carter taking upon admission for bronchial asthma?,Prednisone,Methotrexate,Montelukast,Desloratadine,C
+patient_18_19,,"Please answer the question below about the following patient: ID patient_18, Name: David Romero, Birthday: 02/16/1942, Diagnosis: Cardiomyopathy
+
+<question>
+Please select the correct chronological order of the radiology/nuclear medicine imaging studies Mr. Romero received:
+</question>
+
+<options>
+Chest X-ray < Carotid Doppler Ultrasound < Myocardial Perfuson Scintigraphy < Chest X-ray in two planes
+Echocardiography < Angiography < Echocardiography < < Echocardiography < < Echocardiography < < Echocardiography < Chest X-ray < Echocardiography < Cardiac Catheterization < Myocardial Perfuson Scintigraphy < Transthoracic Echocardiography < Chest X-ray in two planes
+Chest X-ray < Chest X-ray in two planes < Myocardial Perfuson Scintigraphy < Carotid Doppler Ultrasound
+Echocardiography < Angiography < Echocardiography < Echocardiography < Echocardiography < Echocardiography < Chest X-ray < Echocardiography < Cardiac Catheterization < Myocardial Perfusion Scintigraphy < Transthoracic Echocardiography < Chest X-ray in two planes
+Echocardiography < Angiography < Echocardiography < Echocardiography < Echocardiography < Echocardiography < Chest X-ray < Echocardiography < Myocardial Perfusion Scintigraphy < Cardiac Catheterization < Transthoracic Echocardiography < Chest X-ray in two planes
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Chest X-ray < Carotid Doppler Ultrasound < Myocardial Perfuson Scintigraphy < Chest X-ray in two planes,Please select the correct chronological order of the radiology/nuclear medicine imaging studies Mr. Romero received:,Chest X-ray < Carotid Doppler Ultrasound < Myocardial Perfuson Scintigraphy < Chest X-ray in two planes,Echocardiography < Angiography < Echocardiography < < Echocardiography < < Echocardiography < < Echocardiography < Chest X-ray < Echocardiography < Cardiac Catheterization < Myocardial Perfuson Scintigraphy < Transthoracic Echocardiography < Chest X-ray in two planes,Chest X-ray < Chest X-ray in two planes < Myocardial Perfuson Scintigraphy < Carotid Doppler Ultrasound,Echocardiography < Angiography < Echocardiography < Echocardiography < Echocardiography < Echocardiography < Chest X-ray < Echocardiography < Cardiac Catheterization < Myocardial Perfusion Scintigraphy < Transthoracic Echocardiography < Chest X-ray in two planes,A
+patient_20_3,,"Please answer the question below about the following patient: ID patient_20, Name: Hilary Sanders, Birthday: 08/24/1976, Diagnosis: Common Variable Immunodeficiency Syndrome
+
+<question>
+What was Mrs. Sanders' sodium level as per the lab results in October 2017?
+</question>
+
+<options>
+141 mEq/L
+143 mEq/L
+146 mEq/L
+139 mEq/L
+135 mEq/L
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",143 mEq/L,What was Mrs. Sanders' sodium level as per the lab results in October 2017?,141 mEq/L,143 mEq/L,146 mEq/L,139 mEq/L,B
+patient_14_7,,"Please answer the question below about the following patient: ID patient_14, Name: John Havers, Birthday: 05/29/1953, Diagnosis: Liposarcoma
+
+<question>
+What was the result of the activated partial thromboplastin time (aPTT) in Mr. Havers' lab results upon discharge post-lobectomy?
+</question>
+
+<options>
+30.1 sec
+32.4 sec
+1.2
+0.99 INR
+Not applicable
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",30.1 sec,What was the result of the activated partial thromboplastin time (aPTT) in Mr. Havers' lab results upon discharge post-lobectomy?,30.1 sec,32.4 sec,1.2,0.99 INR,A
+patient_19_9,,"Please answer the question below about the following patient: ID patient_19, Name: Emil Nilsson, Birthday: 2004-04-12 00:00:00, Diagnosis: Hypoplastic Left Heart Syndrome
+
+<question>
+What was the total dose of contrast agent used during Mr. Nilsson's cardiac catheterization?
+</question>
+
+<options>
+50 ml Iomeron 350
+75 ml Iomeron 350
+100 ml Iomeron 350
+105 ml Iomeron 350
+150 ml Iomeron 350
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",105 ml Iomeron 350,What was the total dose of contrast agent used during Mr. Nilsson's cardiac catheterization?,50 ml Iomeron 350,75 ml Iomeron 350,100 ml Iomeron 350,105 ml Iomeron 350,D
+patient_13_10,,"Please answer the question below about the following patient: ID patient_13, Name: Ben Harder, Birthday: 1940-02-08 00:00:00, Diagnosis: Prostate cancer 
+
+<question>
+How many of Mr. Harder's biopsy samples showed evidence of prostate cancer upon initial diagnosis?
+</question>
+
+<options>
+8 out of 12
+9 out of 12
+10 out of 12
+11 out of 12
+12 out of 12
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",9 out of 12,How many of Mr. Harder's biopsy samples showed evidence of prostate cancer upon initial diagnosis?,8 out of 12,9 out of 12,10 out of 12,11 out of 12,B
+patient_15_7,,"Please answer the question below about the following patient: ID patient_15, Name: George Davies, Birthday: 07/25/1979, Diagnosis: Galactosemia
+
+<question>
+In which area did Mr. Davies show below-average performance in the Wechsler Memory Scale?
+</question>
+
+<options>
+Forward Digit Span
+Backward Digit Span
+Immediate Reproduction
+30-minute retention
+Recognition performance
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Backward Digit Span,In which area did Mr. Davies show below-average performance in the Wechsler Memory Scale?,Forward Digit Span,Backward Digit Span,Immediate Reproduction,30-minute retention,B
+patient_14_9,,"Please answer the question below about the following patient: ID patient_14, Name: John Havers, Birthday: 05/29/1953, Diagnosis: Liposarcoma
+
+<question>
+After the initial MRI, what was the next step taken for Mr. Havers' treatment?
+</question>
+
+<options>
+En bloc tumor excision.
+Incisional biopsy.
+MRI follow-up.
+Pulmonary metastasis treatment.
+Chemotherapy.
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Incisional biopsy.,"After the initial MRI, what was the next step taken for Mr. Havers' treatment?",En bloc tumor excision.,Incisional biopsy.,MRI follow-up.,Pulmonary metastasis treatment.,B
+patient_15_9,,"Please answer the question below about the following patient: ID patient_15, Name: George Davies, Birthday: 07/25/1979, Diagnosis: Galactosemia
+
+<question>
+What was Mr. Davies' birth weight?
+</question>
+
+<options>
+3500 g
+3750 g
+4000 g
+4030 g
+4250 g
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",4030 g,What was Mr. Davies' birth weight?,3500 g,3750 g,4000 g,4030 g,D
+patient_20_16,,"Please answer the question below about the following patient: ID patient_20, Name: Hilary Sanders, Birthday: 08/24/1976, Diagnosis: Common Variable Immunodeficiency Syndrome
+
+<question>
+From 10/09/2016 to 03/04/2017, how did Mrs. Sanders' ß-2-Microglobulin levels change?
+</question>
+
+<options>
+Increased
+Decreased
+Stayed within the normal range
+Became elevated
+Stayed the same
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Stayed the same,"From 10/09/2016 to 03/04/2017, how did Mrs. Sanders' ß-2-Microglobulin levels change?",Increased,Decreased,Stayed within the normal range,Stayed the same,D
+patient_16_15,,"Please answer the question below about the following patient: ID patient_16, Name: John Chapman, Birthday: 11/16/1994, Diagnosis: Polytrauma
+
+<question>
+What was the creatinine level upon Mr. Chapman's discharge from the outpatient clinic in 2018?
+</question>
+
+<options>
+0.70 mg/dL
+1.20 mg/dL
+0.42 mg/dL
+0.44 mg/dL
+0.90 mg/dL
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",0.44 mg/dL,What was the creatinine level upon Mr. Chapman's discharge from the outpatient clinic in 2018?,0.70 mg/dL,1.20 mg/dL,0.42 mg/dL,0.44 mg/dL,D
+patient_11_19,,"Please answer the question below about the following patient: ID patient_11, Name: Bruno Hurley, Birthday: 12/24/1965, Diagnosis: AML
+
+<question>
+Could you please specify the chronological sequence of the radiology imaging examinations that Mr. Hurley underwent?
+</question>
+
+<options>
+Chest CT <
+CT Chest/Abdomen/Pelvis <
+Chest CT <
+Neck/Chest CT <
+Neck/Chest CT <
+Neck/Chest/Abdomen/Pelvis CT <
+Chest/Abdomen/Pelvis CT <
+Abdomen CT <
+Neck/Chest CT <
+Neck/Chest/Abdomen/Pelvis CT
+Chest CT < CT Chest/Abdomen/Pelvis < Chest CT < Neck/Chest CT < Neck/Chest CT < Neck/Chest/Abdomen/Pelvis CT < Chest/Abdomen/Pelvis CT < Abdomen CT < Neck/Chest CT < Neck/Chest/Abdomen/Pelvis CT
+Chest CT < CT Chest/Abdomen/Pelvis < Chest CT < Neck/Chest CT < Neck/Chest CT < Neck/Chest/Abdomen/Pelvis CT < Chest/Abdomen/Pelvis CT < Abdomen CT < Neck/Chest CT < Neck/Chest/Abdomen/Pelvis CT < Neck/Chest/Abdomen/Pelvis CT
+CT Chest/Abdomen/Pelvis <
+Neck/Chest CT <
+Chest CT <
+Abdomen CT <
+Neck/Chest/Abdomen/Pelvis CT <
+Chest CT <
+Neck/Chest CT <
+Chest/Abdomen/Pelvis CT <
+Neck/Chest/Abdomen/Pelvis CT <
+Neck/Chest CT
+Neck/Chest CT <
+Chest CT <
+CT Chest/Abdomen/Pelvis <
+Neck/Chest/Abdomen/Pelvis CT <
+Abdomen CT <
+Chest CT <
+Neck/Chest CT <
+Chest/Abdomen/Pelvis CT <
+Neck/Chest/Abdomen/Pelvis CT <
+CT Chest/Abdomen/Pelvis
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Chest CT < CT Chest/Abdomen/Pelvis < Chest CT < Neck/Chest CT < Neck/Chest CT < Neck/Chest/Abdomen/Pelvis CT < Chest/Abdomen/Pelvis CT < Abdomen CT < Neck/Chest CT < Neck/Chest/Abdomen/Pelvis CT < Neck/Chest/Abdomen/Pelvis CT,Could you please specify the chronological sequence of the radiology imaging examinations that Mr. Hurley underwent?,"Chest CT <
+CT Chest/Abdomen/Pelvis <
+Chest CT <
+Neck/Chest CT <
+Neck/Chest CT <
+Neck/Chest/Abdomen/Pelvis CT <
+Chest/Abdomen/Pelvis CT <
+Abdomen CT <
+Neck/Chest CT <
+Neck/Chest/Abdomen/Pelvis CT",Chest CT < CT Chest/Abdomen/Pelvis < Chest CT < Neck/Chest CT < Neck/Chest CT < Neck/Chest/Abdomen/Pelvis CT < Chest/Abdomen/Pelvis CT < Abdomen CT < Neck/Chest CT < Neck/Chest/Abdomen/Pelvis CT,Chest CT < CT Chest/Abdomen/Pelvis < Chest CT < Neck/Chest CT < Neck/Chest CT < Neck/Chest/Abdomen/Pelvis CT < Chest/Abdomen/Pelvis CT < Abdomen CT < Neck/Chest CT < Neck/Chest/Abdomen/Pelvis CT < Neck/Chest/Abdomen/Pelvis CT,"CT Chest/Abdomen/Pelvis <
+Neck/Chest CT <
+Chest CT <
+Abdomen CT <
+Neck/Chest/Abdomen/Pelvis CT <
+Chest CT <
+Neck/Chest CT <
+Chest/Abdomen/Pelvis CT <
+Neck/Chest/Abdomen/Pelvis CT <
+Neck/Chest CT",C
+patient_18_8,,"Please answer the question below about the following patient: ID patient_18, Name: David Romero, Birthday: 02/16/1942, Diagnosis: Cardiomyopathy
+
+<question>
+What medication was added to Mr. Romero's regimen after the angiography revealed diffuse coronary atherosclerosis?
+</question>
+
+<options>
+Ramipril
+Aspirin
+Ranolazine
+Spironolactone
+Carvedilol
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Ranolazine,What medication was added to Mr. Romero's regimen after the angiography revealed diffuse coronary atherosclerosis?,Ramipril,Aspirin,Ranolazine,Spironolactone,C
+patient_15_16,,"Please answer the question below about the following patient: ID patient_15, Name: George Davies, Birthday: 07/25/1979, Diagnosis: Galactosemia
+
+<question>
+What change was noted in Mr. Davies' osteopenia status between 2018 and 2020?
+</question>
+
+<options>
+Marked improvement
+Slight improvement
+No change
+Slight deterioration
+Significant deterioration
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Slight improvement,What change was noted in Mr. Davies' osteopenia status between 2018 and 2020?,Marked improvement,Slight improvement,No change,Slight deterioration,B
+patient_15_6,,"Please answer the question below about the following patient: ID patient_15, Name: George Davies, Birthday: 07/25/1979, Diagnosis: Galactosemia
+
+<question>
+Which neuropsychological test did Mr. Davies perform poorly on in terms of reaction time?
+</question>
+
+<options>
+Divided attention
+Wechsler Memory Scale
+Verbal Learning and Memory Test
+Alertness
+Multiple-Choice Vocabulary Intelligence Test
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Alertness,Which neuropsychological test did Mr. Davies perform poorly on in terms of reaction time?,Divided attention,Wechsler Memory Scale,Verbal Learning and Memory Test,Alertness,D
+patient_11_11,,"Please answer the question below about the following patient: ID patient_11, Name: Bruno Hurley, Birthday: 12/24/1965, Diagnosis: AML
+
+<question>
+Which of the following best characterizes Mr. Hurley's liver lesions as of 06/11/21?
+</question>
+
+<options>
+Progressive
+Regressive
+Stable
+New onset
+Resolved
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Stable,Which of the following best characterizes Mr. Hurley's liver lesions as of 06/11/21?,Progressive,Regressive,Stable,New onset,C
+patient_11_8,,"Please answer the question below about the following patient: ID patient_11, Name: Bruno Hurley, Birthday: 12/24/1965, Diagnosis: AML
+
+<question>
+Which medication was added to Mr. Hurley's treatment in 02/2021?
+</question>
+
+<options>
+Azacitidine
+Levofloxacin
+Rifampicin
+Ethambutol
+Pyrazinamide
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Azacitidine,Which medication was added to Mr. Hurley's treatment in 02/2021?,Azacitidine,Levofloxacin,Rifampicin,Ethambutol,A
+patient_14_0,,"Please answer the question below about the following patient: ID patient_14, Name: John Havers, Birthday: 05/29/1953, Diagnosis: Liposarcoma
+
+<question>
+What was the size of the myxoid liposarcoma found in Mr. Havers' right adductor compartment as per the MRI on 02/19/2017?
+</question>
+
+<options>
+30 x 40 x 35 mm
+35 x 45 x 40 mm
+40 x 50 x 45 mm
+45 x 55 x 50 mm
+50 x 60 x 55 mm
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",35 x 45 x 40 mm,What was the size of the myxoid liposarcoma found in Mr. Havers' right adductor compartment as per the MRI on 02/19/2017?,30 x 40 x 35 mm,35 x 45 x 40 mm,40 x 50 x 45 mm,45 x 55 x 50 mm,B
+patient_12_13,,"Please answer the question below about the following patient: ID patient_12, Name: Alan Fisher, Birthday: 1953-09-12 00:00:00, Diagnosis: Chronic kidney disease
+
+<question>
+What was the result of Mr. Fisher's last cardiac catheterization on 03/24/2008?
+</question>
+
+<options>
+Normal coronary arteries
+50% stenosis in D1 and occlusion of the small RCA
+Resolution of previous stenosis
+Multiple blockages requiring bypass surgery
+75% stenosis in D1 and occlusion of the small RCA
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",75% stenosis in D1 and occlusion of the small RCA,What was the result of Mr. Fisher's last cardiac catheterization on 03/24/2008?,75% stenosis in D1 and occlusion of the small RCA,50% stenosis in D1 and occlusion of the small RCA,Resolution of previous stenosis,Multiple blockages requiring bypass surgery,A
+patient_19_13,,"Please answer the question below about the following patient: ID patient_19, Name: Emil Nilsson, Birthday: 2004-04-12 00:00:00, Diagnosis: Hypoplastic Left Heart Syndrome
+
+<question>
+How did the dosage of Captopril change from Mr. Nilsson's admission on 01/20/05 to his discharge on 02/02/05?
+</question>
+
+<options>
+Increased from 2 mg to 3 mg
+Decreased from 3 mg to 2 mg
+Remained the same at 2 mg
+Was discontinued
+Changed from twice daily to three times daily
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Remained the same at 2 mg,How did the dosage of Captopril change from Mr. Nilsson's admission on 01/20/05 to his discharge on 02/02/05?,Increased from 2 mg to 3 mg,Decreased from 3 mg to 2 mg,Remained the same at 2 mg,Was discontinued,C
+patient_14_18,,"Please answer the question below about the following patient: ID patient_14, Name: John Havers, Birthday: 05/29/1953, Diagnosis: Liposarcoma
+
+<question>
+What is the Prothrombin Time percentage in Mr. Havers' last discharge lab results?
+</question>
+
+<options>
+78%
+94%
+120%
+122%
+130%
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",122%,What is the Prothrombin Time percentage in Mr. Havers' last discharge lab results?,78%,94%,120%,122%,D
+patient_11_4,,"Please answer the question below about the following patient: ID patient_11, Name: Bruno Hurley, Birthday: 12/24/1965, Diagnosis: AML
+
+<question>
+What significant change was noted in Mr. Hurley's CT Thorax from 02/23/21 compared to previous scans?
+</question>
+
+<options>
+Complete resolution of pulmonary infiltrates
+Development of large poorly perfused areas with cavitations
+Disappearance of mediastinal lymphadenopathy
+Evidence of new fungal infection
+Complete regression of liver lesions
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Development of large poorly perfused areas with cavitations,What significant change was noted in Mr. Hurley's CT Thorax from 02/23/21 compared to previous scans?,Complete resolution of pulmonary infiltrates,Development of large poorly perfused areas with cavitations,Disappearance of mediastinal lymphadenopathy,Evidence of new fungal infection,B
+patient_16_19,,"Please answer the question below about the following patient: ID patient_16, Name: John Chapman, Birthday: 11/16/1994, Diagnosis: Polytrauma
+
+<question>
+Please select the correct chronological order of the radiological imaging studies Mr. Chapman received:
+</question>
+
+<options>
+CT Head Angiography < CT Head < Bedside Chest X-ray < MRI of the Head < Bedside Chest X-ray < CT Head < Chest X-ray < Supraaortic Angiography < Duppler ultrasound of the right groin
+Full-Body CT < Chest X-ray < CT Head < CT Head < Bedside Chest X-ray < Brain MRI < Bedside Chest X-ray < CT Head < CT Head Angiography with Perfusion < CT Head < CT Head < Supra-aortic Angiography
+Full-Body CT < Chest X-ray < Bedside Chest X-ray < Brain MRI < CT Head < CT Head Angiography with Perfusion < Supra-aortic Angiography < CT Head < Doppler ultrasound of the right groin < CT Head
+Full-Body CT < CT Head < CT Head Angiography with Perfusion < Brain MRI < Chest X-ray < Bedside Chest X-ray < CT Head < Supra-aortic Angiography < CT Head < Doppler ultrasound of the right groin
+Full-Body CT < CT Head < Chest X-ray < CT Head < Bedside Chest X-ray < Brain MRI < Bedside Chest X-ray < CT Head < CT Head Angiography with Perfusion < CT Head < CT Head < Supra-aortic Angiography < Doppler ultrasound of the right groin
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Full-Body CT < CT Head < Chest X-ray < CT Head < Bedside Chest X-ray < Brain MRI < Bedside Chest X-ray < CT Head < CT Head Angiography with Perfusion < CT Head < CT Head < Supra-aortic Angiography < Doppler ultrasound of the right groin,Please select the correct chronological order of the radiological imaging studies Mr. Chapman received:,CT Head Angiography < CT Head < Bedside Chest X-ray < MRI of the Head < Bedside Chest X-ray < CT Head < Chest X-ray < Supraaortic Angiography < Duppler ultrasound of the right groin,Full-Body CT < Chest X-ray < CT Head < CT Head < Bedside Chest X-ray < Brain MRI < Bedside Chest X-ray < CT Head < CT Head Angiography with Perfusion < CT Head < CT Head < Supra-aortic Angiography,Full-Body CT < Chest X-ray < Bedside Chest X-ray < Brain MRI < CT Head < CT Head Angiography with Perfusion < Supra-aortic Angiography < CT Head < Doppler ultrasound of the right groin < CT Head,Full-Body CT < CT Head < Chest X-ray < CT Head < Bedside Chest X-ray < Brain MRI < Bedside Chest X-ray < CT Head < CT Head Angiography with Perfusion < CT Head < CT Head < Supra-aortic Angiography < Doppler ultrasound of the right groin,D
+patient_16_5,,"Please answer the question below about the following patient: ID patient_16, Name: John Chapman, Birthday: 11/16/1994, Diagnosis: Polytrauma
+
+<question>
+What was the main complication identified in Mr. Chapman's chest X-ray on 04/24/2017?
+</question>
+
+<options>
+Pneumothorax
+Pleural effusion
+infiltrates
+Atelectasis
+Cardiomegaly
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",infiltrates,What was the main complication identified in Mr. Chapman's chest X-ray on 04/24/2017?,Pneumothorax,Pleural effusion,infiltrates,Atelectasis,C
+patient_20_2,,"Please answer the question below about the following patient: ID patient_20, Name: Hilary Sanders, Birthday: 08/24/1976, Diagnosis: Common Variable Immunodeficiency Syndrome
+
+<question>
+Which medication was initiated for Mrs. Sanders in 2016 for her condition?
+</question>
+
+<options>
+Hizentra 20%
+Intravenous immunoglobulin
+Corticosteroids
+Antibiotics
+Antihypertensives
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Hizentra 20%,Which medication was initiated for Mrs. Sanders in 2016 for her condition?,Hizentra 20%,Intravenous immunoglobulin,Corticosteroids,Antibiotics,A
+patient_17_7,,"Please answer the question below about the following patient: ID patient_17, Name: Brian Carter, Birthday: 04/24/1956, Diagnosis: ARDS
+
+<question>
+Which parameter in Mr. Carter's lab results indicated a normalization trend from November 2021 to February 2022 but still remained below the reference range?
+</question>
+
+<options>
+Hematocrit percentage
+Red Blood Cells count
+Hemoglobin levels
+Eosinophils percentage
+White Blood Cells count
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Hemoglobin levels,Which parameter in Mr. Carter's lab results indicated a normalization trend from November 2021 to February 2022 but still remained below the reference range?,Hematocrit percentage,Red Blood Cells count,Hemoglobin levels,Eosinophils percentage,C
+patient_19_17,,"Please answer the question below about the following patient: ID patient_19, Name: Emil Nilsson, Birthday: 2004-04-12 00:00:00, Diagnosis: Hypoplastic Left Heart Syndrome
+
+<question>
+How did Mr. Nilsson's calcium levels develop over the course of time?
+</question>
+
+<options>
+Lower in July 2008 than in October 2021.
+Highest in July 2008
+Identical at several time points
+Only recorded in October 2021.
+Outside the reference range in both instances.
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Highest in July 2008,How did Mr. Nilsson's calcium levels develop over the course of time?,Lower in July 2008 than in October 2021.,Highest in July 2008,Identical at several time points,Only recorded in October 2021.,B
+patient_12_10,,"Please answer the question below about the following patient: ID patient_12, Name: Alan Fisher, Birthday: 1953-09-12 00:00:00, Diagnosis: Chronic kidney disease
+
+<question>
+When was Mr. Fisher first admitted with urosepsis and acute postrenal kidney failure?
+</question>
+
+<options>
+1995
+2009
+2016
+2018
+2020
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",2018,When was Mr. Fisher first admitted with urosepsis and acute postrenal kidney failure?,1995,2009,2016,2018,D
+patient_20_6,,"Please answer the question below about the following patient: ID patient_20, Name: Hilary Sanders, Birthday: 08/24/1976, Diagnosis: Common Variable Immunodeficiency Syndrome
+
+<question>
+As of 2016, what was Mrs. Sanders' primary  complaint?
+</question>
+
+<options>
+Abdominal pain
+Chronic diarrhea
+Vomiting
+Gastrointestinal bleeding
+Recurrent respiratory infections
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Recurrent respiratory infections,"As of 2016, what was Mrs. Sanders' primary  complaint?",Recurrent respiratory infections,Chronic diarrhea,Vomiting,Gastrointestinal bleeding,A
+patient_13_0,,"Please answer the question below about the following patient: ID patient_13, Name: Ben Harder, Birthday: 1940-02-08 00:00:00, Diagnosis: Prostate cancer 
+
+<question>
+Considering Mr. Harder's lab results, which parameter was consistently within the normal range post-surgery in December 2015?
+</question>
+
+<options>
+Sodium
+Potassium
+Hemoglobin
+Platelets
+White Blood Cells
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Sodium,"Considering Mr. Harder's lab results, which parameter was consistently within the normal range post-surgery in December 2015?",Sodium,Potassium,Hemoglobin,Platelets,A
+patient_13_9,,"Please answer the question below about the following patient: ID patient_13, Name: Ben Harder, Birthday: 1940-02-08 00:00:00, Diagnosis: Prostate cancer 
+
+<question>
+Which of the following drugs was NOT part of Mr. Harder's initial medication upon admission for prostate cancer treatment?
+</question>
+
+<options>
+Valsartan
+Aspirin
+Simvastatin
+Candesartan
+Doxazosin
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Candesartan,Which of the following drugs was NOT part of Mr. Harder's initial medication upon admission for prostate cancer treatment?,Valsartan,Aspirin,Simvastatin,Candesartan,D
+patient_19_18,,"Please answer the question below about the following patient: ID patient_19, Name: Emil Nilsson, Birthday: 2004-04-12 00:00:00, Diagnosis: Hypoplastic Left Heart Syndrome
+
+<question>
+Mr. Nilsson's Gamma-GT levels showed which change from March 2008 to July 2008?
+</question>
+
+<options>
+Increased significantly.
+Decreased significantly.
+Remained stable.
+Were not measured in March 2008.
+Were only measured in October 2021.
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Decreased significantly.,Mr. Nilsson's Gamma-GT levels showed which change from March 2008 to July 2008?,Increased significantly.,Decreased significantly.,Remained stable.,Were not measured in March 2008.,B
+patient_14_16,,"Please answer the question below about the following patient: ID patient_14, Name: John Havers, Birthday: 05/29/1953, Diagnosis: Liposarcoma
+
+<question>
+Which medication is NOT listed in Mr. Havers' medication upon discharge?
+</question>
+
+<options>
+Empagliflozin
+Metformin
+Atorvastatin
+Ramipril
+Pantoprazole
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Ramipril,Which medication is NOT listed in Mr. Havers' medication upon discharge?,Empagliflozin,Metformin,Atorvastatin,Ramipril,D
+patient_18_17,,"Please answer the question below about the following patient: ID patient_18, Name: David Romero, Birthday: 02/16/1942, Diagnosis: Cardiomyopathy
+
+<question>
+What can be inferred about the thyroid function from Mr. Romero's lab results of March 2016 and June 2016?
+</question>
+
+<options>
+Overactive thyroid, as indicated by elevated TSH levels
+Underactive thyroid, as indicated by low T4 levels
+Normal thyroid function, as indicated by T3 and T4 within reference range
+Inconclusive due to conflicting T3 and T4 levels
+Overactive thyroid, as indicated by low TSH levels
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>","Normal thyroid function, as indicated by T3 and T4 within reference range",What can be inferred about the thyroid function from Mr. Romero's lab results of March 2016 and June 2016?,"Overactive thyroid, as indicated by elevated TSH levels","Underactive thyroid, as indicated by low T4 levels","Normal thyroid function, as indicated by T3 and T4 within reference range",Inconclusive due to conflicting T3 and T4 levels,C
+patient_19_1,,"Please answer the question below about the following patient: ID patient_19, Name: Emil Nilsson, Birthday: 2004-04-12 00:00:00, Diagnosis: Hypoplastic Left Heart Syndrome
+
+<question>
+Which surgical procedure did Mr. Nilsson undergo for his heart condition?
+</question>
+
+<options>
+Ross Procedure
+Damus-Kaye-Stansel Procedure
+Norwood Procedure
+Fontan Procedure
+Glenn Procedure
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Damus-Kaye-Stansel Procedure,Which surgical procedure did Mr. Nilsson undergo for his heart condition?,Ross Procedure,Damus-Kaye-Stansel Procedure,Norwood Procedure,Fontan Procedure,B
+patient_14_13,,"Please answer the question below about the following patient: ID patient_14, Name: John Havers, Birthday: 05/29/1953, Diagnosis: Liposarcoma
+
+<question>
+Which of the following is NOT a part of Mr. Havers' medical history?
+</question>
+
+<options>
+Status post right hip total hip replacement
+Chronic kidney disease
+Status post appendectomy
+Status post cataract surgery
+Nicotine abuse
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Chronic kidney disease,Which of the following is NOT a part of Mr. Havers' medical history?,Status post right hip total hip replacement,Chronic kidney disease,Status post appendectomy,Status post cataract surgery,B
+patient_19_4,,"Please answer the question below about the following patient: ID patient_19, Name: Emil Nilsson, Birthday: 2004-04-12 00:00:00, Diagnosis: Hypoplastic Left Heart Syndrome
+
+<question>
+What condition was observed in Mr. Nilsson's liver during sonography?
+</question>
+
+<options>
+Acute hepatitis
+Liver cirrhosis
+Chronic liver congestion
+Liver steatosis
+Liver fibrosis
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Chronic liver congestion,What condition was observed in Mr. Nilsson's liver during sonography?,Acute hepatitis,Liver cirrhosis,Chronic liver congestion,Liver steatosis,C
+patient_18_11,,"Please answer the question below about the following patient: ID patient_18, Name: David Romero, Birthday: 02/16/1942, Diagnosis: Cardiomyopathy
+
+<question>
+What was the heart rate reported in Mr. Romero's ECG from 06/30/2016?
+</question>
+
+<options>
+69 bpm
+71 bpm
+124 bpm
+65 bpm
+102 bpm
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",69 bpm,What was the heart rate reported in Mr. Romero's ECG from 06/30/2016?,69 bpm,71 bpm,124 bpm,65 bpm,A
+patient_12_11,,"Please answer the question below about the following patient: ID patient_12, Name: Alan Fisher, Birthday: 1953-09-12 00:00:00, Diagnosis: Chronic kidney disease
+
+<question>
+Mr. Fisher was diagnosed with permanent atrial fibrillation in March 2007. What was the outcome of his cardioversion in March 2008?
+</question>
+
+<options>
+Successful
+Partially successful
+Unsuccessful
+Led to complications
+Not attempted
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Unsuccessful,Mr. Fisher was diagnosed with permanent atrial fibrillation in March 2007. What was the outcome of his cardioversion in March 2008?,Successful,Partially successful,Unsuccessful,Led to complications,C
+patient_14_14,,"Please answer the question below about the following patient: ID patient_14, Name: John Havers, Birthday: 05/29/1953, Diagnosis: Liposarcoma
+
+<question>
+What is the grading of Mr. Havers' myxoid liposarcoma?
+</question>
+
+<options>
+G0
+G1
+G2
+G3
+G4
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",G1,What is the grading of Mr. Havers' myxoid liposarcoma?,G0,G1,G2,G3,B
+patient_20_11,,"Please answer the question below about the following patient: ID patient_20, Name: Hilary Sanders, Birthday: 08/24/1976, Diagnosis: Common Variable Immunodeficiency Syndrome
+
+<question>
+What were Mrs. Sanders' serum Immunoglobulin G levels upon her discharge in October 2017?
+</question>
+
+<options>
+514 mg/dL
+188 mg/dL
+1025 mg/dL
+1025 mg/dL
+299.5 mg/dL
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",1025 mg/dL,What were Mrs. Sanders' serum Immunoglobulin G levels upon her discharge in October 2017?,514 mg/dL,188 mg/dL,1025 mg/dL,1025 mg/dL,C
+patient_12_7,,"Please answer the question below about the following patient: ID patient_12, Name: Alan Fisher, Birthday: 1953-09-12 00:00:00, Diagnosis: Chronic kidney disease
+
+<question>
+During Mr. Fisher's hospitalization in April 2009, which medication error occured?
+</question>
+
+<options>
+Overdose of Marcumar
+Double dosing of Cyclosporin A
+Incorrect administration of Steroid
+Overdose of Minoxidil
+Underdosing of Mycophenolic Acid
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Double dosing of Cyclosporin A,"During Mr. Fisher's hospitalization in April 2009, which medication error occured?",Overdose of Marcumar,Double dosing of Cyclosporin A,Incorrect administration of Steroid,Overdose of Minoxidil,B
+patient_17_5,,"Please answer the question below about the following patient: ID patient_17, Name: Brian Carter, Birthday: 04/24/1956, Diagnosis: ARDS
+
+<question>
+Which antibiotic therapy was Mr. Carter on that was escalated to Meropenem on 10/05/2021?
+</question>
+
+<options>
+Piperacillin/Tazobactam
+Cefazolin
+Dexamethasone
+Voriconazole
+Flucloxacillin
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Piperacillin/Tazobactam,Which antibiotic therapy was Mr. Carter on that was escalated to Meropenem on 10/05/2021?,Piperacillin/Tazobactam,Cefazolin,Dexamethasone,Voriconazole,A
+patient_20_18,,"Please answer the question below about the following patient: ID patient_20, Name: Hilary Sanders, Birthday: 08/24/1976, Diagnosis: Common Variable Immunodeficiency Syndrome
+
+<question>
+Please select the correct chronological order of radiological imaging studies Mrs. Sanders received: 
+</question>
+
+<options>
+Chest X-ray < Abdominal Ultrasound < CT Scan of Chest/Abdomen/Pelvis < Abdominal Ultrasound  < Abdominal MRI
+Chest X-ray < Abdominal Ultrasound < CT Scan of Chest/Abdomen/Pelvis < CT Chest < Abdominal Ultrasound < Abdominal MRI
+Chest X-ray < Abdominal Ultrasound < CT Scan of Chest/Abdomen/Pelvis < Abdominal MRI < CT chest < Chest X-ray
+Chest X-ray < Abdominal Ultrasound < Gastrointestinal endoscopy and colonoscopy < CT Scan of Chest/Abdomen/Pelvis < Abdominal MRI < CT chest < Chest X-ray
+CT chest scan < Abdominal Ultrasound < CT Scan of Chest/Abdomen/Pelvis < Abdominal MRI < Gastroscopy: < Abdominal Ultrasound < CT chest
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Chest X-ray < Abdominal Ultrasound < CT Scan of Chest/Abdomen/Pelvis < Abdominal Ultrasound  < Abdominal MRI,Please select the correct chronological order of radiological imaging studies Mrs. Sanders received:,Chest X-ray < Abdominal Ultrasound < CT Scan of Chest/Abdomen/Pelvis < Abdominal Ultrasound  < Abdominal MRI,Chest X-ray < Abdominal Ultrasound < CT Scan of Chest/Abdomen/Pelvis < CT Chest < Abdominal Ultrasound < Abdominal MRI,Chest X-ray < Abdominal Ultrasound < CT Scan of Chest/Abdomen/Pelvis < Abdominal MRI < CT chest < Chest X-ray,Chest X-ray < Abdominal Ultrasound < Gastrointestinal endoscopy and colonoscopy < CT Scan of Chest/Abdomen/Pelvis < Abdominal MRI < CT chest < Chest X-ray,A
+patient_15_1,,"Please answer the question below about the following patient: ID patient_15, Name: George Davies, Birthday: 07/25/1979, Diagnosis: Galactosemia
+
+<question>
+How is Mr. Davies' galactosemia primarily managed?
+</question>
+
+<options>
+Enzyme replacement therapy
+Gene therapy
+Dietetically
+Regular liver function tests
+Regular bone density measurements
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Dietetically,How is Mr. Davies' galactosemia primarily managed?,Enzyme replacement therapy,Gene therapy,Dietetically,Regular liver function tests,C
+patient_12_0,,"Please answer the question below about the following patient: ID patient_12, Name: Alan Fisher, Birthday: 1953-09-12 00:00:00, Diagnosis: Chronic kidney disease
+
+<question>
+When was Mr. Alan Fisher first diagnosed with a heart disease?
+</question>
+
+<options>
+1989
+1995
+2005
+2006
+2008
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",1989,When was Mr. Alan Fisher first diagnosed with a heart disease?,1989,1995,2005,2006,A
+patient_18_15,,"Please answer the question below about the following patient: ID patient_18, Name: David Romero, Birthday: 02/16/1942, Diagnosis: Cardiomyopathy
+
+<question>
+What change in Mr. Romero's left ventricular ejection fraction was observed between the echocardiography reports dated 06/15/2016 and 06/30/2016?
+</question>
+
+<options>
+Decreased from 28% to 27%
+Increased from 28% to 29%
+Remained constant at 28%
+Increased from 27% to 28%
+Decreased from 29% to 28%
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Increased from 28% to 29%,What change in Mr. Romero's left ventricular ejection fraction was observed between the echocardiography reports dated 06/15/2016 and 06/30/2016?,Decreased from 28% to 27%,Increased from 28% to 29%,Remained constant at 28%,Increased from 27% to 28%,B
+patient_16_14,,"Please answer the question below about the following patient: ID patient_16, Name: John Chapman, Birthday: 11/16/1994, Diagnosis: Polytrauma
+
+<question>
+Which antibiotic therapy was initiated in Mr. Chapman for suspected ventriculitis?
+</question>
+
+<options>
+Vancomycin
+Linezolid
+Amoxicillin
+Ciprofloxacin
+Doxycycline
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Ciprofloxacin,Which antibiotic therapy was initiated in Mr. Chapman for suspected ventriculitis?,Vancomycin,Linezolid,Amoxicillin,Ciprofloxacin,D
+patient_17_19,,"Please answer the question below about the following patient: ID patient_17, Name: Brian Carter, Birthday: 04/24/1956, Diagnosis: ARDS
+
+<question>
+Please select the correct chronological order of the radiological imaging studies Mr. Carter received:
+</question>
+
+<options>
+CT chest < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Abdominal ultrasound < Chest X-ray
+Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Abdominal ultrasound
+Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Abdominal ultrasound
+Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < < Abdominal ultrasound < Chest X-ray bedside < Chest X-ray bedside
+CT chest < Chest X-ray bedside < Chest X-ray bedside < Abdominal ultrasound < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",CT chest < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Abdominal ultrasound < Chest X-ray,Please select the correct chronological order of the radiological imaging studies Mr. Carter received:,CT chest < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Abdominal ultrasound < Chest X-ray,Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Abdominal ultrasound,Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Abdominal ultrasound,Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < < Abdominal ultrasound < Chest X-ray bedside < Chest X-ray bedside,A
+patient_12_16,,"Please answer the question below about the following patient: ID patient_12, Name: Alan Fisher, Birthday: 1953-09-12 00:00:00, Diagnosis: Chronic kidney disease
+
+<question>
+What significant change in Mr. Fisher's medication regimen is evident when comparing his discharge medications in April 2009 to those in October 2018?
+</question>
+
+<options>
+Introduction of Apixaban (Eliquis) for anticoagulation therapy
+Increase in the dosage of Cyclosporine (Neoral)
+Addition of Metoprolol Succinate (Toprol-XL) for cardiac management
+Introduction of Mycophenolic Acid (Myfortic) for immunosuppression
+Discontinuation of Aspirin therapy
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Introduction of Apixaban (Eliquis) for anticoagulation therapy,What significant change in Mr. Fisher's medication regimen is evident when comparing his discharge medications in April 2009 to those in October 2018?,Introduction of Apixaban (Eliquis) for anticoagulation therapy,Increase in the dosage of Cyclosporine (Neoral),Addition of Metoprolol Succinate (Toprol-XL) for cardiac management,Introduction of Mycophenolic Acid (Myfortic) for immunosuppression,A
+patient_14_1,,"Please answer the question below about the following patient: ID patient_14, Name: John Havers, Birthday: 05/29/1953, Diagnosis: Liposarcoma
+
+<question>
+Which molecular pathology technique was used to analyze the extracted RNA from Mr. Havers' tumor?
+</question>
+
+<options>
+Polymerase Chain Reaction
+Southern Blotting
+Next-Generation Sequencing
+Sanger Sequencing
+Microarray Analysis
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Next-Generation Sequencing,Which molecular pathology technique was used to analyze the extracted RNA from Mr. Havers' tumor?,Polymerase Chain Reaction,Southern Blotting,Next-Generation Sequencing,Sanger Sequencing,C
+patient_13_16,,"Please answer the question below about the following patient: ID patient_13, Name: Ben Harder, Birthday: 1940-02-08 00:00:00, Diagnosis: Prostate cancer 
+
+<question>
+Which side effect(s) led to the discontinuation of radiation therapy to the mediastinal lymph nodes in Mr. Harder in January 2023?
+</question>
+
+<options>
+Fatigue
+Dyspnea
+Esophagitis
+Diarrhea
+Dyspnea and esophagitis
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Dyspnea and esophagitis,Which side effect(s) led to the discontinuation of radiation therapy to the mediastinal lymph nodes in Mr. Harder in January 2023?,Fatigue,Dyspnea,Esophagitis,Dyspnea and esophagitis,D
+patient_18_5,,"Please answer the question below about the following patient: ID patient_18, Name: David Romero, Birthday: 02/16/1942, Diagnosis: Cardiomyopathy
+
+<question>
+On which date was a CRT-ICD system successfully implanted in Mr. Romero?
+</question>
+
+<options>
+04/07/2016
+2016-05-07 00:00:00
+10/08/2022
+09/23/2022
+05/20/2023
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",2016-05-07 00:00:00,On which date was a CRT-ICD system successfully implanted in Mr. Romero?,04/07/2016,2016-05-07 00:00:00,10/08/2022,09/23/2022,B
+patient_13_8,,"Please answer the question below about the following patient: ID patient_13, Name: Ben Harder, Birthday: 1940-02-08 00:00:00, Diagnosis: Prostate cancer 
+
+<question>
+After which treatment cycle did Mr. Harder develop pronounced fatigue symptoms?
+</question>
+
+<options>
+First cycle of Lutetium PSMA-Therapy
+Second cycle of Docetaxel therapy
+Fourth cycle of Lutetium-Radioligand Therapy
+First cycle of Actinium-225 labeled PSMA in combination with Lutetium-177 PSMA for tandem radioligand therapy
+After starting anti-hormonal therapy
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",First cycle of Actinium-225 labeled PSMA in combination with Lutetium-177 PSMA for tandem radioligand therapy,After which treatment cycle did Mr. Harder develop pronounced fatigue symptoms?,First cycle of Lutetium PSMA-Therapy,Second cycle of Docetaxel therapy,Fourth cycle of Lutetium-Radioligand Therapy,First cycle of Actinium-225 labeled PSMA in combination with Lutetium-177 PSMA for tandem radioligand therapy,D
+patient_11_16,,"Please answer the question below about the following patient: ID patient_11, Name: Bruno Hurley, Birthday: 12/24/1965, Diagnosis: AML
+
+<question>
+As per the current recommendations, when should Mr. Hurley's next bone marrow puncture be scheduled post-transplantation?
+</question>
+
+<options>
+Day +30 and +90
+Day +60 and +180
+Day +60, +120, and +360
+Day +100 and +200
+Day +180 and +365
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>","Day +60, +120, and +360","As per the current recommendations, when should Mr. Hurley's next bone marrow puncture be scheduled post-transplantation?",Day +30 and +90,Day +60 and +180,"Day +60, +120, and +360",Day +100 and +200,C
+patient_15_3,,"Please answer the question below about the following patient: ID patient_15, Name: George Davies, Birthday: 07/25/1979, Diagnosis: Galactosemia
+
+<question>
+What physical examination finding was noted in Mr. Davies during his 2009 hospital stay?
+</question>
+
+<options>
+Diminished breath sounds on the left base
+Cervical lymphadenopathy
+Hepatosplenomegaly
+Signs of meningeal irritation
+Exacerbation of headaches with bending forward
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Diminished breath sounds on the left base,What physical examination finding was noted in Mr. Davies during his 2009 hospital stay?,Diminished breath sounds on the left base,Cervical lymphadenopathy,Hepatosplenomegaly,Signs of meningeal irritation,A
+patient_14_2,,"Please answer the question below about the following patient: ID patient_14, Name: John Havers, Birthday: 05/29/1953, Diagnosis: Liposarcoma
+
+<question>
+As per the histology report dated 03/18/2017, what was the mitotic figure count per 10 high-power fields for Mr. Havers' tumor?
+</question>
+
+<options>
+0 mitotic figures
+1 mitotic figure
+2 mitotic figures
+3 mitotic figures
+4 mitotic figures
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",2 mitotic figures,"As per the histology report dated 03/18/2017, what was the mitotic figure count per 10 high-power fields for Mr. Havers' tumor?",0 mitotic figures,1 mitotic figure,2 mitotic figures,3 mitotic figures,C
+patient_15_5,,"Please answer the question below about the following patient: ID patient_15, Name: George Davies, Birthday: 07/25/1979, Diagnosis: Galactosemia
+
+<question>
+What was a concerning lab finding in Mr. Davies during his 2009 hospital stay?
+</question>
+
+<options>
+Elevated CRP
+Low hemoglobin
+Elevated creatinine
+High white blood cell count
+Low platelet count
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Elevated creatinine,What was a concerning lab finding in Mr. Davies during his 2009 hospital stay?,Elevated CRP,Low hemoglobin,Elevated creatinine,High white blood cell count,C
+patient_17_6,,"Please answer the question below about the following patient: ID patient_17, Name: Brian Carter, Birthday: 04/24/1956, Diagnosis: ARDS
+
+<question>
+How was Mr. Carter's thyroid-stimulating hormone (TSH) level characterized?
+</question>
+
+<options>
+Elevated
+Decreased
+Subtherapeutic
+Within normal range
+Not measured
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Within normal range,How was Mr. Carter's thyroid-stimulating hormone (TSH) level characterized?,Elevated,Decreased,Subtherapeutic,Within normal range,D
+patient_11_0,,"Please answer the question below about the following patient: ID patient_11, Name: Bruno Hurley, Birthday: 12/24/1965, Diagnosis: AML
+
+<question>
+What was the initial reason for Mr. Hurley's hospital admission in October 2019?
+</question>
+
+<options>
+Acute pancreatitis
+Neutropenic fever
+Acute myocardial infarction
+Hematological emergency
+Sudden onset of dyspnea
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Neutropenic fever,What was the initial reason for Mr. Hurley's hospital admission in October 2019?,Acute pancreatitis,Neutropenic fever,Acute myocardial infarction,Hematological emergency,B
+patient_16_2,,"Please answer the question below about the following patient: ID patient_16, Name: John Chapman, Birthday: 11/16/1994, Diagnosis: Polytrauma
+
+<question>
+What was the initial RASS score for Mr. Chapman upon admission on 04/03/2017?
+</question>
+
+<options>
+-5
+-4
+0
+4
+5
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",-4,What was the initial RASS score for Mr. Chapman upon admission on 04/03/2017?,-5,-4,0,4,B
+patient_12_3,,"Please answer the question below about the following patient: ID patient_12, Name: Alan Fisher, Birthday: 1953-09-12 00:00:00, Diagnosis: Chronic kidney disease
+
+<question>
+When did Mr. Fisher first start hemodialysis for terminal renal insufficiency?
+</question>
+
+<options>
+1995
+2005
+2007
+2008
+2020
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",1995,When did Mr. Fisher first start hemodialysis for terminal renal insufficiency?,1995,2005,2007,2008,A
+patient_11_3,,"Please answer the question below about the following patient: ID patient_11, Name: Bruno Hurley, Birthday: 12/24/1965, Diagnosis: AML
+
+<question>
+What was the primary purpose of Mr. Hurley's admission for allogeneic stem cell transplantation?
+</question>
+
+<options>
+Treatment of refractory tuberculosis
+Management of acute pancreatitis
+Treatment of secondary acute myeloid leukemia
+Intervention for EBV reactivation
+Correction of immune deficiency
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Treatment of secondary acute myeloid leukemia,What was the primary purpose of Mr. Hurley's admission for allogeneic stem cell transplantation?,Treatment of refractory tuberculosis,Management of acute pancreatitis,Treatment of secondary acute myeloid leukemia,Intervention for EBV reactivation,C
+patient_18_0,,"Please answer the question below about the following patient: ID patient_18, Name: David Romero, Birthday: 02/16/1942, Diagnosis: Cardiomyopathy
+
+<question>
+What was Mr. David Romero's left ventricular ejection fraction (LVEF) measured in myocardial perfusion scintigraphy in September 2022?
+</question>
+
+<options>
+40%
+28%
+30%
+45%
+53%
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",53%,What was Mr. David Romero's left ventricular ejection fraction (LVEF) measured in myocardial perfusion scintigraphy in September 2022?,40%,28%,30%,53%,D
+patient_11_15,,"Please answer the question below about the following patient: ID patient_11, Name: Bruno Hurley, Birthday: 12/24/1965, Diagnosis: AML
+
+<question>
+Which medication is NOT part of Mr. Hurley's post-transplantation regimen?
+</question>
+
+<options>
+Acyclovir
+Entecavir
+Mycophenolate Mofetil
+Cyclosporine
+Methotrexate
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Methotrexate,Which medication is NOT part of Mr. Hurley's post-transplantation regimen?,Methotrexate,Entecavir,Mycophenolate Mofetil,Cyclosporine,A
+patient_20_15,,"Please answer the question below about the following patient: ID patient_20, Name: Hilary Sanders, Birthday: 08/24/1976, Diagnosis: Common Variable Immunodeficiency Syndrome
+
+<question>
+Comparing 10/09/2016 and 03/04/2017 lab results, Mrs. Sanders' Gamma-Globulin in Serum percentage:
+</question>
+
+<options>
+Increased
+Decreased
+Stayed the same
+Was not measured in 2017
+Varied inconsistently
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Stayed the same,"Comparing 10/09/2016 and 03/04/2017 lab results, Mrs. Sanders' Gamma-Globulin in Serum percentage:",Increased,Decreased,Stayed the same,Was not measured in 2017,C
+patient_17_13,,"Please answer the question below about the following patient: ID patient_17, Name: Brian Carter, Birthday: 04/24/1956, Diagnosis: ARDS
+
+<question>
+Regarding Mr. Carter, what condition was indicated by the echo-free cystic structure identified in the right lower lobe on the ultrasound abdomen performed on 11/01/2021?
+</question>
+
+<options>
+Echinococcus
+Atypical pneumonia
+Congenital cyst
+Pulmonary embolism
+Hepatic lesion
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Congenital cyst,"Regarding Mr. Carter, what condition was indicated by the echo-free cystic structure identified in the right lower lobe on the ultrasound abdomen performed on 11/01/2021?",Echinococcus,Atypical pneumonia,Congenital cyst,Pulmonary embolism,C
+patient_16_13,,"Please answer the question below about the following patient: ID patient_16, Name: John Chapman, Birthday: 11/16/1994, Diagnosis: Polytrauma
+
+<question>
+Regarding Mr. Chapman, what was the finding in the CT Head on 04/21/2017?
+</question>
+
+<options>
+Ischemic stroke
+Brain tumor
+Malresorptive hydrocephalus
+Cerebral abscess
+Normal study
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Malresorptive hydrocephalus,"Regarding Mr. Chapman, what was the finding in the CT Head on 04/21/2017?",Ischemic stroke,Brain tumor,Malresorptive hydrocephalus,Cerebral abscess,C
+patient_20_10,,"Please answer the question below about the following patient: ID patient_20, Name: Hilary Sanders, Birthday: 08/24/1976, Diagnosis: Common Variable Immunodeficiency Syndrome
+
+<question>
+What significant finding was noted in Mrs. Sanders' CT scan in 2021?
+</question>
+
+<options>
+Brain tumor
+Intrapulmonary densities concurrent with atypical pnemonia
+Pulmonary embolism
+Liver cirrhosis
+None of the above
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Intrapulmonary densities concurrent with atypical pnemonia,What significant finding was noted in Mrs. Sanders' CT scan in 2021?,Brain tumor,Intrapulmonary densities concurrent with atypical pnemonia,Pulmonary embolism,Liver cirrhosis,B
+patient_18_1,,"Please answer the question below about the following patient: ID patient_18, Name: David Romero, Birthday: 02/16/1942, Diagnosis: Cardiomyopathy
+
+<question>
+On which date was Mr. Romero's myocardial biopsy performed that revealed a positive detection of HCV-specific RNA?
+</question>
+
+<options>
+01/27/2014
+03/26/2016
+06/15/2016
+09/23/2022
+05/20/2023
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",01/27/2014,On which date was Mr. Romero's myocardial biopsy performed that revealed a positive detection of HCV-specific RNA?,01/27/2014,03/26/2016,06/15/2016,09/23/2022,A
+patient_13_12,,"Please answer the question below about the following patient: ID patient_13, Name: Ben Harder, Birthday: 1940-02-08 00:00:00, Diagnosis: Prostate cancer 
+
+<question>
+As of the PET/CT scan on 12/11/2022, what was Mr. Harder's PSA level?
+</question>
+
+<options>
+0.01 ng/ml
+0.48 ng/ml
+1.23 ng/ml
+1.35 ng/ml
+5.42 ng/ml
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",1.23 ng/ml,"As of the PET/CT scan on 12/11/2022, what was Mr. Harder's PSA level?",0.01 ng/ml,0.48 ng/ml,1.23 ng/ml,1.35 ng/ml,C
+patient_19_3,,"Please answer the question below about the following patient: ID patient_19, Name: Emil Nilsson, Birthday: 2004-04-12 00:00:00, Diagnosis: Hypoplastic Left Heart Syndrome
+
+<question>
+What was a finding in Mr. Nilsson's echocardiography in January 2006?
+</question>
+
+<options>
+Left ventricular hypertrophy
+Tricuspid valve insufficiency
+Aortic valve stenosis
+Right ventricular dilatation
+Relevant tricuspid valve insufficiency
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Tricuspid valve insufficiency,What was a finding in Mr. Nilsson's echocardiography in January 2006?,Left ventricular hypertrophy,Tricuspid valve insufficiency,Aortic valve stenosis,Right ventricular dilatation,B
+patient_18_16,,"Please answer the question below about the following patient: ID patient_18, Name: David Romero, Birthday: 02/16/1942, Diagnosis: Cardiomyopathy
+
+<question>
+Which lab parameter showed an abnormal value in Mr. Romero's results dated 09/29/2023?
+</question>
+
+<options>
+Hemoglobin
+C-reactive Protein
+Total Bilirubin
+Sodium
+Potassium
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",C-reactive Protein,Which lab parameter showed an abnormal value in Mr. Romero's results dated 09/29/2023?,Hemoglobin,C-reactive Protein,Total Bilirubin,Sodium,B
+patient_15_0,,"Please answer the question below about the following patient: ID patient_15, Name: George Davies, Birthday: 07/25/1979, Diagnosis: Galactosemia
+
+<question>
+What was Mr. Davies' primary diagnosis when admitted in September 2009?
+</question>
+
+<options>
+Galactosemia
+Bronchopneumonia
+Osteopenia
+Vitamin D deficiency
+Liver dysfunction
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Bronchopneumonia,What was Mr. Davies' primary diagnosis when admitted in September 2009?,Galactosemia,Bronchopneumonia,Osteopenia,Vitamin D deficiency,B
+patient_16_11,,"Please answer the question below about the following patient: ID patient_16, Name: John Chapman, Birthday: 11/16/1994, Diagnosis: Polytrauma
+
+<question>
+What was Mr. Chapman's hemoglobin level upon last discharge from inpatient care?
+</question>
+
+<options>
+13.5 g/dL
+14.3 g/dL
+7.6 g/dL
+7.8 g/dL
+14.3 g/dL
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",14.3 g/dL,What was Mr. Chapman's hemoglobin level upon last discharge from inpatient care?,13.5 g/dL,14.3 g/dL,7.6 g/dL,7.8 g/dL,B
+patient_15_10,,"Please answer the question below about the following patient: ID patient_15, Name: George Davies, Birthday: 07/25/1979, Diagnosis: Galactosemia
+
+<question>
+What was the finding in Mr. Davies' abdominal sonography as of the last report?
+</question>
+
+<options>
+Hepatomegaly with steatosis
+Gallbladder stones with cholestasis
+Kidney stones
+Pancreatic abnormalities
+Minimal liver enlargement without steatosis
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Minimal liver enlargement without steatosis,What was the finding in Mr. Davies' abdominal sonography as of the last report?,Hepatomegaly with steatosis,Gallbladder stones with cholestasis,Kidney stones,Minimal liver enlargement without steatosis,D
+patient_19_15,,"Please answer the question below about the following patient: ID patient_19, Name: Emil Nilsson, Birthday: 2004-04-12 00:00:00, Diagnosis: Hypoplastic Left Heart Syndrome
+
+<question>
+How did the dosage of Aspirin change from Mr. Nilsson's medication regimen in 2005 to 2008?
+</question>
+
+<options>
+Increased from 10 mg to 25 mg.
+Decreased from 25 mg to 10 mg.
+Remained constant at 10 mg.
+Initially excluded, then introduced at 25 mg.
+Changed from 1-0-1 to 1-1-1.
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Increased from 10 mg to 25 mg.,How did the dosage of Aspirin change from Mr. Nilsson's medication regimen in 2005 to 2008?,Increased from 10 mg to 25 mg.,Decreased from 25 mg to 10 mg.,Remained constant at 10 mg.,"Initially excluded, then introduced at 25 mg.",A
+patient_18_3,,"Please answer the question below about the following patient: ID patient_18, Name: David Romero, Birthday: 02/16/1942, Diagnosis: Cardiomyopathy
+
+<question>
+According to the text, which heart valve showed mild insufficiency graded 1 on a 3-grade scale in Mr. Romero?
+</question>
+
+<options>
+Aortic valve
+Pulmonary valve
+Tricuspid valve
+Mitral valve
+None of the above
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Mitral valve,"According to the text, which heart valve showed mild insufficiency graded 1 on a 3-grade scale in Mr. Romero?",Aortic valve,Pulmonary valve,Tricuspid valve,Mitral valve,D
+patient_17_0,,"Please answer the question below about the following patient: ID patient_17, Name: Brian Carter, Birthday: 04/24/1956, Diagnosis: ARDS
+
+<question>
+On which date did Mr. Brian Carter initially present to the facility with symptoms?
+</question>
+
+<options>
+09/24/2021
+09/28/2021
+09/30/2021
+10/12/2021
+10/30/2021
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",09/28/2021,On which date did Mr. Brian Carter initially present to the facility with symptoms?,09/24/2021,09/28/2021,09/30/2021,10/12/2021,B
+patient_15_4,,"Please answer the question below about the following patient: ID patient_15, Name: George Davies, Birthday: 07/25/1979, Diagnosis: Galactosemia
+
+<question>
+What treatment was Mr. Davies given for bronchopneumonia in 2009?
+</question>
+
+<options>
+Amoxicillin
+Cefuroxime and Sodium Chloride 0.9% inhalation
+Prednisone
+Oxygen supplementation
+Intravenous fluids only
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Cefuroxime and Sodium Chloride 0.9% inhalation,What treatment was Mr. Davies given for bronchopneumonia in 2009?,Amoxicillin,Cefuroxime and Sodium Chloride 0.9% inhalation,Prednisone,Oxygen supplementation,B
+patient_11_18,,"Please answer the question below about the following patient: ID patient_11, Name: Bruno Hurley, Birthday: 12/24/1965, Diagnosis: AML
+
+<question>
+Which of the following sequences accurately represents the chronological order of key medical events and treatments for Mr. Bruno Hurley since his initial hospitalization in October 2019?
+</question>
+
+<options>
+Hospitalization for neutropenic fever (10/2019) → Diagnosis of tuberculosis and initiation of four-drug anti-tuberculosis therapy (11/08/19) → First detection of acid-fast bacilli in sputum (01/02/20) → Secondary AML diagnosis (01/2021) → Start of Actimmune® injections (01/2021) → Allogeneic stem cell transplantation (07/2021).
+Diagnosis of tuberculosis (12/06/19) → Initiation of Moxifloxacin (11/10/19) → Start of Ethambutol therapy (11/08/19) → Bone marrow biopsy showing 0.8% myeloid blasts (05/2021) → Start of Actimmune® injections (01/2021) → Hospitalization for acute pancreatitis (02/2020).
+Hospitalization for fever during neutropenia (10/23/19) → Start of Pyrazinamide therapy (11/20/19) → Last cultural detection of Mycobacterium tuberculosis in sputum (01/02/20) → Start of Venetoclax/Vidaza (03/2021) → Allogeneic stem cell transplantation (07/29/2021) → Diagnosis of secondary AML (01/2021).
+Start of Rifampicin and Isoniazid therapy (11/08/19) → Diagnosis of open lung tuberculosis (11/2019) → First sputum sample without acid-fast rods (03/12/21) → Diagnosis of Myelodysplastic Syndrome EB-2 (07/2010) → Hospitalization for acute pancreatitis (02/2022) → Start of Actimmune® therapy (01/2021).
+Start of Levofloxacin therapy (02/11/20) → Diagnosis of secondary AML (01/2021) → Hospitalization for neutropenic fever (10/23/19) → First detection of acid-fast bacilli in sputum (01/02/20) → Allogeneic stem cell transplantation (07/29/2021) → Discontinuation of Actimmune® therapy (03/2021).
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Hospitalization for neutropenic fever (10/2019) → Diagnosis of tuberculosis and initiation of four-drug anti-tuberculosis therapy (11/08/19) → First detection of acid-fast bacilli in sputum (01/02/20) → Secondary AML diagnosis (01/2021) → Start of Actimmune® injections (01/2021) → Allogeneic stem cell transplantation (07/2021).,Which of the following sequences accurately represents the chronological order of key medical events and treatments for Mr. Bruno Hurley since his initial hospitalization in October 2019?,Hospitalization for neutropenic fever (10/2019) → Diagnosis of tuberculosis and initiation of four-drug anti-tuberculosis therapy (11/08/19) → First detection of acid-fast bacilli in sputum (01/02/20) → Secondary AML diagnosis (01/2021) → Start of Actimmune® injections (01/2021) → Allogeneic stem cell transplantation (07/2021).,Diagnosis of tuberculosis (12/06/19) → Initiation of Moxifloxacin (11/10/19) → Start of Ethambutol therapy (11/08/19) → Bone marrow biopsy showing 0.8% myeloid blasts (05/2021) → Start of Actimmune® injections (01/2021) → Hospitalization for acute pancreatitis (02/2020).,Hospitalization for fever during neutropenia (10/23/19) → Start of Pyrazinamide therapy (11/20/19) → Last cultural detection of Mycobacterium tuberculosis in sputum (01/02/20) → Start of Venetoclax/Vidaza (03/2021) → Allogeneic stem cell transplantation (07/29/2021) → Diagnosis of secondary AML (01/2021).,Start of Rifampicin and Isoniazid therapy (11/08/19) → Diagnosis of open lung tuberculosis (11/2019) → First sputum sample without acid-fast rods (03/12/21) → Diagnosis of Myelodysplastic Syndrome EB-2 (07/2010) → Hospitalization for acute pancreatitis (02/2022) → Start of Actimmune® therapy (01/2021).,A
+patient_12_5,,"Please answer the question below about the following patient: ID patient_12, Name: Alan Fisher, Birthday: 1953-09-12 00:00:00, Diagnosis: Chronic kidney disease
+
+<question>
+What medication was added to Mr. Fisher's therapy following the kidney transplant biopsy in April 2009?
+</question>
+
+<options>
+Cyclosporine A
+Steroid
+Lymphocyte proliferation inhibitor
+Marcumar
+Minoxidil
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Lymphocyte proliferation inhibitor,What medication was added to Mr. Fisher's therapy following the kidney transplant biopsy in April 2009?,Cyclosporine A,Steroid,Lymphocyte proliferation inhibitor,Marcumar,C
+patient_14_19,,"Please answer the question below about the following patient: ID patient_14, Name: John Havers, Birthday: 05/29/1953, Diagnosis: Liposarcoma
+
+<question>
+Analyzing the changes in Mr. John Havers' lab results between April 2017 and August 2018, which of the following interpretations is most consistent with the observed alterations?
+</question>
+
+<options>
+Worsening renal function, indicated by a substantial increase in creatinine levels.
+Possible dehydration or increased erythropoiesis, suggested by a marginal rise in hemoglobin and hematocrit values.
+Indications of an acute inflammatory or infection process, evident from a significant elevation in C-Reactive Protein levels.
+A potential coagulation disorder, inferred from changes in Prothrombin Time and INR.
+Likely vitamin B12 or folate deficiency, indicated by an increase in Mean Corpuscular Volume (MCV).
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>","Possible dehydration or increased erythropoiesis, suggested by a marginal rise in hemoglobin and hematocrit values.","Analyzing the changes in Mr. John Havers' lab results between April 2017 and August 2018, which of the following interpretations is most consistent with the observed alterations?","Worsening renal function, indicated by a substantial increase in creatinine levels.","Possible dehydration or increased erythropoiesis, suggested by a marginal rise in hemoglobin and hematocrit values.","Indications of an acute inflammatory or infection process, evident from a significant elevation in C-Reactive Protein levels.","A potential coagulation disorder, inferred from changes in Prothrombin Time and INR.",B
+patient_12_17,,"Please answer the question below about the following patient: ID patient_12, Name: Alan Fisher, Birthday: 1953-09-12 00:00:00, Diagnosis: Chronic kidney disease
+
+<question>
+Which of Mr. Fisher's medications present in November 2018 is absent from the discharge list in July 2019?
+</question>
+
+<options>
+Metoprolol Succinate (Toprol-XL)
+Pantoprazole (Protonix)
+Torsemide (Demadex)
+Prednisone (Deltasone)
+Vitamin D3 (Cholecalciferol)
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Torsemide (Demadex),Which of Mr. Fisher's medications present in November 2018 is absent from the discharge list in July 2019?,Metoprolol Succinate (Toprol-XL),Pantoprazole (Protonix),Torsemide (Demadex),Prednisone (Deltasone),C
+patient_18_14,,"Please answer the question below about the following patient: ID patient_18, Name: David Romero, Birthday: 02/16/1942, Diagnosis: Cardiomyopathy
+
+<question>
+What was Mr. Romero's reported blood pressure on 09/29/2023?
+</question>
+
+<options>
+120/70 mmHg
+143/84 mmHg
+175/90 mmHg
+110/70 mmHg
+Not specified
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Not specified,What was Mr. Romero's reported blood pressure on 09/29/2023?,Not specified,143/84 mmHg,175/90 mmHg,110/70 mmHg,A
+patient_17_16,,"Please answer the question below about the following patient: ID patient_17, Name: Brian Carter, Birthday: 04/24/1956, Diagnosis: ARDS
+
+<question>
+What significant change was observed in Mr. Carter's thorax imaging on 10/16/2021 compared to the previous examinations?
+</question>
+
+<options>
+Heart borderline enlarged
+New central venous catheter placement
+Regression of infiltrates
+Significant cavitation
+Pleural effusion on the left
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Heart borderline enlarged,What significant change was observed in Mr. Carter's thorax imaging on 10/16/2021 compared to the previous examinations?,Heart borderline enlarged,New central venous catheter placement,Regression of infiltrates,Significant cavitation,A
+patient_14_4,,"Please answer the question below about the following patient: ID patient_14, Name: John Havers, Birthday: 05/29/1953, Diagnosis: Liposarcoma
+
+<question>
+Which of the following medications was NOT part of Mr. Havers' discharge prescription after tumor excision surgery in March 2017?
+</question>
+
+<options>
+Empagliflozin
+Metformin Hydrochloride
+Atorvastatin Calcium
+Metoprolol Tartrate
+Acetaminophen
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Acetaminophen,Which of the following medications was NOT part of Mr. Havers' discharge prescription after tumor excision surgery in March 2017?,Empagliflozin,Metformin Hydrochloride,Atorvastatin Calcium,Acetaminophen,D
+patient_18_18,,"Please answer the question below about the following patient: ID patient_18, Name: David Romero, Birthday: 02/16/1942, Diagnosis: Cardiomyopathy
+
+<question>
+Which of Mr. Romero's medications, present in both March 2016 and May 2023, had a change in its dosing frequency?
+</question>
+
+<options>
+Ramipril (Altace)
+Torasemide (Torem)
+Carvedilol (Coreg)
+Aspirin
+L-Thyroxine (Synthroid)
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Torasemide (Torem),"Which of Mr. Romero's medications, present in both March 2016 and May 2023, had a change in its dosing frequency?",Ramipril (Altace),Torasemide (Torem),Carvedilol (Coreg),Aspirin,B
+patient_12_4,,"Please answer the question below about the following patient: ID patient_12, Name: Alan Fisher, Birthday: 1953-09-12 00:00:00, Diagnosis: Chronic kidney disease
+
+<question>
+What was the primary diagnosis that led to Mr. Fisher's hospitalization from 04/19/2009 to 04/28/2009?
+</question>
+
+<options>
+Urosepsis
+Coronary artery disease
+Progressive deterioration of renal transplant function
+Acute postrenal kidney failure
+Anastomotic stricture
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Progressive deterioration of renal transplant function,What was the primary diagnosis that led to Mr. Fisher's hospitalization from 04/19/2009 to 04/28/2009?,Urosepsis,Coronary artery disease,Progressive deterioration of renal transplant function,Acute postrenal kidney failure,C
+patient_20_5,,"Please answer the question below about the following patient: ID patient_20, Name: Hilary Sanders, Birthday: 08/24/1976, Diagnosis: Common Variable Immunodeficiency Syndrome
+
+<question>
+As per Mrs. Sanders' abdominal ultrasound on 03/04/2017, what abnormality was observed?
+</question>
+
+<options>
+Retroperitoneal lymphadenopathy
+Kidney stones
+Gallbladder inflammation
+Pancreatic cyst
+Mesenterial lymphadenopathy
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Retroperitoneal lymphadenopathy,"As per Mrs. Sanders' abdominal ultrasound on 03/04/2017, what abnormality was observed?",Retroperitoneal lymphadenopathy,Kidney stones,Gallbladder inflammation,Pancreatic cyst,A
+patient_14_12,,"Please answer the question below about the following patient: ID patient_14, Name: John Havers, Birthday: 05/29/1953, Diagnosis: Liposarcoma
+
+<question>
+Which muscles were partially resected in Mr. Havers during the en bloc tumor excision surgery?
+</question>
+
+<options>
+Biceps femoris and semitendinosus
+Gluteus maximus and minimus
+Gracilis, sartorius, and adductor magnus
+Gracilis, sartorius, and adductor longus
+Rectus femoris and vastus lateralis
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>","Gracilis, sartorius, and adductor magnus",Which muscles were partially resected in Mr. Havers during the en bloc tumor excision surgery?,Biceps femoris and semitendinosus,Gluteus maximus and minimus,"Gracilis, sartorius, and adductor magnus","Gracilis, sartorius, and adductor longus",C
+patient_12_15,,"Please answer the question below about the following patient: ID patient_12, Name: Alan Fisher, Birthday: 1953-09-12 00:00:00, Diagnosis: Chronic kidney disease
+
+<question>
+Which medication caused a possible dose-dependent intolerance in Mr. Fisher?
+</question>
+
+<options>
+Fluvastatin
+Cyclosporin A
+Mycophenolic Acid
+Prednisone
+Metoprolol
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Fluvastatin,Which medication caused a possible dose-dependent intolerance in Mr. Fisher?,Fluvastatin,Cyclosporin A,Mycophenolic Acid,Prednisone,A
+patient_17_9,,"Please answer the question below about the following patient: ID patient_17, Name: Brian Carter, Birthday: 04/24/1956, Diagnosis: ARDS
+
+<question>
+How long was Mr. Carter's prone positioning therapy, which was included in the conservative ARDS therapy?
+</question>
+
+<options>
+A total of 7 prone positions overnight
+A total of 9 prone positions, 16 hours each
+A total of 9 prone positions overnight
+A total of 12 prone positions, 24 hours each
+Not specified
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>","A total of 9 prone positions, 16 hours each","How long was Mr. Carter's prone positioning therapy, which was included in the conservative ARDS therapy?",A total of 7 prone positions overnight,"A total of 9 prone positions, 16 hours each",A total of 9 prone positions overnight,"A total of 12 prone positions, 24 hours each",B
+patient_13_15,,"Please answer the question below about the following patient: ID patient_13, Name: Ben Harder, Birthday: 1940-02-08 00:00:00, Diagnosis: Prostate cancer 
+
+<question>
+What was the significant change in Mr. Harder's PSA levels between July 2019 and November 2019?
+</question>
+
+<options>
+From undetectable to >0.03 ng/ml
+From 0.48 ng/ml to 1.35 ng/ml
+From 5.42 ng/ml to 1.23 ng/ml
+From 1.23 ng/ml to 0.01 ng/ml
+No change, remained undetectable
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",From undetectable to >0.03 ng/ml,What was the significant change in Mr. Harder's PSA levels between July 2019 and November 2019?,From undetectable to >0.03 ng/ml,From 0.48 ng/ml to 1.35 ng/ml,From 5.42 ng/ml to 1.23 ng/ml,From 1.23 ng/ml to 0.01 ng/ml,A
+patient_18_9,,"Please answer the question below about the following patient: ID patient_18, Name: David Romero, Birthday: 02/16/1942, Diagnosis: Cardiomyopathy
+
+<question>
+What was the new diagnosis added to Mr. Romero's medical history as of 05/04/2016?
+</question>
+
+<options>
+Hypothyroidism
+Type 2 diabetes mellitus
+Chronic Hepatitis C
+Post-antiviral therapy
+Status post Hepatitis A
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Type 2 diabetes mellitus,What was the new diagnosis added to Mr. Romero's medical history as of 05/04/2016?,Hypothyroidism,Type 2 diabetes mellitus,Chronic Hepatitis C,Post-antiviral therapy,B
+patient_15_11,,"Please answer the question below about the following patient: ID patient_15, Name: George Davies, Birthday: 07/25/1979, Diagnosis: Galactosemia
+
+<question>
+What month/year was Mr. Davies first diagnosed with osteopenia?
+</question>
+
+<options>
+Jan 13
+Jan 14
+Feb 15
+Jan 16
+Aug 18
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Jan 13,What month/year was Mr. Davies first diagnosed with osteopenia?,Jan 13,Jan 14,Feb 15,Jan 16,A
+patient_17_2,,"Please answer the question below about the following patient: ID patient_17, Name: Brian Carter, Birthday: 04/24/1956, Diagnosis: ARDS
+
+<question>
+After the detection of Aspergillus, for how long was Mr. Carter recommended to continue antifungal therapy?
+</question>
+
+<options>
+2-4 weeks
+4-6 weeks
+6-8 weeks
+8-10 weeks
+10-12 weeks
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",4-6 weeks,"After the detection of Aspergillus, for how long was Mr. Carter recommended to continue antifungal therapy?",2-4 weeks,4-6 weeks,6-8 weeks,8-10 weeks,B
+patient_14_17,,"Please answer the question below about the following patient: ID patient_14, Name: John Havers, Birthday: 05/29/1953, Diagnosis: Liposarcoma
+
+<question>
+Which vein was ligated during the en bloc tumor excision surgery in Mr. Havers?
+</question>
+
+<options>
+Femoral vein
+Popliteal vein
+Great saphenous vein
+Small saphenous vein
+Anterior tibial vein
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Great saphenous vein,Which vein was ligated during the en bloc tumor excision surgery in Mr. Havers?,Femoral vein,Popliteal vein,Great saphenous vein,Small saphenous vein,C
+patient_16_3,,"Please answer the question below about the following patient: ID patient_16, Name: John Chapman, Birthday: 11/16/1994, Diagnosis: Polytrauma
+
+<question>
+What was identified in Mr. Chapman's blood cultures during his stay from 04/03/2017 to 05/01/2017?
+</question>
+
+<options>
+E. coli
+Pseudomonas aeruginosa
+Staphylococcus capitis
+Streptococcus pneumoniae
+Klebsiella pneumoniae
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Staphylococcus capitis,What was identified in Mr. Chapman's blood cultures during his stay from 04/03/2017 to 05/01/2017?,E. coli,Pseudomonas aeruginosa,Staphylococcus capitis,Streptococcus pneumoniae,C
+patient_17_4,,"Please answer the question below about the following patient: ID patient_17, Name: Brian Carter, Birthday: 04/24/1956, Diagnosis: ARDS
+
+<question>
+What was Mr. Carter's hemoglobin level at his last discharge?
+</question>
+
+<options>
+10.8 g/dL
+11.6 g/dL
+12.8 g/dL
+15.8 g/dL
+Not specified
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",15.8 g/dL,What was Mr. Carter's hemoglobin level at his last discharge?,10.8 g/dL,11.6 g/dL,12.8 g/dL,15.8 g/dL,D
+patient_17_10,,"Please answer the question below about the following patient: ID patient_17, Name: Brian Carter, Birthday: 04/24/1956, Diagnosis: ARDS
+
+<question>
+Mr. Carter's arterial blood gas analysis revealed an oxygenation disorder with a paO2 of how many mmHg?
+</question>
+
+<options>
+50 mmHg
+78 mmHg
+87 mmHg
+125 mmHg
+Not specified
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",50 mmHg,Mr. Carter's arterial blood gas analysis revealed an oxygenation disorder with a paO2 of how many mmHg?,50 mmHg,78 mmHg,87 mmHg,125 mmHg,A
+patient_14_6,,"Please answer the question below about the following patient: ID patient_14, Name: John Havers, Birthday: 05/29/1953, Diagnosis: Liposarcoma
+
+<question>
+On what date did Mr. Havers present with shortness of breath and coughing, leading to the discovery of pulmonary metastasis?
+</question>
+
+<options>
+01/08/2018
+10/02/2018
+08/14/2023
+01/08/2023
+04/23/2017
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",08/14/2023,"On what date did Mr. Havers present with shortness of breath and coughing, leading to the discovery of pulmonary metastasis?",01/08/2018,10/02/2018,08/14/2023,01/08/2023,C
+patient_11_10,,"Please answer the question below about the following patient: ID patient_11, Name: Bruno Hurley, Birthday: 12/24/1965, Diagnosis: AML
+
+<question>
+Which therapy was initiated in Mr. Hurley in February 2021 due to a low basal interferon-gamma level?
+</question>
+
+<options>
+Pyrazinamide
+Ethambutol
+Actimmune
+Moxifloxacin
+Levofloxacin
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Actimmune,Which therapy was initiated in Mr. Hurley in February 2021 due to a low basal interferon-gamma level?,Pyrazinamide,Ethambutol,Actimmune,Moxifloxacin,C
+patient_16_7,,"Please answer the question below about the following patient: ID patient_16, Name: John Chapman, Birthday: 11/16/1994, Diagnosis: Polytrauma
+
+<question>
+What was the pressure setting of the right VP shunt implanted in Mr. Chapman?
+</question>
+
+<options>
+5/25 cm H2O
+12 cm H2O
+3 cm H2O
+7 cm H2O
+15 cm H2O
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",3 cm H2O,What was the pressure setting of the right VP shunt implanted in Mr. Chapman?,5/25 cm H2O,12 cm H2O,3 cm H2O,7 cm H2O,C
+patient_20_14,,"Please answer the question below about the following patient: ID patient_20, Name: Hilary Sanders, Birthday: 08/24/1976, Diagnosis: Common Variable Immunodeficiency Syndrome
+
+<question>
+Between 03/04/2017 and 10/06/2017, how did Mrs. Sanders' Immunoglobulin G (IgG) levels change?
+</question>
+
+<options>
+Decreased significantly
+Increased significantly
+Remained the same
+Increased slightly
+Not enough information to determine
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Increased significantly,"Between 03/04/2017 and 10/06/2017, how did Mrs. Sanders' Immunoglobulin G (IgG) levels change?",Decreased significantly,Increased significantly,Remained the same,Increased slightly,B
+patient_15_18,,"Please answer the question below about the following patient: ID patient_15, Name: George Davies, Birthday: 07/25/1979, Diagnosis: Galactosemia
+
+<question>
+Comparing the lab results, how did Mr. Davies' creatinine levels change from August 2016 to June 2019?
+</question>
+
+<options>
+Increased from 1.10 mg/dL to 1.22 mg/dL
+Decreased from 1.22 mg/dL to 1.10 mg/dL
+Remained constant at 1.22 mg/dL
+Increased above the reference range
+Decreased below the reference range
+</options>
+You should first think step by step. Then give your final answer exactly as it appears in the options. Your output should be in the following format: 
+<thinking> {{YOUR_THOUGHT_PROCESS}} </thinking> 
+
+<answer>
+{YOUR_ANSWER}
+</answer>",Decreased from 1.22 mg/dL to 1.10 mg/dL,"Comparing the lab results, how did Mr. Davies' creatinine levels change from August 2016 to June 2019?",Increased from 1.10 mg/dL to 1.22 mg/dL,Decreased from 1.22 mg/dL to 1.10 mg/dL,Remained constant at 1.22 mg/dL,Increased above the reference range,B
