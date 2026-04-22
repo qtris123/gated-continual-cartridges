@@ -28,14 +28,15 @@ HF_NS="qtris123"
 CARTRIDGES_OUTPUT_DIR="${CARTRIDGES_OUTPUT_DIR:-${CARTRIDGES_DIR}/outputs}"
 EXPERIMENT_NAME="${EXPERIMENT_NAME:-cross-eval_qasper-QA-vs-MT}"
 RUN_ROOT="${CARTRIDGES_OUTPUT_DIR}/${EXPERIMENT_NAME}_${SLURM_JOB_ID:-$$}"
-
+TP_SIZE="${TP_SIZE:-4}"
 DP_SIZE="${DP_SIZE:-2}"
 HF_CARTRIDGE_FILENAME="${HF_CARTRIDGE_FILENAME:-cache_last.pt}"
 COT="${COT:-1}"
-NUM_EVAL_QUESTIONS="${NUM_EVAL_QUESTIONS:-5}"
-MAX_ANSWER_SCAN_TOKENS="${MAX_ANSWER_SCAN_TOKENS:-256}"
+#NUM_EVAL_QUESTIONS="${NUM_EVAL_QUESTIONS:-5}"
+#MAX_ANSWER_SCAN_TOKENS="${MAX_ANSWER_SCAN_TOKENS:-256}"
 DEBUG="${DEBUG:-0}"
 TOKA_PORT="${TOKA_PORT:-10210}"
+BATCH_SIZE="${BATCH_SIZE:-16}"
 
 # =============================================================================
 # Experiment definitions — edit these directly
@@ -133,7 +134,7 @@ start_toka_server() {
   echo ""
   echo "========== Starting toka server for ${model} =========="
   setsid tksrs model="${model}" kv_cache_num_tokens='(2048 * 2048)' \
-        max_topk_logprobs=20 dp_size="${DP_SIZE}" port="${TOKA_PORT}" &
+        max_topk_logprobs=20 dp_size="${DP_SIZE}" tp_size="${TP_SIZE}" port="${TOKA_PORT}" &
   TOKA_PID=$!
   URL="http://$(hostname):${TOKA_PORT}"
   echo "  PID=${TOKA_PID}, URL=${URL}"
@@ -239,10 +240,10 @@ for ENTRY in "${EXPERIMENTS[@]}"; do
     --model "$EXP_MODEL" \
     --output-dir "$EXP_DIR" \
     "${COMMON_ARGS[@]}" \
-    --max-answer-scan-tokens "$MAX_ANSWER_SCAN_TOKENS" \
-    --num-eval-questions "$NUM_EVAL_QUESTIONS" \
+    #--max-answer-scan-tokens "$MAX_ANSWER_SCAN_TOKENS" \
+    #--num-eval-questions "$NUM_EVAL_QUESTIONS" \
     --top-logprobs 20 \
-    --batch-size 5
+    --batch-size "${BATCH_SIZE}"
 
   echo "  ✓ Experiment ${EXPERIMENT_NUM} complete"
 done
