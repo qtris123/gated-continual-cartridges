@@ -6,8 +6,8 @@
 #SBATCH --mem=128G
 #SBATCH --time=1:00:00
 #SBATCH --job-name=init_kvcache
-#SBATCH --output=logs/init_kvcache_%j.out
-#SBATCH --error=logs/init_kvcache_%j.err
+#SBATCH --output=init_kvcache_%j.out
+#SBATCH --error=init_kvcache_%j.err
 set -euo pipefail
 
 
