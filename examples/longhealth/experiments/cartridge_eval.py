@@ -4,8 +4,13 @@ Evaluate cartridge checkpoints on Qasper-style CSV datasets (Yes/No and MCQ).
 
 Supports two inference backends:
 
-- **local** (default): loads the model onto GPU, greedy-decodes one question at
-  a time.  Full vocabulary logits are available at the answer step.
+- **local** (default): loads the model onto GPU and greedy-decodes until an
+  answer token (A–D / Yes / No) or a step cap. Full vocabulary logits are
+  available at the answer step. Use pre-built ``.pt`` checkpoints (for example
+  from ``experiments_longhealth/swapping/build_init_cache.py`` via
+  ``examples/longhealth/scripts/init_kvcache.sh``). Use the same HuggingFace
+  ``--model`` id as in ``experiments.intervention.MODEL_REGISTRY`` for that
+  checkpoint (e.g. Qwen init ``.pt`` with ``Qwen/Qwen3-4B-Instruct-2507``).
 - **tokasaurus**: sends batched requests to a running Tokasaurus server.
   Cartridges are loaded server-side from HuggingFace.  Top-K logprobs
   (not full logits) are returned per generated token; answer-option logprobs
@@ -343,7 +348,8 @@ def resolve_cartridge_source(
     p = Path(raw).expanduser()
     if p.is_file():
         ap = str(p.resolve())
-        return torch.load(ap, map_location="cpu", weights_only=False), ap, ap
+        # ``load_cache`` uses ``TrainableCache.from_pretrained``; do not load the full dict here.
+        return {}, ap, ap
 
     if hf_hub_download is None:
         raise ImportError("pip install huggingface_hub")
@@ -591,6 +597,21 @@ def find_answer_token_step(
     }
 
 
+def _local_answer_extraction_meta(
+    raw: Dict[str, object], *, answered: bool
+) -> Dict[str, object]:
+    """Shape local decode metadata like :func:`evaluate_tokasaurus` rows."""
+    meta = dict(raw)
+    meta["backend"] = "local"
+    if answered:
+        full = meta.get("generated_text_through_answer_token")
+        if full is not None:
+            meta["generated_text"] = full
+    else:
+        meta["failure_reason"] = "no_answer_token_in_completion"
+    return meta
+
+
 # ---------------------------------------------------------------------------
 # Scoring & statistics (shared by both backends)
 # ---------------------------------------------------------------------------
@@ -784,14 +805,19 @@ def evaluate_local(
         )
 
         if logits is None:
-            rows.append(_build_unanswered_row(idx, record, answer_meta))
+            meta = _local_answer_extraction_meta(answer_meta, answered=False)
+            row = _build_unanswered_row(idx, record, meta)
+            row["user_message"] = user_msg
+            rows.append(row)
             pbar.set_postfix(acc=f"{n_correct}/{n_answered}", miss=len(rows) - n_answered)
             continue
 
         n_answered += 1
         choice_logprobs = option_logprobs_from_logits(logits, tokenizer, record)
         dist_topk, _ = topk_logprobs_non_whitespace(logits, tokenizer, k=DIST_TOPK)
-        row, correct = _score_and_build_row(idx, record, choice_logprobs, dist_topk, answer_meta)
+        meta = _local_answer_extraction_meta(answer_meta, answered=True)
+        row, correct = _score_and_build_row(idx, record, choice_logprobs, dist_topk, meta)
+        row["user_message"] = user_msg
         n_correct += int(bool(correct))
         rows.append(row)
         pbar.set_postfix(acc=f"{n_correct}/{n_answered}", ok=correct, pred=row["generated_answer"])
@@ -959,6 +985,12 @@ def run_all_evaluations(
     top_logprobs: int = 20,
     batch_size: int = 16,
 ) -> List[Dict[str, Any]]:
+    """Evaluate every ``(cartridge, dataset)`` pair: the Cartesian product of
+    ``cartridge_specs`` and ``dataset_configs``.
+
+    A single cartridge and a single dataset therefore produce one result row; multiple
+    of each produce all combinations (e.g. two cartridges × two datasets → four runs).
+    """
 
     tokenizer = AutoTokenizer.from_pretrained(model_name)
 

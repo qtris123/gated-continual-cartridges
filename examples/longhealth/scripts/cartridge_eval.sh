@@ -11,71 +11,99 @@
 
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
+
 # =============================================================================
-# Cross-Evaluation: Longhealth A (patients 1-10) vs B (patients 11-20)
+# Longhealth cartridge evaluation
 #
-# Each experiment is defined explicitly as a pipe-delimited entry:
-#   MODEL | CARTRIDGES (space-separated) | DATASETS (space-separated) | LABEL
+# Each EXPERIMENTS entry is pipe-delimited:
+#   MODEL | CARTRIDGE [CARTRIDGE ...] | DATASET[:type] [DATASET ...] | LABEL
 #
-# The script groups experiments by model so the toka server is started once
-# per model, then all experiments for that model run before switching.
+# - One cartridge and one dataset per line → one (model, cartridge, dataset) run.
+# - Several space-separated cartridges or datasets → Cartesian product in
+#   cartridge_eval.py (same as before).
+#
+# For --backend local, use absolute or resolvable paths to .pt caches (e.g. from
+# examples/longhealth/scripts/init_kvcache.sh → examples/longhealth/outputs/init_caches/).
+#
+# BACKEND=tokasaurus: starts Tokasaurus once per MODEL (HF id), uses Hub cartridge ids.
+# BACKEND=local: loads the HF model on GPU; no Tokasaurus.
 # =============================================================================
 
-export CARTRIDGES_DIR=/home/vo43/cartridges
-DATA_DIR="/scratch/scholar/vo43"
-HF_NS="qtris123"
+export CARTRIDGES_DIR="${CARTRIDGES_DIR:-/home/vo43/cartridges}"
+DATA_DIR="${DATA_DIR:-${CARTRIDGES_DIR}/examples/longhealth}"
+HF_NS="${HF_NS:-qtris123}"
+
+# Match init_kvcache.sh default (REPO_ROOT, not CARTRIDGES_DIR) so BUILD_INIT_CACHES=1 and EXPERIMENTS agree.
+LONGHEALTH_CACHE_DIR="${LONGHEALTH_CACHE_DIR:-${REPO_ROOT}/examples/longhealth/outputs/init_caches}"
 
 CARTRIDGES_OUTPUT_DIR="${CARTRIDGES_OUTPUT_DIR:-${CARTRIDGES_DIR}/outputs}"
-EXPERIMENT_NAME="${EXPERIMENT_NAME:-cross-eval_longhealth-AvB}"
+EXPERIMENT_NAME="${EXPERIMENT_NAME:-cross-eval_longhealth}"
 RUN_ROOT="${CARTRIDGES_OUTPUT_DIR}/${EXPERIMENT_NAME}_${SLURM_JOB_ID:-$$}"
 
+BACKEND="${BACKEND:-local}"
 DP_SIZE="${DP_SIZE:-2}"
 HF_CARTRIDGE_FILENAME="${HF_CARTRIDGE_FILENAME:-cache_last.pt}"
-COT="${COT:-0}"
-NUM_EVAL_QUESTIONS="${NUM_EVAL_QUESTIONS:-20}"
+COT="${COT:-1}"
+#NUM_EVAL_QUESTIONS="${NUM_EVAL_QUESTIONS:-20}"
+#MAX_ANSWER_SCAN_TOKENS="${MAX_ANSWER_SCAN_TOKENS:-256}"
 DEBUG="${DEBUG:-0}"
 TOKA_PORT="${TOKA_PORT:-10210}"
 
+# Set to 1 once to build init caches under LONGHEALTH_CACHE_DIR (explicit commands in init_kvcache.sh).
+BUILD_INIT_CACHES="${BUILD_INIT_CACHES:-1}"
+
 # =============================================================================
-# Experiment definitions — edit these directly
-# Format: MODEL | CARTRIDGE_1 CARTRIDGE_2 ... | DATASET_1 DATASET_2 ... | LABEL
+# Optional: build step-0 caches before experiments (no loops here; commands live in init_kvcache.sh)
+# =============================================================================
+if [[ "$BUILD_INIT_CACHES" == "1" ]]; then
+  echo "========== BUILD_INIT_CACHES=1: running init_kvcache.sh =========="
+  export LONGHEALTH_CACHE_DIR
+  bash "${SCRIPT_DIR}/init_kvcache.sh"
+  echo "========== Init caches done =========="
+fi
+
+# =============================================================================
+# Experiment definitions — edit manually (no generated loops)
+# Format: MODEL | CARTRIDGE_1 ... | DATASET_1 ... | LABEL
 # =============================================================================
 EXPERIMENTS=(
-  # --- Qwen, 512 ---
-  "Qwen/Qwen3-4B-Instruct-2507 | ${HF_NS}/qwen2507_longhealth-p1-10_8192_512_no-cartridge_10-epochs ${HF_NS}/qwen2507_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_512 | ${DATA_DIR}/longhealth_patient1_10-mcq.csv:mcq ${DATA_DIR}/longhealth_patient11_20-mcq.csv:mcq | qwen2507_512_mcq"
-  "Qwen/Qwen3-4B-Instruct-2507 | ${HF_NS}/qwen2507_longhealth-p1-10_8192_512_no-cartridge_10-epochs ${HF_NS}/qwen2507_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_512 | ${DATA_DIR}/longhealth_patient1_10-yes-no.csv:yes_no ${DATA_DIR}/longhealth_patient11_20-yes-no.csv:yes_no | qwen2507_512_yes-no"
-  # --- Qwen, 1024 ---
-  "Qwen/Qwen3-4B-Instruct-2507 | ${HF_NS}/qwen2507_longhealth-p1-10_8192_1024_no-cartridge_10-epochs ${HF_NS}/qwen2507_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_1024 | ${DATA_DIR}/longhealth_patient1_10-mcq.csv:mcq ${DATA_DIR}/longhealth_patient11_20-mcq.csv:mcq | qwen2507_1024_mcq"
-  "Qwen/Qwen3-4B-Instruct-2507 | ${HF_NS}/qwen2507_longhealth-p1-10_8192_1024_no-cartridge_10-epochs ${HF_NS}/qwen2507_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_1024 | ${DATA_DIR}/longhealth_patient1_10-yes-no.csv:yes_no ${DATA_DIR}/longhealth_patient11_20-yes-no.csv:yes_no | qwen2507_1024_yes-no"
-  # --- Qwen, 2048 ---
-  "Qwen/Qwen3-4B-Instruct-2507 | ${HF_NS}/qwen2507_longhealth-p1-10_8192_2048_no-cartridge_10-epochs ${HF_NS}/qwen2507_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_2048 | ${DATA_DIR}/longhealth_patient1_10-mcq.csv:mcq ${DATA_DIR}/longhealth_patient11_20-mcq.csv:mcq | qwen2507_2048_mcq"
-  "Qwen/Qwen3-4B-Instruct-2507 | ${HF_NS}/qwen2507_longhealth-p1-10_8192_2048_no-cartridge_10-epochs ${HF_NS}/qwen2507_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_2048 | ${DATA_DIR}/longhealth_patient1_10-yes-no.csv:yes_no ${DATA_DIR}/longhealth_patient11_20-yes-no.csv:yes_no | qwen2507_2048_yes-no"
-
-  # --- Llama, 512 ---
-  "meta-llama/Llama-3.2-3B-Instruct | ${HF_NS}/llama_longhealth-p1-10_8192_512_no-cartridge_10-epochs ${HF_NS}/llama_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_512 | ${DATA_DIR}/longhealth_patient1_10-mcq.csv:mcq ${DATA_DIR}/longhealth_patient11_20-mcq.csv:mcq | llama_512_mcq"
-  "meta-llama/Llama-3.2-3B-Instruct | ${HF_NS}/llama_longhealth-p1-10_8192_512_no-cartridge_10-epochs ${HF_NS}/llama_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_512 | ${DATA_DIR}/longhealth_patient1_10-yes-no.csv:yes_no ${DATA_DIR}/longhealth_patient11_20-yes-no.csv:yes_no | llama_512_yes-no"
-  # --- Llama, 1024 ---
-  "meta-llama/Llama-3.2-3B-Instruct | ${HF_NS}/llama_longhealth-p1-10_8192_1024_no-cartridge_10-epochs ${HF_NS}/llama_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_1024 | ${DATA_DIR}/longhealth_patient1_10-mcq.csv:mcq ${DATA_DIR}/longhealth_patient11_20-mcq.csv:mcq | llama_1024_mcq"
-  "meta-llama/Llama-3.2-3B-Instruct | ${HF_NS}/llama_longhealth-p1-10_8192_1024_no-cartridge_10-epochs ${HF_NS}/llama_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_1024 | ${DATA_DIR}/longhealth_patient1_10-yes-no.csv:yes_no ${DATA_DIR}/longhealth_patient11_20-yes-no.csv:yes_no | llama_1024_yes-no"
-  # --- Llama, 2048 ---
-  "meta-llama/Llama-3.2-3B-Instruct | ${HF_NS}/llama_longhealth-p1-10_8192_2048_no-cartridge_10-epochs ${HF_NS}/llama_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_2048 | ${DATA_DIR}/longhealth_patient1_10-mcq.csv:mcq ${DATA_DIR}/longhealth_patient11_20-mcq.csv:mcq | llama_2048_mcq"
-  "meta-llama/Llama-3.2-3B-Instruct | ${HF_NS}/llama_longhealth-p1-10_8192_2048_no-cartridge_10-epochs ${HF_NS}/llama_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_2048 | ${DATA_DIR}/longhealth_patient1_10-yes-no.csv:yes_no ${DATA_DIR}/longhealth_patient11_20-yes-no.csv:yes_no | llama_2048_yes-no"
+  # --- Example: local backend, one cartridge .pt, one eval file ---
+  # Qwen 512
+  "Qwen/Qwen3-4B-Instruct-2507 | ${LONGHEALTH_CACHE_DIR}/qwen3_512_init_cache_last.pt | ${DATA_DIR}/longhealth_patient1_10-mcq.csv:mcq | local_qwen512_mcq_p1"
+  "Qwen/Qwen3-4B-Instruct-2507 | ${LONGHEALTH_CACHE_DIR}/qwen3_512_init_cache_last.pt | ${DATA_DIR}/longhealth_patient1_10-yes-no.csv:yes_no | local_qwen512_yes-no_p1"
+  # Qwen 1024
+  "Qwen/Qwen3-4B-Instruct-2507 | ${LONGHEALTH_CACHE_DIR}/qwen3_1024_init_cache_last.pt | ${DATA_DIR}/longhealth_patient1_10-mcq.csv:mcq | local_qwen1024_mcq_p1"
+  "Qwen/Qwen3-4B-Instruct-2507 | ${LONGHEALTH_CACHE_DIR}/qwen3_1024_init_cache_last.pt | ${DATA_DIR}/longhealth_patient1_10-yes-no.csv:yes_no | local_qwen1024_yes-no_p1"
+  # Qwen 2048
+  "Qwen/Qwen3-4B-Instruct-2507 | ${LONGHEALTH_CACHE_DIR}/qwen3_2048_init_cache_last.pt | ${DATA_DIR}/longhealth_patient1_10-mcq.csv:mcq | local_qwen2048_mcq_p1"
+  "Qwen/Qwen3-4B-Instruct-2507 | ${LONGHEALTH_CACHE_DIR}/qwen3_2048_init_cache_last.pt | ${DATA_DIR}/longhealth_patient1_10-yes-no.csv:yes_no | local_qwen2048_yes-no_p1"
+  # Llama 512 (HF id uses meta-llama, not meta_llama)
+  "meta-llama/Llama-3.2-3B-Instruct | ${LONGHEALTH_CACHE_DIR}/llama_512_init_cache_last.pt | ${DATA_DIR}/longhealth_patient1_10-mcq.csv:mcq | local_llama512_mcq_p1"
+  "meta-llama/Llama-3.2-3B-Instruct | ${LONGHEALTH_CACHE_DIR}/llama_512_init_cache_last.pt | ${DATA_DIR}/longhealth_patient1_10-yes-no.csv:yes_no | local_llama512_yes-no_p1"
+  # Llama 1024
+  "meta-llama/Llama-3.2-3B-Instruct | ${LONGHEALTH_CACHE_DIR}/llama_1024_init_cache_last.pt | ${DATA_DIR}/longhealth_patient1_10-mcq.csv:mcq | local_llama1024_mcq_p1"
+  "meta-llama/Llama-3.2-3B-Instruct | ${LONGHEALTH_CACHE_DIR}/llama_1024_init_cache_last.pt | ${DATA_DIR}/longhealth_patient1_10-yes-no.csv:yes_no | local_llama1024_yes-no_p1"
+  # Llama 2048
+  "meta-llama/Llama-3.2-3B-Instruct | ${LONGHEALTH_CACHE_DIR}/llama_2048_init_cache_last.pt | ${DATA_DIR}/longhealth_patient1_10-mcq.csv:mcq | local_llama2048_mcq_p1"
+  "meta-llama/Llama-3.2-3B-Instruct | ${LONGHEALTH_CACHE_DIR}/llama_2048_init_cache_last.pt | ${DATA_DIR}/longhealth_patient1_10-yes-no.csv:yes_no | local_llama2048_yes-no_p1"
 )
 
 mkdir -p "${RUN_ROOT}"
 
 echo "=========================================="
-echo "Cross-Evaluation: Longhealth A vs B"
+echo "Longhealth cartridge eval (BACKEND=${BACKEND})"
 echo "=========================================="
 echo "JobID=${SLURM_JOB_ID:-local}"
 echo "Cluster=${SLURM_CLUSTER_NAME:-local}"
 echo "Node/Server=$(hostname)"
 echo "Started at: $(date)"
 echo "RUN_ROOT=${RUN_ROOT}"
+echo "LONGHEALTH_CACHE_DIR=${LONGHEALTH_CACHE_DIR}"
 echo "Total experiments: ${#EXPERIMENTS[@]}"
 echo ""
 
-# --- Load modules ---
 if command -v module >/dev/null 2>&1; then
   module load gcc/11.4.1 2>/dev/null || true
   module load cuda/12.1.0 2>/dev/null || true
@@ -89,7 +117,6 @@ else
   echo "(nvidia-smi not found)"
 fi
 
-# --- GPU monitoring ---
 GPU_LOG="${RUN_ROOT}/gpu_usage.log"
 echo "=== GPU monitor started: $(date) on $(hostname) ===" >"$GPU_LOG"
 (
@@ -105,14 +132,14 @@ GPU_MON_PID=$!
 cleanup() {
   echo ""
   echo "Cleaning up..."
-  if [ -n "${TOKA_PID:-}" ]; then
+  if [[ "$BACKEND" == "tokasaurus" ]] && [[ -n "${TOKA_PID:-}" ]]; then
     echo "Stopping toka server (PID=${TOKA_PID}) and children..."
     kill -- -"$TOKA_PID" 2>/dev/null || true
     pkill -KILL -P "$TOKA_PID" 2>/dev/null || true
     kill -KILL "$TOKA_PID" 2>/dev/null || true
     wait "$TOKA_PID" 2>/dev/null || true
   fi
-  if [ -n "${GPU_MON_PID:-}" ]; then
+  if [[ -n "${GPU_MON_PID:-}" ]]; then
     kill "$GPU_MON_PID" 2>/dev/null || true
     wait "$GPU_MON_PID" 2>/dev/null || true
   fi
@@ -120,21 +147,21 @@ cleanup() {
 }
 trap cleanup EXIT
 
-# --- Activate conda ---
-source $(conda info --base)/etc/profile.d/conda.sh
+source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate cartridges
 echo "Python: $(which python3)"
 echo ""
 
-# --- Build optional args ---
 COMMON_ARGS=()
 [[ "$COT" == "1" ]] && COMMON_ARGS+=(--cot)
 [[ -n "${HF_USERNAME:-}" ]] && COMMON_ARGS+=(--hf-username "$HF_USERNAME")
 [[ "$DEBUG" == "1" ]] && COMMON_ARGS+=(--debug)
 
-# =============================================================================
-# Helper: start toka server for a given model, wait until healthy
-# =============================================================================
+CARTRIDGE_EVAL_PY="${CARTRIDGE_EVAL_PY:-${CARTRIDGES_DIR}/examples/longhealth/experiments/cartridge_eval.py}"
+if [[ ! -f "$CARTRIDGE_EVAL_PY" ]]; then
+  CARTRIDGE_EVAL_PY="${REPO_ROOT}/examples/longhealth/experiments/cartridge_eval.py"
+fi
+
 start_toka_server() {
   local model="$1"
   echo ""
@@ -152,7 +179,7 @@ start_toka_server() {
       echo "ERROR: toka server died unexpectedly" >&2
       exit 1
     fi
-    if [ "$waited" -ge "$max_wait" ]; then
+    if [[ "$waited" -ge "$max_wait" ]]; then
       echo "ERROR: toka server not ready within ${max_wait}s" >&2
       exit 1
     fi
@@ -162,67 +189,57 @@ start_toka_server() {
   echo "  Server ready (took ~${waited}s)"
 }
 
-# =============================================================================
-# Helper: stop toka server
-# =============================================================================
 stop_toka_server() {
-  if [ -n "${TOKA_PID:-}" ]; then
+  if [[ -n "${TOKA_PID:-}" ]]; then
     echo "  Stopping toka server (PID=${TOKA_PID}) and all child workers..."
-    # Kill entire process group (parent + GPU worker children)
     kill -- -"$TOKA_PID" 2>/dev/null || true
-    # Fallback: kill any remaining children directly
     pkill -KILL -P "$TOKA_PID" 2>/dev/null || true
     kill -KILL "$TOKA_PID" 2>/dev/null || true
     wait "$TOKA_PID" 2>/dev/null || true
     TOKA_PID=""
 
-    # Wait for GPU memory to actually be released
     echo "  Waiting for GPU memory to free..."
     local gpu_wait=0
-    while [ "$gpu_wait" -lt 60 ]; do
+    while [[ "$gpu_wait" -lt 60 ]]; do
       local mem_used
       mem_used=$(nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits 2>/dev/null \
                  | awk '{s+=$1} END {print int(s)}')
-      if [ "${mem_used:-99999}" -lt 1000 ]; then
+      if [[ "${mem_used:-99999}" -lt 1000 ]]; then
         echo "  GPU memory freed (~${mem_used} MiB in use)"
         break
       fi
       sleep 2
       gpu_wait=$((gpu_wait + 2))
     done
-    if [ "$gpu_wait" -ge 60 ]; then
+    if [[ "$gpu_wait" -ge 60 ]]; then
       echo "  WARNING: GPU memory still in use after 60s, proceeding anyway"
     fi
   fi
 }
 
-# =============================================================================
-# Main experiment loop
-# =============================================================================
 TOTAL_EXPERIMENTS=${#EXPERIMENTS[@]}
 EXPERIMENT_NUM=0
 CURRENT_MODEL=""
 
 for ENTRY in "${EXPERIMENTS[@]}"; do
-  # Parse pipe-delimited fields
-  IFS='|' read -r EXP_MODEL EXP_CARTRIDGES EXP_DATASETS EXP_LABEL <<< "$ENTRY"
+  [[ -z "${ENTRY// }" ]] && continue
+  [[ "$ENTRY" =~ ^[[:space:]]*# ]] && continue
 
-  # Trim whitespace
+  IFS='|' read -r EXP_MODEL EXP_CARTRIDGES EXP_DATASETS EXP_LABEL <<< "$ENTRY"
   EXP_MODEL=$(echo "$EXP_MODEL" | xargs)
   EXP_CARTRIDGES=$(echo "$EXP_CARTRIDGES" | xargs)
   EXP_DATASETS=$(echo "$EXP_DATASETS" | xargs)
   EXP_LABEL=$(echo "$EXP_LABEL" | xargs)
 
-  # Restart server if model changed
-  if [[ "$EXP_MODEL" != "$CURRENT_MODEL" ]]; then
-    stop_toka_server
-    start_toka_server "$EXP_MODEL"
-    CURRENT_MODEL="$EXP_MODEL"
+  if [[ "$BACKEND" == "tokasaurus" ]]; then
+    if [[ "$EXP_MODEL" != "$CURRENT_MODEL" ]]; then
+      stop_toka_server
+      start_toka_server "$EXP_MODEL"
+      CURRENT_MODEL="$EXP_MODEL"
+    fi
   fi
 
   EXPERIMENT_NUM=$((EXPERIMENT_NUM + 1))
-
-  # Split into arrays
   read -ra CARTRIDGE_ARR <<< "$EXP_CARTRIDGES"
   read -ra DATASET_ARR <<< "$EXP_DATASETS"
 
@@ -232,33 +249,50 @@ for ENTRY in "${EXPERIMENTS[@]}"; do
   echo ""
   echo "══════════════════════════════════════════"
   echo "  Experiment ${EXPERIMENT_NUM}/${TOTAL_EXPERIMENTS}: ${EXP_LABEL}"
+  echo "  Backend:    ${BACKEND}"
   echo "  Model:      ${EXP_MODEL}"
   echo "  Cartridges: ${CARTRIDGE_ARR[*]}"
   echo "  Datasets:   ${DATASET_ARR[*]}"
   echo "  Output:     ${EXP_DIR}"
   echo "══════════════════════════════════════════"
 
-  python3 "${CARTRIDGES_DIR}/examples/longhealth/experiments/cartridge_eval.py" \
-    --backend tokasaurus \
-    --url "$URL" \
-    --cartridges "${CARTRIDGE_ARR[@]}" \
-    --datasets "${DATASET_ARR[@]}" \
-    --model "$EXP_MODEL" \
-    --output-dir "$EXP_DIR" \
-    "${COMMON_ARGS[@]}" \
-    --max-answer-scan-tokens "$MAX_ANSWER_SCAN_TOKENS" \
-    --num-eval-questions "$NUM_EVAL_QUESTIONS" \
-    --top-logprobs 20 \
-    --batch-size 5
+  if [[ "$BACKEND" == "tokasaurus" ]]; then
+    python3 "$CARTRIDGE_EVAL_PY" \
+      --backend tokasaurus \
+      --url "$URL" \
+      --cartridges "${CARTRIDGE_ARR[@]}" \
+      --datasets "${DATASET_ARR[@]}" \
+      --model "$EXP_MODEL" \
+      --output-dir "$EXP_DIR" \
+      "${COMMON_ARGS[@]}" \
+      #--max-answer-scan-tokens "$MAX_ANSWER_SCAN_TOKENS" \
+      #--num-eval-questions "$NUM_EVAL_QUESTIONS" \
+      --hf-cartridge-filename "$HF_CARTRIDGE_FILENAME" \
+      --top-logprobs 20 \
+      --batch-size 5
+  else
+    python3 "$CARTRIDGE_EVAL_PY" \
+      --backend local \
+      --cartridges "${CARTRIDGE_ARR[@]}" \
+      --datasets "${DATASET_ARR[@]}" \
+      --model "$EXP_MODEL" \
+      --output-dir "$EXP_DIR" \
+      "${COMMON_ARGS[@]}" \
+      #--max-answer-scan-tokens "$MAX_ANSWER_SCAN_TOKENS" \
+      #--num-eval-questions "$NUM_EVAL_QUESTIONS" \
+      --hf-cartridge-filename "$HF_CARTRIDGE_FILENAME"
+  fi
 
   echo "  ✓ Experiment ${EXPERIMENT_NUM} complete"
 done
 
-stop_toka_server
+if [[ "$BACKEND" == "tokasaurus" ]]; then
+  stop_toka_server
+fi
 
 echo ""
 echo "=========================================="
-echo "All ${TOTAL_EXPERIMENTS} experiments complete!"
+echo "All ${TOTAL_EXPERIMENTS} experiment line(s) complete!"
 echo "Results in: ${RUN_ROOT}"
 echo "Finished at: $(date)"
 echo "=========================================="
