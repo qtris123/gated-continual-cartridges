@@ -1,0 +1,12 @@
+{
+  "model": "llama-3.2-3b-instruct",
+  "cache_a_donor": "/home/vo43/cartridges/experiments_longhealth/cartridges_pt/llama_2048_p1/cache_last.pt",
+  "cache_b_base": "/home/vo43/cartridges/experiments_longhealth/cartridges_pt/llama_2048_p1_cache_last.pt",
+  "eval_name": "longhealth",
+  "eval_path": "/home/vo43/cartridges/experiments_longhealth/longhealth_patient1_10_og.parquet",
+  "base_nll": 4.22407865524292,
+  "donor_nll": 3.9320425987243652,
+  "n_slots": 2047,
+  "num_layers": 28,
+  "elapsed_sec": 1862.1131641864777
+}

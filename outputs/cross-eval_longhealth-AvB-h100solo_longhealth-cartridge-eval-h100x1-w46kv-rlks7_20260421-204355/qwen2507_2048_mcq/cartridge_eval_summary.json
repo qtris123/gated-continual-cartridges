@@ -1,0 +1,230 @@
+[
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p1-10_8192_2048_no-cartridge_10-epochs",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient1_10-mcq.csv",
+    "dataset_type": "mcq",
+    "num_total": 200,
+    "num_answered": 128,
+    "num_unanswered": 72,
+    "num_correct": 61,
+    "accuracy": 0.4765625,
+    "avg_gt_answer_logprob": -6.090474497967672,
+    "avg_gt_answer_perplexity": 3136040500.159258,
+    "num_gt_missing_from_topk": 6,
+    "gt_missing_from_topk": [
+      {
+        "idx": 39,
+        "question": "Which of the following is NOT one of the patient's diagnoses?",
+        "question_type": "mcq",
+        "reference_answer": "Insulin-dependent diabetes mellitus type I",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 72,
+        "question": "Which of the following medications was given to the Mrs. Done for eczema treatment during the hospital stay from 10/23/2020 to 11/01/2020?",
+        "question_type": "mcq",
+        "reference_answer": "Desonide Cream",
+        "reference_answer_letter": "C",
+        "generated_answer": "D"
+      },
+      {
+        "idx": 97,
+        "question": "Which sequence correctly lists radiologic examinations Mrs. Anderson underwent in chronological order?",
+        "question_type": "mcq",
+        "reference_answer": "Foot X-ray > Shoulder X-ray > Right ankle X-ray > Chest/abdomen/pelvis CT > Ultrasound > Abdominal MRI  > CT stagings  > Chest X-rays > CT Chest/Abdomen/Pelvis with contrast",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 101,
+        "question": "Mrs. Anderson's tumor marker Ca19-9 levels in September 2021 were:",
+        "question_type": "mcq",
+        "reference_answer": "575 U/ml.",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 124,
+        "question": "Considering Mr. John Williams's treatment journey for his Multiple Myeloma condition, which of the following sequences regarding his treatment chronology is correct?",
+        "question_type": "mcq",
+        "reference_answer": "Received radiation to Th4 and the thoracic rib in August 2018, underwent three cycles of Pomalidomide, Doxorubicin, and Dexamethasone between August and October 2018, and then received four treatments of Daratumumab, Lenalidomide, and Dexamethasone from November 2018 to February 2019.",
+        "reference_answer_letter": "B",
+        "generated_answer": "D"
+      },
+      {
+        "idx": 145,
+        "question": "What was NOT observed in Mr. Williams' bone marrow biopsy microscopic examination?",
+        "question_type": "mcq",
+        "reference_answer": "Atypical proliferation of plasma cells",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p1-10_8192_2048_no-cartridge_10-epochs",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient11_20-mcq.csv",
+    "dataset_type": "mcq",
+    "num_total": 200,
+    "num_answered": 126,
+    "num_unanswered": 74,
+    "num_correct": 45,
+    "accuracy": 0.35714285714285715,
+    "avg_gt_answer_logprob": -6.897918445755755,
+    "avg_gt_answer_perplexity": 202898401.25516006,
+    "num_gt_missing_from_topk": 7,
+    "gt_missing_from_topk": [
+      {
+        "idx": 52,
+        "question": "On which date was Mr. Chapman's ventriculoperitoneal shunt placed?",
+        "question_type": "mcq",
+        "reference_answer": "05/01/2017",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 58,
+        "question": "According to the reports, how long was Mr. Carter's initial intubation period?",
+        "question_type": "mcq",
+        "reference_answer": "From 09/30 to 10/13",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 85,
+        "question": "Which therapy was discontinued and replaced with Dexamethasone 10 mg upon the deterioration of Mr. Carter's oxygenation on 09/30/2021?",
+        "question_type": "mcq",
+        "reference_answer": "Prednisolone",
+        "reference_answer_letter": "B",
+        "generated_answer": "D"
+      },
+      {
+        "idx": 90,
+        "question": "Which of the following side effects did Mr. Harder not experience after his last treatment cycle as per the information provided?",
+        "question_type": "mcq",
+        "reference_answer": "Diarrhea",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 120,
+        "question": "How did Mr. Nilsson's calcium levels develop over the course of time?",
+        "question_type": "mcq",
+        "reference_answer": "Highest in July 2008",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 142,
+        "question": "Please select the correct chronological order of the radiological imaging studies Mr. Carter received:",
+        "question_type": "mcq",
+        "reference_answer": "CT chest < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Chest X-ray bedside < Abdominal ultrasound < Chest X-ray",
+        "reference_answer_letter": "A",
+        "generated_answer": "C"
+      },
+      {
+        "idx": 185,
+        "question": "Which medication caused a possible dose-dependent intolerance in Mr. Fisher?",
+        "question_type": "mcq",
+        "reference_answer": "Fluvastatin",
+        "reference_answer_letter": "A",
+        "generated_answer": "C"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_2048",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient1_10-mcq.csv",
+    "dataset_type": "mcq",
+    "num_total": 200,
+    "num_answered": 134,
+    "num_unanswered": 66,
+    "num_correct": 53,
+    "accuracy": 0.39552238805970147,
+    "avg_gt_answer_logprob": -6.896299369787398,
+    "avg_gt_answer_perplexity": 222126737.9760961,
+    "num_gt_missing_from_topk": 5,
+    "gt_missing_from_topk": [
+      {
+        "idx": 45,
+        "question": "What is the correct order of imaging tests performed for John Miller?",
+        "question_type": "mcq",
+        "reference_answer": "PET-MRI < cMRI < cMRI < PET-CT < PET-MRI < iMRI < cMRI < CT < PET-MRI < PET-MRI < iMRI < cMRI < cMRI < cMRI < cMRI",
+        "reference_answer_letter": "A",
+        "generated_answer": "C"
+      },
+      {
+        "idx": 85,
+        "question": "Which of the following best describes the TNM classification for Mrs. Linda Mayer's right breast condition after the surgery on 09/01/2019?",
+        "question_type": "mcq",
+        "reference_answer": "pTis (DCIS), R0, G3",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 98,
+        "question": "What condition necessitated Mr. Wells' home oxygen therapy?",
+        "question_type": "mcq",
+        "reference_answer": "Pulmonary Emphysema",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 127,
+        "question": "As of the consultation on 06/08/2020, what was Mrs. Miller's nutritional status?",
+        "question_type": "mcq",
+        "reference_answer": "Protein malnutrition",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 175,
+        "question": "What was the total duration of Mrs. Jane Done's hospital stay during her most recent admission?",
+        "question_type": "mcq",
+        "reference_answer": "15 days (02/14/2022 to 03/01/2022)",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_2048",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient11_20-mcq.csv",
+    "dataset_type": "mcq",
+    "num_total": 200,
+    "num_answered": 155,
+    "num_unanswered": 45,
+    "num_correct": 80,
+    "accuracy": 0.5161290322580645,
+    "avg_gt_answer_logprob": -5.36870259245677,
+    "avg_gt_answer_perplexity": 12632325.240333587,
+    "num_gt_missing_from_topk": 3,
+    "gt_missing_from_topk": [
+      {
+        "idx": 18,
+        "question": "Which of the following was NOT part of Mr. Fisher's medical history as of 2009?",
+        "question_type": "mcq",
+        "reference_answer": "Diabetic nephropathy",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 35,
+        "question": "What change in Mr. Carter's blood profile from November 2021 to February 2022 might suggest an improvement in his hepatic function?",
+        "question_type": "mcq",
+        "reference_answer": "Decrease in Gamma-GT from 200 U/L to 38 U/L",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 95,
+        "question": "Please select the correct chronological order of the radiology/nuclear medicine imaging studies Mr. Romero received:",
+        "question_type": "mcq",
+        "reference_answer": "Chest X-ray < Carotid Doppler Ultrasound < Myocardial Perfuson Scintigraphy < Chest X-ray in two planes",
+        "reference_answer_letter": "A",
+        "generated_answer": "C"
+      }
+    ]
+  }
+]

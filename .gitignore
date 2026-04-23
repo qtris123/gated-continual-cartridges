@@ -8,7 +8,12 @@ __pycache__/
 output/
 wandb/
 artifacts/
-outputs/
+outputs/**
+!outputs/
+!outputs/cross-eval_longhealth-AvB-h100solo_longhealth-cartridge-eval-h100x1-w46kv-rlks7_20260421-204355/
+!outputs/cross-eval_longhealth-AvB-h100solo_longhealth-cartridge-eval-h100x1-w46kv-rlks7_20260421-204355/**
+!outputs/swapping_20260422_185334_local/
+!outputs/swapping_20260422_185334_local/**
 _data/
 
 # C extensions
@@ -85,6 +90,11 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+
+AGENTS.md
+CLAUDE.md
+.claude/
+.codex/
 
 # IPython
 profile_default/

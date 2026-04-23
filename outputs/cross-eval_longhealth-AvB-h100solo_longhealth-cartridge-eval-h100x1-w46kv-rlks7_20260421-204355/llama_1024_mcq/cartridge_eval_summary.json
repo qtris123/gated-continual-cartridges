@@ -1,0 +1,366 @@
+[
+  {
+    "cartridge": "qtris123/llama_longhealth-p1-10_8192_1024_no-cartridge_10-epochs",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient1_10-mcq.csv",
+    "dataset_type": "mcq",
+    "num_total": 200,
+    "num_answered": 129,
+    "num_unanswered": 71,
+    "num_correct": 52,
+    "accuracy": 0.40310077519379844,
+    "avg_gt_answer_logprob": -3.180023282931948,
+    "avg_gt_answer_perplexity": 141611.27690203342,
+    "num_gt_missing_from_topk": 9,
+    "gt_missing_from_topk": [
+      {
+        "idx": 7,
+        "question": "What pathological finding was indicated in Mr. Rudolph's internal cytological report?",
+        "question_type": "mcq",
+        "reference_answer": "Altered nuclear plasma ratios",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 9,
+        "question": "Which of the following medications was NOT mentioned in Mr. Miller's report on admission in 2019?",
+        "question_type": "mcq",
+        "reference_answer": "Acetaminophen 500 mg",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 22,
+        "question": "What is the notable allergy Mrs. Mayer has?",
+        "question_type": "mcq",
+        "reference_answer": "Hay fever",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 24,
+        "question": "Which of the following is NOT a part of Mr. Rudolph's medical history?",
+        "question_type": "mcq",
+        "reference_answer": "Prostatectomy",
+        "reference_answer_letter": "A",
+        "generated_answer": "D"
+      },
+      {
+        "idx": 26,
+        "question": "Based on Mrs. Jane Done's hospital course, which of the following statements is accurate?",
+        "question_type": "mcq",
+        "reference_answer": "The patient has undergone empyema removal due to an infection following her resection of a right frontal tumor, which took place in February 2020",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 50,
+        "question": "What was the histopathological finding related to the gallbladder during the exploratory laparotomy performed in Mrs. Anderson?",
+        "question_type": "mcq",
+        "reference_answer": "Chronic cholecystitis.",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 125,
+        "question": "Regarding the therapeutic approach to Mr. Wells' HCC, what was the primary reason for the intermittent pause and resumption of Atezolizumab/Bevacizumab therapy?",
+        "question_type": "mcq",
+        "reference_answer": "Fluctuations in liver function tests indicating possible drug-induced hepatitis",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 126,
+        "question": "As of her discharge in September 2023, how was Mrs. Anderson's pleural effusion status?",
+        "question_type": "mcq",
+        "reference_answer": "Slightly increased at around 100-200ml/day but clinically stable",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 134,
+        "question": "As of the latest update, which therapy has NOT been administered to Mr. Rudolph?",
+        "question_type": "mcq",
+        "reference_answer": "Enfortumab Vedotin",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/llama_longhealth-p1-10_8192_1024_no-cartridge_10-epochs",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient11_20-mcq.csv",
+    "dataset_type": "mcq",
+    "num_total": 200,
+    "num_answered": 112,
+    "num_unanswered": 88,
+    "num_correct": 28,
+    "accuracy": 0.25,
+    "avg_gt_answer_logprob": -4.021638962014886,
+    "avg_gt_answer_perplexity": 195448.31404146776,
+    "num_gt_missing_from_topk": 12,
+    "gt_missing_from_topk": [
+      {
+        "idx": 10,
+        "question": "Which imaging study, done on 01/04/20, indicated progression of Mr. Hurley's tuberculosis?",
+        "question_type": "mcq",
+        "reference_answer": "Chest CT",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 23,
+        "question": "What was Mr. Davies' bone density T-score in the lumbar spine (L2-4) in his last measurement?",
+        "question_type": "mcq",
+        "reference_answer": "-0.2",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 39,
+        "question": "What condition did Mr. Chapman NOT have a history of prior to his admission on 04/03/2017?",
+        "question_type": "mcq",
+        "reference_answer": "Diabetes Mellitus",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 47,
+        "question": "What was Mr. Nilsson's weight and height in December 2021?",
+        "question_type": "mcq",
+        "reference_answer": "47 kg and 169 cm",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 56,
+        "question": "What therapy was initiated in Mr. Carter on 09/30/2021 due to radiological suspicion of atypical pneumonia?",
+        "question_type": "mcq",
+        "reference_answer": "Piperacillin/Tazobactam, Clarithromycin, and Cotrimoxazole",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 94,
+        "question": "Which medication was Mr. Carter taking upon admission for bronchial asthma?",
+        "question_type": "mcq",
+        "reference_answer": "Montelukast",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 106,
+        "question": "What medication was added to Mr. Romero's regimen after the angiography revealed diffuse coronary atherosclerosis?",
+        "question_type": "mcq",
+        "reference_answer": "Ranolazine",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 121,
+        "question": "When was Mr. Fisher first admitted with urosepsis and acute postrenal kidney failure?",
+        "question_type": "mcq",
+        "reference_answer": "2018",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 130,
+        "question": "What condition was observed in Mr. Nilsson's liver during sonography?",
+        "question_type": "mcq",
+        "reference_answer": "Chronic liver congestion",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 151,
+        "question": "What was a concerning lab finding in Mr. Davies during his 2009 hospital stay?",
+        "question_type": "mcq",
+        "reference_answer": "Elevated creatinine",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 169,
+        "question": "What was the finding in Mr. Davies' abdominal sonography as of the last report?",
+        "question_type": "mcq",
+        "reference_answer": "Minimal liver enlargement without steatosis",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 188,
+        "question": "What was the new diagnosis added to Mr. Romero's medical history as of 05/04/2016?",
+        "question_type": "mcq",
+        "reference_answer": "Type 2 diabetes mellitus",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/llama_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_1024",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient1_10-mcq.csv",
+    "dataset_type": "mcq",
+    "num_total": 200,
+    "num_answered": 102,
+    "num_unanswered": 98,
+    "num_correct": 32,
+    "accuracy": 0.3137254901960784,
+    "avg_gt_answer_logprob": -3.1904388052331885,
+    "avg_gt_answer_perplexity": 16067.459728244248,
+    "num_gt_missing_from_topk": 8,
+    "gt_missing_from_topk": [
+      {
+        "idx": 27,
+        "question": "What surgical steps were taken in Mrs. Done  during the neck dissection procedure performed on 01/05/2021?",
+        "question_type": "mcq",
+        "reference_answer": "The auricularis magnus nerve was severed, the accessory nerve was preserved.",
+        "reference_answer_letter": "C",
+        "generated_answer": "D"
+      },
+      {
+        "idx": 34,
+        "question": "Which molecular pathological finding was technically not evaluable (immunohistochemical) for Mr. Miller?",
+        "question_type": "mcq",
+        "reference_answer": "p53",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 38,
+        "question": "Based on the clinical history of Mr. John Williams, which of the following statements is accurate?",
+        "question_type": "mcq",
+        "reference_answer": "Mr. Williams presented with symptoms of fatigue, shortness of breath, and bilateral pitting edema in the lower extremities in November 2022. Preliminary findings included a reduced LVEF of 35%, elevated BNP levels, and an echocardiogram showing mild mitral regurgitation.",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 76,
+        "question": "Based on the immunohistochemical additional findings in Mr. Williams, what percentage of blast cells were positive for CD34 and CD117?",
+        "question_type": "mcq",
+        "reference_answer": "Below 5%",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 97,
+        "question": "Which sequence correctly lists radiologic examinations Mrs. Anderson underwent in chronological order?",
+        "question_type": "mcq",
+        "reference_answer": "Foot X-ray > Shoulder X-ray > Right ankle X-ray > Chest/abdomen/pelvis CT > Ultrasound > Abdominal MRI  > CT stagings  > Chest X-rays > CT Chest/Abdomen/Pelvis with contrast",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 100,
+        "question": "Which method was employed for Mr. Miller's radiotherapy?",
+        "question_type": "mcq",
+        "reference_answer": "Both a) and d)",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 158,
+        "question": "Regarding the molecular pathology report, which of the following statements is true for Mrs. Sample?",
+        "question_type": "mcq",
+        "reference_answer": "No evidence of t(14;18) translocation",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 185,
+        "question": "Regarding Mrs. Done, what histopathological diagnosis was provided for the excised melanoma on 02/23/2018?",
+        "question_type": "mcq",
+        "reference_answer": "Exophytic, ulcerated malignant melanoma with a tumor thickness of at least 15 mm",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/llama_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_1024",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient11_20-mcq.csv",
+    "dataset_type": "mcq",
+    "num_total": 200,
+    "num_answered": 138,
+    "num_unanswered": 62,
+    "num_correct": 49,
+    "accuracy": 0.35507246376811596,
+    "avg_gt_answer_logprob": -3.096567271033751,
+    "avg_gt_answer_perplexity": 188590.01100657327,
+    "num_gt_missing_from_topk": 9,
+    "gt_missing_from_topk": [
+      {
+        "idx": 36,
+        "question": "During Mr. Chapman's stay from 05/25/2019 to 05/26/2019, what was the indication for angiography?",
+        "question_type": "mcq",
+        "reference_answer": "Pseudoaneurysm of the left ICA",
+        "reference_answer_letter": "A",
+        "generated_answer": "B"
+      },
+      {
+        "idx": 40,
+        "question": "Regarding Mr. Harder, what was the correct chronological order of radiological and nuclear medicine imaging studies?",
+        "question_type": "mcq",
+        "reference_answer": "PSMA PET-CT + MRI < Cystogram < Ultrasound < Cystogram < Ultrasound of the abdomen < CT scan abdomen/pelvis < MRI lumbar spine < CT scan < PSMA PET-CT  <  CT scan chest/abdomen < PSMA PET scan < CT scan chest/abdomen < PSMA PET scan",
+        "reference_answer_letter": "D",
+        "generated_answer": "C"
+      },
+      {
+        "idx": 44,
+        "question": "What was the finding regarding Mr. Nilsson's aortic valve during the cardiac catheterization?",
+        "question_type": "mcq",
+        "reference_answer": "Atretic",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 77,
+        "question": "What was the result of Mrs. Sanders' capsule endoscopy in 2023?",
+        "question_type": "mcq",
+        "reference_answer": "Hyperemia and blurry vascular pattern",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 78,
+        "question": "Which of the following was NOT a finding in Mr. Romero's myocardial biopsy on 01/27/2014?",
+        "question_type": "mcq",
+        "reference_answer": "Evidence of acute inflammation-associated myocardial cell necrosis",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 151,
+        "question": "What was a concerning lab finding in Mr. Davies during his 2009 hospital stay?",
+        "question_type": "mcq",
+        "reference_answer": "Elevated creatinine",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 154,
+        "question": "What was the initial RASS score for Mr. Chapman upon admission on 04/03/2017?",
+        "question_type": "mcq",
+        "reference_answer": "-4",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 158,
+        "question": "Which medication is NOT part of Mr. Hurley's post-transplantation regimen?",
+        "question_type": "mcq",
+        "reference_answer": "Methotrexate",
+        "reference_answer_letter": "A",
+        "generated_answer": "C"
+      },
+      {
+        "idx": 174,
+        "question": "Which of the following sequences accurately represents the chronological order of key medical events and treatments for Mr. Bruno Hurley since his initial hospitalization in October 2019?",
+        "question_type": "mcq",
+        "reference_answer": "Hospitalization for neutropenic fever (10/2019) \u2192 Diagnosis of tuberculosis and initiation of four-drug anti-tuberculosis therapy (11/08/19) \u2192 First detection of acid-fast bacilli in sputum (01/02/20) \u2192 Secondary AML diagnosis (01/2021) \u2192 Start of Actimmune\u00ae injections (01/2021) \u2192 Allogeneic stem cell transplantation (07/2021).",
+        "reference_answer_letter": "A",
+        "generated_answer": "B"
+      }
+    ]
+  }
+]

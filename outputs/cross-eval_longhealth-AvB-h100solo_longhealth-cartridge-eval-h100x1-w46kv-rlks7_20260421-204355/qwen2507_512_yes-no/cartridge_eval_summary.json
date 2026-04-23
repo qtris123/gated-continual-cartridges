@@ -1,0 +1,140 @@
+[
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p1-10_8192_512_no-cartridge_10-epochs",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient1_10-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 97,
+    "num_unanswered": 303,
+    "num_correct": 54,
+    "accuracy": 0.5567010309278351,
+    "avg_gt_answer_logprob": -6.76410919847674,
+    "avg_gt_answer_perplexity": 162787876.7212217,
+    "num_gt_missing_from_topk": 4,
+    "gt_missing_from_topk": [
+      {
+        "idx": 100,
+        "question": "Was chronic cholecystitis the histopathological finding related to the gallbladder during the exploratory laparotomy performed in Mrs. Anderson?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 118,
+        "question": "Was a 4mm hyperplastic polyp found and removed from Mr. Wells' sigmoid colon during the colonoscopy on 07/28/2019?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 237,
+        "question": "Was Mr. Rudolph's diagnostic ureterorenoscopy performed on 03/18/2019?",
+        "question_type": "yes_no",
+        "reference_answer": "No",
+        "reference_answer_letter": null,
+        "generated_answer": "Yes"
+      },
+      {
+        "idx": 329,
+        "question": "Did Mr. John Williams receive androgen blockade using Enantone for prostate carcinoma in August 2018?",
+        "question_type": "yes_no",
+        "reference_answer": "No",
+        "reference_answer_letter": null,
+        "generated_answer": "Yes"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p1-10_8192_512_no-cartridge_10-epochs",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient11_20-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 100,
+    "num_unanswered": 300,
+    "num_correct": 52,
+    "accuracy": 0.52,
+    "avg_gt_answer_logprob": -7.281601416755491,
+    "avg_gt_answer_perplexity": 101225597.10059501,
+    "num_gt_missing_from_topk": 6,
+    "gt_missing_from_topk": [
+      {
+        "idx": 4,
+        "question": "Did the histological examination after Mr. Fisher's right laparoscopic nephrectomy show no evidence of malignancy?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 146,
+        "question": "Was Mycobacterium tuberculosis last detected in Mr. Hurley's sputum as of 01/02/20?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 238,
+        "question": "Did Mr. Carter's Hemoglobin levels indicate a normalization trend from November 2021 to February 2022 but still remain below the reference range?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 270,
+        "question": "Was there a double dosing of Cyclosporin A during Mr. Fisher's hospitalization in April 2009?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 283,
+        "question": "Was amoxicillin the antibiotic therapy initiated in Mr. Chapman for suspected ventriculitis?",
+        "question_type": "yes_no",
+        "reference_answer": "No",
+        "reference_answer_letter": null,
+        "generated_answer": "Yes"
+      },
+      {
+        "idx": 309,
+        "question": "Was Mr. Chapman\u2019s initial RASS score upon admission on 04/03/2017 0?",
+        "question_type": "yes_no",
+        "reference_answer": "No",
+        "reference_answer_letter": null,
+        "generated_answer": "Yes"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_512",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient1_10-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 312,
+    "num_unanswered": 88,
+    "num_correct": 170,
+    "accuracy": 0.5448717948717948,
+    "avg_gt_answer_logprob": -6.139116880697061,
+    "avg_gt_answer_perplexity": 67548658.93617262,
+    "num_gt_missing_from_topk": 0,
+    "gt_missing_from_topk": []
+  },
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_512",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient11_20-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 330,
+    "num_unanswered": 70,
+    "num_correct": 194,
+    "accuracy": 0.5878787878787879,
+    "avg_gt_answer_logprob": -5.7085257240073535,
+    "avg_gt_answer_perplexity": 44633223.90666857,
+    "num_gt_missing_from_topk": 0,
+    "gt_missing_from_topk": []
+  }
+]

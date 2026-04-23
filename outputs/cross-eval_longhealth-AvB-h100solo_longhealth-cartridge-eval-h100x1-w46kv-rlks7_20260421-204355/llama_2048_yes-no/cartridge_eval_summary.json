@@ -1,0 +1,141 @@
+[
+  {
+    "cartridge": "qtris123/llama_longhealth-p1-10_8192_2048_no-cartridge_10-epochs",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient1_10-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 275,
+    "num_unanswered": 125,
+    "num_correct": 158,
+    "accuracy": 0.5745454545454546,
+    "avg_gt_answer_logprob": -2.3837734343007617,
+    "avg_gt_answer_perplexity": 3279.226101227225,
+    "num_gt_missing_from_topk": 2,
+    "gt_missing_from_topk": [
+      {
+        "idx": 134,
+        "question": "Was Esophagogastroduodenoscopy with banding therapy performed on Laura Miller on 08/21/2020?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 190,
+        "question": "Did Mrs. Laura Miller undergo the following imaging sequence: X-ray thoracic and lumbar spine < CT thoracic spine < MRI liver <  Chest X-ray < abdominal ultrasound < Chest X-ray < abdominal ultrasound < MRI total spine < MRI liver plain < Spine whole (X-ray) < Thoracix spine < CT Chest/Abdomen/Pelvis?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/llama_longhealth-p1-10_8192_2048_no-cartridge_10-epochs",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient11_20-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 205,
+    "num_unanswered": 195,
+    "num_correct": 110,
+    "accuracy": 0.5365853658536586,
+    "avg_gt_answer_logprob": -2.5648690822624074,
+    "avg_gt_answer_perplexity": 4967.388272923961,
+    "num_gt_missing_from_topk": 5,
+    "gt_missing_from_topk": [
+      {
+        "idx": 46,
+        "question": "Was Mr. Davies' bone density T-score in the lumbar spine (L2-4) measured at his last visit -0.2?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 186,
+        "question": "Did Mr. Carter's transesophageal echocardiogram on 11/26/2020 reveal hypokinesia of the RIVA area?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 198,
+        "question": "Did 9 out of 12 of Mr. Harder's biopsy samples show evidence of prostate cancer upon initial diagnosis?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 224,
+        "question": "Did Mr. Fisher's last cardiac catheterization on 03/24/2008 show 75% stenosis in D1 and occlusion of the small RCA?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 256,
+        "question": "Did Mr. Nilsson undergo the Damus-Kaye-Stansel Procedure for his heart condition?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/llama_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_2048",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient1_10-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 186,
+    "num_unanswered": 214,
+    "num_correct": 92,
+    "accuracy": 0.4946236559139785,
+    "avg_gt_answer_logprob": -2.7245131970515706,
+    "avg_gt_answer_perplexity": 8175.829579289555,
+    "num_gt_missing_from_topk": 3,
+    "gt_missing_from_topk": [
+      {
+        "idx": 4,
+        "question": "Did Mrs. Done show metastases in both the brain and the liver?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 8,
+        "question": "Was a 'Spine-whole in 2 planes' imaging performed on Laura Miller on 06/13/2020?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 252,
+        "question": "As of her discharge in September 2023, was Mrs. Anderson's pleural effusion status slightly increased at around 100-200ml/day but clinically stable?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/llama_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_2048",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient11_20-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 248,
+    "num_unanswered": 152,
+    "num_correct": 154,
+    "accuracy": 0.6209677419354839,
+    "avg_gt_answer_logprob": -1.9406656754303069,
+    "avg_gt_answer_perplexity": 2382.439744454287,
+    "num_gt_missing_from_topk": 0,
+    "gt_missing_from_topk": []
+  }
+]

@@ -1,0 +1,142 @@
+[
+  {
+    "cartridge": "qtris123/llama_longhealth-p1-10_8192_1024_no-cartridge_10-epochs",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient1_10-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 272,
+    "num_unanswered": 128,
+    "num_correct": 183,
+    "accuracy": 0.6727941176470589,
+    "avg_gt_answer_logprob": -1.7373599035375054,
+    "avg_gt_answer_perplexity": 1879.2913198607919,
+    "num_gt_missing_from_topk": 1,
+    "gt_missing_from_topk": [
+      {
+        "idx": 76,
+        "question": "Did Mr. John Williams present with symptoms of fatigue, shortness of breath, and bilateral pitting edema in the lower extremities in November 2022, with preliminary findings that included a reduced LVEF of 35%, elevated BNP levels, and an echocardiogram showing mild mitral regurgitation?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/llama_longhealth-p1-10_8192_1024_no-cartridge_10-epochs",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient11_20-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 232,
+    "num_unanswered": 168,
+    "num_correct": 119,
+    "accuracy": 0.5129310344827587,
+    "avg_gt_answer_logprob": -2.710564842373044,
+    "avg_gt_answer_perplexity": 3717.9472725584783,
+    "num_gt_missing_from_topk": 2,
+    "gt_missing_from_topk": [
+      {
+        "idx": 146,
+        "question": "Was Mycobacterium tuberculosis last detected in Mr. Hurley's sputum as of 01/02/20?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 298,
+        "question": "Was diminished breath sounds on the left base noted as a physical examination finding in Mr. Davies during his 2009 hospital stay?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/llama_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_1024",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient1_10-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 187,
+    "num_unanswered": 213,
+    "num_correct": 112,
+    "accuracy": 0.5989304812834224,
+    "avg_gt_answer_logprob": -2.1454067077014276,
+    "avg_gt_answer_perplexity": 2640.1046509650128,
+    "num_gt_missing_from_topk": 2,
+    "gt_missing_from_topk": [
+      {
+        "idx": 170,
+        "question": "Is the correct TNM classification for Mrs. Linda Mayer's right breast condition after the surgery on 09/01/2019 pTis (DCIS), R0, G3?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 286,
+        "question": "Did the MRI brain report dated 01/04/2020 for Mrs. Done primarily indicate post-surgical changes with no evidence of residual tumor at the surgical site?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/llama_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_1024",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient11_20-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 225,
+    "num_unanswered": 175,
+    "num_correct": 125,
+    "accuracy": 0.5555555555555556,
+    "avg_gt_answer_logprob": -2.3503187254778823,
+    "avg_gt_answer_perplexity": 5077.302837441267,
+    "num_gt_missing_from_topk": 5,
+    "gt_missing_from_topk": [
+      {
+        "idx": 28,
+        "question": "Was the QRS duration on Mr. Romero's ECG at discharge on 05/21/2023 122 ms?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 134,
+        "question": "Did Mr. Romero achieve a maximum workload of 150 watts during the stress echocardiography?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 186,
+        "question": "Did Mr. Carter's transesophageal echocardiogram on 11/26/2020 reveal hypokinesia of the RIVA area?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 248,
+        "question": "Was Candesartan NOT part of Mr. Harder's initial medication upon admission for prostate cancer treatment?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 300,
+        "question": "Did the histology report dated 03/18/2017 for Mr. Havers' tumor show 2 mitotic figures per 10 high-power fields?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      }
+    ]
+  }
+]
