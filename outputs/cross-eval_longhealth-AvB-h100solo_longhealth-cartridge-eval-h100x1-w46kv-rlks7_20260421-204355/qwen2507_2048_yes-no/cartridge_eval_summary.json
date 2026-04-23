@@ -1,0 +1,117 @@
+[
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p1-10_8192_2048_no-cartridge_10-epochs",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient1_10-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 211,
+    "num_unanswered": 189,
+    "num_correct": 129,
+    "accuracy": 0.6113744075829384,
+    "avg_gt_answer_logprob": -6.444787291291087,
+    "avg_gt_answer_perplexity": 142878303.6821285,
+    "num_gt_missing_from_topk": 2,
+    "gt_missing_from_topk": [
+      {
+        "idx": 198,
+        "question": "Was a cardiac stress test never performed in Mr. Williams?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 334,
+        "question": "Did Mr. John Miller's initial presentation include speech disturbances?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p1-10_8192_2048_no-cartridge_10-epochs",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient11_20-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 204,
+    "num_unanswered": 196,
+    "num_correct": 95,
+    "accuracy": 0.46568627450980393,
+    "avg_gt_answer_logprob": -7.735869736604675,
+    "avg_gt_answer_perplexity": 110891975.73011434,
+    "num_gt_missing_from_topk": 4,
+    "gt_missing_from_topk": [
+      {
+        "idx": 87,
+        "question": "Is Splenomegaly the initial imaging finding suggestive of tuberculosis in Mr. Hurley?",
+        "question_type": "yes_no",
+        "reference_answer": "No",
+        "reference_answer_letter": null,
+        "generated_answer": "Yes"
+      },
+      {
+        "idx": 275,
+        "question": "Did Mrs. Sanders receive her radiological imaging studies with CT chest scan before her first Abdominal Ultrasound?",
+        "question_type": "yes_no",
+        "reference_answer": "No",
+        "reference_answer_letter": null,
+        "generated_answer": "Yes"
+      },
+      {
+        "idx": 288,
+        "question": "Was Next-Generation Sequencing used to analyze the extracted RNA from Mr. Havers' tumor?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 318,
+        "question": "Did Mrs. Sanders' Gamma-Globulin in Serum percentage stay the same between the 10/09/2016 and 03/04/2017 lab results?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_2048",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient1_10-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 322,
+    "num_unanswered": 78,
+    "num_correct": 177,
+    "accuracy": 0.5496894409937888,
+    "avg_gt_answer_logprob": -6.452893213080892,
+    "avg_gt_answer_perplexity": 297758956.90700394,
+    "num_gt_missing_from_topk": 0,
+    "gt_missing_from_topk": []
+  },
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_2048",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient11_20-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 342,
+    "num_unanswered": 58,
+    "num_correct": 190,
+    "accuracy": 0.5555555555555556,
+    "avg_gt_answer_logprob": -6.484787804540332,
+    "avg_gt_answer_perplexity": 278466647.5686146,
+    "num_gt_missing_from_topk": 1,
+    "gt_missing_from_topk": [
+      {
+        "idx": 146,
+        "question": "Was Mycobacterium tuberculosis last detected in Mr. Hurley's sputum as of 01/02/20?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      }
+    ]
+  }
+]

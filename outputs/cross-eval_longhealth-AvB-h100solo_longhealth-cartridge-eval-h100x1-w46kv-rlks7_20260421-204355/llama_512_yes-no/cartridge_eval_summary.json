@@ -1,0 +1,141 @@
+[
+  {
+    "cartridge": "qtris123/llama_longhealth-p1-10_8192_512_no-cartridge_10-epochs",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient1_10-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 247,
+    "num_unanswered": 153,
+    "num_correct": 151,
+    "accuracy": 0.611336032388664,
+    "avg_gt_answer_logprob": -1.9467112830524593,
+    "avg_gt_answer_perplexity": 4060.3588681164756,
+    "num_gt_missing_from_topk": 0,
+    "gt_missing_from_topk": []
+  },
+  {
+    "cartridge": "qtris123/llama_longhealth-p1-10_8192_512_no-cartridge_10-epochs",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient11_20-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 213,
+    "num_unanswered": 187,
+    "num_correct": 112,
+    "accuracy": 0.5258215962441315,
+    "avg_gt_answer_logprob": -3.030563786704216,
+    "avg_gt_answer_perplexity": 10207.845500225649,
+    "num_gt_missing_from_topk": 1,
+    "gt_missing_from_topk": [
+      {
+        "idx": 36,
+        "question": "Was Diabetic nephropathy NOT part of Mr. Fisher's medical history as of 2009?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/llama_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_512",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient1_10-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 204,
+    "num_unanswered": 196,
+    "num_correct": 113,
+    "accuracy": 0.553921568627451,
+    "avg_gt_answer_logprob": -2.242228018836204,
+    "avg_gt_answer_perplexity": 5282.337236600704,
+    "num_gt_missing_from_topk": 6,
+    "gt_missing_from_topk": [
+      {
+        "idx": 0,
+        "question": "Was the dosing frequency of Prednisolone reduced in the second regimen for Mrs. Mayer, likely indicating a clinical improvement?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 42,
+        "question": "Was Acetaminophen prescribed to Laura Miller for analgesia in May 2020?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 102,
+        "question": "Is it accurate that Mrs. Sample was not diagnosed with 3-vessel CHD based on the provided information?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 200,
+        "question": "Was both Intensity-modulated radiotherapy and Helical tomotherapy employed for Mr. Miller's radiotherapy?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 330,
+        "question": "Was the liver fibrosis stage for Mr. Wells reported as 'Not specified' on 08/24/2019?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 334,
+        "question": "Did Mr. John Miller's initial presentation include speech disturbances?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/llama_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_512",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient11_20-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 241,
+    "num_unanswered": 159,
+    "num_correct": 136,
+    "accuracy": 0.5643153526970954,
+    "avg_gt_answer_logprob": -2.3546078110875364,
+    "avg_gt_answer_perplexity": 9330.997679881759,
+    "num_gt_missing_from_topk": 3,
+    "gt_missing_from_topk": [
+      {
+        "idx": 98,
+        "question": "Is 'No significant myocardial damage' the diagnosis related to the myocardial biopsy findings on 01/27/2014 in Mr. Romero?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 130,
+        "question": "Was it found that Mr. Hurley's chest CT done on 10/02/20 showed regressive pulmonary infiltrates, progressive right pleural effusion, and regressive lymph nodes?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 320,
+        "question": "Did the ultrasound abdomen performed on Mr. Carter on 11/01/2021 identify a congenital cyst as the echo-free cystic structure in the right lower lobe?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      }
+    ]
+  }
+]

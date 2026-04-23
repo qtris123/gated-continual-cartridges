@@ -1,0 +1,238 @@
+[
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p1-10_8192_1024_no-cartridge_10-epochs",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient1_10-mcq.csv",
+    "dataset_type": "mcq",
+    "num_total": 200,
+    "num_answered": 124,
+    "num_unanswered": 76,
+    "num_correct": 53,
+    "accuracy": 0.4274193548387097,
+    "avg_gt_answer_logprob": -7.423122107436164,
+    "avg_gt_answer_perplexity": 822282017.0156485,
+    "num_gt_missing_from_topk": 5,
+    "gt_missing_from_topk": [
+      {
+        "idx": 1,
+        "question": "What procedure was performed on Mr. Rudolph in 2010?",
+        "question_type": "mcq",
+        "reference_answer": "pTCA stenting",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 26,
+        "question": "Based on Mrs. Jane Done's hospital course, which of the following statements is accurate?",
+        "question_type": "mcq",
+        "reference_answer": "The patient has undergone empyema removal due to an infection following her resection of a right frontal tumor, which took place in February 2020",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 91,
+        "question": "Which medication was prescribed to Mrs. Anderson for her mental health concerns?",
+        "question_type": "mcq",
+        "reference_answer": "Mirtazapine",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 145,
+        "question": "What was NOT observed in Mr. Williams' bone marrow biopsy microscopic examination?",
+        "question_type": "mcq",
+        "reference_answer": "Atypical proliferation of plasma cells",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 197,
+        "question": "In relation to Mr. Doe's radiotherapy in 2015, how many Gy was each session?",
+        "question_type": "mcq",
+        "reference_answer": "2 Gy",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p1-10_8192_1024_no-cartridge_10-epochs",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient11_20-mcq.csv",
+    "dataset_type": "mcq",
+    "num_total": 200,
+    "num_answered": 119,
+    "num_unanswered": 81,
+    "num_correct": 40,
+    "accuracy": 0.33613445378151263,
+    "avg_gt_answer_logprob": -8.370778243332037,
+    "avg_gt_answer_perplexity": 309297473.68058914,
+    "num_gt_missing_from_topk": 6,
+    "gt_missing_from_topk": [
+      {
+        "idx": 58,
+        "question": "According to the reports, how long was Mr. Carter's initial intubation period?",
+        "question_type": "mcq",
+        "reference_answer": "From 09/30 to 10/13",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 80,
+        "question": "What type of heart murmur was noted in Mr. Nilsson's physical examination in January 2005?",
+        "question_type": "mcq",
+        "reference_answer": "3/6 systolic murmur auscultated on the left parasternal side",
+        "reference_answer_letter": "A",
+        "generated_answer": "D"
+      },
+      {
+        "idx": 81,
+        "question": "Considering Mr. Harder's treatment history, which medication was initiated for lymph node and bone metastatic prostate cancer?",
+        "question_type": "mcq",
+        "reference_answer": "Lutetium PSMA-Therapy",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 82,
+        "question": "Which of the following was NOT a component of Mrs. Sanders' lab results in October 2017?",
+        "question_type": "mcq",
+        "reference_answer": "Normal CRP",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 115,
+        "question": "What significant change was noted in Mr. Hurley's CT Thorax from 02/23/21 compared to previous scans?",
+        "question_type": "mcq",
+        "reference_answer": "Development of large poorly perfused areas with cavitations",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 137,
+        "question": "Please select the correct chronological order of radiological imaging studies Mrs. Sanders received:",
+        "question_type": "mcq",
+        "reference_answer": "Chest X-ray < Abdominal Ultrasound < CT Scan of Chest/Abdomen/Pelvis < Abdominal Ultrasound  < Abdominal MRI",
+        "reference_answer_letter": "A",
+        "generated_answer": "C"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_1024",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient1_10-mcq.csv",
+    "dataset_type": "mcq",
+    "num_total": 200,
+    "num_answered": 113,
+    "num_unanswered": 87,
+    "num_correct": 46,
+    "accuracy": 0.40707964601769914,
+    "avg_gt_answer_logprob": -6.7982886022966635,
+    "avg_gt_answer_perplexity": 72901018.17593972,
+    "num_gt_missing_from_topk": 6,
+    "gt_missing_from_topk": [
+      {
+        "idx": 33,
+        "question": "According to the immunohistochemical findings in Mrs. Sample, which antibodies showed a positive reaction on the blastic tumor cells and what was the Ki-67 proliferation index for these cells?",
+        "question_type": "mcq",
+        "reference_answer": "The blastic tumor cells showed a positive reaction after incubation with antibodies against CD20, PAX5, and BCL2. The Ki-67 proliferation index for these blastic tumor cells is > 90%.",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 43,
+        "question": "Mrs. Sample has bone metastasis, of which one was surgically addressed. Where was this metastasis located?",
+        "question_type": "mcq",
+        "reference_answer": "Thoracic vertebra 10",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 53,
+        "question": "From the PSMA-PET-CT scan results for Mr. Williams, which vertebra showed the most notable PSMA uptake?",
+        "question_type": "mcq",
+        "reference_answer": "Th4",
+        "reference_answer_letter": "C",
+        "generated_answer": "D"
+      },
+      {
+        "idx": 66,
+        "question": "What imaging method and findings provided evidence of Mr. Williams's metastatic involvement at the level of T4 vertebral body consistent with prostate cancer?",
+        "question_type": "mcq",
+        "reference_answer": "A PSMA-PET-CT Scan in 05/2018 which exhibited notably increased PSMA uptake at the level of T4 vertebral body, showing evidence of metastatic involvement.",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 86,
+        "question": "Based on the findings from the CT scan of the chest and abdomen performed on 09/28/21, which of the following statements is TRUE for Mrs. Anderson?",
+        "question_type": "mcq",
+        "reference_answer": "The liver showed signs of fatty infiltration.",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 137,
+        "question": "How did Mr. Rudolph's medication plan change between 06/29/2021 and 02/22/2022?",
+        "question_type": "mcq",
+        "reference_answer": "Pantoprazole and Prednisolone were removed from the medication plan.",
+        "reference_answer_letter": "A",
+        "generated_answer": "D"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_1024",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient11_20-mcq.csv",
+    "dataset_type": "mcq",
+    "num_total": 200,
+    "num_answered": 143,
+    "num_unanswered": 57,
+    "num_correct": 67,
+    "accuracy": 0.46853146853146854,
+    "avg_gt_answer_logprob": -6.71433209590734,
+    "avg_gt_answer_perplexity": 30721255.2698345,
+    "num_gt_missing_from_topk": 5,
+    "gt_missing_from_topk": [
+      {
+        "idx": 28,
+        "question": "Which complication did Mr. Chapman NOT experience during his ICU stay?",
+        "question_type": "mcq",
+        "reference_answer": "Diabetes insipidus",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 35,
+        "question": "What change in Mr. Carter's blood profile from November 2021 to February 2022 might suggest an improvement in his hepatic function?",
+        "question_type": "mcq",
+        "reference_answer": "Decrease in Gamma-GT from 200 U/L to 38 U/L",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 77,
+        "question": "What was the result of Mrs. Sanders' capsule endoscopy in 2023?",
+        "question_type": "mcq",
+        "reference_answer": "Hyperemia and blurry vascular pattern",
+        "reference_answer_letter": "D",
+        "generated_answer": "C"
+      },
+      {
+        "idx": 81,
+        "question": "Considering Mr. Harder's treatment history, which medication was initiated for lymph node and bone metastatic prostate cancer?",
+        "question_type": "mcq",
+        "reference_answer": "Lutetium PSMA-Therapy",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 82,
+        "question": "Which of the following was NOT a component of Mrs. Sanders' lab results in October 2017?",
+        "question_type": "mcq",
+        "reference_answer": "Normal CRP",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      }
+    ]
+  }
+]

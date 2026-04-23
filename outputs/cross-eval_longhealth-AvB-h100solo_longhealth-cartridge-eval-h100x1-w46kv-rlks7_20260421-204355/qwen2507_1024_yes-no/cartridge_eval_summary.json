@@ -1,0 +1,125 @@
+[
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p1-10_8192_1024_no-cartridge_10-epochs",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient1_10-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 243,
+    "num_unanswered": 157,
+    "num_correct": 148,
+    "accuracy": 0.6090534979423868,
+    "avg_gt_answer_logprob": -5.391658548167053,
+    "avg_gt_answer_perplexity": 23079252.276710536,
+    "num_gt_missing_from_topk": 3,
+    "gt_missing_from_topk": [
+      {
+        "idx": 50,
+        "question": "Is it true that Paul Doe's C-Reactive Protein value was elevated upon discharge in January 2022?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 177,
+        "question": "Was Mr. Rudolph administered Pembrolizumab as immunotherapy from May to September 2020?",
+        "question_type": "yes_no",
+        "reference_answer": "No",
+        "reference_answer_letter": null,
+        "generated_answer": "Yes"
+      },
+      {
+        "idx": 238,
+        "question": "Was Escherichia coli NOT identified in Mrs. Linda Mayer's lesional skin swab?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p1-10_8192_1024_no-cartridge_10-epochs",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient11_20-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 204,
+    "num_unanswered": 196,
+    "num_correct": 105,
+    "accuracy": 0.5147058823529411,
+    "avg_gt_answer_logprob": -6.896460130376721,
+    "avg_gt_answer_perplexity": 49473939.73748963,
+    "num_gt_missing_from_topk": 4,
+    "gt_missing_from_topk": [
+      {
+        "idx": 7,
+        "question": "Was bradycardia noted in Mr. Nilsson's ECG on 11/20/2021?",
+        "question_type": "yes_no",
+        "reference_answer": "No",
+        "reference_answer_letter": null,
+        "generated_answer": "Yes"
+      },
+      {
+        "idx": 66,
+        "question": "Was Venetoclax/Vidaza started as combination therapy for Mr. Hurley in March 2021?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 180,
+        "question": "Did Mr. Harder avoid experiencing diarrhea after his last treatment cycle?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      },
+      {
+        "idx": 264,
+        "question": "Was Mr. Fisher's cardioversion in March 2008 unsuccessful?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_1024",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient1_10-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 334,
+    "num_unanswered": 66,
+    "num_correct": 193,
+    "accuracy": 0.5778443113772455,
+    "avg_gt_answer_logprob": -6.324907917154477,
+    "avg_gt_answer_perplexity": 130853169.09863538,
+    "num_gt_missing_from_topk": 1,
+    "gt_missing_from_topk": [
+      {
+        "idx": 128,
+        "question": "Was cardiac stress testing never performed in Mrs. Sample?",
+        "question_type": "yes_no",
+        "reference_answer": "Yes",
+        "reference_answer_letter": null,
+        "generated_answer": "No"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_1024",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient11_20-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 337,
+    "num_unanswered": 63,
+    "num_correct": 194,
+    "accuracy": 0.5756676557863502,
+    "avg_gt_answer_logprob": -6.381034942285517,
+    "avg_gt_answer_perplexity": 107864499.29460675,
+    "num_gt_missing_from_topk": 0,
+    "gt_missing_from_topk": []
+  }
+]

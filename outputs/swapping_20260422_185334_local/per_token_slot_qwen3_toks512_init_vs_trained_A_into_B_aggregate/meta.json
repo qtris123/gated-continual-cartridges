@@ -1,0 +1,12 @@
+{
+  "model": "qwen3-4b-instruct",
+  "cache_a_donor": "/home/vo43/cartridges/experiments_longhealth/cartridges_pt/qwen3_512_p1/cache_last.pt",
+  "cache_b_base": "/home/vo43/cartridges/experiments_longhealth/cartridges_pt/qwen3_512_p1_cache_last.pt",
+  "eval_name": "longhealth",
+  "eval_path": "/home/vo43/cartridges/experiments_longhealth/longhealth_patient1_10_og.parquet",
+  "base_nll": 3.3612868455086513,
+  "donor_nll": 1.6007774888735784,
+  "n_slots": 511,
+  "num_layers": 36,
+  "elapsed_sec": 642.9460895061493
+}

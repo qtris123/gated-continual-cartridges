@@ -1,0 +1,422 @@
+[
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p1-10_8192_512_no-cartridge_10-epochs",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient1_10-mcq.csv",
+    "dataset_type": "mcq",
+    "num_total": 200,
+    "num_answered": 108,
+    "num_unanswered": 92,
+    "num_correct": 43,
+    "accuracy": 0.39814814814814814,
+    "avg_gt_answer_logprob": -6.0456856180768686,
+    "avg_gt_answer_perplexity": 41281831.98207939,
+    "num_gt_missing_from_topk": 14,
+    "gt_missing_from_topk": [
+      {
+        "idx": 7,
+        "question": "What pathological finding was indicated in Mr. Rudolph's internal cytological report?",
+        "question_type": "mcq",
+        "reference_answer": "Altered nuclear plasma ratios",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 8,
+        "question": "According to the FISH results from the histological findings in 03/2015, which of the following was detected in Mr. Williams?",
+        "question_type": "mcq",
+        "reference_answer": "Only one trisomy or tetrasomy 9",
+        "reference_answer_letter": "A",
+        "generated_answer": "D"
+      },
+      {
+        "idx": 16,
+        "question": "Could you please specify the chronological sequence of the radiology imaging examinations that Mr. Wells underwent?",
+        "question_type": "mcq",
+        "reference_answer": "Ultrasound < Liver MRI < CT Chest/Abdomen/Pelvis < DSA Coeliac-Mesenteric < MRI liver < CT Chest/Abdomen/Pelvis",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 19,
+        "question": "Mr. Williams\u2019 medications changed between 2018 and March 2019 - how did they change when looking at March 2019?",
+        "question_type": "mcq",
+        "reference_answer": "Amlodipin 5 mg was paused.",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 20,
+        "question": "Based on the medication changes from admission to discharge, which of the following best describes the Mrs Sample's evolving clinical situation?",
+        "question_type": "mcq",
+        "reference_answer": "The patient's pain management was escalated, as indicated by an increased frequency of Hydromorphone intake.",
+        "reference_answer_letter": "B",
+        "generated_answer": "D"
+      },
+      {
+        "idx": 63,
+        "question": "When was Mr. Wells first admitted for SIRT simulation",
+        "question_type": "mcq",
+        "reference_answer": "08/13/2020",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 72,
+        "question": "Which of the following medications was given to the Mrs. Done for eczema treatment during the hospital stay from 10/23/2020 to 11/01/2020?",
+        "question_type": "mcq",
+        "reference_answer": "Desonide Cream",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 105,
+        "question": "On clinical neurological assessment, Mrs. Sample demonstrated:",
+        "question_type": "mcq",
+        "reference_answer": "Mild paraparesis in the left leg",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 124,
+        "question": "Considering Mr. John Williams's treatment journey for his Multiple Myeloma condition, which of the following sequences regarding his treatment chronology is correct?",
+        "question_type": "mcq",
+        "reference_answer": "Received radiation to Th4 and the thoracic rib in August 2018, underwent three cycles of Pomalidomide, Doxorubicin, and Dexamethasone between August and October 2018, and then received four treatments of Daratumumab, Lenalidomide, and Dexamethasone from November 2018 to February 2019.",
+        "reference_answer_letter": "B",
+        "generated_answer": "D"
+      },
+      {
+        "idx": 125,
+        "question": "Regarding the therapeutic approach to Mr. Wells' HCC, what was the primary reason for the intermittent pause and resumption of Atezolizumab/Bevacizumab therapy?",
+        "question_type": "mcq",
+        "reference_answer": "Fluctuations in liver function tests indicating possible drug-induced hepatitis",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 153,
+        "question": "Which of the following is NOT part of the current treatment regimen for Mrs. Sample's DLBCL?",
+        "question_type": "mcq",
+        "reference_answer": "Vincristine",
+        "reference_answer_letter": "D",
+        "generated_answer": "C"
+      },
+      {
+        "idx": 158,
+        "question": "Regarding the molecular pathology report, which of the following statements is true for Mrs. Sample?",
+        "question_type": "mcq",
+        "reference_answer": "No evidence of t(14;18) translocation",
+        "reference_answer_letter": "C",
+        "generated_answer": "B"
+      },
+      {
+        "idx": 187,
+        "question": "Based on the provided information, which of the following treatment combinations was Mr. Williams on, specifically targeting his diagnosis of Multiple Myeloma?",
+        "question_type": "mcq",
+        "reference_answer": "Velcade, Dexamethasone, and Lenalidomide.",
+        "reference_answer_letter": "C",
+        "generated_answer": "D"
+      },
+      {
+        "idx": 191,
+        "question": "Based on the pathology report from 07/26/2023, which of the following findings was NOT present in Mrs. Anderson's liquid sample?",
+        "question_type": "mcq",
+        "reference_answer": "Evidence of a fungal infection",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p1-10_8192_512_no-cartridge_10-epochs",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient11_20-mcq.csv",
+    "dataset_type": "mcq",
+    "num_total": 200,
+    "num_answered": 104,
+    "num_unanswered": 96,
+    "num_correct": 31,
+    "accuracy": 0.2980769230769231,
+    "avg_gt_answer_logprob": -6.733760359749477,
+    "avg_gt_answer_perplexity": 19205945.644711606,
+    "num_gt_missing_from_topk": 16,
+    "gt_missing_from_topk": [
+      {
+        "idx": 7,
+        "question": "In 2019, what treatment was continued for Mrs. Sanders despite gastrointestinal issues?",
+        "question_type": "mcq",
+        "reference_answer": "Subcutaneous immunoglobulin therapy",
+        "reference_answer_letter": "C",
+        "generated_answer": "D"
+      },
+      {
+        "idx": 32,
+        "question": "What abnormality was observed in Mr. Nilsson's ECG on July 2nd 2008?",
+        "question_type": "mcq",
+        "reference_answer": "ST depression and T-wave positivity",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 39,
+        "question": "What condition did Mr. Chapman NOT have a history of prior to his admission on 04/03/2017?",
+        "question_type": "mcq",
+        "reference_answer": "Diabetes Mellitus",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 41,
+        "question": "What was an important finding from Mrs. Sanders' liver biopsy in 2023?",
+        "question_type": "mcq",
+        "reference_answer": "Nodular regenerative hyperplasia",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 52,
+        "question": "On which date was Mr. Chapman's ventriculoperitoneal shunt placed?",
+        "question_type": "mcq",
+        "reference_answer": "05/01/2017",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 71,
+        "question": "What can be inferred about Spironolactone in Mr. Nilsson's treatment from 2005 to 2008?",
+        "question_type": "mcq",
+        "reference_answer": "It was not included in the medication regimen in March 2008.",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 87,
+        "question": "What complication was identified in Mr. Harder during the neurological consultation on 06/25/2023?",
+        "question_type": "mcq",
+        "reference_answer": "Polyneuropathy syndrome of the lower extremities",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 89,
+        "question": "What congenital heart condition was Mr. Nilsson diagnosed with?",
+        "question_type": "mcq",
+        "reference_answer": "Hypoplastic Left Heart Syndrome",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 124,
+        "question": "Which of the following drugs was NOT part of Mr. Harder's initial medication upon admission for prostate cancer treatment?",
+        "question_type": "mcq",
+        "reference_answer": "Candesartan",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 129,
+        "question": "Which of the following is NOT a part of Mr. Havers' medical history?",
+        "question_type": "mcq",
+        "reference_answer": "Chronic kidney disease",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 157,
+        "question": "What was Mr. David Romero's left ventricular ejection fraction (LVEF) measured in myocardial perfusion scintigraphy in September 2022?",
+        "question_type": "mcq",
+        "reference_answer": "53%",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 167,
+        "question": "What was Mr. Davies' primary diagnosis when admitted in September 2009?",
+        "question_type": "mcq",
+        "reference_answer": "Bronchopneumonia",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 173,
+        "question": "What treatment was Mr. Davies given for bronchopneumonia in 2009?",
+        "question_type": "mcq",
+        "reference_answer": "Cefuroxime and Sodium Chloride 0.9% inhalation",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 176,
+        "question": "Analyzing the changes in Mr. John Havers' lab results between April 2017 and August 2018, which of the following interpretations is most consistent with the observed alterations?",
+        "question_type": "mcq",
+        "reference_answer": "Possible dehydration or increased erythropoiesis, suggested by a marginal rise in hemoglobin and hematocrit values.",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 195,
+        "question": "On what date did Mr. Havers present with shortness of breath and coughing, leading to the discovery of pulmonary metastasis?",
+        "question_type": "mcq",
+        "reference_answer": "08/14/2023",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 199,
+        "question": "Comparing the lab results, how did Mr. Davies' creatinine levels change from August 2016 to June 2019?",
+        "question_type": "mcq",
+        "reference_answer": "Decreased from 1.22 mg/dL to 1.10 mg/dL",
+        "reference_answer_letter": "B",
+        "generated_answer": "D"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_512",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient1_10-mcq.csv",
+    "dataset_type": "mcq",
+    "num_total": 200,
+    "num_answered": 137,
+    "num_unanswered": 63,
+    "num_correct": 54,
+    "accuracy": 0.39416058394160586,
+    "avg_gt_answer_logprob": -7.841870320113962,
+    "avg_gt_answer_perplexity": 90330005.09945373,
+    "num_gt_missing_from_topk": 8,
+    "gt_missing_from_topk": [
+      {
+        "idx": 6,
+        "question": "Regarding Mr. Miller, based on the pathology report from 07/26/2023, which of the following findings was NOT present in the liquid sample?",
+        "question_type": "mcq",
+        "reference_answer": "MGMT promoter: Non-methylated",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 39,
+        "question": "Which of the following is NOT one of the patient's diagnoses?",
+        "question_type": "mcq",
+        "reference_answer": "Insulin-dependent diabetes mellitus type I",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 124,
+        "question": "Considering Mr. John Williams's treatment journey for his Multiple Myeloma condition, which of the following sequences regarding his treatment chronology is correct?",
+        "question_type": "mcq",
+        "reference_answer": "Received radiation to Th4 and the thoracic rib in August 2018, underwent three cycles of Pomalidomide, Doxorubicin, and Dexamethasone between August and October 2018, and then received four treatments of Daratumumab, Lenalidomide, and Dexamethasone from November 2018 to February 2019.",
+        "reference_answer_letter": "B",
+        "generated_answer": "D"
+      },
+      {
+        "idx": 129,
+        "question": "Regarding Mrs. Anderson, which is NOT a finding from the CT scan dated 12/02/2022?",
+        "question_type": "mcq",
+        "reference_answer": "Suspicious pulmonary nodules",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 132,
+        "question": "Based on the discharge letter, which of the following statements best represents Mrs. Jane Done's SARS-CoV-2 status and its trend during her hospitalization?",
+        "question_type": "mcq",
+        "reference_answer": "Her viral load decreased, but Ct values remained the same from admission to discharge.",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 160,
+        "question": "How long had Mrs. Linda Mayer been postmenopausal at the time of her diagnosis?",
+        "question_type": "mcq",
+        "reference_answer": "8 years",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 169,
+        "question": "How many times was glioblastoma resection performed on Mr. John Miller by the reporting facility prior to 2021?",
+        "question_type": "mcq",
+        "reference_answer": "Thrice",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 185,
+        "question": "Regarding Mrs. Done, what histopathological diagnosis was provided for the excised melanoma on 02/23/2018?",
+        "question_type": "mcq",
+        "reference_answer": "Exophytic, ulcerated malignant melanoma with a tumor thickness of at least 15 mm",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      }
+    ]
+  },
+  {
+    "cartridge": "qtris123/qwen2507_longhealth-p11-20_8192_10-epochs_with-cartridge_p1-10_8192_512",
+    "dataset": "/workspace/longhealth-tri-work2-d1553f7-h100tp2/examples/longhealth/longhealth_patient11_20-mcq.csv",
+    "dataset_type": "mcq",
+    "num_total": 200,
+    "num_answered": 156,
+    "num_unanswered": 44,
+    "num_correct": 75,
+    "accuracy": 0.4807692307692308,
+    "avg_gt_answer_logprob": -6.246847257855838,
+    "avg_gt_answer_perplexity": 112703491.08312571,
+    "num_gt_missing_from_topk": 7,
+    "gt_missing_from_topk": [
+      {
+        "idx": 18,
+        "question": "Which of the following was NOT part of Mr. Fisher's medical history as of 2009?",
+        "question_type": "mcq",
+        "reference_answer": "Diabetic nephropathy",
+        "reference_answer_letter": "D",
+        "generated_answer": "B"
+      },
+      {
+        "idx": 33,
+        "question": "Which combination therapy was started in March 2021 for Mr. Hurley?",
+        "question_type": "mcq",
+        "reference_answer": "Venetoclax/Vidaza",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 84,
+        "question": "What symptom was NOT reported by Mr. Davies prior to his September 2009 admission?",
+        "question_type": "mcq",
+        "reference_answer": "Vomiting",
+        "reference_answer_letter": "D",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 105,
+        "question": "Could you please specify the chronological sequence of the radiology imaging examinations that Mr. Hurley underwent?",
+        "question_type": "mcq",
+        "reference_answer": "Chest CT < CT Chest/Abdomen/Pelvis < Chest CT < Neck/Chest CT < Neck/Chest CT < Neck/Chest/Abdomen/Pelvis CT < Chest/Abdomen/Pelvis CT < Abdomen CT < Neck/Chest CT < Neck/Chest/Abdomen/Pelvis CT < Neck/Chest/Abdomen/Pelvis CT",
+        "reference_answer_letter": "C",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 119,
+        "question": "Which parameter in Mr. Carter's lab results indicated a normalization trend from November 2021 to February 2022 but still remained below the reference range?",
+        "question_type": "mcq",
+        "reference_answer": "Hemoglobin levels",
+        "reference_answer_letter": "C",
+        "generated_answer": "D"
+      },
+      {
+        "idx": 129,
+        "question": "Which of the following is NOT a part of Mr. Havers' medical history?",
+        "question_type": "mcq",
+        "reference_answer": "Chronic kidney disease",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      },
+      {
+        "idx": 176,
+        "question": "Analyzing the changes in Mr. John Havers' lab results between April 2017 and August 2018, which of the following interpretations is most consistent with the observed alterations?",
+        "question_type": "mcq",
+        "reference_answer": "Possible dehydration or increased erythropoiesis, suggested by a marginal rise in hemoglobin and hematocrit values.",
+        "reference_answer_letter": "B",
+        "generated_answer": "A"
+      }
+    ]
+  }
+]
