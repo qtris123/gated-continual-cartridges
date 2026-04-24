@@ -40,8 +40,8 @@ def plot_one(exp_dir: Path, data: dict, model: str, toks: str) -> None:
     left_col_data = (sorted_donor - sorted_base).unsqueeze(1)
 
     vmin, vmax = -1.0, 1.0
-    clipped_grid = torch.clamp(main_grid_data, vmin, vmax).numpy()
-    clipped_col = torch.clamp(left_col_data, vmin, vmax).numpy()
+    clipped_grid =  main_grid_data.numpy() #torch.clamp(main_grid_data, vmin, vmax).numpy()
+    clipped_col = left_col_data.numpy() #torch.clamp(left_col_data, vmin, vmax).numpy()
 
     fig = plt.figure(figsize=(20, 14))
     gs = gridspec.GridSpec(1, 3, width_ratios=[1, 25, 0.7], wspace=0.015)
@@ -56,7 +56,7 @@ def plot_one(exp_dir: Path, data: dict, model: str, toks: str) -> None:
     ax_col.set_xlabel("donor - base", fontsize=9)
 
     ax_grid = fig.add_subplot(gs[1])
-    im_grid = ax_grid.imshow(clipped_grid, aspect="auto", cmap=cmap_val, vmin=vmin, vmax=vmax)
+    im_grid = ax_grid.imshow(clipped_grid, aspect="auto", cmap=cmap_val) #, vmin=vmin, vmax=vmax)
     ax_grid.set_yticks([])
     ax_grid.set_xlabel("slot position p", fontsize=14)
     title = (
@@ -75,7 +75,7 @@ def plot_one(exp_dir: Path, data: dict, model: str, toks: str) -> None:
     )
 
     plt.subplots_adjust(bottom=0.1, top=0.9, left=0.08, right=0.95)
-    out = exp_dir / "per_question_heatmap.png"
+    out = exp_dir / "per_question_heatmap_no_clip.png"
     fig.savefig(out, bbox_inches="tight", dpi=120)
     plt.close(fig)
     print(f"Wrote {out}")
