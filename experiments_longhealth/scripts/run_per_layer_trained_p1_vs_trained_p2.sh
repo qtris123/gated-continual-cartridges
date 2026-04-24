@@ -16,7 +16,7 @@ export CARTRIDGES_OUTPUT_DIR="${CARTRIDGES_OUTPUT_DIR:-${CARTRIDGES_DIR}/outputs
 cd "$CARTRIDGES_DIR"
 
 # per_layer_swap.py requires name=/path for each --eval (see parse_eval_args).
-EVAL="longhealth=$CARTRIDGES_DIR/experiments_longhealth/longhealth_patient1_10_og.parquet"
+EVAL="longhealth=$CARTRIDGES_DIR/experiments_longhealth/longhealth_patient11_20_og.parquet"
 
 declare -A TRAINED
 

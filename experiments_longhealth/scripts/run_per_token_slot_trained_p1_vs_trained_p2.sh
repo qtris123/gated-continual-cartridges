@@ -15,7 +15,7 @@ export CARTRIDGES_OUTPUT_DIR="${CARTRIDGES_OUTPUT_DIR:-${CARTRIDGES_DIR}/outputs
 
 cd "$CARTRIDGES_DIR"
 
-EVAL="$CARTRIDGES_DIR/experiments_longhealth/longhealth_patient1_10_og.parquet"
+EVAL="$CARTRIDGES_DIR/experiments_longhealth/longhealth_patient11_20_og.parquet"
 
 declare -A TRAINED
 
