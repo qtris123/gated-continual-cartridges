@@ -12,6 +12,8 @@ outputs/**
 !outputs/
 !outputs/cross-eval_longhealth-AvB-h100solo_longhealth-cartridge-eval-h100x1-w46kv-rlks7_20260421-204355/
 !outputs/cross-eval_longhealth-AvB-h100solo_longhealth-cartridge-eval-h100x1-w46kv-rlks7_20260421-204355/**
+!outputs/cross-eval_longhealth-initial-h100solo_1/
+!outputs/cross-eval_longhealth-initial-h100solo_1/**
 !outputs/swapping_20260422_185334_local/
 !outputs/swapping_20260422_185334_local/**
 _data/

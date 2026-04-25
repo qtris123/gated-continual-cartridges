@@ -1,0 +1,16 @@
+[
+  {
+    "cartridge": "/workspace/longhealth-initial-tri-work2-251680de/examples/longhealth/outputs/init_caches/llama_512_init_cache_last.pt",
+    "dataset": "/workspace/longhealth-initial-tri-work2-251680de/examples/longhealth/longhealth_patient1_10-mcq.csv",
+    "dataset_type": "mcq",
+    "num_total": 200,
+    "num_answered": 97,
+    "num_unanswered": 103,
+    "num_correct": 41,
+    "accuracy": 0.422680412371134,
+    "avg_gt_answer_logprob": -6.1198751436055865,
+    "avg_gt_answer_perplexity": 18798116.908002995,
+    "num_gt_missing_from_topk": 0,
+    "gt_missing_from_topk": []
+  }
+]
