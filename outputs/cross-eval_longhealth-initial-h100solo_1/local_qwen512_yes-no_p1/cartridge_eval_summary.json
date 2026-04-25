@@ -1,0 +1,16 @@
+[
+  {
+    "cartridge": "/workspace/longhealth-initial-tri-work2-251680de/examples/longhealth/outputs/init_caches/qwen3_512_init_cache_last.pt",
+    "dataset": "/workspace/longhealth-initial-tri-work2-251680de/examples/longhealth/longhealth_patient1_10-yes-no.csv",
+    "dataset_type": "yes_no",
+    "num_total": 400,
+    "num_answered": 390,
+    "num_unanswered": 10,
+    "num_correct": 203,
+    "accuracy": 0.5205128205128206,
+    "avg_gt_answer_logprob": -10.226810320708893,
+    "avg_gt_answer_perplexity": 4780563008.030712,
+    "num_gt_missing_from_topk": 0,
+    "gt_missing_from_topk": []
+  }
+]
