@@ -44,8 +44,8 @@ from transformers import AutoTokenizer
 
 from cartridges.data.qasper.resources import TOPIC_TO_IDS
 
-
-DEFAULT_PATH = "/home/vo43/cartridges/examples/qasper/qasper_init_20480.txt"
+DEFAULT_PAPER_IDS = TOPIC_TO_IDS["QA"]
+DEFAULT_PATH = "qasper_init.txt"
 
 def _paper_to_text(row: dict) -> str:
     """Render a single QASPER row as a self-contained <paper> XML block."""
@@ -148,8 +148,9 @@ def main():
     parser = argparse.ArgumentParser(
         description="Generate a KV-cache init text from QASPER papers."
     )
-    parser.add_argument("--paper_ids", nargs="+", default=DEFAULT_PAPER_IDS,
-                        help="ArXiv paper IDs to include.")
+    parser.add_argument("--topic", help="Topic name from TOPIC_TO_IDS (e.g. MT, QA, SA).")
+    parser.add_argument("--paper_ids", nargs="+",
+                        help="ArXiv paper IDs to include (overrides --topic).")
     parser.add_argument("--p", type=int, default=4096,
                         help="Total token budget (split evenly across papers).")
     parser.add_argument("--tokenizer", default="Qwen/Qwen3-4B",
@@ -160,19 +161,25 @@ def main():
                         help="Output .txt file path.")
     args = parser.parse_args()
 
-    text = generate_qasper_init_text(
+    paper_ids = args.paper_ids
+    if not paper_ids:
+        if args.topic:
+            if args.topic not in TOPIC_TO_IDS:
+                raise ValueError(f"Topic '{args.topic}' not found in resources.py. Available: {list(TOPIC_TO_IDS.keys())}")
+            paper_ids = TOPIC_TO_IDS[args.topic]
+        else:
+            paper_ids = DEFAULT_PAPER_IDS
+
+    output_path = generate_qasper_init_text(
         p=args.p,
-        paper_ids=args.paper_ids,
+        paper_ids=paper_ids,
         tokenizer_name=args.tokenizer,
+        path=args.output,
         split=args.split,
     )
 
-    with open(args.output, "w", encoding="utf-8") as f:
-        f.write(text)
-
-    n = len(args.paper_ids)
-    print(f"Wrote {n} papers × {args.p // n} tokens → {args.output} ({len(text)} chars)")
-
+    n = len(paper_ids)
+    print(f"Wrote {n} papers × {args.p // n} tokens → {output_path}")
 
 if __name__ == "__main__":
     main()

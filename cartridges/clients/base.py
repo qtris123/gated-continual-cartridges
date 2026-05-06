@@ -61,7 +61,6 @@ class ClientSample:
     top_logprobs: Optional[TopLogprobs] = None
 
 
-
 @dataclass(slots=True)
 class FlatTopLogprobs:
     """

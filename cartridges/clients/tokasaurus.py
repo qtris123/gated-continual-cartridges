@@ -251,9 +251,9 @@ class TokasaurusClient(Client):
                 logger.error(f"Request {i} failed: {response}")
                 samples.append(
                     ClientSample(
-                        text="", 
-                        token_ids=None, 
-                        top_logprobs=None
+                        text="",
+                        token_ids=None,
+                        top_logprobs=None,
                     )
                 )
                 continue
@@ -272,9 +272,9 @@ class TokasaurusClient(Client):
                     text=response.choices[0].message.content,
                     token_ids=fingerprint_data["completion_ids"][0],
                     top_logprobs=(
-                        None if top_logprobs is None else 
+                        None if top_logprobs is None else
                         self._extract_fingerprint_logprobs(fingerprint_data)
-                    )
+                    ),
                 )
             )
         

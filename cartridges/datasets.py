@@ -263,7 +263,7 @@ class DataSource(BaseConfig):
 
 def _prepare_data_source(source: str | DataSource) -> list[Conversation]:
     if isinstance(source, str):
-        is_local = ".pkl" in source or ".parquet" in source
+        is_local = ".pkl" in source or ".parquet" in source or ".csv" in source
         source = DataSource(path=source, type="local" if is_local else "wandb")
 
     if source.type == "local":
