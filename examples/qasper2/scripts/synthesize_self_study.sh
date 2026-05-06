@@ -167,7 +167,7 @@ for model in "${MODELS[@]}"; do
   model_tag="${model##*/}"
   start_server "$model"
 
-  for topic in QA MT SA; do
+  for topic in QA; do # MT SA; do
     echo "=== Processing topic: $topic ==="
     python "$CARTRIDGES_DIR/examples/qasper2/synthesize/self_study.py" \
       --model "$model" \
