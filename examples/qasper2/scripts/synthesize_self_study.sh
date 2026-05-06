@@ -51,16 +51,20 @@ module load cuda/12.1.0
 echo "CUDA version: $(nvcc --version | grep release)"
 echo ""
 
+### CUSTOMIZE YOUR SETTING ###
 export TORCH_CUDA_ARCH_LIST="8.0"
 export CARTRIDGES_DIR=/home/vo43/cartridges
 export CARTRIDGES_OUTPUT_DIR=/home/vo43/cartridges/outputs
-export PATH=$CUDA_HOME/bin:$PATH
-export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 export TOKA_ROOT=/home/vo43/tokasaurus
 BATCH_SIZE="${BATCH_SIZE:-32}"
 TP_SIZE="${TP_SIZE:-1}"
 DP_SIZE="${DP_SIZE:-2}"
+###--------------------------###
 
+
+
+export PATH=$CUDA_HOME/bin:$PATH
+export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 
 echo "=== GPU configuration ($(hostname)) ==="
 echo "CUDA_HOME=${CUDA_HOME:-unset}"
@@ -107,7 +111,7 @@ trap cleanup EXIT
 
 
 PORT="${PORT:-8000}"
-NUM_SAMPLES="${NUM_SAMPLES:-128}"
+NUM_SAMPLES="${NUM_SAMPLES:-65536}"
 MAX_NUM_BATCHES="${MAX_NUM_BATCHES:-64}"
 PROB_THINKING="${PROB_THINKING:-0.2}"
 RUN_NAME="${RUN_NAME:-qasper_self_study_65K}"
