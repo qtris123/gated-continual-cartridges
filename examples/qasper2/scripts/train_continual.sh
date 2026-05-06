@@ -28,11 +28,11 @@ export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 # fi
 
 NUM_GPUS="${NUM_GPUS:-2}"
-MODEL_NAME="${MODEL_NAME:-meta-llama/Llama-3.2-3B-Instruct}" # Qwen/Qwen3-4B-Instruct-2507
-PHASE1_CACHE_PATH="${PHASE1_CACHE_PATH:-/home/vo43/cartridges/outputs/2026-04-01-01-31-37-arxiv_train/1d73d4d2-fe47-45ff-b68e-d3443c2d530c/cache_last.pt}"
+MODEL_NAME="${MODEL_NAME:-meta-llama/Llama-3.2-3B-Instruct}" # Qwen/Qwen3-4B-Instruct-2507}" #
+PHASE1_CACHE_PATH="${PHASE1_CACHE_PATH:-/scratch/scholar/vo43/qasper_QA_llama_512.pt}"
 SYNTH_DATA_PATH="${SYNTH_DATA_PATH:-/scratch/scholar/vo43/qasper-MT_8192_off-policy.parquet}"
-EVAL_DATA_PATH="${EVAL_DATA_PATH:-/home/vo43/cartridges/examples/qasper2/data/qasper-MT_8192_off-policy.parquet}"
-NUM_TOKENS="${NUM_TOKENS:-2048}" # check phase 1 cache size for setting this
+EVAL_DATA_PATH="${EVAL_DATA_PATH:-/home/vo43/cartridges/examples/qasper2/qasper_eval_MT.parquet}"
+NUM_TOKENS="${NUM_TOKENS:-512}" # check phase 1 cache size for setting this
 EPOCHS="${EPOCHS:-1}"
 LR="${LR:-2e-2}"
 GLOBAL_BATCH_SIZE="${GLOBAL_BATCH_SIZE:-32}"

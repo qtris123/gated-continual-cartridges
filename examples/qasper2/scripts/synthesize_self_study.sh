@@ -32,8 +32,9 @@ echo ""
 
 # Activate conda environment
 echo "Activating cartridges conda environment..."
+CONDA_ENV="${CONDA_ENV:-cartridges}"
 source $(conda info --base)/etc/profile.d/conda.sh
-conda activate cartridges
+conda activate "$CONDA_ENV"
 echo "Python: $(which python3)"
 echo ""
 
@@ -55,6 +56,10 @@ export CARTRIDGES_DIR=/home/vo43/cartridges
 export CARTRIDGES_OUTPUT_DIR=/home/vo43/cartridges/outputs
 export PATH=$CUDA_HOME/bin:$PATH
 export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
+export TOKA_ROOT=/home/vo43/tokasaurus
+BATCH_SIZE="${BATCH_SIZE:-32}"
+TP_SIZE="${TP_SIZE:-1}"
+DP_SIZE="${DP_SIZE:-2}"
 
 
 echo "=== GPU configuration ($(hostname)) ==="
@@ -101,54 +106,77 @@ cleanup() {
 trap cleanup EXIT
 
 
-# Base checkpoints (e.g. Llama-3.2-1B) have no tokenizer.chat_template; chat/completions need Instruct.
-MODEL_NAME="${MODEL_NAME:-Qwen/Qwen3-4B-Instruct-2507}"
-DP_SIZE="${DP_SIZE:-2}"
 PORT="${PORT:-8000}"
-TOKA_DIR="${TOKA_DIR:-/home/vo43/tokasaurus}"
 NUM_SAMPLES="${NUM_SAMPLES:-128}"
-BATCH_SIZE="${BATCH_SIZE:-1}"
 MAX_NUM_BATCHES="${MAX_NUM_BATCHES:-64}"
 PROB_THINKING="${PROB_THINKING:-0.2}"
-TOPIC_ID="${TOPIC_ID:-QA}" # QA (PHASE1), MT (PHASE2), SA (PHASE2)
-RUN_NAME="${RUN_NAME:-qasper_self_study}"
-
-echo "=== Starting Tokasaurus on :$PORT model=$MODEL_NAME ==="
-tksrs \
-  model="$MODEL_NAME" \
-  kv_cache_num_tokens='(128 * 1024)' \
-  max_topk_logprobs=20 \
-  dp_size="$DP_SIZE" \
-  port="$PORT" &
-SERVER_PID=$!
-
-MAX_WAIT=3600
-WAITED=0
-until curl -so /dev/null "http://127.0.0.1:${PORT}/ping" 2>/dev/null; do
-  if ! kill -0 "$SERVER_PID" 2>/dev/null; then
-    echo "Tokasaurus exited unexpectedly"
-    exit 1
-  fi
-  if [ "$WAITED" -ge "$MAX_WAIT" ]; then
-    echo "Tokasaurus did not become ready within ${MAX_WAIT}s"
-    exit 1
-  fi
-  sleep 2
-  WAITED=$((WAITED + 2))
-done
-echo "=== Tokasaurus ready ==="
+RUN_NAME="${RUN_NAME:-qasper_self_study_65K}"
 
 export CARTRIDGES_TOKASAURUS_URL="http://127.0.0.1:${PORT}"
 
-echo "=== Qasper self_study synthesis (conda: $CONDA_ENV) ==="
-python "$CARTRIDGES_DIR/examples/qasper2/synthesize/self_study.py" \
-  --model "$MODEL_NAME" \
-  --tokasaurus-url "$CARTRIDGES_TOKASAURUS_URL" \
-  --num-samples "$NUM_SAMPLES" \
-  --batch-size "$BATCH_SIZE" \
-  --max-num-batches "$MAX_NUM_BATCHES" \
-  --prob-thinking "$PROB_THINKING" \
-  --topic "$TOPIC_ID" \
-  --run-name "$RUN_NAME"
+# Models to iterate over — one Tokasaurus server per model.
+MODELS=(
+  "Qwen/Qwen3-4B-Instruct-2507"
+  "meta-llama/Llama-3.2-1B-Instruct"
+)
 
-echo "=== Done ==="
+start_server() {
+  local model_name=$1
+  echo "=== Starting Tokasaurus on :$PORT model=$model_name ==="
+  tksrs \
+    model="$model_name" \
+    kv_cache_num_tokens='(128 * 1024)' \
+    max_topk_logprobs=20 \
+    dp_size="$DP_SIZE" \
+    tp_size="$TP_SIZE" \
+    port="$PORT" &
+  SERVER_PID=$!
+
+  local max_wait=3600 waited=0
+  until curl -so /dev/null "http://127.0.0.1:${PORT}/ping" 2>/dev/null; do
+    if ! kill -0 "$SERVER_PID" 2>/dev/null; then
+      echo "Tokasaurus exited unexpectedly"
+      exit 1
+    fi
+    if [ "$waited" -ge "$max_wait" ]; then
+      echo "Tokasaurus did not become ready within ${max_wait}s"
+      exit 1
+    fi
+    sleep 2
+    waited=$((waited + 2))
+  done
+  echo "=== Tokasaurus ready ==="
+}
+
+stop_server() {
+  if [ -n "${SERVER_PID:-}" ]; then
+    kill "$SERVER_PID" 2>/dev/null || true
+    wait "$SERVER_PID" 2>/dev/null || true
+    unset SERVER_PID
+  fi
+}
+
+echo "=== Qasper self_study synthesis (conda: $CONDA_ENV) ==="
+for model in "${MODELS[@]}"; do
+  echo "=== Processing model: $model ==="
+  # Short tag for output naming, e.g. "Qwen3-4B-Instruct-2507" or "Llama-3.2-1B-Instruct"
+  model_tag="${model##*/}"
+  start_server "$model"
+
+  for topic in QA MT SA; do
+    echo "=== Processing topic: $topic ==="
+    python "$CARTRIDGES_DIR/examples/qasper2/synthesize/self_study.py" \
+      --model "$model" \
+      --tokasaurus-url "$CARTRIDGES_TOKASAURUS_URL" \
+      --num-samples "$NUM_SAMPLES" \
+      --batch-size "$BATCH_SIZE" \
+      --max-num-batches "$MAX_NUM_BATCHES" \
+      --prob-thinking "$PROB_THINKING" \
+      --topic "$topic" \
+      --run-name "${RUN_NAME}_${model_tag}_${topic}"
+  done
+
+  stop_server
+  echo "=== Done with model: $model ==="
+done
+echo "=== All done ==="
