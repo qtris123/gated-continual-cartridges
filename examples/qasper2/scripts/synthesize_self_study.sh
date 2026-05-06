@@ -121,7 +121,7 @@ export CARTRIDGES_TOKASAURUS_URL="http://127.0.0.1:${PORT}"
 # Models to iterate over — one Tokasaurus server per model.
 MODELS=(
   "Qwen/Qwen3-4B-Instruct-2507"
-  "meta-llama/Llama-3.2-1B-Instruct"
+  "meta-llama/Llama-3.2-3B-Instruct"
 )
 
 start_server() {
