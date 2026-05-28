@@ -29,11 +29,11 @@ export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 
 NUM_GPUS="${NUM_GPUS:-2}"
 MODEL_NAME="${MODEL_NAME:-meta-llama/Llama-3.2-3B-Instruct}" # Qwen/Qwen3-4B-Instruct-2507}" #
-PHASE1_CACHE_PATH="${PHASE1_CACHE_PATH:-/scratch/scholar/vo43/qasper_QA_llama_512.pt}"
+PHASE1_CACHE_PATH="${PHASE1_CACHE_PATH:-/home/vo43/cartridges/outputs/2026-05-27-20-56-47-initial/9b2ff33c-b4f9-4323-9596-45d9de15a6eb/cache_last.pt}" #/scratch/scholar/vo43/qasper_QA_llama_512.pt}"
 SYNTH_DATA_PATH="${SYNTH_DATA_PATH:-/scratch/scholar/vo43/qasper-MT_8192_off-policy.parquet}"
 EVAL_DATA_PATH="${EVAL_DATA_PATH:-/home/vo43/cartridges/examples/qasper2/qasper_eval_MT.parquet}"
-NUM_TOKENS="${NUM_TOKENS:-512}" # check phase 1 cache size for setting this
-EPOCHS="${EPOCHS:-1}"
+NUM_TOKENS="${NUM_TOKENS:-1024}" # check phase 1 cache size for setting this
+EPOCHS="${EPOCHS:-2}"
 LR="${LR:-2e-2}"
 GLOBAL_BATCH_SIZE="${GLOBAL_BATCH_SIZE:-32}"
 MASTER_PORT="${MASTER_PORT:-29507}"

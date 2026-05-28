@@ -35,6 +35,15 @@ from cartridges.datasets import (
     DataSource,
 )
 from cartridges.models.config import ModelConfig
+from cartridges.sparse_cache_finetuning import (
+    SparseCacheFinetuningConfig,
+    CacheAccessTracker,
+    BackgroundAccessTracker,
+    CacheTFIDFRanker,
+    mask_cache_gradients,
+    install_query_capture_hooks,
+    collect_background_stats,
+)
 from cartridges.utils import get_logger, seed_everything
 from cartridges.utils.wandb import WandBConfig, prepare_wandb
 
@@ -91,10 +100,12 @@ class TrainConfig(RunConfig):
     device: str = "cuda"
     distributed_backend: Literal["nccl", "gloo"] = "nccl"
 
-    optimizer: Literal["adam"] = "adam"
+    optimizer: Literal["adam", "sgd"] = "adam"
     lr: float = 1e-4
     lr_scheduler: Optional[Scheduler.Config] = None
     weight_decay: float = 0.0
+
+    sparse_cache_finetuning: Optional[SparseCacheFinetuningConfig] = None
 
     kv_cache_initializer: Optional[KVCacheFactory.Config] = None
     pretrained_cache_path: Optional[str] = None
@@ -211,7 +222,7 @@ def train(config: TrainConfig):
             param.requires_grad = False
 
         cache = cache.to(local_rank)
-        wrapped_model = CacheAndModel(cache, model,)
+        wrapped_model = CacheAndModel(cache, model, sparse_config=config.sparse_cache_finetuning)
 
     if is_ddp:
 
@@ -246,11 +257,49 @@ def train(config: TrainConfig):
         num_workers=1, 
     )
 
-    optimizer = optim.Adam(
-        wrapped_model.parameters() if use_peft else cache.parameters(), 
-        lr=config.lr,
-        weight_decay=config.weight_decay,
+    sparse_ft = config.sparse_cache_finetuning
+    sparse_ft_enabled = (
+        sparse_ft is not None
+        and sparse_ft.enabled
+        and cache_tuning
+        and cache is not None
+        and cache._num_trainable_tokens > 0
     )
+
+    if sparse_ft_enabled:
+        optimizer = optim.SGD(cache.parameters(), lr=config.lr)
+        logger.info(
+            f"Sparse cache finetuning enabled: SGD optimizer, top_t={sparse_ft.top_t}, "
+            f"use_idf={sparse_ft.use_idf}"
+        )
+    else:
+        optimizer = optim.Adam(
+            wrapped_model.parameters() if use_peft else cache.parameters(),
+            lr=config.lr,
+            weight_decay=config.weight_decay,
+        )
+
+    # Set up sparse cache finetuning components
+    cache_access_tracker: Optional[CacheAccessTracker] = None
+    tfidf_ranker: Optional[CacheTFIDFRanker] = None
+    if sparse_ft_enabled:
+        cache_access_tracker = CacheAccessTracker(
+            n_trainable_tokens=cache._num_trainable_tokens,
+            device=local_rank,
+        )
+        bg_tracker = None
+        if sparse_ft.background_indices_path is not None:
+            bg_tracker = BackgroundAccessTracker(num_batches=sparse_ft.num_background_batches)
+            bg_tracker.load(sparse_ft.background_indices_path)
+        tfidf_ranker = CacheTFIDFRanker(
+            background_tracker=bg_tracker,
+            use_idf=sparse_ft.use_idf,
+            smoothing=sparse_ft.idf_smoothing,
+        )
+        logger.info(
+            f"Sparse finetuning: tracking {cache._num_trainable_tokens} cache positions, "
+            f"selecting top {sparse_ft.top_t} per step"
+        )
 
     # Initialize counter variables
     # optimizer_step: number of optimizer steps taken, iter_idx: number of loop iterations, epoch_idx: number of epochs completed
@@ -394,6 +443,17 @@ def train(config: TrainConfig):
 
                     loss = (ce_by_token.mean() / accumulate_grad_steps)
 
+                # Accumulate attention-based cache access stats for sparse finetuning
+                if sparse_ft_enabled:
+                    _cam = wrapped_model.module if is_ddp else wrapped_model
+                    captured_q = _cam.get_captured_queries()
+                    if captured_q:
+                        cache_access_tracker.accumulate_from_hooks(
+                            captured_q, cache,
+                            scaling=cache.config.head_dim ** -0.5,
+                            seq_ids=batch.element_ids.to(local_rank),
+                        )
+
                 # the backward pass should go outside of the automated-mixed precision context
                 # see here for an example: https://pytorch.org/docs/stable/notes/amp_examples.html
                 # but it should go inside the ddp context manager
@@ -411,6 +471,17 @@ def train(config: TrainConfig):
             accum_num_target_tokens += torch.tensor(0, device=local_rank) # mask.sum().detach() # TODO: fix thisTI
 
             if do_step:
+                # Sparse cache finetuning: mask gradients before optimizer step
+                if sparse_ft_enabled:
+                    access_scores = cache_access_tracker.get_access_counts()
+                    if is_ddp:
+                        dist.all_reduce(access_scores, op=dist.ReduceOp.SUM)
+                    top_positions = tfidf_ranker.rank_positions(
+                        access_scores, top_t=sparse_ft.top_t,
+                    )
+                    mask_cache_gradients(cache, top_positions, n_layers=attn_config.n_layers)
+                    cache_access_tracker.reset()
+
                 optimizer.step()
                 optimizer.zero_grad()              
 
@@ -441,24 +512,27 @@ def train(config: TrainConfig):
             if config.wandb is not None and is_rank_zero and do_step:
                 total_num_input_tokens += accum_num_input_tokens.item()
                 total_num_target_tokens += accum_num_target_tokens.item()
-                wandb.log(
-                    {
-                        "train/loss": accum_loss,
-                        "train/perplexity": torch.exp(accum_loss).item(),
-                        "train/epoch_idx": epoch_idx,
-                        "train/optimizer_step": optimizer_step,
-                        "train/iter_idx": iter_idx,
-                        "train/step_num_input_tokens": accum_num_input_tokens,
-                        "train/step_num_target_tokens": accum_num_target_tokens,
-                        "train/num_input_tokens": total_num_input_tokens,
-                        "train/num_target_tokens": total_num_target_tokens,
-                        **{
-                            f"optimizer/lr_group{i}": param_group["lr"]
-                            for i, param_group in enumerate(optimizer.param_groups)
-                        },
+                wandb_step_dict = {
+                    "train/loss": accum_loss,
+                    "train/perplexity": torch.exp(accum_loss).item(),
+                    "train/epoch_idx": epoch_idx,
+                    "train/optimizer_step": optimizer_step,
+                    "train/iter_idx": iter_idx,
+                    "train/step_num_input_tokens": accum_num_input_tokens,
+                    "train/step_num_target_tokens": accum_num_target_tokens,
+                    "train/num_input_tokens": total_num_input_tokens,
+                    "train/num_target_tokens": total_num_target_tokens,
+                    **{
+                        f"optimizer/lr_group{i}": param_group["lr"]
+                        for i, param_group in enumerate(optimizer.param_groups)
                     },
-                    step=optimizer_step,
-                )
+                }
+                if sparse_ft_enabled:
+                    wandb_step_dict["sparse/top_t"] = sparse_ft.top_t
+                    wandb_step_dict["sparse/trainable_pct"] = (
+                        100.0 * sparse_ft.top_t / cache._num_trainable_tokens
+                    )
+                wandb.log(wandb_step_dict, step=optimizer_step)
 
             if (
                 config.save_every_n_steps is not None
@@ -500,7 +574,25 @@ def train(config: TrainConfig):
             # Save PEFT model
             logger.info(f"Saving PEFT model to {config.run_dir}/peft_model")
             model.save_pretrained(f"{config.run_dir}/peft_model")
-    
+
+    # Collect background access stats for future phases with use_idf=True
+    if (
+        sparse_ft is not None
+        and sparse_ft.collect_background_stats
+        and cache_tuning
+        and cache is not None
+    ):
+        bg_save_path = os.path.join(config.run_dir, "bg_stats.pt")
+        collect_background_stats(
+            wrapped_model=wrapped_model,
+            cache=cache,
+            dataloader=dataloader,
+            config=sparse_ft,
+            local_rank=local_rank,
+            save_path=bg_save_path,
+            is_ddp=is_ddp,
+        )
+
     logger.info(f"Done training waiting for final barrier.")
 
     # SE (03/21): Careful to synchronize all processes before finishing in case
@@ -904,11 +996,21 @@ class LinearWithWarmup(Scheduler):
 
 
 class CacheAndModel(nn.Module):
-    def __init__(self, cache, model):
+    def __init__(self, cache, model, sparse_config: Optional[SparseCacheFinetuningConfig] = None):
         super(CacheAndModel, self).__init__()
         self.cache = cache
         self.model = model
 
+        self._captured_queries: Optional[dict] = None
+        self._hook_handles: list = []
+        self._sparse_enabled = (
+            sparse_config is not None
+            and sparse_config.enabled
+            and cache._num_trainable_tokens > 0
+        )
+
+        if self._sparse_enabled:
+            self._captured_queries, self._hook_handles = install_query_capture_hooks(model)
 
     def forward(
         self, 
@@ -916,6 +1018,8 @@ class CacheAndModel(nn.Module):
         seq_ids: torch.Tensor, 
         position_ids: torch.Tensor,
     ):
+        if self._captured_queries is not None:
+            self._captured_queries.clear()
 
         out = self.model(
             input_ids=input_ids,
@@ -926,6 +1030,14 @@ class CacheAndModel(nn.Module):
         )
 
         return out
+
+    def get_captured_queries(self) -> Optional[dict]:
+        return self._captured_queries
+
+    def remove_hooks(self):
+        for h in self._hook_handles:
+            h.remove()
+        self._hook_handles.clear()
 
 def save_cache(config: TrainConfig, cache: TrainableCache, optimizer_step: int):
     """

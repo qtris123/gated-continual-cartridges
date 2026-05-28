@@ -4,7 +4,7 @@
 #SBATCH --gres=gpu:2
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=64G 
-#SBATCH --time=45:00
+#SBATCH --time=3:00:00
 #SBATCH --job-name=qasper_train_initial
 #SBATCH --output=qasper_train_initial.out
 #SBATCH --error=qasper_train_initial.err
@@ -28,12 +28,12 @@ export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 # fi
 
 NUM_GPUS="${NUM_GPUS:-2}"
-MODEL_NAME="${MODEL_NAME:-Qwen/Qwen3-4B-Instruct-2507}" # "meta-llama/Llama-3.2-3B-Instruct"
+MODEL_NAME="${MODEL_NAME:-"meta-llama/Llama-3.2-3B-Instruct"}" # Qwen/Qwen3-4B-Instruct-2507}" 
 NUM_TOKENS="${NUM_TOKENS:-1024}"
 TEXT_PATH="${TEXT_PATH:-$CARTRIDGES_DIR/examples/qasper2/train/qasper_init_${NUM_TOKENS}.txt}"
-SYNTH_DATA_PATH="${SYNTH_DATA_PATH:-/scratch/scholar/vo43/qasper-QA-task_llama_8192_no-cartridge.parquet}"
+SYNTH_DATA_PATH="${SYNTH_DATA_PATH:-/scratch/scholar/vo43/qasper_llama_QA-task_8192_no-cartridge.parquet}"
 EVAL_DATA_PATH="${EVAL_DATA_PATH:-/home/vo43/cartridges/examples/qasper2/qasper_eval_QA.parquet}"
-EPOCHS="${EPOCHS:-1}"
+EPOCHS="${EPOCHS:-10}"
 LR="${LR:-2e-2}"
 GLOBAL_BATCH_SIZE="${GLOBAL_BATCH_SIZE:-32}"
 MASTER_PORT="${MASTER_PORT:-29507}"

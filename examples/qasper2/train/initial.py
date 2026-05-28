@@ -33,6 +33,7 @@ import pydrantic
 from pydrantic.variables import FormatStringVariable
 
 from cartridges.datasets import DataSource, TrainDataset, LossEvalDataset
+from cartridges.sparse_cache_finetuning import SparseCacheFinetuningConfig
 from cartridges.initialization import KVFromText
 from cartridges.models import FlexLlamaForCausalLM, FlexQwen3ForCausalLM, HFModelConfig
 from cartridges.train import TrainConfig, LossEvalConfig
@@ -88,9 +89,18 @@ config = TrainConfig(
             name_for_wandb="qasper_perplexity",
         )
     ],
+    optimizer="adam",
+    sparse_cache_finetuning=SparseCacheFinetuningConfig(
+        enabled=False,
+        #top_t=500, 
+        use_idf=False, 
+        collect_background_stats=True,
+        num_background_batches=99999999999,
+        background_top_k_per_batch=1000,
+    ),
     save_every_n_steps=SAVE_EVERY_N_STEPS,
     distributed_backend=DISTRIBUTED_BACKEND,
-    wandb=WandBConfig(tags=["train", "qasper", "phase1"]),
+    wandb=WandBConfig(tags=["train", "qasper", "phase1",'adamw','top-k-1000']),
     output_dir=os.environ.get("CARTRIDGES_OUTPUT_DIR", "."),
     name=RUN_NAME,
 )
