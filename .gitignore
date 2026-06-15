@@ -205,3 +205,5 @@ credentials.txt
 *.out 
 *.err
 data/eval_data_json
+continual_learning_via_sparse_memory_finetuning/
+continual_learning_via_sparse_memory_finetuning/

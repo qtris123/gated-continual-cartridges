@@ -38,7 +38,9 @@ LR="${LR:-2e-2}"
 GLOBAL_BATCH_SIZE="${GLOBAL_BATCH_SIZE:-32}"
 MASTER_PORT="${MASTER_PORT:-29507}"
 EVAL_EVERY_N_STEPS="${EVAL_EVERY_N_STEPS:-50}" # original is 128
-RUN_NAME="${RUN_NAME:-qasper_phase1}"
+RUN_NAME="${RUN_NAME:-qasper_phase1_per-head}"
+# bg_stats granularity — must match Phase 2 GRANULARITY so IDF shapes align
+GRANULARITY="${GRANULARITY:-per_head}"    # global | per_layer | per_head — must match Phase 2
 
 echo "=========================================="
 echo "Qasper Synthesis with Tokasaurus Server"
@@ -146,6 +148,7 @@ MODEL_NAME="$MODEL_NAME" \
 CARTRIDGES_OUTPUT_DIR="$CARTRIDGES_OUTPUT_DIR" \
 EVAL_EVERY_N_STEPS="$EVAL_EVERY_N_STEPS" \
 RUN_NAME="$RUN_NAME" \
+GRANULARITY="$GRANULARITY" \
 torchrun --nproc_per_node="$NUM_GPUS" --master_port="$MASTER_PORT" \
   "$CARTRIDGES_DIR/examples/qasper2/train/initial.py"
 

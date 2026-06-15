@@ -119,7 +119,7 @@ class TrainableCache(nn.Module):
             )
             logger.info(f"num_trainable_tokens: {self._num_trainable_tokens}")
             logger.info(f"num_frozen_tokens: {self._num_frozen_tokens}")
-                
+            
     def update(
         self, 
         new_keys: torch.Tensor,

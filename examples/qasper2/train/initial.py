@@ -25,6 +25,10 @@ Env vars:
     PACKED_SEQ_LENGTH       — packed sequence length (default: 2048)
     SAVE_EVERY_N_STEPS      — save checkpoint every N steps (default: 256)
     DISTRIBUTED_BACKEND     — distributed training backend (default: gloo)
+    GRANULARITY             — granularity for bg_stats collection: global | per_layer | per_head
+                              (default: global). Must match the GRANULARITY used in Phase 2.
+                              The full sorted ranking of all n_tokens is always stored; the
+                              IDF_TOP_K cutoff is applied in Phase 2, not here.
 """
 
 import os
@@ -51,6 +55,7 @@ EVAL_EVERY_N_STEPS = int(os.environ.get("EVAL_EVERY_N_STEPS", "128"))
 SAVE_EVERY_N_STEPS = int(os.environ.get("SAVE_EVERY_N_STEPS", "256"))
 DISTRIBUTED_BACKEND = os.environ.get("DISTRIBUTED_BACKEND", "gloo")
 RUN_NAME = os.environ.get("RUN_NAME", "qasper_phase1")
+GRANULARITY = os.environ.get("GRANULARITY", "global")   # must match Phase 2 GRANULARITY
 _model_cls = FlexQwen3ForCausalLM if "qwen" in MODEL_NAME.lower() else FlexLlamaForCausalLM
 
 config = TrainConfig(
@@ -92,15 +97,17 @@ config = TrainConfig(
     optimizer="adam",
     sparse_cache_finetuning=SparseCacheFinetuningConfig(
         enabled=False,
-        #top_t=500, 
-        use_idf=False, 
+        use_idf=False,
         collect_background_stats=True,
         num_background_batches=99999999999,
-        background_top_k_per_batch=1000,
+        granularity=GRANULARITY,
+        # background_top_k_per_batch is irrelevant here: the full sorted ranking
+        # of all n_tokens positions is always stored, and the top-k cutoff is
+        # applied in Phase 2 when CacheTFIDFRanker calls compute_document_frequencies.
     ),
     save_every_n_steps=SAVE_EVERY_N_STEPS,
     distributed_backend=DISTRIBUTED_BACKEND,
-    wandb=WandBConfig(tags=["train", "qasper", "phase1",'adamw','top-k-1000']),
+    wandb=WandBConfig(tags=["train", "qasper", "phase1",'adamw',GRANULARITY.replace('_','-')]),
     output_dir=os.environ.get("CARTRIDGES_OUTPUT_DIR", "."),
     name=RUN_NAME,
 )

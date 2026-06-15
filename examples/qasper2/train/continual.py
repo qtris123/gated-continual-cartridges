@@ -42,7 +42,7 @@ from cartridges.datasets import DataSource, TrainDataset, LossEvalDataset
 from cartridges.cache import TrainableCache, KVCacheFactory
 from cartridges.sparse_cache_finetuning import SparseCacheFinetuningConfig
 from cartridges.models import FlexLlamaForCausalLM, FlexQwen3ForCausalLM, HFModelConfig
-from cartridges.train import TrainConfig, LossEvalConfig
+from cartridges.train import TrainConfig, LossEvalConfig, CosWithWarmup
 from cartridges.utils.wandb import WandBConfig
 
 
@@ -59,7 +59,7 @@ class KVFromLocal(KVCacheFactory):
 PHASE1_CACHE_PATH = os.environ["PHASE1_CACHE_PATH"]
 SYNTH_DATA_PATH = os.environ["SYNTH_DATA_PATH"]
 EVAL_DATA_PATH = os.environ["EVAL_DATA_PATH"]
-BG_STATS_PATH = os.environ.get("BG_STATS_PATH", "/home/vo43/cartridges/outputs/2026-05-27-20-56-47-initial/9b2ff33c-b4f9-4323-9596-45d9de15a6eb/bg_stats.pt")
+BG_STATS_PATH = os.environ.get("BG_STATS_PATH", "/home/vo43/cartridges/outputs/2026-06-13-11-47-32-initial-per-layer/62cef748-90a5-4914-8ca5-4788dd89d570/cache_last.pt")
 NUM_TOKENS = int(os.environ.get("NUM_TOKENS", "-1"))
 MODEL_NAME = os.environ.get("MODEL_NAME", "meta-llama/Llama-3.2-3B-Instruct")
 LR = float(os.environ.get("LR", "2e-2"))
@@ -69,6 +69,12 @@ EVAL_EVERY_N_STEPS = int(os.environ.get("EVAL_EVERY_N_STEPS", "128"))
 SAVE_EVERY_N_STEPS = int(os.environ.get("SAVE_EVERY_N_STEPS", "256"))
 DISTRIBUTED_BACKEND = os.environ.get("DISTRIBUTED_BACKEND", "gloo")
 RUN_NAME = os.environ.get("RUN_NAME", "qasper_phase2")
+TOP_T = int(os.environ.get("TOP_T", "512"))
+MOMENTUM_MASKING = os.environ.get("MOMENTUM_MASKING", "hard")  # soft | hard | freeze | decouple
+FREEZE_KEYS = os.environ.get("FREEZE_KEYS", "1") not in ("0", "false", "False")
+GRANULARITY = os.environ.get("GRANULARITY", "global")          # global | per_layer | per_head
+IDF_TOP_K = int(os.environ.get("IDF_TOP_K", "128"))            # top-k per bg batch for df computation
+IDF_SMOOTHING = float(os.environ.get("IDF_SMOOTHING", "1.0"))  # Laplace smoothing for IDF
 
 _model_cls = FlexQwen3ForCausalLM if "qwen" in MODEL_NAME.lower() else FlexLlamaForCausalLM
 
@@ -80,8 +86,13 @@ config = TrainConfig(
     kv_cache_initializer=KVFromLocal.Config(
         path=PHASE1_CACHE_PATH,
     ),
-    optimizer="sgd",
+    optimizer= "adam",
     lr=LR,
+    lr_scheduler=CosWithWarmup.Config(
+        max_steps=500,      # Adjust based on your total optimizer steps
+        warmup_steps=20,    # Short warmup for continual learning
+        alpha_f=0.1,        # Final LR = 0.1 * initial LR
+    ),
     epochs=EPOCHS,
     global_batch_size=GLOBAL_BATCH_SIZE,
     dataset=TrainDataset.Config(
@@ -89,6 +100,7 @@ config = TrainConfig(
             DataSource(
                 path=SYNTH_DATA_PATH,
                 type="local",
+                #limit = 1000,
             ),
         ],
         top_k_logits=20,
@@ -97,11 +109,16 @@ config = TrainConfig(
     ),
     sparse_cache_finetuning=SparseCacheFinetuningConfig(
         enabled=True,
-        top_t=500,
+        top_t=TOP_T,
         use_idf=BG_STATS_PATH is not None,
         background_indices_path=BG_STATS_PATH,
         collect_background_stats=True,
         num_background_batches=999999999,
+        momentum_masking=MOMENTUM_MASKING,
+        freeze_keys=FREEZE_KEYS,
+        granularity=GRANULARITY,
+        background_top_k_per_batch=IDF_TOP_K,
+        idf_smoothing=IDF_SMOOTHING,
     ),
     loss_eval_every_n_steps=EVAL_EVERY_N_STEPS,
     loss_evals=[
@@ -118,7 +135,8 @@ config = TrainConfig(
     ],
     save_every_n_steps=SAVE_EVERY_N_STEPS,
     distributed_backend=DISTRIBUTED_BACKEND,
-    wandb=WandBConfig(tags=["train", "qasper", "phase2", "sparse-ft", "top-t-500"]),
+    # !!!
+    wandb=WandBConfig(tags=["train", "qasper", "phase2", f"top-t-{TOP_T}", "lr-2e-2", "all-layers", "value-only", "8k-data", "epochs-10", f"momentum-{MOMENTUM_MASKING}", "adam", f"{GRANULARITY}", f"idf-top-k-{IDF_TOP_K}"]),
     output_dir=os.environ.get("CARTRIDGES_OUTPUT_DIR", "."),
     name=RUN_NAME,
 )

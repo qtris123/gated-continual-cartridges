@@ -40,7 +40,13 @@ from cartridges.sparse_cache_finetuning import (
     CacheAccessTracker,
     BackgroundAccessTracker,
     CacheTFIDFRanker,
-    mask_cache_gradients,
+    GradientMask,
+    TFIDFRankingInfo,
+    apply_gradient_mask_to_cache,
+    freeze_key_gradients,
+    zero_momentum_for_masked_positions,
+    save_non_top_t_state,
+    restore_non_top_t_state,
     install_query_capture_hooks,
     collect_background_stats,
 )
@@ -267,9 +273,18 @@ def train(config: TrainConfig):
     )
 
     if sparse_ft_enabled:
-        optimizer = optim.SGD(cache.parameters(), lr=config.lr)
+        if config.optimizer == "adam":
+            optimizer = optim.Adam(
+                cache.parameters(),
+                lr=config.lr,
+                weight_decay=config.weight_decay,
+            )
+            opt_label = f"Adam (lr={config.lr})"
+        else:
+            optimizer = optim.SGD(cache.parameters(), lr=config.lr, momentum=0.9)
+            opt_label = f"SGD (momentum=0.9, lr={config.lr})"
         logger.info(
-            f"Sparse cache finetuning enabled: SGD optimizer, top_t={sparse_ft.top_t}, "
+            f"Sparse cache finetuning enabled: {opt_label}, top_t={sparse_ft.top_t}, "
             f"use_idf={sparse_ft.use_idf}"
         )
     else:
@@ -286,21 +301,43 @@ def train(config: TrainConfig):
         cache_access_tracker = CacheAccessTracker(
             n_trainable_tokens=cache._num_trainable_tokens,
             device=local_rank,
+            granularity=sparse_ft.granularity,
+            n_layers=attn_config.n_layers,
+            n_kv_heads=attn_config.n_heads,
         )
         bg_tracker = None
         if sparse_ft.background_indices_path is not None:
-            bg_tracker = BackgroundAccessTracker(num_batches=sparse_ft.num_background_batches)
+            bg_tracker = BackgroundAccessTracker(
+                num_batches=sparse_ft.num_background_batches,
+                granularity=sparse_ft.granularity,
+            )
             bg_tracker.load(sparse_ft.background_indices_path)
         tfidf_ranker = CacheTFIDFRanker(
             background_tracker=bg_tracker,
             use_idf=sparse_ft.use_idf,
             smoothing=sparse_ft.idf_smoothing,
+            top_k_per_batch=sparse_ft.background_top_k_per_batch,
+            granularity=sparse_ft.granularity,
         )
         logger.info(
             f"Sparse finetuning: tracking {cache._num_trainable_tokens} cache positions, "
-            f"selecting top {sparse_ft.top_t} per step"
+            f"selecting top {sparse_ft.top_t} per step, "
+            f"momentum_masking={sparse_ft.momentum_masking}"
         )
+        descriptions = {
+            "soft":    "momentum decays naturally, param drifts for ~20 steps",
+            "hard":    "momentum zeroed before step, param stops immediately",
+            "freeze":  "param + momentum both restored post-step, position fully frozen",
+            "decouple":"param restored post-step, momentum keeps decaying (stays warm)",
+        }
+        logger.info(f"  -> {sparse_ft.momentum_masking.upper()}: {descriptions[sparse_ft.momentum_masking]}")
 
+    # Sparse finetuning slot selection log (saved to file after training)
+    sparse_slot_log: list[dict] = []
+    
+    # TF-IDF ranking info log (TF, IDF, TF-IDF values per step)
+    tfidf_ranking_log: list[TFIDFRankingInfo] = []
+    
     # Initialize counter variables
     # optimizer_step: number of optimizer steps taken, iter_idx: number of loop iterations, epoch_idx: number of epochs completed
     optimizer_step, iter_idx, epoch_idx = 0, 0, 0
@@ -471,18 +508,88 @@ def train(config: TrainConfig):
             accum_num_target_tokens += torch.tensor(0, device=local_rank) # mask.sum().detach() # TODO: fix thisTI
 
             if do_step:
-                # Sparse cache finetuning: mask gradients before optimizer step
+                pre_step_state = None
+                # Sparse cache finetuning: compute top positions from THIS step's scores,
+                # then apply gradient mask post-backward (no 1-step lag).
                 if sparse_ft_enabled:
                     access_scores = cache_access_tracker.get_access_counts()
                     if is_ddp:
                         dist.all_reduce(access_scores, op=dist.ReduceOp.SUM)
-                    top_positions = tfidf_ranker.rank_positions(
+
+                    if is_rank_zero and optimizer_step % 50 == 0:
+                        # Flatten multi-dim score tensors for compact diagnostic logging
+                        s = access_scores.float().flatten()
+                        s_norm = s / (s.sum() + 1e-12)
+                        n_s = len(s)
+                        logger.info(
+                            f"[sparse diag step={optimizer_step}] "
+                            f"granularity={sparse_ft.granularity} "
+                            f"scores: min={s.min():.4f} max={s.max():.4f} "
+                            f"std={s.std():.4f} mean={s.mean():.4f} "
+                            f"top1%_share={s_norm.topk(max(1, n_s // 100))[0].sum():.4f} "
+                            f"top10%_share={s_norm.topk(max(1, n_s // 10))[0].sum():.4f}"
+                        )
+
+                    grad_mask, ranking_info = tfidf_ranker.rank_positions(
                         access_scores, top_t=sparse_ft.top_t,
+                        step=optimizer_step, return_info=True,
                     )
-                    mask_cache_gradients(cache, top_positions, n_layers=attn_config.n_layers)
+
+                    # Apply gradient mask post-backward using current step's top positions.
+                    # Non-top-t value positions have their .grad zeroed; keys are handled
+                    # separately by freeze_key_gradients when freeze_keys=True.
+                    apply_gradient_mask_to_cache(
+                        cache, grad_mask, n_layers=attn_config.n_layers
+                    )
+
+                    if sparse_ft.freeze_keys:
+                        freeze_key_gradients(cache, n_layers=attn_config.n_layers)
+
+                    # Momentum / param handling for non-top-t positions:
+                    #
+                    #  "soft"    - nothing, param drifts via residual momentum
+                    #  "hard"    - zero momentum before step → param stops immediately
+                    #  "freeze"  - save param+momentum before step, restore both after
+                    #  "decouple"- save param before step, restore after (momentum decays)
+                    mode = sparse_ft.momentum_masking
+
+                    if mode == "hard":
+                        zero_momentum_for_masked_positions(
+                            cache, grad_mask,
+                            n_layers=attn_config.n_layers,
+                            optimizer=optimizer,
+                            freeze_keys=sparse_ft.freeze_keys,
+                        )
+                    elif mode in ("freeze", "decouple"):
+                        pre_step_state = save_non_top_t_state(
+                            cache, grad_mask,
+                            n_layers=attn_config.n_layers,
+                            optimizer=optimizer,
+                            save_momentum=(mode == "freeze"),
+                        )
+
+                    if is_rank_zero and optimizer_step % 30 == 0:
+                        sparse_slot_log.append({
+                            "step": optimizer_step,
+                            "top_positions": grad_mask.positions_per_layer,
+                            "granularity": grad_mask.granularity,
+                            "access_scores": access_scores.cpu().clone(),
+                        })
+                        tfidf_ranking_log.append(ranking_info)
+
                     cache_access_tracker.reset()
 
                 optimizer.step()
+
+                # Restore non-top-t positions after step ("freeze" / "decouple")
+                if pre_step_state is not None:
+                    restore_non_top_t_state(
+                        cache, pre_step_state,
+                        n_layers=attn_config.n_layers,
+                        optimizer=optimizer,
+                        restore_momentum=(sparse_ft.momentum_masking == "freeze"),
+                    )  
+
                 optimizer.zero_grad()              
 
                 # SE (05/02): We are careful to only reduce the loss immediately
@@ -566,6 +673,36 @@ def train(config: TrainConfig):
     # This is also useful for doing evaluation of a pretrained model without training
     do_evaluation()
     do_evaluate_generations(final=True)
+
+    if sparse_slot_log and is_rank_zero:
+        slot_log_path = os.path.join(config.run_dir, "sparse_slot_log.pt")
+        torch.save(sparse_slot_log, slot_log_path)
+        logger.info(f"Saved sparse slot selection log ({len(sparse_slot_log)} entries) to {slot_log_path}")
+
+    # Save TF-IDF ranking info to separate file
+    if tfidf_ranking_log and is_rank_zero:
+        tfidf_log_path = os.path.join(config.run_dir, "tfidf_ranking_log.pt")
+        tfidf_save_data = {
+            "idf": tfidf_ranker.get_idf_scores() if tfidf_ranker else None,
+            "document_frequencies": tfidf_ranker.get_document_frequencies() if tfidf_ranker else None,
+            "num_background_batches": tfidf_ranker.num_background_batches if tfidf_ranker else 0,
+            "use_idf": tfidf_ranker.use_idf if tfidf_ranker else False,
+            "granularity": tfidf_ranker.granularity if tfidf_ranker else "global",
+            "per_step_info": [
+                {
+                    "step": info.step,
+                    "tf": info.tf,
+                    "tfidf": info.tfidf,
+                    # positions_per_layer: dict[layer_idx → Tensor] — shape depends on granularity
+                    "positions_per_layer": info.mask.positions_per_layer,
+                    "granularity": info.mask.granularity,
+                    "top_t": info.mask.top_t,
+                }
+                for info in tfidf_ranking_log
+            ],
+        }
+        torch.save(tfidf_save_data, tfidf_log_path)
+        logger.info(f"Saved TF-IDF ranking log ({len(tfidf_ranking_log)} entries) to {tfidf_log_path}")
 
     if config.save_after_training and is_rank_zero:
         if cache_tuning:
@@ -685,15 +822,24 @@ def evaluate_perplexity(
 
             del outputs
 
-            if is_ddp:
-                dist.all_reduce(epoch_loss, op=dist.ReduceOp.SUM)
-                dist.all_reduce(epoch_denom, op=dist.ReduceOp.SUM)
-                dist.all_reduce(epoch_num_system_and_user_tokens, op=dist.ReduceOp.SUM)
-                dist.all_reduce(epoch_num_assistant_tokens, op=dist.ReduceOp.SUM)
-                dist.all_reduce(epoch_num_elements, op=dist.ReduceOp.SUM)
+            # if is_ddp:
+            # dist.all_reduce(epoch_loss, op=dist.ReduceOp.SUM)
+            # dist.all_reduce(epoch_denom, op=dist.ReduceOp.SUM)
+            # dist.all_reduce(epoch_num_system_and_user_tokens, op=dist.ReduceOp.SUM)
+            # dist.all_reduce(epoch_num_assistant_tokens, op=dist.ReduceOp.SUM)
+            # dist.all_reduce(epoch_num_elements, op=dist.ReduceOp.SUM)
+            # dist.barrier()
 
+
+        # All-reduce AFTER the loop, not inside it
         if is_ddp:
+            dist.all_reduce(epoch_loss, op=dist.ReduceOp.SUM)
+            dist.all_reduce(epoch_denom, op=dist.ReduceOp.SUM)
+            dist.all_reduce(epoch_num_system_and_user_tokens, op=dist.ReduceOp.SUM)
+            dist.all_reduce(epoch_num_assistant_tokens, op=dist.ReduceOp.SUM)
+            dist.all_reduce(epoch_num_elements, op=dist.ReduceOp.SUM)
             dist.barrier()
+
         logger.info(f"Eval loss - {epoch_loss / epoch_denom} ")
 
     if is_ddp:
