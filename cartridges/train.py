@@ -712,7 +712,10 @@ def train(config: TrainConfig):
             logger.info(f"Saving PEFT model to {config.run_dir}/peft_model")
             model.save_pretrained(f"{config.run_dir}/peft_model")
 
-    # Collect background access stats for future phases with use_idf=True
+    # Collect background access stats for future phases with use_idf=True.
+    # IMPORTANT: each DDP rank sees a different shard of data (DistributedSampler),
+    # so we must all-gather the ranked positions from all ranks and merge them before
+    # saving.  Only rank 0 writes the final bg_stats.pt so it reflects the full corpus.
     if (
         sparse_ft is not None
         and sparse_ft.collect_background_stats
@@ -728,6 +731,7 @@ def train(config: TrainConfig):
             local_rank=local_rank,
             save_path=bg_save_path,
             is_ddp=is_ddp,
+            is_rank_zero=is_rank_zero,
         )
 
     logger.info(f"Done training waiting for final barrier.")

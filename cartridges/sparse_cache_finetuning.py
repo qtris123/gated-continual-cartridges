@@ -971,6 +971,7 @@ def collect_background_stats(
     local_rank,
     save_path: str,
     is_ddp: bool = False,
+    is_rank_zero: bool = True,
 ):
     """Run forward passes over a dataloader to collect background access stats.
 
@@ -978,10 +979,17 @@ def collect_background_stats(
     forward-only passes and accumulating attention-based cache access scores.
     Saves a BackgroundAccessTracker to save_path.
 
+    In DDP mode the dataloader is sharded via DistributedSampler so each rank
+    only sees 1/N of the data.  This function all-gathers the per-batch ranked
+    positions from every rank, merges them into a single tracker, and then lets
+    only rank-0 write the final bg_stats.pt so the IDF statistics cover the full
+    training corpus.
+
     Call this after training completes to produce the IDF statistics needed
     for use_idf=True in subsequent training phases. The granularity of the
     saved stats matches config.granularity.
     """
+    import torch.distributed as dist
     from cartridges.datasets import DatasetBatch
 
     n_trainable = cache._num_trainable_tokens
@@ -1052,5 +1060,41 @@ def collect_background_stats(
         _cam._captured_queries = None
 
     wrapped_model.train()
-    bg_tracker.save(save_path)
-    logger.info(f"Background stats saved to {save_path} ({batch_count} batches)")
+
+    # In DDP, each rank has processed a different shard of the data
+    # (DistributedSampler).  All-gather the ranked-position tensors from every
+    # rank so that the saved bg_stats.pt covers the full training corpus.
+    if is_ddp and dist.is_initialized():
+        local_ranked = bg_tracker.batch_ranked_positions  # list[Tensor] on CPU
+        # Pack into a single tensor for transport (may be empty on some ranks).
+        if local_ranked:
+            local_tensor = torch.stack(local_ranked)  # (n_local_batches, *shape)
+        else:
+            # Placeholder with 0 batches so all_gather_object still participates.
+            local_tensor = torch.zeros(0, dtype=torch.long)
+
+        gathered = [None] * dist.get_world_size()
+        dist.all_gather_object(gathered, local_tensor)
+
+        if is_rank_zero:
+            # Merge non-empty contributions from all ranks.
+            all_tensors = [t for t in gathered if t.numel() > 0]
+            if all_tensors:
+                merged = torch.cat(all_tensors, dim=0)
+                merged_tracker = BackgroundAccessTracker(
+                    num_batches=merged.shape[0],
+                    granularity=config.granularity,
+                )
+                merged_tracker.batch_ranked_positions = list(merged.unbind(0))
+                merged_tracker.current_batch_id = merged.shape[0]
+                merged_tracker.save(save_path)
+                logger.info(
+                    f"Background stats saved to {save_path} "
+                    f"({merged.shape[0]} batches merged from {dist.get_world_size()} ranks)"
+                )
+            else:
+                logger.warning("No background batches collected across any rank; skipping save.")
+    else:
+        # Single-process: save directly.
+        bg_tracker.save(save_path)
+        logger.info(f"Background stats saved to {save_path} ({batch_count} batches)")
