@@ -1,33 +1,14 @@
-#!/usr/bin/env bash
-#SBATCH -A gpu
-#SBATCH --nodes=1
-#SBATCH --gres=gpu:2
-#SBATCH --cpus-per-task=4
-#SBATCH --mem=64G 
-#SBATCH --time=45:00
-#SBATCH --job-name=longhealth_train_initial
-#SBATCH --output=longhealth_train_initial.out
-#SBATCH --error=longhealth_train_initial.err
-
-set -e 
+set -e
 
 # Configuration — adjust these as needed
 export TORCH_CUDA_ARCH_LIST="8.0"
-export CARTRIDGES_DIR=/home/vo43/cartridges
-export CARTRIDGES_OUTPUT_DIR=/home/vo43/cartridges/outputs
-export PATH=$CUDA_HOME/bin:$PATH
-export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export CARTRIDGES_DIR="${CARTRIDGES_DIR:-$(cd "$SCRIPT_DIR/../../.." && pwd)}"
+export CARTRIDGES_OUTPUT_DIR="${CARTRIDGES_OUTPUT_DIR:-$CARTRIDGES_DIR/outputs}"
+export PATH=${CUDA_HOME:+$CUDA_HOME/bin:}$PATH
+export LD_LIBRARY_PATH=${CUDA_HOME:+$CUDA_HOME/lib64:}$LD_LIBRARY_PATH
 
-# if [ -n "$SLURM_SUBMIT_DIR" ]; then
-#   CARTRIDGES_DIR="$SLURM_SUBMIT_DIR"
-#   CARTRIDGES_OUTPUT_DIR="$SLURM_SUBMIT_DIR/outputs"
-# else
-#   SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-#   CARTRIDGES_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
-#   CARTRIDGES_OUTPUT_DIR="$CARTRIDGES_DIR/outputs"
-# fi
-
-NUM_GPUS="${NUM_GPUS:-2}"
+NUM_GPUS="${NUM_GPUS:-4}"
 MODEL_NAME="${MODEL_NAME:-Qwen/Qwen3-4B-Instruct-2507}" # "meta-llama/Llama-3.2-3B-Instruct"
 TEXT_PATH="${TEXT_PATH:-$CARTRIDGES_DIR/examples/longhealth/train/longhealth_context.txt}"
 SYNTH_DATA_PATH="${SYNTH_DATA_PATH:-/scratch/scholar/vo43/longhealth_p1-10_qwen_n8192.parquet}"
@@ -37,28 +18,25 @@ LR="${LR:-2e-2}"
 GLOBAL_BATCH_SIZE="${GLOBAL_BATCH_SIZE:-32}"
 MASTER_PORT="${MASTER_PORT:-29507}"
 PATIENT_IDS="${PATIENT_IDS:-1-10}" # "11-20"
-EVAL_EVERY_N_STEPS="${EVAL_EVERY_N_STEPS:-50}" # original is 128
+EVAL_EVERY_N_STEPS="${EVAL_EVERY_N_STEPS:-50}"
 
 echo "=========================================="
-echo "LongHealth Synthesis with Tokasaurus Server"
+echo "LongHealth Phase 1 — Initial Cartridge"
 echo "=========================================="
-echo "JobID=$SLURM_JOB_ID"
-echo "Partition=$SLURM_JOB_PARTITION"
-echo "NodeList=$SLURM_JOB_NODELIST"
+echo "Host=$(hostname)"
 echo "Started at: $(date)"
 echo ""
 
-# Load compatible GCC for CUDA (GCC 14 causes compilation issues)
-echo "Loading GCC 11.4..."
-module load gcc/11.4.1
-echo "GCC version: $(gcc --version | head -1)"
-echo ""
-
-# Load CUDA module for nvcc compiler (needed for flashinfer)
-echo "Loading CUDA module..."
-module load cuda/12.1.0
-echo "CUDA version: $(nvcc --version | grep release)"
-echo ""
+# Load modules only when running under a module system (e.g. SLURM cluster)
+if command -v module >/dev/null 2>&1; then
+  echo "Loading GCC 11.4..."
+  module load gcc/11.4.1 2>/dev/null || true
+  echo "GCC version: $(gcc --version | head -1)"
+  echo "Loading CUDA module..."
+  module load cuda/12.1.0 2>/dev/null || true
+  echo "CUDA version: $(nvcc --version | grep release 2>/dev/null || echo 'nvcc not found')"
+  echo ""
+fi
 
 
 echo "=== GPU configuration ($(hostname)) ==="
@@ -115,10 +93,9 @@ fi
 #   source "$REPO_DIR/.env"
 # fi
 
-# Activate conda environment
-echo "Activating cartridges conda environment..."
-source $(conda info --base)/etc/profile.d/conda.sh
-conda activate cartridges
+# Activate the repo virtual environment (pydrantic + cartridges live in .venv)
+echo "Activating .venv..."
+source "$CARTRIDGES_DIR/.venv/bin/activate"
 echo "Python: $(which python3)"
 echo ""
 

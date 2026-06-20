@@ -118,7 +118,7 @@ config = TrainConfig(
     ],
     save_every_n_steps=SAVE_EVERY_N_STEPS,
     distributed_backend=DISTRIBUTED_BACKEND,
-    wandb=WandBConfig(tags=["train", "longhealth", "phase1"]),
+    wandb=WandBConfig(tags=["train", "longhealth", "phase1","per-layer"]),
     output_dir=os.environ.get("CARTRIDGES_OUTPUT_DIR", "."),
     name=FormatStringVariable(
         f"longhealth_phase1_{MODEL_NAME.split('/')[-1]}_{NUM_TOKENS}"

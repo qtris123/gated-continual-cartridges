@@ -1,68 +1,47 @@
-#!/usr/bin/env bash
-#SBATCH -A gpu
-#SBATCH --nodes=1
-#SBATCH --gres=gpu:2
-#SBATCH --cpus-per-task=4
-#SBATCH --mem=64G 
-#SBATCH --time=3:00:00
-#SBATCH --job-name=qasper_train_initial
-#SBATCH --output=qasper_train_initial.out
-#SBATCH --error=qasper_train_initial.err
+# Phase 1: Train initial qasper cartridge (NON-SPARSE — no bg_stats collection).
+# For sparse Phase 2 with TF-IDF, use train_initial_sparse.sh instead.
 
-set -e 
+set -e
 
 # Configuration — adjust these as needed
 export TORCH_CUDA_ARCH_LIST="8.0"
-export CARTRIDGES_DIR=/home/vo43/cartridges
-export CARTRIDGES_OUTPUT_DIR=/home/vo43/cartridges/outputs
-export PATH=$CUDA_HOME/bin:$PATH
-export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
-
-# if [ -n "$SLURM_SUBMIT_DIR" ]; then
-#   CARTRIDGES_DIR="$SLURM_SUBMIT_DIR"
-#   CARTRIDGES_OUTPUT_DIR="$SLURM_SUBMIT_DIR/outputs"
-# else
-#   SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-#   CARTRIDGES_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
-#   CARTRIDGES_OUTPUT_DIR="$CARTRIDGES_DIR/outputs"
-# fi
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export CARTRIDGES_DIR="${CARTRIDGES_DIR:-$(cd "$SCRIPT_DIR/../../.." && pwd)}"
+export CARTRIDGES_OUTPUT_DIR="${CARTRIDGES_OUTPUT_DIR:-$CARTRIDGES_DIR/outputs}"
+export PATH=${CUDA_HOME:+$CUDA_HOME/bin:}$PATH
+export LD_LIBRARY_PATH=${CUDA_HOME:+$CUDA_HOME/lib64:}$LD_LIBRARY_PATH
 
 NUM_GPUS="${NUM_GPUS:-2}"
-MODEL_NAME="${MODEL_NAME:-"meta-llama/Llama-3.2-3B-Instruct"}" # Qwen/Qwen3-4B-Instruct-2507}" 
+MODEL_NAME="${MODEL_NAME:-meta-llama/Llama-3.2-3B-Instruct}"
 NUM_TOKENS="${NUM_TOKENS:-1024}"
 TEXT_PATH="${TEXT_PATH:-$CARTRIDGES_DIR/examples/qasper2/train/qasper_init_${NUM_TOKENS}.txt}"
-SYNTH_DATA_PATH="${SYNTH_DATA_PATH:-/scratch/scholar/vo43/qasper_llama_QA-task_8192_no-cartridge.parquet}"
-EVAL_DATA_PATH="${EVAL_DATA_PATH:-/home/vo43/cartridges/examples/qasper2/qasper_eval_QA.parquet}"
+SYNTH_DATA_PATH="${SYNTH_DATA_PATH:-/localhome/local-triv/gated-continual-cartridges/data/qasper/train/qasper_QA_task_8192_no-cartridge.parquet}"
+EVAL_DATA_PATH="${EVAL_DATA_PATH:-$CARTRIDGES_DIR/examples/qasper2/qasper_eval_QA.parquet}"
 EPOCHS="${EPOCHS:-10}"
 LR="${LR:-2e-2}"
 GLOBAL_BATCH_SIZE="${GLOBAL_BATCH_SIZE:-32}"
 MASTER_PORT="${MASTER_PORT:-29507}"
-EVAL_EVERY_N_STEPS="${EVAL_EVERY_N_STEPS:-50}" # original is 128
-RUN_NAME="${RUN_NAME:-qasper_phase1_per-head}"
-# bg_stats granularity — must match Phase 2 GRANULARITY so IDF shapes align
-GRANULARITY="${GRANULARITY:-per_head}"    # global | per_layer | per_head — must match Phase 2
+EVAL_EVERY_N_STEPS="${EVAL_EVERY_N_STEPS:-50}"
+SAVE_EVERY_N_STEPS="${SAVE_EVERY_N_STEPS:-256}"
+RUN_NAME="${RUN_NAME:-qasper_phase1}"
 
 echo "=========================================="
-echo "Qasper Synthesis with Tokasaurus Server"
+echo "Qasper Phase 1 — Initial Cartridge"
 echo "=========================================="
-echo "JobID=$SLURM_JOB_ID"
-echo "Partition=$SLURM_JOB_PARTITION"
-echo "NodeList=$SLURM_JOB_NODELIST"
+echo "Host=$(hostname)"
 echo "Started at: $(date)"
 echo ""
 
-# Load compatible GCC for CUDA (GCC 14 causes compilation issues)
-echo "Loading GCC 11.4..."
-module load gcc/11.4.1
-echo "GCC version: $(gcc --version | head -1)"
-echo ""
-
-# Load CUDA module for nvcc compiler (needed for flashinfer)
-echo "Loading CUDA module..."
-module load cuda/12.1.0
-echo "CUDA version: $(nvcc --version | grep release)"
-echo ""
-
+# Load modules only when running under a module system (e.g. SLURM cluster)
+if command -v module >/dev/null 2>&1; then
+  echo "Loading GCC 11.4..."
+  module load gcc/11.4.1 2>/dev/null || true
+  echo "GCC version: $(gcc --version | head -1)"
+  echo "Loading CUDA module..."
+  module load cuda/12.1.0 2>/dev/null || true
+  echo "CUDA version: $(nvcc --version | grep release 2>/dev/null || echo 'nvcc not found')"
+  echo ""
+fi
 
 echo "=== GPU configuration ($(hostname)) ==="
 echo "CUDA_HOME=${CUDA_HOME:-unset}"
@@ -76,7 +55,7 @@ else
 fi
 
 # GPU monitoring (separate file)
-GPU_LOG="train_initial_gpu_usage.log"  
+GPU_LOG="train_initial_gpu_usage.log"
 mkdir -p "$(dirname "$GPU_LOG")"
 echo "=== GPU monitor started: $(date) on $(hostname) ===" >"$GPU_LOG"
 (
@@ -99,41 +78,31 @@ cleanup() {
     wait "$GPU_MON_PID" 2>/dev/null || true
     echo "=== GPU monitor stopped: $(date) ===" >>"${GPU_LOG:-/dev/null}"
   fi
-  if [ -n "${SERVER_PID:-}" ]; then
-    kill "$SERVER_PID" 2>/dev/null || true
-    wait "$SERVER_PID" 2>/dev/null || true
-  fi
   echo "Job finished at: $(date)"
 }
 trap cleanup EXIT
-
 
 if [ -z "$SYNTH_DATA_PATH" ]; then
   echo "Error: SYNTH_DATA_PATH is required"
   exit 1
 fi
 
-# source "$REPO_DIR/.venv/bin/activate"
-# if [ -f "$REPO_DIR/.env" ]; then
-#   source "$REPO_DIR/.env"
-# fi
-
-# Activate conda environment
-echo "Activating cartridges conda environment..."
-source $(conda info --base)/etc/profile.d/conda.sh
-conda activate cartridges
+# Activate the repo virtual environment (pydrantic + cartridges live in .venv)
+echo "Activating .venv..."
+source "$CARTRIDGES_DIR/.venv/bin/activate"
 echo "Python: $(which python3)"
 echo ""
 
 echo "=== Training initial cartridge ==="
-echo "Model:    $MODEL_NAME"
-echo "GPUs:     $NUM_GPUS"
-echo "Text:     $TEXT_PATH"
-echo "Train data:    $SYNTH_DATA_PATH"
-echo "Eval data:     $EVAL_DATA_PATH"
-echo "Tokens:   $NUM_TOKENS"
-echo "Epochs:   $EPOCHS"
-echo "=================================="
+echo "Model:       $MODEL_NAME"
+echo "GPUs:        $NUM_GPUS"
+echo "Text:        $TEXT_PATH"
+echo "Train data:  $SYNTH_DATA_PATH"
+echo "Eval data:   $EVAL_DATA_PATH"
+echo "Tokens:      $NUM_TOKENS"
+echo "Epochs:      $EPOCHS"
+echo "Run name:    $RUN_NAME"
+echo "============================================"
 
 
 CARTRIDGES_DIR="$CARTRIDGES_DIR" \
@@ -147,8 +116,8 @@ GLOBAL_BATCH_SIZE="$GLOBAL_BATCH_SIZE" \
 MODEL_NAME="$MODEL_NAME" \
 CARTRIDGES_OUTPUT_DIR="$CARTRIDGES_OUTPUT_DIR" \
 EVAL_EVERY_N_STEPS="$EVAL_EVERY_N_STEPS" \
+SAVE_EVERY_N_STEPS="$SAVE_EVERY_N_STEPS" \
 RUN_NAME="$RUN_NAME" \
-GRANULARITY="$GRANULARITY" \
 torchrun --nproc_per_node="$NUM_GPUS" --master_port="$MASTER_PORT" \
   "$CARTRIDGES_DIR/examples/qasper2/train/initial.py"
 

@@ -1,70 +1,48 @@
 #!/usr/bin/env bash
-# Qasper self-study synthesis — SLURM driver: Tokasaurus (tksrs) + synthesis.
+# Qasper self-study synthesis — Tokasaurus (tksrs) + synthesis.
 #
-# Uses conda env `cartridges` by default (override with CONDA_ENV).
+# Runs locally; SLURM directives removed (use `sbatch` only on a cluster that
+# accepts the script as-is). Use the .venv interpreter at $CARTRIDGES_DIR/.venv,
+# matching the longhealth pattern.
 #
-#   sbatch examples/qasper2/scripts/synthesize_self_study.sh
+# Usage:
 #   bash examples/qasper2/scripts/synthesize_self_study.sh
 #
-# Env: CONDA_BASE, CONDA_ENV (default cartridges), CARTRIDGES_* (see README),
-#      CUDA_HOME (+ optional TORCH_CUDA_ARCH_LIST) for Tokasaurus / FlashInfer JIT on GPU nodes.
+# Env: CARTRIDGES_DIR (auto-detected), CARTRIDGES_OUTPUT_DIR, CUDA_HOME
+#      (+ optional TORCH_CUDA_ARCH_LIST) for Tokasaurus / FlashInfer JIT on GPU nodes.
 
-#SBATCH -A gpu
-#SBATCH --nodes=1
-#SBATCH --gres=gpu:2
-#SBATCH --cpus-per-task=4
-#SBATCH --mem=64G 
-#SBATCH --time=45:00
-#SBATCH --job-name=qasper_synthesize
-#SBATCH --output=qasper_synthesize.out
-#SBATCH --error=qasper_synthesize.err
-
-set -e 
+set -e
 
 echo "=========================================="
 echo "Qasper Synthesis with Tokasaurus Server"
 echo "=========================================="
-echo "JobID=$SLURM_JOB_ID"
-echo "Partition=$SLURM_JOB_PARTITION"
-echo "NodeList=$SLURM_JOB_NODELIST"
+echo "Host=$(hostname)"
 echo "Started at: $(date)"
-echo ""
-
-# Activate conda environment
-echo "Activating cartridges conda environment..."
-CONDA_ENV="${CONDA_ENV:-cartridges}"
-source $(conda info --base)/etc/profile.d/conda.sh
-conda activate "$CONDA_ENV"
-echo "Python: $(which python3)"
-echo ""
-
-# Load compatible GCC for CUDA (GCC 14 causes compilation issues)
-echo "Loading GCC 11.4..."
-module load gcc/11.4.1
-echo "GCC version: $(gcc --version | head -1)"
-echo ""
-
-
-# Load CUDA module for nvcc compiler (needed for flashinfer)
-echo "Loading CUDA module..."
-module load cuda/12.1.0
-echo "CUDA version: $(nvcc --version | grep release)"
 echo ""
 
 ### CUSTOMIZE YOUR SETTING ###
 export TORCH_CUDA_ARCH_LIST="8.0"
-export CARTRIDGES_DIR=/home/vo43/cartridges
-export CARTRIDGES_OUTPUT_DIR=/home/vo43/cartridges/outputs
-export TOKA_ROOT=/home/vo43/tokasaurus
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export CARTRIDGES_DIR="${CARTRIDGES_DIR:-$(cd "$SCRIPT_DIR/../../.." && pwd)}"
+export CARTRIDGES_OUTPUT_DIR="${CARTRIDGES_OUTPUT_DIR:-$CARTRIDGES_DIR/outputs}"
 BATCH_SIZE="${BATCH_SIZE:-32}"
 TP_SIZE="${TP_SIZE:-1}"
 DP_SIZE="${DP_SIZE:-2}"
 ###--------------------------###
 
+export PATH=${CUDA_HOME:+$CUDA_HOME/bin:}$PATH
+export LD_LIBRARY_PATH=${CUDA_HOME:+$CUDA_HOME/lib64:}$LD_LIBRARY_PATH
 
-
-export PATH=$CUDA_HOME/bin:$PATH
-export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
+# Load modules only when running under a module system (e.g. SLURM cluster)
+if command -v module >/dev/null 2>&1; then
+  echo "Loading GCC 11.4..."
+  module load gcc/11.4.1 2>/dev/null || true
+  echo "GCC version: $(gcc --version | head -1)"
+  echo "Loading CUDA module..."
+  module load cuda/12.1.0 2>/dev/null || true
+  echo "CUDA version: $(nvcc --version | grep release 2>/dev/null || echo 'nvcc not found')"
+  echo ""
+fi
 
 echo "=== GPU configuration ($(hostname)) ==="
 echo "CUDA_HOME=${CUDA_HOME:-unset}"
@@ -78,7 +56,7 @@ else
 fi
 
 # GPU monitoring (separate file)
-GPU_LOG="synthesize_self_study_gpu_usage.log"  
+GPU_LOG="synthesize_self_study_gpu_usage.log"
 mkdir -p "$(dirname "$GPU_LOG")"
 echo "=== GPU monitor started: $(date) on $(hostname) ===" >"$GPU_LOG"
 (
@@ -109,6 +87,11 @@ cleanup() {
 }
 trap cleanup EXIT
 
+# Activate the repo virtual environment (pydrantic + cartridges live in .venv)
+echo "Activating .venv..."
+source "$CARTRIDGES_DIR/.venv/bin/activate"
+echo "Python: $(which python3)"
+echo ""
 
 PORT="${PORT:-8000}"
 NUM_SAMPLES="${NUM_SAMPLES:-65536}"
@@ -160,10 +143,10 @@ stop_server() {
   fi
 }
 
-echo "=== Qasper self_study synthesis (conda: $CONDA_ENV) ==="
+echo "=== Qasper self_study synthesis ==="
 for model in "${MODELS[@]}"; do
   echo "=== Processing model: $model ==="
-  # Short tag for output naming, e.g. "Qwen3-4B-Instruct-2507" or "Llama-3.2-1B-Instruct"
+  # Short tag for output naming, e.g. "Qwen3-4B-Instruct-2507" or "Llama-3.2-3B-Instruct"
   model_tag="${model##*/}"
   start_server "$model"
 
