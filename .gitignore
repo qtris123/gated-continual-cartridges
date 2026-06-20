@@ -4,8 +4,6 @@ __pycache__/
 *$py.class
 
 .vscode
-
-output/
 wandb/
 artifacts/
 outputs/**
@@ -17,6 +15,7 @@ outputs/**
 !outputs/swapping_20260422_185334_local/
 !outputs/swapping_20260422_185334_local/**
 _data/
+gated-continual-cartridges/data/
 
 # C extensions
 *.so
@@ -207,3 +206,7 @@ credentials.txt
 data/eval_data_json
 continual_learning_via_sparse_memory_finetuning/
 continual_learning_via_sparse_memory_finetuning/
+
+# Large training parquet shards (>100 MB; exceed GitHub file size limit)
+data/longhealth/train/*.parquet
+data/qasper/train/*.parquet
