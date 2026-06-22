@@ -109,10 +109,10 @@ fi
 # which forces NCCL through host memory instead of PCIe peer-to-peer. Verify
 # with a single-run smoke test before launching a sweep.
 DISTRIBUTED_BACKEND="${DISTRIBUTED_BACKEND:-gloo}"
-MODEL_NAME="${MODEL_NAME:-meta-llama/Llama-3.2-3B-Instruct}"
+MODEL_NAME="${MODEL_NAME:-Qwen/Qwen3-4B-Instruct-2507}"
 # TODO: set to the cache_last.pt produced by train_initial_sparse.sh
-PHASE1_CACHE_PATH="${PHASE1_CACHE_PATH:-/localhome/local-triv/gated-continual-cartridges/outputs/qasper-initial-per-layer-all-reduce/d8103e75-4886-47a0-8af0-286ca4bec665/cache-step534.pt}"
-SYNTH_DATA_PATH="${SYNTH_DATA_PATH:-/localhome/local-triv/gated-continual-cartridges/data/qasper/train/qasper_MT_task_8192_no-cartridge.parquet}"
+PHASE1_CACHE_PATH="${PHASE1_CACHE_PATH:-/localhome/local-triv/gated-continual-cartridges/outputs/2026-06-21-16-58-50-initial_sparse_qwen_qasper_per-head_all-reduce/951e1f20-b6dc-4794-87b7-0b1b544858b1/cache-step621.pt}"
+SYNTH_DATA_PATH="${SYNTH_DATA_PATH:-/localhome/local-triv/gated-continual-cartridges/data/qasper/train/qwen_qasper_MT_task_8192.parquet}"
 # BG_STATS_PATH defaults to PHASE1_CACHE_PATH inside continual_sparse.py if unset
 BG_STATS_PATH="${BG_STATS_PATH:-/localhome/local-triv/gated-continual-cartridges/outputs/qasper-initial-per-layer-all-reduce/d8103e75-4886-47a0-8af0-286ca4bec665/bg_stats.pt}"
 NUM_TOKENS="${NUM_TOKENS:-1024}"        # must match Phase 1 cache size
@@ -132,11 +132,11 @@ EVAL_EVERY_N_STEPS="${EVAL_EVERY_N_STEPS:-8}"   # halved from 15 to match double
 SAVE_EVERY_N_STEPS="${SAVE_EVERY_N_STEPS:-256}"
 TOP_T="${TOP_T:-64}" # 128 256 512
 MOMENTUM_MASKING="${MOMENTUM_MASKING:-freeze}"  # soft | hard | freeze | decouple
-FREEZE_KEYS="${FREEZE_KEYS:-1}"                 # 1=freeze keys, 0=update keys
+FREEZE_KEYS="${FREEZE_KEYS:-0}"                 # 1=freeze keys, 0=update keys
 GRANULARITY="${GRANULARITY:-per_layer}"          # must match Phase 1 GRANULARITY
 IDF_TOP_K="${IDF_TOP_K:-128}"                   # top-k positions per bg batch for df
 IDF_SMOOTHING="${IDF_SMOOTHING:-1.0}"           # Laplace smoothing for IDF denominator
-RUN_NAME="${RUN_NAME:-qasper_phase2_sparse_${MOMENTUM_MASKING}_value-only_adam_top-${TOP_T}_${GRANULARITY}_lr${LR}_all-reduce}"
+RUN_NAME="${RUN_NAME:-qwen_qasper_phase2_sparse_${MOMENTUM_MASKING}_key-value_adam_top-${TOP_T}_${GRANULARITY}_lr${LR}_all-reduce}"
 
 echo "=========================================="
 echo "Qasper Phase 2 — TF-IDF Sparse Continual Cartridge"
@@ -216,9 +216,24 @@ if [ -z "$SYNTH_DATA_PATH" ]; then
   exit 1
 fi
 
-# Activate the repo virtual environment (pydrantic + cartridges live in .venv)
-echo "Activating .venv..."
-source "$CARTRIDGES_DIR/.venv/bin/activate"
+# Activate the Python environment where pydrantic + cartridges are installed.
+# Prefer a repo-local .venv; otherwise fall back to a conda env (default: cartridges).
+# Mirrors train_initial_sparse.sh so the same host setup works for both phases.
+CONDA_ENV_NAME="${CONDA_ENV_NAME:-cartridges}"
+if [ -f "$CARTRIDGES_DIR/.venv/bin/activate" ]; then
+  echo "Activating .venv..."
+  source "$CARTRIDGES_DIR/.venv/bin/activate"
+elif command -v conda >/dev/null 2>&1 && conda env list 2>/dev/null | awk '{print $1}' | grep -qx "$CONDA_ENV_NAME"; then
+  echo "Activating conda env '$CONDA_ENV_NAME'..."
+  CONDA_BASE="$(conda info --base 2>/dev/null)"
+  # shellcheck source=/dev/null
+  source "$CONDA_BASE/etc/profile.d/conda.sh"
+  conda activate "$CONDA_ENV_NAME"
+else
+  echo "Error: no .venv at $CARTRIDGES_DIR/.venv and conda env '$CONDA_ENV_NAME' not found."
+  echo "       Set CONDA_ENV_NAME to override the conda env name."
+  exit 1
+fi
 echo "Python: $(which python3)"
 echo ""
 
@@ -268,7 +283,8 @@ IDF_SMOOTHING="$IDF_SMOOTHING" \
 RUN_NAME="$RUN_NAME" \
 DISTRIBUTED_BACKEND="$DISTRIBUTED_BACKEND" \
 torchrun --nproc_per_node="$NUM_GPUS" --master_port="$MASTER_PORT" \
-  "$CARTRIDGES_DIR/examples/qasper2/train/continual_sparse.py"
+  "$CARTRIDGES_DIR/examples/qasper2/train/continual_sparse.py" \
+  "$@"
 
 echo "=== Training Done ==="
 echo ""

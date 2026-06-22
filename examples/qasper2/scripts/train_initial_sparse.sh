@@ -13,20 +13,27 @@ export PATH=${CUDA_HOME:+$CUDA_HOME/bin:}$PATH
 export LD_LIBRARY_PATH=${CUDA_HOME:+$CUDA_HOME/lib64:}$LD_LIBRARY_PATH
 
 NUM_GPUS="${NUM_GPUS:-2}"
-MODEL_NAME="${MODEL_NAME:-meta-llama/Llama-3.2-3B-Instruct}"
+# IMPORTANT: MODEL_NAME must match the model used to synthesize SYNTH_DATA_PATH.
+#   * data/qasper/train/qwen_qasper_*_8192.parquet  ->  Qwen/Qwen3-4B-Instruct-2507
+#     (see examples/qasper2/scripts/synthesize_self_study.sh)
+# Using a mismatched tokenizer/model produces an async CUDA device-side assert
+# whose stack trace points at create_block_mask, not the real culprit (OOV embedding lookup).
+# Note: FlexQwen3ForCausalLM requires Qwen3 architecture (has q_norm/k_norm); it is NOT
+# compatible with Qwen2 / Qwen2.5 checkpoints.
+MODEL_NAME="${MODEL_NAME:-Qwen/Qwen3-4B-Instruct-2507}"
 NUM_TOKENS="${NUM_TOKENS:-1024}"
 TEXT_PATH="${TEXT_PATH:-$CARTRIDGES_DIR/examples/qasper2/train/qasper_init_${NUM_TOKENS}.txt}"
-SYNTH_DATA_PATH="${SYNTH_DATA_PATH:-/localhome/local-triv/gated-continual-cartridges/data/qasper/train/qasper_QA_task_8192_no-cartridge.parquet}"
+SYNTH_DATA_PATH="${SYNTH_DATA_PATH:-/localhome/local-triv/gated-continual-cartridges/data/qasper/train/qwen_qasper_QA_task_8192.parquet}"
 # Optional: set to a parquet to log perplexity in W&B
 EVAL_DATA_PATH="${EVAL_DATA_PATH:-$CARTRIDGES_DIR/examples/qasper2/qasper_eval_QA.parquet}"
 EPOCHS="${EPOCHS:-10}"
 LR="${LR:-2e-2}"
-GLOBAL_BATCH_SIZE="${GLOBAL_BATCH_SIZE:-64}"   # for 4 GPUs: ~16/GPU; for 2 GPUs: ~32/GPU
+GLOBAL_BATCH_SIZE="${GLOBAL_BATCH_SIZE:-32}"   # for 4 GPUs: ~16/GPU; for 2 GPUs: ~32/GPU
 MASTER_PORT="${MASTER_PORT:-29507}"
-EVAL_EVERY_N_STEPS="${EVAL_EVERY_N_STEPS:-25}"  # halved from 50 to match doubled batch size
+EVAL_EVERY_N_STEPS="${EVAL_EVERY_N_STEPS:-50}"  # halved from 50 to match doubled batch size
 SAVE_EVERY_N_STEPS="${SAVE_EVERY_N_STEPS:-256}"
 # bg_stats granularity — must match GRANULARITY in train_continual_sparse.sh
-GRANULARITY="${GRANULARITY:-per_head}"    # global | per_layer | per_head
+GRANULARITY="${GRANULARITY:-per_layer}"    # global | per_layer | per_head
 RUN_NAME="${RUN_NAME:-qasper_phase1_${GRANULARITY}_all_reduced}"
 
 echo "=========================================="
@@ -91,9 +98,23 @@ if [ -z "$SYNTH_DATA_PATH" ]; then
   exit 1
 fi
 
-# Activate the repo virtual environment (pydrantic + cartridges live in .venv)
-echo "Activating .venv..."
-source "$CARTRIDGES_DIR/.venv/bin/activate"
+# Activate the Python environment where pydrantic + cartridges are installed.
+# Prefer a repo-local .venv; otherwise fall back to a conda env (default: cartridges).
+CONDA_ENV_NAME="${CONDA_ENV_NAME:-cartridges}"
+if [ -f "$CARTRIDGES_DIR/.venv/bin/activate" ]; then
+  echo "Activating .venv..."
+  source "$CARTRIDGES_DIR/.venv/bin/activate"
+elif command -v conda >/dev/null 2>&1 && conda env list 2>/dev/null | awk '{print $1}' | grep -qx "$CONDA_ENV_NAME"; then
+  echo "Activating conda env '$CONDA_ENV_NAME'..."
+  CONDA_BASE="$(conda info --base 2>/dev/null)"
+  # shellcheck source=/dev/null
+  source "$CONDA_BASE/etc/profile.d/conda.sh"
+  conda activate "$CONDA_ENV_NAME"
+else
+  echo "Error: no .venv at $CARTRIDGES_DIR/.venv and conda env '$CONDA_ENV_NAME' not found."
+  echo "       Set CONDA_ENV_NAME to override the conda env name."
+  exit 1
+fi
 echo "Python: $(which python3)"
 echo ""
 

@@ -84,7 +84,7 @@ GLOBAL_BATCH_SIZE = int(os.environ.get("GLOBAL_BATCH_SIZE", "32"))
 # Cosine schedule horizon. Empirically: 250 fits bsize 64, 500 fits bsize 32 on
 # the qasper Phase-2 (MT) dataset at EPOCHS=10. Override via env when changing
 # either GLOBAL_BATCH_SIZE or EPOCHS so the LR floor doesn't kick in mid-run.
-MAX_STEPS = int(os.environ.get("MAX_STEPS", "250"))
+MAX_STEPS = int(os.environ.get("MAX_STEPS", "550"))
 EVAL_EVERY_N_STEPS = int(os.environ.get("EVAL_EVERY_N_STEPS", "15"))
 SAVE_EVERY_N_STEPS = int(os.environ.get("SAVE_EVERY_N_STEPS", "256"))
 DISTRIBUTED_BACKEND = os.environ.get("DISTRIBUTED_BACKEND", "gloo")
