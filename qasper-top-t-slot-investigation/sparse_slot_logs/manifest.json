@@ -1,0 +1,74 @@
+{
+  "global__t32": {
+    "folder": "2026-06-22-15-29-24-continual_sparse_global_top-32-key-value_all-reduce_num-tokens-512",
+    "uuid": "14d5b3c1-0f8e-464e-a684-d31ae52c0fd6",
+    "size_bytes": 55313,
+    "src": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-06-22-15-29-24-continual_sparse_global_top-32-key-value_all-reduce_num-tokens-512/14d5b3c1-0f8e-464e-a684-d31ae52c0fd6/sparse_slot_log.pt"
+  },
+  "global__t64": {
+    "folder": "2026-06-22-15-29-40-continual_sparse_global_top-64-key-value_all-reduce_num-tokens-512",
+    "uuid": "2cd950a3-cabe-48a8-bffc-e792d502eef7",
+    "size_bytes": 60177,
+    "src": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-06-22-15-29-40-continual_sparse_global_top-64-key-value_all-reduce_num-tokens-512/2cd950a3-cabe-48a8-bffc-e792d502eef7/sparse_slot_log.pt"
+  },
+  "global__t128": {
+    "folder": "2026-06-22-15-29-58-continual_sparse_global_top-128-key-value_all-reduce_num-tokens-512",
+    "uuid": "0ccf40f4-82d7-4fc5-98c0-16e99a663599",
+    "size_bytes": 69905,
+    "src": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-06-22-15-29-58-continual_sparse_global_top-128-key-value_all-reduce_num-tokens-512/0ccf40f4-82d7-4fc5-98c0-16e99a663599/sparse_slot_log.pt"
+  },
+  "global__t256": {
+    "folder": "2026-06-22-15-30-11-continual_sparse_global_top-256-key-value_all-reduce_num-tokens-512",
+    "uuid": "16af9bc2-13aa-4c1b-ae14-7c0d06bd68ac",
+    "size_bytes": 89361,
+    "src": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-06-22-15-30-11-continual_sparse_global_top-256-key-value_all-reduce_num-tokens-512/16af9bc2-13aa-4c1b-ae14-7c0d06bd68ac/sparse_slot_log.pt"
+  },
+  "per_layer__t32": {
+    "folder": "2026-06-22-12-05-37-continual_sparse-per-layer-top-32-key-value_all-reduce_num-tokens-512",
+    "uuid": "40d0a79f-cf06-4453-b1b7-7b6767ad0f31",
+    "size_bytes": 1269521,
+    "src": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-06-22-12-05-37-continual_sparse-per-layer-top-32-key-value_all-reduce_num-tokens-512/40d0a79f-cf06-4453-b1b7-7b6767ad0f31/sparse_slot_log.pt"
+  },
+  "per_layer__t64": {
+    "folder": "2026-06-22-12-06-23-continual_sparse-per-layer-top-64-key-value_all-reduce_num-tokens-512",
+    "uuid": "3473fc21-26eb-48e5-91c5-d9a65b2560f7",
+    "size_bytes": 1405841,
+    "src": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-06-22-12-06-23-continual_sparse-per-layer-top-64-key-value_all-reduce_num-tokens-512/3473fc21-26eb-48e5-91c5-d9a65b2560f7/sparse_slot_log.pt"
+  },
+  "per_layer__t128": {
+    "folder": "2026-06-22-12-09-37-continual_sparse-per-layer-top-128-key-value_all-reduce_num-tokens-512",
+    "uuid": "2ed32be8-4c57-4127-8c06-be3ab1dc5320",
+    "size_bytes": 1678225,
+    "src": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-06-22-12-09-37-continual_sparse-per-layer-top-128-key-value_all-reduce_num-tokens-512/2ed32be8-4c57-4127-8c06-be3ab1dc5320/sparse_slot_log.pt"
+  },
+  "per_layer__t256": {
+    "folder": "2026-06-22-12-09-53-continual_sparse-per-layer-top-256-key-value_all-reduce_num-tokens-512",
+    "uuid": "c6230f3f-04e5-4bb6-a547-fc8aa4ed6492",
+    "size_bytes": 2223569,
+    "src": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-06-22-12-09-53-continual_sparse-per-layer-top-256-key-value_all-reduce_num-tokens-512/c6230f3f-04e5-4bb6-a547-fc8aa4ed6492/sparse_slot_log.pt"
+  },
+  "per_head__t32": {
+    "folder": "2026-06-22-10-54-19-continual_sparse-per-head-top-32-key-value_all-reduce_num-tokens-512",
+    "uuid": "c715ffa4-c4a3-4fbb-938f-dbe676802e1c",
+    "size_bytes": 9837457,
+    "src": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-06-22-10-54-19-continual_sparse-per-head-top-32-key-value_all-reduce_num-tokens-512/c715ffa4-c4a3-4fbb-938f-dbe676802e1c/sparse_slot_log.pt"
+  },
+  "per_head__t64": {
+    "folder": "2026-06-22-10-54-36-continual_sparse-per-head-top-64-key-value_all-reduce_num-tokens-512",
+    "uuid": "f54b450f-7cb6-4165-a962-0a95ec483111",
+    "size_bytes": 10926993,
+    "src": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-06-22-10-54-36-continual_sparse-per-head-top-64-key-value_all-reduce_num-tokens-512/f54b450f-7cb6-4165-a962-0a95ec483111/sparse_slot_log.pt"
+  },
+  "per_head__t128": {
+    "folder": "2026-06-22-10-54-50-continual_sparse-per-head-top-128-key-value_all-reduce_num-tokens-512",
+    "uuid": "4a162a12-3701-48be-99e2-2ed6eb35d11a",
+    "size_bytes": 13106065,
+    "src": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-06-22-10-54-50-continual_sparse-per-head-top-128-key-value_all-reduce_num-tokens-512/4a162a12-3701-48be-99e2-2ed6eb35d11a/sparse_slot_log.pt"
+  },
+  "per_head__t256": {
+    "folder": "2026-06-22-10-55-05-continual_sparse-per-head-top-256-key-value_all-reduce_num-tokens-512",
+    "uuid": "31203e58-004a-4cee-abc1-5f8e7a5f178b",
+    "size_bytes": 17465233,
+    "src": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-06-22-10-55-05-continual_sparse-per-head-top-256-key-value_all-reduce_num-tokens-512/31203e58-004a-4cee-abc1-5f8e7a5f178b/sparse_slot_log.pt"
+  }
+}
