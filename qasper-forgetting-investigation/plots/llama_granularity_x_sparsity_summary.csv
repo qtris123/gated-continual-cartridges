@@ -1,0 +1,17 @@
+model,granularity,top_k,forgetting_ppl,acquisition_ppl,forgetting_log_ppl,acquisition_log_ppl
+llama,per-head,32,16.25654,6.48485,2.78850,1.86947
+llama,per-head,64,17.55832,6.28121,2.86553,1.83756
+llama,per-head,128,18.00824,6.34735,2.89083,1.84804
+llama,per-head,256,19.57684,6.36024,2.97435,1.85007
+llama,per-head,baseline,6.12804,33.51526,1.81287,3.51200
+llama,per-layer,32,15.26041,6.98303,2.72526,1.94348
+llama,per-layer,64,16.33283,6.44935,2.79318,1.86398
+llama,per-layer,128,16.39165,6.22869,2.79677,1.82917
+llama,per-layer,256,18.89469,6.37718,2.93888,1.85273
+llama,per-layer,baseline,6.12804,33.51526,1.81287,3.51200
+llama,global,32,13.46202,6.89464,2.59987,1.93074
+llama,global,64,14.29802,6.65753,2.66012,1.89575
+llama,global,128,16.32600,6.78317,2.79276,1.91444
+llama,global,256,19.40696,6.68743,2.96563,1.90023
+llama,global,baseline,6.11269,33.92433,1.81037,3.52413
+llama,shared,baseline_avg,6.12292,33.65162,1.81204,3.51606
