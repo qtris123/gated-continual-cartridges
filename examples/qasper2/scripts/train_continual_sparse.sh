@@ -111,20 +111,20 @@ fi
 DISTRIBUTED_BACKEND="${DISTRIBUTED_BACKEND:-gloo}"
 MODEL_NAME="${MODEL_NAME:-Qwen/Qwen3-4B-Instruct-2507}"
 # TODO: set to the cache_last.pt produced by train_initial_sparse.sh
-PHASE1_CACHE_PATH="${PHASE1_CACHE_PATH:-/localhome/local-triv/gated-continual-cartridges/outputs/2026-06-21-16-58-50-initial_sparse_qwen_qasper_per-head_all-reduce/951e1f20-b6dc-4794-87b7-0b1b544858b1/cache-step621.pt}"
+PHASE1_CACHE_PATH="${PHASE1_CACHE_PATH:-/localhome/local-triv/gated-continual-cartridges/outputs/2026-06-22-08-31-41-initial_sparse_qwen_qasper_per-layer_max-tokens-512_all-reduce/ef9e7f9d-7b66-4369-86d6-bdecd9db9efd/cache-step622.pt}"
 SYNTH_DATA_PATH="${SYNTH_DATA_PATH:-/localhome/local-triv/gated-continual-cartridges/data/qasper/train/qwen_qasper_MT_task_8192.parquet}"
 # BG_STATS_PATH defaults to PHASE1_CACHE_PATH inside continual_sparse.py if unset
-BG_STATS_PATH="${BG_STATS_PATH:-/localhome/local-triv/gated-continual-cartridges/outputs/qasper-initial-per-layer-all-reduce/d8103e75-4886-47a0-8af0-286ca4bec665/bg_stats.pt}"
-NUM_TOKENS="${NUM_TOKENS:-1024}"        # must match Phase 1 cache size
+BG_STATS_PATH="${BG_STATS_PATH:-/localhome/local-triv/gated-continual-cartridges/outputs/2026-06-22-08-31-41-initial_sparse_qwen_qasper_per-layer_max-tokens-512_all-reduce/ef9e7f9d-7b66-4369-86d6-bdecd9db9efd/bg_stats.pt}"
+NUM_TOKENS="${NUM_TOKENS:-512}"        # must match Phase 1 cache size
 EPOCHS="${EPOCHS:-10}"
 LR="${LR:-2e-2}"                        # adam: 2e-2
 GLOBAL_BATCH_SIZE="${GLOBAL_BATCH_SIZE:-32}"   # 4 GPU: 16/GPU; 2 GPU: 32/GPU
 # Cosine-schedule horizon. Rule of thumb on this dataset @ EPOCHS=10:
 #   GLOBAL_BATCH_SIZE=64 -> MAX_STEPS=250
-#   GLOBAL_BATCH_SIZE=32 -> MAX_STEPS=500
+#   GLOBAL_BATCH_SIZE=32 -> MAX_STEPS=550
 # If you change GLOBAL_BATCH_SIZE or EPOCHS, scale MAX_STEPS to match the actual
 # number of optimizer steps so the LR doesn't sit at its floor mid-run.
-MAX_STEPS="${MAX_STEPS:-250}"
+MAX_STEPS="${MAX_STEPS:-550}"
 MASTER_PORT="${MASTER_PORT:-29507}"
 # Optional: set to a parquet to log perplexity in W&B during training.
 EVAL_DATA_PATH="${EVAL_DATA_PATH:-$CARTRIDGES_DIR/examples/qasper2/qasper_eval_MT.parquet}"
@@ -134,9 +134,12 @@ TOP_T="${TOP_T:-64}" # 128 256 512
 MOMENTUM_MASKING="${MOMENTUM_MASKING:-freeze}"  # soft | hard | freeze | decouple
 FREEZE_KEYS="${FREEZE_KEYS:-0}"                 # 1=freeze keys, 0=update keys
 GRANULARITY="${GRANULARITY:-per_layer}"          # must match Phase 1 GRANULARITY
-IDF_TOP_K="${IDF_TOP_K:-128}"                   # top-k positions per bg batch for df
+IDF_TOP_K="${IDF_TOP_K:-64}"                   # top-k positions per bg batch for df
 IDF_SMOOTHING="${IDF_SMOOTHING:-1.0}"           # Laplace smoothing for IDF denominator
-RUN_NAME="${RUN_NAME:-qwen_qasper_phase2_sparse_${MOMENTUM_MASKING}_key-value_adam_top-${TOP_T}_${GRANULARITY}_lr${LR}_all-reduce}"
+RUN_NAME="${RUN_NAME:-qwen_qasper_phase2_sparse_num-tokens-${NUM_TOKENS}_${MOMENTUM_MASKING}_key-value_adam_top-${TOP_T}_${GRANULARITY}_lr${LR}_all-reduce}"
+# Optional W&B group — passed through to continual_sparse.py so a sweep can cluster
+# its iterations under one group in the W&B UI. Empty by default.
+WANDB_GROUP="${WANDB_GROUP:-}"
 
 echo "=========================================="
 echo "Qasper Phase 2 — TF-IDF Sparse Continual Cartridge"
@@ -257,6 +260,7 @@ echo "Granularity:     $GRANULARITY"
 echo "IDF top-k:       $IDF_TOP_K"
 echo "IDF smoothing:   $IDF_SMOOTHING"
 echo "Run name:        $RUN_NAME"
+echo "W&B group:       ${WANDB_GROUP:-<none>}"
 echo "====================================================="
 
 
@@ -281,6 +285,7 @@ GRANULARITY="$GRANULARITY" \
 IDF_TOP_K="$IDF_TOP_K" \
 IDF_SMOOTHING="$IDF_SMOOTHING" \
 RUN_NAME="$RUN_NAME" \
+WANDB_GROUP="$WANDB_GROUP" \
 DISTRIBUTED_BACKEND="$DISTRIBUTED_BACKEND" \
 torchrun --nproc_per_node="$NUM_GPUS" --master_port="$MASTER_PORT" \
   "$CARTRIDGES_DIR/examples/qasper2/train/continual_sparse.py" \

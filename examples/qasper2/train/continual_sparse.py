@@ -42,6 +42,8 @@ Env vars:
     IDF_TOP_K               — top-k positions per bg batch counted toward df (default: 128)
     IDF_SMOOTHING           — Laplace smoothing for IDF denominator (default: 1.0)
     RUN_NAME                — W&B run name (default: auto-generated)
+    WANDB_GROUP             — W&B group name (default: None). Set this in a sweep
+                              to cluster all iterations' runs under one group.
     DISTRIBUTED_BACKEND     — distributed backend (default: gloo)
 """
 
@@ -98,6 +100,8 @@ RUN_NAME = os.environ.get(
     "RUN_NAME",
     f"qasper_phase2_sparse_{MOMENTUM_MASKING}_top-{TOP_T}_{GRANULARITY}_lr{LR}",
 )
+# Optional W&B group — lets a sweep cluster all its runs under one group in the UI.
+WANDB_GROUP = os.environ.get("WANDB_GROUP", None)
 
 _model_cls = FlexQwen3ForCausalLM if "qwen" in MODEL_NAME.lower() else FlexLlamaForCausalLM
 
@@ -161,6 +165,7 @@ config = TrainConfig(
     save_every_n_steps=SAVE_EVERY_N_STEPS,
     distributed_backend=DISTRIBUTED_BACKEND,
     wandb=WandBConfig(
+        group=WANDB_GROUP,
         tags=[
             "train", "qasper", "phase2", "sparse",
             f"top-t-{TOP_T}", f"momentum-{MOMENTUM_MASKING}",

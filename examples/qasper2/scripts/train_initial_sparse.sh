@@ -12,7 +12,7 @@ export CARTRIDGES_OUTPUT_DIR="${CARTRIDGES_OUTPUT_DIR:-$CARTRIDGES_DIR/outputs}"
 export PATH=${CUDA_HOME:+$CUDA_HOME/bin:}$PATH
 export LD_LIBRARY_PATH=${CUDA_HOME:+$CUDA_HOME/lib64:}$LD_LIBRARY_PATH
 
-NUM_GPUS="${NUM_GPUS:-2}"
+NUM_GPUS="${NUM_GPUS:-4}"
 # IMPORTANT: MODEL_NAME must match the model used to synthesize SYNTH_DATA_PATH.
 #   * data/qasper/train/qwen_qasper_*_8192.parquet  ->  Qwen/Qwen3-4B-Instruct-2507
 #     (see examples/qasper2/scripts/synthesize_self_study.sh)
@@ -20,9 +20,9 @@ NUM_GPUS="${NUM_GPUS:-2}"
 # whose stack trace points at create_block_mask, not the real culprit (OOV embedding lookup).
 # Note: FlexQwen3ForCausalLM requires Qwen3 architecture (has q_norm/k_norm); it is NOT
 # compatible with Qwen2 / Qwen2.5 checkpoints.
-MODEL_NAME="${MODEL_NAME:-Qwen/Qwen3-4B-Instruct-2507}"
-NUM_TOKENS="${NUM_TOKENS:-1024}"
-TEXT_PATH="${TEXT_PATH:-$CARTRIDGES_DIR/examples/qasper2/train/qasper_init_${NUM_TOKENS}.txt}"
+MODEL_NAME="${MODEL_NAME:-Qwen/Qwen3-4B-Instruct-2507}" # meta-llama/Llama-3.2-3B-Instruct}"
+NUM_TOKENS="${NUM_TOKENS:-512}"
+TEXT_PATH="${TEXT_PATH:-$CARTRIDGES_DIR/examples/qasper2/train/qwen_qasper_init_${NUM_TOKENS}.txt}"
 SYNTH_DATA_PATH="${SYNTH_DATA_PATH:-/localhome/local-triv/gated-continual-cartridges/data/qasper/train/qwen_qasper_QA_task_8192.parquet}"
 # Optional: set to a parquet to log perplexity in W&B
 EVAL_DATA_PATH="${EVAL_DATA_PATH:-$CARTRIDGES_DIR/examples/qasper2/qasper_eval_QA.parquet}"
@@ -34,7 +34,7 @@ EVAL_EVERY_N_STEPS="${EVAL_EVERY_N_STEPS:-50}"  # halved from 50 to match double
 SAVE_EVERY_N_STEPS="${SAVE_EVERY_N_STEPS:-256}"
 # bg_stats granularity — must match GRANULARITY in train_continual_sparse.sh
 GRANULARITY="${GRANULARITY:-per_layer}"    # global | per_layer | per_head
-RUN_NAME="${RUN_NAME:-qasper_phase1_${GRANULARITY}_all_reduced}"
+RUN_NAME="${RUN_NAME:-qasper_phase1_num-tokens-${NUM_TOKENS}_${GRANULARITY}_all_reduced}"
 
 echo "=========================================="
 echo "Qasper Phase 1 — Sparse Initial Cartridge"
