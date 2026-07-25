@@ -50,11 +50,20 @@ from cartridges.sparse_cache_finetuning import (
     install_query_capture_hooks,
     collect_background_stats,
 )
+from cartridges.attention_matching_finetuning import (
+    AttentionMatchingFinetuningConfig,
+    AMQueryAccumulator,
+    apply_am_update_to_cache,
+)
 from cartridges.utils import get_logger, seed_everything
 from cartridges.utils.wandb import WandBConfig, prepare_wandb
 
 
 logger = get_logger(__name__)
+
+
+def _collate_first(batch):
+    return batch[0]
 
 
 class LossEvalConfig(BaseConfig):
@@ -112,6 +121,7 @@ class TrainConfig(RunConfig):
     weight_decay: float = 0.0
 
     sparse_cache_finetuning: Optional[SparseCacheFinetuningConfig] = None
+    attention_matching_finetuning: Optional[AttentionMatchingFinetuningConfig] = None
 
     kv_cache_initializer: Optional[KVCacheFactory.Config] = None
     pretrained_cache_path: Optional[str] = None
@@ -228,7 +238,11 @@ def train(config: TrainConfig):
             param.requires_grad = False
 
         cache = cache.to(local_rank)
-        wrapped_model = CacheAndModel(cache, model, sparse_config=config.sparse_cache_finetuning)
+        wrapped_model = CacheAndModel(
+            cache, model,
+            sparse_config=config.sparse_cache_finetuning,
+            am_config=config.attention_matching_finetuning,
+        )
 
     if is_ddp:
 
@@ -255,24 +269,37 @@ def train(config: TrainConfig):
     dataloader = DataLoader(
         dataset, 
         sampler=train_sampler,
-        # our dataset already handles batching, so we force the batch size to 1
-        # and extract it in the collate. We still use the dataloader to leverage
-        # a single worker to avoid blocking the main process
         batch_size=1, 
-        collate_fn=lambda x: x[0], 
-        num_workers=1, 
+        collate_fn=_collate_first, 
+        num_workers=0, 
     )
 
     sparse_ft = config.sparse_cache_finetuning
+    am_ft = config.attention_matching_finetuning
+    am_ft_enabled = (
+        am_ft is not None
+        and am_ft.enabled
+        and cache_tuning
+        and cache is not None
+        and cache._num_trainable_tokens > 0
+    )
     sparse_ft_enabled = (
         sparse_ft is not None
         and sparse_ft.enabled
         and cache_tuning
         and cache is not None
         and cache._num_trainable_tokens > 0
+        and not am_ft_enabled
     )
 
-    if sparse_ft_enabled:
+    if am_ft_enabled:
+        logger.info(
+            f"Attention Matching finetuning enabled: top_t={am_ft.top_t}, "
+            f"use_idf={am_ft.use_idf}, target_mode={am_ft.target_mode}, "
+            f"queries={am_ft.queries_per_batch}"
+        )
+        optimizer = None
+    elif sparse_ft_enabled:
         if config.optimizer == "adam":
             optimizer = optim.Adam(
                 cache.parameters(),
@@ -296,7 +323,29 @@ def train(config: TrainConfig):
 
     # Set up sparse cache finetuning components
     cache_access_tracker: Optional[CacheAccessTracker] = None
+    am_query_accumulator: Optional[AMQueryAccumulator] = None
     tfidf_ranker: Optional[CacheTFIDFRanker] = None
+    am_slot_log: list[dict] = []
+    am_mse_log: list[dict] = []
+    cached_am_mask: Optional[GradientMask] = None
+
+    if am_ft_enabled or sparse_ft_enabled:
+        tfidf_bg = am_ft if am_ft_enabled else sparse_ft
+        bg_tracker = None
+        if tfidf_bg.background_indices_path is not None:
+            bg_tracker = BackgroundAccessTracker(
+                num_batches=tfidf_bg.num_background_batches,
+                granularity=tfidf_bg.granularity,
+            )
+            bg_tracker.load(tfidf_bg.background_indices_path)
+        tfidf_ranker = CacheTFIDFRanker(
+            background_tracker=bg_tracker,
+            use_idf=tfidf_bg.use_idf,
+            smoothing=tfidf_bg.idf_smoothing,
+            top_k_per_batch=tfidf_bg.background_top_k_per_batch,
+            granularity=tfidf_bg.granularity,
+        )
+
     if sparse_ft_enabled:
         cache_access_tracker = CacheAccessTracker(
             n_trainable_tokens=cache._num_trainable_tokens,
@@ -304,20 +353,6 @@ def train(config: TrainConfig):
             granularity=sparse_ft.granularity,
             n_layers=attn_config.n_layers,
             n_kv_heads=attn_config.n_heads,
-        )
-        bg_tracker = None
-        if sparse_ft.background_indices_path is not None:
-            bg_tracker = BackgroundAccessTracker(
-                num_batches=sparse_ft.num_background_batches,
-                granularity=sparse_ft.granularity,
-            )
-            bg_tracker.load(sparse_ft.background_indices_path)
-        tfidf_ranker = CacheTFIDFRanker(
-            background_tracker=bg_tracker,
-            use_idf=sparse_ft.use_idf,
-            smoothing=sparse_ft.idf_smoothing,
-            top_k_per_batch=sparse_ft.background_top_k_per_batch,
-            granularity=sparse_ft.granularity,
         )
         logger.info(
             f"Sparse finetuning: tracking {cache._num_trainable_tokens} cache positions, "
@@ -331,6 +366,18 @@ def train(config: TrainConfig):
             "decouple":"param restored post-step, momentum keeps decaying (stays warm)",
         }
         logger.info(f"  -> {sparse_ft.momentum_masking.upper()}: {descriptions[sparse_ft.momentum_masking]}")
+
+    if am_ft_enabled:
+        am_query_accumulator = AMQueryAccumulator(
+            granularity=am_ft.granularity,
+            queries_per_batch=am_ft.queries_per_batch,
+            n_layers=attn_config.n_layers,
+            n_kv_heads=attn_config.n_heads,
+            device=local_rank,
+        )
+        logger.info(
+            f"AM finetuning: top_t={am_ft.top_t}, update_interval={am_ft.update_interval}"
+        )
 
     # Sparse finetuning slot selection log (saved to file after training)
     sparse_slot_log: list[dict] = []
@@ -480,25 +527,33 @@ def train(config: TrainConfig):
 
                     loss = (ce_by_token.mean() / accumulate_grad_steps)
 
-                # Accumulate attention-based cache access stats for sparse finetuning
-                if sparse_ft_enabled:
-                    _cam = wrapped_model.module if is_ddp else wrapped_model
-                    captured_q = _cam.get_captured_queries()
-                    if captured_q:
-                        cache_access_tracker.accumulate_from_hooks(
-                            captured_q, cache,
-                            scaling=cache.config.head_dim ** -0.5,
-                            seq_ids=batch.element_ids.to(local_rank),
-                        )
+                # Accumulate attention-based cache access stats
+                _cam = wrapped_model.module if is_ddp else wrapped_model
+                captured_q = _cam.get_captured_queries()
 
-                # the backward pass should go outside of the automated-mixed precision context
-                # see here for an example: https://pytorch.org/docs/stable/notes/amp_examples.html
-                # but it should go inside the ddp context manager
-                t0 = time.time()
-                loss.backward()
-                if config.log_time:
-                    torch.cuda.synchronize()
-                    logger.info(f"Backward pass time: {time.time() - t0:.2f}s")
+                if sparse_ft_enabled and captured_q:
+                    cache_access_tracker.accumulate_from_hooks(
+                        captured_q, cache,
+                        scaling=cache.config.head_dim ** -0.5,
+                        seq_ids=batch.element_ids.to(local_rank),
+                    )
+
+                if am_ft_enabled and captured_q:
+                    am_query_accumulator.accumulate_from_hooks(
+                        captured_q, cache,
+                        scaling=cache.config.head_dim ** -0.5,
+                        seq_ids=batch.element_ids.to(local_rank),
+                    )
+
+                if not am_ft_enabled:
+                    # the backward pass should go outside of the automated-mixed precision context
+                    t0 = time.time()
+                    loss.backward()
+                    if config.log_time:
+                        torch.cuda.synchronize()
+                        logger.info(f"Backward pass time: {time.time() - t0:.2f}s")
+                else:
+                    loss = loss.detach()
 
             # Update the accumulated metrics
             accum_loss += loss.detach()
@@ -509,9 +564,53 @@ def train(config: TrainConfig):
 
             if do_step:
                 pre_step_state = None
-                # Sparse cache finetuning: compute top positions from THIS step's scores,
-                # then apply gradient mask post-backward (no 1-step lag).
-                if sparse_ft_enabled:
+
+                if am_ft_enabled:
+                    should_update = (
+                        optimizer_step % am_ft.update_interval == 0
+                        or cached_am_mask is None
+                    )
+                    if should_update:
+                        access_scores = am_query_accumulator.get_access_scores()
+                        if is_ddp:
+                            dist.all_reduce(access_scores, op=dist.ReduceOp.SUM)
+
+                        grad_mask, ranking_info = tfidf_ranker.rank_positions(
+                            access_scores, top_t=am_ft.top_t,
+                            step=optimizer_step, return_info=True,
+                        )
+                        cached_am_mask = grad_mask
+                    else:
+                        grad_mask = cached_am_mask
+                        ranking_info = None
+
+                    am_stats = apply_am_update_to_cache(
+                        cache, grad_mask, am_query_accumulator,
+                        n_layers=attn_config.n_layers,
+                        head_dim=attn_config.head_dim,
+                        target_mode=am_ft.target_mode,
+                        ridge_lambda=am_ft.ridge_lambda,
+                        freeze_keys=am_ft.freeze_keys,
+                        max_queries_per_head=am_ft.max_queries_per_head,
+                    )
+                    am_stats.step = optimizer_step
+
+                    if is_rank_zero:
+                        am_mse_log.append({
+                            "step": optimizer_step,
+                            "mean_mse": am_stats.mean_mse,
+                            "mse_per_layer": am_stats.mse_per_layer,
+                        })
+                        if optimizer_step % 30 == 0 and ranking_info is not None:
+                            am_slot_log.append({
+                                "step": optimizer_step,
+                                "top_positions": grad_mask.positions_per_layer,
+                                "granularity": grad_mask.granularity,
+                            })
+
+                    am_query_accumulator.reset()
+
+                elif sparse_ft_enabled:
                     access_scores = cache_access_tracker.get_access_counts()
                     if is_ddp:
                         dist.all_reduce(access_scores, op=dist.ReduceOp.SUM)
@@ -579,18 +678,19 @@ def train(config: TrainConfig):
 
                     cache_access_tracker.reset()
 
-                optimizer.step()
+                if not am_ft_enabled:
+                    optimizer.step()
 
-                # Restore non-top-t positions after step ("freeze" / "decouple")
-                if pre_step_state is not None:
-                    restore_non_top_t_state(
-                        cache, pre_step_state,
-                        n_layers=attn_config.n_layers,
-                        optimizer=optimizer,
-                        restore_momentum=(sparse_ft.momentum_masking == "freeze"),
-                    )  
+                    # Restore non-top-t positions after step ("freeze" / "decouple")
+                    if pre_step_state is not None:
+                        restore_non_top_t_state(
+                            cache, pre_step_state,
+                            n_layers=attn_config.n_layers,
+                            optimizer=optimizer,
+                            restore_momentum=(sparse_ft.momentum_masking == "freeze"),
+                        )
 
-                optimizer.zero_grad()              
+                    optimizer.zero_grad()
 
                 # SE (05/02): We are careful to only reduce the loss immediately
                 # after the optimizer step. Doing this outside the `do_step` block
@@ -601,7 +701,7 @@ def train(config: TrainConfig):
                     dist.all_reduce(accum_num_input_tokens, op=dist.ReduceOp.SUM)
                     dist.all_reduce(accum_num_target_tokens, op=dist.ReduceOp.SUM)
 
-                if lr_scheduler is not None:
+                if lr_scheduler is not None and optimizer is not None:
                     new_lr = lr_scheduler.get_lr(config.lr, optimizer_step)
                     for param_group in optimizer.param_groups:
                         param_group["lr"] = new_lr
@@ -629,16 +729,24 @@ def train(config: TrainConfig):
                     "train/step_num_target_tokens": accum_num_target_tokens,
                     "train/num_input_tokens": total_num_input_tokens,
                     "train/num_target_tokens": total_num_target_tokens,
-                    **{
+                }
+                if optimizer is not None:
+                    wandb_step_dict.update({
                         f"optimizer/lr_group{i}": param_group["lr"]
                         for i, param_group in enumerate(optimizer.param_groups)
-                    },
-                }
+                    })
                 if sparse_ft_enabled:
                     wandb_step_dict["sparse/top_t"] = sparse_ft.top_t
                     wandb_step_dict["sparse/trainable_pct"] = (
                         100.0 * sparse_ft.top_t / cache._num_trainable_tokens
                     )
+                if am_ft_enabled:
+                    wandb_step_dict["am/top_t"] = am_ft.top_t
+                    wandb_step_dict["am/trainable_pct"] = (
+                        100.0 * am_ft.top_t / cache._num_trainable_tokens
+                    )
+                    if am_mse_log:
+                        wandb_step_dict["am/mean_mse"] = am_mse_log[-1]["mean_mse"]
                 wandb.log(wandb_step_dict, step=optimizer_step)
 
             if (
@@ -669,10 +777,32 @@ def train(config: TrainConfig):
                 accum_loss = 0.0
                 accum_num_input_tokens, accum_num_target_tokens = 0, 0
 
+                if (
+                    config.max_optimizer_steps > 0
+                    and optimizer_step >= config.max_optimizer_steps
+                ):
+                    logger.info(
+                        f"Reached max_optimizer_steps={config.max_optimizer_steps}, stopping."
+                    )
+                    break
+
+        if config.max_optimizer_steps > 0 and optimizer_step >= config.max_optimizer_steps:
+            break
+
     # We do a final evaluation and generation after training.
     # This is also useful for doing evaluation of a pretrained model without training
     do_evaluation()
     do_evaluate_generations(final=True)
+
+    if am_slot_log and is_rank_zero:
+        am_log_path = os.path.join(config.run_dir, "am_slot_log.pt")
+        torch.save(am_slot_log, am_log_path)
+        logger.info(f"Saved AM slot selection log ({len(am_slot_log)} entries) to {am_log_path}")
+
+    if am_mse_log and is_rank_zero:
+        am_mse_path = os.path.join(config.run_dir, "am_mse_log.pt")
+        torch.save(am_mse_log, am_mse_path)
+        logger.info(f"Saved AM MSE log ({len(am_mse_log)} entries) to {am_mse_path}")
 
     if sparse_slot_log and is_rank_zero:
         slot_log_path = os.path.join(config.run_dir, "sparse_slot_log.pt")
@@ -716,18 +846,28 @@ def train(config: TrainConfig):
     # IMPORTANT: each DDP rank sees a different shard of data (DistributedSampler),
     # so we must all-gather the ranked positions from all ranks and merge them before
     # saving.  Only rank 0 writes the final bg_stats.pt so it reflects the full corpus.
+    bg_ft = am_ft if am_ft_enabled else sparse_ft
     if (
-        sparse_ft is not None
-        and sparse_ft.collect_background_stats
+        bg_ft is not None
+        and bg_ft.collect_background_stats
         and cache_tuning
         and cache is not None
     ):
         bg_save_path = os.path.join(config.run_dir, "bg_stats.pt")
+        bg_collect_config = (
+            SparseCacheFinetuningConfig(
+                granularity=bg_ft.granularity,
+                num_background_batches=bg_ft.num_background_batches,
+                collect_background_stats=True,
+            )
+            if am_ft_enabled
+            else bg_ft
+        )
         collect_background_stats(
             wrapped_model=wrapped_model,
             cache=cache,
             dataloader=dataloader,
-            config=sparse_ft,
+            config=bg_collect_config,
             local_rank=local_rank,
             save_path=bg_save_path,
             is_ddp=is_ddp,
@@ -775,8 +915,8 @@ def evaluate_perplexity(
         # and extract it in the collate. We still use the dataloader to leverage
         # a single worker to avoid blocking the main process
         batch_size=1, 
-        collate_fn=lambda x: x[0], 
-        num_workers=1, 
+        collate_fn=_collate_first, 
+        num_workers=0, 
     )
 
     dataloader_pbar = tqdm(
@@ -884,6 +1024,12 @@ def evaluate_perplexity(
         # SE (05/03): this barrier is just to be safe, can probably be removed
         dist.barrier()
 
+    loss_val = float(epoch_loss / epoch_denom)
+    return {
+        "name": ds_config.name_for_wandb,
+        "loss": loss_val,
+        "perplexity": float(math.exp(loss_val)),
+    }
 
 
 def evaluate_generations(
@@ -1146,7 +1292,13 @@ class LinearWithWarmup(Scheduler):
 
 
 class CacheAndModel(nn.Module):
-    def __init__(self, cache, model, sparse_config: Optional[SparseCacheFinetuningConfig] = None):
+    def __init__(
+        self,
+        cache,
+        model,
+        sparse_config: Optional[SparseCacheFinetuningConfig] = None,
+        am_config: Optional[AttentionMatchingFinetuningConfig] = None,
+    ):
         super(CacheAndModel, self).__init__()
         self.cache = cache
         self.model = model
@@ -1158,8 +1310,13 @@ class CacheAndModel(nn.Module):
             and sparse_config.enabled
             and cache._num_trainable_tokens > 0
         )
+        self._am_enabled = (
+            am_config is not None
+            and am_config.enabled
+            and cache._num_trainable_tokens > 0
+        )
 
-        if self._sparse_enabled:
+        if self._sparse_enabled or self._am_enabled:
             self._captured_queries, self._hook_handles = install_query_capture_hooks(model)
 
     def forward(

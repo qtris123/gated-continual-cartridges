@@ -47,7 +47,7 @@ class KVFromLocal(KVCacheFactory):
 
 CHECKPOINT_PATH = os.environ["CHECKPOINT_PATH"]
 EVAL_DATA_PATH = os.environ["EVAL_DATA_PATH"]
-MODEL_NAME = os.environ.get("MODEL_NAME", "meta-llama/Llama-3.2-3B-Instruct")
+MODEL_NAME = os.environ.get("MODEL_NAME", "Qwen/Qwen3-4B-Instruct-2507")
 RUN_NAME = os.environ.get("RUN_NAME", "forgetting_eval")
 BATCH_SIZE = int(os.environ.get("BATCH_SIZE", "4"))
 WANDB_GROUP = os.environ.get("WANDB_GROUP") or None

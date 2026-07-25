@@ -51,6 +51,7 @@ MODEL_NAME = os.environ.get("MODEL_NAME", "meta-llama/Llama-3.2-3B-Instruct")
 LR = float(os.environ.get("LR", "2e-2"))
 EPOCHS = int(os.environ.get("EPOCHS", "10"))
 GLOBAL_BATCH_SIZE = int(os.environ.get("GLOBAL_BATCH_SIZE", "32"))
+MAX_STEPS = int(os.environ.get("MAX_STEPS", "-1"))
 EVAL_EVERY_N_STEPS = int(os.environ.get("EVAL_EVERY_N_STEPS", "50"))
 SAVE_EVERY_N_STEPS = int(os.environ.get("SAVE_EVERY_N_STEPS", "256"))
 DISTRIBUTED_BACKEND = os.environ.get("DISTRIBUTED_BACKEND", "gloo")
@@ -76,6 +77,7 @@ config = TrainConfig(
     lr=LR,
     epochs=EPOCHS,
     global_batch_size=GLOBAL_BATCH_SIZE,
+    max_optimizer_steps=MAX_STEPS,
     dataset=TrainDataset.Config(
         data_sources=[
             DataSource(

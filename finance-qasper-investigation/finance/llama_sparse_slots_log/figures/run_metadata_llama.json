@@ -1,0 +1,198 @@
+{
+  "model": "llama",
+  "title": "Llama-3.2-3B",
+  "runs": {
+    "global__t32": {
+      "path": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-07-08-08-12-32-continual-llama-global-top-t-32-key-value-num-tokens-512/sparse_slot_log.pt",
+      "steps": [
+        0,
+        30,
+        60,
+        90,
+        120,
+        150,
+        180,
+        210
+      ],
+      "n_tokens": 511,
+      "n_layers": 1,
+      "n_kv_heads": 1
+    },
+    "global__t64": {
+      "path": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-07-08-08-13-28-continual-llama-global-top-t-64-key-value-num-tokens-512/sparse_slot_log.pt",
+      "steps": [
+        0,
+        30,
+        60,
+        90,
+        120,
+        150,
+        180,
+        210
+      ],
+      "n_tokens": 511,
+      "n_layers": 1,
+      "n_kv_heads": 1
+    },
+    "global__t128": {
+      "path": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-07-08-08-20-13-continual-llama-global-top-t-128-key-value-num-tokens-512/sparse_slot_log.pt",
+      "steps": [
+        0,
+        30,
+        60,
+        90,
+        120,
+        150,
+        180,
+        210
+      ],
+      "n_tokens": 511,
+      "n_layers": 1,
+      "n_kv_heads": 1
+    },
+    "global__t256": {
+      "path": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-07-08-08-45-04-continual-llama-global-top-t-256-key-value-num-tokens-512/sparse_slot_log.pt",
+      "steps": [
+        0,
+        30,
+        60,
+        90,
+        120,
+        150,
+        180,
+        210
+      ],
+      "n_tokens": 511,
+      "n_layers": 1,
+      "n_kv_heads": 1
+    },
+    "per_layer__t32": {
+      "path": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-07-08-06-23-26-continual-llama-per-layer-top-t-32-key-value-num-tokens-512/sparse_slot_log.pt",
+      "steps": [
+        0,
+        30,
+        60,
+        90,
+        120,
+        150,
+        180,
+        210
+      ],
+      "n_tokens": 511,
+      "n_layers": 28,
+      "n_kv_heads": 1
+    },
+    "per_layer__t64": {
+      "path": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-07-08-06-53-39-continual-llama-per-layer-top-t-64-key-value-num-tokens-512/sparse_slot_log.pt",
+      "steps": [
+        0,
+        30,
+        60,
+        90,
+        120,
+        150,
+        180,
+        210
+      ],
+      "n_tokens": 511,
+      "n_layers": 28,
+      "n_kv_heads": 1
+    },
+    "per_layer__t128": {
+      "path": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-07-08-06-58-27-continual-llama-per-layer-top-t-128-key-value-num-tokens-512/sparse_slot_log.pt",
+      "steps": [
+        0,
+        30,
+        60,
+        90,
+        120,
+        150,
+        180,
+        210
+      ],
+      "n_tokens": 511,
+      "n_layers": 28,
+      "n_kv_heads": 1
+    },
+    "per_layer__t256": {
+      "path": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-07-08-07-19-58-continual-llama-per-layer-top-t-256-key-value-num-tokens-512/sparse_slot_log.pt",
+      "steps": [
+        0,
+        30,
+        60,
+        90,
+        120,
+        150,
+        180,
+        210
+      ],
+      "n_tokens": 511,
+      "n_layers": 28,
+      "n_kv_heads": 1
+    },
+    "per_head__t32": {
+      "path": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-07-08-07-32-58-continual-llama-per-head-top-t-32-key-value-num-tokens-512/sparse_slot_log.pt",
+      "steps": [
+        0,
+        30,
+        60,
+        90,
+        120,
+        150,
+        180,
+        210
+      ],
+      "n_tokens": 511,
+      "n_layers": 28,
+      "n_kv_heads": 8
+    },
+    "per_head__t64": {
+      "path": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-07-08-07-35-51-continual-llama-per-head-top-t-64-key-value-num-tokens-512/sparse_slot_log.pt",
+      "steps": [
+        0,
+        30,
+        60,
+        90,
+        120,
+        150,
+        180,
+        210
+      ],
+      "n_tokens": 511,
+      "n_layers": 28,
+      "n_kv_heads": 8
+    },
+    "per_head__t128": {
+      "path": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-07-08-07-37-16-continual-llama-per-head-top-t-128-key-value-num-tokens-512/sparse_slot_log.pt",
+      "steps": [
+        0,
+        30,
+        60,
+        90,
+        120,
+        150,
+        180,
+        210
+      ],
+      "n_tokens": 511,
+      "n_layers": 28,
+      "n_kv_heads": 8
+    },
+    "per_head__t256": {
+      "path": "/localhome/local-triv/gated-continual-cartridges/outputs/2026-07-08-08-01-44-continual-llama-per-head-top-t-256-key-value-num-tokens-512/sparse_slot_log.pt",
+      "steps": [
+        0,
+        30,
+        60,
+        90,
+        120,
+        150,
+        180,
+        210
+      ],
+      "n_tokens": 511,
+      "n_layers": 28,
+      "n_kv_heads": 8
+    }
+  }
+}

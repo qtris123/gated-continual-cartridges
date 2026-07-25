@@ -206,6 +206,8 @@ def flex_attention_forward(
     attention_mask: Union[torch.Tensor, "BlockMask"],
     scaling: Optional[float] = None,
     mode: Literal["train", "generate"] = "train",
+    cartridge_beta: Optional[torch.Tensor] = None,
+    num_cartridge_tokens: int = 0,
     **kwargs,
 ) -> tuple[torch.Tensor, torch.Tensor]:
 
@@ -241,6 +243,17 @@ def flex_attention_forward(
     if key.requires_grad and not query.requires_grad:
         query.requires_grad = True
 
+    score_mod = None
+    if cartridge_beta is not None and num_cartridge_tokens > 0:
+        beta_h = cartridge_beta[0].to(torch.float32)
+        head_group_size = query.shape[1] // beta_h.shape[0]
+
+        def score_mod(score, b, h, q_idx, kv_idx):
+            kv_head = h // head_group_size
+            safe_kv_idx = torch.clamp(kv_idx, max=num_cartridge_tokens - 1)
+            bias = beta_h[kv_head, safe_kv_idx]
+            return score + torch.where(kv_idx < num_cartridge_tokens, bias, 0.0)
+
     attn_output = attn(
         query,
         key,
@@ -250,6 +263,7 @@ def flex_attention_forward(
         scale=scaling,
         kernel_options=kernel_options,
         return_lse=False,
+        score_mod=score_mod,
     )    
     attn_output = attn_output.transpose(1, 2).contiguous()
 
@@ -315,6 +329,16 @@ class LlamaAttention(nn.Module):
             attention_mask=batch.attention_mask,
             scaling=self.scaling,
             mode=batch.mode,
+            cartridge_beta=(
+                past_key_value.get_cartridge_beta(self.layer_idx)
+                if past_key_value is not None
+                else None
+            ),
+            num_cartridge_tokens=(
+                past_key_value.num_cartridge_tokens()
+                if past_key_value is not None
+                else 0
+            ),
         )
         attn_output = attn_output.reshape(*input_shape, -1).contiguous()
         attn_output = self.o_proj(attn_output)

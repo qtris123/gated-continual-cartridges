@@ -56,12 +56,14 @@ class TrainableCache(nn.Module):
         self._keys = [None] * config.n_layers  # List of tensors per layer
         self._values = [None] * config.n_layers  # List of tensors per layer
         self._num_tokens = 0
+        self._attention_bias_enabled = False
 
         assert (init_keys is None) == (init_values is None)
         if init_keys is None:
             self._num_trainable_tokens, self._num_frozen_tokens = 0, 0
             self.frozen_keys, self.frozen_values = None, None
             self.trainable_keys, self.trainable_values = None, None
+            self.trainable_beta = None
             self._seq_ids = None
             self._init_seq_ids = None
         else:
@@ -115,6 +117,21 @@ class TrainableCache(nn.Module):
                 [
                     nn.Parameter(values_vec[:, :, num_frozen_tokens:].contiguous())
                     for values_vec in init_values
+                ]
+            )
+            # Per-key additive logit bias (AM beta); zeros = no effect at runtime.
+            self.trainable_beta = nn.ParameterList(
+                [
+                    nn.Parameter(
+                        torch.zeros(
+                            1,
+                            config.n_heads,
+                            self._num_trainable_tokens,
+                            dtype=torch.float32,
+                        ),
+                        requires_grad=False,
+                    )
+                    for _ in init_keys
                 ]
             )
             logger.info(f"num_trainable_tokens: {self._num_trainable_tokens}")
@@ -182,6 +199,26 @@ class TrainableCache(nn.Module):
     def num_cartridge_tokens(self) -> int:
         """Get the number of tokens in the cartridge."""
         return self._num_frozen_tokens + self._num_trainable_tokens
+
+    def get_cartridge_beta(self, layer_idx: int) -> Optional[torch.Tensor]:
+        """Return (1, n_kv_heads, num_cartridge_tokens) beta for attention, or None."""
+        if self.trainable_beta is None or not self._attention_bias_enabled:
+            return None
+        beta_train = self.trainable_beta[layer_idx]
+        if self._num_frozen_tokens > 0:
+            frozen_beta = torch.zeros(
+                1,
+                beta_train.shape[1],
+                self._num_frozen_tokens,
+                device=beta_train.device,
+                dtype=beta_train.dtype,
+            )
+            return torch.cat([frozen_beta, beta_train], dim=2)
+        return beta_train
+
+    def enable_attention_bias(self, enabled: bool = True) -> None:
+        """Enable runtime application of persisted AM beta biases."""
+        self._attention_bias_enabled = enabled
     
     def seq_ids(self) -> torch.Tensor:
         """Returns the sequence ids of the cache."""
@@ -195,15 +232,17 @@ class TrainableCache(nn.Module):
 
     def save(self, path: str):
         """Saves the trainable keys and values to the specified path."""
-        torch.save(
-            {
-                "trainable_keys": self.trainable_keys,
-                "trainable_values": self.trainable_values,
-                "frozen_keys": self.frozen_keys,
-                "frozen_values": self.frozen_values,
-            },
-            path,
-        )
+        payload = {
+            "cache_format_version": 2,
+            "trainable_keys": self.trainable_keys,
+            "trainable_values": self.trainable_values,
+            "frozen_keys": self.frozen_keys,
+            "frozen_values": self.frozen_values,
+            "attention_bias_enabled": self._attention_bias_enabled,
+        }
+        if self.trainable_beta is not None:
+            payload["trainable_beta"] = self.trainable_beta
+        torch.save(payload, path)
 
     @classmethod
     def from_pretrained(cls, path: str, device: Optional[str] = None):
@@ -222,7 +261,7 @@ class TrainableCache(nn.Module):
         num_tokens = checkpoint["trainable_keys"][0].size(2)
         head_dim = checkpoint["trainable_keys"][0].size(3)
 
-        if len(checkpoint["frozen_keys"]) != n_layers:
+        if checkpoint["frozen_keys"] and len(checkpoint["frozen_keys"]) != n_layers:
             raise AssertionError(
                 "Mismatch in number of layers between trainable and fixed keys"
             )
@@ -242,30 +281,42 @@ class TrainableCache(nn.Module):
             checkpoint["frozen_keys"][0].size(2) if checkpoint["frozen_keys"] else 0
         )
 
-        return cls(
-            config=config,
-            init_keys=[
-                (
-                    torch.cat([fixed, trainable], dim=2).contiguous()
-                    if num_frozen_tokens > 0
-                    else trainable
-                )
+        if checkpoint["frozen_keys"] and len(checkpoint["frozen_keys"]) > 0:
+            init_keys = [
+                torch.cat([fixed, trainable], dim=2).contiguous()
                 for fixed, trainable in zip(
                     checkpoint["frozen_keys"], checkpoint["trainable_keys"]
                 )
-            ],
-            init_values=[
-                (
-                    torch.cat([fixed, trainable], dim=2).contiguous()
-                    if num_frozen_tokens > 0
-                    else trainable
-                )
+            ]
+            init_values = [
+                torch.cat([fixed, trainable], dim=2).contiguous()
                 for fixed, trainable in zip(
                     checkpoint["frozen_values"], checkpoint["trainable_values"]
                 )
-            ],
+            ]
+        else:
+            init_keys = list(checkpoint["trainable_keys"])
+            init_values = list(checkpoint["trainable_values"])
+
+        cache = cls(
+            config=config,
+            init_keys=init_keys,
+            init_values=init_values,
             num_frozen_tokens=num_frozen_tokens,
         )
+
+        if "trainable_beta" in checkpoint and cache.trainable_beta is not None:
+            for layer_idx, beta in enumerate(checkpoint["trainable_beta"]):
+                cache.trainable_beta[layer_idx].data.copy_(beta.data.to(
+                    cache.trainable_beta[layer_idx].device,
+                    cache.trainable_beta[layer_idx].dtype,
+                ))
+            cache._attention_bias_enabled = checkpoint.get(
+                "attention_bias_enabled",
+                any(torch.any(beta != 0).item() for beta in checkpoint["trainable_beta"]),
+            )
+
+        return cache
 
 
 class KVCacheFactory(abc.ABC):

@@ -191,6 +191,16 @@ class Qwen3Attention(nn.Module):
             attention_mask=batch.attention_mask,
             scaling=self.scaling,
             mode=batch.mode,
+            cartridge_beta=(
+                past_key_value.get_cartridge_beta(self.layer_idx)
+                if past_key_value is not None
+                else None
+            ),
+            num_cartridge_tokens=(
+                past_key_value.num_cartridge_tokens()
+                if past_key_value is not None
+                else 0
+            ),
         )
 
         attn_output = attn_output.reshape(*input_shape, -1).contiguous()
