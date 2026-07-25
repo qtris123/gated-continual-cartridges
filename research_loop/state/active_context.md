@@ -25,6 +25,11 @@
   cartridge. QA loss **2.239** / MT loss **3.783** (this harness, loss=ln ppl). Staged at
   `outputs/phase1_selfdistill_qwen512/cache_last.pt`. Config.yaml is mislabelled — ignore it.
   → This is the Phase-2 START point (init) AND the retention floor (QA loss 2.24 to preserve).
+- ✅ REF-CART command path SMOKE-TESTED (baseline_continual.py, Qwen, gloo, capped 2 steps): loads the
+  Phase-1 cache, MT data, runs dense steps, evals, saves. Validated launch pattern in RUNBOOK §3(a).
+  EXP-000 = just run it for real (EPOCHS=10, eval both splits, record loss + train cost). Note the
+  "final barrier" hang — checkpoint saves before it.
+- ✅ Cited-paper PDFs staged: `TF-IDF.pdf` (2510.15103v1), `AM.pdf` (2602.16284) at repo root (NORTH_STAR).
 
 ## IN-FLIGHT (experiments dispatched, awaiting result bundles)
 - (none yet)

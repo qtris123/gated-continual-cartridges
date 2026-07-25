@@ -60,11 +60,27 @@ The **authoritative env→config mapping** is the parsing block in
 `examples/qasper2/train/continual_am_sparse.py` (~lines 73–116). Read it before composing a
 run; the table below is a summary, not a substitute.
 
-### (a) Dense self-distillation baseline — Phase 2 (the number to MATCH)
-Driver: `examples/qasper2/train/baseline_continual.py` (dense gradient, no sparse/AM).
-Launcher: `examples/qasper2/scripts/train_continual.sh` (torchrun). **Read the script first.**
-Requires the dense self-distilled **Phase-1 cache** (`cache_last.pt`) — see §7 open item.
-> gradient DDP runs MUST use `DISTRIBUTED_BACKEND=gloo` (NCCL deadlocks on this PCIe box).
+### (a) Dense self-distillation baseline — Phase 2 (the number to MATCH) — ✅ VALIDATED
+Driver: `examples/qasper2/train/baseline_continual.py` (dense gradient, no sparse/AM). Env vars:
+`PHASE1_CACHE_PATH, SYNTH_DATA_PATH, EVAL_DATA_PATH, MODEL_NAME(default Llama→override Qwen),
+NUM_TOKENS(512), LR(2e-2), EPOCHS(10), GLOBAL_BATCH_SIZE(32), EVAL_EVERY_N_STEPS(15),
+DISTRIBUTED_BACKEND(gloo)`. Uses `pydrantic.main` → CLI overrides work (e.g. `max_optimizer_steps=N`).
+**Validated launch pattern (smoke-tested; single GPU, gloo, capped):**
+```bash
+CUDA_VISIBLE_DEVICES=<gpu> PHASE1_CACHE_PATH=outputs/phase1_selfdistill_qwen512/cache_last.pt \
+SYNTH_DATA_PATH=data/qasper/train/qwen_qasper_MT_task_8192.parquet \
+EVAL_DATA_PATH=data/qasper/eval/qasper_eval_QA.parquet MODEL_NAME=Qwen/Qwen3-4B-Instruct-2507 \
+NUM_TOKENS=512 DISTRIBUTED_BACKEND=gloo WANDB_MODE=disabled RUN_NAME=refcart_phase2 \
+.venv/bin/torchrun --nproc_per_node=1 --master_port=2953X examples/qasper2/train/baseline_continual.py
+```
+For the REAL REF-CART run: drop `max_optimizer_steps`, keep EPOCHS=10 (or set MAX horizon), eval BOTH
+splits (run once per EVAL_DATA_PATH, or use `eval_forgetting` on the saved ckpt). Grad-accum = ~32
+micro-batches per optimizer step (dataloader len ~1999 at GBS 32). Wandb: set `WANDB_MODE=online` +
+project/entity env if you want it logged (script attaches WandBConfig; `WANDB_MODE=disabled` for smoke).
+> gradient DDP MUST use `DISTRIBUTED_BACKEND=gloo` (NCCL deadlocks on this PCIe box).
+> ⚠️ Prints "Done training waiting for final barrier" and may HANG there — but **the checkpoint is
+> saved BEFORE the barrier**, so parse the final eval + confirm the saved `cache-step*.pt`/`cache_last.pt`,
+> then kill the PID. Don't wait-for-exit. (Same class as the eval hang.)
 
 ### (b) AM-sparse Phase 2 (the method we are improving) — single GPU, closed-form
 ```bash
