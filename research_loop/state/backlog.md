@@ -5,7 +5,9 @@ Priority order follows the mission: gating → teacher targets → support alloc
 Do NOT re-test settled priors (RUNBOOK §7).
 
 ## Lever 0 — ANCHORING (do first) — establishes BOTH axes' reference lines
-- [ ] EXP-000 dense self-distillation Phase-2 baseline (REF-CART) from the HF Phase-1 cache — the
+- [x] EXP-000-verify Phase-1 cache provenance — DONE: QA loss 2.239 / MT 3.783, it's the QA Phase-1
+      cache; staged at outputs/phase1_selfdistill_qwen512/. (retention floor = QA loss 2.24)
+- [ ] EXP-000 dense self-distillation Phase-2 baseline (REF-CART) from the staged Phase-1 cache — the
       quality BAR. Record its train cost (T2/T3) too, as the efficiency baseline to beat.
 - [ ] EXP-000b ICL / full-context upper bound (REF-ICL) — measure ONCE on QA+MT (icl_eval.py /
       qasper_loss_benchmark fullctx). The ceiling.

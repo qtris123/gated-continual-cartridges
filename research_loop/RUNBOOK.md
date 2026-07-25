@@ -31,6 +31,22 @@ continually writes new docs into it. Two eval splits, both scored as **mean cros
 ⚠️ **Do NOT trust the wandb/log `perplexity` field** — it is broken (`num_elements=0`) in the
 July AM runs (reports garbage like 1244.8 / 80019). **Parse the `Eval loss` mean-CE line only.**
 
+⚠️ **UNITS: the harness `Eval loss` is mean cross-entropy = ln(perplexity).** Many historical repo
+figures (RUNBOOK §8, notes, CSVs) are quoted in **perplexity**, NOT loss. `ppl = exp(loss)`. **Only
+ever compare LOSS-to-LOSS from the loop's own runs.** When citing a historical ppl target, convert it
+(e.g. ppl 7.8 → loss 2.05; ppl 36 → loss 3.58) before comparing. The loop's optimization signal is LOSS.
+
+⚠️ **`eval_forgetting.py` HANGS after printing `Eval loss`** (prints result, never exits — cost a prior
+agent a 78-min stall waiting for exit). Executors: parse the `Eval loss` line from the log, then
+**kill the PID**; never `wait` on exit. The eval itself is fast (~a few seconds over 5-6 batches).
+
+⚠️ **`nvidia-smi` is chronically slow/flaky on this box** (often >20s, sometimes hangs). Prefer
+`torch.cuda` or `/proc/driver/nvidia/gpus/` for GPU checks; if you must call nvidia-smi, wrap in
+`timeout` and tolerate failure. Never let a GPU probe block the loop.
+
+⚠️ **Eval set is TINY (QA n=6, MT n=5 batches).** Deltas < ~0.1-0.2 loss are within noise — don't
+over-claim; confirm a "win" with a re-run or a larger eval before trusting it.
+
 ## 2. Model & data (fixed for this investigation)
 - Model: **Qwen3-4B** (`FlexQwen3ForCausalLM`), `num_tokens=512`, `num_frozen_tokens=1`.
 - Phase-1 (QA) synth: `data/qasper/train/qwen_qasper_QA_task_8192.parquet`
@@ -96,6 +112,9 @@ mechanism outside this list (e.g. an attention-mass floor `τ` on the ranker —
    (`MAX_STEPS ≈ 16000/GLOBAL_BATCH_SIZE`; 32→500, 64→250).
 5. `FREEZE_KEYS=0` means keys **do** update. Keys drive forgetting → keep `freeze` unless testing keys.
 6. pydrantic writes **one UUID run-dir per rank**; `cache_last.pt` may be a dangling symlink.
+7. **`eval_forgetting.py` hangs after printing `Eval loss`** — parse the line, then kill the PID;
+   never wait-for-exit (§1). 8. **`nvidia-smi` is flaky/slow** — use torch/`/proc` for GPU checks (§1).
+9. Eval set is tiny (n=5-6) — treat sub-0.2-loss deltas as noise (§1).
 
 ## 7. Settled priors — DO NOT re-litigate (spend cycles elsewhere)
 - Value-only (`freeze_keys`) preserves Phase-1; **key-value collapses QA to a ~16–19 floor**.
@@ -104,12 +123,16 @@ mechanism outside this list (e.g. an attention-mass floor `τ` on the ranker —
 - Phase-1 AM ridge sweet spot ≈ **λ=2.0 spectral** (recon eval 5.70); rebaking key positions is harmful.
 - `freeze` momentum mode is Pareto-dominant among momentum modes.
 
-## 8. Standing numbers (targets & current best — Qwen3-4B unless noted)
-- Self-distilled **Phase-1 floor**: QA ≈ 7.8 loss (Qwen) / 5.6–6.1 ppl (Llama). AM self-match Phase-1 = **3.82**.
-- Best TF-IDF sparse Phase-2 (Llama, value-only top-64): **QA 6.6 / MT 6.9 ppl**.
-- Current AM-sparse Phase-2 (Qwen, top32 per_head, cartridge_plus_doc): **QA 7.13 / MT 7.28 loss**.
-- **Dense self-distillation Phase-2 baseline: NOT in-repo → wandb** `vqtri-purdue-university/SEACrowd`,
-  run-name pattern `qasper_baseline_phase2` / `qasper_phase2_*`. Establish a local anchor too (EXP-000).
+## 8. Standing numbers (mind the UNITS — loss vs ppl — per §1)
+- **VERIFIED Phase-1 self-distilled cartridge** (HF cache, EXP-000-verify, Qwen, this harness):
+  **QA loss 2.239 (ppl ~9.4) / MT loss 3.783 (ppl ~44)**. QA≪MT confirms it's the QA Phase-1 cache;
+  MT ~44 ppl = the untrained acquisition ceiling. This is the Phase-2 STARTING point + the retention floor.
+- Historical (mostly **perplexity**, convert before comparing): Qwen Phase-1 QA ppl ~7.8; MT untrained
+  ppl ~36–44. Best Llama TF-IDF sparse P2 (value-only top-64) QA 6.6 / MT 6.9 **ppl**. AM self-match P1 = 3.82.
+- Current AM-sparse Phase-2 (Qwen, top32 per_head): QA 7.13 / MT 7.28 **loss** (from logs = loss units).
+- **REF-CART (dense self-distillation Phase-2) = the quality bar** — establish locally from the verified
+  Phase-1 cache (EXP-000), cross-check wandb `vqtri-purdue-university/SEACrowd` (`qasper_baseline_phase2`).
+- **REF-ICL (full-context ceiling)** — measure once (EXP-000b).
 
 ## 8b. Open materials / unknowns to resolve early (flag to human if blocking)
 - **DENSE self-distilled Phase-1 cache: RESOLVED (human-provided) — on HuggingFace:**
@@ -117,9 +140,8 @@ mechanism outside this list (e.g. an attention-mass floor `τ` on the ranker —
   Download once with `huggingface_hub.hf_hub_download(repo_id, "cache_last.pt")` (HF_TOKEN is set);
   stage it under `outputs/phase1_selfdistill_qwen512/cache_last.pt`. This is Qwen3-4B, 512 slots,
   dense adam, 10 epochs — the self-distilled cartridge to MATCH.
-  ⚠️ **NAME/CONFIG MISMATCH — verify before trusting:** the repo name says "QA-task" but its bundled
-  `config.yaml` reads `name: qwen_qasper-MT-task_...` and references the MT dataset + `qasper_eval_MT`.
-  EXP-000 MUST eval the downloaded `cache_last.pt` on BOTH splits first: a genuine QA Phase-1 cache →
-  **low QA loss (~5-8), high MT loss (~33)**. If instead MT is also low, it's an MT/continual cache,
-  NOT the Phase-1 anchor — escalate to the human.
+  ✅ **PROVENANCE VERIFIED (EXP-000-verify): this IS the QA Phase-1 cache.** Dual-split eval gave
+  QA loss 2.239 (ppl ~9.4) ≪ MT loss 3.783 (ppl ~44) — the QA-specialist / MT-untrained signature.
+  The repo NAME is correct; the bundled `config.yaml` (name=MT-task) is a stale mislabel — **ignore it.**
+  Cache staged at `outputs/phase1_selfdistill_qwen512/cache_last.pt` (511 trainable + 1 frozen = 512 slots).
 - Env-var names: RESOLVED — all lever knobs are env-driven (§4, confirmed from source).

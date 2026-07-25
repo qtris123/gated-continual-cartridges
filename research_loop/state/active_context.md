@@ -20,18 +20,24 @@
 - Soft budget: run unattended until target met or ~40 cycles / ~48 GPU-hours, whichever first.
   (Human may adjust in this file.)
 
+## DONE PRE-LAUNCH (do not redo)
+- ✅ Phase-1 cache downloaded + PROVENANCE VERIFIED (EXP-000-verify): it IS the QA Phase-1 self-distilled
+  cartridge. QA loss **2.239** / MT loss **3.783** (this harness, loss=ln ppl). Staged at
+  `outputs/phase1_selfdistill_qwen512/cache_last.pt`. Config.yaml is mislabelled — ignore it.
+  → This is the Phase-2 START point (init) AND the retention floor (QA loss 2.24 to preserve).
+
 ## IN-FLIGHT (experiments dispatched, awaiting result bundles)
 - (none yet)
 
 ## NEXT ACTIONS (what the next cycle should do)
-1. **Cycle 0 = anchoring.** Dispatch:
-   - TRAIN EXP-000: (a) download the human-provided Phase-1 self-distilled cache from HF
-     `qtris123/qwen_qasper-QA-task_8192_512_no-cartridge_10-epochs` → stage at
-     `outputs/phase1_selfdistill_qwen512/cache_last.pt`; (b) **VERIFY provenance** — eval it on QA+MT
-     splits; a real QA Phase-1 cache = low QA (~5-8) / high MT (~33). If MT is also low it's the wrong
-     artifact → set EXP-000 blocked + escalate here (name/config mismatch, RUNBOOK §8b). (c) if
-     verified, run `baseline_continual.py` Phase-2 (dense, gloo) from it → the self-distillation
-     Phase-2 baseline QA/MT loss.
+1. **Cycle 0 = anchoring.** Phase-1 cache is verified & staged — skip re-verification. Dispatch:
+   - TRAIN EXP-000 (REF-CART): run `baseline_continual.py` Phase-2 (dense self-distillation, gloo)
+     from `outputs/phase1_selfdistill_qwen512/cache_last.pt` on the MT synth parquet → the quality BAR
+     (QA/MT loss) + its train cost (efficiency baseline). Compare QA-loss vs the 2.24 floor.
+   - TRAIN EXP-000b (REF-ICL): full-context ICL eval on QA+MT → the ceiling (measure once).
+   - TRAIN EXP-001: reproduce current AM-sparse Phase-2 canonical config from the SAME Phase-1 cache
+     through the same eval harness; record QA/MT loss + solve_s/phase2_e2e_s (first efficiency point).
+   - RESEARCH EXP-002: pull the two cited papers + cartridge synthesis/train-cost figures; wandb cross-check.
    - TRAIN EXP-001: reproduce the current AM-sparse Phase-2 canonical config end-to-end through the
      SAME eval harness, so EXP-000 vs EXP-001 are apples-to-apples.
    - RESEARCH EXP-002: pull the historical dense Phase-2 run from wandb (SEACrowd) to cross-check
