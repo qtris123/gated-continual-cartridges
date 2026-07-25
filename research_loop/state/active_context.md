@@ -43,8 +43,11 @@
 - ~~EXP-002~~ **DONE + INGESTED** (18:20) — research. Key: (c) dense P2 MT=2.891 (ppl18, scf175an) — **EXP-001's
   2.5426 already beats it backprop-free**, pending EXP-000's QA-forgetting; (b) T3 = dense 1805s train + ~10-12ks
   synth vs AM 217s; (a) new levers RIDGE_LAMBDA=0 / ENABLE_BETA=1 / per-head budget (added to backlog); (d) bg_stats recipe.
-- **SETUP-BG1** (TRAIN/EDIT, GPU1) — pipelined during EXP-000: build + run the standalone bg_stats collector over
-  the Phase-1 QA parquet → outputs/phase1_selfdistill_qwen512/bg_stats.pt (per_layer). Unblocks EXP-003 (with-IDF). Bundle: results/SETUP-BG1/.
+- ~~SETUP-BG1~~ **DONE + INGESTED** (18:40) — bg_stats.pt (292MB, per_layer, IDF (36,511) finite) written +
+  sanity-verified via the Phase-2 load path. Collector: examples/qasper2/train/collect_bg_stats.py. gpu1 freed.
+- **EXP-003** (TRAIN, GPU1) — pipelined during EXP-000: AM-sparse WITH-IDF canonical (tfidf, USE_IDF=1,
+  BG_STATS_PATH=…/bg_stats.pt, per_layer, top_t=64) = the TRUE Lever-1 baseline + HYP-G1 with-IDF arm.
+  Single var USE_IDF vs EXP-001 (no-IDF). Bundle: results/EXP-003/.
 
 ## NEXT ACTIONS (what the next cycle should do)
 0. **⚠️ ENSURE EXP-000 COMPLETES + INGESTS.** Its executor agent is parked while training runs (~ETA 1.5–2h

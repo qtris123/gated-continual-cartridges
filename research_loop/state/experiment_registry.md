@@ -121,7 +121,33 @@ Format mirrors `.cursor/rules/research-companion.mdc`.
   granularity='per_layer', save_path='outputs/phase1_selfdistill_qwen512/bg_stats.pt'); single-process, GPU forward-only.
 - Metrics reported: bg_stats.pt exists + shape/layer/head sanity (36 layers, 8 KV heads, per_layer stats); collect wall-clock.
 - Expected: a loadable bg_stats.pt reusable by all future USE_IDF=1 gating experiments.
-- Actual: _pending_
-- Status: dispatched
+- Actual: DONE. bg_stats.pt written (292MB), per_layer, access-counts shape (1990,36,511) int64 over the full
+  QA corpus (1990 packed seqs); derived IDF shape (36,511) finite. Sanity-verified via the exact Phase-2 path
+  (BackgroundAccessTracker.load + CacheTFIDFRanker). collect wall-clock 265.3s (cold flex_attention compile).
+  Collector: examples/qasper2/train/collect_bg_stats.py. Two adaptations: NUM_BG_BATCHES=999999999 (full corpus,
+  not 1000 which truncates coverage) + cache.to(local_rank) after from_pretrained (buffers left on CPU) — mirrors continual_am_sparse.py.
+- Status: done
 - Follow-up: EXP-003 = with-IDF canonical (tfidf, USE_IDF=1, per_layer, top_t=64) loading this bg_stats.pt.
-- Artifacts: outputs/phase1_selfdistill_qwen512/bg_stats.pt , research_loop/results/SETUP-BG1/result.json
+- Artifacts: outputs/phase1_selfdistill_qwen512/bg_stats.pt , examples/qasper2/train/collect_bg_stats.py , research_loop/results/SETUP-BG1/result.json
+
+### EXP-003: AM-sparse with-IDF canonical (the TRUE Lever-1 baseline + HYP-G1 with-IDF arm)
+- Date: 2026-07-25 (cycle 0, pipelined on gpu1 during EXP-000)
+- Research question: does IDF gating (tfidf, USE_IDF=1) beat pure-TF (EXP-001, USE_IDF=0) on MT-acquisition at
+  equal-or-lower QA-forgetting? Establishes the canonical AM-sparse baseline all later gating experiments compare to.
+- Hypothesis tested (HYP-ID): HYP-G1 (this is the with-IDF arm; EXP-001 is the no-IDF arm).
+- Variable under test: USE_IDF (0→1, loading SETUP-BG1 bg_stats.pt). EVERYTHING else identical to EXP-001.
+- Baseline compared to: EXP-001 (no-IDF, QA 2.2521 / MT 2.5426); also PHASE1 floor + REF-CART (EXP-000).
+- Code branch+commit: trivo-explore-research-work @ 92fcb24
+- Dataset / Model: Qasper QA→MT / Qwen3-4B, 512 slots
+- Config knobs (full): slot_selection=tfidf, USE_IDF=1, BG_STATS_PATH=outputs/phase1_selfdistill_qwen512/bg_stats.pt,
+  granularity=per_layer, top_t=64, target_mode=cartridge_plus_doc, key_mode=freeze, ridge_lambda=1e-4,
+  ridge_scale=spectral, delta_weight=1e-2, AM_EXECUTION_MODE=per_document, PHASE1_CACHE=.../cache_last.pt, SYNTH=MT parquet.
+- Command: VAR=val ... bash examples/qasper2/scripts/train_continual_am_sparse.sh (RUNBOOK §3b), USE_IDF=1 + BG_STATS_PATH set.
+- Metrics reported: qa_forgetting_loss / mt_acquisition_loss (mean CE) + solve_s + phase2_e2e_s + gpu_s + gradient_steps:0.
+- Expected: closed-form; either lower MT at ≤ QA vs EXP-001 (IDF helps) or a wash (IDF matters more at small top_t → HYP-a5).
+- Actual: _pending_
+- Interpretation: _pending_
+- Confounders considered: tiny eval (QA n=6, MT n=5) — sub-0.2 deltas are noise; single seed.
+- Status: dispatched
+- Follow-up: if IDF≈wash at top_t=64, test HYP-a5 (USE_IDF at top_t=32). This EXP-003 becomes the canonical baseline for Lever 1/2/4.
+- Artifacts: outputs/<run-dir>/ , research_loop/results/EXP-003/result.json
