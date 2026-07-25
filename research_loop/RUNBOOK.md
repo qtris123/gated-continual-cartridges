@@ -112,11 +112,14 @@ mechanism outside this list (e.g. an attention-mass floor `τ` on the ranker —
   run-name pattern `qasper_baseline_phase2` / `qasper_phase2_*`. Establish a local anchor too (EXP-000).
 
 ## 8b. Open materials / unknowns to resolve early (flag to human if blocking)
-- **Location of the DENSE self-distilled Phase-1 cache** for `baseline_continual.py` init.
-  Local `outputs/*initial_am/` are AM-compaction caches, NOT dense self-distillation. Sibling
-  `/localhome/local-triv/gated-continual-cartridges/outputs/` has only `initial_am` /
-  `initial_am_compaction` runtags too — no committed dense-gradient Phase-1 cache found. Candidates
-  to probe in EXP-000: `grad_phase1_quick.log`, `e2e_qa_to_mt_20260721`, wandb artifacts. If none
-  exists, EXP-000 must first re-run dense Phase-1 self-distillation (`train/initial.py`, gradient,
-  gloo) — escalate to the human via `active_context.md` before spending that time.
+- **DENSE self-distilled Phase-1 cache: RESOLVED (human-provided) — on HuggingFace:**
+  `qtris123/qwen_qasper-QA-task_8192_512_no-cartridge_10-epochs` (files: `cache_last.pt`, `config.yaml`).
+  Download once with `huggingface_hub.hf_hub_download(repo_id, "cache_last.pt")` (HF_TOKEN is set);
+  stage it under `outputs/phase1_selfdistill_qwen512/cache_last.pt`. This is Qwen3-4B, 512 slots,
+  dense adam, 10 epochs — the self-distilled cartridge to MATCH.
+  ⚠️ **NAME/CONFIG MISMATCH — verify before trusting:** the repo name says "QA-task" but its bundled
+  `config.yaml` reads `name: qwen_qasper-MT-task_...` and references the MT dataset + `qasper_eval_MT`.
+  EXP-000 MUST eval the downloaded `cache_last.pt` on BOTH splits first: a genuine QA Phase-1 cache →
+  **low QA loss (~5-8), high MT loss (~33)**. If instead MT is also low, it's an MT/continual cache,
+  NOT the Phase-1 anchor — escalate to the human.
 - Env-var names: RESOLVED — all lever knobs are env-driven (§4, confirmed from source).

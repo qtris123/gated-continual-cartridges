@@ -22,10 +22,13 @@
 
 ## NEXT ACTIONS (what the next cycle should do)
 1. **Cycle 0 = anchoring.** Dispatch:
-   - TRAIN EXP-000: establish the dense self-distillation Phase-2 baseline locally
-     (`baseline_continual.py`). FIRST resolve the dense Phase-1 cache location (RUNBOOK §8b) —
-     if not found locally, spawn a RESEARCH executor to locate it (sibling repo / wandb artifact)
-     and, if truly absent, mark EXP-000 blocked and escalate in this file.
+   - TRAIN EXP-000: (a) download the human-provided Phase-1 self-distilled cache from HF
+     `qtris123/qwen_qasper-QA-task_8192_512_no-cartridge_10-epochs` → stage at
+     `outputs/phase1_selfdistill_qwen512/cache_last.pt`; (b) **VERIFY provenance** — eval it on QA+MT
+     splits; a real QA Phase-1 cache = low QA (~5-8) / high MT (~33). If MT is also low it's the wrong
+     artifact → set EXP-000 blocked + escalate here (name/config mismatch, RUNBOOK §8b). (c) if
+     verified, run `baseline_continual.py` Phase-2 (dense, gloo) from it → the self-distillation
+     Phase-2 baseline QA/MT loss.
    - TRAIN EXP-001: reproduce the current AM-sparse Phase-2 canonical config end-to-end through the
      SAME eval harness, so EXP-000 vs EXP-001 are apples-to-apples.
    - RESEARCH EXP-002: pull the historical dense Phase-2 run from wandb (SEACrowd) to cross-check
