@@ -43,9 +43,23 @@ Baseline for all: AM-sparse canonical (tfidf, use_idf=1, per_layer, top_t=64, fr
 - [ ] HYP-S3: `max_queries_per_head` / `max_ref_examples_per_doc` — does more reference support help?
 
 ## Lever 4 — REGULARIZATION
+- [ ] **HYP-R0 (NEW, high-value, from EXP-002/AM paper): `RIDGE_LAMBDA=0` vs 1e-4** on the VALUE-solve.
+      AM paper found L2 ridge on the (β,C_v) value-solve DEGRADES for ALL λ>0. Our canonical is λ=1e-4 (tiny
+      but nonzero). One var: RIDGE_LAMBDA ∈ {0, 1e-4}. Cheap, closed-form. NOTE: distinct from HYP-R1's λ=2.0
+      which is the Phase-1 RECON solve (RUNBOOK §7), NOT the value-solve — do not conflate.
 - [ ] HYP-R1: `ridge_lambda` × `ridge_scale` (test λ≈2.0 spectral — Phase-1 sweet spot — in Phase-2).
 - [ ] HYP-R2: `delta_weight` trust region sweep (0, 1e-2, 1e-1) — trades acquisition vs stability.
 - [ ] HYP-R3: `enable_old_reference_guard` on/off (explicit old-query preservation block).
+
+## Lever 2.5 — AM-FAITHFULNESS (from EXP-002 reading of AM.pdf; candidate single-var tests)
+Baseline for all: AM-sparse canonical. Priority per AM paper's own ablations.
+- [ ] HYP-T2 (ELEVATED by EXP-002): `ENABLE_BETA=1` vs unset — the per-token β mass-bias (NNLS) is AM's
+      CORE mechanism to stop subsetting from underestimating future attention mass. AM claims dropping tokens
+      w/o β systematically hurts. One var: ENABLE_BETA. (keys frozen; strong candidate right after gating.)
+- [ ] HYP-PH1: nonuniform PER-HEAD support budget (AM's #1 ablation: head sensitivity ~input-invariant →
+      precomputed greedy budget). Map: GRANULARITY=per_head + a per-head TOP_T schedule (MIN_TOP_T_PER_LAYER /
+      residual_budget). Likely needs an EDIT for a per-head budget schedule if no knob suffices.
+- [ ] HYP-a5: at TOP_T=32, USE_IDF=1 vs 0 — AM/TF-IDF both say IDF matters MORE at small support. One var: USE_IDF at fixed small TOP_T.
 
 ## Lever 1.5 — NOVEL GATING DESIGN (the core novelty; open once existing-knob sweeps are informative)
 Not just sweeping knobs — DESIGNING a gater specific to our setting (compressed embedding in attention).

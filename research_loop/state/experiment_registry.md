@@ -95,7 +95,33 @@ Format mirrors `.cursor/rules/research-companion.mdc`.
   cartridges/sparse_cache_finetuning.py collect_background_stats + examples/.../initial_am.py.
 - Metrics reported: extracted numbers (cartridge synth/train cost, historical dense P2 loss) in numbers{}.
 - Expected: a T3 cost table skeleton + a confirmed bg_stats collection recipe + 3-6 knob-mapped ideas.
+- Actual: DELIVERED. (a) AM-faithful teacher = orig attention OUTPUT + MASS; value-solve = closed-form OLS —
+  **paper: L2 ridge on the value-solve HURTS ∀λ>0** (distinct from Phase-1 recon λ=2.0); β mass-bias (NNLS)
+  is AM's cure for low-mass (reweight retained high-mass slots), NOT gating into low-mass; per-head budget =
+  AM's #1 ablation. TF-IDF: specificity>magnitude, IDF matters most at small TOP_T, background = PRESERVE set.
+  (b) T3: dense P2 train ~1805s (wandb scf175an, ~30min) + MT synth ~10-12ks/task; AM EXP-001 e2e=217s.
+  (c) dense P2 MT-acquisition loss 2.891 (ppl 18.0, scf175an); QA-forgetting NOT logged → EXP-000 authoritative.
+  (d) bg_stats recipe CONFIRMED: background = Phase-1 QA parquet (qwen_qasper_QA_task_8192), per_layer,
+  ~25-line standalone collector → outputs/phase1_selfdistill_qwen512/bg_stats.pt (sketch in bundle).
+- Interpretation: EXP-001's MT 2.5426 already BEATS the historical dense P2 MT 2.891 backprop-free — pending
+  EXP-000's authoritative local re-run. New single-var levers surfaced: RIDGE_LAMBDA=0, ENABLE_BETA=1, per-head budget.
+- Status: done
+- Follow-up: SETUP-BG1 (collect bg_stats now) → EXP-003 (with-IDF canonical). Add ridge/β/per-head to backlog.
+- Artifacts: research_loop/results/EXP-002/result.json
+
+### SETUP-BG1: collect bg_stats over the self-distilled Phase-1 cache (infra, unblocks USE_IDF=1)
+- Date: 2026-07-25 (cycle 0, pipelined on gpu1 during EXP-000)
+- Research question: n/a — infrastructure. Produce the IDF background statistics for OUR Phase-1 cache so
+  any USE_IDF=1 AM-sparse run can load them.
+- Variable under test: n/a
+- Baseline compared to: n/a
+- Dataset / Model: background = data/qasper/train/qwen_qasper_QA_task_8192.parquet (Phase-1 QA PRESERVE set),
+  cache = outputs/phase1_selfdistill_qwen512/cache_last.pt, Qwen3-4B, granularity=per_layer.
+- Command: implement ~25-line standalone collector (per EXP-002 sketch) → collect_background_stats(...,
+  granularity='per_layer', save_path='outputs/phase1_selfdistill_qwen512/bg_stats.pt'); single-process, GPU forward-only.
+- Metrics reported: bg_stats.pt exists + shape/layer/head sanity (36 layers, 8 KV heads, per_layer stats); collect wall-clock.
+- Expected: a loadable bg_stats.pt reusable by all future USE_IDF=1 gating experiments.
 - Actual: _pending_
 - Status: dispatched
-- Follow-up: bg_stats recipe → EXP-003 (with-IDF canonical) next cycle.
-- Artifacts: research_loop/results/EXP-002/result.json
+- Follow-up: EXP-003 = with-IDF canonical (tfidf, USE_IDF=1, per_layer, top_t=64) loading this bg_stats.pt.
+- Artifacts: outputs/phase1_selfdistill_qwen512/bg_stats.pt , research_loop/results/SETUP-BG1/result.json

@@ -35,27 +35,33 @@
 - ✅ Cited-paper PDFs staged: `TF-IDF.pdf` (2510.15103v1), `AM.pdf` (2602.16284) at repo root (NORTH_STAR).
 
 ## IN-FLIGHT (experiments dispatched, awaiting result bundles)
-- **EXP-000** (TRAIN, GPU) — REF-CART dense self-distillation Phase-2 → quality BAR + train cost.
-  Expect: MT loss ≪ 3.783; QA loss near/above 2.239. Long pole (10-epoch gradient). Bundle: results/EXP-000/.
-- ~~EXP-001~~ **DONE + INGESTED** (2026-07-25 18:02) — AM-sparse no-IDF anchor: QA 2.2521 / MT 2.5426,
-  solve 181s / e2e 217s / 0 grad steps. Row in results.csv; registry+ledger(HYP-G1)+obs-log updated.
-- **EXP-002** (RESEARCH, no GPU) — AM.pdf + TF-IDF.pdf ideas, cartridge cost figures, wandb dense-P2
-  cross-check, AND the bg_stats-over-our-cache collection recipe (unblocks with-IDF canonical). Bundle: results/EXP-002/.
+- **EXP-000** (TRAIN, GPU0) — REF-CART dense self-distillation Phase-2 → quality BAR + train cost. STILL
+  RUNNING: ~step 110/~620 (epoch ~2/10) at 18:20, ~11 min/epoch → ETA ~1.5–2h (this box slower than the
+  wandb scf175an ~30min). The executor AGENT returned (parked) but the training process is alive (launcher
+  3629349 holds gpu0 flock). ⚠️ MUST ensure its bundle gets written — see NEXT ACTIONS #0. Bundle: results/EXP-000/.
+- ~~EXP-001~~ **DONE + INGESTED** (18:02) — AM-sparse no-IDF anchor: QA 2.2521 / MT 2.5426, e2e 217s / 0 grad.
+- ~~EXP-002~~ **DONE + INGESTED** (18:20) — research. Key: (c) dense P2 MT=2.891 (ppl18, scf175an) — **EXP-001's
+  2.5426 already beats it backprop-free**, pending EXP-000's QA-forgetting; (b) T3 = dense 1805s train + ~10-12ks
+  synth vs AM 217s; (a) new levers RIDGE_LAMBDA=0 / ENABLE_BETA=1 / per-head budget (added to backlog); (d) bg_stats recipe.
+- **SETUP-BG1** (TRAIN/EDIT, GPU1) — pipelined during EXP-000: build + run the standalone bg_stats collector over
+  the Phase-1 QA parquet → outputs/phase1_selfdistill_qwen512/bg_stats.pt (per_layer). Unblocks EXP-003 (with-IDF). Bundle: results/SETUP-BG1/.
 
 ## NEXT ACTIONS (what the next cycle should do)
-1. **Reconcile EXP-000/001/002** (STEP 2): ingest bundles → results.csv rows, registry Actual/Interp,
-   ledger HYP-G1. Assemble the T3 cost skeleton (EXP-000 train cost vs EXP-001 phase2_e2e_s) + first
-   quality×cost Pareto point (REF-CART vs AM-sparse-no-IDF vs PHASE1 floor).
-2. **Fill the two deferred anchors** (were cut this cycle by the 2-GPU cap / bg_stats prereq):
-   - TRAIN EXP-000b (REF-ICL): full-context ICL eval on QA+MT → the ceiling (measure ONCE).
-   - Using EXP-002's bg_stats recipe: collect bg_stats over `outputs/phase1_selfdistill_qwen512/cache_last.pt`
-     (save to `outputs/phase1_selfdistill_qwen512/bg_stats.pt`; EDIT a tiny standalone collector only if
-     no entry point exists), then TRAIN EXP-003 = with-IDF canonical (tfidf, USE_IDF=1, per_layer, top_t=64)
-     — the true Lever-1 baseline. HYP-G1 becomes EXP-003 (with-IDF) vs EXP-001 (no-IDF).
-3. Then begin **Lever 1 (gating)** from `backlog.md` — the stated core problem
-   ("TF-IDF selects slots with insufficient attention mass").
-- NOTE: canonical AM-sparse with IDF needs bg_stats collected over OUR self-distilled cache; the July-10
-  bg_stats.pt files are for a DIFFERENT (AM-baked) Phase-1 cache — do NOT reuse them (mismatched IDF).
+0. **⚠️ ENSURE EXP-000 COMPLETES + INGESTS.** Its executor agent is parked while training runs (~ETA 1.5–2h
+   from 18:02). When the checkpoint saves (cache_last.pt / cache-step*.pt under
+   outputs/2026-07-25-18-02-35-baseline_continual/…, saved BEFORE the final-barrier hang), if no
+   results/EXP-000/result.json appears: either SendMessage the parked EXP-000 agent (id a4255d85247212da7) to
+   eval BOTH splits + write the bundle, OR dispatch a small eval executor on the saved ckpt (eval_forgetting on
+   QA+MT, parse `Eval loss`, kill PID). Then ingest → the quality BAR + T3 dense-train-cost anchor. Headline
+   comparison: EXP-001 MT 2.5426 vs REF-CART MT (and vs the wandb dense 2.891).
+1. **Ingest SETUP-BG1** when it lands → then TRAIN EXP-003 = with-IDF canonical (tfidf, USE_IDF=1, per_layer,
+   top_t=64, BG_STATS_PATH=outputs/phase1_selfdistill_qwen512/bg_stats.pt) — the true Lever-1 baseline.
+   Resolve HYP-G1: EXP-003 (with-IDF) vs EXP-001 (no-IDF), single var USE_IDF.
+2. **Deferred anchor:** TRAIN EXP-000b (REF-ICL) full-context ICL eval on QA+MT → ceiling (measure ONCE), on
+   whichever GPU frees first.
+3. Then Lever-1 gating + the new EXP-002 levers (HYP-R0 RIDGE_LAMBDA=0, HYP-T2 ENABLE_BETA=1, HYP-PH1 per-head).
+   Assemble the quality×cost Pareto plot (REF-CART, REF-ICL, PHASE1, AM points).
+- NOTE: with-IDF needs bg_stats over OUR cache (SETUP-BG1); the July-10 bg_stats.pt are a DIFFERENT cache — never reuse.
 
 ## DECISIONS LOCKED (by the human, do not revisit)
 - Signal = perplexity/eval-loss only (no inference-server task-accuracy).
