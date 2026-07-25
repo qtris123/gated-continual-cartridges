@@ -18,8 +18,10 @@ export CARTRIDGES_WANDB_ENTITY=vqtri-purdue-university
 PY=$PWD/.venv/bin/python
 ```
 Without `CARTRIDGES_DIR` set, `import cartridges` raises immediately.
-First-ever CUDA context on this box takes ~1–2 min (cold JIT); every run after is fast.
-**Do a throwaway warm-up import once per fresh machine before timing anything.**
+First CUDA context on this box is **erratic — usually ~1–2 min but sometimes >2 min** (cold JIT);
+warm runs are ~1s. **Executors: launch every train/eval as a BACKGROUND job and poll its log file;
+never run GPU work synchronously under a short (<300s) timeout — you WILL get false timeouts.**
+Do a throwaway warm-up import once per fresh machine before timing anything.
 
 ## 1. The task & the two axes ("task performance" here = perplexity)
 Qasper 2-stage: **Phase 1 = QA task** builds the cartridge; **Phase 2 = MT task**
