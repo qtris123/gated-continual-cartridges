@@ -60,8 +60,12 @@ Every training executor records T1 + T2 into `results.csv`; T3 is assembled by t
 - Future (out of scope unless a winning recipe emerges): **QA → MT → SA** longer chain — the harder,
   more compelling continual story. Design gaters so they *could* extend to N stages, but validate on 2.
 
-## Literature to mine (research executors)
-- *Continual Learning via Sparse Memory Finetuning* (the TF-IDF gating inspiration).
-- *Fast KV Compaction via Attention Matching* (the fast-update substrate).
+## Literature to mine (research executors) — PDFs provided locally, read these first
+- **TF-IDF gating inspiration**: *Continual Learning via Sparse Memory Finetuning* — arXiv **2510.15103v1**,
+  local PDF **`TF-IDF.pdf`** (repo root). The source of the TF-IDF slot-selection idea we build on.
+- **Fast-update substrate**: *Fast KV Compaction via Attention Matching* — arXiv **2602.16284**,
+  local PDF **`AM.pdf`** (repo root). The closed-form AM value-solve method.
 - Cartridges: self-study long-context KV (arXiv 2506.06266) — for the quality bar + synthesis-cost figures.
 - Adjacent: closed-form model/KV editing (ROME/MEMIT), attention-salience routing, OMP/least-squares.
+Read `TF-IDF.pdf` for what the gating must improve on in OUR setting (compressed embedding in attention,
+not a sparse FFN memory); read `AM.pdf` for the exact teacher/target + value-solve we should stay faithful to.
