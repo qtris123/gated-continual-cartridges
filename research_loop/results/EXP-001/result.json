@@ -1,0 +1,34 @@
+{
+  "exp_id": "EXP-001",
+  "type": "train",
+  "variable_under_test": "method=AM-sparse closed-form (USE_IDF=0) vs EXP-000 dense",
+  "baseline_ref": "EXP-000 / PHASE1",
+  "status": "done",
+  "numbers": {
+    "qa_forgetting_loss": 2.2521,
+    "mt_acquisition_loss": 2.5426,
+    "solve_s": 181.39,
+    "phase2_e2e_s": 217,
+    "gpu_s": null,
+    "gradient_steps": 0,
+    "top_t": 64,
+    "granularity": "per_layer",
+    "use_idf": 0,
+    "n_documents": 16,
+    "mean_mse_last_doc": 0.1987,
+    "value_global_max_abs": 816.0,
+    "phase1_floor_qa": 2.239,
+    "phase1_floor_mt": 3.783,
+    "qa_delta_vs_phase1_floor": 0.013,
+    "mt_delta_vs_phase1_floor": -1.240
+  },
+  "artifacts": [
+    "outputs/2026-07-25-18-02-29-continual_am_sparse/efa3bc76-b438-42b2-916f-6554e7d50fd1/cache_last.pt",
+    "outputs/2026-07-25-18-02-29-continual_am_sparse/efa3bc76-b438-42b2-916f-6554e7d50fd1/phase2_summary.json",
+    "outputs/2026-07-25-18-02-29-continual_am_sparse/efa3bc76-b438-42b2-916f-6554e7d50fd1/per_document_am_stats.pt",
+    "research_loop/results/EXP-001/run.log",
+    "research_loop/results/EXP-001/launch_exp001.sh"
+  ],
+  "command": "flock GPU1 (MASTER_PORT=29501) then: USE_IDF=0 SLOT_SELECTION=tfidf GRANULARITY=per_layer TOP_T=64 TARGET_MODE=cartridge_plus_doc KEY_MODE=freeze RIDGE_LAMBDA=1e-4 RIDGE_SCALE=spectral DELTA_WEIGHT=1e-2 AM_EXECUTION_MODE=per_document PHASE1_CACHE_PATH=outputs/phase1_selfdistill_qwen512/cache_last.pt SYNTH_DATA_PATH=data/qasper/train/qwen_qasper_MT_task_8192.parquet MODEL_NAME=Qwen/Qwen3-4B-Instruct-2507 NUM_TOKENS=512 EVAL_QA_PATH=data/qasper/eval/qasper_eval_QA.parquet EVAL_MT_PATH=data/qasper/eval/qasper_eval_MT.parquet RUN_NAME=exp001_am_sparse_noidf_top64_perlayer WANDB_DISABLED=1 bash examples/qasper2/scripts/train_continual_am_sparse.sh (wrapped by research_loop/results/EXP-001/launch_exp001.sh, launched nohup->run.log). BG_STATS_PATH NOT passed (USE_IDF=0, pure TF).",
+  "observations": "The closed-form AM-sparse Phase-2 update ran cleanly on one flock-claimed GPU (GPU1), single process, no torchrun and no eval hang (RC=0). It processed 16 MT documents value-only (KEY_MODE=freeze) with pure TF ranking (use_idf=0, no bg_stats loaded, confirmed 'BG stats:' empty and 'use_idf: 0' in log). QA forgetting = 2.2521 sits +0.013 above the PHASE1 floor (2.239), i.e. essentially no forgetting and within the sub-0.2 tiny-eval noise band (QA n=6) — freeze-keys preserved Phase-1 as expected. MT acquisition = 2.5426 is -1.240 below the untrained PHASE1/MT floor (3.783), a large acquisition gain (ppl 44 -> 12.7) from a backprop-free update (gradient_steps=0). Cost: solve_s = 181.4s for the 16-doc per-document AM loop; phase2_e2e_s = 217s end-to-end including cold model load + both in-run evals. Both eval numbers were produced by the run's own loss_evals (QA then MT) and cross-verified identical in phase2_summary.json (loss field = printed mean-CE Eval loss; perplexity field ignored per RUNBOOK). Caveats: value_norms global_max_abs = 816 (L35=402), so the closed-form update injects large deep-layer value magnitudes despite intact QA retention; gpu_s unavailable (AM shell starts no GPU monitor and nvidia-smi is flaky on this box); comparison vs EXP-000 (REF-CART dense) is pending as EXP-000 result.json was not yet written at report time (orchestrator-owned)."
+}

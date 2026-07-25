@@ -4,8 +4,8 @@
 > This is the single source of truth for "where are we and what's next."
 
 ## HEADLINE (update every cycle)
-- **Status:** CYCLE 0 IN PROGRESS (anchoring) — dispatched 2026-07-25. Batch: EXP-000 (REF-CART, train),
-  EXP-001 (AM-sparse no-IDF anchor, train), EXP-002 (research). Awaiting result bundles.
+- **Status:** CYCLE 0 IN PROGRESS (anchoring) — dispatched 2026-07-25. **EXP-001 DONE + ingested** (first
+  AM-sparse point). EXP-000 (REF-CART, train) + EXP-002 (research) still running. No new batch until both land.
 - **Goal (TWO axes — see NORTH_STAR.md):** a fast, (near) training-free continual update for the
   KV-cartridge whose GATING gives cartridge-comparable forgetting/acquisition — winning on BOTH
   (1) training efficiency and (2) CL quality, vs cartridge (bar) and ICL (ceiling). Gating is the novelty.
@@ -13,9 +13,11 @@
   **at materially lower training cost than cartridge** (Pareto). Parity-but-expensive ≠ done.
 - **Reference lines (to establish cycle 0):** REF-CART (dense self-distill P2) = _TBD_; REF-ICL
   (full-context ceiling) = _TBD_; cartridge P2 train-cost (efficiency baseline) = _TBD_.
-- **Current best AM-sparse:** QA 7.13 / MT 7.28 loss (Qwen, top32 per_head, cartridge_plus_doc) —
-  from `logs/phase2_from_compaction.log`, to reproduce + time in EXP-001.
-- **Gap to target:** _TBD after EXP-000/000b/001._
+- **Current best AM-sparse (MEASURED in-harness):** EXP-001 — QA **2.2521** / MT **2.5426** loss
+  (Qwen, no-IDF/pure-TF, top64 per_layer, cartridge_plus_doc, freeze, ridge spectral), backprop-free,
+  solve 181s / e2e 217s. Supersedes the old ambiguous-units 7.13/7.28 claim (top32 per_head, not re-measured).
+- **Gap to target:** QA already at the 2.239 floor (no forgetting). MT 2.5426 vs REF-CART bar = _TBD (EXP-000
+  pending)_ and vs REF-ICL ceiling = _TBD (EXP-000b pending)_. Cost side already strong (backprop-free, ~3.6 min).
 
 ## BUDGET
 - Soft budget: run unattended until target met or ~40 cycles / ~48 GPU-hours, whichever first.
@@ -35,9 +37,8 @@
 ## IN-FLIGHT (experiments dispatched, awaiting result bundles)
 - **EXP-000** (TRAIN, GPU) — REF-CART dense self-distillation Phase-2 → quality BAR + train cost.
   Expect: MT loss ≪ 3.783; QA loss near/above 2.239. Long pole (10-epoch gradient). Bundle: results/EXP-000/.
-- **EXP-001** (TRAIN, GPU) — AM-sparse Phase-2 anchor, USE_IDF=0 (no bg_stats), per_layer top_t=64,
-  cartridge_plus_doc, freeze, ridge spectral → first efficiency point (solve_s/phase2_e2e_s) + QA/MT loss,
-  same harness as EXP-000. Doubles as HYP-G1 no-IDF arm. Bundle: results/EXP-001/.
+- ~~EXP-001~~ **DONE + INGESTED** (2026-07-25 18:02) — AM-sparse no-IDF anchor: QA 2.2521 / MT 2.5426,
+  solve 181s / e2e 217s / 0 grad steps. Row in results.csv; registry+ledger(HYP-G1)+obs-log updated.
 - **EXP-002** (RESEARCH, no GPU) — AM.pdf + TF-IDF.pdf ideas, cartridge cost figures, wandb dense-P2
   cross-check, AND the bg_stats-over-our-cache collection recipe (unblocks with-IDF canonical). Bundle: results/EXP-002/.
 

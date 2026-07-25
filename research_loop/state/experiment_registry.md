@@ -69,11 +69,15 @@ Format mirrors `.cursor/rules/research-companion.mdc`.
 - Command: VAR=val ... bash examples/qasper2/scripts/train_continual_am_sparse.sh (RUNBOOK §3b), USE_IDF=0.
 - Metrics reported: qa_forgetting_loss / mt_acquisition_loss (mean CE) + solve_s (T1) + phase2_e2e_s (T2) + gpu_s.
 - Expected: closed-form, gradient_steps=0; cost ≪ EXP-000; quality somewhere between PHASE1 and REF-CART.
-- Actual: _pending_
-- Interpretation: _pending_
+- Actual: QA forgetting 2.2521 (+0.013 vs 2.239 floor → no forgetting, within noise); MT acquisition
+  2.5426 (−1.240 vs 3.783 floor; ppl 44→12.7). solve_s 181.4 / phase2_e2e_s 217 / gradient_steps 0 (16 docs).
+- Interpretation: closed-form, backprop-free AM-sparse achieves large MT acquisition with intact QA
+  retention (freeze-keys) in ~3.6 min — a strong first efficiency+quality point. Caveat: value_global_max_abs
+  816 (deep layers) despite intact QA. Not yet comparable to REF-CART (EXP-000 pending) or with-IDF (EXP-003).
 - Confounders considered: NOT the with-IDF canonical (that needs bg_stats over THIS cache — deferred EXP-003);
-  historical "current best" 7.13/7.28 was top32 per_head — different config, not a strict repro target.
-- Status: dispatched
+  historical "current best" 7.13/7.28 was top32 per_head — different config, not a strict repro target;
+  tiny eval (QA n=6, MT n=5) so the QA +0.013 is noise-level.
+- Status: done
 - Follow-up: with-IDF canonical (EXP-003) next cycle once bg_stats-over-our-cache recipe is confirmed (EXP-002).
 - Artifacts: outputs/<run-dir>/ , logs/ , research_loop/results/EXP-001/result.json
 
