@@ -43,8 +43,14 @@ After Stage 2, the AM-sparse cartridge's **(QA-loss, MT-loss)** pair should be �
 eval, only the Phase-2 update rule differs. Ideal region: QA near the Phase-1 floor (little
 forgetting) AND MT pulled down from ~33 toward the baseline's acquisition level.
 
-## ⚠️ Two things for the human to confirm
-1. **What "MT" denotes** as the Phase-2 task (multi-turn? a second Qasper task type?). The mechanics
-   (QA=old/forgetting split, MT=new/acquisition split) are certain; the semantic label is not.
-2. **The HF cache is genuinely the QA Phase-1 self-distilled cartridge** (name vs config mismatch).
-   EXP-000's dual-split eval settles this automatically, but a one-word confirm saves a cycle.
+## Task domains = Qasper sub-tasks (confirmed by human)
+The stages are different **Qasper task domains**, each a self-study corpus + eval split:
+- Phase 1 = **QA** (Question Answering) — builds the base cartridge.
+- Phase 2 = **MT** (Machine Translation) — the new domain written in continually.
+- Phase 3 = **SA** (Sentiment Analysis) — a possible further continual step.
+This autoresearch is scoped to **QA→MT (2-stage)**; QA→MT→SA is a future longer-chain extension
+(see NORTH_STAR.md for scope). QA-eval after Stage 2 = forgetting; MT-eval = acquisition.
+
+## Cache provenance
+Human believes the HF cache is **mislabelled** (name QA vs config MT). Being re-verified by a
+dual-split eval (EXP-000-verify): a real QA Phase-1 cache → low QA (~5-8) / high MT (~30-40).

@@ -66,7 +66,9 @@ Reuses existing repo conventions: `notes/` + `JOURNAL.md` for durable narrative,
 - Most experiments are **config/env sweeps → no code edits**. Edit executors are the exception,
   used only when a hypothesis needs a mechanism no knob provides (e.g. an attention-mass floor).
 
-## What "done" means
-AM-sparse Phase-2 QA-loss ≤ baseline_QA + 0.15 AND MT-loss ≤ baseline_MT + 0.15 (matches
-self-distillation on both axes), confirmed by a clean re-run — or an honest diminishing-returns
-synthesis if the loop converges short of it.
+## What "done" means (TWO axes — see NORTH_STAR.md)
+An AM-sparse config that matches the self-distillation cartridge on quality (QA-loss ≤ REF-CART_QA
++ 0.15 AND MT-loss ≤ REF-CART_MT + 0.15) **at materially lower training cost** — i.e. it Pareto-wins
+on the (training-cost × forgetting/acquisition) plane vs the cartridge, reaching toward the ICL
+ceiling — driven by a good (possibly novel) GATING mechanism. Or an honest diminishing-returns
+synthesis with the Pareto frontier plotted. The direction anchor is `NORTH_STAR.md`, re-read each cycle.

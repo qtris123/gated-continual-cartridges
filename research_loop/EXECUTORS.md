@@ -35,10 +35,14 @@ Task: run ONE experiment = ONE training/eval config, report the two eval-loss nu
    `examples/qasper2/train/continual_am_sparse.py` ~L73-116 first**. Change only the ONE variable the
    orchestrator named; hold all else at the stated baseline.
 3. Guardrails: no bare `env` (§6.1); gloo for any gradient DDP (§5); single GPU for AM closed-form.
-4. Run to completion. Then **eval** the intended checkpoint (`eval_forgetting`) on BOTH splits.
+4. **Time it (efficiency is a first-class success axis — NORTH_STAR).** Record:
+   - `solve_s` (T1) = the closed-form value-solve wall-clock (from the phase2 summary / your own timer),
+   - `phase2_e2e_s` (T2) = ref-query collection + bg_stats (if collected this run) + solve + eval,
+   - `gpu_s` if available, and `gradient_steps` (0 for pure AM).
+5. Run to completion. Then **eval** the intended checkpoint (`eval_forgetting`) on BOTH splits.
    Parse the **`Eval loss` mean-CE** for QA and MT — NOT the `perplexity` field (§1).
-5. Write the result bundle (numbers.qa_forgetting_loss, mt_acquisition_loss, runtime_s, artifacts).
-   Report a 2-line summary + the bundle path. STOP.
+6. Write the result bundle: numbers = {qa_forgetting_loss, mt_acquisition_loss, solve_s,
+   phase2_e2e_s, gpu_s, gradient_steps}, plus artifacts. Report a 2-line summary + bundle path. STOP.
 If the run crashes: capture the traceback tail, set status=failed + failure_cause, STOP (do not "fix and retry" unless the orchestrator told you to).
 
 ## B) RESEARCH executor (no GPU — external / literature / log-mining)

@@ -4,10 +4,18 @@ Orchestrator refines this each cycle. Each item isolates ONE variable vs a named
 Priority order follows the mission: gating → teacher targets → support allocation → regularization → synthesis.
 Do NOT re-test settled priors (RUNBOOK §7).
 
-## Lever 0 — ANCHORING (do first)
-- [ ] EXP-000 dense self-distillation Phase-2 baseline (local) — the number to match.
-- [ ] EXP-001 reproduce current AM-sparse Phase-2 canonical config through the same eval harness.
-- [ ] EXP-002 (research) wandb cross-check of dense Phase-2 + AM paper gating/target read.
+## Lever 0 — ANCHORING (do first) — establishes BOTH axes' reference lines
+- [ ] EXP-000 dense self-distillation Phase-2 baseline (REF-CART) from the HF Phase-1 cache — the
+      quality BAR. Record its train cost (T2/T3) too, as the efficiency baseline to beat.
+- [ ] EXP-000b ICL / full-context upper bound (REF-ICL) — measure ONCE on QA+MT (icl_eval.py /
+      qasper_loss_benchmark fullctx). The ceiling.
+- [ ] EXP-001 reproduce current AM-sparse Phase-2 canonical config through the same eval harness;
+      record qa/mt loss AND solve_s/phase2_e2e_s (first efficiency data point).
+- [ ] EXP-002 (research) pull the two cited papers (*Sparse Memory Finetuning* gating, *Fast KV
+      Compaction via AM*) + cartridge paper synthesis/train-cost figures; wandb cross-check dense P2;
+      mine any recorded synthesis time (do NOT re-synthesize).
+- [ ] EFF-0 (research/log-mining) assemble the T3 cost comparison table (AM Phase-2 vs cartridge
+      Phase-2 train time; synthesis cost estimated/qualitative per NORTH_STAR).
 
 ## Lever 1 — GATING (the stated core problem: low-attention-mass slot selection)
 Baseline for all: AM-sparse canonical (tfidf, use_idf=1, per_layer, top_t=64, freeze keys, ridge spectral).
@@ -37,7 +45,20 @@ Baseline for all: AM-sparse canonical (tfidf, use_idf=1, per_layer, top_t=64, fr
 - [ ] HYP-R2: `delta_weight` trust region sweep (0, 1e-2, 1e-1) — trades acquisition vs stability.
 - [ ] HYP-R3: `enable_old_reference_guard` on/off (explicit old-query preservation block).
 
-## Lever 5 — SYNTHESIS
-- [ ] Combine the winning setting of each lever; confirm on both eval splits with a clean re-run;
-      run a small robustness check (2 seeds / a larger eval batch count if noise is a concern);
-      write the final `notes/` entry and results table.
+## Lever 1.5 — NOVEL GATING DESIGN (the core novelty; open once existing-knob sweeps are informative)
+Not just sweeping knobs — DESIGNING a gater specific to our setting (compressed embedding in attention).
+Each is an EDIT executor (opt-in flag) + TRAIN executor to evaluate. Draw from the two cited papers
++ observed attention-mass/slot evidence. Keep gradient-free; keep it cheap (efficiency axis).
+- [ ] GATE-N1: mass-aware gate — combine attention-mass (TF) with a *learned/derived* rarity signal
+      that doesn't over-select near-zero-mass slots (fixes the core TF-IDF failure directly).
+- [ ] GATE-N2: conflict-aware gate — select slots by old-vs-new attention conflict (protect
+      load-bearing Phase-1 slots), inspired by the residual_budget idea but as a first-class gater.
+- [ ] GATE-N3: coverage-budgeted gate — cap cumulative coverage (r≈0.91 with forgetting) explicitly,
+      allocating support to maximize acquisition per unit coverage.
+- [ ] (add more as the trajectory + literature suggest — this is where autonomy is expected)
+
+## Lever 5 — SYNTHESIS (two-axis)
+- [ ] Combine the winning gater + best target/support/reg; confirm on both eval splits with a clean
+      re-run; place the final point on the **quality×cost Pareto plot** vs REF-CART and REF-ICL.
+- [ ] Robustness: 2 seeds / larger eval-batch count if noise is a concern (evals are only a few batches).
+- [ ] Write the final `notes/` entry + results table + Pareto figure.

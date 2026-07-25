@@ -17,10 +17,11 @@ in order, every cycle.
 ---
 ## STEP 1 — Load state (always, first thing)
 Read, in this order:
-1. `research_loop/state/active_context.md`  ← headline standings, target, in-flight work, next actions
-2. `research_loop/state/backlog.md`          ← prioritized experiment queue
-3. `research_loop/state/results.csv`          ← the numbers so far
-4. `research_loop/RUNBOOK.md`                 ← how to run things, guardrails, settled priors
+1. `research_loop/NORTH_STAR.md`             ← the direction + two success axes (anti-drift anchor)
+2. `research_loop/state/active_context.md`  ← headline standings, target, in-flight work, next actions
+3. `research_loop/state/backlog.md`          ← prioritized experiment queue
+4. `research_loop/state/results.csv`          ← the numbers so far
+5. `research_loop/RUNBOOK.md` / `PROTOCOL.md` ← how to run things, guardrails, 2-stage definition
 Skim `experiment_registry.md` / `hypothesis_ledger.md` only for the items you're about to touch.
 
 ## STEP 2 — Reconcile in-flight work
@@ -34,14 +35,24 @@ For every experiment marked `dispatched`/`running` in `active_context.md`:
 
 ## STEP 3 — Check the stop conditions
 Stop the loop (see STEP 7 "STOP") if ANY:
-- **Target met:** AM-sparse Phase-2 QA-loss ≤ baseline QA-loss + 0.15 **and** MT-loss ≤ baseline
-  MT-loss + 0.15 (i.e. matches self-distillation on both axes), confirmed by a clean re-run.
+- **Target met (BOTH axes):** an AM-sparse config reaches QA-loss ≤ cartridge QA + 0.15 AND
+  MT-loss ≤ cartridge MT + 0.15 (quality parity with self-distillation), **at materially lower
+  training cost** than the cartridge (T2 ≪ cartridge Phase-2 train time) — i.e. it Pareto-dominates
+  or matches cartridge on quality while winning on cost. Confirm with a clean re-run.
 - **Budget exhausted:** the cycle/hour/GPU-hour budget in `active_context.md` is spent.
-- **Converged:** ≥3 consecutive cycles produced no results.csv improvement and the backlog holds
-  no untested single-variable hypothesis. Write an honest "diminishing returns" synthesis.
-Otherwise continue.
+- **Converged:** ≥3 consecutive cycles with no improvement to the quality/cost Pareto frontier AND no
+  untested single-variable hypothesis or new-gater idea left. Write an honest diminishing-returns synthesis.
+Otherwise continue. (If quality parity is reached but you've drifted expensive to get there, that is
+NOT done — push back toward the cheap frontier; NORTH_STAR.)
 
 ## STEP 4 — DECIDE the next batch (your core job)
+**First re-read `research_loop/NORTH_STAR.md`.** Judge every candidate against the TWO success axes
+(training efficiency + continual-learning quality) as a **Pareto trade**. Reject drift: anything that
+wins quality by blowing up training cost (giant reference banks, many re-solves, gradient epochs), or
+that isn't in service of the gating novelty / fast-AM substrate. Spend the novelty budget on GATING
+(you MAY design & implement new gaters on-branch once existing-knob sweeps are exhausted). Prefer
+gradient-free; a few sparse gradient steps only as a distinct, costed Pareto point.
+
 Follow the research discipline from `.cursor/rules/research-companion.mdc`:
 Observation → Interpretation → Hypothesis → Prediction → Experiment → Result → Decision (never merge).
 - Pick the **next 1–4 experiments** from the backlog that each **isolate ONE variable** vs a named
