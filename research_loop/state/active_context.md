@@ -4,7 +4,8 @@
 > This is the single source of truth for "where are we and what's next."
 
 ## HEADLINE (update every cycle)
-- **Status:** NOT STARTED — cycle 0 not yet run.
+- **Status:** CYCLE 0 IN PROGRESS (anchoring) — dispatched 2026-07-25. Batch: EXP-000 (REF-CART, train),
+  EXP-001 (AM-sparse no-IDF anchor, train), EXP-002 (research). Awaiting result bundles.
 - **Goal (TWO axes — see NORTH_STAR.md):** a fast, (near) training-free continual update for the
   KV-cartridge whose GATING gives cartridge-comparable forgetting/acquisition — winning on BOTH
   (1) training efficiency and (2) CL quality, vs cartridge (bar) and ICL (ceiling). Gating is the novelty.
@@ -32,23 +33,28 @@
 - ✅ Cited-paper PDFs staged: `TF-IDF.pdf` (2510.15103v1), `AM.pdf` (2602.16284) at repo root (NORTH_STAR).
 
 ## IN-FLIGHT (experiments dispatched, awaiting result bundles)
-- (none yet)
+- **EXP-000** (TRAIN, GPU) — REF-CART dense self-distillation Phase-2 → quality BAR + train cost.
+  Expect: MT loss ≪ 3.783; QA loss near/above 2.239. Long pole (10-epoch gradient). Bundle: results/EXP-000/.
+- **EXP-001** (TRAIN, GPU) — AM-sparse Phase-2 anchor, USE_IDF=0 (no bg_stats), per_layer top_t=64,
+  cartridge_plus_doc, freeze, ridge spectral → first efficiency point (solve_s/phase2_e2e_s) + QA/MT loss,
+  same harness as EXP-000. Doubles as HYP-G1 no-IDF arm. Bundle: results/EXP-001/.
+- **EXP-002** (RESEARCH, no GPU) — AM.pdf + TF-IDF.pdf ideas, cartridge cost figures, wandb dense-P2
+  cross-check, AND the bg_stats-over-our-cache collection recipe (unblocks with-IDF canonical). Bundle: results/EXP-002/.
 
 ## NEXT ACTIONS (what the next cycle should do)
-1. **Cycle 0 = anchoring.** Phase-1 cache is verified & staged — skip re-verification. Dispatch:
-   - TRAIN EXP-000 (REF-CART): run `baseline_continual.py` Phase-2 (dense self-distillation, gloo)
-     from `outputs/phase1_selfdistill_qwen512/cache_last.pt` on the MT synth parquet → the quality BAR
-     (QA/MT loss) + its train cost (efficiency baseline). Compare QA-loss vs the 2.24 floor.
-   - TRAIN EXP-000b (REF-ICL): full-context ICL eval on QA+MT → the ceiling (measure once).
-   - TRAIN EXP-001: reproduce current AM-sparse Phase-2 canonical config from the SAME Phase-1 cache
-     through the same eval harness; record QA/MT loss + solve_s/phase2_e2e_s (first efficiency point).
-   - RESEARCH EXP-002: pull the two cited papers + cartridge synthesis/train-cost figures; wandb cross-check.
-   - TRAIN EXP-001: reproduce the current AM-sparse Phase-2 canonical config end-to-end through the
-     SAME eval harness, so EXP-000 vs EXP-001 are apples-to-apples.
-   - RESEARCH EXP-002: pull the historical dense Phase-2 run from wandb (SEACrowd) to cross-check
-     EXP-000; and read the AM paper's gating/target sections for lever ideas.
-2. Once anchored, begin **Lever 1 (gating)** from `backlog.md` — the stated core problem
+1. **Reconcile EXP-000/001/002** (STEP 2): ingest bundles → results.csv rows, registry Actual/Interp,
+   ledger HYP-G1. Assemble the T3 cost skeleton (EXP-000 train cost vs EXP-001 phase2_e2e_s) + first
+   quality×cost Pareto point (REF-CART vs AM-sparse-no-IDF vs PHASE1 floor).
+2. **Fill the two deferred anchors** (were cut this cycle by the 2-GPU cap / bg_stats prereq):
+   - TRAIN EXP-000b (REF-ICL): full-context ICL eval on QA+MT → the ceiling (measure ONCE).
+   - Using EXP-002's bg_stats recipe: collect bg_stats over `outputs/phase1_selfdistill_qwen512/cache_last.pt`
+     (save to `outputs/phase1_selfdistill_qwen512/bg_stats.pt`; EDIT a tiny standalone collector only if
+     no entry point exists), then TRAIN EXP-003 = with-IDF canonical (tfidf, USE_IDF=1, per_layer, top_t=64)
+     — the true Lever-1 baseline. HYP-G1 becomes EXP-003 (with-IDF) vs EXP-001 (no-IDF).
+3. Then begin **Lever 1 (gating)** from `backlog.md` — the stated core problem
    ("TF-IDF selects slots with insufficient attention mass").
+- NOTE: canonical AM-sparse with IDF needs bg_stats collected over OUR self-distilled cache; the July-10
+  bg_stats.pt files are for a DIFFERENT (AM-baked) Phase-1 cache — do NOT reuse them (mismatched IDF).
 
 ## DECISIONS LOCKED (by the human, do not revisit)
 - Signal = perplexity/eval-loss only (no inference-server task-accuracy).
