@@ -16,13 +16,13 @@
 - **CANONICAL AM-sparse = EXP-001 (no-IDF/pure-TF):** QA **2.2521** / MT **2.5426**, backprop-free, e2e 217s.
   HYP-G1 SUPPORTED — IDF gating (EXP-003) is WORSE on both axes (QA 2.6351 / MT 3.0073), so all further gating
   builds on the NO-IDF config. This IS the project's core thesis confirmed: IDF is the wrong gate in compressed-KV.
-- **HONEST standings vs dense (CORRECTED — local apples-to-apples via REFCART-EVAL @4ep):** dense QA 2.3721 /
-  MT **1.8725** vs AM EXP-001 QA 2.2521 / MT 2.5426. ⇒ **Dense ACQUIRES MT much better (1.87 vs 2.54, gap 0.67);
-  AM retains QA slightly better (2.25 vs 2.37) and is ~8× cheaper/backprop-free.** The earlier "AM beats dense"
-  read was WRONG (based on wandb scf175an MT=2.891, now deemed unreliable). **THE CHALLENGE = close the MT-acquisition
-  gap** while keeping AM's retention + cost edge. This reframes lever priority toward ACQUISITION (ENABLE_BETA, more
-  support/top_t, better gating). Full 10-epoch dense (finishing now, Epoch 9) = authoritative bar; expect MT ≤ 1.87.
-- **Gap to target:** MT-acquisition gap ~0.67 vs dense@4ep (will widen vs 10ep). QA already ≤ dense. Cost dominant.
+- **DENSE BAR ESTABLISHED (both dense points measured).** dense@10ep FINAL (REF-CART): QA 2.6991 / MT 2.2137 —
+  but it OVERFIT (worse on BOTH than dense@4ep). **Best dense operating point = dense@4ep: QA 2.3721 / MT 1.8725.**
+  AM canonical EXP-001: QA 2.2521 / MT 2.5426. ⇒ **Pareto: AM RETAINS QA better than even dense@4ep (2.25 < 2.37)
+  and crushes dense@10ep on QA (2.25 vs 2.70); dense@4ep ACQUIRES MT better (1.87 vs 2.54, gap 0.67); AM ~8×
+  cheaper, backprop-free.** THE CHALLENGE = close AM's MT-acquisition gap (target ~1.87) without losing QA/cost edge.
+- **Gap to target:** MT-acquisition gap ≈ 0.67 (AM 2.54 vs dense-best 1.87). QA already BETTER than dense on both
+  points. Cost dominant. Lever priority = ACQUISITION: β (EXP-006 β-clamp), top_t/support (HYP-S1), novel gaters.
   REF-ICL ceiling still _TBD (EXP-000b)_.
 
 ## BUDGET
@@ -41,15 +41,17 @@
 - ✅ Cited-paper PDFs staged: `TF-IDF.pdf` (2510.15103v1), `AM.pdf` (2602.16284) at repo root (NORTH_STAR).
 
 ## IN-FLIGHT (experiments dispatched, awaiting result bundles)
-- **EXP-000** (dense REF-CART bar) — **10-EPOCH RUN COMPLETE** (attempt-2, 01:07→02:51, ~101min; "Done
-  training…final barrier", cache-step624.pt saved). In-training QA-eval ended ~2.69 ⇒ dense@10ep forgets QA
-  MORE than dense@4ep (2.37) and than AM (2.25). First dense-final-eval executor STALLED (no output 40min) →
-  **RE-DISPATCHED dense-final-eval (gpu0)** to eval cache-step624.pt on BOTH splits → authoritative bar → results/EXP-000/.
+- ~~EXP-000~~ **DONE + INGESTED** (dense REF-CART bar). dense@10ep QA 2.6991 / MT 2.2137 (OVERFIT); dense@4ep
+  (best) QA 2.3721 / MT 1.8725. Bar established. results/EXP-000/ + REF-CART row in results.csv.
 - ~~EXP-005 / EXP-005b~~ **BOTH FAILED** — β numerically pathological. EXP-005 (β@λ1e-4) cholesky not-PD;
   EXP-005b (β@λ0) → "NaNs in ridge lstsq solution". CONCLUSIVE: λ doesn't matter; the UNCLAMPED β log-weights
   (~66.6) are the problem. HYP-T2 requires the β-clamp fix. → **EXP-006** (implement opt-in β clamp [-3,3] +
   run β+clamp, RIDGE_LAMBDA=0, baseline EXP-004) dispatched.
-- **EXP-006** (EDIT+TRAIN, GPU) — β-clamp implement + test = HYP-T2's real answer. Bundle: results/EXP-006/.
+- **EXP-006** (EDIT+TRAIN, GPU) — β-clamp: **EDIT DONE** (cartridges/am/finetune.py + continual_am_sparse.py add
+  opt-in `beta_clamp_abs`, clamp after NNLS fit; reviewed, clean; UNCOMMITTED pending run validation). β+clamp RUN
+  still pending/in-progress (no 09:xx am dir yet). = HYP-T2's real answer. Bundle: results/EXP-006/.
+- **EXP-007** (TRAIN, GPU) — HYP-S1 top_t sweep {32,128} vs canonical 64 (EXP-001). Maps acquisition/forgetting
+  knee; top_t=128 targets the MT-acquisition gap. Bundle: results/EXP-007/.
 - NOTE ON CADENCE: /loop re-invocations arrive irregularly (observed a ~4h gap 02:5x→07:0x); ScheduleWakeup
   fallback isn't reliably firing. Make each invocation maximally productive; keep BOTH GPUs loaded to avoid long idle.
 - ~~EXP-001~~ **DONE + INGESTED** (18:02) — AM-sparse no-IDF anchor: QA 2.2521 / MT 2.5426, e2e 217s / 0 grad.

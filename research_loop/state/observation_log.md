@@ -16,6 +16,12 @@ Artifact: research_loop/results/EXP-000-verify/result.json, /tmp/exp000_{qa,mt}.
 eval_forgetting.py printed `Eval loss` then never exited (held GPU 1 ~78 min until killed). nvidia-smi
 repeatedly >20s/hangs on this box. Guardrails added to RUNBOOK §1/§6. Harness `Eval loss` = ln(ppl).
 
+## 2026-07-26 09:2x [EXP-000] dense 10-epoch REF-CART bar = QA 2.6991 / MT 2.2137 (OVERFIT)
+Final 10-epoch dense self-distillation checkpoint (cache-step624, ~101min train) eval'd both splits:
+QA-forgetting 2.6991, MT-acquisition 2.2137. Both WORSE than dense@4ep (QA 2.3721 / MT 1.8725) → 10ep overfit
+(QA-forgetting grows with epochs; MT regressed past ~4ep). Best dense point = @4ep. vs AM EXP-001 (QA 2.2521 /
+MT 2.5426): AM retains QA better than both dense points; dense@4ep acquires MT better (gap 0.67). Artifact: results/EXP-000/result.json.
+
 ## 2026-07-26 08:51 [EXP-005b] β at RIDGE_LAMBDA=0 also failed (NaNs) — confirms unclamped β is root cause
 ENABLE_BETA=1 with RIDGE_LAMBDA=0 (robust lstsq/gels path) crashed with "RuntimeError: NaNs in ridge lstsq
 solution". So the failing solve branch is not the cause — the unclamped β log-weights themselves are. Both β

@@ -1,0 +1,23 @@
+{
+  "exp_id": "EXP-000",
+  "type": "train",
+  "variable_under_test": "dense self-distillation Phase-2, 10 epochs (REF-CART bar)",
+  "baseline_ref": "PHASE1 (QA 2.239 / MT 3.783) / EXP-001 AM (QA 2.2521 / MT 2.5426)",
+  "status": "done",
+  "numbers": {
+    "qa_forgetting_loss": 2.6991467475891113,
+    "mt_acquisition_loss": 2.2136831283569336,
+    "dense_epochs": 10,
+    "optimizer_step": 624,
+    "train_wallclock_s": 6060,
+    "gradient_steps": 624
+  },
+  "artifacts": [
+    "outputs/2026-07-26-01-07-07-baseline_continual/10554903-c539-4056-8962-29f4fd91baee/cache-step624.pt",
+    "research_loop/results/EXP-000/eval_qa.log",
+    "research_loop/results/EXP-000/eval_mt.log"
+  ],
+  "command": "EVAL ONLY, gpu0 via repo flock (/tmp/gpu_locks_$USER/gpu0.lock, MASTER_PORT=29500), ran twice (QA then MT); parsed the 'Eval loss' mean-CE line then killed the PID (eval_forgetting.py hangs after printing). Per split: CHECKPOINT_PATH=outputs/2026-07-26-01-07-07-baseline_continual/10554903-c539-4056-8962-29f4fd91baee/cache-step624.pt EVAL_DATA_PATH=data/qasper/eval/qasper_eval_{QA,MT}.parquet MODEL_NAME=Qwen/Qwen3-4B-Instruct-2507 RUN_NAME=refcart_10ep_<split> WANDB_DISABLED=1 CUDA_VISIBLE_DEVICES=0 MASTER_PORT=29500 .venv/bin/python examples/qasper2/train/eval_forgetting.py . Driver: research_loop/results/EXP-000/run_eval.sh (holds flock fd 200 for its lifetime).",
+  "observations": "EVAL ONLY on the completed 10-epoch dense self-distillation checkpoint (cache-step624.pt, 511 trainable + 1 frozen = 512 slots; 10 epochs, optimizer_step 624 confirmed in train.log), both splits scored as mean cross-entropy: QA-forgetting = 2.6991 (n=6 batches), MT-acquisition = 2.2137 (n=5 batches). QA-forgetting is markedly worse (higher) than AM EXP-001 (2.2521, by +0.447) and worse than dense@4ep (2.3721, by +0.327): Phase-1 QA retention degraded as dense MT training ran longer, so forgetting GREW with epochs (4ep 2.3721 -> 10ep 2.6991), consistent with the LAST-not-BEST cosine-tail regression caveat. On acquisition, dense@10ep MT 2.2137 beats AM 2.5426 (by -0.329), confirming dense writes new MT docs better than closed-form AM; but MT also regressed vs dense@4ep 1.8725 (by +0.341), so extending 4ep -> 10ep hurt BOTH splits (both deltas ~0.33, above the ~0.1-0.2 tiny-eval noise band). Relative to the PHASE1 floor (QA 2.239 / MT 3.783), the run learned the new docs substantially (MT 3.783 -> 2.214) while forgetting some Phase-1 (QA 2.239 -> 2.699); the QA number reproduces this run's in-training QA-eval tail (~2.69) and the prior stalled attempt's QA log (2.6991) exactly, i.e. deterministic. Pareto read: AM has better retention (QA 2.2521 < 2.6991) AND lower cost (closed-form, 0 gradient steps vs 624 gradient steps / ~6060 s wallclock), while dense has better acquisition (MT 2.2137 < 2.5426) -- AM-better-retention-and-cost vs dense-better-acquisition, the two methods sitting on opposite Pareto corners.",
+  "failure_cause": null
+}

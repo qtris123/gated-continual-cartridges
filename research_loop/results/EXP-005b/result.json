@@ -1,0 +1,42 @@
+{
+  "exp_id": "EXP-005b",
+  "type": "train",
+  "variable_under_test": "ENABLE_BETA off->1 at RIDGE_LAMBDA=0 vs EXP-004 (HYP-T2 retry: beta via the lambda=0 gels path to dodge the EXP-005 cholesky crash)",
+  "baseline_ref": "EXP-004 (lambda=0, beta off: QA 2.2619 / MT 2.5569) / EXP-001 (QA 2.2521 / MT 2.5426) / PHASE1 (QA 2.239 / MT 3.783)",
+  "status": "failed",
+  "numbers": {
+    "qa_forgetting_loss": null,
+    "mt_acquisition_loss": null,
+    "solve_s": null,
+    "phase2_e2e_s": 294,
+    "gpu_s": null,
+    "gradient_steps": 0,
+    "enable_beta": 1,
+    "ridge_lambda": 0,
+    "ridge_scale": "spectral",
+    "top_t": 64,
+    "granularity": "per_layer",
+    "use_idf": 0,
+    "value_global_max_abs": null,
+    "documents_completed_before_crash": 3,
+    "crashed_on_document_index": 3,
+    "beta_engaged_attention_bias_enabled": true,
+    "beta_engaged_max_abs_logweight": 68.4527,
+    "beta_engaged_mean_abs_logweight": 4.2267,
+    "beta_engaged_frac_nonzero_entries": 0.1941,
+    "beta_engaged_n_layers": 36,
+    "crash_at_core_py_line": 230,
+    "cholesky_crash": false,
+    "gels_path_taken": true
+  },
+  "artifacts": [
+    "outputs/2026-07-26-08-48-28-continual_am_sparse/61c5bfae-203c-471e-9bb0-83571361473b/cache_last.pt",
+    "outputs/2026-07-26-08-48-28-continual_am_sparse/61c5bfae-203c-471e-9bb0-83571361473b/cache-after-doc-002-38a6f58f.pt",
+    "outputs/2026-07-26-08-48-28-continual_am_sparse/61c5bfae-203c-471e-9bb0-83571361473b/config.yaml",
+    "research_loop/results/EXP-005b/run.log",
+    "research_loop/results/EXP-005b/launch_exp005b.sh"
+  ],
+  "command": "flock GPU1 (MASTER_PORT=29501) then: ENABLE_BETA=1 BETA_FIT_SCOPE=selected USE_IDF=0 SLOT_SELECTION=tfidf GRANULARITY=per_layer TOP_T=64 TARGET_MODE=cartridge_plus_doc KEY_MODE=freeze RIDGE_LAMBDA=0 RIDGE_SCALE=spectral RIDGE_LAMBDA_MIN=0 DELTA_WEIGHT=1e-2 AM_EXECUTION_MODE=per_document PHASE1_CACHE_PATH=outputs/phase1_selfdistill_qwen512/cache_last.pt SYNTH_DATA_PATH=data/qasper/train/qwen_qasper_MT_task_8192.parquet MODEL_NAME=Qwen/Qwen3-4B-Instruct-2507 NUM_TOKENS=512 EVAL_QA_PATH=data/qasper/eval/qasper_eval_QA.parquet EVAL_MT_PATH=data/qasper/eval/qasper_eval_MT.parquet RUN_NAME=exp005b_am_sparse_noidf_beta_top64_perlayer_ridge0 WANDB_DISABLED=1 bash examples/qasper2/scripts/train_continual_am_sparse.sh (wrapped by research_loop/results/EXP-005b/launch_exp005b.sh, nohup->run.log). ONLY variable vs EXP-004: ENABLE_BETA off->1, holding RIDGE_LAMBDA=0. BG_STATS_PATH NOT passed (USE_IDF=0, pure TF). No fix-and-retry per contract.",
+  "observations": "Enabling ENABLE_BETA=1 at RIDGE_LAMBDA=0 did AVOID the exact EXP-005 cholesky crash but STILL failed the closed-form Phase-2 update, so HYP-T2 (does beta close the MT-acquisition gap without hurting QA) remains UNANSWERED -- no eval ran. beta was genuinely engaged (config enable_beta:true; saved cache-after-doc-002 carries attention_bias_enabled=True with non-zero trainable_beta on all 36 layers, max|beta_logweight|=68.45, mean=4.23, ~19.4% nonzero -- essentially identical to EXP-005's 66.6/4.23/19.4%, since beta_fit_scope=selected touches only top-T slots). The lambda=0 path DID take the robust OLS branch as intended: with RIDGE_LAMBDA=0, effective_ridge_lambda short-circuits to 0.0 (core.py L144-145), so _ridge_lstsq enters the lam==0 gels branch (torch.linalg.lstsq driver='gels', L196-197) NOT the cholesky solve. The failure this time is a DIFFERENT symptom of the SAME root cause: the crash is RuntimeError('NaNs in ridge lstsq solution') at core.py:230 (the explicit post-solve NaN guard), reached from value_solve.py:247 guarded_sparse_am_value_update(attention_bias=head_beta) <- finetune.py:546, NOT the linalg.cholesky positive-definite error at core.py:225 that killed EXP-005. Mechanism: the very large fitted beta log-weights (|beta| up to ~68) are added to the attention logits pre-softmax, collapsing the softmax attention onto near-one-hot and making the value-solve design matrix X rank-deficient; gels assumes full column rank, so on the singular X it returns NaNs rather than raising, and the driver's NaN check then raises. Crash occurred on document index 3 with docs 0/1/2 written successfully (cache-after-doc-000..002 + cache-step1..3 saved) -- the exact same document boundary as EXP-005, indicating a deterministic beta-collapse failure at that doc, not a random numerical fluke. Because the crash preceded the aggregate/eval stage, NO phase2_summary.json was written and neither QA-forgetting nor MT-acquisition eval ran; qa_forgetting_loss and mt_acquisition_loss are null (not fabricated), as are solve_s (no summary wall_clock) and value_global_max_abs. Cost: phase2_e2e_s=294s wall (cold model load + flex_attention autotune/compile + 3 docs + crash) on flock-claimed GPU1; gpu_s unavailable (AM shell starts no monitor; nvidia-smi flaky); gradient_steps=0. Caveat: this is a numerical-stability failure of the beta/NNLS mass-bias path (large fitted biases collapsing X), independent of the ridge solver branch -- the lambda=0 gels path fixed the cholesky symptom but not the underlying rank-deficiency, so beta cannot be exercised end-to-end under the current beta-fitting/attention-bias formulation without a further change.",
+  "failure_cause": "RuntimeError: NaNs in ridge lstsq solution, raised at cartridges/am/core.py:230 (the post-solve NaN guard, NOT the cholesky positive-definite error at core.py:225). Path: continual_am_sparse.py:579/362 -> continual.py:199 apply_document_am_write_to_cache -> finetune.py:546 -> value_solve.py:247 guarded_sparse_am_value_update(attention_bias=head_beta) -> core.py:230 _ridge_lstsq. With RIDGE_LAMBDA=0 the solve correctly took the OLS gels branch (no cholesky), but ENABLE_BETA=1 fits large NNLS log-weight biases (max|beta|~68) added to attention logits pre-softmax, collapsing softmax attention to near-one-hot and making the value-solve design matrix X rank-deficient; gels returns NaNs on the singular X and the NaN guard raises. Triggered on document index 3 (docs 0-2 succeeded), the same boundary as EXP-005. beta confirmed engaged (attention_bias_enabled=True, non-zero trainable_beta on all 36 layers, max|beta|=68.45, mean=4.23, 19.4% nonzero). No code patched per contract; orchestrator to decide on any fix."
+}
