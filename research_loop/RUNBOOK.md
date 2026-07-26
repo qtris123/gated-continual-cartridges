@@ -133,6 +133,18 @@ mechanism outside this list (e.g. an attention-mass floor `τ` on the ranker —
 7. **`eval_forgetting.py` hangs after printing `Eval loss`** — parse the line, then kill the PID;
    never wait-for-exit (§1). 8. **`nvidia-smi` is flaky/slow** — use torch/`/proc` for GPU checks (§1).
 9. Eval set is tiny (n=5-6) — treat sub-0.2-loss deltas as noise (§1).
+10. **CODE EDITS may not take effect — dual `cartridges` package.** `import cartridges` can resolve to the
+    SIBLING repo `/localhome/local-triv/gated-continual-cartridges/cartridges` (via the venv editable install),
+    NOT this `_explore` repo, depending on which `.venv`/PYTHONPATH is active. Symptom: your edit to
+    `_explore/cartridges/...` is invisible at runtime, OR a driver (explore) passes a new kwarg the imported
+    (sibling) config rejects → `Extra inputs are not permitted` at pydantic construction, crashing ALL runs.
+    Before running an EDIT-based experiment: (a) set `PYTHONPATH="$CARTRIDGES_DIR:$PYTHONPATH"`, (b) verify with
+    `python -c "import cartridges,os; print(os.path.dirname(cartridges.__file__))"` (must be `_explore`), and
+    (c) test the config CONSTRUCTS with the new field before a full run. Prefer making new kwargs OPT-IN and
+    passed CONDITIONALLY (`hasattr`) so stock runs never break.
+11. **β / ENABLE_BETA is numerically broken (deferred).** The NNLS β-fit produces NaN / huge (~66.6) log-weights
+    → rank-deficient value-solve (cholesky not-PD or lstsq NaN). Do NOT enable β without a deep numerical fix
+    inside `refit_beta_nnls`. (EXP-005/005b/006 all failed.)
 
 ## 7. Settled priors — DO NOT re-litigate (spend cycles elsewhere)
 - Value-only (`freeze_keys`) preserves Phase-1; **key-value collapses QA to a ~16–19 floor**.

@@ -52,10 +52,12 @@ Baseline for all: AM-sparse canonical (tfidf, use_idf=1, per_layer, top_t=64, fr
 
 ## Lever 2.5 — AM-FAITHFULNESS (from EXP-002 reading of AM.pdf; candidate single-var tests)
 Baseline for all: AM-sparse canonical. Priority per AM paper's own ablations.
-- [~] HYP-T2 (IN PROGRESS): `ENABLE_BETA=1` — AM's per-token β mass-bias (NNLS). EXP-005 CRASHED at λ=1e-4
-      (unclamped β log-weights ~66.6 → softmax collapse → cholesky not-PD). Retrying EXP-005b at λ=0 (robust
-      lstsq). **If unstable/degenerate → EDIT-BETA-CLAMP: clamp β∈[-3,3] (AM paper's stability range) in the
-      NNLS β-fit path (cartridges/am/*.py refit_beta_nnls / where attention_bias is applied), opt-in, then retest.**
+- [DEFERRED] HYP-T2: `ENABLE_BETA=1` (AM per-token β mass-bias, NNLS) — **β implementation is numerically broken.**
+      Failed 3 ways: EXP-005 (λ=1e-4) cholesky not-PD (β~66.6); EXP-005b (λ=0) NaN in lstsq; EXP-006 (β-clamp added)
+      `AssertionError max|beta|=NaN` — **the NNLS β-fit itself produces NaN**, so an output clamp can't help. A real
+      fix needs numerical guards INSIDE refit_beta_nnls (input clamps / regularization / NaN guards) — a deep dive
+      into someone else's AM numerics. DEFERRED as a rabbit hole; pursue tractable acquisition levers first (top_t,
+      novel gaters). Revisit β only if support/gating don't close the MT gap. (β-clamp edit was reverted.)
 - [ ] HYP-PH1: nonuniform PER-HEAD support budget (AM's #1 ablation: head sensitivity ~input-invariant →
       precomputed greedy budget). Map: GRANULARITY=per_head + a per-head TOP_T schedule (MIN_TOP_T_PER_LAYER /
       residual_budget). Likely needs an EDIT for a per-head budget schedule if no knob suffices.

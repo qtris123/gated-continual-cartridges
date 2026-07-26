@@ -16,6 +16,13 @@ Artifact: research_loop/results/EXP-000-verify/result.json, /tmp/exp000_{qa,mt}.
 eval_forgetting.py printed `Eval loss` then never exited (held GPU 1 ~78 min until killed). nvidia-smi
 repeatedly >20s/hangs on this box. Guardrails added to RUNBOOK §1/§6. Harness `Eval loss` = ln(ppl).
 
+## 2026-07-26 10:2x [EXP-006/β] β NNLS fit produces NaN — β deferred; import foot-gun found
+EXP-006 (β + opt-in clamp[-3,3]) died `AssertionError: beta clamp failed: max|beta|=nan > 3.0` — the NNLS β-fit
+itself yields NaN, so clamping the output can't help. β failed 3 ways (EXP-005 cholesky not-PD @66.6; EXP-005b
+lstsq NaN; EXP-006 fit NaN). β DEFERRED (needs numerical guards in refit_beta_nnls). Separately: the β-clamp edit
+made continual_am_sparse.py pass beta_clamp_abs UNCONDITIONALLY, which crashed ALL AM runs (incl EXP-007 top_t)
+when `import cartridges` resolved to the SIBLING repo (no field). Edit REVERTED; foot-guns added RUNBOOK §6.10/6.11.
+
 ## 2026-07-26 09:2x [EXP-000] dense 10-epoch REF-CART bar = QA 2.6991 / MT 2.2137 (OVERFIT)
 Final 10-epoch dense self-distillation checkpoint (cache-step624, ~101min train) eval'd both splits:
 QA-forgetting 2.6991, MT-acquisition 2.2137. Both WORSE than dense@4ep (QA 2.3721 / MT 1.8725) → 10ep overfit

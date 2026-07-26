@@ -47,11 +47,14 @@
   EXP-005b (β@λ0) → "NaNs in ridge lstsq solution". CONCLUSIVE: λ doesn't matter; the UNCLAMPED β log-weights
   (~66.6) are the problem. HYP-T2 requires the β-clamp fix. → **EXP-006** (implement opt-in β clamp [-3,3] +
   run β+clamp, RIDGE_LAMBDA=0, baseline EXP-004) dispatched.
-- **EXP-006** (EDIT+TRAIN, GPU) — β-clamp: **EDIT DONE** (cartridges/am/finetune.py + continual_am_sparse.py add
-  opt-in `beta_clamp_abs`, clamp after NNLS fit; reviewed, clean; UNCOMMITTED pending run validation). β+clamp RUN
-  still pending/in-progress (no 09:xx am dir yet). = HYP-T2's real answer. Bundle: results/EXP-006/.
-- **EXP-007** (TRAIN, GPU) — HYP-S1 top_t sweep {32,128} vs canonical 64 (EXP-001). Maps acquisition/forgetting
-  knee; top_t=128 targets the MT-acquisition gap. Bundle: results/EXP-007/.
+- ~~EXP-006 / β~~ **FAILED → β DEFERRED.** β-clamp edit didn't help: EXP-006 died `AssertionError max|beta|=NaN` —
+  the NNLS β-fit ITSELF produces NaN (not just huge values), so an output clamp can't fix it. β is a deep numerical
+  rabbit hole (needs guards inside refit_beta_nnls) → DEFERRED (RUNBOOK §6.11, backlog). **β-clamp edit REVERTED.**
+  Also exposed the dual-cartridges import foot-gun (RUNBOOK §6.10) — the unconditional beta_clamp_abs arg crashed
+  ALL AM runs (incl. EXP-007's first attempt) when the sibling cartridges was imported.
+- **EXP-007** (TRAIN, GPU) — RE-DISPATCHED on reverted/clean code: HYP-S1 top_t sweep {32,128} vs canonical 64.
+  Maps acquisition/forgetting knee; top_t=128 targets the MT gap. Bundle: results/EXP-007/.
+- **REF-ICL** (EVAL, GPU) — the aspirational CEILING (full-context ICL on QA+MT, measure ONCE; icl_eval.py). Bundle: results/REF-ICL/.
 - NOTE ON CADENCE: /loop re-invocations arrive irregularly (observed a ~4h gap 02:5x→07:0x); ScheduleWakeup
   fallback isn't reliably firing. Make each invocation maximally productive; keep BOTH GPUs loaded to avoid long idle.
 - ~~EXP-001~~ **DONE + INGESTED** (18:02) — AM-sparse no-IDF anchor: QA 2.2521 / MT 2.5426, e2e 217s / 0 grad.
