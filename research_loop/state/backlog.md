@@ -32,12 +32,11 @@ Baseline for all: AM-sparse canonical (tfidf, use_idf=1, per_layer, top_t=64, fr
 - [ ] HYP-G4: granularity × top_t interaction under the best gater (small grid, per_layer vs global).
 
 ## Lever 2 — TEACHER TARGETS  ← NOW THE PRIORITY (acquisition is target-limited, per EXP-007)
-- [~] HYP-T1 (EXP-008, RUNNING): `target_mode` cartridge_plus_doc vs self vs (others in enum) at fixed gating.
-      This is THE key remaining closed-form acquisition lever — EXP-007 showed support doesn't move MT, so WHAT
-      the value-solve matches (the target) is the bottleneck. Single var: TARGET_MODE.
-- [ ] SPARSE-GRAD (costed Pareto point, NORTH_STAR-sanctioned): a FEW sparse gradient steps (SGD, value-only,
-      top-t slots) on top of the AM init — does it close the MT-acquisition gap cheaply? Logged as a distinct,
-      more-expensive Pareto point (not the default). Prefer SGD (EXP-002: SGD≫Adam for sparse). Try only if HYP-T1 stalls.
+- [x] HYP-T1 (EXP-008): `target_mode` {cartridge_plus_doc, self, teacher_attention} — NULL. All BIT-IDENTICAL
+      (QA 2.2521 / MT 2.5426) → target_mode is a no-op in per_document AM. AM acquisition ceiling ~2.54 confirmed.
+- [~] HYP-SG1 (EXP-009, RUNNING): the sparse-GRADIENT costed Pareto point — a FEW grad steps (value-only, tfidf
+      top-64) via continual_sparse.py. wandb prior: Adam value-only reaches MT ~1.76 (≈dense) at QA ~2.54. This is
+      the ONLY remaining acquisition lever (closed-form knobs exhausted). Place on quality×cost Pareto.
 - [ ] HYP-T2: `enable_beta` (mass matching) on vs off with keys frozen.
 - [ ] HYP-T3: key_mode freeze vs highest_attention vs omp — but note prior: touching keys hurts
       forgetting; frame as an acquisition-vs-forgetting trade curve, keep freeze as reference.

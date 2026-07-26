@@ -60,6 +60,17 @@ One `### HYP-XXX` block per hypothesis. Status ∈ active | weakened | supported
   ⇒ AM's MT-acquisition (~2.54) is NOT support-limited; more slots only add forgetting. top32 marginally best
   operating point. IMPLICATION: the acquisition gap vs dense (1.87) is TARGET/solve-limited, not gating/support-limited.
 
-### HYP-T1: teacher target_mode affects acquisition (next acquisition lever)
-- Status: active. Since support is exhausted (HYP-S1) and β deferred, target_mode is the remaining closed-form
-  lever on WHAT the value-solve matches. Next decisive test: TARGET_MODE ∈ enum vs cartridge_plus_doc, single var.
+### HYP-T1: teacher target_mode affects acquisition
+- Status: RESOLVED — NULL (EXP-008). target_mode ∈ {cartridge_plus_doc, self, teacher_attention} all give
+  BIT-IDENTICAL QA 2.2521 / MT 2.5426 (15 digits, different solve times) → target_mode is a NO-OP in the
+  per_document AM path (either not wired, or all targets resolve identically). Combined with HYP-S1: **AM's
+  closed-form acquisition ~2.54 is a HARD CEILING** — unmoved by gating, support, ridge, or target. Closing the
+  acquisition gap vs dense (1.87) requires iterative optimization → the sparse-GRADIENT costed Pareto point.
+- Caveat: the bit-identical result may be a wiring bug (target_mode ignored in per_document). Not chasing an EDIT
+  fix (β burned us on that); the sparse-grad point is the cleaner route to acquisition.
+
+### HYP-SG1: a few sparse gradient steps close the acquisition gap (costed Pareto point)
+- Status: active. NORTH_STAR-sanctioned. wandb priors: sparse Adam value-only reaches MT 1.759 (≈dense 1.87) but
+  QA 2.536 (more forgetting); sparse SGD value-only QA 1.689 / MT 3.216 (great retention, weak acquisition). So
+  a few gradient steps CAN close acquisition at a forgetting/cost cost. Test: continual_sparse.py, value-only,
+  tfidf top-64, small step budget, from Phase-1 cache; place on the quality×cost Pareto vs AM (0 steps) + dense (624).

@@ -16,6 +16,12 @@ Artifact: research_loop/results/EXP-000-verify/result.json, /tmp/exp000_{qa,mt}.
 eval_forgetting.py printed `Eval loss` then never exited (held GPU 1 ~78 min until killed). nvidia-smi
 repeatedly >20s/hangs on this box. Guardrails added to RUNBOOK §1/§6. Harness `Eval loss` = ln(ppl).
 
+## 2026-07-26 10:59 [EXP-008] target_mode is a NO-OP (HYP-T1 null); AM acquisition ceiling confirmed
+target_mode ∈ {cartridge_plus_doc, self, teacher_attention} on the no-IDF canonical: all BIT-IDENTICAL
+QA 2.2521 / MT 2.5426 (to 15 digits; solve 165-169s differ). target_mode does not change the written cache in
+the per_document AM path. With HYP-S1 (support null for acquisition), this confirms AM's closed-form MT-acquisition
+~2.54 is a hard ceiling. Partial REF-ICL: QA ICL ceiling 1.9734. Artifact: outputs/2026-07-26-10-53/10-56 dirs.
+
 ## 2026-07-26 10:5x [EXP-007] top_t sweep — acquisition NOT support-limited (HYP-S1 rejected)
 AM-sparse no-IDF canonical at TOP_T∈{32,128} (vs EXP-001 top64 QA 2.2521/MT 2.5426): top32 QA 2.1766 / MT 2.5484
 (solve 173.7s); top128 QA 2.4837 / MT 2.6860 (solve 185.4s). QA-forgetting monotonic in top_t (coverage∝forgetting,
