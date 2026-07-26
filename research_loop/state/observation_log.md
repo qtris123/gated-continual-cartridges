@@ -16,6 +16,14 @@ Artifact: research_loop/results/EXP-000-verify/result.json, /tmp/exp000_{qa,mt}.
 eval_forgetting.py printed `Eval loss` then never exited (held GPU 1 ~78 min until killed). nvidia-smi
 repeatedly >20s/hangs on this box. Guardrails added to RUNBOOK §1/§6. Harness `Eval loss` = ln(ppl).
 
+## 2026-07-26 11:20 [EXP-009] sparse-GRADIENT 62 steps = provisional WIN (QA 1.6169 / MT 1.9664)
+Sparse gradient (continual_sparse.py, value-only/freeze_keys, tfidf top64 per_layer, USE_IDF=0, Adam LR2e-2, 1ep=62
+steps, gloo, from Phase-1 cache on MT): QA-forgetting 1.6169 (n=6), MT-acquisition 1.9664 (n=5), 689s. MT closes the
+AM→dense gap (AM 2.5426 → 1.9664, ~dense@4ep 1.87); QA BETTER than AM (2.2521) AND Phase-1 floor (2.239) — apparent
+positive backward transfer. MT front-loads (3.78→2.11@15→~1.97@30, flat). ~1/10 dense's 624 steps. Dominates AM on
+both axes. Meets +0.15 target vs dense. CAVEAT: single run, tiny eval, QA<floor surprising → EXP-009C confirming.
+Ran torchrun DIRECTLY (the .sh wrapper force-sets BG_STATS→use_idf=True). Artifact: results/EXP-009/result.json.
+
 ## 2026-07-26 10:59 [EXP-008] target_mode is a NO-OP (HYP-T1 null); AM acquisition ceiling confirmed
 target_mode ∈ {cartridge_plus_doc, self, teacher_attention} on the no-IDF canonical: all BIT-IDENTICAL
 QA 2.2521 / MT 2.5426 (to 15 digits; solve 165-169s differ). target_mode does not change the written cache in

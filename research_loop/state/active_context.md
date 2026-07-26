@@ -4,8 +4,12 @@
 > This is the single source of truth for "where are we and what's next."
 
 ## HEADLINE (update every cycle)
-- **Status:** CYCLE 0 IN PROGRESS (anchoring) — dispatched 2026-07-25. **EXP-001 DONE + ingested** (first
-  AM-sparse point). EXP-000 (REF-CART, train) + EXP-002 (research) still running. No new batch until both land.
+- **Status (2026-07-26):** PROVISIONAL WIN — **EXP-009 (sparse-gradient, 62 steps) appears to MEET the target.**
+  QA 1.6169 / MT 1.9664 vs cartridge-best dense@4ep (QA 2.37 / MT 1.87): dominates on QA, matches MT (+0.10 ≤ noise),
+  at ~1/10 dense's gradient cost. This is the NORTH_STAR "costed Pareto point" (a few sparse grad steps). NOT yet
+  declared DONE — STEP-3 requires a CONFIRMING re-run, and QA 1.62 < Phase-1 floor 2.239 must be verified (not an
+  eval artifact). Confirmation re-run + floor control dispatched (EXP-009C). Closed-form AM alone is acquisition-capped
+  at MT ~2.54 (gating/support/target/ridge all null). Best gradient-free point = AM top32 (QA 2.18 / MT 2.55).
 - **Goal (TWO axes — see NORTH_STAR.md):** a fast, (near) training-free continual update for the
   KV-cartridge whose GATING gives cartridge-comparable forgetting/acquisition — winning on BOTH
   (1) training efficiency and (2) CL quality, vs cartridge (bar) and ICL (ceiling). Gating is the novelty.
@@ -61,8 +65,11 @@
   HYP-S1 REJECTED for acquisition (MT flat; forgetting∝top_t). top32 = best AM point.
 - **REF-ICL** (EVAL, GPU0) — CEILING. PARTIAL: QA ICL 1.9734 done; MT ICL still computing (long, ~20min/eval). Bundle: results/REF-ICL/.
 - ~~EXP-008~~ **DONE + INGESTED** — HYP-T1 NULL (target_mode no-op; all 3 modes bit-identical QA 2.2521/MT 2.5426).
-- **EXP-009 / HYP-SG1** (TRAIN, GPU1) — the sparse-GRADIENT costed Pareto point: a FEW sparse grad steps
-  (continual_sparse.py, value-only, tfidf top-64) — does gradient close the acquisition gap AM's closed-form can't? Bundle: results/EXP-009/.
+- ~~EXP-009 / HYP-SG1~~ **DONE + INGESTED (PROVISIONAL WIN)** — sparse-grad 62 steps: QA 1.6169 / MT 1.9664.
+  Closes acquisition gap; dominates AM; ~1/10 dense cost. Config: continual_sparse.py, value-only, tfidf top64,
+  USE_IDF=0, Adam LR2e-2, gloo (ran torchrun directly; the .sh wrapper force-sets BG_STATS→IDF, avoid it).
+- **EXP-009C** (TRAIN, GPU1) — CONFIRMATION: re-run 62-step config (reproduce QA/MT, esp. QA<floor) + re-eval
+  Phase-1 cache QA (floor control) + 30-step run (cheaper frontier, since acquisition plateaus by ~step30). Bundle: results/EXP-009C/.
 - NOTE ON CADENCE: /loop re-invocations arrive irregularly (observed a ~4h gap 02:5x→07:0x); ScheduleWakeup
   fallback isn't reliably firing. Make each invocation maximally productive; keep BOTH GPUs loaded to avoid long idle.
 - ~~EXP-001~~ **DONE + INGESTED** (18:02) — AM-sparse no-IDF anchor: QA 2.2521 / MT 2.5426, e2e 217s / 0 grad.

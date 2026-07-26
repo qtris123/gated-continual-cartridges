@@ -70,7 +70,10 @@ One `### HYP-XXX` block per hypothesis. Status ∈ active | weakened | supported
   fix (β burned us on that); the sparse-grad point is the cleaner route to acquisition.
 
 ### HYP-SG1: a few sparse gradient steps close the acquisition gap (costed Pareto point)
-- Status: active. NORTH_STAR-sanctioned. wandb priors: sparse Adam value-only reaches MT 1.759 (≈dense 1.87) but
-  QA 2.536 (more forgetting); sparse SGD value-only QA 1.689 / MT 3.216 (great retention, weak acquisition). So
-  a few gradient steps CAN close acquisition at a forgetting/cost cost. Test: continual_sparse.py, value-only,
-  tfidf top-64, small step budget, from Phase-1 cache; place on the quality×cost Pareto vs AM (0 steps) + dense (624).
+- Status: SUPPORTED (PROVISIONAL, EXP-009) — 62 sparse grad steps (value-only, tfidf top64, USE_IDF=0, Adam LR2e-2):
+  QA 1.6169 / MT 1.9664. MT closes the AM→dense gap (2.5426→1.9664, near dense@4ep 1.87); QA BETTER than AM (2.2521)
+  and the Phase-1 floor (2.239). Dominates AM on both axes at ~1/10 dense's step cost. Acquisition front-loads
+  (MT 3.78→2.11 by step15→~1.97 by step30, flat after). ⇒ potential TARGET MET (both axes ≤ cartridge+0.15 at ≪ cost).
+- Evidence against: single run, tiny eval (QA n=6, MT n=5); QA 1.62 < floor 2.239 is surprising (positive backward
+  transfer?) — MUST verify it's not an eval artifact. Same odd QA-drop seen in dense in-training (step60 QA~1.67).
+- Next decisive test: EXP-009C — confirm 62-step reproduces + Phase-1 QA floor control + 30-step cheaper point.
