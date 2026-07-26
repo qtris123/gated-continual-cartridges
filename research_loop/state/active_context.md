@@ -45,9 +45,11 @@
   training…final barrier", cache-step624.pt saved). In-training QA-eval ended ~2.69 ⇒ dense@10ep forgets QA
   MORE than dense@4ep (2.37) and than AM (2.25). First dense-final-eval executor STALLED (no output 40min) →
   **RE-DISPATCHED dense-final-eval (gpu0)** to eval cache-step624.pt on BOTH splits → authoritative bar → results/EXP-000/.
-- ~~EXP-005~~ **FAILED** (07:31) — HYP-T2 ENABLE_BETA=1 crashed (cholesky not-PD; unclamped β log-weights ~66.6
-  collapse softmax → rank-deficient value-solve). HYP-T2 unanswered. **RE-DISPATCHED as EXP-005b** (β at
-  RIDGE_LAMBDA=0, robust lstsq/gels; baseline EXP-004) on gpu1. If λ=0 doesn't rescue → EDIT: clamp β∈[-3,3].
+- ~~EXP-005 / EXP-005b~~ **BOTH FAILED** — β numerically pathological. EXP-005 (β@λ1e-4) cholesky not-PD;
+  EXP-005b (β@λ0) → "NaNs in ridge lstsq solution". CONCLUSIVE: λ doesn't matter; the UNCLAMPED β log-weights
+  (~66.6) are the problem. HYP-T2 requires the β-clamp fix. → **EXP-006** (implement opt-in β clamp [-3,3] +
+  run β+clamp, RIDGE_LAMBDA=0, baseline EXP-004) dispatched.
+- **EXP-006** (EDIT+TRAIN, GPU) — β-clamp implement + test = HYP-T2's real answer. Bundle: results/EXP-006/.
 - NOTE ON CADENCE: /loop re-invocations arrive irregularly (observed a ~4h gap 02:5x→07:0x); ScheduleWakeup
   fallback isn't reliably firing. Make each invocation maximally productive; keep BOTH GPUs loaded to avoid long idle.
 - ~~EXP-001~~ **DONE + INGESTED** (18:02) — AM-sparse no-IDF anchor: QA 2.2521 / MT 2.5426, e2e 217s / 0 grad.
