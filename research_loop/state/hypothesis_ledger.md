@@ -18,7 +18,10 @@ One `### HYP-XXX` block per hypothesis. Status ∈ active | weakened | supported
 
 ---
 ### HYP-G1: Attention-mass gating beats TF-IDF for acquisition at fixed support
-- Status: active
+- Status: SUPPORTED (2026-07-25, EXP-003 vs EXP-001) — stronger than predicted: pure-TF (no-IDF) beats
+  TF-IDF on BOTH acquisition AND forgetting at top_t=64. QA 2.2521 vs 2.6351 (−0.383), MT 2.5426 vs 3.0073
+  (−0.465), both >2× noise. IDF is the wrong gate in the compressed-KV setting. Canonical set to no-IDF.
+  Caveat: single seed, tiny eval (deltas large though), only top_t=64 tested → confirm-at-small-t via HYP-a5.
 - Claim: Selecting slots by attention mass (pure TF) instead of TF×IDF avoids spending scarce
   support on low-mass high-IDF slots, improving MT-acquisition without extra forgetting.
 - Motivation / mechanism: TF-IDF can rank a slot the new doc barely attends to (tiny TF) above a

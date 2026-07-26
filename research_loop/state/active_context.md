@@ -13,11 +13,14 @@
   **at materially lower training cost than cartridge** (Pareto). Parity-but-expensive ≠ done.
 - **Reference lines (to establish cycle 0):** REF-CART (dense self-distill P2) = _TBD_; REF-ICL
   (full-context ceiling) = _TBD_; cartridge P2 train-cost (efficiency baseline) = _TBD_.
-- **Current best AM-sparse (MEASURED in-harness):** EXP-001 — QA **2.2521** / MT **2.5426** loss
-  (Qwen, no-IDF/pure-TF, top64 per_layer, cartridge_plus_doc, freeze, ridge spectral), backprop-free,
-  solve 181s / e2e 217s. Supersedes the old ambiguous-units 7.13/7.28 claim (top32 per_head, not re-measured).
-- **Gap to target:** QA already at the 2.239 floor (no forgetting). MT 2.5426 vs REF-CART bar = _TBD (EXP-000
-  pending)_ and vs REF-ICL ceiling = _TBD (EXP-000b pending)_. Cost side already strong (backprop-free, ~3.6 min).
+- **CANONICAL AM-sparse = EXP-001 (no-IDF/pure-TF):** QA **2.2521** / MT **2.5426**, backprop-free, e2e 217s.
+  HYP-G1 SUPPORTED — IDF gating (EXP-003) is WORSE on both axes (QA 2.6351 / MT 3.0073), so all further gating
+  builds on the NO-IDF config. This IS the project's core thesis confirmed: IDF is the wrong gate in compressed-KV.
+- **Preliminary headline (confirm w/ EXP-000):** EXP-001 (QA 2.2521 / MT 2.5426) appears to BEAT dense
+  self-distillation on BOTH axes — dense MT=2.891 (wandb scf175an) and dense QA in-training ~2.37 (EXP-000 mid-run,
+  step 295/620) — backprop-free at ~8× lower cost. If EXP-000's FINAL eval holds, that's the two-axis win.
+- **Gap to target:** QA at/below floor (no forgetting). MT 2.5426 vs REF-CART bar = _TBD (EXP-000, ~55min out)_,
+  vs REF-ICL ceiling = _TBD (EXP-000b pending)_. Cost side already dominant (backprop-free, ~3.6 min vs dense ~30min).
 
 ## BUDGET
 - Soft budget: run unattended until target met or ~40 cycles / ~48 GPU-hours, whichever first.
@@ -45,9 +48,10 @@
   synth vs AM 217s; (a) new levers RIDGE_LAMBDA=0 / ENABLE_BETA=1 / per-head budget (added to backlog); (d) bg_stats recipe.
 - ~~SETUP-BG1~~ **DONE + INGESTED** (18:40) — bg_stats.pt (292MB, per_layer, IDF (36,511) finite) written +
   sanity-verified via the Phase-2 load path. Collector: examples/qasper2/train/collect_bg_stats.py. gpu1 freed.
-- **EXP-003** (TRAIN, GPU1) — pipelined during EXP-000: AM-sparse WITH-IDF canonical (tfidf, USE_IDF=1,
-  BG_STATS_PATH=…/bg_stats.pt, per_layer, top_t=64) = the TRUE Lever-1 baseline + HYP-G1 with-IDF arm.
-  Single var USE_IDF vs EXP-001 (no-IDF). Bundle: results/EXP-003/.
+- ~~EXP-003~~ **DONE + INGESTED** (18:50) — with-IDF: QA 2.6351 / MT 3.0073. **IDF HURTS both** (QA +0.383,
+  MT +0.465 vs EXP-001, >2× noise). HYP-G1 SUPPORTED. ⇒ **canonical = no-IDF (EXP-001)**. (Bundle written by orchestrator.)
+- **EXP-004** (TRAIN, GPU1) — HYP-R0: RIDGE_LAMBDA=0 vs 1e-4 on the no-IDF canonical (AM: ridge on value-solve
+  hurts ∀λ>0). Single var ridge_lambda vs EXP-001. Bundle: results/EXP-004/.
 
 ## NEXT ACTIONS (what the next cycle should do)
 0. **⚠️ ENSURE EXP-000 COMPLETES + INGESTS.** Its executor agent is parked while training runs (~ETA 1.5–2h

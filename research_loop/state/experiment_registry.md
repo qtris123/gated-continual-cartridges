@@ -145,9 +145,37 @@ Format mirrors `.cursor/rules/research-companion.mdc`.
 - Command: VAR=val ... bash examples/qasper2/scripts/train_continual_am_sparse.sh (RUNBOOK §3b), USE_IDF=1 + BG_STATS_PATH set.
 - Metrics reported: qa_forgetting_loss / mt_acquisition_loss (mean CE) + solve_s + phase2_e2e_s + gpu_s + gradient_steps:0.
 - Expected: closed-form; either lower MT at ≤ QA vs EXP-001 (IDF helps) or a wash (IDF matters more at small top_t → HYP-a5).
+- Actual: IDF HURTS BOTH. QA-forgetting 2.6351 (ppl 13.9) = +0.383 vs EXP-001; MT-acquisition 3.0073 (ppl 20.2)
+  = +0.465 vs EXP-001. Both deltas >2× noise band. solve_s 178.4 / e2e 201 / 0 grad. value_max 486 (vs 816) ⇒ IDF
+  really changed slot selection (valid single-var test).
+- Interpretation: In the compressed-KV-cartridge setting the IDF/document-frequency term is the WRONG gate — it
+  worsened acquisition AND (counterintuitively) retention. Pure attention-mass (TF) on the new doc selects slots that
+  are both better for acquisition and less disruptive to Phase-1. Directly validates the project's core problem.
+  ⇒ CANONICAL AM-sparse baseline going forward = the NO-IDF config (EXP-001), NOT this with-IDF one.
+- Confounders considered: tiny eval (QA n=6, MT n=5) but deltas are large; single seed; only top_t=64 tested
+  (HYP-a5 = IDF at top_t=32 is the natural follow-up since literature says IDF helps most at small support).
+- Status: done
+- Follow-up: HYP-G1 → SUPPORTED. Next: HYP-R0 (RIDGE_LAMBDA=0) + HYP-T2 (ENABLE_BETA=1) on the no-IDF canonical.
+- Artifacts: outputs/<run-dir>/ , research_loop/results/EXP-003/result.json
+
+### EXP-004: HYP-R0 — RIDGE_LAMBDA=0 vs 1e-4 on the no-IDF canonical
+- Date: 2026-07-25 (cycle 0→1, pipelined on gpu1 during EXP-000)
+- Research question: does removing the L2 ridge on the value-solve (λ=0, pure OLS) beat the canonical λ=1e-4?
+  AM paper reports ridge on the (β,C_v) value-solve DEGRADES for ALL λ>0.
+- Hypothesis tested (HYP-ID): HYP-R0.
+- Variable under test: RIDGE_LAMBDA (1e-4 → 0). EVERYTHING else = the no-IDF canonical (EXP-001).
+- Baseline compared to: EXP-001 (no-IDF canonical: QA 2.2521 / MT 2.5426).
+- Code branch+commit: trivo-explore-research-work @ (post-EXP-003 ingest)
+- Dataset / Model: Qasper QA→MT / Qwen3-4B, 512 slots
+- Config knobs (full): slot_selection=tfidf, USE_IDF=0, granularity=per_layer, top_t=64, target_mode=cartridge_plus_doc,
+  key_mode=freeze, RIDGE_LAMBDA=0, ridge_scale=spectral (moot at λ=0), ridge_lambda_min=0, delta_weight=1e-2,
+  AM_EXECUTION_MODE=per_document, PHASE1_CACHE=.../cache_last.pt, SYNTH=MT parquet. NO BG_STATS_PATH (USE_IDF=0).
+- Command: VAR=val ... bash examples/qasper2/scripts/train_continual_am_sparse.sh (RUNBOOK §3b), RIDGE_LAMBDA=0, USE_IDF=0.
+- Metrics reported: qa_forgetting_loss / mt_acquisition_loss (mean CE) + solve_s + phase2_e2e_s + gradient_steps:0.
+- Expected: per AM paper, λ=0 ≥ canonical on quality (esp. acquisition) at ~equal cost; or a wash if 1e-4 is already ~0.
 - Actual: _pending_
 - Interpretation: _pending_
-- Confounders considered: tiny eval (QA n=6, MT n=5) — sub-0.2 deltas are noise; single seed.
+- Confounders considered: tiny eval; single seed; λ=1e-4 is already tiny so effect may be small.
 - Status: dispatched
-- Follow-up: if IDF≈wash at top_t=64, test HYP-a5 (USE_IDF at top_t=32). This EXP-003 becomes the canonical baseline for Lever 1/2/4.
-- Artifacts: outputs/<run-dir>/ , research_loop/results/EXP-003/result.json
+- Follow-up: if λ=0 helps, fold into canonical. Then HYP-T2 (ENABLE_BETA=1).
+- Artifacts: outputs/<run-dir>/ , research_loop/results/EXP-004/result.json
