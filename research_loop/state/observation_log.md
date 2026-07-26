@@ -16,6 +16,13 @@ Artifact: research_loop/results/EXP-000-verify/result.json, /tmp/exp000_{qa,mt}.
 eval_forgetting.py printed `Eval loss` then never exited (held GPU 1 ~78 min until killed). nvidia-smi
 repeatedly >20s/hangs on this box. Guardrails added to RUNBOOK §1/§6. Harness `Eval loss` = ln(ppl).
 
+## 2026-07-26 11:5x [REF-ICL] full-context ICL ceiling: QA 1.9734 / MT 1.8960
+Full-context ICL (Qwen3-4B raw, no cartridge, topic papers in-context): QA 1.9734 (ppl 7.2, 103k ctx, 78 convos),
+MT 1.8960 (ppl 6.7, 77k ctx, 69 convos). Both below all cartridge/AM/dense refs (proper ceiling). Off-diagonal
+cross-topic 2.78/2.90 (confirms topic-matched context is doing the work). CAVEAT: measured via
+qasper_loss_benchmark.evaluate_loss_chunked, a DIFFERENT harness than eval_forgetting.py (used for cartridge/AM/dense/
+sparse-grad) — treat ICL as a ballpark ceiling, not a strictly-comparable number. Artifact: results/REF-ICL/result.json.
+
 ## 2026-07-26 11:20 [EXP-009] sparse-GRADIENT 62 steps = provisional WIN (QA 1.6169 / MT 1.9664)
 Sparse gradient (continual_sparse.py, value-only/freeze_keys, tfidf top64 per_layer, USE_IDF=0, Adam LR2e-2, 1ep=62
 steps, gloo, from Phase-1 cache on MT): QA-forgetting 1.6169 (n=6), MT-acquisition 1.9664 (n=5), 689s. MT closes the

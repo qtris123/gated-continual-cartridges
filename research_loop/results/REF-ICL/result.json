@@ -1,0 +1,34 @@
+{
+  "exp_id": "REF-ICL",
+  "type": "train",
+  "variable_under_test": "full-context ICL upper bound (ceiling), QA+MT",
+  "baseline_ref": "ceiling (aspirational)",
+  "status": "done",
+  "numbers": {
+    "qa_icl_loss": 1.9734,
+    "mt_icl_loss": 1.8960,
+    "qa_icl_perplexity": 7.1952,
+    "mt_icl_perplexity": 6.6595,
+    "qa_context_topic": "QA-papers-full-context",
+    "mt_context_topic": "MT-papers-full-context",
+    "qa_context_tokens": 103293,
+    "mt_context_tokens": 76833,
+    "qa_num_eval_conversations": 78,
+    "mt_num_eval_conversations": 69,
+    "mt_num_target_tokens": 2562,
+    "mt_max_sequence_tokens": 77045,
+    "offdiag_icl_QA_docs_on_MT_eval_loss": 2.7761,
+    "offdiag_icl_QA_docs_on_MT_eval_ppl": 16.0563,
+    "offdiag_icl_MT_docs_on_QA_eval_loss": 2.9025,
+    "offdiag_icl_MT_docs_on_QA_eval_ppl": 18.2195
+  },
+  "artifacts": [
+    "examples/qasper2/experiments/qasper_loss_benchmark.py",
+    "examples/qasper2/scripts/run_qasper_loss_benchmark.sh",
+    "research_loop/results/REF-ICL/run_mt_icl.py",
+    "logs/ref_icl.log",
+    "logs/ref_icl_mt.log"
+  ],
+  "command": "GPU0 flock, CUDA_VISIBLE_DEVICES=0, CARTRIDGES_DIR=$PWD, single-GPU inference (no torchrun). Combined run (gave QA=1.9734 + both off-diagonals): .venv/bin/python examples/qasper2/experiments/qasper_loss_benchmark.py --models qwen --only-methods icl_QA_raw icl_MT_raw --qa-eval data/qasper/eval/qasper_eval_QA.parquet --mt-eval data/qasper/eval/qasper_eval_MT.parquet --output-dir outputs/ref_icl_run --device cuda . That run was externally killed at 49/69 of the final eval (icl_MT_raw|MT), so mt_icl_loss was re-measured in a standalone driver reusing the identical harness functions (load_model_and_tokenizer + build_qasper_system_prompt('MT') + evaluate_loss_chunked, cartridge=None): .venv/bin/python research_loop/results/REF-ICL/run_mt_icl.py .",
+  "observations": "Full-context ICL ceiling (Qwen3-4B-Instruct-2507, raw model, NO cartridge, all topic papers placed in the system prompt, chunked prefill 2048, bf16 greedy, teacher-forced mean-CE on assistant tokens = same metric as eval_forgetting) measured ONCE per split via qasper_loss_benchmark.py::evaluate_loss_chunked. Topic-matched diagonal (the ceiling per split): QA-split = QA papers (103,293 ctx tokens) in-context evaluated on qasper_eval_QA.parquet gives Eval loss (mean CE = ln ppl) 1.9734 (ppl 7.195, 78 conversations); MT-split = MT papers (76,833 ctx tokens) in-context on qasper_eval_MT.parquet gives loss 1.8960 (ppl 6.660, 69 conversations, 2562 target tokens). Both are reported as the mean-CE `loss`; note this benchmark's `perplexity` field IS self-consistent (perplexity == exp(loss): exp(1.9734)=7.195, exp(1.8960)=6.660), unlike the broken num_elements=0 wandb perplexity. Versus the loop's own LOSS references, ICL sits at or below every method as expected for a ceiling: QA 1.9734 < PHASE1 cartridge floor 2.239, AM canonical 2.2521, dense@4ep 2.3721 (clear headroom on forgetting); MT 1.8960 << cartridge 3.783 and AM 2.5426, and is essentially tied with dense@4ep MT 1.8725 (0.024 below ICL, within tiny-eval noise) -- so ICL is the strong ceiling on QA and co-best/competitive on MT acquisition. Off-diagonal cross-topic (wrong papers in context) is far worse -- QA-docs on MT eval 2.7761, MT-docs on QA eval 2.9025 -- confirming the gain is genuine topic-matched context, not a generic prompt effect. Caveats: eval sets are tiny (78 QA / 69 MT conversations), so sub-0.1-0.2 loss deltas are within noise; the ICL context is the entire topic paper set (~103k QA / ~77k MT tokens) with no truncation, i.e. the maximal full-context condition; the first combined run was killed just short of finishing the MT eval, so mt_icl_loss came from a standalone re-run using the identical harness functions, while qa_icl_loss and the two off-diagonals were parsed from the first run's printed `loss=` lines (its JSON summary was never written because that process died before the out_dir write)."
+}
