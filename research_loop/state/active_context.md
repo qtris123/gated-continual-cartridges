@@ -53,8 +53,10 @@
   sanity-verified via the Phase-2 load path. Collector: examples/qasper2/train/collect_bg_stats.py. gpu1 freed.
 - ~~EXP-003~~ **DONE + INGESTED** (18:50) — with-IDF: QA 2.6351 / MT 3.0073. **IDF HURTS both** (QA +0.383,
   MT +0.465 vs EXP-001, >2× noise). HYP-G1 SUPPORTED. ⇒ **canonical = no-IDF (EXP-001)**. (Bundle written by orchestrator.)
-- **EXP-004** (TRAIN, GPU1) — HYP-R0: RIDGE_LAMBDA=0 vs 1e-4 on the no-IDF canonical (AM: ridge on value-solve
-  hurts ∀λ>0). Single var ridge_lambda vs EXP-001. Bundle: results/EXP-004/.
+- ~~EXP-004~~ **DONE + INGESTED** (01:18) — HYP-R0 RIDGE_LAMBDA=0 = WASH (QA 2.2619 / MT 2.5569, ≈EXP-001).
+  Keep canonical λ. gpu1 freed.
+- **REFCART-EVAL** (EVAL, GPU1) — pipelined: eval the attempt-1 dense checkpoint cache-step256.pt (~4 epochs)
+  on BOTH splits → dense QA-forgetting bar (+ MT@4ep). Secures the AM-vs-dense headline. Bundle: results/REFCART-EVAL/.
 
 ## NEXT ACTIONS (what the next cycle should do)
 0. **⚠️ SECURE THE DENSE BAR (EXP-000) — the full run is unreliable (restart-loop, see IN-FLIGHT).** Plan:

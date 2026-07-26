@@ -173,9 +173,13 @@ Format mirrors `.cursor/rules/research-companion.mdc`.
 - Command: VAR=val ... bash examples/qasper2/scripts/train_continual_am_sparse.sh (RUNBOOK §3b), RIDGE_LAMBDA=0, USE_IDF=0.
 - Metrics reported: qa_forgetting_loss / mt_acquisition_loss (mean CE) + solve_s + phase2_e2e_s + gradient_steps:0.
 - Expected: per AM paper, λ=0 ≥ canonical on quality (esp. acquisition) at ~equal cost; or a wash if 1e-4 is already ~0.
-- Actual: _pending_
-- Interpretation: _pending_
-- Confounders considered: tiny eval; single seed; λ=1e-4 is already tiny so effect may be small.
-- Status: dispatched
-- Follow-up: if λ=0 helps, fold into canonical. Then HYP-T2 (ENABLE_BETA=1).
+- Actual: WASH. QA 2.2619 / MT 2.5569 vs EXP-001 (QA 2.2521 / MT 2.5426) → +0.010 / +0.014, ≪ noise band.
+  solve_s 162.9 / e2e 186 / 0 grad. Executor verified ridge truly zeroed (effective λ short-circuits to 0 at
+  core.py L144-145, `_ridge_lstsq` OLS gels branch); DELTA_WEIGHT trust-region held identical → isolates ridge only.
+- Interpretation: at λ=1e-4 the L2 ridge on the value-solve is already negligible; removing it neither helps nor
+  hurts. The AM-paper "ridge hurts ∀λ>0" claim doesn't bite at our tiny default. Keep canonical (λ indifferent);
+  do not sweep ridge further on this axis.
+- Confounders considered: tiny eval; single seed; λ=1e-4 is already tiny so effect may be small (confirmed: it is).
+- Status: done
+- Follow-up: HYP-R0 resolved (null/wash). Next lever: HYP-T2 (ENABLE_BETA=1, AM mass-bias).
 - Artifacts: outputs/<run-dir>/ , research_loop/results/EXP-004/result.json

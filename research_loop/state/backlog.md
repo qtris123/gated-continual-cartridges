@@ -43,10 +43,9 @@ Baseline for all: AM-sparse canonical (tfidf, use_idf=1, per_layer, top_t=64, fr
 - [ ] HYP-S3: `max_queries_per_head` / `max_ref_examples_per_doc` — does more reference support help?
 
 ## Lever 4 — REGULARIZATION
-- [ ] **HYP-R0 (NEW, high-value, from EXP-002/AM paper): `RIDGE_LAMBDA=0` vs 1e-4** on the VALUE-solve.
-      AM paper found L2 ridge on the (β,C_v) value-solve DEGRADES for ALL λ>0. Our canonical is λ=1e-4 (tiny
-      but nonzero). One var: RIDGE_LAMBDA ∈ {0, 1e-4}. Cheap, closed-form. NOTE: distinct from HYP-R1's λ=2.0
-      which is the Phase-1 RECON solve (RUNBOOK §7), NOT the value-solve — do not conflate.
+- [x] **HYP-R0 (EXP-004): `RIDGE_LAMBDA=0` vs 1e-4 → WASH.** QA 2.2619 / MT 2.5569 vs EXP-001 2.2521/2.5426
+      (+0.010/+0.014 ≪ noise). At λ=1e-4 the ridge is already negligible; removing it doesn't help. Keep canonical.
+      (Distinct from HYP-R1's λ=2.0 Phase-1 RECON solve — not re-tested.)
 - [ ] HYP-R1: `ridge_lambda` × `ridge_scale` (test λ≈2.0 spectral — Phase-1 sweet spot — in Phase-2).
 - [ ] HYP-R2: `delta_weight` trust region sweep (0, 1e-2, 1e-1) — trades acquisition vs stability.
 - [ ] HYP-R3: `enable_old_reference_guard` on/off (explicit old-query preservation block).
