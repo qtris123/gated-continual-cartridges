@@ -16,6 +16,13 @@ Artifact: research_loop/results/EXP-000-verify/result.json, /tmp/exp000_{qa,mt}.
 eval_forgetting.py printed `Eval loss` then never exited (held GPU 1 ~78 min until killed). nvidia-smi
 repeatedly >20s/hangs on this box. Guardrails added to RUNBOOK §1/§6. Harness `Eval loss` = ln(ppl).
 
+## 2026-07-26 01:08 [infra][EXP-000] dense REF-CART run died mid-train + agent restarted from scratch
+Attempt-1 dense baseline_continual (18:02 run dir) reached ~Epoch 5-6 (step ~329) then its process died; the
+parked executor agent restarted training from Epoch 1 (new run dir 2026-07-26-01-07-07, gpu0) on a ~55-min
+re-arm cycle. 10-epoch (~110min) dense may not finish in one window on this box; restarts lose progress.
+Usable artifact: attempt-1 cache-step256.pt (~4 dense epochs). Dense MT bar already known (wandb scf175an
+MT-acq 2.891). Plan: eval step256 for dense QA-forgetting rather than wait on a full run.
+
 ## 2026-07-25 18:50 [EXP-003] with-IDF canonical — IDF HURTS both axes (HYP-G1 supported)
 AM-sparse USE_IDF=1 (bg_stats over Phase-1 QA corpus, tfidf, per_layer, top_t=64, freeze, ridge 1e-4 spectral),
 single var vs EXP-001 (USE_IDF=0): QA-forgetting 2.6351 (ppl 13.9), MT-acquisition 3.0073 (ppl 20.2). vs EXP-001

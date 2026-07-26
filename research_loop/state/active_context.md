@@ -38,10 +38,13 @@
 - ✅ Cited-paper PDFs staged: `TF-IDF.pdf` (2510.15103v1), `AM.pdf` (2602.16284) at repo root (NORTH_STAR).
 
 ## IN-FLIGHT (experiments dispatched, awaiting result bundles)
-- **EXP-000** (TRAIN, GPU0) — REF-CART dense self-distillation Phase-2 → quality BAR + train cost. STILL
-  RUNNING: ~step 110/~620 (epoch ~2/10) at 18:20, ~11 min/epoch → ETA ~1.5–2h (this box slower than the
-  wandb scf175an ~30min). The executor AGENT returned (parked) but the training process is alive (launcher
-  3629349 holds gpu0 flock). ⚠️ MUST ensure its bundle gets written — see NEXT ACTIONS #0. Bundle: results/EXP-000/.
+- **EXP-000** (TRAIN, GPU0) — REF-CART dense bar. ⚠️ **UNSTABLE / RESTART-LOOP.** Attempt-1 (18:02 run dir)
+  died mid-training ~Epoch 5-6 (step ~329); the parked agent (a4255d85247212da7) RESTARTED IT FROM SCRATCH
+  (new run dir 2026-07-26-01-07-07, Epoch 1) — agent has a "~55-min re-arm" cycle, so a 10-epoch (~110min)
+  run may never complete in one window and restarts lose all progress. Attempt-1 left a usable ~4-epoch dense
+  checkpoint: outputs/2026-07-25-18-02-35-baseline_continual/dfed5e8b-.../cache-step256.pt.
+  **FALLBACK for the dense bar (see NEXT ACTIONS #0): don't wait on a full 10-epoch run — dense MT is already
+  known (wandb scf175an=2.891); get dense QA-forgetting by evaling cache-step256.pt on both splits.**
 - ~~EXP-001~~ **DONE + INGESTED** (18:02) — AM-sparse no-IDF anchor: QA 2.2521 / MT 2.5426, e2e 217s / 0 grad.
 - ~~EXP-002~~ **DONE + INGESTED** (18:20) — research. Key: (c) dense P2 MT=2.891 (ppl18, scf175an) — **EXP-001's
   2.5426 already beats it backprop-free**, pending EXP-000's QA-forgetting; (b) T3 = dense 1805s train + ~10-12ks
@@ -54,13 +57,15 @@
   hurts ∀λ>0). Single var ridge_lambda vs EXP-001. Bundle: results/EXP-004/.
 
 ## NEXT ACTIONS (what the next cycle should do)
-0. **⚠️ ENSURE EXP-000 COMPLETES + INGESTS.** Its executor agent is parked while training runs (~ETA 1.5–2h
-   from 18:02). When the checkpoint saves (cache_last.pt / cache-step*.pt under
-   outputs/2026-07-25-18-02-35-baseline_continual/…, saved BEFORE the final-barrier hang), if no
-   results/EXP-000/result.json appears: either SendMessage the parked EXP-000 agent (id a4255d85247212da7) to
-   eval BOTH splits + write the bundle, OR dispatch a small eval executor on the saved ckpt (eval_forgetting on
-   QA+MT, parse `Eval loss`, kill PID). Then ingest → the quality BAR + T3 dense-train-cost anchor. Headline
-   comparison: EXP-001 MT 2.5426 vs REF-CART MT (and vs the wandb dense 2.891).
+0. **⚠️ SECURE THE DENSE BAR (EXP-000) — the full run is unreliable (restart-loop, see IN-FLIGHT).** Plan:
+   (a) as soon as a GPU frees, dispatch a small EVAL executor to eval the attempt-1 dense checkpoint
+   outputs/2026-07-25-18-02-35-baseline_continual/dfed5e8b-.../cache-step256.pt on BOTH splits (QA forgetting +
+   MT acquisition; parse `Eval loss` mean-CE, kill the PID — eval hangs). Record as REF-CART@~4ep. That + the
+   wandb 10-epoch dense MT=2.891 give a usable dense bar (dense forgetting only worsens with more epochs, so a
+   4-epoch QA-forgetting is a conservative bar for "AM beats dense on QA"). (b) If the 01:07 run happens to
+   complete a full 10 epochs uninterrupted, prefer that as the authoritative bar; if it restarts AGAIN, stop the
+   EXP-000 agent (a4255d85247212da7) + reclaim gpu0, and use (a)+wandb as the dense bar. Headline comparison:
+   EXP-001 (QA 2.2521 / MT 2.5426) vs dense (QA=step256 eval / MT 2.891).
 1. **Ingest SETUP-BG1** when it lands → then TRAIN EXP-003 = with-IDF canonical (tfidf, USE_IDF=1, per_layer,
    top_t=64, BG_STATS_PATH=outputs/phase1_selfdistill_qwen512/bg_stats.pt) — the true Lever-1 baseline.
    Resolve HYP-G1: EXP-003 (with-IDF) vs EXP-001 (no-IDF), single var USE_IDF.
