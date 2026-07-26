@@ -11,8 +11,8 @@
   QA, MATCHES MT (+0.10 ≤ noise), at ~1/10 dense's 624-step cost. This is the NORTH_STAR costed Pareto point (a few
   sparse grad steps) + the gating novelty (no-IDF/attention-mass beats IDF). Closed-form gradient-free AM alone is
   acquisition-capped at MT ~2.54 (gating/support/target/ridge ALL null); best gradient-free point = AM top32 (QA 2.18/MT 2.55).
-  REMAINING before STOP: ingest 30-step cheaper-frontier point (EXP-009C) + REF-ICL ceiling, then write the synthesis
-  (quality×cost Pareto + notes/ + JOURNAL) and STOP the loop.
+  **LOOP STOPPED 2026-07-26** — target met + confirmed; all anchors + ceiling measured; synthesis written.
+  → Full write-up: `notes/2026-07-26-sparse-grad-win.md` (+ JOURNAL row). Winner recipe there.
 - **Goal (TWO axes — see NORTH_STAR.md):** a fast, (near) training-free continual update for the
   KV-cartridge whose GATING gives cartridge-comparable forgetting/acquisition — winning on BOTH
   (1) training efficiency and (2) CL quality, vs cartridge (bar) and ICL (ceiling). Gating is the novelty.
@@ -90,7 +90,15 @@
 - **EXP-005** (TRAIN, GPU1) — HYP-T2: ENABLE_BETA=1 (AM per-token mass-bias) on the no-IDF canonical. Targets
   the MT-acquisition gap directly (β lets retained slots carry missing attention mass). Single var vs EXP-001. Bundle: results/EXP-005/.
 
-## NEXT ACTIONS (what the next cycle should do)
+## NEXT ACTIONS — LOOP STOPPED (target met + confirmed). Only OPTIONAL hardening remains if resumed:
+- **Robustness:** re-run the 62-step winner with a DIFFERENT seed + a larger eval-batch count (evals are n=6/5;
+  the win margins are large but confirmation so far was deterministic/same-seed).
+- **Cheaper/better combos:** top32 + sparse-grad (winner used top64; top32 retains slightly better); 30-step is
+  already ~equal to 62 at 56% cost.
+- **β numerics (if ever wanted):** add NaN/magnitude guards INSIDE `refit_beta_nnls` (RUNBOOK §6.11) — currently broken/deferred.
+- **Out of scope:** QA→MT→SA 3-stage chain (validate the winner extends to N stages).
+
+## (historical) NEXT ACTIONS from the run (superseded by STOP above)
 0. **⚠️ SECURE THE DENSE BAR (EXP-000) — the full run is unreliable (restart-loop, see IN-FLIGHT).** Plan:
    (a) as soon as a GPU frees, dispatch a small EVAL executor to eval the attempt-1 dense checkpoint
    outputs/2026-07-25-18-02-35-baseline_continual/dfed5e8b-.../cache-step256.pt on BOTH splits (QA forgetting +

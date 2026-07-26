@@ -70,7 +70,9 @@ One `### HYP-XXX` block per hypothesis. Status ∈ active | weakened | supported
   fix (β burned us on that); the sparse-grad point is the cleaner route to acquisition.
 
 ### HYP-SG1: a few sparse gradient steps close the acquisition gap (costed Pareto point)
-- Status: SUPPORTED (PROVISIONAL, EXP-009) — 62 sparse grad steps (value-only, tfidf top64, USE_IDF=0, Adam LR2e-2):
+- Status: SUPPORTED + CONFIRMED (EXP-009 + EXP-009C) — bit-identical reproduction + Phase-1 floor control (2.2388)
+  prove QA<floor is real (positive backward transfer). 30 steps ≈ 62 at 56% cost. THE WINNING RECIPE (notes/2026-07-26). —
+  62 sparse grad steps (value-only, tfidf top64, USE_IDF=0, Adam LR2e-2):
   QA 1.6169 / MT 1.9664. MT closes the AM→dense gap (2.5426→1.9664, near dense@4ep 1.87); QA BETTER than AM (2.2521)
   and the Phase-1 floor (2.239). Dominates AM on both axes at ~1/10 dense's step cost. Acquisition front-loads
   (MT 3.78→2.11 by step15→~1.97 by step30, flat after). ⇒ potential TARGET MET (both axes ≤ cartridge+0.15 at ≪ cost).
