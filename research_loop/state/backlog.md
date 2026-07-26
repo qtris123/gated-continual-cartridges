@@ -31,14 +31,20 @@ Baseline for all: AM-sparse canonical (tfidf, use_idf=1, per_layer, top_t=64, fr
       "insufficient mass" problem directly. (log-only; cheap; informs G1–G3.)
 - [ ] HYP-G4: granularity × top_t interaction under the best gater (small grid, per_layer vs global).
 
-## Lever 2 — TEACHER TARGETS
-- [ ] HYP-T1: `target_mode` cartridge_plus_doc vs self vs (others in enum) at fixed gating.
+## Lever 2 — TEACHER TARGETS  ← NOW THE PRIORITY (acquisition is target-limited, per EXP-007)
+- [~] HYP-T1 (EXP-008, RUNNING): `target_mode` cartridge_plus_doc vs self vs (others in enum) at fixed gating.
+      This is THE key remaining closed-form acquisition lever — EXP-007 showed support doesn't move MT, so WHAT
+      the value-solve matches (the target) is the bottleneck. Single var: TARGET_MODE.
+- [ ] SPARSE-GRAD (costed Pareto point, NORTH_STAR-sanctioned): a FEW sparse gradient steps (SGD, value-only,
+      top-t slots) on top of the AM init — does it close the MT-acquisition gap cheaply? Logged as a distinct,
+      more-expensive Pareto point (not the default). Prefer SGD (EXP-002: SGD≫Adam for sparse). Try only if HYP-T1 stalls.
 - [ ] HYP-T2: `enable_beta` (mass matching) on vs off with keys frozen.
 - [ ] HYP-T3: key_mode freeze vs highest_attention vs omp — but note prior: touching keys hurts
       forgetting; frame as an acquisition-vs-forgetting trade curve, keep freeze as reference.
 
 ## Lever 3 — SUPPORT ALLOCATION
-- [ ] HYP-S1: top_t ∈ {32,64,128} sweep under best gater — find the acquisition/forgetting knee.
+- [x] HYP-S1 (EXP-007): top_t {32,64,128} — REJECTED for acquisition. MT flat ~2.54 (worse at 128); QA-forgetting
+      ∝ top_t. Acquisition is NOT support-limited → it's TARGET/solve-limited. top32 = marginally best point.
 - [ ] HYP-S2: `residual_budget` with `min_top_t_per_layer` floor vs uniform per-layer top_t.
 - [ ] HYP-S3: `max_queries_per_head` / `max_ref_examples_per_doc` — does more reference support help?
 

@@ -53,3 +53,13 @@ One `### HYP-XXX` block per hypothesis. Status ∈ active | weakened | supported
 ### HYP-R0: RIDGE_LAMBDA=0 vs 1e-4 on the value-solve
 - Status: RESOLVED — NULL/WASH (EXP-004). QA 2.2619 / MT 2.5569 vs EXP-001 2.2521/2.5426 (Δ<<noise). At
   λ=1e-4 the ridge is already negligible. Keep canonical (λ indifferent). AM "ridge hurts ∀λ>0" doesn't bite at tiny λ.
+
+### HYP-S1: more support (top_t) improves acquisition
+- Status: RESOLVED — REJECTED for acquisition (EXP-007). TOP_T {32,64,128}: MT-acquisition FLAT/worse
+  (2.5484 / 2.5426 / 2.6860); QA-forgetting rises monotonically (2.1766 / 2.2521 / 2.4837, coverage∝forgetting).
+  ⇒ AM's MT-acquisition (~2.54) is NOT support-limited; more slots only add forgetting. top32 marginally best
+  operating point. IMPLICATION: the acquisition gap vs dense (1.87) is TARGET/solve-limited, not gating/support-limited.
+
+### HYP-T1: teacher target_mode affects acquisition (next acquisition lever)
+- Status: active. Since support is exhausted (HYP-S1) and β deferred, target_mode is the remaining closed-form
+  lever on WHAT the value-solve matches. Next decisive test: TARGET_MODE ∈ enum vs cartridge_plus_doc, single var.

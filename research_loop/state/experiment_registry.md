@@ -209,3 +209,23 @@ Format mirrors `.cursor/rules/research-companion.mdc`.
 - Follow-up: (1) EXP-005b = β at RIDGE_LAMBDA=0 (robust lstsq/gels branch) — does λ=0 alone avoid the crash?
   (2) if λ=0 completes but is degenerate, or still crashes → EDIT: clamp β to [-3,3] in the NNLS fit path, then retest.
 - Artifacts: outputs/<run-dir>/ , research_loop/results/EXP-005/result.json
+
+### EXP-006: β-clamp EDIT + test — FAILED (β NNLS fit yields NaN)
+- Date: 2026-07-26. HYP-T2. Variable: ENABLE_BETA=1 + opt-in β-clamp[-3,3] at λ=0. Baseline EXP-004.
+- Actual: FAILED. `AssertionError max|beta|=NaN` on doc 3 — refit_beta_nnls returns NaN, clamp can't repair. No eval.
+- Interpretation: β is numerically broken (NaN fit in _explore tree; huge-finite ~66 in sibling tree). Deep fix
+  needed inside refit_beta_nnls (input guards/regularization). β DEFERRED. Also exposed the dual-cartridges import
+  foot-gun (unconditional new kwarg crashed ALL AM runs when sibling imported). β-clamp edit REVERTED.
+- Status: failed. Follow-up: RUNBOOK §6.10/6.11; backlog HYP-T2 DEFERRED. Artifacts: results/EXP-006/result.json
+
+### EXP-007: HYP-S1 support sweep TOP_T ∈ {32,128} vs canonical 64
+- Date: 2026-07-26. Variable: TOP_T. Baseline: EXP-001 (top64: QA 2.2521 / MT 2.5426).
+- Config: no-IDF canonical, per_layer, freeze, ridge 1e-4 spectral, cartridge_plus_doc; USE_IDF=0.
+- Actual: top32 QA 2.1766 / MT 2.5484 (solve 173.7s); top128 QA 2.4837 / MT 2.6860 (solve 185.4s). gradient_steps=0.
+- Interpretation: QA-forgetting rises monotonically with TOP_T (32<64<128), confirming coverage∝forgetting
+  (t64→t128 +0.23 > noise). MT-acquisition is FLAT/worse with more support (2.5484 / 2.5426 / 2.6860) → the
+  acquisition gap vs dense@4ep (1.87) is NOT support-limited. top32 is a marginally-better operating point
+  (best retention ~= floor, equal acquisition, cheaper). ⇒ support/gating help FORGETTING, not ACQUISITION;
+  the acquisition bottleneck is the TARGET / closed-form value-solve.
+- Status: done. Follow-up: pivot acquisition levers to HYP-T1 (target_mode) + a few sparse gradient steps (costed Pareto point).
+- Artifacts: results/EXP-007/result.json

@@ -21,9 +21,12 @@
   AM canonical EXP-001: QA 2.2521 / MT 2.5426. ⇒ **Pareto: AM RETAINS QA better than even dense@4ep (2.25 < 2.37)
   and crushes dense@10ep on QA (2.25 vs 2.70); dense@4ep ACQUIRES MT better (1.87 vs 2.54, gap 0.67); AM ~8×
   cheaper, backprop-free.** THE CHALLENGE = close AM's MT-acquisition gap (target ~1.87) without losing QA/cost edge.
-- **Gap to target:** MT-acquisition gap ≈ 0.67 (AM 2.54 vs dense-best 1.87). QA already BETTER than dense on both
-  points. Cost dominant. Lever priority = ACQUISITION: β (EXP-006 β-clamp), top_t/support (HYP-S1), novel gaters.
-  REF-ICL ceiling still _TBD (EXP-000b)_.
+- **Gap to target:** MT-acquisition gap ≈ 0.67 (AM ~2.54 vs dense-best 1.87). **KEY (EXP-007): the acquisition
+  gap is NOT support-limited** — MT is flat ~2.54 across top_t {32,64,128}; more support only adds forgetting.
+  So gating/support help FORGETTING, not ACQUISITION; the acquisition bottleneck is the TARGET / closed-form
+  value-solve. **Best AM point now = top32** (QA 2.1766 ~= floor / MT 2.5484, cheaper). Remaining acquisition
+  levers: HYP-T1 target_mode (running), then a few sparse gradient steps (costed Pareto point). β DEFERRED (broken).
+  REF-ICL ceiling running now.
 
 ## BUDGET
 - Soft budget: run unattended until target met or ~40 cycles / ~48 GPU-hours, whichever first.
@@ -52,9 +55,12 @@
   rabbit hole (needs guards inside refit_beta_nnls) → DEFERRED (RUNBOOK §6.11, backlog). **β-clamp edit REVERTED.**
   Also exposed the dual-cartridges import foot-gun (RUNBOOK §6.10) — the unconditional beta_clamp_abs arg crashed
   ALL AM runs (incl. EXP-007's first attempt) when the sibling cartridges was imported.
-- **EXP-007** (TRAIN, GPU) — RE-DISPATCHED on reverted/clean code: HYP-S1 top_t sweep {32,128} vs canonical 64.
-  Maps acquisition/forgetting knee; top_t=128 targets the MT gap. Bundle: results/EXP-007/.
-- **REF-ICL** (EVAL, GPU) — the aspirational CEILING (full-context ICL on QA+MT, measure ONCE; icl_eval.py). Bundle: results/REF-ICL/.
+- ~~EXP-007~~ **DONE + INGESTED** (2 executors, same numbers): top32 QA 2.1766/MT 2.5484, top128 QA 2.4837/MT 2.6860.
+  HYP-S1 REJECTED for acquisition (MT flat; forgetting∝top_t). top32 = best AM point.
+- **REF-ICL** (EVAL, GPU0) — the aspirational CEILING (full-context ICL on QA+MT; 78 full-paper prefills, longer run).
+  STILL RUNNING (parked w/ monitor). Bundle: results/REF-ICL/.
+- **EXP-008** (TRAIN, GPU1) — HYP-T1 target_mode sweep vs cartridge_plus_doc. The acquisition bottleneck is the
+  target/solve (EXP-007) → this is the key remaining closed-form acquisition lever. Bundle: results/EXP-008/.
 - NOTE ON CADENCE: /loop re-invocations arrive irregularly (observed a ~4h gap 02:5x→07:0x); ScheduleWakeup
   fallback isn't reliably firing. Make each invocation maximally productive; keep BOTH GPUs loaded to avoid long idle.
 - ~~EXP-001~~ **DONE + INGESTED** (18:02) — AM-sparse no-IDF anchor: QA 2.2521 / MT 2.5426, e2e 217s / 0 grad.

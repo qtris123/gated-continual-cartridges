@@ -16,6 +16,12 @@ Artifact: research_loop/results/EXP-000-verify/result.json, /tmp/exp000_{qa,mt}.
 eval_forgetting.py printed `Eval loss` then never exited (held GPU 1 ~78 min until killed). nvidia-smi
 repeatedly >20s/hangs on this box. Guardrails added to RUNBOOK §1/§6. Harness `Eval loss` = ln(ppl).
 
+## 2026-07-26 10:5x [EXP-007] top_t sweep — acquisition NOT support-limited (HYP-S1 rejected)
+AM-sparse no-IDF canonical at TOP_T∈{32,128} (vs EXP-001 top64 QA 2.2521/MT 2.5426): top32 QA 2.1766 / MT 2.5484
+(solve 173.7s); top128 QA 2.4837 / MT 2.6860 (solve 185.4s). QA-forgetting monotonic in top_t (coverage∝forgetting,
+t64→t128 +0.23>noise); MT-acquisition flat/worse (~2.54 across 32/64, worse at 128). ⇒ MT-acquisition gap vs
+dense@4ep (1.87) is TARGET/solve-limited, not support-limited. top32 = marginally best AM point. Artifact: results/EXP-007/result.json.
+
 ## 2026-07-26 10:2x [EXP-006/β] β NNLS fit produces NaN — β deferred; import foot-gun found
 EXP-006 (β + opt-in clamp[-3,3]) died `AssertionError: beta clamp failed: max|beta|=nan > 3.0` — the NNLS β-fit
 itself yields NaN, so clamping the output can't help. β failed 3 ways (EXP-005 cholesky not-PD @66.6; EXP-005b
