@@ -43,9 +43,11 @@
 ## IN-FLIGHT (experiments dispatched, awaiting result bundles)
 - **EXP-000** (dense REF-CART bar) — **10-EPOCH RUN COMPLETE** (attempt-2, 01:07→02:51, ~101min; "Done
   training…final barrier", cache-step624.pt saved). In-training QA-eval ended ~2.69 ⇒ dense@10ep forgets QA
-  MORE than dense@4ep (2.37) and than AM (2.25). Its parked agent did NOT write the bundle → I dispatched a
-  dense-final-eval executor (gpu0) to eval cache-step624.pt on BOTH splits → authoritative bar → results/EXP-000/.
-- **EXP-005** (TRAIN, GPU1) — HYP-T2 ENABLE_BETA=1, running (cold-start). Targets the MT-acquisition gap. Bundle: results/EXP-005/.
+  MORE than dense@4ep (2.37) and than AM (2.25). First dense-final-eval executor STALLED (no output 40min) →
+  **RE-DISPATCHED dense-final-eval (gpu0)** to eval cache-step624.pt on BOTH splits → authoritative bar → results/EXP-000/.
+- ~~EXP-005~~ **FAILED** (07:31) — HYP-T2 ENABLE_BETA=1 crashed (cholesky not-PD; unclamped β log-weights ~66.6
+  collapse softmax → rank-deficient value-solve). HYP-T2 unanswered. **RE-DISPATCHED as EXP-005b** (β at
+  RIDGE_LAMBDA=0, robust lstsq/gels; baseline EXP-004) on gpu1. If λ=0 doesn't rescue → EDIT: clamp β∈[-3,3].
 - NOTE ON CADENCE: /loop re-invocations arrive irregularly (observed a ~4h gap 02:5x→07:0x); ScheduleWakeup
   fallback isn't reliably firing. Make each invocation maximally productive; keep BOTH GPUs loaded to avoid long idle.
 - ~~EXP-001~~ **DONE + INGESTED** (18:02) — AM-sparse no-IDF anchor: QA 2.2521 / MT 2.5426, e2e 217s / 0 grad.

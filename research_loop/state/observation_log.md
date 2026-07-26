@@ -16,6 +16,13 @@ Artifact: research_loop/results/EXP-000-verify/result.json, /tmp/exp000_{qa,mt}.
 eval_forgetting.py printed `Eval loss` then never exited (held GPU 1 ~78 min until killed). nvidia-smi
 repeatedly >20s/hangs on this box. Guardrails added to RUNBOOK §1/§6. Harness `Eval loss` = ln(ppl).
 
+## 2026-07-26 07:31 [EXP-005] ENABLE_BETA=1 crashed (β numerically unstable at λ=1e-4)
+β engaged (max|β_logweight| 66.6, mean 4.23, ~19% nonzero, all 36 layers) but crashed on doc 3 with
+linalg.cholesky not-positive-definite (am/core.py:225 _ridge_lstsq). Mechanism: unclamped β added to attention
+logits pre-softmax → near-one-hot softmax → rank-deficient value-solve design matrix → XtX indefinite → cholesky
+fails (primary + raised-floor fallback; λ=1e-4 too small). Docs 0-2 succeeded. No eval numbers (crash pre-eval).
+AM paper clamps β∈[-3,3]; our impl doesn't. Retry EXP-005b (β at λ=0, robust lstsq). Artifact: results/EXP-005/result.json.
+
 ## 2026-07-26 01:18 [EXP-004] RIDGE_LAMBDA=0 vs 1e-4 on no-IDF canonical = WASH
 Pure OLS value-solve (λ=0, ridge truly zeroed via core.py L144-145 gels branch), single var vs EXP-001:
 QA-forgetting 2.2619 (ppl 9.6), MT-acquisition 2.5569 (ppl 12.9). vs EXP-001 (QA 2.2521 / MT 2.5426):

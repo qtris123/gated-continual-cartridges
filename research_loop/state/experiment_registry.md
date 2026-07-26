@@ -198,9 +198,14 @@ Format mirrors `.cursor/rules/research-companion.mdc`.
 - Command: VAR=val ... bash examples/qasper2/scripts/train_continual_am_sparse.sh, ENABLE_BETA=1, USE_IDF=0.
 - Metrics reported: qa_forgetting_loss / mt_acquisition_loss (mean CE) + solve_s + phase2_e2e_s + gradient_steps:0.
 - Expected: β improves MT-acquisition (lower MT loss) vs EXP-001; watch QA doesn't regress; still backprop-free.
-- Actual: _pending_
-- Interpretation: _pending_
-- Confounders considered: tiny eval; single seed; β clamps ([-3,3] etc.) may limit effect; freeze-keys retained.
-- Status: dispatched
-- Follow-up: if β helps MT, fold into canonical; then support/top_t sweep (HYP-S1) + novel gaters (GATE-N*).
+- Actual: **FAILED (crash), HYP-T2 UNANSWERED.** β WAS engaged (max|β_logweight| 66.6, mean 4.23, ~19% nonzero,
+  all 36 layers) but crashed on document 3 with linalg.cholesky not-positive-definite (am/core.py:225 _ridge_lstsq).
+- Interpretation: our β path fits LARGE unclamped NNLS log-weights (~66.6); added to attention logits pre-softmax
+  they collapse the softmax to near-one-hot → value-solve design matrix rank-deficient → XtX indefinite → cholesky
+  fails (both primary + raised-floor fallback; λ=1e-4 too small to rescue). The AM paper CLAMPS β to [-3,3] for
+  exactly this stability reason (EXP-002); our impl doesn't. Docs 0-2 succeeded before the crash.
+- Confounders considered: single variable (EXP-001 same config w/ β off ran clean) → attributable to β.
+- Status: failed
+- Follow-up: (1) EXP-005b = β at RIDGE_LAMBDA=0 (robust lstsq/gels branch) — does λ=0 alone avoid the crash?
+  (2) if λ=0 completes but is degenerate, or still crashes → EDIT: clamp β to [-3,3] in the NNLS fit path, then retest.
 - Artifacts: outputs/<run-dir>/ , research_loop/results/EXP-005/result.json

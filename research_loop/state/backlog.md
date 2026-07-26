@@ -52,9 +52,10 @@ Baseline for all: AM-sparse canonical (tfidf, use_idf=1, per_layer, top_t=64, fr
 
 ## Lever 2.5 — AM-FAITHFULNESS (from EXP-002 reading of AM.pdf; candidate single-var tests)
 Baseline for all: AM-sparse canonical. Priority per AM paper's own ablations.
-- [ ] HYP-T2 (ELEVATED by EXP-002): `ENABLE_BETA=1` vs unset — the per-token β mass-bias (NNLS) is AM's
-      CORE mechanism to stop subsetting from underestimating future attention mass. AM claims dropping tokens
-      w/o β systematically hurts. One var: ENABLE_BETA. (keys frozen; strong candidate right after gating.)
+- [~] HYP-T2 (IN PROGRESS): `ENABLE_BETA=1` — AM's per-token β mass-bias (NNLS). EXP-005 CRASHED at λ=1e-4
+      (unclamped β log-weights ~66.6 → softmax collapse → cholesky not-PD). Retrying EXP-005b at λ=0 (robust
+      lstsq). **If unstable/degenerate → EDIT-BETA-CLAMP: clamp β∈[-3,3] (AM paper's stability range) in the
+      NNLS β-fit path (cartridges/am/*.py refit_beta_nnls / where attention_bias is applied), opt-in, then retest.**
 - [ ] HYP-PH1: nonuniform PER-HEAD support budget (AM's #1 ablation: head sensitivity ~input-invariant →
       precomputed greedy budget). Map: GRANULARITY=per_head + a per-head TOP_T schedule (MIN_TOP_T_PER_LAYER /
       residual_budget). Likely needs an EDIT for a per-head budget schedule if no knob suffices.

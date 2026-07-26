@@ -38,3 +38,18 @@ One `### HYP-XXX` block per hypothesis. Status ∈ active | weakened | supported
 - Notes: This is the user's stated core problem ("select slots with insufficient attention mass").
 
 <!-- more hypotheses appended by the orchestrator -->
+
+### HYP-T2: AM per-token β mass-bias closes the MT-acquisition gap
+- Status: BLOCKED (numerical) → retrying. β is the AM paper's core cure for low-mass (retained slots carry
+  the missing attention mass via w_j=exp(β_j)≥0, NNLS-fit).
+- Evidence for: AM paper claims dropping tokens w/o β systematically underestimates future attention (EXP-002).
+- Evidence against: none yet (unmeasured).
+- Related experiments: EXP-005 (FAILED — β at λ=1e-4 crashed: unclamped β log-weights ~66.6 collapse softmax →
+  rank-deficient value-solve → cholesky not-PD, am/core.py:225). EXP-005b (β at λ=0, robust lstsq — running).
+- Prediction: β lowers MT-acquisition loss vs no-β at ≤ QA cost — IF numerically stabilized.
+- Next decisive test: EXP-005b; if degenerate/crashes → EDIT clamp β to [-3,3] (AM paper's stability range) then retest.
+- Notes: root cause is our β-fit path has NO magnitude clamp; the AM paper clamps β∈[-3,3] for highest-attn keys.
+
+### HYP-R0: RIDGE_LAMBDA=0 vs 1e-4 on the value-solve
+- Status: RESOLVED — NULL/WASH (EXP-004). QA 2.2619 / MT 2.5569 vs EXP-001 2.2521/2.5426 (Δ<<noise). At
+  λ=1e-4 the ridge is already negligible. Keep canonical (λ indifferent). AM "ridge hurts ∀λ>0" doesn't bite at tiny λ.
