@@ -4,12 +4,15 @@
 > This is the single source of truth for "where are we and what's next."
 
 ## HEADLINE (update every cycle)
-- **Status (2026-07-26):** PROVISIONAL WIN — **EXP-009 (sparse-gradient, 62 steps) appears to MEET the target.**
-  QA 1.6169 / MT 1.9664 vs cartridge-best dense@4ep (QA 2.37 / MT 1.87): dominates on QA, matches MT (+0.10 ≤ noise),
-  at ~1/10 dense's gradient cost. This is the NORTH_STAR "costed Pareto point" (a few sparse grad steps). NOT yet
-  declared DONE — STEP-3 requires a CONFIRMING re-run, and QA 1.62 < Phase-1 floor 2.239 must be verified (not an
-  eval artifact). Confirmation re-run + floor control dispatched (EXP-009C). Closed-form AM alone is acquisition-capped
-  at MT ~2.54 (gating/support/target/ridge all null). Best gradient-free point = AM top32 (QA 2.18 / MT 2.55).
+- **Status (2026-07-26):** ✅ **TARGET MET + CONFIRMED.** EXP-009 (sparse-gradient, 62 steps, no-IDF gating):
+  QA 1.6169 / MT 1.9664. EXP-009C reproduced it BIT-IDENTICALLY (QA 1.6169356 / MT 1.9664034) and the Phase-1 QA
+  FLOOR CONTROL returned 2.2388 (= floor) on the same eval harness ⇒ the QA-below-floor is a REAL training effect
+  (positive backward transfer), NOT an eval artifact. vs cartridge-best dense@4ep (QA 2.37 / MT 1.87): DOMINATES on
+  QA, MATCHES MT (+0.10 ≤ noise), at ~1/10 dense's 624-step cost. This is the NORTH_STAR costed Pareto point (a few
+  sparse grad steps) + the gating novelty (no-IDF/attention-mass beats IDF). Closed-form gradient-free AM alone is
+  acquisition-capped at MT ~2.54 (gating/support/target/ridge ALL null); best gradient-free point = AM top32 (QA 2.18/MT 2.55).
+  REMAINING before STOP: ingest 30-step cheaper-frontier point (EXP-009C) + REF-ICL ceiling, then write the synthesis
+  (quality×cost Pareto + notes/ + JOURNAL) and STOP the loop.
 - **Goal (TWO axes — see NORTH_STAR.md):** a fast, (near) training-free continual update for the
   KV-cartridge whose GATING gives cartridge-comparable forgetting/acquisition — winning on BOTH
   (1) training efficiency and (2) CL quality, vs cartridge (bar) and ICL (ceiling). Gating is the novelty.
