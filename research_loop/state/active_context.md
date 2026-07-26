@@ -41,12 +41,13 @@
 - ✅ Cited-paper PDFs staged: `TF-IDF.pdf` (2510.15103v1), `AM.pdf` (2602.16284) at repo root (NORTH_STAR).
 
 ## IN-FLIGHT (experiments dispatched, awaiting result bundles)
-- **EXP-000** (TRAIN, GPU0) — REF-CART dense bar. Attempt-1 (18:02) died ~Epoch 5-6; agent restarted from
-  scratch at 2026-07-26-01-07-07. **Attempt-2 is now STABLE at Epoch 7/10 (step 400), 68min in — past the
-  ~55min mark, so the death was a ONE-OFF not systematic; it should complete the full 10 epochs (~30min more).**
-  When it finishes (cache_last.pt saved before the final-barrier hang), eval BOTH splits for the authoritative
-  dense bar — if the parked agent (a4255d85247212da7) doesn't write results/EXP-000/, I do it. Attempt-1 also
-  left cache-step256.pt (~4ep) → REFCART-EVAL is evaling it now for an early dense-QA read. Dense MT (10ep) already known: wandb scf175an=2.891.
+- **EXP-000** (dense REF-CART bar) — **10-EPOCH RUN COMPLETE** (attempt-2, 01:07→02:51, ~101min; "Done
+  training…final barrier", cache-step624.pt saved). In-training QA-eval ended ~2.69 ⇒ dense@10ep forgets QA
+  MORE than dense@4ep (2.37) and than AM (2.25). Its parked agent did NOT write the bundle → I dispatched a
+  dense-final-eval executor (gpu0) to eval cache-step624.pt on BOTH splits → authoritative bar → results/EXP-000/.
+- **EXP-005** (TRAIN, GPU1) — HYP-T2 ENABLE_BETA=1, running (cold-start). Targets the MT-acquisition gap. Bundle: results/EXP-005/.
+- NOTE ON CADENCE: /loop re-invocations arrive irregularly (observed a ~4h gap 02:5x→07:0x); ScheduleWakeup
+  fallback isn't reliably firing. Make each invocation maximally productive; keep BOTH GPUs loaded to avoid long idle.
 - ~~EXP-001~~ **DONE + INGESTED** (18:02) — AM-sparse no-IDF anchor: QA 2.2521 / MT 2.5426, e2e 217s / 0 grad.
 - ~~EXP-002~~ **DONE + INGESTED** (18:20) — research. Key: (c) dense P2 MT=2.891 (ppl18, scf175an) — **EXP-001's
   2.5426 already beats it backprop-free**, pending EXP-000's QA-forgetting; (b) T3 = dense 1805s train + ~10-12ks
