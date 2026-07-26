@@ -183,3 +183,24 @@ Format mirrors `.cursor/rules/research-companion.mdc`.
 - Status: done
 - Follow-up: HYP-R0 resolved (null/wash). Next lever: HYP-T2 (ENABLE_BETA=1, AM mass-bias).
 - Artifacts: outputs/<run-dir>/ , research_loop/results/EXP-004/result.json
+
+### EXP-005: HYP-T2 — ENABLE_BETA=1 (AM per-token mass-bias) on the no-IDF canonical
+- Date: 2026-07-26 (cycle 1, gpu1 during dense full run)
+- Research question: does the AM per-token β mass-bias (NNLS, w_j=exp(β_j)≥0 so retained slots carry the
+  attention mass lost by subsetting) close the MT-ACQUISITION gap vs dense, without hurting QA retention?
+- Hypothesis tested (HYP-ID): HYP-T2 (elevated by EXP-002 — β is AM's core low-mass cure).
+- Variable under test: ENABLE_BETA (unset/0 → 1). EVERYTHING else = the no-IDF canonical (EXP-001).
+- Baseline compared to: EXP-001 (no-IDF canonical: QA 2.2521 / MT 2.5426). Target = dense MT (REFCART-EVAL 1.8725 @4ep / full 10ep pending).
+- Dataset / Model: Qasper QA→MT / Qwen3-4B, 512 slots
+- Config knobs (full): slot_selection=tfidf, USE_IDF=0, granularity=per_layer, top_t=64, target_mode=cartridge_plus_doc,
+  key_mode=freeze, ENABLE_BETA=1, BETA_FIT_SCOPE=selected, ridge_lambda=1e-4, ridge_scale=spectral, delta_weight=1e-2,
+  AM_EXECUTION_MODE=per_document, PHASE1_CACHE=.../cache_last.pt, SYNTH=MT parquet. NO BG_STATS (USE_IDF=0).
+- Command: VAR=val ... bash examples/qasper2/scripts/train_continual_am_sparse.sh, ENABLE_BETA=1, USE_IDF=0.
+- Metrics reported: qa_forgetting_loss / mt_acquisition_loss (mean CE) + solve_s + phase2_e2e_s + gradient_steps:0.
+- Expected: β improves MT-acquisition (lower MT loss) vs EXP-001; watch QA doesn't regress; still backprop-free.
+- Actual: _pending_
+- Interpretation: _pending_
+- Confounders considered: tiny eval; single seed; β clamps ([-3,3] etc.) may limit effect; freeze-keys retained.
+- Status: dispatched
+- Follow-up: if β helps MT, fold into canonical; then support/top_t sweep (HYP-S1) + novel gaters (GATE-N*).
+- Artifacts: outputs/<run-dir>/ , research_loop/results/EXP-005/result.json

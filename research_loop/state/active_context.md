@@ -16,11 +16,14 @@
 - **CANONICAL AM-sparse = EXP-001 (no-IDF/pure-TF):** QA **2.2521** / MT **2.5426**, backprop-free, e2e 217s.
   HYP-G1 SUPPORTED — IDF gating (EXP-003) is WORSE on both axes (QA 2.6351 / MT 3.0073), so all further gating
   builds on the NO-IDF config. This IS the project's core thesis confirmed: IDF is the wrong gate in compressed-KV.
-- **Preliminary headline (confirm w/ EXP-000):** EXP-001 (QA 2.2521 / MT 2.5426) appears to BEAT dense
-  self-distillation on BOTH axes — dense MT=2.891 (wandb scf175an) and dense QA in-training ~2.37 (EXP-000 mid-run,
-  step 295/620) — backprop-free at ~8× lower cost. If EXP-000's FINAL eval holds, that's the two-axis win.
-- **Gap to target:** QA at/below floor (no forgetting). MT 2.5426 vs REF-CART bar = _TBD (EXP-000, ~55min out)_,
-  vs REF-ICL ceiling = _TBD (EXP-000b pending)_. Cost side already dominant (backprop-free, ~3.6 min vs dense ~30min).
+- **HONEST standings vs dense (CORRECTED — local apples-to-apples via REFCART-EVAL @4ep):** dense QA 2.3721 /
+  MT **1.8725** vs AM EXP-001 QA 2.2521 / MT 2.5426. ⇒ **Dense ACQUIRES MT much better (1.87 vs 2.54, gap 0.67);
+  AM retains QA slightly better (2.25 vs 2.37) and is ~8× cheaper/backprop-free.** The earlier "AM beats dense"
+  read was WRONG (based on wandb scf175an MT=2.891, now deemed unreliable). **THE CHALLENGE = close the MT-acquisition
+  gap** while keeping AM's retention + cost edge. This reframes lever priority toward ACQUISITION (ENABLE_BETA, more
+  support/top_t, better gating). Full 10-epoch dense (finishing now, Epoch 9) = authoritative bar; expect MT ≤ 1.87.
+- **Gap to target:** MT-acquisition gap ~0.67 vs dense@4ep (will widen vs 10ep). QA already ≤ dense. Cost dominant.
+  REF-ICL ceiling still _TBD (EXP-000b)_.
 
 ## BUDGET
 - Soft budget: run unattended until target met or ~40 cycles / ~48 GPU-hours, whichever first.
@@ -38,13 +41,12 @@
 - ✅ Cited-paper PDFs staged: `TF-IDF.pdf` (2510.15103v1), `AM.pdf` (2602.16284) at repo root (NORTH_STAR).
 
 ## IN-FLIGHT (experiments dispatched, awaiting result bundles)
-- **EXP-000** (TRAIN, GPU0) — REF-CART dense bar. ⚠️ **UNSTABLE / RESTART-LOOP.** Attempt-1 (18:02 run dir)
-  died mid-training ~Epoch 5-6 (step ~329); the parked agent (a4255d85247212da7) RESTARTED IT FROM SCRATCH
-  (new run dir 2026-07-26-01-07-07, Epoch 1) — agent has a "~55-min re-arm" cycle, so a 10-epoch (~110min)
-  run may never complete in one window and restarts lose all progress. Attempt-1 left a usable ~4-epoch dense
-  checkpoint: outputs/2026-07-25-18-02-35-baseline_continual/dfed5e8b-.../cache-step256.pt.
-  **FALLBACK for the dense bar (see NEXT ACTIONS #0): don't wait on a full 10-epoch run — dense MT is already
-  known (wandb scf175an=2.891); get dense QA-forgetting by evaling cache-step256.pt on both splits.**
+- **EXP-000** (TRAIN, GPU0) — REF-CART dense bar. Attempt-1 (18:02) died ~Epoch 5-6; agent restarted from
+  scratch at 2026-07-26-01-07-07. **Attempt-2 is now STABLE at Epoch 7/10 (step 400), 68min in — past the
+  ~55min mark, so the death was a ONE-OFF not systematic; it should complete the full 10 epochs (~30min more).**
+  When it finishes (cache_last.pt saved before the final-barrier hang), eval BOTH splits for the authoritative
+  dense bar — if the parked agent (a4255d85247212da7) doesn't write results/EXP-000/, I do it. Attempt-1 also
+  left cache-step256.pt (~4ep) → REFCART-EVAL is evaling it now for an early dense-QA read. Dense MT (10ep) already known: wandb scf175an=2.891.
 - ~~EXP-001~~ **DONE + INGESTED** (18:02) — AM-sparse no-IDF anchor: QA 2.2521 / MT 2.5426, e2e 217s / 0 grad.
 - ~~EXP-002~~ **DONE + INGESTED** (18:20) — research. Key: (c) dense P2 MT=2.891 (ppl18, scf175an) — **EXP-001's
   2.5426 already beats it backprop-free**, pending EXP-000's QA-forgetting; (b) T3 = dense 1805s train + ~10-12ks
@@ -55,8 +57,10 @@
   MT +0.465 vs EXP-001, >2× noise). HYP-G1 SUPPORTED. ⇒ **canonical = no-IDF (EXP-001)**. (Bundle written by orchestrator.)
 - ~~EXP-004~~ **DONE + INGESTED** (01:18) — HYP-R0 RIDGE_LAMBDA=0 = WASH (QA 2.2619 / MT 2.5569, ≈EXP-001).
   Keep canonical λ. gpu1 freed.
-- **REFCART-EVAL** (EVAL, GPU1) — pipelined: eval the attempt-1 dense checkpoint cache-step256.pt (~4 epochs)
-  on BOTH splits → dense QA-forgetting bar (+ MT@4ep). Secures the AM-vs-dense headline. Bundle: results/REFCART-EVAL/.
+- ~~REFCART-EVAL~~ **DONE + INGESTED** (02:32) — dense@4ep: QA 2.3721 / MT 1.8725. Reframed the story (dense
+  acquires MT better; AM cheaper + retains better). Full 10ep dense = authoritative bar (finishing now).
+- **EXP-005** (TRAIN, GPU1) — HYP-T2: ENABLE_BETA=1 (AM per-token mass-bias) on the no-IDF canonical. Targets
+  the MT-acquisition gap directly (β lets retained slots carry missing attention mass). Single var vs EXP-001. Bundle: results/EXP-005/.
 
 ## NEXT ACTIONS (what the next cycle should do)
 0. **⚠️ SECURE THE DENSE BAR (EXP-000) — the full run is unreliable (restart-loop, see IN-FLIGHT).** Plan:

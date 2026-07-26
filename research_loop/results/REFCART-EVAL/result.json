@@ -1,0 +1,39 @@
+{
+  "exp_id": "REFCART-EVAL",
+  "type": "train",
+  "variable_under_test": "dense self-distillation Phase-2 @ ~4 epochs (step256) — REF-CART reference",
+  "baseline_ref": "PHASE1 floor / EXP-001 AM",
+  "status": "done",
+  "numbers": {
+    "qa_forgetting_loss": 2.3721,
+    "mt_acquisition_loss": 1.8725,
+    "dense_epochs_approx": 4,
+    "optimizer_step": 256,
+    "qa_forgetting_ppl": 10.72,
+    "mt_acquisition_ppl": 6.50,
+    "qa_n_batches": 6,
+    "mt_n_batches": 5,
+    "eval_batch_size": 4,
+    "runtime_s": 45,
+    "phase1_floor_qa": 2.239,
+    "phase1_floor_mt": 3.783,
+    "exp001_am_qa": 2.2521,
+    "exp001_am_mt": 2.5426,
+    "wandb_dense10ep_mt": 2.891,
+    "qa_delta_vs_phase1_floor": 0.133,
+    "qa_delta_vs_exp001_am": 0.120,
+    "mt_delta_vs_exp001_am": -0.670,
+    "mt_delta_vs_wandb_dense10ep": -1.019
+  },
+  "artifacts": [
+    "outputs/2026-07-25-18-02-35-baseline_continual/dfed5e8b-a264-4cbf-8b9b-aa868e789ae5/cache-step256.pt",
+    "research_loop/results/REFCART-EVAL/eval_qa.log",
+    "research_loop/results/REFCART-EVAL/eval_mt.log",
+    "research_loop/results/REFCART-EVAL/run_eval.sh",
+    "research_loop/results/REFCART-EVAL/RUNNER_STATUS",
+    "research_loop/results/REFCART-EVAL/runner.out"
+  ],
+  "command": "EVAL ONLY (no training). Claimed exactly one GPU (gpu1) via repo flock on /tmp/gpu_locks_$USER/gpu1.lock (gpu0 held by the concurrent dense baseline_continual job; MASTER_PORT convention 29501 for gpu1, but eval is plain single-process python, no torchrun). Wrapper research_loop/results/REFCART-EVAL/run_eval.sh held the flock and ran, for each split: CUDA_VISIBLE_DEVICES=1 CHECKPOINT_PATH=outputs/2026-07-25-18-02-35-baseline_continual/dfed5e8b-a264-4cbf-8b9b-aa868e789ae5/cache-step256.pt EVAL_DATA_PATH=data/qasper/eval/qasper_eval_QA.parquet|data/qasper/eval/qasper_eval_MT.parquet MODEL_NAME=Qwen/Qwen3-4B-Instruct-2507 NUM_TOKENS=512 RUN_NAME=refcart_eval_qa|refcart_eval_mt WANDB_DISABLED=1 .venv/bin/python examples/qasper2/train/eval_forgetting.py > eval_<split>.log 2>&1 & ; polled the log for the mean-CE 'Eval loss - <float>' line, parsed it, then SIGTERM+SIGKILL'd the PID (eval_forgetting.py hangs after printing Eval loss). NUM_TOKENS is NOT read by eval_forgetting.py (slot count is baked into the checkpoint) — passed only per task spec, it is a no-op. Env-var names confirmed against eval_forgetting.py source: CHECKPOINT_PATH, EVAL_DATA_PATH, MODEL_NAME(default Qwen/Qwen3-4B-Instruct-2507), BATCH_SIZE(default 4), RUN_NAME, WANDB_DISABLED.",
+  "observations": "Evaluated the partial dense self-distillation Phase-2 checkpoint (cache-step256.pt, ~4 epochs / optimizer_step 256, from the verified Phase-1 QA cache + MT synth) on both eval splits as a conservative dense REF-CART reference; both numbers are the harness mean-CE 'Eval loss' (= ln ppl), NOT the broken perplexity field. Dense@4ep gives QA-forgetting loss 2.3721 (ppl 10.7, QA n=6 batches) and MT-acquisition loss 1.8725 (ppl 6.5, MT n=5 batches); an independent re-run reproduced a prior REFCART-EVAL bundle's numbers to 4 decimals. QA-forgetting 2.3721 sits ABOVE (worse than) both EXP-001 AM's 2.2521 (+0.120) and the PHASE1 floor 2.239 (+0.133), i.e. the dense update already forgets a little more Phase-1 knowledge than the value-only AM-sparse update, though both deltas (~0.12-0.13) sit at the edge of the tiny-eval noise band (sub-0.1-0.2 on n=6). MT-acquisition 1.8725 is markedly BELOW (better than) both EXP-001 AM's 2.5426 (-0.670) and the wandb 10-epoch dense MT 2.891 (-1.019), so this partial dense cache has already strongly acquired the new MT docs. Because this is a partial ~4-epoch dense run and Phase-1 forgetting grows monotonically with more Phase-2 training, the 2.3721 QA-forgetting is a LOWER bound on the full 10-epoch dense QA-forgetting loss (10-epoch dense would forget at least this much). Caveats: tiny eval (QA n=6, MT n=5 batches, batch_size 4) reported as-is; the eval was fast (~45s total) because the box's CUDA context was warm from the concurrent gpu0 job; gpu1 flock claimed and released cleanly and gpu0 was left untouched.",
+  "failure_cause": null
+}
