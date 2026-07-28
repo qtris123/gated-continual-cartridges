@@ -26,26 +26,12 @@ OUT_JSON = os.environ["OUT_JSON"]
 
 def per_layer_value_absmax(cache_path: str) -> dict:
     blob = torch.load(cache_path, map_location="cpu", weights_only=False)
-    # TrainableCache.save payload: find the trainable value tensors.
-    if isinstance(blob, dict) and "state_dict" in blob:
-        sd = blob["state_dict"]
-    elif isinstance(blob, dict):
-        sd = blob
-    else:
-        sd = blob.state_dict()
-    out = {}
-    for k, v in sd.items():
-        if not torch.is_tensor(v):
-            continue
-        if "trainable_values" in k or ("values" in k and "frozen" not in k):
-            # key looks like "trainable_values.<layer>" or similar
-            tail = k.rsplit(".", 1)[-1]
-            try:
-                layer = int(tail)
-            except ValueError:
-                continue
-            out[layer] = float(v.detach().float().abs().max().item())
-    return out
+    # TrainableCache.save payload keeps a ParameterList under "trainable_values".
+    tv = blob["trainable_values"] if isinstance(blob, dict) else blob.trainable_values
+    return {
+        int(l): float(v.detach().float().abs().max().item())
+        for l, v in enumerate(tv)
+    }
 
 
 def collect_run(run_dir: str) -> dict:

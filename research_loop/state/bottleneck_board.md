@@ -15,10 +15,29 @@ adversarial confirmation) → **CLOSED** (`confirmed+fixed` / `confirmed+capped`
 the number that shows it. "It didn't help" never closes anything.
 
 ---
-## ACTIVE BOTTLENECK
-**none yet — the board is at its initial state (2026-07-28). First cycle must open with W1 MEASURE.**
-Recommended opening batch: **B-WIRE** (free, code read) + **B-OBJ** and **B-ROUTE**'s write-ceiling
-oracle on the two GPUs. B-ROUTE's oracle is the single most informative run available (MISSION §4).
+## ACTIVE BOTTLENECK — **B-ROUTE**, and the mission now turns on one number
+**Status after cycle 1 (2026-07-28): three of six entries are closed and the search space has collapsed
+onto a single axis.**
+
+| entry | verdict |
+|---|---|
+| **B-WIRE** | ✅ CLOSED — confirmed bug; `target_mode` never reached the write path; HYP-T1 retracted |
+| **B-OBJ** | ✅ CLOSED — **MSE and CE are anti-correlated**; no better fit of this objective can win |
+| **B-CASCADE** | measured — the solve's own magnitude (\|v\| 984→21504) re-routes attention away from the cartridge |
+| **B-ROUTE** | ⭐ **ACTIVE** — value-only writing is bandwidth-capped; a *perfect* write at 9% mass reaches only MT 2.381 |
+| **B-CAP / B-SOLVE** | re-opened / root-caused, but subordinate to B-ROUTE |
+
+**The decisive question, in flight (ORACLE-WRITE-512):** a perfect value write at **9%** bandwidth gave
+MT 2.381. At `top_t=512` the bandwidth is **59%** (6.6×). If MT falls toward ~1.9, value-only writing was
+bandwidth-limited and a gradient-free win is live. **If it stalls at ~2.3–2.4 with perfect values and
+6.6× the bandwidth, then no value-only write can ever win** — and the mission's answer must be
+**key-side**, which is the one axis no experiment in this loop has ever touched (`KEY_MODE=freeze` in
+every row of `results.csv`).
+
+**Why keys are still live despite DIAG-ROUTING's ρ→0 result:** that measured the **routing simplex**
+(post-softmax, 512-dim). The **key/query space** is a different object — 128-dim per head, pre-softmax.
+A new key placed orthogonal to the span of QA's queries would take ≈0 QA attention while remaining
+reachable by MT queries. Nothing has measured that geometry yet. → SCOUT-KEYS dispatched.
 
 ---
 ## The gap under investigation
