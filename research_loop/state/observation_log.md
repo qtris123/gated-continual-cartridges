@@ -223,3 +223,29 @@ research_loop/results/EXP-001/result.json ; outputs/2026-07-25-18-02-29-continua
   false negative** — cwd is `sys.path[0]` for `-c`, so it prints the repo path even when the pin is
   correct. Probe from `/tmp`. Also confirmed: **unpinned imports on this box resolve to the SIBLING
   repo**, not `_explore`.
+
+## 2026-07-28 — DIAG-ROUTING (board B-ROUTE/B-CAP): no MT-specific routing subspace exists
+- Forward passes only, Phase-1 cartridge, both splits, `top_t=512`, 86 s, 0 gradient steps.
+  wandb https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/lqj2ssic
+- **QA Gram null space is large:** λ₁/tr 0.834 (pooled 0.892), participation eff. rank 1.97; eff. rank of
+  512 = 6.5 @τ1e-2, 33 @1e-3, 110 @1e-4; GPM 90%/99% ⇒ r = 9.6 / 72.7 ⇒ null space **439–505 dims**.
+  LIT-011's "P ≡ 0 at t=64" caveat is answered — the projection family is not vacuous at full support.
+- **MT does not live there: ρ_MT = 0.0120** (99% rule), 0.0423 @rank32, 0.0095 @rank128, vs an in-sample
+  QA leakage control of 0.0096 / 0.0361 / 0.0071 — MT exceeds QA's own spectral tail by **13–65% only**.
+  No layer above 0.0147; best head 0.209. LIT-011's criterion ρ→0 ⇒ *no value-space operator can
+  separate the axes*. **We are in that branch.**
+- **QA/MT overlap is near-total:** mean-routing cosine **0.99899** (min 0.9755/288 heads), histogram
+  intersection 0.963, top-32 slot overlap **0.914**. LIT-013's falsifier was intersection < 0.2.
+  Entropies nearly equal (1.946 vs 2.009 nats ⇒ 14.4 vs 15.1 effective slots).
+- **`mass_on_S` recorded for the first time in the loop's history:** `top_t=512` QA 0.5697 / MT 0.5879
+  (ratio 1.032); tf-idf top-32 union QA 0.0827 / MT 0.0896 (ratio 1.083). **Full support is 6.6× the
+  bandwidth of ORACLE-WRITE's operating point.**
+- Convention cross-check against ORACLE-WRITE's independent implementation: 0.08961 vs 0.08956,
+  0.58787 vs 0.58787, 0.56967 vs 0.56967 — **agreement to 4–6 s.f.**, so both are cross-validated.
+- **Rules out:** null-space VALUE projection as an acquisition mechanism (retention only); the LIT-013
+  disjoint-support/interference family. **Also undercuts the gating premise** — at 0.914 overlap,
+  "slots the new doc attends to" ≈ "slots QA attends to"; gating cannot separate what routing does not.
+- **Still alive:** LIT-017 null-space **key** placement (concerns the 128-dim query second moment `Q₀`
+  and *synthetic* keys — untested by this diagnostic). Keys remain the one untouched axis.
+- Caveat (worker-stated): ρ_QA is in-sample by construction, so a held-out control would *shrink* the
+  MT/QA contrast, not widen it. All numbers are pre-write.

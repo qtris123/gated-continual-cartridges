@@ -215,6 +215,47 @@ tokens. Our canonical config runs **neither** component:
   *with a cost ceiling* (NORTH_STAR: giant banks are drift).
 - **Evidence so far:** none directly. HYP-T1's null is not evidence here — see B-WIRE.
 
+## 🧭 DIAG-ROUTING (2026-07-28) — the routing geometry, and what it kills
+Forward passes only, on the untouched Phase-1 cartridge, both eval splits, `top_t=512`.
+Independent reimplementation of ORACLE-WRITE's convention — the two agree to **4–6 significant
+figures** (0.08961 vs 0.08956; 0.58787 vs 0.58787), so both measurements are now cross-validated.
+
+- **(a) The QA routing Gram HAS a large null space at full support.** λ₁/tr = 0.834 (pooled 0.892),
+  participation effective rank **1.97**; effective rank of 512 = 6.5 at τ=1e-2, 72.7 at the 99%-energy
+  rule ⇒ an approximate null space of **439–505 dimensions**. LIT-011's structural caveat ("P is
+  identically zero at t=64") is answered: **the projection family is not vacuous at 512.**
+- **(b) But MT routing energy does NOT live in it: ρ_MT ≈ 0.012.** (0.0423 at rank 32, 0.0095 at 128.)
+  The in-sample QA leakage control at the same ranks is 0.0096 / 0.0361 / 0.0071 — **MT exceeds QA's own
+  spectral tail by only 13–65%**. No layer exceeds ρ_MT = 0.0147; the best single head reaches 0.209.
+  **LIT-011's own criterion:** ρ ∈ [0.3, 0.8] ⇒ separable; ρ → 0 ⇒ *"no value-space operator whatsoever
+  can separate the two axes."* **We are squarely in the ρ → 0 branch.**
+- **QA and MT want the same slots, almost exactly:** mean-routing cosine **0.99899** (min 0.9755 across
+  288 heads), histogram intersection **0.963**, top-32 slot overlap **0.914**. LIT-013 named
+  intersection < 0.2 as its falsifier — **we measure the opposite extreme.** Routing entropies are
+  nearly equal too (QA 1.946 vs MT 2.009 nats ⇒ ~14.4 vs 15.1 effective slots of 512): MT is not more
+  diffuse, just *not different*.
+
+**What this rules out (an entire mechanism family, for ~86 s of GPU):**
+- **Null-space VALUE projection (LIT-011/012) cannot buy acquisition here.** Writing inside QA's
+  approximate null space discards ~99% of MT's routing leverage. It survives **only as a retention
+  operator** — which the board suspected but had no number for. MECH-METRIC's `C₀` is re-scoped
+  accordingly: a better brake on forgetting, not a source of acquisition.
+- **The LIT-013 interference/disjoint-support family is falsified** at the selection level.
+- ⚠️ **It also undercuts the project's gating premise:** at 0.914 top-32 overlap, "select the slots the
+  new document attends to" ≈ "select the slots QA attends to". A discrete "prefer slots QA is blind to"
+  selector has only ~9% of slots to work with. **Gating cannot separate what routing does not.**
+- **Still alive:** LIT-017 (null-space **key** placement) is *not* tested by this — it concerns the
+  128-dim query second moment `Q₀` and **synthetic** keys, whereas this measured routing vectors over
+  frozen Phase-1 keys. Keys remain the one untouched axis.
+
+**🔥 The lever this hands us:** `mass_on_S` at `top_t=512` is **QA 0.5697 / MT 0.5879**, versus
+**0.0827 / 0.0896** on the tf-idf top-32 union — a **6.6× bandwidth gain**. ORACLE-WRITE measured the
+write ceiling at 9% bandwidth and got MT 2.381. **The ceiling at 59% bandwidth is unmeasured, and it
+decides whether value-only writing is capped by bandwidth or by something deeper.** → ORACLE-WRITE-512.
+
+**Caveats (worker-stated):** ρ_QA is in-sample by construction, so a held-out QA control would raise the
+floor and *shrink* the MT/QA contrast, not widen it; all numbers are on the pre-write cartridge.
+
 ## B-CAP — capacity of the selected support
 - **Stage:** A MEASURE · **Status:** weakly measured (indirect)
 - **Claim:** the chosen slots cannot represent the new content.
