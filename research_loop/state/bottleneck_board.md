@@ -31,11 +31,39 @@ the number that shows it. "It didn't help" never closes anything.
   smaller budget**. Suspected cause: `query_accum.py:87-89` builds selection scores from a **GQA-group
   mean query taken before the softmax**. So the ranker may be picking both *low-mass* and *mutually
   colliding* slots.
-- **The mechanism this points to (do not build before measuring):** **disjoint per-document allocation** —
-  16 documents × 32 slots = 512 = exactly the cartridge. Give each document its own high-mass slots and
-  both the collision and the bandwidth deficit disappear together, with no keys and no gradients.
-- **Measure first:** per-layer union/overlap of the 16 selections, writes-per-slot, and **what fraction of
-  each document's write survives in the final cache**. → DIAG-OVERWRITE dispatched.
+- ✅ **CONFIRMED (DIAG-OVERWRITE, 2026-07-28) — and the survival number is catastrophic.**
+  Measured on the canonical run itself (which reproduced EXP-007-top32 to all 16 digits; **no
+  instrumentation needed** — the stock path already saves `am_doc_*.pt` selections and a
+  `cache-after-*.pt` snapshot per document, `SAVE_AFTER_EACH_DOCUMENT=1`):
+  - **Collision:** mean pairwise Jaccard between the 16 documents' per-layer top-32 sets = **0.713**.
+    Union 54.4 slots/layer ⇒ **9.83 writes per slot** (max 16). **87.3% of all 18,432 slot-writes land in
+    slots touched by ≥8 documents**; 18.6 slots per layer are written by **all 16**.
+  - 🔥 **Survival: mean 4.7% across documents 1–15.** doc1 **4.9%**, doc8 **1.0%**, doc15 17.0%, doc16
+    100%. Doc 1's values drift by a median **99% of their own magnitude**, cos(final, as-written) =
+    **0.517**, each of its slots is re-written by **11.8** later documents, and the later documents' net
+    change to doc 1's slots is **30× the change doc 1 itself made**.
+  - **The gate is not gating:** mean Spearman between different documents' slot scores = **0.958**, and
+    each document's top-32 overlaps a *document-independent* top-32 (built from the across-document mean
+    score) by **87.4%**. Verified bitwise that `USE_IDF=0` ⇒ `tfidf == tf`, so this is the raw access
+    score, not an IDF artefact.
+- 🔴 **Consequence — this reframes the entire acquisition story.** The final cartridge effectively holds
+  **the last document plus faint traces of the rest**. MT acquisition has been measured over a 16-document
+  corpus while the cartridge retained roughly one document's worth of it. That is a far better explanation
+  of "MT plateaus at ~2.5 no matter what" than any property of the value solve — and it means
+  **ORACLE-WRITE's 2.381 ceiling was also measuring mostly document 16**, so the write ceiling of a
+  *coexisting* 16-document write is **unmeasured**.
+- ⚠️ **Self-correction: the 4.6× bandwidth gap I put on this board is REFUTED.** DIAG-OVERWRITE reproduced
+  SCOUT-KEYS' 70.4% exactly (0.70437) and ORACLE-WRITE/DIAG-ROUTING to 4–6 s.f., then showed the
+  15.2%-vs-70.4% pair **mixes two aggregations of the same quantity** (the written union is 0.2037 in the
+  aggregation the 70.4% uses), and that **0.5113 of the 0.7044 is the frozen sink slot 0**, unwritable by
+  any AM config. Writable-only: mass-ranked per-layer top-32 = **0.1954 — 0.96× the tf-idf union, i.e.
+  slightly WORSE at a smaller budget**; budget-matched = 0.2373 (1.17×); per-head = 0.2598 (1.28×).
+  **There is no 4.6× writable-bandwidth lever.** Selection quality is not the problem; **allocation is.**
+- **The mechanism this now points to:** **disjoint per-document allocation** — 16 documents × 32 slots =
+  512 = exactly the cartridge. Because documents barely disagree (Spearman 0.958), it must be *explicit*
+  exclusion (greedy: document *d* takes its best 32 among slots not yet claimed), not score-based
+  separation. Gradient-free, closed-form, and squarely inside the project's stated novelty budget
+  (gating/allocation). **Blocked only on MECH-BETA releasing the source tree.**
 
 ## 🔴 B-ROPE — the teacher targets are computed with the WRONG RoPE BASE (opened 2026-07-28)
 - **Stage:** C BUILD (verified by the orchestrator; fix + A/B dispatched) · **Status:** **CONFIRMED bug,

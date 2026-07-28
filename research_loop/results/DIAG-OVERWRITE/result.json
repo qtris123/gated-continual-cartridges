@@ -1,0 +1,99 @@
+{
+  "id": "DIAG-OVERWRITE",
+  "role": "measure",
+  "board_entry": "B-OVERWRITE",
+  "question": "At the canonical top-32 operating point, do the 16 documents select nearly the same slots and overwrite each other -- and if so, is ORACLE-WRITE's 'perfect value write reaches only MT 2.381' an artefact of allocation rather than a property of value-only writing?",
+  "variable_under_test": "none (pure instrumentation of the canonical EXP-007-top32 configuration; no config or code was changed)",
+  "baseline_ref": "EXP-007-top32 (QA 2.1766157150268555 / MT 2.5483615398406982), reproduced to all 16 digits in this run",
+  "status": "done",
+  "numbers": {
+    "qa_forgetting_loss": 2.1766157150268555,
+    "mt_acquisition_loss": 2.5483615398406982,
+    "solve_s": 163.5,
+    "phase2_e2e_s": 169.3387393951416,
+    "gradient_steps": 0
+  },
+  "diagnostics": {
+    "q1_collision": {
+      "n_documents": 16,
+      "top_t_per_doc": 32,
+      "union_size_per_layer_mean": 54.44,
+      "union_size_per_layer_min": 35,
+      "union_size_per_layer_max": 79,
+      "writes_per_slot_mean": 9.828,
+      "writes_per_slot_max": 16,
+      "mean_pairwise_jaccard_between_documents": 0.7127,
+      "n_slots_ge2_docs_mean_per_layer": 46.08,
+      "n_slots_ge4_docs_mean_per_layer": 38.97,
+      "n_slots_ge8_docs_mean_per_layer": 31.44,
+      "n_slots_written_by_ALL_16_docs_mean_per_layer": 18.64,
+      "frac_of_all_18432_slot_writes_landing_in_slots_written_by_ge8_docs": 0.8726,
+      "writes_per_slot_hist_all_36_layers_index_is_n_docs": [16436, 301, 164, 92, 72, 82, 74, 43, 68, 53, 51, 61, 42, 43, 62, 81, 671]
+    },
+    "q2_survival_HEADLINE": {
+      "definition": "fraction of the slots document d wrote that NO later document re-selected",
+      "curve_doc1_to_doc16": [0.0486, 0.0321, 0.0226, 0.033, 0.013, 0.0304, 0.0399, 0.0104, 0.0269, 0.0712, 0.0312, 0.0477, 0.0703, 0.0538, 0.1701, 1.0],
+      "mean_docs_1_to_15": 0.04676,
+      "mean_all_16_docs": 0.10634,
+      "median_relative_value_drift_doc1": 0.9874,
+      "median_relative_value_drift_doc8": 0.4427,
+      "median_relative_value_drift_doc15": 0.0702,
+      "value_cosine_final_vs_after_write_doc1": 0.5170,
+      "value_cosine_final_vs_after_write_docs1_15_mean": 0.8197,
+      "mean_later_documents_rewriting_each_of_doc1_slots": 11.77,
+      "subsequent_change_over_own_write_doc1": 30.16
+    },
+    "q3_slot_mass_bandwidth": {
+      "convention": "layer-average of the mean cartridge-renormalised routing mass on the slot set, untouched Phase-1 cartridge",
+      "MT_share_on_written_union_54p4_slots": 0.2037,
+      "MT_share_on_massranked_per_layer_top32_INCLUDING_frozen_sink": 0.7044,
+      "MT_share_on_massranked_per_layer_top32_WRITABLE_ONLY": 0.1954,
+      "MT_share_on_massranked_budget_matched_54p4_WRITABLE": 0.2373,
+      "MT_share_on_massranked_per_HEAD_top32_WRITABLE": 0.2598,
+      "MT_share_carried_by_the_single_FROZEN_sink_slot0": 0.5113,
+      "QA_share_on_written_union": 0.2006,
+      "QA_share_on_massranked_top32_INCLUDING_sink": 0.7191,
+      "QA_share_on_massranked_top32_WRITABLE_ONLY": 0.1968,
+      "scout_keys_claim": "15.2% vs 70.4%",
+      "verdict": "70.4% reproduced exactly (0.70437 MT); 15.2% is the SAME quantity under a different aggregation (this run gives 0.1524 in that aggregation and 0.2037 in the aggregation the 70.4% uses). Once the unwritable frozen sink is excluded the gap disappears: 0.1954 vs 0.2037 at a smaller budget, 0.2373 budget-matched (1.17x).",
+      "cross_validation": "eval-time absolute mass on the written union reproduces ORACLE-WRITE to 4-5 s.f. (MT 0.08961 vs 0.08956; QA 0.08272 vs 0.08272; cartridge mass MT 0.58787 vs 0.58787)"
+    },
+    "q4_document_disagreement": {
+      "mean_spearman_between_documents_slot_scores": 0.9579,
+      "min_spearman_over_layers": 0.7138,
+      "mean_pearson": 0.9591,
+      "overlap_of_each_doc_top32_with_a_DOC_INDEPENDENT_top32": 0.8742,
+      "note": "USE_IDF=0 verified: ranking_info.tfidf == ranking_info.tf bitwise, so the score is purely the per-document access score"
+    },
+    "mass_on_S": {
+      "solve_side_ref_mass_on_S_mean_over_docs_and_layers": 0.15851,
+      "solve_side_ref_mass_on_S_per_doc": [0.1512, 0.1506, 0.1502, 0.1484, 0.1577, 0.154, 0.1591, 0.1544, 0.1549, 0.1632, 0.1659, 0.164, 0.1614, 0.1662, 0.1698, 0.1651],
+      "eval_time_mass_on_written_union_phase1_cache_MT": 0.08961,
+      "eval_time_mass_on_written_union_phase1_cache_QA": 0.08272,
+      "note": "per-layer arrays in research_loop/state/diagnostics/DIAG-OVERWRITE.json"
+    },
+    "am_solve": {
+      "mean_mse_last_doc": 0.19807696944925424,
+      "value_global_max_abs": 984.0,
+      "n_queries_available_per_kv_head": 73728,
+      "n_queries_used_per_kv_head": 64
+    }
+  },
+  "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/m4bptdfd",
+  "wandb_run_id": "m4bptdfd",
+  "artifacts": [
+    "outputs/2026-07-28-21-43-17-continual_am_sparse/4b0edcab-d1c5-4313-bc43-309d7ff77097/cache_last.pt",
+    "outputs/2026-07-28-21-43-17-continual_am_sparse/4b0edcab-d1c5-4313-bc43-309d7ff77097/am_doc_*.pt",
+    "outputs/2026-07-28-21-43-17-continual_am_sparse/4b0edcab-d1c5-4313-bc43-309d7ff77097/cache-after-*.pt",
+    "research_loop/state/diagnostics/DIAG-OVERWRITE.json",
+    "research_loop/state/diagnostics/DIAG-OVERWRITE_collision.json",
+    "research_loop/state/diagnostics/DIAG-OVERWRITE_slot_mass.json",
+    "research_loop/state/diagnostics/DIAG-OVERWRITE_slot_mass.npz",
+    "research_loop/results/DIAG-OVERWRITE/run_top32.log",
+    "research_loop/results/DIAG-OVERWRITE/slot_mass.log",
+    "research_loop/results/DIAG-OVERWRITE/wrapper.log",
+    "research_loop/results/DIAG-OVERWRITE/wrapper_mass.log"
+  ],
+  "command": "bash research_loop/results/DIAG-OVERWRITE/launch_diag_overwrite.sh  (canonical AM top-32: USE_IDF=0 SLOT_SELECTION=tfidf GRANULARITY=per_layer TOP_T=32 TARGET_MODE=cartridge_plus_doc KEY_MODE=freeze RIDGE_LAMBDA=1e-4 RIDGE_SCALE=spectral DELTA_WEIGHT=1e-2 AM_EXECUTION_MODE=per_document MAX_QUERIES_PER_HEAD unset(=64) PHASE1_CACHE_PATH=outputs/phase1_selfdistill_qwen512/cache_last.pt, RUN_NAME=DIAG-OVERWRITE_top32 WANDB_GROUP=B-OVERWRITE WANDB_DISABLED=0) ; then bash research_loop/results/DIAG-OVERWRITE/launch_slot_mass.sh ; then research_loop/results/DIAG-OVERWRITE/{analyze_overwrite.py,log_wandb.py}. NO source file was edited: all four quantities come from artefacts the stock run already writes (am_doc_*.pt, cache-after-*.pt) plus one standalone forward-pass script. Imports pinned to the frozen snapshot /tmp/amsnap_ovw (git archive HEAD {cartridges,examples} at f5687216; manifest sha256 f0355ea26b754d240551ada0a9db5a2501c82b198fdc5396a5ecbc01a84c6e41, re-verified unchanged after the run); CARTRIDGES_DIR pinned there too; cartridges.__file__ = /tmp/amsnap_ovw/cartridges printed from cwd=/tmp in every job log.",
+  "observations": "No instrumentation hook was needed: the stock per-document path already saves each document's selected slots (am_doc_*.pt) and a full cache snapshot after each write (cache-after-*.pt, SAVE_AFTER_EACH_DOCUMENT defaults to 1), so the run is the canonical one and reproduced EXP-007-top32 to all 16 printed digits on both splits (QA 2.1766157150268555 / MT 2.5483615398406982). (1) COLLISION: the 16 documents' per-layer top-32 selections have mean pairwise Jaccard 0.713, the per-layer union is 54.4 slots (35-79), so 512 slot-writes per layer land in 54.4 distinct slots = 9.83 writes per slot; 31.4 slots per layer are written by >=8 documents and 18.6 by all 16, and 87.3% of all 18432 slot-writes go into slots touched by >=8 documents. (2) SURVIVAL, the headline: the fraction of a document's slots that no later document re-selects is 4.9% for document 1, 1.0% for document 8, 17.0% for document 15 and 100% for document 16 -- mean 4.7% over documents 1-15. Numerically the values are not fully erased, because the DELTA_WEIGHT=1e-2 trust region anchors each solve to the incumbent value: document 1's written values still move by a median 99% of their own magnitude (cos(final, as-written) = 0.517) and the later documents' net change to its slots is 30x larger than the change document 1 itself made; by document 15 the drift is 7% and the cosine 0.965. Each of document 1's slots is re-written by 11.8 later documents on average. (3) BANDWIDTH: this run's own forward pass reproduces ORACLE-WRITE/DIAG-ROUTING to 4-6 s.f. (mass on the union MT 0.08961 vs 0.08956; cartridge mass 0.58787 vs 0.58787) and reproduces SCOUT-KEYS' mass-ranked per-layer top-32 figure exactly (0.70437 vs 0.7044) -- but the 15.2%-vs-70.4% pair mixes two aggregations of the same quantity (in the aggregation the 70.4% uses, the written union carries 0.2037, not 0.152) AND 0.5113 of the 0.7044 is the single FROZEN sink slot 0, which no AM config can write. Restricted to writable slots a mass-ranked per-layer top-32 carries 0.1954, i.e. 0.96x the tf-idf union at a smaller budget; budget-matched (54.4 writable slots) it carries 0.2373 (1.17x) and per-head 0.2598 (1.28x). The 4.6x writable-bandwidth gap is refuted. (4) DISAGREEMENT: the documents' per-layer slot scores have mean Spearman 0.958 across all 120 pairs (min over layers 0.714) and each document's top-32 overlaps a document-INDEPENDENT top-32 (built from the across-document mean score) by 87.4%, so the selector carries very little document-specific information. Caveats: the survival number in (2) is a property of the selection sequence and is exact, but 'overwritten' is not 'erased' -- the trust region keeps a partial trace, which is why the value cosine is 0.52 rather than 0; the eval-time masses in (3) are on the untouched Phase-1 cartridge (the post-write cache was not re-measured here); the Q1/Q2/Q4 numbers are bit-identical to those recomputed from ORACLE-WRITE's independent control run of the same config, which is a same-seed reproduction and confirms plumbing, not seed-robustness."
+}

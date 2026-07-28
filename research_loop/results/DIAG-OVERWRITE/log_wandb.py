@@ -40,15 +40,23 @@ payload = {
     "diag/overlap_with_doc_independent_top32": q4["overlap_with_doc_independent_top32_mean"],
 }
 for split in ("MT", "QA"):
-    s = (q3.get("splits") or {}).get(split, {}).get("summary")
+    s = (q3.get("summary") or {}).get(split)
     if s:
         payload[f"diag/{split}_share_cart_mass_on_written_union"] = s["share_union_norm"]
-        payload[f"diag/{split}_share_cart_mass_on_massranked_top32"] = s["share_mass32_norm"]
-        payload[f"diag/{split}_share_cart_mass_on_massranked_top32_writable"] = s[
-            "share_mass32_writable_norm"
+        payload[f"diag/{split}_share_cart_mass_on_massranked_top32"] = s[
+            "share_massranked_top32_norm"
         ]
-        payload[f"diag/{split}_share_cart_mass_on_frozen_sink"] = s["share_sink_norm"]
-        payload[f"diag/{split}_mass_on_cart"] = s["mass_on_cart"]
+        payload[f"diag/{split}_share_cart_mass_on_massranked_top32_writable"] = s[
+            "share_massranked_top32_WRITABLE_norm"
+        ]
+        payload[f"diag/{split}_share_cart_mass_on_massranked_budget_matched_writable"] = s[
+            "share_massranked_topUnion_WRITABLE_norm"
+        ]
+        payload[f"diag/{split}_share_cart_mass_on_frozen_sink"] = s["share_frozen_sink_norm"]
+        payload[f"diag/{split}_mass_on_cartridge"] = s["abs_mass_on_cartridge"]
+        payload[f"diag/{split}_gain_massranked_writable_over_union"] = s[
+            "gain_massranked_WRITABLE_over_union_norm"
+        ]
 
 for i, v in enumerate(q2["per_doc_mean_over_layers"]["survival_combinatorial"], start=1):
     payload[f"diag/survival_curve/doc{i:02d}"] = v
@@ -59,7 +67,7 @@ run = wandb.init(
 tags = set(run.tags or ())
 tags.update({"diagnostic", "B-OVERWRITE"})
 run.tags = tuple(sorted(tags))
-wandb.log(payload, step=16)
+wandb.log(payload)
 wandb.summary.update(payload)
 wandb.finish()
 print(json.dumps(payload, indent=2))

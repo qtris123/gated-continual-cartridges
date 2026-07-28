@@ -328,3 +328,30 @@ research_loop/results/EXP-001/result.json ; outputs/2026-07-25-18-02-29-continua
 - Import pin earned its keep again: HEAD moved `58c30f3` → `7ab30b6` **and** another worker edited
   `finetune.py` / `value_solve.py` / `continual_am_sparse.py` at 21:13, mid-way through the n=1024 run.
   All 188 `.py` files verified byte-identical to `git archive 58c30f3` afterwards.
+
+## 2026-07-28 — DIAG-OVERWRITE (board B-OVERWRITE): CONFIRMED; mean document survival is 4.7%
+- Measured on the canonical run itself (reproduced EXP-007-top32 to all 16 digits). **No instrumentation
+  was needed** — the stock per-document path already saves `am_doc_*.pt` selections and a
+  `cache-after-*.pt` snapshot per document (`SAVE_AFTER_EACH_DOCUMENT=1`).
+- **Collision:** mean pairwise Jaccard **0.713**; union 54.4 slots/layer ⇒ **9.83 writes/slot** (max 16);
+  46.1 slots/layer take ≥2 docs, 39.0 ≥4, 31.4 ≥8, **18.6 take all 16**; **87.3% of all 18,432 slot-writes
+  land in slots touched by ≥8 documents**.
+- 🔥 **Survival: mean 4.7% over docs 1–15** (doc1 4.9%, doc8 1.0%, doc15 17.0%, doc16 100%). Doc 1's values
+  drift by a median **99%** of their own magnitude, cos(final, as-written) **0.517**, each of its slots
+  re-written by **11.8** later documents, and later documents' net change to its slots is **30×** doc 1's own.
+- **The gate is not gating:** mean Spearman between documents' slot scores **0.958** (min 0.714, Pearson
+  0.959); each document's top-32 overlaps a *document-independent* top-32 by **87.4%**. `USE_IDF=0`
+  verified bitwise (`tfidf == tf`), so this is the raw access score, not an IDF artefact.
+- ⚠️ **Refutes the 4.6× bandwidth gap this board carried** (propagated by the orchestrator from SCOUT-KEYS).
+  DIAG-OVERWRITE reproduced SCOUT-KEYS' 70.4% **exactly** (0.70437) and ORACLE-WRITE/DIAG-ROUTING to 4–6
+  s.f., then showed the 15.2%-vs-70.4% pair **mixes two aggregations of the same quantity** (the union is
+  0.2037 in the 70.4% aggregation) and that **0.5113 of the 0.7044 is the frozen sink slot 0**. Writable
+  only: mass-ranked top-32 **0.1954 = 0.96×** the tf-idf union (worse, at a smaller budget); budget-matched
+  0.2373 (1.17×); per-head 0.2598 (1.28×). **No 4.6× lever. Selection quality is not the problem.**
+- **Implication:** the final cartridge holds the last document plus faint traces. MT acquisition has been
+  measured over a 16-document corpus while the cartridge retained ~one document of it — which also means
+  **ORACLE-WRITE's 2.381 "perfect write" ceiling was mostly measuring document 16**. → DIAG-SEQUENCE
+  dispatched to evaluate the existing per-document snapshots and read the acquisition curve directly.
+- Caveats (worker-stated): "overwritten" ≠ "erased" (the trust region leaves partial traces); (3) measured
+  on the pre-write cartridge; Q1/Q2/Q4 are bit-identical to the same quantities recomputed from
+  ORACLE-WRITE's independent run of this config — a same-seed reproduction, so plumbing, not seed-robustness.
