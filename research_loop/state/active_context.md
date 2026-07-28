@@ -20,6 +20,47 @@
   B-ROUTE, B-TARGET, B-CAP, B-SOLVE), each with a signature to measure and an oracle that brackets it.
   **No mechanism may be built for a cause with no measured number.**
 
+## CYCLE 1 RESULT SO FAR (2026-07-28)
+- ✅ **B-WIRE CLOSED — confirmed bug (DIAG-WIRE).** `target_mode` never reaches the per-document write
+  path; the per-doc write is hard-wired to `cartridge_plus_doc` and *structurally cannot* express
+  `teacher_attention`. **EXP-008 is three replicas of EXP-001; HYP-T1's "NULL" is RETRACTED.**
+  ⇒ **B-TARGET is untested, not dead** — it is promoted to the front of the queue.
+  Fix sketched, **not applied**: blocked until ORACLE-WRITE stops editing `finetune.py`
+  (two editors on one file is how MECH-000 lost a batch).
+- Second-order finding: EXP-008 ran `WANDB_DISABLED=1`, so it has no wandb run and no result bundle —
+  exactly the failure the §0b wandb mandate now blocks. Two other arms of the loop may share this gap.
+- ✅ **SCOUT-AM: WE HAVE BEEN RUNNING AM'S WEAKEST ABLATION.** The paper fits attention **output** *and*
+  attention **mass** (mass = the routing weight of the block against all future tokens, App. A.2).
+  Our canonical config runs **neither**: (1) `KEY_MODE=freeze` **silently disables β**
+  (`finetune.py:256-261` `_should_fit_beta`), so β was never off *by choice*; (2)
+  `max_queries_per_head=64` is **hard-coded with no env knob** (`finetune.py:81`) vs the paper's
+  **16k–50k queries per KV-head** — so `top_t=64` solves an **exactly-determined 64×64** system and
+  `top_t=128` an **underdetermined** one (min-norm branch), which **explains EXP-007's top128 MT
+  regression and confounds HYP-S1's refutation** (support and query count were never separated).
+- ✅ **β's NaN root cause is named, not mysterious (LIT-002):** `key_select.py:35` uses
+  `torch.linalg.lstsq` with the default **`gels` driver**, which on CUDA returns NaN for rank-deficient
+  input **without raising** (so `except RuntimeError` at `:36` never fires — this is why EXP-006's
+  output clamp failed); plus no upper bound (β floors at −27.6 vs the paper's box [−3,3], `iters=2`);
+  plus a residual-target `clamp_min(1e-12)` at `:215` **absent from the paper** that zeroes the whole
+  NNLS target whenever the untouched slots over-supply mass.
+- ⚠️ **AM is not designed for our regime at all.** Its `Ck` is always a subset of the keys *of the block
+  being compacted*; there is **no procedure in the paper** for writing new content into keys fitted to
+  different content, and §6 names our setting as future work. Its only multi-shot mode re-compacts the
+  whole cache **rather than freezing** prior portions. ⇒ the mechanism we need must be **imported**
+  (SCOUT-EDIT dispatched: null-space editing, delta-rule writes, MEMIT-style multi-edit) or designed
+  here. That is the novelty budget, now backed by a measurement rather than an aspiration.
+
+## QUEUED FOR THE NEXT CYCLE (all blocked on ORACLE-WRITE releasing `finetune.py`)
+Serialize these — one code-editing worker at a time (MECH-000 lost a batch to two editors on one file):
+1. **MECH-QUERIES** (likely the biggest single lever): expose `max_queries_per_head` as an env knob and
+   run `n ∈ {256, 1024, 4096}` at fixed `top_t=32`. An exactly-determined 64×64 solve has **zero**
+   generalisation headroom; the paper uses ~250× more rows. Then re-test `top_t` jointly at `n ≫ t`.
+2. **MECH-BETA**: apply LIT-002's three fixes (`driver='gelsd'`, box `w ∈ [e⁻³, e³]` with `iters=2`,
+   drop the residual-target clamp in favour of the paper's full-mass fit) **and** decouple
+   `_should_fit_beta` from `key_mode` so β can run with frozen keys. β has never actually executed.
+3. **MECH-TARGET**: the DIAG-WIRE fix (opt-in target branch at `finetune.py:477`, `target_accumulator`
+   plumbing for `teacher_attention`, fail-loud guard in `continual.py`), then re-run EXP-008 for real.
+
 ## NEXT ACTIONS (first cycle of the new loop)
 The board is at its initial state — every entry is stage **A MEASURE**. Open with a batch that uses
 both GPUs plus GPU-free workers:
@@ -61,8 +102,25 @@ Also queued (do not start before the board says so): a `SEED` env knob for the c
 | AM top64 (canonical) | 2.2521 | 2.5426 | 0 | e2e 217s |
 | Phase-1 start | 2.2388 | 3.7826 | 0 | retention floor / untrained MT |
 
-## IN-FLIGHT
-_(nothing dispatched — the loop was re-armed 2026-07-28 and has not run a cycle under the new spec)_
+## IN-FLIGHT (cycle 1 under the diagnosis spec — dispatched 2026-07-28)
+All four items are stage **A MEASURE** / **B SEARCH**; nothing is being tuned.
+- **DIAG-WIRE** (no GPU) → **B-WIRE**. Is `target_mode` a wiring no-op? Code read + CPU unit-level
+  assertion that the three modes build different targets. Reports a fix sketch; applies nothing.
+  Bundle: `results/DIAG-WIRE/result.json`.
+- **SCOUT-AM** (no GPU) → **B-WIRE/B-TARGET/B-SOLVE/B-ROUTE**. `AM.pdf` in depth: what the target
+  really is, whether our `per_document` path is faithful, the exact β procedure and its safeguards,
+  and **whether AM is designed to acquire new content at all** (vs compact existing content) with
+  frozen keys. Writes LIT entries. Bundle: `results/SCOUT-AM/result.json`.
+- **DIAG-OBJ** (GPU, env-only, no code edits) → **B-OBJ**. (a) reproduce canonical top32
+  (expect QA 2.1766 / MT 2.5484); (b) MSE→0 oracle (`RIDGE_LAMBDA=0`, `TOP_T=512`). Reads
+  `am/mean_mse` against realized ΔCE. Bundle: `results/DIAG-OBJ/result.json`.
+- **ORACLE-WRITE** (GPU, the only code-editing worker this cycle) → **B-ROUTE** ⭐. Opt-in
+  `AM_ORACLE_WRITE` flag writing the *teacher's own* KV for the new doc into the selected slots, plus
+  eval-time attention-mass on those slots (MT vs QA queries). MT ≈ 2.5 ⇒ no value-only frozen-key
+  write can win. Bundle: `results/ORACLE-WRITE/result.json`.
+
+**Concurrency note:** ORACLE-WRITE is the only worker allowed to edit source this cycle (avoids the
+dual-`cartridges` foot-gun colliding with DIAG-OBJ's runs). Both GPUs are claimed via flock.
 
 ## SETTLED FACTS (do not redo)
 - ✅ Phase-1 cache provenance verified (EXP-000-verify) — it IS the QA Phase-1 self-distilled cartridge,

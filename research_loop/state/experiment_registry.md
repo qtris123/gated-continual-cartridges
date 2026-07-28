@@ -229,3 +229,52 @@ Format mirrors `.cursor/rules/research-companion.mdc`.
   the acquisition bottleneck is the TARGET / closed-form value-solve.
 - Status: done. Follow-up: pivot acquisition levers to HYP-T1 (target_mode) + a few sparse gradient steps (costed Pareto point).
 - Artifacts: results/EXP-007/result.json
+
+---
+# CYCLE 1 under the diagnosis-loop spec (2026-07-28) — all items are stage-A MEASURE / stage-B SEARCH
+
+### DIAG-WIRE: is `target_mode` a wiring no-op?
+- Date: 2026-07-28 | Board entry: **B-WIRE** | Role: measure (no GPU, code-level)
+- Research question: EXP-008 found all three `target_mode` values bit-identical to 15 digits. Do the
+  three modes actually produce different solved targets in the `per_document` AM path, or is the path
+  ignoring `target_mode` entirely?
+- Variable under test: `target_mode ∈ {cartridge_plus_doc, self, teacher_attention}` at the tensor level
+- Baseline compared to: EXP-008 (all three modes, QA 2.2521 / MT 2.5426, bit-identical)
+- Expected: either (a) targets identical ⇒ wiring bug ⇒ HYP-T1's NULL is retracted, or (b) targets
+  differ ⇒ the null was real and B-TARGET needs a different attack
+- **Actual: (a). `target_mode` is never read by the per-document path.** Explicitly-built targets differ
+  (max-abs 1.22/3.44/3.56); the per-doc write gives max|dV| = 0.000e+00 and mean_mse identical to 17
+  digits across all three modes; the three EXP-008 caches are bitwise identical across 180 tensors.
+- **Interpretation: EXP-008 is three replicas of EXP-001. HYP-T1 RETRACTED. B-TARGET is untested.**
+  Deciding code: `continual.py:41` (no `target_mode`), `finetune.py:464/:477-484` (hard-wired
+  `cartridge_plus_doc`), `continual.py:172` (`target_accumulator` discarded).
+- Confounders ruled out: stale cache / one-checkpoint-3x, dual-`cartridges` import, a dead write.
+- Status: **done** | Fix sketched, NOT applied (blocked behind ORACLE-WRITE's edits to the same file)
+- Artifacts: research_loop/results/DIAG-WIRE/result.json + unit_check.py
+
+### SCOUT-AM: what does the AM paper's algorithm actually specify?
+- Date: 2026-07-28 | Board entries: **B-WIRE / B-TARGET / B-SOLVE** | Role: scout (no GPU)
+- Research question: what is the target the AM value-solve fits, does our `per_document` implementation
+  match it, what exactly is β/mass-matching (and its stabilization), and is AM designed for *acquiring
+  new content* at all — or only for compacting content already in the cache?
+- Expected: LIT-XXX entries with predictions about our measured signatures
+- Status: dispatched | Artifacts: research_loop/results/SCOUT-AM/result.json, state/literature_ledger.md
+
+### DIAG-OBJ: does a better solve buy any CE?
+- Date: 2026-07-28 | Board entry: **B-OBJ** | Role: measure (GPU, env-only, NO code edits)
+- Research question: is the closed-form solve already near its own optimum while CE stays flat — i.e.
+  is the fitted objective (value/attention MSE) decoupled from what we are scored on (token CE)?
+- Variable under test: fitting freedom (`RIDGE_LAMBDA`, `TOP_T`) vs realized ΔCE, with `am/mean_mse` read
+- Baseline compared to: EXP-007-top32 (QA 2.1766 / MT 2.5484)
+- Expected: MSE falls substantially while MT stays ~2.5 ⇒ B-OBJ confirmed (objective mismatch)
+- Status: dispatched | Artifacts: research_loop/results/DIAG-OBJ/result.json
+
+### ORACLE-WRITE: the write-ceiling — ⭐ the decisive run of the mission
+- Date: 2026-07-28 | Board entry: **B-ROUTE** | Role: measure/build (GPU)
+- Research question: with keys frozen, what is the best MT achievable if the *values* written into the
+  selected slots were perfect (the teacher's own KV for the new document)?
+- Variable under test: solved values vs oracle (teacher) values, all else canonical top32
+- Baseline compared to: EXP-007-top32 (QA 2.1766 / MT 2.5484); Phase-1 start MT 3.7826
+- Expected: MT ≈ 2.5 ⇒ no value-only frozen-key write can win ⇒ the mission pivots to keys/write-rule.
+  MT ≪ 2.5 ⇒ the ceiling is high and our solve/target is the failure, not routing.
+- Status: dispatched | Artifacts: research_loop/results/ORACLE-WRITE/result.json

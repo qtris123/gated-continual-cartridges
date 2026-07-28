@@ -110,3 +110,23 @@ outputs/phase1_selfdistill_qwen512/cache_last.pt over 16 MT docs: QA forgetting 
 floor), MT acquisition loss 2.5426 (−1.240 vs 3.783 floor; ppl 44→12.7). solve_s 181.4 / phase2_e2e_s 217 /
 gradient_steps 0. value_global_max_abs 816 (deep layers) despite intact QA. Artifacts:
 research_loop/results/EXP-001/result.json ; outputs/2026-07-25-18-02-29-continual_am_sparse/efa3bc76.../cache_last.pt.
+
+## 2026-07-28 — DIAG-WIRE (board B-WIRE): `target_mode` is a wiring no-op
+- `TARGET_MODE` is parsed (`continual_am_sparse.py:78`), reaches the config (`:153`), and is echoed into
+  the run name (`:87`) and the wandb tag `target-{TARGET_MODE}` (`:564`) — which is what made EXP-008
+  look like a real sweep. It is then **never read** by the per-document path.
+- `run_per_document_am_phase2` (`cartridges/am/continual.py:41`): zero occurrences of `target_mode`.
+  `apply_document_am_write_to_cache` (`finetune.py:337-595`) unconditionally builds teacher KV (`:464`)
+  and calls `compute_teacher_targets` (`:477-484`). It structurally cannot express `teacher_attention`
+  (no `target_accumulator` in the signature; `continual.py:172` discards it, `collect_teacher_targets=False`).
+- Unit check (CPU): explicitly-built targets differ (max-abs 1.22 / 3.44 / 3.56); the per-doc write gives
+  **max|dV| = 0.000e+00** and `mean_mse = 0.03795905038714409` (17 digits) for all three modes. Positive
+  control on the legacy path: max|dV| = 16.62, mse 1.35e-08 vs 0.845 — the target machinery works where wired.
+- Ruled out: stale cache / one checkpoint evaluated 3× (three runs, distinct dirs, wall-clocks 181.4 /
+  169.3 / 165.2 s, 16 docs each, three caches **bitwise identical** across 180 tensors); dual-`cartridges`
+  (all eight `cartridges/am/*.py` byte-identical between repos); a dead write (EXP-001 vs Phase-1 gives
+  max|dV| = 798.9, max|dK| = 0, exactly as `freeze_keys` predicts).
+- Latent hazards: `finetune.py:672-676` silently downgrades `cartridge_plus_doc`→`self` in the legacy
+  path; EXP-008 ran `WANDB_DISABLED=1` (`launch_exp008.sh:67`) so no wandb run and no `result.json` exist
+  for it — precisely the failure mode the §0b wandb mandate now blocks.
+- **Consequence: HYP-T1 RETRACTED; B-TARGET is untested, not dead.**

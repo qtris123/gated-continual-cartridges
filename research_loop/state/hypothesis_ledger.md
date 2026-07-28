@@ -61,7 +61,16 @@ One `### HYP-XXX` block per hypothesis. Status ∈ active | weakened | supported
   operating point. IMPLICATION: the acquisition gap vs dense (1.87) is TARGET/solve-limited, not gating/support-limited.
 
 ### HYP-T1: teacher target_mode affects acquisition
-- Status: RESOLVED — NULL (EXP-008). target_mode ∈ {cartridge_plus_doc, self, teacher_attention} all give
+- **Status: ❌ RETRACTED 2026-07-28 (DIAG-WIRE). The "NULL" was a WIRING BUG, not a result.**
+  `target_mode` is parsed, put in the config, echoed into the run name and the wandb tag — and never
+  read by the per-document path (`cartridges/am/continual.py:41` contains zero occurrences of it;
+  `finetune.py:337-595` unconditionally builds `cartridge_plus_doc`). Unit check: three explicitly-built
+  targets differ (max-abs 1.22 / 3.44 / 3.56), the per-doc write gives **max|dV| = 0.000e+00** across all
+  three modes, and the three EXP-008 caches are bitwise identical across all 180 tensors.
+  **EXP-008 is three replicas of EXP-001.** The target lever has never been tested. Everything below is
+  the superseded reasoning, kept for provenance. → board entry `B-TARGET` (now promoted), fix sketch in
+  `research_loop/results/DIAG-WIRE/result.json`.
+- Status (superseded): RESOLVED — NULL (EXP-008). target_mode ∈ {cartridge_plus_doc, self, teacher_attention} all give
   BIT-IDENTICAL QA 2.2521 / MT 2.5426 (15 digits, different solve times) → target_mode is a NO-OP in the
   per_document AM path (either not wired, or all targets resolve identically). Combined with HYP-S1: **AM's
   closed-form acquisition ~2.54 is a HARD CEILING** — unmoved by gating, support, ridge, or target. Closing the
