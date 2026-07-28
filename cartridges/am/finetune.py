@@ -95,6 +95,14 @@ class AttentionMatchingFinetuningConfig(BaseConfig):
     oracle_write: bool = False
     oracle_write_assign: Literal["mass_ranked", "sequential"] = "mass_ranked"
 
+    # B-ROPE: rotary base used when the teacher path re-positions the reference
+    # queries by `doc_rope_offset = T_doc` before scoring them against the document
+    # keys (`core._apply_rope_offset_to_queries`). The AM package hard-coded
+    # 10000.0 everywhere, but the model's own RoPE comes from its HF config
+    # (Qwen3-4B-Instruct-2507 -> 5e6). Default stays 10000.0 so every stock run is
+    # bit-identical; set `AM_ROPE_THETA` to opt in to the model's true base.
+    rope_theta: float = 10000.0
+
 
 @dataclass
 class AMUpdateStats:
@@ -363,6 +371,9 @@ def apply_document_am_write_to_cache(
         and old_query_accumulator is not None
     )
     fit_beta = _should_fit_beta(config)
+    # B-ROPE: 10000.0 is the historical hard-coded AM default; `getattr` keeps this
+    # working against an older config object that has no such field.
+    rope_theta = float(getattr(config, "rope_theta", 10000.0))
     oracle_write = bool(getattr(config, "oracle_write", False))
     oracle_mass_on_S: dict[int, list[float]] = {}
     oracle_doc_mass: dict[int, list[float]] = {}
@@ -496,6 +507,7 @@ def apply_document_am_write_to_cache(
             teacher_rope_kwargs = {
                 "n_cartridge_keys": n_cartridge_keys,
                 "doc_rope_offset": doc_rope_offset,
+                "rope_theta": rope_theta,
             }
             targets = compute_teacher_targets(
                 queries,
@@ -529,6 +541,7 @@ def apply_document_am_write_to_cache(
                     head_dim=head_dim,
                     doc_key_start=selected_full.numel(),
                     doc_rope_offset=doc_rope_offset,
+                    rope_theta=rope_theta,
                 )
 
             head_beta = base_beta
@@ -578,6 +591,7 @@ def apply_document_am_write_to_cache(
                     teacher_bias=teacher_bias,
                     n_cartridge_keys=n_cartridge_keys,
                     doc_rope_offset=doc_rope_offset,
+                    rope_theta=rope_theta,
                     assign=getattr(config, "oracle_write_assign", "mass_ranked"),
                     compute_stats=config.compute_update_stats,
                 )
@@ -649,6 +663,10 @@ def apply_document_am_write_to_cache(
     # landing on the written slots, per layer. Plus the query-supply ceiling that
     # `max_queries_per_head` is capped by (B-CASCADE).
     extra["max_queries_per_head"] = int(config.max_queries_per_head)
+    if rope_theta != 10000.0:
+        # Only recorded when moved off the historical default, so stock runs keep a
+        # byte-identical `am_doc_*.pt` payload (B-ROPE).
+        extra["rope_theta"] = rope_theta
     if n_queries_available:
         extra["n_queries_available_min"] = min(n_queries_available)
         extra["n_queries_available_max"] = max(n_queries_available)

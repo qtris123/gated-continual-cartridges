@@ -122,6 +122,10 @@ AM_ORACLE_WRITE_ASSIGN = os.environ.get("AM_ORACLE_WRITE_ASSIGN", "mass_ranked")
 # Default 64 == the historical hard-coded `AttentionMatchingFinetuningConfig`
 # value, so stock runs are unchanged. `n > top_t` makes the system over-determined.
 MAX_QUERIES_PER_HEAD = int(os.environ.get("MAX_QUERIES_PER_HEAD", "64"))
+# B-ROPE: rotary base for the teacher path's document RoPE offset. Unset (or empty)
+# keeps the historical hard-coded 10000.0 -> stock runs are bit-identical.
+# Accepts a float, or "model"/"auto" to read `rope_theta` off the HF model config.
+AM_ROPE_THETA_ENV = os.environ.get("AM_ROPE_THETA") or None
 
 _model_cls = FlexQwen3ForCausalLM if "qwen" in MODEL_NAME.lower() else FlexLlamaForCausalLM
 logger = get_logger(__name__)
@@ -192,10 +196,48 @@ def _max_queries_kwargs() -> dict:
     return {"max_queries_per_head": MAX_QUERIES_PER_HEAD}
 
 
+def _resolve_rope_theta() -> float | None:
+    """Resolve AM_ROPE_THETA -> float, or None when the knob is not requested."""
+    if AM_ROPE_THETA_ENV is None:
+        return None
+    if AM_ROPE_THETA_ENV.strip().lower() in ("model", "auto", "config"):
+        from transformers import AutoConfig
+
+        return float(AutoConfig.from_pretrained(MODEL_NAME).rope_theta)
+    return float(AM_ROPE_THETA_ENV)
+
+
+def _rope_theta_kwargs() -> dict:
+    """Pass `rope_theta` ONLY if the imported package has the field.
+
+    Same conditional-kwarg discipline as `_oracle_write_kwargs` (RUNBOOK §6.10):
+    an unconditional kwarg once crashed every AM run through the sibling
+    `cartridges` import path. When `AM_ROPE_THETA` is unset the kwarg is omitted
+    entirely, so the config is byte-identical to every historical run.
+    """
+    import cartridges
+
+    requested = _resolve_rope_theta()
+    if requested is None:
+        return {}
+    if "rope_theta" not in AttentionMatchingFinetuningConfig.model_fields:
+        raise RuntimeError(
+            f"AM_ROPE_THETA={AM_ROPE_THETA_ENV} but the imported `cartridges` package "
+            f"({os.path.dirname(cartridges.__file__)}) has no `rope_theta` field. "
+            "Export PYTHONPATH=$CARTRIDGES_DIR:$PYTHONPATH (RUNBOOK §6.10)."
+        )
+    if not (requested > 0):
+        raise ValueError(f"AM_ROPE_THETA must be positive, got {requested}")
+    logger.info("B-ROPE: AM teacher rope_theta = %g (env AM_ROPE_THETA=%s)",
+                requested, AM_ROPE_THETA_ENV)
+    return {"rope_theta": requested}
+
+
 def _build_am_config() -> AttentionMatchingFinetuningConfig:
     return AttentionMatchingFinetuningConfig(
         **_oracle_write_kwargs(),
         **_max_queries_kwargs(),
+        **_rope_theta_kwargs(),
         enabled=True,
         top_t=TOP_T,
         use_idf=USE_IDF and BG_STATS_PATH is not None,
@@ -630,6 +672,10 @@ config = TrainConfig(
             # only tagged when moved off the historical default, so stock runs
             # keep a byte-identical config.yaml / wandb config
             [f"nq-{MAX_QUERIES_PER_HEAD}"] if MAX_QUERIES_PER_HEAD != 64 else []
+        ) + (
+            # B-ROPE: only tagged when the rotary base is moved off the historical
+            # hard-coded 10000.0, so stock runs keep a byte-identical wandb config.
+            [f"ropetheta-{AM_ROPE_THETA_ENV}"] if AM_ROPE_THETA_ENV else []
         ),
         notes=os.environ.get("WANDB_NOTES") or None,
     ) if os.environ.get("WANDB_DISABLED", "0") not in ("1", "true", "True") else None,

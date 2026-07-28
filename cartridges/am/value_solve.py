@@ -166,6 +166,7 @@ def oracle_teacher_value_write(
     teacher_bias: Optional[torch.Tensor] = None,
     n_cartridge_keys: Optional[int] = None,
     doc_rope_offset: Optional[int] = None,
+    rope_theta: float = 10000.0,
     assign: str = "mass_ranked",
     compute_stats: bool = True,
 ) -> Tuple[torch.Tensor, dict]:
@@ -231,6 +232,7 @@ def oracle_teacher_value_write(
             attention_bias=teacher_bias,
             doc_key_start=n_cartridge_keys,
             doc_rope_offset=doc_rope_offset,
+            rope_theta=rope_theta,
         )
         w_doc = w_teacher[:, n_cartridge_keys:]  # (n, T_doc)
         doc_mass = w_doc.sum(dim=0)  # (T_doc,)

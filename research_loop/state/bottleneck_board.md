@@ -54,10 +54,40 @@ the number that shows it. "It didn't help" never closes anything.
   solve has been fitting a **corrupted target** all along — and **B-OBJ's anti-correlation becomes
   exactly what you would predict**: fitting a wrong target better (18× lower MSE) *should* destroy the
   model (+13 loss). The same applies to `mass_on_S`, β, and every "AM cannot do X" conclusion.
-- **Do not over-claim yet:** it is equally possible the frames cancel (SCOUT-KEYS hazard #3 notes the
-  cartridge/doc/query frames may already be common under this repo's arange-from-0 convention, in which
-  case `finetune.py:495` rotates queries by T_doc *unnecessarily*). **The A/B settles it** — canonical
-  top32 with `rope_theta=5e6` vs `10000`, single variable. → DIAG-ROPE dispatched.
+- ✅ **RESOLVED (DIAG-ROPE, 2026-07-28). The frames do NOT cancel — and CE does not care.**
+  **Trace:** cartridge slots sit at 0..511, reference queries at 512+i, document keys at 512+m; the model's
+  own base is 5e6 (`modeling_qwen3.py:296-299`). `core.py:66-72` rotates the query forward by `T_doc` —
+  correct in intent and magnitude — but `R_θ(a)∘R_θ(b) = R_θ(a+b)` **only for equal θ**. Composing the AM
+  path's 1e4 on the model's 5e6 yields no single position's rotation: at T=4000 the per-pair angle error
+  runs 0→749 rad and **76.6% of the 64 frequency pairs are off by more than π**; mean cos = 0.103 at
+  T=3858, **−0.099 at T=8900**. `compute_teacher_log_mass` (β's own target) takes the identical rotation.
+
+  | | QA | MT | mean `am/mean_mse` | \|v\|max | cartridge mass (MT) |
+  |---|---|---|---|---|---|
+  | A θ=1e4 (control, reproduced to 17 digits) | 2.17662 | 2.54836 | 0.11906 | 984.0 | 0.3285 |
+  | B θ=5e6 (correct) | 2.15320 | 2.52961 | **0.01406** | **178.0** | **0.5930** |
+
+  **ΔQA −0.023 / ΔMT −0.019 — an order of magnitude inside the noise floor.** Yet the target became
+  **8.5× more fittable** (better on 15/16 docs), the write **5.5× gentler**, and the **B-CASCADE routing
+  collapse fully repaired** (0.329 → 0.593 vs Phase-1's 0.588) — the same repair MECH-QUERIES could only
+  buy by pumping `n`, and there it came with `|v|` *growing* to 7808.
+- ⭐ **Refutes a sub-claim of B-OBJ:** the layer-34/35 residual DIAG-OBJ-c called the binding constraint
+  (93–95% of residual, immovable under extra support and zero ridge) **was a rotary artefact** —
+  L34 2.3067 → 0.0898 (26×), L35 1.0290 → 0.0075 (138×), share 77.8% → **19.2%**. 13/36 layers are
+  individually *worse* under θ=5e6, so the gain is concentrated, not uniform.
+- 🔑 **And it STRENGTHENS B-OBJ's headline:** a target now fitted **8.5× better**, with a gentler write and
+  healthy routing, **still buys no acquisition**. The objective is not merely mis-specified — even
+  correctly specified and well fitted, it does not move CE.
+- **Blast radius (listed, not re-run):** CE numbers all stand, but every conclusion argued *from the
+  internals* rested on a corrupted target — B-OBJ's "trust region was the binding constraint", the entire
+  B-CASCADE/MECH-QUERIES `n`-sweep and its magnitude→routing story, MECH-QUERIES-B (inherits it), **the
+  β/NNLS failures** (`compute_teacher_log_mass` shares the wrong frame, so "β is numerically broken" is
+  confounded with "β was fitted to a corrupted mass target"), **ORACLE-WRITE's `assign="mass_ranked"`**
+  (doc-row→slot pairing chosen on corrupted teacher attention, so **2.381 may UNDER-estimate the
+  ceiling**), every post-write routing figure, and K-GATE/K-SUPPORT/K-RIDGE/EXP-001…009.
+  **Unaffected:** DIAG-ROUTING and DIAG-WIRE.
+- **Canonical config should move to θ=5e6** — strictly better on every internal metric, marginally better
+  on both CE axes, and correct. MECH-003 is default-off; flipping the default is a separate decision.
 - **Related hazards found in the same read (queued, not yet acted on):**
   H2 `key_select.py:283` installs a doc key into a cartridge slot **with no counter-rotation**, while
   `phase1.py::_rope_reposition` implements exactly that and `initial_am_compaction.py` already calls it.

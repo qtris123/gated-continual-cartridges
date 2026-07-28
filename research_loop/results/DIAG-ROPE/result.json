@@ -1,0 +1,138 @@
+{
+  "id": "DIAG-ROPE",
+  "role": "build+test",
+  "board_entry": "B-ROPE",
+  "question": "The AM teacher path hard-codes rope_theta=10000.0 while Qwen3-4B-Instruct-2507 uses 5e6. Does that introduce a real rotary-frame mismatch in the teacher target (so the solve has been fitting a corrupted target), or do the frames cancel?",
+  "variable_under_test": "AM_ROPE_THETA: unset (=10000.0, historical hard-coded default) vs 5000000.0 (the model's own rope_theta). Everything else at the canonical top32 operating point.",
+  "baseline_ref": "EXP-007-top32 / ORACLE-WRITE control (QA 2.1766157150268555 / MT 2.5483615398406982 in-run; QA 2.1771795749664307 / MT 2.5524158477783203 standalone)",
+  "status": "done",
+  "numbers": {
+    "qa_forgetting_loss": 2.1532008647918700,
+    "mt_acquisition_loss": 2.5296061038970947,
+    "control_qa_forgetting_loss": 2.1766157150268555,
+    "control_mt_acquisition_loss": 2.5483615398406982,
+    "delta_qa_B_minus_A": -0.0234148502349854,
+    "delta_mt_B_minus_A": -0.0187554359436035,
+    "qa_standalone_theta5e6": 2.159724712371826,
+    "mt_standalone_theta5e6": 2.529625177383423,
+    "qa_standalone_theta1e4": 2.1771795749664307,
+    "mt_standalone_theta1e4": 2.5524158477783203,
+    "delta_qa_standalone": -0.0174548625946045,
+    "delta_mt_standalone": -0.0227906703948975,
+    "am_mean_mse_over_16_docs_theta1e4": 0.11905761,
+    "am_mean_mse_over_16_docs_theta5e6": 0.01405989,
+    "am_mean_mse_ratio_A_over_B": 8.468,
+    "am_mean_mse_last_doc_theta1e4": 0.19807696944925424,
+    "am_mean_mse_last_doc_theta5e6": 0.015227053611706905,
+    "sum_per_layer_mse_theta1e4": 4.28607,
+    "sum_per_layer_mse_theta5e6": 0.50616,
+    "value_global_max_abs_theta1e4": 984.0,
+    "value_global_max_abs_theta5e6": 178.0,
+    "solve_s": 168.98,
+    "phase2_e2e_s": 168.98,
+    "control_solve_s": 178.37,
+    "control_phase2_e2e_s": 178.37,
+    "gradient_steps": 0,
+    "n_documents": 16
+  },
+  "diagnostics": {
+    "baseline_reproduced_bit_identical": true,
+    "baseline_reproduced_note": "arm A (flag unset) reproduced the canonical in-run losses to all 17 printed digits (2.1766157150268555 / 2.5483615398406982), mean_mse_last_doc to 17 digits (0.19807696944925424), value_global_max_abs 984.0, AND both standalone eval_forgetting.py numbers exactly (2.1771795749664307 / 2.5524158477783203 = ORACLE-WRITE's control). Its config.yaml differs from the ORACLE-WRITE control's only by the new field at its default. Arm A vs arm B configs differ in exactly one numeric field.",
+    "mass_on_S_train_time_reference_queries_mean_over_layers": {
+      "theta1e4": 0.15851,
+      "theta5e6": 0.14532,
+      "theta1e4_range_over_layers": [0.0299, 0.5954],
+      "theta5e6_range_over_layers": [0.0371, 0.5919],
+      "note": "cartridge-only routing of the reference queries onto S; rope_theta-independent by construction (core.py:61 branch), the small difference comes from the slot sets diverging after document 0 because the reference queries are re-collected against a cartridge whose values now differ"
+    },
+    "eval_time_mass_on_rewritten_slots_mean_over_36_layers": {
+      "theta1e4_MT": 0.08098,
+      "theta1e4_QA": 0.07734,
+      "theta5e6_MT": 0.07111,
+      "theta5e6_QA": 0.06819
+    },
+    "total_cartridge_attention_mass": {
+      "theta1e4_MT": 0.32853,
+      "theta1e4_QA": 0.32002,
+      "theta5e6_MT": 0.59302,
+      "theta5e6_QA": 0.57662,
+      "phase1_reference_MT": 0.58787,
+      "phase1_reference_QA": 0.56967,
+      "note": "arm A reproduces ORACLE-WRITE's control (0.32853 / 0.32002) exactly. Correcting the rotary base fully repairs the B-CASCADE routing collapse: MT cartridge mass 0.329 -> 0.593, i.e. back to (slightly above) the Phase-1 level 0.588 and level with the ORACLE-WRITE oracle's 0.596 - and it does so while |v| SHRINKS 984 -> 178, unlike MECH-QUERIES where the same repair came with |v| growing to 7808."
+    },
+    "layer_34_35_residual": {
+      "mse_L34": {"theta1e4": 2.30668, "theta5e6": 0.08978, "ratio": 0.0389},
+      "mse_L35": {"theta1e4": 1.02904, "theta5e6": 0.00747, "ratio": 0.00726},
+      "share_of_total_residual": {"theta1e4": 0.7783, "theta5e6": 0.1921},
+      "note": "DIAG-OBJ-c named layers 34-35 as holding 93-95% of the residual and refusing to shrink under extra support and zero ridge. At the correct rotary base they collapse by 26x / 138x. That structure was a rotary-frame artefact."
+    },
+    "per_layer_mse_ratio_B_over_A": {"min": 0.00726, "median": 0.654, "max": 12.85, "n_layers_worse_under_B": 13, "n_layers": 36},
+    "per_document_mse": {
+      "n_improved_by_B": 15,
+      "n_documents": 16,
+      "ratio_B_over_A_min": 0.0578,
+      "ratio_B_over_A_max": 1.66,
+      "theta1e4_is_bimodal": "arm A's per-doc mean_mse splits into {0.0085-0.026} and {0.132-0.221}; arm B is uniform 0.0107-0.0159",
+      "v_selected_absmax_peak_layer": "L34 in both arms (984.0 -> 178.0)"
+    },
+    "n_queries_available_per_kv_head_per_doc": 57344,
+    "part_a_derivation": {
+      "model_rope_theta": 5000000,
+      "cartridge_slots": "positions 0..511 (cartridges/initialization/text.py:45, prefill with cartridge_len=0), frozen in Phase 2 (KEY_MODE=freeze)",
+      "reference_queries": "positions 512+i (cartridges/datasets.py:434 arange-from-0 per element, + cartridge_len=512 at cartridges/models/qwen/modeling_qwen3.py:366)",
+      "document_keys": "positions 512+m (cartridges/am/teacher.py:99-102 arange(0..T_doc-1) with position_offset=0, + cartridge_len=512 at modeling_qwen3.py:366)",
+      "cartridge_block": "cartridges/am/core.py:61,65 - scored with the UNROTATED query, i.e. relative (512+i)-j, exactly the student's eval-time frame. rope_theta never touches this branch.",
+      "doc_block": "cartridges/am/finetune.py:495-501 sets doc_rope_offset=T_doc; cartridges/am/core.py:66-72 rotates the query forward by T_doc and scores it against the doc keys, intending absolute 512+T_doc+i vs 512+m, i.e. 'the document sits immediately before the query'.",
+      "why_it_does_not_cancel": "R_theta(a) o R_theta(b) = R_theta(a+b) holds only for equal theta. Composing the AM path's theta=1e4 rotation on top of the model's theta=5e6 rotation gives per-frequency-pair angle (512+i)/5e6^(2k/d) + T_doc/1e4^(2k/d), which is not any single position's rotation.",
+      "measured_decorrelation": "mean cos(R_1e4(T)q, R_5e6(T)q) over random unit q in R^128: 0.997 at T=1, 0.508 at 64, 0.285 at 256, 0.170 at 1000, 0.103 at 3858, 0.084 at 4000, -0.099 at 8900. At T=4000 the per-pair angle error is 0 (k=0) to 749 rad, median 33 rad, and 76.6% of the 64 frequency pairs are off by more than pi.",
+      "verdict": "REAL frame mismatch, confined to the document block of the teacher target - it does NOT cancel. Empirically confirmed: correcting theta changes the achievable MSE by 8.5x."
+    },
+    "raw_arrays": "research_loop/state/diagnostics/DIAG-ROPE.json (per-layer MSE / mass_on_S / |v_S| for both arms, all 16 docs, plus the Part A trace) and research_loop/state/diagnostics/DIAG-ROPE_route_mass.json (per-layer eval-time routing, 2 caches x 2 splits)"
+  },
+  "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/mxjf2jje",
+  "wandb_run_id": "mxjf2jje",
+  "wandb_other_runs": {
+    "arm_A_theta1e4_train": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/pbx4ryku",
+    "arm_B_theta5e6_train": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/mxjf2jje",
+    "eval_theta1e4_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/b4dldcrb",
+    "eval_theta1e4_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/1x3kwf4w",
+    "eval_theta5e6_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/m7zln1ky",
+    "eval_theta5e6_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/1ksc3qfl"
+  },
+  "artifacts": [
+    "outputs/2026-07-28-21-18-06-continual_am_sparse/f705f46c-f9ed-4340-b6a6-8dcae568ea28/cache_last.pt",
+    "outputs/2026-07-28-21-23-35-continual_am_sparse/5ff66d3f-84dc-466e-b539-d2ef01a53785/cache_last.pt",
+    "research_loop/results/DIAG-ROPE/launch_diag_rope.sh",
+    "research_loop/results/DIAG-ROPE/sanity_rope.py",
+    "research_loop/results/DIAG-ROPE/collect_stats.py",
+    "research_loop/results/DIAG-ROPE/wrapper.log",
+    "research_loop/results/DIAG-ROPE/run_theta1e4.log",
+    "research_loop/results/DIAG-ROPE/run_theta5e6.log",
+    "research_loop/results/DIAG-ROPE/eval_theta1e4_{QA,MT}.log",
+    "research_loop/results/DIAG-ROPE/eval_theta5e6_{QA,MT}.log",
+    "research_loop/state/diagnostics/DIAG-ROPE.json",
+    "research_loop/state/diagnostics/DIAG-ROPE_route_mass.json"
+  ],
+  "command": "bash research_loop/results/DIAG-ROPE/launch_diag_rope.sh (flock GPU 0; two sequential AM Phase-2 runs at USE_IDF=0 SLOT_SELECTION=tfidf GRANULARITY=per_layer TOP_T=32 KEY_MODE=freeze RIDGE_LAMBDA=1e-4 RIDGE_SCALE=spectral DELTA_WEIGHT=1e-2 MAX_QUERIES_PER_HEAD=64 AM_EXECUTION_MODE=per_document, PHASE1_CACHE_PATH=outputs/phase1_selfdistill_qwen512/cache_last.pt, MT synth; arm A with AM_ROPE_THETA unset, arm B with AM_ROPE_THETA=5000000.0; then eval_forgetting.py on both checkpoints x both splits and the ORACLE-WRITE route-mass diagnostic). Files edited: cartridges/am/finetune.py (config field rope_theta, local getattr, teacher_rope_kwargs, rewrite_keys_on_support, oracle_teacher_value_write, extra['rope_theta'] when off-default), cartridges/am/value_solve.py (rope_theta kwarg on oracle_teacher_value_write), examples/qasper2/train/continual_am_sparse.py (AM_ROPE_THETA env, _resolve_rope_theta, _rope_theta_kwargs conditional kwarg, wandb tag when off-default). NOT committed.",
+  "observations": "PART A (trace). The rotary frames do NOT cancel: the AM teacher path's hard-coded 10000.0 is a real mismatch, and it lands exactly on the document block. Cartridge slots carry positions 0..511 (initialization/text.py:45); reference queries carry 512+i (datasets.py:434 arange-from-0, + cartridge_len=512 at models/qwen/modeling_qwen3.py:366); document keys carry 512+m (teacher.py:99-102 with position_offset=0, + the same cartridge_len shift). The model's own rotary base comes from the HF config and is 5e6 (max_position_embeddings 262144). core.py:61,65 scores the cartridge block with the UNROTATED query, so that branch is rope_theta-independent and already matches the student's eval-time frame; core.py:66-72 rotates the query forward by doc_rope_offset=T_doc (finetune.py:495) before scoring the document block, which is the correct intent (put the document immediately before the query) but is only a rotation to absolute 512+T_doc+i when the extra rotation uses the model's own base, since R_theta(a) o R_theta(b) = R_theta(a+b) requires equal theta. At theta=1e4 on top of 5e6 the composite per-frequency-pair angle is (512+i)/5e6^(2k/d) + T_doc/1e4^(2k/d), no single position's rotation; measured mean cos between the two rotations is 0.103 at T=3858 and -0.099 at T=8900, with 76.6% of the 64 frequency pairs off by more than pi at T=4000. PART B (A/B). Arm A reproduced the baseline exactly - in-run QA 2.1766157150268555 / MT 2.5483615398406982 to all 17 digits, mean_mse_last_doc 0.19807696944925424, |v|max 984.0, and standalone eval_forgetting.py QA 2.1771795749664307 / MT 2.5524158477783203, all identical to ORACLE-WRITE's control - so the build is bit-identical when the flag is unset and everything downstream is valid. Arm B (theta=5e6) changed the SOLVE enormously and CE almost not at all: mean am/mean_mse over 16 documents 0.11906 -> 0.01406 (8.5x better, improved on 15/16 documents), summed per-layer MSE 4.286 -> 0.506, value_global_max_abs 984 -> 178 (5.5x gentler write), and eval-time total cartridge attention mass 0.329 -> 0.593 on MT (Phase-1 is 0.588), i.e. the B-CASCADE routing collapse is fully repaired - while QA moved -0.023 and MT -0.019 in-run (-0.017 / -0.023 standalone), an order of magnitude inside the +/-0.1-0.2 noise floor. The single sharpest structural result: the layer-34/35 residual that DIAG-OBJ-c named as the binding constraint (93-95% of residual, refusing to shrink under extra support and zero ridge) collapses at the correct rotary base - L34 2.3067 -> 0.0898 (26x), L35 1.0290 -> 0.0075 (138x), their share of the residual 77.8% -> 19.2% - so that 'unfittable' structure was a rotary-frame artefact, not a capacity or conditioning limit. 13 of 36 layers are individually worse under theta=5e6 (max ratio 12.9x), so the improvement is concentrated, not uniform. Caveats: n=6 QA / n=5 MT eval batches, so both CE deltas are inside noise and are not evidence of an improvement; the two arms' selected slot sets diverge slightly after document 0 (union per layer 35-79 vs 35-76) because the reference queries are re-collected against a cartridge whose values now differ, so mass_on_S is not perfectly matched between arms (0.1585 vs 0.1453 train-time); only the theta=5e6 variant was tested, not the alternative reading in which doc_rope_offset should be 0.",
+  "part_c_blast_radius": {
+    "verdict": "Arm B did NOT differ materially on CE (-0.019 MT, -0.023 QA, both inside the +/-0.1-0.2 noise floor), so no prior CE conclusion is invalidated. But arm B DID differ materially in every internal quantity - achievable MSE 8.5x, |v| 5.5x, eval-time cartridge routing mass 1.8x - so every prior conclusion that was argued FROM those internals rests on a corrupted target and would need re-testing if the orchestrator wants to keep the mechanistic reading.",
+    "conclusions_whose_CE_numbers_stand": [
+      "B-OBJ's headline (MSE and CE anti-correlated / no better fit of this objective can win) - STRENGTHENED, not overturned: the fix makes the target 8.5x more fittable and buys 0.019 MT.",
+      "ORACLE-WRITE's ceiling (perfect values reach only MT 2.381) - the oracle copies teacher v_doc and does not fit a target, so its CE number is unaffected.",
+      "DIAG-ROUTING (forward passes on the untouched Phase-1 cartridge) - never touches the AM teacher path.",
+      "DIAG-WIRE (target_mode never reaches the write path) - a wiring fact, independent of rotary base."
+    ],
+    "conclusions_whose_MECHANISTIC_reading_would_need_re-testing": [
+      "B-OBJ / DIAG-OBJ-c 'layers 34-35 hold 93-95% of the residual and refuse to shrink' - MEASURED HERE TO BE A ROPE ARTEFACT (77.8% -> 19.2%). This specific sub-claim is already superseded by this run.",
+      "B-OBJ / DIAG-OBJ-c 'the trust region, not top_t or ridge, was the binding constraint on the fit' - re-derive at the corrected base; the residual it was binding was largely rotary noise.",
+      "B-CASCADE / MECH-QUERIES 'the solve's own magnitude re-routes attention away from the cartridge (|v| 984, mass 0.588 -> 0.329)' - at the corrected base the collapse does not happen at all (0.593) with |v| 178, so the cascade was driven by the corrupted target, not by the query count. The whole n in {64,256,1024,4096,16384} sweep fitted the corrupted target.",
+      "MECH-QUERIES-B (DELTA_WEIGHT scaled with n) - in flight on the other GPU; it inherits the same corrupted target.",
+      "B-SOLVE / the beta-NNLS failures (EXP-005, EXP-005b, EXP-006) - compute_teacher_log_mass takes the SAME doc-block rotation (teacher.py:157-177, called at finetune.py:508), so the NNLS mass targets were built in the wrong frame too; 'beta is numerically broken' is confounded with 'beta was fitted to a corrupted mass target'.",
+      "ORACLE-WRITE's assign='mass_ranked' - it ranks document rows by teacher attention computed with the wrong doc-block frame (value_solve.py:227-234), so WHICH document value went into WHICH slot was chosen on corrupted evidence; the ceiling 2.381 may be an under-estimate.",
+      "mass_on_S as reported by every prior bundle - the train-time number itself is rope-independent (cartridge-only branch), but every POST-WRITE routing figure (0.329 cartridge mass, 10/36 layers under 5%) is a property of the solved values and therefore of the corrupted target.",
+      "K-GATE / K-SUPPORT / K-RIDGE and EXP-001..EXP-009 - every AM row in results.csv ran the hard-coded 10000.0, so all of them fitted the corrupted target. Their CE conclusions are unlikely to move (this A/B moved CE by 0.02) but their internal diagnostics do not describe the corrected method."
+    ],
+    "not_re-run_here": "Per the brief these are listed, not re-tested."
+  }
+}

@@ -156,3 +156,68 @@
 - Kept in tree? yes — opt-in, default 64, bit-identical when unset; the `mass_on_S` instrumentation on
   the guarded path is now the only place that number is recorded for the canonical `DELTA_WEIGHT>0`
   configuration.
+
+### MECH-003: true rotary base in the AM teacher path → flag `AM_ROPE_THETA` (default: unset = 10000.0)
+- Status: tested
+- Implements: **B-ROPE** (a confirmed correctness bug found by the orchestrator; no external LIT source)
+  | Targets board entry: **B-ROPE** (and, by consequence, B-OBJ)
+- Files:
+  - `cartridges/am/finetune.py` — new config field `rope_theta: float = 10000.0`; a local
+    `rope_theta = float(getattr(config, "rope_theta", 10000.0))` in
+    `apply_document_am_write_to_cache`; threaded into `teacher_rope_kwargs` (→
+    `compute_teacher_targets` **and** `compute_teacher_log_mass`), into `rewrite_keys_on_support`,
+    and into `oracle_teacher_value_write`; recorded in `AMUpdateStats.extra["rope_theta"]`
+    **only when != 10000.0**
+  - `cartridges/am/value_solve.py::oracle_teacher_value_write` — new `rope_theta` kwarg, forwarded to
+    the teacher `compute_attention_weights` that drives `assign="mass_ranked"`
+  - `examples/qasper2/train/continual_am_sparse.py` — env knob `AM_ROPE_THETA` (float, or
+    `model`/`auto` to read `AutoConfig.from_pretrained(MODEL_NAME).rope_theta`), `_resolve_rope_theta()`
+    + `_rope_theta_kwargs()` (conditional kwarg + loud failure, RUNBOOK §6.10); wandb tag
+    `ropetheta-<v>` added **only** when the env var is set
+- What it changes (at the level of the math): the teacher target is
+  `Attn(q; [K_cart ‖ K_doc], [V_cart ‖ V_doc])`. The cartridge block is scored with the **unrotated**
+  reference query (`core.py:65`), i.e. in exactly the frame the student will see at eval; the document
+  block is scored with the query rotated forward by `doc_rope_offset = T_doc` (`finetune.py:501`,
+  `core.py:66-72`) so the document sits immediately *before* the query. That composition is only a
+  rotation to absolute position `512 + T_doc + i` when the extra rotation uses the **model's own**
+  rotary base — `R_θ(a)∘R_θ(b) = R_θ(a+b)` requires equal θ. The AM package hard-coded θ = 10000.0
+  while `Qwen/Qwen3-4B-Instruct-2507` uses **θ = 5e6**, so the composite per-frequency-pair angle was
+  `(512+i)/5e6^{2k/d} + T_doc/1e4^{2k/d}` — not any single position's rotation. The flag threads the
+  true base through; the default keeps the historical value.
+- Sanity check (`research_loop/results/DIAG-ROPE/sanity_rope.py`, CPU, no GPU): (i) at offset
+  `T_doc=4000`, `_apply_rope_offset_to_queries` with the default is **bit-identical** to explicit
+  10000.0, and mean cos(θ=1e4-rotated, θ=5e6-rotated) = **0.1020**; teacher targets are bit-identical at
+  the default and `‖T(5e6)−T(1e4)‖/‖T(1e4)‖ = 1.069`; (ii) full `apply_document_am_write_to_cache` on a
+  stub cache (L=2, H=2, T=40, d=128, T_doc=4000, |S|=8): unset and explicit-10000.0 give
+  `mean_mse = 0.0218288600` to 10 digits with identical per-layer MSE, `|v|max` and `mass_on_S`;
+  θ=5e6 gives `mean_mse = 0.0219145315` (knob is live), all finite; `extra["rope_theta"]` present only
+  in the 5e6 arm. Driver config constructs correctly for `AM_ROPE_THETA` unset / `5000000.0` / `model`
+  (the last resolves to 5e6 off the HF config).
+- Bit-identical with flag off? **yes.** Arm A (`AM_ROPE_THETA` unset) reproduced the canonical top32
+  operating point to all 17 printed digits *in-run* — QA **2.1766157150268555** / MT
+  **2.5483615398406982**, `mean_mse_last_doc` 0.19807696944925424, `value_global_max_abs` 984.0 — and
+  its standalone `eval_forgetting.py` QA (2.1771795749664307) reproduced ORACLE-WRITE's standalone
+  control exactly. Its `config.yaml` differs from the ORACLE-WRITE control's only by the new field at
+  its default (`rope_theta: 10000.0`) plus the wandb group/notes; the A-vs-B configs differ in exactly
+  one numeric field. Dual-`cartridges` guard verified: from `/tmp` with no PYTHONPATH,
+  `import cartridges` resolves to the **sibling** repo, which has **no** `rope_theta` field — so the
+  kwarg is passed conditionally and `AM_ROPE_THETA` fails loudly rather than silently no-op'ing.
+- Tested by: **DIAG-ROPE** (`WANDB_GROUP=B-ROPE`), single variable at canonical top32:
+
+  | arm | QA | MT | mean `am/mean_mse` (16 docs) | Σ per-layer MSE | `value_global_max_abs` | e2e s |
+  |---|---|---|---|---|---|---|
+  | A θ=1e4 (control) | 2.17662 | 2.54836 | 0.11906 | 4.2861 | 984.0 | 178.4 |
+  | B θ=5e6 (model)   | 2.15320 | 2.52961 | **0.01406** | **0.5062** | **178.0** | 169.0 |
+
+  wandb: A `https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/pbx4ryku`,
+  B `https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/mxjf2jje`
+- Verdict + mechanistic reason: **the bug is real and large in the solve's own units, and invisible in
+  CE.** Correcting the rotary base makes the target **8.5× more fittable** (mean MSE 0.11906 → 0.01406,
+  better on 15/16 documents) and the write **5.5× gentler** (|v| 984 → 178) — and moves CE by
+  **−0.023 QA / −0.019 MT**, an order of magnitude inside the ±0.1–0.2 noise floor. Most strikingly it
+  **dissolves the layer-34/35 residual** that DIAG-OBJ-c named as the binding constraint: L34
+  2.3067 → 0.0898 (0.039×), L35 1.0290 → 0.0075 (0.0073×), their share of the residual 77.8% → **19.2%**
+  — that "unfittable" structure was a rotary-frame artefact, not a capacity limit. So B-OBJ's
+  conclusion is *strengthened*, not overturned: a target that is now 8.5× better fitted still buys no
+  acquisition. Board call is the orchestrator's.
+- Kept in tree? yes — opt-in, default 10000.0, bit-identical when unset.
