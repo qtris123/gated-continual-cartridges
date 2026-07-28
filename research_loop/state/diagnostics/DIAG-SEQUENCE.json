@@ -1,0 +1,643 @@
+{
+ "id": "DIAG-SEQUENCE",
+ "board_entry": "B-OVERWRITE",
+ "question": "Does MT acquisition improve as documents 2..16 are written, or is the final cartridge worth about one document? (Evaluates the per-document cache snapshots DIAG-OVERWRITE's canonical run already saved.)",
+ "provenance": {
+  "snapshot_path": "/tmp/amsnap_seq",
+  "snapshot_contents": "git archive HEAD {cartridges,examples} taken at HEAD=06cd28c93fa4aa1daa1e3d5faaed1ae72c8ae218",
+  "snapshot_manifest_sha256_at_launch": "dfc10ac9600bfe51db7137595506ddad388d22cac6b4668cd05766b861d90a95",
+  "snapshot_manifest_sha256_after": "dfc10ac9600bfe51db7137595506ddad388d22cac6b4668cd05766b861d90a95",
+  "snapshot_manifest_recipe": "cd $SNAP && find cartridges examples -type f -name '*.py' | LC_ALL=C sort | xargs sha256sum | awk '{print $1\"  \"$2}' | LC_ALL=C sort | sha256sum",
+  "verified_import_path": "/tmp/amsnap_seq/cartridges (printed from cwd=/tmp in wrapper.log)",
+  "CARTRIDGES_DIR": "/tmp/amsnap_seq",
+  "repo_HEAD_at_launch": "06cd28c93fa4aa1daa1e3d5faaed1ae72c8ae218",
+  "repo_HEAD_after": "06cd28c93fa4aa1daa1e3d5faaed1ae72c8ae218",
+  "gpu_claimed_via_flock": "0",
+  "source_run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-21-43-17-continual_am_sparse/4b0edcab-d1c5-4313-bc43-309d7ff77097",
+  "source_run_bundle": "research_loop/results/DIAG-OVERWRITE/result.json",
+  "snapshots_are_stock_artefacts": "cache-after-doc-*.pt saved by SAVE_AFTER_EACH_DOCUMENT (default 1); no re-run, no instrumentation, no source edit",
+  "instrumentation": "NONE",
+  "eval_convention": "standalone examples/qasper2/train/eval_forgetting.py, BATCH_SIZE=4 (default), MODEL_NAME=Qwen/Qwen3-4B-Instruct-2507, one fresh process per (k, split); 'Eval loss' mean-CE parsed from the log, then PID killed (RUNBOOK 1)",
+  "each_eval_loaded_intended_snapshot": {
+   "doc0_QA": true,
+   "doc0_MT": true,
+   "doc16_QA": true,
+   "doc16_MT": true,
+   "doc1_QA": true,
+   "doc1_MT": true,
+   "doc2_QA": true,
+   "doc2_MT": true,
+   "doc4_QA": true,
+   "doc4_MT": true,
+   "doc8_QA": true,
+   "doc8_MT": true,
+   "doc12_QA": true,
+   "doc12_MT": true,
+   "doc3_QA": true,
+   "doc3_MT": true,
+   "doc5_QA": true,
+   "doc5_MT": true,
+   "doc6_QA": true,
+   "doc6_MT": true,
+   "doc7_QA": true,
+   "doc7_MT": true,
+   "doc9_QA": true,
+   "doc9_MT": true,
+   "doc10_QA": true,
+   "doc10_MT": true,
+   "doc11_QA": true,
+   "doc11_MT": true,
+   "doc13_QA": true,
+   "doc13_MT": true,
+   "doc14_QA": true,
+   "doc14_MT": true,
+   "doc15_QA": true,
+   "doc15_MT": true
+  },
+  "all_evals_loaded_intended_snapshot": true
+ },
+ "correctness_gate": {
+  "expected_qa_doc16": 2.1772,
+  "expected_mt_doc16": 2.5524,
+  "observed_qa_doc16": 2.1771795749664307,
+  "observed_mt_doc16": 2.5524158477783203,
+  "qa_matches_4dp": true,
+  "mt_matches_4dp": true,
+  "expected_qa_phase1": 2.23880672454834,
+  "expected_mt_phase1": 3.7825491428375244,
+  "observed_qa_phase1": 2.23880672454834,
+  "observed_mt_phase1": 3.7825491428375244
+ },
+ "curve": [
+  {
+   "k": 0,
+   "qa": 2.23880672454834,
+   "mt": 3.7825491428375244,
+   "frac_of_total_mt_drop_achieved": 0.0,
+   "mt_pred_accumulate": 3.7825491428375244,
+   "mt_pred_one_doc_only": 3.7825491428375244,
+   "resid_vs_accumulate": 0.0
+  },
+  {
+   "k": 1,
+   "qa": 2.2298452854156494,
+   "mt": 3.7445480823516846,
+   "d_mt_from_prev": -0.038001060485839844,
+   "frac_of_total_mt_drop_achieved": 0.03089182338082388,
+   "mt_pred_accumulate": 3.6755275461673738,
+   "mt_pred_one_doc_only": 3.6755810302236807,
+   "resid_vs_accumulate": 0.06902053618431081
+  },
+  {
+   "k": 2,
+   "qa": 2.062385082244873,
+   "mt": 3.3668813705444336,
+   "d_mt_from_prev": -0.377666711807251,
+   "frac_of_total_mt_drop_achieved": 0.3379046595703155,
+   "mt_pred_accumulate": 3.604302828383446,
+   "mt_pred_one_doc_only": 3.7112370677616284,
+   "resid_vs_accumulate": -0.23742145783901236
+  },
+  {
+   "k": 3,
+   "qa": 2.047234296798706,
+   "mt": 3.0848138332366943,
+   "d_mt_from_prev": -0.28206753730773926,
+   "frac_of_total_mt_drop_achieved": 0.5672030115787162,
+   "mt_pred_accumulate": 3.5507920300483704,
+   "mt_pred_one_doc_only": 3.7290650865306025,
+   "resid_vs_accumulate": -0.46597819681167607
+  },
+  {
+   "k": 4,
+   "qa": 2.113368272781372,
+   "mt": 3.0337772369384766,
+   "d_mt_from_prev": -0.05103659629821777,
+   "frac_of_total_mt_drop_achieved": 0.6086916831748796,
+   "mt_pred_accumulate": 3.4794442989349363,
+   "mt_pred_one_doc_only": 3.7112370677616284,
+   "resid_vs_accumulate": -0.4456670619964598
+  },
+  {
+   "k": 5,
+   "qa": 2.0924136638641357,
+   "mt": 2.964536190032959,
+   "d_mt_from_prev": -0.06924104690551758,
+   "frac_of_total_mt_drop_achieved": 0.6649791173770286,
+   "mt_pred_accumulate": 3.4082195811510085,
+   "mt_pred_one_doc_only": 3.7112370677616284,
+   "resid_vs_accumulate": -0.44368339111804955
+  },
+  {
+   "k": 6,
+   "qa": 2.0712413787841797,
+   "mt": 2.8944528102874756,
+   "d_mt_from_prev": -0.0700833797454834,
+   "frac_of_total_mt_drop_achieved": 0.7219513008200517,
+   "mt_pred_accumulate": 3.3547087828159334,
+   "mt_pred_one_doc_only": 3.7290650865306025,
+   "resid_vs_accumulate": -0.46025597252845785
+  },
+  {
+   "k": 7,
+   "qa": 2.0596625804901123,
+   "mt": 2.8085434436798096,
+   "d_mt_from_prev": -0.08590936660766602,
+   "frac_of_total_mt_drop_achieved": 0.7917887460405969,
+   "mt_pred_accumulate": 3.2833610517024994,
+   "mt_pred_one_doc_only": 3.7112370677616284,
+   "resid_vs_accumulate": -0.4748176080226898
+  },
+  {
+   "k": 8,
+   "qa": 2.0471396446228027,
+   "mt": 2.709873914718628,
+   "d_mt_from_prev": -0.09866952896118164,
+   "frac_of_total_mt_drop_achieved": 0.8719991828749506,
+   "mt_pred_accumulate": 3.2120133205890653,
+   "mt_pred_one_doc_only": 3.7112370677616284,
+   "resid_vs_accumulate": -0.5021394058704374
+  },
+  {
+   "k": 9,
+   "qa": 2.1467227935791016,
+   "mt": 2.7055881023406982,
+   "d_mt_from_prev": -0.0042858123779296875,
+   "frac_of_total_mt_drop_achieved": 0.8754832056187813,
+   "mt_pred_accumulate": 3.1407886028051375,
+   "mt_pred_one_doc_only": 3.7112370677616284,
+   "resid_vs_accumulate": -0.43520050046443925
+  },
+  {
+   "k": 10,
+   "qa": 2.041499137878418,
+   "mt": 2.533163070678711,
+   "d_mt_from_prev": -0.1724250316619873,
+   "frac_of_total_mt_drop_achieved": 1.0156509682137194,
+   "mt_pred_accumulate": 3.0516039389133454,
+   "mt_pred_one_doc_only": 3.6934090489926543,
+   "resid_vs_accumulate": -0.5184408682346344
+  },
+  {
+   "k": 11,
+   "qa": 2.062858819961548,
+   "mt": 2.486443519592285,
+   "d_mt_from_prev": -0.04671955108642578,
+   "frac_of_total_mt_drop_achieved": 1.0536302272696878,
+   "mt_pred_accumulate": 2.9802562077999113,
+   "mt_pred_one_doc_only": 3.7112370677616284,
+   "resid_vs_accumulate": -0.49381268820762614
+  },
+  {
+   "k": 12,
+   "qa": 2.0421719551086426,
+   "mt": 2.435236930847168,
+   "d_mt_from_prev": -0.05120658874511719,
+   "frac_of_total_mt_drop_achieved": 1.0952570891315585,
+   "mt_pred_accumulate": 2.891194557237625,
+   "mt_pred_one_doc_only": 3.6934090489926543,
+   "resid_vs_accumulate": -0.455957626390457
+  },
+  {
+   "k": 13,
+   "qa": 2.0239388942718506,
+   "mt": 2.4487619400024414,
+   "d_mt_from_prev": 0.013525009155273438,
+   "frac_of_total_mt_drop_achieved": 1.0842623382296876,
+   "mt_pred_accumulate": 2.83768375890255,
+   "mt_pred_one_doc_only": 3.7290650865306025,
+   "resid_vs_accumulate": -0.38892181890010846
+  },
+  {
+   "k": 14,
+   "qa": 2.0390379428863525,
+   "mt": 2.4546189308166504,
+   "d_mt_from_prev": 0.005856990814208984,
+   "frac_of_total_mt_drop_achieved": 1.079501073058073,
+   "mt_pred_accumulate": 2.7484990950107573,
+   "mt_pred_one_doc_only": 3.6934090489926543,
+   "resid_vs_accumulate": -0.2938801641941069
+  },
+  {
+   "k": 15,
+   "qa": 2.1008758544921875,
+   "mt": 2.5003581047058105,
+   "d_mt_from_prev": 0.045739173889160156,
+   "frac_of_total_mt_drop_achieved": 1.0423187822666033,
+   "mt_pred_accumulate": 2.6771513638973237,
+   "mt_pred_one_doc_only": 3.7112370677616284,
+   "resid_vs_accumulate": -0.17679325919151312
+  },
+  {
+   "k": 16,
+   "qa": 2.1771795749664307,
+   "mt": 2.5524158477783203,
+   "d_mt_from_prev": 0.052057743072509766,
+   "frac_of_total_mt_drop_achieved": 1.0,
+   "mt_pred_accumulate": 2.5524158477783203,
+   "mt_pred_one_doc_only": 3.6577530114547065,
+   "resid_vs_accumulate": 0.0
+  }
+ ],
+ "qa_by_k": {
+  "0": 2.23880672454834,
+  "1": 2.2298452854156494,
+  "2": 2.062385082244873,
+  "3": 2.047234296798706,
+  "4": 2.113368272781372,
+  "5": 2.0924136638641357,
+  "6": 2.0712413787841797,
+  "7": 2.0596625804901123,
+  "8": 2.0471396446228027,
+  "9": 2.1467227935791016,
+  "10": 2.041499137878418,
+  "11": 2.062858819961548,
+  "12": 2.0421719551086426,
+  "13": 2.0239388942718506,
+  "14": 2.0390379428863525,
+  "15": 2.1008758544921875,
+  "16": 2.1771795749664307
+ },
+ "mt_by_k": {
+  "0": 3.7825491428375244,
+  "1": 3.7445480823516846,
+  "2": 3.3668813705444336,
+  "3": 3.0848138332366943,
+  "4": 3.0337772369384766,
+  "5": 2.964536190032959,
+  "6": 2.8944528102874756,
+  "7": 2.8085434436798096,
+  "8": 2.709873914718628,
+  "9": 2.7055881023406982,
+  "10": 2.533163070678711,
+  "11": 2.486443519592285,
+  "12": 2.435236930847168,
+  "13": 2.4487619400024414,
+  "14": 2.4546189308166504,
+  "15": 2.5003581047058105,
+  "16": 2.5524158477783203
+ },
+ "wandb_urls": {
+  "doc0_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/f90cgg0r",
+  "doc0_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/4h8b5hkz",
+  "doc16_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/6cqrab39",
+  "doc16_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/36wuqeay",
+  "doc1_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/2hkk8b59",
+  "doc1_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/wvmjwu42",
+  "doc2_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/d26nk9c0",
+  "doc2_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/lzpsadub",
+  "doc4_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/ief3ithn",
+  "doc4_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/v5qj9yr2",
+  "doc8_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/r12likc7",
+  "doc8_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/tapr4qes",
+  "doc12_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/72wad0ua",
+  "doc12_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/r494hs63",
+  "doc3_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/fg7360x6",
+  "doc3_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/riks31g0",
+  "doc5_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/v4avn22c",
+  "doc5_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/a4bd11e6",
+  "doc6_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/py5u2azu",
+  "doc6_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/1f75a9bo",
+  "doc7_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/oia098es",
+  "doc7_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/8pjkowvr",
+  "doc9_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/c1n4it6n",
+  "doc9_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/u36xhzfn",
+  "doc10_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/kn9fupl7",
+  "doc10_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/nnkbo7q0",
+  "doc11_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/t2131nwc",
+  "doc11_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/tagbudhc",
+  "doc13_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/y3x938to",
+  "doc13_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/thjt0u63",
+  "doc14_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/pi6n40t4",
+  "doc14_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/ybq00qu7",
+  "doc15_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/4sr8vu8l",
+  "doc15_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/0spui4gi"
+ },
+ "checkpoints_evaluated": {
+  "0": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/phase1_selfdistill_qwen512/cache_last.pt",
+  "16": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-21-43-17-continual_am_sparse/4b0edcab-d1c5-4313-bc43-309d7ff77097/cache-after-doc-015-af07b880.pt",
+  "1": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-21-43-17-continual_am_sparse/4b0edcab-d1c5-4313-bc43-309d7ff77097/cache-after-doc-000-ae4e8fb7.pt",
+  "2": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-21-43-17-continual_am_sparse/4b0edcab-d1c5-4313-bc43-309d7ff77097/cache-after-doc-001-07b4743b.pt",
+  "4": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-21-43-17-continual_am_sparse/4b0edcab-d1c5-4313-bc43-309d7ff77097/cache-after-doc-003-71f51767.pt",
+  "8": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-21-43-17-continual_am_sparse/4b0edcab-d1c5-4313-bc43-309d7ff77097/cache-after-doc-007-e1a7f420.pt",
+  "12": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-21-43-17-continual_am_sparse/4b0edcab-d1c5-4313-bc43-309d7ff77097/cache-after-doc-011-cfcb19a9.pt",
+  "3": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-21-43-17-continual_am_sparse/4b0edcab-d1c5-4313-bc43-309d7ff77097/cache-after-doc-002-38a6f58f.pt",
+  "5": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-21-43-17-continual_am_sparse/4b0edcab-d1c5-4313-bc43-309d7ff77097/cache-after-doc-004-a11f66ae.pt",
+  "6": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-21-43-17-continual_am_sparse/4b0edcab-d1c5-4313-bc43-309d7ff77097/cache-after-doc-005-0c806aca.pt",
+  "7": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-21-43-17-continual_am_sparse/4b0edcab-d1c5-4313-bc43-309d7ff77097/cache-after-doc-006-b03a4aa0.pt",
+  "9": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-21-43-17-continual_am_sparse/4b0edcab-d1c5-4313-bc43-309d7ff77097/cache-after-doc-008-6f413175.pt",
+  "10": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-21-43-17-continual_am_sparse/4b0edcab-d1c5-4313-bc43-309d7ff77097/cache-after-doc-009-f77cecfb.pt",
+  "11": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-21-43-17-continual_am_sparse/4b0edcab-d1c5-4313-bc43-309d7ff77097/cache-after-doc-010-aba1a026.pt",
+  "13": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-21-43-17-continual_am_sparse/4b0edcab-d1c5-4313-bc43-309d7ff77097/cache-after-doc-012-01bdc15a.pt",
+  "14": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-21-43-17-continual_am_sparse/4b0edcab-d1c5-4313-bc43-309d7ff77097/cache-after-doc-013-152f42ae.pt",
+  "15": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-21-43-17-continual_am_sparse/4b0edcab-d1c5-4313-bc43-309d7ff77097/cache-after-doc-014-8d059cfa.pt"
+ },
+ "document_write_order": [
+  {
+   "k": 1,
+   "doc_index": 0,
+   "slug": "doc-000-ae4e8fb7",
+   "title": "Machine Translation from Natural Language to Code using Long-Short Term Memory",
+   "n_conversations": 485
+  },
+  {
+   "k": 2,
+   "doc_index": 1,
+   "slug": "doc-001-07b4743b",
+   "title": "Pre-Translation for Neural Machine Translation",
+   "n_conversations": 487
+  },
+  {
+   "k": 3,
+   "doc_index": 2,
+   "slug": "doc-002-38a6f58f",
+   "title": "Morphological Word Segmentation on Agglutinative Languages for Neural Machine Translation",
+   "n_conversations": 502
+  },
+  {
+   "k": 4,
+   "doc_index": 3,
+   "slug": "doc-003-71f51767",
+   "title": "Dense Information Flow for Neural Machine Translation",
+   "n_conversations": 513
+  },
+  {
+   "k": 5,
+   "doc_index": 4,
+   "slug": "doc-004-a11f66ae",
+   "title": "Multilingual sequence-to-sequence speech recognition: architecture, transfer learning, and language modeling",
+   "n_conversations": 517
+  },
+  {
+   "k": 6,
+   "doc_index": 5,
+   "slug": "doc-005-0c806aca",
+   "title": "Unsupervised Bilingual Lexicon Induction from Mono-lingual Multimodal Data",
+   "n_conversations": 512
+  },
+  {
+   "k": 7,
+   "doc_index": 6,
+   "slug": "doc-006-b03a4aa0",
+   "title": "Revisiting Low-Resource Neural Machine Translation: A Case Study",
+   "n_conversations": 488
+  },
+  {
+   "k": 8,
+   "doc_index": 7,
+   "slug": "doc-007-e1a7f420",
+   "title": "Exploring Multilingual Syntactic Sentence Representations",
+   "n_conversations": 511
+  },
+  {
+   "k": 9,
+   "doc_index": 8,
+   "slug": "doc-008-6f413175",
+   "title": "Neural Cross-Lingual Relation Extraction Based on Bilingual Word Embedding Mapping",
+   "n_conversations": 537
+  },
+  {
+   "k": 10,
+   "doc_index": 9,
+   "slug": "doc-009-f77cecfb",
+   "title": "Irony Detection in a Multilingual Context",
+   "n_conversations": 516
+  },
+  {
+   "k": 11,
+   "doc_index": 10,
+   "slug": "doc-010-aba1a026",
+   "title": "Non-Parametric Adaptation for Neural Machine Translation",
+   "n_conversations": 508
+  },
+  {
+   "k": 12,
+   "doc_index": 11,
+   "slug": "doc-011-cfcb19a9",
+   "title": "Filling Gender&Number Gaps in Neural Machine Translation with Black-box Context Injection",
+   "n_conversations": 555
+  },
+  {
+   "k": 13,
+   "doc_index": 12,
+   "slug": "doc-012-01bdc15a",
+   "title": "Compositional Neural Machine Translation by Removing the Lexicon from Syntax",
+   "n_conversations": 482
+  },
+  {
+   "k": 14,
+   "doc_index": 13,
+   "slug": "doc-013-152f42ae",
+   "title": "Duality Regularization for Unsupervised Bilingual Lexicon Induction",
+   "n_conversations": 522
+  },
+  {
+   "k": 15,
+   "doc_index": 14,
+   "slug": "doc-014-8d059cfa",
+   "title": "How Language-Neutral is Multilingual BERT?",
+   "n_conversations": 525
+  },
+  {
+   "k": 16,
+   "doc_index": 15,
+   "slug": "doc-015-af07b880",
+   "title": "Controlling the Output Length of Neural Machine Translation",
+   "n_conversations": 532
+  }
+ ],
+ "eval_coverage": {
+  "MT_per_k": [
+   {
+    "k": 1,
+    "n_eval_questions": 6,
+    "cum_frac_docs_1..k": 0.087
+   },
+   {
+    "k": 2,
+    "n_eval_questions": 4,
+    "cum_frac_docs_1..k": 0.1449
+   },
+   {
+    "k": 3,
+    "n_eval_questions": 3,
+    "cum_frac_docs_1..k": 0.1884
+   },
+   {
+    "k": 4,
+    "n_eval_questions": 4,
+    "cum_frac_docs_1..k": 0.2464
+   },
+   {
+    "k": 5,
+    "n_eval_questions": 4,
+    "cum_frac_docs_1..k": 0.3043
+   },
+   {
+    "k": 6,
+    "n_eval_questions": 3,
+    "cum_frac_docs_1..k": 0.3478
+   },
+   {
+    "k": 7,
+    "n_eval_questions": 4,
+    "cum_frac_docs_1..k": 0.4058
+   },
+   {
+    "k": 8,
+    "n_eval_questions": 4,
+    "cum_frac_docs_1..k": 0.4638
+   },
+   {
+    "k": 9,
+    "n_eval_questions": 4,
+    "cum_frac_docs_1..k": 0.5217
+   },
+   {
+    "k": 10,
+    "n_eval_questions": 5,
+    "cum_frac_docs_1..k": 0.5942
+   },
+   {
+    "k": 11,
+    "n_eval_questions": 4,
+    "cum_frac_docs_1..k": 0.6522
+   },
+   {
+    "k": 12,
+    "n_eval_questions": 5,
+    "cum_frac_docs_1..k": 0.7246
+   },
+   {
+    "k": 13,
+    "n_eval_questions": 3,
+    "cum_frac_docs_1..k": 0.7681
+   },
+   {
+    "k": 14,
+    "n_eval_questions": 5,
+    "cum_frac_docs_1..k": 0.8406
+   },
+   {
+    "k": 15,
+    "n_eval_questions": 4,
+    "cum_frac_docs_1..k": 0.8986
+   },
+   {
+    "k": 16,
+    "n_eval_questions": 7,
+    "cum_frac_docs_1..k": 1.0
+   }
+  ],
+  "MT_total": 69,
+  "MT_min_per_doc": 3,
+  "MT_max_per_doc": 7,
+  "QA_n_examples": 78,
+  "QA_n_unique_papers": 16,
+  "QA_overlap_with_MT_train_docs": 0
+ },
+ "summary_scalars": {
+  "mt_phase1_k0": 3.7825491428375244,
+  "mt_after_doc1": 3.7445480823516846,
+  "mt_after_doc16": 2.5524158477783203,
+  "mt_total_drop_k0_to_k16": 1.230133295059204,
+  "mt_drop_from_doc1_alone": 0.038001060485839844,
+  "frac_of_total_mt_drop_from_doc1_alone": 0.03089182338082388,
+  "mt_drop_from_docs2_to_16": 1.1921322345733643,
+  "qa_phase1_k0": 2.23880672454834,
+  "qa_after_doc1": 2.2298452854156494,
+  "qa_after_doc16": 2.1771795749664307,
+  "qa_min_over_k": 2.0239388942718506,
+  "qa_argmin_over_k": 13,
+  "mean_abs_resid_vs_accumulate_model": 0.3448229738796458,
+  "max_abs_resid_vs_accumulate_model": 0.5184408682346344
+ },
+ "curve_models": {
+  "accumulate": "MT(k) = MT(0) - cumfrac_docs_1..k * (MT(0)-MT(16)); every written document persists",
+  "one_doc_only": "MT(k) = MT(0) - frac_of_eval_questions_about_doc_k * (MT(0)-MT(16)); only the last write survives"
+ },
+ "derived": {
+  "mt_min": 2.435236930847168,
+  "mt_argmin_k": 12,
+  "mt_regression_from_best_to_k16": 0.11717891693115234,
+  "n_eval_questions_in_docs_13_to_16": 19,
+  "frac_eval_questions_in_docs_13_to_16": 0.2753623188405797,
+  "mt_drop_by_k3": 0.6977353096008301,
+  "frac_of_total_mt_drop_achieved_by_k3": 0.5672030115787162,
+  "frac_eval_questions_in_docs_1_to_3": 0.18840579710144928,
+  "marginal_dmt_per_document": {
+   "1": -0.038001060485839844,
+   "2": -0.377666711807251,
+   "3": -0.28206753730773926,
+   "4": -0.05103659629821777,
+   "5": -0.06924104690551758,
+   "6": -0.0700833797454834,
+   "7": -0.08590936660766602,
+   "8": -0.09866952896118164,
+   "9": -0.0042858123779296875,
+   "10": -0.1724250316619873,
+   "11": -0.04671955108642578,
+   "12": -0.05120658874511719,
+   "13": 0.013525009155273438,
+   "14": 0.005856990814208984,
+   "15": 0.045739173889160156,
+   "16": 0.052057743072509766
+  },
+  "n_eval_questions_per_document": {
+   "1": 6,
+   "2": 4,
+   "3": 3,
+   "4": 4,
+   "5": 4,
+   "6": 3,
+   "7": 4,
+   "8": 4,
+   "9": 4,
+   "10": 5,
+   "11": 4,
+   "12": 5,
+   "13": 3,
+   "14": 5,
+   "15": 4,
+   "16": 7
+  },
+  "spearman_marginal_dmt_vs_n_eval_questions": 0.5117647058823529,
+  "n_documents_with_negative_marginal_dmt": 12,
+  "monotone_decreasing_k0_to_k12": true,
+  "monotone_increasing_k12_to_k16": true,
+  "qa_below_phase1_floor_for_k": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16
+  ],
+  "qa_regression_from_best_to_k16": 0.15324068069458008,
+  "noise_floor_loss": 0.15,
+  "reference_points": {
+   "ORACLE_WRITE_oracle_MT": 2.381,
+   "ORACLE_WRITE_control_MT": 2.5524,
+   "dense_4ep_bar_QA": 2.3721,
+   "dense_4ep_bar_MT": 1.8725,
+   "win_condition": "QA <= 2.52 AND MT <= 2.02"
+  }
+ },
+ "mass_on_S_note": "This task ran NO AM solve -- it is eval-only on cache snapshots the canonical run already wrote, so no new mass_on_S was produced. Inherited from the source run (DIAG-OVERWRITE, same run dir): solve-side ref mass_on_S mean over docs/layers = 0.15851; eval-time mass on the written union on the untouched Phase-1 cartridge = 0.08961 (MT) / 0.08272 (QA).",
+ "mass_on_S_inherited": {
+  "solve_side_ref_mass_on_S_mean": 0.15851,
+  "eval_time_mass_on_written_union_phase1_MT": 0.08961,
+  "eval_time_mass_on_written_union_phase1_QA": 0.08272,
+  "source": "research_loop/results/DIAG-OVERWRITE/result.json"
+ }
+}

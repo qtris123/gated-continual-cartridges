@@ -46,12 +46,37 @@ the number that shows it. "It didn't help" never closes anything.
     each document's top-32 overlaps a *document-independent* top-32 (built from the across-document mean
     score) by **87.4%**. Verified bitwise that `USE_IDF=0` ⇒ `tfidf == tf`, so this is the raw access
     score, not an IDF artefact.
-- 🔴 **Consequence — this reframes the entire acquisition story.** The final cartridge effectively holds
-  **the last document plus faint traces of the rest**. MT acquisition has been measured over a 16-document
-  corpus while the cartridge retained roughly one document's worth of it. That is a far better explanation
-  of "MT plateaus at ~2.5 no matter what" than any property of the value solve — and it means
-  **ORACLE-WRITE's 2.381 ceiling was also measuring mostly document 16**, so the write ceiling of a
-  *coexisting* 16-document write is **unmeasured**.
+- ❌ **The orchestrator's "16 documents are worth one" reading is REFUTED (DIAG-SEQUENCE, 2026-07-28).**
+  Evaluating all 16 per-document snapshots: **MT after doc 1 is 3.7445 — only 0.038 below Phase-1** and
+  **1.192 worse than the 16-document cartridge**. Doc 1 alone accounts for **3.1%** of the total MT drop;
+  docs 2–16 for **96.9%**. **4.7% slot survival does not mean 4.7% information survival** — the trust
+  region's partial traces carry real information. B-OVERWRITE is mechanically real but is **not** the
+  acquisition bottleneck.
+- ⭐ **What it is instead: a sharp capacity saturation at ≈12 documents.**
+
+  | k | 0 | 1 | 2 | 4 | 8 | **12** | 13 | 16 |
+  |---|---|---|---|---|---|---|---|---|
+  | MT | 3.783 | 3.745 | 3.367 | 3.034 | 2.710 | **2.435 ← min** | 2.449 | 2.552 |
+  | QA | 2.239 | 2.230 | 2.062 | 2.113 | 2.047 | 2.042 | **2.024 ← min** | 2.177 |
+
+  MT falls **strictly monotonically at all 12 steps** to k=12, then rises **strictly monotonically** over
+  the last four documents (+0.117). QA does the same one step later (min at k=13, then +0.153).
+  **k=12 dominates the reported k=16 end state on BOTH axes** — the loop has been reporting the wrong
+  point of the sequence. The tail rise is **not a coverage artefact**: docs 13–16 carry **27.5%** of the
+  MT eval questions and writing them still makes MT worse.
+- ⚠️ **Noise discipline:** MT n=69 / QA n=78. Single-step deltas below ~0.15 — **including the entire
+  k=12→16 tail regression** — sit at or inside the band. Only the k=0→12 descent is far outside it.
+  One seed; k=12 is not seed-varied. So "stop at 12" is a *candidate*, not a result.
+- 🔴 **The caveat that opens the next question:** docs 1–3 hold only **18.8%** of the eval questions but
+  deliver **56.7%** of the total MT improvement, and the curve sits *below* a linear-accumulation
+  prediction at every k∈2..15. Per-document marginal ΔMT correlates only weakly with per-document eval
+  share (**Spearman 0.51**). **Part of the "acquisition" may be a global distribution/format shift from
+  perturbing the cartridge at all, not content being stored.** The same suspicion attaches to QA, which
+  sits **below the untouched Phase-1 floor at every k∈1..16** even though the QA eval's 16 papers are
+  **entirely disjoint** from the Phase-2 documents. → **DIAG-CONTENT dispatched** (write 16 *QA-topic*
+  documents and eval MT: any MT gain is content-free by construction).
+- **Eval coverage verified:** the MT eval spans all 16 training documents (69 examples, 16 unique
+  `paper_id`s, matched 16/16 by title, 3–7 questions each).
 - ⚠️ **Self-correction: the 4.6× bandwidth gap I put on this board is REFUTED.** DIAG-OVERWRITE reproduced
   SCOUT-KEYS' 70.4% exactly (0.70437) and ORACLE-WRITE/DIAG-ROUTING to 4–6 s.f., then showed the
   15.2%-vs-70.4% pair **mixes two aggregations of the same quantity** (the written union is 0.2037 in the
