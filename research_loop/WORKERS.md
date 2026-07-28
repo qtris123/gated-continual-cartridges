@@ -41,6 +41,13 @@ Write `research_loop/results/<ID>/result.json`:
 **Hard requirements**
 - **Any GPU run without a real `wandb_run_url` is an invalid result.** Never pass `WANDB_MODE=disabled`
   or `WANDB_DISABLED=1`. If wandb init fails, fix it or fail the task — do not silently proceed.
+- **Every AM run must record `mass_on_S`** (attention mass landing on the written slots) in
+  `diagnostics`, per layer where available. It is **already computed** at `cartridges/am/value_solve.py:146`
+  and `cartridges/am/finetune.py:628` — and no bundle recorded it for the loop's first nine experiments.
+  Three separate literatures (nonparametric-regression attention, modern Hopfield, fast weights) agree
+  it is the quantity that **bounds every value-only write**. It is free; log it.
+- **When any other worker is editing source, pin imports to a frozen snapshot** (RUNBOOK §9c-bis) and
+  print the resolved `cartridges.__file__` in every job log.
 - `observations` is factual only. **No recommendations, no next steps** — that is the orchestrator's job.
 - Never fabricate a number. If an eval did not run, say it did not run.
 - Report deltas against the named baseline *and* against the noise floor (~0.1–0.2 loss).

@@ -88,6 +88,31 @@ Eliminated as *knob-level* explanations: gating (HYP-G1), support (HYP-S1), ridg
   ⇒ **The mechanism we need is not in this paper.** It must be imported (→ SCOUT-EDIT: null-space
   editing, delta-rule associative writes, MEMIT-style multi-edit) or designed here. This is the
   novelty budget, and it is now a *measured* need rather than an aspiration.
+- ✅ **THREE INDEPENDENT LITERATURES STATE B-ROUTE IDENTICALLY (SCOUT-EDIT, LIT-013/016).** Softmax
+  attention as *nonparametric* regression (arXiv 2501.12352): a new association requires a new key.
+  Modern Hopfield: retrievability is set by key **separation**; poorly separated keys return
+  metastable averages. Fast weights: interference is key **overlap**. All three bound the write by
+  `mass_on_S`.
+- 🔥 **`mass_on_S` IS ALREADY COMPUTED IN OUR CODE AND NO BUNDLE HAS EVER RECORDED IT**
+  (`value_solve.py:146`, `finetune.py:628`). The single number that bounds every value-only mechanism
+  has been sitting in the solve the whole time. → now a standing bundle requirement (WORKERS.md).
+- **Most promising imported operator (LIT-017):** null-space **key** placement — the only candidate
+  that attacks routing and retention *together*, and the only one that escapes the nonparametric
+  bound. Depends on β working (→ B-SOLVE's three named fixes).
+
+## ⭐ CROSS-CUTTING FINDING (SCOUT-EDIT, 2026-07-28): our write is **already MEMIT — with the wrong metric**
+`continual_am_sparse.py:96` defaults `DELTA_WEIGHT=1e-2`, **overriding the `0.0` dataclass default**
+at `finetune.py:87`. So `finetune.py:580` has routed **every AM row in `results.csv`** through
+`guarded_sparse_am_value_update`, which minimises `‖A_new·V_S − R_new‖² + w‖V_S − V_S^old‖²`. That is
+**exactly MEMIT's** `Δ = R K₁ᵀ(C₀ + K₁K₁ᵀ)⁻¹` **with `C₀ = w·I`.**
+
+The whole closed-form editing literature reduces to one statement: **`C₀` should be the second moment
+of the OLD keys, not the identity.** Our "key" is the simplex routing vector `a_S(q) = alpha[:,S]` —
+literally `X` at `value_solve.py:86` — so `C₀` is a `t×t` routing Gram obtainable from **one QA forward
+pass** using hooks we already have. This is a small, principled change with a large literature behind
+it, and it lands on a knob (`DELTA_WEIGHT`) that **has never been swept** — every row is 1e-2, and
+HYP-R0 refuted `RIDGE_LAMBDA`, which is a *different* knob. `DELTA_WEIGHT=0` (DIAG-OBJ-c, in flight)
+is therefore the free negative control for this entire family.
 
 ## ⚠️ CROSS-CUTTING FINDING (SCOUT-AM, 2026-07-28): we have been running AM's weakest ablation
 The paper (`AM.pdf`, arXiv 2602.16284, ICML 2026) fits **two** quantities per layer per KV-head:
@@ -133,6 +158,15 @@ tokens. Our canonical config runs **neither** component:
   the query count pinned at 64 — so adding columns could only *dilute* an already exactly-determined
   system. Support must be re-tested **jointly with query count** (`n ≫ t`) before B-CAP or K-SUPPORT
   can be considered closed. Re-opened.
+- ✅ **A THIRD, INDEPENDENT REASON TO REVISIT `top_t` (SCOUT-EDIT, LIT-011/012):** null-space **value**
+  editing is **identically zero at `top_t=64`** — `C₀ ∈ R^{64×64}` is full rank when `n_old ≫ 64`, so
+  the projector `P = 0`. The retention-preserving projection operators only *exist* at large support.
+  ⇒ `top_t` is entangled with three separate mechanisms (query count, min-norm rank, null-space
+  existence) and cannot be swept as a scalar knob.
+- **Note on what projection can and cannot do (LIT-009/011/012):** preconditioning and null-space
+  projection are **retention** mechanisms — they cannot move MT on their own. Their value here is
+  converting our **0.34 of QA slack** (2.177 vs the 2.52 budget) into usable support *without*
+  EXP-007's monotone QA cost.
 
 ## B-SOLVE — numerics
 - **Stage:** A MEASURE · **Status:** partially measured

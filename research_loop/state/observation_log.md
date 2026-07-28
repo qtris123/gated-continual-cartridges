@@ -153,3 +153,24 @@ research_loop/results/EXP-001/result.json ; outputs/2026-07-25-18-02-29-continua
   to a frozen git-HEAD snapshot (verified byte-identical to HEAD before and after), so both runs used
   pristine solver code and the `AM_ORACLE_WRITE` block was inert (absent from both `config.yaml`s).
   **Without the pin, both runs would have silently used half-edited value-solve code.** → RUNBOOK §9c-bis.
+
+## 2026-07-28 — SCOUT-EDIT (board B-ROUTE/B-CAP): LIT-009…LIT-018
+- **Our canonical write is already MEMIT with `C₀ = w·I`.** `continual_am_sparse.py:96` sets
+  `DELTA_WEIGHT=1e-2`, overriding the `0.0` dataclass default (`finetune.py:87`), so `finetune.py:580`
+  routed every AM row through `guarded_sparse_am_value_update` =
+  `min ‖A_new V_S − R_new‖² + w‖V_S − V_S^old‖²` = MEMIT's `Δ = R K₁ᵀ(C₀+K₁K₁ᵀ)⁻¹` at `C₀ = w·I`.
+  The literature's single claim: `C₀` should be the old keys' second moment. Our key is the simplex
+  routing vector `a_S(q) = alpha[:,S]` (`value_solve.py:86`) ⇒ `C₀` is a `t×t` routing Gram from one QA
+  forward pass.
+- **`DELTA_WEIGHT` has never been swept** — every row is 1e-2. HYP-R0 refuted `RIDGE_LAMBDA`, a
+  different knob. DIAG-OBJ-c (`DELTA_WEIGHT=0`) is the family's free negative control.
+- **`mass_on_S` is already computed** (`value_solve.py:146`, `finetune.py:628`) **and no bundle has ever
+  recorded it** — the quantity three literatures (nonparametric-regression attention, modern Hopfield,
+  fast weights) agree bounds every value-only write. Now a standing bundle requirement.
+- **Null-space value editing is identically zero at `top_t=64`**: `C₀ ∈ R^{64×64}` is full rank when
+  `n_old ≫ 64` ⇒ `P = 0`. Those projectors exist only at large support.
+- Preconditioning/projection are **retention** mechanisms; they cannot move MT alone. Their value is
+  converting our 0.34 of QA slack into support without EXP-007's monotone QA cost.
+- Ranking (findings, not decisions): LIT-017 null-space key placement > LIT-011/012 null-space value
+  projection at large `top_t` > LIT-009/010 `C₀`-metric solve (LIT-010 predicts a **sign flip** on the
+  EXP-007 top128 anomaly) > LIT-013/015 disjoint-support selection.

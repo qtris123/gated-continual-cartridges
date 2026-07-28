@@ -50,8 +50,33 @@
   (SCOUT-EDIT dispatched: null-space editing, delta-rule writes, MEMIT-style multi-edit) or designed
   here. That is the novelty budget, now backed by a measurement rather than an aspiration.
 
+- ✅ **SCOUT-EDIT (LIT-009…LIT-018): our write is already MEMIT with the wrong metric.**
+  `continual_am_sparse.py:96` sets `DELTA_WEIGHT=1e-2`, overriding the `0.0` dataclass default
+  (`finetune.py:87`), so every AM row went through `guarded_sparse_am_value_update` =
+  **MEMIT's `Δ = R K₁ᵀ(C₀ + K₁K₁ᵀ)⁻¹` with `C₀ = w·I`**. The editing literature's one statement is that
+  `C₀` must be the **second moment of the old keys**, not the identity — and our "key" is the simplex
+  routing vector `a_S(q) = alpha[:,S]` (`value_solve.py:86`), so `C₀` is a `t×t` routing Gram from **one
+  QA forward pass** with hooks we already have. `DELTA_WEIGHT` has **never been swept** (HYP-R0 refuted
+  `RIDGE_LAMBDA`, a different knob), so DIAG-OBJ-c (`DELTA_WEIGHT=0`, in flight) doubles as this
+  family's free negative control.
+- 🔥 **`mass_on_S` is already computed and has never been recorded** (`value_solve.py:146`,
+  `finetune.py:628`). It is the quantity three independent literatures say bounds any value-only write.
+  Now a standing bundle requirement (WORKERS.md).
+- **Null-space value editing is identically zero at `top_t=64`** (`C₀` full rank ⇒ `P = 0`); the
+  retention-preserving projectors only exist at large support. `top_t` is now entangled with three
+  mechanisms (query count, min-norm rank, null-space existence) and cannot be swept as a scalar.
+- **Projection/preconditioning are retention mechanisms** — they cannot move MT alone. Their role is to
+  convert our **0.34 of QA slack** (2.177 vs the 2.52 budget) into support without EXP-007's QA cost.
+
 ## QUEUED FOR THE NEXT CYCLE (all blocked on ORACLE-WRITE releasing `finetune.py`)
-Serialize these — one code-editing worker at a time (MECH-000 lost a batch to two editors on one file):
+Serialize these — one code-editing worker at a time (MECH-000 lost a batch to two editors on one file).
+**Priority 0 (no code edit, GPU-only — dispatch the moment a GPU frees):**
+- **DIAG-ROUTING** — the cheapest discriminator SCOUT-EDIT named: one forward-pass-only run yielding
+  four numbers — eigenspectrum/effective rank of the QA routing Gram at `top_t=512`; `ρ` = MT routing
+  energy in its approximate null space; `mass_on_S` + routing entropies for MT vs QA; and the QA/MT
+  mean-routing overlap. **Jointly confirms or refutes LIT-011/012/013 and bounds every value-only
+  mechanism, with no training.**
+**Then, serialized code edits:**
 1. **MECH-QUERIES** (likely the biggest single lever): expose `max_queries_per_head` as an env knob and
    run `n ∈ {256, 1024, 4096}` at fixed `top_t=32`. An exactly-determined 64×64 solve has **zero**
    generalisation headroom; the paper uses ~250× more rows. Then re-test `top_t` jointly at `n ≫ t`.
@@ -60,6 +85,13 @@ Serialize these — one code-editing worker at a time (MECH-000 lost a batch to 
    `_should_fit_beta` from `key_mode` so β can run with frozen keys. β has never actually executed.
 3. **MECH-TARGET**: the DIAG-WIRE fix (opt-in target branch at `finetune.py:477`, `target_accumulator`
    plumbing for `teacher_attention`, fail-loud guard in `continual.py`), then re-run EXP-008 for real.
+4. **MECH-METRIC** (LIT-009/010): replace `C0 = w*I` in `guarded_sparse_am_value_update` with the
+   second moment of the OLD routing vectors, collected in one QA forward pass. Small change, large
+   literature. LIT-010 predicts a **sign flip on the EXP-007 top128 anomaly**, which is exactly the
+   identity-metric min-norm interpolant at `core.py:198-204` — a sharp, falsifiable prediction.
+5. **MECH-NULLKEY** (LIT-017, the most promising and the most work): null-space **key** placement — the
+   only imported operator that attacks routing and retention together and escapes the nonparametric
+   bound. Gated on beta actually working (B-SOLVE's three fixes).
 
 ## NEXT ACTIONS (first cycle of the new loop)
 The board is at its initial state — every entry is stage **A MEASURE**. Open with a batch that uses

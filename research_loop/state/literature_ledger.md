@@ -394,3 +394,523 @@
   64/512 slots free) sits outside the family the correlation was measured in. Whitening by `W_o`
   ignores the MLP and every downstream layer, so it is a first-order correction at best.
 - Related: B-OBJ oracle, LIT-003.
+
+---
+
+> **SCOUT-EDIT (2026-07-28) — external import block, LIT-009…LIT-018.** Dispatched after SCOUT-AM
+> established (LIT-004) that `AM.pdf` contains **no** procedure for writing new content into keys
+> fitted to *different* content, and that §6 names our regime as future work. Question answered here:
+> **how does the literature perform a closed-form, gradient-free write of NEW content into a FIXED,
+> ALREADY-OCCUPIED associative store without destroying what is already there?** Families covered:
+> closed-form model editing (ROME / MEMIT / EMMET), null-space & orthogonal-projection continual
+> learning (AlphaEdit, Adam-NSCL, OWM, GPM), delta-rule / fast-weight associative writes (Schlag et
+> al., DeltaNet, modern Hopfield, test-time regression), recursive least squares / Sherman-Morrison /
+> Kalman sequential updates (Larimar, RLS layers), plus one synthesis (LIT-017) and one falsifier
+> (LIT-018).
+>
+> **NOTATION — read once; every entry below uses it.** Per (layer, KV-head) of Qwen3-4B-Instruct-2507
+> (36 layers × 8 KV-heads, d = 128): the cartridge is `K ∈ R^{512×d}` (frozen under `KEY_MODE=freeze`)
+> and `V ∈ R^{512×d}` (`cache.trainable_values`). A head's output is `o(q) = a(q)ᵀV` with
+> `a(q) = softmax(qKᵀ/√d + β) ∈ Δ^{511}`. Only rows `S` (|S| = `top_t`) move, so
+> `Δo(q) = a_S(q)ᵀ ΔV_S`. **Therefore, in every editing paper's notation, our "weight matrix" is
+> `W = V_Sᵀ ∈ R^{d×t}` and our "key" is the *routing vector* `a_S(q) ∈ R^t_{≥0}` — NOT the model's key
+> vector.** Write `A_new = [a_S(q)]_{q ∈ MT-ref} ∈ R^{n×t}` (this is literally `X` at
+> `value_solve.py:86`), `A_old = [a_S(q)]_{q ∈ QA}`, and the old-key second moment
+> `C₀ = A_oldᵀA_old ∈ R^{t×t}`. Two structural consequences used repeatedly: (i) our keys are
+> **non-negative and sum-to-one**, so `⟨a_old, a_new⟩ ≥ 0` always and two routing vectors can only be
+> orthogonal by having **disjoint support**; (ii) `a_S(q)` is fully determined by `K` and `q` — with
+> frozen keys **we do not get to choose the key we write on**, which is the one freedom every
+> mechanism below assumes it has.
+>
+> **CODE FINDING THAT FRAMES THIS ENTIRE BLOCK (verified by reading, no GPU).** Our canonical write is
+> *already* a MEMIT-shaped update — with the **wrong metric**. `continual_am_sparse.py:96` defaults
+> `DELTA_WEIGHT=1e-2` (the dataclass default at `finetune.py:87` is `0.0`, so the launcher overrides
+> it), and `finetune.py:580` branches on `use_old_guard or config.delta_weight > 0`. **Therefore every
+> AM row in `results.csv` — EXP-001/003/004/005/005b/007/008, all with `delta_w=1e-2` — ran
+> `guarded_sparse_am_value_update`, never the plain `sparse_am_value_update`.** That function appends
+> `√w·I` rows with target `√w·V_S^old` (`value_solve.py:365-369`), i.e. it minimises
+> `‖A_new V_S − R_new‖² + w‖V_S − V_S^old‖²` — which is exactly MEMIT's
+> `Δ = R K₁ᵀ(C₀ + K₁K₁ᵀ)⁻¹` **with `C₀ = w·I`, an isotropic metric.** Every entry below is a
+> statement about what `C₀` should be instead of `1e-2·I`. Note also that `DELTA_WEIGHT` itself has
+> **never been swept** (every AM row is 1e-2); HYP-R0 refuted `RIDGE_LAMBDA`, a different knob.
+
+---
+### LIT-009: Covariance-preconditioned closed-form multi-edit — *Mass-Editing Memory in a Transformer* (MEMIT, arXiv 2210.07229, ICLR 2023)
+- Status: candidate
+- Board entry: **B-CAP** (primary), forgetting (secondary)
+- Mechanism (1 paragraph): treat a weight matrix as a linear associative memory whose pre-existing
+  content satisfies the normal equation `W₀K₀K₀ᵀ = M₀K₀ᵀ`. To add new pairs `(K₁, M₁)` while keeping
+  the old ones, expand to `W₁[K₀|K₁][K₀|K₁]ᵀ = [M₀|M₁][K₀|K₁]ᵀ` and subtract, giving the **entire
+  method in one line**: `Δ = R K₁ᵀ(C₀ + K₁K₁ᵀ)⁻¹` with residual `R ≜ M₁ − W₀K₁` and
+  **`C₀ = λ·E_k[kkᵀ]`**, the *uncentered second moment of the pre-existing keys*, estimated once from
+  100,000 Wikitext samples (GPT-J; 50,000 for GPT-NeoX) with `λ ≈ 1.5·10⁴–2·10⁴` "balancing the
+  weighting of new vs. old associations". The edit key `kᵢ` is the MLP input activation averaged over
+  `P = 10` random prefixes (`kᵢ = (1/P)Σⱼ k(xⱼ + sᵢ)`) so the key generalises across contexts; the
+  target `zᵢ` is found by 20–25 optimisation steps and then **spread over a range of layers**,
+  `rᵢˡ = (zᵢ − hᵢᴸ)/(L − l + 1)`. Scales to 10,000 simultaneous edits. **Note the split: the only
+  gradient in MEMIT is in computing the target `z`; the weight update itself is closed-form.** We are
+  strictly more gradient-free than MEMIT — our target is `compute_teacher_targets` (`teacher.py`), a
+  closed-form teacher attention output, so `gradient_steps` stays 0.
+- Maps to our code: `cartridges/am/core.py::_ridge_lstsq` (add an optional `metric: Tensor` argument
+  and replace `XtX.diagonal().add_(lam)` at `:208` with `XtX += C0_SS`), and
+  `cartridges/am/value_solve.py::guarded_sparse_am_value_update` (`:365-369`: replace the
+  `√w·I` block with a Cholesky factor of `C₀_SS + λI`, keeping today's behaviour when `C₀ = wI`).
+  A new collector — `G = Σ_{q∈QA} a(q)a(q)ᵀ ∈ R^{512×512}` per (layer, head) — reuses the machinery
+  already present: `install_query_capture_hooks` (`sparse_cache_finetuning`), `AMQueryAccumulator`,
+  and the `OLD_REF_DATA_PATH` QA-parquet loader at `continual_am_sparse.py:251`. Proposed opt-in flags
+  `AM_PRECOND ∈ {none, memit_c0}` (default `none` ⇒ bit-identical), `AM_OLD_GRAM_PATH`,
+  `AM_C0_LAMBDA` (MEMIT's λ, the new-vs-old dial).
+- **Prediction (about OUR signature):** the preconditioner acts on **forgetting**, not acquisition, so
+  at fixed `top_t = 64` I predict **MT essentially unchanged (Δ ≤ 0.1, inside noise)** and QA improved
+  from 2.252 toward the Phase-1 floor 2.239. The *discriminating* prediction is about the `top_t`
+  curve: EXP-007's monotone QA degradation (2.1766 → 2.2521 → 2.4837 at t = 32/64/128) is the
+  signature of an isotropic penalty that is blind to *which slot combinations QA reads*. Under `C₀`
+  that curve should **flatten** — QA at `top_t=128` should come back under ~2.30. If QA still
+  degrades monotonically with the true `C₀` in place, the forgetting is not entering through the value
+  write at all and this whole family is refuted for us.
+- Cost: **gradient-free, `gradient_steps = 0`.** One extra forward pass over the QA reference set with
+  query capture (the same pass `ENABLE_OLD_REFERENCE_GUARD=1` already does), done **once** after
+  Phase 1 and cached to disk. Memory: `36 × 8 × 512² × 4 B ≈ 302 MB` fp32 for the full Gram (slice
+  `G[S,S]` per document); or store the raw QA queries and recompute `a` per document (less memory,
+  more flops). Solve cost unchanged — still one `t×t` Cholesky. No extra solves.
+- Why it might NOT transfer: MEMIT's `C₀` is a covariance of *model activations* in a `d₀`-dim space
+  estimated from 10⁵ samples; ours is a covariance of **simplex-valued routing vectors** in a
+  `t ≤ 512`-dim space. Non-negative keys give `C₀` a dominant near-rank-one component (the mean
+  routing vector), so the preconditioner may act as global shrinkage rather than directional
+  whitening — i.e. degenerate to a `DELTA_WEIGHT` rescale (see LIT-018). Also MEMIT preserves
+  *pretraining* knowledge under a frozen `W₀`; our `V` has itself been *fitted* to QA in Phase 1, so
+  the thing being preserved is a fit, not a prior, and `C₀` built from a QA *reference* set is only as
+  representative as `OLD_REF_DATA_PATH`.
+- Related: LIT-010, LIT-011, LIT-018, EXP-007, B-CAP.
+
+---
+### LIT-010: Preservation-memorization with an **equality** constraint — ROME + EMMET, *A Unified Framework for Model Editing* (arXiv 2403.14236, EMNLP Findings 2024)
+- Status: candidate
+- Board entry: **B-CAP** (primary), **B-SOLVE** (secondary)
+- Mechanism (1 paragraph): ROME and MEMIT optimise the *same* objective —
+  `argmin_Ŵ ‖ŴK₀ − W₀K₀‖²_F  s.t.  Ŵk_e = v_e` — differing only in whether the new content enters as
+  an **equality constraint** (ROME, one edit) or a **least-squares term** (MEMIT, batched). ROME's
+  Lagrangian gives a rank-one update
+  `Δ = (v_e − W₀k_e)(k_eᵀC₀⁻¹)/(k_eᵀC₀⁻¹k_e)` (a Sherman-Morrison form); EMMET generalises the
+  equality constraint to a batch:
+  **`Δ = (V_E − W₀K_E)(K_EᵀC₀⁻¹K_E)⁻¹K_EᵀC₀⁻¹`**, with `C₀ = K₀K₀ᵀ = Σᵢ k⁰ᵢ(k⁰ᵢ)ᵀ` requiring ≥ ~4d
+  independent vectors to be invertible, and `D = K_EᵀC₀⁻¹K_E` "often ill-conditioned" hence stabilised
+  as `D ← D + αI, α = 0.1`. Batches to 10,000 edits with MEMIT-level quality. **The transferable
+  point for us is the tradeoff direction:** the equality constraint makes *acquisition* a hard
+  guarantee and puts all the slack into preservation — the opposite of MEMIT's least-squares
+  compromise, and the right way round given that our entire deficit is acquisition.
+- Maps to our code: in our notation EMMET reads
+  `ΔV_S = C₀⁻¹A_newᵀ(A_newC₀⁻¹A_newᵀ + αI)⁻¹R_new` — an exact fit of the `n` reference queries
+  whenever `t ≥ n`, selecting the **minimum-`C₀`-norm** solution among all exact fits. **Our code
+  already takes exactly this branch, with the identity metric:** `core.py:198-204` computes
+  `W = Xᵀ(XXᵀ + λI)⁻¹Y` whenever `n < k`, i.e. whenever `top_t > max_queries_per_head = 64`. So the
+  change is one branch: `core.py::_ridge_lstsq`, `n < k` path — replace `XXᵀ` with `A C₀⁻¹ Aᵀ` and
+  post-multiply by `C₀⁻¹`. Proposed opt-in flag `AM_PRECOND=emmet_c0` (shares `AM_OLD_GRAM_PATH` with
+  LIT-009); `α` maps onto the existing `RIDGE_LAMBDA_MIN`.
+- **Prediction (about OUR signature):** the board's unexplained EXP-007 `top_t=128` anomaly
+  (QA 2.4837 / MT 2.6860, *both worse*) is the **identity-metric min-norm interpolant**: at n=64 < t=128
+  the solve interpolates its 64 reference queries and spends its remaining 64 degrees of freedom
+  isotropically — including on slot combinations QA reads. Under the `C₀⁻¹` metric with everything
+  else identical I predict a **sign flip on the QA axis**: QA at `top_t=128` back to ≤ 2.30 (the free
+  directions are now spent where QA is blind) with MT no worse than the t=64 value (~2.54), because
+  both metrics fit the reference queries exactly. **Falsifier:** if `top_t=128` under `C₀` still gives
+  QA > 2.40, the min-norm metric is not the mechanism, and B-CAP's re-opening (SCOUT-AM) should be
+  resolved by query count alone (LIT-003) rather than by the metric.
+- Cost: **gradient-free, `gradient_steps = 0`**, identical flop count (an `n×n` Cholesky either way),
+  no extra solves. Needs the same `G` statistic as LIT-009 — collect once, use for both.
+- Why it might NOT transfer: EMMET's equality constraint is meaningful because its `k_e` are a handful
+  of well-separated activation vectors; our `A_new` rows are up to 64 **near-parallel simplex
+  vectors**, so `A_newC₀⁻¹A_newᵀ` will be far worse conditioned than EMMET's `D` and may need an `α`
+  large enough to erase the distinction from ridge. And "exact fit of the reference queries" is an
+  interpolation guarantee about our *reference* set — with `max_queries_per_head = 64` (LIT-003) that
+  is precisely the quantity we have most reason to distrust.
+- Related: LIT-009, LIT-003, EXP-007, B-CAP, B-SOLVE.
+
+---
+### LIT-011: Null-space-projected editing — *AlphaEdit: Null-Space Constrained Knowledge Editing* (arXiv 2410.02355, ICLR 2025) + its reproducibility study (arXiv 2606.26783)
+- Status: candidate
+- Board entry: **forgetting** (primary), **B-CAP** (secondary)
+- Mechanism (1 paragraph): instead of *penalising* damage to preserved knowledge, **forbid** it. Take
+  `{U, Λ, Uᵀ} = SVD(K₀K₀ᵀ)` over the preserved-knowledge keys `K₀` (in practice ~100,000 Wikipedia
+  triplets), delete the eigenvectors whose eigenvalue exceeds a threshold (**10⁻²**), keep the rest as
+  `Û`, and form the projector **`P = ÛÛᵀ`**. The edit is then computed *inside* that subspace:
+  **`Δ = R K₁ᵀP(K_pK_pᵀP + K₁K₁ᵀP + I)⁻¹`**, where `K_p` are the keys of *previous* edits in a
+  sequential chain (the term `‖Δ̃PK_p‖²` protects them, using the fact that `W K_p = V_p` already
+  holds after those edits). Because `ΔP K₀ ≈ 0`, "the output of post-edited LLMs remains unchanged
+  when queried about the preserved knowledge" **by construction, with no preserved targets required**.
+  `P` is independent of the edit and is computed **once**; the paper advertises the whole thing as
+  "a single line of additional code" giving +36.7% average over locate-then-edit baselines.
+- Maps to our code: in our notation `ΔV_S = P·Z`, `Z = (P A_newᵀA_new P + I)⁻¹ P A_newᵀ R_new`, with
+  `P` the projector onto the approximate null space of `C₀ = A_oldᵀA_old`. Same insertion point as
+  LIT-009: `cartridges/am/core.py::_ridge_lstsq` (accept a projector and solve in the projected basis)
+  and `value_solve.py::guarded_sparse_am_value_update`. `P` is a per-(layer, head) tensor built once
+  after Phase 1 from the same `G` Gram, cached next to the cartridge (mirror the `trainable_beta`
+  persistence pattern in `cartridges/cache.py::save`/`from_pretrained`, `:243`/`:308`). Proposed
+  opt-in flag `AM_PRECOND=alphaedit`, `AM_NULLSPACE_TAU` (AlphaEdit's 1e-2).
+- **Structural caveat, stated before the prediction:** with `top_t = 64` and `n_old ≫ 64` QA reference
+  queries, `C₀ ∈ R^{64×64}` is generically **full rank ⇒ P = 0 ⇒ the update vanishes entirely.**
+  Null-space editing has room only if (a) the QA routing vectors are effectively low-rank, or (b) `t`
+  is much larger than that effective rank. **This makes null-space editing a reason to run
+  `top_t = 512` — the one support setting HYP-S1 never tested — rather than a drop-in at t=64.**
+- **Prediction (about OUR signature):** three, in increasing order of cost. (i) The eigenspectrum of
+  `C₀` at `top_t = 512` decides the entire family: with `r_eff(τ) = #{λᵢ > τ·λ_max}`, the writable
+  dimension is `512 − r_eff`. I predict `r_eff` is **small per head** (attention from one task's
+  queries onto a 512-slot cartridge is spiky and query-clustered), so a 512-slot null-space write has
+  real room while a 64-slot one has none. (ii) The decisive scalar is
+  `ρ = E_{q∈MT}‖P a(q)‖²/‖a(q)‖²`: `ρ → 0` means MT reads exactly where QA reads, so **no value-space
+  operator whatsoever can separate the two axes** — that would confirm B-ROUTE as *capped*
+  independently of the write-ceiling oracle; `ρ ∈ [0.3, 0.8]` means the axes are separable in value
+  space and this is the operator that separates them. (iii) If run at `top_t=512` with
+  `AM_PRECOND=alphaedit`, QA should be **pinned within noise of the Phase-1 floor 2.2388** — better
+  than any AM point on the board — with MT improving only in proportion to `ρ`.
+- Cost: **gradient-free, `gradient_steps = 0`.** One symmetric 512×512 eigendecomposition per
+  (layer, KV-head) = 288 tiny EVDs, milliseconds each, computed **once** after Phase 1 (P does not
+  depend on the document — the paper's own efficiency argument). Same 302 MB `G` as LIT-009, or store
+  `P` directly. No extra solves per document.
+- Why it might NOT transfer (with *measured* failure modes from the reproducibility study, arXiv
+  2606.26783): that study reproduces efficacy/generalisation/specificity but **not** fluency and
+  consistency (8–15% and 3–10× worse), finds degradation past ~5,000 sequential edits, and — the part
+  that matters most to us — reports that AlphaEdit **fails entirely on Gemma2** because its
+  post-feedforward layer normalisation "violates the linear contribution assumption, making the
+  null-space projection's protection against catastrophic forgetting **bounded rather than
+  unconditional**", and on Phi3 because fused projections break the localisation heuristic. **Our
+  setting violates that linear assumption more severely than Gemma2's:** the path from `V` to CE runs
+  through a softmax we may also be perturbing (if β or keys move, `a_old` itself changes and `P` goes
+  stale), then `o_proj`, RMSNorm and 30+ downstream layers. Exact preservation of a *head output* is
+  not exact preservation of token CE. Chain length is not our risk (we do ~dozens of writes, not
+  5,000), but the `C₀` sample is: it comes from `OLD_REF_DATA_PATH`, not the QA eval split.
+- Related: LIT-009, LIT-012, LIT-017, LIT-018, B-CAP, B-ROUTE.
+
+---
+### LIT-012: How the field actually *builds* the approximate null space — Adam-NSCL (CVPR 2021), OWM (Nature MI 2019), GPM (ICLR 2021)
+- Status: candidate
+- Board entry: **forgetting** (primary), B-CAP (secondary)
+- Mechanism (1 paragraph): three constructions of the same projector, differing in the statistic and,
+  crucially, in the **threshold rule** — which is what AlphaEdit leaves as a bare `10⁻²`.
+  **Adam-NSCL** (*Training Networks in Null Space of Feature Covariance for Continual Learning*, Wang,
+  Li, Sun, Xu, CVPR 2021 oral) states the stability condition as `X̄ˡ_{t−1} Δwˡ_t = 0`, where `X̄` is
+  the **uncentered feature covariance of all previous tasks' layer inputs**, accumulated across tasks;
+  since the exact null space is empty in practice, it takes the SVD of `X̄` and keeps the subspace
+  spanned by the singular vectors of the **smallest** singular values, then projects the candidate
+  (Adam) update into it. **OWM** (Zeng et al., *Continual learning of context-dependent processing*,
+  Nature Machine Intelligence 2019) writes the projector in closed form and maintains it
+  **recursively, RLS-style**: `P_n = I − A_n(A_nᵀA_n + αI)⁻¹A_nᵀ` with `A_n` holding all previously
+  seen inputs as columns and `α` a noise floor; the RLS recursion means old inputs are **never
+  stored**. **GPM** (Saha et al., ICLR 2021) makes the threshold explicit and *energy-based*: build
+  `Rˡ = [xˡ₁ … xˡ_{n_s}]` from `n_s` random samples, SVD it, and keep the smallest `k` satisfying
+  **`‖(Rˡ)_k‖²_F ≥ ε_th‖Rˡ‖²_F`**; project `∇W ← ∇W − (∇W)Mˡ(Mˡ)ᵀ`; append each task's new directions
+  to the basis. GPM also names the failure mode that matters to us: "the size of GPM is determined by
+  the network architecture", so on dissimilar task sequences the basis **saturates** and plasticity
+  dies (they report 45–78% of the maximum basis used on ResNet18).
+- Maps to our code: same insertion point as LIT-011 (`core.py::_ridge_lstsq`, plus a new
+  `cartridges/am/nullspace.py` that builds and caches `P`), but this entry supplies the knobs
+  AlphaEdit hides: proposed `AM_NULLSPACE_RULE ∈ {eig_abs, eig_rel, energy}` (`eig_abs` = AlphaEdit's
+  absolute 10⁻²; `eig_rel` = Adam-NSCL's smallest-singular-value rule; `energy` = GPM's `ε_th`),
+  `AM_NULLSPACE_TAU`, and OWM's recursion as `AM_NULLSPACE_RECURSIVE=1` for the QA→MT→SA chain —
+  after MT is written, fold `A_MT` into the accumulated Gram and re-derive `P` in closed form, with no
+  re-solve of anything else and no stored data.
+- **Prediction (about OUR signature):** the threshold **is** the plasticity/stability dial, and I
+  predict a single τ sweep traces our **entire Pareto front with one mechanism**: `ε_th → 1` (τ → 0)
+  ⇒ writable subspace ≈ ∅ ⇒ QA ≈ the Phase-1 floor **2.2388** and MT ≈ the untrained ceiling **3.7826**;
+  `ε_th → 0` (τ → ∞) ⇒ `P = I` ⇒ exactly today's numbers (QA 2.18–2.25, MT ≈ 2.54). The win condition
+  (QA ≤ 2.52 **and** MT ≤ 2.02) therefore requires an **interior** τ that beats *both* endpoints on
+  MT — which can only exist if MT's routing energy outside the QA subspace is substantial
+  (LIT-011's `ρ`). **Falsifiable in one sweep:** if τ produces a monotone trade with MT never below
+  ~2.5 anywhere on the curve, projection-based methods are refuted for us and our deficit is not an
+  interference problem at all.
+- Cost: **gradient-free, `gradient_steps = 0`.** GPM's `n_s` is only a few hundred samples per task,
+  so the QA statistic need not be large (this bounds the LIT-009 collection cost from above). OWM's
+  recursion makes the N-stage version `O(t²)` per stage with **zero** stored old data — the cheapest
+  path to a 3-stage QA→MT→SA chain we have found. One EVD/SVD per (layer, head), once per stage.
+- Why it might NOT transfer: all three project **gradients**, and we have none — we apply the
+  projector to a *closed-form solution* instead. That is mathematically fine (solve inside the
+  P-subspace) but it removes the assumption these methods lean on: an SGD step is *small*, so
+  "old outputs unchanged" is a well-justified linearisation. Our updates are **not** small — the
+  logged `value_max_abs` of 816 (EXP-001) and 486 (EXP-003) is an order of magnitude above normal KV
+  scale — so a projector guarantees `A_old ΔV_S ≈ 0` only to the extent that `A_old` itself does not
+  move, which β and key rewrites would violate. GPM's saturation warning also applies directly: with
+  only 512 slots, each stage consumes null-space dimensions permanently.
+- Related: LIT-011, LIT-014, LIT-015, LIT-017.
+
+---
+### LIT-013: Delta rule / fast weights — the *key* is the thing that must be chosen, and non-negative keys can only be orthogonal by disjoint support (arXiv 2102.11174; DeltaNet arXiv 2406.06484)
+- Status: candidate
+- Board entry: **B-ROUTE**
+- Mechanism (1 paragraph): in *Linear Transformers Are Secretly Fast Weight Programmers* (Schlag,
+  Irie, Schmidhuber, ICML 2021) the purely additive (Hebbian) write
+  `W⁽ⁱ⁾ = W⁽ⁱ⁻¹⁾ + v⁽ⁱ⁾ ⊗ φ(k⁽ⁱ⁾)` interferes as soon as keys are non-orthogonal: "to prevent
+  associations from interfering with each other upon retrieval, the respective keys need to be
+  orthogonal. Otherwise the dot product will attend to more than one key and return a linear
+  combination of values", and "with keys embedded in a `d_dot` space, there cannot be more than
+  `d_dot` orthogonal vectors" — empirically, `d_key = d_dot = 64` "begins to accumulate errors with 60
+  or more associations". The **delta rule** fixes the *write*, not the key: read out what is currently
+  stored at that key, `v̄⁽ⁱ⁾ = W⁽ⁱ⁻¹⁾φ(k⁽ⁱ⁾)`, then write only the correction,
+  `W⁽ⁱ⁾ = W⁽ⁱ⁻¹⁾ + β⁽ⁱ⁾(v⁽ⁱ⁾ − v̄⁽ⁱ⁾) ⊗ φ(k⁽ⁱ⁾)`, with `β⁽ⁱ⁾` the **write strength** ("to which extent
+  the new value will replace the previous value"). Everything else in that literature is about making
+  keys retrievable: DPFP `φ_{iν}(k) = ReLU([k;−k])_i · ReLU([k;−k])_{i+ν}` to raise effective
+  orthogonality, sum-normalisation `φ'(q) = φ(q)/Σ_j φ(q)_j` so the positive and negative terms of the
+  delta write stay balanced in the overcapacity regime, and in DeltaNet (Yang et al., NeurIPS 2024)
+  ℓ2-normalised keys with `β ∈ (0,2)`, giving the generalised-Householder recurrence `(I − βkkᵀ)`.
+- Maps to our code: **the delta-rule *write* is already what we do** — the residual formulation at
+  `value_solve.py:79-83` (`residual = targets − α_{¬S}V_{¬S}`) is exactly "subtract what is currently
+  stored, then solve for the correction", and our batch least-squares is the converged limit of
+  repeated delta steps. So the transferable content is **not** the update rule; it is the **key
+  condition**, which has two concrete code consequences. (i) `cartridges/am/ranking.py::rank_am_slots`
+  should score slots by a **margin**, not by new-content mass alone:
+  `score_j = MT_mass_j − μ·QA_mass_j` — proposed `SLOT_SELECTION=mass_margin` with
+  `AM_SLOT_MARGIN_MU` (μ = 0 recovers today's pure-TF selector **bit-identically**). This is the
+  correct specialisation of orthogonality to our store: because routing vectors are non-negative,
+  `⟨a_old, a_new⟩ ≥ 0` always, **with equality iff the slots QA reads and the slots MT reads are
+  disjoint** — so "orthogonal keys" here literally means "disjoint support". (ii) The candidate pool
+  at `finetune.py:496-499` for `KEY_MODE ≠ freeze` should be scored the same way (→ LIT-017).
+- **Prediction (about OUR signature):** the capacity/orthogonality statement gives a checkable
+  quantity. Per (layer, head), define the **histogram intersection**
+  `overlap = Σ_{j=1..512} min(ā_QA,j, ā_MT,j)` between the mean QA and mean MT routing vectors. I
+  predict `overlap` is **large (> 0.5)** — the two tasks read the same slots — and, worse, that the
+  current TF selector *increases* it, because TF picks the slots receiving the largest MT mass and
+  those are also the highest-mass QA slots (attention sinks / high-norm slots). That reframes the
+  K-GATE result (pure TF beat TF-IDF on **both** axes, QA 2.252 vs 2.635 and MT 2.543 vs 3.007) as
+  "IDF is the *wrong* orthogonality proxy, but some orthogonality term is still needed": IDF is a
+  corpus-level document-frequency statistic, whereas the quantity the theory names is the **actual QA
+  attention mass on that slot**. `mass_margin` at small μ should therefore beat both pure TF and
+  TF-IDF at identical cost. **Falsifier for a whole family:** if `overlap` is small (< 0.2), then
+  interference is not our problem and LIT-011/012/013 are all refuted at once.
+- Cost: **gradient-free, `gradient_steps = 0`, no extra solves.** The margin selector needs one extra
+  512-vector per (layer, head) — the mean QA routing vector `ā_QA` — which is **the diagonal of the
+  same `G` matrix LIT-009 already collects**, so it is free if `G` exists. No extra forward passes
+  beyond that one QA pass, no extra memory beyond 512 floats × 288 heads (≈ 0.6 MB).
+- Why it might NOT transfer: the fast-weight literature writes into a **linear** store whose keys the
+  model itself produces and can adapt end-to-end; ours is a softmax store with keys frozen from a
+  different task, so we cannot *make* a key orthogonal — only choose among 512 pre-existing ones,
+  which upper-bounds how disjoint the supports can be. DeltaNet's `β` is a learned per-step scalar
+  gate; our nearest analogue (AM's per-key `β` logit bias) is currently broken (B-SOLVE, LIT-002).
+  And capacity results stated for `d_dot` orthogonal directions do not directly bound a softmax store
+  where retrieval is soft and every slot contributes.
+- Related: LIT-016, LIT-017, K-GATE (HYP-G1), B-ROUTE.
+
+---
+### LIT-014: Test-time regression — softmax attention is *nonparametric*, so new content needs new keys; and RLS is the exact sequential write (arXiv 2501.12352)
+- Status: candidate
+- Board entry: **B-ROUTE** (primary, as a theoretical cap), **B-SOLVE** (secondary)
+- Mechanism (1 paragraph): Wang & Li formalise associative recall as memorise-then-retrieve and cast
+  memorisation as **weighted least squares**, `min_{m∈ℳ} ½Σ_{i≤t} γᵢ⁽ᵗ⁾‖vᵢ − m(kᵢ)‖²`, whose linear
+  solution is `M_t = V_tᵀK_t(K_tᵀK_t)⁻¹`. Three design choices (regression weights, function class,
+  test-time optimiser) then generate the whole zoo: **linear attention** = one Hebbian step with
+  `K_tᵀK_t ≈ I`; the **delta rule** = one gradient step,
+  `M_t ← M_{t−1} + α(v_t − M_{t−1}k_t)k_tᵀ`; **recursive least squares (RLS)** = the *exact* solution
+  maintained online by Sherman-Morrison,
+  `P_t = P_{t−1} − (P_{t−1}k_tk_tᵀP_{t−1})/(1 + k_tᵀP_{t−1}k_t)` with `P_t = (K_tᵀK_t)⁻¹`, and
+  `M_t = M_{t−1} + (v_t − M_{t−1}k_t)k_tᵀP_t`; and **softmax attention = nonparametric
+  (Nadaraya-Watson) kernel regression**. Their diagnosis of linear attention is ours verbatim: it
+  "ignores the covariance between the dimensions of the key vectors" by approximating `K_tᵀK_t ≈ I`,
+  and whitening by `(K_tᵀK_t)⁻¹` "accounts for inter-key correlations, preventing information loss
+  when keys occupy correlated directions". **The load-bearing consequence for B-ROUTE:** because
+  softmax attention is *nonparametric*, the model **is** its stored key-value pairs — a new
+  association requires a **new key**, since there is no parametric weight into which it can be folded.
+  A value-only write into frozen keys is therefore a request for a nonparametric regressor to
+  represent a new function **without new sample points**; it can only re-weight what the existing
+  kernel already places mass on.
+- Maps to our code: (a) the whitening statement is the same one-line change as LIT-009/010
+  (`core.py::_ridge_lstsq`: `λI → C₀`); (b) the RLS recursion is the **N-stage extension** — after MT
+  is written, fold its routing into the Gram (`C ← C + A_MTᵀA_MT`) so that a Phase-3 SA write
+  automatically preserves *both* QA and MT with **no stored data and no re-solve**. Proposed opt-in
+  flag `AM_SEQUENTIAL_GRAM=1`, with the running Gram persisted beside the cache in
+  `cartridges/cache.py::save` / `::from_pretrained` (mirror the `trainable_beta` pattern at `:243`
+  and `:308`).
+- **Prediction (about OUR signature):** this entry predicts the **sign and the bound** of the
+  ORACLE-WRITE result. If softmax attention is nonparametric in the strict sense above, substituting
+  *any* values into frozen slots — the teacher's own document values included — changes only the
+  regressor's values at existing sample points, so the achievable change in the head output is bounded
+  by the attention mass those slots receive from MT queries:
+  **`‖Δo(q)‖ ≤ mass_on_S(q)·(value range)`**. That quantity is **already computed** in our code
+  (`value_solve.py:146`, `X.sum(-1).mean()`, and aggregated per layer at `finetune.py:628` as
+  `oracle_ref_mass_on_S_per_layer`) but **has never been recorded in any bundle in
+  `research_loop/results/`**. Concretely I predict `mass_on_S_mean` for MT reference queries at
+  `top_t = 64` is **well under 0.5**, and that post-oracle MT tracks `2.548 − c·mass_on_S` rather than
+  approaching the teacher's 1.87. Reading this number is a **zero-GPU** action wherever an
+  ORACLE-WRITE log exists.
+- Cost: **gradient-free, `gradient_steps = 0`.** The RLS form is `O(t²)` per stage and **removes** the
+  need for `OLD_REF_DATA_PATH`/`ENABLE_OLD_REFERENCE_GUARD` entirely after stage 1 — strictly cheaper
+  than what we run today, which re-collects 64 old queries per document.
+- Why it might NOT transfer: the framework's exact-RLS results are for **linear** memories; softmax
+  attention is the *nonparametric* member of the family, and the paper gives **no closed-form write**
+  for it — which is precisely the gap AM.pdf §6 also names, so this entry corroborates LIT-004 rather
+  than escaping it. Our `(KᵀK)⁻¹` analogue whitens the **routing** Gram, not the model's key Gram, so
+  the transfer is by analogy. And "new keys required" is an argument about the *ideal* regressor; a
+  frozen 30-layer network downstream may still recover usable signal from a metastable mixture.
+- Related: LIT-009, LIT-013, LIT-015, LIT-016, LIT-004, B-ROUTE oracle.
+
+---
+### LIT-015: A closed-form, sequential, **erasable** write into a FIXED 512-slot memory — *Larimar: LLMs with Episodic Memory Control* (arXiv 2403.11901, ICML 2024)
+- Status: candidate
+- Board entry: **B-CAP** (primary), forgetting / N-stage chain (secondary)
+- Mechanism (1 paragraph): a Kanerva-style episodic memory `M ∈ R^{K×C}` with **K = 512 fixed slots**
+  sitting beside a **frozen** LLM. Writing an episode with encodings `Z` and addressing matrix `W₀` is
+  the pseudo-inverse / least-squares solution **`M = W₀†Z`** — Bayesian memory update reformulated as
+  "finding least-square solutions to linear systems". Sequential writes maintain a key covariance and
+  update in **exact RLS form**:
+  **`Cᵢ = Cᵢ₋₁ + αᵢWᵢᵀWᵢ`**, **`Mᵢ = Mᵢ₋₁ + αᵢCᵢ⁻¹Wᵢᵀ(Zᵢ − WᵢMᵢ₋₁)`**, with `αᵢ = +1` to write, so
+  that `M` remains the exact least-squares solution for the growing data; setting **`αᵢ = −1` erases**
+  an episode, leaving `M` the exact least-squares solution with that episode removed. One-shot, no
+  gradients, 8–10× faster than editing baselines, competitive in the **sequential** editing setting.
+  Reported capacity at K = 512: rewrite accuracy ~100% up to **512 edits**, dropping to **82% at
+  1024**.
+- Maps to our code: this is the closest published system to what we are building — same memory size,
+  same frozen LM, same one-shot closed-form write, same sequential requirement. Term for term,
+  `Mᵢ − Mᵢ₋₁ = Cᵢ⁻¹Wᵢᵀ(Zᵢ − WᵢMᵢ₋₁)` **is** our
+  `ΔV_S = (C₀ + A_newᵀA_new)⁻¹A_newᵀ(targets − αV)` with `Wᵢ ↔ A_new` and `Zᵢ ↔ targets` — the only
+  difference being that Larimar's `Cᵢ` accumulates **every previous episode's addresses**, whereas
+  ours is `1e-2·I`. Proposed opt-in flag `AM_PRECOND=rls` (shares the accumulator with LIT-014's
+  `AM_SEQUENTIAL_GRAM`), the running Gram persisted in `cartridges/cache.py`, and `AM_ERASE_ALPHA=-1`
+  as a Phase-3 unlearning knob (`value_solve.py`).
+- **Prediction (about OUR signature):** two, both checkable against data we already produce.
+  (i) **The capacity number is directly comparable and we are far past it.** 512 slots hold ~512
+  one-shot writes at full fidelity — about **one write per slot**. We ask `top_t = 64` slots to absorb
+  an entire document's associations, for each of many documents, on a *shared* support: 1–2 orders of
+  magnitude past Larimar's per-slot budget. I therefore predict per-document MT quality **degrades
+  with document index** within a single Phase-2 run (later documents overwrite earlier ones on the
+  same slots), which is measurable from the existing per-document `am_stats` / `mean_mse` series
+  **with no new GPU run**; if true, the reported MT 2.548 is the average of a decaying curve, not a
+  stable operating point, and per-document slot *disjointness* (a `ranking.py` change) becomes a
+  first-class lever. (ii) Replacing `1e-2·I` with the accumulated `Cᵢ` should show up first as a
+  **reduction in the variance of per-document `mean_mse` across documents**, before it shows up in CE.
+- Cost: **gradient-free, `gradient_steps = 0`**, `O(t²)` per document, and it **removes** the
+  `OLD_REF_DATA_PATH` forward pass after the first stage (the Gram absorbs it). Memory: one `t×t`
+  (or `512×512`) matrix per (layer, head), the same 302 MB object as LIT-009.
+- Why it might NOT transfer: Larimar's addressing matrix `W` is (pseudo-)random and its encoder is
+  **trained** to keep the address space well-conditioned; our addresses are softmax routing vectors we
+  neither choose nor condition, and the pseudo-inverse write assumes episodes share the address space
+  benignly. Larimar also has a trained encoder producing `Z`; our `Z` is the frozen LM's teacher
+  attention output, fixed. And its 512 slots serve *only* the memory, whereas our 512 slots must also
+  keep serving Phase-1 QA.
+- Related: LIT-009, LIT-012, LIT-014, B-CAP.
+
+---
+### LIT-016: Capacity is a property of the **keys** — modern Hopfield separation `Δᵢ` and metastable averages (*Hopfield Networks is All You Need*, arXiv 2008.02217, ICLR 2021)
+- Status: candidate
+- Board entry: **B-ROUTE**
+- Mechanism (1 paragraph): the continuous modern Hopfield energy with interaction `F(x) = exp(x)` has
+  **exponential** storage capacity `~2^{d/2}` in the pattern dimension, converges in **one update**,
+  and that update **is** transformer attention `softmax(βQKᵀ)V`. Whether a stored pattern `xᵢ` is
+  actually retrievable is governed by its **separation**
+  **`Δᵢ = min_{j≠i}(xᵢᵀxᵢ − xᵢᵀx_j)`**: with large `Δᵢ` the query converges to a fixed point
+  exponentially close to `xᵢ`; with small `Δᵢ` the fixed point is a **metastable average** of the
+  poorly separated patterns. Capacity is thus entirely a property of the **keys**; the values are
+  merely what gets read out once routing has been decided.
+- Maps to our code: diagnostic for the value path, prescriptive for the key path. Compute per
+  (layer, head): the separation `Δ_j` of each of the 512 cartridge keys, and the entropy `H(a)` of the
+  routing distribution for MT vs QA queries. `cartridges/am_stability_probe.py` already computes
+  `mass_on_S_mean/min/p10` (`:146-148`, `:243-251`) and is the natural home — proposed opt-in flag
+  `AM_PROBE_SEPARATION=1`. Prescriptive corollary for `cartridges/am/key_select.py`: a rewritten key
+  is only *retrievable* if the rewrite **increases** its separation against the other 511 with respect
+  to MT queries — a criterion neither `select_keys_highest_attention` nor `select_keys_omp` optimises.
+- **Prediction (about OUR signature):** for MT queries against a cartridge whose keys were fitted to
+  QA, I predict `H(a_MT)` sits close to the uniform limit `log 512 ≈ 6.24` nats and is materially
+  higher than `H(a_QA)` — i.e. **no cartridge slot is a well-separated fixed point for MT content**,
+  so MT queries land on a metastable average of many slots. This is the precise, non-hand-wavy version
+  of B-ROUTE, and it makes a **quantitative** claim the write-ceiling oracle can be scored against:
+  the fraction of the head output any value-only write can control is exactly `mass_on_S`, and under
+  near-uniform MT routing `mass_on_S ≈ t/512 = 0.125` at `top_t = 64` (0.0625 at t=32, 0.25 at t=128).
+  **If the oracle write moves MT by much less than a ~12.5% output share implies, the cap is
+  confirmed and it is a key/separation cap, not a value cap** — and note this predicts the observed
+  *flatness* of MT across `top_t` 32/64/128 (2.548 / 2.543 / 2.686) only if the extra mass is being
+  spent on QA-relevant slots, which is exactly what the monotone QA degradation shows.
+- Cost: **gradient-free, `gradient_steps = 0`, no extra solves, no extra forward passes** — two extra
+  reductions over the `alpha` matrix that `compute_attention_weights` already materialises.
+- Why it might NOT transfer: Hopfield capacity results assume patterns are (near-)random, norm-matched
+  and well-separated on a sphere; our 512 cartridge keys are the output of Phase-1 self-distillation
+  and are none of those. The "one update" retrieval story concerns a recurrent map, whereas our
+  attention is applied once inside a much larger network — 30+ downstream layers may recover
+  information that a single metastable average appears to lose. And the `t/512` uniform-routing
+  estimate is an upper bound on *flatness*, not a measurement.
+- Related: LIT-013, LIT-014, LIT-017, B-ROUTE oracle.
+
+---
+### LIT-017: **SYNTHESIS** — null-space **key** placement (AlphaEdit applied to `C_k` instead of `C_v`)
+- Status: candidate *(synthesis, not a single published method: derived from LIT-011 + LIT-012 +
+  LIT-013 + LIT-014 + LIT-016; it is also precisely the open problem AM.pdf §6 names — "move away
+  from subset selection for `C_k`", "architectures that explicitly operate over a fixed set of keys
+  and values")*
+- Board entry: **B-ROUTE** (primary), forgetting (secondary)
+- Mechanism (1 paragraph): every mechanism above operates on **values** and therefore inherits the
+  routing cap LIT-014/LIT-016 describe. Turn the null-space idea 90°: instead of projecting the
+  **value** update into the null space of the old **routing vectors**, choose the **keys** of the
+  rewritten slots to lie in the approximate null space of the old **query** distribution while
+  aligned with the new one. Let `Q₀ = Σ_{q∈QA} qqᵀ ∈ R^{d×d}` (d = 128) with `Q₀ = UΛUᵀ`, let `U_r` be
+  its top-`r` eigenvectors (`r` chosen by GPM's energy rule, LIT-012), and set `P⊥ = I − U_rU_rᵀ`.
+  Place the new key as **`k_new = c · P⊥q̄_MT / ‖P⊥q̄_MT‖`**, where `q̄_MT` is the mean (or top
+  principal direction) of that head's MT reference queries and `c` is chosen so the resulting MT logit
+  `q_MTᵀk_new/√d` matches the logit the *teacher's own* document keys achieve. Then solve values on
+  those keys exactly as now. Result: MT queries route to the rewritten slots (**acquisition**), QA
+  queries produce a logit ≈ 0 there (**retention**), and the value solve finally operates on keys that
+  route for the content being written — the property LIT-004 showed AM always has and we always lack.
+  A **discrete, safer variant** needs no synthetic keys: keep the existing candidate pool at
+  `finetune.py:496-499` (`[K_cartridge[S] ; K_doc]`) but rank candidates by the *whitened* score
+  `(q̄_MTᵀk)·‖P⊥k‖` instead of attention RMS — prefer document keys that MT queries like **and** QA
+  queries are blind to.
+- Maps to our code: `cartridges/am/key_select.py` — a new `select_keys_nullspace(...)` and a new mode
+  in `rewrite_keys_on_support` (`:227-284`); consumed at `cartridges/am/finetune.py:493-509`, the
+  `key_mode != "freeze"` branch that is **already wired and completely untested** (every row in
+  `results.csv` is `key=freeze`). Proposed opt-in flags `KEY_MODE=nullspace` (continuous synthesis) /
+  `KEY_MODE=highest_attention_orth` (discrete selection), plus `AM_KEY_NULLSPACE_TAU`. Requires the
+  QA **query** second moment `Q₀`, collected by the same hooks the `OLD_REF_DATA_PATH` path uses.
+- **Prediction (about OUR signature):** this is the only mechanism in this block that predicts
+  movement on **both** axes in the good direction. (i) Eval-time MT attention mass on the rewritten
+  slots should rise **above** the frozen-key level — which is currently pinned by Phase-1 and, per
+  LIT-016, may be near `t/512 ≈ 0.125` — toward the mass the teacher's document keys receive.
+  (ii) QA attention mass on those same slots should **fall relative to `KEY_MODE=highest_attention`**,
+  which has no orthogonality term and should show the classic key-theft signature (MT improves, QA
+  collapses). (iii) Quantitatively: `KEY_MODE=highest_attention` → MT ≈ 2.2–2.4 with QA > 2.7 (a
+  fail on the QA axis); `KEY_MODE=nullspace` → MT below ~2.3 with QA held under ~2.4.
+  **Discriminator between them:** if both inflict the *same* QA damage, then the damage comes from
+  *removing* the incumbent key, not from the new key's overlap with QA queries — in which case the
+  lever is slot budget/disjointness (LIT-013, LIT-015), not key geometry, and this entry is refuted.
+- Cost: **strictly gradient-free, `gradient_steps = 0`.** One `128×128` eigendecomposition per
+  (layer, KV-head) — 288 tiny EVDs computed **once**; `Q₀` storage `36 × 8 × 128² × 4 B ≈ 19 MB`
+  (16× cheaper than the routing Gram of LIT-009). No extra solves per document;
+  `highest_attention` is the AM paper's cheapest selector (3 s for a 60k context, Table 3) versus
+  OMP's 565 s.
+- Why it might NOT transfer: (i) **off-manifold keys** — `k_new` is synthetic and post-RoPE, the
+  frozen LM has never seen a key in that direction, and nothing constrains its norm distribution, so
+  attention may behave pathologically (the discrete variant exists precisely to dodge this).
+  (ii) Orthogonality yields a QA logit of **0, not −∞**; softmax is shift-invariant per row, so a zero
+  logit can still capture mass when the other 511 logits are negative — the *level* must be set by β,
+  which is currently broken (B-SOLVE, LIT-002), so this entry is **coupled to fixing β**.
+  (iii) Every key taken for MT is a key removed from QA: `rewrite_keys_on_support` overwrites
+  `keys[selected_indices]`, destroying whatever QA content those slots served, independent of where
+  the new key points. (iv) **RoPE frame mismatch** — cartridge keys and document keys sit at different
+  absolute positions (`doc_rope_offset`, handled at `core.py:20-42`), so `q̄_MT` and the candidates
+  are not in a common frame without explicit care. (v) `Q₀` is a *second moment over a QA reference
+  set*, not the QA eval distribution.
+- Related: LIT-004, LIT-011, LIT-012, LIT-013, LIT-016, LIT-001 (β), B-ROUTE.
+
+---
+### LIT-018: The counter-evidence — "the covariance trap" (arXiv 2603.15518)
+- Status: candidate *(falsifier for LIT-009 / LIT-010 / LIT-011 / LIT-012)*
+- Board entry: **B-CAP / forgetting** (as a negative control)
+- Mechanism (1 paragraph): a 2026 critique of covariance-based editing argues that `C₀⁻¹`
+  preconditioning (MEMIT) and null-space projection (AlphaEdit) are **geometrically equivalent** —
+  "different manifestations of the same geometric misconception" — and that both "impose unnecessary
+  constraints that offer marginal gains in locality while compromising robust generalization", with
+  the projection matrix additionally introducing "numerical noise and geometric distortion". Its
+  positive claim is that the covariance of the *pre-existing* distribution is the wrong object when
+  the new and old content share subjects/contexts, and that relational structure must be modelled
+  instead.
+- Maps to our code: **no new code.** This entry is a prediction about the *outcome* of LIT-009 vs
+  LIT-011 vs a plain `DELTA_WEIGHT` sweep, i.e. it defines the negative control those entries need.
+- **Prediction (about OUR signature):** if the critique holds here, then a `AM_PRECOND=memit_c0` arm
+  and an `AM_PRECOND=alphaedit` arm (identical `top_t`, queries, seed) land **within the noise floor
+  (≤ 0.15) of each other on both axes**, and both sit on the **same QA/MT trade curve traced by simply
+  sweeping `DELTA_WEIGHT`** — which is `C₀ = w·I`. That is a cheap three-arm test of whether the
+  *directional* structure of `C₀` matters at all in our store, or only its **scale**. Note the control
+  arm is nearly free and has never been run: **`DELTA_WEIGHT` has never been swept — every AM row in
+  `results.csv` is `delta_w=1e-2`** (HYP-R0/K-RIDGE refuted `RIDGE_LAMBDA`, a different knob). If a
+  `DELTA_WEIGHT` sweep alone reproduces whatever `C₀` achieves, the entire preconditioning family
+  (LIT-009/010/011/012) collapses to an already-available scalar knob.
+- Cost: none beyond the arms it evaluates; the `DELTA_WEIGHT` control needs **zero** new code and
+  **zero** new statistics.
+- Why it might NOT transfer: it is a *same-subject generalization* critique aimed at FFN memories on a
+  factual-editing benchmark (CounterFact/zsRE-style); our failure axis is acquisition of an entire new
+  task in a compressed KV cache, and our "keys" are simplex routing vectors rather than MLP
+  activations, so its geometric argument may simply not be about our object.
+- Related: LIT-009, LIT-010, LIT-011, LIT-012, HYP-R0 (K-RIDGE).
