@@ -30,8 +30,16 @@ continually writes new docs into it. Two eval splits, both scored as **mean cros
 - `data/qasper/eval/qasper_eval_QA.parquet` → **forgetting** (retention of Phase-1 knowledge)
 - `data/qasper/eval/qasper_eval_MT.parquet` → **acquisition** (new-doc learning)
 
-⚠️ **Do NOT trust the wandb/log `perplexity` field** — it is broken (`num_elements=0`) in the
-July AM runs (reports garbage like 1244.8 / 80019). **Parse the `Eval loss` mean-CE line only.**
+✅ **FIXED (2026-07-28):** the wandb `num_elements`/`num_system_and_user_tokens`/
+`num_assistant_tokens`/`macro_loss` fields used to stay at their dead-init value (0 / `nan` /
+`None`) in `evaluate_perplexity` (`cartridges/train.py`), which made the accompanying
+`perplexity` field look like garbage (e.g. `exp(11.29)=80019` for a genuinely-broken July AM
+run, with `num_elements=0` as the tell). Root cause fixed: the counters are now actually
+incremented. **`Eval loss` (mean-CE) was never affected** — it used the correctly-accumulated
+`epoch_loss`/`epoch_denom` even before this fix — but it's still the primary number to read.
+Wandb logging is also **back on by default** (`WANDB_DISABLED=0` in the AM wrapper scripts;
+dense/sparse-grad scripts never disabled it — only individual one-off `launch_exp*.sh` files
+did, via an explicit `WANDB_MODE=disabled` override that new launches should drop).
 
 ⚠️ **UNITS: the harness `Eval loss` is mean cross-entropy = ln(perplexity).** Many historical repo
 figures (RUNBOOK §8, notes, CSVs) are quoted in **perplexity**, NOT loss. `ppl = exp(loss)`. **Only
