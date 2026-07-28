@@ -1,19 +1,22 @@
 #!/usr/bin/env python3
-"""Loss/perplexity benchmark for Qasper QA -> MT cartridges and ICL.
+"""Full-context ICL loss benchmark for Qasper (QA -> MT).
 
-This script evaluates the open-ended Qasper parquet evals, not the MCQ/yes-no
-CSVs.  Each eval row is a conversation; the assistant message is retokenized and
-used as the loss target, matching the existing `eval_forgetting.py` path.
+Evaluates the open-ended Qasper parquet evals (not the MCQ/yes-no CSVs). Each
+eval row is a conversation; the assistant message is retokenized and used as the
+loss target, using the SAME soft-CE-vs-teacher-top-k scorer as `eval_forgetting.py`
+(the shared implementation now lives in `examples/qasper2/train/eval_icl.py`).
 
-Requested benchmark table:
+Methods (all carry full-paper ICL context):
 
   - icl_QA_raw: QA full-paper context + raw model
   - icl_MT_raw: MT full-paper context + raw model
   - icl_QA_plus_MT: QA papers followed by MT papers + raw model
   - icl_MT_plus_QA: MT papers followed by QA papers + raw model
   - icl_MT_plus_QA_cartridge: MT full-paper context + Phase-1 QA cartridge
-  - cartridge_p1: Phase-1 QA cartridge only
-  - cartridge_p2: Phase-2 MT continual cartridge only
+
+Pure-cartridge eval (no ICL context) now lives in `eval_forgetting.py`
+(EVAL_MODE=cartridge) — the single source of truth for cartridge scoring — so
+the old `cartridge_p1` / `cartridge_p2` methods were removed here.
 
 Each condition is evaluated on both `qasper_eval_QA.parquet` and
 `qasper_eval_MT.parquet`, for both Llama and Qwen by default.
@@ -45,7 +48,17 @@ from cartridges.data.qasper.resources import QASPERResource
 from cartridges.datasets import MODEL_TO_MESSAGE_CONVERTER
 from cartridges.models import FlexLlamaForCausalLM, FlexQwen3ForCausalLM, HFModelConfig
 from cartridges.structs import Conversation, read_conversations
-from cartridges.train import CacheAndModel
+from cartridges.train import CacheAndModel  # noqa: F401 (kept for API compatibility)
+
+# Single source of truth for the full-context ICL scorer + context builder.
+import sys as _sys
+_sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "train"))
+from eval_icl import (  # noqa: E402
+    build_qasper_system_prompt,
+    evaluate_loss_chunked,
+    load_model_and_tokenizer,
+    _model_device,
+)
 
 
 QA_EVAL_URL = (
@@ -57,11 +70,6 @@ MT_EVAL_URL = (
     "tri_work_placeholder/examples/qasper2/qasper_eval_MT.parquet"
 )
 
-QASPER_ICL_SYSTEM_TEMPLATE = """\
-Please reference the scientific papers included below to answer questions about them.
-
-{content}
-"""
 
 
 @dataclass(frozen=True)
@@ -106,32 +114,6 @@ def ensure_eval_file(path: Path, url: str, *, download: bool) -> Path:
     return path
 
 
-def build_qasper_system_prompt(
-    topic: str,
-    *,
-    tokenizer,
-    max_context_tokens: Optional[int] = None,
-) -> str:
-    topics = topic.split("+")
-    panels = [
-        QASPERResource(QASPERResource.Config(topic=panel_topic)).to_string()
-        for panel_topic in topics
-    ]
-    if len(topics) == 1:
-        ctx_text = panels[0]
-    else:
-        ctx_text = "\n\n".join(
-            f'<topic-panel topic="{panel_topic}">\n{panel}\n</topic-panel>'
-            for panel_topic, panel in zip(topics, panels)
-        )
-    if max_context_tokens is not None:
-        ctx_text = tokenizer.decode(
-            tokenizer.encode(ctx_text)[:max_context_tokens],
-            add_special_tokens=False,
-            max_length=999_999_999,
-            truncation=True,
-        )
-    return QASPER_ICL_SYSTEM_TEMPLATE.format(content=ctx_text)
 
 
 def resolve_cartridge_path(spec: str, *, hf_filename: str = "cache_last.pt") -> str:
@@ -159,226 +141,16 @@ def load_cache(spec: Optional[str], device: str) -> Optional[TrainableCache]:
     return TrainableCache.from_pretrained(path, device=device).to(device).to(torch.bfloat16)
 
 
-def _model_head_dim(model) -> int:
-    if hasattr(model.config, "head_dim"):
-        return int(model.config.head_dim)
-    return model.config.hidden_size // model.config.num_attention_heads
 
 
-def _model_device(model) -> torch.device:
-    return next(model.parameters()).device
 
 
-def _make_prompt_cache(
-    model,
-    cartridge: Optional[TrainableCache] = None,
-    device: Optional[torch.device] = None,
-) -> TrainableCache:
-    if cartridge is not None:
-        return cartridge
-    dev = device or _model_device(model)
-    return TrainableCache(
-        config=AttnConfig(
-            n_layers=model.config.num_hidden_layers,
-            n_heads=model.config.num_key_value_heads,
-            head_dim=_model_head_dim(model),
-        ),
-    ).to(dev)
 
 
-def load_model_and_tokenizer(model_name: str, device: str, *, multi_gpu: bool = False):
-    model_cls = FlexQwen3ForCausalLM if "qwen" in model_name.lower() else FlexLlamaForCausalLM
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    load_kwargs: dict[str, Any] = {}
-    if multi_gpu:
-        load_kwargs["device_map"] = "auto"
-    model = HFModelConfig(
-        pretrained_model_name_or_path=model_name,
-        model_cls=model_cls,
-        load_kwargs=load_kwargs,
-    ).instantiate()
-    if multi_gpu:
-        model = model.to(torch.bfloat16)
-    else:
-        model = model.to(device).to(torch.bfloat16)
-    model.eval()
-    for param in model.parameters():
-        param.requires_grad = False
-    return model, tokenizer
 
 
-def evaluate_loss_chunked(
-    *,
-    model,
-    cartridge: Optional[TrainableCache],
-    tokenizer,
-    eval_path: Path,
-    system_prompt: str,
-    device: str,
-    desc: str,
-    prefill_chunk_size: int = 2048,
-) -> dict[str, Any]:
-    """Score assistant tokens with full ICL context via chunked generate-mode prefill."""
-    conversations = read_conversations(str(eval_path))
-    converter = MODEL_TO_MESSAGE_CONVERTER[tokenizer.name_or_path.lower()]
-    model_dev = _model_device(model)
-
-    total_loss = torch.tensor(0.0, device=model_dev)
-    total_tokens = torch.tensor(0, device=model_dev)
-    max_sequence_tokens = 0
-
-    with torch.inference_mode():
-        for convo in tqdm(conversations, total=len(conversations), desc=desc, leave=False):
-            messages = [
-                Conversation.Message(
-                    role="system",
-                    content=system_prompt,
-                    token_ids=None,
-                    top_logprobs=None,
-                ),
-                *convo.messages,
-            ]
-            element = converter(messages, retokenize=True, tokenizer=tokenizer)
-            max_sequence_tokens = max(max_sequence_tokens, len(element.input_ids))
-
-            kv_cache = _make_prompt_cache(model, cartridge, device=model_dev)
-            if cartridge is not None:
-                kv_cache.clear()
-
-            target_idxs = element.topk_token_idxs
-            target_ids = element.topk_token_ids
-            target_logprobs = element.topk_logprobs
-            assistant_start = int(target_idxs.min().item())
-
-            last_logits: Optional[torch.Tensor] = None
-            pos = 0
-            while pos < assistant_start:
-                end = min(pos + prefill_chunk_size, assistant_start)
-                chunk_ids = element.input_ids[pos:end]
-                chunk_len = len(chunk_ids)
-                chunk_seq_ids = torch.zeros(chunk_len, dtype=torch.long)
-                chunk_pos_ids = torch.arange(pos, pos + chunk_len, dtype=torch.long)
-
-                with torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
-                    outputs = model(
-                        input_ids=chunk_ids.to(model_dev),
-                        seq_ids=chunk_seq_ids.to(model_dev),
-                        position_ids=chunk_pos_ids.to(model_dev),
-                        past_key_values=kv_cache,
-                        use_cache=True,
-                        mode="generate",
-                    )
-                last_logits = outputs.logits[0, -1, :].contiguous()
-                pos = end
-
-            for tidx, tid, hard_logprob in zip(target_idxs, target_ids, target_logprobs):
-                tidx = int(tidx.item())
-                tid = int(tid.item())
-
-                if tidx == assistant_start:
-                    logits = last_logits
-                else:
-                    prev_id = element.input_ids[tidx - 1 : tidx]
-                    with torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
-                        outputs = model(
-                            input_ids=prev_id.to(model_dev),
-                            seq_ids=torch.zeros(1, dtype=torch.long, device=model_dev),
-                            position_ids=torch.tensor([tidx - 1], dtype=torch.long, device=model_dev),
-                            past_key_values=kv_cache,
-                            use_cache=True,
-                            mode="generate",
-                        )
-                    logits = outputs.logits[0, -1, :].contiguous()
-
-                pred_logp = F.log_softmax(logits.float(), dim=-1)[tid]
-                ce = -hard_logprob.to(model_dev).exp() * pred_logp
-                total_loss += ce
-                total_tokens += 1
-
-            if cartridge is not None:
-                kv_cache.clear()
-            else:
-                kv_cache.clear()
-
-    loss = float((total_loss / total_tokens).item())
-    return {
-        "loss": loss,
-        "perplexity": math.exp(loss),
-        "num_target_tokens": int(total_tokens.item()),
-        "num_examples": len(conversations),
-        "max_sequence_tokens": max_sequence_tokens,
-        "system_prompt_tokens": len(tokenizer.encode(system_prompt, add_special_tokens=False)),
-        "context_mode": "full_topic_panel_chunked",
-        "prefill_chunk_size": prefill_chunk_size,
-    }
 
 
-def evaluate_loss(
-    *,
-    model,
-    cache: Optional[TrainableCache],
-    tokenizer,
-    eval_path: Path,
-    system_prompt: Optional[str],
-    device: str,
-    desc: str,
-) -> dict[str, Any]:
-    conversations = read_conversations(str(eval_path))
-    converter = MODEL_TO_MESSAGE_CONVERTER[tokenizer.name_or_path.lower()]
-    wrapped_model = CacheAndModel(cache, model)
-
-    total_loss = torch.tensor(0.0, device=device)
-    total_tokens = torch.tensor(0, device=device)
-    max_sequence_tokens = 0
-
-    with torch.inference_mode():
-        for convo in tqdm(conversations, total=len(conversations), desc=desc, leave=False):
-            messages = convo.messages
-            if system_prompt is not None:
-                messages = [
-                    Conversation.Message(
-                        role="system",
-                        content=system_prompt,
-                        token_ids=None,
-                        top_logprobs=None,
-                    ),
-                    *messages,
-                ]
-            element = converter(messages, retokenize=True, tokenizer=tokenizer)
-            max_sequence_tokens = max(max_sequence_tokens, len(element.input_ids))
-            element_ids = torch.zeros_like(element.input_ids)
-            position_ids = torch.arange(len(element.input_ids), dtype=torch.long)
-
-            with torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
-                outputs = wrapped_model(
-                    input_ids=element.input_ids.to(device),
-                    seq_ids=element_ids.to(device),
-                    position_ids=position_ids.to(device),
-                )
-                target_idxs = element.topk_token_idxs.to(device) - 1
-                target_ids = element.topk_token_ids.to(device)
-                pred_logprobs = F.log_softmax(outputs.logits, dim=-1)[
-                    0,
-                    target_idxs,
-                    target_ids,
-                ]
-                ce_by_token = -element.topk_logprobs.to(device).exp() * pred_logprobs
-                total_loss += ce_by_token.sum()
-                total_tokens += ce_by_token.shape[0]
-
-            if cache is not None:
-                cache.clear()
-
-    loss = float((total_loss / total_tokens).item())
-    return {
-        "loss": loss,
-        "perplexity": math.exp(loss),
-        "num_target_tokens": int(total_tokens.item()),
-        "num_examples": len(conversations),
-        "max_sequence_tokens": max_sequence_tokens,
-        "system_prompt_tokens": 0,
-        "context_mode": "cartridge_only",
-    }
 
 
 def benchmark_model(
@@ -394,14 +166,16 @@ def benchmark_model(
     prefill_chunk_size: int = 2048,
 ) -> list[dict[str, Any]]:
     # Method -> (context_topic, cartridge). context_topic=None means no ICL context.
+    # ICL / hybrid-context methods only. Pure-cartridge eval now lives in
+    # eval_forgetting.py (EVAL_MODE=cartridge) — the single source of truth for
+    # cartridge scoring — so the old cartridge_p1/cartridge_p2 methods (which
+    # duplicated it) are removed here.
     condition_specs = [
         ("icl_QA_raw", "QA", None),
         ("icl_MT_raw", "MT", None),
         ("icl_QA_plus_MT", "QA+MT", None),
         ("icl_MT_plus_QA", "MT+QA", None),
         ("icl_MT_plus_QA_cartridge", "MT", spec.phase1_cartridge),
-        ("cartridge_p1", None, spec.phase1_cartridge),
-        ("cartridge_p2", None, spec.phase2_cartridge),
     ]
     if only_methods is not None:
         condition_specs = [c for c in condition_specs if c[0] in only_methods]
@@ -438,27 +212,17 @@ def benchmark_model(
         for eval_name, eval_path in [("QA", qa_eval), ("MT", mt_eval)]:
             desc = f"{spec.family}|{condition['method']}|{eval_name}"
             print(f"Evaluating {desc}", flush=True)
-            if condition["system_prompt"] is not None:
-                metrics = evaluate_loss_chunked(
-                    model=model,
-                    cartridge=cache,
-                    tokenizer=tokenizer,
-                    eval_path=eval_path,
-                    system_prompt=condition["system_prompt"],
-                    device=str(model_dev),
-                    desc=desc,
-                    prefill_chunk_size=prefill_chunk_size,
-                )
-            else:
-                metrics = evaluate_loss(
-                    model=model,
-                    cache=cache,
-                    tokenizer=tokenizer,
-                    eval_path=eval_path,
-                    system_prompt=None,
-                    device=str(model_dev),
-                    desc=desc,
-                )
+            # All remaining methods carry a full-context system_prompt → always chunked.
+            metrics = evaluate_loss_chunked(
+                model=model,
+                cartridge=cache,
+                tokenizer=tokenizer,
+                eval_path=eval_path,
+                system_prompt=condition["system_prompt"],
+                device=str(model_dev),
+                desc=desc,
+                prefill_chunk_size=prefill_chunk_size,
+            )
             rows.append(
                 {
                     "model_family": spec.family,
@@ -551,11 +315,10 @@ def main() -> None:
             "icl_QA_plus_MT",
             "icl_MT_plus_QA",
             "icl_MT_plus_QA_cartridge",
-            "cartridge_p1",
-            "cartridge_p2",
         ],
         default=None,
-        help="Restrict to specific benchmark methods (default: all five).",
+        help="Restrict to specific ICL methods (default: all five). "
+        "Cartridge-only eval moved to eval_forgetting.py (EVAL_MODE=cartridge).",
     )
     args = parser.parse_args()
 

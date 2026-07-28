@@ -960,6 +960,26 @@ def evaluate_perplexity(
                 epoch_loss += (ce_by_token.sum())
                 epoch_denom += ce_by_token.shape[0]
 
+                # BUGFIX: these three counters used to stay at their torch.tensor(0)
+                # init value forever (nothing incremented them), which silently logged
+                # num_elements=0 and nan token-count ratios to wandb (RUNBOOK.md §1).
+                # ce_by_token.shape[0] == number of assistant tokens scored this batch
+                # (LossEvalDataset uses targets="tokens" => exactly 1 topk entry/token).
+                num_assistant_tokens_batch = ce_by_token.shape[0]
+                epoch_num_assistant_tokens += num_assistant_tokens_batch
+                epoch_num_system_and_user_tokens += (
+                    batch.input_ids.numel() - num_assistant_tokens_batch
+                )
+                epoch_num_elements += torch.unique(batch.element_ids).numel()
+
+                # BUGFIX: `results` (used below for macro_loss/macro_perplexity, a
+                # per-batch unweighted average, vs the token-weighted micro-average
+                # above) was also never appended to -> macro_loss/macro_perplexity
+                # were always logged as None. Record this batch's mean CE.
+                results.append(
+                    {"loss": (ce_by_token.sum() / num_assistant_tokens_batch).item()}
+                )
+
             if cache_tuning:
                 assert cache is not None
                 cache.clear()

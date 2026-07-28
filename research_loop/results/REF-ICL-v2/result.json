@@ -1,0 +1,30 @@
+{
+  "exp_id": "REF-ICL-v2",
+  "type": "train",
+  "variable_under_test": "ICL full-context on the eval_forgetting parquets (unified-harness re-measure)",
+  "baseline_ref": "prior REF-ICL 1.9734/1.8960; cartridge/AM/sparse-grad on eval_forgetting",
+  "status": "done",
+  "numbers": {
+    "qa_icl_loss": 1.9734,
+    "mt_icl_loss": 1.896,
+    "qa_num_examples": 78,
+    "mt_num_examples": 69,
+    "qa_context_tokens": 103293,
+    "mt_context_tokens": 76833,
+    "qa_icl_perplexity": 7.1952,
+    "mt_icl_perplexity": 6.6595,
+    "qa_num_target_tokens": 2619,
+    "mt_num_target_tokens": 2562,
+    "qa_max_sequence_tokens": 103480,
+    "mt_max_sequence_tokens": 77045
+  },
+  "artifacts": [
+    "research_loop/results/REF-ICL-v2/result.json",
+    "research_loop/results/REF-ICL-v2/run_icl_v2.py",
+    "research_loop/results/REF-ICL-v2/raw_metrics.json",
+    "logs/ref_icl_v2.log",
+    "examples/qasper2/experiments/qasper_loss_benchmark.py"
+  ],
+  "command": "GPU0 claimed via repo flock (/tmp/gpu_locks_$USER/gpu0.lock, held for life of the launcher shell), CUDA_VISIBLE_DEVICES=0, CARTRIDGES_DIR=$PWD, PYTHONPATH=$CARTRIDGES_DIR:$PYTHONPATH, single-GPU inference (no torchrun). Launched as a BACKGROUND job, polled the log: .venv/bin/python research_loop/results/REF-ICL-v2/run_icl_v2.py > logs/ref_icl_v2.log 2>&1 . The driver is a standalone adaptation of research_loop/results/REF-ICL/run_mt_icl.py that reuses the IDENTICAL harness functions from examples/qasper2/experiments/qasper_loss_benchmark.py (load_model_and_tokenizer('Qwen/Qwen3-4B-Instruct-2507') + build_qasper_system_prompt('QA'/'MT', max_context_tokens=None) + evaluate_loss_chunked(cartridge=None, prefill_chunk_size=2048)). It computes ONLY the two diagonals (QA papers full-context on data/qasper/eval/qasper_eval_QA.parquet; MT papers full-context on data/qasper/eval/qasper_eval_MT.parquet), skipping the cross-topic off-diagonals to save time. The benchmark's qwen ModelSpec already had model_name='Qwen/Qwen3-4B-Instruct-2507' (verified; no edit needed). Job exited rc=0 (no hang; flock auto-released on shell exit). QA diagonal ~18.7 min, MT diagonal ~11.2 min.",
+  "observations": "Full-context ICL ceiling re-measured on the SAME eval parquets that eval_forgetting.py and the cartridge/AM/sparse-grad numbers use, so ICL is now apples-to-apples with the rest of the 4B study. Raw Qwen3-4B-Instruct-2507 (NO cartridge), all topic papers in the system prompt, chunked prefill 2048, bf16, teacher-forced mean cross-entropy on assistant tokens -- evaluate_loss_chunked scores exactly the SAME mean-CE (= ln ppl) metric as eval_forgetting.py by design, on the SAME files (QA n=78, MT n=69). Both diagonals reproduced the prior REF-ICL essentially bit-for-bit: QA icl_QA_raw|QA loss=1.9734 (ppl 7.1952, 103293 ctx tokens, 2619 target tokens) vs prior 1.9734; MT icl_MT_raw|MT loss=1.8960 (ppl 6.6595, 76833 ctx tokens, 2562 target tokens) vs prior 1.8960 -- identical to 4 decimals (the prior MT number came from a standalone re-run using these same functions, now confirmed within the full combined driver). Context sizes: QA system-prompt = 103293 tokens (max seq 103480), MT system-prompt = 76833 tokens (max seq 77045). Where ICL sits vs the loop's own LOSS references (all on these same eval files): on QA, ICL 1.9734 beats cartridge dense@4ep 2.372 and AM top32 2.177 (clear forgetting headroom), but ICL is NOT the QA ceiling -- sparse-grad QA 1.617 is BELOW ICL 1.9734, i.e. sparse-grad wins on QA. On MT, ICL 1.8960 is essentially tied with cartridge dense@4ep 1.873 (0.023 below ICL, within the tiny-eval noise band), beats AM top32 2.548 and sparse-grad 1.966. Caveats: eval sets are tiny (78 QA / 69 MT conversations, ~5-6 batches), so sub-0.1-0.2 loss deltas are within noise; the ICL condition uses the entire topic paper set (~103k QA / ~77k MT tokens) with no truncation, i.e. the maximal full-context condition. This benchmark's perplexity field is self-consistent (exp(1.9734)=7.195, exp(1.8960)=6.660), unlike the broken num_elements=0 wandb perplexity. No recommendations."
+}
