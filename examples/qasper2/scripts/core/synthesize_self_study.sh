@@ -6,7 +6,7 @@
 # matching the longhealth pattern.
 #
 # Usage:
-#   bash examples/qasper2/scripts/synthesize_self_study.sh
+#   bash examples/qasper2/scripts/core/synthesize_self_study.sh
 #
 # Env: CARTRIDGES_DIR (auto-detected), CARTRIDGES_OUTPUT_DIR, CUDA_HOME
 #      (+ optional TORCH_CUDA_ARCH_LIST) for Tokasaurus / FlashInfer JIT on GPU nodes.
@@ -23,7 +23,7 @@ echo ""
 ### CUSTOMIZE YOUR SETTING ###
 export TORCH_CUDA_ARCH_LIST="8.0"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-export CARTRIDGES_DIR="${CARTRIDGES_DIR:-$(cd "$SCRIPT_DIR/../../.." && pwd)}"
+export CARTRIDGES_DIR="${CARTRIDGES_DIR:-$(cd "$SCRIPT_DIR/../../../.." && pwd)}"
 export CARTRIDGES_OUTPUT_DIR="${CARTRIDGES_OUTPUT_DIR:-$CARTRIDGES_DIR/outputs}"
 BATCH_SIZE="${BATCH_SIZE:-32}"
 TP_SIZE="${TP_SIZE:-1}"

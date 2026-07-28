@@ -3,7 +3,7 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-export CARTRIDGES_DIR="${CARTRIDGES_DIR:-$(cd "$SCRIPT_DIR/../../.." && pwd)}"
+export CARTRIDGES_DIR="${CARTRIDGES_DIR:-$(cd "$SCRIPT_DIR/../../../.." && pwd)}"
 export CARTRIDGES_OUTPUT_DIR="${CARTRIDGES_OUTPUT_DIR:-$CARTRIDGES_DIR/outputs}"
 export TORCH_CUDA_ARCH_LIST="${TORCH_CUDA_ARCH_LIST:-9.0}"
 export WANDB_DISABLED="${WANDB_DISABLED:-1}"
@@ -31,7 +31,7 @@ run_am() {
     EPOCHS="$EPOCHS" MAX_STEPS="$MAX_STEPS" TOP_T="$TOP_T" \
     GRANULARITY="$GRANULARITY" GLOBAL_BATCH_SIZE="$GLOBAL_BATCH_SIZE" \
     RUN_NAME="abl_${NAME}" "$@" \
-    bash "$SCRIPT_DIR/train_continual_am_sparse.sh" \
+    bash "$SCRIPT_DIR/../core/train_continual_am_sparse.sh" \
     2>&1 | tee "$RESULTS_DIR/${NAME}.log"
   log "$NAME wall-clock: $(($(date +%s)-T0))s"
 }

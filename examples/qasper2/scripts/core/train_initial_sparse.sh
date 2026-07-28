@@ -7,7 +7,7 @@ set -e
 # Configuration — adjust these as needed
 export TORCH_CUDA_ARCH_LIST="8.0"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-export CARTRIDGES_DIR="${CARTRIDGES_DIR:-$(cd "$SCRIPT_DIR/../../.." && pwd)}"
+export CARTRIDGES_DIR="${CARTRIDGES_DIR:-$(cd "$SCRIPT_DIR/../../../.." && pwd)}"
 export CARTRIDGES_OUTPUT_DIR="${CARTRIDGES_OUTPUT_DIR:-$CARTRIDGES_DIR/outputs}"
 export PATH=${CUDA_HOME:+$CUDA_HOME/bin:}$PATH
 export LD_LIBRARY_PATH=${CUDA_HOME:+$CUDA_HOME/lib64:}$LD_LIBRARY_PATH
@@ -15,7 +15,7 @@ export LD_LIBRARY_PATH=${CUDA_HOME:+$CUDA_HOME/lib64:}$LD_LIBRARY_PATH
 NUM_GPUS="${NUM_GPUS:-4}"
 # IMPORTANT: MODEL_NAME must match the model used to synthesize SYNTH_DATA_PATH.
 #   * data/qasper/train/qwen_qasper_*_8192.parquet  ->  Qwen/Qwen3-4B-Instruct-2507
-#     (see examples/qasper2/scripts/synthesize_self_study.sh)
+#     (see examples/qasper2/scripts/core/synthesize_self_study.sh)
 # Using a mismatched tokenizer/model produces an async CUDA device-side assert
 # whose stack trace points at create_block_mask, not the real culprit (OOV embedding lookup).
 # Note: FlexQwen3ForCausalLM requires Qwen3 architecture (has q_norm/k_norm); it is NOT

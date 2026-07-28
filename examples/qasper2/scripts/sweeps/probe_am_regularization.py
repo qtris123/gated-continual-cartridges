@@ -3,7 +3,7 @@
 
 Usage:
   CARTRIDGES_DIR=... PHASE1_CACHE_PATH=... BG_STATS_PATH=... \\
-  python examples/qasper2/scripts/probe_am_regularization.py
+  python examples/qasper2/scripts/sweeps/probe_am_regularization.py
 """
 
 from __future__ import annotations

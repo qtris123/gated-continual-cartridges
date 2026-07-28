@@ -2,7 +2,7 @@
 # Run AM-Sparse experiment suite: baselines + ablations on 2× GH200 GPUs.
 #
 # Usage:
-#   bash examples/qasper2/scripts/run_am_experiments.sh
+#   bash examples/qasper2/scripts/sweeps/run_am_experiments.sh
 #
 # Experiments:
 #   GPU 0: EXP-BASE (gradient sparse baseline) — if PHASE1_GRAD_PATH set
@@ -16,7 +16,7 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-export CARTRIDGES_DIR="${CARTRIDGES_DIR:-$(cd "$SCRIPT_DIR/../../.." && pwd)}"
+export CARTRIDGES_DIR="${CARTRIDGES_DIR:-$(cd "$SCRIPT_DIR/../../../.." && pwd)}"
 export CARTRIDGES_OUTPUT_DIR="${CARTRIDGES_OUTPUT_DIR:-$CARTRIDGES_DIR/outputs}"
 export TORCH_CUDA_ARCH_LIST="${TORCH_CUDA_ARCH_LIST:-9.0}"
 export WANDB_DISABLED="${WANDB_DISABLED:-1}"
@@ -59,7 +59,7 @@ if [ "${SKIP_PHASE1:-0}" != "1" ]; then
   NUM_TOKENS="$NUM_TOKENS" GRANULARITY="$GRANULARITY" \
   AM_PASSES="$AM_PASSES" AM_MAX_BATCHES="$AM_MAX_BATCHES" \
   RUN_NAME="exp_am1_${NUM_TOKENS}_${GRANULARITY}" \
-  bash "$SCRIPT_DIR/train_initial_am.sh" 2>&1 | tee "$RESULTS_DIR/phase1_am.log"
+  bash "$SCRIPT_DIR/../core/train_initial_am.sh" 2>&1 | tee "$RESULTS_DIR/phase1_am.log"
   T1=$(date +%s)
   log_result "Phase 1 AM wall-clock: $((T1-T0))s"
 
@@ -75,7 +75,7 @@ if [ "${SKIP_PHASE1:-0}" != "1" ] && [ "${SKIP_GRAD_PHASE1:-0}" != "1" ]; then
   CUDA_VISIBLE_DEVICES=0 NUM_GPUS=1 \
   NUM_TOKENS="$NUM_TOKENS" GRANULARITY="$GRANULARITY" EPOCHS="${EPOCHS:-10}" \
   RUN_NAME="exp_grad_phase1_${NUM_TOKENS}_${GRANULARITY}" \
-  bash "$SCRIPT_DIR/train_initial_sparse.sh" 2>&1 | tee "$RESULTS_DIR/phase1_grad.log" &
+  bash "$SCRIPT_DIR/../core/train_initial_sparse.sh" 2>&1 | tee "$RESULTS_DIR/phase1_grad.log" &
   GRAD_P1_PID=$!
 
   wait $GRAD_P1_PID || true
@@ -129,7 +129,7 @@ if [ -n "$PHASE1_GRAD_PATH" ]; then
   # EXP-BASE: gradient sparse Phase 2 on GPU 0
   run_phase2 "exp_base_grad_sparse" 0 "$PHASE1_GRAD_PATH" \
     "$(dirname "$PHASE1_GRAD_PATH")/bg_stats.pt" \
-    "$SCRIPT_DIR/train_continual_sparse.sh" \
+    "$SCRIPT_DIR/../core/train_continual_sparse.sh" \
     NUM_GPUS=1 DISTRIBUTED_BACKEND=gloo MOMENTUM_MASKING=freeze &
   BASE_PID=$!
 fi
@@ -138,7 +138,7 @@ if [ -n "$PHASE1_GRAD_PATH" ]; then
   # EXP-AM2: gradient Phase 1 + AM Phase 2 on GPU 1
   run_phase2 "exp_am2_grad_p1" 1 "$PHASE1_GRAD_PATH" \
     "$(dirname "$PHASE1_GRAD_PATH")/bg_stats.pt" \
-    "$SCRIPT_DIR/train_continual_am_sparse.sh" \
+    "$SCRIPT_DIR/../core/train_continual_am_sparse.sh" \
     TARGET_MODE=self USE_IDF=1 &
   AM2_PID=$!
 fi
@@ -148,7 +148,7 @@ if [ -n "$PHASE1_GRAD_PATH" ]; then
   wait ${AM2_PID:-} 2>/dev/null || true
   run_phase2 "exp_am_noidf" 1 "$PHASE1_GRAD_PATH" \
     "$(dirname "$PHASE1_GRAD_PATH")/bg_stats.pt" \
-    "$SCRIPT_DIR/train_continual_am_sparse.sh" \
+    "$SCRIPT_DIR/../core/train_continual_am_sparse.sh" \
     TARGET_MODE=self USE_IDF=0
 fi
 
@@ -157,7 +157,7 @@ if [ -n "$PHASE1_AM_PATH" ]; then
   wait ${AM2_PID:-} 2>/dev/null || true
   run_phase2 "exp_am1plus2_full" 1 "$PHASE1_AM_PATH" \
     "$(dirname "$PHASE1_AM_PATH")/bg_stats.pt" \
-    "$SCRIPT_DIR/train_continual_am_sparse.sh" \
+    "$SCRIPT_DIR/../core/train_continual_am_sparse.sh" \
     TARGET_MODE=self USE_IDF=1
 fi
 

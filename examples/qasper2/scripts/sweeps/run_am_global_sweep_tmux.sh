@@ -28,14 +28,14 @@ if [ ! -f "$P1/bg_stats_global.pt" ]; then
   OUT_PATH="$P1/bg_stats_global.pt" \
   NUM_BG_BATCHES=1000 \
   CUDA_VISIBLE_DEVICES=0 \
-  python examples/qasper2/scripts/collect_bg_stats.py
+  python examples/qasper2/scripts/infra/collect_bg_stats.py
   echo "[$(date -Is)] global bg_stats ready: $P1/bg_stats_global.pt"
 else
   echo "[$(date -Is)] Reusing existing $P1/bg_stats_global.pt"
 fi
 
 echo "[$(date -Is)] Launching global AM sweep queue on GPUs 0,1..."
-python -u examples/qasper2/scripts/launch_am_sweep_e2e.py \
+python -u examples/qasper2/scripts/sweeps/launch_am_sweep_e2e.py \
   --phase1-cache "$P1/cache_last.pt" \
   --bg-global "$P1/bg_stats_global.pt" \
   --output-root "$OUT" \

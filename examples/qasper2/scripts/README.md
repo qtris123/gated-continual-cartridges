@@ -1,0 +1,14 @@
+# qasper2 scripts
+
+Organized into four groups:
+
+| Folder | Purpose |
+|---|---|
+| `core/` | Single-run launchers (Phase-1/2 train, eval, synth) |
+| `sweeps/` | Ablation / sweep / GPU-pool orchestrators |
+| `benchmarks/` | ICL + cartridge comparison tables |
+| `infra/` | Shared helpers (e.g. bg_stats collection) |
+
+Old flat paths (e.g. `examples/qasper2/scripts/train_continual_am_sparse.sh`)
+have been removed. Use the subfolder path instead, e.g.
+`bash examples/qasper2/scripts/core/train_continual_am_sparse.sh`.

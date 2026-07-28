@@ -8,7 +8,7 @@ Usage:
   QA_DATA_PATH=data/qasper/train/qwen_qasper_QA_task_8192.parquet \\
   GRANULARITY=per_head \\
   OUT_PATH=.../bg_stats_per_head.pt \\
-  python examples/qasper2/scripts/collect_bg_stats.py
+  python examples/qasper2/scripts/infra/collect_bg_stats.py
 """
 
 import os

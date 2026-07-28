@@ -6,13 +6,13 @@
 # single summary + table when done.
 #
 # Runs fully unattended. To launch in the background and detach:
-#   nohup bash examples/qasper2/scripts/run_qasper_loss_benchmark_parallel.sh \
+#   nohup bash examples/qasper2/scripts/benchmarks/run_qasper_loss_benchmark_parallel.sh \
 #     > outputs/qasper_loss_benchmark.out 2>&1 &
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-export CARTRIDGES_DIR="${CARTRIDGES_DIR:-$(cd "$SCRIPT_DIR/../../.." && pwd)}"
+export CARTRIDGES_DIR="${CARTRIDGES_DIR:-$(cd "$SCRIPT_DIR/../../../.." && pwd)}"
 export CARTRIDGES_OUTPUT_DIR="${CARTRIDGES_OUTPUT_DIR:-$CARTRIDGES_DIR/outputs}"
 QA_EVAL="${QA_EVAL:-$CARTRIDGES_DIR/examples/qasper2/qasper_eval_QA.parquet}"
 MT_EVAL="${MT_EVAL:-$CARTRIDGES_DIR/examples/qasper2/qasper_eval_MT.parquet}"

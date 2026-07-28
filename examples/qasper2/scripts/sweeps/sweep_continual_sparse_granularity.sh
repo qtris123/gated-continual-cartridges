@@ -32,7 +32,7 @@
 set -uo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CARTRIDGES_DIR="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+CARTRIDGES_DIR="$(cd "$SCRIPT_DIR/../../../.." && pwd)"
 
 # ---------------------------------------------------------------------------
 # Detach mode: re-exec under setsid+nohup so the sweep keeps running after
@@ -149,7 +149,7 @@ run_one() {
   MOMENTUM_MASKING=freeze \
   FREEZE_KEYS=0 \
   GPU_LOG="$LOG_DIR/gpu_${script_id}_gpus-${gpus//,/_}.log" \
-    bash "$SCRIPT_DIR/train_continual_sparse.sh" \
+    bash "$SCRIPT_DIR/../core/train_continual_sparse.sh" \
       "script_id=$script_id" \
       >>"$run_log" 2>&1
   local rc=$?

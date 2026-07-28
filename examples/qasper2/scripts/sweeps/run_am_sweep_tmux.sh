@@ -17,7 +17,7 @@ export CARTRIDGES_WANDB_ENTITY=vqtri-purdue-university
 export TORCH_CUDA_ARCH_LIST=9.0
 export PYTHONUNBUFFERED=1
 
-python -u examples/qasper2/scripts/launch_am_sweep_e2e.py \
+python -u examples/qasper2/scripts/sweeps/launch_am_sweep_e2e.py \
   --phase1-cache "$P1/cache_last.pt" \
   --bg-per-layer "$P1/bg_stats.pt" \
   --bg-per-head "$P1/bg_stats_per_head.pt" \

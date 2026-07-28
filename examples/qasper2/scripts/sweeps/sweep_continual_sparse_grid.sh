@@ -53,8 +53,8 @@
 set -uo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TRAIN_SCRIPT="$SCRIPT_DIR/train_continual_sparse.sh"
-CARTRIDGES_DIR="${CARTRIDGES_DIR:-$(cd "$SCRIPT_DIR/../../.." && pwd)}"
+TRAIN_SCRIPT="$SCRIPT_DIR/../core/train_continual_sparse.sh"
+CARTRIDGES_DIR="${CARTRIDGES_DIR:-$(cd "$SCRIPT_DIR/../../../.." && pwd)}"
 
 # ---- pool/runtime knobs ------------------------------------------------------
 MAX_CONCURRENT="${MAX_CONCURRENT:-2}"

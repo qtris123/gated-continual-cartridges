@@ -8,7 +8,7 @@ GPU. After all training finishes, aggregates phase2_summary.json (QA forgetting
 Example:
   PHASE1_CACHE_PATH=.../cache_last.pt \\
   BG_STATS_PATH=.../bg_stats.pt \\
-  python examples/qasper2/scripts/launch_am_reg_e2e.py
+  python examples/qasper2/scripts/sweeps/launch_am_reg_e2e.py
 """
 
 from __future__ import annotations
@@ -25,7 +25,7 @@ from pathlib import Path
 
 
 REPO = Path(__file__).resolve().parents[3]
-TRAIN_SH = REPO / "examples" / "qasper2" / "scripts" / "train_continual_am_sparse.sh"
+TRAIN_SH = REPO / "examples" / "qasper2" / "scripts" / "core" / "train_continual_am_sparse.sh"
 
 DEFAULT_REGIMES = [
     {

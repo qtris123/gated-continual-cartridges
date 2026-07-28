@@ -37,7 +37,7 @@
 set -uo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TRAIN_SCRIPT="$SCRIPT_DIR/train_continual_sparse.sh"
+TRAIN_SCRIPT="$SCRIPT_DIR/../core/train_continual_sparse.sh"
 
 GPUS_PER_JOB="${GPUS_PER_JOB:-2}"
 POLL_INTERVAL="${POLL_INTERVAL:-15}"

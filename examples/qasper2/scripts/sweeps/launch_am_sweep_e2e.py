@@ -13,7 +13,7 @@ Example:
   BG_STATS_PER_LAYER=.../bg_stats.pt \\
   BG_STATS_PER_HEAD=.../bg_stats_per_head.pt \\
   BG_STATS_GLOBAL=.../bg_stats_global.pt \\
-  python examples/qasper2/scripts/launch_am_sweep_e2e.py --gpus 0,1
+  python examples/qasper2/scripts/sweeps/launch_am_sweep_e2e.py --gpus 0,1
 """
 
 from __future__ import annotations
@@ -30,7 +30,7 @@ from pathlib import Path
 
 
 REPO = Path(__file__).resolve().parents[3]
-TRAIN_SH = REPO / "examples" / "qasper2" / "scripts" / "train_continual_am_sparse.sh"
+TRAIN_SH = REPO / "examples" / "qasper2" / "scripts" / "core" / "train_continual_am_sparse.sh"
 
 GRANULARITIES = ["per_layer", "per_head", "global"]
 TOP_TS = [32, 64, 128, 256]

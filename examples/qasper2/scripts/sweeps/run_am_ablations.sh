@@ -4,7 +4,7 @@
 # Usage:
 #   PHASE1_AM_PATH=/path/to/am/cache_last.pt \
 #   PHASE1_GRAD_PATH=/path/to/grad/cache.pt \
-#   bash examples/qasper2/scripts/run_am_ablations.sh
+#   bash examples/qasper2/scripts/sweeps/run_am_ablations.sh
 #
 # Env:
 #   QUICK=1       — MAX_STEPS=20, EPOCHS=1 (default for ablations)
@@ -13,7 +13,7 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-export CARTRIDGES_DIR="${CARTRIDGES_DIR:-$(cd "$SCRIPT_DIR/../../.." && pwd)}"
+export CARTRIDGES_DIR="${CARTRIDGES_DIR:-$(cd "$SCRIPT_DIR/../../../.." && pwd)}"
 export CARTRIDGES_OUTPUT_DIR="${CARTRIDGES_OUTPUT_DIR:-$CARTRIDGES_DIR/outputs}"
 export TORCH_CUDA_ARCH_LIST="${TORCH_CUDA_ARCH_LIST:-9.0}"
 export WANDB_DISABLED="${WANDB_DISABLED:-1}"
@@ -63,7 +63,7 @@ run_am_ablation() {
     GLOBAL_BATCH_SIZE="$GLOBAL_BATCH_SIZE" \
     RUN_NAME="abl_${NAME}" \
     "${EXTRA[@]}" \
-    bash "$SCRIPT_DIR/train_continual_am_sparse.sh" \
+    bash "$SCRIPT_DIR/../core/train_continual_am_sparse.sh" \
     2>&1 | tee "$RESULTS_DIR/${NAME}.log"
   T1=$(date +%s)
   log "$NAME wall-clock: $((T1-T0))s"
@@ -86,7 +86,7 @@ if [ -n "$PHASE1_GRAD_PATH" ] && [ -f "$PHASE1_GRAD_PATH" ]; then
     GLOBAL_BATCH_SIZE="$GLOBAL_BATCH_SIZE" \
     MOMENTUM_MASKING=freeze \
     RUN_NAME="abl_control_grad_sparse" \
-    bash "$SCRIPT_DIR/train_continual_sparse.sh" \
+    bash "$SCRIPT_DIR/../core/train_continual_sparse.sh" \
     2>&1 | tee "$RESULTS_DIR/control_grad_sparse.log" &
   CTRL_PID=$!
   T_CTRL=$T0

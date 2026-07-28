@@ -4,7 +4,7 @@
 # train_continual_sparse.sh, so concurrent invocations grab disjoint pairs.
 #
 # Usage:
-#   bash examples/qasper2/scripts/sweep_top_t.sh
+#   bash examples/qasper2/scripts/sweeps/sweep_top_t.sh
 #
 # Common overrides (all forwarded as env vars to train_continual_sparse.sh):
 #   MAX_CONCURRENT=2          number of experiments to keep running at once
@@ -13,13 +13,13 @@
 #   WANDB_GROUP="..."         cluster all iterations under one W&B group
 #
 # To run unattended (survives terminal close):
-#   nohup bash examples/qasper2/scripts/sweep_top_t.sh \
+#   nohup bash examples/qasper2/scripts/sweeps/sweep_top_t.sh \
 #     > sweep_top_t_$(date +%Y%m%d_%H%M%S).log 2>&1 &
 
 set -u  # NB: not -e — a single iter crashing should not abort the whole sweep.
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TRAIN_SCRIPT="$SCRIPT_DIR/train_continual_sparse.sh"
+TRAIN_SCRIPT="$SCRIPT_DIR/../core/train_continual_sparse.sh"
 
 TOP_T_VALUES=(32 64 128 256)
 MAX_CONCURRENT="${MAX_CONCURRENT:-2}"
