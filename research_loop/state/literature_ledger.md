@@ -914,3 +914,496 @@
   task in a compressed KV cache, and our "keys" are simplex routing vectors rather than MLP
   activations, so its geometric argument may simply not be about our object.
 - Related: LIT-009, LIT-010, LIT-011, LIT-012, HYP-R0 (K-RIDGE).
+
+---
+
+> **SCOUT-KEYS (2026-07-28) — the key axis, LIT-019…LIT-027.** Dispatched after DIAG-ROUTING showed
+> ρ_MT = 0.012, QA/MT mean-routing cosine 0.99899 and top-32 slot overlap 0.914 — i.e. **no value-space
+> operator can separate the two axes** — while leaving the **128-dim per-head key/query geometry**
+> completely unmeasured. Question answered here: **what closed-form, gradient-free procedures exist for
+> choosing, synthesising or moving KEYS in a fixed-size associative store so a new write is retrievable
+> by new queries without destroying retrieval of the old content?** Families: closed-form key
+> *synthesis* (ROME/r-ROME/SUIT), null-space **key** placement in the old **query** second moment,
+> associative-memory capacity & interference (Hopfield / Personnaz / modern Hopfield / scaling laws /
+> fast weights), writable-key memory architectures (NTM, DNC, Kaiser-LRU, product-key memory, SDM), and
+> RoPE-specific hazards. Plus three code-level hazards found by reading, and one free re-analysis of
+> `DIAG-ROUTING.npz`.
+>
+> **NOTATION (differs from SCOUT-EDIT's on purpose — that is the whole point).** SCOUT-EDIT's "key" was
+> the post-softmax routing vector `a_S(q) ∈ Δ^{511}`. **Here "key" means the actual 128-dim per-head
+> vector `k_j ∈ R^d`, d = 128, stored in `cache.trainable_keys[l][0,h,j]`.** The head's logit is
+> `ℓ_j(q) = q·k_j/√d + β_j`, `a(q) = softmax(ℓ(q))`. Write `Q₀^QA = Σ_{q∈QA} qqᵀ ∈ R^{128×128}` and
+> `Q₀^MT` likewise; `q̄_QA`, `q̄_MT` are the mean reference queries. Qwen3-4B-Instruct-2507: 36 layers ×
+> 8 KV heads (32 Q heads, GQA group = 4), d = 128, **rope_theta = 5,000,000**.
+>
+> **THE ONE ALGEBRAIC FACT THIS BLOCK RESTS ON (derive it once, used by every entry below).**
+> Adding a constant `Δ` to the logits of the written slots `S` maps the measured masses as
+> `m(Δ) = m₀e^Δ/(m₀e^Δ + 1 − m₀)`. With DIAG-ROUTING's measured `m₀`(MT) = 0.08961 and
+> `m₀`(QA) = 0.08272 this gives, for the **same** Δ applied to both:
+> | Δ (nats) | 0 | 1 | 2 | 2.32 | 3 | 5 |
+> |---|---|---|---|---|---|---|
+> | mass_on_S MT | .0896 | .211 | .421 | **.500** | .664 | .936 |
+> | mass_on_S QA | .0827 | .197 | .400 | .478 | .644 | .930 |
+> | **MT/QA ratio** | **1.083** | 1.071 | 1.052 | 1.046 | **1.031** | 1.006 |
+> ⇒ **β (a per-key, query-independent logit bias) provably cannot raise the MT/QA mass ratio — it drives
+> the ratio monotonically toward 1.** It buys bandwidth for both tasks at once. The *only* term that can
+> be asymmetric is a **key change**, because its logit contribution `q·Δk/√d` is query-**dependent**:
+> `Δ_MT − Δ_QA = (q̄_MT − q̄_QA)·Δk/√d ≤ ‖Δk‖·‖q̄_MT − q̄_QA‖/√d`.
+> **The entire key-side lever is therefore proportional to `‖q̄_MT − q̄_QA‖` in the 128-dim query space —
+> a quantity this loop has never measured.** DIAG-ROUTING measured `‖ā_MT − ā_QA‖/‖ā_MT‖ = 0.053` in the
+> 512-dim *routing* space (recomputed here from `DIAG-ROUTING.npz`, reproducing cosine 0.99899 and
+> overlap 0.9142 exactly) — that is a statement about what the **current 512 keys can resolve**, not
+> about the queries. With a QA routing-Gram participation rank of **1.97**, the incumbent key set
+> projects every query onto ≈2 effective directions; two query populations that are *orthogonal in
+> R^128* would still produce near-identical routing through such a key set. **The measured 0.914 overlap
+> is evidence of key blindness, not of query similarity.**
+
+---
+### LIT-019: Closed-form key **synthesis** by prefix-averaged activations — ROME (arXiv 2202.05262, NeurIPS 2022) and r-ROME (arXiv 2403.07175, EMNLP 2024)
+- Status: candidate
+- Board entry: **B-ROUTE** (primary), B-TARGET (secondary)
+- Mechanism (1 paragraph): ROME never *selects* a key — it **constructs** one. The lookup key for a new
+  fact is the MLP post-nonlinearity activation at the subject's last token,
+  **`k* = (1/N) Σ_{j=1..N} k(x_j ⊕ s)`**, averaged over N texts formed by prepending **random prefixes
+  of length 2–10 tokens** to the subject `s`. The averaging is not cosmetic: it is what makes the key a
+  *direction the model reliably produces for that content across contexts* rather than one sample of it,
+  and it is what makes the edit generalise to paraphrases. The edit is then the rank-one closed form
+  `Δ = (v* − W₀k*)(k*ᵀC₀⁻¹)/(k*ᵀC₀⁻¹k*)` — an equality constraint at `k*`, least-squares preservation
+  everywhere else. r-ROME's contribution is a **negative** result we should heed: the original
+  implementation used the *prefix-averaged* `k*` in one place and an *un-prefixed* `k` in another, and
+  that asymmetry alone causes **disabling edits and model collapse under sequential editing**; making
+  the two consistent removes the instability. I.e. *the key you optimise against and the key the model
+  will actually emit must be the same object.*
+- Maps to our code: a new `select_keys_doc_centroid(...)` in `cartridges/am/key_select.py` plus a mode in
+  `rewrite_keys_on_support` (`:227-284`), consumed at `finetune.py:516-532`. Instead of picking one
+  literal document key from `candidate_keys = cat([original_keys[S], k_doc])` (`:519-522`), synthesise
+  `k*_m = Σ_i w_{mi} R_{Δ_i} k_i^doc` where `w_{mi}` is the teacher's own attention mass from the
+  reference queries onto doc token `i` (already computed inside `compute_teacher_targets`) and `R_{Δ}`
+  is the RoPE re-basing `phase1.py::_rope_reposition` **already implements** (→ LIT-026). Proposed
+  opt-in flag `KEY_MODE=doc_centroid`, with `AM_KEY_CENTROID_CLUSTERS=t` (t centroids by weighted
+  k-means or by the top-t eigenvectors of `Σ_i w_i k_i k_iᵀ`, so the t written slots are not t copies of
+  the same vector). r-ROME's lesson maps to a **required assertion**: the key used for selection/β and
+  the key written into `k_param` at `finetune.py:634` must be byte-identical — today the selection frame
+  and the storage frame differ (LIT-026).
+- **Prediction (about OUR signature):** the AM paper's `C_k ⊂ K` restriction (LIT-004) exists because
+  the paper has no principled synthesis; ROME says the principled synthesis is *mass-weighted averaging
+  of the content's own activations*. Concretely: a doc-centroid key should raise `mass_on_S` on MT
+  queries **above** the single-doc-key selector's, because it points at the doc's attention-weighted
+  centroid rather than at one token, and it should raise it **asymmetrically** (MT/QA ratio > 1.04)
+  exactly to the extent that `q̄_MT ≠ q̄_QA`. Quantitatively I predict `mass_on_S`(MT) ≥ 0.25 and
+  MT/QA ratio in **[1.2, 2.5]** if `‖q̄_MT − q̄_QA‖/‖q̄_MT‖ > 0.3`, and ratio ≈ 1.0–1.1 (i.e. the whole
+  key family is dead) if that norm is < 0.05. **Falsifier:** if `KEY_MODE=doc_centroid` moves
+  `mass_on_S` but the ratio stays ≤ 1.1, then keys buy *bandwidth* only, exactly like β, and the
+  acquisition/retention trade cannot be separated at all — B-ROUTE closes as `confirmed+capped`.
+- Cost: **gradient-free, `gradient_steps = 0`.** ROME's only gradient is in computing `v*`; our target
+  is `compute_teacher_targets`, already closed form. One weighted mean (or one t-cluster k-means, ~10
+  Lloyd iterations on ≤ 8900 × 128 per layer/head) per document — cheaper than `highest_attention`'s
+  512-way softmax. No extra forward passes; `w` is a by-product of the teacher softmax we already
+  compute. Memory: negligible.
+- Why it might NOT transfer: ROME's `k*` lives in an MLP's input space where the "association" is a
+  learned linear map; ours must be a **post-RoPE attention key**, so the average of keys at different
+  positions is an average of *differently rotated* vectors and is not the key of any token (→ LIT-026 —
+  this is the entry's single biggest risk). ROME also has one incumbent-free slot per edit; every
+  cartridge key we overwrite was serving QA. And ROME's N ≈ 50 prefixes probe *paraphrase* variation;
+  our `w`-weighted average probes *token* variation, which is not the same invariance.
+- Related: LIT-004, LIT-017, LIT-020, LIT-026, B-ROUTE.
+
+---
+### LIT-020: **SYNTHESIS** — null-space key placement in the old **QUERY** second moment `Q₀` (128-dim), and the theorem that separates it from β and from LIT-011 (AlphaEdit arXiv 2410.02355 · Adam-NSCL CVPR 2021 · GPM ICLR 2021 · SUIT arXiv 2509.24502)
+- Status: candidate *(this is LIT-017's real content, now with the statistic, the sample size and the falsifier)*
+- Board entry: **B-ROUTE** (primary), forgetting (secondary)
+- Mechanism (1 paragraph): AlphaEdit/Adam-NSCL/GPM all build the same object — the projector off the
+  dominant subspace of an old-data second moment — and all three apply it to a **weight update**.
+  DIAG-ROUTING applied it to the **routing** Gram and got ρ_MT = 0.012 (dead). The untried 90° turn is
+  to apply it in the **query/key space**: take `Q₀^QA = Σ_{q∈QA} qqᵀ ∈ R^{128×128}` per (layer, KV-head),
+  `Q₀^QA = UΛUᵀ`, keep the top-r by GPM's energy rule `Σ_{i≤r}λ_i ≥ ε_th·tr(Q₀)`, set
+  `P⊥ = I − U_rU_rᵀ`, and place the new key as **`k* = c·P⊥q̄_MT/‖P⊥q̄_MT‖`**. Then for every QA query
+  `q ∈ span(U_r)` the logit `q·k*/√d ≈ 0` **by construction**, while MT queries with energy outside
+  `span(U_r)` see `c‖P⊥q̄_MT‖/√d > 0`. `c` is set so the MT logit matches what the teacher's own doc keys
+  achieve (that target is already computed — `compute_teacher_log_mass`, `finetune.py:508`).
+  SUIT (arXiv 2509.24502, 2025) is the closest published instance of the same idea in editing: it
+  reports that constructing key/value vectors **without** a subspace constraint causes large hidden-state
+  perturbation, and confines both the key and the value to an "edit-critical subspace" identified by SVD
+  — closed-form at edit time, with preserved knowledge protected by orthogonality rather than by penalty.
+  **The decisive scalar is the key-space analogue of DIAG-ROUTING's ρ:**
+  **`ρ_key(r) = tr(P⊥_r Q₀^MT)/tr(Q₀^MT)`**, the fraction of MT *query* energy outside QA's dominant
+  query subspace.
+- Maps to our code: new `cartridges/am/key_select.py::select_keys_nullspace(...)`, a `nullspace` branch in
+  `rewrite_keys_on_support` (`:227-284`), consumed at the **already-wired, never-run**
+  `finetune.py:516-532`. Needs one new statistic, `Q₀^QA` per (layer, KV-head), collected by the *same*
+  hooks `_collect_reference_queries` (`finetune.py:272-334`) already uses on `OLD_REF_DATA_PATH` /
+  `ENABLE_OLD_REFERENCE_GUARD=1`, cached beside the cartridge (mirror the `trainable_beta` persistence in
+  `cartridges/cache.py::save` `:237` / `::from_pretrained` `:255`). Proposed opt-in flags
+  `KEY_MODE=nullspace`, `AM_KEY_NULLSPACE_RULE ∈ {eig_rel, energy}`, `AM_KEY_NULLSPACE_TAU`,
+  `AM_QA_QUERY_GRAM_PATH`. A discrete, synthesis-free variant needs no new key at all: rescore the
+  existing candidate pool at `finetune.py:519-522` by `(q̄_MT·k)·‖P⊥k‖` instead of attention RMS
+  (`KEY_MODE=highest_attention_orth`).
+- **Prediction (about OUR signature):** three, in order of cost, and the first one decides the family.
+  (i) **`ρ_key` ≫ `ρ_route` = 0.012.** Reason: `ρ_route` is measured *through* a key set whose routing
+  Gram has participation rank **1.97**, so it is upper-bounded by what those keys can resolve; `ρ_key`
+  is measured in the raw 128-dim query space where nothing has been projected away. I predict
+  **ρ_key ∈ [0.15, 0.6]** at the GPM 99%-energy rule, i.e. **10–50× ρ_route** — and equivalently
+  `‖q̄_MT − q̄_QA‖/‖q̄_MT‖ ≥ 0.3`, versus the 0.053 measured in routing space. (ii) If ρ_key lands in
+  that band, `KEY_MODE=nullspace` should push the **MT/QA mass ratio from 1.04 to ≥ 1.5** at
+  `mass_on_S`(MT) ≥ 0.3 — the first mechanism on the board that moves the *ratio* rather than the level
+  — and MT toward 2.1–2.3 with QA held under ~2.4 (Phase-1 floor 2.2388; budget 2.52). (iii) If instead
+  **ρ_key < 0.05**, then MT and QA queries are genuinely the same direction in R^128, no key placement
+  can be asymmetric, and **B-ROUTE closes as `confirmed+capped` for keys as well as values** — the whole
+  mission would have to move to β/bandwidth (which raises both axes together) or off the fixed-512-slot
+  formulation. **This single number is the cheapest decisive measurement left on the board** (below).
+- Cost: **gradient-free, `gradient_steps = 0`.** `Q₀` collection = **one** forward pass over the QA
+  reference set with the existing query hooks (DIAG-ROUTING did QA+MT collection in 5.7 s total for
+  49k/40k query rows per head). 288 symmetric `128×128` EVDs (milliseconds). Storage
+  `36×8×128²×4 B ≈ 19 MB` — **16× cheaper than LIT-009's routing Gram**. Zero extra solves per document.
+- Why it might NOT transfer: (i) **orthogonality gives logit 0, not −∞**; softmax is shift-invariant per
+  row, so whether a zero logit is "invisible" depends on where the other 511 logits sit — and our
+  measured routing says one incumbent slot already owns ~52% of cartridge mass (→ LIT-021), so a
+  logit-0 key is likely *below* the incumbents rather than tied with them, which is favourable for
+  retention but means `c` must be large for acquisition. (ii) `Q₀^QA` comes from `OLD_REF_DATA_PATH`,
+  not the QA eval split, exactly as AlphaEdit's `C₀` comes from Wikipedia rather than the eval set; the
+  reproducibility study (arXiv 2606.26783) already showed the protection is *bounded, not
+  unconditional*, once a nonlinearity intervenes — and between our `V` and CE sit a softmax we are also
+  perturbing, `o_proj`, RMSNorm and 30+ layers. (iii) The synthesised key is **post-RoPE**, so `P⊥q̄_MT`
+  is only meaningful at a stated position (→ LIT-026). (iv) Overwriting a key destroys whatever QA
+  content that slot served regardless of where the new key points (`rewrite_keys_on_support:283`).
+- Related: LIT-011, LIT-012, LIT-017 (this entry supersedes its prediction section), LIT-019, LIT-021,
+  LIT-026, DIAG-ROUTING.
+
+---
+### LIT-021: Attention sinks and massive activations — key **norm** is a mass lever, and one incumbent slot already owns half the cartridge (*The Spike, the Sparse and the Sink*, arXiv 2603.05498 · StreamingLLM, arXiv 2309.17453 · *Massive Activations in LLMs*, arXiv 2402.17762)
+- Status: candidate
+- Board entry: **B-ROUTE** (primary), B-CASCADE (secondary)
+- Mechanism (1 paragraph): a small number of tokens attract disproportionate attention **regardless of
+  semantic relevance**. 2603.05498 gives the geometry: diverse "spike" tokens collapse to nearly the
+  same vector, so their keys are **low-dimensional and near-invariant across prompts**, and the learned
+  key projection maps spike keys and non-spike keys into **distinct subspaces**; a head becomes a sink
+  head exactly when *its query subspace aligns more with the fixed sink-key subspace than with the
+  non-sink-key subspace*. StreamingLLM's operational finding is the same object from the other side —
+  the first few keys act as a bias term that absorbs unwanted mass, and removing them collapses the
+  model. Two consequences for a key-side write. **(a) The lever:** because the logit is `q·k/√d`, key
+  *norm* is a free parameter — a synthesised key can be scaled until it captures any desired mass. This
+  is the one thing values cannot do (LIT-014's nonparametric bound `‖Δo(q)‖ ≤ mass_on_S·range` binds
+  values, not keys). **(b) The hazard:** a sink key captures mass from *every* query, so scaling a key
+  is exactly how you manufacture a new sink and destroy retention.
+- Maps to our code: `cartridges/am/key_select.py::rewrite_keys_on_support` — a norm policy on the written
+  key (`AM_KEY_NORM_MODE ∈ {as_is, match_incumbent, logit_target}` + `AM_KEY_LOGIT_TARGET`), and a
+  protection list so the incumbent sink slot is never overwritten (`AM_KEY_PROTECT_TOPK`, computed from
+  the same access scores `ranking.py::rank_am_slots` already has). Diagnostics belong in
+  `cartridges/am_stability_probe.py` alongside `mass_on_S`.
+- **Prediction (about OUR signature) — with the free measurement that motivates it.** Recomputing
+  `DIAG-ROUTING.npz` (no GPU): **the top-1 slot carries 52.5% of cartridge routing mass on average
+  (median 58.1%), and in 29 of 36 layers it is the SAME slot index for all 8 KV heads.** Routing entropy
+  is 2.81 (QA) / 2.89 (MT) nats = **40–43 effective slots of 512**. So: (i) I predict
+  `KEY_MODE=highest_attention` **will select and overwrite that sink slot** (its selector is attention
+  RMS, `key_select.py:79`, which the sink maximises by construction), and that this — not the new key's
+  direction — will produce the folkloric "keys collapse QA": QA should jump **past 2.52 and plausibly
+  past 2.7**, with total cartridge attention falling below the 0.588 baseline the same way
+  B-CASCADE measured for values. (ii) The same run with the top-1 slot per layer **protected** should
+  lose far less QA at nearly the same MT, and the difference between the two arms is a clean, one-bit
+  attribution of the collapse to sink destruction rather than to key geometry. (iii) Scaling a
+  synthesised key to `logit_target` reproduces the β table above **plus** an asymmetry term, so
+  `mass_on_S` should be tunable continuously from 0.09 to > 0.6 — but any arm whose MT/QA ratio stays
+  at ≈ 1.04 while `mass_on_S` rises is behaving as a **sink**, not as a selective key, and is therefore
+  β in disguise.
+- Cost: **gradient-free, `gradient_steps = 0`, zero extra forward passes** — the sink slot is the argmax
+  of an access-score vector the pipeline already accumulates (`query_accum.py:114`), and the norm policy
+  is one scalar per written key.
+- Why it might NOT transfer: sink analyses are done on *pretrained* caches of real tokens; our 512 slots
+  are **self-distilled parameters** (`outputs/phase1_selfdistill_qwen512`), so the "sink" we measure is
+  a learned artefact of Phase-1 and need not obey the spike-token geometry. Also, 2603.05498's
+  sink-key/non-sink-key subspace split is a statement about `W_K` applied to token activations; our
+  keys bypass `W_K` entirely.
+- Related: LIT-016, LIT-020, LIT-024, B-CASCADE, B-ROUTE.
+
+---
+### LIT-022: What the capacity bounds actually say for 512 slots, 16 documents and d = 128 (Hopfield 1982/Amit-Gutfreund-Sompolinsky · Personnaz et al. 1985 projection rule · modern Hopfield arXiv 2008.02217 · *Scaling Laws for Associative Memories* arXiv 2310.02984 · *Birth of a Transformer* arXiv 2306.00802 · fast weights arXiv 2102.11174)
+- Status: candidate
+- Board entry: **B-CAP** (primary), **B-ROUTE** (secondary)
+- Mechanism (1 paragraph): the field gives four bounds, and they disagree about *what* is scarce.
+  (1) **Hebbian outer-product store:** capacity `≈ 0.138 N` patterns for N units; beyond it the crosstalk
+  term wins and retrieval fails catastrophically. (2) **Projection / pseudo-inverse rule**
+  (Personnaz et al. 1985), `J = ξ(ξᵀξ)⁻¹ξᵀ` — *this is our least-squares solve* — stores up to **N
+  linearly independent patterns exactly**, but basins of attraction vanish past **N/2**, so exact
+  storage ≠ usable retrieval. Its advantage over Hebb is precisely that it **degrades far less as
+  patterns become correlated**, which matters here because our routing vectors have cosine 0.999.
+  (3) **Modern Hopfield** (2008.02217): exponential capacity `~2^{d/2}` in the *pattern* dimension, one-step
+  retrieval, and retrievability governed by the **separation** `Δ_i = min_{j≠i}(x_iᵀx_i − x_iᵀx_j)`;
+  poorly separated patterns return a **metastable average**. (4) **Random-embedding capacity**
+  (2310.02984, 2306.00802): with embeddings sampled on the sphere in `R^d`, an outer-product memory
+  stores a number of associations **proportional to its parameter count**, strictly more than the `d`
+  you get from insisting on exact orthogonality; and (2102.11174) measures the practical limit at
+  `d_dot = 64` as errors accumulating from **~60 associations**.
+- Maps to our code: no code change — this entry **sizes** the others. Our store per (layer, KV-head) is
+  `N = 512` slots of dimension `d = 128`; we write `t = 32` slots per document for **16 documents**, all
+  drawn from a support union of only **~55 slots per layer** (measured, below). Bound (2) says the
+  *value* solve can in principle satisfy up to 512 independent constraints; bound (4) says the *key*
+  space supports O(d) = O(128) near-orthogonal directions per head, i.e. **~8 mutually distinguishable
+  keys per document at 16 documents**, or ~128 if documents share directions gracefully.
+- **Prediction (about OUR signature):** **capacity is not our binding constraint; separation is.**
+  16 documents × 32 slots = 512 write-slots nominally, but the measured support union is 55 slots/layer,
+  so each slot is written **~9 times** (16 docs × 32 / 55) — that is inside Personnaz's N/2 usable
+  regime only if the write directions are near-independent, and they are not (routing cosine 0.999).
+  Concretely I predict: (a) per-document MT quality **decays with document index** within a Phase-2 run
+  (later documents overwrite earlier ones on the same ~55 slots) — measurable **with zero GPU** from the
+  per-document `am_stats.mean_mse` series already in every run's `phase2_summary.json`, and already
+  partially visible (DIAG-OBJ-a: `am/mean_mse` first doc 0.00851 → last doc 0.19808, a **23× rise**);
+  (b) forcing per-document slot **disjointness** (16 docs × 32 = 512 distinct slots, exactly one write
+  per slot — Larimar's measured full-fidelity regime, LIT-015) should collapse that 23× rise; (c) if
+  disjointness does **not** improve MT, capacity/interference is refuted and the cap is separation, i.e.
+  keys. **Falsifier for this entry:** if `mean_mse` is flat across document index in some run, the 23×
+  is a per-document difficulty effect, not interference.
+- Cost: **zero.** The document-index series is already logged; the disjointness variant is a change to
+  `ranking.py::rank_am_slots` (exclude already-written slots), no extra solves, no extra passes.
+- Why it might NOT transfer: every bound above is for a memory whose retrieval is the *identity* of a
+  stored pattern; ours is a soft mixture read by 30+ downstream layers that may recover information a
+  "metastable average" appears to lose. Hopfield/Personnaz capacities also assume patterns are the
+  *unknowns*; in our store the 512 keys are fixed and only 55 values move.
+- Related: LIT-013, LIT-015, LIT-016, LIT-023, B-CAP.
+
+---
+### LIT-023: Sparse Distributed Memory — the formal condition under which value-only writing into **fixed random** keys works (Kanerva 1988 · *Attention Approximates SDM*, arXiv 2111.05498, NeurIPS 2021 · *SDM is a Continual Learner*, arXiv 2303.11934, ICLR 2023)
+- Status: candidate
+- Board entry: **B-ROUTE** (primary), forgetting (secondary)
+- Mechanism (1 paragraph): SDM fixes `N` "hard locations" — **random addresses that are never moved** —
+  and writes a datum by *adding* its value into **every** hard location within Hamming distance `d` of
+  the datum's address; reading pools the same neighbourhood. Bricken & Pehlevan show that under
+  conditions they verify in pretrained GPT-2, **transformer attention is SDM's read operation**, with
+  the softmax temperature playing the role of the Hamming radius. The 2023 follow-up shows SDM's *fixed,
+  sparse, random* addressing is **itself** a continual-learning mechanism: because addresses are random
+  and coverage is uniform, two unrelated data write into nearly disjoint neighbourhoods without any
+  coordination. **This is the exact theoretical statement of when our frozen-key regime is legitimate:**
+  value-only writing into fixed keys works iff the fixed address set **covers** the query space, so that
+  every new query has its own well-populated neighbourhood. Kanerva's usable capacity is only
+  `≈ 0.1 N` data per N hard locations.
+- Maps to our code: diagnostic and prescriptive. The coverage statistic is the *effective number of
+  distinct neighbourhoods*, i.e. the routing entropy already computable from
+  `core.py::compute_attention_weights`; the prescription is that if coverage fails, you do not fix it by
+  writing values — you fix it by **adding an address**. Proposed opt-in probe flag
+  `AM_PROBE_COVERAGE=1` in `cartridges/am_stability_probe.py`.
+- **Prediction (about OUR signature):** SDM's coverage condition is **violated in our cartridge, and I
+  can already quantify by how much.** Recomputed from `DIAG-ROUTING.npz`: routing entropy is 2.81 nats
+  (QA) / 2.89 (MT) against `log 512 = 6.24`, i.e. **40–43 effective addresses out of 512 (8%)**, and the
+  QA routing Gram has participation effective rank **1.97**. A store with ~40 effective addresses and a
+  single address holding 52% of the mass is the *opposite* of Kanerva's uniform random coverage — it is
+  a store with one hard location. Prediction: **any mechanism that raises effective coverage should move
+  MT more per unit of QA cost than any mechanism that improves the fit at fixed coverage**, and the
+  measurable proxy is routing entropy: I predict a monotone relation between post-write routing entropy
+  and ΔMT across arms, and **no** relation between `am/mean_mse` and ΔMT (which DIAG-OBJ-c already
+  confirmed to be *anti*-correlated). Falsifier: an arm that raises entropy from 2.9 to > 4.0 nats and
+  still leaves MT ≥ 2.5.
+- Cost: **gradient-free, `gradient_steps = 0`, no extra forward passes** — two extra reductions over the
+  `alpha` matrix `compute_attention_weights` already materialises.
+- Why it might NOT transfer: SDM's guarantees assume **binary** addresses and uniformly random hard
+  locations; our keys are learned, real-valued, RoPE-phased and highly non-uniform. Kanerva's `0.1N`
+  capacity is for autoassociative recall of the stored datum, not for a language model's CE.
+- Related: LIT-016, LIT-022, LIT-024.
+
+---
+### LIT-024: The only published **closed-form, gradient-free key-write rules** — usage/LRU allocation (Kaiser et al., *Learning to Remember Rare Events*, arXiv 1703.03129, ICLR 2017 · NTM arXiv 1410.5401 · DNC, Graves et al., Nature 538:471–476, 2016)
+- Status: candidate ⭐ *(the single most directly transferable mechanism in this block)*
+- Board entry: **B-ROUTE**
+- Mechanism (1 paragraph): Kaiser et al. maintain a memory `(K, V, A)` — keys, values, **ages** — beside
+  a network, with all keys ℓ2-normalised and queries normalised. Given a query `q` with true value `v`
+  and nearest neighbour `n₁`: **if `V[n₁] = v`, move the key toward the query and reset its age,
+  `K[n₁] ← (q + K[n₁])/‖q + K[n₁]‖`, `A[n₁] ← 0`; otherwise pick the OLDEST slot,
+  `n' = argmax_i (A[i] + r_i)` with `r_i` a tiny tie-break noise, and write `K[n'] ← q`, `V[n'] ← v`,
+  `A[n'] ← 0`**; all other ages increment. Nothing here is learned by backprop — it is a rule.
+  NTM/DNC give the same idea a differentiable form: DNC maintains a usage vector `u_t` and a free list
+  `φ_t` (indices sorted by ascending usage) and writes with the **allocation weighting**
+  `a_t[φ_t[j]] = (1 − u_t[φ_t[j]]) ∏_{i<j} u_t[φ_t[i]]`, which concentrates the write on the
+  **least-used** location; NTM's write is `M_t(i) = M_{t−1}(i)[1 − w_t(i)e_t] + w_t(i)a_t`, an explicit
+  erase-then-add. **The invariant across all three: you write the new key AT the query, and you place it
+  where the old content is NOT being read.**
+- Maps to our code: two independent, small changes, both of which invert the sign of what we do today.
+  (i) **Where:** `cartridges/am/ranking.py::rank_am_slots` currently selects the slots with the
+  **highest** new-content access score (TF). The LRU/DNC rule selects the slots with the **lowest old**
+  usage. Proposed `SLOT_SELECTION=qa_least_used` using the QA access scores that
+  `ENABLE_OLD_REFERENCE_GUARD=1` already collects (`continual.py:61-88`) — and note this is the
+  *sharpened* form of the IDF idea that K-GATE refuted: IDF used corpus document-frequency, DNC uses the
+  **actual old usage of that slot**, which is the quantity the theory names (LIT-013 made the same point
+  for the margin selector; this entry supplies the published rule and the exact formula).
+  (ii) **What:** `key_select.py` gains `KEY_MODE=query_centroid`: `k* = c·q̄_MT/‖q̄_MT‖` where `q̄_MT` is
+  the mean (or top principal direction) of that head's MT reference queries — Kaiser's `K[n'] ← q`
+  verbatim. Combined with LIT-020's `P⊥`, this is `k* = c·P⊥q̄_MT/‖P⊥q̄_MT‖`.
+- **Prediction (about OUR signature):** this is the **only** mechanism reviewed that raises the MT/QA
+  mass ratio *by construction on both factors at once* — the new key points at MT's query centroid
+  (raising the MT logit) and sits on slots QA barely reads (limiting the QA logit). Concretely:
+  `SLOT_SELECTION=qa_least_used` alone, values only, no key change, should push the MT/QA `mass_on_S`
+  ratio **above 1.04** — I predict **1.3–3.0** — while *lowering* the absolute `mass_on_S` (least-used
+  slots carry less mass), so MT may not improve and **QA should improve toward or below the 2.2388
+  floor**. Adding `KEY_MODE=query_centroid` on those slots should then raise `mass_on_S` back to ≥ 0.3
+  **at the elevated ratio**, which is the combination the win condition needs (MT ≤ 2.02, QA ≤ 2.52).
+  **Sharp falsifier:** if `qa_least_used` leaves the ratio at ≈ 1.04, then no slot subset of this
+  cartridge is QA-blind — consistent with the 0.914 top-32 overlap — and the discrete lever is dead,
+  leaving only synthesis (LIT-019/020).
+- Cost: **gradient-free, `gradient_steps = 0`, no extra solves.** `qa_least_used` reuses an access-score
+  vector already accumulated; `query_centroid` is one mean per (layer, head) per document over queries
+  already in memory. Strictly cheaper than `highest_attention` (which runs a 512-way softmax plus a
+  200-iteration NNLS, `key_select.py:96`).
+- Why it might NOT transfer: Kaiser's memory sits **beside** a network that is trained end-to-end to
+  produce queries the memory can serve; ours must work with a frozen LM whose queries we cannot shape,
+  and whose keys we cannot ℓ2-normalise without changing the logit scale the model expects. DNC's usage
+  is a *within-episode* counter with a free gate; our "usage" is a cross-task statistic estimated from a
+  reference set. And "write at the query" assumes the query is stationary — ours are RoPE-phased
+  (LIT-026) and drift as soon as earlier layers are written (B-CASCADE).
+- Related: LIT-013, LIT-019, LIT-020, LIT-021, K-GATE (HYP-G1), B-ROUTE.
+
+---
+### LIT-025: Key-usage imbalance is the *known* failure mode of writable-key memories, and the published fix is **query-side** (Lample et al., *Large Memory Layers with Product Keys*, arXiv 1907.05242 · arXiv 2010.03881 · *Memory Layers at Scale*, arXiv 2412.09764 · `TF-IDF.pdf` = arXiv 2510.15103)
+- Status: candidate
+- Board entry: **B-ROUTE** (primary), K-GATE (secondary)
+- Mechanism (1 paragraph): product-key memory is a fixed table of `N` learned key–value pairs read by
+  `I = TopK(Kq(x), k)`, `s = softmax(K_I q(x))`, `y = sV_I` — architecturally our object with `N = 512`,
+  `k = t`. Its documented pathology is **catastrophic key-usage imbalance**: without intervention only a
+  minority of slots are ever accessed. The fix that works is **not** on the keys — it is **batch
+  normalisation on the query vectors**, which raises memory usage from **25.8% to 80.3%** at `N = 1M`
+  and drops perplexity 19.8 → 18.0; dead keys are additionally re-initialised with noise. The field's
+  standard diagnostic is the **KL divergence between the slot-access distribution and uniform**.
+  `TF-IDF.pdf` (our gating ancestor) sits on exactly this architecture and updates **values only** —
+  its keys are frozen throughout — selecting slots by TF-IDF of access counts against a background
+  corpus.
+- Maps to our code: (a) the diagnostic — log `KL(access_distribution ‖ uniform)` and top-1 share
+  alongside `mass_on_S` in `ranking.py::rank_am_slots` / `am_stability_probe.py`; (b) the query-side fix
+  has **no gradient-free analogue for a frozen LM** (we cannot insert a BatchNorm), which is itself the
+  finding: *the one intervention that reliably fixes usage imbalance in this architecture is unavailable
+  to us*, so imbalance must be attacked on the key side instead (LIT-020/LIT-024) or accepted.
+- **Prediction (about OUR signature) — and the quantitative reason TF-IDF.pdf's premise does not hold
+  here.** Their store is `N = 10⁶–10⁸` with `k = 32`, a selection density of **3×10⁻⁵**; ours is
+  `N = 512` with `k = 32`, density **6×10⁻²** — **2,000× denser**. Two random 32-subsets of 10⁶ slots
+  overlap with probability ~10⁻³; two random 32-subsets of 512 overlap in ~2 slots (6.25%) by chance
+  alone. **We measure a top-32 QA/MT overlap of 0.914 — 15× the chance level and 3 orders of magnitude
+  above the regime TF-IDF.pdf was designed for.** Prediction: any selection-only mechanism (TF, TF-IDF,
+  margin, least-used) can move the MT/QA mass ratio by at most the amount the ~9% of non-overlapping
+  slots allows, i.e. **ratio ≤ ~1.2 from selection alone**; getting past that requires changing what
+  the slots *are* (keys), not which ones are picked. Falsifier: a selection-only arm that reaches
+  ratio > 1.3.
+- Cost: **zero** for the diagnostic; the transfer analysis is free.
+- Why it might NOT transfer: product-key memories are trained end-to-end with the keys in the loss, so
+  "usage" is something the optimiser can fix; our keys are a fixed post-hoc artefact. And their memory
+  replaces an FFN (position-independent), while ours lives inside attention with RoPE (LIT-026).
+- Related: LIT-013, LIT-024, K-GATE (HYP-G1), TF-IDF.pdf.
+
+---
+### LIT-026: RoPE hazards for key synthesis and key relocation — and **three concrete, unreported hazards in our own code** (RoFormer arXiv 2104.09864 · StreamingLLM arXiv 2309.17453 · `AM.pdf` App. C.3 · DapQ arXiv 2603.11564 · *Round and Round We Go* arXiv 2410.06205 · KVMerger arXiv 2407.08454)
+- Status: candidate ⭐ *(blocking: it gates every other key-side entry)*
+- Board entry: **B-ROUTE** (primary), **B-TARGET** (secondary)
+- Mechanism (1 paragraph): **a synthesised key is well-defined only as a (direction, position) pair.**
+  RoPE stores `R_p k`; the logit against a query at position `n` is `qᵀR_{n−p}k`, so a stored key means
+  nothing until you say where it lives. The literature's answer to relocation is always the same
+  operator: a **uniform phase shift** `R_Δ`, `Δ = p_target − p_source`. `AM.pdf` App. C.3 does exactly
+  this for text-based chunking ("applies a uniform RoPE phase shift to the compacted keys to align them
+  to the chunk's original global offset, i.e. a rotation by `Δ = p_global − p_local`"), and §2 notes the
+  compacted cache **retains a logical length T** so appended tokens keep the position IDs they would
+  have had. StreamingLLM's central operational rule is the same: assign positions by **cache index, not
+  original text index**. DapQ (2603.11564) supplies the quantitative penalty for getting it wrong:
+  synthetic "pseudo queries" must be given the **future** positions they will actually occupy, and
+  query similarity to real queries **decays monotonically with the absolute position offset** — the
+  semantic content of the pseudo token barely matters, the position does. *Round and Round We Go*
+  (2410.06205) explains the structure: the low-index (high-frequency) RoPE bands carry positional
+  selectivity, the high-index (low-frequency) bands carry semantic content — so a phase error is not a
+  uniform degradation, it corrupts the positional bands first. KVMerger (2407.08454) merges keys only
+  within *adjacent* token sets, where the phase mismatch is small, precisely to dodge this.
+- Maps to our code — **three hazards, found by reading, none previously reported, all no-GPU checkable:**
+  1. **`rope_theta` is hard-coded to `10000.0` in every AM function and no caller ever overrides it**
+     (`core.py:24/51/83/122`, `teacher.py:142/164/187`, `key_select.py:59/110/236`, `phase1.py:47/264`;
+     `grep 'rope_theta='` finds no non-default call site). **Qwen3-4B-Instruct-2507 uses
+     `rope_theta = 5,000,000`** (verified in the HF snapshot `config.json`). This is live in the
+     **teacher-target construction of every AM run**: `finetune.py:495` sets
+     `doc_rope_offset = k_doc.shape[0]`, which `_attention_scores` (`core.py:66`) turns into
+     `_apply_rope_offset_to_queries(..., rope_theta=10000.0)`. Quantifying it: for an isotropic
+     128-dim query, `E[cos(rot_{θ=1e4}(q), rot_{θ=5e6}(q))]` = **0.29 / 0.34 / 0.27 / 0.24 / 0.00** at
+     offsets 256 / 512 / 1024 / 2048 / 4096, and at offset 1024 **75% of dimension pairs are rotated by
+     more than 1 radian in error**. The measured document lengths in this project are
+     **T_doc = 3858–8900 tokens** (`logs/phase1_*.log`, `doc_token_counts`), i.e. **the offsets where the
+     two thetas are fully decorrelated.**
+  2. **`rewrite_keys_on_support` selects doc keys in one rotary frame and installs them in another with
+     no counter-rotation.** `key_select.py:258-278` scores candidates with `doc_key_start=t`,
+     `doc_rope_offset=T_doc` (so the query is rotated forward by T_doc for the doc block), then
+     `:283` does `out[selected_indices] = new_k` — the **raw** doc key, unrotated, into a cartridge slot.
+     `phase1.py::_rope_reposition` (`:42-68`) implements exactly the missing `R_Δ`, and
+     `initial_am_compaction.py:150` already uses it via `rebake_key_positions`. **So the fix exists in
+     this repo and the `KEY_MODE ≠ freeze` path does not call it.**
+  3. **Frame bookkeeping is inconsistent end-to-end.** Cartridge keys are baked at positions 0…511
+     (`initialization/text.py:45`, `arange`); document keys are baked at positions 0…T_doc−1
+     (`teacher.py::prefill_document_kv_cache` is called at `continual.py:162` with the default
+     `position_offset=0` — the Phase-1 logs' own `rope_note` says "Per-doc prefill at position 0; docs
+     concatenated so absolute RoPE positions **overlap**"); and eval/reference queries are at
+     `arange(seq_len)` from 0 (`utils/chat.py:70`, `generation.py:228`). In that convention doc keys and
+     cartridge keys are **already in a common frame**, yet `finetune.py:495` applies a T_doc query
+     rotation anyway. Proposed opt-in flags: `AM_ROPE_THETA` (default 10000.0 ⇒ bit-identical),
+     `AM_DOC_ROPE_OFFSET ∈ {t_doc, zero}`, `AM_KEY_REBAKE=1` (call `_rope_reposition` inside
+     `rewrite_keys_on_support`).
+- **Prediction (about OUR signature):** (i) Hazard 2 means **the first-ever `KEY_MODE≠freeze` run is
+  measuring a phase-corrupted key, not a key-side mechanism** — I predict `KEY_MODE=highest_attention`
+  as it stands produces `mass_on_S` on MT **at or below** the frozen-key 0.0896 with the ratio still
+  ≈1.0, because a key rotated by thousands of positions is near-orthogonal to the query that selected
+  it; the run would look like "keys don't help" for a reason that has nothing to do with keys.
+  (ii) Hazards 1+3 predict a *target* defect independent of keys: the doc block's contribution to
+  `compute_teacher_targets` (`finetune.py:500`) is computed at a scrambled relative phase, so the
+  teacher output we fit is **not** the output the model would produce for `[cartridge ‖ doc]`. That is a
+  candidate mechanistic account for why ORACLE-WRITE's *perfect content transplant* (teacher's own doc
+  **values**, which are RoPE-free and therefore unaffected) beat the solve by 0.17 while the solve —
+  which fits RoPE-corrupted **targets** — has been pinned at 2.54 through every knob. Falsifiable and
+  cheap: rerun the canonical config with `AM_ROPE_THETA=5e6` and, separately, `AM_DOC_ROPE_OFFSET=zero`,
+  one variable each; if either moves MT by more than the 0.1–0.2 noise band, a substantial fraction of
+  this loop's "AM cannot acquire" evidence was measured against a mis-specified target.
+- Cost: **gradient-free, `gradient_steps = 0`, zero extra passes.** `_rope_reposition` is one elementwise
+  rotation of a `t×128` block; passing the true theta is a constant.
+- Why it might NOT transfer: the position convention in this repo is deliberately non-standard (the
+  cartridge overlaps the query positions), so "the correct frame" is a design choice, not a fact — it is
+  possible the current offset is intentional and only θ is wrong, or vice versa. Also, θ affects only
+  the *offset* paths; with `doc_rope_offset=0` (frozen-key runs on cartridge-only keys, e.g.
+  `refit_beta_nnls:189`, which uses a raw `queries @ keys.T`) it is a no-op — so this hazard bounds the
+  **teacher target** and the **key-rewrite** paths, not the value solve's design matrix.
+- Related: LIT-004, LIT-019, LIT-020, LIT-024, B-TARGET, B-ROUTE, ORACLE-WRITE.
+
+---
+### LIT-027: The counter-case — why a key write may be *strictly worse*, and what "keys collapse QA" is actually made of
+- Status: candidate *(falsifier for LIT-019/020/021/024; also an operational blocker report)*
+- Board entry: **B-ROUTE** (as the negative control)
+- Mechanism (1 paragraph): three named reasons a key-side write can lose where a value-side write does
+  not, each with a code location. **(a) Eviction, not addition.** `rewrite_keys_on_support:283` does
+  `out[selected_indices] = new_k` — every key we take is a key **removed**, and the value that slot held
+  is simultaneously re-solved, so the slot's entire QA contribution is destroyed regardless of where the
+  new key points. Values-only writes destroy the value but keep the routing; key writes destroy both.
+  **(b) The candidate pool guarantees eviction of the best slots.** The pool is
+  `cat([original_keys[S], k_doc])` (`finetune.py:519-522`) and `S` is chosen by highest MT access mass —
+  which, at 0.914 QA/MT top-32 overlap, is also the highest **QA** mass. So the slots offered up for key
+  replacement are precisely the ones QA reads most, including (LIT-021) the layer's single dominant slot
+  in the 29/36 layers where all 8 heads share it. **(c) The write moves the softmax the value solve was
+  fitted against.** `finetune.py:500` computes the teacher targets, `:516` rewrites the keys, `:591`
+  solves values on the *new* keys — internally consistent — but B-CASCADE showed that perturbing layer
+  `ℓ` moves the queries at layers `> ℓ`, and a key rewrite perturbs the *routing* at layer `ℓ`, which is
+  a strictly larger perturbation than a value rewrite of the same magnitude.
+  **The verdict on the folklore.** The pre-loop claim "moving keys collapses QA" is **untested in this
+  setting**: every row in `results.csv` is `KEY_MODE=freeze`, the claim comes from a different model and
+  a pre-loop session, and — per (a)/(b)/LIT-026 — the mechanism it would have measured is *eviction of
+  the highest-mass slots plus a rotary phase error*, not key geometry. It is folklore **about a
+  confound**, not evidence about keys.
+- Maps to our code: **no new code — this entry is a set of controls.** Arm 1:
+  `KEY_MODE=highest_attention` unchanged (the folklore reproduction). Arm 2: same, with the top-1 mass
+  slot per layer excluded from `S` (LIT-021's `AM_KEY_PROTECT_TOPK=1`). Arm 3: same, with
+  `AM_KEY_REBAKE=1` (LIT-026). The three arms attribute any QA collapse to eviction / sink destruction /
+  phase error respectively.
+- **🔴 OPERATIONAL BLOCKER (verified by reading, affects the cheapest experiment on the board):**
+  `finetune.py:264-269` `_should_fit_beta` returns `config.key_mode != "freeze"` when `enable_beta` is
+  `None`, and `continual_am_sparse.py:104-109` maps an **unset** `ENABLE_BETA` to `None`. **Therefore
+  `KEY_MODE=highest_attention` with `ENABLE_BETA` unset silently switches on the β/NNLS path that
+  crashed EXP-005 (cholesky not-PD), EXP-005b (NaN in ridge lstsq) and EXP-006 (NaN generated *inside*
+  `refit_beta_nnls`, so the output clamp could not fix it).** A key-only run is nevertheless available
+  **with no code change**: `ENABLE_BETA=0` forces `_should_fit_beta → False` at `:267-268` while leaving
+  `key_mode` free. Without that env var, the first key experiment will fail for a B-SOLVE reason and be
+  mis-attributed to keys.
+- **Prediction (about OUR signature):** if (a)+(b) dominate, all three arms lose QA by a similar amount
+  (QA > 2.7, past the 2.52 budget) and the MT/QA `mass_on_S` ratio stays ≈ 1.04 — keys bought bandwidth
+  and paid for it symmetrically, exactly like β, and **B-ROUTE closes `confirmed+capped`**. If arm 2 or
+  arm 3 recovers QA to ≤ 2.5 at the same MT, the collapse was a confound and the key axis is live. If
+  arm 1 alone already gives MT ≤ 2.3 at QA ≤ 2.52, the folklore is simply false.
+- Cost: **gradient-free, `gradient_steps = 0`**; `highest_attention` is AM's cheapest selector (3 s for a
+  60k context on 64 heads, Table 3) — but note our `key_select.py:96` runs a **200-iteration** NNLS per
+  head per document versus the paper's 2 (LIT-002), so budget the arm's `solve_s` against the 165–185 s
+  baseline rather than assuming parity.
+- Why it might NOT transfer: this entry is about *our* code, so the transfer risk is inverted — the risk
+  is that (a)/(b)/(c) are individually real but jointly small, and the true cap is the one DIAG-ROUTING
+  measured (queries genuinely inseparable), in which case none of the controls matter.
+- Related: LIT-002 (β is broken), LIT-004, LIT-020, LIT-021, LIT-026, B-SOLVE, B-CASCADE, B-ROUTE.

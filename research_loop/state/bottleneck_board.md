@@ -15,6 +15,34 @@ adversarial confirmation) → **CLOSED** (`confirmed+fixed` / `confirmed+capped`
 the number that shows it. "It didn't help" never closes anything.
 
 ---
+## 🔴 B-ROPE — the teacher targets are computed with the WRONG RoPE BASE (opened 2026-07-28)
+- **Stage:** C BUILD (verified by the orchestrator; fix + A/B dispatched) · **Status:** **CONFIRMED bug,
+  live in every AM run ever performed in this project**
+- **The fact:** `cartridges/am/` hard-codes `rope_theta: float = 10000.0` as a default in **every**
+  entry point (`core.py:24,51,83,122`, `teacher.py:142,164,187`, `key_select.py:59,110,236`), and
+  **no caller anywhere passes it** — `grep rope_theta cartridges/am/finetune.py cartridges/am/continual.py`
+  returns **nothing**. Meanwhile the actual model config:
+  ```
+  Qwen/Qwen3-4B-Instruct-2507 → rope_theta = 5000000, max_position_embeddings = 262144
+  ```
+  **500× wrong**, in the teacher-target path (`finetune.py:495` → `_apply_rope_offset_to_queries`) at
+  document offsets T_doc = 3858–8900, where SCOUT-KEYS measured the two rotations as **decorrelated**
+  (E[cos] 0.24–0.34 at 1–2k, **0.00 at 4k**).
+- **Why this may reframe everything:** if the *target* is computed in the wrong rotary frame, then the
+  solve has been fitting a **corrupted target** all along — and **B-OBJ's anti-correlation becomes
+  exactly what you would predict**: fitting a wrong target better (18× lower MSE) *should* destroy the
+  model (+13 loss). The same applies to `mass_on_S`, β, and every "AM cannot do X" conclusion.
+- **Do not over-claim yet:** it is equally possible the frames cancel (SCOUT-KEYS hazard #3 notes the
+  cartridge/doc/query frames may already be common under this repo's arange-from-0 convention, in which
+  case `finetune.py:495` rotates queries by T_doc *unnecessarily*). **The A/B settles it** — canonical
+  top32 with `rope_theta=5e6` vs `10000`, single variable. → DIAG-ROPE dispatched.
+- **Related hazards found in the same read (queued, not yet acted on):**
+  H2 `key_select.py:283` installs a doc key into a cartridge slot **with no counter-rotation**, while
+  `phase1.py::_rope_reposition` implements exactly that and `initial_am_compaction.py` already calls it.
+  H4 🔴 `_should_fit_beta` (`finetune.py:264-269`) **silently enables the broken β/NNLS path whenever
+  `KEY_MODE != freeze`** with `ENABLE_BETA` unset — so the *first* key experiment would crash for a
+  B-SOLVE reason and look like "keys don't work". **`ENABLE_BETA=0` gives a clean keys-only arm.**
+
 ## ACTIVE BOTTLENECK — **B-ROUTE**, and the mission now turns on one number
 **Status after cycle 1 (2026-07-28): three of six entries are closed and the search space has collapsed
 onto a single axis.**
@@ -294,10 +322,13 @@ figures** (0.08961 vs 0.08956; 0.58787 vs 0.58787), so both measurements are now
   128-dim query second moment `Q₀` and **synthetic** keys, whereas this measured routing vectors over
   frozen Phase-1 keys. Keys remain the one untouched axis.
 
-**🔥 The lever this hands us:** `mass_on_S` at `top_t=512` is **QA 0.5697 / MT 0.5879**, versus
-**0.0827 / 0.0896** on the tf-idf top-32 union — a **6.6× bandwidth gain**. ORACLE-WRITE measured the
-write ceiling at 9% bandwidth and got MT 2.381. **The ceiling at 59% bandwidth is unmeasured, and it
-decides whether value-only writing is capped by bandwidth or by something deeper.** → ORACLE-WRITE-512.
+**~~🔥 The lever this hands us~~ — ⚠️ CORRECTED 2026-07-28 by ORACLE-WRITE-512.** DIAG-ROUTING's
+0.5697/0.5879 is **total cartridge mass**, not writable-slot mass (the two agree to 5–6 s.f., so it was
+the *label* that was wrong, not the measurement). The **511 writable slots carry only 0.2190 QA /
+0.2328 MT**. The difference is **frozen slot 0 — an attention sink holding 0.3506 QA / 0.3550 MT**
+(0.624 in one layer), which **no AM config can write**. So the real writable-bandwidth gain of full
+support over top-32 is **2.6×, not 6.6×**. The orchestrator propagated the 6.6× figure into two worker
+briefs before it was checked; the corrected number stands.
 
 **Caveats (worker-stated):** ρ_QA is in-sample by construction, so a held-out QA control would raise the
 floor and *shrink* the MT/QA contrast, not widen it; all numbers are on the pre-write cartridge.

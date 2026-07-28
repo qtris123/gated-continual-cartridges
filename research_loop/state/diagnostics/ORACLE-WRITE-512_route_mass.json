@@ -1,0 +1,2039 @@
+{
+  "model": "Qwen/Qwen3-4B-Instruct-2507",
+  "runs": {
+    "phase1_S511|QA": {
+      "per_layer": {
+        "0": {
+          "mass_on_S": 0.1783350503925855,
+          "mass_on_cart": 0.17871245990196863,
+          "share_of_cart": 0.9978881746153001,
+          "mass_on_S_scored": 0.15429199355255788,
+          "mass_on_cart_scored": 0.15468882420286964,
+          "share_of_cart_scored": 0.9974346521000681
+        },
+        "1": {
+          "mass_on_S": 0.1589231574907899,
+          "mass_on_cart": 0.15997951539854208,
+          "share_of_cart": 0.9933969176921147,
+          "mass_on_S_scored": 0.12001107202692768,
+          "mass_on_cart_scored": 0.12046089217083834,
+          "share_of_cart_scored": 0.9962658408400901
+        },
+        "2": {
+          "mass_on_S": 0.12152548177012552,
+          "mass_on_cart": 0.12689808864767352,
+          "share_of_cart": 0.9576620346704765,
+          "mass_on_S_scored": 0.10393560423155512,
+          "mass_on_cart_scored": 0.10776542438071117,
+          "share_of_cart_scored": 0.9644615128538245
+        },
+        "3": {
+          "mass_on_S": 0.1396520041550199,
+          "mass_on_cart": 0.14920959124962488,
+          "share_of_cart": 0.9359452229943094,
+          "mass_on_S_scored": 0.12306907758509307,
+          "mass_on_cart_scored": 0.12948843614888492,
+          "share_of_cart_scored": 0.9504252367646875
+        },
+        "4": {
+          "mass_on_S": 0.17087521233285466,
+          "mass_on_cart": 0.17795183237952492,
+          "share_of_cart": 0.9602329464549841,
+          "mass_on_S_scored": 0.1594861093858764,
+          "mass_on_cart_scored": 0.16451834394828013,
+          "share_of_cart_scored": 0.9694123193703814
+        },
+        "5": {
+          "mass_on_S": 0.20240694331005216,
+          "mass_on_cart": 0.2101259350311011,
+          "share_of_cart": 0.9632649262457467,
+          "mass_on_S_scored": 0.1743648166349709,
+          "mass_on_cart_scored": 0.18006749296971247,
+          "share_of_cart_scored": 0.9683303396926797
+        },
+        "6": {
+          "mass_on_S": 0.24386708453918496,
+          "mass_on_cart": 0.2496353187598288,
+          "share_of_cart": 0.9768933568803483,
+          "mass_on_S_scored": 0.25052813113122646,
+          "mass_on_cart_scored": 0.25457138093931614,
+          "share_of_cart_scored": 0.9841174220245382
+        },
+        "7": {
+          "mass_on_S": 0.06446286701248027,
+          "mass_on_cart": 0.6050818517493705,
+          "share_of_cart": 0.10653577995457925,
+          "mass_on_S_scored": 0.08020431658309259,
+          "mass_on_cart_scored": 0.6523329967667739,
+          "share_of_cart_scored": 0.12294996110976696
+        },
+        "8": {
+          "mass_on_S": 0.12433077682120104,
+          "mass_on_cart": 0.5871130852028728,
+          "share_of_cart": 0.21176631888257,
+          "mass_on_S_scored": 0.165290178175633,
+          "mass_on_cart_scored": 0.6202979658841632,
+          "share_of_cart_scored": 0.2664689992011032
+        },
+        "9": {
+          "mass_on_S": 0.12394796005294968,
+          "mass_on_cart": 0.6460125322143236,
+          "share_of_cart": 0.19186618505386552,
+          "mass_on_S_scored": 0.15022800763789457,
+          "mass_on_cart_scored": 0.6718208169882514,
+          "share_of_cart_scored": 0.22361320733013504
+        },
+        "10": {
+          "mass_on_S": 0.13141809574638805,
+          "mass_on_cart": 0.6111271750802795,
+          "share_of_cart": 0.21504214033539676,
+          "mass_on_S_scored": 0.16085851961713385,
+          "mass_on_cart_scored": 0.6436996764242763,
+          "share_of_cart_scored": 0.2498968470990943
+        },
+        "11": {
+          "mass_on_S": 0.1691727886791341,
+          "mass_on_cart": 0.5733059154202541,
+          "share_of_cart": 0.29508292890214516,
+          "mass_on_S_scored": 0.20165466338270902,
+          "mass_on_cart_scored": 0.608873391752254,
+          "share_of_cart_scored": 0.33119309550114284
+        },
+        "12": {
+          "mass_on_S": 0.1833487036637962,
+          "mass_on_cart": 0.5500194989144802,
+          "share_of_cart": 0.3333494612930153,
+          "mass_on_S_scored": 0.2381241588862901,
+          "mass_on_cart_scored": 0.5742570194819356,
+          "share_of_cart_scored": 0.41466477693405146
+        },
+        "13": {
+          "mass_on_S": 0.19295896617889716,
+          "mass_on_cart": 0.6206826586276293,
+          "share_of_cart": 0.31088183872502945,
+          "mass_on_S_scored": 0.2581416273808925,
+          "mass_on_cart_scored": 0.6133383315407898,
+          "share_of_cart_scored": 0.42087965826692336
+        },
+        "14": {
+          "mass_on_S": 0.1702131920416529,
+          "mass_on_cart": 0.4867084603756666,
+          "share_of_cart": 0.3497231009920674,
+          "mass_on_S_scored": 0.19205020919994073,
+          "mass_on_cart_scored": 0.47608753323054304,
+          "share_of_cart_scored": 0.40339264482891085
+        },
+        "15": {
+          "mass_on_S": 0.2040161779926469,
+          "mass_on_cart": 0.506891840758423,
+          "share_of_cart": 0.4024846359479634,
+          "mass_on_S_scored": 0.2153948851387753,
+          "mass_on_cart_scored": 0.4801911935636951,
+          "share_of_cart_scored": 0.4485606733856192
+        },
+        "16": {
+          "mass_on_S": 0.20976913646639636,
+          "mass_on_cart": 0.5334135573357344,
+          "share_of_cart": 0.3932579770078212,
+          "mass_on_S_scored": 0.24694072679055015,
+          "mass_on_cart_scored": 0.5168824532005613,
+          "share_of_cart_scored": 0.4777502607439683
+        },
+        "17": {
+          "mass_on_S": 0.24744673255675784,
+          "mass_on_cart": 0.4832963563191394,
+          "share_of_cart": 0.5119979269890442,
+          "mass_on_S_scored": 0.321307391013613,
+          "mass_on_cart_scored": 0.5128806929817724,
+          "share_of_cart_scored": 0.6264758947068264
+        },
+        "18": {
+          "mass_on_S": 0.300242794250759,
+          "mass_on_cart": 0.5418022641291221,
+          "share_of_cart": 0.5541556655053129,
+          "mass_on_S_scored": 0.34810164072396144,
+          "mass_on_cart_scored": 0.48116219972280566,
+          "share_of_cart_scored": 0.7234600742213343
+        },
+        "19": {
+          "mass_on_S": 0.2325490879205366,
+          "mass_on_cart": 0.5313366443539659,
+          "share_of_cart": 0.4376680780285446,
+          "mass_on_S_scored": 0.26488300420574307,
+          "mass_on_cart_scored": 0.5186734397295732,
+          "share_of_cart_scored": 0.5106932106333576
+        },
+        "20": {
+          "mass_on_S": 0.25513422562895965,
+          "mass_on_cart": 0.5618009000706176,
+          "share_of_cart": 0.45413637749047686,
+          "mass_on_S_scored": 0.3568381229717798,
+          "mass_on_cart_scored": 0.5825403985766884,
+          "share_of_cart_scored": 0.6125551529879072
+        },
+        "21": {
+          "mass_on_S": 0.2698124789555247,
+          "mass_on_cart": 0.5968024013563991,
+          "share_of_cart": 0.4520968386559788,
+          "mass_on_S_scored": 0.33618988105248476,
+          "mass_on_cart_scored": 0.5743422618163547,
+          "share_of_cart_scored": 0.5853476287628319
+        },
+        "22": {
+          "mass_on_S": 0.19892350791875893,
+          "mass_on_cart": 0.531859178096056,
+          "share_of_cart": 0.3740153711944264,
+          "mass_on_S_scored": 0.2577295392216868,
+          "mass_on_cart_scored": 0.5337313548350616,
+          "share_of_cart_scored": 0.4828825154957078
+        },
+        "23": {
+          "mass_on_S": 0.2325784522884836,
+          "mass_on_cart": 0.5702457763254642,
+          "share_of_cart": 0.4078565102001578,
+          "mass_on_S_scored": 0.28488031644182105,
+          "mass_on_cart_scored": 0.5969695115007486,
+          "share_of_cart_scored": 0.4772108306262535
+        },
+        "24": {
+          "mass_on_S": 0.27148657218397904,
+          "mass_on_cart": 0.7330370477090279,
+          "share_of_cart": 0.3703585965163156,
+          "mass_on_S_scored": 0.3381196826229846,
+          "mass_on_cart_scored": 0.7446216762225197,
+          "share_of_cart_scored": 0.4540825138723765
+        },
+        "25": {
+          "mass_on_S": 0.25079002561202896,
+          "mass_on_cart": 0.7429013807947437,
+          "share_of_cart": 0.3375818541940761,
+          "mass_on_S_scored": 0.2900304306140607,
+          "mass_on_cart_scored": 0.7787189841406998,
+          "share_of_cart_scored": 0.3724455631887583
+        },
+        "26": {
+          "mass_on_S": 0.306825505491967,
+          "mass_on_cart": 0.8455675101528565,
+          "share_of_cart": 0.3628634045275711,
+          "mass_on_S_scored": 0.38895312081361005,
+          "mass_on_cart_scored": 0.8687327197145168,
+          "share_of_cart_scored": 0.4477247282011295
+        },
+        "27": {
+          "mass_on_S": 0.2715937944982822,
+          "mass_on_cart": 0.8126350964109103,
+          "share_of_cart": 0.3342137149845056,
+          "mass_on_S_scored": 0.31798918302298596,
+          "mass_on_cart_scored": 0.8429221111019407,
+          "share_of_cart_scored": 0.37724622338745273
+        },
+        "28": {
+          "mass_on_S": 0.3580403059022501,
+          "mass_on_cart": 0.7816707124002278,
+          "share_of_cart": 0.4580449289226124,
+          "mass_on_S_scored": 0.39661610760321003,
+          "mass_on_cart_scored": 0.8128395470192797,
+          "share_of_cart_scored": 0.48793898999823476
+        },
+        "29": {
+          "mass_on_S": 0.30484677946272615,
+          "mass_on_cart": 0.8788365845878919,
+          "share_of_cart": 0.34687538594638306,
+          "mass_on_S_scored": 0.4272844129195419,
+          "mass_on_cart_scored": 0.9023054767173864,
+          "share_of_cart_scored": 0.4735474004591162
+        },
+        "30": {
+          "mass_on_S": 0.22363841655896977,
+          "mass_on_cart": 0.8387399427592754,
+          "share_of_cart": 0.26663618263278016,
+          "mass_on_S_scored": 0.2715712778494985,
+          "mass_on_cart_scored": 0.8796565819442067,
+          "share_of_cart_scored": 0.3087242037674235
+        },
+        "31": {
+          "mass_on_S": 0.2624531863257289,
+          "mass_on_cart": 0.8721106642236313,
+          "share_of_cart": 0.3009402328079195,
+          "mass_on_S_scored": 0.33439326287453847,
+          "mass_on_cart_scored": 0.896416888568364,
+          "share_of_cart_scored": 0.37303320267491413
+        },
+        "32": {
+          "mass_on_S": 0.22156947075078884,
+          "mass_on_cart": 0.834224675471584,
+          "share_of_cart": 0.2655992771078564,
+          "mass_on_S_scored": 0.29279257202077885,
+          "mass_on_cart_scored": 0.8756603826862931,
+          "share_of_cart_scored": 0.3343677272718096
+        },
+        "33": {
+          "mass_on_S": 0.30415163072757423,
+          "mass_on_cart": 0.8745978977531195,
+          "share_of_cart": 0.3477616759758435,
+          "mass_on_S_scored": 0.4269746089366248,
+          "mass_on_cart_scored": 0.9015186898077476,
+          "share_of_cart_scored": 0.4736170350807467
+        },
+        "34": {
+          "mass_on_S": 0.2476269454928115,
+          "mass_on_cart": 0.8221578203762571,
+          "share_of_cart": 0.30119149797722056,
+          "mass_on_S_scored": 0.2892501645000689,
+          "mass_on_cart_scored": 0.8526614959024209,
+          "share_of_cart_scored": 0.3392321171884732
+        },
+        "35": {
+          "mass_on_S": 0.33605992748440866,
+          "mass_on_cart": 0.6818047578757008,
+          "share_of_cart": 0.4928975980330067,
+          "mass_on_S_scored": 0.35571782909399136,
+          "mass_on_cart_scored": 0.7551037231534891,
+          "share_of_cart_scored": 0.4710847241070814
+        }
+      },
+      "n_slots_per_layer": {
+        "0": 511,
+        "1": 511,
+        "2": 511,
+        "3": 511,
+        "4": 511,
+        "5": 511,
+        "6": 511,
+        "7": 511,
+        "8": 511,
+        "9": 511,
+        "10": 511,
+        "11": 511,
+        "12": 511,
+        "13": 511,
+        "14": 511,
+        "15": 511,
+        "16": 511,
+        "17": 511,
+        "18": 511,
+        "19": 511,
+        "20": 511,
+        "21": 511,
+        "22": 511,
+        "23": 511,
+        "24": 511,
+        "25": 511,
+        "26": 511,
+        "27": 511,
+        "28": 511,
+        "29": 511,
+        "30": 511,
+        "31": 511,
+        "32": 511,
+        "33": 511,
+        "34": 511,
+        "35": 511
+      },
+      "summary": {
+        "mean_mass_on_S": 0.2190275955182625,
+        "mean_mass_on_S_scored": 0.2581721290512251,
+        "mean_mass_on_cart": 0.5696749146725913,
+        "max_mass_on_S": 0.3580403059022501,
+        "argmax_layer": 28
+      },
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/phase1_selfdistill_qwen512/cache_last.pt",
+      "slots_from": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-20-27-43-continual_am_sparse/feb4a768-e806-4965-8c7a-03e382f93c0e"
+    },
+    "phase1_S511|MT": {
+      "per_layer": {
+        "0": {
+          "mass_on_S": 0.19186141509562732,
+          "mass_on_cart": 0.19226608686149121,
+          "share_of_cart": 0.9978952514586963,
+          "mass_on_S_scored": 0.1566646035810079,
+          "mass_on_cart_scored": 0.15706825554138232,
+          "share_of_cart_scored": 0.9974300856720977
+        },
+        "1": {
+          "mass_on_S": 0.15850885761901737,
+          "mass_on_cart": 0.15961286323145032,
+          "share_of_cart": 0.9930832290701278,
+          "mass_on_S_scored": 0.11775941359261625,
+          "mass_on_cart_scored": 0.11819316306028582,
+          "share_of_cart_scored": 0.9963301644829631
+        },
+        "2": {
+          "mass_on_S": 0.1269866275601089,
+          "mass_on_cart": 0.1326830206438899,
+          "share_of_cart": 0.9570676560110156,
+          "mass_on_S_scored": 0.10345275829212448,
+          "mass_on_cart_scored": 0.10727266880053268,
+          "share_of_cart_scored": 0.9643906453421878
+        },
+        "3": {
+          "mass_on_S": 0.14577389266341925,
+          "mass_on_cart": 0.15576491747051477,
+          "share_of_cart": 0.9358583115547392,
+          "mass_on_S_scored": 0.12141404861030311,
+          "mass_on_cart_scored": 0.12777629776172206,
+          "share_of_cart_scored": 0.9502079081733663
+        },
+        "4": {
+          "mass_on_S": 0.18094104006886483,
+          "mass_on_cart": 0.18842999991029502,
+          "share_of_cart": 0.9602560110120711,
+          "mass_on_S_scored": 0.15893133676768653,
+          "mass_on_cart_scored": 0.16398692568422388,
+          "share_of_cart_scored": 0.9691707805641013
+        },
+        "5": {
+          "mass_on_S": 0.21104893777519465,
+          "mass_on_cart": 0.21913759596645832,
+          "share_of_cart": 0.963088678802054,
+          "mass_on_S_scored": 0.17287867754162708,
+          "mass_on_cart_scored": 0.1786267770444109,
+          "share_of_cart_scored": 0.9678206168308422
+        },
+        "6": {
+          "mass_on_S": 0.2605255529284477,
+          "mass_on_cart": 0.2665325298905373,
+          "share_of_cart": 0.9774624997385626,
+          "mass_on_S_scored": 0.2533640818703835,
+          "mass_on_cart_scored": 0.25738470634383026,
+          "share_of_cart_scored": 0.9843789301603811
+        },
+        "7": {
+          "mass_on_S": 0.06635033180937171,
+          "mass_on_cart": 0.6374996840953827,
+          "share_of_cart": 0.10407900343279915,
+          "mass_on_S_scored": 0.07873485189085357,
+          "mass_on_cart_scored": 0.6542262807662929,
+          "share_of_cart_scored": 0.12034804196283849
+        },
+        "8": {
+          "mass_on_S": 0.13375050891190768,
+          "mass_on_cart": 0.6166174739599228,
+          "share_of_cart": 0.21691002049124677,
+          "mass_on_S_scored": 0.16679781344977326,
+          "mass_on_cart_scored": 0.6154713403610956,
+          "share_of_cart_scored": 0.2710082541811181
+        },
+        "9": {
+          "mass_on_S": 0.13039860799908637,
+          "mass_on_cart": 0.6688114196062088,
+          "share_of_cart": 0.19497066613465436,
+          "mass_on_S_scored": 0.14698698788671918,
+          "mass_on_cart_scored": 0.6683329999865637,
+          "share_of_cart_scored": 0.21993076488767463
+        },
+        "10": {
+          "mass_on_S": 0.1408132217824459,
+          "mass_on_cart": 0.6365876480937004,
+          "share_of_cart": 0.22120005344765875,
+          "mass_on_S_scored": 0.15883675950472473,
+          "mass_on_cart_scored": 0.6387104217565032,
+          "share_of_cart_scored": 0.2486835255762875
+        },
+        "11": {
+          "mass_on_S": 0.17960940152406693,
+          "mass_on_cart": 0.6023099273443222,
+          "share_of_cart": 0.2982009649351001,
+          "mass_on_S_scored": 0.19960033130496857,
+          "mass_on_cart_scored": 0.6031443255660498,
+          "share_of_cart_scored": 0.33093295061284717
+        },
+        "12": {
+          "mass_on_S": 0.19412003066390754,
+          "mass_on_cart": 0.574503057450056,
+          "share_of_cart": 0.3378920758498891,
+          "mass_on_S_scored": 0.23072323140271653,
+          "mass_on_cart_scored": 0.5725108421379286,
+          "share_of_cart_scored": 0.40300237903115727
+        },
+        "13": {
+          "mass_on_S": 0.20697232708334923,
+          "mass_on_cart": 0.6354793302714825,
+          "share_of_cart": 0.3256948215686713,
+          "mass_on_S_scored": 0.24771003114535042,
+          "mass_on_cart_scored": 0.6031015885239184,
+          "share_of_cart_scored": 0.4107268756356899
+        },
+        "14": {
+          "mass_on_S": 0.17908485168591143,
+          "mass_on_cart": 0.501963523030281,
+          "share_of_cart": 0.35676865642507677,
+          "mass_on_S_scored": 0.18441167257429567,
+          "mass_on_cart_scored": 0.4661411967340807,
+          "share_of_cart_scored": 0.3956133331838869
+        },
+        "15": {
+          "mass_on_S": 0.20169655736535788,
+          "mass_on_cart": 0.5090247385203839,
+          "share_of_cart": 0.39624116885093386,
+          "mass_on_S_scored": 0.18412532841759116,
+          "mass_on_cart_scored": 0.46482891258460113,
+          "share_of_cart_scored": 0.3961141904744995
+        },
+        "16": {
+          "mass_on_S": 0.21346895527094603,
+          "mass_on_cart": 0.5451612539589406,
+          "share_of_cart": 0.3915702991009403,
+          "mass_on_S_scored": 0.22908247401247167,
+          "mass_on_cart_scored": 0.5056970601524812,
+          "share_of_cart_scored": 0.4530033730933638
+        },
+        "17": {
+          "mass_on_S": 0.2645734053105116,
+          "mass_on_cart": 0.5138096459209919,
+          "share_of_cart": 0.5149249481999698,
+          "mass_on_S_scored": 0.30618801087164305,
+          "mass_on_cart_scored": 0.4969023723885196,
+          "share_of_cart_scored": 0.6161934977284427
+        },
+        "18": {
+          "mass_on_S": 0.3100787507370114,
+          "mass_on_cart": 0.5318291429430246,
+          "share_of_cart": 0.5830420443323289,
+          "mass_on_S_scored": 0.31819623052655116,
+          "mass_on_cart_scored": 0.4541403065427591,
+          "share_of_cart_scored": 0.7006562199882421
+        },
+        "19": {
+          "mass_on_S": 0.2405427059158683,
+          "mass_on_cart": 0.5483411453664303,
+          "share_of_cart": 0.43867345711422956,
+          "mass_on_S_scored": 0.24689997433685493,
+          "mass_on_cart_scored": 0.514120217694797,
+          "share_of_cart_scored": 0.48023782344896027
+        },
+        "20": {
+          "mass_on_S": 0.2638694575056434,
+          "mass_on_cart": 0.5776534162461757,
+          "share_of_cart": 0.45679545915329867,
+          "mass_on_S_scored": 0.33047627639621613,
+          "mass_on_cart_scored": 0.5595115405521199,
+          "share_of_cart_scored": 0.5906514029542728
+        },
+        "21": {
+          "mass_on_S": 0.27819201350212097,
+          "mass_on_cart": 0.5995987340807915,
+          "share_of_cart": 0.46396364383357197,
+          "mass_on_S_scored": 0.31078458818767707,
+          "mass_on_cart_scored": 0.5649900734191943,
+          "share_of_cart_scored": 0.5500708823198925
+        },
+        "22": {
+          "mass_on_S": 0.21597223291173578,
+          "mass_on_cart": 0.5594553276896477,
+          "share_of_cart": 0.3860401755464991,
+          "mass_on_S_scored": 0.26286943567441273,
+          "mass_on_cart_scored": 0.5315859546706045,
+          "share_of_cart_scored": 0.49450034065948734
+        },
+        "23": {
+          "mass_on_S": 0.24590863306075333,
+          "mass_on_cart": 0.5966751970350742,
+          "share_of_cart": 0.4121314817218691,
+          "mass_on_S_scored": 0.26306376151979016,
+          "mass_on_cart_scored": 0.5809192233119134,
+          "share_of_cart_scored": 0.45284051717211493
+        },
+        "24": {
+          "mass_on_S": 0.28654298596084116,
+          "mass_on_cart": 0.7513602837920189,
+          "share_of_cart": 0.381365627305579,
+          "mass_on_S_scored": 0.3205666925458588,
+          "mass_on_cart_scored": 0.7408328543967516,
+          "share_of_cart_scored": 0.43271122580935095
+        },
+        "25": {
+          "mass_on_S": 0.269565237686038,
+          "mass_on_cart": 0.7712052375078201,
+          "share_of_cart": 0.34953761278534445,
+          "mass_on_S_scored": 0.294505324426989,
+          "mass_on_cart_scored": 0.7840391087587879,
+          "share_of_cart_scored": 0.37562580888754427
+        },
+        "26": {
+          "mass_on_S": 0.3332523239776492,
+          "mass_on_cart": 0.8617221370339394,
+          "share_of_cart": 0.38672828474003085,
+          "mass_on_S_scored": 0.390054066231435,
+          "mass_on_cart_scored": 0.86190813765872,
+          "share_of_cart_scored": 0.4525471441666331
+        },
+        "27": {
+          "mass_on_S": 0.29772292599081995,
+          "mass_on_cart": 0.8336995109915734,
+          "share_of_cart": 0.35711059208457324,
+          "mass_on_S_scored": 0.3291844901491384,
+          "mass_on_cart_scored": 0.8414150583474176,
+          "share_of_cart_scored": 0.3912272390224079
+        },
+        "28": {
+          "mass_on_S": 0.38067662008106706,
+          "mass_on_cart": 0.8033001616597175,
+          "share_of_cart": 0.47389087946222,
+          "mass_on_S_scored": 0.3805695946192388,
+          "mass_on_cart_scored": 0.8080143880136864,
+          "share_of_cart_scored": 0.47099358658053075
+        },
+        "29": {
+          "mass_on_S": 0.3301116499118507,
+          "mass_on_cart": 0.8926459789276123,
+          "share_of_cart": 0.36981250989158443,
+          "mass_on_S_scored": 0.42600195376227185,
+          "mass_on_cart_scored": 0.9029402624900038,
+          "share_of_cart_scored": 0.47179417228278486
+        },
+        "30": {
+          "mass_on_S": 0.24697318747639657,
+          "mass_on_cart": 0.8573648825287818,
+          "share_of_cart": 0.2880607691184572,
+          "mass_on_S_scored": 0.2865597246960678,
+          "mass_on_cart_scored": 0.8805362446805074,
+          "share_of_cart_scored": 0.32543773913593155
+        },
+        "31": {
+          "mass_on_S": 0.2875841870903969,
+          "mass_on_cart": 0.8846355140209198,
+          "share_of_cart": 0.3250877706494566,
+          "mass_on_S_scored": 0.3459567072612992,
+          "mass_on_cart_scored": 0.894355812638556,
+          "share_of_cart_scored": 0.38682222709622366
+        },
+        "32": {
+          "mass_on_S": 0.23657866436988115,
+          "mass_on_cart": 0.8605083718895912,
+          "share_of_cart": 0.2749289514178436,
+          "mass_on_S_scored": 0.28882847457635596,
+          "mass_on_cart_scored": 0.8793200426600484,
+          "share_of_cart_scored": 0.32846797589489174
+        },
+        "33": {
+          "mass_on_S": 0.3355348376557231,
+          "mass_on_cart": 0.8980021864175797,
+          "share_of_cart": 0.3736459027948248,
+          "mass_on_S_scored": 0.44134988419996585,
+          "mass_on_cart_scored": 0.9059221154539777,
+          "share_of_cart_scored": 0.4871830333657277
+        },
+        "34": {
+          "mass_on_S": 0.2677794699091464,
+          "mass_on_cart": 0.8462393701076507,
+          "share_of_cart": 0.3164346630139437,
+          "mass_on_S_scored": 0.29891721561120693,
+          "mass_on_cart_scored": 0.8567049940706323,
+          "share_of_cart_scored": 0.34891499136815146
+        },
+        "35": {
+          "mass_on_S": 0.36873052520677446,
+          "mass_on_cart": 0.7328776769340039,
+          "share_of_cart": 0.5031269703142819,
+          "mass_on_S_scored": 0.3748722078277207,
+          "mass_on_cart_scored": 0.7609753552867881,
+          "share_of_cart_scored": 0.49262069424895233
+        }
+      },
+      "n_slots_per_layer": {
+        "0": 511,
+        "1": 511,
+        "2": 511,
+        "3": 511,
+        "4": 511,
+        "5": 511,
+        "6": 511,
+        "7": 511,
+        "8": 511,
+        "9": 511,
+        "10": 511,
+        "11": 511,
+        "12": 511,
+        "13": 511,
+        "14": 511,
+        "15": 511,
+        "16": 511,
+        "17": 511,
+        "18": 511,
+        "19": 511,
+        "20": 511,
+        "21": 511,
+        "22": 511,
+        "23": 511,
+        "24": 511,
+        "25": 511,
+        "26": 511,
+        "27": 511,
+        "28": 511,
+        "29": 511,
+        "30": 511,
+        "31": 511,
+        "32": 511,
+        "33": 511,
+        "34": 511,
+        "35": 511
+      },
+      "summary": {
+        "mean_mass_on_S": 0.23283613700186834,
+        "mean_mass_on_S_scored": 0.2535366393129419,
+        "mean_mass_on_cart": 0.5878696942055184,
+        "max_mass_on_S": 0.38067662008106706,
+        "argmax_layer": 28
+      },
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/phase1_selfdistill_qwen512/cache_last.pt",
+      "slots_from": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-20-27-43-continual_am_sparse/feb4a768-e806-4965-8c7a-03e382f93c0e"
+    },
+    "oracle|QA": {
+      "per_layer": {
+        "0": {
+          "mass_on_S": 0.1783350503925855,
+          "mass_on_cart": 0.17871245990196863,
+          "share_of_cart": 0.9978881746153001,
+          "mass_on_S_scored": 0.15429199355255788,
+          "mass_on_cart_scored": 0.15468882420286964,
+          "share_of_cart_scored": 0.9974346521000681
+        },
+        "1": {
+          "mass_on_S": 0.3630510017586251,
+          "mass_on_cart": 0.3649205684196204,
+          "share_of_cart": 0.994876784640855,
+          "mass_on_S_scored": 0.27342046957154365,
+          "mass_on_cart_scored": 0.2743518961641159,
+          "share_of_cart_scored": 0.9966049930560162
+        },
+        "2": {
+          "mass_on_S": 0.4011755200723807,
+          "mass_on_cart": 0.41765912777433795,
+          "share_of_cart": 0.9605333473979207,
+          "mass_on_S_scored": 0.36444077059575375,
+          "mass_on_cart_scored": 0.3795206119150276,
+          "share_of_cart_scored": 0.9602660808244846
+        },
+        "3": {
+          "mass_on_S": 0.361974336206913,
+          "mass_on_cart": 0.38119718867043656,
+          "share_of_cart": 0.949572418069057,
+          "mass_on_S_scored": 0.3189853736351992,
+          "mass_on_cart_scored": 0.33457318400098607,
+          "share_of_cart_scored": 0.9534098633387758
+        },
+        "4": {
+          "mass_on_S": 0.3668514844030142,
+          "mass_on_cart": 0.3815250126644969,
+          "share_of_cart": 0.9615398000801949,
+          "mass_on_S_scored": 0.3166243238683965,
+          "mass_on_cart_scored": 0.3283870903396024,
+          "share_of_cart_scored": 0.964180179985025
+        },
+        "5": {
+          "mass_on_S": 0.38110087998211384,
+          "mass_on_cart": 0.39441980080058175,
+          "share_of_cart": 0.9662316121263852,
+          "mass_on_S_scored": 0.3287190628124585,
+          "mass_on_cart_scored": 0.3402877496644348,
+          "share_of_cart_scored": 0.9660032226743853
+        },
+        "6": {
+          "mass_on_S": 0.3640578867246707,
+          "mass_on_cart": 0.3734592841938138,
+          "share_of_cart": 0.9748261782018945,
+          "mass_on_S_scored": 0.36393615993756107,
+          "mass_on_cart_scored": 0.37108531861689403,
+          "share_of_cart_scored": 0.9807344609967884
+        },
+        "7": {
+          "mass_on_S": 0.03537683375422299,
+          "mass_on_cart": 0.24317329299325743,
+          "share_of_cart": 0.14547993045932023,
+          "mass_on_S_scored": 0.040338949372536036,
+          "mass_on_cart_scored": 0.2760195035705042,
+          "share_of_cart_scored": 0.1461452862958004
+        },
+        "8": {
+          "mass_on_S": 0.15068983263336122,
+          "mass_on_cart": 0.32102066402633983,
+          "share_of_cart": 0.4694085132818649,
+          "mass_on_S_scored": 0.19922668340609884,
+          "mass_on_cart_scored": 0.3672537374196047,
+          "share_of_cart_scored": 0.5424769392570482
+        },
+        "9": {
+          "mass_on_S": 0.11922388387999187,
+          "mass_on_cart": 0.33241695910692215,
+          "share_of_cart": 0.3586576455073203,
+          "mass_on_S_scored": 0.1502925031749107,
+          "mass_on_cart_scored": 0.35825451162763566,
+          "share_of_cart_scored": 0.4195132183879444
+        },
+        "10": {
+          "mass_on_S": 0.135953699471429,
+          "mass_on_cart": 0.31014894507825375,
+          "share_of_cart": 0.43834970787060545,
+          "mass_on_S_scored": 0.16064102918694792,
+          "mass_on_cart_scored": 0.34020836387895,
+          "share_of_cart_scored": 0.4721842442536358
+        },
+        "11": {
+          "mass_on_S": 0.17994338549518338,
+          "mass_on_cart": 0.3387649552896619,
+          "share_of_cart": 0.5311747354189051,
+          "mass_on_S_scored": 0.234068375636986,
+          "mass_on_cart_scored": 0.37852628750398715,
+          "share_of_cart_scored": 0.6183675569283162
+        },
+        "12": {
+          "mass_on_S": 0.15094855683855712,
+          "mass_on_cart": 0.3066793371302386,
+          "share_of_cart": 0.4922032186813201,
+          "mass_on_S_scored": 0.18961530985291472,
+          "mass_on_cart_scored": 0.33330898389146274,
+          "share_of_cart_scored": 0.5688874858370461
+        },
+        "13": {
+          "mass_on_S": 0.11169149960187497,
+          "mass_on_cart": 0.31372801307588816,
+          "share_of_cart": 0.3560137920322013,
+          "mass_on_S_scored": 0.1322207794442585,
+          "mass_on_cart_scored": 0.30724088999550503,
+          "share_of_cart_scored": 0.4303489013008422
+        },
+        "14": {
+          "mass_on_S": 0.12904782981301346,
+          "mass_on_cart": 0.2655101187216739,
+          "share_of_cart": 0.48603733234095814,
+          "mass_on_S_scored": 0.13617171363641214,
+          "mass_on_cart_scored": 0.2650297141430168,
+          "share_of_cart_scored": 0.5137979115916429
+        },
+        "15": {
+          "mass_on_S": 0.14149110383975008,
+          "mass_on_cart": 0.2765227695150922,
+          "share_of_cart": 0.5116797581908629,
+          "mass_on_S_scored": 0.1246093141754969,
+          "mass_on_cart_scored": 0.24431317005734626,
+          "share_of_cart_scored": 0.5100392833765288
+        },
+        "16": {
+          "mass_on_S": 0.14775116512707123,
+          "mass_on_cart": 0.30993929024164873,
+          "share_of_cart": 0.4767100196037581,
+          "mass_on_S_scored": 0.1392343487276199,
+          "mass_on_cart_scored": 0.2838527871115875,
+          "share_of_cart_scored": 0.490516052861177
+        },
+        "17": {
+          "mass_on_S": 0.19084661842013398,
+          "mass_on_cart": 0.3195173942949623,
+          "share_of_cart": 0.597296490982128,
+          "mass_on_S_scored": 0.17184402037777488,
+          "mass_on_cart_scored": 0.27869191677026867,
+          "share_of_cart_scored": 0.6166092736712897
+        },
+        "18": {
+          "mass_on_S": 0.17731194758865362,
+          "mass_on_cart": 0.31824407788614434,
+          "share_of_cart": 0.5571571001930447,
+          "mass_on_S_scored": 0.14693269927556754,
+          "mass_on_cart_scored": 0.24226997797841468,
+          "share_of_cart_scored": 0.6064833146130003
+        },
+        "19": {
+          "mass_on_S": 0.14065258181653917,
+          "mass_on_cart": 0.317873901532342,
+          "share_of_cart": 0.4424791753538423,
+          "mass_on_S_scored": 0.1123101081202712,
+          "mass_on_cart_scored": 0.2661717551020367,
+          "share_of_cart_scored": 0.4219460027876257
+        },
+        "20": {
+          "mass_on_S": 0.09777320531429723,
+          "mass_on_cart": 0.2948798374272883,
+          "share_of_cart": 0.3315696528027496,
+          "mass_on_S_scored": 0.08786080286629376,
+          "mass_on_cart_scored": 0.25161795970728124,
+          "share_of_cart_scored": 0.34918335308221354
+        },
+        "21": {
+          "mass_on_S": 0.15023692202521488,
+          "mass_on_cart": 0.3299084329046309,
+          "share_of_cart": 0.4553897598266153,
+          "mass_on_S_scored": 0.12183623320276203,
+          "mass_on_cart_scored": 0.2755573478283068,
+          "share_of_cart_scored": 0.4421447446891355
+        },
+        "22": {
+          "mass_on_S": 0.14358328290594122,
+          "mass_on_cart": 0.32352341533017653,
+          "share_of_cart": 0.4438111002240911,
+          "mass_on_S_scored": 0.13014259024652283,
+          "mass_on_cart_scored": 0.30924659786492004,
+          "share_of_cart_scored": 0.4208375812217328
+        },
+        "23": {
+          "mass_on_S": 0.1326681556723391,
+          "mass_on_cart": 0.3333098135578136,
+          "share_of_cart": 0.39803255192582987,
+          "mass_on_S_scored": 0.10876732816867767,
+          "mass_on_cart_scored": 0.3089742949100886,
+          "share_of_cart_scored": 0.3520271102174662
+        },
+        "24": {
+          "mass_on_S": 0.1315691179673498,
+          "mass_on_cart": 0.406208992159615,
+          "share_of_cart": 0.32389513897233296,
+          "mass_on_S_scored": 0.12257365206183254,
+          "mass_on_cart_scored": 0.3769346266222528,
+          "share_of_cart_scored": 0.32518543907792913
+        },
+        "25": {
+          "mass_on_S": 0.1925041879682491,
+          "mass_on_cart": 0.4690253747006257,
+          "share_of_cart": 0.4104344846824602,
+          "mass_on_S_scored": 0.17586357781749593,
+          "mass_on_cart_scored": 0.4679543997049787,
+          "share_of_cart_scored": 0.37581349364033956
+        },
+        "26": {
+          "mass_on_S": 0.13982681285900375,
+          "mass_on_cart": 0.48315803209940594,
+          "share_of_cart": 0.28940181797543935,
+          "mass_on_S_scored": 0.15752740336902818,
+          "mass_on_cart_scored": 0.49118860580849255,
+          "share_of_cart_scored": 0.3207065504089602
+        },
+        "27": {
+          "mass_on_S": 0.16744230738064894,
+          "mass_on_cart": 0.48683156445622444,
+          "share_of_cart": 0.3439429971383978,
+          "mass_on_S_scored": 0.16055028576940106,
+          "mass_on_cart_scored": 0.48828034644001267,
+          "share_of_cart_scored": 0.3288075937111783
+        },
+        "28": {
+          "mass_on_S": 0.20958696600670615,
+          "mass_on_cart": 0.49587798429032165,
+          "share_of_cart": 0.4226583406534122,
+          "mass_on_S_scored": 0.20081924637135953,
+          "mass_on_cart_scored": 0.5018463860763398,
+          "share_of_cart_scored": 0.4001607901203683
+        },
+        "29": {
+          "mass_on_S": 0.11661032878328115,
+          "mass_on_cart": 0.4810169084618489,
+          "share_of_cart": 0.24242459408790182,
+          "mass_on_S_scored": 0.13357309202808332,
+          "mass_on_cart_scored": 0.4931765228748868,
+          "share_of_cart_scored": 0.2708423573154744
+        },
+        "30": {
+          "mass_on_S": 0.14849548080625632,
+          "mass_on_cart": 0.4751563382645448,
+          "share_of_cart": 0.31251920441305575,
+          "mass_on_S_scored": 0.1325885984348222,
+          "mass_on_cart_scored": 0.4942906114972243,
+          "share_of_cart_scored": 0.26824017157276464
+        },
+        "31": {
+          "mass_on_S": 0.11770402515927951,
+          "mass_on_cart": 0.45817522425204515,
+          "share_of_cart": 0.25689740284719054,
+          "mass_on_S_scored": 0.10964168433516751,
+          "mass_on_cart_scored": 0.46674645028982786,
+          "share_of_cart_scored": 0.23490630569784754
+        },
+        "32": {
+          "mass_on_S": 0.11906169222978254,
+          "mass_on_cart": 0.4532132536793749,
+          "share_of_cart": 0.26270567169691067,
+          "mass_on_S_scored": 0.10815990539271216,
+          "mass_on_cart_scored": 0.4732509158912985,
+          "share_of_cart_scored": 0.22854663722944707
+        },
+        "33": {
+          "mass_on_S": 0.15082453160236278,
+          "mass_on_cart": 0.4729238813742995,
+          "share_of_cart": 0.3189192543292003,
+          "mass_on_S_scored": 0.14011513985161472,
+          "mass_on_cart_scored": 0.4863610725086033,
+          "share_of_cart_scored": 0.2880887220864828
+        },
+        "34": {
+          "mass_on_S": 0.18199599092865051,
+          "mass_on_cart": 0.4760144554699461,
+          "share_of_cart": 0.38233290782939494,
+          "mass_on_S_scored": 0.16609664499025711,
+          "mass_on_cart_scored": 0.481488303971591,
+          "share_of_cart_scored": 0.34496506689819245
+        },
+        "35": {
+          "mass_on_S": 0.27557364940003026,
+          "mass_on_cart": 0.48560184876744944,
+          "share_of_cart": 0.5674888802410637,
+          "mass_on_S_scored": 0.2689726526851461,
+          "mass_on_cart_scored": 0.5192065512510419,
+          "share_of_cart_scored": 0.5180455678709165
+        }
+      },
+      "n_slots_per_layer": {
+        "0": 511,
+        "1": 511,
+        "2": 511,
+        "3": 511,
+        "4": 511,
+        "5": 511,
+        "6": 511,
+        "7": 511,
+        "8": 511,
+        "9": 511,
+        "10": 511,
+        "11": 511,
+        "12": 511,
+        "13": 511,
+        "14": 511,
+        "15": 511,
+        "16": 511,
+        "17": 511,
+        "18": 511,
+        "19": 511,
+        "20": 511,
+        "21": 511,
+        "22": 511,
+        "23": 511,
+        "24": 511,
+        "25": 511,
+        "26": 511,
+        "27": 511,
+        "28": 511,
+        "29": 511,
+        "30": 511,
+        "31": 511,
+        "32": 511,
+        "33": 511,
+        "34": 511,
+        "35": 511
+      },
+      "summary": {
+        "mean_mass_on_S": 0.18619254874526328,
+        "mean_mass_on_S_scored": 0.17730591183201228,
+        "mean_mass_on_cart": 0.3719516255142581,
+        "max_mass_on_S": 0.4011755200723807,
+        "argmax_layer": 2
+      },
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-20-27-43-continual_am_sparse/feb4a768-e806-4965-8c7a-03e382f93c0e/cache_last.pt",
+      "slots_from": "-"
+    },
+    "oracle|MT": {
+      "per_layer": {
+        "0": {
+          "mass_on_S": 0.19186141509562732,
+          "mass_on_cart": 0.19226608686149121,
+          "share_of_cart": 0.9978952514586963,
+          "mass_on_S_scored": 0.1566646035810079,
+          "mass_on_cart_scored": 0.15706825554138232,
+          "share_of_cart_scored": 0.9974300856720977
+        },
+        "1": {
+          "mass_on_S": 0.3763130556792021,
+          "mass_on_cart": 0.3782878652215004,
+          "share_of_cart": 0.9947796117088187,
+          "mass_on_S_scored": 0.27311695748060405,
+          "mass_on_cart_scored": 0.27402703916533305,
+          "share_of_cart_scored": 0.9966788617375094
+        },
+        "2": {
+          "mass_on_S": 0.42142113745212556,
+          "mass_on_cart": 0.43861342072486875,
+          "share_of_cart": 0.9608031071089194,
+          "mass_on_S_scored": 0.36321332918117977,
+          "mass_on_cart_scored": 0.3780064084025494,
+          "share_of_cart_scored": 0.9608655332488012
+        },
+        "3": {
+          "mass_on_S": 0.3726707484573126,
+          "mass_on_cart": 0.392820592597127,
+          "share_of_cart": 0.9487047152833968,
+          "mass_on_S_scored": 0.3190322551384836,
+          "mass_on_cart_scored": 0.3346068142541771,
+          "share_of_cart_scored": 0.9534541484147343
+        },
+        "4": {
+          "mass_on_S": 0.37946391068398955,
+          "mass_on_cart": 0.39480622112751007,
+          "share_of_cart": 0.9611396436466855,
+          "mass_on_S_scored": 0.3156630894246276,
+          "mass_on_cart_scored": 0.32767330455556687,
+          "share_of_cart_scored": 0.9633469832178454
+        },
+        "5": {
+          "mass_on_S": 0.3915112242102623,
+          "mass_on_cart": 0.40555514618754385,
+          "share_of_cart": 0.9653711163344797,
+          "mass_on_S_scored": 0.3260686933575525,
+          "mass_on_cart_scored": 0.3379449498178808,
+          "share_of_cart_scored": 0.9648574228828439
+        },
+        "6": {
+          "mass_on_S": 0.37961221635341647,
+          "mass_on_cart": 0.3893786832690239,
+          "share_of_cart": 0.9749178182184675,
+          "mass_on_S_scored": 0.36303347539938957,
+          "mass_on_cart_scored": 0.3702726025398963,
+          "share_of_cart_scored": 0.9804491958334218
+        },
+        "7": {
+          "mass_on_S": 0.032999481866136195,
+          "mass_on_cart": 0.2505144264549017,
+          "share_of_cart": 0.13172687231278815,
+          "mass_on_S_scored": 0.03707185339336745,
+          "mass_on_cart_scored": 0.2755872058645065,
+          "share_of_cart_scored": 0.13451950092194762
+        },
+        "8": {
+          "mass_on_S": 0.15865305038169025,
+          "mass_on_cart": 0.33333669453859327,
+          "share_of_cart": 0.47595435180425844,
+          "mass_on_S_scored": 0.19421991103333855,
+          "mass_on_cart_scored": 0.36414498076785085,
+          "share_of_cart_scored": 0.5333587480014103
+        },
+        "9": {
+          "mass_on_S": 0.1250607842579484,
+          "mass_on_cart": 0.34413729421794415,
+          "share_of_cart": 0.3634037529764114,
+          "mass_on_S_scored": 0.14844232495179127,
+          "mass_on_cart_scored": 0.3574985039597094,
+          "share_of_cart_scored": 0.41522502418225765
+        },
+        "10": {
+          "mass_on_S": 0.14643239490687848,
+          "mass_on_cart": 0.32509877160191536,
+          "share_of_cart": 0.4504243254606495,
+          "mass_on_S_scored": 0.16073841158995678,
+          "mass_on_cart_scored": 0.34010037735604753,
+          "share_of_cart_scored": 0.47262050351000173
+        },
+        "11": {
+          "mass_on_S": 0.19029157757759094,
+          "mass_on_cart": 0.3537165306508541,
+          "share_of_cart": 0.5379776207446284,
+          "mass_on_S_scored": 0.23121768268731122,
+          "mass_on_cart_scored": 0.37622910342488225,
+          "share_of_cart_scored": 0.6145661794435742
+        },
+        "12": {
+          "mass_on_S": 0.16184440683573484,
+          "mass_on_cart": 0.3216201886534691,
+          "share_of_cart": 0.5032159439783014,
+          "mass_on_S_scored": 0.18418506492775552,
+          "mass_on_cart_scored": 0.33032247072825854,
+          "share_of_cart_scored": 0.5575916906945041
+        },
+        "13": {
+          "mass_on_S": 0.11871898910030723,
+          "mass_on_cart": 0.32303911745548247,
+          "share_of_cart": 0.3675065423513848,
+          "mass_on_S_scored": 0.1269490839818974,
+          "mass_on_cart_scored": 0.3020325723241587,
+          "share_of_cart_scored": 0.4203158719108227
+        },
+        "14": {
+          "mass_on_S": 0.13716469928622246,
+          "mass_on_cart": 0.2769702594727278,
+          "share_of_cart": 0.4952325912079688,
+          "mass_on_S_scored": 0.13254090643412986,
+          "mass_on_cart_scored": 0.2623510163431518,
+          "share_of_cart_scored": 0.5052044710235392
+        },
+        "15": {
+          "mass_on_S": 0.14602116653695701,
+          "mass_on_cart": 0.28434209115803244,
+          "share_of_cart": 0.513540453832426,
+          "mass_on_S_scored": 0.11544739623073486,
+          "mass_on_cart_scored": 0.23821077953550054,
+          "share_of_cart_scored": 0.48464387907151674
+        },
+        "16": {
+          "mass_on_S": 0.15982501655817033,
+          "mass_on_cart": 0.3245808411389589,
+          "share_of_cart": 0.4924043452390536,
+          "mass_on_S_scored": 0.14099973091196957,
+          "mass_on_cart_scored": 0.28637444945074075,
+          "share_of_cart_scored": 0.4923614211477443
+        },
+        "17": {
+          "mass_on_S": 0.2019745135679841,
+          "mass_on_cart": 0.3374280080199242,
+          "share_of_cart": 0.5985706840199764,
+          "mass_on_S_scored": 0.1679005393937265,
+          "mass_on_cart_scored": 0.27663348876899524,
+          "share_of_cart_scored": 0.6069422040725266
+        },
+        "18": {
+          "mass_on_S": 0.18095213435590268,
+          "mass_on_cart": 0.31752672120928765,
+          "share_of_cart": 0.5698800203861704,
+          "mass_on_S_scored": 0.13726133764208898,
+          "mass_on_cart_scored": 0.23398421501201358,
+          "share_of_cart_scored": 0.5866264851885051
+        },
+        "19": {
+          "mass_on_S": 0.14717110339552164,
+          "mass_on_cart": 0.3305225856602192,
+          "share_of_cart": 0.4452679174754343,
+          "mass_on_S_scored": 0.10928624575255347,
+          "mass_on_cart_scored": 0.2667406037112496,
+          "share_of_cart_scored": 0.40970982382141324
+        },
+        "20": {
+          "mass_on_S": 0.1050188378430903,
+          "mass_on_cart": 0.3129646822810173,
+          "share_of_cart": 0.33556130703844644,
+          "mass_on_S_scored": 0.08753205276298671,
+          "mass_on_cart_scored": 0.2551026714676344,
+          "share_of_cart_scored": 0.34312479857386424
+        },
+        "21": {
+          "mass_on_S": 0.15608715415000915,
+          "mass_on_cart": 0.3426861077547073,
+          "share_of_cart": 0.4554814175943643,
+          "mass_on_S_scored": 0.119311528034642,
+          "mass_on_cart_scored": 0.2784767634788591,
+          "share_of_cart_scored": 0.4284433880376511
+        },
+        "22": {
+          "mass_on_S": 0.153529978916049,
+          "mass_on_cart": 0.34670893885195253,
+          "share_of_cart": 0.442820942039823,
+          "mass_on_S_scored": 0.12878137515170046,
+          "mass_on_cart_scored": 0.3120043022757299,
+          "share_of_cart_scored": 0.4127551261709575
+        },
+        "23": {
+          "mass_on_S": 0.14189352812245487,
+          "mass_on_cart": 0.3527062304317951,
+          "share_of_cart": 0.40229946590040083,
+          "mass_on_S_scored": 0.10787689518314335,
+          "mass_on_cart_scored": 0.3123102374229461,
+          "share_of_cart_scored": 0.34541581497071155
+        },
+        "24": {
+          "mass_on_S": 0.139270493760705,
+          "mass_on_cart": 0.41947503983974455,
+          "share_of_cart": 0.33201139646809885,
+          "mass_on_S_scored": 0.12245558603586022,
+          "mass_on_cart_scored": 0.3831563490987476,
+          "share_of_cart_scored": 0.319596912132339
+        },
+        "25": {
+          "mass_on_S": 0.2011654306203127,
+          "mass_on_cart": 0.48609185963869095,
+          "share_of_cart": 0.41384241811792055,
+          "mass_on_S_scored": 0.17293895361108952,
+          "mass_on_cart_scored": 0.4699305289430045,
+          "share_of_cart_scored": 0.36800961623002876
+        },
+        "26": {
+          "mass_on_S": 0.14950225735083222,
+          "mass_on_cart": 0.4961938291788101,
+          "share_of_cart": 0.3012980987656682,
+          "mass_on_S_scored": 0.15108317699774831,
+          "mass_on_cart_scored": 0.48990062025726816,
+          "share_of_cart_scored": 0.3083955617741573
+        },
+        "27": {
+          "mass_on_S": 0.17698031589388846,
+          "mass_on_cart": 0.500910148769617,
+          "share_of_cart": 0.35331748883228714,
+          "mass_on_S_scored": 0.1554282268074506,
+          "mass_on_cart_scored": 0.48741378679952985,
+          "share_of_cart_scored": 0.318883525695955
+        },
+        "28": {
+          "mass_on_S": 0.2197847083210945,
+          "mass_on_cart": 0.5136226557195187,
+          "share_of_cart": 0.4279108522057008,
+          "mass_on_S_scored": 0.18732255776350987,
+          "mass_on_cart_scored": 0.4963792053448977,
+          "share_of_cart_scored": 0.37737793152183535
+        },
+        "29": {
+          "mass_on_S": 0.1229227665811777,
+          "mass_on_cart": 0.49191540107131004,
+          "share_of_cart": 0.2498859891629177,
+          "mass_on_S_scored": 0.12961610604970367,
+          "mass_on_cart_scored": 0.49600637489515387,
+          "share_of_cart_scored": 0.26131943581794087
+        },
+        "30": {
+          "mass_on_S": 0.15519513972103596,
+          "mass_on_cart": 0.48948819264769555,
+          "share_of_cart": 0.317055941393741,
+          "mass_on_S_scored": 0.12881907543849425,
+          "mass_on_cart_scored": 0.49398723791391935,
+          "share_of_cart_scored": 0.2607740960727853
+        },
+        "31": {
+          "mass_on_S": 0.12548859603703022,
+          "mass_on_cart": 0.46946834549307825,
+          "share_of_cart": 0.2672993765005193,
+          "mass_on_S_scored": 0.11111852850046687,
+          "mass_on_cart_scored": 0.4695604132265899,
+          "share_of_cart_scored": 0.23664373181911694
+        },
+        "32": {
+          "mass_on_S": 0.12359632318839431,
+          "mass_on_cart": 0.4692994423210621,
+          "share_of_cart": 0.26336345634060715,
+          "mass_on_S_scored": 0.10482590557726727,
+          "mass_on_cart_scored": 0.47540570422134576,
+          "share_of_cart_scored": 0.22049778672504322
+        },
+        "33": {
+          "mass_on_S": 0.15609838645905255,
+          "mass_on_cart": 0.4890767835080624,
+          "share_of_cart": 0.319169487742571,
+          "mass_on_S_scored": 0.135253194065228,
+          "mass_on_cart_scored": 0.48832896200592496,
+          "share_of_cart_scored": 0.2769714774025362
+        },
+        "34": {
+          "mass_on_S": 0.18996776512358338,
+          "mass_on_cart": 0.49288877844810486,
+          "share_of_cart": 0.38541710306676147,
+          "mass_on_S_scored": 0.16448658737328534,
+          "mass_on_cart_scored": 0.4832023543179919,
+          "share_of_cart_scored": 0.34040932521002976
+        },
+        "35": {
+          "mass_on_S": 0.2907046162057668,
+          "mass_on_cart": 0.5170308850705624,
+          "share_of_cart": 0.5622577385606135,
+          "mass_on_S_scored": 0.2624534155641283,
+          "mass_on_cart_scored": 0.5145911991735811,
+          "share_of_cart_scored": 0.5100231328977664
+        }
+      },
+      "n_slots_per_layer": {
+        "0": 511,
+        "1": 511,
+        "2": 511,
+        "3": 511,
+        "4": 511,
+        "5": 511,
+        "6": 511,
+        "7": 511,
+        "8": 511,
+        "9": 511,
+        "10": 511,
+        "11": 511,
+        "12": 511,
+        "13": 511,
+        "14": 511,
+        "15": 511,
+        "16": 511,
+        "17": 511,
+        "18": 511,
+        "19": 511,
+        "20": 511,
+        "21": 511,
+        "22": 511,
+        "23": 511,
+        "24": 511,
+        "25": 511,
+        "26": 511,
+        "27": 511,
+        "28": 511,
+        "29": 511,
+        "30": 511,
+        "31": 511,
+        "32": 511,
+        "33": 511,
+        "34": 511,
+        "35": 511
+      },
+      "summary": {
+        "mean_mass_on_S": 0.19519914791259604,
+        "mean_mass_on_S_scored": 0.17423211270583808,
+        "mean_mass_on_cart": 0.3862524685346418,
+        "max_mass_on_S": 0.42142113745212556,
+        "argmax_layer": 2
+      },
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-20-27-43-continual_am_sparse/feb4a768-e806-4965-8c7a-03e382f93c0e/cache_last.pt",
+      "slots_from": "-"
+    },
+    "control|QA": {
+      "per_layer": {
+        "0": {
+          "mass_on_S": 0.1783350503925855,
+          "mass_on_cart": 0.17871245990196863,
+          "share_of_cart": 0.9978881746153001,
+          "mass_on_S_scored": 0.15429199355255788,
+          "mass_on_cart_scored": 0.15468882420286964,
+          "share_of_cart_scored": 0.9974346521000681
+        },
+        "1": {
+          "mass_on_S": 0.35904344140241545,
+          "mass_on_cart": 0.3608371632484098,
+          "share_of_cart": 0.9950289991478525,
+          "mass_on_S_scored": 0.2741235387193287,
+          "mass_on_cart_scored": 0.27506842896336586,
+          "share_of_cart_scored": 0.9965648902435001
+        },
+        "2": {
+          "mass_on_S": 0.37737198003257316,
+          "mass_on_cart": 0.39210744807496667,
+          "share_of_cart": 0.9624198211109312,
+          "mass_on_S_scored": 0.3274235465272595,
+          "mass_on_cart_scored": 0.34085154892971337,
+          "share_of_cart_scored": 0.9606045434013186
+        },
+        "3": {
+          "mass_on_S": 0.3038224217792352,
+          "mass_on_cart": 0.3223998661463459,
+          "share_of_cart": 0.9423776300245796,
+          "mass_on_S_scored": 0.2541419201768414,
+          "mass_on_cart_scored": 0.2689790102009921,
+          "share_of_cart_scored": 0.9448392273692144
+        },
+        "4": {
+          "mass_on_S": 0.3141320035792887,
+          "mass_on_cart": 0.32885347586125135,
+          "share_of_cart": 0.9552339465368039,
+          "mass_on_S_scored": 0.2626621882029734,
+          "mass_on_cart_scored": 0.27380129021285554,
+          "share_of_cart_scored": 0.9593168388606842
+        },
+        "5": {
+          "mass_on_S": 0.32920342280219,
+          "mass_on_cart": 0.3434533231581251,
+          "share_of_cart": 0.9585099360084676,
+          "mass_on_S_scored": 0.2717943594354671,
+          "mass_on_cart_scored": 0.2835654439066785,
+          "share_of_cart_scored": 0.9584890023655871
+        },
+        "6": {
+          "mass_on_S": 0.3345409343019128,
+          "mass_on_cart": 0.34615376715858776,
+          "share_of_cart": 0.9664518085358446,
+          "mass_on_S_scored": 0.3224861609111901,
+          "mass_on_cart_scored": 0.3307743697800951,
+          "share_of_cart_scored": 0.9749430136488049
+        },
+        "7": {
+          "mass_on_S": 0.038445304050886385,
+          "mass_on_cart": 0.35164974195261794,
+          "share_of_cart": 0.1093284011454403,
+          "mass_on_S_scored": 0.03727031762648762,
+          "mass_on_cart_scored": 0.37996764511222736,
+          "share_of_cart_scored": 0.09808813488706243
+        },
+        "8": {
+          "mass_on_S": 0.11621388769708574,
+          "mass_on_cart": 0.3908880952124794,
+          "share_of_cart": 0.2973073089726973,
+          "mass_on_S_scored": 0.15481483862344525,
+          "mass_on_cart_scored": 0.42427032892373556,
+          "share_of_cart_scored": 0.3648966898443513
+        },
+        "9": {
+          "mass_on_S": 0.08703854512229252,
+          "mass_on_cart": 0.3881986479585369,
+          "share_of_cart": 0.22421135565518252,
+          "mass_on_S_scored": 0.10684095691489827,
+          "mass_on_cart_scored": 0.41814732917987374,
+          "share_of_cart_scored": 0.2555103176778601
+        },
+        "10": {
+          "mass_on_S": 0.10695626606078197,
+          "mass_on_cart": 0.38177839169899624,
+          "share_of_cart": 0.28015274930779477,
+          "mass_on_S_scored": 0.13032665161423757,
+          "mass_on_cart_scored": 0.41888541140234076,
+          "share_of_cart_scored": 0.311127215383155
+        },
+        "11": {
+          "mass_on_S": 0.11789599819652115,
+          "mass_on_cart": 0.36821643138925236,
+          "share_of_cart": 0.32018125250877205,
+          "mass_on_S_scored": 0.14423869245832502,
+          "mass_on_cart_scored": 0.40393572868213895,
+          "share_of_cart_scored": 0.3570832739379385
+        },
+        "12": {
+          "mass_on_S": 0.1137714401896422,
+          "mass_on_cart": 0.3539784378372133,
+          "share_of_cart": 0.3214078260946593,
+          "mass_on_S_scored": 0.14250177692916385,
+          "mass_on_cart_scored": 0.37911624135111704,
+          "share_of_cart_scored": 0.37587885030012835
+        },
+        "13": {
+          "mass_on_S": 0.08486113026932192,
+          "mass_on_cart": 0.3626396954059601,
+          "share_of_cart": 0.23400949025815668,
+          "mass_on_S_scored": 0.11203199739590339,
+          "mass_on_cart_scored": 0.3620111561313118,
+          "share_of_cart_scored": 0.30947111849576864
+        },
+        "14": {
+          "mass_on_S": 0.10564843355678022,
+          "mass_on_cart": 0.3081984140444547,
+          "share_of_cart": 0.34279356655463333,
+          "mass_on_S_scored": 0.12168348713451872,
+          "mass_on_cart_scored": 0.31271495373934544,
+          "share_of_cart_scored": 0.3891195022158886
+        },
+        "15": {
+          "mass_on_S": 0.11723580836163212,
+          "mass_on_cart": 0.32356115616858006,
+          "share_of_cart": 0.36232967439562047,
+          "mass_on_S_scored": 0.1090842779624799,
+          "mass_on_cart_scored": 0.3004308880945798,
+          "share_of_cart_scored": 0.3630927520612949
+        },
+        "16": {
+          "mass_on_S": 0.1262240424597015,
+          "mass_on_cart": 0.3337474012126525,
+          "share_of_cart": 0.3782023230774937,
+          "mass_on_S_scored": 0.1335958359338437,
+          "mass_on_cart_scored": 0.3229321156261804,
+          "share_of_cart_scored": 0.4136963450500894
+        },
+        "17": {
+          "mass_on_S": 0.16223938819409037,
+          "mass_on_cart": 0.3253546856964628,
+          "share_of_cart": 0.4986539162538768,
+          "mass_on_S_scored": 0.17281995974153952,
+          "mass_on_cart_scored": 0.32523320286999496,
+          "share_of_cart_scored": 0.5313724374279849
+        },
+        "18": {
+          "mass_on_S": 0.16451589801969627,
+          "mass_on_cart": 0.3423505326112111,
+          "share_of_cart": 0.4805481001150596,
+          "mass_on_S_scored": 0.18340050325838833,
+          "mass_on_cart_scored": 0.3213385519930405,
+          "share_of_cart_scored": 0.5707391849526987
+        },
+        "19": {
+          "mass_on_S": 0.12907666297784695,
+          "mass_on_cart": 0.3606776891586681,
+          "share_of_cart": 0.35787260165422646,
+          "mass_on_S_scored": 0.13110204965001346,
+          "mass_on_cart_scored": 0.3572514345737849,
+          "share_of_cart_scored": 0.3669741727039484
+        },
+        "20": {
+          "mass_on_S": 0.11846837733173743,
+          "mass_on_cart": 0.3713468589509527,
+          "share_of_cart": 0.31902350720404143,
+          "mass_on_S_scored": 0.13922822191235945,
+          "mass_on_cart_scored": 0.36314564500659785,
+          "share_of_cart_scored": 0.38339499268903493
+        },
+        "21": {
+          "mass_on_S": 0.1681635935868447,
+          "mass_on_cart": 0.3888018121942878,
+          "share_of_cart": 0.4325175148690198,
+          "mass_on_S_scored": 0.17806110531945135,
+          "mass_on_cart_scored": 0.3817475207346275,
+          "share_of_cart_scored": 0.46643683494471433
+        },
+        "22": {
+          "mass_on_S": 0.12644164826876172,
+          "mass_on_cart": 0.3468560476321727,
+          "share_of_cart": 0.36453638081827006,
+          "mass_on_S_scored": 0.1442176200458001,
+          "mass_on_cart_scored": 0.37128202309359026,
+          "share_of_cart_scored": 0.38843146469670764
+        },
+        "23": {
+          "mass_on_S": 0.11266476386420739,
+          "mass_on_cart": 0.35945276023509604,
+          "share_of_cart": 0.31343413190239594,
+          "mass_on_S_scored": 0.1276607636437702,
+          "mass_on_cart_scored": 0.3946792326978528,
+          "share_of_cart_scored": 0.3234544740830107
+        },
+        "24": {
+          "mass_on_S": 0.13713043944638534,
+          "mass_on_cart": 0.45454975046838325,
+          "share_of_cart": 0.3016841155562874,
+          "mass_on_S_scored": 0.16942398768997957,
+          "mass_on_cart_scored": 0.47583929119605334,
+          "share_of_cart_scored": 0.3560529591075198
+        },
+        "25": {
+          "mass_on_S": 0.13887718707943955,
+          "mass_on_cart": 0.4639917093639572,
+          "share_of_cart": 0.29930963048846987,
+          "mass_on_S_scored": 0.16543566241274357,
+          "mass_on_cart_scored": 0.49922244887444844,
+          "share_of_cart_scored": 0.331386664974174
+        },
+        "26": {
+          "mass_on_S": 0.1082597347558476,
+          "mass_on_cart": 0.4915327690541744,
+          "share_of_cart": 0.22024927242219272,
+          "mass_on_S_scored": 0.12821970388446888,
+          "mass_on_cart_scored": 0.5197270043982308,
+          "share_of_cart_scored": 0.24670587212016984
+        },
+        "27": {
+          "mass_on_S": 0.10588523879414424,
+          "mass_on_cart": 0.4829545288036267,
+          "share_of_cart": 0.21924473729740726,
+          "mass_on_S_scored": 0.127713067169042,
+          "mass_on_cart_scored": 0.5157398603580616,
+          "share_of_cart_scored": 0.24763078634328342
+        },
+        "28": {
+          "mass_on_S": 0.14828052220400423,
+          "mass_on_cart": 0.48495386137316626,
+          "share_of_cart": 0.30576212298659095,
+          "mass_on_S_scored": 0.1517911688170391,
+          "mass_on_cart_scored": 0.5220301576405365,
+          "share_of_cart_scored": 0.2907708809450825
+        },
+        "29": {
+          "mass_on_S": 0.07048067734770787,
+          "mass_on_cart": 0.4945195000618696,
+          "share_of_cart": 0.1425235553681705,
+          "mass_on_S_scored": 0.09642603507520771,
+          "mass_on_cart_scored": 0.5320151641469913,
+          "share_of_cart_scored": 0.1812467793654205
+        },
+        "30": {
+          "mass_on_S": 0.07640582552024473,
+          "mass_on_cart": 0.462564948014915,
+          "share_of_cart": 0.16517858918653106,
+          "mass_on_S_scored": 0.08989771183561669,
+          "mass_on_cart_scored": 0.5157887403543508,
+          "share_of_cart_scored": 0.17429172993163106
+        },
+        "31": {
+          "mass_on_S": 0.059186829797302686,
+          "mass_on_cart": 0.46898589717845124,
+          "share_of_cart": 0.12620172622116574,
+          "mass_on_S_scored": 0.07093639411501595,
+          "mass_on_cart_scored": 0.5074042432314569,
+          "share_of_cart_scored": 0.13980252443939
+        },
+        "32": {
+          "mass_on_S": 0.07450497732497752,
+          "mass_on_cart": 0.46683938956509036,
+          "share_of_cart": 0.15959445366079045,
+          "mass_on_S_scored": 0.08996254929710136,
+          "mass_on_cart_scored": 0.5198868304638974,
+          "share_of_cart_scored": 0.17304256239156388
+        },
+        "33": {
+          "mass_on_S": 0.10175061431558181,
+          "mass_on_cart": 0.5024717207998037,
+          "share_of_cart": 0.20250018081340262,
+          "mass_on_S_scored": 0.11787092829078334,
+          "mass_on_cart_scored": 0.5322186497159931,
+          "share_of_cart_scored": 0.22147087170598512
+        },
+        "34": {
+          "mass_on_S": 0.1571313066718479,
+          "mass_on_cart": 0.5023389828080932,
+          "share_of_cart": 0.31279934874549886,
+          "mass_on_S_scored": 0.17483458445173108,
+          "mass_on_cart_scored": 0.5401617147941633,
+          "share_of_cart_scored": 0.32367081868872255
+        },
+        "35": {
+          "mass_on_S": 0.2217785178751607,
+          "mass_on_cart": 0.4665482832739751,
+          "share_of_cart": 0.4753602699357139,
+          "mass_on_S_scored": 0.23411800967527283,
+          "mass_on_cart_scored": 0.528761934555865,
+          "share_of_cart_scored": 0.4427663838394889
+        }
+      },
+      "n_slots_per_layer": {
+        "0": 511,
+        "1": 511,
+        "2": 511,
+        "3": 511,
+        "4": 511,
+        "5": 511,
+        "6": 511,
+        "7": 511,
+        "8": 511,
+        "9": 511,
+        "10": 511,
+        "11": 511,
+        "12": 511,
+        "13": 511,
+        "14": 511,
+        "15": 511,
+        "16": 511,
+        "17": 511,
+        "18": 511,
+        "19": 511,
+        "20": 511,
+        "21": 511,
+        "22": 511,
+        "23": 511,
+        "24": 511,
+        "25": 511,
+        "26": 511,
+        "27": 511,
+        "28": 511,
+        "29": 511,
+        "30": 511,
+        "31": 511,
+        "32": 511,
+        "33": 511,
+        "34": 511,
+        "35": 511
+      },
+      "summary": {
+        "mean_mass_on_S": 0.15533284204529654,
+        "mean_mass_on_S_scored": 0.15978979351122904,
+        "mean_mass_on_cart": 0.39090182343540986,
+        "max_mass_on_S": 0.37737198003257316,
+        "argmax_layer": 2
+      },
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-20-31-23-continual_am_sparse/55e8f9f8-d37f-43e0-92bf-347d954c3880/cache_last.pt",
+      "slots_from": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-20-31-23-continual_am_sparse/55e8f9f8-d37f-43e0-92bf-347d954c3880"
+    },
+    "control|MT": {
+      "per_layer": {
+        "0": {
+          "mass_on_S": 0.19186141509562732,
+          "mass_on_cart": 0.19226608686149121,
+          "share_of_cart": 0.9978952514586963,
+          "mass_on_S_scored": 0.1566646035810079,
+          "mass_on_cart_scored": 0.15706825554138232,
+          "share_of_cart_scored": 0.9974300856720977
+        },
+        "1": {
+          "mass_on_S": 0.3729106064885855,
+          "mass_on_cart": 0.3748095650225878,
+          "share_of_cart": 0.9949335376916332,
+          "mass_on_S_scored": 0.27436706333026395,
+          "mass_on_cart_scored": 0.27529297891210336,
+          "share_of_cart_scored": 0.9966366175210918
+        },
+        "2": {
+          "mass_on_S": 0.39756266251206396,
+          "mass_on_cart": 0.4130121849477291,
+          "share_of_cart": 0.9625930589974713,
+          "mass_on_S_scored": 0.3259684803148995,
+          "mass_on_cart_scored": 0.3391643460144948,
+          "share_of_cart_scored": 0.9610930044544501
+        },
+        "3": {
+          "mass_on_S": 0.3130393013358116,
+          "mass_on_cart": 0.332456037774682,
+          "share_of_cart": 0.9415960781797265,
+          "mass_on_S_scored": 0.2526036427413738,
+          "mass_on_cart_scored": 0.2672463928136297,
+          "share_of_cart_scored": 0.9452088018173276
+        },
+        "4": {
+          "mass_on_S": 0.3266316719353199,
+          "mass_on_cart": 0.341975100710988,
+          "share_of_cart": 0.9551329066245813,
+          "mass_on_S_scored": 0.26141126634179385,
+          "mass_on_cart_scored": 0.2726087209119358,
+          "share_of_cart_scored": 0.9589248116029304
+        },
+        "5": {
+          "mass_on_S": 0.3383967917412519,
+          "mass_on_cart": 0.3534017127007246,
+          "share_of_cart": 0.9575414594207712,
+          "mass_on_S_scored": 0.2704524279199104,
+          "mass_on_cart_scored": 0.28236334441138095,
+          "share_of_cart_scored": 0.9578170583143495
+        },
+        "6": {
+          "mass_on_S": 0.3502756867557764,
+          "mass_on_cart": 0.3624061245471239,
+          "share_of_cart": 0.9665280552129021,
+          "mass_on_S_scored": 0.32361934354396465,
+          "mass_on_cart_scored": 0.33186521556208043,
+          "share_of_cart_scored": 0.9751529487531565
+        },
+        "7": {
+          "mass_on_S": 0.03556051005143672,
+          "mass_on_cart": 0.3651891604065895,
+          "share_of_cart": 0.09737559026079752,
+          "mass_on_S_scored": 0.03485420370688204,
+          "mass_on_cart_scored": 0.3803161625560609,
+          "share_of_cart_scored": 0.09164533916368679
+        },
+        "8": {
+          "mass_on_S": 0.12218888001516462,
+          "mass_on_cart": 0.4037752129137516,
+          "share_of_cart": 0.30261609952086077,
+          "mass_on_S_scored": 0.15431854829110733,
+          "mass_on_cart_scored": 0.42233004298273424,
+          "share_of_cart_scored": 0.3653979887417486
+        },
+        "9": {
+          "mass_on_S": 0.0909814506303519,
+          "mass_on_cart": 0.40285891368985177,
+          "share_of_cart": 0.22583948756907887,
+          "mass_on_S_scored": 0.1054308518220632,
+          "mass_on_cart_scored": 0.41794910996710294,
+          "share_of_cart_scored": 0.2522576297156411
+        },
+        "10": {
+          "mass_on_S": 0.11421129610389472,
+          "mass_on_cart": 0.39784127846360207,
+          "share_of_cart": 0.28707754143803293,
+          "mass_on_S_scored": 0.12902503810200627,
+          "mass_on_cart_scored": 0.4185078775017267,
+          "share_of_cart_scored": 0.3082977526545458
+        },
+        "11": {
+          "mass_on_S": 0.12305964482948184,
+          "mass_on_cart": 0.3842593103647232,
+          "share_of_cart": 0.32025156322869225,
+          "mass_on_S_scored": 0.14478517658165152,
+          "mass_on_cart_scored": 0.40150844557596127,
+          "share_of_cart_scored": 0.3606030662043936
+        },
+        "12": {
+          "mass_on_S": 0.11755550149828195,
+          "mass_on_cart": 0.36706004217267035,
+          "share_of_cart": 0.32026232221425543,
+          "mass_on_S_scored": 0.1351118510258933,
+          "mass_on_cart_scored": 0.37544495458253,
+          "share_of_cart_scored": 0.3598712657522026
+        },
+        "13": {
+          "mass_on_S": 0.08812792729586363,
+          "mass_on_cart": 0.36916883662343025,
+          "share_of_cart": 0.23871984456195663,
+          "mass_on_S_scored": 0.10389365980533954,
+          "mass_on_cart_scored": 0.3528572614075708,
+          "share_of_cart_scored": 0.29443537421024274
+        },
+        "14": {
+          "mass_on_S": 0.10881069852039219,
+          "mass_on_cart": 0.3173980124294758,
+          "share_of_cart": 0.34282098267571653,
+          "mass_on_S_scored": 0.11324246691875771,
+          "mass_on_cart_scored": 0.30583985981580153,
+          "share_of_cart_scored": 0.370267194691236
+        },
+        "15": {
+          "mass_on_S": 0.11347032459452748,
+          "mass_on_cart": 0.32632982842624186,
+          "share_of_cart": 0.3477166802120095,
+          "mass_on_S_scored": 0.08917063898076125,
+          "mass_on_cart_scored": 0.28559727225798726,
+          "share_of_cart_scored": 0.3122251073189913
+        },
+        "16": {
+          "mass_on_S": 0.12745182355865836,
+          "mass_on_cart": 0.3410545542836189,
+          "share_of_cart": 0.37369922775659575,
+          "mass_on_S_scored": 0.12215845497393403,
+          "mass_on_cart_scored": 0.3136196806503403,
+          "share_of_cart_scored": 0.38951144494701045
+        },
+        "17": {
+          "mass_on_S": 0.16157850958406925,
+          "mass_on_cart": 0.3372698135674,
+          "share_of_cart": 0.47907788685565067,
+          "mass_on_S_scored": 0.1419337117792944,
+          "mass_on_cart_scored": 0.2990351624083091,
+          "share_of_cart_scored": 0.47463887068068283
+        },
+        "18": {
+          "mass_on_S": 0.15316750723868608,
+          "mass_on_cart": 0.3292091883718967,
+          "share_of_cart": 0.46525890725035846,
+          "mass_on_S_scored": 0.13633670846900375,
+          "mass_on_cart_scored": 0.27964660174022143,
+          "share_of_cart_scored": 0.48753214814909196
+        },
+        "19": {
+          "mass_on_S": 0.12669778298586606,
+          "mass_on_cart": 0.3670513119548559,
+          "share_of_cart": 0.34517730589517354,
+          "mass_on_S_scored": 0.10529909056671702,
+          "mass_on_cart_scored": 0.3337315669941958,
+          "share_of_cart_scored": 0.3155203192646992
+        },
+        "20": {
+          "mass_on_S": 0.10718034021556377,
+          "mass_on_cart": 0.3761540845036507,
+          "share_of_cart": 0.28493732922504944,
+          "mass_on_S_scored": 0.10018612810822784,
+          "mass_on_cart_scored": 0.32834509217487845,
+          "share_of_cart_scored": 0.30512448791184654
+        },
+        "21": {
+          "mass_on_S": 0.16035647671669723,
+          "mass_on_cart": 0.3854020558297634,
+          "share_of_cart": 0.4160758207982382,
+          "mass_on_S_scored": 0.1405388855729412,
+          "mass_on_cart_scored": 0.35003898480643897,
+          "share_of_cart_scored": 0.4014949524855209
+        },
+        "22": {
+          "mass_on_S": 0.12906976770609618,
+          "mass_on_cart": 0.3651853483170271,
+          "share_of_cart": 0.3534363256930212,
+          "mass_on_S_scored": 0.12835484296432423,
+          "mass_on_cart_scored": 0.3587976536836408,
+          "share_of_cart_scored": 0.3577360154018658
+        },
+        "23": {
+          "mass_on_S": 0.1119358479976654,
+          "mass_on_cart": 0.3724713925272226,
+          "share_of_cart": 0.30052200046338967,
+          "mass_on_S_scored": 0.10491545985770542,
+          "mass_on_cart_scored": 0.372409685061929,
+          "share_of_cart_scored": 0.2817205461245154
+        },
+        "24": {
+          "mass_on_S": 0.13318658694624902,
+          "mass_on_cart": 0.4588956214487553,
+          "share_of_cart": 0.2902328562773657,
+          "mass_on_S_scored": 0.13955095268431164,
+          "mass_on_cart_scored": 0.4497511414789204,
+          "share_of_cart_scored": 0.31028482156915727
+        },
+        "25": {
+          "mass_on_S": 0.14225295055657625,
+          "mass_on_cart": 0.4782662488520145,
+          "share_of_cart": 0.2974346421016053,
+          "mass_on_S_scored": 0.15620903797581454,
+          "mass_on_cart_scored": 0.49307127914607385,
+          "share_of_cart_scored": 0.31680822749673304
+        },
+        "26": {
+          "mass_on_S": 0.1131137830670923,
+          "mass_on_cart": 0.5015807829797267,
+          "share_of_cart": 0.22551458689290377,
+          "mass_on_S_scored": 0.11674619930782512,
+          "mass_on_cart_scored": 0.5088299878587209,
+          "share_of_cart_scored": 0.2294404852181005
+        },
+        "27": {
+          "mass_on_S": 0.1094130143057555,
+          "mass_on_cart": 0.49482591152191163,
+          "share_of_cart": 0.22111415703603574,
+          "mass_on_S_scored": 0.11821632581609566,
+          "mass_on_cart_scored": 0.5085171000460551,
+          "share_of_cart_scored": 0.2324726657282304
+        },
+        "28": {
+          "mass_on_S": 0.15123376920819281,
+          "mass_on_cart": 0.49910531714558604,
+          "share_of_cart": 0.3030097336432079,
+          "mass_on_S_scored": 0.13468815524721406,
+          "mass_on_cart_scored": 0.5094118252291892,
+          "share_of_cart_scored": 0.2643993495569456
+        },
+        "29": {
+          "mass_on_S": 0.07043168907985091,
+          "mass_on_cart": 0.5040961064398288,
+          "share_of_cart": 0.13971877223427423,
+          "mass_on_S_scored": 0.08496078730187874,
+          "mass_on_cart_scored": 0.52380496686925,
+          "share_of_cart_scored": 0.16219927773820877
+        },
+        "30": {
+          "mass_on_S": 0.0795200520195067,
+          "mass_on_cart": 0.47628549486398697,
+          "share_of_cart": 0.16695879441429404,
+          "mass_on_S_scored": 0.086498104576763,
+          "mass_on_cart_scored": 0.5127821095188924,
+          "share_of_cart_scored": 0.16868393606383447
+        },
+        "31": {
+          "mass_on_S": 0.061986711667850615,
+          "mass_on_cart": 0.4800087004899979,
+          "share_of_cart": 0.12913664190789445,
+          "mass_on_S_scored": 0.06940630276067289,
+          "mass_on_cart_scored": 0.5015197682436512,
+          "share_of_cart_scored": 0.13839195811510568
+        },
+        "32": {
+          "mass_on_S": 0.07375920228660107,
+          "mass_on_cart": 0.48219165578484535,
+          "share_of_cart": 0.15296656713510726,
+          "mass_on_S_scored": 0.0790887232593593,
+          "mass_on_cart_scored": 0.5133369499403084,
+          "share_of_cart_scored": 0.1540678559541756
+        },
+        "33": {
+          "mass_on_S": 0.10145125510171056,
+          "mass_on_cart": 0.5128202617168427,
+          "share_of_cart": 0.19783004431624346,
+          "mass_on_S_scored": 0.10723648459347405,
+          "mass_on_cart_scored": 0.5186887260157088,
+          "share_of_cart_scored": 0.20674535461221175
+        },
+        "34": {
+          "mass_on_S": 0.16009617805248127,
+          "mass_on_cart": 0.5160350121557713,
+          "share_of_cart": 0.31024286004096624,
+          "mass_on_S_scored": 0.16606898914083293,
+          "mass_on_cart_scored": 0.5322977575261922,
+          "share_of_cart_scored": 0.3119851376279024
+        },
+        "35": {
+          "mass_on_S": 0.23662890309933574,
+          "mass_on_cart": 0.49999324455857275,
+          "share_of_cart": 0.4732642004158425,
+          "mass_on_S_scored": 0.23536239081672353,
+          "mass_on_cart_scored": 0.5285640470131033,
+          "share_of_cart_scored": 0.4452864173164029
+        }
+      },
+      "n_slots_per_layer": {
+        "0": 511,
+        "1": 511,
+        "2": 511,
+        "3": 511,
+        "4": 511,
+        "5": 511,
+        "6": 511,
+        "7": 511,
+        "8": 511,
+        "9": 511,
+        "10": 511,
+        "11": 511,
+        "12": 511,
+        "13": 511,
+        "14": 511,
+        "15": 511,
+        "16": 511,
+        "17": 511,
+        "18": 511,
+        "19": 511,
+        "20": 511,
+        "21": 511,
+        "22": 511,
+        "23": 511,
+        "24": 511,
+        "25": 511,
+        "26": 511,
+        "27": 511,
+        "28": 511,
+        "29": 511,
+        "30": 511,
+        "31": 511,
+        "32": 511,
+        "33": 511,
+        "34": 511,
+        "35": 511
+      },
+      "summary": {
+        "mean_mass_on_S": 0.1587543477999538,
+        "mean_mass_on_S_scored": 0.1485743055216886,
+        "mean_mass_on_cart": 0.4022808198713594,
+        "max_mass_on_S": 0.39756266251206396,
+        "argmax_layer": 2
+      },
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-20-31-23-continual_am_sparse/55e8f9f8-d37f-43e0-92bf-347d954c3880/cache_last.pt",
+      "slots_from": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-20-31-23-continual_am_sparse/55e8f9f8-d37f-43e0-92bf-347d954c3880"
+    }
+  }
+}

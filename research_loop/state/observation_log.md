@@ -279,3 +279,29 @@ research_loop/results/EXP-001/result.json ; outputs/2026-07-25-18-02-29-continua
 - Solve-time `mass_on_S` recorded for the first time from the `DELTA_WEIGHT` branch (previously
   unreachable in the canonical config): 0.1585 → 0.1452 over 36 layers, cross-checking ORACLE-WRITE's
   independent 0.1523.
+
+## 2026-07-28 — ORACLE-WRITE-512 (board B-ROUTE): inconclusive BY ORCHESTRATOR DESIGN ERROR
+- Oracle top-512 QA **3.3920** / MT **3.2370**; control top-512 QA 2.4974 / MT 2.5757.
+  Neither interpretation branch fired: MT did not fall toward 1.9 and did not stall at 2.3–2.4 — it
+  **regressed to 3.24**, and QA landed *worse than the Phase-1 floor*.
+- **Cause (worker-diagnosed): `n_written = 511` for all 16 documents on all 36 layers.** Every Qasper doc
+  exceeds 511 tokens, so `min(|S|, T_doc) = |S| = 511`: **each document overwrites the entire writable
+  cartridge and the 16 documents mutually overwrite** — the final cache holds only document 16, with
+  zero Phase-1 content. At top-32 the per-doc selections overlapped only partially (union 34–82/layer),
+  so 16 documents coexisted. **The run bounds "value-only writing at full support as implemented", not
+  bandwidth in isolation.** The orchestrator specified `TOP_T=512` without checking that sequential
+  per-document writes at full support annihilate each other — my error, recorded as such.
+- ⚠️ **Board correction: the bandwidth premise was off ~2.5×.** DIAG-ROUTING's 0.5697/0.5879 is **total
+  cartridge mass** (the two measurements agree to 5–6 s.f. — the *label* was wrong, not the number). The
+  511 **writable** slots carry **0.2190 QA / 0.2328 MT**; the difference is **frozen slot 0, an attention
+  sink holding 0.3506/0.3550** (0.624 in one layer) that **no AM config can write**. Real writable gain
+  over top-32 is **2.6×, not 6.6×**. The orchestrator had already propagated 6.6× into two briefs.
+- **New mechanism datum:** at full support the cartridge-mass collapse tracks **slots overwritten**, not
+  value magnitude — the oracle (|v| = 67) collapses total mass 34.3% while the control (|v| = 792)
+  collapses it 31.6%. Contrast with top-32, where only the *solved* write collapsed it. B-CASCADE is
+  therefore two effects, not one.
+- **Built-in null control:** layer 0 is bit-unchanged (0.1919 → 0.1919, ratio exactly 1.000), as required
+  since layer-0 queries come from embeddings. Early layers then pull 2.4–3.3× more mass in; layers 7+
+  push it out (min 0.393 at L7); the peak-mass layer moves 28 → 2.
+- Control replicates DIAG-OBJ-b within noise (Δ −0.016 QA / −0.088 MT) — independent HYP-R0 replication.
+- Provenance: HEAD moved 3ff9ce5 → 58c30f3 mid-run; the snapshot pin held (`diff -r` clean).
