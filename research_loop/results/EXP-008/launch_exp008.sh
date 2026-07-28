@@ -65,7 +65,7 @@ run_one() {
   EVAL_MT_PATH=data/qasper/eval/qasper_eval_MT.parquet \
   RUN_NAME="$runname" \
   WANDB_DISABLED=1 \
-  bash examples/qasper2/scripts/train_continual_am_sparse.sh >"$log" 2>&1
+  bash examples/qasper2/scripts/core/train_continual_am_sparse.sh >"$log" 2>&1
   local rc=$?
   echo "EXP008_${tag}_END_EPOCH=$(date +%s) TS=$(date -Is) RC=$rc"
   return $rc

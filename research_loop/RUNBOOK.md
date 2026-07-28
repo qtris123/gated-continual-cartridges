@@ -88,20 +88,20 @@ PHASE1_CACHE_PATH=<phase1 cache_last.pt> \
 BG_STATS_PATH=<bg_stats.pt> \
 SYNTH_DATA_PATH=data/qasper/train/qwen_qasper_MT_task_8192.parquet \
 TOP_T=64 GRANULARITY=per_layer \
-bash examples/qasper2/scripts/train_continual_am_sparse.sh
+bash examples/qasper2/scripts/core/train_continual_am_sparse.sh
 ```
 ### (c) Phase-1 AM cache + background stats (if a fresh Phase-1 is needed)
-`examples/qasper2/scripts/train_initial_am.sh → train/initial_am.py`
+`examples/qasper2/scripts/core/train_initial_am.sh → train/initial_am.py`
 (produces `cache_last.pt` + `bg_stats.pt`; `collect_background_stats`).
 
 ### (d) Eval (forgetting + acquisition) on any checkpoint
-`examples/qasper2/scripts/eval_forgetting.sh` (round-robins QA+MT across GPUs) or
+`examples/qasper2/scripts/core/eval_forgetting.sh` (round-robins QA+MT across GPUs) or
 `train/eval_forgetting.py` with `CHECKPOINT_PATH=`, `EVAL_DATA_PATH=`. Metric key
 `eval_qasper_perplexity/loss`. **Report the `loss` (mean CE), not `perplexity`.**
 
 ## 4. The knobs = the four levers (ALL env-driven → NO code edit for a sweep)
 **Confirmed** env-var names from `examples/qasper2/train/continual_am_sparse.py` L61-112.
-Set them as `VAR=val ... bash examples/qasper2/scripts/train_continual_am_sparse.sh` (never bare `env`).
+Set them as `VAR=val ... bash examples/qasper2/scripts/core/train_continual_am_sparse.sh` (never bare `env`).
 
 | Lever | ENV VARS (default) |
 |---|---|

@@ -72,7 +72,7 @@ EVAL_QA_PATH=data/qasper/eval/qasper_eval_QA.parquet \
 EVAL_MT_PATH=data/qasper/eval/qasper_eval_MT.parquet \
 RUN_NAME=exp006_am_sparse_noidf_beta_clamp3_top64_perlayer_ridge0 \
 WANDB_DISABLED=1 \
-bash examples/qasper2/scripts/train_continual_am_sparse.sh
+bash examples/qasper2/scripts/core/train_continual_am_sparse.sh
 RC=$?
 
 echo "EXP006_E2E_END_EPOCH=$(date +%s)"
