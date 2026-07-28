@@ -174,3 +174,27 @@ research_loop/results/EXP-001/result.json ; outputs/2026-07-25-18-02-29-continua
 - Ranking (findings, not decisions): LIT-017 null-space key placement > LIT-011/012 null-space value
   projection at large `top_t` > LIT-009/010 `C₀`-metric solve (LIT-010 predicts a **sign flip** on the
   EXP-007 top128 anomaly) > LIT-013/015 disjoint-support selection.
+
+## 2026-07-28 — ORACLE-WRITE (board B-ROUTE): the write ceiling is real but not flat
+- Phase-1 2.2388/3.7825 · control (solved) 2.1772/2.5524 · **oracle (teacher's own doc values) 1.8955/2.3810**
+  · dense@4ep bar 2.3721/1.8725. A *perfect* content transplant into the tfidf top-32 slots closes only
+  **25% of the MT gap** (−0.171, edge of noise) and leaves **0.509 to the bar**; QA improves −0.282.
+- Routing (full eval-time softmax over `[512 slots ‖ own-sequence causal prefix]`, mean over 36 layers,
+  S = union of the 16 docs' selections, 34–82 slots/layer): mass on S = **MT 0.0927 / QA 0.0888**,
+  **ratio 1.04** — MT queries do NOT preferentially route to what we wrote. S carries ~15.5% of cartridge
+  mass, ~9% of total attention; only 4/36 layers below 5%. The write barely perturbs routing
+  (cartridge total 0.588 → 0.596), as frozen keys predict.
+  ⇒ the slots are **readable through a narrow channel, not unreadable**: value-only frozen-key writing
+  is bandwidth-capped, and **no value-only write at this support/selection can reach MT ≤ 2.02.**
+- Flag-off control reproduced EXP-007-top32 to all 16 printed digits in a fresh process (and the Phase-1
+  floor exactly), which also **retires the sibling-import confound** on EXP-007's number.
+- 🔥 **Unlooked-for (new board entry B-CASCADE):** the **solved** write reaches `|v|` up to **984** and
+  **collapses total cartridge attention 0.588 → 0.329 on MT** (0.570 → 0.320 QA), 10/36 layers under 5%.
+  The oracle's teacher values top out at **|63|** and leave cartridge mass at Phase-1 level. Our solve is
+  pushing the model to route away from the cartridge *as a whole* — per-layer independent writes shifting
+  the residual stream, hence the queries of every later layer. Converges with SCOUT-AM's divergence #3
+  (no on-policy layer-sequential re-extraction) and #2 (n=64 ⇒ exactly-determined ⇒ exact interpolation
+  with no norm control ⇒ |v|=984).
+- ⚠️ Outstanding W5 control: the oracle changes value **magnitude** as well as content, so part of both
+  gains may be a magnitude/entropy effect. Needs a **norm-matched shuffled-value control** before the
+  oracle's cause is attributed. Queued.

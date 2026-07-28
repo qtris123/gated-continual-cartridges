@@ -34,6 +34,7 @@ from cartridges.am.teacher import (
 )
 from cartridges.am.value_solve import (
     guarded_sparse_am_value_update,
+    oracle_teacher_value_write,
     sparse_am_value_update,
 )
 from cartridges.sparse_cache_finetuning import (
@@ -88,6 +89,12 @@ class AttentionMatchingFinetuningConfig(BaseConfig):
     idf_prior_weight: float = 0.0
     min_top_t_per_layer: int = 1
 
+    # B-ROUTE write-ceiling oracle (OPT-IN, default off -> bit-identical stock runs).
+    # When on, the per-document write skips the closed-form solve and copies the
+    # teacher's own document value vectors into the selected slots instead.
+    oracle_write: bool = False
+    oracle_write_assign: Literal["mass_ranked", "sequential"] = "mass_ranked"
+
 
 @dataclass
 class AMUpdateStats:
@@ -97,6 +104,7 @@ class AMUpdateStats:
     n_queries: int
     mask: Optional[GradientMask] = None
     timing: dict = field(default_factory=dict)
+    extra: dict = field(default_factory=dict)
 
 
 def apply_am_update_to_cache(
@@ -355,6 +363,10 @@ def apply_document_am_write_to_cache(
         and old_query_accumulator is not None
     )
     fit_beta = _should_fit_beta(config)
+    oracle_write = bool(getattr(config, "oracle_write", False))
+    oracle_mass_on_S: dict[int, list[float]] = {}
+    oracle_doc_mass: dict[int, list[float]] = {}
+    oracle_n_written: list[int] = []
 
     for layer_idx in range(n_layers):
         v_param = cache.trainable_values[layer_idx]
@@ -542,7 +554,30 @@ def apply_document_am_write_to_cache(
                     cache.enable_attention_bias(True)
                 head_beta = beta_full
 
-            if use_old_guard or config.delta_weight > 0:
+            if oracle_write:
+                # B-ROUTE write-ceiling oracle: skip the solve entirely and put the
+                # teacher's own document values into the selected slots.
+                new_values, stats = oracle_teacher_value_write(
+                    keys, values, queries, selected_full,
+                    v_doc=v_doc,
+                    k_teacher=k_teacher,
+                    targets=targets,
+                    head_dim=head_dim,
+                    attention_bias=head_beta,
+                    teacher_bias=teacher_bias,
+                    n_cartridge_keys=n_cartridge_keys,
+                    doc_rope_offset=doc_rope_offset,
+                    assign=getattr(config, "oracle_write_assign", "mass_ranked"),
+                    compute_stats=config.compute_update_stats,
+                )
+                mse = stats["mse"]
+                oracle_mass_on_S.setdefault(layer_idx, []).append(stats["mass_on_S_mean"])
+                if stats.get("teacher_doc_mass_mean") is not None:
+                    oracle_doc_mass.setdefault(layer_idx, []).append(
+                        stats["teacher_doc_mass_mean"]
+                    )
+                oracle_n_written.append(stats["n_written"])
+            elif use_old_guard or config.delta_weight > 0:
                 new_values, stats = guarded_sparse_am_value_update(
                     keys, values, queries, selected_full,
                     old_queries=old_queries,
@@ -586,12 +621,25 @@ def apply_document_am_write_to_cache(
             total_mse += mse_per_layer[layer_idx]
 
     mean_mse = total_mse / max(len(mse_per_layer), 1) if mse_per_layer else 0.0
+    extra: dict = {}
+    if oracle_write:
+        extra["oracle_write"] = True
+        extra["oracle_write_assign"] = getattr(config, "oracle_write_assign", "mass_ranked")
+        extra["oracle_ref_mass_on_S_per_layer"] = {
+            l: sum(v) / len(v) for l, v in oracle_mass_on_S.items() if v
+        }
+        extra["oracle_teacher_doc_mass_per_layer"] = {
+            l: sum(v) / len(v) for l, v in oracle_doc_mass.items() if v
+        }
+        extra["oracle_n_written_min"] = min(oracle_n_written) if oracle_n_written else 0
+        extra["oracle_n_written_max"] = max(oracle_n_written) if oracle_n_written else 0
     return AMUpdateStats(
         step=-1,
         mse_per_layer=mse_per_layer,
         mean_mse=mean_mse,
         n_queries=total_queries,
         mask=mask,
+        extra=extra,
     )
 
 

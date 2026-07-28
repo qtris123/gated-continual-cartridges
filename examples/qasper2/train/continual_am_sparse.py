@@ -115,6 +115,9 @@ SAVE_AFTER_EACH_DOCUMENT = os.environ.get("SAVE_AFTER_EACH_DOCUMENT", "1") not i
 OLD_REF_MAX_EXAMPLES = int(os.environ.get("OLD_REF_MAX_EXAMPLES", "64"))
 EVAL_QA_PATH = os.environ.get("EVAL_QA_PATH") or None
 EVAL_MT_PATH = os.environ.get("EVAL_MT_PATH") or None
+# B-ROUTE write-ceiling oracle (opt-in, default OFF).
+AM_ORACLE_WRITE = os.environ.get("AM_ORACLE_WRITE", "0") in ("1", "true", "True")
+AM_ORACLE_WRITE_ASSIGN = os.environ.get("AM_ORACLE_WRITE_ASSIGN", "mass_ranked")
 
 _model_cls = FlexQwen3ForCausalLM if "qwen" in MODEL_NAME.lower() else FlexLlamaForCausalLM
 logger = get_logger(__name__)
@@ -138,8 +141,34 @@ def _setup_run_dir(config: TrainConfig) -> Path:
     return run_dir
 
 
+def _oracle_write_kwargs() -> dict:
+    """Pass the oracle flags ONLY if the imported cartridges package has them.
+
+    RUNBOOK §6.10: `import cartridges` can resolve to the sibling repo, whose
+    config would reject an unknown field and crash every stock run. So the kwarg
+    is conditional — and if the oracle was explicitly requested but the field is
+    missing, fail loudly instead of silently running the ordinary solve.
+    """
+    import cartridges
+
+    has_field = "oracle_write" in AttentionMatchingFinetuningConfig.model_fields
+    if not has_field:
+        if AM_ORACLE_WRITE:
+            raise RuntimeError(
+                "AM_ORACLE_WRITE=1 but the imported `cartridges` package "
+                f"({os.path.dirname(cartridges.__file__)}) has no `oracle_write` field. "
+                "Export PYTHONPATH=$CARTRIDGES_DIR:$PYTHONPATH (RUNBOOK §6.10)."
+            )
+        return {}
+    return {
+        "oracle_write": AM_ORACLE_WRITE,
+        "oracle_write_assign": AM_ORACLE_WRITE_ASSIGN,
+    }
+
+
 def _build_am_config() -> AttentionMatchingFinetuningConfig:
     return AttentionMatchingFinetuningConfig(
+        **_oracle_write_kwargs(),
         enabled=True,
         top_t=TOP_T,
         use_idf=USE_IDF and BG_STATS_PATH is not None,
@@ -566,7 +595,11 @@ config = TrainConfig(
             f"key-{KEY_MODE}", f"exec-{AM_EXECUTION_MODE}",
             f"ridge-{RIDGE_SCALE}", f"lammin-{RIDGE_LAMBDA_MIN}",
             f"delta-{DELTA_WEIGHT}",
-        ],
+        ] + (
+            ["oracle", "diagnostic", f"oracle-write-{AM_ORACLE_WRITE_ASSIGN}"]
+            if AM_ORACLE_WRITE
+            else []
+        ),
         notes=os.environ.get("WANDB_NOTES") or None,
     ) if os.environ.get("WANDB_DISABLED", "0") not in ("1", "true", "True") else None,
     output_dir=os.environ.get("CARTRIDGES_OUTPUT_DIR", "."),

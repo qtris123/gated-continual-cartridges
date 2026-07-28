@@ -60,8 +60,55 @@ Eliminated as *knob-level* explanations: gating (HYP-G1), support (HYP-S1), ridg
   preconditioning) — SCOUT direction, MISSION §5.
 - **Evidence so far:** none. `am/mean_mse` is logged to wandb but has never been read against CE.
 
+## 🔥 B-CASCADE — the solve destroys the routing it depends on (NEW, opened 2026-07-28 by ORACLE-WRITE)
+- **Stage:** A MEASURE (measured on first contact) · **Status:** **measured, self-inflicted, fixable**
+- **The observation:** our **solved** write reaches `|v|` up to **984** and **collapses total cartridge
+  attention from 0.588 → 0.329 on MT** (0.570 → 0.320 on QA), pushing 10/36 layers under 5% mass on S.
+  The **oracle's teacher values top out at |63|** — 15× smaller — and leave cartridge mass **at Phase-1
+  level**. The closed-form solve is making the model route away from *the cartridge as a whole*.
+- **Mechanism (why values can move attention at all):** the solve is **per-layer and independent**, but
+  the model is **sequential**. Extreme values written at layer *l* perturb the residual stream, which
+  shifts the **queries** at layers *l+1…35*, which re-routes attention away from the cartridge. We
+  optimise each layer against queries collected from an activation distribution our own write destroys.
+- **This converges with two independent findings:** (i) SCOUT-AM's divergence #3 — the paper does
+  **on-policy, layer-sequential re-extraction** of reference queries and we do not; (ii) SCOUT-AM's
+  divergence #2 — `max_queries_per_head=64` at `top_t=64` is an **exactly-determined** system, i.e.
+  exact interpolation with no norm control, which is precisely how you get `|v| = 984`.
+- **Prediction (sharp, falsifiable):** raising the reference-query count `n ≫ t` should shrink `|v|`
+  toward the teacher's scale, restore cartridge mass toward 0.588, and improve MT — **all three
+  together**. If `|v|` shrinks but MT does not move, B-CASCADE is refuted and the cap is elsewhere.
+- **Also explains** why `DELTA_WEIGHT` (the trust region = MEMIT's `C₀ = w·I`) is load-bearing: it is
+  the *only* thing currently restraining the write's magnitude, and it has never been swept.
+
 ## B-ROUTE — routing / frozen keys
-- **Stage:** A MEASURE · **Status:** suspected · **⭐ highest information value**
+- **Stage:** E VERIFY (one control outstanding) · **Status:** ✅ **MEASURED — partially confirmed, and
+  the value-only family is BOUNDED**
+- ✅ **ORACLE-WRITE (2026-07-28), the decisive run — neither branch of the predicted dichotomy:**
+
+  | | QA | MT |
+  |---|---|---|
+  | Phase-1 start | 2.2388 | 3.7825 |
+  | control (solved values, flag off) | 2.1772 | 2.5524 |
+  | **oracle (teacher's own doc values)** | **1.8955** | **2.3810** |
+  | dense@4ep bar | 2.3721 | 1.8725 |
+
+  A **perfect content transplant** into the tfidf-selected top-32 slots moves MT only 2.552 → 2.381
+  (−0.171, at the edge of the noise band) — **closing just 25% of the gap, leaving 0.509 to the bar** —
+  while QA improves −0.282 (outside noise).
+- **Mechanistic sentence:** the rewritten slots are **readable through a narrow channel, not
+  unreadable**. Under the full eval-time softmax they carry **~9% of total attention** (~15.5% of
+  cartridge mass), and **MT queries route to them no more than QA queries do (ratio 1.04)**. So
+  value-only writing at this support and selection is capped by **bandwidth**, not by zero routing.
+- **What this bounds:** at `top_t=32` with frozen keys and tfidf selection, **no value-only write of any
+  kind — however perfect — reaches MT ≤ 2.02.** Closing the gap requires *more mass on S* (β /
+  mass-matching), *different keys*, or *more/better-selected support* — not a better value solve.
+- **Bit-identical-when-off verified**, and the flag-off control reproduced EXP-007-top32 to all 16
+  printed digits in a fresh process, which **also retires the sibling-import confound** on that number.
+- ⚠️ **Outstanding control (W5, not yet run):** the oracle changes value **magnitude** (984 → 63) as
+  well as content, so part of both gains could be a magnitude/entropy effect rather than the document
+  content being read. A **norm-matched shuffled/random-value control** separates them. Until it runs,
+  read the oracle as an upper bound whose *cause* is not yet attributed.
+- **Superseded framing below (kept for provenance):**
 - **Claim:** with `KEY_MODE=freeze`, eval-time MT queries may barely attend to the rewritten slots.
   Whatever we write is then unreadable, and no improvement to *what* we write can matter.
 - **Signature to measure:** attention mass on rewritten slots at eval time, per layer, MT queries vs

@@ -221,6 +221,7 @@ def run_per_document_am_phase2(
                     "prefill_s": prefill_s,
                     "total_s": doc_wall,
                 },
+                "extra": dict(getattr(am_stats, "extra", None) or {}),
             }
             per_doc_stats.append(doc_record)
 
