@@ -130,3 +130,26 @@ research_loop/results/EXP-001/result.json ; outputs/2026-07-25-18-02-29-continua
   path; EXP-008 ran `WANDB_DISABLED=1` (`launch_exp008.sh:67`) so no wandb run and no `result.json` exist
   for it — precisely the failure mode the §0b wandb mandate now blocks.
 - **Consequence: HYP-T1 RETRACTED; B-TARGET is untested, not dead.**
+
+## 2026-07-28 — DIAG-OBJ (board B-OBJ): better fitting bought no CE
+- (a) Canonical top32 reproduced **bit-identically** on a different GPU + fresh process:
+  QA 2.1766157150268555 / MT 2.5483615398406982, `value_global_max_abs` 984.0,
+  `mean_mse_last_doc` 0.198077 — all matching EXP-007-top32 to every printed digit.
+  wandb https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/suffgao1
+- (b) Maximal-support oracle (`TOP_T=511`, `RIDGE_LAMBDA=0`, no OOM, 234 s): QA 2.5151 / MT 2.6652.
+  wandb https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/s2wb1tnk
+- `am/mean_mse` mean over 16 docs: **0.11906 → 0.09155 (−23.1%)**, uniform (per-doc ratio 0.62–0.85 on
+  all 16 docs). **MT went the wrong way (+0.117); QA +0.339.** Standalone re-evals of both
+  `cache_last.pt` agree within 0.004. ⇒ a materially better fit of the solve's own objective bought
+  **zero** CE improvement.
+- Caveat (worker-flagged, correct): this is a *maximal-support* oracle, not MSE→0. `DELTA_WEIGHT=1e-2`
+  appends a 511×511 identity block in `guarded_sparse_am_value_update`, keeping the system
+  over-determined and shrinking the solution toward the prior. → DIAG-OBJ-c (`DELTA_WEIGHT=0`) dispatched.
+- ⭐ **93–95% of the residual is in layers 34–35 alone** (4.40 / 2.23 on the last doc) and those two
+  refuse to shrink (0.93× / 0.77×), while the other 34 layers drop 44.5% and are already tiny
+  (median ≈0.0027). The solve is already near its own optimum nearly everywhere.
+- Provenance: the concurrent ORACLE-WRITE worker edited `value_solve.py` (19:22:42), `finetune.py`
+  (19:23:12) and `continual.py` (19:23:37) *during* run (a). This worker had PYTHONPATH-pinned imports
+  to a frozen git-HEAD snapshot (verified byte-identical to HEAD before and after), so both runs used
+  pristine solver code and the `AM_ORACLE_WRITE` block was inert (absent from both `config.yaml`s).
+  **Without the pin, both runs would have silently used half-edited value-solve code.** → RUNBOOK §9c-bis.

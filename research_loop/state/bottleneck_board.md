@@ -30,7 +30,25 @@ Eliminated as *knob-level* explanations: gating (HYP-G1), support (HYP-S1), ridg
 
 ---
 ## B-OBJ — objective mismatch
-- **Stage:** A MEASURE · **Status:** suspected
+- **Stage:** A MEASURE (sharpened, one decisive test left) · **Status:** **measured — leaning confirmed**
+- ✅ **DIAG-OBJ (2026-07-28):** 16× more support (`top_t` 32 → all 511) plus zero ridge bought a
+  **23.1% MSE reduction** (0.11906 → 0.09155, uniform: per-doc ratio 0.62–0.85 across all 16 docs) and
+  **MT moved the wrong way, +0.117** (2.5484 → 2.6652). QA +0.339 as coverage predicts.
+  **Fitting the internal objective materially better bought zero CE.** (MT's +0.117 sits at the edge of
+  the ±0.1–0.2 noise band, so read it as "MT did not improve", not a confirmed regression; the MSE drop
+  and the QA change are outside the band.) Run (a) reproduced EXP-007-top32 **bit-identically**
+  (QA 2.1766 / MT 2.5484), so the harness is sound.
+- ⚠️ **Not yet a true MSE→0 test.** `DELTA_WEIGHT=1e-2` appends a 511×511 identity block to the stacked
+  design in `guarded_sparse_am_value_update`, keeping the system over-determined and shrinking the
+  solution toward the prior even with every slot free. **The decisive run is `DELTA_WEIGHT=0` +
+  `TOP_T=511` + `RIDGE_LAMBDA=0`** — env-only, no code edit (dispatched as DIAG-OBJ-c).
+- ⭐ **Structural signal worth its own board entry:** **93–95% of the residual sits in layers 34–35
+  alone** (4.40 and 2.23 on the last doc), and those two layers *refuse to shrink* (0.93× / 0.77×) while
+  the other 34 layers drop 44.5% and are already tiny (median ≈0.0027). **The solve is already at its
+  own optimum almost everywhere.** So the sharp question is no longer "is MSE low?" but "**why can't
+  layers 34–35 be fitted, and is that where CE lives?**" Per-layer support/query allocation is the
+  obvious follow-up once `max_queries_per_head` is unpinned (MECH-QUERIES).
+- **Prior claim (superseded):** "suspected"
 - **Claim:** the solve minimizes value/attention-space MSE, but we are scored on token cross-entropy.
   A numerically excellent solve can leave CE almost untouched — the two objectives are only loosely
   coupled through the frozen LM.

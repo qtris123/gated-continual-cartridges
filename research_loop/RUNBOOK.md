@@ -272,6 +272,20 @@ CLI override (`seed=<n>`) is the first thing to try; if that path doesn't reach 
 worker adds an opt-in `SEED` env var (default = current value, so stock runs stay bit-identical).
 A same-seed rerun confirms plumbing only — a changed seed is what confirms a *result*.
 
+### 9c-bis. FROZEN-SNAPSHOT PIN — mandatory when any worker is editing source concurrently
+When a code-editing worker is live, every *measuring* worker must pin its imports to committed code, or
+its numbers silently inherit half-finished edits. Proven pattern (DIAG-OBJ, 2026-07-28 — the only
+reason its reproduction was trustworthy while `value_solve.py`/`finetune.py`/`continual.py` were being
+rewritten underneath it):
+```bash
+mkdir -p /tmp/amsnap_<ID> && git -C "$CARTRIDGES_DIR" archive HEAD cartridges | tar -x -C /tmp/amsnap_<ID>
+export PYTHONPATH="/tmp/amsnap_<ID>:$PYTHONPATH"
+python -c "import cartridges,os;print(os.path.dirname(cartridges.__file__))"   # must print the snapshot
+```
+`git archive HEAD` excludes uncommitted edits **by construction**. Verify the printed import path in
+every launched job's log, and re-verify the snapshot is unchanged after the run. This composes with —
+does not replace — the dual-`cartridges` check in §6.10.
+
 ### 9d. Eval size is fixed
 The eval splits are whole parquets (`qasper_eval_{QA,MT}.parquet`); `BATCH_SIZE` (default 4) changes
 batching, **not** how many examples are scored. There is no knob to "eval on more data" — so the noise
