@@ -1,0 +1,251 @@
+{
+  "id": "DIAG-OBJ-c",
+  "role": "measure",
+  "board_entry": "B-OBJ",
+  "question": "With the trust region removed (DELTA_WEIGHT=0), the closed-form solve is finally free to drive its own reconstruction objective toward zero. Does token cross-entropy follow it down?",
+  "variable_under_test": "DELTA_WEIGHT=0 vs 1e-2 (DIAG-OBJ-b). All else held: TOP_T=511, RIDGE_LAMBDA=0, RIDGE_SCALE=spectral, GRANULARITY=per_layer, SLOT_SELECTION=tfidf, USE_IDF=0, KEY_MODE=freeze, TARGET_MODE=cartridge_plus_doc, AM_EXECUTION_MODE=per_document.",
+  "baseline_ref": "DIAG-OBJ-b (QA 2.5133 / MT 2.6630 standalone; mean am/mean_mse 0.09155). Secondary: DIAG-OBJ-a = EXP-007-top32 canonical (QA 2.1772 / MT 2.5524; mean am/mean_mse 0.11906).",
+  "status": "done",
+  "numbers": {
+    "qa_forgetting_loss": 16.008390426635742,
+    "mt_acquisition_loss": 15.950357437133789,
+    "qa_forgetting_loss_in_run": 16.02863311767578,
+    "mt_acquisition_loss_in_run": 15.922715187072754,
+    "solve_s": 173.10059261322021,
+    "phase2_e2e_s": 444,
+    "gradient_steps": 0,
+    "am_mean_mse_first_doc": 2.8777093149541983e-05,
+    "am_mean_mse_last_doc": 0.001173312180254159,
+    "am_mean_mse_mean_over_docs": 0.005037225661151447,
+    "am_mean_mse_min": 2.8777093149541983e-05,
+    "am_mean_mse_max": 0.04156762868838261,
+    "value_global_max_abs": 21504.0,
+    "n_documents": 16
+  },
+  "diagnostics": {
+    "verdict_shape": "MSE collapsed 94.5% (18.2x better fit) while BOTH eval CEs exploded by ~13.3-13.5 loss. Not 'MSE->0 with flat CE' and not 'CE follows MSE' - the two are anti-correlated in this regime.",
+    "am_mean_mse_definition": "F.mse_loss(alpha_new @ V_new, target) in attention-output space, averaged over heads then over the 36 layers, on the run's OWN reference queries (cartridges/am/value_solve.py). DELTA_WEIGHT=0 + no old-ref guard routes finetune.py to sparse_am_value_update (stats['mse']) instead of guarded_sparse_am_value_update (stats['mse_new']) - identical quantity, different branch.",
+    "c_vs_b": {
+      "d_mt_acquisition_loss": 13.287318706512451,
+      "d_qa_forgetting_loss": 13.495131969451904,
+      "am_mean_mse_ratio": 0.055022321214175364,
+      "am_mean_mse_pct_reduction": 94.49776787858247,
+      "am_mean_mse_last_doc_ratio": 0.006953680373169819,
+      "per_document_mse_ratio_range": [
+        0.0023894837649845986,
+        0.7059166777415828
+      ],
+      "n_documents_where_C_fits_better": 16,
+      "mt_improved_with_better_fit": false
+    },
+    "c_vs_a_canonical_top32": {
+      "am_mean_mse_ratio": 0.042309146272646904,
+      "am_mean_mse_pct_reduction": 95.7690853727353,
+      "d_mt_acquisition_loss": 13.397941589355469,
+      "d_qa_forgetting_loss": 13.831210851669312
+    },
+    "am_mse_per_layer_last_doc_stats": {
+      "n_layers": 36,
+      "mean": 0.001173312180254159,
+      "min": 9.442241259705053e-10,
+      "max": 0.014850731070220391,
+      "argmin_layer": 0,
+      "argmax_layer": 20,
+      "pct_of_total_in_L34_L35": 0.43157480370909374,
+      "mean_excl_L34_L35": 0.0012369689581927048
+    },
+    "L34_L35": {
+      "L34": {
+        "top32_A": 4.401999038411304,
+        "delta1e-2_B": 4.076406116790167,
+        "delta0_C": 0.00015503264535254857,
+        "ratio_C_over_B": 3.80316977530747e-05
+      },
+      "L35": {
+        "top32_A": 2.2290687046479434,
+        "delta1e-2_B": 1.720802967344298,
+        "delta0_C": 2.7261265245215327e-05,
+        "ratio_C_over_B": 1.584217703162578e-05
+      },
+      "pct_of_total_residual_in_L34_L35": {
+        "A": 92.99229825064538,
+        "B": 95.43718227274105,
+        "C": 0.43157480370909374
+      },
+      "other_34_layers_mean": {
+        "A": 0.014697151679820726,
+        "B": 0.00815183834193857,
+        "C": 0.0012369689581927048
+      },
+      "other_34_layers_ratio_C_over_B": 0.15174110504975302,
+      "n_layers_worse_than_B": 9,
+      "layers_worse_than_B": {
+        "7": {
+          "B": 6.457681899552092e-06,
+          "C": 0.001350937351535464,
+          "ratio": 209.19849762639524
+        },
+        "13": {
+          "B": 0.0002519407925660744,
+          "C": 0.00037598909339564557,
+          "ratio": 1.4923708446183366
+        },
+        "14": {
+          "B": 5.858754299481461e-06,
+          "C": 2.3796351255711556e-05,
+          "ratio": 4.061674212522907
+        },
+        "20": {
+          "B": 0.006374026543198852,
+          "C": 0.014850731070220391,
+          "ratio": 2.329882213318717
+        },
+        "23": {
+          "B": 4.4647750709975176e-05,
+          "C": 0.0008232124737475033,
+          "ratio": 18.437938320677407
+        },
+        "25": {
+          "B": 1.1107678326398307e-06,
+          "C": 0.0005392733031897023,
+          "ratio": 485.49596715280745
+        },
+        "29": {
+          "B": 2.688240310666501e-05,
+          "C": 0.00021858011562869706,
+          "ratio": 8.130973810689717
+        },
+        "31": {
+          "B": 7.295630611935111e-05,
+          "C": 0.007268507285743908,
+          "ratio": 99.62822506190443
+        },
+        "32": {
+          "B": 0.000873621655939067,
+          "C": 0.013620703405365475,
+          "ratio": 15.591078028765676
+        }
+      },
+      "reading": "The trust region - not top_t and not ridge - was what pinned layers 34/35: at DELTA_WEIGHT=1e-2 they held 95.4% of the residual and shrank only 0.93x/0.77x; at DELTA_WEIGHT=0 they fell by 4-5 orders of magnitude to 0.43% of the residual."
+    },
+    "numerical_health": {
+      "value_global_max_abs": 21504.0,
+      "value_norms_per_probe_layer": {
+        "global_max_abs": 21504.0,
+        "L0_max_abs": 3.0,
+        "L18_max_abs": 125.0,
+        "L35_max_abs": 402.0
+      },
+      "value_global_max_abs_DIAG_OBJ_b": 848.0,
+      "value_global_max_abs_DIAG_OBJ_a_top32": 984.0,
+      "value_max_abs_ratio_vs_top32": 21.853658536585368,
+      "trainable_values_per_layer_max_abs": [
+        3.0,
+        3.140625,
+        3.703125,
+        41.5,
+        139.0,
+        68.0,
+        35.75,
+        6496.0,
+        2368.0,
+        2112.0,
+        360.0,
+        1584.0,
+        115.5,
+        3984.0,
+        804.0,
+        130.0,
+        592.0,
+        108.5,
+        125.0,
+        3424.0,
+        16000.0,
+        181.0,
+        2096.0,
+        4032.0,
+        1640.0,
+        3104.0,
+        332.0,
+        496.0,
+        118.5,
+        2528.0,
+        4160.0,
+        8096.0,
+        21504.0,
+        478.0,
+        3488.0,
+        402.0
+      ],
+      "trainable_values_argmax_layer": 32,
+      "trainable_values_mean_abs": 5.496933273091498,
+      "trainable_keys_global_max_abs": 302.0,
+      "nonfinite_counts": {
+        "trainable_values": 0,
+        "trainable_keys": 0,
+        "frozen_values": 0,
+        "frozen_keys": 0,
+        "am_mean_mse_per_document": 0
+      },
+      "diverged": false,
+      "diverged_note": "Nothing is NaN/Inf and the solve did not error: every per-document MSE and every cache tensor is finite in bf16. The blow-up is a magnitude blow-up, not an overflow: trainable value max|v| = 21504 vs 984 at the canonical top32 point (21.9x) and 848 at DIAG-OBJ-b (25.4x), concentrated in layers 32 (21504), 20 (16000), 31 (8096), 7 (6496)."
+    },
+    "effective_slots_selected_per_layer": 511,
+    "n_cache_trainable_tokens": 511,
+    "n_queries_per_doc": 18432,
+    "eval_split_sizes": {
+      "qa_batches": 6,
+      "mt_batches": 5
+    },
+    "noise_floor_loss": 0.2,
+    "checkpoint_verified": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-19-44-42-continual_am_sparse/6e30fe4b-992c-4300-a97d-88af3e2494e1/cache_last.pt -- path echoed in both eval logs and in wrapper.log; agrees with the in-run eval to within 0.028 loss",
+    "phase2_e2e_note": "444s = wrapper train start->end (1785267772 -> 1785268216). This was the FIRST job in a fresh process on a cold GPU, so it includes ~250s of model load / cold CUDA context; DIAG-OBJ-b's 234s was warm. solve_s (per_document_am_stats wall_clock_s) is the comparable number.",
+    "provenance": {
+      "snapshot_path": "/tmp/amsnap_diagobjc",
+      "snapshot_command": "git -C $CARTRIDGES_DIR archive HEAD cartridges examples | tar -x -C /tmp/amsnap_diagobjc  (taken at HEAD=0dbc6ed323d02cb859e1ecf8e5068c29ab4ac080, 2026-07-28T19:42Z)",
+      "verified_import_path": "/tmp/amsnap_diagobjc/cartridges  (printed as DIAGOBJC_CARTRIDGES_RESOLVED in wrapper.log by a probe run from cwd=/tmp so that cwd could not shadow PYTHONPATH)",
+      "pythonpath_pin_note": "WITHOUT the pin, `import cartridges` on this box resolves via the venv editable finder to the SIBLING repo /localhome/local-triv/gated-continual-cartridges/cartridges (RUNBOOK 6.10) -- NOT the _explore tree. With the pin, sys.path[0] for a by-path script launch is the script's dir, so PYTHONPATH wins. A `python -c` probe run from the repo root reports the repo path instead (cwd is sys.path[0] for -c) and is therefore NOT a valid check; that is why the probe here runs from /tmp.",
+      "driver_also_frozen": "CARTRIDGES_DIR was pointed at the snapshot, so the launcher script AND examples/qasper2/train/continual_am_sparse.py also came from committed code. CARTRIDGES_DIR affects nothing numerical (only a presence check in cartridges/__init__.py plus those two file paths); every cache/data/output path passed was an absolute path into the real repo.",
+      "file_hashes_sha256": {
+        "cartridges/am/value_solve.py": "0a18815cebe724b40868ae28cb3bd07b6c4c07d4dc9472d13225306155bee0df",
+        "cartridges/am/finetune.py": "8a426ad4db54878caa7d1579a0f5e8fc77da5baea9698f91453bf68867abb053",
+        "cartridges/am/continual.py": "1c957ed824af3907a15121e25c86dcb4d5e3bf2a880ca0ffc814bf65a5dc6716",
+        "examples/qasper2/train/continual_am_sparse.py": "075917a2b57ab73aa59c2a789613e4c6ec8adf7d7c401a101366a13b432b0c66",
+        "examples/qasper2/scripts/core/train_continual_am_sparse.sh": "9959e29bfbe8b373bf87d385c3574d7522f0ea0f2d7c0769cad7e8180df4c020"
+      },
+      "snapshot_py_only_manifest_sha256_before": "02d7d0b8a5ea73328725ce8568a39a9dadf085aa897e460980aff1518d072643",
+      "snapshot_py_only_manifest_sha256_after": "02d7d0b8a5ea73328725ce8568a39a9dadf085aa897e460980aff1518d072643",
+      "snapshot_unchanged": true,
+      "snapshot_all_files_hash_changed_note": "The all-files hash logged in wrapper.log (BEFORE c5ef8e84 / AFTER 5a86bfd8) changed only because Python wrote __pycache__/*.pyc into the snapshot during the run. The .py-only manifest and all five key-file hashes are identical before and after.",
+      "identical_to_DIAG_OBJ_frozen": "diff -rq --exclude=__pycache__ /tmp/DIAG-OBJ_frozen/cartridges /tmp/amsnap_diagobjc/cartridges -> NO DIFFERENCES. This run therefore executed byte-identical solver code to DIAG-OBJ-a and DIAG-OBJ-b; the DELTA_WEIGHT env knob is the only difference.",
+      "concurrent_editor": "During this task the ORACLE-WRITE worker's edits to cartridges/am/{value_solve,finetune,continual}.py were COMMITTED to the branch: git HEAD moved 0dbc6ed -> c4e2e9f (46dffe7, 8e2d937, c4e2e9f) while the run was in flight, and the committed cartridges/am/value_solve.py hash is now 5c7eadb3... != the snapshot's 0a18815c.... The pin is what kept this run on the same code as DIAG-OBJ-b.",
+      "baseline_reproduced": false,
+      "baseline_reproduced_note": "No baseline reproduction run was dispatched for DIAG-OBJ-c (the task was ONE run). The provenance guarantee is instead the byte-identical-package proof above: the same frozen package that produced the bit-identical EXP-007-top32 reproduction in DIAG-OBJ-a was used here."
+    },
+    "raw_dump": "research_loop/state/diagnostics/DIAG-OBJ-c.json (per-document MSE array, per-layer MSE array for ALL 16 documents, first/last-doc per-layer arrays, per-layer value magnitudes)"
+  },
+  "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/08vjg5ki",
+  "wandb_run_id": "08vjg5ki",
+  "wandb_group": "B-OBJ",
+  "wandb_all_runs": {
+    "train": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/08vjg5ki",
+    "eval_qa": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/30d561e7",
+    "eval_mt": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/6q75la2m"
+  },
+  "artifacts": [
+    "outputs/2026-07-28-19-44-42-continual_am_sparse/6e30fe4b-992c-4300-a97d-88af3e2494e1/cache_last.pt",
+    "outputs/2026-07-28-19-44-42-continual_am_sparse/6e30fe4b-992c-4300-a97d-88af3e2494e1/phase2_summary.json",
+    "outputs/2026-07-28-19-44-42-continual_am_sparse/6e30fe4b-992c-4300-a97d-88af3e2494e1/per_document_am_stats.pt",
+    "research_loop/results/DIAG-OBJ-c/launch_diag_obj_c.sh",
+    "research_loop/results/DIAG-OBJ-c/wrapper.log",
+    "research_loop/results/DIAG-OBJ-c/run_c_no_trust_region.log",
+    "research_loop/results/DIAG-OBJ-c/eval_c_qa.log",
+    "research_loop/results/DIAG-OBJ-c/eval_c_mt.log",
+    "research_loop/results/DIAG-OBJ-c/mse_run_c.json",
+    "research_loop/results/DIAG-OBJ-c/collect_mse.py",
+    "research_loop/state/diagnostics/DIAG-OBJ-c.json"
+  ],
+  "command": "research_loop/results/DIAG-OBJ-c/launch_diag_obj_c.sh -- one flock-claimed GPU (gpu0, MASTER_PORT=29500) held for the train + both evals. NO SOURCE FILES EDITED. Train: USE_IDF=0 SLOT_SELECTION=tfidf GRANULARITY=per_layer TOP_T=511 TARGET_MODE=cartridge_plus_doc KEY_MODE=freeze RIDGE_LAMBDA=0 RIDGE_SCALE=spectral DELTA_WEIGHT=0 AM_EXECUTION_MODE=per_document PHASE1_CACHE_PATH=outputs/phase1_selfdistill_qwen512/cache_last.pt SYNTH_DATA_PATH=data/qasper/train/qwen_qasper_MT_task_8192.parquet MODEL_NAME=Qwen/Qwen3-4B-Instruct-2507 NUM_TOKENS=512 EVAL_QA_PATH=data/qasper/eval/qasper_eval_QA.parquet EVAL_MT_PATH=data/qasper/eval/qasper_eval_MT.parquet RUN_NAME=DIAG-OBJ-c_no-trust-region WANDB_DISABLED=0 WANDB_GROUP=B-OBJ WANDB_NOTES='DELTA_WEIGHT=0 vs 1e-2 (DIAG-OBJ-b): true MSE->0 test' timeout 3000 bash /tmp/amsnap_diagobjc/examples/qasper2/scripts/core/train_continual_am_sparse.sh (VAR=val form, never bare env, RUNBOOK 6.1; launched as a detached background job and polled). Then examples/qasper2/train/eval_forgetting.py twice on the run's cache_last.pt (CHECKPOINT_PATH + EVAL_DATA_PATH = QA then MT), parsing the `Eval loss` line then killing the PID (RUNBOOK 1). PYTHONPATH and CARTRIDGES_DIR both pinned to the frozen snapshot /tmp/amsnap_diagobjc.",
+  "observations": "Removing the trust region worked exactly as intended on the solve's own objective and catastrophically on the model: with DELTA_WEIGHT=0 (single change vs DIAG-OBJ-b) the mean am/mean_mse over the 16 documents fell from 0.09155 to 0.005037 (-94.5%, ratio 0.055) and the last document's value from 0.16873 to 0.0011733 (-99.3%), improving on ALL 16 documents (per-doc ratio range 0.0024-0.706); this is the closest to MSE->0 this objective has reached, 95.8% below the canonical top32 operating point. Token cross-entropy went the opposite way by an enormous margin: MT acquisition 2.6630 -> 15.9504 and QA forgetting 2.5133 -> 16.0084 (standalone eval_forgetting.py on the run's own cache_last.pt; the in-run evals agree at 15.9227 / 16.0286), i.e. +13.29 and +13.50 loss, roughly the CE of a destroyed cartridge (ppl ~8e6). The layers that refused to shrink in every previous run collapsed completely: layer 34 went 4.0764 -> 0.00015503 (3.80e-05x) and layer 35 1.7208 -> 0.00002726 (1.58e-05x), so the share of per-layer residual held by L34+L35 dropped from 95.44% to 0.43% and the other 34 layers also improved (mean 0.008152 -> 0.001237, ratio 0.152); the trust region, not capacity or ridge, was what pinned L34/L35 - 9 of 36 layers are nonetheless slightly WORSE than DIAG-OBJ-b (worst: L25 486x, L7 209x, L31 100x), so the improvement is a large net win concentrated in the deep layers rather than a uniform one. Nothing diverged in the numerical sense: no NaN or Inf anywhere in the 16 per-document MSEs or in any cache tensor, and the solve returned rc=0 in 173.1s (solve wall) with 511/511 slots selected per layer and 0 gradient steps - but the written values blew up in magnitude, value_global_max_abs = 21504.0 versus 984.0 at top32 (21.9x) and 848.0 at DIAG-OBJ-b (25.4x), concentrated in layers 32 (21504), 20 (16000), 31 (8096) and 7 (6496) while the keys (frozen) stayed at 302. So the fit improved by ~18x on the solve's own reference queries while both eval splits collapsed by ~13.3 loss, which is a decoupling result of the anti-correlated kind rather than the flat-CE kind. Noise caveat: the eval splits are tiny (QA n=6 batches, MT n=5) and sub-0.1-0.2 loss deltas are noise, but the +13.3/+13.5 deltas here are ~70x the noise floor and the MSE reduction is monotone across all 16 documents, so neither direction is attributable to eval noise. Provenance: `import cartridges` was PYTHONPATH-pinned to a frozen `git archive HEAD` snapshot at /tmp/amsnap_diagobjc (verified resolved path /tmp/amsnap_diagobjc/cartridges, .py-manifest hash unchanged before and after), which is byte-identical (diff -rq, excluding __pycache__) to the /tmp/DIAG-OBJ_frozen package DIAG-OBJ-a/b ran - necessary because the concurrent ORACLE-WRITE worker's edits to cartridges/am/*.py were COMMITTED mid-run (HEAD moved 0dbc6ed -> c4e2e9f) and the live value_solve.py no longer matches what DIAG-OBJ-b used.",
+  "failure_cause": null
+}

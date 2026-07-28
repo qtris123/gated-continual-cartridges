@@ -30,7 +30,24 @@ Eliminated as *knob-level* explanations: gating (HYP-G1), support (HYP-S1), ridg
 
 ---
 ## B-OBJ — objective mismatch
-- **Stage:** A MEASURE (sharpened, one decisive test left) · **Status:** **measured — leaning confirmed**
+- **Stage:** CLOSED · **Status:** ✅ **CONFIRMED — and stronger than the hypothesis: MSE and CE are
+  ANTI-CORRELATED** (DIAG-OBJ-c, 2026-07-28)
+- **Mechanistic sentence:** removing the trust region (`DELTA_WEIGHT=0`, single variable vs DIAG-OBJ-b)
+  drove the solve's own objective 18.2× better — mean `am/mean_mse` 0.09155 → **0.005037**, improving on
+  **all 16/16 documents**, the closest to MSE→0 this objective has ever come — and **destroyed the
+  model**: MT 2.663 → **15.95**, QA 2.513 → **16.01** (ppl ≈ 8e6), ~70× the noise band. `|v|` went
+  848 → **21504**, with **no NaN/Inf anywhere** and rc=0. The failure is **magnitude, not overflow**.
+  ⇒ minimising value/attention-space reconstruction on the reference queries is not merely *decoupled*
+  from token CE; over this range it is **anti-correlated**. **No better fit of this objective can win.**
+- ⭐ **And it identified what was holding the residual:** layers 34/35 held 93–95% of the residual and
+  refused to shrink under both extra support and zero ridge. Removing the trust region collapsed them
+  (L34 3.8e-05×, L35 1.6e-05×; their residual share 95.44% → **0.43%**). **The trust region — not
+  `top_t`, not ridge — was the binding constraint on the fit.** The knob the loop never swept was the
+  one doing all the work.
+- **Consequence for the mission:** the five queued *value-solve improvement* mechanisms are now
+  deprioritised. What matters is the **metric/trust region** (→ MECH-METRIC: MEMIT's `C₀` from the old
+  keys' second moment instead of `w·I`) and **routing/mass** (→ B-ROUTE, β), not fit quality.
+- **Superseded intermediate finding (kept for provenance):**
 - ✅ **DIAG-OBJ (2026-07-28):** 16× more support (`top_t` 32 → all 511) plus zero ridge bought a
   **23.1% MSE reduction** (0.11906 → 0.09155, uniform: per-doc ratio 0.62–0.85 across all 16 docs) and
   **MT moved the wrong way, +0.117** (2.5484 → 2.6652). QA +0.339 as coverage predicts.
@@ -79,6 +96,14 @@ Eliminated as *knob-level* explanations: gating (HYP-G1), support (HYP-S1), ridg
   together**. If `|v|` shrinks but MT does not move, B-CASCADE is refuted and the cap is elsewhere.
 - **Also explains** why `DELTA_WEIGHT` (the trust region = MEMIT's `C₀ = w·I`) is load-bearing: it is
   the *only* thing currently restraining the write's magnitude, and it has never been swept.
+- ✅ **CONFIRMED BY DIAG-OBJ-c (2026-07-28):** with the trust region removed, `|v|` reaches **21504** and
+  both losses explode to ~16 (ppl 8e6) — with **no NaN/Inf**. Magnitude alone destroys the model. So the
+  causal chain is established: *fewer reference rows than columns → exact interpolation → enormous
+  values → the residual stream is perturbed → later layers' queries move → attention routes away from
+  the cartridge → CE collapses.* `DELTA_WEIGHT` is the only brake, and it is a **crude** one (`C₀ = w·I`
+  penalises every direction equally). **This is the strongest argument for MECH-METRIC:** replace the
+  isotropic brake with MEMIT's `C₀` = second moment of the old routing vectors, so the write is
+  restrained *in the directions the old content occupies* and free elsewhere.
 
 ## B-ROUTE — routing / frozen keys
 - **Stage:** E VERIFY (one control outstanding) · **Status:** ✅ **MEASURED — partially confirmed, and

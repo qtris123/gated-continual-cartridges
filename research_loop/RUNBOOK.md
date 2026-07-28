@@ -280,11 +280,19 @@ rewritten underneath it):
 ```bash
 mkdir -p /tmp/amsnap_<ID> && git -C "$CARTRIDGES_DIR" archive HEAD cartridges | tar -x -C /tmp/amsnap_<ID>
 export PYTHONPATH="/tmp/amsnap_<ID>:$PYTHONPATH"
-python -c "import cartridges,os;print(os.path.dirname(cartridges.__file__))"   # must print the snapshot
+cd /tmp && python -c "import cartridges,os;print(os.path.dirname(cartridges.__file__))"  # must print the snapshot
 ```
-`git archive HEAD` excludes uncommitted edits **by construction**. Verify the printed import path in
-every launched job's log, and re-verify the snapshot is unchanged after the run. This composes with —
-does not replace — the dual-`cartridges` check in §6.10.
+`git archive HEAD` excludes uncommitted edits **by construction** — and note that HEAD can move *during*
+your run if the orchestrator commits another worker's edits (observed 2026-07-28: `0dbc6ed` → `c4e2e9f`
+mid-run), which is exactly what the snapshot protects you from. Re-verify the snapshot's manifest hash
+after the run. Consider pinning `CARTRIDGES_DIR` at the snapshot too, so the *driver* also comes from
+committed code.
+
+⚠️ **The verification probe is a FALSE NEGATIVE if you run it from the repo root.** For `python -c`,
+cwd is `sys.path[0]`, so it prints the repo path even when the pin is correct (a real run's `wrapper.log`
+showed exactly this). **`cd /tmp` first.** Related, and confirmed 2026-07-28: on this box an **unpinned**
+`import cartridges` resolves to the **sibling** repo, not `_explore` — so the pin is not optional
+hygiene, it decides which code actually runs. Composes with, does not replace, §6.10.
 
 ### 9d. Eval size is fixed
 The eval splits are whole parquets (`qasper_eval_{QA,MT}.parquet`); `BATCH_SIZE` (default 4) changes

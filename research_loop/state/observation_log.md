@@ -198,3 +198,28 @@ research_loop/results/EXP-001/result.json ; outputs/2026-07-25-18-02-29-continua
 - ⚠️ Outstanding W5 control: the oracle changes value **magnitude** as well as content, so part of both
   gains may be a magnitude/entropy effect. Needs a **norm-matched shuffled-value control** before the
   oracle's cause is attributed. Queued.
+
+## 2026-07-28 — DIAG-OBJ-c (board B-OBJ): MSE and CE are ANTI-correlated
+- Single variable vs DIAG-OBJ-b: `DELTA_WEIGHT=1e-2 → 0` (with `TOP_T=511`, `RIDGE_LAMBDA=0`).
+- mean `am/mean_mse` 0.09155 → **0.005037** (−94.5%, an 18.2× better fit, improved on **all 16/16
+  documents**, per-doc ratio 0.0024–0.706 — the closest this objective has ever come to zero).
+- **Both eval losses exploded: MT 2.6630 → 15.9504, QA 2.5133 → 16.0084** (ppl ≈ 8e6). Standalone
+  re-eval of the run's own `cache_last.pt` agrees within 0.028. The delta is ~70× the noise band.
+- `value_global_max_abs` 848 → **21504** (L32; also L20 16000, L31 8096). **No NaN/Inf anywhere**, rc=0,
+  frozen keys unchanged at 302 — the failure is **magnitude**, not numerical overflow.
+- **Layers 34/35 finally broke.** They held 93–95% of the residual and refused to shrink under both more
+  support and zero ridge; removing the trust region collapsed them: L34 4.0764 → 0.000155 (3.8e-05×),
+  L35 1.7208 → 0.0000273 (1.6e-05×); their share of per-layer residual 95.44% → **0.43%**. The other 34
+  layers improved 0.152× (9 of 36 got slightly worse). ⇒ **the trust region — not `top_t`, not ridge —
+  was what pinned them.**
+- **B-OBJ CONFIRMED in the strongest available form:** an unregularised minimum-residual fit on the
+  reference queries buys an 18× better reconstruction and pays +13.3 loss. The fitted distance is not
+  merely decoupled from token CE — over this range it is **anti-correlated**.
+- Provenance: ORACLE-WRITE's edits were **committed mid-run** (HEAD `0dbc6ed` → `c4e2e9f`) and the live
+  `value_solve.py` no longer matches what DIAG-OBJ-b ran. The pin held — `import cartridges` resolved to
+  the snapshot, manifest hash identical before/after, `diff -rq` against DIAG-OBJ's frozen tree shows no
+  differences. `CARTRIDGES_DIR` was pinned too, so the driver also came from committed code.
+- ⚠️ **RUNBOOK correction (worker-found):** `python -c "import cartridges"` run **from the repo root is a
+  false negative** — cwd is `sys.path[0]` for `-c`, so it prints the repo path even when the pin is
+  correct. Probe from `/tmp`. Also confirmed: **unpinned imports on this box resolve to the SIBLING
+  repo**, not `_explore`.
