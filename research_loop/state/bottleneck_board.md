@@ -229,6 +229,48 @@ Eliminated as *knob-level* explanations: gating (HYP-G1), support (HYP-S1), ridg
   preconditioning) — SCOUT direction, MISSION §5.
 - **Evidence so far:** none. `am/mean_mse` is logged to wandb but has never been read against CE.
 
+## 🧪 B-CONTENT — how much of "acquisition" is content at all? (DIAG-CONTENT, 2026-07-28)
+- **Stage:** CLOSED · **Status:** **the acquisition claim SURVIVES, but damaged — and the answer is
+  k-dependent**
+- **Design:** arm B writes the **QA-topic corpus** (no MT content by construction; exactly 16 unique
+  documents, so per-k curves are directly comparable) and evaluates MT. Arm C writes the canonical
+  documents in **reversed order** (content held exactly constant, verified by slug).
+
+  | k | A canonical | B content-free | C reversed | ΔB/ΔA | ΔC/ΔA |
+  |---|---|---|---|---|---|
+  | 4 | 3.0338 | 3.2659 | 3.1886 | 0.690 | 0.793 |
+  | 8 | 2.7099 | **2.9978** ← B's min | 2.8801 | **0.732** | 0.841 |
+  | 12 | **2.4352** | 3.0436 | 2.7166 | 0.548 | 0.791 |
+  | 16 | 2.5524 | 3.4343 | 2.8920 | **0.283** | 0.724 |
+
+- **The split, stated plainly:** of the canonical 1.230-loss MT improvement, **28.3% is content-free at
+  the reported k=16 point**, rising to **73.2% at matched k=8**. All far outside the ±0.15 band.
+  **But content is also real:** canonical beats content-free by 0.232 / 0.288 / 0.608 / 0.882 at
+  k=4/8/12/16 — every one outside the band, and **widening with k**. Neither branch; the middle.
+- ✅ **The confound was refuted by measurement, not argued away.** Writing the QA corpus back into the
+  cartridge it built is **not** a no-op: arm B displaces **69.9%** of the Phase-1 value Frobenius norm
+  (canonical 62.1%), changes **more** slots (2195 vs 1960), and is the harshest of the three writes.
+- 🔴 **And it produces an outright anomaly:** arm B **degrades QA by +0.652** above the floor at k=16
+  **while re-writing the exact 16 papers the QA eval scores** (16/16 title overlap, verified).
+  **Writing a paper in makes the model worse at that paper.** That is not a retrieval story at all.
+- **Sequence alone is worth 0.340** (arm C, same documents reversed) — comparable in size to arm B's
+  entire content-free gain, and consistent with the recency/overwrite that B-OVERWRITE measured.
+- ⚠️ **Strongest surviving objection (worker-stated):** arm B's documents are QASPER papers in the **same
+  synthesis format**, differing only in topic — so "content-free" here means "**topic**-free within one
+  corpus format" and does not separate a generic activation perturbation from transfer of shared
+  scientific-paper structure. Arm A's per-k curve is reused from DIAG-SEQUENCE, not re-measured. Single
+  seed; k=1 deltas are inside the band for all three arms.
+
+## ⚠️ TWO INTERNALS FINDINGS THAT CUT AGAINST THIS BOARD'S OWN FRAMING (DIAG-CONTENT)
+1. **Bandwidth does not predict MT — final nail.** All three arms sit within **0.079–0.091** eval-time
+   `mass_on_S` (a **13% spread**) while MT spans **0.882**. The arm with the **highest** bandwidth (B,
+   0.0906) has the **worst** MT. Together with MECH-BETA (4.23× bandwidth → both axes worse), the
+   bandwidth hypothesis is dead in both directions.
+2. **The B-CASCADE "routing collapse" is specific to the canonical arm, and is ANTI-ordered with MT.**
+   Total cartridge mass: **0.329 (A, best MT)** vs 0.655 (B, worst MT) / 0.591 (C) against Phase-1's
+   0.588. The arm with healthy routing has the worst acquisition. **Collapse is not the pathology this
+   board took it for** — see the B-CASCADE entry, whose framing this contradicts.
+
 ## 🔥 B-CASCADE — the solve destroys the routing it depends on
 - **Stage:** CLOSED (with one confound outstanding) · **Status:** ❌ **REFUTED as an acquisition
   explanation — but half of it was right** (MECH-QUERIES, 2026-07-28)

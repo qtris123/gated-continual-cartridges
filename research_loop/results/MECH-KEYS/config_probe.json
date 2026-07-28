@@ -1,0 +1,120 @@
+{
+  "control": {
+    "import": "/localhome/local-triv/gated-continual-cartridges_explore/cartridges",
+    "fields": {
+      "key_mode": "freeze",
+      "key_reposition": false,
+      "rope_theta": 5000000.0,
+      "enable_beta": false,
+      "freeze_keys": true,
+      "top_t": 32,
+      "granularity": "per_layer",
+      "use_idf": false,
+      "slot_selection": "tfidf",
+      "delta_weight": 0.01,
+      "ridge_lambda": 0.0001,
+      "ridge_scale": "spectral",
+      "max_queries_per_head": 64,
+      "oracle_write": false
+    },
+    "n_fields": 42,
+    "tags": null
+  },
+  "keys_norepos": {
+    "import": "/localhome/local-triv/gated-continual-cartridges_explore/cartridges",
+    "fields": {
+      "key_mode": "highest_attention",
+      "key_reposition": false,
+      "rope_theta": 5000000.0,
+      "enable_beta": false,
+      "freeze_keys": false,
+      "top_t": 32,
+      "granularity": "per_layer",
+      "use_idf": false,
+      "slot_selection": "tfidf",
+      "delta_weight": 0.01,
+      "ridge_lambda": 0.0001,
+      "ridge_scale": "spectral",
+      "max_queries_per_head": 64,
+      "oracle_write": false
+    },
+    "n_fields": 42,
+    "tags": null
+  },
+  "keys_repos": {
+    "import": "/localhome/local-triv/gated-continual-cartridges_explore/cartridges",
+    "fields": {
+      "key_mode": "highest_attention",
+      "key_reposition": true,
+      "rope_theta": 5000000.0,
+      "enable_beta": false,
+      "freeze_keys": false,
+      "top_t": 32,
+      "granularity": "per_layer",
+      "use_idf": false,
+      "slot_selection": "tfidf",
+      "delta_weight": 0.01,
+      "ridge_lambda": 0.0001,
+      "ridge_scale": "spectral",
+      "max_queries_per_head": 64,
+      "oracle_write": false
+    },
+    "n_fields": 42,
+    "tags": null
+  },
+  "omp_repos": {
+    "import": "/localhome/local-triv/gated-continual-cartridges_explore/cartridges",
+    "fields": {
+      "key_mode": "omp",
+      "key_reposition": true,
+      "rope_theta": 5000000.0,
+      "enable_beta": false,
+      "freeze_keys": false,
+      "top_t": 32,
+      "granularity": "per_layer",
+      "use_idf": false,
+      "slot_selection": "tfidf",
+      "delta_weight": 0.01,
+      "ridge_lambda": 0.0001,
+      "ridge_scale": "spectral",
+      "max_queries_per_head": 64,
+      "oracle_write": false
+    },
+    "n_fields": 42,
+    "tags": null
+  },
+  "stock": {
+    "import": "/localhome/local-triv/gated-continual-cartridges_explore/cartridges",
+    "fields": {
+      "key_mode": "freeze",
+      "key_reposition": false,
+      "rope_theta": 10000.0,
+      "enable_beta": null,
+      "freeze_keys": true,
+      "top_t": 64,
+      "granularity": "per_layer",
+      "use_idf": false,
+      "slot_selection": "tfidf",
+      "delta_weight": 0.01,
+      "ridge_lambda": 0.0001,
+      "ridge_scale": "spectral",
+      "max_queries_per_head": 64,
+      "oracle_write": false
+    },
+    "n_fields": 42,
+    "tags": null
+  },
+  "GUARD_repos_with_freeze": {
+    "rc": 1,
+    "err": "ValueError: AM_KEY_REPOSITION=1 is meaningless with KEY_MODE=freeze (no key is ever installed). Set KEY_MODE=highest_attention or omp."
+  },
+  "GUARD_repos_without_theta": {
+    "rc": 1,
+    "err": "ValueError: AM_KEY_REPOSITION=1 requires AM_ROPE_THETA to be set explicitly (use 5000000 / 'model' for Qwen3-4B-Instruct-2507); the counter-rotation is only correct in the model's own rotary frame."
+  },
+  "UNPINNED_must_fail_loudly": {
+    "rc": 1,
+    "constructed": false,
+    "tail": "RuntimeError: AM_ROPE_THETA=5000000 but the imported `cartridges` package (/localhome/local-triv/gated-continual-cartridges/cartridges) has no `rope_theta` field. Export PYTHONPATH=$CARTRIDGES_DIR:$PYTHONPATH (RUNBOOK \u00a76.10)."
+  }
+}

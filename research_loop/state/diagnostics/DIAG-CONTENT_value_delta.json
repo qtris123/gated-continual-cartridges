@@ -1,0 +1,686 @@
+{
+ "phase1": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/phase1_selfdistill_qwen512/cache_last.pt",
+ "arms": {
+  "armA": {
+   "cache_path": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-21-43-17-continual_am_sparse/4b0edcab-d1c5-4313-bc43-309d7ff77097/cache-after-doc-015-af07b880.pt",
+   "value_global_max_abs": 984.0,
+   "dV_global_max_abs": 966.875,
+   "dV_rel_fro_global": 0.6206468075045902,
+   "dV_rel_fro_mean_over_layers": 0.5000196332786653,
+   "n_slots_changed_total": 1960,
+   "n_layers": 36,
+   "per_layer": {
+    "0": {
+     "value_absmax": 8.0625,
+     "dV_absmax": 8.12939453125,
+     "dV_rel_fro": 0.7681800078655815,
+     "n_slots_changed": 36
+    },
+    "1": {
+     "value_absmax": 7.375,
+     "dV_absmax": 7.64453125,
+     "dV_rel_fro": 0.7167487932073564,
+     "n_slots_changed": 35
+    },
+    "2": {
+     "value_absmax": 5.84375,
+     "dV_absmax": 6.43359375,
+     "dV_rel_fro": 0.48466091909469117,
+     "n_slots_changed": 42
+    },
+    "3": {
+     "value_absmax": 6.375,
+     "dV_absmax": 6.701171875,
+     "dV_rel_fro": 0.29703139022914793,
+     "n_slots_changed": 46
+    },
+    "4": {
+     "value_absmax": 7.625,
+     "dV_absmax": 7.78125,
+     "dV_rel_fro": 0.3630887302602324,
+     "n_slots_changed": 46
+    },
+    "5": {
+     "value_absmax": 6.65625,
+     "dV_absmax": 6.87890625,
+     "dV_rel_fro": 0.25124745320330005,
+     "n_slots_changed": 41
+    },
+    "6": {
+     "value_absmax": 9.0625,
+     "dV_absmax": 9.462890625,
+     "dV_rel_fro": 0.5245730240135474,
+     "n_slots_changed": 46
+    },
+    "7": {
+     "value_absmax": 4.09375,
+     "dV_absmax": 3.361328125,
+     "dV_rel_fro": 0.08647383270014916,
+     "n_slots_changed": 43
+    },
+    "8": {
+     "value_absmax": 6.5625,
+     "dV_absmax": 7.0234375,
+     "dV_rel_fro": 0.3134823789259532,
+     "n_slots_changed": 48
+    },
+    "9": {
+     "value_absmax": 20.875,
+     "dV_absmax": 20.12109375,
+     "dV_rel_fro": 0.31673904826294064,
+     "n_slots_changed": 57
+    },
+    "10": {
+     "value_absmax": 33.0,
+     "dV_absmax": 34.65625,
+     "dV_rel_fro": 0.7049876095865263,
+     "n_slots_changed": 41
+    },
+    "11": {
+     "value_absmax": 14.5,
+     "dV_absmax": 14.751953125,
+     "dV_rel_fro": 0.39466938002201346,
+     "n_slots_changed": 54
+    },
+    "12": {
+     "value_absmax": 17.75,
+     "dV_absmax": 17.37109375,
+     "dV_rel_fro": 0.4571493694501144,
+     "n_slots_changed": 57
+    },
+    "13": {
+     "value_absmax": 12.4375,
+     "dV_absmax": 10.6875,
+     "dV_rel_fro": 0.18149202424543853,
+     "n_slots_changed": 66
+    },
+    "14": {
+     "value_absmax": 52.0,
+     "dV_absmax": 49.953125,
+     "dV_rel_fro": 0.6673183369705185,
+     "n_slots_changed": 61
+    },
+    "15": {
+     "value_absmax": 42.25,
+     "dV_absmax": 41.5703125,
+     "dV_rel_fro": 0.4213113125657331,
+     "n_slots_changed": 65
+    },
+    "16": {
+     "value_absmax": 22.25,
+     "dV_absmax": 27.8125,
+     "dV_rel_fro": 0.6022719590017394,
+     "n_slots_changed": 58
+    },
+    "17": {
+     "value_absmax": 18.75,
+     "dV_absmax": 45.1875,
+     "dV_rel_fro": 0.5026768353155128,
+     "n_slots_changed": 68
+    },
+    "18": {
+     "value_absmax": 28.0,
+     "dV_absmax": 28.90625,
+     "dV_rel_fro": 0.7295564040890834,
+     "n_slots_changed": 79
+    },
+    "19": {
+     "value_absmax": 42.0,
+     "dV_absmax": 42.09814453125,
+     "dV_rel_fro": 0.4894808247453427,
+     "n_slots_changed": 63
+    },
+    "20": {
+     "value_absmax": 25.0,
+     "dV_absmax": 25.005157470703125,
+     "dV_rel_fro": 0.3313808993100569,
+     "n_slots_changed": 72
+    },
+    "21": {
+     "value_absmax": 62.25,
+     "dV_absmax": 59.59375,
+     "dV_rel_fro": 0.6511250232276835,
+     "n_slots_changed": 78
+    },
+    "22": {
+     "value_absmax": 69.5,
+     "dV_absmax": 71.3359375,
+     "dV_rel_fro": 0.7245673656468054,
+     "n_slots_changed": 54
+    },
+    "23": {
+     "value_absmax": 52.25,
+     "dV_absmax": 53.05078125,
+     "dV_rel_fro": 0.5503311178424234,
+     "n_slots_changed": 64
+    },
+    "24": {
+     "value_absmax": 39.5,
+     "dV_absmax": 40.71875,
+     "dV_rel_fro": 0.34864089389618397,
+     "n_slots_changed": 71
+    },
+    "25": {
+     "value_absmax": 40.25,
+     "dV_absmax": 38.59375,
+     "dV_rel_fro": 0.5310885535663453,
+     "n_slots_changed": 47
+    },
+    "26": {
+     "value_absmax": 106.5,
+     "dV_absmax": 104.796875,
+     "dV_rel_fro": 0.4710279069526182,
+     "n_slots_changed": 56
+    },
+    "27": {
+     "value_absmax": 65.0,
+     "dV_absmax": 64.33984375,
+     "dV_rel_fro": 0.6087374342271317,
+     "n_slots_changed": 47
+    },
+    "28": {
+     "value_absmax": 89.5,
+     "dV_absmax": 89.36328125,
+     "dV_rel_fro": 0.7335692142270721,
+     "n_slots_changed": 69
+    },
+    "29": {
+     "value_absmax": 78.5,
+     "dV_absmax": 77.921875,
+     "dV_rel_fro": 0.3205937799394465,
+     "n_slots_changed": 60
+    },
+    "30": {
+     "value_absmax": 318.0,
+     "dV_absmax": 311.71875,
+     "dV_rel_fro": 0.5444900206312663,
+     "n_slots_changed": 44
+    },
+    "31": {
+     "value_absmax": 74.0,
+     "dV_absmax": 71.0,
+     "dV_rel_fro": 0.3003454495861881,
+     "n_slots_changed": 47
+    },
+    "32": {
+     "value_absmax": 258.0,
+     "dV_absmax": 253.84375,
+     "dV_rel_fro": 0.5000452607793083,
+     "n_slots_changed": 53
+    },
+    "33": {
+     "value_absmax": 71.0,
+     "dV_absmax": 70.97216796875,
+     "dV_rel_fro": 0.1509771182519933,
+     "n_slots_changed": 56
+    },
+    "34": {
+     "value_absmax": 984.0,
+     "dV_absmax": 966.875,
+     "dV_rel_fro": 0.9648051654678538,
+     "n_slots_changed": 47
+    },
+    "35": {
+     "value_absmax": 388.0,
+     "dV_absmax": 377.125,
+     "dV_rel_fro": 0.995841960724649,
+     "n_slots_changed": 43
+    }
+   }
+  },
+  "armB": {
+   "cache_path": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-22-52-30-continual_am_sparse/03b02326-28dc-4eeb-973b-13bd100b5c3c/cache-after-doc-015-8f0f132c.pt",
+   "value_global_max_abs": 760.0,
+   "dV_global_max_abs": 722.25,
+   "dV_rel_fro_global": 0.6985335426214901,
+   "dV_rel_fro_mean_over_layers": 0.5699573273269317,
+   "n_slots_changed_total": 2195,
+   "n_layers": 36,
+   "per_layer": {
+    "0": {
+     "value_absmax": 8.75,
+     "dV_absmax": 9.166015625,
+     "dV_rel_fro": 0.8513184691310585,
+     "n_slots_changed": 39
+    },
+    "1": {
+     "value_absmax": 9.1875,
+     "dV_absmax": 9.451171875,
+     "dV_rel_fro": 0.7771928505601844,
+     "n_slots_changed": 38
+    },
+    "2": {
+     "value_absmax": 6.3125,
+     "dV_absmax": 6.90234375,
+     "dV_rel_fro": 0.5072728969333046,
+     "n_slots_changed": 48
+    },
+    "3": {
+     "value_absmax": 2.921875,
+     "dV_absmax": 3.8671875,
+     "dV_rel_fro": 0.25401465711799953,
+     "n_slots_changed": 43
+    },
+    "4": {
+     "value_absmax": 4.3125,
+     "dV_absmax": 5.296875,
+     "dV_rel_fro": 0.363182634113863,
+     "n_slots_changed": 44
+    },
+    "5": {
+     "value_absmax": 9.4375,
+     "dV_absmax": 9.66015625,
+     "dV_rel_fro": 0.4289007065328632,
+     "n_slots_changed": 46
+    },
+    "6": {
+     "value_absmax": 7.0625,
+     "dV_absmax": 7.498046875,
+     "dV_rel_fro": 0.5543771179098586,
+     "n_slots_changed": 46
+    },
+    "7": {
+     "value_absmax": 8.6875,
+     "dV_absmax": 8.376953125,
+     "dV_rel_fro": 0.11991514479675573,
+     "n_slots_changed": 51
+    },
+    "8": {
+     "value_absmax": 28.25,
+     "dV_absmax": 28.5859375,
+     "dV_rel_fro": 0.6259508358285012,
+     "n_slots_changed": 52
+    },
+    "9": {
+     "value_absmax": 40.75,
+     "dV_absmax": 39.9375,
+     "dV_rel_fro": 0.43602729300843696,
+     "n_slots_changed": 55
+    },
+    "10": {
+     "value_absmax": 69.0,
+     "dV_absmax": 69.349609375,
+     "dV_rel_fro": 0.8772185638259494,
+     "n_slots_changed": 45
+    },
+    "11": {
+     "value_absmax": 34.5,
+     "dV_absmax": 35.33984375,
+     "dV_rel_fro": 0.7124838287626725,
+     "n_slots_changed": 49
+    },
+    "12": {
+     "value_absmax": 37.25,
+     "dV_absmax": 37.0283203125,
+     "dV_rel_fro": 0.5232282159308496,
+     "n_slots_changed": 62
+    },
+    "13": {
+     "value_absmax": 20.0,
+     "dV_absmax": 12.744140625,
+     "dV_rel_fro": 0.1328063467468354,
+     "n_slots_changed": 74
+    },
+    "14": {
+     "value_absmax": 76.5,
+     "dV_absmax": 74.453125,
+     "dV_rel_fro": 0.846114690146876,
+     "n_slots_changed": 66
+    },
+    "15": {
+     "value_absmax": 25.875,
+     "dV_absmax": 30.6875,
+     "dV_rel_fro": 0.3983382132626627,
+     "n_slots_changed": 70
+    },
+    "16": {
+     "value_absmax": 23.625,
+     "dV_absmax": 30.1875,
+     "dV_rel_fro": 0.6273215944792714,
+     "n_slots_changed": 67
+    },
+    "17": {
+     "value_absmax": 43.0,
+     "dV_absmax": 48.46875,
+     "dV_rel_fro": 0.5161527540281101,
+     "n_slots_changed": 79
+    },
+    "18": {
+     "value_absmax": 39.75,
+     "dV_absmax": 40.5703125,
+     "dV_rel_fro": 0.7765982620625526,
+     "n_slots_changed": 101
+    },
+    "19": {
+     "value_absmax": 61.25,
+     "dV_absmax": 62.22265625,
+     "dV_rel_fro": 0.518814461708104,
+     "n_slots_changed": 77
+    },
+    "20": {
+     "value_absmax": 33.75,
+     "dV_absmax": 34.248046875,
+     "dV_rel_fro": 0.35969814401206185,
+     "n_slots_changed": 108
+    },
+    "21": {
+     "value_absmax": 91.0,
+     "dV_absmax": 88.78125,
+     "dV_rel_fro": 0.7289163643680688,
+     "n_slots_changed": 89
+    },
+    "22": {
+     "value_absmax": 60.5,
+     "dV_absmax": 64.625,
+     "dV_rel_fro": 0.7012255198415327,
+     "n_slots_changed": 61
+    },
+    "23": {
+     "value_absmax": 48.5,
+     "dV_absmax": 48.66015625,
+     "dV_rel_fro": 0.5449781139886377,
+     "n_slots_changed": 83
+    },
+    "24": {
+     "value_absmax": 49.5,
+     "dV_absmax": 49.232421875,
+     "dV_rel_fro": 0.4074415156210424,
+     "n_slots_changed": 83
+    },
+    "25": {
+     "value_absmax": 44.75,
+     "dV_absmax": 43.59375,
+     "dV_rel_fro": 0.5354963314453263,
+     "n_slots_changed": 52
+    },
+    "26": {
+     "value_absmax": 124.0,
+     "dV_absmax": 120.703125,
+     "dV_rel_fro": 0.6593031750444442,
+     "n_slots_changed": 72
+    },
+    "27": {
+     "value_absmax": 80.5,
+     "dV_absmax": 82.578125,
+     "dV_rel_fro": 0.7086215871658305,
+     "n_slots_changed": 51
+    },
+    "28": {
+     "value_absmax": 115.0,
+     "dV_absmax": 113.86328125,
+     "dV_rel_fro": 0.817217466818923,
+     "n_slots_changed": 69
+    },
+    "29": {
+     "value_absmax": 89.5,
+     "dV_absmax": 85.4375,
+     "dV_rel_fro": 0.3311296181531761,
+     "n_slots_changed": 64
+    },
+    "30": {
+     "value_absmax": 320.0,
+     "dV_absmax": 317.203125,
+     "dV_rel_fro": 0.650592874446912,
+     "n_slots_changed": 50
+    },
+    "31": {
+     "value_absmax": 65.0,
+     "dV_absmax": 66.1015625,
+     "dV_rel_fro": 0.3090594136736381,
+     "n_slots_changed": 54
+    },
+    "32": {
+     "value_absmax": 209.0,
+     "dV_absmax": 207.8828125,
+     "dV_rel_fro": 0.4827366482110156,
+     "n_slots_changed": 52
+    },
+    "33": {
+     "value_absmax": 87.5,
+     "dV_absmax": 87.47216796875,
+     "dV_rel_fro": 0.18266851774900633,
+     "n_slots_changed": 60
+    },
+    "34": {
+     "value_absmax": 760.0,
+     "dV_absmax": 722.25,
+     "dV_rel_fro": 1.0748227621349067,
+     "n_slots_changed": 49
+    },
+    "35": {
+     "value_absmax": 556.0,
+     "dV_absmax": 546.1875,
+     "dV_rel_fro": 1.1773261942083082,
+     "n_slots_changed": 46
+    }
+   }
+  },
+  "armC": {
+   "cache_path": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-23-02-19-continual_am_sparse/14501f52-61b5-441f-b451-15656cbaf687/cache-after-doc-015-ae4e8fb7.pt",
+   "value_global_max_abs": 724.0,
+   "dV_global_max_abs": 702.875,
+   "dV_rel_fro_global": 0.667164350787902,
+   "dV_rel_fro_mean_over_layers": 0.5303069960332493,
+   "n_slots_changed_total": 2004,
+   "n_layers": 36,
+   "per_layer": {
+    "0": {
+     "value_absmax": 7.1875,
+     "dV_absmax": 7.083984375,
+     "dV_rel_fro": 0.7460115859987105,
+     "n_slots_changed": 38
+    },
+    "1": {
+     "value_absmax": 8.3125,
+     "dV_absmax": 8.576171875,
+     "dV_rel_fro": 0.7031279240235296,
+     "n_slots_changed": 37
+    },
+    "2": {
+     "value_absmax": 5.90625,
+     "dV_absmax": 6.49609375,
+     "dV_rel_fro": 0.5003430053897574,
+     "n_slots_changed": 44
+    },
+    "3": {
+     "value_absmax": 6.0,
+     "dV_absmax": 6.326171875,
+     "dV_rel_fro": 0.30127883861560306,
+     "n_slots_changed": 42
+    },
+    "4": {
+     "value_absmax": 4.65625,
+     "dV_absmax": 5.1640625,
+     "dV_rel_fro": 0.3757891765679848,
+     "n_slots_changed": 45
+    },
+    "5": {
+     "value_absmax": 8.0625,
+     "dV_absmax": 8.28515625,
+     "dV_rel_fro": 0.25087525304910624,
+     "n_slots_changed": 45
+    },
+    "6": {
+     "value_absmax": 10.5625,
+     "dV_absmax": 10.611572265625,
+     "dV_rel_fro": 0.5252552209771547,
+     "n_slots_changed": 44
+    },
+    "7": {
+     "value_absmax": 5.71875,
+     "dV_absmax": 5.4697265625,
+     "dV_rel_fro": 0.07009830703037062,
+     "n_slots_changed": 46
+    },
+    "8": {
+     "value_absmax": 11.5,
+     "dV_absmax": 11.013671875,
+     "dV_rel_fro": 0.32326700019095733,
+     "n_slots_changed": 54
+    },
+    "9": {
+     "value_absmax": 24.625,
+     "dV_absmax": 23.8125,
+     "dV_rel_fro": 0.3142567862190112,
+     "n_slots_changed": 57
+    },
+    "10": {
+     "value_absmax": 34.5,
+     "dV_absmax": 35.90625,
+     "dV_rel_fro": 0.734222075553786,
+     "n_slots_changed": 42
+    },
+    "11": {
+     "value_absmax": 20.875,
+     "dV_absmax": 19.8671875,
+     "dV_rel_fro": 0.3914153440306581,
+     "n_slots_changed": 56
+    },
+    "12": {
+     "value_absmax": 32.5,
+     "dV_absmax": 32.2783203125,
+     "dV_rel_fro": 0.5103040856148652,
+     "n_slots_changed": 58
+    },
+    "13": {
+     "value_absmax": 19.875,
+     "dV_absmax": 7.0,
+     "dV_rel_fro": 0.11843698369183937,
+     "n_slots_changed": 69
+    },
+    "14": {
+     "value_absmax": 69.0,
+     "dV_absmax": 66.953125,
+     "dV_rel_fro": 0.8463464471655786,
+     "n_slots_changed": 61
+    },
+    "15": {
+     "value_absmax": 43.25,
+     "dV_absmax": 41.8125,
+     "dV_rel_fro": 0.39947644403947175,
+     "n_slots_changed": 65
+    },
+    "16": {
+     "value_absmax": 26.125,
+     "dV_absmax": 29.9375,
+     "dV_rel_fro": 0.6474956203109782,
+     "n_slots_changed": 64
+    },
+    "17": {
+     "value_absmax": 37.0,
+     "dV_absmax": 51.9375,
+     "dV_rel_fro": 0.5352677449141733,
+     "n_slots_changed": 73
+    },
+    "18": {
+     "value_absmax": 48.0,
+     "dV_absmax": 49.40625,
+     "dV_rel_fro": 0.7913994823191619,
+     "n_slots_changed": 78
+    },
+    "19": {
+     "value_absmax": 46.25,
+     "dV_absmax": 43.296875,
+     "dV_rel_fro": 0.5207037575073722,
+     "n_slots_changed": 64
+    },
+    "20": {
+     "value_absmax": 26.5,
+     "dV_absmax": 26.7578125,
+     "dV_rel_fro": 0.30843719927054086,
+     "n_slots_changed": 76
+    },
+    "21": {
+     "value_absmax": 60.75,
+     "dV_absmax": 59.28125,
+     "dV_rel_fro": 0.7038901910843376,
+     "n_slots_changed": 78
+    },
+    "22": {
+     "value_absmax": 75.0,
+     "dV_absmax": 75.8359375,
+     "dV_rel_fro": 0.823948384394417,
+     "n_slots_changed": 54
+    },
+    "23": {
+     "value_absmax": 59.5,
+     "dV_absmax": 59.28515625,
+     "dV_rel_fro": 0.5769601880767007,
+     "n_slots_changed": 65
+    },
+    "24": {
+     "value_absmax": 33.5,
+     "dV_absmax": 33.232421875,
+     "dV_rel_fro": 0.304983000428687,
+     "n_slots_changed": 79
+    },
+    "25": {
+     "value_absmax": 67.0,
+     "dV_absmax": 67.1689453125,
+     "dV_rel_fro": 0.5697276538789873,
+     "n_slots_changed": 46
+    },
+    "26": {
+     "value_absmax": 98.0,
+     "dV_absmax": 94.703125,
+     "dV_rel_fro": 0.45747425697421473,
+     "n_slots_changed": 57
+    },
+    "27": {
+     "value_absmax": 92.0,
+     "dV_absmax": 90.5390625,
+     "dV_rel_fro": 0.7140744694362142,
+     "n_slots_changed": 45
+    },
+    "28": {
+     "value_absmax": 121.0,
+     "dV_absmax": 120.86328125,
+     "dV_rel_fro": 0.813420665605373,
+     "n_slots_changed": 64
+    },
+    "29": {
+     "value_absmax": 134.0,
+     "dV_absmax": 129.9375,
+     "dV_rel_fro": 0.41682199763826505,
+     "n_slots_changed": 63
+    },
+    "30": {
+     "value_absmax": 294.0,
+     "dV_absmax": 291.203125,
+     "dV_rel_fro": 0.6554315041144616,
+     "n_slots_changed": 47
+    },
+    "31": {
+     "value_absmax": 108.0,
+     "dV_absmax": 102.875,
+     "dV_rel_fro": 0.33966452976200945,
+     "n_slots_changed": 52
+    },
+    "32": {
+     "value_absmax": 318.0,
+     "dV_absmax": 313.84375,
+     "dV_rel_fro": 0.6041544660778069,
+     "n_slots_changed": 53
+    },
+    "33": {
+     "value_absmax": 64.5,
+     "dV_absmax": 60.09375,
+     "dV_rel_fro": 0.1486882533440757,
+     "n_slots_changed": 52
+    },
+    "34": {
+     "value_absmax": 724.0,
+     "dV_absmax": 702.875,
+     "dV_rel_fro": 1.014000561826319,
+     "n_slots_changed": 47
+    },
+    "35": {
+     "value_absmax": 444.0,
+     "dV_absmax": 433.4375,
+     "dV_rel_fro": 1.0340034520744918,
+     "n_slots_changed": 44
+    }
+   }
+  }
+ }
+}
