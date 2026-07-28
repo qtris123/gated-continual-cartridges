@@ -3,7 +3,9 @@
 There is no single prose spec in the repo; this file consolidates the authoritative definition
 from the script docstrings (`examples/qasper2/train/{initial,continual,baseline_continual,
 continual_am_sparse}.py`), the data/eval wiring, and `notes/2026-06-20-qasper2-longhealth-port.md`.
-**Human: please confirm the two ⚠️ points below.**
+✅ Both formerly-open ⚠️ points are **resolved**: the task domains are confirmed (QA→MT→SA), and the
+Phase-1 cache provenance is verified (EXP-000-verify; the repo *name* is right, its bundled
+`config.yaml` is a stale mislabel — ignore it).
 
 ## Shared setup (fixed)
 - Frozen LM: **Qwen3-4B** (`FlexQwen3ForCausalLM`, `Qwen/Qwen3-4B-Instruct-2507`).
@@ -38,10 +40,13 @@ continual_am_sparse}.py`), the data/eval wiring, and `notes/2026-06-20-qasper2-l
   - `qasper_eval_MT.parquet` → **acquisition** (did the new task get learned?)
 
 ## What "match self-distillation" means (the loop's target)
-After Stage 2, the AM-sparse cartridge's **(QA-loss, MT-loss)** pair should be ≤ the dense
-`baseline_continual.py` cartridge's pair (within +0.15 on each axis) — same Phase-1 start, same
-eval, only the Phase-2 update rule differs. Ideal region: QA near the Phase-1 floor (little
-forgetting) AND MT pulled down from ~33 toward the baseline's acquisition level.
+After Stage 2, the AM cartridge's **(QA-loss, MT-loss)** pair must be within +0.15 on each axis of the
+dense `baseline_continual.py` cartridge's pair — same Phase-1 start, same eval, only the Phase-2
+update rule differs. Measured concretely against the dense **@4ep** operating point
+(QA 2.3721 / MT 1.8725), that is **QA ≤ 2.52 AND MT ≤ 2.02**, at **`gradient_steps = 0`**
+(the gradient-free requirement — see `PLAN_AM_MUST_WIN.md` §3 for the confirmation standard).
+Ideal region: QA at or below the Phase-1 floor (2.2388, no forgetting) AND MT pulled down from the
+untrained 3.7826 to the dense cartridge's acquisition level.
 
 ## Task domains = Qasper sub-tasks (confirmed by human)
 The stages are different **Qasper task domains**, each a self-study corpus + eval split:

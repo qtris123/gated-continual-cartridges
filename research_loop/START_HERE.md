@@ -1,19 +1,28 @@
-# START HERE — launching the unattended loop
+# START HERE — launching, watching, and steering the loop
 
-## 0. Preconditions (one-time, verify)
-- On branch **`trivo-explore-research-work`** (the loop commits here only):
+**What this loop is:** a **diagnosis engine** for one question — *why does the gradient-free
+closed-form AM update cap at MT ~2.54, and what mechanism from the literature fixes it?*
+It measures causes, imports fixes, builds them, tests one variable at a time, and tries to refute its
+own results. It does **not** sweep knobs, and it does **not** stop because it ran out of them.
+
+Read in this order: `PLAN_AM_MUST_WIN.md` (mission) → `DESIGN.md` (architecture) →
+`ORCHESTRATOR.md` (the cycle) → `WORKERS.md` (roles) → `RUNBOOK.md` (mechanics).
+
+## 0. Preconditions (one-time)
+- On branch **`trivo-explore-research-work`** — the loop commits here only:
   ```bash
   cd /localhome/local-triv/gated-continual-cartridges_explore && git branch --show-current
   ```
-- Env vars exported (the loop's RUNBOOK §0 re-exports them, but set them in your shell too):
+- Environment (RUNBOOK §0 re-exports these, but set them in your shell too):
   ```bash
   export CARTRIDGES_DIR=/localhome/local-triv/gated-continual-cartridges_explore
   export CARTRIDGES_OUTPUT_DIR=$CARTRIDGES_DIR/outputs
   export CARTRIDGES_WANDB_PROJECT=SEACrowd
   export CARTRIDGES_WANDB_ENTITY=vqtri-purdue-university
   ```
-- `HF_TOKEN`, `WANDB_API_KEY` already in env; `~/.netrc` logged in. 2× GH200 free.
-- Warm up CUDA once (first import is slow ~1-2 min, then fast):
+- `HF_TOKEN` and `WANDB_API_KEY` in env, `~/.netrc` logged in — **wandb is mandatory** (RUNBOOK §0b);
+  a GPU run without a wandb URL is treated as an invalid result.
+- Both GH200s free. Warm up CUDA once (first import ~1–2 min, then fast):
   ```bash
   $CARTRIDGES_DIR/.venv/bin/python -c "import os;os.environ.setdefault('CARTRIDGES_DIR','$CARTRIDGES_DIR');import cartridges,torch;print(torch.cuda.device_count())"
   ```
@@ -24,40 +33,45 @@ tmux new -s amloop
 cd /localhome/local-triv/gated-continual-cartridges_explore
 claude   # then, at the prompt:
 ```
-In the Claude session, start the self-paced loop pointing at the orchestrator spec:
 ```
 /loop Run ONE cycle of the orchestrator defined in research_loop/ORCHESTRATOR.md. Follow that file's steps exactly. State lives in research_loop/state/ — treat those files as your only memory.
 ```
-(Omit an interval so the loop self-paces via ScheduleWakeup, as ORCHESTRATOR.md STEP 7 directs.)
+(Omit an interval so the loop self-paces via ScheduleWakeup, as ORCHESTRATOR.md STEP 7.6 directs.)
 Detach with `Ctrl-b d`; re-attach with `tmux attach -t amloop`.
 
 ## 2. Watch progress
-- `research_loop/state/active_context.md` — headline standings + next actions (rewritten each cycle).
-- `research_loop/state/results.csv` — the numbers.
-- `notes/JOURNAL.md` — milestone narrative.
-- `git log --oneline` on the branch — committed units of work.
+| where | what you'll see |
+|---|---|
+| `state/bottleneck_board.md` | ★ **the real story** — which cause is active, its stage, what has been measured, what is ruled out |
+| `state/active_context.md` | headline standings + next actions (rewritten every cycle) |
+| `state/literature_ledger.md` | what the loop has read and what it plans to import |
+| `state/mechanism_registry.md` | what it has built, and the mechanistic verdict on each |
+| `state/results.csv` | the numbers, one row per GPU run, each with its wandb URL |
+| wandb `vqtri-purdue-university/SEACrowd` | training/solve curves, grouped by board entry (`B-ROUTE`, …) |
+| `notes/JOURNAL.md` | one line per milestone, newest first |
+| `git log --oneline` | committed units of work on the branch |
 
-## 3. Stopping / steering
-- The loop self-stops when the target is met or the budget in `active_context.md` is exhausted.
-- To steer mid-run: edit `research_loop/state/active_context.md` (NEXT ACTIONS / BUDGET) or
-  `backlog.md` — the orchestrator re-reads them every cycle.
-- To hard-stop: `Ctrl-c` in the tmux session (or kill the pane).
+## 3. Steering and stopping
+- **Steer:** edit `state/active_context.md` (NEXT ACTIONS / BUDGET) or `state/bottleneck_board.md`
+  (add a cause, re-prioritize the active one). The orchestrator re-reads both every cycle.
+- **Stop:** write `STOP` into the BUDGET block of `active_context.md`, or `Ctrl-c` the tmux pane.
+  The loop stops on its own **only** for a verified PASS — "out of knobs" is not an ending
+  (MISSION §6 escalation ladder).
+- **The win it is chasing:** `gradient_steps = 0` with **QA ≤ 2.52 AND MT ≤ 2.02**, confirmed by a
+  fresh-process + changed-seed re-run plus the floor control and mechanism-off ablation.
 
-## 4. MATERIALS / THINGS I MAY NEED FROM YOU
-Please confirm or provide:
-1. **Dense self-distilled Phase-1 cache** (`cache_last.pt`) location — needed to init the
-   `baseline_continual.py` self-distillation baseline (EXP-000). Local `outputs/*initial_am/` are
-   AM-compaction caches, not dense self-distillation. Candidates to check: the sibling repo
-   `/localhome/local-triv/gated-continual-cartridges/outputs/`, or a wandb artifact. If it doesn't
-   exist anywhere, the loop will need to first re-run dense Phase-1 self-distillation (extra time) —
-   tell me if you'd rather point me at an existing one.
-2. **wandb run names** for the historical dense Phase-2 baseline, if you know them (pattern
-   `qasper_baseline_phase2` / `qasper_phase2_*` under `vqtri-purdue-university/SEACrowd`). Speeds up EXP-002.
-3. **Confirm the metric target** framing: "match self-distillation" = match its Phase-2 QA+MT eval
-   loss within +0.15. If you have a specific target number in mind, put it in `active_context.md`.
-4. **Budget** you're comfortable with (default written in `active_context.md`: ~40 cycles / ~48 GPU-h).
-5. (Optional, only if you later want task-accuracy) a **tokasaurus/SGLang inference server** or Modal
-   credentials — NOT needed for the perplexity-only plan we agreed on.
+## 4. What the loop will do on its first cycle
+Every board entry starts at stage **A MEASURE**, so cycle 1 is diagnosis, not training:
+1. **B-WIRE** — is `target_mode` a wiring no-op? (EXP-008's three modes were bit-identical to 15
+   digits; if that's a bug, HYP-T1's "NULL" gets retracted.) No GPU.
+2. **B-ROUTE write-ceiling oracle** — write the *teacher's own* KV into the selected slots. If MT
+   stays ~2.5, no value-only frozen-key write can win and the mission pivots to keys. GPU.
+3. **B-OBJ** — is the solve already near-perfect in MSE while CE doesn't move? GPU.
+4. **SCOUT** — `AM.pdf` in depth, then the delta-rule and null-space-editing families. No GPU.
 
-Nothing in this list blocks launching: the loop's cycle 0 will itself try to locate the Phase-1
-cache and will escalate into `active_context.md` if it's truly missing.
+## 5. Nothing is blocking
+All materials are resolved: the Phase-1 cache is staged and provenance-verified
+(`outputs/phase1_selfdistill_qwen512/cache_last.pt`), `bg_stats.pt` is collected over that cache, the
+dense bar and the sparse-gradient reference are measured, and every lever knob is env-driven
+(RUNBOOK §4). The one open infra item is an opt-in `SEED` knob needed for the confirmation standard
+(RUNBOOK §9c) — the loop builds it when it needs it.

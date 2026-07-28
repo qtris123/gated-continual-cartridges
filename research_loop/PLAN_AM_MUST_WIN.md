@@ -1,75 +1,134 @@
-# PLAN — make closed-form AM the winning mechanism (2026-07-28)
+# MISSION — make closed-form AM the winning mechanism
 
-**Objective:** find an **AM / closed-form** config (backprop-free, `gradient_steps = 0`) whose continual-learning
-quality **matches the self-distillation cartridge on BOTH axes** — i.e. it *is* the winning mechanism, not the
-sparse-gradient method. A few gradient steps are now only a **reference point**, no longer an allowed winner.
-
-> Supersedes the prior loop's stop (which accepted the sparse-gradient winner). Full prior write-up:
-> `notes/2026-07-26-sparse-grad-win.md`. This plan targets the *value-solve itself*, since every knob is exhausted.
+**Rewritten 2026-07-28.** Supersedes both the prior loop's STOP (`notes/2026-07-26-sparse-grad-win.md`)
+and the first draft of this plan, which was a knob-tuning phase list. This version is
+**diagnosis-driven**: we do not search the config space, we search the **cause space**, and we import
+mechanisms from outside this repo to attack the causes we measure.
 
 ---
-## Current standing (mean-CE loss; QA = forgetting, MT = acquisition; lower better)
+## 1. Objective
+
+Find an **AM / closed-form** continual update — **backprop-free, `gradient_steps = 0`** — whose
+continual-learning quality matches the self-distillation cartridge on **both** axes, so that the
+**closed-form solve itself is the winning mechanism**. A few sparse gradient steps remain a *costed
+reference point on the Pareto plot*, never an acceptable answer.
+
+## 2. Standing (mean-CE eval loss; QA = forgetting, MT = acquisition; lower is better)
 
 | technique | QA | MT | grad steps | note |
 |---|---|---|---|---|
-| ICL full-context (ceiling?) | 1.973 | 1.896 | 0 | different context source; **NOT the ceiling on QA** |
-| Cartridge dense @4ep (BAR, best) | 2.372 | **1.873** | 256 | the quality bar to match |
-| Cartridge dense @10ep | 2.699 | 2.214 | 624 | overfit |
-| **Sparse-gradient winner** | **1.617** | **1.966** | 62 | the reference to beat, gradient-free |
-| **AM closed-form top32 (best)** | **2.177** | **2.548** | 0 | our starting point |
-| AM closed-form top64 | 2.252 | 2.543 | 0 | canonical |
-| Phase-1 start (floor) | 2.239 | 3.783 | 0 | retention floor |
+| ICL full-context | 1.973 | 1.896 | 0 | different context source **and different eval harness** → ballpark; re-ruler in D0 |
+| **Cartridge dense @4ep** | **2.372** | **1.873** | 256 | ← **THE BAR** (best dense operating point) |
+| Cartridge dense @10ep | 2.699 | 2.214 | 624 | overfit; not the bar |
+| Sparse-gradient (62 steps) | 1.617 | 1.966 | 62 | prior loop's winner; now only a reference point |
+| **AM closed-form top32** | **2.177** | **2.548** | 0 | best gradient-free point = our starting line |
+| AM closed-form top64 | 2.252 | 2.543 | 0 | canonical config |
+| Phase-1 start | 2.239 | 3.783 | 0 | retention floor / untrained acquisition ceiling |
 
-**AM's bottleneck = ACQUISITION.** Retention is competitive (QA 2.18–2.25, even out-retains dense cartridge 2.37).
-But **MT 2.54 is the worst of every real method** — ~0.65 behind the ~1.9 acquisition cluster (ICL/dense/sparse-grad).
-The one-shot linear value-solve captures Phase-1 structure but can't *fit new MT docs* like iterative gradient can.
-Confirmed **immovable** by gating (HYP-G1), support/top_t (HYP-S1), target_mode (HYP-T1 null), ridge (HYP-R0 null);
-β (mass-matching) is numerically broken (NaN). ⇒ the fix must change the **solve / target / keys**, not the knobs.
+**The gap is entirely in ACQUISITION.** AM *out-retains* the dense cartridge (2.18 vs 2.37) but sits
+~0.67 behind it on MT. Every knob-level explanation is eliminated: gating (HYP-G1), support/`top_t`
+(HYP-S1), `target_mode` (HYP-T1 — bit-identical, therefore **suspicious**, see B-WIRE), ridge
+(HYP-R0). β is numerically broken (NaN inside `refit_beta_nnls`).
 
-## Win condition (STOP-success)
-An AM config, **0 gradient steps**, reaches **MT ≤ cartridge_MT + 0.15 AND QA ≤ cartridge_QA + 0.15** on the
-**unified harness**, confirmed by a clean re-run. Concretely: **MT 2.54 → ≤ ~2.0** while **QA ≤ ~2.4**.
-Stretch: match/beat the sparse-grad winner (QA 1.62 / MT 1.97) gradient-free.
-**Honesty gate:** if unreachable after β + keys + target + support, deliver a *diagnosed* "closed-form is
-acquisition-limited, here's the mechanism" — a real negative result.
+⇒ **The remaining explanations are structural.** Structural causes are what this mission measures,
+and structural fixes are what it imports.
 
----
-## Phases
+## 3. Win condition
 
-**Phase 0 — Unified re-baseline (also answers "ICL ≈ cartridge?").**
-- Re-measure **ICL on `data/qasper/eval/qasper_eval_{QA,MT}.parquet`** (the same 78/69 examples as everything else),
-  report the diagonals `icl_QA_raw|QA` / `icl_MT_raw|MT`. (Metric already matches eval_forgetting by design.)
-- Optional parity check: eval the Phase-1 cartridge QA through BOTH `eval_forgetting.py` and the benchmark's
-  cartridge path → confirm they agree (validates ICL-vs-cartridge comparability).
-- Output: one ruler for ICL / cartridge / AM / sparse-grad.
+**PASS** = an AM config with **`gradient_steps = 0`** reaching, on the unified `eval_forgetting.py`
+harness, against the **dense @4ep bar (QA 2.3721 / MT 1.8725)**:
 
-**Phase 1 — Diagnose WHY the value-solve caps at MT 2.54 (no blind sweeps).**
-- Instrument, on the new MT queries: (a) the solve's **reconstruction error vs its target**; (b) **attention mass on
-  the newly-written slots** (with frozen keys, are the new values even attended to?); (c) confirm whether
-  `target_mode` genuinely changes the solved target or is a **wiring no-op** (bit-identical result was suspicious).
-- Decides the lever: target-limited vs routing-limited (frozen keys) vs capacity-limited.
+> **QA ≤ 2.52  AND  MT ≤ 2.02**   (bar + 0.15 on each axis)
 
-**Phase 2 — Fix β / mass-matching (highest-potential; currently NaN).**
-- EDIT: numerical guards in `refit_beta_nnls` (input clamp / regularize / NaN-guard) so β runs finite. β is AM's
-  *explicit acquisition mechanism* (retained slots carry the missing attention mass). Test β on/off, keys frozen.
+**Confirmation standard (required before any PASS is reported):** a W5 VERIFY worker reproduces it in
+a fresh process **and** with a changed seed (RUNBOOK §9c — add a `SEED` knob if none exists), plus two
+controls: the Phase-1 floor control (QA on the untouched Phase-1 cache) and the mechanism-off
+ablation. The eval set is fixed and small (a handful of batches per split) and **cannot** be enlarged,
+so margins under ~0.1–0.2 are labelled "within noise" regardless of how much we want the win.
 
-**Phase 3 — Open the two structural levers Phase 1 points at.**
-- **Keys:** `KEY_MODE ∈ {freeze, highest_attention, omp}` → acquisition/forgetting **trade curve** (moving keys
-  routes attention to new content = acquisition, at a retention cost — settled prior: keys can collapse QA).
-- **Target/reference:** if target-limited, build an **acquisition-weighted target** (up-weight new-doc queries / use
-  the doc's own outputs); sweep `MAX_REF_EXAMPLES_PER_DOC`, per_document vs decoupled, on-policy re-extraction.
+**Stretch:** match or beat the sparse-gradient reference (QA 1.62 / MT 1.97) with zero gradients.
 
-**Phase 4 — Synthesis + honest verdict.**
-- Best gradient-free AM point on the quality×cost Pareto vs cartridge / unified-ICL / sparse-grad. Clears the win
-  condition → confirm + STOP. Else → diagnosed-limit synthesis.
+**Not a win:** parity bought with a giant reference bank, dozens of re-solves, or a runtime
+approaching the dense cartridge's. Cost is an axis (NORTH_STAR) — report it on every result.
 
-## Mechanics
-Orchestrator + executors; ≤2 training GPUs; one variable per experiment; adversarial verify anything that flips
-direction; state in `research_loop/state/*`. Reframe `NORTH_STAR.md` to "closed-form AM must be the winner" if we
-wire this into the live loop.
+## 4. The bottleneck ladder — the cause space we are actually searching
 
-## Risk (honest)
-May not succeed. Keys-unfreezing trades away AM's retention strength (its current advantage); β may be insufficient
-even once fixed; a one-shot linear projection is inherently weaker than iterative fitting for *learning new* content.
-Most likely landing: "β + a smarter target closes ~half the acquisition gap gradient-free; the rest needs keys
-(costing retention) or a few gradient steps," with a crisp diagnosis of the cap.
+Acquisition failure has these candidate causes. Each has a **signature** (what a diagnostic must
+show) and an **oracle test** (an upper-bound run that brackets it). This ladder seeds
+`state/bottleneck_board.md`; the orchestrator maintains it and adds causes as evidence demands.
+
+| id | cause | signature to measure | oracle test (upper bound) |
+|---|---|---|---|
+| **B-OBJ** | **Objective mismatch** — the solve minimizes value/attention-space MSE; we are scored on token CE. A perfect solve can leave CE untouched. | achieved solve MSE vs realized ΔCE, per layer | drive MSE→~0 (unbounded support, λ=0) and read MT. Flat MT ⇒ confirmed |
+| **B-ROUTE** | **Routing** — with **frozen keys**, eval-time MT queries may not attend to the rewritten slots at all; anything written is unreadable. | attention mass on rewritten slots at eval time, per layer, MT vs QA queries | **write-ceiling oracle**: replace the selected slots' values with the *teacher's own* KV for the new doc, then eval. If MT stays ~2.5, **no value-only frozen-key write can win** — the whole family is capped |
+| **B-TARGET** | **Target/reference** — the reference queries the solve fits don't represent the eval distribution, so we fit the wrong thing well. | recon error on held-out MT queries vs on reference queries (generalization gap) | solve using the *eval* MT queries as the reference (deliberate cheat). Large MT drop ⇒ reference-limited |
+| **B-CAP** | **Capacity** — the selected support cannot represent the new content. | residual energy / spectrum of the solve system after fitting; effective rank vs `top_t` | `top_t = 512` (all slots), ignore the QA cost, read MT alone |
+| **B-SOLVE** | **Numerics** — ill-conditioning, ridge, or the NaN β path means we never reach our own optimum. | condition number / Gram spectrum of the query matrix; β finiteness | solve the *same* objective iteratively (LSQR/CG) and compare to the closed form |
+| **B-WIRE** | **Wiring bug** — `target_mode` gave **bit-identical** results across all three modes. That is a no-op, not a null result. | read the path in `cartridges/am/finetune.py`; assert the solved target actually differs across modes | if it is a bug: fix it, re-run EXP-008, and **retract HYP-T1's "NULL"** in the ledger |
+
+**Order of attack:** B-WIRE and B-OBJ first (cheap; either one can invalidate prior conclusions),
+then B-ROUTE's write-ceiling oracle — **the single most informative run in this mission**, because it
+bounds the entire method family in one shot — then B-TARGET / B-CAP / B-SOLVE as the oracles direct.
+
+**Untested prior, flagged:** every experiment in `results.csv` ran `KEY_MODE=freeze`. The claim "keys
+collapse QA" comes from a pre-loop session, so within this investigation the key-side levers
+(`highest_attention`, `omp`, and imported key-write rules) are **unmeasured**, not settled.
+
+## 5. The literature mandate (this is what makes it research, not tuning)
+
+Once a cause is *measured*, the orchestrator dispatches **W2 SCOUT** workers to find how the field
+already solves that specific failure; the fix is then imported, adapted, and cited. Local PDFs first
+(`AM.pdf` = Fast KV Compaction via Attention Matching; `TF-IDF.pdf` = Continual Learning via Sparse
+Memory Finetuning, both at repo root), then external search (WebSearch/WebFetch, arXiv, OSS code).
+
+Seed directions per cause — SCOUT is expected to go **beyond** this list:
+
+- **B-OBJ** → objectives that provably track end-loss: logit/KL-matched closed-form fits,
+  Gauss-Newton / natural-gradient closed forms, layerwise least squares with output-space weighting.
+- **B-ROUTE** → the **delta rule / fast-weight** literature (DeltaNet, delta-rule linear attention,
+  Fast Weight Programmers): closed-form *associative writes* where the key is chosen so the write is
+  retrievable; Hopfield/associative-memory capacity; closed-form key-side editing (our `KEY_MODE ∈
+  {highest_attention, omp}` handle is untested).
+- **B-TARGET** → on-policy / self-generated reference construction, test-time training,
+  coverage-driven reference selection.
+- **B-CAP / B-SOLVE** → closed-form model editing: **ROME / MEMIT** (covariance-preconditioned
+  least-squares multi-edit), **AlphaEdit / null-space-projected editing**, Adam-NSCL-style null-space
+  continual learning (write in the null space of old keys ⇒ acquisition *without* forgetting — exactly
+  our two axes), recursive least squares / Kalman updates, OMP and matching pursuit.
+- **KV-compression side** → H2O, SnapKV, PyramidKV, Scissorhands: what "which slot matters" means in a
+  KV cache, and how they decide it.
+
+Every source read becomes a `LIT-XXX` entry in `state/literature_ledger.md`: claim, mechanism in one
+paragraph, **how it maps to our code** (file + function + proposed flag), and **what it predicts for
+our measured signature**. A LIT entry with no prediction is not usable — send it back.
+
+## 6. Escalation, not quitting
+
+There is no "we ran out of knobs" ending. If every board entry is closed and the gap survives, the
+loop **escalates** — in this order — and keeps running:
+
+1. **Widen the cause space.** The board is wrong or incomplete: dispatch W1 MEASURE on the residual
+   (what does a *winning* run do that ours doesn't? diff the sparse-gradient winner's internals
+   against AM's — same slots, same eval, different update rule).
+2. **Widen the mechanism space.** New family from the literature (§5), built and tested. Two
+   independent families minimum per closed cause.
+3. **Widen the definition of the write.** Keys, β, multiple alternating closed-form rounds
+   (ALS/EM-style re-solves are still `gradient_steps = 0`), per-head allocation, null-space projection
+   — anything that stays backprop-free is in scope.
+4. **Report and continue.** Write the current mechanistic account into `active_context.md` +
+   `notes/`, flag it for the human, and go back to step 1 with the new board.
+
+The loop stops only on a **verified PASS** or a **human stop**. Honesty is a reporting requirement,
+not an exit: never claim a win inside noise, never close a cause without a mechanism, always say what
+is still unexplained.
+
+## 7. Operating rules
+
+- **GPUs are free to use.** Both GH200s should be busy whenever dispatchable GPU work exists; an idle
+  GPU with an open board entry is an orchestrator bug.
+- **Every GPU run is logged to wandb** per the naming/grouping contract in RUNBOOK §0b. No wandb URL
+  in a bundle ⇒ the result is invalid and gets re-run.
+- **One variable per experiment**, named baseline, both eval splits, T1/T2 timings recorded.
+- **No mechanism is built before its target cause has a measured number** on the board.
+- **No cause is closed without a mechanistic explanation** written into the board.
+- Full autonomy on branch `trivo-explore-research-work` only; commit each coherent unit of work.

@@ -68,8 +68,19 @@ One `### HYP-XXX` block per hypothesis. Status ∈ active | weakened | supported
   acquisition gap vs dense (1.87) requires iterative optimization → the sparse-GRADIENT costed Pareto point.
 - Caveat: the bit-identical result may be a wiring bug (target_mode ignored in per_document). Not chasing an EDIT
   fix (β burned us on that); the sparse-grad point is the cleaner route to acquisition.
+- ⚠️ **RE-OPENED 2026-07-28 as board entry `B-WIRE`.** Three genuinely different targets producing a
+  solution identical to 15 digits is a **no-op, not a null result** — and the sparse-gradient escape
+  route it justified is now disqualified (gradient-free is required). The wiring must be read
+  (`cartridges/am/finetune.py` target_mode handling ~L108-190 + the per_document path) and the target
+  tensor asserted to differ by mode. **If it is a bug, this "NULL" is retracted** along with the
+  downstream claim that AM's acquisition ceiling is unmoved by the target.
 
 ### HYP-SG1: a few sparse gradient steps close the acquisition gap (costed Pareto point)
+> ⚠️ **DISQUALIFIED AS A WINNER 2026-07-28.** The mission now requires `gradient_steps = 0`
+> (`PLAN_AM_MUST_WIN.md` §1). This result stands as a **reference point** on the Pareto plot and as
+> evidence that the acquisition gap *is* closable by iterative fitting — which makes it a useful
+> diagnostic target: a MEASURE worker should diff what this run does to the cache against what the
+> closed-form solve does to it, on the same slots.
 - Status: SUPPORTED + CONFIRMED (EXP-009 + EXP-009C) — bit-identical reproduction + Phase-1 floor control (2.2388)
   prove QA<floor is real (positive backward transfer). 30 steps ≈ 62 at 56% cost. THE WINNING RECIPE (notes/2026-07-26). —
   62 sparse grad steps (value-only, tfidf top64, USE_IDF=0, Adam LR2e-2):

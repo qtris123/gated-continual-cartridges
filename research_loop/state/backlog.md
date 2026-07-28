@@ -1,87 +1,84 @@
-# BACKLOG — prioritized, single-variable experiment queue
+# BACKLOG — work queued *behind the board*
 
-Orchestrator refines this each cycle. Each item isolates ONE variable vs a named baseline.
-Priority order follows the mission: gating → teacher targets → support allocation → regularization → synthesis.
-Do NOT re-test settled priors (RUNBOOK §7).
+> **This is not a sweep list.** The bottleneck board (`bottleneck_board.md`) drives the loop; this file
+> holds work that is ready to dispatch **once a board entry reaches the stage that needs it**.
+> Every item names the **board entry** it serves and what its outcome would mean.
+> Anything here that cannot name one is drift — delete it.
 
-## Lever 0 — ANCHORING (do first) — establishes BOTH axes' reference lines
-- [x] EXP-000-verify Phase-1 cache provenance — DONE: QA loss 2.239 / MT 3.783, it's the QA Phase-1
-      cache; staged at outputs/phase1_selfdistill_qwen512/. (retention floor = QA loss 2.24)
-- [ ] EXP-000 dense self-distillation Phase-2 baseline (REF-CART) from the staged Phase-1 cache — the
-      quality BAR. Record its train cost (T2/T3) too, as the efficiency baseline to beat.
-- [ ] EXP-000b ICL / full-context upper bound (REF-ICL) — measure ONCE on QA+MT (icl_eval.py /
-      qasper_loss_benchmark fullctx). The ceiling.
-- [ ] EXP-001 reproduce current AM-sparse Phase-2 canonical config through the same eval harness;
-      record qa/mt loss AND solve_s/phase2_e2e_s (first efficiency data point).
-- [ ] EXP-002 (research) pull the two cited papers (*Sparse Memory Finetuning* gating, *Fast KV
-      Compaction via AM*) + cartridge paper synthesis/train-cost figures; wandb cross-check dense P2;
-      mine any recorded synthesis time (do NOT re-synthesize).
-- [ ] EFF-0 (research/log-mining) assemble the T3 cost comparison table (AM Phase-2 vs cartridge
-      Phase-2 train time; synthesis cost estimated/qualitative per NORTH_STAR).
+Priority = whatever the active bottleneck needs. Do not work down this list top-to-bottom.
 
-## Lever 1 — GATING (the stated core problem: low-attention-mass slot selection)
-Baseline for all: AM-sparse canonical (tfidf, use_idf=1, per_layer, top_t=64, freeze keys, ridge spectral).
-- [ ] HYP-G1: `slot_selection=attention_mass` (pure TF, drop IDF) improves acquisition at fixed top_t
-      by avoiding low-mass high-IDF slots. Compare vs tfidf. (one var: slot_selection)
-- [ ] HYP-G2: soft IDF prior (`residual_budget` + `idf_prior_weight>0`) beats the hard multiplicative
-      IDF gate. (one var: slot_selection=residual_budget vs tfidf, prior weight swept separately)
-- [ ] HYP-G3: an **attention-mass floor** — never select a slot whose TF mass < τ — reduces wasted
-      support. If no knob exists → EDIT executor adds an opt-in floor to the ranker, then TRAIN.
-- [ ] DIAG-G0: instrument selected-slot attention-mass distribution (per layer) to quantify the
-      "insufficient mass" problem directly. (log-only; cheap; informs G1–G3.)
-- [ ] HYP-G4: granularity × top_t interaction under the best gater (small grid, per_layer vs global).
+---
+## Stage A — MEASURE (open now; every board entry is at stage A)
 
-## Lever 2 — TEACHER TARGETS  ← NOW THE PRIORITY (acquisition is target-limited, per EXP-007)
-- [x] HYP-T1 (EXP-008): `target_mode` {cartridge_plus_doc, self, teacher_attention} — NULL. All BIT-IDENTICAL
-      (QA 2.2521 / MT 2.5426) → target_mode is a no-op in per_document AM. AM acquisition ceiling ~2.54 confirmed.
-- [~] HYP-SG1 (EXP-009, RUNNING): the sparse-GRADIENT costed Pareto point — a FEW grad steps (value-only, tfidf
-      top-64) via continual_sparse.py. wandb prior: Adam value-only reaches MT ~1.76 (≈dense) at QA ~2.54. This is
-      the ONLY remaining acquisition lever (closed-form knobs exhausted). Place on quality×cost Pareto.
-- [ ] HYP-T2: `enable_beta` (mass matching) on vs off with keys frozen.
-- [ ] HYP-T3: key_mode freeze vs highest_attention vs omp — but note prior: touching keys hurts
-      forgetting; frame as an acquisition-vs-forgetting trade curve, keep freeze as reference.
+- [ ] **DIAG-WIRE → B-WIRE** *(no GPU, cheapest, do first)*. Read `cartridges/am/finetune.py`
+      `target_mode` handling (~L108-190) + the `per_document` path; assert the solved target tensor
+      actually differs across `{cartridge_plus_doc, self, teacher_attention}`.
+      **Outcome:** identical ⇒ wiring bug ⇒ fix, re-run EXP-008, **retract HYP-T1's NULL**.
+      Different ⇒ the null was real and B-TARGET must be attacked another way.
+- [ ] **DIAG-ROUTE → B-ROUTE** *(GPU)*. Attention mass on rewritten slots at eval time, per layer,
+      MT queries vs QA queries, before vs after the write.
+      **Outcome:** near-zero mass on written slots ⇒ routing-limited ⇒ the answer involves keys.
+- [ ] **ORACLE-WRITE → B-ROUTE** *(GPU)* ⭐ **the most informative run in the mission**. Put the
+      teacher's own KV for the new doc into the selected slots; eval both splits.
+      **Outcome:** MT ~2.5 ⇒ *no* value-only frozen-key write can win (family capped) — mission pivots
+      to keys/write-rule. MT ≪ 2.5 ⇒ the ceiling is high and our *solve* is what's failing.
+- [ ] **DIAG-OBJ → B-OBJ** *(GPU)*. Achieved solve MSE (per layer, `am/mean_mse`) against realized ΔCE.
+      Then the MSE→0 oracle (unbounded support, `RIDGE_LAMBDA=0`).
+      **Outcome:** MSE→0 with flat MT ⇒ objective mismatch confirmed ⇒ change what we fit.
+- [ ] **DIAG-TARGET → B-TARGET** *(GPU)*. Recon error on reference queries vs held-out MT queries.
+      Then the target-cheat oracle (reference set built from the eval MT queries).
+      **Outcome:** large MT drop under the cheat ⇒ reference-limited ⇒ better reference construction.
+- [ ] **DIAG-CAP → B-CAP** *(GPU)*. Residual energy / effective rank vs `top_t`; `TOP_T=512` oracle
+      reading MT alone. **Outcome:** flat MT ⇒ capacity refuted (and the `top_t=128` MT *regression*
+      belongs to another cause).
+- [ ] **DIAG-SOLVE → B-SOLVE** *(GPU)*. Condition number / Gram spectrum; closed form vs an iterative
+      (LSQR/CG) solve of the same objective. **Outcome:** a gap ⇒ we don't reach our own optimum.
 
-## Lever 3 — SUPPORT ALLOCATION
-- [x] HYP-S1 (EXP-007): top_t {32,64,128} — REJECTED for acquisition. MT flat ~2.54 (worse at 128); QA-forgetting
-      ∝ top_t. Acquisition is NOT support-limited → it's TARGET/solve-limited. top32 = marginally best point.
-- [ ] HYP-S2: `residual_budget` with `min_top_t_per_layer` floor vs uniform per-layer top_t.
-- [ ] HYP-S3: `max_queries_per_head` / `max_ref_examples_per_doc` — does more reference support help?
+## Stage B — SEARCH (dispatch as soon as the matching cause has a number)
+- [ ] **SCOUT-AM → B-WIRE/B-TARGET/B-SOLVE.** `AM.pdf` in depth: what the target actually is, whether
+      our `per_document` path is faithful, and the exact role/derivation of β.
+- [ ] **SCOUT-ROUTE → B-ROUTE.** Delta rule / fast weights (DeltaNet, FWP), associative-memory capacity,
+      closed-form key placement. The question: *how do you write so the write is retrievable?*
+- [ ] **SCOUT-EDIT → B-CAP/forgetting.** ROME/MEMIT (covariance-preconditioned closed-form multi-edit),
+      **AlphaEdit / null-space-projected editing**, Adam-NSCL. The question: *can we write in the null
+      space of the old keys — acquisition without forgetting, in one operator?*
+- [ ] **SCOUT-OBJ → B-OBJ.** Output/logit-space distillation objectives, Gauss-Newton / natural-gradient
+      closed forms. The question: *what closed-form fit provably moves CE, not MSE?*
+- [ ] **SCOUT-GATE.** H2O / SnapKV / PyramidKV / Scissorhands — how the KV-compression field decides
+      which slot matters; what it implies for our gater.
 
-## Lever 4 — REGULARIZATION
-- [x] **HYP-R0 (EXP-004): `RIDGE_LAMBDA=0` vs 1e-4 → WASH.** QA 2.2619 / MT 2.5569 vs EXP-001 2.2521/2.5426
-      (+0.010/+0.014 ≪ noise). At λ=1e-4 the ridge is already negligible; removing it doesn't help. Keep canonical.
-      (Distinct from HYP-R1's λ=2.0 Phase-1 RECON solve — not re-tested.)
-- [ ] HYP-R1: `ridge_lambda` × `ridge_scale` (test λ≈2.0 spectral — Phase-1 sweet spot — in Phase-2).
-- [ ] HYP-R2: `delta_weight` trust region sweep (0, 1e-2, 1e-1) — trades acquisition vs stability.
-- [ ] HYP-R3: `enable_old_reference_guard` on/off (explicit old-query preservation block).
+## Stage C/D — BUILD & TEST (gated on a measured cause + a chosen LIT entry)
+- [ ] **MECH-KEYS → B-ROUTE.** `KEY_MODE ∈ {highest_attention, omp}` already exists but has **never been
+      run in this loop**. Frame as an acquisition↔forgetting **trade curve**, freeze as the reference
+      point. (Not a sweep: it discriminates B-ROUTE.)
+- [ ] **MECH-BETA → B-SOLVE.** Numerical guards *inside* `refit_beta_nnls` (input clamp, regularized /
+      renormalized targets, NaN guards). Only after the board says mass-matching would matter — β is
+      AM's own acquisition mechanism, but it has already burned three experiments (MECH-000).
+- [ ] **MECH-ROUNDS.** Alternating closed-form re-solves (value-solve ↔ key/support re-select, ALS/EM
+      style, K rounds). Still `gradient_steps = 0`. Directly attacks "one-shot linear projection is
+      weaker than iterative fitting". **Cost it** — many re-solves is drift (NORTH_STAR).
+- [ ] **MECH-NULLSPACE → B-ROUTE/forgetting.** If SCOUT-EDIT delivers: project the write onto the null
+      space of Phase-1 keys/queries. This is the one candidate that could improve *both* axes at once.
+- [ ] **MECH-SEED (infra) → confirmation standard.** Opt-in `SEED` env knob for
+      `continual_am_sparse.py` (default = current, stock runs bit-identical). Needed before any PASS
+      can be verified (RUNBOOK §9c).
 
-## Lever 2.5 — AM-FAITHFULNESS (from EXP-002 reading of AM.pdf; candidate single-var tests)
-Baseline for all: AM-sparse canonical. Priority per AM paper's own ablations.
-- [DEFERRED] HYP-T2: `ENABLE_BETA=1` (AM per-token β mass-bias, NNLS) — **β implementation is numerically broken.**
-      Failed 3 ways: EXP-005 (λ=1e-4) cholesky not-PD (β~66.6); EXP-005b (λ=0) NaN in lstsq; EXP-006 (β-clamp added)
-      `AssertionError max|beta|=NaN` — **the NNLS β-fit itself produces NaN**, so an output clamp can't help. A real
-      fix needs numerical guards INSIDE refit_beta_nnls (input clamps / regularization / NaN guards) — a deep dive
-      into someone else's AM numerics. DEFERRED as a rabbit hole; pursue tractable acquisition levers first (top_t,
-      novel gaters). Revisit β only if support/gating don't close the MT gap. (β-clamp edit was reverted.)
-- [ ] HYP-PH1: nonuniform PER-HEAD support budget (AM's #1 ablation: head sensitivity ~input-invariant →
-      precomputed greedy budget). Map: GRANULARITY=per_head + a per-head TOP_T schedule (MIN_TOP_T_PER_LAYER /
-      residual_budget). Likely needs an EDIT for a per-head budget schedule if no knob suffices.
-- [ ] HYP-a5: at TOP_T=32, USE_IDF=1 vs 0 — AM/TF-IDF both say IDF matters MORE at small support. One var: USE_IDF at fixed small TOP_T.
+## Stage E — VERIFY (mandatory before anything is believed)
+- [ ] Any result that flips direction, closes a board entry, or would be reported as a win: fresh
+      process + changed seed + mechanism-off ablation + Phase-1 floor control (WORKERS.md W5).
 
-## Lever 1.5 — NOVEL GATING DESIGN (the core novelty; open once existing-knob sweeps are informative)
-Not just sweeping knobs — DESIGNING a gater specific to our setting (compressed embedding in attention).
-Each is an EDIT executor (opt-in flag) + TRAIN executor to evaluate. Draw from the two cited papers
-+ observed attention-mass/slot evidence. Keep gradient-free; keep it cheap (efficiency axis).
-- [ ] GATE-N1: mass-aware gate — combine attention-mass (TF) with a *learned/derived* rarity signal
-      that doesn't over-select near-zero-mass slots (fixes the core TF-IDF failure directly).
-- [ ] GATE-N2: conflict-aware gate — select slots by old-vs-new attention conflict (protect
-      load-bearing Phase-1 slots), inspired by the residual_budget idea but as a first-class gater.
-- [ ] GATE-N3: coverage-budgeted gate — cap cumulative coverage (r≈0.91 with forgetting) explicitly,
-      allocating support to maximize acquisition per unit coverage.
-- [ ] (add more as the trajectory + literature suggest — this is where autonomy is expected)
+## Reference lines / bookkeeping
+- [ ] **D0 ICL re-ruler** *(GPU, informational)*. REF-ICL was measured on a different harness; redo with
+      `EVAL_MODE=icl` in `eval_forgetting.py` on `qasper_eval_{QA,MT}.parquet` so the ceiling shares the
+      ruler. Gates nothing — do it when a GPU is otherwise idle.
+- [ ] **T3 cost table.** AM Phase-2 vs cartridge Phase-2 train time + a synthesis-cost term (mined from
+      logs/wandb or cited from the paper — **never re-synthesize**). Assemble the quality×cost Pareto plot.
 
-## Lever 5 — SYNTHESIS (two-axis)
-- [ ] Combine the winning gater + best target/support/reg; confirm on both eval splits with a clean
-      re-run; place the final point on the **quality×cost Pareto plot** vs REF-CART and REF-ICL.
-- [ ] Robustness: 2 seeds / larger eval-batch count if noise is a concern (evals are only a few batches).
-- [ ] Write the final `notes/` entry + results table + Pareto figure.
+---
+## Retired (kept so they are not re-run)
+Knob-level questions, all resolved and now part of the board's "closed" section:
+`HYP-G1` no-IDF gating wins both axes · `HYP-S1` acquisition is not support-limited ·
+`HYP-R0` ridge λ is a wash · `HYP-T1` target_mode bit-identical (**re-opened as B-WIRE**) ·
+`HYP-SG1` sparse-gradient works but is disqualified by the gradient-free requirement.
+Old sweep candidates with no board entry (HYP-R1/R2/R3, HYP-S2/S3, HYP-a5, HYP-PH1, GATE-N1/N2/N3):
+**not queued.** Any of them may return the moment a measurement gives it a cause to serve.
