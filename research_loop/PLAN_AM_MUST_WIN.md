@@ -33,6 +33,39 @@ reference point on the Pareto plot*, never an acceptable answer.
 ⇒ **The remaining explanations are structural.** Structural causes are what this mission measures,
 and structural fixes are what it imports.
 
+---
+### STATUS UPDATE — end of cycle 1 (2026-07-28). Live detail: `state/bottleneck_board.md`.
+
+**Corrections to the table above, all measured this cycle:**
+- **The best gradient-free point is not the one quoted.** The canonical run's own per-document curve
+  bottoms at **k=12: QA 2.0422 / MT 2.4352**, then degrades to 2.1772 / 2.5524 by k=16.
+  **QA now clears its budget with 0.48 to spare; MT is 0.42 short.**
+- **HYP-T1 is retracted** — `target_mode` never reached the write path (a wiring bug); EXP-008 was three
+  replicas of EXP-001. **HYP-S1 is confounded** — `max_queries_per_head` was hard-coded at 64, so
+  `top_t=128` was an underdetermined solve. **β was never numerically broken in the way believed** — a
+  `torch.linalg.lstsq` `gels`-driver silent NaN; it now runs clean.
+- 🔴 **A confirmed 500× rotary-base bug** (`rope_theta` 10000 vs the model's 5e6) sat in the
+  teacher-target path of every AM run ever performed here. CE-neutral (ΔMT −0.019) but the target was
+  **8.5× more fittable** once fixed, so every conclusion argued *from the internals* was resting on a
+  corrupted target.
+
+**🏁 THE VALUE SIDE IS CLOSED.** No value-side lever reaches MT ≤ 2.02: perfect teacher values **2.381**;
+4.2× bandwidth via β **2.812 (worse)**; 256× reference queries **~2.55 (nothing)**; better fit **15.95
+(catastrophic)**; correct rotary base **noise**; more support **worse**.
+**Mechanistic reason:** β is *query-independent*, so 4.23× more mass moved the MT/QA selectivity ratio
+only **1.043 → 1.051**. **Bandwidth is not the constraint — selectivity is**, and no query-independent
+operator can supply it. Confirmed independently: across three arms, `mass_on_S` varies 13% while MT
+spans 0.882, and the highest-bandwidth arm has the **worst** MT.
+
+⚠️ **And the metric itself is partly suspect:** writing 16 documents with **zero MT content** recovers
+**28.3%** of the MT improvement at k=16 and **73.2%** at matched k=8. Sequence alone is worth 0.340.
+Writing a paper in can make the model **worse** at that paper. A share of what this project has called
+acquisition is a distribution/format effect, not storage.
+
+**The only untested axis is KEYS** (every row in `results.csv` is `KEY_MODE=freeze`; "keys collapse QA"
+is pre-loop folklore). In flight: `MECH-KEYS` (empirical) and `DIAG-KEYSPACE` (whether key-side
+selectivity is geometrically available at all).
+
 ## 3. Win condition
 
 **PASS** = an AM config with **`gradient_steps = 0`** reaching, on the unified `eval_forgetting.py`
