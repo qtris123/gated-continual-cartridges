@@ -305,3 +305,26 @@ research_loop/results/EXP-001/result.json ; outputs/2026-07-25-18-02-29-continua
   push it out (min 0.393 at L7); the peak-mass layer moves 28 → 2.
 - Control replicates DIAG-OBJ-b within noise (Δ −0.016 QA / −0.088 MT) — independent HYP-R0 replication.
 - Provenance: HEAD moved 3ff9ce5 → 58c30f3 mid-run; the snapshot pin held (`diff -r` clean).
+
+## 2026-07-28 — MECH-QUERIES-B (board B-CASCADE): confound resolved; queries are not an acquisition lever
+- Control gate passed first: `n=64/w=1e-2` reproduced EXP-007-top32 to all 16 digits in-run *and* the
+  ORACLE-WRITE/MECH-QUERIES standalone control exactly; its `config.yaml` differs from MECH-QUERIES'
+  n=64 arm in exactly one line (the wandb notes string).
+- With `w(n) = 1e-2·n/64`: MT **2.5524 → 2.5986 → 2.6084** (+0.046/+0.056) — inside the noise band and on
+  the wrong side of it. **The best MT in every sweep so far remains the n=64 control.**
+- `|v|` followed the derivation exactly: 7808 → **656** at n=16384 (12×), landing 33% *below* the control's
+  984 (still 10× the teacher's |63|).
+- **The "near-trivial write" objection is closed, not assumed away:** at w=2.56 the cache still displaces
+  **50.3%** of the Phase-1 value tensor's Frobenius norm (control 62.1%) with `dV_absmax`=618 and **1974
+  slots changed — more than the control's 1960**. Flat MT is a statement about *effect*, not a null edit.
+- 🔑 **QA is the only axis that moved: 2.1772 → 2.0401 → 2.0263** — monotone in `n`, same sign on both arms,
+  in-run and standalone agreeing to <0.001, and **0.21 below the untouched Phase-1 floor (2.2388)**.
+  We now hold **0.49 of QA slack** against the 2.52 budget. Caveat: upper edge of noise; not seed-varied.
+- 🔑 **Bandwidth rose and MT still did not move.** Eval `mass_on_S` reached **0.0886** vs Phase-1's 0.0896 —
+  the written slots are read more than in any prior arm — with no MT response. Routing recovery is driven
+  by `n` alone and is cleanly decoupled from `|v|` (cartridge mass 0.636–0.638 at both 656 and 7808).
+- `am/mean_mse` **rose** 0.11906 → 0.12914 while QA improved — the same MSE/CE anti-correlation B-OBJ closed
+  on, now visible in the opposite direction. Cost flat: 173.5 / 165.8 / 183.8 s.
+- Import pin earned its keep again: HEAD moved `58c30f3` → `7ab30b6` **and** another worker edited
+  `finetune.py` / `value_solve.py` / `continual_am_sparse.py` at 21:13, mid-way through the n=1024 run.
+  All 188 `.py` files verified byte-identical to `git archive 58c30f3` afterwards.

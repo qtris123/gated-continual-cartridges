@@ -15,6 +15,28 @@ adversarial confirmation) → **CLOSED** (`confirmed+fixed` / `confirmed+capped`
 the number that shows it. "It didn't help" never closes anything.
 
 ---
+## 🔴 B-OVERWRITE — the 16 documents may be overwriting each other AT top-32 TOO (opened 2026-07-28)
+- **Stage:** A MEASURE (dispatched) · **Status:** suspected, and the arithmetic is alarming
+- **The observation that opened it:** ORACLE-WRITE-512 failed because at full support each document
+  writes all 511 slots, so only document 16 survives. But ORACLE-WRITE recorded that at `top_t=32` the
+  **union of all 16 documents' selections is only 34–82 slots per layer**. Sixteen documents × 32 slots
+  = **512 slot-writes landing in ~54 distinct slots ⇒ ~9 writes per slot.** The ranker is choosing
+  *nearly the same slots for every document*, so later documents overwrite earlier ones **at the
+  canonical operating point as well** — differing from the 512 case in degree, not in kind.
+- **If true, it reframes the mission's central measurement:** ORACLE-WRITE's "perfect value write
+  reaches MT 2.381" would be measuring *mostly the last few documents' values*, not 16 documents
+  coexisting. The write ceiling would be an artefact of allocation, not a property of value-only writing.
+- **Converging evidence (SCOUT-KEYS):** the written support (mean 54.7 slots/layer) carries **15.2%** of
+  cartridge mass, while a **mass-ranked per-layer top-32 carries 70.4%** — a **4.6× bandwidth gap at a
+  smaller budget**. Suspected cause: `query_accum.py:87-89` builds selection scores from a **GQA-group
+  mean query taken before the softmax**. So the ranker may be picking both *low-mass* and *mutually
+  colliding* slots.
+- **The mechanism this points to (do not build before measuring):** **disjoint per-document allocation** —
+  16 documents × 32 slots = 512 = exactly the cartridge. Give each document its own high-mass slots and
+  both the collision and the bandwidth deficit disappear together, with no keys and no gradients.
+- **Measure first:** per-layer union/overlap of the 16 selections, writes-per-slot, and **what fraction of
+  each document's write survives in the final cache**. → DIAG-OVERWRITE dispatched.
+
 ## 🔴 B-ROPE — the teacher targets are computed with the WRONG RoPE BASE (opened 2026-07-28)
 - **Stage:** C BUILD (verified by the orchestrator; fix + A/B dispatched) · **Status:** **CONFIRMED bug,
   live in every AM run ever performed in this project**
@@ -145,10 +167,27 @@ Eliminated as *knob-level* explanations: gating (HYP-G1), support (HYP-S1), ridg
   `[X_new (n×t); √w·I (t×t)]`, giving `(X_newᵀX_new + w·I)V = X_newᵀR + w·V_old`. The **data Gram scales
   with `n` while the trust region stays fixed at `t` rows**, so its relative pull decays like **1/n**.
   The spectral ridge (λ ∝ σ_max(X)²) is scale-invariant and does not compensate.
-- ⚠️ **OUTSTANDING CONFOUND (worker-flagged, and it is a real one):** `n` was swept at **fixed**
-  `DELTA_WEIGHT=1e-2`, so *"more queries don't help"* is **not separated from** *"more queries help, but
-  the 1/n trust-region decay cancels it."* Resolvable **env-only** by scaling `DELTA_WEIGHT ∝ n`
-  (w = 1e-2·n/64) to hold the relative pull constant. → MECH-QUERIES-B dispatched.
+- ✅ **CONFOUND RESOLVED (MECH-QUERIES-B, 2026-07-28): query count is genuinely NOT an acquisition lever.**
+  With `w(n) = 1e-2·n/64` holding the trust region's relative pull constant:
+
+  | arm | QA | MT | \|v\|max | \|ΔV\| rel-Fro | cart mass (MT) | eval `mass_on_S` (MT) |
+  |---|---|---|---|---|---|---|
+  | n=64, w=1e-2 (control) | 2.1772 | **2.5524** | 984 | 0.621 | 0.3285 | 0.0810 |
+  | n=1024, w=0.16 | **2.0401** | 2.5986 | 696 | 0.526 | 0.6384 | 0.0878 |
+  | n=16384, w=2.56 | **2.0263** | 2.6084 | 656 | 0.503 | 0.6362 | 0.0886 |
+
+  MT +0.046/+0.056 — inside the noise band **and on the wrong side of it**. `|v|` behaved exactly as the
+  derivation predicted (7808 → 656, 12×, landing *below* the control). **The "near-trivial write"
+  objection is closed, not assumed away:** at w=2.56 the write still displaces **50.3%** of the Phase-1
+  value tensor's Frobenius norm and changes **1974 slots — more than the control's 1960**.
+- 🔑 **Two findings that matter more than the null:**
+  1. **QA is the only axis that moved, and it moved a lot: 2.1772 → 2.0263** — monotone in `n`, same sign
+     on both arms, and **0.21 *below the untouched Phase-1 floor* (2.2388)**. We now hold **0.49 of QA
+     slack** against the 2.52 budget. Caveat: at the upper edge of noise, not re-run or seed-varied.
+  2. **Bandwidth rose and MT still did not move.** Eval `mass_on_S` climbed toward Phase-1 for the first
+     time (0.0810 → 0.0886 vs 0.0896) — the written slots are read *more* than in any prior arm — with
+     no MT response. Routing recovery is driven by `n` alone, cleanly decoupled from `|v|` (cartridge
+     mass 0.636–0.638 at both 656 and 7808).
 - **Also established:** the accumulator can supply **57,344–81,920 real queries per KV-head per
   document** — the hard-coded 64 was discarding **~99.9%** of them — and the cost is **flat**: 256× the
   queries for **1.23×** wall clock. This is a *quality*-dominated point, not a cost-dominated one.
