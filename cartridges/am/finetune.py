@@ -70,6 +70,24 @@ class AttentionMatchingFinetuningConfig(BaseConfig):
     key_mode: Literal["freeze", "highest_attention", "omp"] = "freeze"
     enable_beta: Optional[bool] = None
     beta_fit_scope: Literal["all", "selected"] = "selected"
+    # B-SOLVE / LIT-002 (AM paper App. C.2 "Stabilizing beta", Algorithm 3).
+    # All three default to the historical behaviour, so a run that does not set
+    # them is bit-identical.
+    #   beta_box    -> symmetric box on the fitted log-weights (paper: 3.0 for
+    #                  highest-attention keys). None = unbounded above, floored
+    #                  at log(1e-12) = -27.6.
+    #   nnls_iters  -> projected-gradient steps (paper: 2). Historical: 200.
+    #   nnls_driver -> lstsq driver for the NNLS warm start. None keeps torch's
+    #                  CUDA default `gels`, which returns NaN for rank-deficient
+    #                  input WITHOUT raising; 'gelsd' is rank-revealing.
+    #   beta_target -> 'residual' subtracts the non-selected slots' mass from the
+    #                  teacher target (this tree's own invention); 'full' fits the
+    #                  selected keys against the full teacher mass, as the paper
+    #                  does over all compacted keys.
+    beta_box: Optional[float] = None
+    nnls_iters: int = 200
+    nnls_driver: Optional[str] = None
+    beta_target: Literal["residual", "full"] = "residual"
     max_ref_examples_per_doc: int = 32
     save_after_each_document: bool = True
 
@@ -270,11 +288,27 @@ def apply_am_update_to_cache(
 
 
 def _should_fit_beta(config: AttentionMatchingFinetuningConfig) -> bool:
+    """Whether to fit per-key log-bias beta. Decoupled from `key_mode` (B-SOLVE).
+
+    Historically the unset fallback was `config.key_mode != "freeze"`, which
+    (a) silently switched the beta/NNLS path ON for every key experiment and
+    (b) made "beta with frozen keys" -- the configuration B-ROUTE actually needs
+    -- expressible only by setting `ENABLE_BETA=1` explicitly. beta is now an
+    independent axis: unset == off, whatever `key_mode` is. Every run in
+    `state/results.csv` used `key_mode="freeze"`, where both rules agree, so no
+    historical configuration changes behaviour.
+    """
     if config.enable_beta is True:
         return True
     if config.enable_beta is False:
         return False
-    return config.key_mode != "freeze"
+    if config.key_mode != "freeze":
+        logger.warning(
+            "ENABLE_BETA is unset with key_mode=%s: beta is OFF (it is now an "
+            "independent axis; set ENABLE_BETA=1 to fit it).",
+            config.key_mode,
+        )
+    return False
 
 
 def _collect_reference_queries(
@@ -371,6 +405,16 @@ def apply_document_am_write_to_cache(
         and old_query_accumulator is not None
     )
     fit_beta = _should_fit_beta(config)
+    # B-SOLVE / LIT-002 beta-fit knobs. `getattr` defaults reproduce the historical
+    # behaviour exactly, so an older config object (or an unset flag) is unchanged.
+    beta_kwargs = {
+        "n_iters": int(getattr(config, "nnls_iters", 200)),
+        "beta_box": getattr(config, "beta_box", None),
+        "nnls_driver": getattr(config, "nnls_driver", None),
+        "target_mode": getattr(config, "beta_target", "residual"),
+    }
+    beta_fit_info: list[dict] = []
+    beta_per_layer: dict[int, list[torch.Tensor]] = {}
     # B-ROPE: 10000.0 is the historical hard-coded AM default; `getattr` keeps this
     # working against an older config object that has no such field.
     rope_theta = float(getattr(config, "rope_theta", 10000.0))
@@ -546,30 +590,39 @@ def apply_document_am_write_to_cache(
 
             head_beta = base_beta
             if fit_beta and beta_param is not None:
+                fit_info: dict = {"layer": layer_idx, "head": head_idx}
                 if config.beta_fit_scope == "selected":
-                    beta_full = refit_beta_nnls(
-                        keys,
-                        queries,
-                        target_log_mass,
-                        head_dim,
-                        selected_indices=selected_full,
-                        base_beta=base_beta,
-                    )
+                    fit_idx = selected_full
                 else:
-                    trainable_idx = torch.arange(
+                    fit_idx = torch.arange(
                         n_frozen,
                         keys.shape[0],
                         device=device,
                         dtype=torch.long,
                     )
-                    beta_full = refit_beta_nnls(
-                        keys,
-                        queries,
-                        target_log_mass,
-                        head_dim,
-                        selected_indices=trainable_idx,
-                        base_beta=base_beta,
+                beta_full = refit_beta_nnls(
+                    keys,
+                    queries,
+                    target_log_mass,
+                    head_dim,
+                    selected_indices=fit_idx,
+                    base_beta=base_beta,
+                    info=fit_info,
+                    **beta_kwargs,
+                )
+                if not torch.isfinite(beta_full).all():
+                    # Fail loudly: a NaN beta would otherwise be written into the
+                    # cache and poison the value solve (EXP-005b/EXP-006).
+                    raise RuntimeError(
+                        f"refit_beta_nnls returned non-finite beta at layer "
+                        f"{layer_idx} head {head_idx}: "
+                        f"{int((~torch.isfinite(beta_full)).sum().item())} of "
+                        f"{beta_full.numel()} entries. fit_info={fit_info}"
                     )
+                beta_fit_info.append(fit_info)
+                beta_per_layer.setdefault(layer_idx, []).append(
+                    beta_full[fit_idx].detach().float().cpu()
+                )
                 with torch.no_grad():
                     beta_param[0, head_idx].copy_(
                         beta_full[n_frozen:].to(beta_param.dtype)
@@ -680,6 +733,55 @@ def apply_document_am_write_to_cache(
         extra["v_selected_absmax_after_per_layer"] = {
             l: max(v) for l, v in solve_v_absmax.items() if v
         }
+    if fit_beta and beta_fit_info:
+        # B-SOLVE: the fitted beta distribution is the headline diagnostic of the
+        # mass-matching arm. Only recorded when beta actually ran, so a stock run's
+        # `am_doc_*.pt` payload stays byte-identical.
+        extra["beta"] = {
+            "box": beta_kwargs["beta_box"],
+            "n_iters": beta_kwargs["n_iters"],
+            "driver": beta_kwargs["nnls_driver"],
+            "target_mode": beta_kwargs["target_mode"],
+            "fit_scope": config.beta_fit_scope,
+            "n_fits": len(beta_fit_info),
+        }
+        for key in (
+            "rank_deficient",
+            "warm_start_nonfinite",
+            "warm_start_raised",
+        ):
+            extra["beta"][f"n_{key}"] = sum(
+                1 for i in beta_fit_info if i.get(key)
+            )
+        ranks = [i["lstsq_rank"] for i in beta_fit_info if "lstsq_rank" in i]
+        if ranks:
+            extra["beta"]["lstsq_rank_min"] = min(ranks)
+            extra["beta"]["lstsq_rank_max"] = max(ranks)
+            extra["beta"]["n_cols"] = beta_fit_info[0].get("n_cols")
+            extra["beta"]["n_rows"] = beta_fit_info[0].get("n_rows")
+        for key in ("resid_clamp_frac", "resid_min", "frac_at_upper", "frac_at_lower"):
+            vals = [i[key] for i in beta_fit_info if key in i]
+            if vals:
+                extra["beta"][f"{key}_mean"] = sum(vals) / len(vals)
+                extra["beta"][f"{key}_max"] = max(vals)
+        extra["beta_per_layer"] = {}
+        all_beta = []
+        for l, vs in beta_per_layer.items():
+            b = torch.cat(vs)
+            all_beta.append(b)
+            extra["beta_per_layer"][l] = {
+                "min": float(b.min().item()),
+                "median": float(b.median().item()),
+                "max": float(b.max().item()),
+                "mean": float(b.mean().item()),
+                "n": int(b.numel()),
+            }
+        if all_beta:
+            b = torch.cat(all_beta)
+            extra["beta"]["min"] = float(b.min().item())
+            extra["beta"]["median"] = float(b.median().item())
+            extra["beta"]["max"] = float(b.max().item())
+            extra["beta"]["mean"] = float(b.mean().item())
     if oracle_write:
         extra["oracle_write"] = True
         extra["oracle_write_assign"] = getattr(config, "oracle_write_assign", "mass_ranked")

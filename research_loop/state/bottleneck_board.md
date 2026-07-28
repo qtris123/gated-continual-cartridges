@@ -301,7 +301,46 @@ Eliminated as *knob-level* explanations: gating (HYP-G1), support (HYP-S1), ridg
   isotropic brake with MEMIT's `C₀` = second moment of the old routing vectors, so the write is
   restrained *in the directions the old content occupies* and free elsewhere.
 
-## B-ROUTE — routing / frozen keys
+## 🏁 B-ROUTE — CLOSED: the write is NOT bandwidth-limited, and the value-only family is EXHAUSTED
+- **Stage:** CLOSED · **Status:** ✅ **confirmed + capped** (MECH-BETA, 2026-07-28)
+- **The decisive test.** β (AM's own mass-matching mechanism) **ran clean for the first time in this
+  project** — 288 fits/doc × 16 docs, **0 non-finite warm starts, 0 raised**, every β inside [−3,3].
+  It did exactly what it was supposed to do to bandwidth, and **both axes got worse**:
+
+  | arm | QA | MT | eval `mass_on_S` (MT) | MT/QA ratio | `am/mean_mse` |
+  |---|---|---|---|---|---|
+  | control θ=1e4, β off | 2.1766 | 2.5484 | 0.0810 | 1.047 | 0.11906 |
+  | rope θ=5e6, β off | 2.1532 | 2.5296 | 0.0711 | 1.043 | 0.01406 |
+  | **β on, box 3** | **2.7364** | **2.8119** | **0.3010 (4.23×)** | **1.051** | 0.00782 |
+
+  **`mass_on_S` rose 4.23× on all 36 layers, past Phase-1's 0.0896 — and MT regressed +0.282 while QA
+  regressed +0.581, past the 2.52 budget.**
+- **Mechanistic sentence:** β is **query-independent**, so raising mass on the written slots raises it for
+  **QA queries too**. SCOUT-KEYS predicted the ratio would move only 1.03→1.05; measured **1.043 →
+  1.051** — a 4.2× bandwidth gain bought **+0.008 of selectivity**. Bandwidth is not the constraint;
+  **selectivity is, and no query-independent operator can supply it.**
+- **What this closes, together with the rest of the board.** Every value-side lever has now been tried at
+  the canonical point, and none reaches MT ≤ 2.02:
+  | lever | result |
+  |---|---|
+  | perfect values (teacher's own KV) | MT 2.381 — closes 25% of the gap |
+  | 4.2× bandwidth (β) | MT 2.812 — **worse** |
+  | 256× reference queries | MT 2.552–2.608 — no effect |
+  | better fit (ridge/trust region off) | MT 15.95 — catastrophically worse |
+  | correct rotary base | ΔMT −0.019 — inside noise |
+  | more support (`top_t` 64→511) | MT 2.55–2.67 — worse |
+  | target mode | was a wiring no-op |
+  ⇒ **A gradient-free win, if it exists, is not on the value side.** The best gradient-free point remains
+  QA 2.042 / MT 2.435 (k=12 of the canonical run) against a target of QA ≤ 2.52 / **MT ≤ 2.02**.
+- **Two build corrections worth keeping** (MECH-004): `torch.linalg.lstsq(driver='gelsd')` is **CPU-only
+  and raises on CUDA** — the old bare `except RuntimeError` would have silently degraded to a uniform
+  warm start; a CPU retry costs 1.31× `solve_s` on 64×32 matrices. And LIT-002's divergence #3
+  (residual-target clamp) is a **non-issue at `KEY_MODE=freeze`** — the target is strictly positive there,
+  measured clamp fraction 5.4e−5. β saturates upward: **59.7% of entries pinned at the +3 ceiling.**
+- ✅ **H4 hazard fixed:** `_should_fit_beta` with `highest_attention` + `ENABLE_BETA` unset now returns
+  **False** (it returned True). **A clean keys-only arm is now possible for the first time.**
+
+## B-ROUTE (earlier stage, superseded above)
 - **Stage:** E VERIFY (one control outstanding) · **Status:** ✅ **MEASURED — partially confirmed, and
   the value-only family is BOUNDED**
 - ✅ **ORACLE-WRITE (2026-07-28), the decisive run — neither branch of the predicted dichotomy:**

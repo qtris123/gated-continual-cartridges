@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 from typing import Literal, Optional, Tuple
 
 import torch
@@ -15,14 +16,32 @@ def nnls_projected_gradient(
     target: torch.Tensor,
     n_iters: int = 100,
     lower_bound: float = 1e-12,
+    upper_bound: Optional[float] = None,
+    driver: Optional[str] = None,
+    info: Optional[dict] = None,
 ) -> torch.Tensor:
-    """Solve min_{w>=0} ||Phi w - target||_2^2 via projected gradient descent.
+    """Solve min_{lo<=w<=hi} ||Phi w - target||_2^2 via projected gradient descent.
 
     Args:
         Phi: (n, t)
         target: (n,)
         n_iters: PGD iterations
         lower_bound: minimum weight
+        upper_bound: optional maximum weight (box constraint). ``None`` keeps the
+            historical lower-bound-only projection.  B-SOLVE / LIT-002: the AM
+            paper (App. C.2, Algorithm 3) *bounds both sides* -- ``w in [e^-3,
+            e^3]`` for highest-attention keys, ``w <= e^7`` for OMP -- because an
+            unbounded fit can drive a selected key to ``beta ~= -inf``, after
+            which "the corresponding key cannot contribute to the attention
+            output, regardless of Cv".
+        driver: optional ``torch.linalg.lstsq`` driver for the warm start.  The
+            torch default on CUDA is ``gels``, which *requires* full rank and
+            returns undefined values (NaN/Inf) **without raising** otherwise --
+            LIT-002's named root cause of the EXP-005b / EXP-006 NaNs, since the
+            ``except RuntimeError`` below then never fires.  Pass ``'gelsd'`` for
+            a rank-revealing SVD warm start.
+        info: optional dict; filled in-place with warm-start diagnostics
+            (``lstsq_rank``, ``rank_deficient``, ``warm_start_nonfinite``, ...).
 
     Returns:
         w: (t,) non-negative weights
@@ -31,10 +50,66 @@ def nnls_projected_gradient(
     device = Phi.device
     Phi = Phi.to(torch.float32)
     target = target.to(device=device, dtype=torch.float32)
+
+    if info is not None:
+        info["n_rows"] = int(n)
+        info["n_cols"] = int(t)
+
+    # Fail loudly on a poisoned input instead of laundering it into a NaN beta.
+    if not (torch.isfinite(Phi).all() and torch.isfinite(target).all()):
+        raise RuntimeError(
+            "nnls_projected_gradient: non-finite input "
+            f"(Phi finite={bool(torch.isfinite(Phi).all())}, "
+            f"target finite={bool(torch.isfinite(target).all())}, "
+            f"Phi shape={tuple(Phi.shape)})"
+        )
+
+    def _record_rank(sol) -> None:
+        if info is None:
+            return
+        rank = getattr(sol, "rank", None)
+        if rank is not None and rank.numel() > 0:
+            info["lstsq_rank"] = int(rank.reshape(-1)[0].item())
+            info["rank_deficient"] = bool(info["lstsq_rank"] < min(n, t))
+
     try:
-        w = torch.linalg.lstsq(Phi, target).solution.clamp_min(lower_bound)
-    except RuntimeError:
-        w = torch.ones(t, device=device, dtype=torch.float32)
+        sol = (
+            torch.linalg.lstsq(Phi, target)
+            if driver is None
+            else torch.linalg.lstsq(Phi, target, driver=driver)
+        )
+        w = sol.solution
+        _record_rank(sol)
+    except RuntimeError as exc:
+        if driver is not None and Phi.is_cuda:
+            # torch accepts ONLY driver='gels' for CUDA inputs -- the
+            # rank-revealing drivers ('gelsd'/'gelss'/'gelsy') are CPU/LAPACK
+            # only, and 'gels' is precisely the one that returns NaN without
+            # raising on rank-deficient input (LIT-002). Phi here is tiny
+            # (n x t, both <= a few hundred), so run the warm start on the CPU
+            # and move the solution back.
+            sol = torch.linalg.lstsq(Phi.cpu(), target.cpu(), driver=driver)
+            w = sol.solution.to(device=device, dtype=torch.float32)
+            _record_rank(sol)
+            if info is not None:
+                info["warm_start_on_cpu"] = True
+        else:
+            w = torch.ones(t, device=device, dtype=torch.float32)
+            if info is not None:
+                info["warm_start_raised"] = str(exc)[:200]
+
+    if not torch.isfinite(w).all():
+        # `gels` on a rank-deficient system returns NaN/Inf *silently*; a NaN here
+        # survives every downstream clamp (torch.clamp passes NaN through), which
+        # is exactly why EXP-006's output clamp could not work.  Fall back to the
+        # paper's own uniform warm start and record it.
+        if info is not None:
+            info["warm_start_nonfinite"] = int((~torch.isfinite(w)).sum().item())
+        w = torch.where(torch.isfinite(w), w, torch.ones_like(w))
+
+    w = w.clamp_min(lower_bound)
+    if upper_bound is not None:
+        w = w.clamp_max(upper_bound)
 
     # Gradient Lipschitz constant for 1/2 ||Phi w - target||^2.
     L = torch.linalg.matrix_norm(Phi, ord=2).square().clamp_min(1e-8)
@@ -43,7 +118,14 @@ def nnls_projected_gradient(
     for _ in range(n_iters):
         grad = Phi.T @ (Phi @ w - target)
         w = w - lr * grad
-        w = torch.clamp(w, min=lower_bound)
+        w = torch.clamp(w, min=lower_bound, max=upper_bound)
+
+    if not torch.isfinite(w).all():
+        raise RuntimeError(
+            "nnls_projected_gradient: non-finite solution after "
+            f"{n_iters} PGD steps (Phi shape={tuple(Phi.shape)}, "
+            f"box=[{lower_bound}, {upper_bound}], driver={driver})"
+        )
 
     return w
 
@@ -170,6 +252,10 @@ def refit_beta_nnls(
     selected_indices: Optional[torch.Tensor] = None,
     base_beta: Optional[torch.Tensor] = None,
     n_iters: int = 200,
+    beta_box: Optional[float] = None,
+    nnls_driver: Optional[str] = None,
+    target_mode: Literal["residual", "full"] = "residual",
+    info: Optional[dict] = None,
 ) -> torch.Tensor:
     """Fit per-key log biases beta so student mass matches teacher log mass.
 
@@ -179,6 +265,20 @@ def refit_beta_nnls(
         target_log_mass: (n,) teacher log unnormalized mass targets
         selected_indices: optional (t,) indices to fit
         base_beta: existing beta; preserved on non-selected positions
+        n_iters: PGD iterations (AM paper App. C.2 uses 2 for highest-attention
+            keys and 0 for OMP; this tree historically used 200)
+        beta_box: optional symmetric box on the fitted log-weights, i.e.
+            ``beta in [-beta_box, +beta_box]`` (paper: 3.0).  ``None`` keeps the
+            historical unbounded-above / ``1e-12``-floored behaviour, whose floor
+            puts beta at -27.6 -- the "effectively beta = -inf" state the paper
+            writes a special rule to avoid (LIT-002).
+        nnls_driver: lstsq driver for the NNLS warm start; ``'gelsd'`` is
+            rank-revealing, the CUDA default ``gels`` returns NaN silently.
+        target_mode: ``'residual'`` fits the selected keys against
+            ``teacher_mass - mass(non-selected)``; ``'full'`` fits them against
+            the full teacher mass, as the paper does over *all* compacted keys
+            (LIT-002 divergence #3).
+        info: optional dict; filled in-place with fit diagnostics.
 
     Returns:
         beta: (T,) float32 log-weights
@@ -192,6 +292,18 @@ def refit_beta_nnls(
         base_beta = torch.zeros(T, device=device, dtype=torch.float32)
     else:
         base_beta = base_beta.to(device=device, dtype=torch.float32)
+
+    # Box on w: [e^-box, e^+box]. `None` reproduces the historical projection.
+    if beta_box is None:
+        w_lower, w_upper = 1e-12, None
+    else:
+        beta_box = float(beta_box)
+        w_lower, w_upper = math.exp(-beta_box), math.exp(beta_box)
+    if info is not None:
+        info["beta_box"] = beta_box
+        info["n_iters"] = int(n_iters)
+        info["driver"] = nnls_driver
+        info["target_mode"] = target_mode
 
     # Use one row-wise shift for both teacher target and student features.
     # Different shifts would destroy the absolute mass relation being fitted.
@@ -212,16 +324,65 @@ def refit_beta_nnls(
             if (~selected_mask).any()
             else torch.zeros_like(target)
         )
-        residual_target = (target - fixed_mass).clamp_min(1e-12)
+        raw_residual = target - fixed_mass
+        residual_target = raw_residual.clamp_min(1e-12)
+        if info is not None:
+            # LIT-002 divergence #3: when the untouched slots over-supply mass the
+            # clamp zeroes the WHOLE NNLS target -> w->0 -> beta->-27.6. Record how
+            # often that actually happens rather than assuming it.
+            info["resid_clamp_frac"] = float(
+                (raw_residual <= 1e-12).float().mean().item()
+            )
+            info["resid_min"] = float(raw_residual.min().item())
+        fit_target = target if target_mode == "full" else residual_target
         phi = torch.exp(scores[:, idx] - row_shift[:, None])
-        w = nnls_projected_gradient(phi, residual_target, n_iters=n_iters)
+        w = nnls_projected_gradient(
+            phi,
+            fit_target,
+            n_iters=n_iters,
+            lower_bound=w_lower,
+            upper_bound=w_upper,
+            driver=nnls_driver,
+            info=info,
+        )
         beta = base_beta.clone()
-        beta[idx] = torch.log(w.clamp(min=1e-12))
+        beta[idx] = torch.log(w.clamp(min=w_lower, max=w_upper))
+        _record_beta_info(info, beta[idx], beta_box)
         return beta
 
     phi = torch.exp(scores - row_shift[:, None])
-    w = nnls_projected_gradient(phi, target, n_iters=n_iters)
-    return torch.log(w.clamp(min=1e-12))
+    w = nnls_projected_gradient(
+        phi,
+        target,
+        n_iters=n_iters,
+        lower_bound=w_lower,
+        upper_bound=w_upper,
+        driver=nnls_driver,
+        info=info,
+    )
+    beta = torch.log(w.clamp(min=w_lower, max=w_upper))
+    _record_beta_info(info, beta, beta_box)
+    return beta
+
+
+def _record_beta_info(
+    info: Optional[dict],
+    beta_fitted: torch.Tensor,
+    beta_box: Optional[float],
+) -> None:
+    """Summarize a fitted beta vector into ``info`` (diagnostics only)."""
+    if info is None:
+        return
+    b = beta_fitted.detach().float()
+    info["beta_min"] = float(b.min().item())
+    info["beta_median"] = float(b.median().item())
+    info["beta_max"] = float(b.max().item())
+    info["beta_mean"] = float(b.mean().item())
+    info["beta_n"] = int(b.numel())
+    if beta_box is not None:
+        tol = 1e-6 * max(1.0, abs(beta_box))
+        info["frac_at_upper"] = float((b >= beta_box - tol).float().mean().item())
+        info["frac_at_lower"] = float((b <= -beta_box + tol).float().mean().item())
 
 
 def rewrite_keys_on_support(

@@ -126,6 +126,26 @@ MAX_QUERIES_PER_HEAD = int(os.environ.get("MAX_QUERIES_PER_HEAD", "64"))
 # keeps the historical hard-coded 10000.0 -> stock runs are bit-identical.
 # Accepts a float, or "model"/"auto" to read `rope_theta` off the HF model config.
 AM_ROPE_THETA_ENV = os.environ.get("AM_ROPE_THETA") or None
+# B-SOLVE / LIT-002: box-constrained NNLS for the beta (mass-matching) fit.
+# These are only forwarded when beta is actually requested (or a knob is set
+# explicitly), so every beta-off run keeps a byte-identical config.
+AM_BETA_BOX_ENV = os.environ.get("AM_BETA_BOX")
+AM_NNLS_ITERS_ENV = os.environ.get("AM_NNLS_ITERS")
+AM_NNLS_DRIVER_ENV = os.environ.get("AM_NNLS_DRIVER")
+AM_BETA_TARGET_ENV = os.environ.get("AM_BETA_TARGET")
+AM_BETA_BOX = float(AM_BETA_BOX_ENV) if AM_BETA_BOX_ENV else 3.0
+AM_NNLS_ITERS = int(AM_NNLS_ITERS_ENV) if AM_NNLS_ITERS_ENV else 2
+AM_NNLS_DRIVER = AM_NNLS_DRIVER_ENV or "gelsd"
+AM_BETA_TARGET = AM_BETA_TARGET_ENV or "residual"
+_BETA_KNOBS_SET = any(
+    v is not None
+    for v in (
+        AM_BETA_BOX_ENV,
+        AM_NNLS_ITERS_ENV,
+        AM_NNLS_DRIVER_ENV,
+        AM_BETA_TARGET_ENV,
+    )
+)
 
 _model_cls = FlexQwen3ForCausalLM if "qwen" in MODEL_NAME.lower() else FlexLlamaForCausalLM
 logger = get_logger(__name__)
@@ -233,11 +253,55 @@ def _rope_theta_kwargs() -> dict:
     return {"rope_theta": requested}
 
 
+def _beta_fit_kwargs() -> dict:
+    """Pass the LIT-002 beta-fit knobs ONLY when beta is actually in play.
+
+    Same conditional-kwarg discipline as `_oracle_write_kwargs` (RUNBOOK §6.10):
+    the sibling `cartridges` package has none of these fields, and MECH-000 lost
+    a whole batch to an unconditional new kwarg. When `ENABLE_BETA` is not truthy
+    and no `AM_*NNLS*`/`AM_BETA_*` knob is set, nothing is forwarded, so the
+    config is byte-identical to every historical run.
+    """
+    import cartridges
+
+    if not (ENABLE_BETA is True or _BETA_KNOBS_SET):
+        return {}
+    missing = [
+        f
+        for f in ("beta_box", "nnls_iters", "nnls_driver", "beta_target")
+        if f not in AttentionMatchingFinetuningConfig.model_fields
+    ]
+    if missing:
+        raise RuntimeError(
+            f"beta-fit knobs requested (ENABLE_BETA={ENABLE_BETA}, "
+            f"AM_BETA_BOX={AM_BETA_BOX_ENV}, AM_NNLS_ITERS={AM_NNLS_ITERS_ENV}, "
+            f"AM_NNLS_DRIVER={AM_NNLS_DRIVER_ENV}) but the imported `cartridges` "
+            f"package ({os.path.dirname(cartridges.__file__)}) is missing "
+            f"{missing}. Export PYTHONPATH=$CARTRIDGES_DIR:$PYTHONPATH "
+            "(RUNBOOK §6.10)."
+        )
+    if AM_BETA_BOX <= 0:
+        raise ValueError(f"AM_BETA_BOX must be positive, got {AM_BETA_BOX}")
+    if AM_NNLS_ITERS < 0:
+        raise ValueError(f"AM_NNLS_ITERS must be >= 0, got {AM_NNLS_ITERS}")
+    logger.info(
+        "B-SOLVE: boxed NNLS beta fit -> box=%.3f iters=%d driver=%s target=%s",
+        AM_BETA_BOX, AM_NNLS_ITERS, AM_NNLS_DRIVER, AM_BETA_TARGET,
+    )
+    return {
+        "beta_box": AM_BETA_BOX,
+        "nnls_iters": AM_NNLS_ITERS,
+        "nnls_driver": AM_NNLS_DRIVER,
+        "beta_target": AM_BETA_TARGET,
+    }
+
+
 def _build_am_config() -> AttentionMatchingFinetuningConfig:
     return AttentionMatchingFinetuningConfig(
         **_oracle_write_kwargs(),
         **_max_queries_kwargs(),
         **_rope_theta_kwargs(),
+        **_beta_fit_kwargs(),
         enabled=True,
         top_t=TOP_T,
         use_idf=USE_IDF and BG_STATS_PATH is not None,
@@ -676,6 +740,11 @@ config = TrainConfig(
             # B-ROPE: only tagged when the rotary base is moved off the historical
             # hard-coded 10000.0, so stock runs keep a byte-identical wandb config.
             [f"ropetheta-{AM_ROPE_THETA_ENV}"] if AM_ROPE_THETA_ENV else []
+        ) + (
+            # B-SOLVE: only tagged when the beta fit is actually active.
+            ["beta", f"betabox-{AM_BETA_BOX}", f"nnls-{AM_NNLS_DRIVER}-{AM_NNLS_ITERS}"]
+            if (ENABLE_BETA is True or _BETA_KNOBS_SET)
+            else []
         ),
         notes=os.environ.get("WANDB_NOTES") or None,
     ) if os.environ.get("WANDB_DISABLED", "0") not in ("1", "true", "True") else None,

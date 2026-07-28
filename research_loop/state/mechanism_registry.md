@@ -221,3 +221,71 @@
   conclusion is *strengthened*, not overturned: a target that is now 8.5× better fitted still buys no
   acquisition. Board call is the orchestrator's.
 - Kept in tree? yes — opt-in, default 10000.0, bit-identical when unset.
+
+### MECH-004: box-constrained NNLS beta (mass matching) → flags `AM_BETA_BOX` / `AM_NNLS_ITERS` / `AM_NNLS_DRIVER` / `AM_BETA_TARGET` (default: all off)
+- Status: tested
+- Implements: **LIT-002** (AM paper App. C.2 "Stabilizing β" / Algorithm 3), enabling **LIT-001** (β mass
+  matching) | Targets board entry: **B-SOLVE** (primary), **B-ROUTE**
+- Files:
+  - `cartridges/am/key_select.py::nnls_projected_gradient` — new `upper_bound`, `driver`, `info` kwargs;
+    fail-loud finite check on `(Phi, target)` **and** on the returned `w`; NaN warm start replaced by the
+    paper's uniform start and *recorded* instead of laundered; box projection `clip(w, lo, hi)` inside the
+    PGD loop. Also `::refit_beta_nnls` — new `beta_box`, `nnls_driver`, `target_mode`, `info` kwargs and a
+    `_record_beta_info` summarizer.
+  - `cartridges/am/finetune.py` — config fields `beta_box: Optional[float] = None`, `nnls_iters: int = 200`,
+    `nnls_driver: Optional[str] = None`, `beta_target: Literal["residual","full"] = "residual"`;
+    `_should_fit_beta` **decoupled from `key_mode`**; a fail-loud `isfinite(beta_full)` assert before the
+    write-back; per-layer β distributions + fit diagnostics into `AMUpdateStats.extra["beta"]` /
+    `["beta_per_layer"]`, recorded **only when β actually ran**.
+  - `examples/qasper2/train/continual_am_sparse.py` — env knobs `AM_BETA_BOX` (3.0), `AM_NNLS_ITERS` (2),
+    `AM_NNLS_DRIVER` (gelsd), `AM_BETA_TARGET` (residual) + `_beta_fit_kwargs()` (conditional kwarg + loud
+    failure, RUNBOOK §6.10); wandb tags added only when β is active.
+- What it changes (at the level of the math): β is fitted by `min_w ‖Φw − r‖²` with `Φ = exp(qKᵀ/√d − shift)`
+  on the selected slots and `r` the teacher's `[cartridge‖doc]` mass minus the untouched slots' mass, then
+  `β = log w`. The three LIT-002 fixes are (1) a **rank-revealing** lstsq warm start instead of `gels`,
+  (2) a **two-sided box** `w ∈ [e^-3, e^3] ⇔ β ∈ [−3,3]` instead of a `1e-12` floor alone (which put β at
+  −27.6), (3) `AM_BETA_TARGET=full` to fit against the full teacher mass as the paper does. `AM_NNLS_ITERS`
+  drops the PGD budget 200 → 2 (the paper's value).
+- ⚠️ **Correction to LIT-002, found on GPU:** `torch.linalg.lstsq(..., driver='gelsd')` is **CPU-only**;
+  on CUDA input it *raises*. The old `except RuntimeError` would then have silently fallen back to a
+  uniform warm start. The implementation retries the warm start on the CPU with the requested driver
+  (`info["warm_start_on_cpu"]`) — the matrices are 64×32, so the round trip costs ~1.3× `solve_s`.
+- Sanity check (`research_loop/results/MECH-BETA/sanity_beta.py`, run on CPU **and** CUDA →
+  `sanity_cuda.json`): (i) `nnls_projected_gradient` and `refit_beta_nnls` at default arguments are
+  **bit-identical** to `git show HEAD:cartridges/am/key_select.py` (max|Δ| = 0.0; note the *first* lstsq
+  call in a process differs from later ones by ~4e-8 on both old and new code, so the comparison burns one
+  call first); (ii) on a rank-8 64×64 `Φ` the old path returns β ∈ [−27.63, +12.99] (CUDA) while the boxed
+  `gelsd` path returns finite β with `lstsq_rank = 8` correctly reported; (iii) `refit_beta_nnls` on a
+  rank-deficient synthetic head returns β ∈ [−3.0, +3.0], median 1.90, non-selected slots untouched;
+  (iv) full `apply_document_am_write_to_cache` on a stub cache: β off → `mass_on_S` 0.2073/0.2078 with
+  all-zero β and bias disabled; β on → finite β, bias enabled, `mass_on_S` 0.8252/0.8231 (**3.98×**),
+  `resid_clamp_frac = 0`; (v) `_should_fit_beta`: freeze+unset **False**, freeze+ENABLE_BETA=1 **True**,
+  highest_attention+unset **False** (was True — the H4 hazard).
+- Bit-identical with flag off? **yes.** The MECH-BETA control arm reproduced EXP-007-top32 / DIAG-ROPE arm A
+  to all 17 in-run digits (QA **2.1766157150268555** / MT **2.5483615398406982**, `mean_mse_last_doc`
+  0.19807696944925424, `|v|max` 984.0), and its standalone `eval_forgetting.py` numbers
+  (QA 2.1771795749664307 / MT 2.5524158477783203) match DIAG-ROPE's exactly. The rope-only arm likewise
+  reproduced DIAG-ROPE arm B exactly (QA 2.15320086479187 / MT 2.5296061038970947, `|v|max` 178.0).
+- Tested by: **MECH-BETA** (`WANDB_GROUP=B-SOLVE`), canonical top32, `KEY_MODE=freeze`:
+
+  | arm | QA (in-run) | MT (in-run) | eval `mass_on_S` MT | MT/QA mass | cart mass MT | mean `am/mean_mse` | \|v\|max | solve_s |
+  |---|---|---|---|---|---|---|---|---|
+  | control θ=1e4, β off | 2.17662 | 2.54836 | 0.08098 | 1.047 | 0.3285 | 0.11906 | 984.0 | 177.4 |
+  | rope θ=5e6, β off | 2.15320 | 2.52961 | 0.07111 | 1.043 | 0.5930 | 0.01406 | 178.0 | 184.3 |
+  | **β on, θ=5e6, box 3** | **2.73637** | **2.81193** | **0.30101** | **1.051** | 0.6785 | **0.00782** | 107.5 | 241.4 |
+  | Phase-1 reference | 2.2388 | 3.7825 | 0.08961 | 1.083 | 0.5879 | — | — | — |
+
+  wandb: control `https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/2a39ix5a`,
+  rope `.../runs/zl1g5jtf`, β `.../runs/fk4n72af`.
+- Verdict + mechanistic reason: **the mechanism works and the hypothesis it serves does not.** β is no
+  longer numerically broken — 4608 fits, zero NaN, every β inside the paper's box — and it does exactly
+  what LIT-001 says it should: eval-time `mass_on_S` on MT rises **0.0711 → 0.3010 (4.23×)**, past
+  Phase-1's 0.0896, on **all 36 layers**. **Acquisition does not follow: MT regresses +0.282** (2.5296 →
+  2.8112) and QA regresses **+0.581** (2.1597 → 2.7403, past the 2.52 retention budget). The reason is
+  that β is **query-independent**: it maps MT and QA mass through the same monotone function, so the
+  MT/QA `mass_on_S` ratio moved only 1.043 → 1.051 (Phase-1 1.083) — a 4.2× bandwidth gain bought +0.008
+  of selectivity. β saturates at the ceiling (59.7% of fitted entries at +3, per-layer medians 2.22–3.00),
+  so the box is the binding constraint and a larger box would buy more of the same mass with the same
+  null selectivity. The write itself got *better* by its own metric while CE got worse (`am/mean_mse`
+  0.01406 → 0.00782, `|v|max` 178 → 107.5) — the B-OBJ anti-correlation again.
+- Kept in tree? yes — opt-in, all four flags default to the historical behaviour, bit-identical when off.
