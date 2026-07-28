@@ -389,6 +389,16 @@ def guarded_sparse_am_value_update(
         "n_selected": selected_mask.sum().item(),
     }
     if compute_stats:
+        # Attention mass the reference queries put on the written slots S. This is
+        # the quantity that bounds every value-only write (WORKERS.md standing
+        # requirement); it is read-only and does not touch the solution.
+        stats["mass_on_S_mean"] = X_new.sum(dim=-1).mean().item()
+        v_old_sel = values[selected_mask].to(torch.float32)
+        v_new_sel = new_values[selected_mask].to(torch.float32)
+        stats["v_selected_absmax_before"] = v_old_sel.abs().max().item()
+        stats["v_selected_absmax_after"] = v_new_sel.abs().max().item()
+        stats["v_selected_absmean_after"] = v_new_sel.abs().mean().item()
+        stats["v_delta_absmax"] = (v_new_sel - v_old_sel).abs().max().item()
         output_new = compute_attention_weights(
             new_queries, keys, head_dim, attention_bias=attention_bias,
         ) @ new_values.to(torch.float32)

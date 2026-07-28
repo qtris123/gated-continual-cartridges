@@ -367,6 +367,11 @@ def apply_document_am_write_to_cache(
     oracle_mass_on_S: dict[int, list[float]] = {}
     oracle_doc_mass: dict[int, list[float]] = {}
     oracle_n_written: list[int] = []
+    # B-CASCADE diagnostics (read-only; never touch the solution).
+    solve_mass_on_S: dict[int, list[float]] = {}
+    solve_v_absmax: dict[int, list[float]] = {}
+    n_queries_available: list[int] = []
+    n_queries_used: list[int] = []
 
     for layer_idx in range(n_layers):
         v_param = cache.trainable_values[layer_idx]
@@ -434,10 +439,16 @@ def apply_document_am_write_to_cache(
                 continue
             queries = queries.to(device=device, dtype=keys.dtype)
 
+            # How many reference queries the accumulator could actually supply for
+            # this (layer, head) BEFORE the subsample — this is the hard ceiling on
+            # `max_queries_per_head` (B-CASCADE). Recorded, never padded.
+            n_queries_available.append(int(queries.shape[0]))
+
             if queries.shape[0] > config.max_queries_per_head:
                 idx = torch.randperm(queries.shape[0], device=device)[: config.max_queries_per_head]
                 queries = queries[idx]
 
+            n_queries_used.append(int(queries.shape[0]))
             total_queries += queries.shape[0]
 
             old_queries = None
@@ -593,6 +604,12 @@ def apply_document_am_write_to_cache(
                     attention_bias=head_beta,
                 )
                 mse = stats["mse_new"]
+                if stats.get("mass_on_S_mean") is not None:
+                    solve_mass_on_S.setdefault(layer_idx, []).append(stats["mass_on_S_mean"])
+                if stats.get("v_selected_absmax_after") is not None:
+                    solve_v_absmax.setdefault(layer_idx, []).append(
+                        stats["v_selected_absmax_after"]
+                    )
             else:
                 new_values, stats = sparse_am_value_update(
                     keys, values, queries, selected_full,
@@ -605,6 +622,12 @@ def apply_document_am_write_to_cache(
                     attention_bias=head_beta,
                 )
                 mse = stats["mse"]
+                if stats.get("mass_on_S_mean") is not None:
+                    solve_mass_on_S.setdefault(layer_idx, []).append(stats["mass_on_S_mean"])
+                if stats.get("v_selected_absmax_after") is not None:
+                    solve_v_absmax.setdefault(layer_idx, []).append(
+                        stats["v_selected_absmax_after"]
+                    )
 
             with torch.no_grad():
                 if config.key_mode != "freeze":
@@ -622,6 +645,23 @@ def apply_document_am_write_to_cache(
 
     mean_mse = total_mse / max(len(mse_per_layer), 1) if mse_per_layer else 0.0
     extra: dict = {}
+    # Standing requirement (WORKERS.md): every AM run records the attention mass
+    # landing on the written slots, per layer. Plus the query-supply ceiling that
+    # `max_queries_per_head` is capped by (B-CASCADE).
+    extra["max_queries_per_head"] = int(config.max_queries_per_head)
+    if n_queries_available:
+        extra["n_queries_available_min"] = min(n_queries_available)
+        extra["n_queries_available_max"] = max(n_queries_available)
+        extra["n_queries_used_min"] = min(n_queries_used)
+        extra["n_queries_used_max"] = max(n_queries_used)
+    if solve_mass_on_S:
+        extra["ref_mass_on_S_per_layer"] = {
+            l: sum(v) / len(v) for l, v in solve_mass_on_S.items() if v
+        }
+    if solve_v_absmax:
+        extra["v_selected_absmax_after_per_layer"] = {
+            l: max(v) for l, v in solve_v_absmax.items() if v
+        }
     if oracle_write:
         extra["oracle_write"] = True
         extra["oracle_write_assign"] = getattr(config, "oracle_write_assign", "mass_ranked")

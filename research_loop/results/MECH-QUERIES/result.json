@@ -1,0 +1,197 @@
+{
+  "id": "MECH-QUERIES",
+  "role": "build+test",
+  "board_entry": "B-CASCADE",
+  "secondary_board_entries": ["B-TARGET", "B-CAP"],
+  "question": "Does raising the reference-query count n per KV head (n >> top_t) shrink the solved write's |v| toward the teacher's scale, restore total cartridge attention mass toward 0.588, and improve MT — all three together?",
+  "variable_under_test": "MAX_QUERIES_PER_HEAD (new env knob) in {64, 256, 1024, 4096, 16384} at fixed TOP_T=32; everything else canonical EXP-007-top32 (GRANULARITY=per_layer, SLOT_SELECTION=tfidf, USE_IDF=0, KEY_MODE=freeze, TARGET_MODE=cartridge_plus_doc, RIDGE_LAMBDA=1e-4, RIDGE_SCALE=spectral, DELTA_WEIGHT=1e-2, AM_EXECUTION_MODE=per_document)",
+  "baseline_ref": "EXP-007-top32 (QA 2.1766157150268555 / MT 2.5483615398406982), reproduced in-process as the n=64 control",
+  "status": "done",
+  "numbers": {
+    "qa_forgetting_loss": 2.1771795749664307,
+    "mt_acquisition_loss": 2.5524158477783203,
+    "solve_s": 164.2226164340973,
+    "phase2_e2e_s": 164.2226164340973,
+    "gradient_steps": 0,
+    "note": "top-level numbers are the n=64 CONTROL arm; per-arm numbers below",
+    "per_arm": {
+      "n64": {
+        "qa_forgetting_loss": 2.1771795749664307,
+        "mt_acquisition_loss": 2.5524158477783203,
+        "qa_in_run_eval": 2.1766157150268555,
+        "mt_in_run_eval": 2.5483615398406982,
+        "value_global_max_abs": 984.0,
+        "eval_total_cartridge_mass_MT": 0.32853,
+        "eval_mass_on_S_MT": 0.08098,
+        "solve_ref_mass_on_S_mean_over_layers": 0.15851,
+        "am_mean_mse_over_docs": 0.11906,
+        "am_mean_mse_last_doc": 0.19808,
+        "solve_s": 164.2,
+        "phase2_e2e_s": 164.2,
+        "gradient_steps": 0
+      },
+      "n256": {
+        "qa_forgetting_loss": 2.409698724746704,
+        "mt_acquisition_loss": 2.7715871334075928,
+        "qa_in_run_eval": 2.414180040359497,
+        "mt_in_run_eval": 2.778197765350342,
+        "value_global_max_abs": 1328.0,
+        "eval_total_cartridge_mass_MT": 0.37147,
+        "eval_mass_on_S_MT": 0.07843,
+        "solve_ref_mass_on_S_mean_over_layers": 0.1463,
+        "am_mean_mse_over_docs": 0.12407,
+        "am_mean_mse_last_doc": 0.2232,
+        "solve_s": 153.8,
+        "phase2_e2e_s": 153.8,
+        "gradient_steps": 0
+      },
+      "n1024": {
+        "qa_forgetting_loss": 2.2574684619903564,
+        "mt_acquisition_loss": 2.574378490447998,
+        "qa_in_run_eval": 2.2605247497558594,
+        "mt_in_run_eval": 2.5729055404663086,
+        "value_global_max_abs": 1968.0,
+        "eval_total_cartridge_mass_MT": 0.63986,
+        "eval_mass_on_S_MT": 0.08418,
+        "solve_ref_mass_on_S_mean_over_layers": 0.14719,
+        "am_mean_mse_over_docs": 0.12325,
+        "am_mean_mse_last_doc": 0.22515,
+        "solve_s": 171.9,
+        "phase2_e2e_s": 171.9,
+        "gradient_steps": 0
+      },
+      "n4096": {
+        "qa_forgetting_loss": 2.341167449951172,
+        "mt_acquisition_loss": 2.7113912105560303,
+        "qa_in_run_eval": 2.342860221862793,
+        "mt_in_run_eval": 2.7084569931030273,
+        "value_global_max_abs": 3344.0,
+        "eval_total_cartridge_mass_MT": 0.63949,
+        "eval_mass_on_S_MT": 0.08361,
+        "solve_ref_mass_on_S_mean_over_layers": 0.14514,
+        "am_mean_mse_over_docs": 0.1251,
+        "am_mean_mse_last_doc": 0.21582,
+        "solve_s": 159.0,
+        "phase2_e2e_s": 159.0,
+        "gradient_steps": 0
+      },
+      "n16384": {
+        "qa_forgetting_loss": 2.3325297832489014,
+        "mt_acquisition_loss": 2.6943328380584717,
+        "qa_in_run_eval": 2.3339521884918213,
+        "mt_in_run_eval": 2.6925723552703857,
+        "value_global_max_abs": 7808.0,
+        "eval_total_cartridge_mass_MT": 0.63882,
+        "eval_mass_on_S_MT": 0.08393,
+        "solve_ref_mass_on_S_mean_over_layers": 0.14522,
+        "am_mean_mse_over_docs": 0.1261,
+        "am_mean_mse_last_doc": 0.21645,
+        "solve_s": 201.7,
+        "phase2_e2e_s": 201.7,
+        "gradient_steps": 0
+      }
+    },
+    "phase1_floor_control": {
+      "qa_forgetting_loss": 2.23880672454834,
+      "mt_acquisition_loss": 3.7825491428375244,
+      "eval_total_cartridge_mass_MT": 0.58787,
+      "eval_mass_on_S_MT": 0.08961
+    }
+  },
+  "diagnostics": {
+    "baseline_reproduced": {
+      "n64_in_run_eval_vs_EXP-007-top32": "EXACT to all 16 printed digits on BOTH splits (2.1766157150268555 / 2.5483615398406982)",
+      "n64_standalone_eval_vs_ORACLE-WRITE_control": "EXACT (2.1771795749664307 / 2.5524158477783203)",
+      "phase1_floor_control": "EXACT (2.23880672454834 / 3.7825491428375244)"
+    },
+    "value_global_max_abs_vs_n": {
+      "64": 984.0, "256": 1328.0, "1024": 1968.0, "4096": 3344.0, "16384": 7808.0,
+      "teacher_own_values_reference_ORACLE-WRITE": 63.25,
+      "direction": "|v| GROWS monotonically with n (8x from n=64 to n=16384), AWAY from the teacher's scale — the opposite of the B-CASCADE prediction. argmax layer is 34 in every arm."
+    },
+    "eval_time_total_cartridge_attention_mass_MT": {
+      "phase1": 0.58787, "n64": 0.32853, "n256": 0.37147,
+      "n1024": 0.63986, "n4096": 0.63949, "n16384": 0.63882,
+      "direction": "the 0.588 -> 0.329 routing collapse IS repaired at n >= 1024 and OVERSHOOTS Phase-1 (0.640), with no MT benefit"
+    },
+    "eval_time_total_cartridge_attention_mass_QA": {
+      "phase1": 0.56967, "n64": 0.32002, "n256": 0.36221,
+      "n1024": 0.62306, "n4096": 0.62272, "n16384": 0.62215
+    },
+    "eval_time_mass_on_S_MT": {
+      "phase1": 0.08961, "n64": 0.08098, "n256": 0.07843,
+      "n1024": 0.08418, "n4096": 0.08361, "n16384": 0.08393,
+      "note": "essentially invariant in n; S = per-layer union over the 16 documents of that arm's selected slots"
+    },
+    "layers_with_eval_mass_on_S_below_0.05_MT_of_36": {
+      "n64": 10, "n256": 12, "n1024": 9, "n4096": 9, "n16384": 9
+    },
+    "solve_time_ref_mass_on_S_mean_over_36_layers": {
+      "n64": 0.15851, "n256": 0.1463, "n1024": 0.14719, "n4096": 0.14514, "n16384": 0.14522,
+      "per_layer_range_n64": [0.02992, 0.59539],
+      "note": "computed inside guarded_sparse_am_value_update (value_solve.py) — the standing WORKERS.md requirement; recorded here for the first time in this loop. Cross-checks ORACLE-WRITE's 0.1523 train-time figure."
+    },
+    "am_mean_mse_over_16_docs": {
+      "n64": 0.11906, "n256": 0.12407, "n1024": 0.12325, "n4096": 0.1251, "n16384": 0.1261,
+      "note": "reference-set MSE rises slightly with n, as expected when 32 free rows must fit more constraints; it is also a better-estimated quantity at large n"
+    },
+    "reference_query_supply_ceiling_per_kv_head": {
+      "min_over_docs_and_heads": 57344,
+      "max_over_docs_and_heads": 81920,
+      "used_per_arm": {"n64": 64, "n256": 256, "n1024": 1024, "n4096": 4096, "n16384": 16384},
+      "note": "The accumulator is NOT the bottleneck. continual.py:172-182 collects every token of every packed reference batch (queries_per_batch='all_tokens', 4 q-heads per KV head), yielding 57344-81920 real reference queries per KV head per document. The historical hard-coded cap of 64 was discarding ~99.9% of them. The paper's 16k-50k regime is fully reachable; n=16384 ran in 201.7 s. No rows were fabricated or padded in any arm."
+    },
+    "cost_scaling": {
+      "phase2_e2e_s": {"n64": 164.2, "n256": 153.8, "n1024": 171.9, "n4096": 159.0, "n16384": 201.7},
+      "n16384_over_n64": 1.23,
+      "note": "cost is essentially FLAT in n (spread 154-202 s, within the run-to-run spread of the arms themselves); the per-document teacher-target/prefill work dominates. Raising n by 256x costs 1.23x wall clock. This arm is therefore NOT cost-dominated — it is quality-dominated: it is nearly free and still buys nothing."
+    },
+    "mechanism_for_the_v_growth": "guarded_sparse_am_value_update (value_solve.py:365-372) stacks the design as [X_new (n x t) ; sqrt(w) I (t x t)] with w=DELTA_WEIGHT=1e-2, i.e. the normal equations are (X_new^T X_new + w I) V_S = X_new^T R_new + w V_S_old. X_new^T X_new grows ~n while the trust-region block stays fixed at t=32 rows, so the relative pull of DELTA_WEIGHT decays like 1/n. RIDGE_LAMBDA is spectral-scaled (lam = 1e-4 * sigma_max(X)^2, itself growing with n) and is therefore scale-invariant and does not compensate. Raising n thus WEAKENS the only magnitude control in the system. Reproduced at unit level on synthetic data with the real function: |v|max 3.523 / 3.826 / 4.237 / 4.642 / 5.801 for n = 64 / 256 / 1024 / 4096 / 16384.",
+    "raw_arrays": "research_loop/state/diagnostics/MECH-QUERIES.json (per-arm per-layer |v|, solve-time mass_on_S, eval-time mass_on_S and total cartridge mass, plus the baseline_reproduced block); research_loop/state/diagnostics/MECH-QUERIES_route_mass.json (full per-layer, 12 cache x split combinations); research_loop/state/diagnostics/MECH-QUERIES_solve.json (per-document solve artefacts)"
+  },
+  "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/g4vbe2nd",
+  "wandb_run_id": "g4vbe2nd",
+  "wandb_other_runs": {
+    "train_n64": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/g4vbe2nd",
+    "train_n256": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/oy9at8n4",
+    "train_n1024": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/2oq9i3m2",
+    "train_n4096": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/5mbxe35f",
+    "train_n16384": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/71d29gbi",
+    "eval_n64_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/a97yej06",
+    "eval_n64_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/6zhn2i5a",
+    "eval_n256_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/7g6ggult",
+    "eval_n256_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/0ge8okqp",
+    "eval_n1024_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/pu3760st",
+    "eval_n1024_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/uauloy64",
+    "eval_n4096_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/izevjcpk",
+    "eval_n4096_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/8isil1tq",
+    "eval_n16384_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/f7epszlx",
+    "eval_n16384_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/hqex4env",
+    "eval_phase1_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/v0bccng6",
+    "eval_phase1_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/en7962fe"
+  },
+  "artifacts": [
+    "outputs/2026-07-28-20-01-52-continual_am_sparse/7359a34d-8305-432c-b34b-ecc9371e5568/cache_last.pt",
+    "outputs/2026-07-28-20-08-47-continual_am_sparse/53d5a974-46e4-4a5e-be9f-13359d62bfc1/cache_last.pt",
+    "outputs/2026-07-28-20-15-39-continual_am_sparse/ba19a7fd-e946-472b-84f6-f73494caa701/cache_last.pt",
+    "outputs/2026-07-28-20-24-55-continual_am_sparse/ce7865de-575c-4007-9eac-bac94579aa28/cache_last.pt",
+    "outputs/2026-07-28-20-28-24-continual_am_sparse/2b64632a-6f85-4b24-8a05-2a693c14c2fd/cache_last.pt",
+    "research_loop/results/MECH-QUERIES/launch_mech_queries.sh",
+    "research_loop/results/MECH-QUERIES/run_evals_and_diag.sh",
+    "research_loop/results/MECH-QUERIES/collect_diag.py",
+    "research_loop/results/MECH-QUERIES/wrapper.log",
+    "research_loop/results/MECH-QUERIES/wrapper_batch1.log",
+    "research_loop/results/MECH-QUERIES/wrapper_evals.log",
+    "research_loop/results/MECH-QUERIES/run_n64.log",
+    "research_loop/results/MECH-QUERIES/run_n256.log",
+    "research_loop/results/MECH-QUERIES/run_n1024.log",
+    "research_loop/results/MECH-QUERIES/run_n4096.log",
+    "research_loop/results/MECH-QUERIES/run_n16384.log",
+    "research_loop/state/diagnostics/MECH-QUERIES.json",
+    "research_loop/state/diagnostics/MECH-QUERIES_route_mass.json",
+    "research_loop/state/diagnostics/MECH-QUERIES_solve.json"
+  ],
+  "command": "FILES CHANGED (3, all default-preserving). (1) examples/qasper2/train/continual_am_sparse.py: new env knob `MAX_QUERIES_PER_HEAD` (default 64 == the historical dataclass default) plus `_max_queries_kwargs()`, which passes the kwarg CONDITIONALLY on `'max_queries_per_head' in AttentionMatchingFinetuningConfig.model_fields` and raises loudly if the knob is moved off 64 while the field is missing (RUNBOOK 6.10 / MECH-000); a wandb tag `nq-<N>` is added ONLY when N != 64 so stock config.yaml stays byte-identical. (2) cartridges/am/value_solve.py::guarded_sparse_am_value_update: under `compute_stats`, the stats dict now also carries `mass_on_S_mean` (= X_new.sum(-1).mean(), the WORKERS.md standing requirement) and `v_selected_absmax_before/after`, `v_selected_absmean_after`, `v_delta_absmax`. Read-only; no tensor entering the solve is touched. (3) cartridges/am/finetune.py::apply_document_am_write_to_cache: records the pre-subsample query count per (layer,head) (`n_queries_available_*`, the real accumulator ceiling), the post-subsample count, and per-layer `ref_mass_on_S_per_layer` / `v_selected_absmax_after_per_layer` into `AMUpdateStats.extra`. The `randperm` subsample at finetune.py:437-444 was NOT modified: it still draws `torch.randperm(queries.shape[0])[:cap]` from the FULL pool, so (a) the RNG stream advances identically for every cap and (b) the n=64 subsample is an exact prefix of the n=256/1024/4096/16384 subsamples (verified: prefix=True for all pairs, post-draw RNG state identical); the per-document path computes targets AFTER the subsample from the subsampled queries, so the DIAG-WIRE query/target alignment trap does not arise there and alignment is preserved by construction. UNIT SANITY (no GPU): (i) guarded solve on random (T=512,d=128,|S|=32) at n=64/256/1024 -> shapes preserved, all finite, exactly the 32 selected rows changed, mass_on_S 0.0617/0.0635/0.0624; (ii) full `apply_document_am_write_to_cache` on a stub cache (L=3,H=2,T=64,d=16,T_doc=40,|S|=8) at n=64/256/1024 -> finite, shapes preserved, 48/48 selected rows written, extra dict carries all 7 new keys, avail=1200 used=64/256/1024; (iii) driver config at default is BYTE-IDENTICAL to HEAD's (289-line to_dict diff empty) and at n=1024 differs in exactly two entries (`max_queries_per_head`, the `nq-1024` tag). DUAL-CARTRIDGES: from a neutral cwd with no PYTHONPATH `import cartridges` resolves to the SIBLING repo, which DOES have `max_queries_per_head` but NOT the new instrumentation -> the launcher pins PYTHONPATH=$CARTRIDGES_DIR and its preflight hard-asserts both the resolved path and the presence of `mass_on_S_mean` in the guarded solve's source (PREFLIGHT_OK in every job log). GPU COMMANDS: research_loop/results/MECH-QUERIES/launch_mech_queries.sh (one flock-claimed GPU, gpu1, MASTER_PORT=29501) ran five sequential Phase-2 runs, MAX_QUERIES_PER_HEAD in {64,256,1024,4096,16384}, all other env at TOP_T=32 GRANULARITY=per_layer SLOT_SELECTION=tfidf USE_IDF=0 KEY_MODE=freeze TARGET_MODE=cartridge_plus_doc RIDGE_LAMBDA=1e-4 RIDGE_SCALE=spectral DELTA_WEIGHT=1e-2 AM_EXECUTION_MODE=per_document PHASE1_CACHE_PATH=outputs/phase1_selfdistill_qwen512/cache_last.pt SYNTH_DATA_PATH=data/qasper/train/qwen_qasper_MT_task_8192.parquet MODEL_NAME=Qwen/Qwen3-4B-Instruct-2507 NUM_TOKENS=512, EVAL_QA_PATH/EVAL_MT_PATH set, WANDB_DISABLED=0 WANDB_GROUP=B-CASCADE RUN_NAME=MECH-QUERIES_n<N>. Then research_loop/results/MECH-QUERIES/run_evals_and_diag.sh re-claimed one GPU and ran examples/qasper2/train/eval_forgetting.py on {5 arms + phase1} x {QA, MT} (parse `Eval loss`, then kill the PID per RUNBOOK 1), then research_loop/results/ORACLE-WRITE/measure_route_mass.py (unmodified, standalone) over the same 6 caches x 2 splits, then research_loop/results/MECH-QUERIES/collect_diag.py. DID NOT COMMIT.",
+  "observations": "The n=64 control reproduced EXP-007-top32 to all 16 printed digits on both splits in-run (QA 2.1766157150268555 / MT 2.5483615398406982) and reproduced ORACLE-WRITE's standalone control exactly (QA 2.1771795749664307 / MT 2.5524158477783203); the Phase-1 floor control also reproduced exactly (2.23880672454834 / 3.7825491428375244), so the build is default-preserving and every downstream number is on the same ruler. B-CASCADE's joint prediction did not hold, and it failed on the |v| axis in the opposite direction to the one predicted: value_global_max_abs GROWS monotonically with n — 984 (n=64), 1328, 1968, 3344, 7808 (n=16384) — moving 8x further from the teacher's own |63|, with layer 34 the argmax in every arm. The reason is in the solve itself: `guarded_sparse_am_value_update` stacks [X_new (n x t); sqrt(w) I (t x t)], so the normal equations are (X_new^T X_new + w I) V = X_new^T R + w V_old; X_new^T X_new scales with n while the DELTA_WEIGHT trust region stays fixed at 32 rows, so its relative pull decays like 1/n, and the spectral-scaled ridge (lam ~ sigma_max(X)^2, itself growing with n) does not compensate — reproduced at unit level on synthetic data (|v|max 3.52 -> 5.80 across the same sweep). Meanwhile the routing collapse ORACLE-WRITE found IS repaired by more queries and then overshoots: total eval-time cartridge attention mass on MT goes 0.3285 (n=64) / 0.3715 (n=256) / 0.6399 (n=1024) / 0.6395 (n=4096) / 0.6388 (n=16384) against the Phase-1 reference 0.5879, i.e. from -44% to +9% of Phase-1 — and MT did not improve at any n. MT is 2.5524 (control), 2.7716, 2.5744, 2.7114, 2.6943: the best MT in the sweep is the n=64 control, n=1024's +0.022 is deep inside the +-0.1-0.2 noise band ('MT did not move'), and n=256/4096/16384 are +0.219/+0.159/+0.142, i.e. at or outside the band and worse. QA moves the same way (2.1772 control vs 2.2575-2.4097). Eval-time mass_on_S is essentially invariant in n (MT 0.0784-0.0842 vs Phase-1 0.0896), so what n moves is the cartridge's TOTAL share of attention, not the written slots' share of it. The three quantities B-CASCADE bound together are therefore decoupled in the measurement: cartridge routing mass recovered fully (and past Phase-1) while |v| grew and CE did not improve. Solve-time mass_on_S — computed at value_solve.py and never before recorded in this loop — is 0.1585 / 0.1463 / 0.1472 / 0.1451 / 0.1452 averaged over the 36 layers (per-layer range 0.030-0.595 at n=64), cross-checking ORACLE-WRITE's independent 0.1523 train-time figure. am/mean_mse rises slightly with n (0.11906 -> 0.12610), consistent with 32 free rows fitting more constraints. On cost, the sweep is essentially FLAT: phase2 e2e 164.2 / 153.8 / 171.9 / 159.0 / 201.7 s, so a 256x increase in n costs 1.23x wall clock and the per-document prefill/teacher-target work dominates — this is not a cost-dominated point, it is a quality-dominated one. The accumulator ceiling is 57344-81920 real reference queries per KV head per document (continual.py:172-182 keeps every token of every packed batch, 4 q-heads per KV head), so the hard-coded 64 was discarding ~99.9% of the available queries and the AM paper's 16k-50k regime is fully reachable on this box; no rows were fabricated or padded in any arm. Caveats: the eval splits are tiny (QA n=6, MT n=5 batches) so only the n=256 deltas are clearly outside the noise band on both axes; the cartridge-mass series is non-monotone between n=256 (0.3715) and n=1024 (0.6399) — a step change this measurement does not explain; and the sweep varies n at a FIXED DELTA_WEIGHT=1e-2, so it cannot separate 'more queries do not help' from 'more queries help but the 1/n decay of the trust region cancels it', which would need DELTA_WEIGHT scaled with n. This sits alongside DIAG-OBJ-c, which drove the same trust-region axis to its endpoint (DELTA_WEIGHT=0 -> |v| 21504, both losses +13).",
+  "failure_cause": null
+}

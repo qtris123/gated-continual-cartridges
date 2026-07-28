@@ -96,8 +96,35 @@ Eliminated as *knob-level* explanations: gating (HYP-G1), support (HYP-S1), ridg
   preconditioning) — SCOUT direction, MISSION §5.
 - **Evidence so far:** none. `am/mean_mse` is logged to wandb but has never been read against CE.
 
-## 🔥 B-CASCADE — the solve destroys the routing it depends on (NEW, opened 2026-07-28 by ORACLE-WRITE)
-- **Stage:** A MEASURE (measured on first contact) · **Status:** **measured, self-inflicted, fixable**
+## 🔥 B-CASCADE — the solve destroys the routing it depends on
+- **Stage:** CLOSED (with one confound outstanding) · **Status:** ❌ **REFUTED as an acquisition
+  explanation — but half of it was right** (MECH-QUERIES, 2026-07-28)
+- **The prediction was:** raising `n ≫ t` shrinks `|v|`, restores cartridge mass, **and** improves MT —
+  all three together. Result across `n ∈ {64, 256, 1024, 4096, 16384}` at `top_t=32`:
+
+  | n | QA | MT | \|v\|max | cartridge mass (MT) |
+  |---|---|---|---|---|
+  | 64 (control) | **2.1772** | **2.5524** | 984 | 0.3285 |
+  | 256 | 2.4097 | 2.7716 | 1328 | 0.3715 |
+  | 1024 | 2.2575 | 2.5744 | 1968 | 0.6399 |
+  | 4096 | 2.3412 | 2.7114 | 3344 | 0.6395 |
+  | 16384 | 2.3325 | 2.6943 | 7808 | 0.6388 |
+
+  **The three quantities decoupled.** ✅ The routing collapse **is repaired and overshoots** (0.329 →
+  0.640, past Phase-1's 0.588). ❌ `|v|` **grows** 984 → 7808, *away* from the teacher's |63|.
+  ❌ **MT never improves** — the best arm is the `n=64` control; n=1024's +0.022 is inside noise.
+- **Mechanism for why `|v|` grew (worker-derived, reproduced at unit level):** the guarded solve stacks
+  `[X_new (n×t); √w·I (t×t)]`, giving `(X_newᵀX_new + w·I)V = X_newᵀR + w·V_old`. The **data Gram scales
+  with `n` while the trust region stays fixed at `t` rows**, so its relative pull decays like **1/n**.
+  The spectral ridge (λ ∝ σ_max(X)²) is scale-invariant and does not compensate.
+- ⚠️ **OUTSTANDING CONFOUND (worker-flagged, and it is a real one):** `n` was swept at **fixed**
+  `DELTA_WEIGHT=1e-2`, so *"more queries don't help"* is **not separated from** *"more queries help, but
+  the 1/n trust-region decay cancels it."* Resolvable **env-only** by scaling `DELTA_WEIGHT ∝ n`
+  (w = 1e-2·n/64) to hold the relative pull constant. → MECH-QUERIES-B dispatched.
+- **Also established:** the accumulator can supply **57,344–81,920 real queries per KV-head per
+  document** — the hard-coded 64 was discarding **~99.9%** of them — and the cost is **flat**: 256× the
+  queries for **1.23×** wall clock. This is a *quality*-dominated point, not a cost-dominated one.
+- **Superseded framing below (kept for provenance):**
 - **The observation:** our **solved** write reaches `|v|` up to **984** and **collapses total cartridge
   attention from 0.588 → 0.329 on MT** (0.570 → 0.320 on QA), pushing 10/36 layers under 5% mass on S.
   The **oracle's teacher values top out at |63|** — 15× smaller — and leave cartridge mass **at Phase-1

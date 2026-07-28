@@ -81,3 +81,78 @@
   narrow channel, not unreadable. Verdict on the *mechanism as a method* is n/a (it is a deliberate
   oracle, not a candidate write rule). Orchestrator owns the board call.
 - Kept in tree? yes — opt-in, default off, needed to reproduce/extend the ceiling measurement.
+
+### MECH-002: reference-query count per KV head → flag `MAX_QUERIES_PER_HEAD` (default: 64 = unchanged)
+- Status: tested
+- Implements: SCOUT-AM divergence #2 (`AM.pdf` uses **16k–50k** reference queries per KV-head; we
+  hard-coded 64) | Targets board entry: **B-CASCADE** (also B-TARGET, B-CAP)
+- Files:
+  - `examples/qasper2/train/continual_am_sparse.py` — env knob `MAX_QUERIES_PER_HEAD` +
+    `_max_queries_kwargs()` (conditional kwarg + loud failure, RUNBOOK §6.10); wandb tag `nq-<N>`
+    added **only** when `N != 64`
+  - `cartridges/am/value_solve.py::guarded_sparse_am_value_update` — stats now carry
+    **`mass_on_S_mean`** (the WORKERS.md standing requirement, previously only in the un-guarded
+    solve, which `DELTA_WEIGHT=1e-2` never reaches) + `v_selected_absmax_before/after`,
+    `v_selected_absmean_after`, `v_delta_absmax`
+  - `cartridges/am/finetune.py::apply_document_am_write_to_cache` — records into
+    `AMUpdateStats.extra`: the **pre-subsample** query count per (layer,head)
+    (`n_queries_available_*`, i.e. the real accumulator ceiling), the post-subsample count, and
+    per-layer `ref_mass_on_S_per_layer` / `v_selected_absmax_after_per_layer`
+- What it changes (at the level of the math): `AttentionMatchingFinetuningConfig.max_queries_per_head`
+  was pinned at 64 with no env knob, so the per-document solve fitted `n=64` rows against `t=top_t`
+  columns — exactly determined at `top_t=64`, underdetermined at `top_t=128`. The knob lets `n ≫ t`,
+  making `X_new` in `min ‖A_new·V_S − R_new‖² + w‖V_S − V_S^old‖²` tall instead of square. **The
+  `randperm` subsample was not touched**: it still draws from the full pool, so the RNG stream advances
+  identically for any cap and the `n=64` draw is an exact *prefix* of every larger draw (verified);
+  targets in the per-document path are computed *after* the subsample from the subsampled queries, so
+  the DIAG-WIRE alignment trap does not arise there.
+- **Accumulator ceiling (asked for explicitly): 57 344 – 81 920 real reference queries per KV head per
+  document.** `continual.py:172-182` keeps every token of every packed reference batch
+  (`queries_per_batch='all_tokens'`, 4 q-heads per KV head), so the hard-coded 64 was discarding
+  ~99.9% of what was already collected. The paper's 16k–50k regime is reachable; `n=16384` ran in
+  201.7 s. **Nothing was fabricated or padded in any arm.**
+- Sanity check: (i) guarded solve on random `(T=512, d=128, |S|=32)` at n=64/256/1024 — shapes
+  preserved, all finite, exactly the 32 selected rows changed, `mass_on_S` 0.0617/0.0635/0.0624;
+  (ii) full `apply_document_am_write_to_cache` on a stub cache `(L=3,H=2,T=64,d=16,T_doc=40,|S|=8)` at
+  n=64/256/1024 — finite, shapes preserved, 48/48 selected rows written, `extra` carries all 7 new
+  keys, `avail=1200 used=64/256/1024`; (iii) `randperm` prefix property `prefix=True` for all pairs and
+  post-draw RNG state identical.
+- Bit-identical with flag off? **yes.** The driver's 289-line `config.to_dict()` at the default is
+  **byte-identical to HEAD's**, and at `n=1024` differs in exactly two entries
+  (`max_queries_per_head`, the `nq-1024` tag). The `n=64` GPU control reproduced EXP-007-top32 to all
+  16 printed digits on both splits in-run (2.1766157150268555 / 2.5483615398406982), reproduced
+  ORACLE-WRITE's standalone control exactly (2.1771795749664307 / 2.5524158477783203), and the Phase-1
+  floor control reproduced exactly (2.23880672454834 / 3.7825491428375244). Dual-`cartridges` guard:
+  the sibling repo *does* have `max_queries_per_head` but *not* the new instrumentation, so the
+  launcher pins `PYTHONPATH` and hard-asserts both the resolved path and the presence of
+  `mass_on_S_mean` in the guarded solve (`PREFLIGHT_OK` in every job log).
+- Tested by: **MECH-QUERIES** (`WANDB_GROUP=B-CASCADE`), 5 arms at fixed `TOP_T=32`:
+
+  | n | QA | MT | `value_global_max_abs` | cartridge mass MT | `mass_on_S` MT | e2e s |
+  |---|---|---|---|---|---|---|
+  | Phase-1 | 2.2388 | 3.7825 | — | 0.5879 | 0.0896 | — |
+  | **64 (control)** | **2.1772** | **2.5524** | 984 | 0.3285 | 0.0810 | 164.2 |
+  | 256 | 2.4097 | 2.7716 | 1328 | 0.3715 | 0.0784 | 153.8 |
+  | 1024 | 2.2575 | 2.5744 | 1968 | 0.6399 | 0.0842 | 171.9 |
+  | 4096 | 2.3412 | 2.7114 | 3344 | 0.6395 | 0.0836 | 159.0 |
+  | 16384 | 2.3325 | 2.6943 | 7808 | 0.6388 | 0.0839 | 201.7 |
+
+  wandb train: `g4vbe2nd` / `oy9at8n4` / `2oq9i3m2` / `5mbxe35f` / `71d29gbi` (12 eval runs in the bundle)
+- Verdict + mechanistic reason: **the knob works and is nearly free; B-CASCADE's joint prediction does
+  not hold.** `|v|` **grows** monotonically with `n` (984 → 7808, 8× *away* from the teacher's |63|),
+  because `guarded_sparse_am_value_update` stacks `[X_new (n×t) ; √w·I (t×t)]` — the normal equations
+  are `(X_newᵀX_new + w·I)V = X_newᵀR + w·V_old`, so `X_newᵀX_new` scales with `n` while the
+  `DELTA_WEIGHT` trust region stays fixed at 32 rows and its relative pull decays like `1/n`; the
+  spectral-scaled ridge (`λ ∝ σ_max(X)²`, itself growing with `n`) does not compensate. Reproduced at
+  unit level (`|v|max` 3.52 → 5.80 over the same sweep). Meanwhile the routing collapse **is** repaired
+  and overshoots — total eval-time cartridge attention on MT 0.329 → 0.640 vs Phase-1's 0.588 — and
+  **MT still does not improve at any n** (best MT in the sweep is the n=64 control; n=1024's +0.022 is
+  inside the ±0.1–0.2 noise band, n=256/4096/16384 are +0.219/+0.159/+0.142 and worse). So the three
+  quantities B-CASCADE bound together are **decoupled**. Cost is flat (256× the queries for 1.23× wall
+  clock), so this is a quality-dominated point, not a cost-dominated one. Confound not separated: `n`
+  was swept at a **fixed** `DELTA_WEIGHT=1e-2`, so "more queries don't help" cannot be told apart from
+  "more queries help but the 1/n decay of the trust region cancels it". Board call is the
+  orchestrator's.
+- Kept in tree? yes — opt-in, default 64, bit-identical when unset; the `mass_on_S` instrumentation on
+  the guarded path is now the only place that number is recorded for the canonical `DELTA_WEIGHT>0`
+  configuration.

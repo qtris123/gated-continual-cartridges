@@ -249,3 +249,33 @@ research_loop/results/EXP-001/result.json ; outputs/2026-07-25-18-02-29-continua
   and *synthetic* keys — untested by this diagnostic). Keys remain the one untouched axis.
 - Caveat (worker-stated): ρ_QA is in-sample by construction, so a held-out control would *shrink* the
   MT/QA contrast, not widen it. All numbers are pre-write.
+
+## 2026-07-28 — MECH-QUERIES (board B-CASCADE): refuted, with the mechanism for why
+- BUILD: `MAX_QUERIES_PER_HEAD` env knob (MECH-002), default 64, **bit-identical when default** — driver
+  `to_dict()` byte-identical to HEAD (empty diff) and the `n=64` GPU control reproduced EXP-007-top32 to
+  all 16 digits, matching ORACLE-WRITE's independent control exactly. `randperm` untouched and
+  cap-invariant, so the n=64 draw is an exact prefix of every larger draw (verified).
+- **The accumulator can supply 57,344–81,920 real queries per KV-head per document.** The hard-coded 64
+  was discarding **~99.9%** of them. n=16384 (the AM paper's own regime) ran fine.
+- Sweep at `TOP_T=32` — the three quantities B-CASCADE bound together **decoupled**:
+  | n | QA | MT | \|v\|max | cartridge mass MT |
+  |---|---|---|---|---|
+  | 64 | **2.1772** | **2.5524** | 984 | 0.3285 |
+  | 256 | 2.4097 | 2.7716 | 1328 | 0.3715 |
+  | 1024 | 2.2575 | 2.5744 | 1968 | 0.6399 |
+  | 4096 | 2.3412 | 2.7114 | 3344 | 0.6395 |
+  | 16384 | 2.3325 | 2.6943 | 7808 | 0.6388 |
+  ✅ routing collapse repaired and overshooting (0.329 → 0.640 vs Phase-1's 0.588); ❌ `|v|` **grew** 8×
+  away from the teacher's |63|; ❌ **MT never improved** (best = the n=64 control; n=1024's +0.022 is noise).
+- **Why `|v|` grew** (worker-derived, reproduced at unit level 3.52 → 5.80): the guarded solve stacks
+  `[X_new (n×t); √w·I (t×t)]` ⇒ `(X_newᵀX_new + w·I)V = X_newᵀR + w·V_old`. The data Gram scales with `n`
+  while the trust region contributes a fixed `t` rows, so **its relative pull decays like 1/n**; the
+  spectral ridge (λ ∝ σ_max(X)²) is scale-invariant and doesn't compensate.
+- ⚠️ **Confound the worker raised against itself:** `n` was swept at fixed `DELTA_WEIGHT`, so "queries
+  don't help" is not separated from "queries help but the 1/n decay cancels it". Env-only fix: scale
+  `DELTA_WEIGHT ∝ n`. → MECH-QUERIES-B dispatched (n=1024@0.16, n=16384@2.56, + the n=64 control).
+- **Cost is flat:** 256× the queries for **1.23×** wall clock (164 → 202 s). A quality-dominated point,
+  not a cost-dominated one.
+- Solve-time `mass_on_S` recorded for the first time from the `DELTA_WEIGHT` branch (previously
+  unreachable in the canonical config): 0.1585 → 0.1452 over 36 layers, cross-checking ORACLE-WRITE's
+  independent 0.1523.

@@ -118,6 +118,10 @@ EVAL_MT_PATH = os.environ.get("EVAL_MT_PATH") or None
 # B-ROUTE write-ceiling oracle (opt-in, default OFF).
 AM_ORACLE_WRITE = os.environ.get("AM_ORACLE_WRITE", "0") in ("1", "true", "True")
 AM_ORACLE_WRITE_ASSIGN = os.environ.get("AM_ORACLE_WRITE_ASSIGN", "mass_ranked")
+# B-CASCADE: number of reference queries per KV head fed to the closed-form solve.
+# Default 64 == the historical hard-coded `AttentionMatchingFinetuningConfig`
+# value, so stock runs are unchanged. `n > top_t` makes the system over-determined.
+MAX_QUERIES_PER_HEAD = int(os.environ.get("MAX_QUERIES_PER_HEAD", "64"))
 
 _model_cls = FlexQwen3ForCausalLM if "qwen" in MODEL_NAME.lower() else FlexLlamaForCausalLM
 logger = get_logger(__name__)
@@ -166,9 +170,32 @@ def _oracle_write_kwargs() -> dict:
     }
 
 
+def _max_queries_kwargs() -> dict:
+    """Pass `max_queries_per_head` ONLY if the imported package has the field.
+
+    Same conditional-kwarg discipline as `_oracle_write_kwargs` (RUNBOOK §6.10):
+    an unconditional kwarg once crashed every AM run through the sibling
+    `cartridges` import path. Default is 64 (the dataclass default), so an
+    unset `MAX_QUERIES_PER_HEAD` produces a byte-identical config.
+    """
+    import cartridges
+
+    if "max_queries_per_head" not in AttentionMatchingFinetuningConfig.model_fields:
+        if MAX_QUERIES_PER_HEAD != 64:
+            raise RuntimeError(
+                f"MAX_QUERIES_PER_HEAD={MAX_QUERIES_PER_HEAD} but the imported "
+                f"`cartridges` package ({os.path.dirname(cartridges.__file__)}) has no "
+                "`max_queries_per_head` field. "
+                "Export PYTHONPATH=$CARTRIDGES_DIR:$PYTHONPATH (RUNBOOK §6.10)."
+            )
+        return {}
+    return {"max_queries_per_head": MAX_QUERIES_PER_HEAD}
+
+
 def _build_am_config() -> AttentionMatchingFinetuningConfig:
     return AttentionMatchingFinetuningConfig(
         **_oracle_write_kwargs(),
+        **_max_queries_kwargs(),
         enabled=True,
         top_t=TOP_T,
         use_idf=USE_IDF and BG_STATS_PATH is not None,
@@ -599,6 +626,10 @@ config = TrainConfig(
             ["oracle", "diagnostic", f"oracle-write-{AM_ORACLE_WRITE_ASSIGN}"]
             if AM_ORACLE_WRITE
             else []
+        ) + (
+            # only tagged when moved off the historical default, so stock runs
+            # keep a byte-identical config.yaml / wandb config
+            [f"nq-{MAX_QUERIES_PER_HEAD}"] if MAX_QUERIES_PER_HEAD != 64 else []
         ),
         notes=os.environ.get("WANDB_NOTES") or None,
     ) if os.environ.get("WANDB_DISABLED", "0") not in ("1", "true", "True") else None,
