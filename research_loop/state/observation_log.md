@@ -355,3 +355,30 @@ research_loop/results/EXP-001/result.json ; outputs/2026-07-25-18-02-29-continua
 - Caveats (worker-stated): "overwritten" ≠ "erased" (the trust region leaves partial traces); (3) measured
   on the pre-write cartridge; Q1/Q2/Q4 are bit-identical to the same quantities recomputed from
   ORACLE-WRITE's independent run of this config — a same-seed reproduction, so plumbing, not seed-robustness.
+
+## 2026-07-29 — DIAG-KEYSPACE (board B-ROUTE, key side): there is no task separation to exploit
+- **ρ_key sits at its own held-out control floor at every r** (control = eigenbasis from half the QA
+  *documents*, energy from the disjoint other half): 0.4117/0.4033, 0.3398/0.3283, 0.2609/0.2514,
+  0.1711/0.1657, 0.0751/0.0741 (ratios 1.014–1.038). At the GPM 99% rule MT is **below** its floor
+  (0.0113 vs 0.0118). No head exceeds its control by >0.044. **The raw 0.171 lands inside LIT-020's
+  live band [0.15, 0.6] only because the floor is 0.166** — without the control it reads as a green light.
+- **Key-blindness premise CONFIRMED, its consequence REFUTED.** `Q₀` participation effective rank
+  5.09 (QA) / 5.30 (MT), 106–107 of 128 dims to 99% energy, vs the routing Gram's 1.97 — the incumbent
+  keys do resolve far less than the queries contain. But QA and MT occupy the **same** subspace: mean
+  principal angle 4.3° at r=1, 10–14° for r=4…32, traces agreeing to 0.3%.
+- **Mean-query separation is smaller than sampling noise:** 0.0700 vs a QA split-half control of 0.174 —
+  2.5× smaller than the within-QA gap, with **0 of 288 heads** the other way (cosine 0.99727).
+- **Achievable bound:** an optimally placed key buys MT/QA **1.2245** at comparable bandwidth (1.19×
+  above the same-task floor) vs incumbent 1.083; 1.080 at β's bandwidth. Random key 1.011; the
+  `q̄_MT − q̄_QA` direction gives **0.841 — worse than random**.
+- 🔬 **Self-caught overfitting:** free-form optimisation hit in-sample 2.2–166 but **held-out 0.885–1.12**,
+  with the QA-vs-QA control reaching the same fit ratio. The first pass (superseded run `kx4hsp5t`)
+  reported per-head ratios to **1e26** before the held-out split existed. The reported bound is the
+  closed-form construction the optimiser cannot beat.
+- **Consequence: BOTH sides of the write are now closed.** Values (perfect write 2.381; 4.23× bandwidth
+  worse; bandwidth doesn't predict MT) and keys (no separation to exploit). **Selectivity mechanisms are
+  bounded.** Explicitly NOT ruled out: mechanisms that change the **query distribution**, non-fixed-slot
+  formulations, and **allocation/capacity** mechanisms — which are not selectivity mechanisms at all.
+- Cross-validated: reproduces DIAG-ROUTING's cartridge mass to 5–6 s.f. and the union ratio 1.083;
+  ρ_key identical to 6 s.f. across two processes. Cost 8.7 s collection + 0.8 s spectra + 167 s for the
+  bound optimisation (unbudgeted by SCOUT-KEYS, and it is what made the number credible).

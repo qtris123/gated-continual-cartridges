@@ -343,7 +343,45 @@ Eliminated as *knob-level* explanations: gating (HYP-G1), support (HYP-S1), ridg
   isotropic brake with MEMIT's `C₀` = second moment of the old routing vectors, so the write is
   restrained *in the directions the old content occupies* and free elsewhere.
 
-## 🏁 B-ROUTE — CLOSED: the write is NOT bandwidth-limited, and the value-only family is EXHAUSTED
+## 🏁🏁 B-ROUTE (KEY SIDE) — CLOSED: **there is no task separation to exploit** (DIAG-KEYSPACE, 2026-07-29)
+- **Stage:** CLOSED · **Status:** ✅ **confirmed + capped.** Selectivity is not geometrically available
+  on the key side either. **Both sides of the write are now closed.**
+- **ρ_key sits at its own control floor at every threshold** (control = eigenbasis from one half of the
+  QA *documents*, energy from the disjoint other half — a document-level split, never token-level):
+
+  | r | 4 | 8 | 16 | 32 | 64 |
+  |---|---|---|---|---|---|
+  | ρ_key (MT) | 0.4117 | 0.3398 | 0.2609 | 0.1711 | 0.0751 |
+  | QA held-out control | 0.4033 | 0.3283 | 0.2514 | 0.1657 | 0.0741 |
+  | ratio | 1.021 | 1.035 | 1.038 | **1.032** | 1.014 |
+
+  At the GPM 99%-energy rule MT is **below** its floor (0.0113 vs 0.0118). **No head anywhere exceeds
+  its control by >0.044.** The raw 0.171 lands inside LIT-020's live band [0.15, 0.6] **only because the
+  floor is 0.166** — without the control this would have been read as a green light.
+- ⭐ **The key-blindness premise was RIGHT; its consequence is REFUTED.** `Q₀` participation effective
+  rank is **5.09 (QA) / 5.30 (MT)** — 106–107 of 128 dims to 99% energy — versus the routing Gram's
+  **1.97**, so the incumbent keys really do resolve far less than the queries contain. But **QA and MT
+  occupy the same subspace**: mean principal angle **4.3°** at r=1, 10–14° for r=4…32, traces agreeing
+  to 0.3%. There was never a hidden separation for better keys to expose.
+- **Mean-query separation is smaller than sampling noise:** ‖q̄_MT − q̄_QA‖/‖q̄_MT‖ = **0.0700** against a
+  QA split-half control of **0.174** — the between-task gap is **2.5× smaller than the within-QA
+  sampling gap**, and **0 of 288 heads** run the other way (cosine 0.99727). Prediction was ≥0.30.
+- **Achievable selectivity bound (held-out documents):** an *optimally placed* extra key buys MT/QA
+  **1.2245** at comparable bandwidth — **1.19× above the same-task floor** — against an incumbent 1.083.
+  At β's bandwidth it is 1.080 vs a 1.034 control. A random key gives 1.011; the `q̄_MT − q̄_QA`
+  direction gives **0.841, worse than random** (Δμ is noise-dominated).
+- 🔬 **The worker caught its own overfitting, which is why this number is credible.** Free-form
+  optimisation reached in-sample ratios of 2.2–166 but **held-out 0.885–1.12**, with the QA-vs-QA
+  control reaching the *same* fit ratio (2.94 vs 2.82). Its first pass (superseded run `kx4hsp5t`)
+  reported per-head ratios up to **1e26** before the held-out split was added. The reported bound comes
+  from the **closed-form** construction that the optimiser fails to beat.
+- **What this does NOT rule out (the escalation surface):** mechanisms that **change the query
+  distribution**, and **non-fixed-512-slot** formulations. Also untouched: **allocation/capacity**
+  mechanisms, which are not selectivity mechanisms and are therefore *not* bounded by this result.
+- **Cross-validated:** independently reproduces DIAG-ROUTING's cartridge mass to 5–6 s.f. and the
+  tf-idf-union ratio 1.083; ρ_key identical to 6 s.f. across two processes.
+
+## 🏁 B-ROUTE (VALUE SIDE) — CLOSED: the write is NOT bandwidth-limited, and the value-only family is EXHAUSTED
 - **Stage:** CLOSED · **Status:** ✅ **confirmed + capped** (MECH-BETA, 2026-07-28)
 - **The decisive test.** β (AM's own mass-matching mechanism) **ran clean for the first time in this
   project** — 288 fits/doc × 16 docs, **0 non-finite warm starts, 0 raised**, every β inside [−3,3].

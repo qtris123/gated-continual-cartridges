@@ -345,6 +345,8 @@ def collect(model, cache, dataloader, n_layers, S32, label):
         "sub_lse": sub_lse,
         "sub_scored": sub_scored,
         "sub_half": sub_half,
+        "sub_group": sub_group,
+        "n_docs": doc_offset,
         "n_batches": n_batches,
     }
     return out
@@ -576,90 +578,155 @@ def main():
     dmu_logit_per_unit = nrm(mq_mt - mq_qa) / d_sqrt
 
     # ---------------- item 4: achievable selectivity bound ------------------------------
+    # Every construction / optimisation is FITTED on documents 0,1 (mod 4) and REPORTED on
+    # the held-out documents 2,3 (mod 4).  The identical pipeline is run as a CONTROL on
+    # two QA document groups (target = QA docs g0, avoid = QA docs g1; tested on g2 vs g3),
+    # i.e. two samples of the SAME task.  Any selectivity the control reaches is the floor
+    # that the MT-vs-QA arm must beat.  A random-direction key is the second floor.
     t_opt = time.time()
-    qMT = MT["sub_q"].reshape(P, N_SUB, d)
-    lMT = MT["sub_lse"].reshape(P, N_SUB)
-    qQA = QA["sub_q"].reshape(P, N_SUB, d)
-    lQA = QA["sub_lse"].reshape(P, N_SUB)
     c_med = torch.as_tensor(key_norm_med.reshape(P), device=DEVICE, dtype=torch.float32)
 
-    dmu = torch.as_tensor((mq_mt - mq_qa).reshape(P, d), device=DEVICE, dtype=torch.float32)
-    qbar_mt = torch.as_tensor(mq_mt.reshape(P, d), device=DEVICE, dtype=torch.float32)
-    # LIT-020 construction: P_perp_r qbar_MT with U_r from Q0^QA
-    U_qa = torch.zeros(P, d, d, device=DEVICE)
-    for l in range(n_layers):
-        _, Uq = eigh_desc(QA["Q0"]["all"][l])
-        U_qa[l * H:(l + 1) * H] = Uq.float()
-    nullspace_dirs = {}
-    for r in (4, 8, 16, 32, 64):
-        Ur = U_qa[:, :, :r]
-        proj = torch.einsum("pdr,pd->pr", Ur, qbar_mt)
-        nullspace_dirs[r] = qbar_mt - torch.einsum("pdr,pr->pd", Ur, proj)
+    def rows(split, groups):
+        g = res[split]["sub_group"]
+        idx = torch.as_tensor(np.nonzero(np.isin(g, groups))[0], device=DEVICE, dtype=torch.long)
+        q = res[split]["sub_q"].reshape(P, N_SUB, d)[:, idx, :].contiguous()
+        l = res[split]["sub_lse"].reshape(P, N_SUB)[:, idx].contiguous()
+        return q, l, int(idx.numel())
 
-    bound = {"c_scales": CSCALES, "m_keys": MKEYS, "results": {}}
-    bound_ph = {}       # per-head arrays for the npz
-    for m in MKEYS:
-        for cs in CSCALES:
-            c = c_med * cs
-            tag = f"m{m}_c{cs:g}"
-            entry = {}
-            # fixed constructions
-            fixed = {
-                "qbar_MT": qbar_mt,
-                "dmu": dmu,
-                **{f"nullspace_r{r}": v for r, v in nullspace_dirs.items()},
-            }
-            for name, v in fixed.items():
-                vv = v / v.norm(dim=-1, keepdim=True).clamp_min(1e-12)
-                k = (c.view(P, 1, 1) * vv.view(P, 1, d)).expand(P, m, d).contiguous()
-                if m > 1:   # m identical keys == one key with logit + log m; keep as-is
-                    k = k.clone()
-                with torch.no_grad():
-                    mMT = mass_stats(qMT, lMT, k, d_sqrt)
-                    mQA = mass_stats(qQA, lQA, k, d_sqrt)
-                entry[name] = {
-                    "mass_MT": float(mMT.mean()), "mass_QA": float(mQA.mean()),
-                    "ratio_meanhead": float((mMT / mQA.clamp_min(1e-30)).mean()),
-                    "ratio_pooled": float(mMT.mean() / mQA.mean().clamp_min(1e-30)),
-                }
-                bound_ph[f"{tag}_{name}_massMT"] = mMT.cpu().numpy().reshape(n_layers, H)
-                bound_ph[f"{tag}_{name}_massQA"] = mQA.cpu().numpy().reshape(n_layers, H)
-            # optimised (multi-start: dmu / qbar_MT / null-space r=32; per-head best)
-            gen = torch.Generator(device=DEVICE).manual_seed(SEED)
-            for obj in ("ratio", "mass"):
-                best = None
-                for v0 in (dmu, qbar_mt, nullspace_dirs[32]):
-                    init = v0.view(P, 1, d).expand(P, m, d).contiguous().clone()
-                    if m > 1:
-                        init = init + 0.3 * init.norm(dim=-1, keepdim=True) * torch.randn(
-                            P, m, d, device=DEVICE, generator=gen) / (d ** 0.5)
-                    _k, mMT, mQA = optimise_key(qMT, lMT, qQA, lQA, c, m, d_sqrt, obj, init)
-                    val = (torch.log(mMT.clamp_min(1e-30)) - torch.log(mQA.clamp_min(1e-30))
-                           if obj == "ratio" else torch.log(mMT.clamp_min(1e-30)))
-                    if best is None:
-                        best = (val, mMT, mQA)
-                    else:
-                        take = val > best[0]
-                        best = (torch.where(take, val, best[0]),
-                                torch.where(take, mMT, best[1]),
-                                torch.where(take, mQA, best[2]))
-                _val, mMT, mQA = best
-                entry[f"opt_{obj}"] = {
-                    "mass_MT": float(mMT.mean()), "mass_QA": float(mQA.mean()),
-                    "ratio_meanhead": float((mMT / mQA.clamp_min(1e-30)).mean()),
-                    "ratio_pooled": float(mMT.mean() / mQA.mean().clamp_min(1e-30)),
-                    "per_head_ratio_max": float((mMT / mQA.clamp_min(1e-30)).max()),
-                    "per_head_ratio_median": float((mMT / mQA.clamp_min(1e-30)).median()),
-                    "per_head_mass_MT_median": float(mMT.median()),
-                }
-                bound_ph[f"{tag}_opt_{obj}_massMT"] = mMT.cpu().numpy().reshape(n_layers, H)
-                bound_ph[f"{tag}_opt_{obj}_massQA"] = mQA.cpu().numpy().reshape(n_layers, H)
-            bound["results"][tag] = entry
-            print(f"[bound] {tag}: opt_ratio={entry['opt_ratio']['ratio_pooled']:.4f} "
-                  f"massMT={entry['opt_ratio']['mass_MT']:.4f} | "
-                  f"opt_mass massMT={entry['opt_mass']['mass_MT']:.4f} "
-                  f"ratio={entry['opt_mass']['ratio_pooled']:.4f}", flush=True)
+    def pop_stats(q):
+        """mean query and eigenbasis of the uncentered second moment, per head."""
+        mu = q.mean(dim=1)                                     # (P, d)
+        C = torch.einsum("pnd,pne->pde", q, q).double() / q.shape[1]
+        _, U = torch.linalg.eigh(C)
+        return mu, U.flip(-1).float()                          # descending
+
+    @torch.no_grad()
+    def evaluate(k, qT, lT, qA, lA):
+        mT = mass_stats(qT, lT, k, d_sqrt)
+        mA = mass_stats(qA, lA, k, d_sqrt)
+        return mT, mA
+
+    def summarise(mT, mA):
+        r = mT / mA.clamp_min(1e-30)
+        return {
+            "mass_target": float(mT.mean()), "mass_avoid": float(mA.mean()),
+            "ratio_pooled": float(mT.mean() / mA.mean().clamp_min(1e-30)),
+            "ratio_meanhead": float(r.mean()), "ratio_medianhead": float(r.median()),
+            "ratio_p90head": float(r.quantile(0.9)),
+        }
+
+    def run_arm(label, fit, test, out_dict, ph_dict):
+        """fit/test = ((q_target, lse_target), (q_avoid, lse_avoid))"""
+        (qTf, lTf), (qAf, lAf) = fit
+        (qTt, lTt), (qAt, lAt) = test
+        muT, _ = pop_stats(qTf)
+        muA, U_A = pop_stats(qAf)                # avoid-population eigenbasis (LIT-020's Q0^QA)
+        dirs = {"qbar_target": muT, "dmu": muT - muA}
+        for r in (4, 8, 16, 32, 64):
+            Ur = U_A[:, :, :r]
+            dirs[f"nullspace_r{r}"] = muT - torch.einsum(
+                "pdr,pr->pd", Ur, torch.einsum("pdr,pd->pr", Ur, muT))
+        gen0 = torch.Generator(device=DEVICE).manual_seed(SEED + 17)
+        dirs["random"] = torch.randn(P, d, device=DEVICE, generator=gen0)
+        for m in MKEYS:
+            for cs in CSCALES:
+                c = c_med * cs
+                tag = f"{label}_m{m}_c{cs:g}"
+                entry = {}
+                for name, v in dirs.items():
+                    vv = v / v.norm(dim=-1, keepdim=True).clamp_min(1e-12)
+                    k = (c.view(P, 1, 1) * vv.view(P, 1, d)).expand(P, m, d).contiguous().clone()
+                    entry[name] = {
+                        "fit": summarise(*evaluate(k, qTf, lTf, qAf, lAf)),
+                        "test": summarise(*evaluate(k, qTt, lTt, qAt, lAt)),
+                    }
+                gen = torch.Generator(device=DEVICE).manual_seed(SEED)
+                for obj in ("ratio", "mass"):
+                    best = None
+                    for v0 in (dirs["dmu"], dirs["qbar_target"], dirs["nullspace_r32"]):
+                        init = v0.view(P, 1, d).expand(P, m, d).contiguous().clone()
+                        if m > 1:
+                            init = init + 0.3 * init.norm(dim=-1, keepdim=True) * torch.randn(
+                                P, m, d, device=DEVICE, generator=gen) / (d ** 0.5)
+                        kk, mT, mA = optimise_key(qTf, lTf, qAf, lAf, c, m, d_sqrt, obj, init)
+                        val = (torch.log(mT.clamp_min(1e-30)) - torch.log(mA.clamp_min(1e-30))
+                               if obj == "ratio" else torch.log(mT.clamp_min(1e-30)))
+                        if best is None:
+                            best = (val, kk)
+                        else:
+                            take = (val > best[0]).view(P, 1, 1)
+                            best = (torch.maximum(val, best[0]),
+                                    torch.where(take, kk, best[1]))
+                    k = best[1]
+                    entry[f"opt_{obj}"] = {
+                        "fit": summarise(*evaluate(k, qTf, lTf, qAf, lAf)),
+                        "test": summarise(*evaluate(k, qTt, lTt, qAt, lAt)),
+                    }
+                    mT_t, mA_t = evaluate(k, qTt, lTt, qAt, lAt)
+                    ph_dict[f"{tag}_opt_{obj}_test_massT"] = mT_t.cpu().numpy().reshape(n_layers, H)
+                    ph_dict[f"{tag}_opt_{obj}_test_massA"] = mA_t.cpu().numpy().reshape(n_layers, H)
+                out_dict[tag] = entry
+                print(
+                    f"[bound] {tag}: opt_ratio TEST ratio={entry['opt_ratio']['test']['ratio_pooled']:.3f} "
+                    f"(fit {entry['opt_ratio']['fit']['ratio_pooled']:.3f}) massT={entry['opt_ratio']['test']['mass_target']:.4f}"
+                    f" | nullspace_r32 TEST ratio={entry['nullspace_r32']['test']['ratio_pooled']:.3f}"
+                    f" massT={entry['nullspace_r32']['test']['mass_target']:.4f}"
+                    f" | random TEST ratio={entry['random']['test']['ratio_pooled']:.3f}",
+                    flush=True,
+                )
+
+    qMT_f, lMT_f, nMTf = rows("MT", [0, 1])
+    qMT_t, lMT_t, nMTt = rows("MT", [2, 3])
+    qQA_f, lQA_f, nQAf = rows("QA", [0, 1])
+    qQA_t, lQA_t, nQAt = rows("QA", [2, 3])
+    qQA_g0, lQA_g0, n0 = rows("QA", [0])
+    qQA_g1, lQA_g1, n1 = rows("QA", [1])
+    qQA_g2, lQA_g2, n2 = rows("QA", [2])
+    qQA_g3, lQA_g3, n3 = rows("QA", [3])
+    print(f"[bound] sampled rows/head: MT fit={nMTf} test={nMTt} | QA fit={nQAf} test={nQAt} "
+          f"| QA groups {n0}/{n1}/{n2}/{n3}", flush=True)
+
+    bound = {
+        "c_scales": CSCALES, "m_keys": MKEYS,
+        "protocol": (
+            "keys FITTED on documents 0,1 (mod 4) and REPORTED on held-out documents 2,3; "
+            "arm MTvQA: target=MT, avoid=QA; arm QAvQA (control): target=QA docs g0 (fit) / "
+            "g2 (test), avoid=QA docs g1 (fit) / g3 (test) -- same task, so its test ratio is "
+            "the floor that MT-vs-QA must beat"
+        ),
+        "n_rows_per_head": {"MT_fit": nMTf, "MT_test": nMTt, "QA_fit": nQAf, "QA_test": nQAt,
+                            "QA_g0": n0, "QA_g1": n1, "QA_g2": n2, "QA_g3": n3},
+        "results": {},
+    }
+    bound_ph = {}
+    run_arm("MTvQA", ((qMT_f, lMT_f), (qQA_f, lQA_f)), ((qMT_t, lMT_t), (qQA_t, lQA_t)),
+            bound["results"], bound_ph)
+    run_arm("QAvQA", ((qQA_g0, lQA_g0), (qQA_g1, lQA_g1)), ((qQA_g2, lQA_g2), (qQA_g3, lQA_g3)),
+            bound["results"], bound_ph)
     opt_s = time.time() - t_opt
+
+    # headline: best held-out TEST ratio subject to a minimum achieved target mass
+    def best_feasible(arm, mass_floor):
+        best = {"ratio_pooled": float("nan"), "mass_target": float("nan"), "config": ""}
+        for tag, entry in bound["results"].items():
+            if not tag.startswith(arm + "_"):
+                continue
+            for name, v in entry.items():
+                t = v["test"]
+                if t["mass_target"] >= mass_floor and (
+                    np.isnan(best["ratio_pooled"]) or t["ratio_pooled"] > best["ratio_pooled"]
+                ):
+                    best = {"ratio_pooled": t["ratio_pooled"], "mass_target": t["mass_target"],
+                            "mass_avoid": t["mass_avoid"], "config": f"{tag}/{name}"}
+        return best
+
+    bound["headline"] = {
+        f"{arm}_massfloor{mf:g}": best_feasible(arm, mf)
+        for arm in ("MTvQA", "QAvQA") for mf in (0.08, 0.15, 0.30)
+    }
+    for k, v in bound["headline"].items():
+        print(f"[headline] {k}: ratio={v['ratio_pooled']:.4f} massT={v['mass_target']:.4f} "
+              f"[{v['config']}]", flush=True)
 
     # incumbent per-slot selectivity: what the existing 512 keys already achieve
     sm_qa = QA["slot_mass"]      # (L, H, T_c)
@@ -718,6 +785,9 @@ def main():
         "incumbent_top1mass_slot_ratio_mean": float(np.nanmean(inc_top1mass)),
         "mean_qnorm_QA": float(np.mean(np.sqrt(st_qa["mean_qnorm2"]))),
         "mean_qnorm_MT": float(np.mean(np.sqrt(st_mt["mean_qnorm2"]))),
+        # ---- item 4 headlines (held-out documents)
+        **{f"bound_{k}_ratio": v["ratio_pooled"] for k, v in bound["headline"].items()},
+        **{f"bound_{k}_massT": v["mass_target"] for k, v in bound["headline"].items()},
     }
 
     out = {
@@ -734,7 +804,10 @@ def main():
             "n_layers": n_layers, "n_kv_heads": int(H), "head_dim": int(d),
             "T_cartridge": int(T_c), "n_frozen": int(n_frozen),
             "n_query_rows_per_head": {"QA": QA["n_rows"], "MT": MT["n_rows"]},
+            "n_documents": {"QA": QA["n_docs"], "MT": MT["n_docs"]},
             "n_subsampled_rows_per_head": N_SUB,
+            "n_subsampled_scored": {"QA": int(QA["sub_scored"].sum()),
+                                    "MT": int(MT["sub_scored"].sum())},
             "seed": SEED,
             "query_definition": (
                 "post-RoPE q after q_norm, captured at every attention layer, pooled over the "
@@ -832,8 +905,9 @@ def main():
             wandb.summary.update({f"diag/pooled_{k}_{k2}": v2 for k2, v2 in v.items()})
         for tag, entry in bound["results"].items():
             for name, vals in entry.items():
-                for stat, x in vals.items():
-                    wandb.summary.update({f"bound/{tag}/{name}/{stat}": x})
+                for phase, stats_d in vals.items():
+                    for stat, x in stats_d.items():
+                        wandb.summary.update({f"bound/{tag}/{name}/{phase}/{stat}": x})
         for l in range(n_layers):
             row = {"layer": l}
             for k, v in out["per_layer"].items():
