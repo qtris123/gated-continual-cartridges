@@ -517,7 +517,8 @@ def main():
             "ref_mass_on_S_mean_over_layers": a["ref_mass_on_S_mean_over_layers"],
             "eval_mass_on_S": a.get("eval_mass_on_S"),
             "n_slots_union_per_layer_min_max": (
-                [min(a["n_slots_union_per_layer"]), max(a["n_slots_union_per_layer"])]
+                [min(int(x) for x in a["n_slots_union_per_layer"].values()),
+                 max(int(x) for x in a["n_slots_union_per_layer"].values())]
                 if a.get("n_slots_union_per_layer") else None
             ),
             "cost": a["cost"],

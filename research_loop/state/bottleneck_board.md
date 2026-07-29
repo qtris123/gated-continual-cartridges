@@ -187,6 +187,43 @@ the number that shows it. "It didn't help" never closes anything.
   only prints). The worker logged the cells via a parser under the no-edit rule; the losses are the
   harness's own, not recomputed. `EVAL_MODE=icl` also does **not** hang, unlike the cartridge path (§1).
 
+## 🏁 B-GATE — MECH-BUDGET-B (2026-07-29): **support is genuinely not a lever, confound removed**
+Gate exact to 16 digits, on checkpoints **sha256-identical** to MECH-BUDGET's. **Determinacy proven per
+arm** — `n_queries_used_min = max =` the cap in every (layer, head): 512 for t128 (4:1), 512 for t64
+(8:1), 1024 for t256 (4:1), of 57344 available.
+
+| arm | best MT | QA there | `mass_on_S`(MT) | `mean_mse` | solve_s |
+|---|---|---|---|---|---|
+| **t32/q64** (gate, incumbent) | **2.2720** | 1.9560 | 0.2430 | 0.003941 | 309 |
+| t128/q512 | 2.4075 | 2.4059 | 0.3098 | 0.002118 | 349 |
+| t64/q512 (control) | 2.3768 | 2.2032 | 0.3065 | 0.003504 | 296 |
+| t256/q1024 | 2.3860 | 2.4705 | 0.3940 | 0.001424 | 404 |
+| t128/q512, `dw`=8e-2 | 2.3595 | 2.2849 | 0.3682 | 0.005363 | 389 |
+
+- **The clean contrast — matched n=512, matched `w`, both determined: t128 vs t64 gives ΔMT +0.0346 /
+  +0.0284 / −0.0230 / −0.0185 — all four INSIDE the ±0.049 resolution (0.37–0.70×) and not even
+  sign-consistent.** Own optima +0.0307 (0.62×). t256 vs t128 at held 4:1 repeats it (0.32–0.51×).
+  **Support is not a lever.** QA costs, by contrast, clear at 2.5–3.3× everywhere.
+- **Raising the query cap did NOT rescue MECH-BUDGET's t128** (own-optimum MT **+0.0504, worse**).
+- **The control the brief asked for fires:** at t64 — *already* determined at n=64 — raising n alone to
+  512 makes **both axes worse at every k** (MT +0.130…+0.172, clearing even the conservative composite).
+  **The query count is not a free change**, so only matched-n contrasts isolate support.
+- **The trust-region escape is closed too:** arm D repeats t128/q512 at `w = 1e-2·n/64 = 8e-2`,
+  reproducing MECH-QUERIES-B's signature (|v|max 130→82, mse 0.0021→0.0054) and recovering part of the
+  damage — but its best MT is still **2.3595, 1.77× the resolution worse** than the incumbent.
+  **The null is not a trust-region artefact.**
+- ⚠️ **CORRECTION TO THIS BOARD (worker-measured, and it was my claim):** I attributed MECH-BUDGET's t128
+  to the solver's **min-norm branch** (`core.py:198-204`). Measured against the real solver
+  (`determinacy_check.log`): with `DELTA_WEIGHT > 0` the stacked design is **(n+t)×t**, so that branch is
+  **never taken**. The underdetermination lives in the **data block** — at t=128/n=64 it has rank 64,
+  leaving a **64-dim null space per head** where the solution is pinned to its prior at
+  |Δv|/|v| = **0.0004**. **Half of every head's support was written carrying no new information** —
+  which also explains why that arm had the *lowest* `am/mean_mse`.
+- **Caveat the worker stated:** raising `MAX_QUERIES_PER_HEAD` moves **three** coupled things — data
+  rank, 1/n trust-region dilution, and the effective ridge under `RIDGE_SCALE=spectral`
+  (λ_eff 1.8e-6 → 2.6e-5 → 1.0e-4). Only the matched-n contrasts hold all three fixed, and those are the
+  two returning the MT null.
+
 ## 🏁 B-GATE — CLOSED (MECH-INFOGATE, 2026-07-29): **the incumbent ranker is already optimal for acquisition**
 Gate exact to 16 digits. Six arms at their own-optimum k, against the paired resolution ±0.049 MT / ±0.054 QA:
 

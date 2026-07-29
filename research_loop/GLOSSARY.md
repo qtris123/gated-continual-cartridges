@@ -48,6 +48,7 @@ When a definition here conflicts with the code, **the code wins** — fix this f
 | **MECH-006** | `AM_ONPOLICY_LAYERS`, `AM_ONPOLICY_DOCKV` | off | on-policy layer-sequential re-extraction of reference queries (group size 4) | `am/finetune.py`, `am/continual.py` |
 | **MECH-007** | `AM_SEED_OFFSET` | 0 | offsets the per-document reference draw (`continual.py:150` seeds with the constant `doc_idx`). **Without this, seed variation is impossible** — `pydrantic.main` is never reached in `per_document` mode, so `seed=N` on argv is silently ignored | `am/continual.py` |
 | **MECH-008** | `SLOT_SELECTION` ∈ {`redundancy`,`fisher`,`mass_x_redundancy`}, `AM_SLOT_FISHER_PATH`, `AM_REDUNDANCY_RIDGE_REL`, `AM_MASS_REDUNDANCY_ALPHA` | `tfidf` / unset / 1e-6 / 0.5 | information-theoretic slot selection — pick the top-t slots by a *statistical* criterion instead of attention mass | `am/ranking.py`, `am/finetune.py`, `am/continual.py`, `examples/qasper2/train/continual_am_sparse.py` |
+| **MECH-009** | `SLOT_SELECTION=constrained_mass`, `AM_SAFE_FRACTION`, `AM_SAFE_METRIC` | `tfidf` / 1.0 / `redundancy` | **safety constraint + incumbent ranking**: keep only the safest `q` of slots per layer, then take the top-t by attention mass *inside* that set. `q=1.0` ≡ `attention_mass`; `q ≤ top_t/511` ≡ the pure safety selector | `am/ranking.py`, `am/finetune.py`, `examples/qasper2/train/continual_am_sparse.py` |
 
 **Foot-gun that has bitten twice:** any new kwarg must be passed **conditionally** (`hasattr` guard). An
 unconditional one crashed every AM run via the sibling-`cartridges` import path (RUNBOOK §6.10).
@@ -74,6 +75,44 @@ geometric form also degenerates *exactly*: **α=0 reproduces `attention_mass` an
 not a fourth arbitrary selector.
 
 **Not implemented on purpose: `kl_loo`.** See §2 — it is algebraically identical to attention mass.
+
+### 3b-bis. MECH-009 — `constrained_mass`, exactly (the constrained form MECH-INFOGATE could not test)
+
+MECH-INFOGATE's three selectors rank **by** a safety metric. DIAG-IMPORTANCE's promising projection
+described something else — *mass-ranked **within** a safety constraint* — and its own table already
+listed that variant (`best32_within_safest_quartile_fisher` 4.62% MT mass; `best32_within_most_redundant_quartile`
+17.31%). `constrained_mass` **is** that variant, with the constraint strength exposed as a knob. Code:
+`cartridges/am/ranking.py::_rank_slot_prior_per_layer` (branch `constrained_mass`) + `_safety_prior`.
+
+Per layer *l*, with `n = 511` writable slots, `k = min(TOP_T, n)`, `q = AM_SAFE_FRACTION ∈ (0, 1]`:
+
+```
+n_safe        = clamp( floor(q · n), k, n )                 # candidate-set size
+candidates_l  = the n_safe safest slots of layer l by AM_SAFE_METRIC
+                  redundancy -> DESCENDING (most reconstructible first)
+                  fisher     -> ASCENDING  (flattest QA loss first)
+score_l[j]    = tf_l[j]  if j ∈ candidates_l  else −1.0      # tf = the incumbent's own score
+selection_l   = top-k of score_l
+```
+
+* **`floor`, not `round`** — so `q = 0.25` gives **127** of 511, exactly DIAG-IMPORTANCE's "safest
+  quartile", which is what makes its published tradeoff rows reproducible by this mode (verified:
+  4.62%/0.28% and 17.31%/12.34%, both to 4 d.p.).
+* **The sentinel is −1.0, not −∞**, because `tf ≥ 0` always (a normalised attention mass), so −1.0
+  orders strictly below every candidate while keeping the score finite for the finiteness assert and
+  for the `ranking_info` saved into each `am_doc_*.pt`.
+* **Both degeneracies are exact, and verified bit-for-bit:** `q = 1.0` excludes nothing, so
+  `score = tf` and the selection is **`attention_mass`** (identical index tensors *and* identical score
+  tensor, at both `TOP_T=32` and `TOP_T=64`, under either metric); any `q ≤ k/n` clamps `n_safe = k`,
+  so mass ranking is a no-op and the selection is the **pure safety selector** (`redundancy` / `fisher`,
+  set agreement 1.0000). `q` is therefore a genuine interpolation knob between the incumbent ranker and
+  MECH-008's, not a sixth ad-hoc selector.
+* Same requirements as MECH-008: `GRANULARITY=per_layer` only, the cache must be passed (`redundancy`
+  is recomputed from the **live** cache at every document, so it drifts as slots are written — at
+  document 0 it is exactly DIAG-IMPORTANCE's array), and `AM_SAFE_METRIC=fisher` needs
+  `AM_SLOT_FISHER_PATH`. Seven fail-loud paths (`q ≤ 0`, `q > 1`, unknown metric, fisher without a
+  path, `cache=None`, non-`per_layer`, wrong prior shape). No `or`-style defaulting: `q = 0.0` raises
+  rather than silently becoming the unconstrained selector.
 
 ## 4. Reproducing an experiment
 
