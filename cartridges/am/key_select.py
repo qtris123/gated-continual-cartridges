@@ -395,6 +395,8 @@ def rewrite_keys_on_support(
     doc_key_start: Optional[int] = None,
     doc_rope_offset: Optional[int] = None,
     rope_theta: float = 10000.0,
+    reposition: bool = False,
+    info: Optional[dict] = None,
 ) -> torch.Tensor:
     """Replace cartridge key rows at selected_indices using teacher candidates.
 
@@ -403,6 +405,23 @@ def rewrite_keys_on_support(
         selected_indices: (t,) support indices in cartridge
         candidate_keys: (T_cand, d) pool, typically concat(cartridge, doc)
         queries: (n, d) reference queries
+        reposition: **opt-in RoPE counter-rotation (B-ROPE hazard H2 / LIT-026).**
+            The candidate pool is ``[cartridge_support || doc]`` and the two blocks
+            are scored in *different* rotary frames: ``_attention_scores`` scores the
+            cartridge block with the raw reference query, and the doc block with the
+            query rotated FORWARD by ``doc_rope_offset = T_doc``.  A doc key that wins
+            selection is then installed into a cartridge slot, where the student (and
+            eval) will score it with the **raw** query -- so the logit it was chosen
+            for is not the logit it delivers, and the mismatch is a rotation by
+            thousands of positions.  With ``reposition=True`` every doc-sourced row is
+            counter-rotated by ``-doc_rope_offset`` (``phase1._rope_reposition``, the
+            same operator ``initial_am_compaction`` already uses) so that
+            ``<q, k_installed> == <R_offset q, k_doc>`` exactly.  Cartridge-sourced
+            rows are already in the student frame and are left untouched.
+            Default ``False`` -> bit-identical to the historical behaviour.
+        info: optional dict; filled in-place with rewrite diagnostics
+            (``n_selected``, ``n_from_doc``, ``n_from_cartridge``, ``n_changed``,
+            ``n_repositioned``, ``rope_delta``).
 
     Returns:
         new_keys: (T, d) with rows at selected_indices rewritten
@@ -440,6 +459,62 @@ def rewrite_keys_on_support(
     else:
         raise ValueError(f"Unsupported key rewrite mode: {mode}")
 
+    sel_src = torch.as_tensor(sel_idx, device=device, dtype=torch.long)
+    from_doc = (
+        sel_src >= doc_key_start
+        if doc_key_start is not None
+        else torch.zeros_like(sel_src, dtype=torch.bool)
+    )
+    if info is not None:
+        info["n_selected"] = int(t)
+        info["n_from_doc"] = int(from_doc.sum().item())
+        info["n_from_cartridge"] = int(t - from_doc.sum().item())
+        info["n_repositioned"] = 0
+        info["rope_delta"] = 0.0
+
+    if (
+        reposition
+        and doc_rope_offset
+        and doc_key_start is not None
+        and bool(from_doc.any())
+    ):
+        # H2 fix. Doc row m was baked at absolute RoPE position m; the teacher scored
+        # it against a query rotated forward by `doc_rope_offset`, i.e. it behaved as
+        # a key at position `m - doc_rope_offset` in the student's (cartridge/eval)
+        # frame. Re-base it to exactly that position -> a uniform phase shift of
+        # `-doc_rope_offset`, the AM.pdf App. C.3 / StreamingLLM operator. Done in
+        # float32 so the bf16 cache does not eat the rotation.
+        from cartridges.am.phase1 import _rope_reposition  # local: phase1 imports us
+
+        rows = new_k[from_doc].to(torch.float32)
+        m = (sel_src[from_doc] - doc_key_start).to(torch.float32)
+        rebased = _rope_reposition(
+            rows,
+            from_pos=m,
+            to_pos=m - float(doc_rope_offset),
+            head_dim=head_dim,
+            rope_theta=rope_theta,
+        )
+        if rebased.shape != rows.shape:
+            raise RuntimeError(
+                "rewrite_keys_on_support: _rope_reposition changed shape "
+                f"{tuple(rows.shape)} -> {tuple(rebased.shape)}"
+            )
+        if not torch.isfinite(rebased).all():
+            raise RuntimeError(
+                "rewrite_keys_on_support: non-finite key after RoPE reposition "
+                f"({int((~torch.isfinite(rebased)).sum().item())} of {rebased.numel()} "
+                f"entries; doc_rope_offset={doc_rope_offset}, rope_theta={rope_theta})"
+            )
+        new_k = new_k.clone()
+        new_k[from_doc] = rebased.to(new_k.dtype)
+        if info is not None:
+            info["n_repositioned"] = int(from_doc.sum().item())
+            info["rope_delta"] = -float(doc_rope_offset)
+
     out = keys.clone()
     out[selected_indices] = new_k.to(device=device, dtype=dtype)
+    if info is not None:
+        changed = (out[selected_indices] != keys[selected_indices]).any(dim=-1)
+        info["n_changed"] = int(changed.sum().item())
     return out

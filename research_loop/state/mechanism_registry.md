@@ -289,3 +289,102 @@
   null selectivity. The write itself got *better* by its own metric while CE got worse (`am/mean_mse`
   0.01406 → 0.00782, `|v|max` 178 → 107.5) — the B-OBJ anti-correlation again.
 - Kept in tree? yes — opt-in, all four flags default to the historical behaviour, bit-identical when off.
+
+---
+### MECH-005: RoPE counter-rotation on key install (B-ROPE hazard **H2**) → flag `AM_KEY_REPOSITION` (default: unset = off)
+- Status: tested
+- Implements: **LIT-026** (hazard 2: "`rewrite_keys_on_support` selects doc keys in one rotary frame and
+  installs them in another with no counter-rotation"; `AM.pdf` App. C.3's uniform phase shift
+  `R_Δ`, `Δ = p_target − p_source`) · negative control from **LIT-027**
+  | Targets board entry: **B-ROUTE** (key side), **B-ROPE**
+- Files:
+  - `cartridges/am/key_select.py::rewrite_keys_on_support` — new `reposition: bool = False` and
+    `info: Optional[dict] = None` kwargs. After selection, rows whose candidate index is
+    `>= doc_key_start` (i.e. **document**-sourced) are re-based by `phase1._rope_reposition`
+    (lazy import; `phase1` imports `key_select`, so a module-level import would be circular) from
+    `from_pos = m` to `to_pos = m − doc_rope_offset`, in **float32**, then cast back. Fail-loud shape
+    and `isfinite` assertions. Cartridge-sourced rows are untouched. `info` records `n_selected`,
+    `n_from_doc`, `n_from_cartridge`, `n_changed`, `n_repositioned`, `rope_delta`.
+  - `cartridges/am/finetune.py` — new config field `key_reposition: bool = False`; a local
+    `key_reposition = bool(getattr(config, "key_reposition", False))` in
+    `apply_document_am_write_to_cache`, threaded into `rewrite_keys_on_support` together with the
+    MECH-003 `rope_theta`; per-(layer,head) `info` dicts aggregated into
+    `AMUpdateStats.extra["key_rewrite"]` / `["key_rewrite_per_layer"]` **only when the rewrite ran**
+    (`key_mode != "freeze"`), so every frozen-key run keeps a byte-identical `am_doc_*.pt` payload.
+  - `examples/qasper2/train/continual_am_sparse.py` — env knob `AM_KEY_REPOSITION`,
+    `_key_reposition_kwargs()` (conditional kwarg + loud failure, RUNBOOK §6.10) which additionally
+    **refuses** `AM_KEY_REPOSITION=1` with `KEY_MODE=freeze` (no key is ever installed) and **refuses**
+    it without an explicit `AM_ROPE_THETA` (the counter-rotation is only correct in the model's own
+    rotary frame — at θ=1e4 it is *worse than doing nothing*, see the sanity numbers). wandb tag
+    `keyrepos-<0|1>` added **only** when the env var is set.
+- What it changes (at the level of the math): the candidate pool is `[K_cart[S] ‖ K_doc]` and
+  `core._attention_scores` scores the two blocks in **different rotary frames** — the cartridge block
+  against the raw reference query `q`, the document block against `R_Δ q` with `Δ = doc_rope_offset =
+  T_doc`. A document key that wins selection was therefore chosen for the logit `⟨R_Δ q, k_doc⟩`, but
+  once installed into a cartridge slot the student (and eval) scores it with the **raw** `q`, giving
+  `⟨q, k_doc⟩` — a rotation by thousands of positions away from the logit it was picked for, and the
+  value solve is then fitted against that corrupted routing. Because RoPE is orthogonal,
+  `⟨R_Δ q, k⟩ = ⟨q, R_{−Δ} k⟩`, so installing `R_{−Δ} k_doc` restores the intended logit exactly. In
+  absolute-position terms the document row `m` (prefilled at position `m`) behaves as a key at
+  `m − T_doc` in the cartridge frame, and that is where it is re-based.
+- Sanity check (`research_loop/results/MECH-KEYS/sanity_keys.py`, run on CPU → `sanity_cpu.json` and
+  on CUDA → `sanity_cuda.json`; both agree):
+  (i) **the headline numeric check** — for the 16 document-sourced installs at `T_doc=4000`, θ=5e6, the
+  gap between the logit the installed key *delivers* (student frame, raw query) and the logit the
+  selector *used* falls from **max 1.0540 / mean 0.2358** to **max 4.77e-07 / mean 4.99e-08** in float32,
+  and to **max 5.52e-03 / mean 6.23e-04** in the cache's bf16, on a score scale `max|s| = 2.779`;
+  cartridge-sourced rows are **exactly 0.0** in both arms;
+  (ii) at the primitive level over this project's real document lengths `T_doc = 3858 / 4000 / 8900`,
+  relative error **1.041 / 0.945 / 1.203 → 1.98e-07 / 2.03e-07 / 2.15e-07** and correlation with the
+  intended logit **0.510 / 0.430 / 0.327 → 1.000**;
+  (iii) **θ matters**: the same counter-rotation done at the AM package's historical 10000.0 gives max
+  errors **4.43 / 5.02 / 5.11 — larger than not correcting at all**, which is why the driver refuses
+  `AM_KEY_REPOSITION=1` without an explicit `AM_ROPE_THETA`;
+  (iv) end-to-end on a stub cache (L=2, H=2, T=40, T_doc=4000, |S|=8): `freeze`, `highest_attention`
+  ±reposition and `omp`+reposition all finite, with `extra["key_rewrite"]` populated only for the
+  non-freeze arms;
+  (v) driver config probe (`config_probe.json`) — all four arms construct against the `_explore`
+  package with the expected fields; both guards fire; and **unpinned** (sibling `cartridges`) the run
+  fails loudly instead of silently no-op'ing.
+- Bit-identical with flag off? **yes.** `rewrite_keys_on_support` at default arguments is bit-identical
+  to `git show HEAD:cartridges/am/key_select.py` for **both** `highest_attention` and `omp`
+  (max|Δ| = 0.0, old-vs-old check passed first to burn the first-lstsq BLAS difference); the freeze
+  end-to-end write is bit-identical to a `git archive HEAD` snapshot executed in a **separate
+  interpreter** (mean_mse, per-layer MSE, key/value sums, |v|max, `mass_on_S` and the `extra` key set
+  all equal); and the GPU control arm reproduced **DIAG-ROPE arm B to all 17 printed digits** in-run
+  (QA **2.15320086479187** / MT **2.5296061038970947**), with mean `am/mean_mse`
+  **0.014059890443260059** and `|v|max` **178.0** identical to MECH-BETA's rope arm, and standalone
+  QA 2.159724712371826 / MT 2.529625177383423 identical to that run's standalone numbers.
+- Tested by: **MECH-KEYS** (`WANDB_GROUP=B-ROUTE`), canonical top32 at θ=5e6, `ENABLE_BETA=0`:
+
+  | arm | QA (standalone) | MT (standalone) | eval `mass_on_S` MT | **MT/QA mass** | cart mass MT | mean `am/mean_mse` | \|v\|max | doc keys installed /32 | solve_s |
+  |---|---|---|---|---|---|---|---|---|---|
+  | control `freeze` | 2.15972 | 2.52963 | 0.0711 | **1.0428** | 0.5930 | 0.01406 | 178.0 | — | 182 |
+  | `highest_attention`, repos **0** | 2.12011 | 2.42385 | **0.3756** | **1.0485** | 0.7204 | 0.00384 | **63.25** | 8.91 (27.8%) | 325 |
+  | **`highest_attention`, repos 1** | **2.03492** | **2.33050** | 0.2430 | **1.0510** | 0.6711 | 0.00394 | 74.0 | 12.91 (40.3%) | 272 |
+  | `omp`, repos 1 | 2.11686 | 2.39698 | 0.1918 | **1.0638** | 0.6454 | 0.00484 | 141.0 | 17.86 (55.8%) | **3857** |
+  | Phase-1 reference | 2.2388 | 3.7825 | 0.0878 | 1.0812 | 0.5879 | — | — | — | — |
+
+  wandb: control `https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/6cr40yfg`,
+  keys-norepos `.../runs/ftsdkn1m`, keys-repos `.../runs/f28mqklc`, omp `.../runs/vdad238z`.
+- Verdict + mechanistic reason: **the fix is real, it is worth −0.093 MT / −0.085 QA on top of the
+  uncorrected key write, and the key axis as a whole is the first lever in this loop that improves BOTH
+  axes at once.** The pre-loop folklore that key rewriting collapses QA (RUNBOOK §7) is **false in this
+  setting**: every key arm beat the frozen-key control on retention as well as acquisition, and the best
+  arm (`highest_attention` + reposition) reaches **MT 2.3305 / QA 2.0349** — below ORACLE-WRITE's
+  *perfect value write* ceiling (2.381) and below the k=12 snapshot minimum (2.435), at 0 gradient steps.
+  **But it does NOT work through selectivity.** The eval-time MT/QA `mass_on_S` ratio moved
+  1.0428 → 1.0510 (+0.0082), the same order as β's +0.008 and still **below the untouched Phase-1
+  cartridge's own 1.0812**. What moved is bandwidth (MT `mass_on_S` 0.0711 → 0.2430, and 0.3756 in the
+  no-reposition arm) — and unlike β, which bought 4.2× bandwidth query-independently and made CE worse,
+  the key write buys its bandwidth by **moving the keys themselves into the document's directions**, so
+  the extra mass lands on slots whose *content* is the document. Part of the reposition/OMP bandwidth is
+  a wider written support (87.6 / 105.2 union slots per layer vs the control's 53.4), but the
+  no-reposition arm sits at **51.6 slots/layer — smaller than the control — and still carries 5.3× the
+  mass**, so the gain is not a support-size artefact. OMP installs the most document keys (55.8% of
+  147,456 slot-writes) and the highest ratio (1.0638) yet lands **worse** than `highest_attention` on
+  both axes at **21× the solve cost** (3857 s vs 182 s), because our `key_select.py` runs a
+  200-iteration NNLS inside each of its 32 greedy steps (LIT-002/LIT-027). ⚠️ Noise discipline:
+  MT n=69 / QA n=78, so ΔMT −0.199 sits at the **top edge** of the 0.1–0.2 band and ΔQA −0.125 sits
+  **inside** it; one seed, no seed variation was run, and MT 2.3305 is still 0.31 above the 2.02 bar.
+- Kept in tree? yes — opt-in, default off, bit-identical when off.

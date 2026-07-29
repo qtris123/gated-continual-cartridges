@@ -126,6 +126,11 @@ MAX_QUERIES_PER_HEAD = int(os.environ.get("MAX_QUERIES_PER_HEAD", "64"))
 # keeps the historical hard-coded 10000.0 -> stock runs are bit-identical.
 # Accepts a float, or "model"/"auto" to read `rope_theta` off the HF model config.
 AM_ROPE_THETA_ENV = os.environ.get("AM_ROPE_THETA") or None
+# B-ROPE hazard H2 / LIT-026: counter-rotate a DOCUMENT key back into the cartridge
+# frame when it is installed into a cartridge slot (`KEY_MODE != freeze` only).
+# Unset/0 keeps the historical (uncorrected) install -> stock runs are bit-identical.
+AM_KEY_REPOSITION_ENV = os.environ.get("AM_KEY_REPOSITION")
+AM_KEY_REPOSITION = AM_KEY_REPOSITION_ENV in ("1", "true", "True")
 # B-SOLVE / LIT-002: box-constrained NNLS for the beta (mass-matching) fit.
 # These are only forwarded when beta is actually requested (or a knob is set
 # explicitly), so every beta-off run keeps a byte-identical config.
@@ -253,6 +258,46 @@ def _rope_theta_kwargs() -> dict:
     return {"rope_theta": requested}
 
 
+def _key_reposition_kwargs() -> dict:
+    """Pass `key_reposition` ONLY if the imported package has the field.
+
+    Same conditional-kwarg discipline as `_oracle_write_kwargs` (RUNBOOK §6.10):
+    the sibling `cartridges` package has no such field. When `AM_KEY_REPOSITION`
+    is unset the kwarg is omitted entirely, so the config is byte-identical to
+    every historical run; when it IS requested but the field is missing we fail
+    loudly rather than silently running the uncorrected install.
+    """
+    import cartridges
+
+    if AM_KEY_REPOSITION_ENV is None:
+        return {}
+    if "key_reposition" not in AttentionMatchingFinetuningConfig.model_fields:
+        raise RuntimeError(
+            f"AM_KEY_REPOSITION={AM_KEY_REPOSITION_ENV} but the imported `cartridges` "
+            f"package ({os.path.dirname(cartridges.__file__)}) has no `key_reposition` "
+            "field. Export PYTHONPATH=$CARTRIDGES_DIR:$PYTHONPATH (RUNBOOK §6.10)."
+        )
+    if AM_KEY_REPOSITION and KEY_MODE == "freeze":
+        raise ValueError(
+            "AM_KEY_REPOSITION=1 is meaningless with KEY_MODE=freeze (no key is "
+            "ever installed). Set KEY_MODE=highest_attention or omp."
+        )
+    if AM_KEY_REPOSITION and AM_ROPE_THETA_ENV is None:
+        # The counter-rotation must use the model's own rotary base; doing it at the
+        # AM package's historical 10000.0 while the model runs 5e6 would replace one
+        # frame error with another (MECH-003 / B-ROPE).
+        raise ValueError(
+            "AM_KEY_REPOSITION=1 requires AM_ROPE_THETA to be set explicitly "
+            "(use 5000000 / 'model' for Qwen3-4B-Instruct-2507); the counter-"
+            "rotation is only correct in the model's own rotary frame."
+        )
+    logger.info(
+        "B-ROPE H2: key reposition = %s (env AM_KEY_REPOSITION=%s, KEY_MODE=%s)",
+        AM_KEY_REPOSITION, AM_KEY_REPOSITION_ENV, KEY_MODE,
+    )
+    return {"key_reposition": AM_KEY_REPOSITION}
+
+
 def _beta_fit_kwargs() -> dict:
     """Pass the LIT-002 beta-fit knobs ONLY when beta is actually in play.
 
@@ -301,6 +346,7 @@ def _build_am_config() -> AttentionMatchingFinetuningConfig:
         **_oracle_write_kwargs(),
         **_max_queries_kwargs(),
         **_rope_theta_kwargs(),
+        **_key_reposition_kwargs(),
         **_beta_fit_kwargs(),
         enabled=True,
         top_t=TOP_T,
@@ -740,6 +786,11 @@ config = TrainConfig(
             # B-ROPE: only tagged when the rotary base is moved off the historical
             # hard-coded 10000.0, so stock runs keep a byte-identical wandb config.
             [f"ropetheta-{AM_ROPE_THETA_ENV}"] if AM_ROPE_THETA_ENV else []
+        ) + (
+            # B-ROPE H2 / MECH-005: only tagged when the knob is set explicitly.
+            [f"keyrepos-{int(AM_KEY_REPOSITION)}"]
+            if AM_KEY_REPOSITION_ENV is not None
+            else []
         ) + (
             # B-SOLVE: only tagged when the beta fit is actually active.
             ["beta", f"betabox-{AM_BETA_BOX}", f"nnls-{AM_NNLS_DRIVER}-{AM_NNLS_ITERS}"]

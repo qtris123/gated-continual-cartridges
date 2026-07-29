@@ -164,6 +164,42 @@ the number that shows it. "It didn't help" never closes anything.
   `KEY_MODE != freeze`** with `ENABLE_BETA` unset — so the *first* key experiment would crash for a
   B-SOLVE reason and look like "keys don't work". **`ENABLE_BETA=0` gives a clean keys-only arm.**
 
+## 🥇 NEW BEST GRADIENT-FREE POINT — MECH-KEYS (2026-07-29): **QA 2.0349 / MT 2.3305**
+**The "keys collapse QA" folklore is FALSE in this setting. Every key arm beat the frozen control on
+BOTH axes — there is no trade curve to report, because QA *improved*.**
+
+| arm (θ=5e6, β off, top32) | QA | MT | `mass_on_S` MT | **MT/QA ratio** | doc keys/32 | solve_s |
+|---|---|---|---|---|---|---|
+| control `freeze` | 2.1597 | 2.5296 | 0.0711 | 1.0428 | — | 182 |
+| keys, no reposition | 2.1201 | 2.4239 | 0.3756 | 1.0485 | 8.91 (27.8%) | 325 |
+| **keys + reposition** | **2.0349** | **2.3305** | 0.2430 | 1.0510 | 12.91 (40.3%) | 272 |
+| `omp` + reposition | 2.1169 | 2.3970 | 0.1918 | 1.0638 | 17.86 (55.8%) | **3857** |
+
+- **MT 2.3305 is below ORACLE-WRITE's *perfect value write* ceiling (2.381) and below the k=12 value-only
+  minimum (2.435)** — gradient-free. **QA clears its budget by 0.49.** Still **0.31 above** the 2.02 bar.
+- 🔑 **It does NOT work through selectivity — DIAG-KEYSPACE's bound holds.** The MT/QA mass ratio moved
+  only **1.0428 → 1.0510** (+0.0082, the same order as β's +0.008) and remains **below the untouched
+  Phase-1 cartridge's own 1.0812**. What moved is **bandwidth whose content is the document**:
+  `mass_on_S` 0.0711 → 0.2430.
+- ⚠️ **This forces a correction to this board's "bandwidth doesn't predict MT".** β raised bandwidth to
+  0.30 and made both axes *worse*; keys raised it to 0.243 and made both axes *better*. The distinction
+  is **what the mass lands on**: β amplifies slots holding *solved values*, key installation puts mass on
+  slots **keyed by the document itself**. Bandwidth-to-the-right-content is a real lever; generic
+  bandwidth is not.
+- **Not a support-size artefact:** the no-reposition arm writes a union of **51.6 slots/layer — smaller
+  than the control's 53.4 — and still carries 5.3× the mass**.
+- **The H2 fix was worth −0.093 MT / −0.085 QA** on top of the uncorrected key write, and it makes
+  document keys win selection 40.3% vs 27.8% of the time. Unit check: repositioned logit error **4.8e-07**
+  vs **1.054 uncorrected**; doing the same rotation at θ=1e4 gives errors of 4.4–5.1, **worse than not
+  correcting at all** — which is why the driver refuses the flag without an explicit `AM_ROPE_THETA`.
+- **OMP is dominated:** most document keys installed and the best ratio, but worse CE at **21× the solve
+  cost** (a 200-iteration NNLS inside each of 32 greedy steps).
+- ⚠️ **Noise:** ΔMT −0.199 sits at the **top edge** of the 0.1–0.2 band and ΔQA −0.125 sits **inside** it.
+  **One seed, no variation.** This is the new best point *and* it needs verification before it is quoted.
+- **Not yet done:** the 16 per-document snapshots exist for all four arms but were **not** evaluated
+  (32 evals/arm). The value-only curve bottoms at k=12 and then *degrades by 0.117* — so the keys arm's
+  own minimum is unmeasured and may be materially better than its k=16 endpoint. → DIAG-KEYCURVE.
+
 ## 🧭 SYNTHESIS (2026-07-29): the write is not performing content acquisition at all
 Three routes were open. All three are now closed, and they converge on one account:
 

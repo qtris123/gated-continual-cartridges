@@ -121,6 +121,17 @@ class AttentionMatchingFinetuningConfig(BaseConfig):
     # bit-identical; set `AM_ROPE_THETA` to opt in to the model's true base.
     rope_theta: float = 10000.0
 
+    # B-ROPE hazard H2 / LIT-026: when `key_mode != "freeze"`, a *document* key that
+    # wins selection is installed into a cartridge slot with NO counter-rotation --
+    # it was scored against a query rotated forward by `doc_rope_offset = T_doc`, but
+    # the student/eval scores it with the raw query, so the installed key is off by a
+    # multi-thousand-position phase. `key_reposition=True` re-bases every doc-sourced
+    # row by `-doc_rope_offset` (`phase1._rope_reposition`, the operator
+    # `initial_am_compaction` already uses) so the logit that selected the key is the
+    # logit it delivers. Default False -> `key_mode="freeze"` runs are untouched and
+    # a key run reproduces the historical (phase-corrupted) behaviour exactly.
+    key_reposition: bool = False
+
 
 @dataclass
 class AMUpdateStats:
@@ -418,6 +429,9 @@ def apply_document_am_write_to_cache(
     # B-ROPE: 10000.0 is the historical hard-coded AM default; `getattr` keeps this
     # working against an older config object that has no such field.
     rope_theta = float(getattr(config, "rope_theta", 10000.0))
+    # B-ROPE H2: opt-in counter-rotation of doc-sourced keys on install (MECH-005).
+    key_reposition = bool(getattr(config, "key_reposition", False))
+    key_rewrite_info: list[dict] = []
     oracle_write = bool(getattr(config, "oracle_write", False))
     oracle_mass_on_S: dict[int, list[float]] = {}
     oracle_doc_mass: dict[int, list[float]] = {}
@@ -576,6 +590,7 @@ def apply_document_am_write_to_cache(
                     [original_keys[selected_full], k_doc],
                     dim=0,
                 )
+                rewrite_info: dict = {"layer": layer_idx, "head": head_idx}
                 keys = rewrite_keys_on_support(
                     keys,
                     selected_full,
@@ -586,7 +601,10 @@ def apply_document_am_write_to_cache(
                     doc_key_start=selected_full.numel(),
                     doc_rope_offset=doc_rope_offset,
                     rope_theta=rope_theta,
+                    reposition=key_reposition,
+                    info=rewrite_info,
                 )
+                key_rewrite_info.append(rewrite_info)
 
             head_beta = base_beta
             if fit_beta and beta_param is not None:
@@ -732,6 +750,39 @@ def apply_document_am_write_to_cache(
     if solve_v_absmax:
         extra["v_selected_absmax_after_per_layer"] = {
             l: max(v) for l, v in solve_v_absmax.items() if v
+        }
+    if key_rewrite_info:
+        # B-ROUTE key-side arm (MECH-005): how many of the `top_t` support slots per
+        # (layer, head) actually received a DOCUMENT key, and how many were
+        # counter-rotated. Only recorded when `key_mode != "freeze"`, so every
+        # frozen-key run keeps a byte-identical `am_doc_*.pt` payload.
+        per_layer_rw: dict[int, list[dict]] = {}
+        for i in key_rewrite_info:
+            per_layer_rw.setdefault(i["layer"], []).append(i)
+        extra["key_rewrite"] = {
+            "mode": config.key_mode,
+            "reposition": key_reposition,
+            "n_head_calls": len(key_rewrite_info),
+            "n_selected_total": sum(i["n_selected"] for i in key_rewrite_info),
+            "n_from_doc_total": sum(i["n_from_doc"] for i in key_rewrite_info),
+            "n_from_cartridge_total": sum(
+                i["n_from_cartridge"] for i in key_rewrite_info
+            ),
+            "n_changed_total": sum(i.get("n_changed", 0) for i in key_rewrite_info),
+            "n_repositioned_total": sum(
+                i.get("n_repositioned", 0) for i in key_rewrite_info
+            ),
+            "rope_delta": key_rewrite_info[0].get("rope_delta"),
+        }
+        extra["key_rewrite_per_layer"] = {
+            l: {
+                "n_heads": len(v),
+                "n_selected": sum(i["n_selected"] for i in v),
+                "n_from_doc": sum(i["n_from_doc"] for i in v),
+                "n_changed": sum(i.get("n_changed", 0) for i in v),
+                "n_repositioned": sum(i.get("n_repositioned", 0) for i in v),
+            }
+            for l, v in per_layer_rw.items()
         }
     if fit_beta and beta_fit_info:
         # B-SOLVE: the fitted beta distribution is the headline diagnostic of the
