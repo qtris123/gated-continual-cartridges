@@ -14,7 +14,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from logging import getLogger
 import time
-from typing import Dict, Literal, Optional
+from typing import Callable, Dict, Literal, Optional
 
 import torch
 import torch.nn as nn
@@ -131,6 +131,26 @@ class AttentionMatchingFinetuningConfig(BaseConfig):
     # logit it delivers. Default False -> `key_mode="freeze"` runs are untouched and
     # a key run reproduces the historical (phase-corrupted) behaviour exactly.
     key_reposition: bool = False
+
+    # LIT-006 / SCOUT-AM divergence #3: on-policy, layer-sequential reference
+    # queries. We collect `Q_ref` in ONE forward pass over the *pre-write*
+    # cartridge (`am/continual.py`) and then solve all `n_layers` layers against
+    # it. But writing layer `l` perturbs the residual stream, so the queries the
+    # model actually emits at layers `l+1 ... n-1` are not the ones we fitted.
+    # The AM paper compacts layers sequentially and re-extracts `Q_ref^l` with
+    # layers `< l` already written. `onpolicy_layers = N > 0` splits the write
+    # into groups of N layers and re-extracts the reference queries from the
+    # UPDATED cache before each group after the first (N = 1 -> per layer, i.e.
+    # up to n_layers-1 extra prefill passes per document; N = 4 -> 8 for a
+    # 36-layer model). 0 = off -> a single pass, bit-identical to history.
+    #
+    # `onpolicy_refresh_doc_kv` additionally re-prefills the DOCUMENT KV against
+    # the updated cartridge, so the teacher `[cartridge || doc]` is on-policy as
+    # well. The paper only re-extracts queries (its target block is captured from
+    # the unmodified model), so this stays OFF by default and is a second,
+    # separately-testable axis.
+    onpolicy_layers: int = 0
+    onpolicy_refresh_doc_kv: bool = False
 
 
 @dataclass
@@ -395,6 +415,115 @@ def _collect_reference_queries(
     return query_acc, target_acc, batch_count
 
 
+def _onpolicy_refresh(
+    refresh_fn: Callable[[int, int], tuple[AMQueryAccumulator, Optional[dict]]],
+    layer_idx: int,
+    group_size: int,
+    old_accumulator: AMQueryAccumulator,
+    doc_kv: dict[int, tuple[torch.Tensor, torch.Tensor]],
+    n_layers: int,
+    events: list[dict],
+) -> tuple[AMQueryAccumulator, dict[int, tuple[torch.Tensor, torch.Tensor]]]:
+    """Re-extract reference queries (and optionally doc KV) from the updated cache.
+
+    LIT-006 / SCOUT-AM divergence #3. Fail-loud: a refresh that returns the wrong
+    shape, an empty layer, or non-finite queries would silently corrupt every
+    remaining layer's solve, so all three are asserted here rather than surfacing
+    as a mysterious MSE.
+
+    Also records the **query drift** at the boundary layer -- mean cosine
+    similarity and relative L2 change between the stale queries this layer would
+    have been solved against and the on-policy ones -- which is the direct
+    measurement of the activation shift this mechanism exists to remove.
+    """
+    t0 = time.time()
+    result = refresh_fn(layer_idx, group_size)
+    if not (isinstance(result, tuple) and len(result) == 2):
+        raise TypeError(
+            "onpolicy_refresh_fn must return (query_accumulator, doc_kv_or_None), "
+            f"got {type(result)!r}"
+        )
+    new_acc, new_doc_kv = result
+
+    old_batches = old_accumulator._queries.get(layer_idx) or []
+    new_batches = getattr(new_acc, "_queries", {}).get(layer_idx) or []
+    if not new_batches:
+        raise RuntimeError(
+            f"on-policy refresh at layer {layer_idx} produced no reference "
+            "queries; the write would fall back to nothing."
+        )
+    if len(new_batches) != len(old_batches):
+        raise RuntimeError(
+            f"on-policy refresh at layer {layer_idx} returned "
+            f"{len(new_batches)} query batches, expected {len(old_batches)} "
+            "(the reference dataloader must be replayed deterministically)."
+        )
+    q_new = new_batches[0]
+    q_old = old_batches[0]
+    if q_new.shape != q_old.shape:
+        raise RuntimeError(
+            f"on-policy refresh at layer {layer_idx} changed the query shape: "
+            f"{tuple(q_old.shape)} -> {tuple(q_new.shape)}"
+        )
+    if not torch.isfinite(q_new).all():
+        raise RuntimeError(
+            f"on-policy refresh at layer {layer_idx} produced non-finite queries "
+            f"({int((~torch.isfinite(q_new)).sum().item())} of {q_new.numel()})."
+        )
+
+    a = q_old.detach().float().reshape(-1, q_old.shape[-1])
+    b = q_new.detach().float().reshape(-1, q_new.shape[-1])
+    cos = torch.nn.functional.cosine_similarity(a, b, dim=-1)
+    rel_l2 = (b - a).norm() / a.norm().clamp_min(1e-12)
+    event = {
+        "layer": int(layer_idx),
+        "group_size": int(group_size),
+        "n_batches": len(new_batches),
+        "query_cos_mean": float(cos.mean().item()),
+        "query_cos_min": float(cos.min().item()),
+        "query_rel_l2": float(rel_l2.item()),
+        "doc_kv_refreshed": new_doc_kv is not None,
+    }
+
+    if new_doc_kv is not None:
+        for l in range(n_layers):
+            if l not in new_doc_kv:
+                raise RuntimeError(
+                    f"on-policy doc-KV refresh is missing layer {l}"
+                )
+        k_new, v_new = new_doc_kv[layer_idx]
+        k_old, v_old = doc_kv[layer_idx]
+        if k_new.shape != k_old.shape or v_new.shape != v_old.shape:
+            raise RuntimeError(
+                f"on-policy doc-KV refresh changed shapes at layer {layer_idx}: "
+                f"{tuple(k_old.shape)}/{tuple(v_old.shape)} -> "
+                f"{tuple(k_new.shape)}/{tuple(v_new.shape)}"
+            )
+        if not (torch.isfinite(k_new).all() and torch.isfinite(v_new).all()):
+            raise RuntimeError(
+                f"on-policy doc-KV refresh produced non-finite KV at layer {layer_idx}"
+            )
+        event["doc_v_rel_l2"] = float(
+            ((v_new.float() - v_old.float()).norm() / v_old.float().norm().clamp_min(1e-12)).item()
+        )
+        doc_kv = new_doc_kv
+
+    event["refresh_s"] = time.time() - t0
+    events.append(event)
+    logger.info(
+        "on-policy refresh before layer %d (group %d): cos=%.4f rel_l2=%.4f "
+        "batches=%d doc_kv=%s %.2fs",
+        layer_idx,
+        group_size,
+        event["query_cos_mean"],
+        event["query_rel_l2"],
+        event["n_batches"],
+        event["doc_kv_refreshed"],
+        event["refresh_s"],
+    )
+    return new_acc, doc_kv
+
+
 def apply_document_am_write_to_cache(
     cache: nn.Module,
     mask: GradientMask,
@@ -405,8 +534,18 @@ def apply_document_am_write_to_cache(
     head_dim: int,
     old_query_accumulator: Optional[AMQueryAccumulator] = None,
     old_target_bank: Optional[dict[tuple[int, int], torch.Tensor]] = None,
+    onpolicy_refresh_fn: Optional[
+        Callable[[int, int], tuple[AMQueryAccumulator, Optional[dict]]]
+    ] = None,
 ) -> AMUpdateStats:
-    """Apply one per-document AM write with teacher [cartridge || doc KV]."""
+    """Apply one per-document AM write with teacher [cartridge || doc KV].
+
+    ``onpolicy_refresh_fn(layer_idx, group_size)`` is the LIT-006 hook: when
+    ``config.onpolicy_layers > 0`` it is called at every group boundary and must
+    return ``(fresh_query_accumulator, fresh_doc_kv_or_None)`` re-extracted from
+    the cache **as it stands after the previous groups were written**. It is only
+    ever called when the flag is on, so a stock run is untouched.
+    """
     device = cache.trainable_values[0].device
     mse_per_layer: dict[int, float] = {}
     total_mse = 0.0
@@ -441,8 +580,29 @@ def apply_document_am_write_to_cache(
     solve_v_absmax: dict[int, list[float]] = {}
     n_queries_available: list[int] = []
     n_queries_used: list[int] = []
+    # LIT-006 on-policy layer-sequential re-extraction (off unless BOTH the config
+    # field is > 0 and the caller supplied the hook).
+    onpolicy_group = int(getattr(config, "onpolicy_layers", 0) or 0)
+    onpolicy_active = onpolicy_group > 0 and onpolicy_refresh_fn is not None
+    if onpolicy_group > 0 and onpolicy_refresh_fn is None:
+        raise ValueError(
+            f"onpolicy_layers={onpolicy_group} but no `onpolicy_refresh_fn` was "
+            "passed to apply_document_am_write_to_cache -- the on-policy write "
+            "cannot silently fall back to stale queries."
+        )
+    onpolicy_events: list[dict] = []
 
     for layer_idx in range(n_layers):
+        if onpolicy_active and layer_idx > 0 and layer_idx % onpolicy_group == 0:
+            query_accumulator, doc_kv = _onpolicy_refresh(
+                onpolicy_refresh_fn,
+                layer_idx,
+                onpolicy_group,
+                query_accumulator,
+                doc_kv,
+                n_layers,
+                events=onpolicy_events,
+            )
         v_param = cache.trainable_values[layer_idx]
         k_param = cache.trainable_keys[layer_idx]
         beta_param = (
@@ -751,6 +911,23 @@ def apply_document_am_write_to_cache(
         extra["v_selected_absmax_after_per_layer"] = {
             l: max(v) for l, v in solve_v_absmax.items() if v
         }
+    if onpolicy_events:
+        # LIT-006 / MECH-006: only recorded when the on-policy write actually ran,
+        # so every stock run keeps a byte-identical `am_doc_*.pt` payload.
+        extra["onpolicy"] = {
+            "group_size": onpolicy_group,
+            "n_refreshes": len(onpolicy_events),
+            "refresh_layers": [e["layer"] for e in onpolicy_events],
+            "refresh_s_total": sum(e["refresh_s"] for e in onpolicy_events),
+            "doc_kv_refreshed": bool(onpolicy_events[0]["doc_kv_refreshed"]),
+            "query_cos_mean": sum(e["query_cos_mean"] for e in onpolicy_events)
+            / len(onpolicy_events),
+            "query_cos_min": min(e["query_cos_min"] for e in onpolicy_events),
+            "query_rel_l2_mean": sum(e["query_rel_l2"] for e in onpolicy_events)
+            / len(onpolicy_events),
+            "query_rel_l2_max": max(e["query_rel_l2"] for e in onpolicy_events),
+        }
+        extra["onpolicy_events"] = onpolicy_events
     if key_rewrite_info:
         # B-ROUTE key-side arm (MECH-005): how many of the `top_t` support slots per
         # (layer, head) actually received a DOCUMENT key, and how many were

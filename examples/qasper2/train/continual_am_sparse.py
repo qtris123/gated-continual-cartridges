@@ -131,6 +131,17 @@ AM_ROPE_THETA_ENV = os.environ.get("AM_ROPE_THETA") or None
 # Unset/0 keeps the historical (uncorrected) install -> stock runs are bit-identical.
 AM_KEY_REPOSITION_ENV = os.environ.get("AM_KEY_REPOSITION")
 AM_KEY_REPOSITION = AM_KEY_REPOSITION_ENV in ("1", "true", "True")
+# LIT-006 / MECH-006: on-policy, layer-sequential reference-query re-extraction.
+# `AM_ONPOLICY_LAYERS=N` re-extracts the reference queries from the UPDATED cache
+# every N layers (N=1 -> per layer). Unset/0 keeps the historical single-pass
+# behaviour -> stock runs are bit-identical.
+AM_ONPOLICY_LAYERS_ENV = os.environ.get("AM_ONPOLICY_LAYERS")
+AM_ONPOLICY_LAYERS = int(AM_ONPOLICY_LAYERS_ENV) if AM_ONPOLICY_LAYERS_ENV else 0
+# Second, separately-testable axis: also re-prefill the DOCUMENT KV against the
+# updated cartridge, so the teacher `[cartridge || doc]` is on-policy too. The AM
+# paper only re-extracts queries, so this defaults OFF.
+AM_ONPOLICY_DOCKV_ENV = os.environ.get("AM_ONPOLICY_DOCKV")
+AM_ONPOLICY_DOCKV = AM_ONPOLICY_DOCKV_ENV in ("1", "true", "True")
 # B-SOLVE / LIT-002: box-constrained NNLS for the beta (mass-matching) fit.
 # These are only forwarded when beta is actually requested (or a knob is set
 # explicitly), so every beta-off run keeps a byte-identical config.
@@ -298,6 +309,60 @@ def _key_reposition_kwargs() -> dict:
     return {"key_reposition": AM_KEY_REPOSITION}
 
 
+def _onpolicy_kwargs() -> dict:
+    """Pass the on-policy knobs ONLY if the imported package has the fields.
+
+    Same conditional-kwarg discipline as `_oracle_write_kwargs` (RUNBOOK §6.10):
+    the sibling `cartridges` package has neither field, and MECH-000 lost a whole
+    batch of runs to an unconditional new kwarg. When `AM_ONPOLICY_LAYERS` is
+    unset both kwargs are omitted entirely, so the config is byte-identical to
+    every historical run; when the knob IS requested but the field is missing we
+    fail loudly rather than silently running the stale-query write.
+    """
+    import cartridges
+
+    if AM_ONPOLICY_LAYERS_ENV is None and AM_ONPOLICY_DOCKV_ENV is None:
+        return {}
+    missing = [
+        f
+        for f in ("onpolicy_layers", "onpolicy_refresh_doc_kv")
+        if f not in AttentionMatchingFinetuningConfig.model_fields
+    ]
+    if missing:
+        raise RuntimeError(
+            f"AM_ONPOLICY_LAYERS={AM_ONPOLICY_LAYERS_ENV} / "
+            f"AM_ONPOLICY_DOCKV={AM_ONPOLICY_DOCKV_ENV} requested but the imported "
+            f"`cartridges` package ({os.path.dirname(cartridges.__file__)}) is "
+            f"missing {missing}. Export PYTHONPATH=$CARTRIDGES_DIR:$PYTHONPATH "
+            "(RUNBOOK §6.10)."
+        )
+    if AM_ONPOLICY_LAYERS < 0:
+        raise ValueError(
+            f"AM_ONPOLICY_LAYERS must be >= 0, got {AM_ONPOLICY_LAYERS}"
+        )
+    if AM_ONPOLICY_DOCKV and AM_ONPOLICY_LAYERS <= 0:
+        raise ValueError(
+            "AM_ONPOLICY_DOCKV=1 is meaningless without AM_ONPOLICY_LAYERS>0 "
+            "(nothing is ever re-extracted)."
+        )
+    if AM_ONPOLICY_LAYERS > 0 and AM_EXECUTION_MODE != "per_document":
+        raise ValueError(
+            "AM_ONPOLICY_LAYERS is only implemented for "
+            f"AM_EXECUTION_MODE=per_document, got {AM_EXECUTION_MODE}."
+        )
+    if AM_ONPOLICY_LAYERS > 0:
+        logger.info(
+            "LIT-006: on-policy layer-sequential re-extraction every %d layers "
+            "(doc-KV refresh = %s)",
+            AM_ONPOLICY_LAYERS,
+            AM_ONPOLICY_DOCKV,
+        )
+    return {
+        "onpolicy_layers": AM_ONPOLICY_LAYERS,
+        "onpolicy_refresh_doc_kv": AM_ONPOLICY_DOCKV,
+    }
+
+
 def _beta_fit_kwargs() -> dict:
     """Pass the LIT-002 beta-fit knobs ONLY when beta is actually in play.
 
@@ -347,6 +412,7 @@ def _build_am_config() -> AttentionMatchingFinetuningConfig:
         **_max_queries_kwargs(),
         **_rope_theta_kwargs(),
         **_key_reposition_kwargs(),
+        **_onpolicy_kwargs(),
         **_beta_fit_kwargs(),
         enabled=True,
         top_t=TOP_T,
@@ -790,6 +856,12 @@ config = TrainConfig(
             # B-ROPE H2 / MECH-005: only tagged when the knob is set explicitly.
             [f"keyrepos-{int(AM_KEY_REPOSITION)}"]
             if AM_KEY_REPOSITION_ENV is not None
+            else []
+        ) + (
+            # LIT-006 / MECH-006: only tagged when the knob is set explicitly.
+            [f"onpolicy-{AM_ONPOLICY_LAYERS}"]
+            + ([f"onpolicydockv-{int(AM_ONPOLICY_DOCKV)}"] if AM_ONPOLICY_DOCKV else [])
+            if AM_ONPOLICY_LAYERS_ENV is not None
             else []
         ) + (
             # B-SOLVE: only tagged when the beta fit is actually active.

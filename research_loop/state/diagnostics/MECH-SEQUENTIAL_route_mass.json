@@ -1,0 +1,5731 @@
+{
+  "model": "Qwen/Qwen3-4B-Instruct-2507",
+  "runs": {
+    "control|QA": {
+      "per_layer": {
+        "0": {
+          "mass_on_S": 0.046508897348151855,
+          "mass_on_cart": 0.17871245990196863,
+          "share_of_cart": 0.2602442905976671,
+          "mass_on_S_scored": 0.029004811527973462,
+          "mass_on_cart_scored": 0.15468882420286964,
+          "share_of_cart_scored": 0.1875042471713053
+        },
+        "1": {
+          "mass_on_S": 0.11786523604920755,
+          "mass_on_cart": 0.29792509390972555,
+          "share_of_cart": 0.3956203705516729,
+          "mass_on_S_scored": 0.07647596937172192,
+          "mass_on_cart_scored": 0.20733421217648754,
+          "share_of_cart_scored": 0.3688535942472623
+        },
+        "2": {
+          "mass_on_S": 0.1527702312450856,
+          "mass_on_cart": 0.31187237861255807,
+          "share_of_cart": 0.4898485461416045,
+          "mass_on_S_scored": 0.10770368322291962,
+          "mass_on_cart_scored": 0.23784304367262427,
+          "share_of_cart_scored": 0.45283512000109977
+        },
+        "3": {
+          "mass_on_S": 0.18824260278294483,
+          "mass_on_cart": 0.2986414413899183,
+          "share_of_cart": 0.6303298092416039,
+          "mass_on_S_scored": 0.13449605856177552,
+          "mass_on_cart_scored": 0.22079453706377197,
+          "share_of_cart_scored": 0.6091457712240819
+        },
+        "4": {
+          "mass_on_S": 0.16040311474353075,
+          "mass_on_cart": 0.28816756792366505,
+          "share_of_cart": 0.5566313929748721,
+          "mass_on_S_scored": 0.12257485548564158,
+          "mass_on_cart_scored": 0.2299453555832113,
+          "share_of_cart_scored": 0.5330608012271197
+        },
+        "5": {
+          "mass_on_S": 0.1972775119356811,
+          "mass_on_cart": 0.3027428363760312,
+          "share_of_cart": 0.6516339553965412,
+          "mass_on_S_scored": 0.14584682624091533,
+          "mass_on_cart_scored": 0.25156178917990424,
+          "share_of_cart_scored": 0.57976541952726
+        },
+        "6": {
+          "mass_on_S": 0.14974489897334328,
+          "mass_on_cart": 0.3213487369939685,
+          "share_of_cart": 0.4659887584252553,
+          "mass_on_S_scored": 0.1276374348773898,
+          "mass_on_cart_scored": 0.30841824913034005,
+          "share_of_cart_scored": 0.41384527419273814
+        },
+        "7": {
+          "mass_on_S": 0.02032804896104305,
+          "mass_on_cart": 0.6284595583565533,
+          "share_of_cart": 0.032345834653548275,
+          "mass_on_S_scored": 0.013953487717899636,
+          "mass_on_cart_scored": 0.6631969426505754,
+          "share_of_cart_scored": 0.021039734685947484
+        },
+        "8": {
+          "mass_on_S": 0.032785642998836316,
+          "mass_on_cart": 0.6295455005019903,
+          "share_of_cart": 0.0520782738859916,
+          "mass_on_S_scored": 0.036449651860778864,
+          "mass_on_cart_scored": 0.6470458076718474,
+          "share_of_cart_scored": 0.0563324132984175
+        },
+        "9": {
+          "mass_on_S": 0.02952146043632335,
+          "mass_on_cart": 0.6803757039209207,
+          "share_of_cart": 0.043389939214752725,
+          "mass_on_S_scored": 0.03155898630232154,
+          "mass_on_cart_scored": 0.6979831351538386,
+          "share_of_cart_scored": 0.04521453988335377
+        },
+        "10": {
+          "mass_on_S": 0.04161893071917196,
+          "mass_on_cart": 0.6402681277443966,
+          "share_of_cart": 0.06500234654158325,
+          "mass_on_S_scored": 0.04531505804917156,
+          "mass_on_cart_scored": 0.6682380592153927,
+          "share_of_cart_scored": 0.06781274640713811
+        },
+        "11": {
+          "mass_on_S": 0.04289493824277694,
+          "mass_on_cart": 0.5866367829342684,
+          "share_of_cart": 0.07312009660939253,
+          "mass_on_S_scored": 0.05274828355553133,
+          "mass_on_cart_scored": 0.6412445982251744,
+          "share_of_cart_scored": 0.08225922479741288
+        },
+        "12": {
+          "mass_on_S": 0.03766594978515059,
+          "mass_on_cart": 0.5443208897486329,
+          "share_of_cart": 0.06919806036204987,
+          "mass_on_S_scored": 0.04026036859468997,
+          "mass_on_cart_scored": 0.5754621655443053,
+          "share_of_cart_scored": 0.06996179941145113
+        },
+        "13": {
+          "mass_on_S": 0.03140654230567937,
+          "mass_on_cart": 0.6023260842387875,
+          "share_of_cart": 0.052142092344167,
+          "mass_on_S_scored": 0.048606076181424214,
+          "mass_on_cart_scored": 0.5893424987884003,
+          "share_of_cart_scored": 0.08247509093837796
+        },
+        "14": {
+          "mass_on_S": 0.032056534924777225,
+          "mass_on_cart": 0.4639754326393207,
+          "share_of_cart": 0.06909101790675397,
+          "mass_on_S_scored": 0.03956250344631029,
+          "mass_on_cart_scored": 0.4622506610807366,
+          "share_of_cart_scored": 0.08558668873250203
+        },
+        "15": {
+          "mass_on_S": 0.02986558307505523,
+          "mass_on_cart": 0.4755027781551083,
+          "share_of_cart": 0.06280843024919851,
+          "mass_on_S_scored": 0.02881295792509543,
+          "mass_on_cart_scored": 0.4425887469118358,
+          "share_of_cart_scored": 0.0651009726888402
+        },
+        "16": {
+          "mass_on_S": 0.029388587941260386,
+          "mass_on_cart": 0.48198964648569625,
+          "share_of_cart": 0.060973483881945865,
+          "mass_on_S_scored": 0.042009653123156084,
+          "mass_on_cart_scored": 0.4439898589586838,
+          "share_of_cart_scored": 0.09461849696676373
+        },
+        "17": {
+          "mass_on_S": 0.03824020560811429,
+          "mass_on_cart": 0.40097650163806975,
+          "share_of_cart": 0.09536769723885402,
+          "mass_on_S_scored": 0.04344053899370768,
+          "mass_on_cart_scored": 0.3841616825412912,
+          "share_of_cart_scored": 0.11307879199805025
+        },
+        "18": {
+          "mass_on_S": 0.05108496373092445,
+          "mass_on_cart": 0.4468221152201295,
+          "share_of_cart": 0.11432953291883761,
+          "mass_on_S_scored": 0.05343818294724329,
+          "mass_on_cart_scored": 0.3639129319915611,
+          "share_of_cart_scored": 0.1468433195127083
+        },
+        "19": {
+          "mass_on_S": 0.039428418958171584,
+          "mass_on_cart": 0.5013231712703904,
+          "share_of_cart": 0.07864870649855865,
+          "mass_on_S_scored": 0.04158607171652835,
+          "mass_on_cart_scored": 0.47236382317206205,
+          "share_of_cart_scored": 0.08803822324340091
+        },
+        "20": {
+          "mass_on_S": 0.042844112790286694,
+          "mass_on_cart": 0.5291028587768475,
+          "share_of_cart": 0.08097501663349824,
+          "mass_on_S_scored": 0.045057837578598534,
+          "mass_on_cart_scored": 0.49732248994310924,
+          "share_of_cart_scored": 0.09060084450182995
+        },
+        "21": {
+          "mass_on_S": 0.05280999195141097,
+          "mass_on_cart": 0.5841433663542072,
+          "share_of_cart": 0.09040587464172034,
+          "mass_on_S_scored": 0.06378140509322018,
+          "mass_on_cart_scored": 0.5183185572931902,
+          "share_of_cart_scored": 0.12305445019430748
+        },
+        "22": {
+          "mass_on_S": 0.03628896385392485,
+          "mass_on_cart": 0.5092243491671979,
+          "share_of_cart": 0.07126321416733705,
+          "mass_on_S_scored": 0.048268054859835756,
+          "mass_on_cart_scored": 0.5095906968151354,
+          "share_of_cart_scored": 0.09471926226578269
+        },
+        "23": {
+          "mass_on_S": 0.04234455608335944,
+          "mass_on_cart": 0.5412645663600415,
+          "share_of_cart": 0.07823264021903929,
+          "mass_on_S_scored": 0.04827209715683436,
+          "mass_on_cart_scored": 0.5537612572249769,
+          "share_of_cart_scored": 0.08717131530424639
+        },
+        "24": {
+          "mass_on_S": 0.06136249227226168,
+          "mass_on_cart": 0.718674254293243,
+          "share_of_cart": 0.08538290039707438,
+          "mass_on_S_scored": 0.07606740180102865,
+          "mass_on_cart_scored": 0.7097012049007525,
+          "share_of_cart_scored": 0.10718229203466863
+        },
+        "25": {
+          "mass_on_S": 0.05471893460101759,
+          "mass_on_cart": 0.7315394710749388,
+          "share_of_cart": 0.07479970222332978,
+          "mass_on_S_scored": 0.06952803202454212,
+          "mass_on_cart_scored": 0.7523413252493679,
+          "share_of_cart_scored": 0.09241554290733218
+        },
+        "26": {
+          "mass_on_S": 0.06611425550848556,
+          "mass_on_cart": 0.8380979932844639,
+          "share_of_cart": 0.07888606826200253,
+          "mass_on_S_scored": 0.07391266065922435,
+          "mass_on_cart_scored": 0.8481918742247965,
+          "share_of_cart_scored": 0.08714143922538364
+        },
+        "27": {
+          "mass_on_S": 0.05883302581302511,
+          "mass_on_cart": 0.7959042346725861,
+          "share_of_cart": 0.07391972959815632,
+          "mass_on_S_scored": 0.05602691277332459,
+          "mass_on_cart_scored": 0.8088344764327129,
+          "share_of_cart_scored": 0.06926870009352956
+        },
+        "28": {
+          "mass_on_S": 0.0959534485785601,
+          "mass_on_cart": 0.7689736721416315,
+          "share_of_cart": 0.12478118829650536,
+          "mass_on_S_scored": 0.09387486621470068,
+          "mass_on_cart_scored": 0.7875436549425217,
+          "share_of_cart_scored": 0.11919957151016862
+        },
+        "29": {
+          "mass_on_S": 0.06069716393540148,
+          "mass_on_cart": 0.8845597319304943,
+          "share_of_cart": 0.0686185022270162,
+          "mass_on_S_scored": 0.0859328290264813,
+          "mass_on_cart_scored": 0.896342257635882,
+          "share_of_cart_scored": 0.09587055423798785
+        },
+        "30": {
+          "mass_on_S": 0.04601451041526161,
+          "mass_on_cart": 0.8174887119481961,
+          "share_of_cart": 0.05628764011383381,
+          "mass_on_S_scored": 0.05841214701664179,
+          "mass_on_cart_scored": 0.863018025192153,
+          "share_of_cart_scored": 0.06768357706507484
+        },
+        "31": {
+          "mass_on_S": 0.05539669218705967,
+          "mass_on_cart": 0.8596123059590658,
+          "share_of_cart": 0.06444381007930525,
+          "mass_on_S_scored": 0.06553810542721747,
+          "mass_on_cart_scored": 0.8823861834565024,
+          "share_of_cart_scored": 0.0742737212526268
+        },
+        "32": {
+          "mass_on_S": 0.05279523250646889,
+          "mass_on_cart": 0.8109347699210048,
+          "share_of_cart": 0.06510416677732515,
+          "mass_on_S_scored": 0.06893666990246423,
+          "mass_on_cart_scored": 0.8606786358306407,
+          "share_of_cart_scored": 0.08009571404771013
+        },
+        "33": {
+          "mass_on_S": 0.06024192372569814,
+          "mass_on_cart": 0.8578184234599272,
+          "share_of_cart": 0.0702268942682744,
+          "mass_on_S_scored": 0.08255583123681244,
+          "mass_on_cart_scored": 0.8987075114532389,
+          "share_of_cart_scored": 0.09186062226554334
+        },
+        "34": {
+          "mass_on_S": 0.06570780584782672,
+          "mass_on_cart": 0.7790146395564079,
+          "share_of_cart": 0.08434733124558805,
+          "mass_on_S_scored": 0.07126799106893762,
+          "mass_on_cart_scored": 0.8208935187945342,
+          "share_of_cart_scored": 0.08681758283777566
+        },
+        "35": {
+          "mass_on_S": 0.13363123748179837,
+          "mass_on_cart": 0.6501476708799601,
+          "share_of_cart": 0.2055398234387759,
+          "mass_on_S_scored": 0.13434874672483924,
+          "mass_on_cart_scored": 0.7335857068732204,
+          "share_of_cart_scored": 0.18313980965833843
+        }
+      },
+      "n_slots_per_layer": {
+        "0": 36,
+        "1": 35,
+        "2": 42,
+        "3": 39,
+        "4": 44,
+        "5": 43,
+        "6": 44,
+        "7": 39,
+        "8": 50,
+        "9": 55,
+        "10": 40,
+        "11": 55,
+        "12": 49,
+        "13": 62,
+        "14": 59,
+        "15": 56,
+        "16": 63,
+        "17": 70,
+        "18": 75,
+        "19": 66,
+        "20": 74,
+        "21": 76,
+        "22": 55,
+        "23": 66,
+        "24": 68,
+        "25": 45,
+        "26": 54,
+        "27": 45,
+        "28": 68,
+        "29": 58,
+        "30": 42,
+        "31": 48,
+        "32": 54,
+        "33": 54,
+        "34": 47,
+        "35": 45
+      },
+      "summary": {
+        "mean_mass_on_S": 0.06819035134214102,
+        "mean_mass_on_S_scored": 0.06675730689630274,
+        "mean_mass_on_cart": 0.5766231618817309,
+        "max_mass_on_S": 0.1972775119356811,
+        "argmax_layer": 5
+      },
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-02-04-15-continual_am_sparse/9366d343-5038-4654-b413-2ac243379627/cache_last.pt",
+      "slots_from": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-02-04-15-continual_am_sparse/9366d343-5038-4654-b413-2ac243379627",
+      "beta": {
+        "attention_bias_enabled": false,
+        "has_trainable_beta": true,
+        "global": {
+          "min": 0.0,
+          "max": 0.0,
+          "mean": 0.0,
+          "n_nonzero": 0,
+          "n": 147168
+        },
+        "per_layer": {
+          "0": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "1": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "2": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "3": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "4": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "5": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "6": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "7": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "8": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "9": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "10": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "11": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "12": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "13": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "14": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "15": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "16": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "17": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "18": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "19": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "20": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "21": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "22": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "23": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "24": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "25": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "26": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "27": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "28": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "29": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "30": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "31": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "32": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "33": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "34": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "35": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          }
+        }
+      }
+    },
+    "control|MT": {
+      "per_layer": {
+        "0": {
+          "mass_on_S": 0.049098681192845106,
+          "mass_on_cart": 0.19226608686149121,
+          "share_of_cart": 0.2553683907251718,
+          "mass_on_S_scored": 0.028961403401543812,
+          "mass_on_cart_scored": 0.15706825554138232,
+          "share_of_cart_scored": 0.18438737542299524
+        },
+        "1": {
+          "mass_on_S": 0.12070452198386192,
+          "mass_on_cart": 0.3067041033878922,
+          "share_of_cart": 0.39355365856062746,
+          "mass_on_S_scored": 0.07590576680631586,
+          "mass_on_cart_scored": 0.2054111864490494,
+          "share_of_cart_scored": 0.3695308328553162
+        },
+        "2": {
+          "mass_on_S": 0.1579399460926652,
+          "mass_on_cart": 0.32423128485679625,
+          "share_of_cart": 0.4871212417469918,
+          "mass_on_S_scored": 0.10750017884557457,
+          "mass_on_cart_scored": 0.23616621254199563,
+          "share_of_cart_scored": 0.45518864738730835
+        },
+        "3": {
+          "mass_on_S": 0.19118101038038732,
+          "mass_on_cart": 0.30570240169763563,
+          "share_of_cart": 0.6253827556431198,
+          "mass_on_S_scored": 0.13446068075092205,
+          "mass_on_cart_scored": 0.21723431130110707,
+          "share_of_cart_scored": 0.6189661289949127
+        },
+        "4": {
+          "mass_on_S": 0.1619550008326769,
+          "mass_on_cart": 0.2966311305761337,
+          "share_of_cart": 0.5459811332617678,
+          "mass_on_S_scored": 0.12317714348702948,
+          "mass_on_cart_scored": 0.22862992967878068,
+          "share_of_cart_scored": 0.5387621107179199
+        },
+        "5": {
+          "mass_on_S": 0.20068579968065023,
+          "mass_on_cart": 0.3125062432140112,
+          "share_of_cart": 0.6421817292885766,
+          "mass_on_S_scored": 0.1455843658022914,
+          "mass_on_cart_scored": 0.25197729219411336,
+          "share_of_cart_scored": 0.5777678001640677
+        },
+        "6": {
+          "mass_on_S": 0.15333062121644617,
+          "mass_on_cart": 0.3388161566108465,
+          "share_of_cart": 0.4525481392333862,
+          "mass_on_S_scored": 0.12922639636487165,
+          "mass_on_cart_scored": 0.3118757836805667,
+          "share_of_cart_scored": 0.414352133531565
+        },
+        "7": {
+          "mass_on_S": 0.01980360016459599,
+          "mass_on_cart": 0.6620233058929443,
+          "share_of_cart": 0.029913750752150147,
+          "mass_on_S_scored": 0.013797850658496221,
+          "mass_on_cart_scored": 0.6648707140431936,
+          "share_of_cart_scored": 0.020752682238910945
+        },
+        "8": {
+          "mass_on_S": 0.03374528978019953,
+          "mass_on_cart": 0.6566649809479713,
+          "share_of_cart": 0.05138889808237425,
+          "mass_on_S_scored": 0.03677615276730498,
+          "mass_on_cart_scored": 0.6427648128893672,
+          "share_of_cart_scored": 0.057215566300196495
+        },
+        "9": {
+          "mass_on_S": 0.031252376222983005,
+          "mass_on_cart": 0.7040127336978912,
+          "share_of_cart": 0.04439177691975406,
+          "mass_on_S_scored": 0.031553548379022564,
+          "mass_on_cart_scored": 0.6963455362491175,
+          "share_of_cart_scored": 0.04531306188733044
+        },
+        "10": {
+          "mass_on_S": 0.04396854816004634,
+          "mass_on_cart": 0.6657871961593628,
+          "share_of_cart": 0.06603994251268544,
+          "mass_on_S_scored": 0.04477190336243051,
+          "mass_on_cart_scored": 0.6684125904735413,
+          "share_of_cart_scored": 0.06698243569994929
+        },
+        "11": {
+          "mass_on_S": 0.046295281033962965,
+          "mass_on_cart": 0.6184588275849819,
+          "share_of_cart": 0.07485588202328888,
+          "mass_on_S_scored": 0.05332299638873986,
+          "mass_on_cart_scored": 0.6360088105689353,
+          "share_of_cart_scored": 0.08384002784653298
+        },
+        "12": {
+          "mass_on_S": 0.04054948533885181,
+          "mass_on_cart": 0.5710012324154377,
+          "share_of_cart": 0.07101470721406364,
+          "mass_on_S_scored": 0.04104571147973792,
+          "mass_on_cart_scored": 0.5775998202643294,
+          "share_of_cart_scored": 0.07106254198790089
+        },
+        "13": {
+          "mass_on_S": 0.03555152916815132,
+          "mass_on_cart": 0.6156742542982101,
+          "share_of_cart": 0.05774405689364989,
+          "mass_on_S_scored": 0.047780199175603125,
+          "mass_on_cart_scored": 0.5807942889985585,
+          "share_of_cart_scored": 0.08226699208421748
+        },
+        "14": {
+          "mass_on_S": 0.03470592682715505,
+          "mass_on_cart": 0.4800134375691414,
+          "share_of_cart": 0.07230199013367411,
+          "mass_on_S_scored": 0.04024208863436664,
+          "mass_on_cart_scored": 0.45565126316329635,
+          "share_of_cart_scored": 0.08831773746217987
+        },
+        "15": {
+          "mass_on_S": 0.03159554661251605,
+          "mass_on_cart": 0.47921587601304055,
+          "share_of_cart": 0.06593176101631545,
+          "mass_on_S_scored": 0.027099145002005904,
+          "mass_on_cart_scored": 0.4317178365125217,
+          "share_of_cart_scored": 0.06277050126285415
+        },
+        "16": {
+          "mass_on_S": 0.032028452563099566,
+          "mass_on_cart": 0.49291251301765443,
+          "share_of_cart": 0.06497796610400194,
+          "mass_on_S_scored": 0.042058589330973985,
+          "mass_on_cart_scored": 0.4385994133960447,
+          "share_of_cart_scored": 0.0958929447837544
+        },
+        "17": {
+          "mass_on_S": 0.039700402808375654,
+          "mass_on_cart": 0.41499407440423963,
+          "share_of_cart": 0.09566498718173039,
+          "mass_on_S_scored": 0.04075116079640891,
+          "mass_on_cart_scored": 0.36070163765519414,
+          "share_of_cart_scored": 0.11297747651305151
+        },
+        "18": {
+          "mass_on_S": 0.054978672228753564,
+          "mass_on_cart": 0.43568118996918204,
+          "share_of_cart": 0.12619014429482825,
+          "mass_on_S_scored": 0.048929482547218774,
+          "mass_on_cart_scored": 0.3371808117576915,
+          "share_of_cart_scored": 0.14511348463797225
+        },
+        "19": {
+          "mass_on_S": 0.04123755900654942,
+          "mass_on_cart": 0.5113680496811867,
+          "share_of_cart": 0.08064164163611523,
+          "mass_on_S_scored": 0.03841077263563709,
+          "mass_on_cart_scored": 0.4577634474153541,
+          "share_of_cart_scored": 0.0839096543258616
+        },
+        "20": {
+          "mass_on_S": 0.041686036717146636,
+          "mass_on_cart": 0.5413289323449135,
+          "share_of_cart": 0.07700685152107468,
+          "mass_on_S_scored": 0.03375362977676332,
+          "mass_on_cart_scored": 0.4625869787455908,
+          "share_of_cart_scored": 0.07296709878927833
+        },
+        "21": {
+          "mass_on_S": 0.05476513309404254,
+          "mass_on_cart": 0.5738051019608974,
+          "share_of_cart": 0.0954420462747551,
+          "mass_on_S_scored": 0.05781966545542733,
+          "mass_on_cart_scored": 0.48725027260047027,
+          "share_of_cart_scored": 0.1186652295684555
+        },
+        "22": {
+          "mass_on_S": 0.039567923592403534,
+          "mass_on_cart": 0.534482029825449,
+          "share_of_cart": 0.07403040960109662,
+          "mass_on_S_scored": 0.048938272266440055,
+          "mass_on_cart_scored": 0.5015580101370533,
+          "share_of_cart_scored": 0.0975725066240442
+        },
+        "23": {
+          "mass_on_S": 0.04509119796566665,
+          "mass_on_cart": 0.5631748907268047,
+          "share_of_cart": 0.08006606599146184,
+          "mass_on_S_scored": 0.044925290704424914,
+          "mass_on_cart_scored": 0.534093037515204,
+          "share_of_cart_scored": 0.08411510270464072
+        },
+        "24": {
+          "mass_on_S": 0.06502111437730491,
+          "mass_on_cart": 0.7318370327353477,
+          "share_of_cart": 0.08884643912358331,
+          "mass_on_S_scored": 0.0733367918665571,
+          "mass_on_cart_scored": 0.6907108107365081,
+          "share_of_cart_scored": 0.106175827461507
+        },
+        "25": {
+          "mass_on_S": 0.05691566653549671,
+          "mass_on_cart": 0.7569324657320976,
+          "share_of_cart": 0.07519252920463444,
+          "mass_on_S_scored": 0.070575928753191,
+          "mass_on_cart_scored": 0.7538199763480431,
+          "share_of_cart_scored": 0.09362438110900591
+        },
+        "26": {
+          "mass_on_S": 0.07110288278199732,
+          "mass_on_cart": 0.8521973937749863,
+          "share_of_cart": 0.0834347573712145,
+          "mass_on_S_scored": 0.07042721190739198,
+          "mass_on_cart_scored": 0.838388371523426,
+          "share_of_cart_scored": 0.08400308770912399
+        },
+        "27": {
+          "mass_on_S": 0.06277024406008422,
+          "mass_on_cart": 0.8117890685796738,
+          "share_of_cart": 0.07732334234299137,
+          "mass_on_S_scored": 0.05600936653835526,
+          "mass_on_cart_scored": 0.8077410996472063,
+          "share_of_cart_scored": 0.06934074118900009
+        },
+        "28": {
+          "mass_on_S": 0.09891550149768591,
+          "mass_on_cart": 0.7888001516461373,
+          "share_of_cart": 0.12539995243568397,
+          "mass_on_S_scored": 0.08467621902392117,
+          "mass_on_cart_scored": 0.7811328320648407,
+          "share_of_cart_scored": 0.10840181790859908
+        },
+        "29": {
+          "mass_on_S": 0.06206241715699434,
+          "mass_on_cart": 0.895276965200901,
+          "share_of_cart": 0.06932203057750679,
+          "mass_on_S_scored": 0.07588072366587917,
+          "mass_on_cart_scored": 0.8883371762611455,
+          "share_of_cart_scored": 0.08541883160316194
+        },
+        "30": {
+          "mass_on_S": 0.04965908289887011,
+          "mass_on_cart": 0.836656391620636,
+          "share_of_cart": 0.059354214461540815,
+          "mass_on_S_scored": 0.05750379801540985,
+          "mass_on_cart_scored": 0.8605523790631976,
+          "share_of_cart_scored": 0.06682196158473099
+        },
+        "31": {
+          "mass_on_S": 0.06024099844507873,
+          "mass_on_cart": 0.8633977860212326,
+          "share_of_cart": 0.06977200940331955,
+          "mass_on_S_scored": 0.06556035274644088,
+          "mass_on_cart_scored": 0.8719338216789061,
+          "share_of_cart_scored": 0.0751895970960326
+        },
+        "32": {
+          "mass_on_S": 0.05372294085100293,
+          "mass_on_cart": 0.8347927048802376,
+          "share_of_cart": 0.06435482789551955,
+          "mass_on_S_scored": 0.06283651000349713,
+          "mass_on_cart_scored": 0.8590336225630248,
+          "share_of_cart_scored": 0.07314790521937574
+        },
+        "33": {
+          "mass_on_S": 0.06477606985718012,
+          "mass_on_cart": 0.8779651686549187,
+          "share_of_cart": 0.0737797718745721,
+          "mass_on_S_scored": 0.0830009062712682,
+          "mass_on_cart_scored": 0.8923434451815674,
+          "share_of_cart_scored": 0.09301453013349563
+        },
+        "34": {
+          "mass_on_S": 0.06893962344620377,
+          "mass_on_cart": 0.7993997320532799,
+          "share_of_cart": 0.08623923762037108,
+          "mass_on_S_scored": 0.0748145639849863,
+          "mass_on_cart_scored": 0.8160252842839857,
+          "share_of_cart_scored": 0.09168167387194588
+        },
+        "35": {
+          "mass_on_S": 0.14431653660722077,
+          "mass_on_cart": 0.7020871564745903,
+          "share_of_cart": 0.2055535915681486,
+          "mass_on_S_scored": 0.13643734721258968,
+          "mass_on_cart_scored": 0.7381390185210968,
+          "share_of_cart_scored": 0.18483963560949485
+        }
+      },
+      "n_slots_per_layer": {
+        "0": 36,
+        "1": 35,
+        "2": 42,
+        "3": 39,
+        "4": 44,
+        "5": 43,
+        "6": 44,
+        "7": 39,
+        "8": 50,
+        "9": 55,
+        "10": 40,
+        "11": 55,
+        "12": 49,
+        "13": 62,
+        "14": 59,
+        "15": 56,
+        "16": 63,
+        "17": 70,
+        "18": 75,
+        "19": 66,
+        "20": 74,
+        "21": 76,
+        "22": 55,
+        "23": 66,
+        "24": 68,
+        "25": 45,
+        "26": 54,
+        "27": 45,
+        "28": 68,
+        "29": 58,
+        "30": 42,
+        "31": 48,
+        "32": 54,
+        "33": 54,
+        "34": 47,
+        "35": 45
+      },
+      "summary": {
+        "mean_mass_on_S": 0.07110726725497646,
+        "mean_mass_on_S_scored": 0.06521811430025108,
+        "mean_mass_on_cart": 0.5930163347524487,
+        "max_mass_on_S": 0.20068579968065023,
+        "argmax_layer": 5
+      },
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-02-04-15-continual_am_sparse/9366d343-5038-4654-b413-2ac243379627/cache_last.pt",
+      "slots_from": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-02-04-15-continual_am_sparse/9366d343-5038-4654-b413-2ac243379627",
+      "beta": {
+        "attention_bias_enabled": false,
+        "has_trainable_beta": true,
+        "global": {
+          "min": 0.0,
+          "max": 0.0,
+          "mean": 0.0,
+          "n_nonzero": 0,
+          "n": 147168
+        },
+        "per_layer": {
+          "0": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "1": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "2": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "3": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "4": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "5": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "6": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "7": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "8": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "9": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "10": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "11": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "12": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "13": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "14": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "15": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "16": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "17": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "18": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "19": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "20": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "21": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "22": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "23": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "24": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "25": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "26": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "27": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "28": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "29": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "30": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "31": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "32": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "33": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "34": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "35": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          }
+        }
+      }
+    },
+    "onpolicy|QA": {
+      "per_layer": {
+        "0": {
+          "mass_on_S": 0.046508897348151855,
+          "mass_on_cart": 0.17871245990196863,
+          "share_of_cart": 0.2602442905976671,
+          "mass_on_S_scored": 0.029004811527973462,
+          "mass_on_cart_scored": 0.15468882420286964,
+          "share_of_cart_scored": 0.1875042471713053
+        },
+        "1": {
+          "mass_on_S": 0.11786523604920755,
+          "mass_on_cart": 0.29792509390972555,
+          "share_of_cart": 0.3956203705516729,
+          "mass_on_S_scored": 0.07647596937172192,
+          "mass_on_cart_scored": 0.20733421217648754,
+          "share_of_cart_scored": 0.3688535942472623
+        },
+        "2": {
+          "mass_on_S": 0.1527702312450856,
+          "mass_on_cart": 0.31187237861255807,
+          "share_of_cart": 0.4898485461416045,
+          "mass_on_S_scored": 0.10770368322291962,
+          "mass_on_cart_scored": 0.23784304367262427,
+          "share_of_cart_scored": 0.45283512000109977
+        },
+        "3": {
+          "mass_on_S": 0.18824260278294483,
+          "mass_on_cart": 0.2986414413899183,
+          "share_of_cart": 0.6303298092416039,
+          "mass_on_S_scored": 0.13449605856177552,
+          "mass_on_cart_scored": 0.22079453706377197,
+          "share_of_cart_scored": 0.6091457712240819
+        },
+        "4": {
+          "mass_on_S": 0.16040311474353075,
+          "mass_on_cart": 0.28816756792366505,
+          "share_of_cart": 0.5566313929748721,
+          "mass_on_S_scored": 0.12257485548564158,
+          "mass_on_cart_scored": 0.2299453555832113,
+          "share_of_cart_scored": 0.5330608012271197
+        },
+        "5": {
+          "mass_on_S": 0.19740936563660702,
+          "mass_on_cart": 0.30301824243118364,
+          "share_of_cart": 0.651476835363928,
+          "mass_on_S_scored": 0.14590465548544632,
+          "mass_on_cart_scored": 0.2515752115587371,
+          "share_of_cart_scored": 0.5799643557146762
+        },
+        "6": {
+          "mass_on_S": 0.14977108116727322,
+          "mass_on_cart": 0.32150542192781967,
+          "share_of_cart": 0.4658430961108268,
+          "mass_on_S_scored": 0.12764455459986357,
+          "mass_on_cart_scored": 0.3084076400725338,
+          "share_of_cart_scored": 0.4138825956770821
+        },
+        "7": {
+          "mass_on_S": 0.01993580140454772,
+          "mass_on_cart": 0.6282382449135184,
+          "share_of_cart": 0.03173286816897311,
+          "mass_on_S_scored": 0.013730105215704204,
+          "mass_on_cart_scored": 0.6629484181824692,
+          "share_of_cart_scored": 0.02071066894366606
+        },
+        "8": {
+          "mass_on_S": 0.032426136798070125,
+          "mass_on_cart": 0.6289158199603359,
+          "share_of_cart": 0.051558786993329504,
+          "mass_on_S_scored": 0.035728686633183786,
+          "mass_on_cart_scored": 0.6462669567599375,
+          "share_of_cart_scored": 0.05528471827232159
+        },
+        "9": {
+          "mass_on_S": 0.029457249690797955,
+          "mass_on_cart": 0.6797746314356724,
+          "share_of_cart": 0.043333846731798076,
+          "mass_on_S_scored": 0.031366470142908796,
+          "mass_on_cart_scored": 0.6971236575236981,
+          "share_of_cart_scored": 0.04499412665799901
+        },
+        "10": {
+          "mass_on_S": 0.04182714893249795,
+          "mass_on_cart": 0.6401445964972178,
+          "share_of_cart": 0.0653401577727443,
+          "mass_on_S_scored": 0.045375576392868724,
+          "mass_on_cart_scored": 0.6680727711430302,
+          "share_of_cart_scored": 0.06792011043233208
+        },
+        "11": {
+          "mass_on_S": 0.04359547303950725,
+          "mass_on_cart": 0.5874767464896044,
+          "share_of_cart": 0.07420799767821736,
+          "mass_on_S_scored": 0.05325425131180306,
+          "mass_on_cart_scored": 0.6420871145445776,
+          "share_of_cart_scored": 0.08293929297985597
+        },
+        "12": {
+          "mass_on_S": 0.03837285922296966,
+          "mass_on_cart": 0.543758139324685,
+          "share_of_cart": 0.07056971923330922,
+          "mass_on_S_scored": 0.041172089181063784,
+          "mass_on_cart_scored": 0.5750103971347321,
+          "share_of_cart_scored": 0.07160233864678563
+        },
+        "13": {
+          "mass_on_S": 0.03156953849732721,
+          "mass_on_cart": 0.6027803122997284,
+          "share_of_cart": 0.05237320770627537,
+          "mass_on_S_scored": 0.04863252705480489,
+          "mass_on_cart_scored": 0.5884585678918801,
+          "share_of_cart_scored": 0.08264392721653828
+        },
+        "14": {
+          "mass_on_S": 0.03214529712082973,
+          "mass_on_cart": 0.4647225004931291,
+          "share_of_cart": 0.06917095059249234,
+          "mass_on_S_scored": 0.039526255205686124,
+          "mass_on_cart_scored": 0.4632772379542362,
+          "share_of_cart_scored": 0.08531879394771956
+        },
+        "15": {
+          "mass_on_S": 0.030580256124570344,
+          "mass_on_cart": 0.4749071332626045,
+          "share_of_cart": 0.06439207580329331,
+          "mass_on_S_scored": 0.02973456313081851,
+          "mass_on_cart_scored": 0.44309643506093443,
+          "share_of_cart_scored": 0.0671063018747362
+        },
+        "16": {
+          "mass_on_S": 0.029842393206005607,
+          "mass_on_cart": 0.48385062348097563,
+          "share_of_cart": 0.06167687248454888,
+          "mass_on_S_scored": 0.042452850582809926,
+          "mass_on_cart_scored": 0.4436649324421484,
+          "share_of_cart_scored": 0.09568673897467783
+        },
+        "17": {
+          "mass_on_S": 0.03893066158828636,
+          "mass_on_cart": 0.3997352990942697,
+          "share_of_cart": 0.09739110275348821,
+          "mass_on_S_scored": 0.04360238221801502,
+          "mass_on_cart_scored": 0.3842424362863735,
+          "share_of_cart_scored": 0.11347622776761293
+        },
+        "18": {
+          "mass_on_S": 0.05203964279886956,
+          "mass_on_cart": 0.4459547051228583,
+          "share_of_cart": 0.11669266452639601,
+          "mass_on_S_scored": 0.05441909907268358,
+          "mass_on_cart_scored": 0.36587770223481003,
+          "share_of_cart_scored": 0.148735762634037
+        },
+        "19": {
+          "mass_on_S": 0.04057365646197771,
+          "mass_on_cart": 0.500098401059707,
+          "share_of_cart": 0.08113134610309142,
+          "mass_on_S_scored": 0.042198620641297535,
+          "mass_on_cart_scored": 0.47405205846242476,
+          "share_of_cart_scored": 0.0890168492847972
+        },
+        "20": {
+          "mass_on_S": 0.04419634394677511,
+          "mass_on_cart": 0.5260843322612345,
+          "share_of_cart": 0.08400999846699254,
+          "mass_on_S_scored": 0.045878506665633305,
+          "mass_on_cart_scored": 0.49507829955444393,
+          "share_of_cart_scored": 0.09266919335168321
+        },
+        "21": {
+          "mass_on_S": 0.05407041452417616,
+          "mass_on_cart": 0.5829871393119296,
+          "share_of_cart": 0.09274718236150586,
+          "mass_on_S_scored": 0.06374399739226207,
+          "mass_on_cart_scored": 0.5124858143039221,
+          "share_of_cart_scored": 0.12438197431638494
+        },
+        "22": {
+          "mass_on_S": 0.03714966136370398,
+          "mass_on_cart": 0.507143985790511,
+          "share_of_cart": 0.07325269036917971,
+          "mass_on_S_scored": 0.048109351564518774,
+          "mass_on_cart_scored": 0.5053955173847465,
+          "share_of_cart_scored": 0.0951914884672279
+        },
+        "23": {
+          "mass_on_S": 0.0420641100499779,
+          "mass_on_cart": 0.5377214807085693,
+          "share_of_cart": 0.07822657557691196,
+          "mass_on_S_scored": 0.048677763402029596,
+          "mass_on_cart_scored": 0.5475272946842029,
+          "share_of_cart_scored": 0.08890472470437377
+        },
+        "24": {
+          "mass_on_S": 0.06347466760295599,
+          "mass_on_cart": 0.7147305943071842,
+          "share_of_cart": 0.0888092214164757,
+          "mass_on_S_scored": 0.07701794779672792,
+          "mass_on_cart_scored": 0.7064460028032621,
+          "share_of_cart_scored": 0.10902170511420761
+        },
+        "25": {
+          "mass_on_S": 0.056649529452746115,
+          "mass_on_cart": 0.7290091129640738,
+          "share_of_cart": 0.07770757380852913,
+          "mass_on_S_scored": 0.0705519806751544,
+          "mass_on_cart_scored": 0.7494132090907554,
+          "share_of_cart_scored": 0.09414296388070527
+        },
+        "26": {
+          "mass_on_S": 0.06887932087799224,
+          "mass_on_cart": 0.8342114891856909,
+          "share_of_cart": 0.08256817578145352,
+          "mass_on_S_scored": 0.07664133858116313,
+          "mass_on_cart_scored": 0.8454119118628224,
+          "share_of_cart_scored": 0.09065561710892839
+        },
+        "27": {
+          "mass_on_S": 0.061205073997067906,
+          "mass_on_cart": 0.7923512570559978,
+          "share_of_cart": 0.07724487523939444,
+          "mass_on_S_scored": 0.05752840478850849,
+          "mass_on_cart_scored": 0.8053402354035408,
+          "share_of_cart_scored": 0.07143366525041692
+        },
+        "28": {
+          "mass_on_S": 0.1008180022763554,
+          "mass_on_cart": 0.7646842898490528,
+          "share_of_cart": 0.13184264880903554,
+          "mass_on_S_scored": 0.09595769076384447,
+          "mass_on_cart_scored": 0.7837207784357759,
+          "share_of_cart_scored": 0.12243862023840418
+        },
+        "29": {
+          "mass_on_S": 0.06241009884979576,
+          "mass_on_cart": 0.8820146036644777,
+          "share_of_cart": 0.07075857768171018,
+          "mass_on_S_scored": 0.08848697330294879,
+          "mass_on_cart_scored": 0.8934729173011386,
+          "share_of_cart_scored": 0.09903710743716353
+        },
+        "30": {
+          "mass_on_S": 0.04811997753373968,
+          "mass_on_cart": 0.815150236710906,
+          "share_of_cart": 0.05903203528211142,
+          "mass_on_S_scored": 0.06031596412972532,
+          "mass_on_cart_scored": 0.8596706383553294,
+          "share_of_cart_scored": 0.0701617124496868
+        },
+        "31": {
+          "mass_on_S": 0.058153241542944066,
+          "mass_on_cart": 0.8598388110597929,
+          "share_of_cart": 0.0676327246397117,
+          "mass_on_S_scored": 0.0690578376549307,
+          "mass_on_cart_scored": 0.8798343273645687,
+          "share_of_cart_scored": 0.07848959230970748
+        },
+        "32": {
+          "mass_on_S": 0.054551286079610385,
+          "mass_on_cart": 0.8092675680915514,
+          "share_of_cart": 0.06740821976624556,
+          "mass_on_S_scored": 0.07064628032252687,
+          "mass_on_cart_scored": 0.858548077703114,
+          "share_of_cart_scored": 0.08228575912897956
+        },
+        "33": {
+          "mass_on_S": 0.06260379178759952,
+          "mass_on_cart": 0.8563580767561992,
+          "share_of_cart": 0.07310469006695956,
+          "mass_on_S_scored": 0.08570733836682391,
+          "mass_on_cart_scored": 0.8969951608609771,
+          "share_of_cart_scored": 0.09554938767401831
+        },
+        "34": {
+          "mass_on_S": 0.06690929394486982,
+          "mass_on_cart": 0.7796786241233349,
+          "share_of_cart": 0.08581650422967815,
+          "mass_on_S_scored": 0.07162100163726873,
+          "mass_on_cart_scored": 0.8213060117487053,
+          "share_of_cart_scored": 0.08720379567753922
+        },
+        "35": {
+          "mass_on_S": 0.13314145817518389,
+          "mass_on_cart": 0.651263307624807,
+          "share_of_cart": 0.20443568156903863,
+          "mass_on_S_scored": 0.1342545259642938,
+          "mass_on_cart_scored": 0.7347924829030046,
+          "share_of_cart_scored": 0.18271080487089836
+        }
+      },
+      "n_slots_per_layer": {
+        "0": 36,
+        "1": 35,
+        "2": 42,
+        "3": 39,
+        "4": 44,
+        "5": 43,
+        "6": 44,
+        "7": 39,
+        "8": 49,
+        "9": 55,
+        "10": 40,
+        "11": 55,
+        "12": 50,
+        "13": 62,
+        "14": 59,
+        "15": 58,
+        "16": 64,
+        "17": 70,
+        "18": 76,
+        "19": 67,
+        "20": 76,
+        "21": 75,
+        "22": 55,
+        "23": 67,
+        "24": 69,
+        "25": 45,
+        "26": 54,
+        "27": 45,
+        "28": 69,
+        "29": 58,
+        "30": 42,
+        "31": 49,
+        "32": 54,
+        "33": 54,
+        "34": 47,
+        "35": 45
+      },
+      "summary": {
+        "mean_mass_on_S": 0.069129525440682,
+        "mean_mass_on_S_scored": 0.06747763800131529,
+        "mean_mass_on_cart": 0.5756304074721238,
+        "max_mass_on_S": 0.19740936563660702,
+        "argmax_layer": 5
+      },
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-02-12-30-continual_am_sparse/17147731-29ed-40b9-95eb-27530586ac89/cache_last.pt",
+      "slots_from": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-02-12-30-continual_am_sparse/17147731-29ed-40b9-95eb-27530586ac89",
+      "beta": {
+        "attention_bias_enabled": false,
+        "has_trainable_beta": true,
+        "global": {
+          "min": 0.0,
+          "max": 0.0,
+          "mean": 0.0,
+          "n_nonzero": 0,
+          "n": 147168
+        },
+        "per_layer": {
+          "0": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "1": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "2": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "3": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "4": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "5": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "6": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "7": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "8": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "9": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "10": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "11": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "12": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "13": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "14": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "15": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "16": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "17": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "18": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "19": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "20": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "21": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "22": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "23": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "24": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "25": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "26": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "27": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "28": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "29": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "30": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "31": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "32": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "33": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "34": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "35": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          }
+        }
+      }
+    },
+    "onpolicy|MT": {
+      "per_layer": {
+        "0": {
+          "mass_on_S": 0.049098681192845106,
+          "mass_on_cart": 0.19226608686149121,
+          "share_of_cart": 0.2553683907251718,
+          "mass_on_S_scored": 0.028961403401543812,
+          "mass_on_cart_scored": 0.15706825554138232,
+          "share_of_cart_scored": 0.18438737542299524
+        },
+        "1": {
+          "mass_on_S": 0.12070452198386192,
+          "mass_on_cart": 0.3067041033878922,
+          "share_of_cart": 0.39355365856062746,
+          "mass_on_S_scored": 0.07590576680631586,
+          "mass_on_cart_scored": 0.2054111864490494,
+          "share_of_cart_scored": 0.3695308328553162
+        },
+        "2": {
+          "mass_on_S": 0.1579399460926652,
+          "mass_on_cart": 0.32423128485679625,
+          "share_of_cart": 0.4871212417469918,
+          "mass_on_S_scored": 0.10750017884557457,
+          "mass_on_cart_scored": 0.23616621254199563,
+          "share_of_cart_scored": 0.45518864738730835
+        },
+        "3": {
+          "mass_on_S": 0.19118101038038732,
+          "mass_on_cart": 0.30570240169763563,
+          "share_of_cart": 0.6253827556431198,
+          "mass_on_S_scored": 0.13446068075092205,
+          "mass_on_cart_scored": 0.21723431130110707,
+          "share_of_cart_scored": 0.6189661289949127
+        },
+        "4": {
+          "mass_on_S": 0.1619550008326769,
+          "mass_on_cart": 0.2966311305761337,
+          "share_of_cart": 0.5459811332617678,
+          "mass_on_S_scored": 0.12317714348702948,
+          "mass_on_cart_scored": 0.22862992967878068,
+          "share_of_cart_scored": 0.5387621107179199
+        },
+        "5": {
+          "mass_on_S": 0.20082717146724463,
+          "mass_on_cart": 0.3127774834632874,
+          "share_of_cart": 0.64207681845748,
+          "mass_on_S_scored": 0.14561006717622327,
+          "mass_on_cart_scored": 0.2519323132542499,
+          "share_of_cart_scored": 0.5779729693875104
+        },
+        "6": {
+          "mass_on_S": 0.15334427477791907,
+          "mass_on_cart": 0.338960250839591,
+          "share_of_cart": 0.45239603876292694,
+          "mass_on_S_scored": 0.12923828211731506,
+          "mass_on_cart_scored": 0.31182047708438393,
+          "share_of_cart_scored": 0.41446374313108686
+        },
+        "7": {
+          "mass_on_S": 0.01948489621281624,
+          "mass_on_cart": 0.6617957524955272,
+          "share_of_cart": 0.029442461876404875,
+          "mass_on_S_scored": 0.013618829521255323,
+          "mass_on_cart_scored": 0.6646979493521602,
+          "share_of_cart_scored": 0.020488749114584676
+        },
+        "8": {
+          "mass_on_S": 0.033351048221811654,
+          "mass_on_cart": 0.655945897102356,
+          "share_of_cart": 0.050844205854690246,
+          "mass_on_S_scored": 0.03605962490588776,
+          "mass_on_cart_scored": 0.6420596753313241,
+          "share_of_cart_scored": 0.05616241961820729
+        },
+        "9": {
+          "mass_on_S": 0.03116388930939138,
+          "mass_on_cart": 0.7032133758068084,
+          "share_of_cart": 0.044316405776037085,
+          "mass_on_S_scored": 0.03135005386428476,
+          "mass_on_cart_scored": 0.6955862276075782,
+          "share_of_cart_scored": 0.045069974965017856
+        },
+        "10": {
+          "mass_on_S": 0.04415618409402668,
+          "mass_on_cart": 0.6656723529100418,
+          "share_of_cart": 0.06633321017613886,
+          "mass_on_S_scored": 0.04483213597308091,
+          "mass_on_cart_scored": 0.6682716618284036,
+          "share_of_cart_scored": 0.06708669323253863
+        },
+        "11": {
+          "mass_on_S": 0.04703677725046873,
+          "mass_on_cart": 0.6193273954093457,
+          "share_of_cart": 0.0759481618270409,
+          "mass_on_S_scored": 0.05384676517870722,
+          "mass_on_cart_scored": 0.6368813667327142,
+          "share_of_cart_scored": 0.08454755939076733
+        },
+        "12": {
+          "mass_on_S": 0.04130881386809051,
+          "mass_on_cart": 0.5703981027007103,
+          "share_of_cart": 0.07242102256740039,
+          "mass_on_S_scored": 0.041992327182391584,
+          "mass_on_cart_scored": 0.5773748994152775,
+          "share_of_cart_scored": 0.07272974149883948
+        },
+        "13": {
+          "mass_on_S": 0.03570458344183862,
+          "mass_on_cart": 0.6159620217978954,
+          "share_of_cart": 0.057965559853223755,
+          "mass_on_S_scored": 0.04781396883619102,
+          "mass_on_cart_scored": 0.5798480810363436,
+          "share_of_cart_scored": 0.08245947585225198
+        },
+        "14": {
+          "mass_on_S": 0.03478514421731234,
+          "mass_on_cart": 0.48072506859898567,
+          "share_of_cart": 0.07235974674399523,
+          "mass_on_S_scored": 0.04021387573427562,
+          "mass_on_cart_scored": 0.4568629104769109,
+          "share_of_cart_scored": 0.08802175622507218
+        },
+        "15": {
+          "mass_on_S": 0.03231739215552807,
+          "mass_on_cart": 0.47864654995501044,
+          "share_of_cart": 0.06751828078268962,
+          "mass_on_S_scored": 0.027964655149969434,
+          "mass_on_cart_scored": 0.4324635681372709,
+          "share_of_cart_scored": 0.06466360916925377
+        },
+        "16": {
+          "mass_on_S": 0.03247504467144609,
+          "mass_on_cart": 0.4943104416131973,
+          "share_of_cart": 0.06569767081080218,
+          "mass_on_S_scored": 0.04239773066317449,
+          "mass_on_cart_scored": 0.43795613550190626,
+          "share_of_cart_scored": 0.09680816690599817
+        },
+        "17": {
+          "mass_on_S": 0.040354869631119075,
+          "mass_on_cart": 0.4127758476883173,
+          "share_of_cart": 0.09776460967161676,
+          "mass_on_S_scored": 0.040634411094153326,
+          "mass_on_cart_scored": 0.35926206813577,
+          "share_of_cart_scored": 0.11310520842071485
+        },
+        "18": {
+          "mass_on_S": 0.05599927040748298,
+          "mass_on_cart": 0.4362446293234825,
+          "share_of_cart": 0.12836667008216301,
+          "mass_on_S_scored": 0.04955748680929575,
+          "mass_on_cart_scored": 0.33842324466094853,
+          "share_of_cart_scored": 0.1464364153205411
+        },
+        "19": {
+          "mass_on_S": 0.042468316433951256,
+          "mass_on_cart": 0.508930093422532,
+          "share_of_cart": 0.08344626694867606,
+          "mass_on_S_scored": 0.03873923567474866,
+          "mass_on_cart_scored": 0.45782012701220665,
+          "share_of_cart_scored": 0.08461671601807007
+        },
+        "20": {
+          "mass_on_S": 0.04283384068403393,
+          "mass_on_cart": 0.5365224234759808,
+          "share_of_cart": 0.0798360679997777,
+          "mass_on_S_scored": 0.034114599716467936,
+          "mass_on_cart_scored": 0.4585145109803485,
+          "share_of_cart_scored": 0.07440244288785454
+        },
+        "21": {
+          "mass_on_S": 0.05578958829864859,
+          "mass_on_cart": 0.5708222560584545,
+          "share_of_cart": 0.09773548194122185,
+          "mass_on_S_scored": 0.057427551158232025,
+          "mass_on_cart_scored": 0.4816427789192289,
+          "share_of_cart_scored": 0.11923266302693303
+        },
+        "22": {
+          "mass_on_S": 0.04019716898910701,
+          "mass_on_cart": 0.5320070907473564,
+          "share_of_cart": 0.07555758125824708,
+          "mass_on_S_scored": 0.04881750974312692,
+          "mass_on_cart_scored": 0.4976234235026518,
+          "share_of_cart_scored": 0.09810131002176745
+        },
+        "23": {
+          "mass_on_S": 0.044617510447278616,
+          "mass_on_cart": 0.5591366663575172,
+          "share_of_cart": 0.07979714644353114,
+          "mass_on_S_scored": 0.04459588391347196,
+          "mass_on_cart_scored": 0.5272809630906926,
+          "share_of_cart_scored": 0.08457707946076833
+        },
+        "24": {
+          "mass_on_S": 0.06669322208035737,
+          "mass_on_cart": 0.7262411013245582,
+          "share_of_cart": 0.09183344478675005,
+          "mass_on_S_scored": 0.0733969443761958,
+          "mass_on_cart_scored": 0.6848851188284452,
+          "share_of_cart_scored": 0.10716679682243291
+        },
+        "25": {
+          "mass_on_S": 0.059007337875664236,
+          "mass_on_cart": 0.7538972295820713,
+          "share_of_cart": 0.07826973698838953,
+          "mass_on_S_scored": 0.07164794927830812,
+          "mass_on_cart_scored": 0.7505712218809463,
+          "share_of_cart_scored": 0.095457895519571
+        },
+        "26": {
+          "mass_on_S": 0.07390758311375975,
+          "mass_on_cart": 0.8484791919589043,
+          "share_of_cart": 0.08710594651487862,
+          "mass_on_S_scored": 0.07307275699322155,
+          "mass_on_cart_scored": 0.8347131802084667,
+          "share_of_cart_scored": 0.08754235433897412
+        },
+        "27": {
+          "mass_on_S": 0.06513716490007937,
+          "mass_on_cart": 0.8085599049925805,
+          "share_of_cart": 0.08055947926415803,
+          "mass_on_S_scored": 0.05735046678832692,
+          "mass_on_cart_scored": 0.8038374039458633,
+          "share_of_cart_scored": 0.07134585490399667
+        },
+        "28": {
+          "mass_on_S": 0.10362335033714772,
+          "mass_on_cart": 0.7848160177469253,
+          "share_of_cart": 0.13203521334163504,
+          "mass_on_S_scored": 0.08657426631934563,
+          "mass_on_cart_scored": 0.7770360571439149,
+          "share_of_cart_scored": 0.11141602184789116
+        },
+        "29": {
+          "mass_on_S": 0.06346104512922465,
+          "mass_on_cart": 0.8932164058089256,
+          "share_of_cart": 0.07104778272825417,
+          "mass_on_S_scored": 0.07746828602776687,
+          "mass_on_cart_scored": 0.8852403180660632,
+          "share_of_cart_scored": 0.08751102321797505
+        },
+        "30": {
+          "mass_on_S": 0.051724818022921684,
+          "mass_on_cart": 0.8346987292170525,
+          "share_of_cart": 0.06196824819829254,
+          "mass_on_S_scored": 0.059220870103247926,
+          "mass_on_cart_scored": 0.857462882251129,
+          "share_of_cart_scored": 0.06906522874526438
+        },
+        "31": {
+          "mass_on_S": 0.06327070235274732,
+          "mass_on_cart": 0.8634767442941665,
+          "share_of_cart": 0.07327435599260615,
+          "mass_on_S_scored": 0.06933861124059541,
+          "mass_on_cart_scored": 0.8693359465826125,
+          "share_of_cart_scored": 0.07976043267642126
+        },
+        "32": {
+          "mass_on_S": 0.055063846753910184,
+          "mass_on_cart": 0.8331663876771926,
+          "share_of_cart": 0.06608985620198168,
+          "mass_on_S_scored": 0.064078901355663,
+          "mass_on_cart_scored": 0.8571959919151526,
+          "share_of_cart_scored": 0.0747540842001577
+        },
+        "33": {
+          "mass_on_S": 0.06685426635667682,
+          "mass_on_cart": 0.87607461810112,
+          "share_of_cart": 0.0763111554374016,
+          "mass_on_S_scored": 0.08523390378736129,
+          "mass_on_cart_scored": 0.890432613143504,
+          "share_of_cart_scored": 0.09572190251035292
+        },
+        "34": {
+          "mass_on_S": 0.06997963619651273,
+          "mass_on_cart": 0.7998668536543846,
+          "share_of_cart": 0.08748910631412453,
+          "mass_on_S_scored": 0.07535345426627568,
+          "mass_on_cart_scored": 0.8162891066325633,
+          "share_of_cart_scored": 0.09231221347192935
+        },
+        "35": {
+          "mass_on_S": 0.14358510731253774,
+          "mass_on_cart": 0.7031807288527488,
+          "share_of_cart": 0.20419374624614534,
+          "mass_on_S_scored": 0.13636236722165956,
+          "mass_on_cart_scored": 0.7395459926286588,
+          "share_of_cart_scored": 0.184386594722757
+        }
+      },
+      "n_slots_per_layer": {
+        "0": 36,
+        "1": 35,
+        "2": 42,
+        "3": 39,
+        "4": 44,
+        "5": 43,
+        "6": 44,
+        "7": 39,
+        "8": 49,
+        "9": 55,
+        "10": 40,
+        "11": 55,
+        "12": 50,
+        "13": 62,
+        "14": 59,
+        "15": 58,
+        "16": 64,
+        "17": 70,
+        "18": 76,
+        "19": 67,
+        "20": 76,
+        "21": 75,
+        "22": 55,
+        "23": 67,
+        "24": 69,
+        "25": 45,
+        "26": 54,
+        "27": 45,
+        "28": 69,
+        "29": 58,
+        "30": 42,
+        "31": 49,
+        "32": 54,
+        "33": 54,
+        "34": 47,
+        "35": 45
+      },
+      "summary": {
+        "mean_mass_on_S": 0.07198341737481921,
+        "mean_mass_on_S_scored": 0.06577580404060018,
+        "mean_mass_on_cart": 0.5918161838988049,
+        "max_mass_on_S": 0.20082717146724463,
+        "argmax_layer": 5
+      },
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-02-12-30-continual_am_sparse/17147731-29ed-40b9-95eb-27530586ac89/cache_last.pt",
+      "slots_from": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-02-12-30-continual_am_sparse/17147731-29ed-40b9-95eb-27530586ac89",
+      "beta": {
+        "attention_bias_enabled": false,
+        "has_trainable_beta": true,
+        "global": {
+          "min": 0.0,
+          "max": 0.0,
+          "mean": 0.0,
+          "n_nonzero": 0,
+          "n": 147168
+        },
+        "per_layer": {
+          "0": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "1": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "2": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "3": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "4": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "5": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "6": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "7": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "8": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "9": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "10": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "11": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "12": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "13": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "14": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "15": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "16": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "17": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "18": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "19": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "20": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "21": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "22": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "23": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "24": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "25": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "26": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "27": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "28": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "29": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "30": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "31": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "32": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "33": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "34": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "35": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          }
+        }
+      }
+    },
+    "onpolicy_keys|QA": {
+      "per_layer": {
+        "0": {
+          "mass_on_S": 0.09020623600129814,
+          "mass_on_cart": 0.2089331119786948,
+          "share_of_cart": 0.43174696029271126,
+          "mass_on_S_scored": 0.06999521735172297,
+          "mass_on_cart_scored": 0.18570399663292667,
+          "share_of_cart_scored": 0.3769182065051599
+        },
+        "1": {
+          "mass_on_S": 0.1554076427516217,
+          "mass_on_cart": 0.2997850952669978,
+          "share_of_cart": 0.5183968289457849,
+          "mass_on_S_scored": 0.11233262696672187,
+          "mass_on_cart_scored": 0.22429738729998736,
+          "share_of_cart_scored": 0.5008200421723246
+        },
+        "2": {
+          "mass_on_S": 0.4159754114225507,
+          "mass_on_cart": 0.5205188087808589,
+          "share_of_cart": 0.7991553895945352,
+          "mass_on_S_scored": 0.4163365745052849,
+          "mass_on_cart_scored": 0.5098916450590066,
+          "share_of_cart_scored": 0.8165197028421691
+        },
+        "3": {
+          "mass_on_S": 0.6275123581290245,
+          "mass_on_cart": 0.6770682198305925,
+          "share_of_cart": 0.9268081705061164,
+          "mass_on_S_scored": 0.6234145152655299,
+          "mass_on_cart_scored": 0.6688659399144747,
+          "share_of_cart_scored": 0.9320470337377973
+        },
+        "4": {
+          "mass_on_S": 0.6286499059448639,
+          "mass_on_cart": 0.6793646812438965,
+          "share_of_cart": 0.9253497028927449,
+          "mass_on_S_scored": 0.6471637136019474,
+          "mass_on_cart_scored": 0.6973793329560789,
+          "share_of_cart_scored": 0.927993823474413
+        },
+        "5": {
+          "mass_on_S": 0.5585890024279555,
+          "mass_on_cart": 0.6193158036718766,
+          "share_of_cart": 0.9019453388983836,
+          "mass_on_S_scored": 0.5657427483225834,
+          "mass_on_cart_scored": 0.6291051213638433,
+          "share_of_cart_scored": 0.8992817402218949
+        },
+        "6": {
+          "mass_on_S": 0.4141852114116773,
+          "mass_on_cart": 0.5297472033028802,
+          "share_of_cart": 0.781854455916531,
+          "mass_on_S_scored": 0.41176930232078074,
+          "mass_on_cart_scored": 0.5449890952021077,
+          "share_of_cart_scored": 0.7555551220122619
+        },
+        "7": {
+          "mass_on_S": 0.05628133363825327,
+          "mass_on_cart": 0.6270419231926402,
+          "share_of_cart": 0.08975689113686659,
+          "mass_on_S_scored": 0.027150467048956024,
+          "mass_on_cart_scored": 0.642799687481145,
+          "share_of_cart_scored": 0.04223783486166119
+        },
+        "8": {
+          "mass_on_S": 0.07956713154756774,
+          "mass_on_cart": 0.6149122193455696,
+          "share_of_cart": 0.1293959187089311,
+          "mass_on_S_scored": 0.05540207707873962,
+          "mass_on_cart_scored": 0.6042606134185267,
+          "share_of_cart_scored": 0.09168573269290133
+        },
+        "9": {
+          "mass_on_S": 0.05452046852951753,
+          "mass_on_cart": 0.6635154876857996,
+          "share_of_cart": 0.0821690970917247,
+          "mass_on_S_scored": 0.040875491703589846,
+          "mass_on_cart_scored": 0.6650248936634566,
+          "share_of_cart_scored": 0.06146460394650332
+        },
+        "10": {
+          "mass_on_S": 0.0884710926329717,
+          "mass_on_cart": 0.6317262525359789,
+          "share_of_cart": 0.14004656649587788,
+          "mass_on_S_scored": 0.07168627838430262,
+          "mass_on_cart_scored": 0.6450950737534793,
+          "share_of_cart_scored": 0.11112513689989403
+        },
+        "11": {
+          "mass_on_S": 0.08577352165108702,
+          "mass_on_cart": 0.5885499358798066,
+          "share_of_cart": 0.14573703337995716,
+          "mass_on_S_scored": 0.06681605141699519,
+          "mass_on_cart_scored": 0.6007644948544235,
+          "share_of_cart_scored": 0.11121837590150192
+        },
+        "12": {
+          "mass_on_S": 0.08389807517717902,
+          "mass_on_cart": 0.5577103216201067,
+          "share_of_cart": 0.15043306879001522,
+          "mass_on_S_scored": 0.0624845823263817,
+          "mass_on_cart_scored": 0.5617523883398637,
+          "share_of_cart_scored": 0.1112315383492026
+        },
+        "13": {
+          "mass_on_S": 0.06090951118433926,
+          "mass_on_cart": 0.6196605380003651,
+          "share_of_cart": 0.09829496546753372,
+          "mass_on_S_scored": 0.03976152302868346,
+          "mass_on_cart_scored": 0.5684985318863014,
+          "share_of_cart_scored": 0.06994129412569122
+        },
+        "14": {
+          "mass_on_S": 0.05291467791539617,
+          "mass_on_cart": 0.45695723795021576,
+          "share_of_cart": 0.1157978767395322,
+          "mass_on_S_scored": 0.040732455831739386,
+          "mass_on_cart_scored": 0.4364376288873178,
+          "share_of_cart_scored": 0.09332938577176614
+        },
+        "15": {
+          "mass_on_S": 0.05372815998271108,
+          "mass_on_cart": 0.4796730466187,
+          "share_of_cart": 0.11200996253896349,
+          "mass_on_S_scored": 0.028561720642346196,
+          "mass_on_cart_scored": 0.42835010295152753,
+          "share_of_cart_scored": 0.06667844934679114
+        },
+        "16": {
+          "mass_on_S": 0.05753181129693985,
+          "mass_on_cart": 0.5136723909527063,
+          "share_of_cart": 0.11200098021666262,
+          "mass_on_S_scored": 0.042745041168455226,
+          "mass_on_cart_scored": 0.4529425829546558,
+          "share_of_cart_scored": 0.09437187576760572
+        },
+        "17": {
+          "mass_on_S": 0.141958778956905,
+          "mass_on_cart": 0.46577457423942786,
+          "share_of_cart": 0.30478000906063235,
+          "mass_on_S_scored": 0.11609360848209611,
+          "mass_on_cart_scored": 0.44469482637443997,
+          "share_of_cart_scored": 0.26106354649681374
+        },
+        "18": {
+          "mass_on_S": 0.2170909202347199,
+          "mass_on_cart": 0.5619013259808222,
+          "share_of_cart": 0.3863506103242925,
+          "mass_on_S_scored": 0.1433905498723849,
+          "mass_on_cart_scored": 0.43267928589023036,
+          "share_of_cart_scored": 0.3314014665096834
+        },
+        "19": {
+          "mass_on_S": 0.2077983054332435,
+          "mass_on_cart": 0.6303997188806534,
+          "share_of_cart": 0.32962943860795674,
+          "mass_on_S_scored": 0.1840624233587592,
+          "mass_on_cart_scored": 0.5789945784667467,
+          "share_of_cart_scored": 0.31790008094062044
+        },
+        "20": {
+          "mass_on_S": 0.20066605741158128,
+          "mass_on_cart": 0.640784320111076,
+          "share_of_cart": 0.3131569408202702,
+          "mass_on_S_scored": 0.17474518648628606,
+          "mass_on_cart_scored": 0.5818444021834176,
+          "share_of_cart_scored": 0.3003297545366782
+        },
+        "21": {
+          "mass_on_S": 0.2443134201069673,
+          "mass_on_cart": 0.6804602931564053,
+          "share_of_cart": 0.35904140559574327,
+          "mass_on_S_scored": 0.20012325598065658,
+          "mass_on_cart_scored": 0.6070389276745211,
+          "share_of_cart_scored": 0.32967120699705377
+        },
+        "22": {
+          "mass_on_S": 0.1997276758775115,
+          "mass_on_cart": 0.5880401387500266,
+          "share_of_cart": 0.3396497325880928,
+          "mass_on_S_scored": 0.20254817013296292,
+          "mass_on_cart_scored": 0.5806860372099817,
+          "share_of_cart_scored": 0.3488084044626676
+        },
+        "23": {
+          "mass_on_S": 0.20272381976246834,
+          "mass_on_cart": 0.6168701538505653,
+          "share_of_cart": 0.3286328873216607,
+          "mass_on_S_scored": 0.20262095565420837,
+          "mass_on_cart_scored": 0.622554974321101,
+          "share_of_cart_scored": 0.3254667684169859
+        },
+        "24": {
+          "mass_on_S": 0.26486229927589494,
+          "mass_on_cart": 0.7683044926573833,
+          "share_of_cart": 0.3447361063317474,
+          "mass_on_S_scored": 0.2617931675255503,
+          "mass_on_cart_scored": 0.7475754590196526,
+          "share_of_cart_scored": 0.3501896221538061
+        },
+        "25": {
+          "mass_on_S": 0.28287583248068887,
+          "mass_on_cart": 0.7883658297359943,
+          "share_of_cart": 0.3588129036178769,
+          "mass_on_S_scored": 0.30356771643719815,
+          "mass_on_cart_scored": 0.8025156782073072,
+          "share_of_cart_scored": 0.37827013811782506
+        },
+        "26": {
+          "mass_on_S": 0.2855911630516251,
+          "mass_on_cart": 0.8843276804933945,
+          "share_of_cart": 0.322947216683622,
+          "mass_on_S_scored": 0.29864498826100105,
+          "mass_on_cart_scored": 0.8823742967564079,
+          "share_of_cart_scored": 0.33845612837864236
+        },
+        "27": {
+          "mass_on_S": 0.29176694884275395,
+          "mass_on_cart": 0.8577623255550861,
+          "share_of_cart": 0.34014894353624353,
+          "mass_on_S_scored": 0.2970637269673706,
+          "mass_on_cart_scored": 0.8568282508358513,
+          "share_of_cart_scored": 0.3467016017242424
+        },
+        "28": {
+          "mass_on_S": 0.28077920572832227,
+          "mass_on_cart": 0.8167139030992985,
+          "share_of_cart": 0.3437913872444318,
+          "mass_on_S_scored": 0.27416175612969995,
+          "mass_on_cart_scored": 0.8284380529708834,
+          "share_of_cart_scored": 0.3309381493842796
+        },
+        "29": {
+          "mass_on_S": 0.2654980244114995,
+          "mass_on_cart": 0.9126914100100597,
+          "share_of_cart": 0.2908957195166033,
+          "mass_on_S_scored": 0.29588978992203985,
+          "mass_on_cart_scored": 0.9269128948188365,
+          "share_of_cart_scored": 0.31922070733504143
+        },
+        "30": {
+          "mass_on_S": 0.2530985549092293,
+          "mass_on_cart": 0.8639713792751232,
+          "share_of_cart": 0.2929478463992411,
+          "mass_on_S_scored": 0.27731767426514814,
+          "mass_on_cart_scored": 0.8966444840454882,
+          "share_of_cart_scored": 0.30928386802085023
+        },
+        "31": {
+          "mass_on_S": 0.26555479504168034,
+          "mass_on_cart": 0.9143945090472698,
+          "share_of_cart": 0.2904159992368813,
+          "mass_on_S_scored": 0.2788908807045178,
+          "mass_on_cart_scored": 0.9188787271704278,
+          "share_of_cart_scored": 0.3035121746297549
+        },
+        "32": {
+          "mass_on_S": 0.24567452274883786,
+          "mass_on_cart": 0.8540976336225867,
+          "share_of_cart": 0.2876422004669759,
+          "mass_on_S_scored": 0.2568385284244673,
+          "mass_on_cart_scored": 0.8943335518394548,
+          "share_of_cart_scored": 0.2871842702269246
+        },
+        "33": {
+          "mass_on_S": 0.24147131216401854,
+          "mass_on_cart": 0.8940092337628206,
+          "share_of_cart": 0.2700993491394749,
+          "mass_on_S_scored": 0.26473092790458347,
+          "mass_on_cart_scored": 0.9265109375716621,
+          "share_of_cart_scored": 0.28572887503997496
+        },
+        "34": {
+          "mass_on_S": 0.23297856360053024,
+          "mass_on_cart": 0.8367224571605524,
+          "share_of_cart": 0.27844186755922784,
+          "mass_on_S_scored": 0.22756060190945465,
+          "mass_on_cart_scored": 0.8630989386226076,
+          "share_of_cart_scored": 0.2636552910986213
+        },
+        "35": {
+          "mass_on_S": 0.2576937317692985,
+          "mass_on_cart": 0.7008862486109138,
+          "share_of_cart": 0.3676684087896169,
+          "mass_on_S_scored": 0.24212700592260772,
+          "mass_on_cart_scored": 0.766567225581865,
+          "share_of_cart_scored": 0.31585880251901005
+        }
+      },
+      "n_slots_per_layer": {
+        "0": 43,
+        "1": 43,
+        "2": 32,
+        "3": 33,
+        "4": 33,
+        "5": 33,
+        "6": 34,
+        "7": 83,
+        "8": 83,
+        "9": 103,
+        "10": 72,
+        "11": 100,
+        "12": 93,
+        "13": 88,
+        "14": 76,
+        "15": 51,
+        "16": 55,
+        "17": 96,
+        "18": 119,
+        "19": 88,
+        "20": 166,
+        "21": 129,
+        "22": 96,
+        "23": 99,
+        "24": 126,
+        "25": 107,
+        "26": 118,
+        "27": 107,
+        "28": 114,
+        "29": 110,
+        "30": 101,
+        "31": 97,
+        "32": 100,
+        "33": 128,
+        "34": 115,
+        "35": 125
+      },
+      "summary": {
+        "mean_mass_on_S": 0.22628459676257584,
+        "mean_mass_on_S_scored": 0.21736503614738206,
+        "mean_mass_on_cart": 0.6545730529404763,
+        "max_mass_on_S": 0.6286499059448639,
+        "argmax_layer": 4
+      },
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-02-27-29-continual_am_sparse/8299a2c7-7e6d-4016-a3f7-49d8d88f962f/cache_last.pt",
+      "slots_from": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-02-27-29-continual_am_sparse/8299a2c7-7e6d-4016-a3f7-49d8d88f962f",
+      "beta": {
+        "attention_bias_enabled": false,
+        "has_trainable_beta": true,
+        "global": {
+          "min": 0.0,
+          "max": 0.0,
+          "mean": 0.0,
+          "n_nonzero": 0,
+          "n": 147168
+        },
+        "per_layer": {
+          "0": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "1": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "2": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "3": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "4": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "5": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "6": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "7": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "8": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "9": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "10": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "11": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "12": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "13": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "14": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "15": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "16": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "17": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "18": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "19": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "20": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "21": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "22": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "23": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "24": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "25": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "26": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "27": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "28": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "29": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "30": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "31": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "32": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "33": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "34": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "35": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          }
+        }
+      }
+    },
+    "onpolicy_keys|MT": {
+      "per_layer": {
+        "0": {
+          "mass_on_S": 0.09663729537278413,
+          "mass_on_cart": 0.22503189723938705,
+          "share_of_cart": 0.42943821101940133,
+          "mass_on_S_scored": 0.06991475287775431,
+          "mass_on_cart_scored": 0.18783196725480544,
+          "share_of_cart_scored": 0.37221967005707135
+        },
+        "1": {
+          "mass_on_S": 0.16029810975305736,
+          "mass_on_cart": 0.30696976874023674,
+          "share_of_cart": 0.5221951021786267,
+          "mass_on_S_scored": 0.11148587783549932,
+          "mass_on_cart_scored": 0.22152497636257532,
+          "share_of_cart_scored": 0.5032654992953376
+        },
+        "2": {
+          "mass_on_S": 0.43280795216560364,
+          "mass_on_cart": 0.5423870995640755,
+          "share_of_cart": 0.7979687431973543,
+          "mass_on_S_scored": 0.416122597330348,
+          "mass_on_cart_scored": 0.5084678949926348,
+          "share_of_cart_scored": 0.8183851948732684
+        },
+        "3": {
+          "mass_on_S": 0.6400019124150276,
+          "mass_on_cart": 0.6909518592059612,
+          "share_of_cart": 0.9262612205002456,
+          "mass_on_S_scored": 0.6228494852618441,
+          "mass_on_cart_scored": 0.666301142136442,
+          "share_of_cart_scored": 0.9347867591292527
+        },
+        "4": {
+          "mass_on_S": 0.6425379693508149,
+          "mass_on_cart": 0.6963782802224159,
+          "share_of_cart": 0.9226852525406091,
+          "mass_on_S_scored": 0.6476191063582385,
+          "mass_on_cart_scored": 0.6967386853220312,
+          "share_of_cart_scored": 0.9295007152630118
+        },
+        "5": {
+          "mass_on_S": 0.5764115318655968,
+          "mass_on_cart": 0.6391787149012089,
+          "share_of_cart": 0.9018002609093243,
+          "mass_on_S_scored": 0.5664499451833065,
+          "mass_on_cart_scored": 0.629045181214856,
+          "share_of_cart_scored": 0.9004916691188045
+        },
+        "6": {
+          "mass_on_S": 0.4262535260990262,
+          "mass_on_cart": 0.5512998513877392,
+          "share_of_cart": 0.773179105755344,
+          "mass_on_S_scored": 0.41458547487564146,
+          "mass_on_cart_scored": 0.5471564835631038,
+          "share_of_cart_scored": 0.7577091514585464
+        },
+        "7": {
+          "mass_on_S": 0.05384893931041006,
+          "mass_on_cart": 0.6564781986176967,
+          "share_of_cart": 0.0820270032177706,
+          "mass_on_S_scored": 0.026365391979870808,
+          "mass_on_cart_scored": 0.6448274101715922,
+          "share_of_cart_scored": 0.04088751744106974
+        },
+        "8": {
+          "mass_on_S": 0.07912363731302322,
+          "mass_on_cart": 0.6368434093892574,
+          "share_of_cart": 0.12424347358623683,
+          "mass_on_S_scored": 0.05444138653570558,
+          "mass_on_cart_scored": 0.6003935238423522,
+          "share_of_cart_scored": 0.09067617216670791
+        },
+        "9": {
+          "mass_on_S": 0.057148820254951715,
+          "mass_on_cart": 0.6868189245462417,
+          "share_of_cart": 0.08320798716009177,
+          "mass_on_S_scored": 0.04188696820227826,
+          "mass_on_cart_scored": 0.6632875394858391,
+          "share_of_cart_scored": 0.06315054287729843
+        },
+        "10": {
+          "mass_on_S": 0.08896590704098344,
+          "mass_on_cart": 0.6536675274372101,
+          "share_of_cart": 0.13610268723273744,
+          "mass_on_S_scored": 0.06936070930204012,
+          "mass_on_cart_scored": 0.6442253863225218,
+          "share_of_cart_scored": 0.1076652841918833
+        },
+        "11": {
+          "mass_on_S": 0.08890252993442119,
+          "mass_on_cart": 0.616224093735218,
+          "share_of_cart": 0.14426980515406662,
+          "mass_on_S_scored": 0.06645930804469267,
+          "mass_on_cart_scored": 0.5962711255314014,
+          "share_of_cart_scored": 0.11145820281916827
+        },
+        "12": {
+          "mass_on_S": 0.0881635515484959,
+          "mass_on_cart": 0.5814718753099442,
+          "share_of_cart": 0.15162135142220204,
+          "mass_on_S_scored": 0.06081119996323239,
+          "mass_on_cart_scored": 0.5602668130146535,
+          "share_of_cart_scored": 0.10853971456210794
+        },
+        "13": {
+          "mass_on_S": 0.06728091762633995,
+          "mass_on_cart": 0.6315924607217311,
+          "share_of_cart": 0.10652584033295288,
+          "mass_on_S_scored": 0.040174393205787876,
+          "mass_on_cart_scored": 0.5545566925120298,
+          "share_of_cart_scored": 0.07244415899807465
+        },
+        "14": {
+          "mass_on_S": 0.05563583257608116,
+          "mass_on_cart": 0.4718216873705387,
+          "share_of_cart": 0.11791707347353941,
+          "mass_on_S_scored": 0.03986970485885286,
+          "mass_on_cart_scored": 0.42737327079862286,
+          "share_of_cart_scored": 0.09329012267039827
+        },
+        "15": {
+          "mass_on_S": 0.05604505119845271,
+          "mass_on_cart": 0.4791299983859062,
+          "share_of_cart": 0.11697253644576076,
+          "mass_on_S_scored": 0.028602478410656055,
+          "mass_on_cart_scored": 0.4127225176046641,
+          "share_of_cart_scored": 0.0693019575880122
+        },
+        "16": {
+          "mass_on_S": 0.0593351693591103,
+          "mass_on_cart": 0.5202919125556946,
+          "share_of_cart": 0.11404207508752842,
+          "mass_on_S_scored": 0.04062615956160168,
+          "mass_on_cart_scored": 0.437412733960952,
+          "share_of_cart_scored": 0.09287831927917396
+        },
+        "17": {
+          "mass_on_S": 0.15854849405586718,
+          "mass_on_cart": 0.48153173364698887,
+          "share_of_cart": 0.3292586614283227,
+          "mass_on_S_scored": 0.12935434301601176,
+          "mass_on_cart_scored": 0.4092127316450347,
+          "share_of_cart_scored": 0.31610537261635885
+        },
+        "18": {
+          "mass_on_S": 0.22962219789624214,
+          "mass_on_cart": 0.5490308836102485,
+          "share_of_cart": 0.41823184223503285,
+          "mass_on_S_scored": 0.17631427930910823,
+          "mass_on_cart_scored": 0.41768642108390147,
+          "share_of_cart_scored": 0.42212116652384934
+        },
+        "19": {
+          "mass_on_S": 0.22841386124491692,
+          "mass_on_cart": 0.6436750933527946,
+          "share_of_cart": 0.3548589398653718,
+          "mass_on_S_scored": 0.23121359867569435,
+          "mass_on_cart_scored": 0.5874170635381217,
+          "share_of_cart_scored": 0.39361062697609095
+        },
+        "20": {
+          "mass_on_S": 0.2274893805384636,
+          "mass_on_cart": 0.6547411911189556,
+          "share_of_cart": 0.34744931833245934,
+          "mass_on_S_scored": 0.23298430051959929,
+          "mass_on_cart_scored": 0.5836003275237728,
+          "share_of_cart_scored": 0.39921893380039053
+        },
+        "21": {
+          "mass_on_S": 0.26261912658810616,
+          "mass_on_cart": 0.6781088508665561,
+          "share_of_cart": 0.38728166761502203,
+          "mass_on_S_scored": 0.2569684155930959,
+          "mass_on_cart_scored": 0.6139875400075682,
+          "share_of_cart_scored": 0.41852382800785903
+        },
+        "22": {
+          "mass_on_S": 0.22298176512122153,
+          "mass_on_cart": 0.6184248112142086,
+          "share_of_cart": 0.3605640670907455,
+          "mass_on_S_scored": 0.23901623547961245,
+          "mass_on_cart_scored": 0.5928644207099003,
+          "share_of_cart_scored": 0.4031549661782919
+        },
+        "23": {
+          "mass_on_S": 0.22899994160979986,
+          "mass_on_cart": 0.6370239101350308,
+          "share_of_cart": 0.35948406012147716,
+          "mass_on_S_scored": 0.2462380898361742,
+          "mass_on_cart_scored": 0.6117607060119009,
+          "share_of_cart_scored": 0.4025072016171369
+        },
+        "24": {
+          "mass_on_S": 0.29498463310301304,
+          "mass_on_cart": 0.7844921618700027,
+          "share_of_cart": 0.3760198602875201,
+          "mass_on_S_scored": 0.321569588294167,
+          "mass_on_cart_scored": 0.7418299309449862,
+          "share_of_cart_scored": 0.4334815499888673
+        },
+        "25": {
+          "mass_on_S": 0.2993202794343233,
+          "mass_on_cart": 0.8130896016955376,
+          "share_of_cart": 0.3681270536606914,
+          "mass_on_S_scored": 0.3291046811117966,
+          "mass_on_cart_scored": 0.8093601378679834,
+          "share_of_cart_scored": 0.40662328883496063
+        },
+        "26": {
+          "mass_on_S": 0.30724608413875104,
+          "mass_on_cart": 0.8955096647143364,
+          "share_of_cart": 0.34309633524364164,
+          "mass_on_S_scored": 0.3397668835523071,
+          "mass_on_cart_scored": 0.8754207825493199,
+          "share_of_cart_scored": 0.38811836584787174
+        },
+        "27": {
+          "mass_on_S": 0.308996194601059,
+          "mass_on_cart": 0.8714053854346275,
+          "share_of_cart": 0.3545952317553582,
+          "mass_on_S_scored": 0.32630167186120634,
+          "mass_on_cart_scored": 0.8559066860309157,
+          "share_of_cart_scored": 0.38123510095984947
+        },
+        "28": {
+          "mass_on_S": 0.2954243989661336,
+          "mass_on_cart": 0.8330059155821801,
+          "share_of_cart": 0.3546486206639532,
+          "mass_on_S_scored": 0.2977252324794439,
+          "mass_on_cart_scored": 0.8248606174835277,
+          "share_of_cart_scored": 0.36094004995382073
+        },
+        "29": {
+          "mass_on_S": 0.2893439754843712,
+          "mass_on_cart": 0.9235485315322876,
+          "share_of_cart": 0.3132959076923784,
+          "mass_on_S_scored": 0.3470792256697,
+          "mass_on_cart_scored": 0.9277968231725283,
+          "share_of_cart_scored": 0.3740896896832325
+        },
+        "30": {
+          "mass_on_S": 0.2673941276967525,
+          "mass_on_cart": 0.8790084317326545,
+          "share_of_cart": 0.30419973010916346,
+          "mass_on_S_scored": 0.2986976934726307,
+          "mass_on_cart_scored": 0.8963681815844974,
+          "share_of_cart_scored": 0.333231031187014
+        },
+        "31": {
+          "mass_on_S": 0.27918329983949663,
+          "mass_on_cart": 0.9179800257086754,
+          "share_of_cart": 0.30412785901737754,
+          "mass_on_S_scored": 0.3075702799008658,
+          "mass_on_cart_scored": 0.9151784463565299,
+          "share_of_cart_scored": 0.33607683957740886
+        },
+        "32": {
+          "mass_on_S": 0.25842851437628267,
+          "mass_on_cart": 0.8779437065124511,
+          "share_of_cart": 0.2943565885367134,
+          "mass_on_S_scored": 0.2742665128536656,
+          "mass_on_cart_scored": 0.8956953498369823,
+          "share_of_cart_scored": 0.3062051320279629
+        },
+        "33": {
+          "mass_on_S": 0.25576036535203456,
+          "mass_on_cart": 0.9174993962049485,
+          "share_of_cart": 0.27875807483899806,
+          "mass_on_S_scored": 0.2885213134625663,
+          "mass_on_cart_scored": 0.927072691787136,
+          "share_of_cart_scored": 0.3112175733559557
+        },
+        "34": {
+          "mass_on_S": 0.23866982106119394,
+          "mass_on_cart": 0.8581318169832229,
+          "share_of_cart": 0.27812722513918875,
+          "mass_on_S_scored": 0.2360265360131662,
+          "mass_on_cart_scored": 0.8567252058614333,
+          "share_of_cart_scored": 0.27549853138246655
+        },
+        "35": {
+          "mass_on_S": 0.2744075526483357,
+          "mass_on_cart": 0.7500114113092422,
+          "share_of_cart": 0.3658711701056944,
+          "mass_on_S_scored": 0.24650567151158234,
+          "mass_on_cart_scored": 0.7670997385863305,
+          "share_of_cart_scored": 0.32134761506484366
+        }
+      },
+      "n_slots_per_layer": {
+        "0": 43,
+        "1": 43,
+        "2": 32,
+        "3": 33,
+        "4": 33,
+        "5": 33,
+        "6": 34,
+        "7": 83,
+        "8": 83,
+        "9": 103,
+        "10": 72,
+        "11": 100,
+        "12": 93,
+        "13": 88,
+        "14": 76,
+        "15": 51,
+        "16": 55,
+        "17": 96,
+        "18": 119,
+        "19": 88,
+        "20": 166,
+        "21": 129,
+        "22": 96,
+        "23": 99,
+        "24": 126,
+        "25": 107,
+        "26": 118,
+        "27": 107,
+        "28": 114,
+        "29": 110,
+        "30": 101,
+        "31": 97,
+        "32": 100,
+        "33": 128,
+        "34": 115,
+        "35": 125
+      },
+      "summary": {
+        "mean_mass_on_S": 0.23881201852612627,
+        "mean_mass_on_S_scored": 0.23452359701110403,
+        "mean_mass_on_cart": 0.6714083356265392,
+        "max_mass_on_S": 0.6425379693508149,
+        "argmax_layer": 4
+      },
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-02-27-29-continual_am_sparse/8299a2c7-7e6d-4016-a3f7-49d8d88f962f/cache_last.pt",
+      "slots_from": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-02-27-29-continual_am_sparse/8299a2c7-7e6d-4016-a3f7-49d8d88f962f",
+      "beta": {
+        "attention_bias_enabled": false,
+        "has_trainable_beta": true,
+        "global": {
+          "min": 0.0,
+          "max": 0.0,
+          "mean": 0.0,
+          "n_nonzero": 0,
+          "n": 147168
+        },
+        "per_layer": {
+          "0": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "1": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "2": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "3": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "4": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "5": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "6": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "7": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "8": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "9": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "10": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "11": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "12": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "13": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "14": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "15": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "16": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "17": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "18": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "19": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "20": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "21": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "22": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "23": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "24": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "25": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "26": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "27": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "28": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "29": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "30": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "31": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "32": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "33": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "34": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "35": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          }
+        }
+      }
+    },
+    "phase1|QA": {
+      "per_layer": {
+        "0": {
+          "mass_on_S": 0.046508897348151855,
+          "mass_on_cart": 0.17871245990196863,
+          "share_of_cart": 0.2602442905976671,
+          "mass_on_S_scored": 0.029004811527973462,
+          "mass_on_cart_scored": 0.15468882420286964,
+          "share_of_cart_scored": 0.1875042471713053
+        },
+        "1": {
+          "mass_on_S": 0.06649400753667578,
+          "mass_on_cart": 0.15997951539854208,
+          "share_of_cart": 0.41564076107510045,
+          "mass_on_S_scored": 0.045766740957713846,
+          "mass_on_cart_scored": 0.12046089217083834,
+          "share_of_cart_scored": 0.37993028387011435
+        },
+        "2": {
+          "mass_on_S": 0.05627609172370285,
+          "mass_on_cart": 0.12689808864767352,
+          "share_of_cart": 0.44347469944918344,
+          "mass_on_S_scored": 0.03732358535972885,
+          "mass_on_cart_scored": 0.10776542438071117,
+          "share_of_cart_scored": 0.3463410047723003
+        },
+        "3": {
+          "mass_on_S": 0.0894953521201387,
+          "mass_on_cart": 0.14920959124962488,
+          "share_of_cart": 0.5997962421223623,
+          "mass_on_S_scored": 0.06290023021738508,
+          "mass_on_cart_scored": 0.12948843614888492,
+          "share_of_cart_scored": 0.4857594399013579
+        },
+        "4": {
+          "mass_on_S": 0.0801094095998754,
+          "mass_on_cart": 0.17795183237952492,
+          "share_of_cart": 0.45017468226470914,
+          "mass_on_S_scored": 0.06323835035517908,
+          "mass_on_cart_scored": 0.16451834394828013,
+          "share_of_cart_scored": 0.38438479769197903
+        },
+        "5": {
+          "mass_on_S": 0.11297625062676768,
+          "mass_on_cart": 0.2101259350311011,
+          "share_of_cart": 0.5376597163507963,
+          "mass_on_S_scored": 0.07714763931210326,
+          "mass_on_cart_scored": 0.18006749296971247,
+          "share_of_cart_scored": 0.4284373489060547
+        },
+        "6": {
+          "mass_on_S": 0.09832739449727039,
+          "mass_on_cart": 0.2496353187598288,
+          "share_of_cart": 0.393884146625382,
+          "mass_on_S_scored": 0.08411173372265945,
+          "mass_on_cart_scored": 0.25457138093931614,
+          "share_of_cart_scored": 0.3304053009112981
+        },
+        "7": {
+          "mass_on_S": 0.017826000508648576,
+          "mass_on_cart": 0.6050818517493705,
+          "share_of_cart": 0.029460477879333657,
+          "mass_on_S_scored": 0.016244490338975168,
+          "mass_on_cart_scored": 0.6523329967667739,
+          "share_of_cart_scored": 0.024902144180180108
+        },
+        "8": {
+          "mass_on_S": 0.03191916320550566,
+          "mass_on_cart": 0.5871130852028728,
+          "share_of_cart": 0.05436629502896571,
+          "mass_on_S_scored": 0.03560091413446582,
+          "mass_on_cart_scored": 0.6202979658841632,
+          "share_of_cart_scored": 0.05739324662095389
+        },
+        "9": {
+          "mass_on_S": 0.04034071894178245,
+          "mass_on_cart": 0.6460125322143236,
+          "share_of_cart": 0.06244572191735571,
+          "mass_on_S_scored": 0.0390374272344858,
+          "mass_on_cart_scored": 0.6718208169882514,
+          "share_of_cart_scored": 0.05810690328038536
+        },
+        "10": {
+          "mass_on_S": 0.04139116326890265,
+          "mass_on_cart": 0.6111271750802795,
+          "share_of_cart": 0.06772921407637517,
+          "mass_on_S_scored": 0.04383697513236304,
+          "mass_on_cart_scored": 0.6436996764242763,
+          "share_of_cart_scored": 0.06810159572531639
+        },
+        "11": {
+          "mass_on_S": 0.05508009582020653,
+          "mass_on_cart": 0.5733059154202541,
+          "share_of_cart": 0.09607452904062715,
+          "mass_on_S_scored": 0.05766633232616659,
+          "mass_on_cart_scored": 0.608873391752254,
+          "share_of_cart_scored": 0.09470989060666751
+        },
+        "12": {
+          "mass_on_S": 0.056279673687337585,
+          "mass_on_cart": 0.5500194989144802,
+          "share_of_cart": 0.1023230518161834,
+          "mass_on_S_scored": 0.053166217518790436,
+          "mass_on_cart_scored": 0.5742570194819356,
+          "share_of_cart_scored": 0.09258261669444492
+        },
+        "13": {
+          "mass_on_S": 0.05012363364706592,
+          "mass_on_cart": 0.6206826586276293,
+          "share_of_cart": 0.08075565339281851,
+          "mass_on_S_scored": 0.05992130449688209,
+          "mass_on_cart_scored": 0.6133383315407898,
+          "share_of_cart_scored": 0.0976969829137396
+        },
+        "14": {
+          "mass_on_S": 0.04978956851603774,
+          "mass_on_cart": 0.4867084603756666,
+          "share_of_cart": 0.10229854742530588,
+          "mass_on_S_scored": 0.048638057782990005,
+          "mass_on_cart_scored": 0.47608753323054304,
+          "share_of_cart_scored": 0.10216200674895065
+        },
+        "15": {
+          "mass_on_S": 0.051351315438902624,
+          "mass_on_cart": 0.506891840758423,
+          "share_of_cart": 0.10130625768619521,
+          "mass_on_S_scored": 0.045629858202541,
+          "mass_on_cart_scored": 0.4801911935636951,
+          "share_of_cart_scored": 0.09502435449493185
+        },
+        "16": {
+          "mass_on_S": 0.05522793825366534,
+          "mass_on_cart": 0.5334135573357344,
+          "share_of_cart": 0.10353681021816338,
+          "mass_on_S_scored": 0.06701640285190257,
+          "mass_on_cart_scored": 0.5168824532005613,
+          "share_of_cart_scored": 0.12965501621680856
+        },
+        "17": {
+          "mass_on_S": 0.06924256507772952,
+          "mass_on_cart": 0.4832963563191394,
+          "share_of_cart": 0.14327144033340478,
+          "mass_on_S_scored": 0.07904251616088294,
+          "mass_on_cart_scored": 0.5128806929817724,
+          "share_of_cart_scored": 0.1541148209369076
+        },
+        "18": {
+          "mass_on_S": 0.08990573354337054,
+          "mass_on_cart": 0.5418022641291221,
+          "share_of_cart": 0.16593827581706863,
+          "mass_on_S_scored": 0.09682628368434673,
+          "mass_on_cart_scored": 0.48116219972280566,
+          "share_of_cart_scored": 0.20123418618529823
+        },
+        "19": {
+          "mass_on_S": 0.07532132232639317,
+          "mass_on_cart": 0.5313366443539659,
+          "share_of_cart": 0.14175819252589628,
+          "mass_on_S_scored": 0.07334715528495442,
+          "mass_on_cart_scored": 0.5186734397295732,
+          "share_of_cart_scored": 0.1414129771580289
+        },
+        "20": {
+          "mass_on_S": 0.074807029896571,
+          "mass_on_cart": 0.5618009000706176,
+          "share_of_cart": 0.1331557672605506,
+          "mass_on_S_scored": 0.09676508658962789,
+          "mass_on_cart_scored": 0.5825403985766884,
+          "share_of_cart_scored": 0.16610880005241263
+        },
+        "21": {
+          "mass_on_S": 0.08875693739779915,
+          "mass_on_cart": 0.5968024013563991,
+          "share_of_cart": 0.14872081143788024,
+          "mass_on_S_scored": 0.1104970622911577,
+          "mass_on_cart_scored": 0.5743422618163547,
+          "share_of_cart_scored": 0.19238887617587336
+        },
+        "22": {
+          "mass_on_S": 0.05991641023138072,
+          "mass_on_cart": 0.531859178096056,
+          "share_of_cart": 0.1126546512666546,
+          "mass_on_S_scored": 0.07384143465629922,
+          "mass_on_cart_scored": 0.5337313548350616,
+          "share_of_cart_scored": 0.13834944113245576
+        },
+        "23": {
+          "mass_on_S": 0.07544470784099151,
+          "mass_on_cart": 0.5702457763254642,
+          "share_of_cart": 0.1323020896833998,
+          "mass_on_S_scored": 0.08422314391569947,
+          "mass_on_cart_scored": 0.5969695115007486,
+          "share_of_cart_scored": 0.14108449810772933
+        },
+        "24": {
+          "mass_on_S": 0.10262919935727648,
+          "mass_on_cart": 0.7330370477090279,
+          "share_of_cart": 0.14000547404530933,
+          "mass_on_S_scored": 0.10682550726409357,
+          "mass_on_cart_scored": 0.7446216762225197,
+          "share_of_cart_scored": 0.14346279550445193
+        },
+        "25": {
+          "mass_on_S": 0.09719509778854747,
+          "mass_on_cart": 0.7429013807947437,
+          "share_of_cart": 0.13083176354386333,
+          "mass_on_S_scored": 0.10226465843592313,
+          "mass_on_cart_scored": 0.7787189841406998,
+          "share_of_cart_scored": 0.1313242138931158
+        },
+        "26": {
+          "mass_on_S": 0.1049105592246633,
+          "mass_on_cart": 0.8455675101528565,
+          "share_of_cart": 0.12407118055623757,
+          "mass_on_S_scored": 0.1214469707492382,
+          "mass_on_cart_scored": 0.8687327197145168,
+          "share_of_cart_scored": 0.13979785495951866
+        },
+        "27": {
+          "mass_on_S": 0.10591019488250215,
+          "mass_on_cart": 0.8126350964109103,
+          "share_of_cart": 0.13032933890040665,
+          "mass_on_S_scored": 0.0910435367621689,
+          "mass_on_cart_scored": 0.8429221111019407,
+          "share_of_cart_scored": 0.10800943000907749
+        },
+        "28": {
+          "mass_on_S": 0.1557077421263481,
+          "mass_on_cart": 0.7816707124002278,
+          "share_of_cart": 0.19919863908963148,
+          "mass_on_S_scored": 0.15210269151434,
+          "mass_on_cart_scored": 0.8128395470192797,
+          "share_of_cart_scored": 0.18712511229566475
+        },
+        "29": {
+          "mass_on_S": 0.1264817392026695,
+          "mass_on_cart": 0.8788365845878919,
+          "share_of_cart": 0.14391951976143538,
+          "mass_on_S_scored": 0.16008580445606047,
+          "mass_on_cart_scored": 0.9023054767173864,
+          "share_of_cart_scored": 0.17741863325318305
+        },
+        "30": {
+          "mass_on_S": 0.09196262123684089,
+          "mass_on_cart": 0.8387399427592754,
+          "share_of_cart": 0.10964378414399044,
+          "mass_on_S_scored": 0.09887506850646989,
+          "mass_on_cart_scored": 0.8796565819442067,
+          "share_of_cart_scored": 0.11240189698568204
+        },
+        "31": {
+          "mass_on_S": 0.12412009555070351,
+          "mass_on_cart": 0.8721106642236313,
+          "share_of_cart": 0.14232149730813975,
+          "mass_on_S_scored": 0.13461462484829842,
+          "mass_on_cart_scored": 0.896416888568364,
+          "share_of_cart_scored": 0.1501696661062318
+        },
+        "32": {
+          "mass_on_S": 0.10125186080889155,
+          "mass_on_cart": 0.834224675471584,
+          "share_of_cart": 0.12137241175664609,
+          "mass_on_S_scored": 0.13158452906832527,
+          "mass_on_cart_scored": 0.8756603826862931,
+          "share_of_cart_scored": 0.1502689075240094
+        },
+        "33": {
+          "mass_on_S": 0.12656136045310026,
+          "mass_on_cart": 0.8745978977531195,
+          "share_of_cart": 0.144708054728055,
+          "mass_on_S_scored": 0.16864507526170666,
+          "mass_on_cart_scored": 0.9015186898077476,
+          "share_of_cart_scored": 0.18706775263602232
+        },
+        "34": {
+          "mass_on_S": 0.09766680399964874,
+          "mass_on_cart": 0.8221578203762571,
+          "share_of_cart": 0.11879325547855511,
+          "mass_on_S_scored": 0.09679431990557111,
+          "mass_on_cart_scored": 0.8526614959024209,
+          "share_of_cart_scored": 0.11352021918513876
+        },
+        "35": {
+          "mass_on_S": 0.15552218553299704,
+          "mass_on_cart": 0.6818047578757008,
+          "share_of_cart": 0.2281036964563837,
+          "mass_on_S_scored": 0.15106422058404426,
+          "mass_on_cart_scored": 0.7551037231534891,
+          "share_of_cart_scored": 0.20005757613426256
+        }
+      },
+      "n_slots_per_layer": {
+        "0": 36,
+        "1": 35,
+        "2": 42,
+        "3": 39,
+        "4": 44,
+        "5": 43,
+        "6": 44,
+        "7": 39,
+        "8": 50,
+        "9": 55,
+        "10": 40,
+        "11": 55,
+        "12": 49,
+        "13": 62,
+        "14": 59,
+        "15": 56,
+        "16": 63,
+        "17": 70,
+        "18": 75,
+        "19": 66,
+        "20": 74,
+        "21": 76,
+        "22": 55,
+        "23": 66,
+        "24": 68,
+        "25": 45,
+        "26": 54,
+        "27": 45,
+        "28": 68,
+        "29": 58,
+        "30": 42,
+        "31": 48,
+        "32": 54,
+        "33": 54,
+        "34": 47,
+        "35": 45
+      },
+      "summary": {
+        "mean_mass_on_S": 0.0811897455894184,
+        "mean_mass_on_S_scored": 0.08322613226143094,
+        "mean_mass_on_cart": 0.5696749146725913,
+        "max_mass_on_S": 0.1557077421263481,
+        "argmax_layer": 28
+      },
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/phase1_selfdistill_qwen512/cache_last.pt",
+      "slots_from": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-02-04-15-continual_am_sparse/9366d343-5038-4654-b413-2ac243379627",
+      "beta": {
+        "attention_bias_enabled": false,
+        "has_trainable_beta": true,
+        "global": {
+          "min": 0.0,
+          "max": 0.0,
+          "mean": 0.0,
+          "n_nonzero": 0,
+          "n": 147168
+        },
+        "per_layer": {
+          "0": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "1": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "2": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "3": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "4": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "5": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "6": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "7": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "8": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "9": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "10": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "11": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "12": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "13": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "14": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "15": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "16": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "17": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "18": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "19": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "20": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "21": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "22": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "23": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "24": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "25": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "26": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "27": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "28": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "29": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "30": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "31": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "32": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "33": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "34": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "35": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          }
+        }
+      }
+    },
+    "phase1|MT": {
+      "per_layer": {
+        "0": {
+          "mass_on_S": 0.049098681192845106,
+          "mass_on_cart": 0.19226608686149121,
+          "share_of_cart": 0.2553683907251718,
+          "mass_on_S_scored": 0.028961403401543812,
+          "mass_on_cart_scored": 0.15706825554138232,
+          "share_of_cart_scored": 0.18438737542299524
+        },
+        "1": {
+          "mass_on_S": 0.06606151475571095,
+          "mass_on_cart": 0.15961286323145032,
+          "share_of_cart": 0.4138859075531834,
+          "mass_on_S_scored": 0.04501846412910697,
+          "mass_on_cart_scored": 0.11819316306028582,
+          "share_of_cart_scored": 0.38088890222985883
+        },
+        "2": {
+          "mass_on_S": 0.05844162446446717,
+          "mass_on_cart": 0.1326830206438899,
+          "share_of_cart": 0.440460461186813,
+          "mass_on_S_scored": 0.03784104358116972,
+          "mass_on_cart_scored": 0.10727266880053268,
+          "share_of_cart_scored": 0.35275568329089446
+        },
+        "3": {
+          "mass_on_S": 0.09233444901183248,
+          "mass_on_cart": 0.15576491747051477,
+          "share_of_cart": 0.5927807783117194,
+          "mass_on_S_scored": 0.06395543221846677,
+          "mass_on_cart_scored": 0.12777629776172206,
+          "share_of_cart_scored": 0.5005265713499636
+        },
+        "4": {
+          "mass_on_S": 0.08333388809114695,
+          "mass_on_cart": 0.18842999991029502,
+          "share_of_cart": 0.44225382439536864,
+          "mass_on_S_scored": 0.06419691873843739,
+          "mass_on_cart_scored": 0.16398692568422388,
+          "share_of_cart_scored": 0.39147583547029907
+        },
+        "5": {
+          "mass_on_S": 0.11535764951258898,
+          "mass_on_cart": 0.21913759596645832,
+          "share_of_cart": 0.5264165147191168,
+          "mass_on_S_scored": 0.07699897622429329,
+          "mass_on_cart_scored": 0.1786267770444109,
+          "share_of_cart_scored": 0.4310606589803134
+        },
+        "6": {
+          "mass_on_S": 0.10143986223265529,
+          "mass_on_cart": 0.2665325298905373,
+          "share_of_cart": 0.3805909255216082,
+          "mass_on_S_scored": 0.08546961023880112,
+          "mass_on_cart_scored": 0.25738470634383026,
+          "share_of_cart_scored": 0.33206949804012664
+        },
+        "7": {
+          "mass_on_S": 0.017611762834712864,
+          "mass_on_cart": 0.6374996840953827,
+          "share_of_cart": 0.027626308332535255,
+          "mass_on_S_scored": 0.01594151111550856,
+          "mass_on_cart_scored": 0.6542262807662929,
+          "share_of_cart_scored": 0.024366968408600653
+        },
+        "8": {
+          "mass_on_S": 0.03375577719416469,
+          "mass_on_cart": 0.6166174739599228,
+          "share_of_cart": 0.0547434651460407,
+          "mass_on_S_scored": 0.035588900457593636,
+          "mass_on_cart_scored": 0.6154713403610956,
+          "share_of_cart_scored": 0.0578238142440779
+        },
+        "9": {
+          "mass_on_S": 0.04257927262224257,
+          "mass_on_cart": 0.6688114196062088,
+          "share_of_cart": 0.06366409330647035,
+          "mass_on_S_scored": 0.03872711780851098,
+          "mass_on_cart_scored": 0.6683329999865637,
+          "share_of_cart_scored": 0.057945841084144516
+        },
+        "10": {
+          "mass_on_S": 0.043536967923864724,
+          "mass_on_cart": 0.6365876480937004,
+          "share_of_cart": 0.06839116035983225,
+          "mass_on_S_scored": 0.04298418118188755,
+          "mass_on_cart_scored": 0.6387104217565032,
+          "share_of_cart_scored": 0.06729838705884542
+        },
+        "11": {
+          "mass_on_S": 0.05770811270922423,
+          "mass_on_cart": 0.6023099273443222,
+          "share_of_cart": 0.09581132584626031,
+          "mass_on_S_scored": 0.05575100422649994,
+          "mass_on_cart_scored": 0.6031443255660498,
+          "share_of_cart_scored": 0.09243393639520313
+        },
+        "12": {
+          "mass_on_S": 0.05996040245518088,
+          "mass_on_cart": 0.574503057450056,
+          "share_of_cart": 0.10436916162172644,
+          "mass_on_S_scored": 0.053189938813796925,
+          "mass_on_cart_scored": 0.5725108421379286,
+          "share_of_cart_scored": 0.09290643058421323
+        },
+        "13": {
+          "mass_on_S": 0.05612216643057764,
+          "mass_on_cart": 0.6354793302714825,
+          "share_of_cart": 0.08831470003375522,
+          "mass_on_S_scored": 0.0604576284442443,
+          "mass_on_cart_scored": 0.6031015885239184,
+          "share_of_cart_scored": 0.10024451865930811
+        },
+        "14": {
+          "mass_on_S": 0.05242350068874657,
+          "mass_on_cart": 0.501963523030281,
+          "share_of_cart": 0.10443687296693094,
+          "mass_on_S_scored": 0.04897109883823588,
+          "mass_on_cart_scored": 0.4661411967340807,
+          "share_of_cart_scored": 0.10505636313919792
+        },
+        "15": {
+          "mass_on_S": 0.05295483996160329,
+          "mass_on_cart": 0.5090247385203839,
+          "share_of_cart": 0.10403195749489631,
+          "mass_on_S_scored": 0.04361532114382185,
+          "mass_on_cart_scored": 0.46482891258460113,
+          "share_of_cart_scored": 0.09383091275735489
+        },
+        "16": {
+          "mass_on_S": 0.058531641773879525,
+          "mass_on_cart": 0.5451612539589406,
+          "share_of_cart": 0.10736574059294372,
+          "mass_on_S_scored": 0.06576957170336066,
+          "mass_on_cart_scored": 0.5056970601524812,
+          "share_of_cart_scored": 0.13005725539224883
+        },
+        "17": {
+          "mass_on_S": 0.07894524838775396,
+          "mass_on_cart": 0.5138096459209919,
+          "share_of_cart": 0.15364687878960784,
+          "mass_on_S_scored": 0.08503167820944627,
+          "mass_on_cart_scored": 0.4969023723885196,
+          "share_of_cart_scored": 0.17112351023947503
+        },
+        "18": {
+          "mass_on_S": 0.10264087021350861,
+          "mass_on_cart": 0.5318291429430246,
+          "share_of_cart": 0.1929959491229021,
+          "mass_on_S_scored": 0.10619085938738809,
+          "mass_on_cart_scored": 0.4541403065427591,
+          "share_of_cart_scored": 0.23382830781039649
+        },
+        "19": {
+          "mass_on_S": 0.082611851580441,
+          "mass_on_cart": 0.5483411453664303,
+          "share_of_cart": 0.1506577652954265,
+          "mass_on_S_scored": 0.07916738208060521,
+          "mass_on_cart_scored": 0.514120217694797,
+          "share_of_cart_scored": 0.15398612883884338
+        },
+        "20": {
+          "mass_on_S": 0.08452674960717559,
+          "mass_on_cart": 0.5776534162461757,
+          "share_of_cart": 0.14632779315400643,
+          "mass_on_S_scored": 0.09567436540992254,
+          "mass_on_cart_scored": 0.5595115405521199,
+          "share_of_cart_scored": 0.17099623238425452
+        },
+        "21": {
+          "mass_on_S": 0.0998744560405612,
+          "mass_on_cart": 0.5995987340807915,
+          "share_of_cart": 0.1665688240547617,
+          "mass_on_S_scored": 0.11986855130750253,
+          "mass_on_cart_scored": 0.5649900734191943,
+          "share_of_cart_scored": 0.21216045546089812
+        },
+        "22": {
+          "mass_on_S": 0.06649851640686393,
+          "mass_on_cart": 0.5594553276896477,
+          "share_of_cart": 0.1188629603036926,
+          "mass_on_S_scored": 0.07909680627268985,
+          "mass_on_cart_scored": 0.5315859546706045,
+          "share_of_cart_scored": 0.14879401078552182
+        },
+        "23": {
+          "mass_on_S": 0.08561829272657633,
+          "mass_on_cart": 0.5966751970350742,
+          "share_of_cart": 0.14349229388454612,
+          "mass_on_S_scored": 0.08820514405359987,
+          "mass_on_cart_scored": 0.5809192233119134,
+          "share_of_cart_scored": 0.15183719270078247
+        },
+        "24": {
+          "mass_on_S": 0.11657600598409772,
+          "mass_on_cart": 0.7513602837920189,
+          "share_of_cart": 0.15515327133842313,
+          "mass_on_S_scored": 0.11971254464148731,
+          "mass_on_cart_scored": 0.7408328543967516,
+          "share_of_cart_scored": 0.1615918407654414
+        },
+        "25": {
+          "mass_on_S": 0.10397565681487322,
+          "mass_on_cart": 0.7712052375078201,
+          "share_of_cart": 0.13482229082218714,
+          "mass_on_S_scored": 0.10759210791278871,
+          "mass_on_cart_scored": 0.7840391087587879,
+          "share_of_cart_scored": 0.13722798609257866
+        },
+        "26": {
+          "mass_on_S": 0.12064641788601875,
+          "mass_on_cart": 0.8617221370339394,
+          "share_of_cart": 0.14000617217666653,
+          "mass_on_S_scored": 0.13010744039757377,
+          "mass_on_cart_scored": 0.86190813765872,
+          "share_of_cart_scored": 0.15095279266186826
+        },
+        "27": {
+          "mass_on_S": 0.11558692567050458,
+          "mass_on_cart": 0.8336995109915734,
+          "share_of_cart": 0.13864338907075702,
+          "mass_on_S_scored": 0.09557462310902687,
+          "mass_on_cart_scored": 0.8414150583474176,
+          "share_of_cart_scored": 0.11358796370573679
+        },
+        "28": {
+          "mass_on_S": 0.16526880860328674,
+          "mass_on_cart": 0.8033001616597175,
+          "share_of_cart": 0.20573730280574193,
+          "mass_on_S_scored": 0.1435896107966224,
+          "mass_on_cart_scored": 0.8080143880136864,
+          "share_of_cart_scored": 0.17770674993746552
+        },
+        "29": {
+          "mass_on_S": 0.13629115810617803,
+          "mass_on_cart": 0.8926459789276123,
+          "share_of_cart": 0.15268220697068793,
+          "mass_on_S_scored": 0.15933396600355496,
+          "mass_on_cart_scored": 0.9029402624900038,
+          "share_of_cart_scored": 0.17646124845974392
+        },
+        "30": {
+          "mass_on_S": 0.09952550642192363,
+          "mass_on_cart": 0.8573648825287818,
+          "share_of_cart": 0.11608302188488873,
+          "mass_on_S_scored": 0.1002425113569285,
+          "mass_on_cart_scored": 0.8805362446805074,
+          "share_of_cart_scored": 0.1138425725942722
+        },
+        "31": {
+          "mass_on_S": 0.13635589368641376,
+          "mass_on_cart": 0.8846355140209198,
+          "share_of_cart": 0.15413793763110128,
+          "mass_on_S_scored": 0.1404232002626072,
+          "mass_on_cart_scored": 0.894355812638556,
+          "share_of_cart_scored": 0.1570104406749774
+        },
+        "32": {
+          "mass_on_S": 0.10647103739902378,
+          "mass_on_cart": 0.8605083718895912,
+          "share_of_cart": 0.12373039110034911,
+          "mass_on_S_scored": 0.12556464433856163,
+          "mass_on_cart_scored": 0.8793200426600484,
+          "share_of_cart_scored": 0.14279743238731776
+        },
+        "33": {
+          "mass_on_S": 0.14179702633991836,
+          "mass_on_cart": 0.8980021864175797,
+          "share_of_cart": 0.15790276291597066,
+          "mass_on_S_scored": 0.1788372055428927,
+          "mass_on_cart_scored": 0.9059221154539777,
+          "share_of_cart_scored": 0.19740902942111463
+        },
+        "34": {
+          "mass_on_S": 0.10648080250248312,
+          "mass_on_cart": 0.8462393701076507,
+          "share_of_cart": 0.12582823047920547,
+          "mass_on_S_scored": 0.108478215467083,
+          "mass_on_cart_scored": 0.8567049940706323,
+          "share_of_cart_scored": 0.12662260196669212
+        },
+        "35": {
+          "mass_on_S": 0.16927171577699482,
+          "mass_on_cart": 0.7328776769340039,
+          "share_of_cart": 0.23096857921112238,
+          "mass_on_S_scored": 0.15886474232669923,
+          "mass_on_cart_scored": 0.7609753552867881,
+          "share_of_cart_scored": 0.20876463504764622
+        }
+      },
+      "n_slots_per_layer": {
+        "0": 36,
+        "1": 35,
+        "2": 42,
+        "3": 39,
+        "4": 44,
+        "5": 43,
+        "6": 44,
+        "7": 39,
+        "8": 50,
+        "9": 55,
+        "10": 40,
+        "11": 55,
+        "12": 49,
+        "13": 62,
+        "14": 59,
+        "15": 56,
+        "16": 63,
+        "17": 70,
+        "18": 75,
+        "19": 66,
+        "20": 74,
+        "21": 76,
+        "22": 55,
+        "23": 66,
+        "24": 68,
+        "25": 45,
+        "26": 54,
+        "27": 45,
+        "28": 68,
+        "29": 58,
+        "30": 42,
+        "31": 48,
+        "32": 54,
+        "33": 54,
+        "34": 47,
+        "35": 45
+      },
+      "summary": {
+        "mean_mass_on_S": 0.08778375150027891,
+        "mean_mass_on_S_scored": 0.08569427003172944,
+        "mean_mass_on_cart": 0.5878696942055184,
+        "max_mass_on_S": 0.16927171577699482,
+        "argmax_layer": 35
+      },
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/phase1_selfdistill_qwen512/cache_last.pt",
+      "slots_from": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-02-04-15-continual_am_sparse/9366d343-5038-4654-b413-2ac243379627",
+      "beta": {
+        "attention_bias_enabled": false,
+        "has_trainable_beta": true,
+        "global": {
+          "min": 0.0,
+          "max": 0.0,
+          "mean": 0.0,
+          "n_nonzero": 0,
+          "n": 147168
+        },
+        "per_layer": {
+          "0": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "1": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "2": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "3": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "4": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "5": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "6": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "7": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "8": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "9": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "10": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "11": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "12": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "13": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "14": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "15": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "16": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "17": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "18": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "19": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "20": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "21": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "22": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "23": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "24": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "25": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "26": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "27": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "28": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "29": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "30": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "31": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "32": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "33": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "34": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          },
+          "35": {
+            "all_min": 0.0,
+            "all_max": 0.0,
+            "all_mean": 0.0,
+            "all_nonzero": 0,
+            "onS_min": 0.0,
+            "onS_median": 0.0,
+            "onS_max": 0.0,
+            "onS_mean": 0.0
+          }
+        }
+      }
+    }
+  },
+  "ratios": {
+    "control": {
+      "mass_on_S_MT": 0.07110726725497646,
+      "mass_on_S_QA": 0.06819035134214102,
+      "mt_over_qa_mass_on_S": 1.042776079832761,
+      "mass_on_cart_MT": 0.5930163347524487,
+      "mass_on_cart_QA": 0.5766231618817309
+    },
+    "onpolicy": {
+      "mass_on_S_MT": 0.07198341737481921,
+      "mass_on_S_QA": 0.069129525440682,
+      "mt_over_qa_mass_on_S": 1.0412832565527452,
+      "mass_on_cart_MT": 0.5918161838988049,
+      "mass_on_cart_QA": 0.5756304074721238
+    },
+    "onpolicy_keys": {
+      "mass_on_S_MT": 0.23881201852612627,
+      "mass_on_S_QA": 0.22628459676257584,
+      "mt_over_qa_mass_on_S": 1.055361354430565,
+      "mass_on_cart_MT": 0.6714083356265392,
+      "mass_on_cart_QA": 0.6545730529404763
+    },
+    "phase1": {
+      "mass_on_S_MT": 0.08778375150027891,
+      "mass_on_S_QA": 0.0811897455894184,
+      "mt_over_qa_mass_on_S": 1.0812172259315458,
+      "mass_on_cart_MT": 0.5878696942055184,
+      "mass_on_cart_QA": 0.5696749146725913
+    }
+  }
+}

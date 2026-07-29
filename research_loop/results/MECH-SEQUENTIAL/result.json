@@ -1,0 +1,691 @@
+{
+  "id": "MECH-SEQUENTIAL",
+  "role": "build+test",
+  "board_entry": "B-CASCADE (query-distribution)",
+  "question": "Values, key selectivity and allocation are all closed. DIAG-KEYSPACE explicitly did NOT bound mechanisms that change the QUERY DISTRIBUTION. We collect reference queries in ONE forward pass over the pre-write cartridge and then solve all 36 layers against them, but writing layer l perturbs the residual stream, so the true queries at layers l+1..35 are not the ones we fitted (the AM paper does on-policy layer-sequential re-extraction; SCOUT-AM divergence #3 / LIT-006). Does re-extracting the reference queries from the UPDATED cache move MT materially below 2.33?",
+  "variable_under_test": "AM_ONPOLICY_LAYERS in {unset, 4} (group size 4 -> 8 re-extractions per document, before layers 4,8,...,32), crossed with the MECH-005 best point (KEY_MODE=highest_attention + AM_KEY_REPOSITION=1). All at AM_ROPE_THETA=5e6, ENABLE_BETA=0, canonical top32 (GRANULARITY=per_layer, SLOT_SELECTION=tfidf, USE_IDF=0, RIDGE_LAMBDA=1e-4 spectral, DELTA_WEIGHT=1e-2, MAX_QUERIES_PER_HEAD=64).",
+  "baseline_ref": "MECH-KEYS control (KEY_MODE=freeze, theta=5e6): in-run QA 2.15320086479187 / MT 2.5296061038970947, standalone QA 2.159724712371826 / MT 2.529625177383423; and MECH-005 best point standalone QA 2.0349 / MT 2.3305",
+  "status": "done",
+  "numbers": {
+    "qa_forgetting_loss": 2.0931923389434814,
+    "mt_acquisition_loss": 2.381277084350586,
+    "solve_s": 726.438060760498,
+    "phase2_e2e_s": 1195,
+    "gradient_steps": 0
+  },
+  "arms": {
+    "control": {
+      "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-02-04-15-continual_am_sparse/9366d343-5038-4654-b413-2ac243379627",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/5fk6z5oz",
+      "wall_clock_s": 170.61902952194214,
+      "phase2_e2e_s": 593,
+      "solve_s": 164.79382872581482,
+      "prefill_s_total": 21.745739221572876,
+      "onpolicy_refresh_s_total": null,
+      "gradient_steps": 0,
+      "eval_in_run": {
+        "qa_forgetting": 2.15320086479187,
+        "mt_acquisition": 2.5296061038970947
+      },
+      "eval_standalone": {
+        "qa_forgetting": 2.159724712371826,
+        "mt_acquisition": 2.529625177383423
+      },
+      "eval_wandb": {
+        "qa": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/5y8564b0",
+        "mt": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/on1yodjz"
+      },
+      "k_curve_standalone": {
+        "16": {
+          "qa_forgetting": 2.159724712371826,
+          "mt_acquisition": 2.529625177383423
+        }
+      },
+      "am_mean_mse_over_docs": 0.014059890443260059,
+      "value_global_max_abs": 178.0,
+      "ref_mass_on_S_mean_over_layers": 0.14532308662364812,
+      "eval_mass_on_S": {
+        "QA": {
+          "mean_mass_on_S": 0.06819035134214102,
+          "mean_mass_on_S_scored": 0.06675730689630274,
+          "mean_mass_on_cart": 0.5766231618817309,
+          "max_mass_on_S": 0.1972775119356811,
+          "argmax_layer": 5
+        },
+        "MT": {
+          "mean_mass_on_S": 0.07110726725497646,
+          "mean_mass_on_S_scored": 0.06521811430025108,
+          "mean_mass_on_cart": 0.5930163347524487,
+          "max_mass_on_S": 0.20068579968065023,
+          "argmax_layer": 5
+        }
+      },
+      "eval_mt_over_qa_mass_ratio": 1.042776079832761,
+      "eval_total_cartridge_mass": {
+        "QA": 0.5766231618817309,
+        "MT": 0.5930163347524487
+      },
+      "onpolicy": null,
+      "keys_rewritten": null,
+      "solve_s_multiple_vs_control": 1.0,
+      "phase2_e2e_s_multiple_vs_control": 1.0
+    },
+    "onpolicy": {
+      "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-02-12-30-continual_am_sparse/17147731-29ed-40b9-95eb-27530586ac89",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/05keqbxl",
+      "wall_clock_s": 592.1859171390533,
+      "phase2_e2e_s": 630,
+      "solve_s": 586.222975730896,
+      "prefill_s_total": 22.20850419998169,
+      "onpolicy_refresh_s_total": 342.40695881843567,
+      "gradient_steps": 0,
+      "eval_in_run": {
+        "qa_forgetting": 2.1331639289855957,
+        "mt_acquisition": 2.5065157413482666
+      },
+      "eval_standalone": {
+        "qa_forgetting": 2.1398370265960693,
+        "mt_acquisition": 2.5085017681121826
+      },
+      "eval_wandb": {
+        "qa": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/bew1snvg",
+        "mt": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/zrsj2weq"
+      },
+      "k_curve_standalone": {
+        "8": {
+          "qa_forgetting": 1.954670786857605,
+          "mt_acquisition": 2.4732847213745117
+        },
+        "12": {
+          "qa_forgetting": 2.0890250205993652,
+          "mt_acquisition": 2.493834972381592
+        },
+        "16": {
+          "qa_forgetting": 2.1398370265960693,
+          "mt_acquisition": 2.5085017681121826
+        }
+      },
+      "am_mean_mse_over_docs": 0.014377060362077445,
+      "value_global_max_abs": 169.0,
+      "ref_mass_on_S_mean_over_layers": 0.1449815865351209,
+      "eval_mass_on_S": {
+        "QA": {
+          "mean_mass_on_S": 0.069129525440682,
+          "mean_mass_on_S_scored": 0.06747763800131529,
+          "mean_mass_on_cart": 0.5756304074721238,
+          "max_mass_on_S": 0.19740936563660702,
+          "argmax_layer": 5
+        },
+        "MT": {
+          "mean_mass_on_S": 0.07198341737481921,
+          "mean_mass_on_S_scored": 0.06577580404060018,
+          "mean_mass_on_cart": 0.5918161838988049,
+          "max_mass_on_S": 0.20082717146724463,
+          "argmax_layer": 5
+        }
+      },
+      "eval_mt_over_qa_mass_ratio": 1.0412832565527452,
+      "eval_total_cartridge_mass": {
+        "QA": 0.5756304074721238,
+        "MT": 0.5918161838988049
+      },
+      "onpolicy": {
+        "group_size": 4,
+        "doc_kv_refreshed": false,
+        "n_refreshes_per_doc": 8,
+        "refresh_layers": [
+          4,
+          8,
+          12,
+          16,
+          20,
+          24,
+          28,
+          32
+        ],
+        "n_docs_with_onpolicy": 16,
+        "refresh_s_total_all_docs": 342.40695881843567,
+        "query_cos_mean_over_docs": 0.9981674654409289,
+        "query_cos_min_over_docs": -0.7461996078491211,
+        "query_rel_l2_mean_over_docs": 0.04977183025039267,
+        "query_rel_l2_max_over_docs": 0.18856510519981384,
+        "per_document_query_cos_mean": [
+          0.9961612150073051,
+          0.99520343542099,
+          0.99735988676548,
+          0.9976423904299736,
+          0.9988704547286034,
+          0.9987340420484543,
+          0.9986649453639984,
+          0.998142272233963,
+          0.9988448321819305,
+          0.9985394701361656,
+          0.9988294765353203,
+          0.998805433511734,
+          0.9982503950595856,
+          0.9989148899912834,
+          0.9989075139164925,
+          0.9988087937235832
+        ],
+        "per_document_refresh_s": [
+          19.894909620285034,
+          20.327901124954224,
+          17.930065155029297,
+          21.934651851654053,
+          19.06622862815857,
+          17.53092861175537,
+          21.809876680374146,
+          18.19144034385681,
+          20.619145393371582,
+          21.076690673828125,
+          26.528480768203735,
+          25.645806789398193,
+          25.783035039901733,
+          21.485477209091187,
+          20.37762188911438,
+          24.20469903945923
+        ]
+      },
+      "keys_rewritten": null,
+      "solve_s_multiple_vs_control": 3.5573114616218917,
+      "phase2_e2e_s_multiple_vs_control": 1.0623946037099494
+    },
+    "onpolicy_keys": {
+      "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-02-27-29-continual_am_sparse/8299a2c7-7e6d-4016-a3f7-49d8d88f962f",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/3sag81hz",
+      "wall_clock_s": 732.6114304065704,
+      "phase2_e2e_s": 1195,
+      "solve_s": 726.438060760498,
+      "prefill_s_total": 22.103432416915894,
+      "onpolicy_refresh_s_total": 353.09726119041443,
+      "gradient_steps": 0,
+      "eval_in_run": {
+        "qa_forgetting": 2.09283447265625,
+        "mt_acquisition": 2.381660223007202
+      },
+      "eval_standalone": {
+        "qa_forgetting": 2.0931923389434814,
+        "mt_acquisition": 2.381277084350586
+      },
+      "eval_wandb": {
+        "qa": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/ets09osm",
+        "mt": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/zfwnt8s8"
+      },
+      "k_curve_standalone": {
+        "8": {
+          "qa_forgetting": 1.9478557109832764,
+          "mt_acquisition": 2.3246867656707764
+        },
+        "12": {
+          "qa_forgetting": 2.1439507007598877,
+          "mt_acquisition": 2.4483301639556885
+        },
+        "16": {
+          "qa_forgetting": 2.0931923389434814,
+          "mt_acquisition": 2.381277084350586
+        }
+      },
+      "am_mean_mse_over_docs": 0.004428239053220453,
+      "value_global_max_abs": 75.5,
+      "ref_mass_on_S_mean_over_layers": 0.30337593940071705,
+      "eval_mass_on_S": {
+        "QA": {
+          "mean_mass_on_S": 0.22628459676257584,
+          "mean_mass_on_S_scored": 0.21736503614738206,
+          "mean_mass_on_cart": 0.6545730529404763,
+          "max_mass_on_S": 0.6286499059448639,
+          "argmax_layer": 4
+        },
+        "MT": {
+          "mean_mass_on_S": 0.23881201852612627,
+          "mean_mass_on_S_scored": 0.23452359701110403,
+          "mean_mass_on_cart": 0.6714083356265392,
+          "max_mass_on_S": 0.6425379693508149,
+          "argmax_layer": 4
+        }
+      },
+      "eval_mt_over_qa_mass_ratio": 1.055361354430565,
+      "eval_total_cartridge_mass": {
+        "QA": 0.6545730529404763,
+        "MT": 0.6714083356265392
+      },
+      "onpolicy": {
+        "group_size": 4,
+        "doc_kv_refreshed": false,
+        "n_refreshes_per_doc": 8,
+        "refresh_layers": [
+          4,
+          8,
+          12,
+          16,
+          20,
+          24,
+          28,
+          32
+        ],
+        "n_docs_with_onpolicy": 16,
+        "refresh_s_total_all_docs": 353.09726119041443,
+        "query_cos_mean_over_docs": 0.997482015285641,
+        "query_cos_min_over_docs": -0.21362218260765076,
+        "query_rel_l2_mean_over_docs": 0.06254434847505763,
+        "query_rel_l2_max_over_docs": 0.15315310657024384,
+        "per_document_query_cos_mean": [
+          0.9935661181807518,
+          0.9953913316130638,
+          0.9960373044013977,
+          0.9976200833916664,
+          0.9975974634289742,
+          0.9981595352292061,
+          0.9980073124170303,
+          0.997601218521595,
+          0.9982599765062332,
+          0.9985581636428833,
+          0.9986723512411118,
+          0.9983459264039993,
+          0.9979535788297653,
+          0.9978112131357193,
+          0.9976939335465431,
+          0.9984367340803146
+        ],
+        "per_document_refresh_s": [
+          19.447249174118042,
+          23.862988233566284,
+          20.130340576171875,
+          25.34616255760193,
+          21.69690752029419,
+          18.211663007736206,
+          23.37012529373169,
+          20.298627138137817,
+          21.363434314727783,
+          22.151572704315186,
+          25.276637077331543,
+          23.637239694595337,
+          23.655306577682495,
+          20.509079217910767,
+          19.24002432823181,
+          24.899903774261475
+        ]
+      },
+      "keys_rewritten": {
+        "mode": "highest_attention",
+        "reposition": true,
+        "rope_delta_last_doc": -6335.0,
+        "n_selected_total": 147456,
+        "n_from_doc_total": 60611,
+        "n_from_cartridge_total": 86845,
+        "n_changed_total": 138003,
+        "n_repositioned_total": 60611,
+        "doc_fraction_of_support": 0.4110446506076389,
+        "per_document_n_from_doc": [
+          5287,
+          4422,
+          4083,
+          4101,
+          3713,
+          3563,
+          3595,
+          3530,
+          3608,
+          3426,
+          3566,
+          3620,
+          3720,
+          3624,
+          3393,
+          3360
+        ],
+        "keys_rewritten_per_layer_per_doc_mean": {
+          "0": 196.8125,
+          "1": 137.3125,
+          "2": 59.625,
+          "3": 54.25,
+          "4": 45.6875,
+          "5": 53.0,
+          "6": 52.0,
+          "7": 148.0625,
+          "8": 104.9375,
+          "9": 145.8125,
+          "10": 63.8125,
+          "11": 86.0625,
+          "12": 107.0625,
+          "13": 153.5,
+          "14": 108.75,
+          "15": 138.3125,
+          "16": 97.125,
+          "17": 134.9375,
+          "18": 141.75,
+          "19": 124.625,
+          "20": 178.9375,
+          "21": 133.25,
+          "22": 104.75,
+          "23": 117.75,
+          "24": 145.125,
+          "25": 69.875,
+          "26": 97.4375,
+          "27": 71.625,
+          "28": 76.5,
+          "29": 112.0,
+          "30": 80.625,
+          "31": 92.875,
+          "32": 89.375,
+          "33": 112.6875,
+          "34": 91.875,
+          "35": 60.0625
+        }
+      },
+      "solve_s_multiple_vs_control": 4.408163014217911,
+      "phase2_e2e_s_multiple_vs_control": 2.015177065767285
+    }
+  },
+  "deltas_vs_reference": {
+    "onpolicy_minus_control": {
+      "qa_forgetting": -0.019887685775756836,
+      "mt_acquisition": -0.021123409271240234
+    },
+    "onpolicy_keys_minus_MECH005": {
+      "qa_forgetting": 0.05827593803405762,
+      "mt_acquisition": 0.05077362060546875
+    },
+    "noise_band_loss": [
+      0.1,
+      0.2
+    ],
+    "eval_n": {
+      "MT": 69,
+      "QA": 78
+    }
+  },
+  "baseline_reproduced": {
+    "in_run_bit_identical": true,
+    "in_run_measured": {
+      "qa_forgetting": 2.15320086479187,
+      "mt_acquisition": 2.5296061038970947
+    },
+    "in_run_reference": {
+      "qa_forgetting": 2.15320086479187,
+      "mt_acquisition": 2.5296061038970947
+    },
+    "standalone_measured": {
+      "qa_forgetting": 2.159724712371826,
+      "mt_acquisition": 2.529625177383423
+    },
+    "standalone_reference": {
+      "qa_forgetting": 2.159724712371826,
+      "mt_acquisition": 2.529625177383423
+    },
+    "standalone_delta": {
+      "qa_forgetting": 0.0,
+      "mt_acquisition": 0.0
+    }
+  },
+  "phase1_reference_mass": {
+    "QA": {
+      "mean_mass_on_S": 0.0811897455894184,
+      "mean_mass_on_cart": 0.5696749146725913
+    },
+    "MT": {
+      "mean_mass_on_S": 0.08778375150027891,
+      "mean_mass_on_cart": 0.5878696942055184
+    }
+  },
+  "mt_over_qa_mass_ratio": {
+    "control": {
+      "mass_on_S_MT": 0.07110726725497646,
+      "mass_on_S_QA": 0.06819035134214102,
+      "mt_over_qa_mass_on_S": 1.042776079832761,
+      "mass_on_cart_MT": 0.5930163347524487,
+      "mass_on_cart_QA": 0.5766231618817309
+    },
+    "onpolicy": {
+      "mass_on_S_MT": 0.07198341737481921,
+      "mass_on_S_QA": 0.069129525440682,
+      "mt_over_qa_mass_on_S": 1.0412832565527452,
+      "mass_on_cart_MT": 0.5918161838988049,
+      "mass_on_cart_QA": 0.5756304074721238
+    },
+    "onpolicy_keys": {
+      "mass_on_S_MT": 0.23881201852612627,
+      "mass_on_S_QA": 0.22628459676257584,
+      "mt_over_qa_mass_on_S": 1.055361354430565,
+      "mass_on_cart_MT": 0.6714083356265392,
+      "mass_on_cart_QA": 0.6545730529404763
+    },
+    "phase1": {
+      "mass_on_S_MT": 0.08778375150027891,
+      "mass_on_S_QA": 0.0811897455894184,
+      "mt_over_qa_mass_on_S": 1.0812172259315458,
+      "mass_on_cart_MT": 0.5878696942055184,
+      "mass_on_cart_QA": 0.5696749146725913
+    }
+  },
+  "part_a_sanity": {
+    "device": "cuda",
+    "config": {
+      "fields_present": [
+        true,
+        true
+      ],
+      "defaults": [
+        0,
+        false
+      ],
+      "constructs_on": [
+        4,
+        true
+      ]
+    },
+    "checks": {
+      "off_with_hook_bit_identical_to_off": true,
+      "on_identity_numerics_bit_identical_to_off": true,
+      "on_identity_adds_only_diagnostic_keys": [
+        "onpolicy",
+        "onpolicy_events"
+      ],
+      "on_perturbed_differs_from_off": true,
+      "on_perturbed_finite": true,
+      "off_has_no_onpolicy_key": true,
+      "extra_keys_off": [
+        "max_queries_per_head",
+        "n_queries_available_max",
+        "n_queries_available_min",
+        "n_queries_used_max",
+        "n_queries_used_min",
+        "ref_mass_on_S_per_layer",
+        "rope_theta",
+        "v_selected_absmax_after_per_layer"
+      ],
+      "extra_keys_on": [
+        "max_queries_per_head",
+        "n_queries_available_max",
+        "n_queries_available_min",
+        "n_queries_used_max",
+        "n_queries_used_min",
+        "onpolicy",
+        "onpolicy_events",
+        "ref_mass_on_S_per_layer",
+        "rope_theta",
+        "v_selected_absmax_after_per_layer"
+      ],
+      "refresh_layers_g1": [
+        1,
+        2,
+        3
+      ],
+      "refresh_layers_g2": [
+        2
+      ],
+      "refresh_layers_g4": null,
+      "identity_cos_is_one": 1.0,
+      "identity_rel_l2_is_zero": 0.0,
+      "perturbed_cos_mean": 0.9508528113365173,
+      "perturbed_rel_l2_mean": 0.310570369164149,
+      "dockv_flag": true,
+      "dockv_rel_l2": [
+        0.10007216036319733,
+        0.14089342951774597,
+        0.14044460654258728
+      ]
+    },
+    "fail_loud": {
+      "no_hook": "ValueError: onpolicy_layers=1 but no `onpolicy_refresh_fn` was passed to apply_document_am_write_to_cache -- the on-policy",
+      "wrong_shape": "RuntimeError: on-policy refresh at layer 1 changed the query shape: (1, 2, 24, 128) -> (1, 2, 12, 128)",
+      "empty_layer": "RuntimeError: on-policy refresh at layer 1 produced no reference queries; the write would fall back to nothing.",
+      "wrong_batch_count": "RuntimeError: on-policy refresh at layer 1 returned 1 query batches, expected 3 (the reference dataloader must be replayed d",
+      "nonfinite": "RuntimeError: on-policy refresh at layer 1 produced non-finite queries (1 of 6144).",
+      "not_a_tuple": "TypeError: onpolicy_refresh_fn must return (query_accumulator, doc_kv_or_None), got <class 'cartridges.am.query_accum.AMQ",
+      "bad_dockv_shape": "RuntimeError: on-policy doc-KV refresh changed shapes at layer 1: (2, 4000, 128)/(2, 4000, 128) -> (2, 5, 128)/(2, 5, 128)",
+      "all_raised": true
+    },
+    "off_vs_HEAD_bit_identical": true,
+    "stub_mean_mse": {
+      "off": "0.027586082462221384",
+      "off_with_hook": "0.027586082462221384",
+      "on_identity_g1": "0.027586082462221384",
+      "on_perturbed_g1": "0.028871837770566344",
+      "on_perturbed_g2": "0.028492691926658154",
+      "on_perturbed_g4": "0.027586082462221384",
+      "on_perturbed_dockv": "0.028883114689961076"
+    }
+  },
+  "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/3sag81hz",
+  "wandb_run_id": "3sag81hz",
+  "artifacts": [
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/MECH-SEQUENTIAL/wrapper.log",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/MECH-SEQUENTIAL/sanity_cuda.json",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/MECH-SEQUENTIAL/sanity_cpu.json",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/MECH-SEQUENTIAL/config_probe.json",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/MECH-SEQUENTIAL/curve.tsv",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/state/diagnostics/MECH-SEQUENTIAL.json",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/state/diagnostics/MECH-SEQUENTIAL_route_mass.json",
+    "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-02-04-15-continual_am_sparse/9366d343-5038-4654-b413-2ac243379627/cache_last.pt",
+    "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-02-12-30-continual_am_sparse/17147731-29ed-40b9-95eb-27530586ac89/cache_last.pt",
+    "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-02-27-29-continual_am_sparse/8299a2c7-7e6d-4016-a3f7-49d8d88f962f/cache_last.pt"
+  ],
+  "command": "bash research_loop/results/MECH-SEQUENTIAL/launch_mech_sequential.sh",
+  "observations": "Part A. `AM_ONPOLICY_LAYERS` -> `onpolicy_layers` (group size N; 0 = off) plus a second, untested axis `AM_ONPOLICY_DOCKV` -> `onpolicy_refresh_doc_kv`. Group size 4 was chosen: 36 layers = 9 groups, 8 re-extractions per document, before layers 4,8,...,32; per-layer would be 35. Unit sanity (CPU and CUDA agree): the OFF arm is bit-identical to a `git archive HEAD` snapshot run in a separate interpreter; passing the hook with the knob off is bit-identical (the hook is never called); and with the knob ON but a refresh that returns the SAME queries, every number (mean_mse, per-layer MSE, k/v sums, |v|max, mass_on_S, n_queries) is bit-identical to OFF -- so the restructuring changes only the queries, not the math. Six corruption modes (wrong shape, empty layer, wrong batch count, non-finite, non-tuple return, bad doc-KV shape) and 'knob on with no hook' all raise. The `onpolicy`/`onpolicy_events` keys appear in `am_doc_*.pt` only when the mechanism ran.\nPart B, 3 arms, theta=5e6, top32, beta off, 0 gradient steps. CONTROL REPRODUCED THE GATE EXACTLY: in-run QA 2.15320086479187 / MT 2.5296061038970947 and standalone QA 2.159724712371826 / MT 2.529625177383423 -- all four to the last printed digit, |v|max 178.0, mean am/mean_mse 0.014059890443260059, identical to MECH-KEYS' control.\nTHE MECHANISM IS LIVE AND THE ACTIVATION SHIFT IS SMALL. Every document ran 8 refreshes; the per-group query drift (stale vs on-policy queries at the boundary layer) is mean cosine 0.99817 and mean relative L2 4.98% (max 18.9% on a single boundary), and it does NOT widen with depth: rel-L2 by boundary layer is 9.20/2.55/3.61/7.95/6.57/5.44/2.47/2.05% at L4..L32, i.e. largest at the SHALLOWEST boundary. LIT-006 predicted the gap should widen with layer index; it does not.\nON-POLICY ALONE (frozen keys): QA 2.15972 -> 2.13984 (-0.0199), MT 2.52963 -> 2.50850 (-0.0211). Both are ~1/5 of the 0.1-0.2 noise band. COMPOSED WITH MECH-005 (the best gradient-free point): QA 2.09319 / MT 2.38128 versus MECH-005's own QA 2.03492 / MT 2.33050 -- i.e. +0.0583 QA and +0.0508 MT WORSE, inside the band but on the wrong side. MT does not move materially below 2.33; the bar (MT <= 2.02) is still 0.36 away.\nTHE ROUTING COLLAPSE THIS ENTRY WAS OPENED FOR IS ALREADY GONE, SO THERE WAS NOTHING TO REPAIR. Total eval-time cartridge attention mass on MT: control 0.5930, on-policy 0.5918 (-0.0012), on-policy+keys 0.6714, against the untouched Phase-1 cartridge's 0.5879. The 0.588 -> 0.329 collapse recorded by ORACLE-WRITE was a theta=1e4 measurement; at the model's true rotary base (MECH-003) the control already sits at Phase-1 level. On-policy therefore neither prevents nor improves it.\nSelectivity is untouched: the MT/QA mass_on_S ratio is 1.0428 (control) -> 1.0413 (on-policy) -> 1.0554 (on-policy+keys), all below Phase-1's 1.0812, and eval-time mass_on_S on MT is 0.0711 -> 0.0720 with frozen keys. The solve's own objective got slightly WORSE with on-policy queries (mean am/mean_mse 0.014060 -> 0.014377 frozen-key; 0.003940 -> 0.004428 in the keys arm), and |v|max moved 178.0 -> 169.0 / 74.0 -> 75.5.\nCOST (a success axis): 8 extra reference-query passes per document cost 342-353 s over 16 documents (~21-22 s/doc, ~2.6-2.9 s per refresh). solve_s 164.8 s -> 586.2 s (3.56x) frozen-key and -> 726.4 s (4.41x control, 2.67x MECH-005's 272 s). phase2_e2e_s 593 / 630 / 1195 s (the control's e2e is inflated by a ~6 min nv_kthread_q_flush exit hang). gradient_steps = 0 for all arms.\nK-CURVE (k in {8,12,16}, standalone, both splits): on-policy frozen-key MT 2.4733 / 2.4938 / 2.5085 -- monotonically WORSE in k, minimum at the earliest measured point; on-policy+keys MT 2.3247 / 2.4483 / 2.3813 -- non-monotone with its minimum at k=8. Neither reproduces the value-only shape (bottom at k=12 then degrade); on-policy does not remove the late-document degradation and in the frozen-key arm moves the best k earlier. Only three k were measured, so the shape statement is coarse. QA at k=8 is 1.9547 / 1.9479, far below the Phase-1 floor 2.2388.\nCAVEATS: one seed, no seed variation (there is no SEED knob, DIAG-KEYCURVE seed_probe). Slot selection is deliberately held fixed at the pre-write ranking so the only variable is the queries. The doc-KV refresh axis (`AM_ONPOLICY_DOCKV`) is implemented and unit-tested but was NOT run on GPU. `cartridges.am.*` uses a bare `logging.getLogger`, so the per-refresh INFO lines do not reach the run log; the refresh record lives in `am_doc_*.pt` `extra['onpolicy']`. Every number here is from a wandb-logged run.\nMATCHED-k COMPARISON (added after DIAG-KEYCURVE published MECH-005's own k-curve; same harness, same splits): at every k measured, adding on-policy to MECH-005 is equal or worse. MT at k=8 2.3289 -> 2.3247 (-0.004), k=12 **2.2720 -> 2.4483 (+0.176)**, k=16 2.3305 -> 2.3813 (+0.051); QA at k=8 1.9464 -> 1.9479 (+0.001), k=12 **1.9560 -> 2.1440 (+0.188)**, k=16 2.0349 -> 2.0932 (+0.058). At k=12 -- the k where MECH-005 is actually best -- on-policy costs +0.176 MT and +0.188 QA, both AT OR ABOVE the top of the 0.1-0.2 noise band. This is the only on-policy-vs-no-on-policy delta in the whole experiment that escapes the noise floor, and it points the wrong way.",
+  "matched_k_vs_MECH005": {
+    "source": "research_loop/results/DIAG-KEYCURVE/curve.tsv (arm keys_repos), same harness, same splits",
+    "note": "DIAG-KEYCURVE established that MECH-005's own optimum is k=12 (QA 1.9560 / MT 2.2720), not k=16.",
+    "per_k": {
+      "8": {
+        "MECH005_qa": 1.9463961124420166,
+        "MECH005_mt": 2.32890248298645,
+        "onpolicy_keys_qa": 1.9478557109832764,
+        "onpolicy_keys_mt": 2.3246867656707764,
+        "delta_qa": 0.00146,
+        "delta_mt": -0.004216
+      },
+      "12": {
+        "MECH005_qa": 1.9560121297836304,
+        "MECH005_mt": 2.2720184326171875,
+        "onpolicy_keys_qa": 2.1439507007598877,
+        "onpolicy_keys_mt": 2.4483301639556885,
+        "delta_qa": 0.187939,
+        "delta_mt": 0.176312
+      },
+      "16": {
+        "MECH005_qa": 2.034916400909424,
+        "MECH005_mt": 2.330503463745117,
+        "onpolicy_keys_qa": 2.0931923389434814,
+        "onpolicy_keys_mt": 2.381277084350586,
+        "delta_qa": 0.058276,
+        "delta_mt": 0.050774
+      }
+    }
+  },
+  "diagnostics": {
+    "onpolicy_group_size": 4,
+    "n_refreshes_per_document": 8,
+    "refresh_layers": [
+      4,
+      8,
+      12,
+      16,
+      20,
+      24,
+      28,
+      32
+    ],
+    "query_drift_cos_mean_over_docs": {
+      "control": null,
+      "onpolicy": 0.9981674654409289,
+      "onpolicy_keys": 0.997482015285641
+    },
+    "query_drift_rel_l2_mean_over_docs": {
+      "control": null,
+      "onpolicy": 0.04977183025039267,
+      "onpolicy_keys": 0.06254434847505763
+    },
+    "query_drift_rel_l2_per_boundary_layer_onpolicy": {
+      "4": 0.092,
+      "8": 0.02546,
+      "12": 0.03608,
+      "16": 0.07947,
+      "20": 0.06566,
+      "24": 0.05435,
+      "28": 0.0247,
+      "32": 0.02046
+    },
+    "mass_on_S_MT": {
+      "control": 0.07110726725497646,
+      "onpolicy": 0.07198341737481921,
+      "onpolicy_keys": 0.23881201852612627
+    },
+    "mt_over_qa_mass_ratio": {
+      "control": 1.042776079832761,
+      "onpolicy": 1.0412832565527452,
+      "onpolicy_keys": 1.055361354430565
+    },
+    "total_cartridge_mass_MT": {
+      "control": 0.5930163347524487,
+      "onpolicy": 0.5918161838988049,
+      "onpolicy_keys": 0.6714083356265392
+    },
+    "phase1_total_cartridge_mass_MT": 0.5878696942055184,
+    "am_mean_mse": {
+      "control": 0.014059890443260059,
+      "onpolicy": 0.014377060362077445,
+      "onpolicy_keys": 0.004428239053220453
+    },
+    "value_global_max_abs": {
+      "control": 178.0,
+      "onpolicy": 169.0,
+      "onpolicy_keys": 75.5
+    },
+    "solve_s": {
+      "control": 164.79382872581482,
+      "onpolicy": 586.222975730896,
+      "onpolicy_keys": 726.438060760498
+    },
+    "solve_s_multiple_vs_control": {
+      "control": 1.0,
+      "onpolicy": 3.5573114616218917,
+      "onpolicy_keys": 4.408163014217911
+    },
+    "onpolicy_refresh_s_total": {
+      "control": null,
+      "onpolicy": 342.40695881843567,
+      "onpolicy_keys": 353.09726119041443
+    },
+    "phase2_e2e_s": {
+      "control": 593,
+      "onpolicy": 630,
+      "onpolicy_keys": 1195
+    },
+    "gradient_steps": 0,
+    "raw_dumps": [
+      "research_loop/state/diagnostics/MECH-SEQUENTIAL.json",
+      "research_loop/state/diagnostics/MECH-SEQUENTIAL_route_mass.json"
+    ],
+    "query_drift_cos_min_over_docs": {
+      "control": null,
+      "onpolicy": -0.7461996078491211,
+      "onpolicy_keys": -0.21362218260765076
+    },
+    "query_drift_rel_l2_max_over_docs": {
+      "control": null,
+      "onpolicy": 0.18856510519981384,
+      "onpolicy_keys": 0.15315310657024384
+    }
+  }
+}

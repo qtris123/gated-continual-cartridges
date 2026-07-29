@@ -401,7 +401,40 @@ Eliminated as *knob-level* explanations: gating (HYP-G1), support (HYP-S1), ridg
    0.588. The arm with healthy routing has the worst acquisition. **Collapse is not the pathology this
    board took it for** — see the B-CASCADE entry, whose framing this contradicts.
 
-## 🔥 B-CASCADE — the solve destroys the routing it depends on
+## 💀 B-CASCADE — **RETRACTED: the collapse was a rope artefact, not a mechanism** (MECH-SEQUENTIAL, 2026-07-29)
+> **The observation this entry was built on no longer exists once the rotary base is correct.**
+> Total cartridge mass on MT at θ=5e6: **control 0.5930 vs Phase-1's 0.5879** — no collapse at all.
+> **ORACLE-WRITE's 0.588 → 0.329 was a θ=1e4 artefact, already fixed by MECH-003.** So B-CASCADE was a
+> real measurement of a *bug*, not of the method. The orchestrator opened it as a major finding and it
+> drove MECH-QUERIES, MECH-QUERIES-B and MECH-SEQUENTIAL; those runs stand as measurements, but their
+> motivating premise does not.
+>
+> **And the activation shift it hypothesised is real but tiny, and points the wrong way:** per-group
+> query drift cos **0.9982**, rel-L2 **4.98%**, and by boundary layer 9.20/2.55/3.61/7.95/6.57/5.44/
+> 2.47/2.05% at L4…L32 — **largest at the shallowest boundary**, contradicting LIT-006's prediction that
+> it compounds with depth.
+
+## 🏁 MECH-SEQUENTIAL — on-policy layer-sequential re-extraction: **works, measured, buys nothing**
+- **Stage:** CLOSED · **Status:** ✅ **confirmed negative.** This was the AM paper's own procedure
+  (SCOUT-AM divergence #3) and the last mechanism inside the mission's scope.
+
+  | arm (θ=5e6, top32, β off) | QA | MT | cart mass MT | solve_s |
+  |---|---|---|---|---|
+  | control (gate, reproduced to the last digit) | 2.15972 | 2.52963 | 0.5930 | 164.8 |
+  | on-policy, frozen keys | 2.13984 | 2.50850 | 0.5918 | 586.2 (**3.56×**) |
+  | on-policy + MECH-005 | 2.09319 | 2.38128 | 0.6714 | 726.4 (**4.41×**) |
+  | **MECH-005 alone** | **2.03492** | **2.33050** | 0.6711 | 272.0 |
+
+- **MT does not move materially below 2.33.** Isolated ΔMT −0.021 (inside noise); composed it is
+  **0.051 worse than MECH-005 alone**. Matched against DIAG-KEYCURVE, the **only** delta escaping noise
+  points the wrong way: **at k=12 — where MECH-005 is actually best — on-policy costs +0.176 MT** (and
+  +0.188 QA). At 3.6–4.4× the solve cost it is a dominated point even if it had helped.
+- 🔬 **The bit-identical check was better than asked for:** with the knob **on** but the refresh
+  returning the *same* queries, every number is bit-identical to off — isolating the restructuring from
+  the mechanism. 7/7 corruption modes raise; CPU and CUDA sanity agree exactly.
+- ⇒ **The gradient/closed-form gap is NOT cross-layer.**
+
+## 🔥 B-CASCADE (original framing, superseded above)
 - **Stage:** CLOSED (with one confound outstanding) · **Status:** ❌ **REFUTED as an acquisition
   explanation — but half of it was right** (MECH-QUERIES, 2026-07-28)
 - **The prediction was:** raising `n ≫ t` shrinks `|v|`, restores cartridge mass, **and** improves MT —

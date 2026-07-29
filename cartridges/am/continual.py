@@ -196,6 +196,50 @@ def run_per_document_am_phase2(
                 step=doc_idx + 1,
             )
 
+            # LIT-006 / MECH-006: on-policy, layer-sequential re-extraction. The
+            # kwarg is passed ONLY when the knob is on, so a stock run's call
+            # signature is byte-identical (RUNBOOK 6.10 / MECH-000: an
+            # unconditional new kwarg once crashed every AM run through the
+            # sibling-`cartridges` import path).
+            onpolicy_kwargs: dict = {}
+            onpolicy_group = int(getattr(config, "onpolicy_layers", 0) or 0)
+            if onpolicy_group > 0:
+                refresh_doc_kv = bool(
+                    getattr(config, "onpolicy_refresh_doc_kv", False)
+                )
+
+                def _onpolicy_refresh_fn(layer_idx: int, group_size: int):
+                    """Re-extract reference queries from the UPDATED cartridge.
+
+                    Layers `< layer_idx` have already been written, so this
+                    forward pass sees the perturbed residual stream and produces
+                    the queries the remaining layers will actually be asked.
+                    """
+                    fresh_acc, _, _ = _collect_reference_queries(
+                        wrapped_model,
+                        cache,
+                        doc_loader,
+                        config,
+                        n_layers,
+                        n_kv_heads,
+                        head_dim,
+                        local_rank,
+                        max_batches=len(doc_loader),
+                    )
+                    fresh_kv = None
+                    if refresh_doc_kv:
+                        fresh_kv = prefill_document_kv_cache(
+                            model=model,
+                            tokenizer=tokenizer,
+                            system_prompt=system_prompt,
+                            attn_config=cache.config,
+                            device=local_rank,
+                            cartridge_cache=cache,
+                        )
+                    return fresh_acc, fresh_kv
+
+                onpolicy_kwargs["onpolicy_refresh_fn"] = _onpolicy_refresh_fn
+
             am_stats = apply_document_am_write_to_cache(
                 cache=cache,
                 mask=grad_mask,
@@ -206,6 +250,7 @@ def run_per_document_am_phase2(
                 head_dim=head_dim,
                 old_query_accumulator=old_query_acc,
                 old_target_bank=old_target_bank,
+                **onpolicy_kwargs,
             )
             am_stats.step = doc_idx + 1
             doc_wall = time.time() - t_doc

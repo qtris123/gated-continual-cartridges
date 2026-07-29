@@ -388,3 +388,100 @@
   MT n=69 / QA n=78, so ΔMT −0.199 sits at the **top edge** of the 0.1–0.2 band and ΔQA −0.125 sits
   **inside** it; one seed, no seed variation was run, and MT 2.3305 is still 0.31 above the 2.02 bar.
 - Kept in tree? yes — opt-in, default off, bit-identical when off.
+
+---
+### MECH-006: on-policy layer-sequential re-extraction → flags `AM_ONPOLICY_LAYERS` / `AM_ONPOLICY_DOCKV` (default: unset = off)
+- Status: tested
+- Implements: **LIT-006** (AM paper §3.1 "On-policy queries", App. C.4) = SCOUT-AM's **divergence #3**
+  | Targets board entry: **B-CASCADE / query-distribution** — the one escape hatch DIAG-KEYSPACE
+  explicitly did **not** bound, and the last unimplemented thing the paper does.
+- Files:
+  - `cartridges/am/finetune.py` — new config fields `onpolicy_layers: int = 0` and
+    `onpolicy_refresh_doc_kv: bool = False`; new module-level `_onpolicy_refresh()` (validation +
+    drift measurement + logging); `apply_document_am_write_to_cache` gains one optional kwarg
+    `onpolicy_refresh_fn` and, at the top of its layer loop, rebinds `query_accumulator` (and
+    optionally `doc_kv`) whenever `layer_idx > 0 and layer_idx % onpolicy_layers == 0`. Fails loudly
+    if `onpolicy_layers > 0` arrives without a hook. Records `extra["onpolicy"]` /
+    `extra["onpolicy_events"]` **only when the mechanism ran**, so every stock run keeps a
+    byte-identical `am_doc_*.pt` payload.
+  - `cartridges/am/continual.py` — inside the per-document loop, builds `_onpolicy_refresh_fn`
+    (closure over `wrapped_model`, `cache`, `doc_loader`, and — for the doc-KV axis — `model`,
+    `tokenizer`, `system_prompt`) and passes it **only when the knob is on** (RUNBOOK §6.10 /
+    MECH-000: an unconditional new kwarg once crashed every AM run).
+  - `examples/qasper2/train/continual_am_sparse.py` — env knobs `AM_ONPOLICY_LAYERS` (group size,
+    0/unset = off) and `AM_ONPOLICY_DOCKV` (0/1), `_onpolicy_kwargs()` (conditional kwarg + loud
+    failure; refuses `AM_ONPOLICY_DOCKV=1` without `AM_ONPOLICY_LAYERS>0`, refuses a negative group,
+    refuses any `AM_EXECUTION_MODE != per_document`); wandb tag `onpolicy-<N>` added **only** when
+    the env var is set.
+- What it changes (at the level of the math): we collect `Q_ref` in **one** forward pass over the
+  *pre-write* cartridge and then solve all 36 layers against it — but writing layer `l` perturbs the
+  residual stream, so the queries the model actually emits at layers `l+1…35` are not the ones we
+  fitted. With `onpolicy_layers = N` the write is split into `⌈36/N⌉` groups and, before each group
+  after the first, the reference queries are re-extracted by replaying the same reference dataloader
+  against the **partially-written** cache, so each layer is solved against the activations it will
+  actually see. The teacher's cartridge block was already on-policy (layer `l` reads the current
+  `k_param`/`v_param`); the *document* block is not, which is what the second flag addresses.
+  Slot selection is deliberately **not** re-ranked, so the only variable is the query distribution.
+- **Group size = 4**, i.e. refreshes before layers 4,8,…,32 (8 per document). Per-layer would be 35
+  passes/doc; the brief's range was 4–6 and 4 is the finer end. Measured price: 2.6–2.9 s per
+  refresh, 21–22 s per document, 342–353 s per 16-document run.
+- Sanity check (`research_loop/results/MECH-SEQUENTIAL/sanity_seq.py`, run on CPU → `sanity_cpu.json`
+  and on CUDA → `sanity_cuda.json`; both agree exactly):
+  (i) **the decisive check** — with `onpolicy_layers=1` and a refresh that returns the *same*
+  queries, every number is bit-identical to OFF (`mean_mse`, per-layer MSE, k/v sums, |v|max,
+  `mass_on_S`, `n_queries`), and the only difference is the two new diagnostic keys; measured drift
+  is cos = 1.0, rel-L2 = 0.0. So the restructuring changes **the queries and nothing else**;
+  (ii) passing a refresh function that *raises* with the knob off is bit-identical to OFF — the hook
+  cannot fire; (iii) with perturbed queries the write changes, stays finite, and `extra["onpolicy"]`
+  records the expected refresh layers for group sizes 1 / 2 / 4; (iv) **fail-loud**: wrong query
+  shape, empty layer, wrong batch count, non-finite queries, a non-tuple return, a wrong-shaped
+  doc-KV refresh, and `onpolicy_layers>0` with **no** hook all raise (7/7);
+  (v) driver config probe (`config_probe.json`) — all four arms construct against the `_explore`
+  package, all three guards fire, and **unpinned** (sibling `cartridges`, which has neither field)
+  the run fails loudly instead of silently no-op'ing.
+- Bit-identical with flag off? **yes.** The stub write with the flag off is bit-identical to a
+  `git archive HEAD` snapshot executed in a **separate interpreter**, and on GPU the control arm
+  reproduced MECH-KEYS' control to all 17 printed digits in-run (QA **2.15320086479187** / MT
+  **2.5296061038970947**, mean `am/mean_mse` **0.014059890443260059**, `|v|max` **178.0**) *and*
+  standalone (QA **2.159724712371826** / MT **2.529625177383423**) — Δ = 0.0 on all four.
+- Tested by: **MECH-SEQUENTIAL** (`WANDB_GROUP=B-CASCADE`), canonical top32 at θ=5e6, `ENABLE_BETA=0`:
+
+  | arm | QA (standalone) | MT (standalone) | eval `mass_on_S` MT | **MT/QA mass** | **cart mass MT** | mean `am/mean_mse` | \|v\|max | solve_s | ×control |
+  |---|---|---|---|---|---|---|---|---|---|
+  | control (`freeze`, on-policy off) | 2.15972 | 2.52963 | 0.0711 | 1.0428 | 0.5930 | 0.014060 | 178.0 | 164.8 | 1.00 |
+  | on-policy g=4, frozen keys | 2.13984 | 2.50850 | 0.0720 | 1.0413 | 0.5918 | 0.014377 | 169.0 | 586.2 | **3.56×** |
+  | **on-policy g=4 + MECH-005** | 2.09319 | 2.38128 | 0.2388 | 1.0554 | 0.6714 | 0.004428 | 75.5 | 726.4 | **4.41×** |
+  | MECH-005 alone (reference) | **2.03492** | **2.33050** | 0.2430 | 1.0510 | 0.6711 | 0.003940 | 74.0 | 272.0 | 1.65× |
+  | Phase-1 reference | — | — | 0.0878 | 1.0812 | 0.5879 | — | — | — | — |
+
+  wandb: control `https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/5fk6z5oz`,
+  on-policy `.../runs/05keqbxl`, on-policy+keys `.../runs/3sag81hz` (+14 standalone eval runs, see
+  `results/MECH-SEQUENTIAL/curve.tsv`).
+- Verdict + mechanistic reason: ❌ **the mechanism works, is measured, and buys nothing — and it
+  identifies why.** (1) **The cross-layer activation shift is real but tiny.** Per group boundary the
+  on-policy queries differ from the stale ones by mean cosine **0.99817** / mean relative L2
+  **4.98%**, and the drift **does not widen with depth** — rel-L2 by boundary layer is
+  9.20/2.55/3.61/7.95/6.57/5.44/2.47/2.05% at L4…L32, *largest at the shallowest boundary*, directly
+  contradicting LIT-006's prediction. (2) **The pathology this entry was opened for no longer
+  exists.** B-CASCADE was opened on ORACLE-WRITE's "the write collapses total cartridge attention
+  0.588 → 0.329". At the model's true rotary base (MECH-003) the control already sits at
+  **0.5930 vs Phase-1's 0.5879** — the collapse was a θ=1e4 artefact. On-policy moves it by
+  **−0.0012**. There was nothing left to repair *by construction*. (3) **Both axes move by ~1/5 of
+  the noise band and the composition is on the wrong side:** on-policy alone −0.020 QA / −0.021 MT;
+  composed with the best point it is **+0.058 QA / +0.051 MT worse** than MECH-005 alone. Selectivity
+  is untouched (MT/QA ratio 1.0428 → 1.0413 frozen-key, still below Phase-1's 1.0812) and the solve's
+  own objective gets *slightly worse* (0.014060 → 0.014377). (4) **Cost is 3.6–4.4× `solve_s`** for
+  that null. ⚠️ Noise discipline: MT n=69 / QA n=78; every delta reported here is **inside** the
+  0.1–0.2 band, so the honest reading is "no effect", not "a small effect". One seed, no seed
+  variation. k-curve (k ∈ {8,12,16}): the frozen-key on-policy arm is **monotonically worse in k**
+  (MT 2.4733/2.4938/2.5085) and the composed arm is non-monotone with its minimum at k=8 (MT
+  2.3247/2.4483/2.3813) — on-policy does **not** remove the late-document degradation, and only three
+  k were measured. The `AM_ONPOLICY_DOCKV` axis is implemented and unit-tested but **not run on GPU**.
+- 🔑 **Matched-k comparison against DIAG-KEYCURVE's `keys_repos` curve (same harness, same splits) —
+  the only delta in this experiment that escapes the noise floor, and it points the wrong way.**
+  Adding on-policy to MECH-005 gives MT **2.3289 → 2.3247 (−0.004)** at k=8, **2.2720 → 2.4483
+  (+0.176)** at k=12, **2.3305 → 2.3813 (+0.051)** at k=16, and QA +0.001 / **+0.188** / +0.058.
+  At **k=12 — the k at which MECH-005 is actually best (QA 1.9560 / MT 2.2720)** — on-policy costs
+  **+0.176 MT and +0.188 QA**, at or above the top of the 0.1–0.2 band. Everywhere else it is inside
+  the band. There is no k at which on-policy helps.
+- Kept in tree? yes — opt-in, both flags default off, bit-identical when off.
