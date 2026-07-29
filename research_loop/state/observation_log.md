@@ -382,3 +382,26 @@ research_loop/results/EXP-001/result.json ; outputs/2026-07-25-18-02-29-continua
 - Cross-validated: reproduces DIAG-ROUTING's cartridge mass to 5–6 s.f. and the union ratio 1.083;
   ρ_key identical to 6 s.f. across two processes. Cost 8.7 s collection + 0.8 s spectra + 167 s for the
   bound optimisation (unbudgeted by SCOUT-KEYS, and it is what made the number credible).
+
+## 2026-07-29 — DIAG-PERDOC (board B-OVERWRITE, capacity): competition HELPS; the write is not a store
+- Pooled over 5 documents (27 questions, 1164 scored tokens), θ=1e4: Phase-1 **3.9640** → **solo 3.7488**
+  → k=16 **2.6186** → k=12 **2.5086**.
+- **solo − k16 = +1.101** (sd 0.186, se 0.083), **same sign 5/5**. A solo write into 32 *uncontested*
+  slots buys only **15.5%** of what the full 16-document write buys on those same questions.
+  θ=5e6 arm agrees: solo is stronger (−0.665) but still **+0.753 worse than its own 16-doc cartridge**, 5/5.
+- **71–93% of a solo write's full-MT gain lands on the OTHER 15 documents' questions** (doc-000: own
+  −0.050 vs others −0.037). **Not bandwidth, not fit:** solo `ref_mass_on_S` 0.1477–0.1535 vs the 16-doc
+  run's 0.15851, solve MSE 0.0085–0.205. A solo write is well-fitted and equally well-routed — it simply
+  does not carry the content.
+- **Uncertainty measured:** replicate solo write of doc-015 (same document, different draw of 32 of its
+  532 conversations; caches differ in 36/180 tensors) → spread **0.216**. Leave-one-out recovering
+  doc-015's 7 per-example losses exactly → paired solo−k16 **+1.172 (se 0.226), 0/7 questions favour
+  solo**. Gap is 5–14× noise; per-document ordering is not resolvable. Subset arithmetic exact to 0.0061.
+- **Provenance:** the filtered-parquet route reproduces the canonical `cache-after-doc-000` **bitwise
+  (180/180 tensors)** and DIAG-SEQUENCE's k=1 to 16 digits; all four session gates reproduce exactly.
+  Snapshot held while HEAD moved 5bbcbf0 → d1dbf7c.
+- ⚠️ **Correction to B-ROPE:** the rotary base is **not a wash at small k** — one document alone gives
+  full MT **3.1146 (θ=5e6) vs 3.7445 (θ=1e4)**, a first-document gain of 0.668 vs 0.038 (**17.6×**),
+  converging by k=12/k=16. DIAG-ROPE's "inside noise" was measured **only at k=16**.
+- **⇒ Disjoint allocation is dead before being built. All three routes (values, keys, allocation) are
+  closed, and they converge: the write is a cumulative, largely document-agnostic adaptation, not a store.**

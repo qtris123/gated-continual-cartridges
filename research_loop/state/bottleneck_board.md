@@ -84,11 +84,27 @@ the number that shows it. "It didn't help" never closes anything.
   any AM config. Writable-only: mass-ranked per-layer top-32 = **0.1954 — 0.96× the tf-idf union, i.e.
   slightly WORSE at a smaller budget**; budget-matched = 0.2373 (1.17×); per-head = 0.2598 (1.28×).
   **There is no 4.6× writable-bandwidth lever.** Selection quality is not the problem; **allocation is.**
-- **The mechanism this now points to:** **disjoint per-document allocation** — 16 documents × 32 slots =
-  512 = exactly the cartridge. Because documents barely disagree (Spearman 0.958), it must be *explicit*
-  exclusion (greedy: document *d* takes its best 32 among slots not yet claimed), not score-based
-  separation. Gradient-free, closed-form, and squarely inside the project's stated novelty budget
-  (gating/allocation). **Blocked only on MECH-BETA releasing the source tree.**
+- ❌ **DISJOINT ALLOCATION IS DEAD BEFORE IT WAS BUILT (DIAG-PERDOC, 2026-07-29) — competition is not
+  costing us, it is HELPING.** Writing a document **alone into 32 uncontested slots** is **+1.101 WORSE
+  on that document's own questions** than writing it as one of 16 (sd 0.186, se 0.083, **same sign 5/5**;
+  the θ=5e6 arm agrees at +0.753, 5/5). Pooled over 5 documents / 27 questions: Phase-1 3.9640 → **solo
+  3.7488** → k=16 2.6186 → **k=12 2.5086**.
+  A solo write buys only **15.5%** of what the full 16-document write buys on those same questions.
+- 🔴 **And the benefit is not the document's own:** **71–93% of a solo write's full-MT gain lands on the
+  OTHER 15 documents' questions** (doc-000: own −0.050 vs others −0.037). It is **not bandwidth or fit** —
+  every solo write lands `ref_mass_on_S` 0.1477–0.1535 against the 16-doc run's 0.15851, with solve MSE
+  0.0085–0.205. **A solo write is well-fitted and equally well-routed; it just doesn't carry the content.**
+- **Uncertainty measured, not assumed** (subsets are 3–7 questions): a replicate solo write of doc-015
+  differing only in which 32 of its 532 conversations were drawn gives spread **0.216**; leave-one-out
+  recovers per-example losses exactly, giving paired solo−k16 = **+1.172 (se 0.226) with 0/7 questions
+  favouring solo**. The gap is **5–14× the noise**; per-document *ordering* is not resolvable.
+- **Provenance:** the filtered-parquet route reproduces the canonical `cache-after-doc-000`
+  **bitwise (180/180 tensors)** and DIAG-SEQUENCE's k=1 loss to 16 digits; all session gates reproduce
+  exactly.
+- ⚠️ **Bonus correction to B-ROPE, forced into view by the gates:** the rotary base is **not a wash at
+  small k**. One document alone: full MT **3.1146 at θ=5e6 vs 3.7445 at θ=1e4** — a first-document gain
+  of 0.668 vs 0.038, **17.6×** — yet the arms converge by k=12 (2.4705 vs 2.4352) and k=16 (2.5296 vs
+  2.5524). **DIAG-ROPE's "ΔMT −0.019, inside noise" was measured only at k=16.**
 
 ## 🔴 B-ROPE — the teacher targets are computed with the WRONG RoPE BASE (opened 2026-07-28)
 - **Stage:** C BUILD (verified by the orchestrator; fix + A/B dispatched) · **Status:** **CONFIRMED bug,
@@ -147,6 +163,32 @@ the number that shows it. "It didn't help" never closes anything.
   H4 🔴 `_should_fit_beta` (`finetune.py:264-269`) **silently enables the broken β/NNLS path whenever
   `KEY_MODE != freeze`** with `ENABLE_BETA` unset — so the *first* key experiment would crash for a
   B-SOLVE reason and look like "keys don't work". **`ENABLE_BETA=0` gives a clean keys-only arm.**
+
+## 🧭 SYNTHESIS (2026-07-29): the write is not performing content acquisition at all
+Three routes were open. All three are now closed, and they converge on one account:
+
+| route | verdict | decisive evidence |
+|---|---|---|
+| **values** | closed | perfect teacher values reach only MT 2.381; β's 4.23× bandwidth made **both axes worse**; bandwidth doesn't predict MT (13% spread vs 0.882 MT span, highest-bandwidth arm worst) |
+| **keys / selectivity** | closed | ρ_key **at its held-out control floor everywhere**; QA/MT query separation **2.5× smaller than sampling noise**, 0/288 heads otherwise; optimal key buys 1.22 vs incumbent 1.083 |
+| **allocation / capacity** | closed | a solo write into **uncontested** slots is **+1.101 worse** on its own document than writing it among 16, 5/5 documents; **71–93%** of a solo write's gain lands on *other* documents' questions |
+
+**The account:** the closed-form write is not storing retrievable per-document content. It is producing a
+**cumulative, largely document-agnostic adaptation** to the MT distribution. Everything on the board
+follows from that single fact:
+- why **28.3–73.2%** of the MT gain is reproduced by documents with **zero MT content** (DIAG-CONTENT);
+- why **writing a paper in makes the model worse at that paper** (arm B degraded QA by +0.652 while
+  rewriting the exact 16 papers the QA eval scores);
+- why the curve **saturates at k≈12 and then degrades** — an adaptation saturates, a store would not;
+- why **sequence alone is worth 0.340** and per-document survival of 4.7% costs almost nothing;
+- why **better fitting is anti-correlated with CE**, and why a *perfect* value write closes only 25%.
+
+**Consequence for the mission:** MT ≤ 2.02 is not reachable by improving *what* or *where* we write,
+because the write's benefit is not localised in either. The remaining escape hatches are the two
+DIAG-KEYSPACE explicitly did not bound — **mechanisms that change the query distribution** (the
+cross-layer effect gradient descent exploits and a per-layer closed-form solve cannot: SCOUT-AM's
+divergence #3, the paper's **on-policy layer-sequential re-extraction**, which we have never
+implemented) — and **non-fixed-slot formulations** (out of scope; fixed size is the premise).
 
 ## ACTIVE BOTTLENECK — **B-ROUTE**, and the mission now turns on one number
 **Status after cycle 1 (2026-07-28): three of six entries are closed and the search space has collapsed
