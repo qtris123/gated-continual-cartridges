@@ -187,7 +187,43 @@ the number that shows it. "It didn't help" never closes anything.
   only prints). The worker logged the cells via a parser under the no-edit rule; the losses are the
   harness's own, not recomputed. `EVAL_MODE=icl` also does **not** hang, unlike the cartridge path (§1).
 
-## 🥇 BEST GRADIENT-FREE POINT — **k=12: QA 1.9560 / MT 2.2720** (MECH-KEYS + DIAG-KEYCURVE)
+## ❌❌ THE KEY-SIDE RESULT IS REFUTED (DIAG-CONTROLCURVE, 2026-07-29)
+**"Key installation improves acquisition" was an artefact of comparing a mapped curve against an
+unmapped one. At their own optima the two arms are indistinguishable on both axes.**
+
+The frozen control's true MT minimum is **k=10 (2.4083)** — not the edge point k=8 (2.4536) that
+DIAG-KEYCURVE was forced to use. Full control MT curve: 3.1146, 2.7728, 2.6457, 2.5266, 2.5363, 2.5202,
+2.4668, 2.4536, 2.4437, **2.4083**, 2.4307, 2.4705, 2.4860, 2.4835, 2.5142, 2.5296.
+
+| comparison | Δ | clears ±0.15? |
+|---|---|---|
+| MT, each arm at own best (keys k=12 vs control k=10) | **−0.1363** | **NO** |
+| QA at those same two points | −0.0115 | no |
+| QA, each arm at own QA-best (both k=3) | **+0.0430 — control BETTER** | no |
+| *(DIAG-KEYCURVE's version, control pinned at edge k=8)* | *−0.1816* | *yes* |
+
+- **Mechanism of the artefact:** k=16 is neither arm's best point, but it costs the control **0.1213** MT
+  against its own optimum and the keys arm only **0.0585** — a **2.07× asymmetric penalty**. Reading both
+  at k=16 manufactures most of the −0.199 the board quoted.
+- **The "concentrated at low k" premise was itself a baseline mismatch.** DIAG-KEYCURVE's −0.779 at k=1
+  compared against DIAG-SEQUENCE's **θ=1e4** value-only curve; against the *matched* θ=5e6 control the
+  k=1 gap is only −0.150 (inside band) and **grows** with k. Only **7/16** per-k ΔMT clear the band.
+  The board's own B-ROPE entry records θ alone as worth 0.668 MT at k=1 — essentially all of it.
+- **Neither "faster" nor "better endpoint" is supported.** Speed would need an early lead (k=1–5 all
+  inside band); endpoint would need the optima to separate (−0.136, inside). Only the **sign** is
+  consistent: all 16 ΔMT negative, **0/16 ΔQA clear the band**.
+- **Also collapses an earlier claim:** the control's own optimum (2.4083) sits **0.027 above
+  ORACLE-WRITE's perfect-value-write ceiling (2.381) — inside the band** — so "the keys arm beats a
+  perfect value write" does not distinguish it from the frozen control either.
+- **The one place the arms *are* ordered is the tail, not the optimum:** both bottom on QA at k=3, then
+  the control degrades **+0.342** by k=16 versus the keys arm's **+0.174**. That is a *retention*
+  property under over-writing, not an acquisition gain.
+- **Bandwidth, final word:** a **3.3× separation** in `mass_on_S` at the two optima (control ~0.074–0.084
+  vs keys 0.2430) buys **0.136 of MT — inside the band**.
+- Gates: all four passed to 16 digits, and k=8/12/14 were **re-run** rather than only reused, so the 13
+  new points sit on a demonstrably identical session.
+
+## 🥇 BEST *MEASURED* POINT (not a demonstrated improvement) — **k=12: QA 1.9560 / MT 2.2720**
 > ⚠️ **CORRECTION (DIAG-KEYCURVE, 2026-07-29).** The headline below — *"beats frozen keys on BOTH
 > axes"* — **does not survive verification on the QA axis.** At matched k the mechanism-off control
 > gives ΔMT / ΔQA of −0.125/**+0.013** (k=8), −0.198/−0.118 (k=12), −0.164/−0.077 (k=14),

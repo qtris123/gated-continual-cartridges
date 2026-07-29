@@ -1,0 +1,580 @@
+{
+ "control_k16_QA": {
+  "id": "1e1n1ees",
+  "name": "DIAG-CONTROLCURVE_doc16_QA",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc16_QA",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc16_QA",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k16_MT": {
+  "id": "3fij870d",
+  "name": "DIAG-CONTROLCURVE_doc16_MT",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc16_MT",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc16_MT",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "phase1_k0_QA": {
+  "id": "vjvrornc",
+  "name": "DIAG-CONTROLCURVE_doc0_QA",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc0_QA",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc0_QA",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "phase1_k0_MT": {
+  "id": "i2l9a2wb",
+  "name": "DIAG-CONTROLCURVE_doc0_MT",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc0_MT",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc0_MT",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k4_QA": {
+  "id": "6m4wbh3h",
+  "name": "DIAG-CONTROLCURVE_doc4_QA",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc4_QA",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc4_QA",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k4_MT": {
+  "id": "9z7aqygb",
+  "name": "DIAG-CONTROLCURVE_doc4_MT",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc4_MT",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc4_MT",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k2_QA": {
+  "id": "9qbzwvuu",
+  "name": "DIAG-CONTROLCURVE_doc2_QA",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc2_QA",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc2_QA",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k2_MT": {
+  "id": "zf8uzoam",
+  "name": "DIAG-CONTROLCURVE_doc2_MT",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc2_MT",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc2_MT",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k6_QA": {
+  "id": "ord30tff",
+  "name": "DIAG-CONTROLCURVE_doc6_QA",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc6_QA",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc6_QA",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k6_MT": {
+  "id": "fw62bofh",
+  "name": "DIAG-CONTROLCURVE_doc6_MT",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc6_MT",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc6_MT",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k1_QA": {
+  "id": "7sw424sv",
+  "name": "DIAG-CONTROLCURVE_doc1_QA",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc1_QA",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc1_QA",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k1_MT": {
+  "id": "jmktjbqv",
+  "name": "DIAG-CONTROLCURVE_doc1_MT",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc1_MT",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc1_MT",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k3_QA": {
+  "id": "e9c84deq",
+  "name": "DIAG-CONTROLCURVE_doc3_QA",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc3_QA",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc3_QA",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k3_MT": {
+  "id": "3emh9lzd",
+  "name": "DIAG-CONTROLCURVE_doc3_MT",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc3_MT",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc3_MT",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k5_QA": {
+  "id": "5jc4rdiq",
+  "name": "DIAG-CONTROLCURVE_doc5_QA",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc5_QA",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc5_QA",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k5_MT": {
+  "id": "ojmgu92g",
+  "name": "DIAG-CONTROLCURVE_doc5_MT",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc5_MT",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc5_MT",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k7_QA": {
+  "id": "1eftuoem",
+  "name": "DIAG-CONTROLCURVE_doc7_QA",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc7_QA",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc7_QA",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k7_MT": {
+  "id": "7hry7rhh",
+  "name": "DIAG-CONTROLCURVE_doc7_MT",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc7_MT",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc7_MT",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k9_QA": {
+  "id": "lv4h0foi",
+  "name": "DIAG-CONTROLCURVE_doc9_QA",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc9_QA",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc9_QA",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k9_MT": {
+  "id": "pvsko04u",
+  "name": "DIAG-CONTROLCURVE_doc9_MT",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc9_MT",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc9_MT",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k10_QA": {
+  "id": "h2uf3eu0",
+  "name": "DIAG-CONTROLCURVE_doc10_QA",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc10_QA",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc10_QA",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k10_MT": {
+  "id": "ka0imjc8",
+  "name": "DIAG-CONTROLCURVE_doc10_MT",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc10_MT",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc10_MT",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k11_QA": {
+  "id": "n822uohp",
+  "name": "DIAG-CONTROLCURVE_doc11_QA",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc11_QA",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc11_QA",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k11_MT": {
+  "id": "is0drb3v",
+  "name": "DIAG-CONTROLCURVE_doc11_MT",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc11_MT",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc11_MT",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k13_QA": {
+  "id": "6wx0v8mm",
+  "name": "DIAG-CONTROLCURVE_doc13_QA",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc13_QA",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc13_QA",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k13_MT": {
+  "id": "i8th2qf0",
+  "name": "DIAG-CONTROLCURVE_doc13_MT",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc13_MT",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc13_MT",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k15_QA": {
+  "id": "1ynosemh",
+  "name": "DIAG-CONTROLCURVE_doc15_QA",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc15_QA",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc15_QA",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k15_MT": {
+  "id": "vjafk40t",
+  "name": "DIAG-CONTROLCURVE_doc15_MT",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc15_MT",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc15_MT",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k8_QA": {
+  "id": "x1o4utcr",
+  "name": "DIAG-CONTROLCURVE_doc8_QA",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc8_QA",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc8_QA",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k8_MT": {
+  "id": "6fx3bvd4",
+  "name": "DIAG-CONTROLCURVE_doc8_MT",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc8_MT",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc8_MT",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k12_QA": {
+  "id": "t8f8ei42",
+  "name": "DIAG-CONTROLCURVE_doc12_QA",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc12_QA",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc12_QA",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k12_MT": {
+  "id": "n0j4apjj",
+  "name": "DIAG-CONTROLCURVE_doc12_MT",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc12_MT",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc12_MT",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k14_QA": {
+  "id": "986l35hp",
+  "name": "DIAG-CONTROLCURVE_doc14_QA",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc14_QA",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc14_QA",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ },
+ "control_k14_MT": {
+  "id": "3djk7b5p",
+  "name": "DIAG-CONTROLCURVE_doc14_MT",
+  "group": "B-ROUTE",
+  "tags_before": [
+   "DIAG-CONTROLCURVE_doc14_MT",
+   "eval",
+   "forgetting"
+  ],
+  "tags_after": [
+   "DIAG-CONTROLCURVE_doc14_MT",
+   "eval",
+   "forgetting",
+   "diagnostic",
+   "DIAG-CONTROLCURVE"
+  ]
+ }
+}
