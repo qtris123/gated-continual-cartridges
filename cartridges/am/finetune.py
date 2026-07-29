@@ -115,6 +115,7 @@ class AttentionMatchingFinetuningConfig(BaseConfig):
         "redundancy",
         "fisher",
         "mass_x_redundancy",
+        "constrained_mass",
     ] = "tfidf"
     idf_prior_weight: float = 0.0
     min_top_t_per_layer: int = 1
@@ -133,6 +134,19 @@ class AttentionMatchingFinetuningConfig(BaseConfig):
     redundancy_ridge_rel: float = 1e-6
     mass_redundancy_alpha: float = 0.5
     slot_fisher_path: Optional[str] = None
+
+    # B-GATE / MECH-009: the constraint knobs for `slot_selection`
+    # = "constrained_mass" (mass-ranked WITHIN a safety constraint). Inert for
+    # every other mode, and the default `safe_fraction = 1.0` makes even
+    # `constrained_mass` itself identical to `attention_mass`, so nothing
+    # changes unless a fraction is set explicitly.
+    #   safe_fraction -> the fraction of slots per layer that stay CANDIDATES,
+    #                    keeping the safest ones by `safe_metric`; in (0, 1].
+    #   safe_metric   -> which QA-importance scorer defines "safest":
+    #                    "redundancy" (gradient-free) or "fisher" (cached array,
+    #                    needs `slot_fisher_path`).
+    safe_fraction: float = 1.0
+    safe_metric: Literal["redundancy", "fisher"] = "redundancy"
 
     # B-ROUTE write-ceiling oracle (OPT-IN, default off -> bit-identical stock runs).
     # When on, the per-document write skips the closed-form solve and copies the

@@ -1,0 +1,614 @@
+{
+  "id": "MECH-CONSTRAINED",
+  "role": "build + test",
+  "board_entry": "B-GATE",
+  "question": "Does the ONE variant of the human's protect-Phase-1 hypothesis that was never run -- best-t MASS-RANKED *WITHIN* a hard safety constraint (the safest fraction q of slots per layer by redundancy), which is what DIAG-IMPORTANCE's promising ~34.6%/69% projection actually described -- beat the incumbent tfidf ranker on acquisition? And does a LOOSER constraint land anywhere useful on the trade curve?",
+  "variable_under_test": "SLOT_SELECTION=constrained_mass (redundancy-gated) at AM_SAFE_FRACTION in {0.75, 0.50, 0.25} x TOP_T=32, plus q=0.50 x TOP_T=64; everything else held at the project's current best point (KEY_MODE=highest_attention, AM_KEY_REPOSITION=1, AM_ROPE_THETA=5000000, ENABLE_BETA=0, GRANULARITY=per_layer, USE_IDF=0, RIDGE_LAMBDA=1e-4, RIDGE_SCALE=spectral, DELTA_WEIGHT=1e-2, MAX_QUERIES_PER_HEAD=64)",
+  "baseline_ref": "C0_control in this bundle == MECH-005/DIAG-KEYCURVE/MECH-INFOGATE C0 (QA 1.9560 / MT 2.2720 at k=12)",
+  "status": "done",
+  "mechanism": "MECH-009",
+  "numbers": {
+    "qa_forgetting_loss": 1.9118664264678955,
+    "mt_acquisition_loss": 2.3287529945373535,
+    "solve_s": 340.7,
+    "phase2_e2e_s": 651.0,
+    "gradient_steps": 0,
+    "_note": "qa/mt are the BEST new arm's own optima -- the LIGHTEST constraint, q=0.75 at TOP_T=32 (QA 1.91187 at k=8, MT 2.32875 at k=8). NO ARM BEAT THE CONTROL ON MT: every arm's best MT is +0.0567 to +0.1668 WORSE than the control's 2.27202, and all four clear DIAG-NOISE's +-0.049 paired MT resolution (1.16x to 3.40x). Every arm's QA gain is INSIDE the +-0.054 paired QA resolution, i.e. unresolved. gradient_steps = 0 in every arm; the redundancy gate is gradient-free and data-free."
+  },
+  "targets": {
+    "budget_QA": 2.52,
+    "budget_MT": 2.02,
+    "incumbent_best": {
+      "QA": 1.95601,
+      "MT": 2.27202,
+      "k": 12
+    },
+    "paired_resolution_DIAG_NOISE": {
+      "MT": 0.049,
+      "QA": 0.054
+    },
+    "any_arm_meets_both_budgets": false,
+    "any_arm_beats_MT_2.2720_while_holding_QA<=2.52": false
+  },
+  "arms": {
+    "C0_control": {
+      "label": "control / GATE (tfidf, TOP_T=32)",
+      "selector": "tfidf",
+      "safe_fraction": 1.0,
+      "top_t": 32,
+      "n_candidate_slots_per_layer": 511,
+      "k_curve_MT": {
+        "8": 2.32890248298645,
+        "10": 2.319589376449585,
+        "12": 2.2720184326171875,
+        "16": 2.330503463745117
+      },
+      "k_curve_QA": {
+        "8": 1.9463961124420166,
+        "10": 1.968939185142517,
+        "12": 1.9560121297836304,
+        "16": 2.034916400909424
+      },
+      "own_optimum": {
+        "MT": 2.2720184326171875,
+        "MT_k": 12,
+        "QA": 1.9463961124420166,
+        "QA_k": 8
+      },
+      "vs_control_at_own_optima": {
+        "dMT": 0.0,
+        "dMT_clears_0.049": false,
+        "dQA": 0.0,
+        "dQA_clears_0.054": false,
+        "MT_meets_budget": false,
+        "QA_meets_budget": true
+      },
+      "realised_selection": {
+        "frac_writable_MT_routing_mass": 0.2798910681158304,
+        "frac_total_QA_Fisher_mass": 0.23889410961419344,
+        "mean_redundancy_of_selected": 0.7593979313969612,
+        "slots_per_layer_per_doc": 32.0,
+        "union_slots_per_layer": 87.58333333333333,
+        "union_frac_of_511_writable": 0.171395955642531
+      },
+      "predicted_frac_writable_MT_routing_mass": 0.37362799048423767,
+      "predicted_frac_total_QA_Fisher_mass": 0.29594504833221436,
+      "realised_over_predicted_MT": 0.7491,
+      "mass_on_S": {
+        "union_MT_phase1_evalgeom": 0.11900365352630615,
+        "union_QA_phase1_evalgeom": 0.10973892360925674,
+        "selectivity_MT_over_QA": 1.0844251940181042,
+        "ref_mass_on_S_mean_in_run": 0.3136346771789249
+      },
+      "am_mean_mse": 0.0039414096599943195,
+      "v_absmax_max": 78.5,
+      "solve_s": 336.3,
+      "phase2_e2e_s": 394.0,
+      "solve_cost_multiple_vs_control": 1.0,
+      "gradient_steps": 0,
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/tmbp0ow3",
+      "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-22-40-continual_am_sparse/6dd8dfd0-a1ae-47e0-bd9d-82c64e7333bd"
+    },
+    "Q75": {
+      "label": "constrained_mass q=0.75 redundancy, TOP_T=32 (light touch)",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.75,
+      "top_t": 32,
+      "n_candidate_slots_per_layer": 383,
+      "k_curve_MT": {
+        "8": 2.3287529945373535,
+        "10": 2.3586020469665527,
+        "12": 2.3554306030273438,
+        "16": 2.330395460128784
+      },
+      "k_curve_QA": {
+        "8": 1.9118664264678955,
+        "10": 1.9882663488388062,
+        "12": 2.0291409492492676,
+        "16": 2.03568434715271
+      },
+      "own_optimum": {
+        "MT": 2.3287529945373535,
+        "MT_k": 8,
+        "QA": 1.9118664264678955,
+        "QA_k": 8
+      },
+      "vs_control_at_own_optima": {
+        "dMT": 0.05673,
+        "dMT_clears_0.049": true,
+        "dQA": -0.03453,
+        "dQA_clears_0.054": false,
+        "MT_meets_budget": false,
+        "QA_meets_budget": true
+      },
+      "realised_selection": {
+        "frac_writable_MT_routing_mass": 0.16614097449928522,
+        "frac_total_QA_Fisher_mass": 0.14773522224277258,
+        "mean_redundancy_of_selected": 0.7909630984067917,
+        "slots_per_layer_per_doc": 32.0,
+        "union_slots_per_layer": 125.52777777777777,
+        "union_frac_of_511_writable": 0.24565122852794086
+      },
+      "predicted_frac_writable_MT_routing_mass": 0.2780311703681946,
+      "predicted_frac_total_QA_Fisher_mass": 0.19695641100406647,
+      "realised_over_predicted_MT": 0.5976,
+      "mass_on_S": {
+        "union_MT_phase1_evalgeom": 0.11333134770393372,
+        "union_QA_phase1_evalgeom": 0.10536620020866394,
+        "selectivity_MT_over_QA": 1.0755949012064197,
+        "ref_mass_on_S_mean_in_run": 0.24891658349262497
+      },
+      "am_mean_mse": 0.004405929586802712,
+      "v_absmax_max": 89.0,
+      "solve_s": 340.7,
+      "phase2_e2e_s": 651.0,
+      "solve_cost_multiple_vs_control": 1.013,
+      "gradient_steps": 0,
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/zismkxc8",
+      "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-36-28-continual_am_sparse/825113ac-2620-47fc-96a9-7dce28b48b9b"
+    },
+    "Q50": {
+      "label": "constrained_mass q=0.50 redundancy, TOP_T=32",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.5,
+      "top_t": 32,
+      "n_candidate_slots_per_layer": 255,
+      "k_curve_MT": {
+        "8": 2.4290695190429688,
+        "10": 2.464343547821045,
+        "12": 2.4173004627227783,
+        "16": 2.3693320751190186
+      },
+      "k_curve_QA": {
+        "8": 1.923022747039795,
+        "10": 1.9483559131622314,
+        "12": 1.9477330446243286,
+        "16": 1.9600306749343872
+      },
+      "own_optimum": {
+        "MT": 2.3693320751190186,
+        "MT_k": 16,
+        "QA": 1.923022747039795,
+        "QA_k": 8
+      },
+      "vs_control_at_own_optima": {
+        "dMT": 0.09731,
+        "dMT_clears_0.049": true,
+        "dQA": -0.02337,
+        "dQA_clears_0.054": false,
+        "MT_meets_budget": false,
+        "QA_meets_budget": true
+      },
+      "realised_selection": {
+        "frac_writable_MT_routing_mass": 0.13271387945860624,
+        "frac_total_QA_Fisher_mass": 0.1085635214112699,
+        "mean_redundancy_of_selected": 0.8097363635897636,
+        "slots_per_layer_per_doc": 32.0,
+        "union_slots_per_layer": 122.19444444444444,
+        "union_frac_of_511_writable": 0.23912807131985214
+      },
+      "predicted_frac_writable_MT_routing_mass": 0.23401090502738953,
+      "predicted_frac_total_QA_Fisher_mass": 0.15356522798538208,
+      "realised_over_predicted_MT": 0.5671,
+      "mass_on_S": {
+        "union_MT_phase1_evalgeom": 0.0888948142528534,
+        "union_QA_phase1_evalgeom": 0.08372053503990173,
+        "selectivity_MT_over_QA": 1.0618041823369329,
+        "ref_mass_on_S_mean_in_run": 0.24849770309245084
+      },
+      "am_mean_mse": 0.004374247806127496,
+      "v_absmax_max": 91.0,
+      "solve_s": 316.2,
+      "phase2_e2e_s": 465.0,
+      "solve_cost_multiple_vs_control": 0.94,
+      "gradient_steps": 0,
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/03gtxhfb",
+      "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-46-24-continual_am_sparse/34164eb6-0ceb-4628-8002-106bf5066fc7"
+    },
+    "Q25": {
+      "label": "constrained_mass q=0.25 redundancy, TOP_T=32 (DIAG-IMPORTANCE quartile)",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.25,
+      "top_t": 32,
+      "n_candidate_slots_per_layer": 127,
+      "k_curve_MT": {
+        "8": 2.5830538272857666,
+        "10": 2.528303623199463,
+        "12": 2.467229127883911,
+        "16": 2.4388303756713867
+      },
+      "k_curve_QA": {
+        "8": 1.9124763011932373,
+        "10": 1.9139657020568848,
+        "12": 1.9344761371612549,
+        "16": 1.9933292865753174
+      },
+      "own_optimum": {
+        "MT": 2.4388303756713867,
+        "MT_k": 16,
+        "QA": 1.9124763011932373,
+        "QA_k": 8
+      },
+      "vs_control_at_own_optima": {
+        "dMT": 0.16681,
+        "dMT_clears_0.049": true,
+        "dQA": -0.03392,
+        "dQA_clears_0.054": false,
+        "MT_meets_budget": false,
+        "QA_meets_budget": true
+      },
+      "realised_selection": {
+        "frac_writable_MT_routing_mass": 0.10001046024262905,
+        "frac_total_QA_Fisher_mass": 0.07421620702371001,
+        "mean_redundancy_of_selected": 0.8302661813795567,
+        "slots_per_layer_per_doc": 32.0,
+        "union_slots_per_layer": 115.33333333333333,
+        "union_frac_of_511_writable": 0.22570123939986952
+      },
+      "predicted_frac_writable_MT_routing_mass": 0.17100483179092407,
+      "predicted_frac_total_QA_Fisher_mass": 0.1131528913974762,
+      "realised_over_predicted_MT": 0.5848,
+      "mass_on_S": {
+        "union_MT_phase1_evalgeom": 0.06630370020866394,
+        "union_QA_phase1_evalgeom": 0.06336034834384918,
+        "selectivity_MT_over_QA": 1.0464541616602474,
+        "ref_mass_on_S_mean_in_run": 0.22260513480845626
+      },
+      "am_mean_mse": 0.0047634041254839155,
+      "v_absmax_max": 80.0,
+      "solve_s": 329.9,
+      "phase2_e2e_s": 468.0,
+      "solve_cost_multiple_vs_control": 0.981,
+      "gradient_steps": 0,
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/11ogsctl",
+      "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-07-39-continual_am_sparse/01b04302-3cb2-4edc-82ca-2d7eb7e2479e"
+    },
+    "Q50T64": {
+      "label": "constrained_mass q=0.50 redundancy, TOP_T=64 (loose x least-bad budget)",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.5,
+      "top_t": 64,
+      "n_candidate_slots_per_layer": 255,
+      "k_curve_MT": {
+        "8": 2.3999416828155518,
+        "10": 2.4522786140441895,
+        "12": 2.412045478820801,
+        "16": 2.4008917808532715
+      },
+      "k_curve_QA": {
+        "8": 1.952900767326355,
+        "10": 2.030168056488037,
+        "12": 2.0590686798095703,
+        "16": 2.0701000690460205
+      },
+      "own_optimum": {
+        "MT": 2.3999416828155518,
+        "MT_k": 8,
+        "QA": 1.952900767326355,
+        "QA_k": 8
+      },
+      "vs_control_at_own_optima": {
+        "dMT": 0.12792,
+        "dMT_clears_0.049": true,
+        "dQA": 0.0065,
+        "dQA_clears_0.054": false,
+        "MT_meets_budget": false,
+        "QA_meets_budget": true
+      },
+      "realised_selection": {
+        "frac_writable_MT_routing_mass": 0.18415827490389347,
+        "frac_total_QA_Fisher_mass": 0.14799591153860092,
+        "mean_redundancy_of_selected": 0.8065848499536514,
+        "slots_per_layer_per_doc": 64.0,
+        "union_slots_per_layer": 168.5,
+        "union_frac_of_511_writable": 0.32974559686888455
+      },
+      "predicted_frac_writable_MT_routing_mass": 0.30091986060142517,
+      "predicted_frac_total_QA_Fisher_mass": 0.20989055931568146,
+      "realised_over_predicted_MT": 0.612,
+      "mass_on_S": {
+        "union_MT_phase1_evalgeom": 0.10320188105106354,
+        "union_QA_phase1_evalgeom": 0.09758506715297699,
+        "selectivity_MT_over_QA": 1.0575581291477874,
+        "ref_mass_on_S_mean_in_run": 0.24648061454672643
+      },
+      "am_mean_mse": 0.0034584253610112884,
+      "v_absmax_max": 86.0,
+      "solve_s": 363.7,
+      "phase2_e2e_s": 392.0,
+      "solve_cost_multiple_vs_control": 1.081,
+      "gradient_steps": 0,
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/7seii73w",
+      "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-26-31-continual_am_sparse/06cde547-5cf6-4f5d-be1d-87ba43f6ad3f"
+    }
+  },
+  "diagnostics": {
+    "baseline_reproduced": {
+      "gate_line": "GATE_PASS",
+      "expected": {
+        "k12": {
+          "QA": 1.9560121297836304,
+          "MT": 2.2720184326171875
+        },
+        "k16": {
+          "QA": 2.034916400909424,
+          "MT": 2.330503463745117
+        }
+      },
+      "observed": {
+        "k12": {
+          "QA": 1.9560121297836304,
+          "MT": 2.2720184326171875
+        },
+        "k16": {
+          "QA": 2.034916400909424,
+          "MT": 2.330503463745117
+        }
+      },
+      "bit_identical_when_default": true
+    },
+    "dose_response": {
+      "_definition": "TOP_T=32 held fixed; only the constraint strength q moves (1.00 = the incumbent tfidf control, then 0.75 / 0.50 / 0.25). A monotone degradation as q tightens, tracking the realised MT routing mass, is the dose-response form of MECH-INFOGATE's log(mass) -> MT relationship (Pearson -0.877 over its six arms).",
+      "arms": [
+        "C0_control",
+        "Q75",
+        "Q50",
+        "Q25"
+      ],
+      "q": [
+        1.0,
+        0.75,
+        0.5,
+        0.25
+      ],
+      "best_MT": [
+        2.2720184326171875,
+        2.3287529945373535,
+        2.3693320751190186,
+        2.4388303756713867
+      ],
+      "best_QA": [
+        1.9463961124420166,
+        1.9118664264678955,
+        1.923022747039795,
+        1.9124763011932373
+      ],
+      "realised_MT_routing_mass": [
+        0.2798910681158304,
+        0.16614097449928522,
+        0.13271387945860624,
+        0.10001046024262905
+      ],
+      "realised_QA_Fisher_exposure": [
+        0.23889410961419344,
+        0.14773522224277258,
+        0.1085635214112699,
+        0.07421620702371001
+      ],
+      "MT_monotone_worsening_as_q_tightens": true,
+      "MT_mass_monotone_falling_as_q_tightens": true,
+      "QA_Fisher_monotone_falling_as_q_tightens": true,
+      "pearson_logMTmass_vs_bestMT_sweep_only": -0.977466753614338,
+      "spearman_q_vs_bestMT": -1.0
+    },
+    "predicted_vs_realised_mass": {
+      "_definition": "PREDICTED = the selector scored offline on the UNTOUCHED Phase-1 cartridge with DIAG-IMPORTANCE's doc-0 eval geometry (research_loop/results/MECH-CONSTRAINED/sanity_mech009.py). REALISED = the same two axes recomputed from the run's own 16 saved per-document masks (am_doc_*.pt), i.e. after the redundancy scores drift with the live cache and the union of written slots grows. The ratio is the systematic optimism of any doc-0 projection, and it is why DIAG-IMPORTANCE's own extrapolation over-promised.",
+      "C0_control": {
+        "safe_fraction": 1.0,
+        "top_t": 32,
+        "n_candidate_slots_per_layer": 511,
+        "predicted_frac_writable_MT_routing_mass": 0.37362799048423767,
+        "realised_frac_writable_MT_routing_mass": 0.2798910681158304,
+        "realised_over_predicted_MT": 0.7491,
+        "predicted_frac_total_QA_Fisher_mass": 0.29594504833221436,
+        "realised_frac_total_QA_Fisher_mass": 0.23889410961419344,
+        "realised_over_predicted_QAfisher": 0.8072,
+        "best_MT": 2.2720184326171875,
+        "best_MT_k": 12,
+        "best_QA": 1.9463961124420166,
+        "best_QA_k": 8
+      },
+      "Q75": {
+        "safe_fraction": 0.75,
+        "top_t": 32,
+        "n_candidate_slots_per_layer": 383,
+        "predicted_frac_writable_MT_routing_mass": 0.2780311703681946,
+        "realised_frac_writable_MT_routing_mass": 0.16614097449928522,
+        "realised_over_predicted_MT": 0.5976,
+        "predicted_frac_total_QA_Fisher_mass": 0.19695641100406647,
+        "realised_frac_total_QA_Fisher_mass": 0.14773522224277258,
+        "realised_over_predicted_QAfisher": 0.7501,
+        "best_MT": 2.3287529945373535,
+        "best_MT_k": 8,
+        "best_QA": 1.9118664264678955,
+        "best_QA_k": 8
+      },
+      "Q50": {
+        "safe_fraction": 0.5,
+        "top_t": 32,
+        "n_candidate_slots_per_layer": 255,
+        "predicted_frac_writable_MT_routing_mass": 0.23401090502738953,
+        "realised_frac_writable_MT_routing_mass": 0.13271387945860624,
+        "realised_over_predicted_MT": 0.5671,
+        "predicted_frac_total_QA_Fisher_mass": 0.15356522798538208,
+        "realised_frac_total_QA_Fisher_mass": 0.1085635214112699,
+        "realised_over_predicted_QAfisher": 0.707,
+        "best_MT": 2.3693320751190186,
+        "best_MT_k": 16,
+        "best_QA": 1.923022747039795,
+        "best_QA_k": 8
+      },
+      "Q25": {
+        "safe_fraction": 0.25,
+        "top_t": 32,
+        "n_candidate_slots_per_layer": 127,
+        "predicted_frac_writable_MT_routing_mass": 0.17100483179092407,
+        "realised_frac_writable_MT_routing_mass": 0.10001046024262905,
+        "realised_over_predicted_MT": 0.5848,
+        "predicted_frac_total_QA_Fisher_mass": 0.1131528913974762,
+        "realised_frac_total_QA_Fisher_mass": 0.07421620702371001,
+        "realised_over_predicted_QAfisher": 0.6559,
+        "best_MT": 2.4388303756713867,
+        "best_MT_k": 16,
+        "best_QA": 1.9124763011932373,
+        "best_QA_k": 8
+      },
+      "Q50T64": {
+        "safe_fraction": 0.5,
+        "top_t": 64,
+        "n_candidate_slots_per_layer": 255,
+        "predicted_frac_writable_MT_routing_mass": 0.30091986060142517,
+        "realised_frac_writable_MT_routing_mass": 0.18415827490389347,
+        "realised_over_predicted_MT": 0.612,
+        "predicted_frac_total_QA_Fisher_mass": 0.20989055931568146,
+        "realised_frac_total_QA_Fisher_mass": 0.14799591153860092,
+        "realised_over_predicted_QAfisher": 0.7051,
+        "best_MT": 2.3999416828155518,
+        "best_MT_k": 8,
+        "best_QA": 1.952900767326355,
+        "best_QA_k": 8
+      }
+    },
+    "pooled_with_MECH_INFOGATE": {
+      "_definition": "MECH-INFOGATE's six arms plus this bundle's four new selectors, on the identical axes and the identical control.",
+      "n_points": 10,
+      "labels": [
+        "MECH-INFOGATE:C0_control",
+        "MECH-INFOGATE:R32",
+        "MECH-INFOGATE:R64",
+        "MECH-INFOGATE:R128",
+        "MECH-INFOGATE:X32",
+        "MECH-INFOGATE:F32",
+        "MECH-CONSTRAINED:Q75",
+        "MECH-CONSTRAINED:Q50",
+        "MECH-CONSTRAINED:Q25",
+        "MECH-CONSTRAINED:Q50T64"
+      ],
+      "pearson_logMTmass_vs_bestMT": -0.8681028959019508,
+      "spearman_MTmass_vs_bestMT": -0.6,
+      "pearson_QAfisher_vs_bestQA": 0.6033321076217266,
+      "spearman_QAfisher_vs_bestQA": 0.6484848484848483,
+      "MECH_INFOGATE_published_pearson_logMTmass_vs_bestMT": -0.8766490587087726
+    },
+    "constraint_binding_check": {
+      "_definition": "Document-0 direct check that the constraint actually bound: fraction of each layer's selected slots that lie inside the redundancy-safest 383 (q=0.75) of 511.",
+      "Q75_doc0_frac_inside_redundancy_top383": 1.0,
+      "C0_control_doc0_frac_inside_redundancy_top383": 0.5443
+    },
+    "eval_integrity": {
+      "eval_rows": 40,
+      "missing_losses": 0,
+      "distinct_checkpoint_paths": 20,
+      "every_eval_log_contains_its_intended_checkpoint_path": true,
+      "k12_checkpoints_distinct_across_arms": true,
+      "wandb_urls_present": 40
+    },
+    "build_reproduces_DIAG_IMPORTANCE_tradeoff_rows": {
+      "best32_within_safest_quartile_fisher": {
+        "frac_writable_MT_routing_mass": 0.04619098827242851,
+        "frac_total_QA_Fisher_mass": 0.0028283149003982544
+      },
+      "best32_within_most_redundant_quartile": {
+        "frac_writable_MT_routing_mass": 0.17306417226791382,
+        "frac_total_QA_Fisher_mass": 0.12340613454580307
+      },
+      "published": {
+        "best32_within_safest_quartile_fisher": {
+          "frac_writable_MT_routing_mass": 0.0462,
+          "frac_total_QA_Fisher_mass": 0.0028
+        },
+        "best32_within_most_redundant_quartile": {
+          "frac_writable_MT_routing_mass": 0.1731,
+          "frac_total_QA_Fisher_mass": 0.1234
+        }
+      }
+    },
+    "degeneracy_q1_is_attention_mass": {
+      "identical_index_tensor": true,
+      "identical_select_score": true,
+      "set_agreement": 1.0,
+      "fisher_gate_identical": true,
+      "top_t64_identical": true
+    },
+    "degeneracy_small_q_is_pure_safety": {
+      "0.0626": {
+        "vs_pure_redundancy_set": 1.0,
+        "vs_pure_fisher_set": 1.0
+      },
+      "0.05": {
+        "vs_pure_redundancy_set": 1.0,
+        "vs_pure_fisher_set": 1.0
+      },
+      "0.001": {
+        "vs_pure_redundancy_set": 1.0,
+        "vs_pure_fisher_set": 1.0
+      }
+    },
+    "redundancy_vs_DIAG_IMPORTANCE": {
+      "max_abs_diff": 0.0,
+      "top32_set_agreement": 1.0,
+      "mean": 0.775850236415863,
+      "diag_mean": 0.775850236415863
+    },
+    "mech008_modes_unchanged": {
+      "redundancy": 0.09574031084775925,
+      "fisher": 0.010441286489367485,
+      "mass_x_redundancy": 0.19762763381004333
+    },
+    "default_tfidf_selection_sha": "f1aa6c6173119045c73ec8e70199b7fc",
+    "fail_loud_cases_verified": [
+      "safe_fraction = 0",
+      "safe_fraction < 0",
+      "safe_fraction > 1",
+      "unknown safe_metric",
+      "fisher gate without a path",
+      "cache=None",
+      "granularity != per_layer"
+    ],
+    "raw_arrays": "research_loop/state/diagnostics/MECH-CONSTRAINED.json"
+  },
+  "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/zismkxc8",
+  "wandb_run_id": "zismkxc8",
+  "wandb_all_training_runs": {
+    "C0_control": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/tmbp0ow3",
+    "Q75": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/zismkxc8",
+    "Q50": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/03gtxhfb",
+    "Q25": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/11ogsctl",
+    "Q50T64": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/7seii73w"
+  },
+  "wandb_group": "B-GATE",
+  "wandb_n_eval_runs": 40,
+  "artifacts": [
+    "research_loop/results/MECH-CONSTRAINED/result.json",
+    "research_loop/results/MECH-CONSTRAINED/curve.tsv",
+    "research_loop/results/MECH-CONSTRAINED/rundirs.tsv",
+    "research_loop/results/MECH-CONSTRAINED/arms_analysis.json",
+    "research_loop/results/MECH-CONSTRAINED/sanity.json",
+    "research_loop/results/MECH-CONSTRAINED/wrapper.log",
+    "research_loop/results/MECH-CONSTRAINED/worktree_diff.patch",
+    "research_loop/results/MECH-CONSTRAINED/launch_mech_constrained.sh",
+    "research_loop/results/MECH-CONSTRAINED/sanity_mech009.py",
+    "research_loop/results/MECH-CONSTRAINED/analyse_and_finalize.py",
+    "research_loop/state/diagnostics/MECH-CONSTRAINED.json",
+    "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-22-40-continual_am_sparse/6dd8dfd0-a1ae-47e0-bd9d-82c64e7333bd",
+    "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-36-28-continual_am_sparse/825113ac-2620-47fc-96a9-7dce28b48b9b",
+    "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-46-24-continual_am_sparse/34164eb6-0ceb-4628-8002-106bf5066fc7",
+    "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-07-39-continual_am_sparse/01b04302-3cb2-4edc-82ca-2d7eb7e2479e",
+    "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-26-31-continual_am_sparse/06cde547-5cf6-4f5d-be1d-87ba43f6ad3f"
+  ],
+  "provenance": {
+    "repo": "/localhome/local-triv/gated-continual-cartridges_explore",
+    "branch": "trivo-explore-research-work",
+    "head_at_launch": "5938fee23b2e85a8ab28b14534db83d7ac3ad8cb",
+    "head_after": "9d9f8acb0c43f53f5c321cc54d824d0e356f685e",
+    "import_probe_from_tmp": "/localhome/local-triv/gated-continual-cartridges_explore/cartridges",
+    "gpu": "0",
+    "phase1_cache": "outputs/phase1_selfdistill_qwen512/cache_last.pt",
+    "synth_data": "data/qasper/train/qwen_qasper_MT_task_8192.parquet",
+    "diag_importance_npz": "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/state/diagnostics/DIAG-IMPORTANCE.npz",
+    "worktree_diff": "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/MECH-CONSTRAINED/worktree_diff.patch"
+  },
+  "command": "FILES EDITED (MECH-009, opt-in / default off): cartridges/am/ranking.py (+'constrained_mass' in SLOT_PRIOR_SELECTIONS, _safety_prior, _or_default, the constrained_mass branch of _rank_slot_prior_per_layer, two new kwargs on it, conditional pass-through in rank_am_slots); cartridges/am/finetune.py (slot_selection Literal += 'constrained_mass'; new fields safe_fraction=1.0 / safe_metric='redundancy'); examples/qasper2/train/continual_am_sparse.py (AM_SAFE_FRACTION / AM_SAFE_METRIC env knobs, validation + fail-loud, _slot_prior_kwargs() conditional-kwarg guard extended, two new wandb tags). 217 insertions, 8 deletions across 3 files. RUN: bash research_loop/results/MECH-CONSTRAINED/launch_mech_constrained.sh (flock GPU 0, PYTHONPATH pinned to _explore, 5 AM Phase-2 runs + 40 dual-split evals at k in {8,10,12,16}). SANITY: research_loop/results/MECH-CONSTRAINED/sanity_mech009.py (CPU). ANALYSIS: research_loop/results/MECH-CONSTRAINED/analyse_and_finalize.py (CPU). NOT COMMITTED.",
+  "observations": "MECH-009 built (one opt-in SLOT_SELECTION mode, `constrained_mass`: restrict each layer to the safest floor(q*511) slots by redundancy, then take the top_t by ATTENTION MASS inside that set) and tested on five AM Phase-2 arms, every arm evaluated on BOTH splits at k = 8, 10, 12, 16 (40 evals, 0 missing, 20 distinct checkpoint paths, every eval log confirmed to contain its own intended checkpoint path, all 40 with a wandb URL). DEFAULT PRESERVED: the tfidf control reproduced QA 1.9560121297836304 / MT 2.2720184326171875 at k=12 and QA 2.034916400909424 / MT 2.330503463745117 at k=16 to all 16 digits (CONTROL_GATE=GATE_PASS), so the mechanism is numerically inert when off. BUILD IDENTITY -- THE NEW MODE IS DEMONSTRABLY THE SELECTOR DIAG-IMPORTANCE PROJECTED. Scored offline on the untouched Phase-1 cartridge it reproduces DIAG-IMPORTANCE's own `selector_tradeoff_table` rows EXACTLY: `best32_within_safest_quartile_fisher` 0.0462 MT mass / 0.0028 QA Fisher (published 0.0462 / 0.0028) and `best32_within_most_redundant_quartile` 0.1731 / 0.1234 (published 0.1731 / 0.1234). Both degeneracies are exact and verified bit-for-bit: q=1.0 gives identical index AND score tensors to `attention_mass` (at TOP_T=32 and 64, under either safety metric), and any q <= top_t/511 gives set agreement 1.0000 with the pure safety selector (`redundancy` / `fisher`). `compute_slot_redundancy` still reproduces DIAG-IMPORTANCE's array at max|diff| = 0.0; the three MECH-008 modes are unchanged to 1e-9; the default tfidf selection sha (f1aa6c6173119045c73ec8e70199b7fc) matches MECH-008's recorded value; seven fail-loud paths verified. The constraint was also confirmed to BIND at run time: the Q75 arm's document-0 selection is 100% inside the redundancy-safest 383 slots per layer, against 54.4% for the tfidf control. THE CONSTRAINED FORM LOSES, AND IT LOSES AS A DOSE-RESPONSE CURVE. Best MT per arm at its own-optimum k: control 2.27202 (k=12), q=0.75 2.32875 (k=8), q=0.50 2.36933 (k=16), q=0.25 2.43883 (k=16) -- MONOTONE in constraint strength, +0.0567 / +0.0973 / +0.1668 vs the control, all three clearing DIAG-NOISE's +-0.049 paired MT resolution (1.16x / 1.99x / 3.40x). The realised share of writable MT routing mass falls monotonically alongside it: 0.2799 -> 0.1661 -> 0.1327 -> 0.1000, and realised QA Fisher exposure falls 0.2389 -> 0.1477 -> 0.1086 -> 0.0742. Within this single-variable sweep log(realised MT routing mass) predicts best MT loss at Pearson -0.9775 (n=4); pooled with MECH-INFOGATE's six arms on identical axes and the identical control it is -0.8681 over ten points, against MECH-INFOGATE's published -0.8766. So the r ~ -0.88 relationship now rests on a controlled dose, not only on six heterogeneous selectors. NO ARM MEETS THE TARGET: the target is QA <= 2.52 AND MT <= 2.02; every arm clears QA by 0.53-0.61 and misses MT by 0.31-0.42, and no arm beats the incumbent's MT 2.27202 at any q. THE LOOSE CONSTRAINT IS NOT A FREE LUNCH EITHER. q=0.75 excludes only the most QA-critical quarter of slots, yet it already costs 41% of the incumbent's realised MT bandwidth (0.1661 vs 0.2799) -- because the MT-wanted slots are concentrated in exactly the least-redundant part of the cartridge (top-32 overlap with the incumbent drops to 0.634 at q=0.75, 0.448 at q=0.50, 0.252 at q=0.25). RAISING THE BUDGET DOES NOT RESCUE IT: q=0.50 at TOP_T=64 buys back bandwidth (0.1842 vs 0.1327 at t=32) but its best MT is 2.39994 (+0.1279), WORSE than q=0.50 at t=32 (2.36933), and its QA degrades from 1.9230 to 1.9529 -- the same budget reversal MECH-BUDGET measured on the incumbent. THE RETENTION SIDE IS REAL BUT UNRESOLVED: every constrained arm's best QA is better than the control's 1.94640 (1.91187 / 1.92302 / 1.91248 / 1.95290), but every one of those deltas (-0.0345, -0.0234, -0.0339, +0.0065) is INSIDE the +-0.054 paired QA resolution, so none is a resolved win -- and QA was already 0.57 ahead of budget. PROJECTIONS ARE SYSTEMATICALLY OPTIMISTIC, WHICH IS THE OTHER MEASURED LESSON. The doc-0 offline projection of MT bandwidth over-states the realised 16-document value by a consistent factor: realised / predicted = 0.749 (control), 0.598 (q=0.75), 0.567 (q=0.50), 0.585 (q=0.25), 0.612 (q=0.50,t=64). That ~0.6 shrinkage is why DIAG-IMPORTANCE's linear extrapolation over-promised even for the selector it correctly described. COST IS NOT THE DISCRIMINATOR: solve_s is 316-364 s across all five arms (0.94x-1.08x the control's 336.3 s), so the constraint and a 2x budget are both essentially free; am/mean_mse 0.00346-0.00476 and |v|max 78.5-91.0 are all in the control's range, so nothing failed numerically. Selectivity (MT/QA mass_on_S ratio) stays in the same 1.046-1.084 band every mechanism in this project has produced. gradient_steps = 0 in every arm -- the redundancy gate needs no eval data and no backward pass. CAVEATS: (a) single seed per arm (AM_SEED_OFFSET unset), so deltas are adjudicated against the measured paired resolution, not a seed-varied interval; (b) two of the four new arms bottom on MT at k=16, the edge of the evaluated set, so their true minima are unlocated -- which if anything flatters them; (c) redundancy is recomputed from the LIVE cache at every document, so the constraint set drifts as slots are written (at document 0 it is exactly DIAG-IMPORTANCE's array, verified); (d) only the redundancy gate was run -- the fisher gate is implemented and unit-tested but was not given GPU time, and DIAG-IMPORTANCE's own table puts it 3.7x lower on MT bandwidth (0.0462 vs 0.1731 at q=0.25), so it is predicted to be strictly worse.",
+  "interpretation_requested_by_the_brief_not_a_recommendation": "The brief's decision rule reads: 'if any q beats MT 2.2720 while holding QA <= 2.52, the constrained form is a live lever and B-GATE reopens; if MT degrades MONOTONICALLY as q tightens -- tracking realised MT routing mass as the r = -0.877 relationship predicts -- then the gating family is closed by a measured dose-response curve rather than by three point estimates.' The second branch is what happened, in its strongest form. No q beats MT 2.2720 (the closest, q=0.75, is +0.0567, which clears the paired resolution by 1.16x). MT degrades monotonically as q tightens (2.2720 -> 2.3288 -> 2.3693 -> 2.4388) with TOP_T held fixed at 32 and only the constraint strength moving, and realised MT routing mass falls monotonically with it (0.2799 -> 0.1661 -> 0.1327 -> 0.1000), giving Pearson log(mass) vs MT = -0.9775 within the sweep and -0.8681 pooled over ten arms. The gating family is therefore closed by a controlled dose-response curve on a single variable, not by three point estimates: the incumbent maximises MT routing mass by construction, any constraint can only remove candidates from that maximisation, and the loss follows the mass it removes. This also closes the specific loose end MECH-INFOGATE left open -- the constrained selector DIAG-IMPORTANCE's projection actually described has now been built, verified to reproduce that projection's own numbers exactly, and measured to lose."
+}

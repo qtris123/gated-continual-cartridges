@@ -19,6 +19,25 @@ slots carry Phase-1 (QA) knowledge.
                           disk here.
     mass_x_redundancy  -- slots the new task WANTS *and* that are redundant.
 
+MECH-009 / B-GATE adds a fourth, `constrained_mass`, for a different reason.
+MECH-INFOGATE measured that all three of the above LOSE acquisition badly, and
+diagnosed why: DIAG-IMPORTANCE's promising projection (~34.6% of writable MT
+routing mass at t=64) described a selector nobody had run -- best-t **mass
+ranked WITHIN** the safest fraction of slots, i.e. a hard safety CONSTRAINT
+followed by the incumbent's own ranking -- whereas the three modes above rank by
+the safety metric ITSELF, which is 2.4-3.2x below that. `constrained_mass` is
+that missing variant, with the constraint strength exposed as a knob.
+
+    constrained_mass   -- restrict to the safest `safe_fraction` of slots per
+                          layer (by `safe_metric` in {redundancy, fisher}), then
+                          take the top-t by ATTENTION MASS within that set.
+                          Degenerate by construction: safe_fraction = 1.0 is
+                          exactly `attention_mass`, and safe_fraction small
+                          enough that the candidate set is only top_t slots is
+                          exactly the pure-safety selector (`redundancy` /
+                          `fisher`). So it interpolates between the incumbent's
+                          ranking and MECH-008's, and nothing else.
+
 NOT implemented on purpose: `kl_loo`. DIAG-IMPORTANCE showed the exact
 leave-one-out KL of dropping slot j is `-log(1 - w_j)`, a strictly monotone
 function of the slot's own attention weight, so ranking by LOO-KL *is* ranking
@@ -28,6 +47,7 @@ it as a separate mode.
 
 from __future__ import annotations
 
+import math
 import os
 from logging import getLogger
 from typing import TYPE_CHECKING, Optional
@@ -45,9 +65,15 @@ if TYPE_CHECKING:
 
 logger = getLogger(__name__)
 
-# The MECH-008 selections. Each needs the *cache* (redundancy) and/or a cached
-# score array on disk (fisher), neither of which the attention-mass family uses.
-SLOT_PRIOR_SELECTIONS = ("redundancy", "fisher", "mass_x_redundancy")
+# The MECH-008 selections plus MECH-009's `constrained_mass`. Each needs the
+# *cache* (redundancy) and/or a cached score array on disk (fisher), neither of
+# which the attention-mass family uses.
+SLOT_PRIOR_SELECTIONS = (
+    "redundancy",
+    "fisher",
+    "mass_x_redundancy",
+    "constrained_mass",
+)
 
 
 def _rank_attention_mass_per_layer(
@@ -317,6 +343,46 @@ def _mask_from_topk(
     )
 
 
+def _or_default(value, default):
+    """`value` unless it is literally absent. Falsy-but-valid values survive.
+
+    Deliberately not `value or default`: `safe_fraction = 0.0` is INVALID and
+    must raise, not silently become the unconstrained 1.0.
+    """
+    return default if value is None else value
+
+
+def _safety_prior(
+    metric: str,
+    cache,
+    n_layers: int,
+    n_tokens: int,
+    redundancy_ridge_rel: float,
+    slot_fisher_path: Optional[str],
+) -> tuple[torch.Tensor, bool]:
+    """The MECH-008 scorers, re-used as a *safety* ordering (MECH-009).
+
+    Returns `(scores, safest_is_largest)`. The two metrics disagree on direction:
+    high `redundancy` means the slot is reconstructible from the others (safe to
+    overwrite), while LOW `fisher` means the QA loss is flat in that slot (safe
+    to overwrite).
+    """
+    if metric == "redundancy":
+        prior = compute_slot_redundancy(cache, ridge_rel=redundancy_ridge_rel)
+        safest_is_largest = True
+    elif metric == "fisher":
+        prior = load_slot_fisher_scores(slot_fisher_path, n_layers, n_tokens)
+        safest_is_largest = False
+    else:
+        raise ValueError(
+            f"safe_metric must be 'redundancy' or 'fisher', got {metric!r}. "
+            "Those are the only two QA-importance scorers MECH-008 built; a "
+            "third would need its own DIAG-IMPORTANCE validation."
+        )
+    _check_prior_shape(prior, n_layers, n_tokens, f"constrained_mass/{metric}")
+    return prior, safest_is_largest
+
+
 def _rank_slot_prior_per_layer(
     access_scores: torch.Tensor,
     top_t: int,
@@ -325,11 +391,13 @@ def _rank_slot_prior_per_layer(
     redundancy_ridge_rel: float = 1e-6,
     mass_redundancy_alpha: float = 0.5,
     slot_fisher_path: Optional[str] = None,
+    safe_fraction: float = 1.0,
+    safe_metric: str = "redundancy",
 ) -> tuple[GradientMask, TFIDFRankingInfo]:
     """MECH-008: pick the top-t slots by an information-theoretic prior.
 
     `access_scores` is (n_layers, n_tokens) and is only used by the modes that
-    need the new task's demand (`mass_x_redundancy`).
+    need the new task's demand (`mass_x_redundancy`, `constrained_mass`).
     """
     scores = access_scores.float().cpu()
     n_layers, n_tokens = scores.shape
@@ -378,6 +446,69 @@ def _rank_slot_prior_per_layer(
         u_red = _unit_rank(prior)
         a = float(mass_redundancy_alpha)
         select_score = u_tf.pow(1.0 - a) * u_red.pow(a)
+        mask = _mask_from_topk(select_score, top_t, largest=True)
+
+    elif mode == "constrained_mass":
+        # MECH-009. A HARD safety constraint, then the incumbent's own ranking
+        # inside it -- the variant DIAG-IMPORTANCE's projection actually
+        # described and that MECH-INFOGATE never ran.
+        #
+        #   candidates_l = the `n_safe` safest slots of layer l by `safe_metric`
+        #   selection_l  = top-k of `tf` restricted to candidates_l
+        #
+        # `n_safe = floor(safe_fraction * n_tokens)`, floored at k so the budget
+        # is always fillable. FLOOR, not round, so that safe_fraction = 0.25 on
+        # 511 writable slots gives 127 -- DIAG-IMPORTANCE's own "safest
+        # quartile" size, which is what makes its published 4.62% / 0.28%
+        # tradeoff row directly reproducible by this mode.
+        # The two degeneracies are exact and are the reason
+        # this is an interpolation knob rather than a fifth ad-hoc selector:
+        #   safe_fraction = 1.0    -> n_safe = n_tokens -> no slot is excluded,
+        #                             `select_score` IS `tf`, so the selection is
+        #                             bit-for-bit `attention_mass`;
+        #   safe_fraction <= k/n   -> n_safe = k -> the candidate set has exactly
+        #                             k members, so mass ranking is a no-op and
+        #                             the selection is the PURE safety selector
+        #                             (`redundancy` / `fisher`).
+        # Excluded slots get the sentinel -1.0 rather than -inf: `tf >= 0`
+        # always (it is a normalised attention mass), so -1.0 orders strictly
+        # below every candidate while keeping `select_score` finite for the
+        # finiteness assert below and for the saved `ranking_info`.
+        if not (0.0 < safe_fraction <= 1.0):
+            raise ValueError(
+                "safe_fraction must be in (0, 1], got "
+                f"{safe_fraction!r} (1.0 = unconstrained = attention_mass; "
+                "small = only the safest slots are candidates)."
+            )
+        k = min(top_t, n_tokens)
+        n_safe = int(math.floor(float(safe_fraction) * n_tokens))
+        n_safe = max(k, min(n_safe, n_tokens))
+        safety, safest_is_largest = _safety_prior(
+            safe_metric,
+            cache,
+            n_layers,
+            n_tokens,
+            redundancy_ridge_rel,
+            slot_fisher_path,
+        )
+        if n_safe >= n_tokens:
+            select_score = tf
+        else:
+            _, cand = torch.topk(
+                safety, k=n_safe, dim=-1, largest=safest_is_largest
+            )
+            keep = torch.zeros_like(tf, dtype=torch.bool)
+            keep.scatter_(-1, cand, True)
+            select_score = torch.where(keep, tf, torch.full_like(tf, -1.0))
+        logger.info(
+            "MECH-009 constrained_mass: safe_metric=%s safe_fraction=%.4f -> "
+            "%d/%d candidate slots per layer, top_t=%d",
+            safe_metric,
+            safe_fraction,
+            n_safe,
+            n_tokens,
+            k,
+        )
         mask = _mask_from_topk(select_score, top_t, largest=True)
 
     else:  # pragma: no cover - guarded by the caller
@@ -445,6 +576,16 @@ def rank_am_slots(
                 getattr(config, "mass_redundancy_alpha", 0.5)
             ),
             slot_fisher_path=getattr(config, "slot_fisher_path", None),
+            # MECH-009. `getattr` defaults keep this working against a config
+            # object that predates the two fields (RUNBOOK §6.10), and the
+            # defaults are the inert ones: safe_fraction=1.0 leaves
+            # `constrained_mass` equal to `attention_mass`. NB no `or 1.0`
+            # fallback -- that would silently turn an (invalid) 0.0 into the
+            # unconstrained selector instead of raising.
+            safe_fraction=_or_default(getattr(config, "safe_fraction", None), 1.0),
+            safe_metric=_or_default(
+                getattr(config, "safe_metric", None), "redundancy"
+            ),
         )
         info.step = step
         return mask, info

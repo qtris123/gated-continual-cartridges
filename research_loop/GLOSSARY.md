@@ -114,6 +114,20 @@ selection_l   = top-k of score_l
   path, `cache=None`, non-`per_layer`, wrong prior shape). No `or`-style defaulting: `q = 0.0` raises
   rather than silently becoming the unconstrained selector.
 
+**Verification that it IS the projected selector.** Scored offline on the untouched Phase-1 cartridge,
+`constrained_mass(fisher, q=0.25, t=32)` reproduces DIAG-IMPORTANCE's `best32_within_safest_quartile_fisher`
+row at **0.0462 / 0.0028** (published 0.0462 / 0.0028) and `constrained_mass(redundancy, q=0.25, t=32)`
+its `best32_within_most_redundant_quartile` row at **0.1731 / 0.1234** (published 0.1731 / 0.1234).
+
+**Measured result (MECH-CONSTRAINED, 2026-07-29) — it loses, as a dose-response curve.** With `TOP_T`
+held at 32 and only `q` moving: best MT **2.2720 → 2.3288 → 2.3693 → 2.4388** at `q` = 1.00 / 0.75 /
+0.50 / 0.25, monotone, all three deltas clearing DIAG-NOISE's ±0.049. Realised MT routing mass falls
+monotonically with it (**0.2799 → 0.1661 → 0.1327 → 0.1000**); Pearson `log(mass)` vs MT = **−0.9775**
+within the sweep, **−0.8681** pooled over ten arms with MECH-INFOGATE. Every arm's QA gain sits *inside*
+the ±0.054 paired QA resolution. `q = 0.50` at `TOP_T=64` is worse on **both** axes than at `TOP_T=32`.
+**Doc-0 projections are ~0.6× optimistic** (realised/predicted MT bandwidth 0.749 / 0.598 / 0.567 /
+0.585 / 0.612), which is the residual reason DIAG-IMPORTANCE's extrapolation over-promised.
+
 ## 4. Reproducing an experiment
 
 Every experiment has a bundle at `research_loop/results/<ID>/result.json` containing its exact

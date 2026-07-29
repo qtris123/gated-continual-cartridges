@@ -187,6 +187,38 @@ the number that shows it. "It didn't help" never closes anything.
   only prints). The worker logged the cells via a parser under the no-edit rule; the losses are the
   harness's own, not recomputed. `EVAL_MODE=icl` also does **not** hang, unlike the cartridge path (§1).
 
+## 🏁🏁 B-GATE — MECH-CONSTRAINED (2026-07-29): **closed by a controlled DOSE-RESPONSE curve**
+The strongest form of the human's hypothesis — **mass-ranked *within* a safety constraint** — built and
+measured. **The build is provably the selector DIAG-IMPORTANCE projected:** it reproduces that
+diagnostic's own `selector_tradeoff_table` rows **exactly** (`best32_within_safest_quartile_fisher`
+0.0462 / 0.0028; `best32_within_most_redundant_quartile` 0.1731 / 0.1234). Degeneracies exact: `q=1.0`
+gives **identical index *and* score tensors** to `attention_mass`. Gate passed to 16 digits.
+
+| `q` | candidates/layer | best MT | ΔMT | realised MT mass | *predicted* | QA Fisher |
+|---|---|---|---|---|---|---|
+| **1.00** (= incumbent) | 511 | **2.2720** | — | **0.2799** | 0.3736 | 0.2389 |
+| 0.75 | 383 | 2.3288 | **+0.057** ✔ | 0.1661 | 0.2780 | 0.1477 |
+| 0.50 | 255 | 2.3693 | **+0.097** ✔ | 0.1327 | 0.2340 | 0.1086 |
+| 0.25 | 127 | 2.4388 | **+0.167** ✔ | 0.1000 | 0.1710 | 0.0742 |
+| 0.50 @ **t64** | 255 | 2.3999 | **+0.128** ✔ | 0.1842 | 0.3009 | 0.1480 |
+
+- **With `TOP_T` fixed and only `q` moving, MT degrades monotonically** (2.2720 → 2.3288 → 2.3693 →
+  2.4388), tracking realised MT routing mass falling monotonically (0.2799 → 0.1661 → 0.1327 → 0.1000).
+  **Pearson `log(mass)` vs MT = −0.9775 within the sweep; −0.8681 pooled over 10 arms** with
+  MECH-INFOGATE. **The r ≈ −0.88 law now rests on a controlled dose, not on heterogeneous point
+  estimates.**
+- **Every ΔMT clears the ±0.049 resolution; every QA gain sits *inside* ±0.054.** No `q` beats 2.2720 —
+  **the curve's optimum is `q = 1.0`, which IS the incumbent.** There is no untried setting where this
+  might have worked. A bigger budget does not rescue it (q=0.50 at t64 is worse on **both** axes than at
+  t32). Cost 0.94×–1.08×; nothing failed numerically.
+- **The constraint genuinely bound:** Q75's doc-0 selection is **100%** inside the redundancy-safest 383
+  slots, vs **54.4%** for the control.
+- ⭐ **Second finding, and it explains DIAG-IMPORTANCE's over-promise:** offline doc-0 projections are
+  systematically **~0.6× optimistic** (realised/predicted 0.749 / 0.598 / 0.567 / 0.585 / 0.612), because
+  redundancy is recomputed on the **drifting live cache** and the written union grows as documents
+  accumulate. **The projection was over-optimistic for a measurable reason — not because the selector
+  was wrong.** Any future static slot-statistics extrapolation in this codebase should carry that factor.
+
 ## 🏁 B-GATE — MECH-BUDGET-B (2026-07-29): **support is genuinely not a lever, confound removed**
 Gate exact to 16 digits, on checkpoints **sha256-identical** to MECH-BUDGET's. **Determinacy proven per
 arm** — `n_queries_used_min = max =` the cap in every (layer, head): 512 for t128 (4:1), 512 for t64

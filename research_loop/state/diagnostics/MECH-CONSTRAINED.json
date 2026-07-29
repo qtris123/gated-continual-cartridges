@@ -1,0 +1,1442 @@
+{
+  "id": "MECH-CONSTRAINED",
+  "mechanism": "MECH-009",
+  "selector": "constrained_mass: per layer, restrict to the safest floor(q*511) slots by redundancy (descending), then take the top_t by attention mass within that candidate set.",
+  "baseline_reproduced": {
+    "gate_line": "GATE_PASS",
+    "expected": {
+      "k12": {
+        "QA": 1.9560121297836304,
+        "MT": 2.2720184326171875
+      },
+      "k16": {
+        "QA": 2.034916400909424,
+        "MT": 2.330503463745117
+      }
+    },
+    "observed": {
+      "k12": {
+        "QA": 1.9560121297836304,
+        "MT": 2.2720184326171875
+      },
+      "k16": {
+        "QA": 2.034916400909424,
+        "MT": 2.330503463745117
+      }
+    },
+    "bit_identical_when_default": true
+  },
+  "paired_resolution_used": {
+    "MT": 0.049,
+    "QA": 0.054,
+    "source": "DIAG-NOISE"
+  },
+  "incumbent_best_point": {
+    "k": 12,
+    "QA": 1.9560121297836304,
+    "MT": 2.2720184326171875
+  },
+  "control_own_optimum": {
+    "MT": 2.2720184326171875,
+    "MT_k": 12,
+    "QA": 1.9463961124420166,
+    "QA_k": 8
+  },
+  "budget": {
+    "QA": 2.52,
+    "MT": 2.02
+  },
+  "per_arm": {
+    "C0_control": {
+      "selector": "tfidf",
+      "safe_fraction": 1.0,
+      "top_t": 32,
+      "n_candidate_slots_per_layer": 511,
+      "k_curve_MT": {
+        "8": 2.32890248298645,
+        "10": 2.319589376449585,
+        "12": 2.2720184326171875,
+        "16": 2.330503463745117
+      },
+      "k_curve_QA": {
+        "8": 1.9463961124420166,
+        "10": 1.968939185142517,
+        "12": 1.9560121297836304,
+        "16": 2.034916400909424
+      },
+      "own_optimum": {
+        "MT": 2.2720184326171875,
+        "MT_k": 12,
+        "QA": 1.9463961124420166,
+        "QA_k": 8
+      },
+      "realised_selection": {
+        "frac_writable_MT_routing_mass": 0.2798910681158304,
+        "frac_total_QA_Fisher_mass": 0.23889410961419344,
+        "mean_redundancy_of_selected": 0.7593979313969612,
+        "slots_per_layer_per_doc": 32.0,
+        "union_slots_per_layer": 87.58333333333333,
+        "union_frac_of_511_writable": 0.171395955642531
+      },
+      "mass_on_S": {
+        "union_MT_phase1_evalgeom": 0.11900365352630615,
+        "union_QA_phase1_evalgeom": 0.10973892360925674,
+        "selectivity_MT_over_QA": 1.0844251940181042,
+        "ref_mass_on_S_mean_in_run": 0.3136346771789249
+      },
+      "am_mean_mse": 0.0039414096599943195,
+      "v_absmax_max": 78.5,
+      "solve_s": 336.3,
+      "phase2_e2e_s": 394.0,
+      "gradient_steps": 0,
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/tmbp0ow3",
+      "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-22-40-continual_am_sparse/6dd8dfd0-a1ae-47e0-bd9d-82c64e7333bd",
+      "solve_cost_multiple_vs_control": 1.0,
+      "vs_control_at_own_optima": {
+        "dMT": 0.0,
+        "dMT_clears_0.049": false,
+        "dQA": 0.0,
+        "dQA_clears_0.054": false,
+        "MT_meets_budget": false,
+        "QA_meets_budget": true
+      }
+    },
+    "Q75": {
+      "selector": "constrained_mass",
+      "safe_fraction": 0.75,
+      "top_t": 32,
+      "n_candidate_slots_per_layer": 383,
+      "k_curve_MT": {
+        "8": 2.3287529945373535,
+        "10": 2.3586020469665527,
+        "12": 2.3554306030273438,
+        "16": 2.330395460128784
+      },
+      "k_curve_QA": {
+        "8": 1.9118664264678955,
+        "10": 1.9882663488388062,
+        "12": 2.0291409492492676,
+        "16": 2.03568434715271
+      },
+      "own_optimum": {
+        "MT": 2.3287529945373535,
+        "MT_k": 8,
+        "QA": 1.9118664264678955,
+        "QA_k": 8
+      },
+      "realised_selection": {
+        "frac_writable_MT_routing_mass": 0.16614097449928522,
+        "frac_total_QA_Fisher_mass": 0.14773522224277258,
+        "mean_redundancy_of_selected": 0.7909630984067917,
+        "slots_per_layer_per_doc": 32.0,
+        "union_slots_per_layer": 125.52777777777777,
+        "union_frac_of_511_writable": 0.24565122852794086
+      },
+      "mass_on_S": {
+        "union_MT_phase1_evalgeom": 0.11333134770393372,
+        "union_QA_phase1_evalgeom": 0.10536620020866394,
+        "selectivity_MT_over_QA": 1.0755949012064197,
+        "ref_mass_on_S_mean_in_run": 0.24891658349262497
+      },
+      "am_mean_mse": 0.004405929586802712,
+      "v_absmax_max": 89.0,
+      "solve_s": 340.7,
+      "phase2_e2e_s": 651.0,
+      "gradient_steps": 0,
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/zismkxc8",
+      "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-36-28-continual_am_sparse/825113ac-2620-47fc-96a9-7dce28b48b9b",
+      "solve_cost_multiple_vs_control": 1.013,
+      "vs_control_at_own_optima": {
+        "dMT": 0.05673,
+        "dMT_clears_0.049": true,
+        "dQA": -0.03453,
+        "dQA_clears_0.054": false,
+        "MT_meets_budget": false,
+        "QA_meets_budget": true
+      }
+    },
+    "Q50": {
+      "selector": "constrained_mass",
+      "safe_fraction": 0.5,
+      "top_t": 32,
+      "n_candidate_slots_per_layer": 255,
+      "k_curve_MT": {
+        "8": 2.4290695190429688,
+        "10": 2.464343547821045,
+        "12": 2.4173004627227783,
+        "16": 2.3693320751190186
+      },
+      "k_curve_QA": {
+        "8": 1.923022747039795,
+        "10": 1.9483559131622314,
+        "12": 1.9477330446243286,
+        "16": 1.9600306749343872
+      },
+      "own_optimum": {
+        "MT": 2.3693320751190186,
+        "MT_k": 16,
+        "QA": 1.923022747039795,
+        "QA_k": 8
+      },
+      "realised_selection": {
+        "frac_writable_MT_routing_mass": 0.13271387945860624,
+        "frac_total_QA_Fisher_mass": 0.1085635214112699,
+        "mean_redundancy_of_selected": 0.8097363635897636,
+        "slots_per_layer_per_doc": 32.0,
+        "union_slots_per_layer": 122.19444444444444,
+        "union_frac_of_511_writable": 0.23912807131985214
+      },
+      "mass_on_S": {
+        "union_MT_phase1_evalgeom": 0.0888948142528534,
+        "union_QA_phase1_evalgeom": 0.08372053503990173,
+        "selectivity_MT_over_QA": 1.0618041823369329,
+        "ref_mass_on_S_mean_in_run": 0.24849770309245084
+      },
+      "am_mean_mse": 0.004374247806127496,
+      "v_absmax_max": 91.0,
+      "solve_s": 316.2,
+      "phase2_e2e_s": 465.0,
+      "gradient_steps": 0,
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/03gtxhfb",
+      "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-46-24-continual_am_sparse/34164eb6-0ceb-4628-8002-106bf5066fc7",
+      "solve_cost_multiple_vs_control": 0.94,
+      "vs_control_at_own_optima": {
+        "dMT": 0.09731,
+        "dMT_clears_0.049": true,
+        "dQA": -0.02337,
+        "dQA_clears_0.054": false,
+        "MT_meets_budget": false,
+        "QA_meets_budget": true
+      }
+    },
+    "Q25": {
+      "selector": "constrained_mass",
+      "safe_fraction": 0.25,
+      "top_t": 32,
+      "n_candidate_slots_per_layer": 127,
+      "k_curve_MT": {
+        "8": 2.5830538272857666,
+        "10": 2.528303623199463,
+        "12": 2.467229127883911,
+        "16": 2.4388303756713867
+      },
+      "k_curve_QA": {
+        "8": 1.9124763011932373,
+        "10": 1.9139657020568848,
+        "12": 1.9344761371612549,
+        "16": 1.9933292865753174
+      },
+      "own_optimum": {
+        "MT": 2.4388303756713867,
+        "MT_k": 16,
+        "QA": 1.9124763011932373,
+        "QA_k": 8
+      },
+      "realised_selection": {
+        "frac_writable_MT_routing_mass": 0.10001046024262905,
+        "frac_total_QA_Fisher_mass": 0.07421620702371001,
+        "mean_redundancy_of_selected": 0.8302661813795567,
+        "slots_per_layer_per_doc": 32.0,
+        "union_slots_per_layer": 115.33333333333333,
+        "union_frac_of_511_writable": 0.22570123939986952
+      },
+      "mass_on_S": {
+        "union_MT_phase1_evalgeom": 0.06630370020866394,
+        "union_QA_phase1_evalgeom": 0.06336034834384918,
+        "selectivity_MT_over_QA": 1.0464541616602474,
+        "ref_mass_on_S_mean_in_run": 0.22260513480845626
+      },
+      "am_mean_mse": 0.0047634041254839155,
+      "v_absmax_max": 80.0,
+      "solve_s": 329.9,
+      "phase2_e2e_s": 468.0,
+      "gradient_steps": 0,
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/11ogsctl",
+      "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-07-39-continual_am_sparse/01b04302-3cb2-4edc-82ca-2d7eb7e2479e",
+      "solve_cost_multiple_vs_control": 0.981,
+      "vs_control_at_own_optima": {
+        "dMT": 0.16681,
+        "dMT_clears_0.049": true,
+        "dQA": -0.03392,
+        "dQA_clears_0.054": false,
+        "MT_meets_budget": false,
+        "QA_meets_budget": true
+      }
+    },
+    "Q50T64": {
+      "selector": "constrained_mass",
+      "safe_fraction": 0.5,
+      "top_t": 64,
+      "n_candidate_slots_per_layer": 255,
+      "k_curve_MT": {
+        "8": 2.3999416828155518,
+        "10": 2.4522786140441895,
+        "12": 2.412045478820801,
+        "16": 2.4008917808532715
+      },
+      "k_curve_QA": {
+        "8": 1.952900767326355,
+        "10": 2.030168056488037,
+        "12": 2.0590686798095703,
+        "16": 2.0701000690460205
+      },
+      "own_optimum": {
+        "MT": 2.3999416828155518,
+        "MT_k": 8,
+        "QA": 1.952900767326355,
+        "QA_k": 8
+      },
+      "realised_selection": {
+        "frac_writable_MT_routing_mass": 0.18415827490389347,
+        "frac_total_QA_Fisher_mass": 0.14799591153860092,
+        "mean_redundancy_of_selected": 0.8065848499536514,
+        "slots_per_layer_per_doc": 64.0,
+        "union_slots_per_layer": 168.5,
+        "union_frac_of_511_writable": 0.32974559686888455
+      },
+      "mass_on_S": {
+        "union_MT_phase1_evalgeom": 0.10320188105106354,
+        "union_QA_phase1_evalgeom": 0.09758506715297699,
+        "selectivity_MT_over_QA": 1.0575581291477874,
+        "ref_mass_on_S_mean_in_run": 0.24648061454672643
+      },
+      "am_mean_mse": 0.0034584253610112884,
+      "v_absmax_max": 86.0,
+      "solve_s": 363.7,
+      "phase2_e2e_s": 392.0,
+      "gradient_steps": 0,
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/7seii73w",
+      "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-26-31-continual_am_sparse/06cde547-5cf6-4f5d-be1d-87ba43f6ad3f",
+      "solve_cost_multiple_vs_control": 1.081,
+      "vs_control_at_own_optima": {
+        "dMT": 0.12792,
+        "dMT_clears_0.049": true,
+        "dQA": 0.0065,
+        "dQA_clears_0.054": false,
+        "MT_meets_budget": false,
+        "QA_meets_budget": true
+      }
+    }
+  },
+  "dose_response": {
+    "_definition": "TOP_T=32 held fixed; only the constraint strength q moves (1.00 = the incumbent tfidf control, then 0.75 / 0.50 / 0.25). A monotone degradation as q tightens, tracking the realised MT routing mass, is the dose-response form of MECH-INFOGATE's log(mass) -> MT relationship (Pearson -0.877 over its six arms).",
+    "arms": [
+      "C0_control",
+      "Q75",
+      "Q50",
+      "Q25"
+    ],
+    "q": [
+      1.0,
+      0.75,
+      0.5,
+      0.25
+    ],
+    "best_MT": [
+      2.2720184326171875,
+      2.3287529945373535,
+      2.3693320751190186,
+      2.4388303756713867
+    ],
+    "best_QA": [
+      1.9463961124420166,
+      1.9118664264678955,
+      1.923022747039795,
+      1.9124763011932373
+    ],
+    "realised_MT_routing_mass": [
+      0.2798910681158304,
+      0.16614097449928522,
+      0.13271387945860624,
+      0.10001046024262905
+    ],
+    "realised_QA_Fisher_exposure": [
+      0.23889410961419344,
+      0.14773522224277258,
+      0.1085635214112699,
+      0.07421620702371001
+    ],
+    "MT_monotone_worsening_as_q_tightens": true,
+    "MT_mass_monotone_falling_as_q_tightens": true,
+    "QA_Fisher_monotone_falling_as_q_tightens": true,
+    "pearson_logMTmass_vs_bestMT_sweep_only": -0.977466753614338,
+    "spearman_q_vs_bestMT": -1.0
+  },
+  "pooled_with_MECH_INFOGATE": {
+    "_definition": "MECH-INFOGATE's six arms plus this bundle's four new selectors, on the identical axes and the identical control.",
+    "n_points": 10,
+    "labels": [
+      "MECH-INFOGATE:C0_control",
+      "MECH-INFOGATE:R32",
+      "MECH-INFOGATE:R64",
+      "MECH-INFOGATE:R128",
+      "MECH-INFOGATE:X32",
+      "MECH-INFOGATE:F32",
+      "MECH-CONSTRAINED:Q75",
+      "MECH-CONSTRAINED:Q50",
+      "MECH-CONSTRAINED:Q25",
+      "MECH-CONSTRAINED:Q50T64"
+    ],
+    "pearson_logMTmass_vs_bestMT": -0.8681028959019508,
+    "spearman_MTmass_vs_bestMT": -0.6,
+    "pearson_QAfisher_vs_bestQA": 0.6033321076217266,
+    "spearman_QAfisher_vs_bestQA": 0.6484848484848483,
+    "MECH_INFOGATE_published_pearson_logMTmass_vs_bestMT": -0.8766490587087726
+  },
+  "raw_curve_rows": [
+    {
+      "arm": "C0_control",
+      "selector": "tfidf",
+      "safe_fraction": 1.0,
+      "top_t": 32,
+      "k": 8,
+      "split": "QA",
+      "loss": 1.9463961124420166,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-22-40-continual_am_sparse/6dd8dfd0-a1ae-47e0-bd9d-82c64e7333bd/cache-after-doc-007-e1a7f420.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/e3314ji7"
+    },
+    {
+      "arm": "C0_control",
+      "selector": "tfidf",
+      "safe_fraction": 1.0,
+      "top_t": 32,
+      "k": 8,
+      "split": "MT",
+      "loss": 2.32890248298645,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-22-40-continual_am_sparse/6dd8dfd0-a1ae-47e0-bd9d-82c64e7333bd/cache-after-doc-007-e1a7f420.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/mvdkekmj"
+    },
+    {
+      "arm": "C0_control",
+      "selector": "tfidf",
+      "safe_fraction": 1.0,
+      "top_t": 32,
+      "k": 10,
+      "split": "QA",
+      "loss": 1.968939185142517,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-22-40-continual_am_sparse/6dd8dfd0-a1ae-47e0-bd9d-82c64e7333bd/cache-after-doc-009-f77cecfb.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/uw5csy1x"
+    },
+    {
+      "arm": "C0_control",
+      "selector": "tfidf",
+      "safe_fraction": 1.0,
+      "top_t": 32,
+      "k": 10,
+      "split": "MT",
+      "loss": 2.319589376449585,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-22-40-continual_am_sparse/6dd8dfd0-a1ae-47e0-bd9d-82c64e7333bd/cache-after-doc-009-f77cecfb.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/uz401zy1"
+    },
+    {
+      "arm": "C0_control",
+      "selector": "tfidf",
+      "safe_fraction": 1.0,
+      "top_t": 32,
+      "k": 12,
+      "split": "QA",
+      "loss": 1.9560121297836304,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-22-40-continual_am_sparse/6dd8dfd0-a1ae-47e0-bd9d-82c64e7333bd/cache-after-doc-011-cfcb19a9.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/5sw81jwc"
+    },
+    {
+      "arm": "C0_control",
+      "selector": "tfidf",
+      "safe_fraction": 1.0,
+      "top_t": 32,
+      "k": 12,
+      "split": "MT",
+      "loss": 2.2720184326171875,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-22-40-continual_am_sparse/6dd8dfd0-a1ae-47e0-bd9d-82c64e7333bd/cache-after-doc-011-cfcb19a9.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/3m7okqmf"
+    },
+    {
+      "arm": "C0_control",
+      "selector": "tfidf",
+      "safe_fraction": 1.0,
+      "top_t": 32,
+      "k": 16,
+      "split": "QA",
+      "loss": 2.034916400909424,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-22-40-continual_am_sparse/6dd8dfd0-a1ae-47e0-bd9d-82c64e7333bd/cache-after-doc-015-af07b880.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/kz5r8spr"
+    },
+    {
+      "arm": "C0_control",
+      "selector": "tfidf",
+      "safe_fraction": 1.0,
+      "top_t": 32,
+      "k": 16,
+      "split": "MT",
+      "loss": 2.330503463745117,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-22-40-continual_am_sparse/6dd8dfd0-a1ae-47e0-bd9d-82c64e7333bd/cache-after-doc-015-af07b880.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/renahlih"
+    },
+    {
+      "arm": "Q75",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.75,
+      "top_t": 32,
+      "k": 8,
+      "split": "QA",
+      "loss": 1.9118664264678955,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-36-28-continual_am_sparse/825113ac-2620-47fc-96a9-7dce28b48b9b/cache-after-doc-007-e1a7f420.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/i5fxbk37"
+    },
+    {
+      "arm": "Q75",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.75,
+      "top_t": 32,
+      "k": 8,
+      "split": "MT",
+      "loss": 2.3287529945373535,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-36-28-continual_am_sparse/825113ac-2620-47fc-96a9-7dce28b48b9b/cache-after-doc-007-e1a7f420.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/j8isgtqi"
+    },
+    {
+      "arm": "Q75",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.75,
+      "top_t": 32,
+      "k": 10,
+      "split": "QA",
+      "loss": 1.9882663488388062,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-36-28-continual_am_sparse/825113ac-2620-47fc-96a9-7dce28b48b9b/cache-after-doc-009-f77cecfb.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/uayfuowx"
+    },
+    {
+      "arm": "Q75",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.75,
+      "top_t": 32,
+      "k": 10,
+      "split": "MT",
+      "loss": 2.3586020469665527,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-36-28-continual_am_sparse/825113ac-2620-47fc-96a9-7dce28b48b9b/cache-after-doc-009-f77cecfb.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/y6pj9wvj"
+    },
+    {
+      "arm": "Q75",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.75,
+      "top_t": 32,
+      "k": 12,
+      "split": "QA",
+      "loss": 2.0291409492492676,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-36-28-continual_am_sparse/825113ac-2620-47fc-96a9-7dce28b48b9b/cache-after-doc-011-cfcb19a9.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/6kcfcs1f"
+    },
+    {
+      "arm": "Q75",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.75,
+      "top_t": 32,
+      "k": 12,
+      "split": "MT",
+      "loss": 2.3554306030273438,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-36-28-continual_am_sparse/825113ac-2620-47fc-96a9-7dce28b48b9b/cache-after-doc-011-cfcb19a9.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/sgkg1gvv"
+    },
+    {
+      "arm": "Q75",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.75,
+      "top_t": 32,
+      "k": 16,
+      "split": "QA",
+      "loss": 2.03568434715271,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-36-28-continual_am_sparse/825113ac-2620-47fc-96a9-7dce28b48b9b/cache-after-doc-015-af07b880.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/d3mg7ljc"
+    },
+    {
+      "arm": "Q75",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.75,
+      "top_t": 32,
+      "k": 16,
+      "split": "MT",
+      "loss": 2.330395460128784,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-36-28-continual_am_sparse/825113ac-2620-47fc-96a9-7dce28b48b9b/cache-after-doc-015-af07b880.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/2ddaobsu"
+    },
+    {
+      "arm": "Q50",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.5,
+      "top_t": 32,
+      "k": 8,
+      "split": "QA",
+      "loss": 1.923022747039795,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-46-24-continual_am_sparse/34164eb6-0ceb-4628-8002-106bf5066fc7/cache-after-doc-007-e1a7f420.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/oowwzms2"
+    },
+    {
+      "arm": "Q50",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.5,
+      "top_t": 32,
+      "k": 8,
+      "split": "MT",
+      "loss": 2.4290695190429688,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-46-24-continual_am_sparse/34164eb6-0ceb-4628-8002-106bf5066fc7/cache-after-doc-007-e1a7f420.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/pnrpcmqo"
+    },
+    {
+      "arm": "Q50",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.5,
+      "top_t": 32,
+      "k": 10,
+      "split": "QA",
+      "loss": 1.9483559131622314,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-46-24-continual_am_sparse/34164eb6-0ceb-4628-8002-106bf5066fc7/cache-after-doc-009-f77cecfb.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/3wvjqaja"
+    },
+    {
+      "arm": "Q50",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.5,
+      "top_t": 32,
+      "k": 10,
+      "split": "MT",
+      "loss": 2.464343547821045,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-46-24-continual_am_sparse/34164eb6-0ceb-4628-8002-106bf5066fc7/cache-after-doc-009-f77cecfb.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/6wkzepb3"
+    },
+    {
+      "arm": "Q50",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.5,
+      "top_t": 32,
+      "k": 12,
+      "split": "QA",
+      "loss": 1.9477330446243286,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-46-24-continual_am_sparse/34164eb6-0ceb-4628-8002-106bf5066fc7/cache-after-doc-011-cfcb19a9.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/6mgzxcsh"
+    },
+    {
+      "arm": "Q50",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.5,
+      "top_t": 32,
+      "k": 12,
+      "split": "MT",
+      "loss": 2.4173004627227783,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-46-24-continual_am_sparse/34164eb6-0ceb-4628-8002-106bf5066fc7/cache-after-doc-011-cfcb19a9.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/z0gzuyed"
+    },
+    {
+      "arm": "Q50",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.5,
+      "top_t": 32,
+      "k": 16,
+      "split": "QA",
+      "loss": 1.9600306749343872,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-46-24-continual_am_sparse/34164eb6-0ceb-4628-8002-106bf5066fc7/cache-after-doc-015-af07b880.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/tfpt7szb"
+    },
+    {
+      "arm": "Q50",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.5,
+      "top_t": 32,
+      "k": 16,
+      "split": "MT",
+      "loss": 2.3693320751190186,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-46-24-continual_am_sparse/34164eb6-0ceb-4628-8002-106bf5066fc7/cache-after-doc-015-af07b880.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/fekewv8d"
+    },
+    {
+      "arm": "Q25",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.25,
+      "top_t": 32,
+      "k": 8,
+      "split": "QA",
+      "loss": 1.9124763011932373,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-07-39-continual_am_sparse/01b04302-3cb2-4edc-82ca-2d7eb7e2479e/cache-after-doc-007-e1a7f420.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/w6a3yx9d"
+    },
+    {
+      "arm": "Q25",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.25,
+      "top_t": 32,
+      "k": 8,
+      "split": "MT",
+      "loss": 2.5830538272857666,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-07-39-continual_am_sparse/01b04302-3cb2-4edc-82ca-2d7eb7e2479e/cache-after-doc-007-e1a7f420.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/s1u5rart"
+    },
+    {
+      "arm": "Q25",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.25,
+      "top_t": 32,
+      "k": 10,
+      "split": "QA",
+      "loss": 1.9139657020568848,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-07-39-continual_am_sparse/01b04302-3cb2-4edc-82ca-2d7eb7e2479e/cache-after-doc-009-f77cecfb.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/3p7xqxr2"
+    },
+    {
+      "arm": "Q25",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.25,
+      "top_t": 32,
+      "k": 10,
+      "split": "MT",
+      "loss": 2.528303623199463,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-07-39-continual_am_sparse/01b04302-3cb2-4edc-82ca-2d7eb7e2479e/cache-after-doc-009-f77cecfb.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/ertb4sjc"
+    },
+    {
+      "arm": "Q25",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.25,
+      "top_t": 32,
+      "k": 12,
+      "split": "QA",
+      "loss": 1.9344761371612549,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-07-39-continual_am_sparse/01b04302-3cb2-4edc-82ca-2d7eb7e2479e/cache-after-doc-011-cfcb19a9.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/l3mxdw0d"
+    },
+    {
+      "arm": "Q25",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.25,
+      "top_t": 32,
+      "k": 12,
+      "split": "MT",
+      "loss": 2.467229127883911,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-07-39-continual_am_sparse/01b04302-3cb2-4edc-82ca-2d7eb7e2479e/cache-after-doc-011-cfcb19a9.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/lsp40pu1"
+    },
+    {
+      "arm": "Q25",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.25,
+      "top_t": 32,
+      "k": 16,
+      "split": "QA",
+      "loss": 1.9933292865753174,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-07-39-continual_am_sparse/01b04302-3cb2-4edc-82ca-2d7eb7e2479e/cache-after-doc-015-af07b880.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/i58e3csl"
+    },
+    {
+      "arm": "Q25",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.25,
+      "top_t": 32,
+      "k": 16,
+      "split": "MT",
+      "loss": 2.4388303756713867,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-07-39-continual_am_sparse/01b04302-3cb2-4edc-82ca-2d7eb7e2479e/cache-after-doc-015-af07b880.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/3k3rax2i"
+    },
+    {
+      "arm": "Q50T64",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.5,
+      "top_t": 64,
+      "k": 8,
+      "split": "QA",
+      "loss": 1.952900767326355,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-26-31-continual_am_sparse/06cde547-5cf6-4f5d-be1d-87ba43f6ad3f/cache-after-doc-007-e1a7f420.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/t7inb9eo"
+    },
+    {
+      "arm": "Q50T64",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.5,
+      "top_t": 64,
+      "k": 8,
+      "split": "MT",
+      "loss": 2.3999416828155518,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-26-31-continual_am_sparse/06cde547-5cf6-4f5d-be1d-87ba43f6ad3f/cache-after-doc-007-e1a7f420.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/5h2pkiuv"
+    },
+    {
+      "arm": "Q50T64",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.5,
+      "top_t": 64,
+      "k": 10,
+      "split": "QA",
+      "loss": 2.030168056488037,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-26-31-continual_am_sparse/06cde547-5cf6-4f5d-be1d-87ba43f6ad3f/cache-after-doc-009-f77cecfb.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/tutjmfqh"
+    },
+    {
+      "arm": "Q50T64",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.5,
+      "top_t": 64,
+      "k": 10,
+      "split": "MT",
+      "loss": 2.4522786140441895,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-26-31-continual_am_sparse/06cde547-5cf6-4f5d-be1d-87ba43f6ad3f/cache-after-doc-009-f77cecfb.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/xw0o0y8m"
+    },
+    {
+      "arm": "Q50T64",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.5,
+      "top_t": 64,
+      "k": 12,
+      "split": "QA",
+      "loss": 2.0590686798095703,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-26-31-continual_am_sparse/06cde547-5cf6-4f5d-be1d-87ba43f6ad3f/cache-after-doc-011-cfcb19a9.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/79e7ybo2"
+    },
+    {
+      "arm": "Q50T64",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.5,
+      "top_t": 64,
+      "k": 12,
+      "split": "MT",
+      "loss": 2.412045478820801,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-26-31-continual_am_sparse/06cde547-5cf6-4f5d-be1d-87ba43f6ad3f/cache-after-doc-011-cfcb19a9.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/2o2qplb0"
+    },
+    {
+      "arm": "Q50T64",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.5,
+      "top_t": 64,
+      "k": 16,
+      "split": "QA",
+      "loss": 2.0701000690460205,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-26-31-continual_am_sparse/06cde547-5cf6-4f5d-be1d-87ba43f6ad3f/cache-after-doc-015-af07b880.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/jr75ouim"
+    },
+    {
+      "arm": "Q50T64",
+      "selector": "constrained_mass",
+      "safe_fraction": 0.5,
+      "top_t": 64,
+      "k": 16,
+      "split": "MT",
+      "loss": 2.4008917808532715,
+      "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-26-31-continual_am_sparse/06cde547-5cf6-4f5d-be1d-87ba43f6ad3f/cache-after-doc-015-af07b880.pt",
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/4dlxlexw"
+    }
+  ],
+  "sanity": {
+    "cartridges_pkg": "/localhome/local-triv/gated-continual-cartridges_explore/cartridges",
+    "default_new_fields": {
+      "slot_selection": "tfidf",
+      "safe_fraction": 1.0,
+      "safe_metric": "redundancy"
+    },
+    "redundancy_vs_DIAG_IMPORTANCE": {
+      "max_abs_diff": 0.0,
+      "top32_set_agreement": 1.0,
+      "mean": 0.775850236415863,
+      "diag_mean": 0.775850236415863
+    },
+    "degeneracy_q1_is_attention_mass": {
+      "identical_index_tensor": true,
+      "identical_select_score": true,
+      "set_agreement": 1.0,
+      "fisher_gate_identical": true,
+      "top_t64_identical": true
+    },
+    "degeneracy_small_q_is_pure_safety": {
+      "0.0626": {
+        "vs_pure_redundancy_set": 1.0,
+        "vs_pure_fisher_set": 1.0
+      },
+      "0.05": {
+        "vs_pure_redundancy_set": 1.0,
+        "vs_pure_fisher_set": 1.0
+      },
+      "0.001": {
+        "vs_pure_redundancy_set": 1.0,
+        "vs_pure_fisher_set": 1.0
+      }
+    },
+    "reproduces_DIAG_IMPORTANCE_tradeoff_rows": {
+      "best32_within_safest_quartile_fisher": {
+        "frac_writable_MT_routing_mass": 0.04619098827242851,
+        "frac_total_QA_Fisher_mass": 0.0028283149003982544
+      },
+      "best32_within_most_redundant_quartile": {
+        "frac_writable_MT_routing_mass": 0.17306417226791382,
+        "frac_total_QA_Fisher_mass": 0.12340613454580307
+      },
+      "published": {
+        "best32_within_safest_quartile_fisher": {
+          "frac_writable_MT_routing_mass": 0.0462,
+          "frac_total_QA_Fisher_mass": 0.0028
+        },
+        "best32_within_most_redundant_quartile": {
+          "frac_writable_MT_routing_mass": 0.1731,
+          "frac_total_QA_Fisher_mass": 0.1234
+        }
+      }
+    },
+    "predicted_sweep_redundancy_gate": {
+      "q1.0_t32": {
+        "n_candidate_slots_per_layer": 511,
+        "frac_writable_MT_routing_mass": 0.37362799048423767,
+        "frac_total_QA_Fisher_mass": 0.29594504833221436,
+        "top32_overlap_vs_incumbent": 1.0,
+        "mean_redundancy_of_selected": 0.7710423469543457
+      },
+      "q0.75_t32": {
+        "n_candidate_slots_per_layer": 383,
+        "frac_writable_MT_routing_mass": 0.2780311703681946,
+        "frac_total_QA_Fisher_mass": 0.19695641100406647,
+        "top32_overlap_vs_incumbent": 0.6336805555555556,
+        "mean_redundancy_of_selected": 0.8030311465263367
+      },
+      "q0.5_t32": {
+        "n_candidate_slots_per_layer": 255,
+        "frac_writable_MT_routing_mass": 0.23401090502738953,
+        "frac_total_QA_Fisher_mass": 0.15356522798538208,
+        "top32_overlap_vs_incumbent": 0.4479166666666667,
+        "mean_redundancy_of_selected": 0.8203151226043701
+      },
+      "q0.25_t32": {
+        "n_candidate_slots_per_layer": 127,
+        "frac_writable_MT_routing_mass": 0.17100483179092407,
+        "frac_total_QA_Fisher_mass": 0.1131528913974762,
+        "top32_overlap_vs_incumbent": 0.2517361111111111,
+        "mean_redundancy_of_selected": 0.8419578075408936
+      },
+      "q0.5_t64": {
+        "n_candidate_slots_per_layer": 255,
+        "frac_writable_MT_routing_mass": 0.30091986060142517,
+        "frac_total_QA_Fisher_mass": 0.20989055931568146,
+        "top32_overlap_vs_incumbent": null,
+        "mean_redundancy_of_selected": 0.8160621523857117
+      }
+    },
+    "predicted_MT_mass_monotone_decreasing_in_tightness": true,
+    "default_tfidf_selection_sha": "f1aa6c6173119045c73ec8e70199b7fc",
+    "default_tfidf_selection_sha_matches_MECH008": true,
+    "mech008_modes_unchanged": {
+      "redundancy": 0.09574031084775925,
+      "fisher": 0.010441286489367485,
+      "mass_x_redundancy": 0.19762763381004333
+    },
+    "fail_loud_cases_verified": [
+      "safe_fraction = 0",
+      "safe_fraction < 0",
+      "safe_fraction > 1",
+      "unknown safe_metric",
+      "fisher gate without a path",
+      "cache=None",
+      "granularity != per_layer"
+    ]
+  },
+  "arms_analysis": {
+    "C0_control": {
+      "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-22-40-continual_am_sparse/6dd8dfd0-a1ae-47e0-bd9d-82c64e7333bd",
+      "n_documents": 16,
+      "slots_selected_per_layer_per_doc": 32.0,
+      "realised_frac_writable_MT_routing_mass": 0.2798910681158304,
+      "realised_frac_total_QA_Fisher_mass": 0.23889410961419344,
+      "mean_redundancy_of_selected": 0.7593979313969612,
+      "realised_MT_mass_per_doc": [
+        0.33053,
+        0.29289,
+        0.28763,
+        0.27779,
+        0.28172,
+        0.27964,
+        0.27861,
+        0.27911,
+        0.28056,
+        0.27654,
+        0.27335,
+        0.27114,
+        0.26704,
+        0.26705,
+        0.26895,
+        0.2657
+      ],
+      "realised_QA_Fisher_per_doc": [
+        0.29095,
+        0.25784,
+        0.24116,
+        0.2334,
+        0.23669,
+        0.23625,
+        0.23268,
+        0.23411,
+        0.2354,
+        0.23995,
+        0.23641,
+        0.2386,
+        0.23274,
+        0.22529,
+        0.22445,
+        0.22638
+      ],
+      "union_slots_per_layer": 87.58333333333333,
+      "union_frac_writable_slots": 0.171395955642531,
+      "mass_on_S_union_MT_evalgeom": 0.11900365352630615,
+      "mass_on_S_union_QA_evalgeom": 0.10973892360925674,
+      "selectivity_MT_over_QA_evalgeom": 1.0844251940181042,
+      "ref_mass_on_S_mean": 0.3136346771789249,
+      "am_mean_mse": 0.0039414096599943195,
+      "am_mean_mse_per_doc": [
+        0.006424,
+        0.007245,
+        0.007038,
+        0.006585,
+        0.003405,
+        0.005002,
+        0.003415,
+        0.00299,
+        0.003866,
+        0.002131,
+        0.002861,
+        0.002728,
+        0.002102,
+        0.002182,
+        0.002684,
+        0.002404
+      ],
+      "v_absmax_max": 78.5,
+      "doc_wall_s_total": 330.37259125709534,
+      "doc_wall_s_mean": 20.64828695356846,
+      "selector": "tfidf",
+      "safe_fraction": 1.0,
+      "top_t": 32,
+      "n_candidate_slots_per_layer": 511,
+      "rc": 0,
+      "wall_s": 394.0,
+      "solve_s": 336.3,
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/tmbp0ow3"
+    },
+    "Q75": {
+      "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-36-28-continual_am_sparse/825113ac-2620-47fc-96a9-7dce28b48b9b",
+      "n_documents": 16,
+      "slots_selected_per_layer_per_doc": 32.0,
+      "realised_frac_writable_MT_routing_mass": 0.16614097449928522,
+      "realised_frac_total_QA_Fisher_mass": 0.14773522224277258,
+      "mean_redundancy_of_selected": 0.7909630984067917,
+      "realised_MT_mass_per_doc": [
+        0.24703,
+        0.16112,
+        0.16206,
+        0.15602,
+        0.16252,
+        0.1586,
+        0.16281,
+        0.16152,
+        0.16778,
+        0.16243,
+        0.16536,
+        0.16008,
+        0.15982,
+        0.15613,
+        0.15748,
+        0.1575
+      ],
+      "realised_QA_Fisher_per_doc": [
+        0.20131,
+        0.13842,
+        0.13896,
+        0.14002,
+        0.1496,
+        0.14412,
+        0.15034,
+        0.14502,
+        0.15126,
+        0.14421,
+        0.15255,
+        0.14578,
+        0.14525,
+        0.13801,
+        0.1377,
+        0.14123
+      ],
+      "union_slots_per_layer": 125.52777777777777,
+      "union_frac_writable_slots": 0.24565122852794086,
+      "mass_on_S_union_MT_evalgeom": 0.11333134770393372,
+      "mass_on_S_union_QA_evalgeom": 0.10536620020866394,
+      "selectivity_MT_over_QA_evalgeom": 1.0755949012064197,
+      "ref_mass_on_S_mean": 0.24891658349262497,
+      "am_mean_mse": 0.004405929586802712,
+      "am_mean_mse_per_doc": [
+        0.006788,
+        0.007848,
+        0.007616,
+        0.006857,
+        0.004393,
+        0.005613,
+        0.00416,
+        0.003388,
+        0.004769,
+        0.002376,
+        0.003617,
+        0.003013,
+        0.002381,
+        0.002505,
+        0.002645,
+        0.002523
+      ],
+      "v_absmax_max": 89.0,
+      "doc_wall_s_total": 334.5318739414215,
+      "doc_wall_s_mean": 20.908242121338844,
+      "selector": "constrained_mass",
+      "safe_fraction": 0.75,
+      "top_t": 32,
+      "n_candidate_slots_per_layer": 383,
+      "rc": 0,
+      "wall_s": 651.0,
+      "solve_s": 340.7,
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/zismkxc8"
+    },
+    "Q50": {
+      "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-46-24-continual_am_sparse/34164eb6-0ceb-4628-8002-106bf5066fc7",
+      "n_documents": 16,
+      "slots_selected_per_layer_per_doc": 32.0,
+      "realised_frac_writable_MT_routing_mass": 0.13271387945860624,
+      "realised_frac_total_QA_Fisher_mass": 0.1085635214112699,
+      "mean_redundancy_of_selected": 0.8097363635897636,
+      "realised_MT_mass_per_doc": [
+        0.21611,
+        0.131,
+        0.13094,
+        0.12596,
+        0.12471,
+        0.12789,
+        0.12949,
+        0.12732,
+        0.1276,
+        0.1276,
+        0.12767,
+        0.12557,
+        0.12444,
+        0.12381,
+        0.1268,
+        0.12652
+      ],
+      "realised_QA_Fisher_per_doc": [
+        0.15161,
+        0.10815,
+        0.10881,
+        0.10809,
+        0.10129,
+        0.10816,
+        0.10916,
+        0.10181,
+        0.10282,
+        0.10148,
+        0.10473,
+        0.11018,
+        0.1025,
+        0.1051,
+        0.10266,
+        0.11047
+      ],
+      "union_slots_per_layer": 122.19444444444444,
+      "union_frac_writable_slots": 0.23912807131985214,
+      "mass_on_S_union_MT_evalgeom": 0.0888948142528534,
+      "mass_on_S_union_QA_evalgeom": 0.08372053503990173,
+      "selectivity_MT_over_QA_evalgeom": 1.0618041823369329,
+      "ref_mass_on_S_mean": 0.24849770309245084,
+      "am_mean_mse": 0.004374247806127496,
+      "am_mean_mse_per_doc": [
+        0.007273,
+        0.00666,
+        0.006582,
+        0.00665,
+        0.003554,
+        0.006684,
+        0.004303,
+        0.003325,
+        0.004756,
+        0.002365,
+        0.003681,
+        0.003127,
+        0.002505,
+        0.002615,
+        0.002865,
+        0.003041
+      ],
+      "v_absmax_max": 91.0,
+      "doc_wall_s_total": 310.2896456718445,
+      "doc_wall_s_mean": 19.39310285449028,
+      "selector": "constrained_mass",
+      "safe_fraction": 0.5,
+      "top_t": 32,
+      "n_candidate_slots_per_layer": 255,
+      "rc": 0,
+      "wall_s": 465.0,
+      "solve_s": 316.2,
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/03gtxhfb"
+    },
+    "Q25": {
+      "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-07-39-continual_am_sparse/01b04302-3cb2-4edc-82ca-2d7eb7e2479e",
+      "n_documents": 16,
+      "slots_selected_per_layer_per_doc": 32.0,
+      "realised_frac_writable_MT_routing_mass": 0.10001046024262905,
+      "realised_frac_total_QA_Fisher_mass": 0.07421620702371001,
+      "mean_redundancy_of_selected": 0.8302661813795567,
+      "realised_MT_mass_per_doc": [
+        0.16407,
+        0.09865,
+        0.09478,
+        0.09349,
+        0.09358,
+        0.09484,
+        0.09699,
+        0.09747,
+        0.09866,
+        0.09588,
+        0.09533,
+        0.09433,
+        0.09474,
+        0.09522,
+        0.0963,
+        0.09584
+      ],
+      "realised_QA_Fisher_per_doc": [
+        0.11006,
+        0.07211,
+        0.0738,
+        0.069,
+        0.07369,
+        0.07235,
+        0.07033,
+        0.07044,
+        0.07369,
+        0.07182,
+        0.07238,
+        0.07184,
+        0.07197,
+        0.07077,
+        0.07211,
+        0.07108
+      ],
+      "union_slots_per_layer": 115.33333333333333,
+      "union_frac_writable_slots": 0.22570123939986952,
+      "mass_on_S_union_MT_evalgeom": 0.06630370020866394,
+      "mass_on_S_union_QA_evalgeom": 0.06336034834384918,
+      "selectivity_MT_over_QA_evalgeom": 1.0464541616602474,
+      "ref_mass_on_S_mean": 0.22260513480845626,
+      "am_mean_mse": 0.0047634041254839155,
+      "am_mean_mse_per_doc": [
+        0.007563,
+        0.008088,
+        0.006605,
+        0.007514,
+        0.004532,
+        0.005687,
+        0.004249,
+        0.003459,
+        0.005162,
+        0.002633,
+        0.004447,
+        0.003302,
+        0.002469,
+        0.003117,
+        0.003306,
+        0.004081
+      ],
+      "v_absmax_max": 80.0,
+      "doc_wall_s_total": 323.917929649353,
+      "doc_wall_s_mean": 20.244870603084564,
+      "selector": "constrained_mass",
+      "safe_fraction": 0.25,
+      "top_t": 32,
+      "n_candidate_slots_per_layer": 127,
+      "rc": 0,
+      "wall_s": 468.0,
+      "solve_s": 329.9,
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/11ogsctl"
+    },
+    "Q50T64": {
+      "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-26-31-continual_am_sparse/06cde547-5cf6-4f5d-be1d-87ba43f6ad3f",
+      "n_documents": 16,
+      "slots_selected_per_layer_per_doc": 64.0,
+      "realised_frac_writable_MT_routing_mass": 0.18415827490389347,
+      "realised_frac_total_QA_Fisher_mass": 0.14799591153860092,
+      "mean_redundancy_of_selected": 0.8065848499536514,
+      "realised_MT_mass_per_doc": [
+        0.28461,
+        0.18297,
+        0.17867,
+        0.16996,
+        0.17201,
+        0.1711,
+        0.17209,
+        0.17956,
+        0.18011,
+        0.18011,
+        0.17751,
+        0.17882,
+        0.17668,
+        0.17967,
+        0.18182,
+        0.18084
+      ],
+      "realised_QA_Fisher_per_doc": [
+        0.21102,
+        0.15461,
+        0.13908,
+        0.14333,
+        0.13457,
+        0.13702,
+        0.13692,
+        0.14269,
+        0.14158,
+        0.14142,
+        0.14079,
+        0.14674,
+        0.14623,
+        0.14987,
+        0.15064,
+        0.15143
+      ],
+      "union_slots_per_layer": 168.5,
+      "union_frac_writable_slots": 0.32974559686888455,
+      "mass_on_S_union_MT_evalgeom": 0.10320188105106354,
+      "mass_on_S_union_QA_evalgeom": 0.09758506715297699,
+      "selectivity_MT_over_QA_evalgeom": 1.0575581291477874,
+      "ref_mass_on_S_mean": 0.24648061454672643,
+      "am_mean_mse": 0.0034584253610112884,
+      "am_mean_mse_per_doc": [
+        0.005921,
+        0.006011,
+        0.004868,
+        0.004995,
+        0.003042,
+        0.00419,
+        0.003172,
+        0.002689,
+        0.003471,
+        0.002091,
+        0.002678,
+        0.002496,
+        0.002072,
+        0.002324,
+        0.002459,
+        0.002855
+      ],
+      "v_absmax_max": 86.0,
+      "doc_wall_s_total": 358.0965368747711,
+      "doc_wall_s_mean": 22.381033554673195,
+      "selector": "constrained_mass",
+      "safe_fraction": 0.5,
+      "top_t": 64,
+      "n_candidate_slots_per_layer": 255,
+      "rc": 0,
+      "wall_s": 392.0,
+      "solve_s": 363.7,
+      "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/7seii73w"
+    }
+  },
+  "provenance": {
+    "repo": "/localhome/local-triv/gated-continual-cartridges_explore",
+    "branch": "trivo-explore-research-work",
+    "head_at_launch": "5938fee23b2e85a8ab28b14534db83d7ac3ad8cb",
+    "head_after": "9d9f8acb0c43f53f5c321cc54d824d0e356f685e",
+    "import_probe_from_tmp": "/localhome/local-triv/gated-continual-cartridges_explore/cartridges",
+    "gpu": "0",
+    "phase1_cache": "outputs/phase1_selfdistill_qwen512/cache_last.pt",
+    "synth_data": "data/qasper/train/qwen_qasper_MT_task_8192.parquet",
+    "diag_importance_npz": "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/state/diagnostics/DIAG-IMPORTANCE.npz",
+    "worktree_diff": "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/MECH-CONSTRAINED/worktree_diff.patch"
+  },
+  "predicted_vs_realised_mass": {
+    "_definition": "PREDICTED = the selector scored offline on the UNTOUCHED Phase-1 cartridge with DIAG-IMPORTANCE's doc-0 eval geometry (research_loop/results/MECH-CONSTRAINED/sanity_mech009.py). REALISED = the same two axes recomputed from the run's own 16 saved per-document masks (am_doc_*.pt), i.e. after the redundancy scores drift with the live cache and the union of written slots grows. The ratio is the systematic optimism of any doc-0 projection, and it is why DIAG-IMPORTANCE's own extrapolation over-promised.",
+    "C0_control": {
+      "safe_fraction": 1.0,
+      "top_t": 32,
+      "n_candidate_slots_per_layer": 511,
+      "predicted_frac_writable_MT_routing_mass": 0.37362799048423767,
+      "realised_frac_writable_MT_routing_mass": 0.2798910681158304,
+      "realised_over_predicted_MT": 0.7491,
+      "predicted_frac_total_QA_Fisher_mass": 0.29594504833221436,
+      "realised_frac_total_QA_Fisher_mass": 0.23889410961419344,
+      "realised_over_predicted_QAfisher": 0.8072,
+      "best_MT": 2.2720184326171875,
+      "best_MT_k": 12,
+      "best_QA": 1.9463961124420166,
+      "best_QA_k": 8
+    },
+    "Q75": {
+      "safe_fraction": 0.75,
+      "top_t": 32,
+      "n_candidate_slots_per_layer": 383,
+      "predicted_frac_writable_MT_routing_mass": 0.2780311703681946,
+      "realised_frac_writable_MT_routing_mass": 0.16614097449928522,
+      "realised_over_predicted_MT": 0.5976,
+      "predicted_frac_total_QA_Fisher_mass": 0.19695641100406647,
+      "realised_frac_total_QA_Fisher_mass": 0.14773522224277258,
+      "realised_over_predicted_QAfisher": 0.7501,
+      "best_MT": 2.3287529945373535,
+      "best_MT_k": 8,
+      "best_QA": 1.9118664264678955,
+      "best_QA_k": 8
+    },
+    "Q50": {
+      "safe_fraction": 0.5,
+      "top_t": 32,
+      "n_candidate_slots_per_layer": 255,
+      "predicted_frac_writable_MT_routing_mass": 0.23401090502738953,
+      "realised_frac_writable_MT_routing_mass": 0.13271387945860624,
+      "realised_over_predicted_MT": 0.5671,
+      "predicted_frac_total_QA_Fisher_mass": 0.15356522798538208,
+      "realised_frac_total_QA_Fisher_mass": 0.1085635214112699,
+      "realised_over_predicted_QAfisher": 0.707,
+      "best_MT": 2.3693320751190186,
+      "best_MT_k": 16,
+      "best_QA": 1.923022747039795,
+      "best_QA_k": 8
+    },
+    "Q25": {
+      "safe_fraction": 0.25,
+      "top_t": 32,
+      "n_candidate_slots_per_layer": 127,
+      "predicted_frac_writable_MT_routing_mass": 0.17100483179092407,
+      "realised_frac_writable_MT_routing_mass": 0.10001046024262905,
+      "realised_over_predicted_MT": 0.5848,
+      "predicted_frac_total_QA_Fisher_mass": 0.1131528913974762,
+      "realised_frac_total_QA_Fisher_mass": 0.07421620702371001,
+      "realised_over_predicted_QAfisher": 0.6559,
+      "best_MT": 2.4388303756713867,
+      "best_MT_k": 16,
+      "best_QA": 1.9124763011932373,
+      "best_QA_k": 8
+    },
+    "Q50T64": {
+      "safe_fraction": 0.5,
+      "top_t": 64,
+      "n_candidate_slots_per_layer": 255,
+      "predicted_frac_writable_MT_routing_mass": 0.30091986060142517,
+      "realised_frac_writable_MT_routing_mass": 0.18415827490389347,
+      "realised_over_predicted_MT": 0.612,
+      "predicted_frac_total_QA_Fisher_mass": 0.20989055931568146,
+      "realised_frac_total_QA_Fisher_mass": 0.14799591153860092,
+      "realised_over_predicted_QAfisher": 0.7051,
+      "best_MT": 2.3999416828155518,
+      "best_MT_k": 8,
+      "best_QA": 1.952900767326355,
+      "best_QA_k": 8
+    }
+  },
+  "constraint_binding_check": {
+    "_definition": "Document-0 direct check that the constraint actually bound: fraction of each layer's selected slots that lie inside the redundancy-safest 383 (q=0.75) of 511.",
+    "Q75_doc0_frac_inside_redundancy_top383": 1.0,
+    "C0_control_doc0_frac_inside_redundancy_top383": 0.5443
+  },
+  "eval_integrity": {
+    "eval_rows": 40,
+    "missing_losses": 0,
+    "distinct_checkpoint_paths": 20,
+    "every_eval_log_contains_its_intended_checkpoint_path": true,
+    "k12_checkpoints_distinct_across_arms": true,
+    "wandb_urls_present": 40
+  }
+}

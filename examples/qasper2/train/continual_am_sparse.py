@@ -163,10 +163,24 @@ AM_REDUNDANCY_RIDGE_REL = (
 AM_MASS_REDUNDANCY_ALPHA = (
     float(AM_MASS_REDUNDANCY_ALPHA_ENV) if AM_MASS_REDUNDANCY_ALPHA_ENV else 0.5
 )
+# B-GATE / MECH-009: `SLOT_SELECTION=constrained_mass` restricts the candidate
+# slots to the safest `AM_SAFE_FRACTION` of each layer (by `AM_SAFE_METRIC`) and
+# then applies the INCUMBENT attention-mass ranking inside that set. Unset ->
+# 1.0 -> no slot is excluded -> identical to `attention_mass`, so stock runs and
+# every MECH-008 mode are unaffected.
+AM_SAFE_FRACTION_ENV = os.environ.get("AM_SAFE_FRACTION")
+AM_SAFE_METRIC_ENV = os.environ.get("AM_SAFE_METRIC")
+AM_SAFE_FRACTION = float(AM_SAFE_FRACTION_ENV) if AM_SAFE_FRACTION_ENV else 1.0
+AM_SAFE_METRIC = AM_SAFE_METRIC_ENV or "redundancy"
 # `kl_loo` is intentionally NOT a mode: DIAG-IMPORTANCE showed the exact
 # leave-one-out KL is -log(1 - w_j), a monotone function of the slot's own
 # attention weight (rho = 0.968 with mass), so it IS `attention_mass`.
-SLOT_PRIOR_SELECTIONS = ("redundancy", "fisher", "mass_x_redundancy")
+SLOT_PRIOR_SELECTIONS = (
+    "redundancy",
+    "fisher",
+    "mass_x_redundancy",
+    "constrained_mass",
+)
 # B-SOLVE / LIT-002: box-constrained NNLS for the beta (mass-matching) fit.
 # These are only forwarded when beta is actually requested (or a knob is set
 # explicitly), so every beta-off run keeps a byte-identical config.
@@ -443,6 +457,8 @@ def _slot_prior_kwargs() -> dict:
             AM_SLOT_FISHER_PATH_ENV,
             AM_REDUNDANCY_RIDGE_REL_ENV,
             AM_MASS_REDUNDANCY_ALPHA_ENV,
+            AM_SAFE_FRACTION_ENV,
+            AM_SAFE_METRIC_ENV,
         )
     )
     is_prior_mode = SLOT_SELECTION in SLOT_PRIOR_SELECTIONS
@@ -465,7 +481,13 @@ def _slot_prior_kwargs() -> dict:
 
     missing = [
         f
-        for f in ("redundancy_ridge_rel", "mass_redundancy_alpha", "slot_fisher_path")
+        for f in (
+            "redundancy_ridge_rel",
+            "mass_redundancy_alpha",
+            "slot_fisher_path",
+            "safe_fraction",
+            "safe_metric",
+        )
         if f not in AttentionMatchingFinetuningConfig.model_fields
     ]
     if missing:
@@ -483,9 +505,23 @@ def _slot_prior_kwargs() -> dict:
             "AM_MASS_REDUNDANCY_ALPHA must be in [0, 1] (0 = pure attention mass, "
             f"1 = pure redundancy), got {AM_MASS_REDUNDANCY_ALPHA}"
         )
-    if SLOT_SELECTION == "fisher" and not AM_SLOT_FISHER_PATH_ENV:
+    if AM_SAFE_METRIC not in ("redundancy", "fisher"):
         raise ValueError(
-            "SLOT_SELECTION=fisher needs AM_SLOT_FISHER_PATH pointing at a cached "
+            "AM_SAFE_METRIC must be 'redundancy' or 'fisher', got "
+            f"{AM_SAFE_METRIC!r} (MECH-009)."
+        )
+    if not (0.0 < AM_SAFE_FRACTION <= 1.0):
+        raise ValueError(
+            "AM_SAFE_FRACTION must be in (0, 1] (1.0 = unconstrained = the "
+            f"incumbent attention-mass ranking), got {AM_SAFE_FRACTION}"
+        )
+    needs_fisher = SLOT_SELECTION == "fisher" or (
+        SLOT_SELECTION == "constrained_mass" and AM_SAFE_METRIC == "fisher"
+    )
+    if needs_fisher and not AM_SLOT_FISHER_PATH_ENV:
+        raise ValueError(
+            f"SLOT_SELECTION={SLOT_SELECTION} (AM_SAFE_METRIC={AM_SAFE_METRIC}) "
+            "needs AM_SLOT_FISHER_PATH pointing at a cached "
             "(n_layers, n_slots) diagonal-Fisher array. Generate one with "
             "research_loop/results/MECH-INFOGATE/compute_slot_fisher.py — it is a "
             "DIAGNOSTIC backward pass (no optimizer, gradient_steps stays 0), paid "
@@ -502,10 +538,18 @@ def _slot_prior_kwargs() -> dict:
         AM_MASS_REDUNDANCY_ALPHA,
         AM_SLOT_FISHER_PATH_ENV,
     )
+    logger.info(
+        "MECH-009: safe_fraction=%g safe_metric=%s (inert unless "
+        "slot_selection=constrained_mass)",
+        AM_SAFE_FRACTION,
+        AM_SAFE_METRIC,
+    )
     return {
         "redundancy_ridge_rel": AM_REDUNDANCY_RIDGE_REL,
         "mass_redundancy_alpha": AM_MASS_REDUNDANCY_ALPHA,
         "slot_fisher_path": AM_SLOT_FISHER_PATH_ENV,
+        "safe_fraction": AM_SAFE_FRACTION,
+        "safe_metric": AM_SAFE_METRIC,
     }
 
 
@@ -1015,6 +1059,16 @@ config = TrainConfig(
             # B-SOLVE: only tagged when the beta fit is actually active.
             ["beta", f"betabox-{AM_BETA_BOX}", f"nnls-{AM_NNLS_DRIVER}-{AM_NNLS_ITERS}"]
             if (ENABLE_BETA is True or _BETA_KNOBS_SET)
+            else []
+        ) + (
+            # B-GATE / MECH-008: only tagged when a slot prior is actually in play.
+            [f"sel-{SLOT_SELECTION}"]
+            if SLOT_SELECTION in SLOT_PRIOR_SELECTIONS
+            else []
+        ) + (
+            # B-GATE / MECH-009: only tagged when the constraint is active.
+            [f"safeq-{AM_SAFE_FRACTION}", f"safemetric-{AM_SAFE_METRIC}"]
+            if SLOT_SELECTION == "constrained_mass"
             else []
         ),
         notes=os.environ.get("WANDB_NOTES") or None,

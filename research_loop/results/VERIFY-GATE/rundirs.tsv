@@ -1,0 +1,4 @@
+arm	selector	offset	run_dir	rc	wall_s	solve_s	wandb_url
+R_off0	redundancy	0	/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-04-34-continual_am_sparse/858e2a0b-7f5b-4073-99b7-1f303eb60513	0	475	336.9	https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/1xt7gc82
+R_off1000	redundancy	1000	/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-24-07-continual_am_sparse/37bd2eb3-dff9-4a2f-b1c3-de1fc5c128c1	0	461	325.0	https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/94f57n1u
+R_off2000	redundancy	2000	/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-35-19-continual_am_sparse/0de275ec-28a6-4287-ba59-51ec93705f51	0	627	324.3	https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/4yidlgiv

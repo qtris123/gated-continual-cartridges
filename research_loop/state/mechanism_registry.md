@@ -647,3 +647,92 @@
 - Kept in tree? **yes** — opt-in, default off, bit-identical when off, fail-loud when requested against a
   package that lacks it. It is the reusable instrument for any future "which slots may be overwritten"
   question, and it is the reason nobody needs to rebuild `kl_loo`.
+
+---
+
+### MECH-009: mass-ranked **within** a safety constraint → `SLOT_SELECTION=constrained_mass` + `AM_SAFE_FRACTION` / `AM_SAFE_METRIC` (default: `tfidf` / 1.0 / `redundancy` = off)
+- Status: **tested → dead for acquisition (with a measured dose-response cause)**
+- Implements: the constrained selector **DIAG-IMPORTANCE's projection actually described** (its
+  `selector_tradeoff_table` rows `best32_within_safest_quartile_fisher` and
+  `best32_within_most_redundant_quartile`), which MECH-INFOGATE diagnosed it had *not* tested.
+  | Targets board entry: **B-GATE**
+- Files: `cartridges/am/ranking.py` (`_rank_slot_prior_per_layer` branch `constrained_mass`,
+  `_safety_prior`, `_or_default`, `SLOT_PRIOR_SELECTIONS` += `constrained_mass`),
+  `cartridges/am/finetune.py` (`slot_selection` Literal += `constrained_mass`; fields
+  `safe_fraction=1.0`, `safe_metric="redundancy"`), `examples/qasper2/train/continual_am_sparse.py`
+  (`AM_SAFE_FRACTION` / `AM_SAFE_METRIC`, validation, conditional-kwarg guard, two wandb tags).
+  217 insertions / 8 deletions across 3 files.
+- What it changes: MECH-008's three modes rank **by** a safety metric. This one uses the safety metric
+  as a **hard constraint** and then applies the **incumbent's own attention-mass ranking inside it**.
+  Per layer, `n_safe = clamp(floor(q·511), top_t, 511)`; candidates = the `n_safe` safest slots
+  (`redundancy` descending / `fisher` ascending); `score = tf` on candidates and `−1.0` elsewhere
+  (`tf ≥ 0` always, so −1.0 orders strictly below every candidate and the score stays finite for the
+  saved `ranking_info`); selection = top-`top_t` of that. `floor` not `round`, so `q = 0.25` → **127**
+  of 511 = DIAG-IMPORTANCE's own "safest quartile". Reuses `compute_slot_redundancy` /
+  `load_slot_fisher_scores` verbatim — no scorer was reimplemented.
+- Sanity check (CPU, `results/MECH-CONSTRAINED/sanity_mech009.py`): **it reproduces DIAG-IMPORTANCE's
+  published tradeoff rows exactly** — `best32_within_safest_quartile_fisher` **0.0462 / 0.0028**
+  (published 0.0462 / 0.0028) and `best32_within_most_redundant_quartile` **0.1731 / 0.1234**
+  (published 0.1731 / 0.1234). **Both degeneracies exact:** `q = 1.0` gives *identical index tensors and
+  an identical score tensor* to `attention_mass` (at `TOP_T` 32 and 64, under either metric); any
+  `q ≤ top_t/511` gives set agreement **1.0000** with the pure safety selector. `compute_slot_redundancy`
+  still reproduces DIAG-IMPORTANCE's array at **max|Δ| = 0.0**; the three MECH-008 modes are unchanged to
+  1e-9; seven fail-loud paths verified (`q ≤ 0`, `q > 1`, unknown metric, fisher gate with no path,
+  `cache=None`, non-`per_layer`, wrong prior shape). Deliberately **no `or`-style defaulting** — `q = 0.0`
+  raises rather than silently becoming the unconstrained selector (that bug existed for one commit and
+  the sanity script caught it).
+- **Bit-identical with flag off? YES.** The `tfidf` control re-ran the project's best point and reproduced
+  **QA 1.9560121297836304 / MT 2.2720184326171875 at k=12** and **QA 2.034916400909424 /
+  MT 2.330503463745117 at k=16** to all 16 digits (`CONTROL_GATE=GATE_PASS`); the default tfidf selection
+  sha `f1aa6c6173119045c73ec8e70199b7fc` matches MECH-008's recorded value. The only trace in a default
+  run is two inert lines of `config.yaml`.
+- Tested by: **MECH-CONSTRAINED** (`WANDB_GROUP=B-GATE`, 5 training runs + 40 dual-split evals at
+  k ∈ {8,10,12,16}; 20 distinct checkpoints, every eval log confirmed to hold its own checkpoint path).
+  Deltas vs the control **at each arm's own optimum**, against DIAG-NOISE's paired resolution
+  (±0.049 MT / ±0.054 QA):
+
+  | arm | candidates/layer | best MT (k) | ΔMT | best QA (k) | ΔQA | realised MT routing mass | *predicted* | realised QA Fisher | solve s | wandb |
+  |---|---|---|---|---|---|---|---|---|---|---|
+  | control `tfidf` t32 | 511 | **2.2720** (12) | — | **1.9464** (8) | — | **0.2799** | 0.3736 | 0.2389 | 336 | `tmbp0ow3` |
+  | `constrained_mass` q=0.75 t32 | 383 | 2.3288 (8) | **+0.057** ✔ | 1.9119 (8) | −0.035 ✘ | 0.1661 | 0.2780 | 0.1477 | 341 | `zismkxc8` |
+  | `constrained_mass` q=0.50 t32 | 255 | 2.3693 (16) | **+0.097** ✔ | 1.9230 (8) | −0.023 ✘ | 0.1327 | 0.2340 | 0.1086 | 316 | `03gtxhfb` |
+  | `constrained_mass` q=0.25 t32 | 127 | 2.4388 (16) | **+0.167** ✔ | 1.9125 (8) | −0.034 ✘ | 0.1000 | 0.1710 | 0.0742 | 330 | `11ogsctl` |
+  | `constrained_mass` q=0.50 **t64** | 255 | 2.3999 (8) | **+0.128** ✔ | 1.9529 (8) | +0.007 ✘ | 0.1842 | 0.3009 | 0.1480 | 364 | `7seii73w` |
+
+  (✔ = clears the paired resolution. *predicted* = the same axis scored offline on the untouched Phase-1
+  cartridge at doc-0 geometry, i.e. what an extrapolation would have promised. Full URLs in
+  `result.json::wandb_all_training_runs`; the 40 eval runs are in `curve.tsv`.)
+- Verdict + mechanistic reason: ❌ **dead for acquisition — and this is the strongest form the negative
+  can take, because it is a controlled DOSE-RESPONSE curve, not three point estimates.** With `TOP_T`
+  held at 32 and **only the constraint strength moving**, MT degrades **monotonically** as `q` tightens
+  (2.2720 → 2.3288 → 2.3693 → 2.4388) and the realised share of writable MT routing mass falls
+  monotonically with it (0.2799 → 0.1661 → 0.1327 → 0.1000). Within the sweep
+  `log(realised MT routing mass)` predicts best-MT loss at **Pearson −0.9775** (n=4); pooled with
+  MECH-INFOGATE's six arms on identical axes and the identical control, **−0.8681 over ten points**
+  (MECH-INFOGATE alone published −0.8766). The incumbent **maximises MT routing mass by construction**,
+  so any constraint can only remove candidates from that maximisation, and the CE loss follows the mass
+  it removes — the relationship is now measured with a single moving variable. **Even the lightest touch
+  is expensive:** excluding only the most QA-critical *quarter* (`q = 0.75`) already costs **41% of the
+  incumbent's realised MT bandwidth**, because MT-wanted slots are concentrated in exactly the
+  least-redundant part of the cartridge (top-32 overlap with the incumbent 0.634 → 0.448 → 0.252).
+  **A bigger budget does not rescue it:** q=0.50 at `TOP_T=64` buys bandwidth back (0.1842 vs 0.1327) but
+  is *worse* on MT (2.3999 vs 2.3693) **and** worse on QA (1.9529 vs 1.9230) — MECH-BUDGET's reversal
+  again. **The retention side is real but unresolved:** every constrained arm's best QA beats the
+  control's 1.9464, but all four deltas sit **inside** the ±0.054 paired QA resolution, on the axis that
+  was already 0.57 ahead of budget. **Cost is not the discriminator:** 316–364 s solve (0.94×–1.08×),
+  `am/mean_mse` 0.0035–0.0048, `|v|max` 78.5–91.0, `gradient_steps = 0` throughout (the redundancy gate
+  needs no eval data and no backward pass).
+- 🔑 **Second measured result, worth carrying forward: doc-0 projections are systematically ~0.6×
+  optimistic.** realised/predicted MT bandwidth = 0.749 (control), 0.598, 0.567, 0.585, 0.612. Redundancy
+  is recomputed from the **live** cache each document and the written union grows, so any offline
+  extrapolation from the untouched Phase-1 cartridge over-states what a 16-document run realises. **That,
+  and not a wrong selector, is the residual reason DIAG-IMPORTANCE's projection over-promised** — the
+  selector it described has now been built, verified to reproduce its numbers exactly, and measured.
+- ⚠️ Honest limits: (a) single seed per arm (`AM_SEED_OFFSET` unset); (b) two of the four new arms bottom
+  on MT at **k=16**, the edge of the evaluated set, so their minima are unlocated — which flatters them;
+  (c) only the **redundancy** gate got GPU time — the `fisher` gate is implemented and unit-tested but
+  DIAG-IMPORTANCE's own table puts it 3.7× lower on MT bandwidth at the same `q` (0.0462 vs 0.1731), so
+  it is predicted to be strictly worse and was not run.
+- Kept in tree? **yes** — opt-in, default off, bit-identical when off, fail-loud when requested against a
+  package that lacks it. It is the reference implementation of "safety constraint + incumbent ranking",
+  and its two exact degeneracies make it the single knob that spans `attention_mass` ↔ MECH-008.
