@@ -152,6 +152,19 @@ class AttentionMatchingFinetuningConfig(BaseConfig):
     onpolicy_layers: int = 0
     onpolicy_refresh_doc_kv: bool = False
 
+    # MECH-007 / RUNBOOK §9c: the ONLY stochastic choice left in the per-document
+    # AM write. `am/continual.py` draws `max_ref_examples_per_doc` of a document's
+    # conversations with `seed=doc_idx` — a constant — and `config.seed` never
+    # reaches that draw (the `per_document` path does not go through
+    # `pydrantic.main`, so a `seed=<n>` CLI override is silently ignored;
+    # DIAG-KEYCURVE/seed_probe.json). `seed_offset` shifts that draw to
+    # `doc_idx + seed_offset`, which is what a "changed seed" means for this
+    # method: a different subset of each document's ~500 reference conversations.
+    # DIAG-PERDOC measured the resulting spread at 0.216 loss on a per-document
+    # subset, so it is a real source of variance. Default 0 -> every historical
+    # run is bit-identical.
+    seed_offset: int = 0
+
 
 @dataclass
 class AMUpdateStats:

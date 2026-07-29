@@ -187,6 +187,46 @@ the number that shows it. "It didn't help" never closes anything.
   only prints). The worker logged the cells via a parser under the no-edit rule; the losses are the
   harness's own, not recomputed. `EVAL_MODE=icl` also does **not** hang, unlike the cartridge path (§1).
 
+## ✅ MECH-SEED (2026-07-29): **the first seed-varied confirmation in this project's history**
+**The MT effect survives seed variance and is not marginal. The QA effect does not.**
+
+- **The knob is real, not cosmetic:** a non-zero `AM_SEED_OFFSET` replaces **~30 of each document's 32**
+  reference conversations (mean shared 2.19/32 and 2.63/32; Jaccard 0.036/0.043; **0 of 16 documents**
+  keep their draw). Both consumers of the per-document seed are offset together (`limit_conversations`,
+  which picks *which*, and `build_reference_dataloader`, which seeds packing/ordering).
+- **Bit-identical when default, proven three ways:** the `git archive HEAD` snapshot (which contains *zero*
+  occurrences of `seed_offset`), the edited tree with the flag unset, and the edited tree with
+  `AM_SEED_OFFSET=0` explicit all produce **sha256-identical output across all 17 cartridge artefacts**,
+  identical `am/mean_mse`, `|v|max` and in-run evals. The only diff anywhere is one line of `config.yaml`.
+- **Offset-0 gate exact** (16 digits) for the keys arm at k=12 **and** k=16, the mechanism-off control, and
+  the Phase-1 floor.
+
+| at k=12 | offset 0 | offset 1000 | offset 2000 | mean | range |
+|---|---|---|---|---|---|
+| keys MT | 2.27202 | 2.26954 | 2.26263 | **2.26806** | **0.0094** |
+| keys QA | 1.95601 | 1.93972 | 1.94464 | **1.94679** | 0.0163 |
+| **ΔMT vs control** | −0.1984 | −0.1791 | −0.2537 | **−0.2104** | 0.0746 |
+| ΔQA vs control | −0.1181 | −0.1125 | −0.1262 | −0.1189 | — |
+
+- 🔑 **ΔMT survives, and not marginally.** All six deltas (k=12 and k=16 × 3 seeds) share a sign and all
+  six exceed 0.15. **The adversarial pairing — the keys arm's *worst* seed against the control's *best*
+  — still gives −0.1766 (k=12) and −0.1519 (k=16), outside the band.** The effect is **22×** the keys
+  arm's own across-seed spread at k=12.
+- ❌ **ΔQA remains unconfirmed**, exactly as DIAG-KEYCURVE's correction said: consistently negative but
+  **inside the band at every seed** (−0.1181/−0.1125/−0.1262); adversarially paired it is −0.0962.
+- **The control is the noisier arm** (k=12 MT range 0.0677, k=16 range 0.1290) — so the seed-stability is
+  a property of the mechanism, not of the harness.
+- **Internal signature is seed-stable too:** `ref_mass_on_S` 0.3136/0.3615/0.3587 (keys) vs 0.1452/0.1460
+  (control) — a **2.4–2.5× ratio at every seed**; `|v|max` 78.5/77.0/88.0 vs 139/162. Cost is **~1.9×**
+  the control's solve time, seed-independent.
+- 🚩 **Still NOT a PASS.** Seed-averaged best point **QA 1.9468 / MT 2.2681**: clears the QA budget by
+  0.573 at every seed, **falls 0.248 short of MT ≤ 2.02 at every seed** (best seed 2.2626, short by
+  0.243). **All four elements of MISSION §3's confirmation standard are now satisfied** — fresh-process
+  reproduction, changed seed, seed-varied mechanism-off ablation, and the Phase-1 floor control — but
+  §3's threshold is not met.
+- **Caveat the worker refused to argue away:** three seeds are three samples of a coarse instrument; the
+  ranges quoted are ranges of three, not confidence intervals.
+
 ## 📐 DIAG-NOISE (2026-07-29): the ±0.15 band was ~3× TOO WIDE — and it reverses the refutation below
 **The threshold every claim in this project was adjudicated against had never been measured. Measured, it
 is not ±0.15.** Per-example losses were recovered **exactly** (not by leave-one-out: the metric is a

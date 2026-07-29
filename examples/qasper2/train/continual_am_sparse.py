@@ -142,6 +142,14 @@ AM_ONPOLICY_LAYERS = int(AM_ONPOLICY_LAYERS_ENV) if AM_ONPOLICY_LAYERS_ENV else 
 # paper only re-extracts queries, so this defaults OFF.
 AM_ONPOLICY_DOCKV_ENV = os.environ.get("AM_ONPOLICY_DOCKV")
 AM_ONPOLICY_DOCKV = AM_ONPOLICY_DOCKV_ENV in ("1", "true", "True")
+# MECH-007 / RUNBOOK §9c: the seed knob this method actually has. `config.seed`
+# does NOT reach the per-document write (the `per_document` path never goes
+# through `pydrantic.main`, so a `seed=<n>` CLI override is silently ignored),
+# and `am/continual.py` draws each document's reference conversations with
+# `seed=doc_idx`, a constant. `AM_SEED_OFFSET=N` shifts that draw to
+# `doc_idx + N`. Unset/0 -> bit-identical to every historical run.
+AM_SEED_OFFSET_ENV = os.environ.get("AM_SEED_OFFSET")
+AM_SEED_OFFSET = int(AM_SEED_OFFSET_ENV) if AM_SEED_OFFSET_ENV else 0
 # B-SOLVE / LIT-002: box-constrained NNLS for the beta (mass-matching) fit.
 # These are only forwarded when beta is actually requested (or a knob is set
 # explicitly), so every beta-off run keeps a byte-identical config.
@@ -363,6 +371,42 @@ def _onpolicy_kwargs() -> dict:
     }
 
 
+def _seed_offset_kwargs() -> dict:
+    """Pass `seed_offset` ONLY if the imported package has the field.
+
+    Same conditional-kwarg discipline as `_oracle_write_kwargs` (RUNBOOK §6.10):
+    an unconditional new kwarg once crashed every AM run through the sibling
+    `cartridges` import path (MECH-000). When `AM_SEED_OFFSET` is unset the kwarg
+    is omitted entirely; when it IS requested but the field is missing we fail
+    loudly rather than silently running the historical single seed — the whole
+    point of this knob is that a "seed-varied" result must actually be seed-varied.
+    """
+    import cartridges
+
+    if AM_SEED_OFFSET_ENV is None:
+        return {}
+    if "seed_offset" not in AttentionMatchingFinetuningConfig.model_fields:
+        raise RuntimeError(
+            f"AM_SEED_OFFSET={AM_SEED_OFFSET_ENV} but the imported `cartridges` "
+            f"package ({os.path.dirname(cartridges.__file__)}) has no `seed_offset` "
+            "field, so the run would silently use the historical seed. "
+            "Export PYTHONPATH=$CARTRIDGES_DIR:$PYTHONPATH (RUNBOOK §6.10)."
+        )
+    if AM_SEED_OFFSET < 0:
+        raise ValueError(f"AM_SEED_OFFSET must be >= 0, got {AM_SEED_OFFSET}")
+    if AM_SEED_OFFSET > 0 and AM_EXECUTION_MODE != "per_document":
+        raise ValueError(
+            "AM_SEED_OFFSET only affects the per-document reference draw; got "
+            f"AM_EXECUTION_MODE={AM_EXECUTION_MODE}."
+        )
+    logger.info(
+        "MECH-007: per-document reference draw seed = doc_idx + %d "
+        "(env AM_SEED_OFFSET=%s)",
+        AM_SEED_OFFSET, AM_SEED_OFFSET_ENV,
+    )
+    return {"seed_offset": AM_SEED_OFFSET}
+
+
 def _beta_fit_kwargs() -> dict:
     """Pass the LIT-002 beta-fit knobs ONLY when beta is actually in play.
 
@@ -414,6 +458,7 @@ def _build_am_config() -> AttentionMatchingFinetuningConfig:
         **_key_reposition_kwargs(),
         **_onpolicy_kwargs(),
         **_beta_fit_kwargs(),
+        **_seed_offset_kwargs(),
         enabled=True,
         top_t=TOP_T,
         use_idf=USE_IDF and BG_STATS_PATH is not None,

@@ -485,3 +485,78 @@
   **+0.176 MT and +0.188 QA**, at or above the top of the 0.1–0.2 band. Everywhere else it is inside
   the band. There is no k at which on-policy helps.
 - Kept in tree? yes — opt-in, both flags default off, bit-identical when off.
+
+### MECH-007: opt-in per-document reference-draw seed offset → flag `AM_SEED_OFFSET` (default: 0 = off)
+- Status: **tested** (MECH-SEED, 2026-07-29) · Targets board entry: **the confirmation standard itself**
+  (PLAN_AM_MUST_WIN.md §3) — and, through it, **BEST GRADIENT-FREE POINT** / B-ROUTE (key side).
+- Implements: no external LIT entry. This is infrastructure the mission's own PASS criterion requires and
+  that DIAG-KEYCURVE proved by direct test did not exist (`seed_probe.json`): `continual_am_sparse.py`
+  reaches `pydrantic.main` **only** in `AM_EXECUTION_MODE=train_loop`, so a `seed=<n>` CLI override never
+  reaches `config.seed` in the canonical `per_document` path (probe: it stayed 42); there is no `SEED` env
+  knob; and `cartridges/am/continual.py:150` seeded the per-document reference draw with `seed=doc_idx`,
+  a constant. **Every number in this project was one seed.**
+- Files:
+  - `cartridges/am/finetune.py` — `AttentionMatchingFinetuningConfig.seed_offset: int = 0` (+13 lines)
+  - `cartridges/am/continual.py::run_per_document_am_phase2` — reads it via
+    `getattr(config, "seed_offset", 0)` (so a sibling-package config still works), raises on a negative
+    value, logs once when non-zero, and derives `draw_seed = doc_idx + seed_offset` — used for **both**
+    `limit_conversations(...)` (which conversations are drawn) and `build_reference_dataloader(...)`
+    (packing/ordering of the drawn subset). Records `aggregate["seed_offset"]` **only** when non-zero, so
+    a stock `per_document_am_stats.pt` keeps exactly its historical keys. (+34 lines)
+  - `examples/qasper2/train/continual_am_sparse.py` — `AM_SEED_OFFSET` env var and a
+    `_seed_offset_kwargs()` helper wired into `_build_am_config()`, following the repo's
+    conditional-kwarg discipline (RUNBOOK §6.10 / MECH-000): the kwarg is omitted entirely when the env
+    var is unset, and if it IS set while the imported `cartridges` lacks the field the driver **raises**
+    rather than silently running the historical seed. (+45 lines)
+- What it changes (at the level of the math): nothing in the solve. It changes only **which 32 of a
+  document's ~500 synthesised conversations** form the reference set `Q_ref` that the closed-form
+  value/key write is fitted to — the single stochastic choice the per-document AM path contains. DIAG-PERDOC
+  had already measured that this choice is a genuine source of variance (0.216 spread on a per-document
+  subset loss), which is why it is the right thing to vary.
+- Sanity check (CPU, no GPU): 6-case config-construction matrix — flag unset → `seed_offset=0`; `=0` →
+  0 + the `MECH-007:` log line; `=1000` → 1000; **HEAD-snapshot package + `=1000` → RuntimeError**
+  (fail-loud, as designed); HEAD-snapshot package + unset → constructs fine with the field absent (the
+  sibling-import path is not broken); `=-5` → ValueError. Plus a draw probe on the real MT parquet:
+  offset 0 vs 1000 shares **2.19 of 32** conversations per document (Jaccard 0.036), 0 vs 2000 shares
+  **2.63 of 32** (Jaccard 0.043), and **0 of 16 documents** keep the same draw. The knob is not cosmetic.
+- **Bit-identical with flag off? YES — proven two ways.** Three runs of the identical keys+reposition
+  configuration: A1 = `git archive HEAD` snapshot (no `seed_offset` field at all), A2 = edited tree with
+  `AM_SEED_OFFSET` unset, A3 = edited tree with `AM_SEED_OFFSET=0` explicit. **All 17 cartridge artefacts
+  (16 `cache-after-doc-*.pt` + `cache_last.pt`) are sha256-identical across all three**, as are
+  `am/mean_mse` (0.0039414096599943195), `|v|max` (78.5) and the in-run evals (QA 2.0349531173706055 /
+  MT 2.3290133476257324). The only difference anywhere in the tree is **one line of config.yaml**,
+  `seed_offset: 0` — unavoidable when adding a pydantic field, and numerically inert.
+- Tested by: **MECH-SEED** (this build's own W5 half) → the mission's best point (MECH-005 keys+reposition
+  at k=12) run at offsets {0, 1000, 2000}, both splits, k ∈ {12, 16}, against the mechanism-off control
+  (`KEY_MODE=freeze`) at the same three offsets.
+
+  | arm | k | MT @off0 | MT @off1000 | MT @off2000 | mean | range |
+  |---|---|---|---|---|---|---|
+  | keys+repos | 12 | 2.27202 | 2.26954 | 2.26263 | **2.26806** | **0.0094** |
+  | keys+repos | 16 | 2.33050 | 2.30624 | 2.29011 | 2.30895 | 0.0404 |
+  | control `freeze` | 12 | 2.47046 | 2.44861 | 2.51633 | 2.47846 | 0.0677 |
+  | control `freeze` | 16 | 2.52963 | 2.48238 | 2.61136 | 2.54112 | 0.1290 |
+
+  **ΔMT (keys − control) at matched k:** k=12 → −0.1984 / −0.1791 / −0.2537 (mean **−0.2104**);
+  k=16 → −0.1991 / −0.1761 / −0.3212 (mean **−0.2322**). **All six same sign, all six outside the ±0.15
+  band.** Adversarially paired (keys' worst seed vs control's best seed) it is still −0.1766 at k=12 and
+  −0.1519 at k=16. **ΔQA** at k=12 is −0.1181 / −0.1125 / −0.1262 (mean −0.1189) — consistently negative,
+  consistently **inside** the band at every seed; at k=16 the mean is −0.1658 but only offset 2000 clears.
+  wandb (group `VERIFY`): A1 `790bm7pf`, A2 `i0s58v1k`, A3 `xn2qekrp`, keys@1000 `qts8j7kw`,
+  keys@2000 `t1p85sr0`, control@1000 `nmratchj`, control@2000 `buqjv0fy`, + 26 eval runs (`curve.tsv`).
+- Verdict + mechanistic reason: ✅ **supported — and it retires the blocker.** The knob does exactly the
+  one thing that was missing, at zero cost to every existing configuration, and the first thing it was
+  used for produced a clean answer: **the seed-to-seed spread of the point under test (0.0094 MT at k=12)
+  is 22× smaller than the keys-vs-control effect it was meant to test (−0.2104), so the MT advantage of
+  key installation is NOT a seed artefact.** The mechanism's *internal* signature is seed-stable too —
+  solve-time `ref_mass_on_S` 0.3136/0.3615/0.3587 (keys) vs 0.1452/0.1460 (control), a 2.4–2.5× ratio at
+  every seed; `am/mean_mse` 0.00394/0.00353/0.00348 vs 0.01424/0.01353; `|v|max` 78.5/77.0/88.0 vs
+  139/162; solve cost 296–311 s vs 157–165 s (~1.9×, seed-independent). ⚠️ Two honest limits. (a) The
+  **QA** half of the old "beats frozen keys on BOTH axes" headline is now refuted at three seeds rather
+  than one — ΔQA never leaves the noise band at k=12. (b) The point is **still not a mission PASS**:
+  averaged over seeds it is QA 1.9468 / MT 2.2681, clearing the QA budget by 0.573 but **0.248 short of
+  MT ≤ 2.02 at every seed, best seed included**. (c) This varies the *only* stochastic choice the
+  per-document path has; it does not vary document order or eval sampling, so it is a **lower bound** on
+  total run-to-run variance, and three seeds on an n=69/78 eval are three samples of a coarse instrument.
+- Kept in tree? **yes** — opt-in, default 0, bit-identical when default, fail-loud when requested against
+  a package that lacks it. Every future result in this project can and should be seed-varied with it.

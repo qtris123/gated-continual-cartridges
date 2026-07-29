@@ -1,0 +1,1621 @@
+{
+ "id": "MECH-SEED",
+ "mechanism": "MECH-007 (AM_SEED_OFFSET)",
+ "default_preservation": {
+  "n_artefacts_compared": 17,
+  "artefacts": [
+   "cache-after-doc-000-ae4e8fb7.pt",
+   "cache-after-doc-001-07b4743b.pt",
+   "cache-after-doc-002-38a6f58f.pt",
+   "cache-after-doc-003-71f51767.pt",
+   "cache-after-doc-004-a11f66ae.pt",
+   "cache-after-doc-005-0c806aca.pt",
+   "cache-after-doc-006-b03a4aa0.pt",
+   "cache-after-doc-007-e1a7f420.pt",
+   "cache-after-doc-008-6f413175.pt",
+   "cache-after-doc-009-f77cecfb.pt",
+   "cache-after-doc-010-aba1a026.pt",
+   "cache-after-doc-011-cfcb19a9.pt",
+   "cache-after-doc-012-01bdc15a.pt",
+   "cache-after-doc-013-152f42ae.pt",
+   "cache-after-doc-014-8d059cfa.pt",
+   "cache-after-doc-015-af07b880.pt",
+   "cache_last.pt"
+  ],
+  "flag_unset_vs_git_archive_HEAD_bit_identical": true,
+  "flag_zero_vs_git_archive_HEAD_bit_identical": true,
+  "hashes_A1_head_snapshot": [
+   "0921b3779a9126a1cf6af5232dc52d9810c809d5408f404368ec763e88613794  cache-after-doc-000-ae4e8fb7.pt",
+   "ee757d88409c9848ee68053667c969fad32677b0a385edd80a9e7ee9f8bfd9af  cache-after-doc-001-07b4743b.pt",
+   "c6a12895473218eb9a5a636dba53d556db4df377b7a9379a07a8be51543e28a7  cache-after-doc-002-38a6f58f.pt",
+   "636dc1055aab591636ebf2f6403ae1f5cc402e93909d6401aa1b993143162a80  cache-after-doc-003-71f51767.pt",
+   "c63c30c43fd4f5bf259eefc952afda60aca85113c519d16572874326adb888f0  cache-after-doc-004-a11f66ae.pt",
+   "167a85178151decae275358f922d0775b05e1729833434c42875cdfb7d973906  cache-after-doc-005-0c806aca.pt",
+   "c9110768211d7098cdb2158751a0d2fcb4f97f7ab9ac6119c156e44f416a340b  cache-after-doc-006-b03a4aa0.pt",
+   "c167a55174409c1a81d3f6c2b710ff2b1d9564f25011094272f3eb4e0710231f  cache-after-doc-007-e1a7f420.pt",
+   "e939be2f5677161c4bb5d13480d2176e7478c9b7e9b919cd5c490d562ad22262  cache-after-doc-008-6f413175.pt",
+   "ba592c96c44b482853972f0b3a79662b277107df209d32ef850780f4513061c0  cache-after-doc-009-f77cecfb.pt",
+   "89a528f88cf5a1532b465de84baa5b0b7408e3c5f532a5ae7ea908e48209b482  cache-after-doc-010-aba1a026.pt",
+   "96eb96a3d1b0f4e323bbcb8cafb8b1682ecc17e39eecb1aeaea9b6398adf5695  cache-after-doc-011-cfcb19a9.pt",
+   "281c18b5c388c3b5b34550d0cb93a6e4f2a540a1c79762072927b7d83038a944  cache-after-doc-012-01bdc15a.pt",
+   "000501fc92d55772ec7c53df04625896d30ec993de272cda68bed7c3e7bacdeb  cache-after-doc-013-152f42ae.pt",
+   "c7d2aa521b2b9a2fd64fe1baab7dbb2fc006232e322dbfa56114399c0625e1d8  cache-after-doc-014-8d059cfa.pt",
+   "3065c076062bf2ea2d765f4dabca82df3154e20829192c1278bc1fbb47905ab8  cache-after-doc-015-af07b880.pt",
+   "8d9bbac517a077307c7b2211646ff9e72e200408d82ff545596696d3bcd53cd9  cache_last.pt"
+  ],
+  "hashes_A2_edited_flag_unset": [
+   "0921b3779a9126a1cf6af5232dc52d9810c809d5408f404368ec763e88613794  cache-after-doc-000-ae4e8fb7.pt",
+   "ee757d88409c9848ee68053667c969fad32677b0a385edd80a9e7ee9f8bfd9af  cache-after-doc-001-07b4743b.pt",
+   "c6a12895473218eb9a5a636dba53d556db4df377b7a9379a07a8be51543e28a7  cache-after-doc-002-38a6f58f.pt",
+   "636dc1055aab591636ebf2f6403ae1f5cc402e93909d6401aa1b993143162a80  cache-after-doc-003-71f51767.pt",
+   "c63c30c43fd4f5bf259eefc952afda60aca85113c519d16572874326adb888f0  cache-after-doc-004-a11f66ae.pt",
+   "167a85178151decae275358f922d0775b05e1729833434c42875cdfb7d973906  cache-after-doc-005-0c806aca.pt",
+   "c9110768211d7098cdb2158751a0d2fcb4f97f7ab9ac6119c156e44f416a340b  cache-after-doc-006-b03a4aa0.pt",
+   "c167a55174409c1a81d3f6c2b710ff2b1d9564f25011094272f3eb4e0710231f  cache-after-doc-007-e1a7f420.pt",
+   "e939be2f5677161c4bb5d13480d2176e7478c9b7e9b919cd5c490d562ad22262  cache-after-doc-008-6f413175.pt",
+   "ba592c96c44b482853972f0b3a79662b277107df209d32ef850780f4513061c0  cache-after-doc-009-f77cecfb.pt",
+   "89a528f88cf5a1532b465de84baa5b0b7408e3c5f532a5ae7ea908e48209b482  cache-after-doc-010-aba1a026.pt",
+   "96eb96a3d1b0f4e323bbcb8cafb8b1682ecc17e39eecb1aeaea9b6398adf5695  cache-after-doc-011-cfcb19a9.pt",
+   "281c18b5c388c3b5b34550d0cb93a6e4f2a540a1c79762072927b7d83038a944  cache-after-doc-012-01bdc15a.pt",
+   "000501fc92d55772ec7c53df04625896d30ec993de272cda68bed7c3e7bacdeb  cache-after-doc-013-152f42ae.pt",
+   "c7d2aa521b2b9a2fd64fe1baab7dbb2fc006232e322dbfa56114399c0625e1d8  cache-after-doc-014-8d059cfa.pt",
+   "3065c076062bf2ea2d765f4dabca82df3154e20829192c1278bc1fbb47905ab8  cache-after-doc-015-af07b880.pt",
+   "8d9bbac517a077307c7b2211646ff9e72e200408d82ff545596696d3bcd53cd9  cache_last.pt"
+  ],
+  "hashes_A3_edited_flag_zero": [
+   "0921b3779a9126a1cf6af5232dc52d9810c809d5408f404368ec763e88613794  cache-after-doc-000-ae4e8fb7.pt",
+   "ee757d88409c9848ee68053667c969fad32677b0a385edd80a9e7ee9f8bfd9af  cache-after-doc-001-07b4743b.pt",
+   "c6a12895473218eb9a5a636dba53d556db4df377b7a9379a07a8be51543e28a7  cache-after-doc-002-38a6f58f.pt",
+   "636dc1055aab591636ebf2f6403ae1f5cc402e93909d6401aa1b993143162a80  cache-after-doc-003-71f51767.pt",
+   "c63c30c43fd4f5bf259eefc952afda60aca85113c519d16572874326adb888f0  cache-after-doc-004-a11f66ae.pt",
+   "167a85178151decae275358f922d0775b05e1729833434c42875cdfb7d973906  cache-after-doc-005-0c806aca.pt",
+   "c9110768211d7098cdb2158751a0d2fcb4f97f7ab9ac6119c156e44f416a340b  cache-after-doc-006-b03a4aa0.pt",
+   "c167a55174409c1a81d3f6c2b710ff2b1d9564f25011094272f3eb4e0710231f  cache-after-doc-007-e1a7f420.pt",
+   "e939be2f5677161c4bb5d13480d2176e7478c9b7e9b919cd5c490d562ad22262  cache-after-doc-008-6f413175.pt",
+   "ba592c96c44b482853972f0b3a79662b277107df209d32ef850780f4513061c0  cache-after-doc-009-f77cecfb.pt",
+   "89a528f88cf5a1532b465de84baa5b0b7408e3c5f532a5ae7ea908e48209b482  cache-after-doc-010-aba1a026.pt",
+   "96eb96a3d1b0f4e323bbcb8cafb8b1682ecc17e39eecb1aeaea9b6398adf5695  cache-after-doc-011-cfcb19a9.pt",
+   "281c18b5c388c3b5b34550d0cb93a6e4f2a540a1c79762072927b7d83038a944  cache-after-doc-012-01bdc15a.pt",
+   "000501fc92d55772ec7c53df04625896d30ec993de272cda68bed7c3e7bacdeb  cache-after-doc-013-152f42ae.pt",
+   "c7d2aa521b2b9a2fd64fe1baab7dbb2fc006232e322dbfa56114399c0625e1d8  cache-after-doc-014-8d059cfa.pt",
+   "3065c076062bf2ea2d765f4dabca82df3154e20829192c1278bc1fbb47905ab8  cache-after-doc-015-af07b880.pt",
+   "8d9bbac517a077307c7b2211646ff9e72e200408d82ff545596696d3bcd53cd9  cache_last.pt"
+  ],
+  "config_yaml_diff_A1_vs_A2": [
+   "48a49",
+   ">   seed_offset: 0"
+  ]
+ },
+ "drawn_id_overlap_probe": {
+  "mt_parquet": "data/qasper/train/qwen_qasper_MT_task_8192.parquet",
+  "max_ref_examples_per_doc": 32,
+  "n_documents": 16,
+  "n_conversations_per_document": {
+   "0": 485,
+   "1": 487,
+   "2": 502,
+   "3": 513,
+   "4": 517,
+   "5": 512,
+   "6": 488,
+   "7": 511,
+   "8": 537,
+   "9": 516,
+   "10": 508,
+   "11": 555,
+   "12": 482,
+   "13": 522,
+   "14": 525,
+   "15": 532
+  },
+  "pairs": [
+   {
+    "a": 0,
+    "b": 1000,
+    "per_document": [
+     {
+      "doc_idx": 0,
+      "n_available": 485,
+      "n_drawn": 32,
+      "n_shared": 1,
+      "n_differ": 31,
+      "jaccard": 0.015873015873015872
+     },
+     {
+      "doc_idx": 1,
+      "n_available": 487,
+      "n_drawn": 32,
+      "n_shared": 3,
+      "n_differ": 29,
+      "jaccard": 0.04918032786885246
+     },
+     {
+      "doc_idx": 2,
+      "n_available": 502,
+      "n_drawn": 32,
+      "n_shared": 0,
+      "n_differ": 32,
+      "jaccard": 0.0
+     },
+     {
+      "doc_idx": 3,
+      "n_available": 513,
+      "n_drawn": 32,
+      "n_shared": 1,
+      "n_differ": 31,
+      "jaccard": 0.015873015873015872
+     },
+     {
+      "doc_idx": 4,
+      "n_available": 517,
+      "n_drawn": 32,
+      "n_shared": 5,
+      "n_differ": 27,
+      "jaccard": 0.0847457627118644
+     },
+     {
+      "doc_idx": 5,
+      "n_available": 512,
+      "n_drawn": 32,
+      "n_shared": 0,
+      "n_differ": 32,
+      "jaccard": 0.0
+     },
+     {
+      "doc_idx": 6,
+      "n_available": 488,
+      "n_drawn": 32,
+      "n_shared": 5,
+      "n_differ": 27,
+      "jaccard": 0.0847457627118644
+     },
+     {
+      "doc_idx": 7,
+      "n_available": 511,
+      "n_drawn": 32,
+      "n_shared": 2,
+      "n_differ": 30,
+      "jaccard": 0.03225806451612903
+     },
+     {
+      "doc_idx": 8,
+      "n_available": 537,
+      "n_drawn": 32,
+      "n_shared": 4,
+      "n_differ": 28,
+      "jaccard": 0.06666666666666667
+     },
+     {
+      "doc_idx": 9,
+      "n_available": 516,
+      "n_drawn": 32,
+      "n_shared": 3,
+      "n_differ": 29,
+      "jaccard": 0.04918032786885246
+     },
+     {
+      "doc_idx": 10,
+      "n_available": 508,
+      "n_drawn": 32,
+      "n_shared": 2,
+      "n_differ": 30,
+      "jaccard": 0.03225806451612903
+     },
+     {
+      "doc_idx": 11,
+      "n_available": 555,
+      "n_drawn": 32,
+      "n_shared": 2,
+      "n_differ": 30,
+      "jaccard": 0.03225806451612903
+     },
+     {
+      "doc_idx": 12,
+      "n_available": 482,
+      "n_drawn": 32,
+      "n_shared": 4,
+      "n_differ": 28,
+      "jaccard": 0.06666666666666667
+     },
+     {
+      "doc_idx": 13,
+      "n_available": 522,
+      "n_drawn": 32,
+      "n_shared": 1,
+      "n_differ": 31,
+      "jaccard": 0.015873015873015872
+     },
+     {
+      "doc_idx": 14,
+      "n_available": 525,
+      "n_drawn": 32,
+      "n_shared": 1,
+      "n_differ": 31,
+      "jaccard": 0.015873015873015872
+     },
+     {
+      "doc_idx": 15,
+      "n_available": 532,
+      "n_drawn": 32,
+      "n_shared": 1,
+      "n_differ": 31,
+      "jaccard": 0.015873015873015872
+     }
+    ],
+    "mean_shared_of_32": 2.1875,
+    "mean_differ_of_32": 29.8125,
+    "mean_jaccard": 0.03608279921301459,
+    "n_documents_with_identical_draw": 0
+   },
+   {
+    "a": 0,
+    "b": 2000,
+    "per_document": [
+     {
+      "doc_idx": 0,
+      "n_available": 485,
+      "n_drawn": 32,
+      "n_shared": 2,
+      "n_differ": 30,
+      "jaccard": 0.03225806451612903
+     },
+     {
+      "doc_idx": 1,
+      "n_available": 487,
+      "n_drawn": 32,
+      "n_shared": 5,
+      "n_differ": 27,
+      "jaccard": 0.0847457627118644
+     },
+     {
+      "doc_idx": 2,
+      "n_available": 502,
+      "n_drawn": 32,
+      "n_shared": 2,
+      "n_differ": 30,
+      "jaccard": 0.03225806451612903
+     },
+     {
+      "doc_idx": 3,
+      "n_available": 513,
+      "n_drawn": 32,
+      "n_shared": 2,
+      "n_differ": 30,
+      "jaccard": 0.03225806451612903
+     },
+     {
+      "doc_idx": 4,
+      "n_available": 517,
+      "n_drawn": 32,
+      "n_shared": 2,
+      "n_differ": 30,
+      "jaccard": 0.03225806451612903
+     },
+     {
+      "doc_idx": 5,
+      "n_available": 512,
+      "n_drawn": 32,
+      "n_shared": 4,
+      "n_differ": 28,
+      "jaccard": 0.06666666666666667
+     },
+     {
+      "doc_idx": 6,
+      "n_available": 488,
+      "n_drawn": 32,
+      "n_shared": 3,
+      "n_differ": 29,
+      "jaccard": 0.04918032786885246
+     },
+     {
+      "doc_idx": 7,
+      "n_available": 511,
+      "n_drawn": 32,
+      "n_shared": 5,
+      "n_differ": 27,
+      "jaccard": 0.0847457627118644
+     },
+     {
+      "doc_idx": 8,
+      "n_available": 537,
+      "n_drawn": 32,
+      "n_shared": 2,
+      "n_differ": 30,
+      "jaccard": 0.03225806451612903
+     },
+     {
+      "doc_idx": 9,
+      "n_available": 516,
+      "n_drawn": 32,
+      "n_shared": 3,
+      "n_differ": 29,
+      "jaccard": 0.04918032786885246
+     },
+     {
+      "doc_idx": 10,
+      "n_available": 508,
+      "n_drawn": 32,
+      "n_shared": 1,
+      "n_differ": 31,
+      "jaccard": 0.015873015873015872
+     },
+     {
+      "doc_idx": 11,
+      "n_available": 555,
+      "n_drawn": 32,
+      "n_shared": 0,
+      "n_differ": 32,
+      "jaccard": 0.0
+     },
+     {
+      "doc_idx": 12,
+      "n_available": 482,
+      "n_drawn": 32,
+      "n_shared": 3,
+      "n_differ": 29,
+      "jaccard": 0.04918032786885246
+     },
+     {
+      "doc_idx": 13,
+      "n_available": 522,
+      "n_drawn": 32,
+      "n_shared": 2,
+      "n_differ": 30,
+      "jaccard": 0.03225806451612903
+     },
+     {
+      "doc_idx": 14,
+      "n_available": 525,
+      "n_drawn": 32,
+      "n_shared": 3,
+      "n_differ": 29,
+      "jaccard": 0.04918032786885246
+     },
+     {
+      "doc_idx": 15,
+      "n_available": 532,
+      "n_drawn": 32,
+      "n_shared": 3,
+      "n_differ": 29,
+      "jaccard": 0.04918032786885246
+     }
+    ],
+    "mean_shared_of_32": 2.625,
+    "mean_differ_of_32": 29.375,
+    "mean_jaccard": 0.04321757715027799,
+    "n_documents_with_identical_draw": 0
+   }
+  ]
+ },
+ "offset0_gate": {
+  "k12_QA": {
+   "expected": 1.9560121297836304,
+   "observed": 1.9560121297836304,
+   "exact": true
+  },
+  "k12_MT": {
+   "expected": 2.2720184326171875,
+   "observed": 2.2720184326171875,
+   "exact": true
+  },
+  "k16_QA": {
+   "expected": 2.034916400909424,
+   "observed": 2.034916400909424,
+   "exact": true
+  },
+  "k16_MT": {
+   "expected": 2.330503463745117,
+   "observed": 2.330503463745117,
+   "exact": true
+  },
+  "passed": true
+ },
+ "same_session_gates": {
+  "control_offset0_k16_QA": {
+   "expected": 2.159724712371826,
+   "observed": 2.159724712371826,
+   "delta": 0.0
+  },
+  "control_offset0_k16_MT": {
+   "expected": 2.529625177383423,
+   "observed": 2.529625177383423,
+   "delta": 0.0
+  },
+  "control_offset0_k12_QA": {
+   "expected": 2.074141263961792,
+   "observed": 2.074141263961792,
+   "delta": 0.0
+  },
+  "control_offset0_k12_MT": {
+   "expected": 2.4704575538635254,
+   "observed": 2.4704575538635254,
+   "delta": 0.0
+  },
+  "phase1_floor_QA": {
+   "expected": 2.23880672454834,
+   "observed": 2.23880672454834,
+   "delta": 0.0
+  },
+  "phase1_floor_MT": {
+   "expected": 3.7825491428375244,
+   "observed": 3.7825491428375244,
+   "delta": 0.0
+  }
+ },
+ "losses_long": [
+  {
+   "arm": "keys",
+   "offset": 0,
+   "k": 12,
+   "split": "QA",
+   "loss": 1.9560121297836304,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-13-05-continual_am_sparse/955753b0-2246-4f18-8200-729b831687e5/cache-after-doc-011-cfcb19a9.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/ipym8ux4"
+  },
+  {
+   "arm": "keys",
+   "offset": 0,
+   "k": 12,
+   "split": "MT",
+   "loss": 2.2720184326171875,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-13-05-continual_am_sparse/955753b0-2246-4f18-8200-729b831687e5/cache-after-doc-011-cfcb19a9.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/3x1ieyas"
+  },
+  {
+   "arm": "keys",
+   "offset": 0,
+   "k": 16,
+   "split": "QA",
+   "loss": 2.034916400909424,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-13-05-continual_am_sparse/955753b0-2246-4f18-8200-729b831687e5/cache-after-doc-015-af07b880.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/lnmxefxy"
+  },
+  {
+   "arm": "keys",
+   "offset": 0,
+   "k": 16,
+   "split": "MT",
+   "loss": 2.330503463745117,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-13-05-continual_am_sparse/955753b0-2246-4f18-8200-729b831687e5/cache-after-doc-015-af07b880.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/w44sq2sa"
+  },
+  {
+   "arm": "keys",
+   "offset": 1000,
+   "k": 12,
+   "split": "QA",
+   "loss": 1.9397201538085938,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-40-40-continual_am_sparse/92b047bb-8822-4f50-8720-5dc2fcb26a4f/cache-after-doc-011-cfcb19a9.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/zs4nu08j"
+  },
+  {
+   "arm": "keys",
+   "offset": 1000,
+   "k": 12,
+   "split": "MT",
+   "loss": 2.269538164138794,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-40-40-continual_am_sparse/92b047bb-8822-4f50-8720-5dc2fcb26a4f/cache-after-doc-011-cfcb19a9.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/fw5bii98"
+  },
+  {
+   "arm": "keys",
+   "offset": 1000,
+   "k": 16,
+   "split": "QA",
+   "loss": 1.996092677116394,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-40-40-continual_am_sparse/92b047bb-8822-4f50-8720-5dc2fcb26a4f/cache-after-doc-015-af07b880.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/4nggvfdu"
+  },
+  {
+   "arm": "keys",
+   "offset": 1000,
+   "k": 16,
+   "split": "MT",
+   "loss": 2.306238889694214,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-40-40-continual_am_sparse/92b047bb-8822-4f50-8720-5dc2fcb26a4f/cache-after-doc-015-af07b880.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/3dp3a4d0"
+  },
+  {
+   "arm": "keys",
+   "offset": 2000,
+   "k": 12,
+   "split": "QA",
+   "loss": 1.9446364641189575,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-06-27-continual_am_sparse/5d1785dc-3bc8-40d4-b177-12b7a20f1743/cache-after-doc-011-cfcb19a9.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/ihuornza"
+  },
+  {
+   "arm": "keys",
+   "offset": 2000,
+   "k": 12,
+   "split": "MT",
+   "loss": 2.262629747390747,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-06-27-continual_am_sparse/5d1785dc-3bc8-40d4-b177-12b7a20f1743/cache-after-doc-011-cfcb19a9.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/vj60oi5l"
+  },
+  {
+   "arm": "keys",
+   "offset": 2000,
+   "k": 16,
+   "split": "QA",
+   "loss": 2.0024614334106445,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-06-27-continual_am_sparse/5d1785dc-3bc8-40d4-b177-12b7a20f1743/cache-after-doc-015-af07b880.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/nn0m6ooi"
+  },
+  {
+   "arm": "keys",
+   "offset": 2000,
+   "k": 16,
+   "split": "MT",
+   "loss": 2.290109395980835,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-06-27-continual_am_sparse/5d1785dc-3bc8-40d4-b177-12b7a20f1743/cache-after-doc-015-af07b880.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/m7pic7u4"
+  },
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 12,
+   "split": "QA",
+   "loss": 2.0522191524505615,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-37-31-continual_am_sparse/a2f9458c-31a0-4bfb-8b60-da98da202ba6/cache-after-doc-011-cfcb19a9.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/1e85etm3"
+  },
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 12,
+   "split": "MT",
+   "loss": 2.448606491088867,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-37-31-continual_am_sparse/a2f9458c-31a0-4bfb-8b60-da98da202ba6/cache-after-doc-011-cfcb19a9.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/h7056va3"
+  },
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 16,
+   "split": "QA",
+   "loss": 2.138103485107422,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-37-31-continual_am_sparse/a2f9458c-31a0-4bfb-8b60-da98da202ba6/cache-after-doc-015-af07b880.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/1g77x6zo"
+  },
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 16,
+   "split": "MT",
+   "loss": 2.482379198074341,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-37-31-continual_am_sparse/a2f9458c-31a0-4bfb-8b60-da98da202ba6/cache-after-doc-015-af07b880.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/8ru81zb3"
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 12,
+   "split": "QA",
+   "loss": 2.070828914642334,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-06-02-01-continual_am_sparse/727e44ac-de50-44df-bf3c-877ad3e65317/cache-after-doc-011-cfcb19a9.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/utryc44n"
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 12,
+   "split": "MT",
+   "loss": 2.5163300037384033,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-06-02-01-continual_am_sparse/727e44ac-de50-44df-bf3c-877ad3e65317/cache-after-doc-011-cfcb19a9.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/j4qb30os"
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 16,
+   "split": "QA",
+   "loss": 2.2329885959625244,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-06-02-01-continual_am_sparse/727e44ac-de50-44df-bf3c-877ad3e65317/cache-after-doc-015-af07b880.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/kmvr4wbq"
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 16,
+   "split": "MT",
+   "loss": 2.6113579273223877,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-06-02-01-continual_am_sparse/727e44ac-de50-44df-bf3c-877ad3e65317/cache-after-doc-015-af07b880.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/jykpqvoo"
+  },
+  {
+   "arm": "control",
+   "offset": 0,
+   "k": 12,
+   "split": "QA",
+   "loss": 2.074141263961792,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-23-19-56-continual_am_sparse/508b8b0f-075a-429b-b757-2b11bfb57124/cache-after-doc-011-cfcb19a9.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/jmc52yl6"
+  },
+  {
+   "arm": "control",
+   "offset": 0,
+   "k": 12,
+   "split": "MT",
+   "loss": 2.4704575538635254,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-23-19-56-continual_am_sparse/508b8b0f-075a-429b-b757-2b11bfb57124/cache-after-doc-011-cfcb19a9.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/5vq3wdw0"
+  },
+  {
+   "arm": "control",
+   "offset": 0,
+   "k": 16,
+   "split": "QA",
+   "loss": 2.159724712371826,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-23-19-56-continual_am_sparse/508b8b0f-075a-429b-b757-2b11bfb57124/cache-after-doc-015-af07b880.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/vie4yjqx"
+  },
+  {
+   "arm": "control",
+   "offset": 0,
+   "k": 16,
+   "split": "MT",
+   "loss": 2.529625177383423,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-23-19-56-continual_am_sparse/508b8b0f-075a-429b-b757-2b11bfb57124/cache-after-doc-015-af07b880.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/e3a25p1r"
+  },
+  {
+   "arm": "phase1",
+   "offset": 0,
+   "k": 0,
+   "split": "QA",
+   "loss": 2.23880672454834,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/phase1_selfdistill_qwen512/cache_last.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/821vcjm1"
+  },
+  {
+   "arm": "phase1",
+   "offset": 0,
+   "k": 0,
+   "split": "MT",
+   "loss": 3.7825491428375244,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/phase1_selfdistill_qwen512/cache_last.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/ud71x9gz"
+  }
+ ],
+ "losses_by_arm": {
+  "keys": {
+   "k12_QA": {
+    "per_offset": {
+     "0": 1.9560121297836304,
+     "1000": 1.9397201538085938,
+     "2000": 1.9446364641189575
+    },
+    "mean": 1.9467895825703938,
+    "min": 1.9397201538085938,
+    "max": 1.9560121297836304,
+    "range": 0.01629197597503662,
+    "sd": 0.008356677545067142,
+    "n_offsets": 3
+   },
+   "k12_MT": {
+    "per_offset": {
+     "0": 2.2720184326171875,
+     "1000": 2.269538164138794,
+     "2000": 2.262629747390747
+    },
+    "mean": 2.268062114715576,
+    "min": 2.262629747390747,
+    "max": 2.2720184326171875,
+    "range": 0.00938868522644043,
+    "sd": 0.004865274298036169,
+    "n_offsets": 3
+   },
+   "k16_QA": {
+    "per_offset": {
+     "0": 2.034916400909424,
+     "1000": 1.996092677116394,
+     "2000": 2.0024614334106445
+    },
+    "mean": 2.0111568371454873,
+    "min": 1.996092677116394,
+    "max": 2.034916400909424,
+    "range": 0.038823723793029785,
+    "sd": 0.020821333215558197,
+    "n_offsets": 3
+   },
+   "k16_MT": {
+    "per_offset": {
+     "0": 2.330503463745117,
+     "1000": 2.306238889694214,
+     "2000": 2.290109395980835
+    },
+    "mean": 2.308950583140055,
+    "min": 2.290109395980835,
+    "max": 2.330503463745117,
+    "range": 0.04039406776428223,
+    "sd": 0.020333104500900024,
+    "n_offsets": 3
+   }
+  },
+  "control": {
+   "k12_QA": {
+    "per_offset": {
+     "0": 2.074141263961792,
+     "1000": 2.0522191524505615,
+     "2000": 2.070828914642334
+    },
+    "mean": 2.065729777018229,
+    "min": 2.0522191524505615,
+    "max": 2.074141263961792,
+    "range": 0.02192211151123047,
+    "sd": 0.011817175917277226,
+    "n_offsets": 3
+   },
+   "k12_MT": {
+    "per_offset": {
+     "0": 2.4704575538635254,
+     "1000": 2.448606491088867,
+     "2000": 2.5163300037384033
+    },
+    "mean": 2.478464682896932,
+    "min": 2.448606491088867,
+    "max": 2.5163300037384033,
+    "range": 0.06772351264953613,
+    "sd": 0.034564492299413094,
+    "n_offsets": 3
+   },
+   "k16_QA": {
+    "per_offset": {
+     "0": 2.159724712371826,
+     "1000": 2.138103485107422,
+     "2000": 2.2329885959625244
+    },
+    "mean": 2.1769389311472573,
+    "min": 2.138103485107422,
+    "max": 2.2329885959625244,
+    "range": 0.09488511085510254,
+    "sd": 0.04972969999439553,
+    "n_offsets": 3
+   },
+   "k16_MT": {
+    "per_offset": {
+     "0": 2.529625177383423,
+     "1000": 2.482379198074341,
+     "2000": 2.6113579273223877
+    },
+    "mean": 2.541120767593384,
+    "min": 2.482379198074341,
+    "max": 2.6113579273223877,
+    "range": 0.12897872924804688,
+    "sd": 0.06525327267897571,
+    "n_offsets": 3
+   }
+  }
+ },
+ "keys_minus_control_deltas": {
+  "k12_dQA": {
+   "per_offset": {
+    "0": -0.11812913417816162,
+    "1000": -0.11249899864196777,
+    "2000": -0.12619245052337646
+   },
+   "mean": -0.11894019444783528,
+   "min": -0.12619245052337646,
+   "max": -0.11249899864196777,
+   "range": 0.013693451881408691,
+   "sd": 0.006882660835599568,
+   "n_offsets": 3,
+   "all_same_sign": true,
+   "all_clear_noise_band": false
+  },
+  "k12_dMT": {
+   "per_offset": {
+    "0": -0.1984391212463379,
+    "1000": -0.17906832695007324,
+    "2000": -0.25370025634765625
+   },
+   "mean": -0.2104025681813558,
+   "min": -0.25370025634765625,
+   "max": -0.17906832695007324,
+   "range": 0.07463192939758301,
+   "sd": 0.03872756470947658,
+   "n_offsets": 3,
+   "all_same_sign": true,
+   "all_clear_noise_band": true
+  },
+  "k16_dQA": {
+   "per_offset": {
+    "0": -0.12480831146240234,
+    "1000": -0.14201080799102783,
+    "2000": -0.23052716255187988
+   },
+   "mean": -0.16578209400177002,
+   "min": -0.23052716255187988,
+   "max": -0.12480831146240234,
+   "range": 0.10571885108947754,
+   "sd": 0.05672675204762883,
+   "n_offsets": 3,
+   "all_same_sign": true,
+   "all_clear_noise_band": false
+  },
+  "k16_dMT": {
+   "per_offset": {
+    "0": -0.19912171363830566,
+    "1000": -0.17614030838012695,
+    "2000": -0.32124853134155273
+   },
+   "mean": -0.23217018445332846,
+   "min": -0.32124853134155273,
+   "max": -0.17614030838012695,
+   "range": 0.14510822296142578,
+   "sd": 0.07799519318627446,
+   "n_offsets": 3,
+   "all_same_sign": true,
+   "all_clear_noise_band": true
+  }
+ },
+ "runs": {
+  "A1_snapshot_head": {
+   "dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-01-52-continual_am_sparse/22a36199-af2b-4562-9cf8-a3257eb1b6d7",
+   "rc": 0,
+   "wall_s": 969,
+   "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/790bm7pf",
+   "phase2_summary": {
+    "run_name": "MECH-SEED_off0_keys-snapshotHEAD",
+    "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-01-52-continual_am_sparse/22a36199-af2b-4562-9cf8-a3257eb1b6d7",
+    "n_documents": 16,
+    "wall_clock_s": 318.08530282974243,
+    "mean_mse_last_doc": 0.0024044408210638973,
+    "eval_metrics": {
+     "qa_forgetting": {
+      "name": "qa_forgetting",
+      "loss": 2.0349531173706055,
+      "perplexity": 7.651893376187829
+     },
+     "mt_acquisition": {
+      "name": "mt_acquisition",
+      "loss": 2.3290133476257324,
+      "perplexity": 10.267805778682588
+     }
+    },
+    "value_norms": {
+     "global_max_abs": 74.0,
+     "L0_max_abs": 3.546875,
+     "L18_max_abs": 8.0,
+     "L35_max_abs": 74.0
+    },
+    "reg": {
+     "ridge_scale": "spectral",
+     "ridge_lambda": 0.0001,
+     "ridge_lambda_min": 0.0,
+     "delta_weight": 0.01
+    }
+   },
+   "internals": {
+    "n_documents": 16,
+    "seed_offset_recorded": 0,
+    "wall_clock_s": 318.08530282974243,
+    "mean_mse_over_docs": 0.0039414096599943195,
+    "mean_mse_per_doc": [
+     0.006424280278363565,
+     0.007245070696860189,
+     0.007037560276886425,
+     0.00658520622128991,
+     0.0034050817209908425,
+     0.005002150294217245,
+     0.003415030324769456,
+     0.0029895938250648316,
+     0.003866286677148562,
+     0.0021306175254191353,
+     0.002860904096116378,
+     0.002728043440062796,
+     0.002102309767145193,
+     0.00218203861054336,
+     0.0026839399839673206,
+     0.0024044408210638973
+    ],
+    "ref_mass_on_S_mean_over_layers_and_docs": 0.3136346771789249,
+    "ref_mass_on_S_per_doc": [
+     0.2170669259568159,
+     0.22575334244821635,
+     0.2325070784459563,
+     0.2894198051071726,
+     0.2913396817489734,
+     0.2880534874889741,
+     0.2992598533358735,
+     0.3329102803011968,
+     0.3377151176035922,
+     0.34469830322066425,
+     0.3440014768453289,
+     0.3413817317406129,
+     0.36390729822354234,
+     0.3710514543102666,
+     0.3662059963874829,
+     0.37288300169812927
+    ],
+    "v_selected_absmax_max": 78.5
+   },
+   "config_seed_offset": null
+  },
+  "A2_edited_unset": {
+   "dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-13-05-continual_am_sparse/955753b0-2246-4f18-8200-729b831687e5",
+   "rc": 0,
+   "wall_s": 487,
+   "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/i0s58v1k",
+   "phase2_summary": {
+    "run_name": "MECH-SEED_off0_keys-flagunset",
+    "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-13-05-continual_am_sparse/955753b0-2246-4f18-8200-729b831687e5",
+    "n_documents": 16,
+    "wall_clock_s": 296.24156761169434,
+    "mean_mse_last_doc": 0.0024044408210638973,
+    "eval_metrics": {
+     "qa_forgetting": {
+      "name": "qa_forgetting",
+      "loss": 2.0349531173706055,
+      "perplexity": 7.651893376187829
+     },
+     "mt_acquisition": {
+      "name": "mt_acquisition",
+      "loss": 2.3290133476257324,
+      "perplexity": 10.267805778682588
+     }
+    },
+    "value_norms": {
+     "global_max_abs": 74.0,
+     "L0_max_abs": 3.546875,
+     "L18_max_abs": 8.0,
+     "L35_max_abs": 74.0
+    },
+    "reg": {
+     "ridge_scale": "spectral",
+     "ridge_lambda": 0.0001,
+     "ridge_lambda_min": 0.0,
+     "delta_weight": 0.01
+    }
+   },
+   "internals": {
+    "n_documents": 16,
+    "seed_offset_recorded": 0,
+    "wall_clock_s": 296.24156761169434,
+    "mean_mse_over_docs": 0.0039414096599943195,
+    "mean_mse_per_doc": [
+     0.006424280278363565,
+     0.007245070696860189,
+     0.007037560276886425,
+     0.00658520622128991,
+     0.0034050817209908425,
+     0.005002150294217245,
+     0.003415030324769456,
+     0.0029895938250648316,
+     0.003866286677148562,
+     0.0021306175254191353,
+     0.002860904096116378,
+     0.002728043440062796,
+     0.002102309767145193,
+     0.00218203861054336,
+     0.0026839399839673206,
+     0.0024044408210638973
+    ],
+    "ref_mass_on_S_mean_over_layers_and_docs": 0.3136346771789249,
+    "ref_mass_on_S_per_doc": [
+     0.2170669259568159,
+     0.22575334244821635,
+     0.2325070784459563,
+     0.2894198051071726,
+     0.2913396817489734,
+     0.2880534874889741,
+     0.2992598533358735,
+     0.3329102803011968,
+     0.3377151176035922,
+     0.34469830322066425,
+     0.3440014768453289,
+     0.3413817317406129,
+     0.36390729822354234,
+     0.3710514543102666,
+     0.3662059963874829,
+     0.37288300169812927
+    ],
+    "v_selected_absmax_max": 78.5
+   },
+   "config_seed_offset": 0
+  },
+  "A3_edited_zero": {
+   "dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-24-07-continual_am_sparse/35127762-600b-4fee-afab-dc40fa378c49",
+   "rc": 0,
+   "wall_s": 553,
+   "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/xn2qekrp",
+   "phase2_summary": {
+    "run_name": "MECH-SEED_off0_keys-flagzero",
+    "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-24-07-continual_am_sparse/35127762-600b-4fee-afab-dc40fa378c49",
+    "n_documents": 16,
+    "wall_clock_s": 292.4696137905121,
+    "mean_mse_last_doc": 0.0024044408210638973,
+    "eval_metrics": {
+     "qa_forgetting": {
+      "name": "qa_forgetting",
+      "loss": 2.0349531173706055,
+      "perplexity": 7.651893376187829
+     },
+     "mt_acquisition": {
+      "name": "mt_acquisition",
+      "loss": 2.3290133476257324,
+      "perplexity": 10.267805778682588
+     }
+    },
+    "value_norms": {
+     "global_max_abs": 74.0,
+     "L0_max_abs": 3.546875,
+     "L18_max_abs": 8.0,
+     "L35_max_abs": 74.0
+    },
+    "reg": {
+     "ridge_scale": "spectral",
+     "ridge_lambda": 0.0001,
+     "ridge_lambda_min": 0.0,
+     "delta_weight": 0.01
+    }
+   },
+   "internals": {
+    "n_documents": 16,
+    "seed_offset_recorded": 0,
+    "wall_clock_s": 292.4696137905121,
+    "mean_mse_over_docs": 0.0039414096599943195,
+    "mean_mse_per_doc": [
+     0.006424280278363565,
+     0.007245070696860189,
+     0.007037560276886425,
+     0.00658520622128991,
+     0.0034050817209908425,
+     0.005002150294217245,
+     0.003415030324769456,
+     0.0029895938250648316,
+     0.003866286677148562,
+     0.0021306175254191353,
+     0.002860904096116378,
+     0.002728043440062796,
+     0.002102309767145193,
+     0.00218203861054336,
+     0.0026839399839673206,
+     0.0024044408210638973
+    ],
+    "ref_mass_on_S_mean_over_layers_and_docs": 0.3136346771789249,
+    "ref_mass_on_S_per_doc": [
+     0.2170669259568159,
+     0.22575334244821635,
+     0.2325070784459563,
+     0.2894198051071726,
+     0.2913396817489734,
+     0.2880534874889741,
+     0.2992598533358735,
+     0.3329102803011968,
+     0.3377151176035922,
+     0.34469830322066425,
+     0.3440014768453289,
+     0.3413817317406129,
+     0.36390729822354234,
+     0.3710514543102666,
+     0.3662059963874829,
+     0.37288300169812927
+    ],
+    "v_selected_absmax_max": 78.5
+   },
+   "config_seed_offset": 0
+  },
+  "B1_keys_off1000": {
+   "dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-40-40-continual_am_sparse/92b047bb-8822-4f50-8720-5dc2fcb26a4f",
+   "rc": 0,
+   "wall_s": 437,
+   "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/qts8j7kw",
+   "phase2_summary": {
+    "run_name": "MECH-SEED_off1000_keys",
+    "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-40-40-continual_am_sparse/92b047bb-8822-4f50-8720-5dc2fcb26a4f",
+    "n_documents": 16,
+    "wall_clock_s": 296.81769585609436,
+    "mean_mse_last_doc": 0.0024791880037279648,
+    "eval_metrics": {
+     "qa_forgetting": {
+      "name": "qa_forgetting",
+      "loss": 1.994279384613037,
+      "perplexity": 7.346906825752386
+     },
+     "mt_acquisition": {
+      "name": "mt_acquisition",
+      "loss": 2.3053863048553467,
+      "perplexity": 10.028051389212331
+     }
+    },
+    "value_norms": {
+     "global_max_abs": 77.0,
+     "L0_max_abs": 2.703125,
+     "L18_max_abs": 12.125,
+     "L35_max_abs": 77.0
+    },
+    "reg": {
+     "ridge_scale": "spectral",
+     "ridge_lambda": 0.0001,
+     "ridge_lambda_min": 0.0,
+     "delta_weight": 0.01
+    }
+   },
+   "internals": {
+    "n_documents": 16,
+    "seed_offset_recorded": 1000,
+    "wall_clock_s": 296.81769585609436,
+    "mean_mse_over_docs": 0.0035296255920377697,
+    "mean_mse_per_doc": [
+     0.005826715304591643,
+     0.006431979458233804,
+     0.00483891519573692,
+     0.004800151638846728,
+     0.003501286869082934,
+     0.0034867451123293198,
+     0.002766106934630999,
+     0.002834857992847143,
+     0.004168915548089242,
+     0.0023215557696403266,
+     0.003157694115600407,
+     0.002853747439094908,
+     0.002266132222091402,
+     0.0024538660928341313,
+     0.0022861517752264466,
+     0.0024791880037279648
+    ],
+    "ref_mass_on_S_mean_over_layers_and_docs": 0.3614952863800782,
+    "ref_mass_on_S_per_doc": [
+     0.21246663557637172,
+     0.2772693365663549,
+     0.28188444322828826,
+     0.3260369264203796,
+     0.3237683986565874,
+     0.32060601986530757,
+     0.35918620036035365,
+     0.38371759307079223,
+     0.3883165285773834,
+     0.39305950638825177,
+     0.41255885117506197,
+     0.41137845812934554,
+     0.42370843294904464,
+     0.4216532079121357,
+     0.41721416172286907,
+     0.4310998814827245
+    ],
+    "v_selected_absmax_max": 77.0
+   },
+   "config_seed_offset": 1000
+  },
+  "B2_keys_off2000": {
+   "dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-06-27-continual_am_sparse/5d1785dc-3bc8-40d4-b177-12b7a20f1743",
+   "rc": 0,
+   "wall_s": 669,
+   "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/t1p85sr0",
+   "phase2_summary": {
+    "run_name": "MECH-SEED_off2000_keys",
+    "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-06-27-continual_am_sparse/5d1785dc-3bc8-40d4-b177-12b7a20f1743",
+    "n_documents": 16,
+    "wall_clock_s": 310.53736639022827,
+    "mean_mse_last_doc": 0.002184961358930574,
+    "eval_metrics": {
+     "qa_forgetting": {
+      "name": "qa_forgetting",
+      "loss": 2.0048117637634277,
+      "perplexity": 7.424696168345962
+     },
+     "mt_acquisition": {
+      "name": "mt_acquisition",
+      "loss": 2.2910265922546387,
+      "perplexity": 9.885080421050036
+     }
+    },
+    "value_norms": {
+     "global_max_abs": 85.0,
+     "L0_max_abs": 2.21875,
+     "L18_max_abs": 10.125,
+     "L35_max_abs": 85.0
+    },
+    "reg": {
+     "ridge_scale": "spectral",
+     "ridge_lambda": 0.0001,
+     "ridge_lambda_min": 0.0,
+     "delta_weight": 0.01
+    }
+   },
+   "internals": {
+    "n_documents": 16,
+    "seed_offset_recorded": 2000,
+    "wall_clock_s": 310.53736639022827,
+    "mean_mse_over_docs": 0.0034845242188639406,
+    "mean_mse_per_doc": [
+     0.007460533456903957,
+     0.006163788013938958,
+     0.004890943153504345,
+     0.005295633390346666,
+     0.003478303084799942,
+     0.0034084098582841055,
+     0.0032591311163735603,
+     0.0024220384324912126,
+     0.003373793710140818,
+     0.002129294470787752,
+     0.003191965053784113,
+     0.0023562495774424657,
+     0.0019433771863425085,
+     0.002196899054853121,
+     0.001997066582898949,
+     0.002184961358930574
+    ],
+    "ref_mass_on_S_mean_over_layers_and_docs": 0.3587277334552507,
+    "ref_mass_on_S_per_doc": [
+     0.21865553120086487,
+     0.27491672666251865,
+     0.3195362462979069,
+     0.3519470839593042,
+     0.34102581414400546,
+     0.3434803389245644,
+     0.3422037625003011,
+     0.3377890475579382,
+     0.3765226815206309,
+     0.376488118341917,
+     0.39317912521720344,
+     0.392666728264885,
+     0.41545705264757593,
+     0.419346594859639,
+     0.4129096862872959,
+     0.42351919689746054
+    ],
+    "v_selected_absmax_max": 88.0
+   },
+   "config_seed_offset": 2000
+  },
+  "B3_control_off1000": {
+   "dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-37-31-continual_am_sparse/a2f9458c-31a0-4bfb-8b60-da98da202ba6",
+   "rc": 0,
+   "wall_s": 516,
+   "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/nmratchj",
+   "phase2_summary": {
+    "run_name": "MECH-SEED_off1000_control",
+    "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-37-31-continual_am_sparse/a2f9458c-31a0-4bfb-8b60-da98da202ba6",
+    "n_documents": 16,
+    "wall_clock_s": 157.36840176582336,
+    "mean_mse_last_doc": 0.01736120851992003,
+    "eval_metrics": {
+     "qa_forgetting": {
+      "name": "qa_forgetting",
+      "loss": 2.137864828109741,
+      "perplexity": 8.481309229089966
+     },
+     "mt_acquisition": {
+      "name": "mt_acquisition",
+      "loss": 2.479006767272949,
+      "perplexity": 11.929409851373178
+     }
+    },
+    "value_norms": {
+     "global_max_abs": 139.0,
+     "L0_max_abs": 9.125,
+     "L18_max_abs": 31.125,
+     "L35_max_abs": 102.0
+    },
+    "reg": {
+     "ridge_scale": "spectral",
+     "ridge_lambda": 0.0001,
+     "ridge_lambda_min": 0.0,
+     "delta_weight": 0.01
+    }
+   },
+   "internals": {
+    "n_documents": 16,
+    "seed_offset_recorded": 1000,
+    "wall_clock_s": 157.36840176582336,
+    "mean_mse_over_docs": 0.014240528425720692,
+    "mean_mse_per_doc": [
+     0.011743468564696337,
+     0.014508300783954079,
+     0.013100156995903944,
+     0.01626875569061465,
+     0.0129358892026706,
+     0.012152315802445123,
+     0.013166286231902783,
+     0.013036343866982887,
+     0.016658684427511616,
+     0.012758498902895907,
+     0.018152188417704766,
+     0.017245374491159912,
+     0.013139586010349072,
+     0.012907660927857655,
+     0.012713735974961714,
+     0.01736120851992003
+    ],
+    "ref_mass_on_S_mean_over_layers_and_docs": 0.14517302594140347,
+    "ref_mass_on_S_per_doc": [
+     0.14681206509057018,
+     0.1528851380086659,
+     0.14701955007654355,
+     0.15303484953215551,
+     0.14873844435593733,
+     0.14339139342903057,
+     0.14666186709008697,
+     0.1475573643935301,
+     0.14320635967629236,
+     0.14305459217414157,
+     0.14298085214007492,
+     0.14053606298370547,
+     0.1407852986141936,
+     0.14172437404259755,
+     0.1434210727699489,
+     0.14095913068498098
+    ],
+    "v_selected_absmax_max": 139.0
+   },
+   "config_seed_offset": 1000
+  },
+  "B4_control_off2000": {
+   "dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-06-02-01-continual_am_sparse/727e44ac-de50-44df-bf3c-877ad3e65317",
+   "rc": 0,
+   "wall_s": 415,
+   "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/buqjv0fy",
+   "phase2_summary": {
+    "run_name": "MECH-SEED_off2000_control",
+    "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-06-02-01-continual_am_sparse/727e44ac-de50-44df-bf3c-877ad3e65317",
+    "n_documents": 16,
+    "wall_clock_s": 164.71934747695923,
+    "mean_mse_last_doc": 0.012772137579961255,
+    "eval_metrics": {
+     "qa_forgetting": {
+      "name": "qa_forgetting",
+      "loss": 2.2326536178588867,
+      "perplexity": 9.324577142555867
+     },
+     "mt_acquisition": {
+      "name": "mt_acquisition",
+      "loss": 2.6107277870178223,
+      "perplexity": 13.608951666900913
+     }
+    },
+    "value_norms": {
+     "global_max_abs": 162.0,
+     "L0_max_abs": 10.4375,
+     "L18_max_abs": 30.5,
+     "L35_max_abs": 139.0
+    },
+    "reg": {
+     "ridge_scale": "spectral",
+     "ridge_lambda": 0.0001,
+     "ridge_lambda_min": 0.0,
+     "delta_weight": 0.01
+    }
+   },
+   "internals": {
+    "n_documents": 16,
+    "seed_offset_recorded": 2000,
+    "wall_clock_s": 164.71934747695923,
+    "mean_mse_over_docs": 0.01352661944242565,
+    "mean_mse_per_doc": [
+     0.016534260809142626,
+     0.014179783613144537,
+     0.012200344221469095,
+     0.0162443886987502,
+     0.013920615043136624,
+     0.013477316568064958,
+     0.016748162697202435,
+     0.010531571624552625,
+     0.01585794067492922,
+     0.012441348102318747,
+     0.013961944545839187,
+     0.012490140857885813,
+     0.010926917428226565,
+     0.012662887224103593,
+     0.011476151390082932,
+     0.012772137579961255
+    ],
+    "ref_mass_on_S_mean_over_layers_and_docs": 0.14598544111650982,
+    "ref_mass_on_S_per_doc": [
+     0.15149542683826034,
+     0.15228048107625605,
+     0.1469900099230775,
+     0.154757334119899,
+     0.14718621995093095,
+     0.14788488724863985,
+     0.14888078588248593,
+     0.14445151213698815,
+     0.14538674157584966,
+     0.14154084175566417,
+     0.14547757082457086,
+     0.1448084005694707,
+     0.13920741635633427,
+     0.1428302677070153,
+     0.14400231888592113,
+     0.1385868430127933
+    ],
+    "v_selected_absmax_max": 162.0
+   },
+   "config_seed_offset": 2000
+  }
+ },
+ "eval_checkpoint_provenance": [
+  {
+   "arm": "keys",
+   "offset": 0,
+   "k": 12,
+   "split": "QA",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "keys",
+   "offset": 0,
+   "k": 12,
+   "split": "MT",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "keys",
+   "offset": 0,
+   "k": 16,
+   "split": "QA",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "keys",
+   "offset": 0,
+   "k": 16,
+   "split": "MT",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "keys",
+   "offset": 1000,
+   "k": 12,
+   "split": "QA",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "keys",
+   "offset": 1000,
+   "k": 12,
+   "split": "MT",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "keys",
+   "offset": 1000,
+   "k": 16,
+   "split": "QA",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "keys",
+   "offset": 1000,
+   "k": 16,
+   "split": "MT",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "keys",
+   "offset": 2000,
+   "k": 12,
+   "split": "QA",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "keys",
+   "offset": 2000,
+   "k": 12,
+   "split": "MT",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "keys",
+   "offset": 2000,
+   "k": 16,
+   "split": "QA",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "keys",
+   "offset": 2000,
+   "k": 16,
+   "split": "MT",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 12,
+   "split": "QA",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 12,
+   "split": "MT",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 16,
+   "split": "QA",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 16,
+   "split": "MT",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 12,
+   "split": "QA",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 12,
+   "split": "MT",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 16,
+   "split": "QA",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 16,
+   "split": "MT",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "control",
+   "offset": 0,
+   "k": 12,
+   "split": "QA",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "control",
+   "offset": 0,
+   "k": 12,
+   "split": "MT",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "control",
+   "offset": 0,
+   "k": 16,
+   "split": "QA",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "control",
+   "offset": 0,
+   "k": 16,
+   "split": "MT",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "phase1",
+   "offset": 0,
+   "k": 0,
+   "split": "QA",
+   "ckpt_path_in_log": true
+  },
+  {
+   "arm": "phase1",
+   "offset": 0,
+   "k": 0,
+   "split": "MT",
+   "ckpt_path_in_log": true
+  }
+ ],
+ "noise_band_used": 0.15,
+ "vs_mission_target": {
+  "target_qa": 2.52,
+  "target_mt": 2.02,
+  "keys_k12_MT_mean_over_offsets": 2.268062114715576,
+  "keys_k12_MT_worst_over_offsets": 2.2720184326171875,
+  "mt_short_by_at_mean": 0.24806211471557615
+ }
+}

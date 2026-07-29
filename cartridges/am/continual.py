@@ -127,6 +127,24 @@ def run_per_document_am_phase2(
                     attention_bias=head_beta,
                 ).detach().cpu()
 
+    # MECH-007 / RUNBOOK §9c: opt-in seed offset for the per-document reference
+    # draw. Read with `getattr` so a config from the sibling `cartridges` package
+    # (RUNBOOK §6.10) still works and simply keeps the historical behaviour.
+    seed_offset = int(getattr(config, "seed_offset", 0) or 0)
+    if seed_offset < 0:
+        raise ValueError(
+            f"seed_offset must be >= 0, got {seed_offset}: the per-document draw "
+            "is seeded by `doc_idx + seed_offset` and a negative offset would "
+            "alias document indices onto each other."
+        )
+    if seed_offset:
+        logger.info(
+            "MECH-007: per-document reference draw seeded by doc_idx + %d "
+            "(max_ref_examples_per_doc=%s)",
+            seed_offset,
+            config.max_ref_examples_per_doc,
+        )
+
     per_doc_stats = []
     t_total = time.time()
 
@@ -145,15 +163,23 @@ def run_per_document_am_phase2(
             len(doc_conversations),
         )
 
+        # The document's sampling seed. BOTH consumers are offset together:
+        # `limit_conversations` chooses WHICH conversations are drawn and
+        # `build_reference_dataloader` seeds the packing/ordering of the drawn
+        # subset. `seed_offset=0` reproduces `seed=doc_idx` exactly.
+        draw_seed = doc_idx + seed_offset
+        assert isinstance(draw_seed, int) and draw_seed >= 0, (
+            f"per-document draw seed must be a non-negative int, got {draw_seed!r}"
+        )
         limited = limit_conversations(
             doc_conversations,
             config.max_ref_examples_per_doc,
-            seed=doc_idx,
+            seed=draw_seed,
         )
         doc_loader, doc_tmp = build_reference_dataloader(
             limited,
             tokenizer,
-            seed=doc_idx,
+            seed=draw_seed,
         )
 
         t_doc = time.time()
@@ -303,6 +329,10 @@ def run_per_document_am_phase2(
         "old_ref_batches": old_batch_count,
         "wall_clock_s": time.time() - t_total,
     }
+    if seed_offset:
+        # provenance only, and only when the knob is on, so a stock
+        # `per_document_am_stats.pt` keeps exactly its historical keys.
+        aggregate["seed_offset"] = seed_offset
     logger.info(
         "Per-document AM Phase 2 complete: %d documents in %.1fs",
         len(per_doc_stats),
