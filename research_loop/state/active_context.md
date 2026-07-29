@@ -61,6 +61,56 @@
   but deliver 56.7% of the MT gain (Spearman 0.51), and QA sits below its own floor at every k despite
   the QA eval papers being **entirely disjoint** from the Phase-2 documents. Bundle: `results/DIAG-CONTENT/`.
 
+## QUEUED (next, in priority order) — updated 2026-07-29
+0. **MECH-SEQUENTIAL** ← *the last mechanism inside scope.* The two escape hatches DIAG-KEYSPACE
+   explicitly did **not** bound are "mechanisms that change the query distribution" and non-fixed-slot
+   formulations (out of scope). The first has a concrete, gradient-free instance already identified:
+   **SCOUT-AM's divergence #3** — the AM paper performs **on-policy, layer-sequential re-extraction** of
+   reference queries, and we do not. We solve every layer against queries collected from **one** forward
+   pass on the *pre-write* cartridge, so layers 1…35 are fitted against an activation distribution our
+   own writes destroy (`continual.py:172-182`). Gradient descent gets this for free — it is exactly the
+   cross-layer effect a per-layer closed-form solve misses, and it is the most plausible remaining
+   explanation for the 62-step sparse-gradient reference reaching MT 1.966 where every closed-form
+   variant stalls at 2.33–2.55.
+   **Build:** after writing layer *l*, re-extract the reference queries for layers > *l* from the
+   *updated* cache (opt-in flag, default off; bit-identical when off). Cost: one extra forward pass per
+   layer-group, still `gradient_steps = 0`. **Compose with MECH-005** (`KEY_MODE=highest_attention` +
+   `AM_KEY_REPOSITION=1`, θ=5e6), which is the current best point.
+   **Prediction:** if the cascade is what closed-form is missing, MT should move materially below 2.33;
+   if it does not, the gradient/closed-form gap is not cross-layer and the mission has a clean negative.
+1. **VERIFY-BEST** — MECH-005's point (QA 2.0349 / MT 2.3305) is the mission's best and is **one seed**
+   with ΔMT at the top edge of the noise band. Partly covered by DIAG-KEYCURVE's Part 2; if that returns
+   without genuine seed variation (no `SEED` knob exists — see RUNBOOK §9c), a small BUILD adds one.
+2. **COMPOSE-K** — the value-only curve bottoms at k=12 and degrades 0.117 by k=16. If DIAG-KEYCURVE
+   shows the keys arm has the same shape, its own minimum is the number to quote, not its endpoint.
+3. **MECH-METRIC** (LIT-009/010) — `C₀` from the old routing vectors' second moment instead of `w·I`.
+   Now a **retention** mechanism only (DIAG-ROUTING's ρ→0 killed its acquisition story); its value is
+   converting QA slack — currently **0.49** — into support.
+
+## STANDINGS (all on the `eval_forgetting.py` ruler; mean CE = ln ppl, lower better)
+| point | QA | MT | grad steps | note |
+|---|---|---|---|---|
+| ICL full-context | 1.9734 | 1.8960 | 0 | ⚠️ different harness + context source → re-ruler (D0) |
+| **dense @4ep — THE BAR** | **2.3721** | **1.8725** | 256 | best dense operating point |
+| dense @10ep | 2.6991 | 2.2137 | 624 | overfit |
+| sparse-gradient (62 steps) | 1.6169 | 1.9664 | 62 | reference point only; 30 steps ≈ same (1.5993 / 1.9840) |
+| **AM top32 — best gradient-free** | **2.1766** | **2.5484** | 0 | the line to move |
+| AM top64 (canonical) | 2.2521 | 2.5426 | 0 | e2e 217s |
+| Phase-1 start | 2.2388 | 3.7826 | 0 | retention floor / untrained MT |
+
+## IN-FLIGHT (cycle 2)
+- **MECH-KEYS** (GPU, code-editing) → B-ROUTE key-side. **The first key experiment in this project's
+  history.** Fixes hazard H2 (installed document keys get no RoPE counter-rotation; `phase1.py::
+  _rope_reposition` already implements it) behind opt-in `AM_KEY_REPOSITION`, then runs 4 arms:
+  freeze control (must reproduce QA 2.15320 / MT 2.52961), `highest_attention` without and with
+  reposition, and `omp`. **Target metric is the MT/QA mass ratio, not loss** — β proved bandwidth alone
+  is worthless, so only selectivity above ~1.05 counts. Bundle: `results/MECH-KEYS/`.
+- **DIAG-CONTENT** (GPU, env-only, pinned) → B-OVERWRITE / B-ROUTE. **A control on whether the write
+  stores content at all:** writes the *QA-topic* corpus and evaluates **MT**, where any gain is
+  content-free by construction. Motivated by two anomalies — docs 1–3 hold 18.8% of the eval questions
+  but deliver 56.7% of the MT gain (Spearman 0.51), and QA sits below its own floor at every k despite
+  the QA eval papers being **entirely disjoint** from the Phase-2 documents. Bundle: `results/DIAG-CONTENT/`.
+
 ## QUEUED (next, in priority order)
 1. **MECH-DISJOINT** → B-OVERWRITE. Disjoint per-document allocation (16 docs × 32 slots = 512 = exactly
    the cartridge), with **explicit exclusion** rather than score-based separation, because the documents
