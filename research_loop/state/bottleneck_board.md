@@ -226,6 +226,16 @@ the number that shows it. "It didn't help" never closes anything.
   §3's threshold is not met.
 - **Caveat the worker refused to argue away:** three seeds are three samples of a coarse instrument; the
   ranges quoted are ranges of three, not confidence intervals.
+- 🔴 **STRONGEST SURVIVING OBJECTION — and it is the orchestrator's own dispatch error.** MECH-SEED
+  seed-varied the **matched-k** comparison, not the **own-optimum** one, because the brief asked for the
+  control at k=12/k=16 only. DIAG-CONTROLCURVE (which landed mid-run) relocated the control's true MT
+  minimum to **k=10 (2.4083)**, which shrinks the own-optimum ΔMT to **−0.1363** and ΔQA to −0.0115.
+  ⇒ **The seed-confirmed statement is "keys beat frozen keys AT MATCHED k". The own-optimum claim —
+  the fair one — is weaker and remains un-seed-varied.** Closing this needs only 4 evals on snapshots
+  that already exist (control k=10 at offsets 1000/2000). → VERIFY-OPTIMA dispatched.
+- **Calibration against the measured yardstick:** DIAG-NOISE's paired-MT resolution is 0.0494, so the
+  matched-k deltas are **3.6–6.5×** it, and the seed spread is **5× below** it — the seed is *not* the
+  dominant noise term. The own-optimum −0.1363 is 2.8× the yardstick.
 
 ## 📐 DIAG-NOISE (2026-07-29): the ±0.15 band was ~3× TOO WIDE — and it reverses the refutation below
 **The threshold every claim in this project was adjudicated against had never been measured. Measured, it

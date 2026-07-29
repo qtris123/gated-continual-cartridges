@@ -560,3 +560,11 @@
   total run-to-run variance, and three seeds on an n=69/78 eval are three samples of a coarse instrument.
 - Kept in tree? **yes** — opt-in, default 0, bit-identical when default, fail-loud when requested against
   a package that lacks it. Every future result in this project can and should be seed-varied with it.
+- ⚠️ **Scope note added after two concurrent workers landed (2026-07-29).** **DIAG-NOISE** measured the
+  harness resolution (MT paired 95% = **0.0494**, composite 0.1055), so the matched-k ΔMT above is
+  **3.6–6.5× the applicable yardstick** and this job's own seed spread (0.0094) is **5× smaller than the
+  resolution** — the seed is not the dominant noise term. But **DIAG-CONTROLCURVE** mapped all 16 control
+  k and relocated the control's true MT minimum to **k=10 (2.4083)**, shrinking the **own-optimum** ΔMT to
+  **−0.1363** and ΔQA to −0.0115. MECH-SEED seed-varied the **matched-k** comparison (k=12, k=16), **not**
+  the own-optimum one. So the seed-confirmed statement is *"keys beat frozen keys at matched k"*; the
+  own-optimum claim is weaker and remains un-seed-varied.
