@@ -54,8 +54,12 @@ from cartridges.am.query_accum import (
 
 # --- slot ranking --------------------------------------------------------
 from cartridges.am.ranking import (
+    SLOT_PRIOR_SELECTIONS,
     _rank_attention_mass_per_layer,
     _rank_residual_budget_per_layer,
+    _rank_slot_prior_per_layer,
+    compute_slot_redundancy,
+    load_slot_fisher_scores,
     rank_am_slots,
 )
 
@@ -128,8 +132,12 @@ __all__ = [
     "install_query_capture_hooks",
     "install_teacher_attention_capture_hooks",
     # ranking
+    "SLOT_PRIOR_SELECTIONS",
     "_rank_attention_mass_per_layer",
     "_rank_residual_budget_per_layer",
+    "_rank_slot_prior_per_layer",
+    "compute_slot_redundancy",
+    "load_slot_fisher_scores",
     "rank_am_slots",
     # finetune
     "AMUpdateStats",

@@ -187,6 +187,46 @@ the number that shows it. "It didn't help" never closes anything.
   only prints). The worker logged the cells via a parser under the no-edit rule; the losses are the
   harness's own, not recomputed. `EVAL_MODE=icl` also does **not** hang, unlike the cartridge path (§1).
 
+## 🏁 B-GATE — CLOSED (MECH-INFOGATE, 2026-07-29): **the incumbent ranker is already optimal for acquisition**
+Gate exact to 16 digits. Six arms at their own-optimum k, against the paired resolution ±0.049 MT / ±0.054 QA:
+
+| arm | best MT | ΔMT | best QA | ΔQA | realised **MT routing mass** | realised QA Fisher |
+|---|---|---|---|---|---|---|
+| **control `tfidf` t32** | **2.2720** | — | 1.9464 | — | **0.2799** | 0.2389 |
+| `redundancy` t32 | 2.4386 | **+0.167** ✔ | 1.9247 | −0.022 ✘ | 0.0662 | 0.0444 |
+| `redundancy` t64 | 2.4811 | **+0.209** ✔ | 1.9389 | −0.008 ✘ | 0.1195 | 0.0901 |
+| `redundancy` t128 | 2.4582 | **+0.186** ✔ | 2.0611 | +0.115 ✔ | 0.2146 | 0.1749 |
+| `mass_x_redundancy` t32 | 2.3789 | **+0.107** ✔ | **1.8943** | −0.052 ✘ | 0.1251 | 0.0970 |
+| `fisher` t32 | 2.6692 | **+0.397** ✔ | **1.8641** | **−0.082** ✔ | 0.0104 | **0.0004** |
+
+**Every** new selector is worse on MT by **2.2×–8.1×** the resolution, and raising `top_t` made it *worse*.
+
+### The mechanism — and it is proof-shaped, not just an empirical loss
+- **Across the six arms, `log(realised MT routing mass)` predicts best-MT loss at Pearson −0.877**, and
+  realised QA-Fisher exposure predicts best-QA loss at Spearman +0.771. **Both halves of the Pareto trade
+  are now confirmed at the LOSS level, not merely at the mass level.**
+- The incumbent selector **maximises MT routing mass by construction** — that is literally its score
+  function. Since MT loss tracks that quantity, **any importance-aware modification necessarily captures
+  less of it and therefore loses acquisition.** This is why the effect is monotone in "how much QA-safety
+  the criterion enforces", and why no budget rescues it.
+- 🔴 **Even the reverse trade cannot reach parity:** the redundancy gate at **4× the budget (t=128) still
+  captures LESS MT routing mass (0.2146) than the incumbent at t=32 (0.2799)**.
+- ⚠️ **Why DIAG-IMPORTANCE's projection over-promised, diagnosed by the worker:** its ~34.6%/69% figures
+  extrapolated a *different* selector — **best-32 mass-ranked *within* the most-redundant quartile**, i.e.
+  a hard constraint plus mass ranking — whereas MECH-INFOGATE tested **pure top-t-by-redundancy**, which
+  sits **2.4–3.2× below** it. (DIAG-IMPORTANCE's own table already put that constrained variant at 4.62%
+  MT mass, far under the incumbent, so it too would lose — but it was not run.)
+- **`fisher` is the anti-alignment confirmed end-to-end:** the best retention ever measured here
+  (QA **1.8641**) while exposing **0.04%** of QA Fisher mass — bought with **+0.397 MT**.
+- **Cost is not the discriminator:** all six arms solve in 312–358 s (0.89×–1.02× control),
+  `am/mean_mse` 0.0032–0.0047, `gradient_steps = 0` throughout.
+- **Build quality:** `redundancy` reproduces DIAG-IMPORTANCE's array **exactly (max|Δ| = 0.0**, Spearman
+  1.0, top-32 set agreement 1.0000); `mass_x_redundancy` verified to degenerate **exactly** to
+  `attention_mass` at α=0 and `redundancy` at α=1; seven fail-loud paths; bit-identical when default.
+  `kl_loo` deliberately **not** implemented, with the reason recorded so nobody rebuilds it.
+- Caveats recorded: Fisher was scored on the QA **eval** split (so `fisher`'s QA is an optimistic bound;
+  its MT is unaffected); one seed per arm; three arms bottom at k=16, the edge of the evaluated set.
+
 ## 📊 B-GATE — MECH-BUDGET (2026-07-29): **budget is not an established lever either**
 Gate passed exactly (16 digits, all four required values). `tfidf` at larger `top_t`, keys+reposition base:
 

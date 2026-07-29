@@ -103,9 +103,36 @@ class AttentionMatchingFinetuningConfig(BaseConfig):
     compute_update_stats: bool = True
     old_reference_weight: float = 1.0
     delta_weight: float = 0.0
-    slot_selection: Literal["tfidf", "attention_mass", "residual_budget"] = "tfidf"
+    # B-GATE / MECH-008: the last three are the information-theoretic selections
+    # (`am/ranking.py`). `tfidf` stays the default, so every historical config is
+    # bit-identical. `kl_loo` is deliberately absent -- DIAG-IMPORTANCE showed the
+    # exact leave-one-out KL is `-log(1 - w_j)`, a monotone function of the slot's
+    # own attention weight, so it IS `attention_mass` (measured rho = 0.968).
+    slot_selection: Literal[
+        "tfidf",
+        "attention_mass",
+        "residual_budget",
+        "redundancy",
+        "fisher",
+        "mass_x_redundancy",
+    ] = "tfidf"
     idf_prior_weight: float = 0.0
     min_top_t_per_layer: int = 1
+
+    # B-GATE / MECH-008 knobs. All inert unless `slot_selection` names a prior
+    # mode, so a stock run's config is byte-identical apart from these defaults.
+    #   redundancy_ridge_rel  -> the relative ridge in the redundancy Gram solve;
+    #                            1e-6 is DIAG-IMPORTANCE's own value.
+    #   mass_redundancy_alpha -> 0 = pure attention mass, 1 = pure redundancy,
+    #                            0.5 = geometric mean (the documented default).
+    #   slot_fisher_path      -> a CACHED (n_layers, n_slots) diagonal-Fisher
+    #                            array. The scoring pass is a diagnostic backward
+    #                            over QA data; it constructs no optimizer and
+    #                            leaves `gradient_steps` at 0, but it costs real
+    #                            GPU time, so it is paid once offline.
+    redundancy_ridge_rel: float = 1e-6
+    mass_redundancy_alpha: float = 0.5
+    slot_fisher_path: Optional[str] = None
 
     # B-ROUTE write-ceiling oracle (OPT-IN, default off -> bit-identical stock runs).
     # When on, the per-document write skips the closed-form solve and copies the
@@ -1108,6 +1135,7 @@ def run_decoupled_tfidf_am_update(
         config,
         old_access_scores=old_access_scores,
         step=step,
+        cache=cache,  # MECH-008 slot priors; ignored by every other selection
     )
     rank_time = time.time() - t_rank
 

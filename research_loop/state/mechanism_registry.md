@@ -568,3 +568,82 @@
   **−0.1363** and ΔQA to −0.0115. MECH-SEED seed-varied the **matched-k** comparison (k=12, k=16), **not**
   the own-optimum one. So the seed-confirmed statement is *"keys beat frozen keys at matched k"*; the
   own-optimum claim is weaker and remains un-seed-varied.
+
+---
+
+### MECH-008: information-theoretic slot selection → `SLOT_SELECTION` ∈ {`redundancy`, `fisher`, `mass_x_redundancy`} (default: `tfidf` = off)
+- Status: **tested** · Targets board entry: **B-GATE** · Implements: the human's own sparse-finetuning
+  hypothesis, grounded in **DIAG-IMPORTANCE** (attention mass ≉ importance: Spearman(`tf_mass_qa`,
+  `fisher`) = 0.579 pooled / 0.666 ± 0.122 per layer; `redundancy` is the best gradient-free Fisher
+  proxy at ρ = −0.648)
+- Files: `cartridges/am/ranking.py` (`compute_slot_redundancy`, `load_slot_fisher_scores`, `_unit_rank`,
+  `_mask_from_topk`, `_rank_slot_prior_per_layer`, `SLOT_PRIOR_SELECTIONS`; `rank_am_slots` gains a
+  `cache=None` keyword) · `cartridges/am/finetune.py` (3 new `slot_selection` literals + fields
+  `redundancy_ridge_rel=1e-6`, `mass_redundancy_alpha=0.5`, `slot_fisher_path=None`) ·
+  `cartridges/am/continual.py` + `finetune.py` (pass `cache=`) · `cartridges/am/__init__.py` ·
+  `examples/qasper2/train/continual_am_sparse.py` (`AM_SLOT_FISHER_PATH`, `AM_REDUNDANCY_RIDGE_REL`,
+  `AM_MASS_REDUNDANCY_ALPHA`, `_slot_prior_kwargs()`). 476 insertions / 2 deletions, 5 files.
+- What it changes (at the level of the math): nothing in the solve — only **which `top_t` slots per layer
+  the closed-form write is allowed to touch**. `redundancy[l,j] = 1 − r_j²/‖v_j‖²` with
+  `r_j² = 1/(G⁻¹)_{jj}`, `G = VVᵀ + λI` over the head-concatenated value matrix `V ∈ R^{512×1024}`
+  (the uncentred R² of regressing slot *j* on all the others; the frozen sink is a regressor but never
+  selectable) — taken **descending**, recomputed from the LIVE cache each document, one float64 512×512
+  inverse per layer, no eval data and no backward pass. `fisher` loads a cached
+  `(n_layers, n_slots)` diagonal empirical Fisher of the QA loss and takes it **ascending**.
+  `mass_x_redundancy` scores `u_tf^(1−α)·u_red^α` on per-layer ordinal ranks `u ∈ (0,1]` — a **product**,
+  not a sum, because the semantics wanted are AND: a slot last on either axis scores 1/511. `kl_loo` is
+  **deliberately not implemented** — the exact LOO-KL is `−log(1−w_j)`, monotone in the slot's own
+  attention weight, so ranking by it *is* ranking by attention mass (DIAG-IMPORTANCE ρ = 0.968).
+- Sanity check (CPU, `results/MECH-INFOGATE/sanity_mech008.py`): `compute_slot_redundancy` reproduces
+  DIAG-IMPORTANCE's `score_redundancy` array **exactly — max|Δ| = 0.0** (and 0.0 again for the
+  `ridge_rel` 1e-4 and 1e-8 variants), Spearman 1.0, per-layer top-32 set agreement **1.0000**. Selected
+  sets reproduce the published top-32 overlaps with the incumbent (**redundancy 0.1068** vs 0.107,
+  **lowest-Fisher 0.0009** vs 0.0009). α-degeneracy exact: **α=0 ≡ `attention_mass`, α=1 ≡ `redundancy`**
+  (overlap 1.0000 each). Seven fail-loud paths verified (α outside [0,1]; `cache=None`; granularity ≠
+  `per_layer`; `fisher` with no path; path missing; Fisher array wrong shape; `ridge_rel ≤ 0`).
+  Config constructs for all six modes; the driver raises a named error if the imported `cartridges` is
+  the sibling package.
+- **Bit-identical with flag off? YES.** The `tfidf` control re-ran the project's best point and
+  reproduced **QA 1.9560121297836304 / MT 2.2720184326171875 at k=12** and **QA 2.034916400909424 /
+  MT 2.330503463745117 at k=16** to all 16 digits (`CONTROL_GATE=GATE_PASS`). The only trace of the
+  mechanism in a default run is three inert lines of `config.yaml`.
+- Tested by: **MECH-INFOGATE** (`WANDB_GROUP=B-GATE`, 6 training runs + 48 dual-split evals at
+  k ∈ {8,10,12,16}). Deltas vs the control **at each arm's own optimum**, against DIAG-NOISE's measured
+  paired resolution (±0.049 MT / ±0.054 QA):
+
+  | arm | best MT (k) | ΔMT | best QA (k) | ΔQA | realised MT routing mass | realised QA Fisher mass | solve s | wandb |
+  |---|---|---|---|---|---|---|---|---|
+  | control `tfidf` t32 | **2.2720** (12) | — | **1.9464** (8) | — | **0.2799** | 0.2389 | 351 | `jmgeslj3` |
+  | `redundancy` t32 | 2.4386 (16) | **+0.167** ✔ | 1.9247 (10) | −0.022 ✘ | 0.0662 | 0.0444 | 312 | `cfxq1ngg` |
+  | `redundancy` t64 | 2.4811 (16) | **+0.209** ✔ | 1.9389 (8) | −0.008 ✘ | 0.1195 | 0.0901 | 331 | `0j8yd1qm` |
+  | `redundancy` t128 | 2.4582 (16) | **+0.186** ✔ | 2.0611 (8) | **+0.115** ✔ | 0.2146 | 0.1749 | 358 | `n8sypan6` |
+  | `mass_x_redundancy` t32 | 2.3789 (16) | **+0.107** ✔ | 1.8943 (8) | −0.052 ✘ | 0.1251 | 0.0970 | 328 | `wbcf9pm2` |
+  | `fisher` t32 | 2.6692 (16) | **+0.397** ✔ | **1.8641** (12) | **−0.082** ✔ | 0.0104 | **0.0004** | 330 | `47hn748u` |
+
+  (✔ = clears the paired resolution.)
+- Verdict + mechanistic reason: ❌ **dead for acquisition, with a measured cause — and the cause closes
+  the family.** Every information-theoretic gate is **worse on MT** than the incumbent, by 2.2×–8.1× the
+  measured resolution, and **raising `top_t` does not fix it**: the redundancy gate at **4× the budget**
+  (t=128) still captures **less** MT routing mass (0.2146) than the incumbent does at t=32 (**0.2799**).
+  DIAG-IMPORTANCE's projection (~34.6% at t=64, ~69% at t=128) extrapolated a *different* selector —
+  best-32-**within** the most-redundant quartile, i.e. mass-ranked inside a redundancy constraint — and
+  pure top-t-by-redundancy sits 2.4–3.2× below it. Across the six arms `log(realised MT routing mass)`
+  predicts best MT loss at **Pearson −0.877** and realised QA Fisher exposure predicts best QA loss at
+  **Spearman +0.771**, so *both* halves of the Pareto trade are now confirmed at the **loss** level, not
+  just at the mass level. The one resolved win is on the axis that was already 0.57 ahead of budget:
+  `fisher` gives the best retention in the bundle (**QA 1.8641**, −0.082) while exposing 0.04% of QA
+  Fisher mass — and pays **+0.397 MT** for it. **Cost is not the discriminator**: all six arms solve in
+  312–358 s (0.89×–1.02× the control), so a 4× larger `top_t` is essentially free here; `am/mean_mse`
+  0.0032–0.0047 and `|v|max` 74.5–91.5 are all in the control's range, so nothing failed numerically.
+  `gradient_steps = 0` throughout; the Fisher pass (98.8 s of *diagnostic* backward over 78 QA + 69 MT
+  examples) was paid once offline and cached to `state/diagnostics/slot_fisher_qa_phase1.npz`.
+- ⚠️ Honest limits: (a) the cached Fisher is scored on the QA **eval** split (matching DIAG-IMPORTANCE),
+  so `fisher`'s QA number is an *optimistic bound* — its MT number, which is what the arm was dispatched
+  to test, is unaffected; (b) single seed per arm (`AM_SEED_OFFSET` unset), so deltas are adjudicated
+  against the paired resolution, not a seed-varied interval; (c) three of the five new arms bottom on MT
+  at **k=16**, the edge of the evaluated set, so their true minima are unlocated — which if anything
+  flatters them; (d) `redundancy` is recomputed from the live cache each document and therefore drifts
+  as slots are written (at document 0 it is exactly DIAG-IMPORTANCE's array).
+- Kept in tree? **yes** — opt-in, default off, bit-identical when off, fail-loud when requested against a
+  package that lacks it. It is the reusable instrument for any future "which slots may be overwritten"
+  question, and it is the reason nobody needs to rebuild `kl_loo`.

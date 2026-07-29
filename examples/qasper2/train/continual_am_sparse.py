@@ -150,6 +150,23 @@ AM_ONPOLICY_DOCKV = AM_ONPOLICY_DOCKV_ENV in ("1", "true", "True")
 # `doc_idx + N`. Unset/0 -> bit-identical to every historical run.
 AM_SEED_OFFSET_ENV = os.environ.get("AM_SEED_OFFSET")
 AM_SEED_OFFSET = int(AM_SEED_OFFSET_ENV) if AM_SEED_OFFSET_ENV else 0
+# B-GATE / MECH-008: information-theoretic slot selection. These are only
+# forwarded when one of the new `SLOT_SELECTION` modes is actually requested (or
+# a knob is set explicitly), so every historical run keeps a byte-identical
+# config. See `cartridges/am/ranking.py`.
+AM_SLOT_FISHER_PATH_ENV = os.environ.get("AM_SLOT_FISHER_PATH") or None
+AM_REDUNDANCY_RIDGE_REL_ENV = os.environ.get("AM_REDUNDANCY_RIDGE_REL")
+AM_MASS_REDUNDANCY_ALPHA_ENV = os.environ.get("AM_MASS_REDUNDANCY_ALPHA")
+AM_REDUNDANCY_RIDGE_REL = (
+    float(AM_REDUNDANCY_RIDGE_REL_ENV) if AM_REDUNDANCY_RIDGE_REL_ENV else 1e-6
+)
+AM_MASS_REDUNDANCY_ALPHA = (
+    float(AM_MASS_REDUNDANCY_ALPHA_ENV) if AM_MASS_REDUNDANCY_ALPHA_ENV else 0.5
+)
+# `kl_loo` is intentionally NOT a mode: DIAG-IMPORTANCE showed the exact
+# leave-one-out KL is -log(1 - w_j), a monotone function of the slot's own
+# attention weight (rho = 0.968 with mass), so it IS `attention_mass`.
+SLOT_PRIOR_SELECTIONS = ("redundancy", "fisher", "mass_x_redundancy")
 # B-SOLVE / LIT-002: box-constrained NNLS for the beta (mass-matching) fit.
 # These are only forwarded when beta is actually requested (or a knob is set
 # explicitly), so every beta-off run keeps a byte-identical config.
@@ -407,6 +424,91 @@ def _seed_offset_kwargs() -> dict:
     return {"seed_offset": AM_SEED_OFFSET}
 
 
+def _slot_prior_kwargs() -> dict:
+    """Pass the MECH-008 slot-prior knobs ONLY when a prior mode is in play.
+
+    Same conditional-kwarg discipline as `_oracle_write_kwargs` (RUNBOOK §6.10):
+    the sibling `cartridges` package has none of these fields, and MECH-000 lost
+    a whole batch to an unconditional new kwarg. When `SLOT_SELECTION` is one of
+    the historical values and no `AM_SLOT_FISHER_PATH` / `AM_REDUNDANCY_RIDGE_REL`
+    / `AM_MASS_REDUNDANCY_ALPHA` is set, nothing is forwarded, so the config is
+    byte-identical to every historical run.
+    """
+    import cartridges
+
+    pkg = os.path.dirname(cartridges.__file__)
+    knobs_set = any(
+        v is not None
+        for v in (
+            AM_SLOT_FISHER_PATH_ENV,
+            AM_REDUNDANCY_RIDGE_REL_ENV,
+            AM_MASS_REDUNDANCY_ALPHA_ENV,
+        )
+    )
+    is_prior_mode = SLOT_SELECTION in SLOT_PRIOR_SELECTIONS
+
+    # The MODE itself goes through the (unconditional) `slot_selection` kwarg, so
+    # a sibling import would reject it with an opaque pydantic Literal error.
+    # Say what actually went wrong first.
+    if is_prior_mode:
+        field = AttentionMatchingFinetuningConfig.model_fields.get("slot_selection")
+        allowed = getattr(getattr(field, "annotation", None), "__args__", ())
+        if SLOT_SELECTION not in allowed:
+            raise RuntimeError(
+                f"SLOT_SELECTION={SLOT_SELECTION!r} (MECH-008) but the imported "
+                f"`cartridges` package ({pkg}) only allows {list(allowed)}. "
+                "Export PYTHONPATH=$CARTRIDGES_DIR:$PYTHONPATH (RUNBOOK §6.10)."
+            )
+
+    if not (is_prior_mode or knobs_set):
+        return {}
+
+    missing = [
+        f
+        for f in ("redundancy_ridge_rel", "mass_redundancy_alpha", "slot_fisher_path")
+        if f not in AttentionMatchingFinetuningConfig.model_fields
+    ]
+    if missing:
+        raise RuntimeError(
+            f"SLOT_SELECTION={SLOT_SELECTION!r} / MECH-008 knobs requested but the "
+            f"imported `cartridges` package ({pkg}) has no {missing}. "
+            "Export PYTHONPATH=$CARTRIDGES_DIR:$PYTHONPATH (RUNBOOK §6.10)."
+        )
+    if not (AM_REDUNDANCY_RIDGE_REL > 0.0):
+        raise ValueError(
+            f"AM_REDUNDANCY_RIDGE_REL must be > 0, got {AM_REDUNDANCY_RIDGE_REL}"
+        )
+    if not (0.0 <= AM_MASS_REDUNDANCY_ALPHA <= 1.0):
+        raise ValueError(
+            "AM_MASS_REDUNDANCY_ALPHA must be in [0, 1] (0 = pure attention mass, "
+            f"1 = pure redundancy), got {AM_MASS_REDUNDANCY_ALPHA}"
+        )
+    if SLOT_SELECTION == "fisher" and not AM_SLOT_FISHER_PATH_ENV:
+        raise ValueError(
+            "SLOT_SELECTION=fisher needs AM_SLOT_FISHER_PATH pointing at a cached "
+            "(n_layers, n_slots) diagonal-Fisher array. Generate one with "
+            "research_loop/results/MECH-INFOGATE/compute_slot_fisher.py — it is a "
+            "DIAGNOSTIC backward pass (no optimizer, gradient_steps stays 0), paid "
+            "once and cached."
+        )
+    if AM_SLOT_FISHER_PATH_ENV and not os.path.exists(AM_SLOT_FISHER_PATH_ENV):
+        raise FileNotFoundError(
+            f"AM_SLOT_FISHER_PATH={AM_SLOT_FISHER_PATH_ENV!r} does not exist."
+        )
+    logger.info(
+        "MECH-008: slot_selection=%s ridge_rel=%g alpha=%g fisher_path=%s",
+        SLOT_SELECTION,
+        AM_REDUNDANCY_RIDGE_REL,
+        AM_MASS_REDUNDANCY_ALPHA,
+        AM_SLOT_FISHER_PATH_ENV,
+    )
+    return {
+        "redundancy_ridge_rel": AM_REDUNDANCY_RIDGE_REL,
+        "mass_redundancy_alpha": AM_MASS_REDUNDANCY_ALPHA,
+        "slot_fisher_path": AM_SLOT_FISHER_PATH_ENV,
+    }
+
+
 def _beta_fit_kwargs() -> dict:
     """Pass the LIT-002 beta-fit knobs ONLY when beta is actually in play.
 
@@ -459,6 +561,7 @@ def _build_am_config() -> AttentionMatchingFinetuningConfig:
         **_onpolicy_kwargs(),
         **_beta_fit_kwargs(),
         **_seed_offset_kwargs(),
+        **_slot_prior_kwargs(),
         enabled=True,
         top_t=TOP_T,
         use_idf=USE_IDF and BG_STATS_PATH is not None,

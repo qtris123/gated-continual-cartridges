@@ -213,6 +213,10 @@ def run_per_document_am_phase2(
                 if old_query_acc is not None and config.enable_old_reference_guard
                 else None
             )
+            # `cache=` is MECH-008's only new argument. It is a keyword with a
+            # `None` default on a function that lives in this same package, so it
+            # cannot reach a sibling-`cartridges` signature (RUNBOOK §6.10); the
+            # attention-mass family ignores it entirely.
             grad_mask, ranking_info = rank_am_slots(
                 access_scores,
                 config.top_t,
@@ -220,6 +224,7 @@ def run_per_document_am_phase2(
                 config,
                 old_access_scores=old_access_scores,
                 step=doc_idx + 1,
+                cache=cache,
             )
 
             # LIT-006 / MECH-006: on-policy, layer-sequential re-extraction. The

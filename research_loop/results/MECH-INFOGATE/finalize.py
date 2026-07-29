@@ -101,10 +101,58 @@ def main():
         repro["gate_line"] and repro["gate_line"].startswith("GATE_PASS")
     )
 
+    # ---- own-optimum comparison (each arm at its OWN best k) -----------------
+    import numpy as np
+    from scipy.stats import pearsonr, spearmanr
+
+    def best(arm, sp):
+        d = {k: v for k, v in curves[arm][sp].items() if v is not None}
+        if not d:
+            return None, None
+        k = min(d, key=d.get)
+        return d[k], k
+
+    cmt, cmtk = best("C0_control", "MT")
+    cqa, cqak = best("C0_control", "QA")
+    own = {"control_own_optimum": {"MT": cmt, "MT_k": cmtk, "QA": cqa, "QA_k": cqak}}
+    for arm in per_arm:
+        mt, mtk = best(arm, "MT")
+        qa, qak = best(arm, "QA")
+        dmt, dqa = mt - cmt, qa - cqa
+        own[arm] = {
+            "MT_best": mt, "MT_best_k": mtk, "QA_best": qa, "QA_best_k": qak,
+            "dMT_vs_control_own_optima": round(dmt, 5),
+            "dQA_vs_control_own_optima": round(dqa, 5),
+            "dMT_clears_paired_resolution": bool(abs(dmt) > RES_MT),
+            "dQA_clears_paired_resolution": bool(abs(dqa) > RES_QA),
+            "realised_frac_writable_MT_routing_mass":
+                per_arm[arm]["realised_frac_writable_MT_routing_mass"],
+            "realised_frac_total_QA_Fisher_mass":
+                per_arm[arm]["realised_frac_total_QA_Fisher_mass"],
+        }
+    ks = [a for a in per_arm]
+    mm = np.array([own[a]["realised_frac_writable_MT_routing_mass"] for a in ks])
+    qf = np.array([own[a]["realised_frac_total_QA_Fisher_mass"] for a in ks])
+    mtb = np.array([own[a]["MT_best"] for a in ks])
+    qab = np.array([own[a]["QA_best"] for a in ks])
+    own["bandwidth_vs_acquisition"] = {
+        "spearman_MTmass_vs_bestMT": float(spearmanr(mm, mtb).statistic),
+        "pearson_logMTmass_vs_bestMT": float(pearsonr(np.log(mm), mtb)[0]),
+        "spearman_QAfisher_vs_bestQA": float(spearmanr(qf, qab).statistic),
+        "pearson_QAfisher_vs_bestQA": float(pearsonr(qf, qab)[0]),
+        "n_arms": len(ks),
+        "_definition": (
+            "Across the 6 arms, does the SELECTION's measured write bandwidth "
+            "predict acquisition, and its retention exposure predict forgetting? "
+            "Both are the causal link DIAG-IMPORTANCE's Pareto table asserts."
+        ),
+    }
+
     diagnostics = {
         "id": "MECH-INFOGATE",
         "mechanism": "MECH-008",
         "baseline_reproduced": repro,
+        "own_optimum_comparison": own,
         "paired_resolution_used": {"MT": RES_MT, "QA": RES_QA, "source": "DIAG-NOISE"},
         "incumbent_best_point": {"k": 12, **INC},
         "per_arm": per_arm,
