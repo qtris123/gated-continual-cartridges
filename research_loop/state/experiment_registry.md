@@ -278,3 +278,38 @@ Format mirrors `.cursor/rules/research-companion.mdc`.
 - Expected: MT ≈ 2.5 ⇒ no value-only frozen-key write can win ⇒ the mission pivots to keys/write-rule.
   MT ≪ 2.5 ⇒ the ceiling is high and our solve/target is the failure, not routing.
 - Status: dispatched | Artifacts: research_loop/results/ORACLE-WRITE/result.json
+
+---
+# B-GATE — information-theoretic slot selection (opened 2026-07-29, human-directed)
+
+**Human's hypothesis:** keep the sparse-finetuning mindset — pick top-t slots by a *statistical*
+criterion that avoids overwriting slots carrying important Phase-1 knowledge, while still acquiring
+Phase-2. Candidate criteria: information gain, entropy, KL divergence, Fisher information.
+
+**Why this is not already closed by the board.** Everything measured so far bounded *attention/routing*
+separation (QA/MT top-32 overlap 0.914, mean-routing cosine 0.99899, ranker Spearman across documents
+0.958, ρ_key at its control floor). **None of it measured IMPORTANCE.** A slot can carry high attention
+and be redundant, or low attention and be load-bearing — `tf_mass ≠ Fisher ≠ KL-irreplaceability`. The
+incumbent TF ranker assumes they coincide and that assumption is untested here.
+
+**Reframing worth recording:** retention is **not** the binding constraint (QA 1.9560 vs a 2.52 budget —
+0.56 of slack, and 0.28 *below* the untouched Phase-1 floor). So the value of a better protective metric
+is **converting QA slack into acquisition headroom**, not reducing forgetting per se.
+
+### DIAG-IMPORTANCE: does slot importance differ from slot attention mass?
+- Date: 2026-07-29 | Board entry: **B-GATE** | Role: measure (GPU, no source edits, pinned imports)
+- Research question: are Fisher / KL-irreplaceability / entropy / redundancy rank-correlated with the
+  incumbent `tf_mass` ranker — and if not, how much "safe acquisition budget" does an importance-based
+  selector expose beyond the ~9% implied by the 0.914 attention overlap?
+- Metrics computed per writable slot (511) per layer, on the Phase-1 cartridge, both eval splits:
+  `tf_mass_qa`, `tf_mass_mt`, `entropy`, `kl_loo`, `fisher`, `redundancy`, `contrast = log(mass_mt/mass_qa)`
+- Note on the gradient-free requirement: `fisher` needs a **diagnostic backward pass**, which is *not*
+  an optimizer step — `gradient_steps` stays 0. Its wall-clock cost is reported separately. The other
+  five metrics are gradient-free.
+- Expected: Spearman(`tf_mass_qa`, `fisher`) ≥ 0.9 ⇒ the gating family is bounded before anything is
+  built (a clean negative the project has never had). ≤ 0.6 ⇒ real headroom the incumbent ranker misses.
+- Status: **dispatched** | Artifacts: `research_loop/results/DIAG-IMPORTANCE/result.json`,
+  `state/diagnostics/DIAG-IMPORTANCE.{json,npz}`, and `results/DIAG-IMPORTANCE/METRICS.md` (per-metric
+  formulas + code paths, written for a human reproducing it)
+- Follow-up (gated on the result, NOT pre-approved): `MECH-INFOGATE` — implement the winning criteria as
+  opt-in `SLOT_SELECTION` modes with a `top_t` sweep, trained runs logged to wandb under `B-GATE`.
