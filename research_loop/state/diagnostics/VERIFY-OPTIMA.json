@@ -1,0 +1,1319 @@
+{
+ "id": "VERIFY-OPTIMA",
+ "what_this_job_measured": "the frozen-key control at k=10 (its MT argmin) and the keys arm at k=10, at seed offsets {0,1000,2000}, plus a control MT argmin-stability sweep at the two non-zero offsets. All from pre-existing per-document snapshots; nothing re-trained.",
+ "noise_yardstick_DIAG_NOISE": {
+  "MT_paired_95pct": 0.049414709208868444,
+  "QA_paired_95pct": 0.05389150679130719,
+  "MT_composite_95pct": 0.10553301160022083,
+  "QA_composite_95pct": 0.1967026909783353,
+  "note": "the correct yardstick for these paired same-example comparisons is 0.0494 MT, NOT the inherited +-0.15 rule of thumb, which is ~3x too wide."
+ },
+ "correctness_gates": {
+  "control_1000_12_MT": {
+   "expected": 2.448606491088867,
+   "observed": 2.448606491088867,
+   "source_of_expectation": "MECH-SEED",
+   "exact_match": true,
+   "abs_diff": 0.0
+  },
+  "control_2000_12_MT": {
+   "expected": 2.5163300037384033,
+   "observed": 2.5163300037384033,
+   "source_of_expectation": "MECH-SEED",
+   "exact_match": true,
+   "abs_diff": 0.0
+  },
+  "control_0_10_MT": {
+   "expected": 2.4083292484283447,
+   "observed": 2.4083292484283447,
+   "source_of_expectation": "DIAG-CONTROLCURVE",
+   "exact_match": true,
+   "abs_diff": 0.0
+  },
+  "control_0_10_QA": {
+   "expected": 1.9674913883209229,
+   "observed": 1.9674913883209229,
+   "source_of_expectation": "DIAG-CONTROLCURVE",
+   "exact_match": true,
+   "abs_diff": 0.0
+  },
+  "keys_0_10_MT": {
+   "expected": 2.319589376449585,
+   "observed": 2.319589376449585,
+   "source_of_expectation": "DIAG-KEYCURVE",
+   "exact_match": true,
+   "abs_diff": 0.0
+  },
+  "keys_0_10_QA": {
+   "expected": 1.968939185142517,
+   "observed": 1.968939185142517,
+   "source_of_expectation": "DIAG-KEYCURVE",
+   "exact_match": true,
+   "abs_diff": 0.0
+  }
+ },
+ "correctness_gates_all_passed": true,
+ "losses_by_arm_offset_k_split": {
+  "control|0|1|MT": {
+   "loss": 3.1145591735839844,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|1|QA": {
+   "loss": 1.9870699644088745,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|2|MT": {
+   "loss": 2.7727901935577393,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|2|QA": {
+   "loss": 1.8753408193588257,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|3|MT": {
+   "loss": 2.6456825733184814,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|3|QA": {
+   "loss": 1.8177090883255005,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|4|MT": {
+   "loss": 2.526649236679077,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|4|QA": {
+   "loss": 1.8310279846191406,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|5|MT": {
+   "loss": 2.536327838897705,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|5|QA": {
+   "loss": 1.900788426399231,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|6|MT": {
+   "loss": 2.5201644897460938,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|6|QA": {
+   "loss": 1.931013822555542,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|7|MT": {
+   "loss": 2.4667556285858154,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|7|QA": {
+   "loss": 1.9014028310775757,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|8|MT": {
+   "loss": 2.453585624694824,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|8|QA": {
+   "loss": 1.9329710006713867,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|9|MT": {
+   "loss": 2.4436779022216797,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|9|QA": {
+   "loss": 1.9655601978302002,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|10|MT": {
+   "loss": 2.4083292484283447,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|0|10|QA": {
+   "loss": 1.9674913883209229,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|0|11|MT": {
+   "loss": 2.4306740760803223,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|11|QA": {
+   "loss": 1.9997590780258179,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|12|MT": {
+   "loss": 2.4704575538635254,
+   "measured_by": "MECH-SEED"
+  },
+  "control|0|12|QA": {
+   "loss": 2.074141263961792,
+   "measured_by": "MECH-SEED"
+  },
+  "control|0|13|MT": {
+   "loss": 2.486041784286499,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|13|QA": {
+   "loss": 2.079558849334717,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|14|MT": {
+   "loss": 2.4835116863250732,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|14|QA": {
+   "loss": 2.0921683311462402,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|15|MT": {
+   "loss": 2.514181613922119,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|15|QA": {
+   "loss": 2.1373283863067627,
+   "measured_by": "DIAG-CONTROLCURVE"
+  },
+  "control|0|16|MT": {
+   "loss": 2.529625177383423,
+   "measured_by": "MECH-SEED"
+  },
+  "control|0|16|QA": {
+   "loss": 2.159724712371826,
+   "measured_by": "MECH-SEED"
+  },
+  "control|1000|1|MT": {
+   "loss": 3.34344744682312,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|1000|2|MT": {
+   "loss": 2.958583354949951,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|1000|3|MT": {
+   "loss": 2.737459182739258,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|1000|4|MT": {
+   "loss": 2.5260438919067383,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|1000|5|MT": {
+   "loss": 2.4545605182647705,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|1000|6|MT": {
+   "loss": 2.467552661895752,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|1000|7|MT": {
+   "loss": 2.480165719985962,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|1000|8|MT": {
+   "loss": 2.492708444595337,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|1000|9|MT": {
+   "loss": 2.5033955574035645,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|1000|10|MT": {
+   "loss": 2.491347312927246,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|1000|10|QA": {
+   "loss": 2.0084433555603027,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|1000|11|MT": {
+   "loss": 2.4789345264434814,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|1000|12|MT": {
+   "loss": 2.448606491088867,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|1000|12|QA": {
+   "loss": 2.0522191524505615,
+   "measured_by": "MECH-SEED"
+  },
+  "control|1000|13|MT": {
+   "loss": 2.50688099861145,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|1000|14|MT": {
+   "loss": 2.501429796218872,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|1000|15|MT": {
+   "loss": 2.465484619140625,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|1000|16|MT": {
+   "loss": 2.482379198074341,
+   "measured_by": "MECH-SEED"
+  },
+  "control|1000|16|QA": {
+   "loss": 2.138103485107422,
+   "measured_by": "MECH-SEED"
+  },
+  "control|2000|1|MT": {
+   "loss": 3.2963919639587402,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|2000|2|MT": {
+   "loss": 2.892812967300415,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|2000|3|MT": {
+   "loss": 2.704789161682129,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|2000|4|MT": {
+   "loss": 2.5352654457092285,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|2000|5|MT": {
+   "loss": 2.4469118118286133,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|2000|6|MT": {
+   "loss": 2.4107038974761963,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|2000|7|MT": {
+   "loss": 2.434037685394287,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|2000|8|MT": {
+   "loss": 2.439911365509033,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|2000|9|MT": {
+   "loss": 2.4538910388946533,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|2000|10|MT": {
+   "loss": 2.472822427749634,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|2000|10|QA": {
+   "loss": 1.9783906936645508,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|2000|11|MT": {
+   "loss": 2.471754550933838,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|2000|12|MT": {
+   "loss": 2.5163300037384033,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|2000|12|QA": {
+   "loss": 2.070828914642334,
+   "measured_by": "MECH-SEED"
+  },
+  "control|2000|13|MT": {
+   "loss": 2.5320236682891846,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|2000|14|MT": {
+   "loss": 2.536113977432251,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|2000|15|MT": {
+   "loss": 2.5560152530670166,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "control|2000|16|MT": {
+   "loss": 2.6113579273223877,
+   "measured_by": "MECH-SEED"
+  },
+  "control|2000|16|QA": {
+   "loss": 2.2329885959625244,
+   "measured_by": "MECH-SEED"
+  },
+  "keys|0|1|MT": {
+   "loss": 2.965111255645752,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|1|QA": {
+   "loss": 1.913637638092041,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|2|MT": {
+   "loss": 2.6856672763824463,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|2|QA": {
+   "loss": 1.8658878803253174,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|3|MT": {
+   "loss": 2.5314693450927734,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|3|QA": {
+   "loss": 1.8607447147369385,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|4|MT": {
+   "loss": 2.4055702686309814,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|4|QA": {
+   "loss": 1.8669999837875366,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|5|MT": {
+   "loss": 2.4009695053100586,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|5|QA": {
+   "loss": 1.9200594425201416,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|6|MT": {
+   "loss": 2.346301555633545,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|6|QA": {
+   "loss": 1.9135236740112305,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|7|MT": {
+   "loss": 2.3156590461730957,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|7|QA": {
+   "loss": 1.9160072803497314,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|8|MT": {
+   "loss": 2.32890248298645,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|8|QA": {
+   "loss": 1.9463961124420166,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|9|MT": {
+   "loss": 2.31606125831604,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|9|QA": {
+   "loss": 1.93601655960083,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|10|MT": {
+   "loss": 2.319589376449585,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "keys|0|10|QA": {
+   "loss": 1.968939185142517,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "keys|0|11|MT": {
+   "loss": 2.2814929485321045,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|11|QA": {
+   "loss": 1.9373838901519775,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|12|MT": {
+   "loss": 2.2720184326171875,
+   "measured_by": "MECH-SEED"
+  },
+  "keys|0|12|QA": {
+   "loss": 1.9560121297836304,
+   "measured_by": "MECH-SEED"
+  },
+  "keys|0|13|MT": {
+   "loss": 2.298682928085327,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|13|QA": {
+   "loss": 1.989310383796692,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|14|MT": {
+   "loss": 2.319815158843994,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|14|QA": {
+   "loss": 2.015522003173828,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|15|MT": {
+   "loss": 2.3325002193450928,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|15|QA": {
+   "loss": 2.0397305488586426,
+   "measured_by": "DIAG-KEYCURVE"
+  },
+  "keys|0|16|MT": {
+   "loss": 2.330503463745117,
+   "measured_by": "MECH-SEED"
+  },
+  "keys|0|16|QA": {
+   "loss": 2.034916400909424,
+   "measured_by": "MECH-SEED"
+  },
+  "keys|1000|10|MT": {
+   "loss": 2.273444652557373,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "keys|1000|10|QA": {
+   "loss": 1.911603569984436,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "keys|1000|12|MT": {
+   "loss": 2.269538164138794,
+   "measured_by": "MECH-SEED"
+  },
+  "keys|1000|12|QA": {
+   "loss": 1.9397201538085938,
+   "measured_by": "MECH-SEED"
+  },
+  "keys|1000|16|MT": {
+   "loss": 2.306238889694214,
+   "measured_by": "MECH-SEED"
+  },
+  "keys|1000|16|QA": {
+   "loss": 1.996092677116394,
+   "measured_by": "MECH-SEED"
+  },
+  "keys|2000|10|MT": {
+   "loss": 2.303954601287842,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "keys|2000|10|QA": {
+   "loss": 1.9478639364242554,
+   "measured_by": "VERIFY-OPTIMA"
+  },
+  "keys|2000|12|MT": {
+   "loss": 2.262629747390747,
+   "measured_by": "MECH-SEED"
+  },
+  "keys|2000|12|QA": {
+   "loss": 1.9446364641189575,
+   "measured_by": "MECH-SEED"
+  },
+  "keys|2000|16|MT": {
+   "loss": 2.290109395980835,
+   "measured_by": "MECH-SEED"
+  },
+  "keys|2000|16|QA": {
+   "loss": 2.0024614334106445,
+   "measured_by": "MECH-SEED"
+  }
+ },
+ "own_optimum_comparison_keys_k12_vs_control_k10": {
+  "0": {
+   "keys_k12_MT": 2.2720184326171875,
+   "control_k10_MT": 2.4083292484283447,
+   "dMT": -0.13631081581115723,
+   "keys_k12_QA": 1.9560121297836304,
+   "control_k10_QA": 1.9674913883209229,
+   "dQA": -0.01147925853729248
+  },
+  "1000": {
+   "keys_k12_MT": 2.269538164138794,
+   "control_k10_MT": 2.491347312927246,
+   "dMT": -0.22180914878845215,
+   "keys_k12_QA": 1.9397201538085938,
+   "control_k10_QA": 2.0084433555603027,
+   "dQA": -0.06872320175170898
+  },
+  "2000": {
+   "keys_k12_MT": 2.262629747390747,
+   "control_k10_MT": 2.472822427749634,
+   "dMT": -0.21019268035888672,
+   "keys_k12_QA": 1.9446364641189575,
+   "control_k10_QA": 1.9783906936645508,
+   "dQA": -0.03375422954559326
+  }
+ },
+ "own_optimum_dMT": {
+  "per_offset": {
+   "0": -0.13631081581115723,
+   "1000": -0.22180914878845215,
+   "2000": -0.21019268035888672
+  },
+  "mean": -0.1894375483194987,
+  "min": -0.22180914878845215,
+  "max": -0.13631081581115723,
+  "range": 0.08549833297729492
+ },
+ "own_optimum_dQA": {
+  "per_offset": {
+   "0": -0.01147925853729248,
+   "1000": -0.06872320175170898,
+   "2000": -0.03375422954559326
+  },
+  "mean": -0.03798556327819824,
+  "min": -0.06872320175170898,
+  "max": -0.01147925853729248,
+  "range": 0.057243943214416504
+ },
+ "own_optimum_dMT_vs_resolution": {
+  "paired_95pct": 0.049414709208868444,
+  "all_offsets_clear_paired": true,
+  "all_same_sign": true,
+  "ratio_mean_effect_over_paired_resolution": 3.833626694407429,
+  "all_offsets_clear_composite": true
+ },
+ "own_optimum_dQA_vs_resolution": {
+  "paired_95pct": 0.05389150679130719,
+  "all_offsets_clear_paired": false,
+  "all_same_sign": true
+ },
+ "common_k10_comparison": {
+  "0": {
+   "keys_k10_MT": 2.319589376449585,
+   "control_k10_MT": 2.4083292484283447,
+   "dMT": -0.08873987197875977,
+   "keys_k10_QA": 1.968939185142517,
+   "control_k10_QA": 1.9674913883209229,
+   "dQA": 0.0014477968215942383
+  },
+  "1000": {
+   "keys_k10_MT": 2.273444652557373,
+   "control_k10_MT": 2.491347312927246,
+   "dMT": -0.21790266036987305,
+   "keys_k10_QA": 1.911603569984436,
+   "control_k10_QA": 2.0084433555603027,
+   "dQA": -0.0968397855758667
+  },
+  "2000": {
+   "keys_k10_MT": 2.303954601287842,
+   "control_k10_MT": 2.472822427749634,
+   "dMT": -0.168867826461792,
+   "keys_k10_QA": 1.9478639364242554,
+   "control_k10_QA": 1.9783906936645508,
+   "dQA": -0.03052675724029541
+  }
+ },
+ "common_k10_dMT": {
+  "per_offset": {
+   "0": -0.08873987197875977,
+   "1000": -0.21790266036987305,
+   "2000": -0.168867826461792
+  },
+  "mean": -0.15850345293680826,
+  "min": -0.21790266036987305,
+  "max": -0.08873987197875977,
+  "range": 0.12916278839111328
+ },
+ "common_k10_dQA": {
+  "per_offset": {
+   "0": 0.0014477968215942383,
+   "1000": -0.0968397855758667,
+   "2000": -0.03052675724029541
+  },
+  "mean": -0.04197291533152262,
+  "min": -0.0968397855758667,
+  "max": 0.0014477968215942383,
+  "range": 0.09828758239746094
+ },
+ "adversarial_pairing_own_optimum": {
+  "note": "keys' WORST seed at its argmin k=12 against the control's BEST seed at its argmin k=10.",
+  "keys_worst_MT": 2.2720184326171875,
+  "keys_worst_MT_offset": 0,
+  "control_best_MT": 2.4083292484283447,
+  "control_best_MT_offset": 0,
+  "dMT": -0.13631081581115723,
+  "keys_worst_QA": 1.9560121297836304,
+  "control_best_QA": 1.9674913883209229,
+  "dQA": -0.01147925853729248,
+  "dMT_clears_paired_resolution": true,
+  "dMT_clears_composite_resolution": true,
+  "dQA_clears_paired_resolution": false
+ },
+ "argmin_stability_control_MT": {
+  "0": {
+   "control_MT_by_k": {
+    "1": 3.1145591735839844,
+    "2": 2.7727901935577393,
+    "3": 2.6456825733184814,
+    "4": 2.526649236679077,
+    "5": 2.536327838897705,
+    "6": 2.5201644897460938,
+    "7": 2.4667556285858154,
+    "8": 2.453585624694824,
+    "9": 2.4436779022216797,
+    "10": 2.4083292484283447,
+    "11": 2.4306740760803223,
+    "12": 2.4704575538635254,
+    "13": 2.486041784286499,
+    "14": 2.4835116863250732,
+    "15": 2.514181613922119,
+    "16": 2.529625177383423
+   },
+   "k_measured": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+   ],
+   "k_not_measured": [],
+   "argmin_k": 10,
+   "argmin_MT": 2.4083292484283447,
+   "MT_at_k10": 2.4083292484283447,
+   "gap_k10_minus_argmin": 0.0,
+   "second_best_k": 11,
+   "gap_best_to_second": 0.02234482765197754
+  },
+  "1000": {
+   "control_MT_by_k": {
+    "1": 3.34344744682312,
+    "2": 2.958583354949951,
+    "3": 2.737459182739258,
+    "4": 2.5260438919067383,
+    "5": 2.4545605182647705,
+    "6": 2.467552661895752,
+    "7": 2.480165719985962,
+    "8": 2.492708444595337,
+    "9": 2.5033955574035645,
+    "10": 2.491347312927246,
+    "11": 2.4789345264434814,
+    "12": 2.448606491088867,
+    "13": 2.50688099861145,
+    "14": 2.501429796218872,
+    "15": 2.465484619140625,
+    "16": 2.482379198074341
+   },
+   "k_measured": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+   ],
+   "k_not_measured": [],
+   "argmin_k": 12,
+   "argmin_MT": 2.448606491088867,
+   "MT_at_k10": 2.491347312927246,
+   "gap_k10_minus_argmin": 0.042740821838378906,
+   "second_best_k": 5,
+   "gap_best_to_second": 0.00595402717590332
+  },
+  "2000": {
+   "control_MT_by_k": {
+    "1": 3.2963919639587402,
+    "2": 2.892812967300415,
+    "3": 2.704789161682129,
+    "4": 2.5352654457092285,
+    "5": 2.4469118118286133,
+    "6": 2.4107038974761963,
+    "7": 2.434037685394287,
+    "8": 2.439911365509033,
+    "9": 2.4538910388946533,
+    "10": 2.472822427749634,
+    "11": 2.471754550933838,
+    "12": 2.5163300037384033,
+    "13": 2.5320236682891846,
+    "14": 2.536113977432251,
+    "15": 2.5560152530670166,
+    "16": 2.6113579273223877
+   },
+   "k_measured": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+   ],
+   "k_not_measured": [],
+   "argmin_k": 6,
+   "argmin_MT": 2.4107038974761963,
+   "MT_at_k10": 2.472822427749634,
+   "gap_k10_minus_argmin": 0.0621185302734375,
+   "second_best_k": 7,
+   "gap_best_to_second": 0.02333378791809082
+  }
+ },
+ "per_seed_own_argmin_comparison": {
+  "0": {
+   "control_argmin_k": 10,
+   "control_argmin_MT": 2.4083292484283447,
+   "keys_k_measured": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+   ],
+   "keys_argmin_k_over_measured": 12,
+   "keys_argmin_MT_over_measured": 2.2720184326171875,
+   "dMT_each_arm_at_its_own_measured_argmin": -0.13631081581115723
+  },
+  "1000": {
+   "control_argmin_k": 12,
+   "control_argmin_MT": 2.448606491088867,
+   "keys_k_measured": [
+    10,
+    12,
+    16
+   ],
+   "keys_argmin_k_over_measured": 12,
+   "keys_argmin_MT_over_measured": 2.269538164138794,
+   "dMT_each_arm_at_its_own_measured_argmin": -0.17906832695007324
+  },
+  "2000": {
+   "control_argmin_k": 6,
+   "control_argmin_MT": 2.4107038974761963,
+   "keys_k_measured": [
+    10,
+    12,
+    16
+   ],
+   "keys_argmin_k_over_measured": 12,
+   "keys_argmin_MT_over_measured": 2.262629747390747,
+   "dMT_each_arm_at_its_own_measured_argmin": -0.14807415008544922
+  }
+ },
+ "per_seed_own_argmin_summary": {
+  "dMT_per_offset": {
+   "0": -0.13631081581115723,
+   "1000": -0.17906832695007324,
+   "2000": -0.14807415008544922
+  },
+  "mean": -0.15448443094889322,
+  "range": 0.042757511138916016,
+  "all_same_sign": true,
+  "all_clear_paired_resolution": true,
+  "all_clear_composite_resolution": true,
+  "ratio_each_over_paired_resolution": {
+   "0": 2.7585068898208465,
+   "1000": 3.623785909437992,
+   "2000": 2.9965601833163147
+  },
+  "adversarial_dMT": -0.13631081581115723,
+  "adversarial_note": "keys' worst seed at k=12 vs the control's best (seed, k) pair anywhere on its curve",
+  "control_own_minimum_value_across_seeds": {
+   "per_offset": {
+    "0": 2.4083292484283447,
+    "1000": 2.448606491088867,
+    "2000": 2.4107038974761963
+   },
+   "mean": 2.4225465456644693,
+   "range": 0.04027724266052246,
+   "range_below_paired_resolution": true
+  },
+  "argmin_k_per_offset": {
+   "0": 10,
+   "1000": 12,
+   "2000": 6
+  },
+  "argmin_moves_across_seeds": true,
+  "gap_best_to_second_per_offset": {
+   "0": 0.02234482765197754,
+   "1000": 0.00595402717590332,
+   "2000": 0.02333378791809082
+  },
+  "argmin_selection_is_inside_noise": true
+ },
+ "matched_k_comparison_for_reference_MECH_SEED": {
+  "k12_dMT": {
+   "0": -0.1984391212463379,
+   "1000": -0.17906832695007324,
+   "2000": -0.25370025634765625
+  },
+  "k16_dMT": {
+   "0": -0.19912171363830566,
+   "1000": -0.17614030838012695,
+   "2000": -0.32124853134155273
+  }
+ },
+ "eval_provenance": [
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 12,
+   "split": "MT",
+   "loss": 2.448606491088867,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-37-31-continual_am_sparse/a2f9458c-31a0-4bfb-8b60-da98da202ba6/cache-after-doc-011-cfcb19a9.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/sknou0at",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 12,
+   "split": "MT",
+   "loss": 2.5163300037384033,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-06-02-01-continual_am_sparse/727e44ac-de50-44df-bf3c-877ad3e65317/cache-after-doc-011-cfcb19a9.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/6lii92y2",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 0,
+   "k": 10,
+   "split": "MT",
+   "loss": 2.4083292484283447,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-23-19-56-continual_am_sparse/508b8b0f-075a-429b-b757-2b11bfb57124/cache-after-doc-009-f77cecfb.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/0llm01sx",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 0,
+   "k": 10,
+   "split": "QA",
+   "loss": 1.9674913883209229,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-28-23-19-56-continual_am_sparse/508b8b0f-075a-429b-b757-2b11bfb57124/cache-after-doc-009-f77cecfb.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/kjyc8tsk",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "keys",
+   "offset": 0,
+   "k": 10,
+   "split": "MT",
+   "loss": 2.319589376449585,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-13-05-continual_am_sparse/955753b0-2246-4f18-8200-729b831687e5/cache-after-doc-009-f77cecfb.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/hzwyd410",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "keys",
+   "offset": 0,
+   "k": 10,
+   "split": "QA",
+   "loss": 1.968939185142517,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-13-05-continual_am_sparse/955753b0-2246-4f18-8200-729b831687e5/cache-after-doc-009-f77cecfb.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/ozhvbknc",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 10,
+   "split": "MT",
+   "loss": 2.491347312927246,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-37-31-continual_am_sparse/a2f9458c-31a0-4bfb-8b60-da98da202ba6/cache-after-doc-009-f77cecfb.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/licjcw6d",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 10,
+   "split": "QA",
+   "loss": 2.0084433555603027,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-37-31-continual_am_sparse/a2f9458c-31a0-4bfb-8b60-da98da202ba6/cache-after-doc-009-f77cecfb.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/4hqameh5",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 10,
+   "split": "MT",
+   "loss": 2.472822427749634,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-06-02-01-continual_am_sparse/727e44ac-de50-44df-bf3c-877ad3e65317/cache-after-doc-009-f77cecfb.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/ulp0v6uk",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 10,
+   "split": "QA",
+   "loss": 1.9783906936645508,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-06-02-01-continual_am_sparse/727e44ac-de50-44df-bf3c-877ad3e65317/cache-after-doc-009-f77cecfb.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/2jcnkcfo",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "keys",
+   "offset": 1000,
+   "k": 10,
+   "split": "MT",
+   "loss": 2.273444652557373,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-40-40-continual_am_sparse/92b047bb-8822-4f50-8720-5dc2fcb26a4f/cache-after-doc-009-f77cecfb.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/uq2kjv7q",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "keys",
+   "offset": 1000,
+   "k": 10,
+   "split": "QA",
+   "loss": 1.911603569984436,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-40-40-continual_am_sparse/92b047bb-8822-4f50-8720-5dc2fcb26a4f/cache-after-doc-009-f77cecfb.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/7cv19o38",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "keys",
+   "offset": 2000,
+   "k": 10,
+   "split": "MT",
+   "loss": 2.303954601287842,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-06-27-continual_am_sparse/5d1785dc-3bc8-40d4-b177-12b7a20f1743/cache-after-doc-009-f77cecfb.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/1zadp2vz",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "keys",
+   "offset": 2000,
+   "k": 10,
+   "split": "QA",
+   "loss": 1.9478639364242554,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-06-27-continual_am_sparse/5d1785dc-3bc8-40d4-b177-12b7a20f1743/cache-after-doc-009-f77cecfb.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/bapte7kh",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 9,
+   "split": "MT",
+   "loss": 2.5033955574035645,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-37-31-continual_am_sparse/a2f9458c-31a0-4bfb-8b60-da98da202ba6/cache-after-doc-008-6f413175.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/2b37y3t7",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 9,
+   "split": "MT",
+   "loss": 2.4538910388946533,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-06-02-01-continual_am_sparse/727e44ac-de50-44df-bf3c-877ad3e65317/cache-after-doc-008-6f413175.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/n3qbnzn3",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 11,
+   "split": "MT",
+   "loss": 2.4789345264434814,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-37-31-continual_am_sparse/a2f9458c-31a0-4bfb-8b60-da98da202ba6/cache-after-doc-010-aba1a026.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/9x4qgp1o",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 11,
+   "split": "MT",
+   "loss": 2.471754550933838,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-06-02-01-continual_am_sparse/727e44ac-de50-44df-bf3c-877ad3e65317/cache-after-doc-010-aba1a026.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/nt4szdo1",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 8,
+   "split": "MT",
+   "loss": 2.492708444595337,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-37-31-continual_am_sparse/a2f9458c-31a0-4bfb-8b60-da98da202ba6/cache-after-doc-007-e1a7f420.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/9mpw4a4f",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 8,
+   "split": "MT",
+   "loss": 2.439911365509033,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-06-02-01-continual_am_sparse/727e44ac-de50-44df-bf3c-877ad3e65317/cache-after-doc-007-e1a7f420.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/4gyia0s6",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 13,
+   "split": "MT",
+   "loss": 2.50688099861145,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-37-31-continual_am_sparse/a2f9458c-31a0-4bfb-8b60-da98da202ba6/cache-after-doc-012-01bdc15a.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/v92hdud8",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 13,
+   "split": "MT",
+   "loss": 2.5320236682891846,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-06-02-01-continual_am_sparse/727e44ac-de50-44df-bf3c-877ad3e65317/cache-after-doc-012-01bdc15a.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/fz5brwv0",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 7,
+   "split": "MT",
+   "loss": 2.480165719985962,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-37-31-continual_am_sparse/a2f9458c-31a0-4bfb-8b60-da98da202ba6/cache-after-doc-006-b03a4aa0.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/8i6o8pe2",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 7,
+   "split": "MT",
+   "loss": 2.434037685394287,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-06-02-01-continual_am_sparse/727e44ac-de50-44df-bf3c-877ad3e65317/cache-after-doc-006-b03a4aa0.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/7jhz7il1",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 14,
+   "split": "MT",
+   "loss": 2.501429796218872,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-37-31-continual_am_sparse/a2f9458c-31a0-4bfb-8b60-da98da202ba6/cache-after-doc-013-152f42ae.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/erzfoz5c",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 14,
+   "split": "MT",
+   "loss": 2.536113977432251,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-06-02-01-continual_am_sparse/727e44ac-de50-44df-bf3c-877ad3e65317/cache-after-doc-013-152f42ae.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/z4z8qkk5",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 6,
+   "split": "MT",
+   "loss": 2.467552661895752,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-37-31-continual_am_sparse/a2f9458c-31a0-4bfb-8b60-da98da202ba6/cache-after-doc-005-0c806aca.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/ndym0lsb",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 6,
+   "split": "MT",
+   "loss": 2.4107038974761963,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-06-02-01-continual_am_sparse/727e44ac-de50-44df-bf3c-877ad3e65317/cache-after-doc-005-0c806aca.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/988ms64r",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 15,
+   "split": "MT",
+   "loss": 2.465484619140625,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-37-31-continual_am_sparse/a2f9458c-31a0-4bfb-8b60-da98da202ba6/cache-after-doc-014-8d059cfa.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/93k9870i",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 15,
+   "split": "MT",
+   "loss": 2.5560152530670166,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-06-02-01-continual_am_sparse/727e44ac-de50-44df-bf3c-877ad3e65317/cache-after-doc-014-8d059cfa.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/3j9ucde4",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 5,
+   "split": "MT",
+   "loss": 2.4545605182647705,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-37-31-continual_am_sparse/a2f9458c-31a0-4bfb-8b60-da98da202ba6/cache-after-doc-004-a11f66ae.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/ath6956a",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 5,
+   "split": "MT",
+   "loss": 2.4469118118286133,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-06-02-01-continual_am_sparse/727e44ac-de50-44df-bf3c-877ad3e65317/cache-after-doc-004-a11f66ae.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/ki6gd53s",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 4,
+   "split": "MT",
+   "loss": 2.5260438919067383,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-37-31-continual_am_sparse/a2f9458c-31a0-4bfb-8b60-da98da202ba6/cache-after-doc-003-71f51767.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/h2t11i9m",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 4,
+   "split": "MT",
+   "loss": 2.5352654457092285,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-06-02-01-continual_am_sparse/727e44ac-de50-44df-bf3c-877ad3e65317/cache-after-doc-003-71f51767.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/w26focni",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 3,
+   "split": "MT",
+   "loss": 2.737459182739258,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-37-31-continual_am_sparse/a2f9458c-31a0-4bfb-8b60-da98da202ba6/cache-after-doc-002-38a6f58f.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/shufhckv",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 3,
+   "split": "MT",
+   "loss": 2.704789161682129,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-06-02-01-continual_am_sparse/727e44ac-de50-44df-bf3c-877ad3e65317/cache-after-doc-002-38a6f58f.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/ckp4c7te",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 2,
+   "split": "MT",
+   "loss": 2.958583354949951,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-37-31-continual_am_sparse/a2f9458c-31a0-4bfb-8b60-da98da202ba6/cache-after-doc-001-07b4743b.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/gzldr8vo",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 2,
+   "split": "MT",
+   "loss": 2.892812967300415,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-06-02-01-continual_am_sparse/727e44ac-de50-44df-bf3c-877ad3e65317/cache-after-doc-001-07b4743b.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/udi94lbp",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 1000,
+   "k": 1,
+   "split": "MT",
+   "loss": 3.34344744682312,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-05-37-31-continual_am_sparse/a2f9458c-31a0-4bfb-8b60-da98da202ba6/cache-after-doc-000-ae4e8fb7.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/0866w1tz",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  },
+  {
+   "arm": "control",
+   "offset": 2000,
+   "k": 1,
+   "split": "MT",
+   "loss": 3.2963919639587402,
+   "ckpt": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-06-02-01-continual_am_sparse/727e44ac-de50-44df-bf3c-877ad3e65317/cache-after-doc-000-ae4e8fb7.pt",
+   "wandb_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/g61h4q2p",
+   "ckpt_path_found_in_eval_log": 1,
+   "cartridges_pkg": "/tmp/amsnap_verifyoptima/cartridges"
+  }
+ ]
+}

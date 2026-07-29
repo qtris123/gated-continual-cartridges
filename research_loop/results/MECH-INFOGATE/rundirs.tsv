@@ -1,0 +1,3 @@
+arm	selector	top_t	run_dir	rc	wall_s	solve_s	wandb_url
+C0_control	tfidf	32	/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-07-17-36-continual_am_sparse/c28044a8-c9d7-452c-a18e-44117e5f6f7b	0	570	351.2	https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/jmgeslj3
+R32	redundancy	32	/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-07-52-51-continual_am_sparse/ef58d93f-2b0f-47b8-98a9-2fcde6f59484	0	488	312.4	https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/cfxq1ngg

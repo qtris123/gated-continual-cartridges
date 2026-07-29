@@ -30,6 +30,11 @@ When a definition here conflicts with the code, **the code wins** — fix this f
 | **selectivity (MT/QA mass ratio)** | ratio of `mass_on_S` for MT queries vs QA queries. **1.04–1.05** for every mechanism tried, vs the untouched Phase-1 cartridge's own **1.0812**. β provably cannot move it (β is query-independent). | MECH-BETA, MECH-KEYS |
 | **survival** | fraction of a document's written slots still holding its values after all 16 documents. **Mean 4.7%** — but this does *not* mean 4.7% information survival (DIAG-SEQUENCE refuted that). | DIAG-OVERWRITE |
 | **frozen-snapshot pin** | `git archive HEAD cartridges examples` into `/tmp`, `PYTHONPATH`-pinned, probed **from `/tmp`**. Mandatory when any worker is editing source. Load-bearing four times this session. | RUNBOOK §9c-bis |
+| **redundancy** (slot) | `1 − r_j²/‖v_j‖²`, the uncentred no-intercept **R²** of regressing slot *j*'s value vector on all the OTHER slots' (heads concatenated, `V ∈ R^{512×1024}`). `r_j² = 1/(G⁻¹)_{jj}` with `G = VVᵀ + λI`, `λ = 1e-6·mean(diag VVᵀ)`. High ⇒ the slot carries nothing the rest of the cartridge cannot reconstruct ⇒ cheapest to overwrite. **Gradient-free and data-free** — one 512×512 float64 inverse per layer, no eval data, no backward pass. Best gradient-free proxy for Fisher (ρ = −0.648). | DIAG-IMPORTANCE §5; MECH-008 |
+| **slot Fisher** | diagonal **empirical** Fisher of the QA loss w.r.t. a slot's value: `(1/E) Σ_e Σ_h Σ_c (∂L_e/∂v[l,h,j,c])²`. Low ⇒ the QA loss is flat in that slot ⇒ safest to overwrite. Needs a **diagnostic backward pass** over QA data — *not* an optimizer step (`gradient_steps` stays 0) but a real cost: **98.8 s** for 78 QA + 69 MT examples on one GH200, so it is paid once and cached to `state/diagnostics/slot_fisher_qa_phase1.npz`. | DIAG-IMPORTANCE §4; MECH-008 |
+| **write bandwidth / retention exposure** | the two axes of the measured Pareto trade. *Bandwidth* = `frac_writable_MT_routing_mass`, the share of the 511 writable slots' mean MT routing mass a selection captures. *Exposure* = `frac_total_QA_Fisher_mass`, the share of that layer's total QA Fisher mass sitting inside it. Incumbent top-32 = **37.4% / 29.6%**. | DIAG-IMPORTANCE `selector_tradeoff_table` |
+| **the reverse trade** | because retention is **0.57 ahead** of budget while MT is **0.248 short**, the useful direction is to *spend QA slack to buy MT bandwidth* (redundancy gate at larger `top_t`), not to protect QA at fixed `top_t`. Selecting for QA-safety at fixed budget buys 106× less exposure for **8.1× less bandwidth** — MT-wanted and QA-safe are anti-aligned, intersection **11× below chance**. | DIAG-IMPORTANCE → MECH-INFOGATE |
+| **why there is no `kl_loo` selector** | the exact leave-one-out KL of deleting slot *j* is `−log(1−w_j)` — a strictly monotone function of the slot's own attention weight — so ranking by LOO-KL **is** ranking by attention mass (measured ρ = 0.968). Registered here so nobody rebuilds it. | DIAG-IMPORTANCE §3 |
 
 ## 3. Code mechanisms added (all opt-in, default off, bit-identical when off)
 
@@ -42,9 +47,33 @@ When a definition here conflicts with the code, **the code wins** — fix this f
 | **MECH-005** | `AM_KEY_REPOSITION` | off | RoPE counter-rotation when a **document** key is installed into a cartridge slot. **Refuses to run without an explicit `AM_ROPE_THETA`** (rotating at 1e4 is worse than not correcting) | `am/key_select.py`, `am/finetune.py` |
 | **MECH-006** | `AM_ONPOLICY_LAYERS`, `AM_ONPOLICY_DOCKV` | off | on-policy layer-sequential re-extraction of reference queries (group size 4) | `am/finetune.py`, `am/continual.py` |
 | **MECH-007** | `AM_SEED_OFFSET` | 0 | offsets the per-document reference draw (`continual.py:150` seeds with the constant `doc_idx`). **Without this, seed variation is impossible** — `pydrantic.main` is never reached in `per_document` mode, so `seed=N` on argv is silently ignored | `am/continual.py` |
+| **MECH-008** | `SLOT_SELECTION` ∈ {`redundancy`,`fisher`,`mass_x_redundancy`}, `AM_SLOT_FISHER_PATH`, `AM_REDUNDANCY_RIDGE_REL`, `AM_MASS_REDUNDANCY_ALPHA` | `tfidf` / unset / 1e-6 / 0.5 | information-theoretic slot selection — pick the top-t slots by a *statistical* criterion instead of attention mass | `am/ranking.py`, `am/finetune.py`, `am/continual.py`, `examples/qasper2/train/continual_am_sparse.py` |
 
 **Foot-gun that has bitten twice:** any new kwarg must be passed **conditionally** (`hasattr` guard). An
 unconditional one crashed every AM run via the sibling-`cartridges` import path (RUNBOOK §6.10).
+
+### 3b. MECH-008 — the three selectors, exactly (so a human can reproduce them)
+
+All three are **per-layer** (`GRANULARITY=per_layer` is enforced; they raise otherwise, because the
+priors are per-(layer, slot) arrays aggregated over all 32 query heads). All three default **off** —
+`SLOT_SELECTION=tfidf` is unchanged and bit-identical. Code: `cartridges/am/ranking.py`
+(`compute_slot_redundancy`, `load_slot_fisher_scores`, `_rank_slot_prior_per_layer`).
+
+| mode | score | direction | inputs | cost |
+|---|---|---|---|---|
+| `redundancy` | `1 − r_j²/‖v_j‖²`, `r_j² = 1/(G⁻¹)_{jj}`, `G = VVᵀ + λI` over the **head-concatenated** value matrix `V ∈ R^{512×1024}` (the frozen sink is a **regressor** but never selectable), `λ = AM_REDUNDANCY_RIDGE_REL · mean(diag VVᵀ)` | **descending** (most redundant first) | the cartridge values only — recomputed from the **live** cache at every document, so document 0 reproduces DIAG-IMPORTANCE exactly | one 512×512 float64 inverse × 36 layers ≈ free; no eval data, no backward |
+| `fisher` | cached `(n_layers, n_slots)` diagonal Fisher of the QA loss (`AM_SLOT_FISHER_PATH`) | **ascending** (lowest Fisher = safest) | `state/diagnostics/slot_fisher_qa_phase1.npz`, generated by `results/MECH-INFOGATE/compute_slot_fisher.py` | 98.8 s of diagnostic backward, **paid once**; `gradient_steps` still 0. ⚠️ scored on the QA **eval** split (matching DIAG-IMPORTANCE) → its QA number is an optimistic bound, its MT number is clean |
+| `mass_x_redundancy` | `u_tf^(1−α) · u_red^α`, where `u_x[l,j] = rank_ascending(x[l,j])/n_slots ∈ (0,1]` (ordinal ranks, ties by slot index) and `α = AM_MASS_REDUNDANCY_ALPHA` | **descending** | both of the above | same as `redundancy` |
+
+**Why rank space, and why a product.** The two axes are on incomparable scales (`tf` sums to 1 over 511
+slots; `redundancy` is an R² crowded near 1), so any rule on the raw numbers is silently dominated by
+one of them — ranks are scale-free. A **product** rather than a sum because the semantics wanted are
+AND, not OR: a slot last on either axis scores 1/511 and cannot be rescued by the other. The weighted
+geometric form also degenerates *exactly*: **α=0 reproduces `attention_mass` and α=1 reproduces
+`redundancy`** (verified, top-32 agreement 1.0000 per layer), so α is a genuine interpolation knob and
+not a fourth arbitrary selector.
+
+**Not implemented on purpose: `kl_loo`.** See §2 — it is algebraically identical to attention mass.
 
 ## 4. Reproducing an experiment
 

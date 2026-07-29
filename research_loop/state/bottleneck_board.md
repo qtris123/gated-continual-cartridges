@@ -272,7 +272,30 @@ deficit. At top_t=64 the linear projection is ~34.6% MT / 24.6% QA-Fisher; at 12
   §3's threshold is not met.
 - **Caveat the worker refused to argue away:** three seeds are three samples of a coarse instrument; the
   ranges quoted are ranges of three, not confidence intervals.
-- 🔴 **STRONGEST SURVIVING OBJECTION — and it is the orchestrator's own dispatch error.** MECH-SEED
+- ✅ **OBJECTION CLOSED (VERIFY-OPTIMA, 2026-07-29): the own-optimum claim survives seed variation.**
+  All 6 gates exact to 16 digits (including a checkpoint **sha256-identical** to DIAG-KEYCURVE's).
+
+  | own-optimum ΔMT (keys k=12 vs control k=10) | off 0 | off 1000 | off 2000 | mean |
+  |---|---|---|---|---|
+  | | **−0.1363** | **−0.2218** | **−0.2102** | **−0.1894** |
+
+  All three are **2.8–4.5× the measured paired resolution (±0.0494)** and all clear the conservative
+  composite (±0.1055). **The board's one-seed −0.1363 was the *weakest* of the three.** Adversarial
+  pairing (keys' worst seed vs the control's best value anywhere, any seed) still gives −0.1363, 2.76×.
+  **ΔQA stays unconfirmed** (−0.0115 / −0.0687 / −0.0338; only one seed clears ±0.0539).
+- ⚠️ **The argmin DOES move across seeds — k=10 / k=12 / k=6 — and the worker said so plainly**, then
+  showed why it doesn't undo the result: at every offset the best k beats its own runner-up by just
+  **0.0060–0.0233**, i.e. **2–8× smaller than the resolution**, so *the argmin is selected out of noise
+  rather than located*; while the **value** of the control's minimum is stable (2.4083 / 2.4486 / 2.4107,
+  range 0.0403, below the resolution).
+- 🎯 **The number the mission should quote** — each arm at its **own per-seed argmin**, the strictest fair
+  form and conservative against the keys arm: **ΔMT −0.1363 / −0.1791 / −0.1481, mean −0.1545**, all
+  2.8–3.6× the yardstick and all clearing the composite.
+- Caveats not argued away: three offsets are three samples of a coarse instrument; the keys curve is only
+  3 points deep at non-zero offsets; the seed knob perturbs only the reference draw, so it is a **lower
+  bound** on total run-to-run variance.
+
+- 🔴 **(SUPERSEDED — CLOSED ABOVE) STRONGEST SURVIVING OBJECTION — the orchestrator's own dispatch error.** MECH-SEED
   seed-varied the **matched-k** comparison, not the **own-optimum** one, because the brief asked for the
   control at k=12/k=16 only. DIAG-CONTROLCURVE (which landed mid-run) relocated the control's true MT
   minimum to **k=10 (2.4083)**, which shrinks the own-optimum ΔMT to **−0.1363** and ΔQA to −0.0115.

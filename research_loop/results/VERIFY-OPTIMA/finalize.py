@@ -205,6 +205,30 @@ def main():
             "dMT_each_arm_at_its_own_measured_argmin": keys_curve[kk] - argmin[off]["argmin_MT"],
         }
 
+    # per-seed own-argmin dMT (the honest version: each arm at ITS OWN per-seed argmin)
+    ps = [per_seed_argmin_cmp[o]["dMT_each_arm_at_its_own_measured_argmin"] for o in offsets]
+    ctrl_min_vals = [argmin[o]["argmin_MT"] for o in offsets]
+    per_seed_summary = {
+        "dMT_per_offset": {str(o): v for o, v in zip(offsets, ps)},
+        "mean": mean(ps), "range": max(ps) - min(ps),
+        "all_same_sign": len({v < 0 for v in ps}) == 1,
+        "all_clear_paired_resolution": all(abs(v) > MT_PAIRED_RES for v in ps),
+        "all_clear_composite_resolution": all(abs(v) > MT_COMPOSITE for v in ps),
+        "ratio_each_over_paired_resolution": {str(o): abs(v) / MT_PAIRED_RES for o, v in zip(offsets, ps)},
+        "adversarial_dMT": max(keys_k12_mt) - min(ctrl_min_vals),
+        "adversarial_note": "keys' worst seed at k=12 vs the control's best (seed, k) pair anywhere on its curve",
+        "control_own_minimum_value_across_seeds": {
+            "per_offset": {str(o): v for o, v in zip(offsets, ctrl_min_vals)},
+            "mean": mean(ctrl_min_vals), "range": max(ctrl_min_vals) - min(ctrl_min_vals),
+            "range_below_paired_resolution": (max(ctrl_min_vals) - min(ctrl_min_vals)) < MT_PAIRED_RES,
+        },
+        "argmin_k_per_offset": {str(o): argmin[o]["argmin_k"] for o in offsets},
+        "argmin_moves_across_seeds": len({argmin[o]["argmin_k"] for o in offsets}) > 1,
+        "gap_best_to_second_per_offset": {str(o): argmin[o]["gap_best_to_second"] for o in offsets},
+        "argmin_selection_is_inside_noise": all(
+            argmin[o]["gap_best_to_second"] < MT_PAIRED_RES for o in offsets),
+    }
+
     def stats(vals):
         vals = [v for v in vals if v is not None]
         return {"per_offset": {str(o): v for o, v in zip(offsets, vals)},
@@ -251,6 +275,7 @@ def main():
         "adversarial_pairing_own_optimum": adversarial,
         "argmin_stability_control_MT": argmin,
         "per_seed_own_argmin_comparison": per_seed_argmin_cmp,
+        "per_seed_own_argmin_summary": per_seed_summary,
         "matched_k_comparison_for_reference_MECH_SEED": {
             "k12_dMT": {str(o): L("keys", o, 12, "MT") - L("control", o, 12, "MT") for o in offsets},
             "k16_dMT": {str(o): L("keys", o, 16, "MT") - L("control", o, 16, "MT") for o in offsets},

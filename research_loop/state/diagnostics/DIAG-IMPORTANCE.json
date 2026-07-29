@@ -3323,5 +3323,29 @@
       "mean_redundancy_of_selected": 0.8416
     },
     "_definition": "per layer: fraction of the 511 writable slots' mean MT routing mass captured by the 32 selected slots (write bandwidth), fraction of total QA diagonal-Fisher mass sitting in those same 32 slots (retention risk), and their mean redundancy. Higher bandwidth / lower Fisher is better."
+  },
+  "snapshot_integrity": {
+    "pinned_git_head": "f5816384fb5135e431d6edff20e0bb41c9d8689e",
+    "snapshot_path": "/tmp/amsnap_DIAG-IMPORTANCE",
+    "n_python_files": 130,
+    "manifest_sha256_canonical_relpath_LC_ALL_C": "eb891fd928797d11d493d088ea483fd5c349e73b47ae18d2131d59100c680828",
+    "manifest_sha256_as_recorded_by_the_launcher": "d40fd2bf917fd7bf5bece923ae6904106af8e0fb8f7d9f3942707438e51cfb7b",
+    "launcher_hash_stable_pre_and_post_run": true,
+    "snapshot_bytes_equal_git_archive_of_pinned_head": true,
+    "note": "The launcher's manifest recipe (find|sort|xargs sha256sum|sha256sum) hashes ABSOLUTE paths and is locale-collation sensitive, so it yields different digests in different shells for identical content -- it is only meaningful as a WITHIN-RUN invariant, and there it held exactly (SNAP_SHA == POSTRUN_SNAP_SHA). The durable check is the canonical digest above plus `diff -r -x __pycache__` against `git archive f5816384 cartridges`, which is clean: every .py byte-matches the pinned commit, so no concurrent edit to cartridges/am/*.py reached this measurement.",
+    "repo_HEAD_moved_during_run": {
+      "from": "f5816384fb5135e431d6edff20e0bb41c9d8689e",
+      "to": "9292e9854b5038542f98672ce132f1ac1bd2e099",
+      "isolated_by_the_pin": true
+    },
+    "files_in_this_bundle_are_the_only_ones_this_worker_wrote": [
+      "research_loop/results/DIAG-IMPORTANCE/*",
+      "research_loop/state/diagnostics/DIAG-IMPORTANCE.json",
+      "research_loop/state/diagnostics/DIAG-IMPORTANCE.npz"
+    ],
+    "not_written_by_this_worker": [
+      "cartridges/am/{__init__,continual,finetune,ranking}.py and examples/qasper2/train/continual_am_sparse.py (edited 07:08-07:09 by a downstream BUILD worker, 14+ min after this run ended at 06:54)",
+      "research_loop/state/diagnostics/slot_fisher_qa_phase1.npz (created by that worker from this bundle's Fisher dump)"
+    ]
   }
 }

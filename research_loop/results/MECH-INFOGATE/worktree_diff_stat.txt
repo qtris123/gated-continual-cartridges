@@ -1,0 +1,6 @@
+ cartridges/am/__init__.py                     |   8 +
+ cartridges/am/continual.py                    |   5 +
+ cartridges/am/finetune.py                     |  30 ++-
+ cartridges/am/ranking.py                      | 332 +++++++++++++++++++++++++-
+ examples/qasper2/train/continual_am_sparse.py | 103 ++++++++
+ 5 files changed, 476 insertions(+), 2 deletions(-)

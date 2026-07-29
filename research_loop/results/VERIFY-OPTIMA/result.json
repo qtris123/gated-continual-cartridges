@@ -1,0 +1,175 @@
+{
+  "id": "VERIFY-OPTIMA",
+  "role": "verify",
+  "board_entry": "VERIFY (MECH-SEED's strongest surviving objection) / B-ROUTE (key side)",
+  "question": "MECH-SEED seed-varied the MATCHED-k keys-vs-control comparison only (k=12, k=16), while DIAG-CONTROLCURVE relocated the frozen control's true MT minimum to k=10 -- which shrinks the OWN-OPTIMUM dMT from ~-0.21 to -0.1363 on one seed. Does the fair, own-optimum key-side claim survive seed variation above DIAG-NOISE's measured paired resolution of +-0.0494 MT, and is the control's MT argmin itself seed-stable at k=10?",
+  "variable_under_test": "AM_SEED_OFFSET in {0,1000,2000} (which 32 of each document's ~500 reference conversations the closed-form solve is fitted to), crossed with k = number of documents written. NOTHING WAS RE-TRAINED: all 40 evals read pre-existing per-document `cache-after-doc-*.pt` snapshots produced by MECH-SEED (offsets 1000/2000) and by MECH-KEYS/DIAG-KEYCURVE (offset 0).",
+  "baseline_ref": "MECH-SEED (control k=12 MT 2.448606491088867 @off1000, 2.5163300037384033 @off2000; keys k=12 MT 2.2720184326171875 / 2.269538164138794 / 2.262629747390747), DIAG-CONTROLCURVE (control offset-0 MT argmin k=10 = 2.4083292484283447, QA 1.9674913883209229), DIAG-KEYCURVE (keys offset-0 k=10 MT 2.319589376449585 / QA 1.968939185142517), DIAG-NOISE (paired 95% resolution 0.0494 MT / 0.0539 QA).",
+  "status": "done",
+  "numbers": {
+    "qa_forgetting_loss": 1.9847751458485921,
+    "mt_acquisition_loss": 2.457499663035075,
+    "solve_s": 0,
+    "phase2_e2e_s": 0,
+    "gradient_steps": 0,
+    "_note": "qa/mt are the number this task was dispatched to produce: the frozen-key CONTROL at k=10 (DIAG-CONTROLCURVE's argmin), averaged over the three seed offsets -- MT 2.4083292484283447 / 2.491347312927246 / 2.472822427749634 and QA 1.9674913883209229 / 2.0084433555603027 / 1.9783906936645508. The keys arm's k=12 seed-mean is unchanged from MECH-SEED (MT 2.2680621147155762 / QA 1.9467895825703938). solve_s / phase2_e2e_s / gradient_steps are 0 because nothing was trained: this job is 40 evals on checkpoints that already existed."
+  },
+  "diagnostics": {
+    "headline": "THE OWN-OPTIMUM KEY-SIDE CLAIM SURVIVES SEED VARIATION. Keys at k=12 vs control at k=10 gives dMT -0.1363 / -0.2218 / -0.2102 at offsets 0/1000/2000 (mean -0.1894, range 0.0855) -- all three 2.8-4.5x DIAG-NOISE's measured paired resolution of 0.0494, and all three also clear the conservative composite 0.1055. Letting the control take ITS OWN per-seed MT argmin (k=10/12/6) instead of a pinned k=10 weakens but does not break it: dMT -0.1363 / -0.1791 / -0.1481, mean -0.1545, still 2.8-3.6x the yardstick. The adversarial pairing -- the keys arm's WORST seed at k=12 against the control's BEST (seed, k) pair anywhere on its 16-point curve -- is -0.1363, still 2.76x the yardstick.",
+    "second_headline": "BUT THE CONTROL'S MT ARGMIN IS NOT SEED-STABLE. It moves k=10 (offset 0) -> k=12 (offset 1000) -> k=6 (offset 2000). The movement is itself inside noise -- at every offset the gap from the best k to the runner-up is 0.0060-0.0233, i.e. 2-8x SMALLER than the 0.0494 paired resolution -- so the control's argmin is being selected out of noise and 'k=10 is the control's optimum' is a one-seed statement. What IS stable is the VALUE of the control's minimum: 2.4083 / 2.4486 / 2.4107, range 0.0403, below the resolution. That is why the comparison survives even though the argmin wanders.",
+    "correctness_gates_all_passed": true,
+    "correctness_gates": {
+      "control_off1000_k12_MT": {"expected": 2.448606491088867, "observed": 2.448606491088867, "exact": true, "source": "MECH-SEED"},
+      "control_off2000_k12_MT": {"expected": 2.5163300037384033, "observed": 2.5163300037384033, "exact": true, "source": "MECH-SEED"},
+      "control_off0_k10_MT": {"expected": 2.4083292484283447, "observed": 2.4083292484283447, "exact": true, "source": "DIAG-CONTROLCURVE"},
+      "control_off0_k10_QA": {"expected": 1.9674913883209229, "observed": 1.9674913883209229, "exact": true, "source": "DIAG-CONTROLCURVE"},
+      "keys_off0_k10_MT": {"expected": 2.319589376449585, "observed": 2.319589376449585, "exact": true, "source": "DIAG-KEYCURVE"},
+      "keys_off0_k10_QA": {"expected": 1.968939185142517, "observed": 1.968939185142517, "exact": true, "source": "DIAG-KEYCURVE"},
+      "note": "all six reproduce to all 16 printed digits. The keys offset-0 gate is stronger than a numeric match: the checkpoint evaluated (MECH-SEED run A2, cache-after-doc-009) is sha256-IDENTICAL (ba592c96c44b4828...) to DIAG-KEYCURVE's own keys run snapshot, so this is the same bytes through the same harness in a new session."
+    },
+    "no_snapshot_was_missing": "all 16 cache-after-doc-*.pt exist in all six run directories used; k=10 == cache-after-doc-009-f77cecfb.pt in every case; nothing was substituted and nothing had to be re-run.",
+    "own_optimum_comparison_as_dispatched": {
+      "definition": "keys at its argmin k=12 vs control at DIAG-CONTROLCURVE's argmin k=10, per offset.",
+      "MT": {
+        "0":    {"keys_k12": 2.2720184326171875, "control_k10": 2.4083292484283447, "dMT": -0.13631081581115723},
+        "1000": {"keys_k12": 2.269538164138794,  "control_k10": 2.491347312927246,  "dMT": -0.22180914878845215},
+        "2000": {"keys_k12": 2.262629747390747,  "control_k10": 2.472822427749634,  "dMT": -0.21019268035888672},
+        "mean": -0.1894375483194987, "range": 0.08549833297729492,
+        "all_same_sign": true,
+        "all_clear_paired_resolution_0.0494": true,
+        "all_clear_composite_resolution_0.1055": true,
+        "ratio_mean_over_paired_resolution": 3.8336266944074290
+      },
+      "QA": {
+        "0":    {"keys_k12": 1.9560121297836304, "control_k10": 1.9674913883209229, "dQA": -0.01147925853729248},
+        "1000": {"keys_k12": 1.9397201538085938, "control_k10": 2.0084433555603027, "dQA": -0.06872320175170898},
+        "2000": {"keys_k12": 1.9446364641189575, "control_k10": 1.9783906936645508, "dQA": -0.03375422954559326},
+        "mean": -0.03798556327819824, "range": 0.057243943214416504,
+        "all_same_sign": true,
+        "all_clear_paired_resolution_0.0539": false,
+        "n_offsets_clearing": 1,
+        "verdict": "the QA half of the own-optimum claim remains UNCONFIRMED -- only offset 1000 clears, and the seed-mean -0.038 is below the yardstick."
+      }
+    },
+    "own_optimum_comparison_each_arm_at_its_OWN_PER_SEED_argmin": {
+      "definition": "the strictest fair version: for each offset, the control takes the minimum of ITS OWN 16-point MT curve at that offset (k=10/12/6), and the keys arm takes the minimum over the k measured at that offset ({1..16} at offset 0; {10,12,16} at 1000/2000, argmin k=12 in all three).",
+      "dMT_per_offset": {"0": -0.13631081581115723, "1000": -0.17906832695007324, "2000": -0.14807415008544922},
+      "mean": -0.15448443094889322,
+      "range": 0.042757511138916016,
+      "all_same_sign": true,
+      "all_clear_paired_resolution": true,
+      "all_clear_composite_resolution": true,
+      "ratio_each_over_paired_resolution": {"0": 2.7585068898208465, "1000": 3.6237859094379920, "2000": 2.9965601833163147},
+      "caveat": "the keys arm's curve is only 3 points deep at the non-zero offsets, so its per-seed minimum could be LOWER than 2.2695/2.2626 -- that direction would only enlarge |dMT|. The control's curve is fully mapped (16/16 k) at every offset, so its minimum cannot be lower than reported. The estimate is therefore conservative against the keys arm."
+    },
+    "adversarial_pairing": {
+      "note": "keys' WORST seed at its argmin k=12 (2.2720184326171875, offset 0) against the control's BEST value anywhere on its curve at any seed (2.4083292484283447, offset 0, k=10).",
+      "dMT": -0.13631081581115723,
+      "ratio_over_paired_resolution": 2.7585068898208465,
+      "clears_paired_0.0494": true,
+      "clears_composite_0.1055": true,
+      "dQA_same_pairing": -0.01147925853729248,
+      "dQA_clears": false,
+      "verdict": "the MT effect survives the least favourable pairing the data allows; the QA effect does not, at any pairing."
+    },
+    "common_k_comparison_at_k10": {
+      "definition": "both arms read at k=10 (the control's offset-0 argmin), the 'both arms at a common k' version the brief asked for.",
+      "0":    {"keys_k10_MT": 2.319589376449585, "control_k10_MT": 2.4083292484283447, "dMT": -0.08873987197875977, "keys_k10_QA": 1.968939185142517,  "control_k10_QA": 1.9674913883209229, "dQA": 0.0014477968215942383},
+      "1000": {"keys_k10_MT": 2.273444652557373, "control_k10_MT": 2.491347312927246,  "dMT": -0.21790266036987305, "keys_k10_QA": 1.911603569984436,  "control_k10_QA": 2.0084433555603027, "dQA": -0.0968397855758667},
+      "2000": {"keys_k10_MT": 2.303954601287842, "control_k10_MT": 2.472822427749634,  "dMT": -0.16886782646179200, "keys_k10_QA": 1.9478639364242554, "control_k10_QA": 1.9783906936645508, "dQA": -0.03052675724029541},
+      "dMT_mean": -0.15850345293680826, "dMT_range": 0.12916278839111328,
+      "all_dMT_clear_paired": true,
+      "dQA_mean": -0.04197291533152262,
+      "dQA_sign_flips_across_seeds": true,
+      "note": "at a common k=10 the MT effect is present at every seed (-0.089 / -0.218 / -0.169) but the offset-0 value -0.0887 does NOT clear the conservative composite 0.1055. QA flips sign across seeds and is unresolvable."
+    },
+    "argmin_stability_control_MT": {
+      "control_MT_full_curves_by_offset": {
+        "0":    {"1": 3.1145591735839844, "2": 2.7727901935577393, "3": 2.6456825733184814, "4": 2.526649236679077, "5": 2.536327838897705, "6": 2.5201644897460938, "7": 2.4667556285858154, "8": 2.453585624694824, "9": 2.4436779022216797, "10": 2.4083292484283447, "11": 2.4306740760803223, "12": 2.4704575538635254, "13": 2.486041784286499, "14": 2.4835116863250732, "15": 2.514181613922119, "16": 2.529625177383423},
+        "1000": {"1": 3.34344744682312, "2": 2.958583354949951, "3": 2.737459182739258, "4": 2.5260438919067383, "5": 2.4545605182647705, "6": 2.467552661895752, "7": 2.480165719985962, "8": 2.492708444595337, "9": 2.5033955574035645, "10": 2.491347312927246, "11": 2.4789345264434814, "12": 2.448606491088867, "13": 2.50688099861145, "14": 2.501429796218872, "15": 2.465484619140625, "16": 2.482379198074341},
+        "2000": {"1": 3.2963919639587402, "2": 2.892812967300415, "3": 2.704789161682129, "4": 2.5352654457092285, "5": 2.4469118118286133, "6": 2.4107038974761963, "7": 2.434037685394287, "8": 2.439911365509033, "9": 2.4538910388946533, "10": 2.472822427749634, "11": 2.471754550933838, "12": 2.5163300037384033, "13": 2.5320236682891846, "14": 2.536113977432251, "15": 2.5560152530670166, "16": 2.6113579273223877}
+      },
+      "provenance_of_each_curve": "offset 0 = DIAG-CONTROLCURVE (all 16 k), re-gated here at k=10; offsets 1000/2000 = measured by THIS job (k=1..11,13,14,15 MT) plus MECH-SEED's k=12 and k=16 (k=12 re-run here as the correctness gate and reproduced exactly). All 16 k are populated at every offset.",
+      "argmin_k_per_offset": {"0": 10, "1000": 12, "2000": 6},
+      "argmin_MT_per_offset": {"0": 2.4083292484283447, "1000": 2.448606491088867, "2000": 2.4107038974761963},
+      "argmin_moves_across_seeds": true,
+      "gap_best_to_second_best_k": {"0": 0.02234482765197754, "1000": 0.00595402717590332, "2000": 0.02333378791809082},
+      "argmin_selection_is_inside_the_measured_noise": true,
+      "control_minimum_VALUE_across_seeds": {"mean": 2.4225465456644693, "min": 2.4083292484283447, "max": 2.448606491088867, "range": 0.04027724266052246, "range_below_paired_resolution": true},
+      "MT_at_k10_minus_argmin_per_offset": {"0": 0.0, "1000": 0.04274082183837890, "2000": 0.06212353706359863},
+      "plain_statement": "the control's MT argmin is NOT seed-stable: k=10, 12, 6 at the three offsets. Every one of those minima is separated from its own runner-up by less than half the measured paired resolution, so the argmin location is not resolvable at this eval size -- the 'own-optimum' comparison is therefore itself seed-dependent, and that must be said. What is resolvable is that the control's best achievable MT sits at 2.41-2.45 at every seed while the keys arm sits at 2.26-2.27."
+    },
+    "matched_k_reference_unchanged": {
+      "k12_dMT": {"0": -0.1984391212463379, "1000": -0.17906832695007324, "2000": -0.25370025634765625},
+      "k16_dMT": {"0": -0.19912171363830566, "1000": -0.17614030838012695, "2000": -0.32124853134155273},
+      "note": "reproduced from MECH-SEED for context; this job re-ran the control k=12 MT at both non-zero offsets as its gate and got bit-identical values."
+    },
+    "mass_on_S": "NOT APPLICABLE / NOT NEWLY MEASURED: this job performed no AM solve (40 evals, 0 gradient steps, 0 solves), so there is no new write to report mass for. The relevant existing figures are MECH-SEED's solve-time ref_mass_on_S -- keys 0.3136 / 0.3615 / 0.3587 vs control 0.1452 / 0.1460 -- and DIAG-KEYCURVE's eval-time mass_on_S at k=10 (keys 0.2212).",
+    "noise_discipline": {
+      "eval_sizes": {"MT_examples": 69, "QA_examples": 78},
+      "yardstick_used": {"MT_paired_95pct": 0.049414709208868444, "QA_paired_95pct": 0.05389150679130719, "MT_composite_95pct": 0.10553301160022083, "QA_composite_95pct": 0.1967026909783353},
+      "explicit": "the correct yardstick for these comparisons is DIAG-NOISE's measured PAIRED resolution of +-0.0494 MT, not the inherited +-0.15 rule of thumb, which is ~3x too wide for paired same-example comparisons. Ranges over three seed offsets are RANGES OF THREE, not confidence intervals."
+    },
+    "eval_provenance": {
+      "n_evals": 40,
+      "all_evals_loaded_intended_checkpoint": true,
+      "method": "each eval log was grepped (fixed-string) for the exact checkpoint path it was given; 40/40 matched, and the sha256 prefix of each checkpoint is recorded in wrapper.log next to the eval header.",
+      "all_evals_have_wandb_urls": true,
+      "eval_hang_handling": "every eval ran as a background job, was polled for the `Eval loss - ` line, then SIGTERM/SIGKILLed (RUNBOOK §1). No eval was waited on for exit.",
+      "distinct_checkpoints_confirmed": "the six run directories are distinct and their k=10 snapshots hash differently across arms/offsets (keys off0 ba592c96..., control off0 bd8c1ed5..., control off1000 089fc49e..., control off2000 545e9a39...); the keys-off0 k=10 snapshot is deliberately byte-identical to DIAG-KEYCURVE's, which is what makes that gate a true reproduction."
+    },
+    "import_provenance": {
+      "snapshot": "/tmp/amsnap_verifyoptima = `git archive HEAD cartridges examples` taken at launch",
+      "snapshot_manifest_sha256": "b71eaf15e00306be667183893a745c19460b9261739d179433ddc919c8abe1c9",
+      "manifest_identical_at_launch_and_after": true,
+      "manifest_identical_for_addendum_run": true,
+      "resolved_package_in_every_eval_log": "/tmp/amsnap_verifyoptima/cartridges (printed by a runpy wrapper; 40/40 logs carry the line)",
+      "cwd_for_every_eval": "/tmp/verify_optima_cwd (RUNBOOK §9c-bis: the pin probe is a false negative from the repo root)",
+      "repo_HEAD_moved_during_this_job": {"at_launch": "cb0b6b4dc2fbb350894da00e9930d70a2b576b16", "after": "90f1d543416da2d16b063dfcf67d4db433e9309d", "note": "the orchestrator committed while this job ran, and the working tree acquired live uncommitted edits to cartridges/am/{__init__,continual,finetune,ranking}.py and examples/qasper2/train/continual_am_sparse.py from a concurrent worker. NONE of that entered any eval: the snapshot manifest hash is identical before, between and after both runs, so all 40 evals executed the same frozen code."},
+      "source_files_edited_by_this_worker": "none"
+    },
+    "cost": {
+      "n_evals": 40,
+      "wall_clock_s_main_run": 3423,
+      "wall_clock_s_addendum_run": 660,
+      "mean_s_per_eval": 102,
+      "gpu": "one GH200 (device 1), claimed via flock for both runs; never two jobs on one device"
+    }
+  },
+  "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/licjcw6d",
+  "wandb_run_id": "licjcw6d",
+  "wandb_all_runs": {
+    "group": "VERIFY",
+    "tags": ["eval", "forgetting", "diagnostic", "VERIFY-OPTIMA"],
+    "n_runs": 40,
+    "tagging_note": "eval_forgetting.py hard-codes tags=[eval, forgetting, RUN_NAME] and exposes no tag knob; under the no-source-edit rule the mandated `diagnostic` tag was applied post-hoc through the wandb API (research_loop/results/VERIFY-OPTIMA/tag_runs.py, 40/40 tagged).",
+    "key_runs": {
+      "control_off1000_k10_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/licjcw6d",
+      "control_off1000_k10_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/4hqameh5",
+      "control_off2000_k10_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/ulp0v6uk",
+      "control_off2000_k10_QA": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/2jcnkcfo",
+      "keys_off1000_k10_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/uq2kjv7q",
+      "keys_off2000_k10_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/1zadp2vz",
+      "gate_control_off1000_k12_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/sknou0at",
+      "gate_control_off2000_k12_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/6lii92y2",
+      "gate_control_off0_k10_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/0llm01sx",
+      "gate_keys_off0_k10_MT": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/hzwyd410"
+    },
+    "all_urls_file": "research_loop/results/VERIFY-OPTIMA/wandb_runs.json (40 entries, also column 7 of curve.tsv)"
+  },
+  "artifacts": [
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/VERIFY-OPTIMA/launch_verify_optima.sh",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/VERIFY-OPTIMA/launch_verify_optima_addendum.sh",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/VERIFY-OPTIMA/finalize.py",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/VERIFY-OPTIMA/tag_runs.py",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/VERIFY-OPTIMA/curve.tsv",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/VERIFY-OPTIMA/wrapper.log",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/VERIFY-OPTIMA/wrapper_addendum.log",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/VERIFY-OPTIMA/evals",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/VERIFY-OPTIMA/wandb_runs.json",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/VERIFY-OPTIMA/wandb_runs_tagged.json",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/state/diagnostics/VERIFY-OPTIMA.json"
+  ],
+  "command": "NO SOURCE FILE EDITED. `nohup bash research_loop/results/VERIFY-OPTIMA/launch_verify_optima.sh &` (34 evals) then `nohup bash research_loop/results/VERIFY-OPTIMA/launch_verify_optima_addendum.sh &` (6 evals, control k=1,2,3 MT at both non-zero offsets, to complete the 16-point curves), then `.venv/bin/python research_loop/results/VERIFY-OPTIMA/finalize.py` and `.venv/bin/python research_loop/results/VERIFY-OPTIMA/tag_runs.py`. Each eval: CHECKPOINT_PATH=<pre-existing cache-after-doc-(k-1)-*.pt> EVAL_DATA_PATH=data/qasper/eval/qasper_eval_{QA,MT}.parquet MODEL_NAME=Qwen/Qwen3-4B-Instruct-2507 RUN_NAME=VERIFY-OPTIMA_<arm>_off<N>_k<k>_<split> WANDB_GROUP=VERIFY WANDB_DISABLED=0 .venv/bin/python -c 'import cartridges; print pkg; runpy.run_path(<snapshot>/examples/qasper2/train/eval_forgetting.py)' -- run from cwd=/tmp/verify_optima_cwd with CARTRIDGES_DIR and PYTHONPATH pinned to /tmp/amsnap_verifyoptima.",
+  "observations": "1) THE OWN-OPTIMUM CLAIM SURVIVES SEED VARIATION. Keys at its argmin k=12 against the control at DIAG-CONTROLCURVE's argmin k=10 gives dMT -0.13631 (offset 0), -0.22181 (offset 1000), -0.21019 (offset 2000): mean -0.18944, range 0.08550, same sign at every seed, every one of the three between 2.76x and 4.49x DIAG-NOISE's measured paired resolution of 0.0494, and every one also clearing the conservative composite 0.1055. The one-seed -0.1363 the board records is in fact the WEAKEST of the three seeds. 2) THE FOUR DISPATCHED EVALS: control at k=10 is MT 2.491347312927246 / QA 2.0084433555603027 at offset 1000 and MT 2.472822427749634 / QA 1.9783906936645508 at offset 2000. No snapshot was missing -- all 16 cache-after-doc-*.pt exist in all six run directories, k=10 is cache-after-doc-009-f77cecfb.pt in every one, and nothing had to be re-run or substituted. 3) ALL SIX CORRECTNESS GATES PASSED TO 16 DIGITS: control k=12 MT reproduced MECH-SEED exactly at both non-zero offsets (2.448606491088867 and 2.5163300037384033); control offset-0 k=10 reproduced DIAG-CONTROLCURVE exactly (MT 2.4083292484283447 / QA 1.9674913883209229); keys offset-0 k=10 reproduced DIAG-KEYCURVE exactly (MT 2.319589376449585 / QA 1.968939185142517) from a checkpoint that is sha256-identical to the one DIAG-KEYCURVE evaluated. 4) THE ADVERSARIAL PAIRING STILL CLEARS. The keys arm's worst seed at k=12 (2.2720184326171875) against the control's best value anywhere on its curve at any seed (2.4083292484283447) is dMT -0.13631, 2.76x the paired resolution and 1.29x the composite. 5) BUT THE CONTROL'S MT ARGMIN IS NOT SEED-STABLE, AND I AM REPORTING THAT PLAINLY. Mapping all 16 k of the control's MT curve at both non-zero offsets (13 new points per offset, plus MECH-SEED's k=12/16) puts the argmin at k=10 (offset 0), k=12 (offset 1000) and k=6 (offset 2000). So 'the control's optimum is k=10' is a one-seed fact, and the own-optimum comparison is itself seed-dependent. Two things blunt this: (a) at every offset the best k beats its own runner-up by only 0.0060-0.0233, i.e. 2-8x SMALLER than the 0.0494 resolution, so the argmin is being selected out of noise rather than located; and (b) the VALUE of the control's minimum is stable -- 2.4083 / 2.4486 / 2.4107, range 0.0403, itself below the resolution. 6) LETTING EACH ARM TAKE ITS OWN PER-SEED ARGMIN -- the strictest fair form -- gives dMT -0.13631 / -0.17907 / -0.14807, mean -0.15448, range 0.04276, all still 2.76-3.62x the paired resolution and all still clearing the composite 0.1055. This is the number that should be quoted for the fair comparison; it is conservative against the keys arm, whose curve is only three points deep at the non-zero offsets (its true per-seed minimum can only be lower). 7) AT A COMMON k=10 the keys arm is better at every seed -- dMT -0.08874 / -0.21790 / -0.16887, mean -0.15850 -- but the offset-0 value does not clear the composite 0.1055, so the common-k version is the weakest of the three framings. 8) THE QA HALF REMAINS UNCONFIRMED, as the board already says. At the own optima dQA is -0.01148 / -0.06872 / -0.03375 (mean -0.038): only offset 1000 clears the 0.0539 QA paired resolution. At a common k=10 the sign flips (+0.00145 at offset 0). Adversarially paired it is -0.01148. 9) PROVENANCE: 40 evals, 40 wandb URLs, 40/40 verified by fixed-string grep to have loaded the checkpoint they were given, all killed after their `Eval loss` line per RUNBOOK §1, all logging the resolved package path /tmp/amsnap_verifyoptima/cartridges. The pin earned its keep: repo HEAD moved cb0b6b4 -> 90f1d54 mid-job and the working tree acquired live uncommitted edits to cartridges/am/{__init__,continual,finetune,ranking}.py from a concurrent worker, while the snapshot manifest hash b71eaf15... was identical at launch, between the two runs and after. Nothing was trained (0 solves, 0 gradient steps); one GH200 held via flock; no source file was edited and nothing was committed. 10) CAVEATS I AM NOT ARGUING AWAY: three offsets are three samples of a coarse instrument (MT n=69) and the ranges quoted are ranges of three, not confidence intervals; the keys arm's per-seed curve is unmapped except at k in {10,12,16} for the non-zero offsets; the control's k=12 and k=16 points at the non-zero offsets are MECH-SEED's (k=12 MT re-run here and exact, k=16 reused); and the seed knob perturbs only which 32 reference conversations each document contributes, which is one of several stochastic choices, so it remains a lower bound on total run-to-run variance."
+}
