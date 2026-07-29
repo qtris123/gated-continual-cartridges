@@ -1,0 +1,22 @@
+{
+  "cell": "icl_MT|QA",
+  "icl_topic": "MT",
+  "eval_split": "QA",
+  "eval_data_path": "data/qasper/eval/qasper_eval_QA.parquet",
+  "harness": "examples/qasper2/train/eval_forgetting.py EVAL_MODE=icl (-> eval_icl.run_icl_loss_eval)",
+  "eval_loss_mean_ce": 2.9024903774261475,
+  "elapsed_s": 861,
+  "gpu": "1",
+  "snapshot_head": "a238cd304ce7d3cc90b4136666788e0d98091fdd",
+  "resolved_cartridges": "/tmp/amsnap_d0/cartridges",
+  "loss": 2.9024903774261475,
+  "perplexity": 18.219462255464432,
+  "num_target_tokens": 2619,
+  "num_examples": 78,
+  "max_sequence_tokens": 77020,
+  "system_prompt_tokens": 76833,
+  "context_mode": "full_topic_panel_chunked",
+  "prefill_chunk_size": 2048,
+  "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/u0l4fg6b",
+  "wandb_run_id": "u0l4fg6b"
+}

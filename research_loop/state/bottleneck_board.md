@@ -164,6 +164,29 @@ the number that shows it. "It didn't help" never closes anything.
   `KEY_MODE != freeze`** with `ENABLE_BETA` unset — so the *first* key experiment would crash for a
   B-SOLVE reason and look like "keys don't work". **`ENABLE_BETA=0` gives a clean keys-only arm.**
 
+## 📏 D0-ICL (2026-07-29): the ruler was fine — and **the "ceiling" is not a ceiling**
+- **The harness suspicion is refuted.** Re-measured on `eval_forgetting.py EVAL_MODE=icl`, all four cells
+  match the board's prior numbers to **~5e-05** — four orders of magnitude below the noise band:
+  `icl_QA|QA` **1.97341**, `icl_MT|MT` **1.89605**, `icl_QA|MT` 2.77610, `icl_MT|QA` 2.90249.
+  The worker verified *why* rather than trusting the docstring: it counted denominators directly
+  (`LossEvalDataset(packed_seq_length=2048)` yields **2619 QA / 2562 MT** scored entries, exactly the
+  `num_target_tokens` the ICL path reports). Same tokens, same formula, same files; only the forward pass
+  differs. **The ICL numbers were correctly rulered all along.**
+- 🔴 **But the ordering the mission assumed is wrong.** On **QA**, ICL 1.97341 is **0.3565 worse** than
+  the sparse-gradient reference (1.6169) — far outside noise. On **MT**, ICL 1.89605 is **0.0235 above
+  (worse than) the dense@4ep bar** (1.87250) — inside the band, so honestly a tie, but the point estimate
+  puts the "ceiling" **behind** the bar. **The mission has been reaching toward a line that two existing
+  methods already sit at or past.** ICL is a *reference point*, not an upper bound.
+- ⭐ **And it rehabilitates DIAG-CONTENT's finding rather than leaving it damning.** Off-diagonals bound
+  the topic-general component: wrong-topic context costs +0.880/+0.929, so ICL's gain *is* largely
+  content-specific — **but topic-mismatched papers still buy 1.00645 of the 1.88650 total MT drop, i.e.
+  53.3% of ICL's own MT gain survives a deliberate topic mismatch.** Full-context ICL is not exempt from
+  the content-free-gain effect. **Our 28–73% therefore sits inside the range the gold-standard method
+  itself exhibits** — a property of this benchmark, not a defect unique to AM.
+- ⚠️ **Repo gap worth fixing:** `eval_forgetting.py`'s ICL branch **never initialises wandb** (`_run_icl`
+  only prints). The worker logged the cells via a parser under the no-edit rule; the losses are the
+  harness's own, not recomputed. `EVAL_MODE=icl` also does **not** hang, unlike the cartridge path (§1).
+
 ## 🥇 NEW BEST GRADIENT-FREE POINT — MECH-KEYS (2026-07-29): **QA 2.0349 / MT 2.3305**
 **The "keys collapse QA" folklore is FALSE in this setting. Every key arm beat the frozen control on
 BOTH axes — there is no trade curve to report, because QA *improved*.**
