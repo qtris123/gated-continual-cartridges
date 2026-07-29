@@ -187,7 +187,53 @@ the number that shows it. "It didn't help" never closes anything.
   only prints). The worker logged the cells via a parser under the no-edit rule; the losses are the
   harness's own, not recomputed. `EVAL_MODE=icl` also does **not** hang, unlike the cartridge path (§1).
 
-## ❌❌ THE KEY-SIDE RESULT IS REFUTED (DIAG-CONTROLCURVE, 2026-07-29)
+## 📐 DIAG-NOISE (2026-07-29): the ±0.15 band was ~3× TOO WIDE — and it reverses the refutation below
+**The threshold every claim in this project was adjudicated against had never been measured. Measured, it
+is not ±0.15.** Per-example losses were recovered **exactly** (not by leave-one-out: the metric is a
+token-weighted micro-average `L = Σc_e / Σt_e`, so a read-only probe bucketing `ce_by_token` by
+`element_ids` reproduces **92 published evals to ≤4.0e-07**, across 60 cached checkpoints, ~6 GPU-minutes,
+nothing retrained).
+
+| 95% interval | MT | QA |
+|---|---|---|
+| a single arm's loss | ±0.186 | ±0.177 |
+| an **independent** difference | ±0.256 | ±0.236 |
+| a **paired** difference ← *what every board comparison is* | **±0.049** | **±0.054** |
+
+Every comparison here is paired — same examples, byte-identical token counts, per-example losses
+correlating r = 0.92–0.99. The inherited ±0.15 is **~3× too wide** for that, and ~1.7× too *narrow* for an
+independent comparison (presumably where the rule of thumb came from).
+
+### 🔄 Consequence: DIAG-CONTROLCURVE's MT refutation is itself REVERSED
+**ΔMT −0.1363 is RESOLVED** — CI **[−0.181, −0.094]**, z = **−6.1**. An **argmin-selection-aware**
+bootstrap that re-picks each arm's best k on every resample gives [−0.182, −0.094] with selection bias
+−0.0005, so the effect is not an artefact of choosing the optima post hoc.
+⇒ **Key installation DOES improve acquisition, by ~0.136 at the two arms' own optima.** Its **QA** half
+stands refuted (−0.0115 and control-better +0.0430, both genuinely unresolvable).
+
+**7 of 23 load-bearing deltas were adjudicated on the wrong side**; only **4** are genuinely unresolvable
+(DIAG-CONTROLCURVE's QA-at-optima, DIAG-KEYCURVE's QA-at-edge, and both DIAG-ROPE deltas). Also flipped to
+RESOLVED: MECH-KEYS ΔQA −0.125/−0.118, the keys k=12-vs-k=16 gap, DIAG-SEQUENCE's tail rise.
+Per k, keys−control clears the measured resolution at **16/16 MT (all negative)** and **7/16 QA** —
+correcting this board's "not one ΔQA clears it at any k". Unchanged: MECH-BETA, all four DIAG-CONTENT
+gaps, arm C, MECH-SEQUENTIAL, DIAG-ROPE.
+
+### Adversarial limits, measured rather than assumed
+- **Run-to-run variance of the solve is exactly ZERO** — six nominally identical runs give byte-identical
+  caches (two sha256 groups).
+- ⚠️ **`results.csv` mixes two harness paths:** in-run vs standalone eval of a *byte-identical* cartridge
+  differs by up to **0.0065** (DIAG-ROPE/MECH-BETA rows are in-run; MECH-KEYS/KEYCURVE/CONTROLCURVE/
+  SEQUENCE are standalone). Flips nothing, but it is a real cross-row inconsistency.
+- Eval packing jitter: median 0.0045, max 0.0216. Token weighting moves an *arm's* loss 0.03–0.18 but a
+  *difference* by median 0.006.
+- 🔴 **The one component that is not small — and it is exactly what MECH-SEED is running:** the arbitrary
+  choice of which 32 conversations become reference queries. DIAG-PERDOC's single replicate pair differs
+  by **0.0476 MT / 0.0965 QA** — 1.9× and 3.5× the paired sampling SE. A conservative composite gives
+  **±0.106 MT / ±0.197 QA**, under which **10 of 23** deltas become unresolvable (including "k=12
+  dominates k=16"). **DIAG-CONTROLCURVE's −0.1363 survives even that.** This term rests on **one pair**
+  and is the largest remaining gap in the estimate.
+
+## ❌ (SUPERSEDED ON THE MT AXIS BY DIAG-NOISE ABOVE) THE KEY-SIDE RESULT IS REFUTED (DIAG-CONTROLCURVE)
 **"Key installation improves acquisition" was an artefact of comparing a mapped curve against an
 unmapped one. At their own optima the two arms are indistinguishable on both axes.**
 

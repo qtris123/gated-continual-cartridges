@@ -1,0 +1,1698 @@
+{
+ "id": "DIAG-NOISE",
+ "board_entry": "methodology (applies to every claim in the investigation)",
+ "question": "What is the eval's actual resolution? Estimate the sampling distribution of the reported token-weighted mean CE from exactly-recovered per-example losses, and re-score every load-bearing claim against the MEASURED resolution instead of the inherited +-0.1-0.2 rule of thumb.",
+ "headline": {
+  "the_reported_metric_is": "token-weighted (micro) mean cross-entropy: L = sum_e c_e / sum_e t_e, c_e = summed CE over example e's scored assistant tokens, t_e its token count. MT: 69 examples / 2562 scored tokens. QA: 78 / 2619.",
+  "recovery_method": "direct per-example decomposition of the harness's own arithmetic: one forward pass per packed batch, ce_by_token bucketed by element id. NOT leave-one-out: 92 evals whose published value came from the standalone eval_forgetting.py path reproduce it to <= 4.0e-07, so the decomposition is exact, not approximate. Cost: 60 distinct cached checkpoints x 2 splits in ~6 GPU-minutes total, no re-training.",
+  "resolution_MT_paired_95pct": 0.049414709208868444,
+  "resolution_QA_paired_95pct": 0.05389150679130719,
+  "resolution_MT_single_arm_95pct": 0.18565767499887575,
+  "resolution_QA_single_arm_95pct": 0.17747795232771008,
+  "resolution_MT_unpaired_diff_95pct": 0.25623942132603406,
+  "resolution_QA_unpaired_diff_95pct": 0.23591241384662734,
+  "composite_MT_95pct_incl_one_pipeline_replicate": 0.10553301160022083,
+  "composite_QA_95pct_incl_one_pipeline_replicate": 0.1967026909783353,
+  "one_line": "the +-0.15 band is ~3.0x TOO WIDE for the paired comparisons the board actually makes (measured MT resolution +-0.049 at 95%) and ~1.7x TOO NARROW for an independent one. Every board claim is paired.",
+  "which_the_board_should_have_used": "PAIRED. Both arms are scored on the SAME 69/78 examples with byte-identical token counts (verified: t_e arrays are equal across every arm), so the difference is a within-subject contrast. Per-example losses correlate r = 0.92-0.99 between arms, which is exactly why the paired SE is 4-12x smaller than the independent one."
+ },
+ "resolution_table": {
+  "MT_n69": {
+   "single_arm_bootstrap_se": {
+    "min": 0.08757387676739777,
+    "median": 0.0945485841322567,
+    "max": 0.14628038746452374
+   },
+   "single_arm_se_clustered_by_paper16": 0.07981112236794477,
+   "paired_diff_se": {
+    "min": 0.010948258451080462,
+    "median": 0.02521158633105533,
+    "max": 0.045934860605449136
+   },
+   "paired_diff_se_clustered_by_paper16": 0.029965340082067717,
+   "independent_diff_se": 0.13073439863573166
+  },
+  "QA_n78": {
+   "single_arm_bootstrap_se": {
+    "min": 0.0786901666584842,
+    "median": 0.09054001294200809,
+    "max": 0.12280700859058048
+   },
+   "single_arm_se_clustered_by_paper16": 0.11207229304620389,
+   "paired_diff_se": {
+    "min": 0.012671177499444521,
+    "median": 0.027495666730258772,
+    "max": 0.043507213573191664
+   },
+   "paired_diff_se_clustered_by_paper16": 0.03383480724657232,
+   "independent_diff_se": 0.1203634764523609
+  },
+  "uncertainty_of_the_resolution_itself": {
+   "method": "double bootstrap: 2000 outer example-resamples, delta-method paired SE on each",
+   "examples": {
+    "DIAG-CONTROLCURVE_dMT_optima": {
+     "se": 0.02231619380446005,
+     "se_95ci": [
+      0.016738932689184808,
+      0.02720848831057049
+     ]
+    },
+    "MECH-KEYS_dMT_k16": {
+     "se": 0.023558094936225737,
+     "se_95ci": [
+      0.01936111247731567,
+      0.02727898359047386
+     ]
+    },
+    "keys_k12_vs_k16_MT": {
+     "se": 0.010948258451080462,
+     "se_95ci": [
+      0.008881278467966325,
+      0.013110808901641183
+     ]
+    },
+    "DIAG-SEQUENCE_tailrise_MT": {
+     "se": 0.01951545820327672,
+     "se_95ci": [
+      0.013713543200818893,
+      0.025169760780079417
+     ]
+    }
+   },
+   "reading": "the SE is itself uncertain by roughly +-25%; the resolution is +-0.04 to +-0.07 MT, not a point."
+  },
+  "token_weighting": {
+   "macro_minus_micro_single_arm_MT_median": -0.08561850061646359,
+   "macro_minus_micro_single_arm_QA_median": -0.09611887702746147,
+   "effect_on_a_DIFFERENCE_MT_median": 0.017715261435702234,
+   "effect_on_a_DIFFERENCE_MT_max": 0.051481908198385024,
+   "reading": "token weighting moves an ARM's reported loss by 0.03-0.18 relative to an unweighted per-question mean (always upward: long answers are harder), i.e. by as much as the whole old noise band. It moves a DIFFERENCE by a median 0.006 and at most 0.058, so it is nearly irrelevant to every comparison the board makes."
+  }
+ },
+ "rescored_claims": [
+  {
+   "claim": "MECH-KEYS_dMT_k16",
+   "description": "keys+reposition vs frozen-key control, both at k=16",
+   "split": "MT",
+   "board_delta": -0.199,
+   "board_verdict_vs_pm0.15": "clears (top edge)",
+   "measured_delta": -0.19912168687517204,
+   "paired_se": 0.023558094936225737,
+   "paired_ci95": [
+    -0.24615267898606813,
+    -0.15359979904784773
+   ],
+   "paired_z": -8.45236796159518,
+   "paper_cluster_se": 0.027518540148918687,
+   "unpaired_se": 0.12897368277194582,
+   "n_examples_favouring_A": 54,
+   "n_examples": 69,
+   "verdict_vs_pm0.15_rule": "clears",
+   "verdict_vs_measured_paired": "RESOLVED",
+   "verdict_vs_paper_clustered": "RESOLVED",
+   "verdict_vs_composite_incl_pipeline": "RESOLVED",
+   "adjudicated_on_wrong_side_by_pm0.15": false
+  },
+  {
+   "claim": "MECH-KEYS_dQA_k16",
+   "description": "keys+reposition vs frozen-key control, both at k=16",
+   "split": "QA",
+   "board_delta": -0.125,
+   "board_verdict_vs_pm0.15": "inside band",
+   "measured_delta": -0.12480828219423791,
+   "paired_se": 0.028114118953745004,
+   "paired_ci95": [
+    -0.17968543946465887,
+    -0.06971778472153847
+   ],
+   "paired_z": -4.439345312566252,
+   "paper_cluster_se": 0.03383480724657232,
+   "unpaired_se": 0.12518070302268539,
+   "n_examples_favouring_A": 55,
+   "n_examples": 78,
+   "verdict_vs_pm0.15_rule": "INSIDE (called noise)",
+   "verdict_vs_measured_paired": "RESOLVED",
+   "verdict_vs_paper_clustered": "RESOLVED",
+   "verdict_vs_composite_incl_pipeline": "not resolvable",
+   "adjudicated_on_wrong_side_by_pm0.15": true
+  },
+  {
+   "claim": "MECH-KEYS_dMT_k12matched",
+   "description": "matched-k comparison at k=12 (DIAG-KEYCURVE correction table)",
+   "split": "MT",
+   "board_delta": -0.198,
+   "board_verdict_vs_pm0.15": "clears",
+   "measured_delta": -0.19843898494445342,
+   "paired_se": 0.023182578326743388,
+   "paired_ci95": [
+    -0.2459554922763003,
+    -0.15516882811160565
+   ],
+   "paired_z": -8.559832394291298,
+   "paper_cluster_se": 0.02484843005125149,
+   "unpaired_se": 0.12760988415338606,
+   "n_examples_favouring_A": 62,
+   "n_examples": 69,
+   "verdict_vs_pm0.15_rule": "clears",
+   "verdict_vs_measured_paired": "RESOLVED",
+   "verdict_vs_paper_clustered": "RESOLVED",
+   "verdict_vs_composite_incl_pipeline": "RESOLVED",
+   "adjudicated_on_wrong_side_by_pm0.15": false
+  },
+  {
+   "claim": "MECH-KEYS_dQA_k12matched",
+   "description": "matched-k comparison at k=12",
+   "split": "QA",
+   "board_delta": -0.118,
+   "board_verdict_vs_pm0.15": "inside band",
+   "measured_delta": -0.11812936327487694,
+   "paired_se": 0.02906039648255513,
+   "paired_ci95": [
+    -0.1760642454714703,
+    -0.062006840894007195
+   ],
+   "paired_z": -4.0649604813819264,
+   "paper_cluster_se": 0.03717253928408638,
+   "unpaired_se": 0.1203634764523609,
+   "n_examples_favouring_A": 54,
+   "n_examples": 78,
+   "verdict_vs_pm0.15_rule": "INSIDE (called noise)",
+   "verdict_vs_measured_paired": "RESOLVED",
+   "verdict_vs_paper_clustered": "RESOLVED",
+   "verdict_vs_composite_incl_pipeline": "not resolvable",
+   "adjudicated_on_wrong_side_by_pm0.15": true
+  },
+  {
+   "claim": "DIAG-CONTROLCURVE_dMT_optima",
+   "description": "each arm at its own MT optimum (keys k=12 vs control k=10) -- the refutation",
+   "split": "MT",
+   "board_delta": -0.1363,
+   "board_verdict_vs_pm0.15": "INSIDE band -> REFUTED",
+   "measured_delta": -0.1363109287517474,
+   "paired_se": 0.02231619380446005,
+   "paired_ci95": [
+    -0.1814396729270157,
+    -0.09403287192181217
+   ],
+   "paired_z": -6.108162079346377,
+   "paper_cluster_se": 0.027285249236754922,
+   "unpaired_se": 0.12853295423231753,
+   "n_examples_favouring_A": 54,
+   "n_examples": 69,
+   "verdict_vs_pm0.15_rule": "INSIDE (called noise)",
+   "verdict_vs_measured_paired": "RESOLVED",
+   "verdict_vs_paper_clustered": "RESOLVED",
+   "verdict_vs_composite_incl_pipeline": "RESOLVED",
+   "adjudicated_on_wrong_side_by_pm0.15": true
+  },
+  {
+   "claim": "DIAG-CONTROLCURVE_dQA_optima",
+   "description": "QA at the two MT-optimal points",
+   "split": "QA",
+   "board_delta": -0.0115,
+   "board_verdict_vs_pm0.15": "inside band",
+   "measured_delta": -0.011479510501105683,
+   "paired_se": 0.027495666730258772,
+   "paired_ci95": [
+    -0.06500597291176971,
+    0.042695530547289924
+   ],
+   "paired_z": -0.41750253280719934,
+   "paper_cluster_se": 0.041189866147532624,
+   "unpaired_se": 0.11696261238196538,
+   "n_examples_favouring_A": 41,
+   "n_examples": 78,
+   "verdict_vs_pm0.15_rule": "INSIDE (called noise)",
+   "verdict_vs_measured_paired": "not resolvable",
+   "verdict_vs_paper_clustered": "not resolvable",
+   "verdict_vs_composite_incl_pipeline": "not resolvable",
+   "adjudicated_on_wrong_side_by_pm0.15": false
+  },
+  {
+   "claim": "DIAG-KEYCURVE_dMT_edge",
+   "description": "keys k=12 vs control pinned at the EDGE point k=8 (the superseded comparison)",
+   "split": "MT",
+   "board_delta": -0.1816,
+   "board_verdict_vs_pm0.15": "clears",
+   "measured_delta": -0.18156730671067015,
+   "paired_se": 0.02521158633105533,
+   "paired_ci95": [
+    -0.23240762219002672,
+    -0.13359104215431106
+   ],
+   "paired_z": -7.201740672978508,
+   "paper_cluster_se": 0.029965340082067717,
+   "unpaired_se": 0.12899534574429716,
+   "n_examples_favouring_A": 54,
+   "n_examples": 69,
+   "verdict_vs_pm0.15_rule": "clears",
+   "verdict_vs_measured_paired": "RESOLVED",
+   "verdict_vs_paper_clustered": "RESOLVED",
+   "verdict_vs_composite_incl_pipeline": "RESOLVED",
+   "adjudicated_on_wrong_side_by_pm0.15": false
+  },
+  {
+   "claim": "DIAG-KEYCURVE_dQA_edge",
+   "description": "QA at those two points (control BETTER)",
+   "split": "QA",
+   "board_delta": 0.023,
+   "board_verdict_vs_pm0.15": "inside band",
+   "measured_delta": 0.02304086213811104,
+   "paired_se": 0.02653098643655822,
+   "paired_ci95": [
+    -0.029222583287985087,
+    0.07486195959488162
+   ],
+   "paired_z": 0.8684510164447566,
+   "paper_cluster_se": 0.03607171820719716,
+   "unpaired_se": 0.11611361471690723,
+   "n_examples_favouring_A": 36,
+   "n_examples": 78,
+   "verdict_vs_pm0.15_rule": "INSIDE (called noise)",
+   "verdict_vs_measured_paired": "not resolvable",
+   "verdict_vs_paper_clustered": "not resolvable",
+   "verdict_vs_composite_incl_pipeline": "not resolvable",
+   "adjudicated_on_wrong_side_by_pm0.15": false
+  },
+  {
+   "claim": "keys_k12_vs_k16_MT",
+   "description": "does the keys arm's own k=12 optimum beat its k=16 endpoint?",
+   "split": "MT",
+   "board_delta": -0.0585,
+   "board_verdict_vs_pm0.15": "inside band",
+   "measured_delta": -0.058484884787021796,
+   "paired_se": 0.010948258451080462,
+   "paired_ci95": [
+    -0.08083151656594202,
+    -0.037905019189134005
+   ],
+   "paired_z": -5.341934979736438,
+   "paper_cluster_se": 0.013115961366933982,
+   "unpaired_se": 0.1250144572041123,
+   "n_examples_favouring_A": 56,
+   "n_examples": 69,
+   "verdict_vs_pm0.15_rule": "INSIDE (called noise)",
+   "verdict_vs_measured_paired": "RESOLVED",
+   "verdict_vs_paper_clustered": "RESOLVED",
+   "verdict_vs_composite_incl_pipeline": "not resolvable",
+   "adjudicated_on_wrong_side_by_pm0.15": true
+  },
+  {
+   "claim": "keys_k12_vs_k16_QA",
+   "description": "same, QA axis",
+   "split": "QA",
+   "board_delta": -0.0789,
+   "board_verdict_vs_pm0.15": "inside band",
+   "measured_delta": -0.07890440118345475,
+   "paired_se": 0.012671177499444521,
+   "paired_ci95": [
+    -0.104320633470892,
+    -0.05449043093968432
+   ],
+   "paired_z": -6.227077253626489,
+   "paper_cluster_se": 0.011227539379995606,
+   "unpaired_se": 0.12074487965973697,
+   "n_examples_favouring_A": 62,
+   "n_examples": 78,
+   "verdict_vs_pm0.15_rule": "INSIDE (called noise)",
+   "verdict_vs_measured_paired": "RESOLVED",
+   "verdict_vs_paper_clustered": "RESOLVED",
+   "verdict_vs_composite_incl_pipeline": "not resolvable",
+   "adjudicated_on_wrong_side_by_pm0.15": true
+  },
+  {
+   "claim": "DIAG-SEQUENCE_tailrise_MT",
+   "description": "value-only theta=1e4: MT gets WORSE from k=12 to k=16",
+   "split": "MT",
+   "board_delta": 0.1172,
+   "board_verdict_vs_pm0.15": "inside band",
+   "measured_delta": 0.11717913144510586,
+   "paired_se": 0.01951545820327672,
+   "paired_ci95": [
+    0.0815554957962465,
+    0.15798643016805508
+   ],
+   "paired_z": 6.004426348822854,
+   "paper_cluster_se": 0.019187507544475946,
+   "unpaired_se": 0.13073439863573166,
+   "n_examples_favouring_A": 13,
+   "n_examples": 69,
+   "verdict_vs_pm0.15_rule": "INSIDE (called noise)",
+   "verdict_vs_measured_paired": "RESOLVED",
+   "verdict_vs_paper_clustered": "RESOLVED",
+   "verdict_vs_composite_incl_pipeline": "RESOLVED",
+   "adjudicated_on_wrong_side_by_pm0.15": true
+  },
+  {
+   "claim": "DIAG-SEQUENCE_tailrise_QA",
+   "description": "same, QA axis (board quotes +0.153 from its k=13 min)",
+   "split": "QA",
+   "board_delta": 0.135,
+   "board_verdict_vs_pm0.15": "inside band",
+   "measured_delta": 0.13500735134991537,
+   "paired_se": 0.018765036191741403,
+   "paired_ci95": [
+    0.1001767317764943,
+    0.1738127038658323
+   ],
+   "paired_z": 7.194622486757199,
+   "paper_cluster_se": 0.019212843094308027,
+   "unpaired_se": 0.1201608072468204,
+   "n_examples_favouring_A": 11,
+   "n_examples": 78,
+   "verdict_vs_pm0.15_rule": "INSIDE (called noise)",
+   "verdict_vs_measured_paired": "RESOLVED",
+   "verdict_vs_paper_clustered": "RESOLVED",
+   "verdict_vs_composite_incl_pipeline": "not resolvable",
+   "adjudicated_on_wrong_side_by_pm0.15": true
+  },
+  {
+   "claim": "MECH-BETA_dMT",
+   "description": "beta ON vs beta OFF at theta=5e6, k=16",
+   "split": "MT",
+   "board_delta": 0.282,
+   "board_verdict_vs_pm0.15": "far outside",
+   "measured_delta": 0.28159307570034237,
+   "paired_se": 0.03850425730636533,
+   "paired_ci95": [
+    0.20803225884087542,
+    0.35907225781271657
+   ],
+   "paired_z": 7.313297162435875,
+   "paper_cluster_se": 0.04776974168363767,
+   "unpaired_se": 0.14283026996705916,
+   "n_examples_favouring_A": 16,
+   "n_examples": 69,
+   "verdict_vs_pm0.15_rule": "clears",
+   "verdict_vs_measured_paired": "RESOLVED",
+   "verdict_vs_paper_clustered": "RESOLVED",
+   "verdict_vs_composite_incl_pipeline": "RESOLVED",
+   "adjudicated_on_wrong_side_by_pm0.15": false
+  },
+  {
+   "claim": "MECH-BETA_dQA",
+   "description": "same, QA axis",
+   "split": "QA",
+   "board_delta": 0.581,
+   "board_verdict_vs_pm0.15": "far outside",
+   "measured_delta": 0.5806101953438686,
+   "paired_se": 0.043507213573191664,
+   "paired_ci95": [
+    0.4954353598507279,
+    0.6657331067775244
+   ],
+   "paired_z": 13.34514779640197,
+   "paper_cluster_se": 0.047079127174388856,
+   "unpaired_se": 0.14267610346385085,
+   "n_examples_favouring_A": 4,
+   "n_examples": 78,
+   "verdict_vs_pm0.15_rule": "clears",
+   "verdict_vs_measured_paired": "RESOLVED",
+   "verdict_vs_paper_clustered": "RESOLVED",
+   "verdict_vs_composite_incl_pipeline": "RESOLVED",
+   "adjudicated_on_wrong_side_by_pm0.15": false
+  },
+  {
+   "claim": "DIAG-CONTENT_gap_k4",
+   "description": "content-free arm B minus canonical, matched k=4",
+   "split": "MT",
+   "board_delta": 0.232,
+   "board_verdict_vs_pm0.15": "outside",
+   "measured_delta": 0.23212755249104416,
+   "paired_se": 0.0354252006803903,
+   "paired_ci95": [
+    0.16351112079145344,
+    0.30262351202724097
+   ],
+   "paired_z": 6.552610797757285,
+   "paper_cluster_se": 0.03370943797236939,
+   "unpaired_se": 0.18164696147033693,
+   "n_examples_favouring_A": 16,
+   "n_examples": 69,
+   "verdict_vs_pm0.15_rule": "clears",
+   "verdict_vs_measured_paired": "RESOLVED",
+   "verdict_vs_paper_clustered": "RESOLVED",
+   "verdict_vs_composite_incl_pipeline": "RESOLVED",
+   "adjudicated_on_wrong_side_by_pm0.15": false
+  },
+  {
+   "claim": "DIAG-CONTENT_gap_k8",
+   "description": "matched k=8",
+   "split": "MT",
+   "board_delta": 0.288,
+   "board_verdict_vs_pm0.15": "outside",
+   "measured_delta": 0.2878978418345907,
+   "paired_se": 0.030325730190263238,
+   "paired_ci95": [
+    0.22830966546229783,
+    0.3473598881500972
+   ],
+   "paired_z": 9.493517222118754,
+   "paper_cluster_se": 0.03142192501890226,
+   "unpaired_se": 0.15980366408206445,
+   "n_examples_favouring_A": 9,
+   "n_examples": 69,
+   "verdict_vs_pm0.15_rule": "clears",
+   "verdict_vs_measured_paired": "RESOLVED",
+   "verdict_vs_paper_clustered": "RESOLVED",
+   "verdict_vs_composite_incl_pipeline": "RESOLVED",
+   "adjudicated_on_wrong_side_by_pm0.15": false
+  },
+  {
+   "claim": "DIAG-CONTENT_gap_k12",
+   "description": "matched k=12",
+   "split": "MT",
+   "board_delta": 0.608,
+   "board_verdict_vs_pm0.15": "outside",
+   "measured_delta": 0.6083862796018676,
+   "paired_se": 0.044832964696505814,
+   "paired_ci95": [
+    0.5218366629502892,
+    0.6976233564163692
+   ],
+   "paired_z": 13.570065770138195,
+   "paper_cluster_se": 0.04597074076158119,
+   "unpaired_se": 0.15121248779432,
+   "n_examples_favouring_A": 5,
+   "n_examples": 69,
+   "verdict_vs_pm0.15_rule": "clears",
+   "verdict_vs_measured_paired": "RESOLVED",
+   "verdict_vs_paper_clustered": "RESOLVED",
+   "verdict_vs_composite_incl_pipeline": "RESOLVED",
+   "adjudicated_on_wrong_side_by_pm0.15": false
+  },
+  {
+   "claim": "DIAG-CONTENT_gap_k16",
+   "description": "matched k=16",
+   "split": "MT",
+   "board_delta": 0.882,
+   "board_verdict_vs_pm0.15": "outside",
+   "measured_delta": 0.8819236972224076,
+   "paired_se": 0.045934860605449136,
+   "paired_ci95": [
+    0.7936537658471492,
+    0.9730829974880023
+   ],
+   "paired_z": 19.199442114292324,
+   "paper_cluster_se": 0.046009231133626476,
+   "unpaired_se": 0.15771067616995932,
+   "n_examples_favouring_A": 0,
+   "n_examples": 69,
+   "verdict_vs_pm0.15_rule": "clears",
+   "verdict_vs_measured_paired": "RESOLVED",
+   "verdict_vs_paper_clustered": "RESOLVED",
+   "verdict_vs_composite_incl_pipeline": "RESOLVED",
+   "adjudicated_on_wrong_side_by_pm0.15": false
+  },
+  {
+   "claim": "DIAG-CONTENT_armC_sequence",
+   "description": "reversed document order, content held constant",
+   "split": "MT",
+   "board_delta": 0.34,
+   "board_verdict_vs_pm0.15": "outside",
+   "measured_delta": 0.3395890191041264,
+   "paired_se": 0.03156132123393202,
+   "paired_ci95": [
+    0.2791043893669215,
+    0.4026731824148745
+   ],
+   "paired_z": 10.759657892237714,
+   "paper_cluster_se": 0.0334770005685133,
+   "unpaired_se": 0.14304782901460536,
+   "n_examples_favouring_A": 7,
+   "n_examples": 69,
+   "verdict_vs_pm0.15_rule": "clears",
+   "verdict_vs_measured_paired": "RESOLVED",
+   "verdict_vs_paper_clustered": "RESOLVED",
+   "verdict_vs_composite_incl_pipeline": "RESOLVED",
+   "adjudicated_on_wrong_side_by_pm0.15": false
+  },
+  {
+   "claim": "MECH-SEQUENTIAL_k12_MT",
+   "description": "on-policy layer-sequential composed with keys, at k=12",
+   "split": "MT",
+   "board_delta": 0.176,
+   "board_verdict_vs_pm0.15": "the only delta escaping noise",
+   "measured_delta": 0.17631165673954402,
+   "paired_se": 0.015625550504714054,
+   "paired_ci95": [
+    0.1474808101669459,
+    0.20879664985165294
+   ],
+   "paired_z": 11.28354848594632,
+   "paper_cluster_se": 0.018755408372848736,
+   "unpaired_se": 0.12653223369242866,
+   "n_examples_favouring_A": 2,
+   "n_examples": 69,
+   "verdict_vs_pm0.15_rule": "clears",
+   "verdict_vs_measured_paired": "RESOLVED",
+   "verdict_vs_paper_clustered": "RESOLVED",
+   "verdict_vs_composite_incl_pipeline": "RESOLVED",
+   "adjudicated_on_wrong_side_by_pm0.15": false
+  },
+  {
+   "claim": "MECH-SEQUENTIAL_k12_QA",
+   "description": "same, QA axis",
+   "split": "QA",
+   "board_delta": 0.188,
+   "board_verdict_vs_pm0.15": "escapes noise",
+   "measured_delta": 0.18793880959389497,
+   "paired_se": 0.015695968821111253,
+   "paired_ci95": [
+    0.158870319252379,
+    0.22053072233047377
+   ],
+   "paired_z": 11.973699217668882,
+   "paper_cluster_se": 0.017296253657591104,
+   "unpaired_se": 0.1190109108603777,
+   "n_examples_favouring_A": 2,
+   "n_examples": 78,
+   "verdict_vs_pm0.15_rule": "clears",
+   "verdict_vs_measured_paired": "RESOLVED",
+   "verdict_vs_paper_clustered": "RESOLVED",
+   "verdict_vs_composite_incl_pipeline": "not resolvable",
+   "adjudicated_on_wrong_side_by_pm0.15": false
+  },
+  {
+   "claim": "DIAG-ROPE_dMT",
+   "description": "theta=5e6 vs theta=1e4 at k=16 (standalone evals of the byte-identical caches)",
+   "split": "MT",
+   "board_delta": -0.019,
+   "board_verdict_vs_pm0.15": "inside band",
+   "measured_delta": -0.022791049692084626,
+   "paired_se": 0.028593911723796397,
+   "paired_ci95": [
+    -0.07797236786460061,
+    0.03432507661525648
+   ],
+   "paired_z": -0.7970595248469443,
+   "paper_cluster_se": 0.03264916195842102,
+   "unpaired_se": 0.13294227133237596,
+   "n_examples_favouring_A": 34,
+   "n_examples": 69,
+   "verdict_vs_pm0.15_rule": "INSIDE (called noise)",
+   "verdict_vs_measured_paired": "not resolvable",
+   "verdict_vs_paper_clustered": "not resolvable",
+   "verdict_vs_composite_incl_pipeline": "not resolvable",
+   "adjudicated_on_wrong_side_by_pm0.15": false
+  },
+  {
+   "claim": "DIAG-ROPE_dQA",
+   "description": "same, QA axis",
+   "split": "QA",
+   "board_delta": -0.023,
+   "board_verdict_vs_pm0.15": "inside band",
+   "measured_delta": -0.017454590202913123,
+   "paired_se": 0.027993054027685996,
+   "paired_ci95": [
+    -0.07353984051323526,
+    0.03603402035556272
+   ],
+   "paired_z": -0.6235329016137358,
+   "paper_cluster_se": 0.030622693771852446,
+   "unpaired_se": 0.12420368256943305,
+   "n_examples_favouring_A": 39,
+   "n_examples": 78,
+   "verdict_vs_pm0.15_rule": "INSIDE (called noise)",
+   "verdict_vs_measured_paired": "not resolvable",
+   "verdict_vs_paper_clustered": "not resolvable",
+   "verdict_vs_composite_incl_pipeline": "not resolvable",
+   "adjudicated_on_wrong_side_by_pm0.15": false
+  }
+ ],
+ "rescore_counts": {
+  "n_claims_scored": 23,
+  "n_inside_the_old_pm0.15_rule": 11,
+  "n_not_resolvable_at_the_MEASURED_paired_resolution": 4,
+  "n_not_resolvable_under_the_composite_resolution": 10,
+  "n_adjudicated_on_the_WRONG_side_by_pm0.15": 7,
+  "which_flipped": [
+   "MECH-KEYS_dQA_k16",
+   "MECH-KEYS_dQA_k12matched",
+   "DIAG-CONTROLCURVE_dMT_optima",
+   "keys_k12_vs_k16_MT",
+   "keys_k12_vs_k16_QA",
+   "DIAG-SEQUENCE_tailrise_MT",
+   "DIAG-SEQUENCE_tailrise_QA"
+  ]
+ },
+ "argmin_selection_test": {
+  "MT": {
+   "control_argmin_k": 10,
+   "keys_argmin_k": 12,
+   "point_delta_at_own_optima": -0.13631092875174744,
+   "fixed_k_bootstrap": {
+    "se": 0.02240115152954161,
+    "ci95": [
+     -0.18163806690623538,
+     -0.09391002064466791
+    ],
+    "excludes_zero": true
+   },
+   "selection_aware_bootstrap": {
+    "se": 0.022309137432023934,
+    "ci95": [
+     -0.18175356160242298,
+     -0.09430419478211637
+    ],
+    "mean": -0.13681097505260253,
+    "excludes_zero": true,
+    "selection_bias_mean_minus_point": -0.0005000463008550948
+   },
+   "control_argmin_distribution": {
+    "7": 9,
+    "8": 15,
+    "9": 107,
+    "10": 99402,
+    "11": 467
+   },
+   "keys_argmin_distribution": {
+    "11": 9393,
+    "12": 90584,
+    "13": 23
+   }
+  },
+  "QA": {
+   "control_argmin_k": 3,
+   "keys_argmin_k": 3,
+   "point_delta_at_own_optima": 0.04303542388842052,
+   "fixed_k_bootstrap": {
+    "se": 0.026049045704394078,
+    "ci95": [
+     -0.008123862053035646,
+     0.09404070325401997
+    ],
+    "excludes_zero": false
+   },
+   "selection_aware_bootstrap": {
+    "se": 0.023879807825864637,
+    "ci95": [
+     -0.009589449954671408,
+     0.08400045866810303
+    ],
+    "mean": 0.03725249467056759,
+    "excludes_zero": false,
+    "selection_bias_mean_minus_point": -0.005782929217852929
+   },
+   "control_argmin_distribution": {
+    "1": 1,
+    "2": 92,
+    "3": 71237,
+    "4": 28649,
+    "7": 21
+   },
+   "keys_argmin_distribution": {
+    "1": 862,
+    "2": 34343,
+    "3": 37368,
+    "4": 27257,
+    "6": 43,
+    "7": 100,
+    "9": 2,
+    "11": 25
+   }
+  }
+ },
+ "per_k_keys_minus_control": {
+  "MT": [
+   {
+    "k": 1,
+    "delta": -0.14944786161531964,
+    "se": 0.02079810853355451,
+    "ci95": [
+     -0.19193454787021635,
+     -0.11117840919435366
+    ],
+    "clears_measured": true,
+    "clears_pm015": false
+   },
+   {
+    "k": 2,
+    "delta": -0.08712310155953595,
+    "se": 0.020052255953428907,
+    "ci95": [
+     -0.12720322837497844,
+     -0.048216498788635716
+    ],
+    "clears_measured": true,
+    "clears_pm015": false
+   },
+   {
+    "k": 3,
+    "delta": -0.11421294176706911,
+    "se": 0.02540959390071573,
+    "ci95": [
+     -0.1650535010418982,
+     -0.065679527116204
+    ],
+    "clears_measured": true,
+    "clears_pm015": false
+   },
+   {
+    "k": 4,
+    "delta": -0.12107897688410334,
+    "se": 0.021941568727102838,
+    "ci95": [
+     -0.16493692173106744,
+     -0.07867669374901556
+    ],
+    "clears_measured": true,
+    "clears_pm015": false
+   },
+   {
+    "k": 5,
+    "delta": -0.13535849913683756,
+    "se": 0.01910763539979311,
+    "ci95": [
+     -0.1737882106819485,
+     -0.09863896551720194
+    ],
+    "clears_measured": true,
+    "clears_pm015": false
+   },
+   {
+    "k": 6,
+    "delta": -0.1738629430259516,
+    "se": 0.022401391765105163,
+    "ci95": [
+     -0.21850420791412029,
+     -0.13163725534074003
+    ],
+    "clears_measured": true,
+    "clears_pm015": true
+   },
+   {
+    "k": 7,
+    "delta": -0.1510965016090015,
+    "se": 0.021472868592935696,
+    "ci95": [
+     -0.19378032779634874,
+     -0.10953422420396058
+    ],
+    "clears_measured": true,
+    "clears_pm015": true
+   },
+   {
+    "k": 8,
+    "delta": -0.12468326875048563,
+    "se": 0.02417223645042508,
+    "ci95": [
+     -0.171109098732058,
+     -0.07562554447274175
+    ],
+    "clears_measured": true,
+    "clears_pm015": false
+   },
+   {
+    "k": 9,
+    "delta": -0.12761667347990732,
+    "se": 0.025014382496079977,
+    "ci95": [
+     -0.17681438941414027,
+     -0.07794344670213642
+    ],
+    "clears_measured": true,
+    "clears_pm015": false
+   },
+   {
+    "k": 10,
+    "delta": -0.08873991781637691,
+    "se": 0.022381660551299472,
+    "ci95": [
+     -0.13262121416980183,
+     -0.04513427852939644
+    ],
+    "clears_measured": true,
+    "clears_pm015": false
+   },
+   {
+    "k": 11,
+    "delta": -0.14918126101784443,
+    "se": 0.02287088723424961,
+    "ci95": [
+     -0.19600114539046906,
+     -0.10614917563486201
+    ],
+    "clears_measured": true,
+    "clears_pm015": false
+   },
+   {
+    "k": 12,
+    "delta": -0.19843898494445342,
+    "se": 0.022910422044787732,
+    "ci95": [
+     -0.24510608038599546,
+     -0.15528134686993061
+    ],
+    "clears_measured": true,
+    "clears_pm015": true
+   },
+   {
+    "k": 13,
+    "delta": -0.18735901909724403,
+    "se": 0.023008578903520118,
+    "ci95": [
+     -0.23418847621892908,
+     -0.1444950887230565
+    ],
+    "clears_measured": true,
+    "clears_pm015": true
+   },
+   {
+    "k": 14,
+    "delta": -0.1636966111804103,
+    "se": 0.02227955083459085,
+    "ci95": [
+     -0.20800685160788365,
+     -0.12059224904635181
+    ],
+    "clears_measured": true,
+    "clears_pm015": true
+   },
+   {
+    "k": 15,
+    "delta": -0.18168100680060897,
+    "se": 0.025289938431832554,
+    "ci95": [
+     -0.23187068452944654,
+     -0.13305156939048984
+    ],
+    "clears_measured": true,
+    "clears_pm015": true
+   },
+   {
+    "k": 16,
+    "delta": -0.19912168687517204,
+    "se": 0.023416608371932525,
+    "ci95": [
+     -0.24562463450087346,
+     -0.1533673818533535
+    ],
+    "clears_measured": true,
+    "clears_pm015": true
+   }
+  ],
+  "QA": [
+   {
+    "k": 1,
+    "delta": -0.07343243461340439,
+    "se": 0.02166492408656338,
+    "ci95": [
+     -0.11639681427884069,
+     -0.031671731665026216
+    ],
+    "clears_measured": true,
+    "clears_pm015": false
+   },
+   {
+    "k": 2,
+    "delta": -0.009452821911504898,
+    "se": 0.02868411145745652,
+    "ci95": [
+     -0.0645057945246001,
+     0.04821858071179233
+    ],
+    "clears_measured": false,
+    "clears_pm015": false
+   },
+   {
+    "k": 3,
+    "delta": 0.043035423888421104,
+    "se": 0.02624110133034375,
+    "ci95": [
+     -0.00923057555677487,
+     0.09484988928218147
+    ],
+    "clears_measured": false,
+    "clears_pm015": false
+   },
+   {
+    "k": 4,
+    "delta": 0.03597212547101643,
+    "se": 0.027192169335704036,
+    "ci95": [
+     -0.017286479635166326,
+     0.08904137079293792
+    ],
+    "clears_measured": false,
+    "clears_pm015": false
+   },
+   {
+    "k": 5,
+    "delta": 0.01927077392459878,
+    "se": 0.023403532594181393,
+    "ci95": [
+     -0.027436589516032218,
+     0.06468164194884778
+    ],
+    "clears_measured": false,
+    "clears_pm015": false
+   },
+   {
+    "k": 6,
+    "delta": -0.017490035744659845,
+    "se": 0.024411277867046083,
+    "ci95": [
+     -0.06596471694714952,
+     0.029442274605327078
+    ],
+    "clears_measured": false,
+    "clears_pm015": false
+   },
+   {
+    "k": 7,
+    "delta": 0.014604628056370524,
+    "se": 0.024641284229969015,
+    "ci95": [
+     -0.034394960042467865,
+     0.06263132063619554
+    ],
+    "clears_measured": false,
+    "clears_pm015": false
+   },
+   {
+    "k": 8,
+    "delta": 0.013424978769351436,
+    "se": 0.025448829680771973,
+    "ci95": [
+     -0.036036846941909506,
+     0.06351034956029852
+    ],
+    "clears_measured": false,
+    "clears_pm015": false
+   },
+   {
+    "k": 9,
+    "delta": -0.029543736020606812,
+    "se": 0.028583562365546666,
+    "ci95": [
+     -0.08510983967518627,
+     0.02720624432676428
+    ],
+    "clears_measured": false,
+    "clears_pm015": false
+   },
+   {
+    "k": 10,
+    "delta": 0.0014476394024095932,
+    "se": 0.029328758037998472,
+    "ci95": [
+     -0.05601492422263601,
+     0.05852188291841996
+    ],
+    "clears_measured": false,
+    "clears_pm015": false
+   },
+   {
+    "k": 11,
+    "delta": -0.062375376188012116,
+    "se": 0.029460151032906706,
+    "ci95": [
+     -0.12125471894786817,
+     -0.005196092466396278
+    ],
+    "clears_measured": true,
+    "clears_pm015": false
+   },
+   {
+    "k": 12,
+    "delta": -0.11812936327487694,
+    "se": 0.029158536116715136,
+    "ci95": [
+     -0.17670475218982884,
+     -0.06193476055567306
+    ],
+    "clears_measured": true,
+    "clears_pm015": false
+   },
+   {
+    "k": 13,
+    "delta": -0.09024842942550496,
+    "se": 0.029854755569013087,
+    "ci95": [
+     -0.1493148492959542,
+     -0.032951184814100906
+    ],
+    "clears_measured": true,
+    "clears_pm015": false
+   },
+   {
+    "k": 14,
+    "delta": -0.07664635028006418,
+    "se": 0.031217073566018803,
+    "ci95": [
+     -0.13744895948566102,
+     -0.015190892271025932
+    ],
+    "clears_measured": true,
+    "clears_pm015": false
+   },
+   {
+    "k": 15,
+    "delta": -0.09759805268883104,
+    "se": 0.03212344278153779,
+    "ci95": [
+     -0.16118921127180802,
+     -0.035030892681425514
+    ],
+    "clears_measured": true,
+    "clears_pm015": false
+   },
+   {
+    "k": 16,
+    "delta": -0.12480828219423791,
+    "se": 0.028062582882292388,
+    "ci95": [
+     -0.1800283564326514,
+     -0.07006933330240363
+    ],
+    "clears_measured": true,
+    "clears_pm015": false
+   }
+  ]
+ },
+ "per_k_counts": {
+  "MT": {
+   "n_clearing_pm0.15": 7,
+   "n_clearing_measured": 16,
+   "n_k": 16
+  },
+  "QA": {
+   "n_clearing_pm0.15": 0,
+   "n_clearing_measured": 7,
+   "n_k": 16
+  }
+ },
+ "diag_perdoc_rescore": {
+  "doc000": {
+   "paper_id": "1910.11471",
+   "n_questions": 6,
+   "n_tokens": 134,
+   "solo_loss": 2.896302242481948,
+   "k16_loss": 2.03739209863815,
+   "k12_loss": 1.889008883648418,
+   "phase1_loss": 2.985790061333827,
+   "paired_delta_solo_minus_k16": 0.8589101438437977,
+   "paired": {
+    "point": 0.8589101438437977,
+    "bootstrap_se": 0.048108238755440125,
+    "ci95_lo": 0.7385427775633736,
+    "ci95_hi": 0.9292233391605502,
+    "ci95_halfwidth": 0.0953402807985883,
+    "excludes_zero": true
+   },
+   "n_questions_favouring_solo": 0
+  },
+  "doc009": {
+   "paper_id": "2002.02427",
+   "n_questions": 5,
+   "n_tokens": 189,
+   "solo_loss": 3.789807873201213,
+   "k16_loss": 2.7798975861761486,
+   "k12_loss": 2.6326416116791234,
+   "phase1_loss": 3.9687207633234864,
+   "paired_delta_solo_minus_k16": 1.0099102870250636,
+   "paired": {
+    "point": 1.0099102870250636,
+    "bootstrap_se": 0.22783605897547043,
+    "ci95_lo": 0.4997160653824325,
+    "ci95_hi": 1.3966755749445632,
+    "ci95_halfwidth": 0.44847975478106533,
+    "excludes_zero": true
+   },
+   "n_questions_favouring_solo": 0
+  },
+  "doc011": {
+   "paper_id": "1903.03467",
+   "n_questions": 5,
+   "n_tokens": 247,
+   "solo_loss": 4.321987096042555,
+   "k16_loss": 3.0539157559857264,
+   "k12_loss": 2.8710532361689394,
+   "phase1_loss": 4.62351624211395,
+   "paired_delta_solo_minus_k16": 1.268071340056829,
+   "paired": {
+    "point": 1.268071340056829,
+    "bootstrap_se": 0.18752719702134135,
+    "ci95_lo": 0.8018223563520376,
+    "ci95_hi": 1.5500262811611372,
+    "ci95_halfwidth": 0.3741019624045498,
+    "excludes_zero": true
+   },
+   "n_questions_favouring_solo": 0
+  },
+  "doc013": {
+   "paper_id": "1909.01013",
+   "n_questions": 5,
+   "n_tokens": 312,
+   "solo_loss": 3.503762893689477,
+   "k16_loss": 2.4465858417564132,
+   "k12_loss": 2.3755635386271896,
+   "phase1_loss": 3.5792139142732005,
+   "paired_delta_solo_minus_k16": 1.0571770519330639,
+   "paired": {
+    "point": 1.0571770519330639,
+    "bootstrap_se": 0.0916757380038209,
+    "ci95_lo": 0.8922607727599323,
+    "ci95_hi": 1.2409787060604043,
+    "ci95_halfwidth": 0.17435896665023598,
+    "excludes_zero": true
+   },
+   "n_questions_favouring_solo": 0
+  },
+  "doc015": {
+   "paper_id": "1910.10408",
+   "n_questions": 7,
+   "n_tokens": 282,
+   "solo_loss": 3.8966800599843854,
+   "k16_loss": 2.5993546771493476,
+   "k12_loss": 2.5439546193061875,
+   "phase1_loss": 4.295664880443759,
+   "paired_delta_solo_minus_k16": 1.297325382835037,
+   "paired": {
+    "point": 1.297325382835037,
+    "bootstrap_se": 0.18602623977745755,
+    "ci95_lo": 0.852707689743633,
+    "ci95_hi": 1.5792113806662318,
+    "ci95_halfwidth": 0.3632518454612994,
+    "excludes_zero": true
+   },
+   "n_questions_favouring_solo": 0
+  },
+  "_pooled_5docs_27questions": {
+   "board_value": 1.101,
+   "board_se": 0.083,
+   "measured_paired_delta_solo_minus_k16": 1.1296096414771812,
+   "paired": {
+    "point": 1.1296096414771812,
+    "bootstrap_se": 0.08193899638799845,
+    "ci95_lo": 0.9630793266902216,
+    "ci95_hi": 1.2832658572262858,
+    "ci95_halfwidth": 0.16009326526803214,
+    "excludes_zero": true
+   },
+   "document_cluster_bootstrap": {
+    "point": 1.1296096414771812,
+    "bootstrap_se": 0.06727773710743308,
+    "ci95_lo": 0.9830618447272733,
+    "ci95_hi": 1.2435573383435592,
+    "ci95_halfwidth": 0.13024774680814294,
+    "excludes_zero": true
+   },
+   "n_questions": 28,
+   "n_questions_favouring_solo": 0
+  },
+  "_loo_crosscheck_doc015": {
+   "note": "DIAG-PERDOC recovered these 7 per-example losses by leave-one-out over eval subsets; we recover them directly from the full-MT forward pass. Orders may differ, so both sorted and unsorted comparisons are given.",
+   "ours_solo_sorted": [
+    0.4569096372660688,
+    2.5753661557297653,
+    3.253308997070764,
+    3.7667678581310886,
+    4.5420401514688225,
+    4.778544836268947,
+    4.788219898172902
+   ],
+   "diagperdoc_solo_sorted": [
+    0.4440010190010071,
+    2.535735683441162,
+    3.1515476336845984,
+    3.846084319628202,
+    4.556573867797852,
+    4.808782052993775,
+    4.812397980690003
+   ],
+   "max_abs_diff_solo_sorted": 0.10176136338616537,
+   "ours_k16_sorted": [
+    0.3421375837299365,
+    1.4207445355090018,
+    2.50517057156538,
+    2.7431475929285702,
+    2.826035508917462,
+    3.18343039299901,
+    3.187689596831327
+   ],
+   "diagperdoc_k16_sorted": [
+    0.29417139291763306,
+    1.3835284423828125,
+    2.4209488538595347,
+    2.7250267565250397,
+    2.7958718813382664,
+    3.1572075366973875,
+    3.1713210344314575
+   ],
+   "max_abs_diff_k16_sorted": 0.0842217177058453
+  }
+ },
+ "non_sampling_variance_components": {
+  "run_to_run_variance_of_the_SOLVE_is_ZERO": {
+   "evidence": "the theta=1e4 k=16 cartridge is BYTE-IDENTICAL across 3 independent runs (sha256 581d8e9b... for cache-step16.pt of f705f46c and 4b0edcab; b30ee18d... for cache-after-doc-015 of 4b0edcab and e6660cc4) and the theta=5e6 k=16 cartridge across 3 more (8b793be8... for 5ff66d3f, 508b8b0f, 55af444a). Their standalone evals agree to 16 digits."
+  },
+  "in_run_eval_vs_standalone_eval_of_a_byte_identical_cartridge": {
+   "theta1e4_k16": {
+    "in_run_published": [
+     2.1766157150268555,
+     2.5483615398406982
+    ],
+    "standalone_measured": [
+     2.177179302667139,
+     2.55241603439307
+    ],
+    "abs_diff_QA": 0.000563587640283636,
+    "abs_diff_MT": 0.0040544945523719456
+   },
+   "theta5e6_k16": {
+    "in_run_published": [
+     2.1532,
+     2.52961
+    ],
+    "standalone_measured": [
+     2.159724712464226,
+     2.5296249847009853
+    ],
+    "abs_diff_QA": 0.006524712464226035,
+    "abs_diff_MT": 1.498470098537652e-05
+   },
+   "reading": "results.csv MIXES two harness paths. DIAG-ROPE-A/B and MECH-BETA quote in-run numbers (2.17662/2.54836 and 2.15320/2.52961); MECH-KEYS, DIAG-KEYCURVE, DIAG-CONTROLCURVE, DIAG-SEQUENCE quote standalone eval_forgetting.py numbers (2.17718/2.55242 and 2.15972/2.52962) for the SAME byte-identical caches. The gap is 0.0006-0.0065 loss -- an order of magnitude below the measured paired resolution, so it flips nothing, but it is a real cross-row inconsistency."
+  },
+  "eval_packing_jitter": {
+   "rows": [
+    {
+     "doc": "doc000",
+     "quantity": "phase1_floor",
+     "subset_eval": 2.9679129123687744,
+     "subset_of_full_eval": 2.985790061333827,
+     "abs_diff": 0.01787714896505266
+    },
+    {
+     "doc": "doc000",
+     "quantity": "solo_rope1e4",
+     "subset_eval": 2.9178621768951416,
+     "subset_of_full_eval": 2.896302242481948,
+     "abs_diff": 0.021559934413193815
+    },
+    {
+     "doc": "doc000",
+     "quantity": "k12_rope1e4",
+     "subset_eval": 1.8849869966506958,
+     "subset_of_full_eval": 1.889008883648418,
+     "abs_diff": 0.004021886997722213
+    },
+    {
+     "doc": "doc000",
+     "quantity": "k16_rope1e4",
+     "subset_eval": 2.03598952293396,
+     "subset_of_full_eval": 2.03739209863815,
+     "abs_diff": 0.0014025757041902231
+    },
+    {
+     "doc": "doc000",
+     "quantity": "n_scored_tokens",
+     "subset_eval": 134,
+     "subset_of_full_eval": 134,
+     "abs_diff": 0
+    },
+    {
+     "doc": "doc009",
+     "quantity": "phase1_floor",
+     "subset_eval": 3.971012592315674,
+     "subset_of_full_eval": 3.9687207633234864,
+     "abs_diff": 0.0022918289921873836
+    },
+    {
+     "doc": "doc009",
+     "quantity": "solo_rope1e4",
+     "subset_eval": 3.7725119590759277,
+     "subset_of_full_eval": 3.789807873201213,
+     "abs_diff": 0.017295914125285083
+    },
+    {
+     "doc": "doc009",
+     "quantity": "k12_rope1e4",
+     "subset_eval": 2.6344592571258545,
+     "subset_of_full_eval": 2.6326416116791234,
+     "abs_diff": 0.001817645446731131
+    },
+    {
+     "doc": "doc009",
+     "quantity": "k16_rope1e4",
+     "subset_eval": 2.7806174755096436,
+     "subset_of_full_eval": 2.7798975861761486,
+     "abs_diff": 0.000719889333494983
+    },
+    {
+     "doc": "doc009",
+     "quantity": "n_scored_tokens",
+     "subset_eval": 189,
+     "subset_of_full_eval": 189,
+     "abs_diff": 0
+    },
+    {
+     "doc": "doc011",
+     "quantity": "phase1_floor",
+     "subset_eval": 4.618667125701904,
+     "subset_of_full_eval": 4.62351624211395,
+     "abs_diff": 0.00484911641204544
+    },
+    {
+     "doc": "doc011",
+     "quantity": "solo_rope1e4",
+     "subset_eval": 4.3348774909973145,
+     "subset_of_full_eval": 4.321987096042555,
+     "abs_diff": 0.012890394954759188
+    },
+    {
+     "doc": "doc011",
+     "quantity": "k12_rope1e4",
+     "subset_eval": 2.8776543140411377,
+     "subset_of_full_eval": 2.8710532361689394,
+     "abs_diff": 0.006601077872198324
+    },
+    {
+     "doc": "doc011",
+     "quantity": "k16_rope1e4",
+     "subset_eval": 3.050403356552124,
+     "subset_of_full_eval": 3.0539157559857264,
+     "abs_diff": 0.0035123994336023756
+    },
+    {
+     "doc": "doc011",
+     "quantity": "n_scored_tokens",
+     "subset_eval": 247,
+     "subset_of_full_eval": 247,
+     "abs_diff": 0
+    },
+    {
+     "doc": "doc013",
+     "quantity": "phase1_floor",
+     "subset_eval": 3.57560658454895,
+     "subset_of_full_eval": 3.5792139142732005,
+     "abs_diff": 0.0036073297242502633
+    },
+    {
+     "doc": "doc013",
+     "quantity": "solo_rope1e4",
+     "subset_eval": 3.49471378326416,
+     "subset_of_full_eval": 3.503762893689477,
+     "abs_diff": 0.009049110425316975
+    },
+    {
+     "doc": "doc013",
+     "quantity": "k12_rope1e4",
+     "subset_eval": 2.372390031814575,
+     "subset_of_full_eval": 2.3755635386271896,
+     "abs_diff": 0.003173506812614413
+    },
+    {
+     "doc": "doc013",
+     "quantity": "k16_rope1e4",
+     "subset_eval": 2.452610731124878,
+     "subset_of_full_eval": 2.4465858417564132,
+     "abs_diff": 0.006024889368464681
+    },
+    {
+     "doc": "doc013",
+     "quantity": "n_scored_tokens",
+     "subset_eval": 312,
+     "subset_of_full_eval": 312,
+     "abs_diff": 0
+    },
+    {
+     "doc": "doc015",
+     "quantity": "phase1_floor",
+     "subset_eval": 4.2891106605529785,
+     "subset_of_full_eval": 4.295664880443759,
+     "abs_diff": 0.006554219890780644
+    },
+    {
+     "doc": "doc015",
+     "quantity": "solo_rope1e4",
+     "subset_eval": 3.895472288131714,
+     "subset_of_full_eval": 3.8966800599843854,
+     "abs_diff": 0.001207771852671513
+    },
+    {
+     "doc": "doc015",
+     "quantity": "k12_rope1e4",
+     "subset_eval": 2.548189640045166,
+     "subset_of_full_eval": 2.5439546193061875,
+     "abs_diff": 0.004235020738978523
+    },
+    {
+     "doc": "doc015",
+     "quantity": "k16_rope1e4",
+     "subset_eval": 2.5921595096588135,
+     "subset_of_full_eval": 2.5993546771493476,
+     "abs_diff": 0.007195167490534171
+    },
+    {
+     "doc": "doc015",
+     "quantity": "n_scored_tokens",
+     "subset_eval": 282,
+     "subset_of_full_eval": 282,
+     "abs_diff": 0
+    }
+   ],
+   "n": 20,
+   "median_abs_diff": 0.004542068575511982,
+   "max_abs_diff": 0.021559934413193815,
+   "mean_abs_diff": 0.0067943414477037,
+   "what_it_is": "the SAME questions scored by (a) a standalone eval of a filtered parquet holding only that document's questions and (b) subsetting the full 69-question eval. Same model, same cartridge, same tokens: the only difference is how examples are packed into 2048-token sequences, which changes bf16 reduction order."
+  },
+  "reference_draw_sensitivity": {
+   "full_MT_draw1": 3.6313126515643126,
+   "full_MT_draw2": 3.583736557154715,
+   "abs_diff_full_MT": 0.04757609440959776,
+   "full_QA_draw1": 2.271618702873687,
+   "full_QA_draw2": 2.175100207207334,
+   "abs_diff_full_QA": 0.09651849566635295
+  },
+  "seed": "no seed variation is possible in this codebase (established by DIAG-KEYCURVE by direct probe)."
+ },
+ "what_this_bootstrap_does_NOT_cover": [
+  "seed / stochastic training variance -- there is none: the AM solve is bitwise deterministic (proved above).",
+  "the arbitrary choice of WHICH 32 of a document's ~532 synthesis conversations become reference queries. One replicate pair exists (DIAG-PERDOC's doc-015 solo write): it moves full-MT by 0.0476 and full-QA by 0.0965 -- 1.9x and 3.5x the paired eval-sampling SE. This is the dominant un-quantified term and it rests on ONE pair, on a SOLO write.",
+  "the eval set is FIXED. The bootstrap answers 'would this delta survive a fresh draw of 69 comparable questions'. If one instead regards these 69 questions AS the population, the sampling SE is zero and every delta is exact. The former frame is the only one that supports any claim of generality; it is the one used here.",
+  "questions cluster in 16 papers (3-7 each). Clustering by paper is reported throughout; it changes the paired SE by at most ~35% and flips no verdict.",
+  "model/decoding nondeterminism beyond bf16 packing order (not separately isolated)."
+ ],
+ "provenance": {
+  "snapshot_path": "/tmp/amsnap_DIAG-NOISE",
+  "snapshot_contents": "git archive HEAD cartridges examples at HEAD=e45287ddf2b91b744c566dffe831358aac0f7c35",
+  "snapshot_manifest_sha256": "13babff8c30d7de00f33e677ac5ece04f863200c860c6e335c32a42f4d2da609",
+  "snapshot_manifest_recipe": "cd $SNAP && find cartridges examples -type f -name '*.py' | LC_ALL=C sort | xargs sha256sum | awk '{print $1\"  \"$2}' | LC_ALL=C sort | sha256sum",
+  "verified_import_path": "/tmp/amsnap_DIAG-NOISE/cartridges (probe asserts this at start; run from /tmp, not the repo root)",
+  "repo_HEAD": "e45287ddf2b91b744c566dffe831358aac0f7c35",
+  "repo_dirty_files_at_run": "M cartridges/am/continual.py\n M cartridges/am/finetune.py\n M examples/qasper2/train/continual_am_sparse.py\n M research_loop/results/MECH-SEED/curve.tsv\n M research_loop/results/MECH-SEED/rundirs.tsv\n?? AM.pdf\n?? TF-IDF.pdf\n?? research_loop/results/MECH-SEED/config_diff_A1_A2.txt\n?? research_loop/results/MECH-SEED/hashdiff_A1_A2.txt\n?? research_loop/results/MECH-SEED/hashdiff_A1_A3.txt\n?? research_loop/results/MECH-SEED/hashes_A1.txt\n?? research_loop/results/MECH-SEED/hashes_A2.txt\n?? research_loop/results/MECH-SEED/hashes_A3.txt\n?? research_loop/results/MECH-SEED/rundir_A3_edited_zero.txt\n?? start.bash",
+  "concurrent_editor": "MECH-SEED was editing cartridges/am/continual.py, cartridges/am/finetune.py and examples/qasper2/train/continual_am_sparse.py in the working tree; this job imported only from the frozen git-archive snapshot.",
+  "no_source_file_edited": true,
+  "gpu_claimed_via_flock": "/tmp/gpu_locks_$USER/gpu0.lock (CUDA_VISIBLE_DEVICES=0)",
+  "nothing_retrained": "all 45 checkpoints are pre-existing cached artefacts (cache-after-doc-*.pt / cache-step16.pt / phase1 cache_last.pt). No solve, no training, no data edit.",
+  "instrumentation": "a read-only probe in /tmp replicating cartridges.train.evaluate_perplexity's loop and bucketing ce_by_token by batch.element_ids; the repo's own LossEvalDataset(seed=42, packed_seq_length=2048) supplies the batches.",
+  "wandb_runs": {
+   "pass1_13ckpt": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/i7ae5gnw",
+   "pass2_28ckpt": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/eu5uy2bq",
+   "pass3_step16_files": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/xqb0ptbq",
+   "pass4_full_k_curves_32ckpt": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/u54zfh9p"
+  },
+  "exactness_gate": {
+   "standalone_referenced_evals": 92,
+   "max_abs_err": 4.01811039552058e-07,
+   "breakdown": {
+    "full_k_curves_DIAG-CONTROLCURVE_and_DIAG-KEYCURVE": {
+     "n": 64,
+     "max_abs_err": 4.01811039552058e-07
+    },
+    "other_full_precision_standalone_refs": {
+     "n": 28,
+     "max_abs_err": 2.722992915593636e-07
+    },
+    "board_numbers_quoted_only_to_4-5_dp_DIAG-CONTENT": {
+     "n": 7,
+     "max_abs_err": 3.9731615477656135e-05
+    },
+    "references_that_are_IN-RUN_evals_not_standalone": {
+     "n": 16,
+     "max_abs_err": 0.006524712464226035,
+     "min_abs_err": 1.498470098537652e-05,
+     "note": "these do NOT match, by 0.0006-0.0065; see non_sampling_variance_components."
+    }
+   }
+  },
+  "curve_gate": {
+   "ctrlK_MT": {
+    "max_abs_err_vs_published": 4.01811039552058e-07,
+    "measured": [
+     3.114559177229326,
+     2.7727904180205827,
+     2.6456823392825446,
+     2.5266492519329007,
+     2.536327844520089,
+     2.5201644387772517,
+     2.4667556362112353,
+     2.453585719749461,
+     2.4436778478580448,
+     2.4083293417905387,
+     2.4306742619927535,
+     2.4704573979832447,
+     2.4860417747675654,
+     2.4835114735129076,
+     2.5141812121110796,
+     2.5296249847009853
+    ],
+    "published": [
+     3.1145591735839844,
+     2.7727901935577393,
+     2.6456825733184814,
+     2.526649236679077,
+     2.536327838897705,
+     2.5201644897460938,
+     2.4667556285858154,
+     2.453585624694824,
+     2.4436779022216797,
+     2.4083292484283447,
+     2.4306740760803223,
+     2.4704575538635254,
+     2.486041784286499,
+     2.4835116863250732,
+     2.514181613922119,
+     2.529625177383423
+    ]
+   },
+   "ctrlK_QA": {
+    "max_abs_err_vs_published": 2.7491789778011366e-07,
+    "measured": [
+     1.9870700310343872,
+     1.8753408274402559,
+     1.8177091776395262,
+     1.8310279597226935,
+     1.9007885846420123,
+     1.93101375162687,
+     1.901402556159678,
+     1.9329711669484224,
+     1.9655602457093844,
+     1.9674915395876393,
+     1.9997592910249857,
+     2.0741413923614105,
+     2.079558863888797,
+     2.092168325556454,
+     2.1373285637560255,
+     2.1597247124642256
+    ],
+    "published": [
+     1.9870699644088745,
+     1.8753408193588257,
+     1.8177090883255005,
+     1.8310279846191406,
+     1.900788426399231,
+     1.931013822555542,
+     1.9014028310775757,
+     1.9329710006713867,
+     1.9655601978302002,
+     1.9674913883209229,
+     1.9997590780258179,
+     2.074141263961792,
+     2.079558849334717,
+     2.0921683311462402,
+     2.1373283863067627,
+     2.159724712371826
+    ]
+   },
+   "keysK_MT": {
+    "max_abs_err_vs_published": 2.9651149713316727e-07,
+    "measured": [
+     2.9651113156140063,
+     2.685667316461047,
+     2.531469397515475,
+     2.4055702750487975,
+     2.400969345383251,
+     2.3463014957512995,
+     2.315659134602234,
+     2.3289024509989757,
+     2.3160611743781376,
+     2.319589423974162,
+     2.2814930009749093,
+     2.2720184130387913,
+     2.2986827556703218,
+     2.319814862332497,
+     2.3325002053104704,
+     2.3305032978258136
+    ],
+    "published": [
+     2.965111255645752,
+     2.6856672763824463,
+     2.5314693450927734,
+     2.4055702686309814,
+     2.4009695053100586,
+     2.346301555633545,
+     2.3156590461730957,
+     2.32890248298645,
+     2.31606125831604,
+     2.319589376449585,
+     2.2814929485321045,
+     2.2720184326171875,
+     2.298682928085327,
+     2.319815158843994,
+     2.3325002193450928,
+     2.330503463745117
+    ]
+   },
+   "keysK_QA": {
+    "max_abs_err_vs_published": 1.2520343362076858e-07,
+    "measured": [
+     1.9136375964209826,
+     1.865888005528751,
+     1.8607446015279467,
+     1.8670000851937099,
+     1.9200593585666113,
+     1.91352371588221,
+     1.916007184216048,
+     1.9463961457177743,
+     1.936016509688778,
+     1.9689391789900486,
+     1.9373839148369734,
+     1.9560120290865342,
+     1.9893104344632921,
+     2.0155219752763904,
+     2.0397305110671944,
+     2.0349164302699885
+    ],
+    "published": [
+     1.913637638092041,
+     1.8658878803253174,
+     1.8607447147369385,
+     1.8669999837875366,
+     1.9200594425201416,
+     1.9135236740112305,
+     1.9160072803497314,
+     1.9463961124420166,
+     1.93601655960083,
+     1.968939185142517,
+     1.9373838901519775,
+     1.9560121297836304,
+     1.989310383796692,
+     2.015522003173828,
+     2.0397305488586426,
+     2.034916400909424
+    ]
+   }
+  },
+  "bootstrap": {
+   "B_paired": 200000,
+   "B_other": 50000,
+   "rng_seed": 20260729,
+   "kind": "nonparametric, over examples, percentile intervals; ratio estimator sum(c)/sum(t)"
+  },
+  "n_distinct_checkpoint_files_evaluated": 60,
+  "snapshot_manifest_sha256_after_run": "13babff8c30d7de00f33e677ac5ece04f863200c860c6e335c32a42f4d2da609",
+  "snapshot_manifest_unchanged": true,
+  "repo_HEAD_after_run": "e45287ddf2b91b744c566dffe831358aac0f7c35",
+  "repo_HEAD_moved_during_run": false
+ },
+ "consequences_stated_not_acted_on": {
+  "the number first": "the measured resolution is MATERIALLY SMALLER than +-0.15 for the paired comparisons the board makes: +-0.049 MT / +-0.054 QA at 95%, median over 23 comparisons (range +-0.021 to +-0.090). It is materially LARGER than +-0.15 for an independent comparison (+-0.256 MT / +-0.236 QA) and for a single arm's absolute loss (+-0.186 MT / +-0.177 QA).",
+  "for DIAG-CONTROLCURVE": "its -0.1363 at the two arms' own MT optima is 6.1 paired SE from zero, CI [-0.181,-0.094], and survives an argmin-selection-aware bootstrap (CI [-0.182,-0.094], selection bias -0.0005) and the conservative composite resolution (+-0.106). Its 'INSIDE the band' verdict on the MT axis was adjudicated on the wrong side of the true threshold. Its QA findings (-0.0115 at the MT optima; +0.0430 control-better at each arm's QA optimum) remain unresolvable and are unaffected.",
+  "what does NOT change": "nothing in DIAG-CONTROLCURVE's non-statistical arguments is touched by this measurement: the 2.07x asymmetric k=16 penalty, the baseline-mismatch at k=1, the 0/16 QA deltas clearing +-0.15, and the fact that ORACLE-WRITE's ceiling sits 0.027 from the control's optimum (that 0.027 is itself below the measured resolution, so 'the keys arm beats a perfect value write' is genuinely not distinguishable from the control). Being resolvable against sampling noise is not the same as being large, and -0.136 MT is still far from the 0.31 MT the mission needs.",
+  "the honest caveat that cuts the other way": "the paired bootstrap covers eval-question sampling only. The one measured pipeline-level sensitivity - which 32 of a document's ~532 conversations become reference queries - moved full MT by 0.0476 and full QA by 0.0965 on a single replicate pair. If that magnitude generalises, the honest resolution is +-0.106 MT / +-0.197 QA and 10 of 23 deltas become unresolvable, including 'k=12 dominates k=16' (0.058/0.079) and MECH-KEYS' QA -0.125. That component is measured ONCE, on a SOLO write, and is the single largest gap in this estimate."
+ }
+}

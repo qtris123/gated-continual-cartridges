@@ -405,3 +405,30 @@ research_loop/results/EXP-001/result.json ; outputs/2026-07-25-18-02-29-continua
   converging by k=12/k=16. DIAG-ROPE's "inside noise" was measured **only at k=16**.
 - **⇒ Disjoint allocation is dead before being built. All three routes (values, keys, allocation) are
   closed, and they converge: the write is a cumulative, largely document-agnostic adaptation, not a store.**
+
+## 2026-07-29 — DIAG-NOISE (methodology): the noise band was ~3× too wide, and it flips 7 verdicts
+- Per-example losses recovered **exactly**: the metric is a token-weighted micro-average `L = Σc_e/Σt_e`,
+  so a read-only probe bucketing `ce_by_token` by `element_ids` reproduces **92 published evals to
+  ≤4.0e-07** over 60 cached checkpoints (~6 GPU-min, nothing retrained). Cheaper and exact vs leave-one-out.
+- **Measured 95% intervals:** single arm ±0.186 MT / ±0.177 QA; **independent** difference ±0.256/±0.236;
+  **paired** difference **±0.049 MT / ±0.054 QA**. Every board comparison is paired (same examples,
+  identical token counts, r = 0.92–0.99), so **the inherited ±0.15 is ~3× too wide** — and ~1.7× too
+  narrow for an independent comparison, which is presumably where the rule of thumb came from.
+  The SE is itself uncertain by ~±25% (double bootstrap) ⇒ MT paired resolution is a range ±0.04–0.07.
+  Clustering by the 16 papers changes paired SEs by ≤35% and flips nothing.
+- 🔄 **DIAG-CONTROLCURVE's MT refutation is REVERSED: ΔMT −0.1363 is RESOLVED**, CI [−0.181, −0.094],
+  z = −6.1, and an **argmin-selection-aware** bootstrap (re-picking each arm's best k per resample) gives
+  [−0.182, −0.094] with selection bias −0.0005. **Key installation does improve acquisition (~0.136).**
+  Its QA half stands refuted (−0.0115; control-better +0.0430; both unresolvable).
+- **7 of 23 load-bearing deltas were adjudicated on the wrong side**; only 4 are genuinely unresolvable.
+  Per k, keys−control clears the measured resolution at **16/16 MT** and **7/16 QA** — correcting the
+  board's "not one ΔQA clears it at any k". Unchanged: MECH-BETA, DIAG-CONTENT (all four), arm C,
+  MECH-SEQUENTIAL, DIAG-ROPE. DIAG-PERDOC re-derives independently as +1.1296 (se 0.082, 0/28 favouring
+  solo) vs its quoted +1.101 — and its five subsets hold **28** questions, not 27.
+- **Run-to-run variance of the solve is exactly ZERO** (six identical runs → byte-identical caches).
+- ⚠️ **`results.csv` mixes two harness paths** — in-run vs standalone eval of a byte-identical cartridge
+  differs by up to **0.0065**. Flips nothing; a real cross-row inconsistency to note in any write-up.
+- 🔴 **Largest remaining gap, and MECH-SEED is running exactly it:** the reference-conversation draw.
+  DIAG-PERDOC's single replicate pair differs by 0.0476 MT / 0.0965 QA (1.9×/3.5× the paired SE). A
+  conservative composite of **±0.106 MT / ±0.197 QA** makes 10 of 23 deltas unresolvable (including
+  "k=12 dominates k=16") — **but DIAG-CONTROLCURVE's −0.1363 survives even that.** Rests on one pair.

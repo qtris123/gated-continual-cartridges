@@ -1,1 +1,5 @@
 arm	offset	k	split	loss	ckpt	wandb_url
+keys	0	12	QA	1.9560121297836304	/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-13-05-continual_am_sparse/955753b0-2246-4f18-8200-729b831687e5/cache-after-doc-011-cfcb19a9.pt	https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/ipym8ux4
+keys	0	12	MT	2.2720184326171875	/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-13-05-continual_am_sparse/955753b0-2246-4f18-8200-729b831687e5/cache-after-doc-011-cfcb19a9.pt	https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/3x1ieyas
+keys	0	16	QA	2.034916400909424	/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-13-05-continual_am_sparse/955753b0-2246-4f18-8200-729b831687e5/cache-after-doc-015-af07b880.pt	https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/lnmxefxy
+keys	0	16	MT	2.330503463745117	/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-04-13-05-continual_am_sparse/955753b0-2246-4f18-8200-729b831687e5/cache-after-doc-015-af07b880.pt	https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/w44sq2sa
