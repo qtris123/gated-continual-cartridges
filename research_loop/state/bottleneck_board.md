@@ -187,6 +187,34 @@ the number that shows it. "It didn't help" never closes anything.
   only prints). The worker logged the cells via a parser under the no-edit rule; the losses are the
   harness's own, not recomputed. `EVAL_MODE=icl` also does **not** hang, unlike the cartridge path (§1).
 
+## 📊 B-GATE — MECH-BUDGET (2026-07-29): **budget is not an established lever either**
+Gate passed exactly (16 digits, all four required values). `tfidf` at larger `top_t`, keys+reposition base:
+
+| arm | MT k=8 | k=10 | k=12 | k=16 | QA k=8 → k=16 |
+|---|---|---|---|---|---|
+| **t32** (incumbent) | 2.3289 | 2.3196 | **2.2720** | 2.3305 | 1.9464 → 2.0349 |
+| **t64** | **2.2318** | 2.2629 | 2.2881 | 2.3590 | 2.0362 → 2.2382 |
+| **t128** | 2.4155 | 2.3584 | **2.3571** | 2.5051 | 2.3825 → 2.4992 |
+
+- **t64 clears the resolution only at small k** (k=8 −0.0971 = 1.97×; k=10 −0.0567 = 1.15×) and is
+  *worse* at k=12/k=16. **At each arm's own optimum it is −0.0402 = 0.81× — it does NOT clear.**
+  The MT argmin also moves 12 → 8. **QA degrades at every k** (+0.0898 → +0.2033, all clearing).
+- **t128 is worse on both axes everywhere** — QA +0.369…+0.464 (6.9–8.6×, clearing even the composite).
+  The trade does not saturate past 64; it **reverses**.
+- 🔴 **CONFOUND, and it is the orchestrator's dispatch error — the same one this brief warned about.**
+  `MAX_QUERIES_PER_HEAD` was held at 64 per the assigned base config (logs confirm `n_queries_used = 64`
+  of 57344 available), so **t128 is an under-determined solve (64 equations, 128 unknowns/head)** — the
+  *identical* underdetermination the brief cited as invalidating the old HYP-S1 result. **t64 is exactly
+  determined and is therefore the clean discriminand; t128's verdict is not yet trustworthy.**
+  → MECH-BUDGET-B dispatched to re-run the large-support arms with the query cap raised.
+- **Cost: essentially 1× for a 4× budget** — `solve_s` 367.4 / 370.6 / 380.0 s (1.000 / 1.009 / 1.034).
+  The worker explicitly refused to report the raw `phase2_e2e_s` (579 / 515 / 872) as cost scaling
+  because it is contaminated by cold-CUDA JIT — t64 was the *fastest* despite twice the budget.
+- **The solve got better while CE got worse, again:** `mass_on_S` rises monotonically (MT 0.2430 → 0.2770
+  → 0.3999) and `am/mean_mse` **falls** monotonically (0.003941 → 0.003179 → 0.002670). Selectivity is
+  untouched and drifting slightly *down* (1.0510 / 1.0479 / 1.0470) — the same 1.04–1.05 band every
+  mechanism in this project has produced.
+
 ## 🆕 B-GATE — DIAG-IMPORTANCE (2026-07-29): **attention mass does NOT capture importance**
 The human's precondition is **validated**: the incumbent TF ranker's assumption that attention mass ≈
 importance is **false**, by a wide margin. Gate passed — the pipeline reproduces DIAG-ROUTING to 4–5 s.f.
