@@ -36,6 +36,26 @@ This loop **diagnoses, then imports** — it does not tune. See `PLAN_AM_MUST_WI
 (what target, which keys, which projection, how many closed-form rounds), not just slot selection.
 Designing and implementing new mechanisms on-branch is expected, not exceptional.
 
+> ⚠️ **MEASURED REALITY (2026-07-29) — read this before spending novelty budget on a *selective* gater.**
+> The premise that a gater can route new-domain content to different slots than the old domain **has been
+> measured and does not hold in this setting**:
+> - **Slot level:** different documents' top-32 selections overlap **91.4%**, and each document's
+>   selection overlaps a *document-independent* top-32 by **87.4%** (mean Spearman 0.958 between
+>   documents' scores). The ranker is close to document-independent already.
+> - **Routing level (post-softmax, 512-dim):** QA/MT mean-routing cosine **0.99899**, ρ_MT = 0.012
+>   against a 0.0096 control.
+> - **Query level (pre-softmax, 128-dim):** ρ_key sits **at its held-out control floor at every
+>   threshold**, and the mean QA/MT query separation (0.070) is **2.5× smaller than within-QA sampling
+>   noise** (0.174), with 0 of 288 heads the other way. An *optimally placed* key buys MT/QA **1.22**
+>   versus an incumbent 1.083.
+>
+> **Gating cannot separate what routing does not, and routing cannot separate what the queries do not.**
+> A gater that merely picks *different slots* is bounded by these numbers regardless of how clever it is.
+> Novelty budget should go to **allocation/capacity** (which slots, for which document, without mutual
+> overwrite — untouched by the above), to mechanisms that **change the query distribution**, or to
+> formulations that leave the fixed-512-slot setting. Evidence: `state/bottleneck_board.md`
+> (DIAG-ROUTING, DIAG-OVERWRITE, DIAG-KEYSPACE, MECH-BETA).
+
 Inherit cartridge's substrate choices (self-study data, text init, self-distillation objective) —
 those are the ground, not variables to overturn.
 
