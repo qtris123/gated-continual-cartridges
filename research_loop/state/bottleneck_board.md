@@ -187,6 +187,41 @@ the number that shows it. "It didn't help" never closes anything.
   only prints). The worker logged the cells via a parser under the no-edit rule; the losses are the
   harness's own, not recomputed. `EVAL_MODE=icl` also does **not** hang, unlike the cartridge path (§1).
 
+## ✅✅ B-GATE — VERIFY-GATE (2026-07-29): **the gating negative SURVIVES seed variation**
+Gates exact: the offset-0 redundancy arm, retrained from a frozen snapshot, reproduced MECH-INFOGATE on
+**all 8 cells to 16 digits** and produced **16/16 checkpoints sha256-identical** to its run dir.
+
+| offset | redundancy (k) | tfidf (k) | ΔMT | ×resolution |
+|---|---|---|---|---|
+| 0 | 2.43865 (16) | 2.27202 (12) | **+0.16663** | 3.37× |
+| 1000 | 2.43268 (10) | 2.26954 (12) | **+0.16314** | 3.30× |
+| 2000 | 2.46260 (16) | 2.26263 (12) | **+0.19997** | 4.05× |
+
+- **All 12 matched-k cells are positive and all 12 clear the conservative composite (±0.1055)**, not just
+  the ±0.049 paired resolution. Weakest cell anywhere +0.108 (2.19×); largest +0.324.
+- **Adversarial pairing** — redundancy's best value at *any* seed/k vs tfidf's worst — is **+0.16066
+  (3.25×)** and still clears the composite. **The negative survives the strictest pairing the data allow.**
+- 🔎 **Note the asymmetry, stated plainly: this negative is better established than the project's own
+  positive.** The key-side *positive* does not clear the composite on its QA axis; this does everywhere.
+- **Argmin honesty:** redundancy's MT argmin moves (16 → 10 → 16) but beats its own runner-up by only
+  0.07–0.80× the resolution — selected out of noise, not located — while the *value* of its minimum is
+  stable (range 0.0299, below resolution). **The incumbent's argmin is seed-stable at k=12 all three times.**
+- **Spread:** tfidf reproduces MECH-SEED's **0.0094 exactly** (same checkpoints); redundancy is 3.2×
+  noisier (0.0299) but still 0.61× resolution. The effect is **5.9× the noisier arm's own spread and
+  18.8× the incumbent's**. Redundancy is genuinely seed-noisy at small k (k=8 range 0.118) and settles by
+  k=12–16.
+- ⭐ **The mechanism re-confirms under a different perturbation:** across the 6 distinct arms here,
+  `log(MT routing mass) → best MT` gives **Pearson −0.986** (MECH-INFOGATE got −0.877 across *selectors*;
+  MECH-CONSTRAINED −0.9775 across *constraint strength*). **The law reappears when the SEED varies**, so
+  it is not an artefact of which selectors were compared. MT routing mass gap is a **seed-stable 4.04×**
+  (across-seed ranges two orders below the gap), and redundancy is *less* selective (1.033 vs 1.085) —
+  **the loss is bandwidth, not selectivity.**
+- **QA:** redundancy is consistently better (−0.0217 / −0.0486 / −0.0251, same sign every seed) but
+  **no offset clears ±0.054** — unconfirmed, same verdict as MECH-INFOGATE.
+- **Caveats not argued away:** three offsets are ranges of three, not CIs; the k-grid {8,10,12,16} locates
+  neither true minimum, and redundancy bottoms at the k=16 *endpoint* at two of three offsets — which is
+  **generous to it**; the seed knob perturbs only the reference draw, so it remains a lower bound.
+
 ## 🏁🏁 B-GATE — MECH-CONSTRAINED (2026-07-29): **closed by a controlled DOSE-RESPONSE curve**
 The strongest form of the human's hypothesis — **mass-ranked *within* a safety constraint** — built and
 measured. **The build is provably the selector DIAG-IMPORTANCE projected:** it reproduces that

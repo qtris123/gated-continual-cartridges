@@ -1,6 +1,6 @@
 # Closed-form AM for continual cartridges — full investigation synthesis
 
-**Date:** 2026-07-29 · **Status:** in-progress (one confound-removal run outstanding) · **Branch:** `trivo-explore-research-work`
+**Date:** 2026-07-29 · **Status:** COMPLETE — every in-scope family closed and confirmed · **Branch:** `trivo-explore-research-work`
 **Live state:** `research_loop/state/bottleneck_board.md` · **Terms & reproduction:** `research_loop/GLOSSARY.md`
 **Supersedes:** `notes/2026-07-28-am-diagnosis-cycle1.md` (cycle 1 only) and `notes/2026-07-26-sparse-grad-win.md`
 
@@ -85,6 +85,23 @@ rabbit hole" (a `gels`-driver silent NaN). HYP-R0 stands.
 loop's own curve; "keys beat frozen keys on both axes" was corrected twice; `ORACLE-WRITE-512` was
 misdesigned (full support makes 16 documents mutually annihilate); and I pinned the query cap in
 `MECH-BUDGET`, reproducing the exact underdetermination I had warned that worker about.
+
+## Final confirmations (added 2026-07-29, after the synthesis was first written)
+
+- **Support is genuinely not a lever, confound removed** (MECH-BUDGET-B). With determinacy proven per arm,
+  the matched-n contrast t128 vs t64 gives ΔMT inside the resolution at all four k and **not even
+  sign-consistent**. Three escapes closed: more queries, determined solve, and an n-scaled trust region.
+- **The gating family closed by a controlled dose-response** (MECH-CONSTRAINED). Tightening the safety
+  constraint monotonically cuts MT routing mass (0.2799 → 0.1661 → 0.1327 → 0.1000) and monotonically
+  raises MT loss (2.2720 → 2.3288 → 2.3693 → 2.4388), Pearson **−0.9775**. **The curve's optimum is the
+  incumbent**, so no untried setting remains.
+- **The gating negative survives seed variation** (VERIFY-GATE). ΔMT +0.167 / +0.163 / +0.200 across
+  offsets; **all 12 matched-k cells clear even the conservative composite**, and so does the adversarial
+  pairing. Worth stating plainly: **this negative is better established than the project's own positive**,
+  whose QA axis does not clear the composite.
+- **The mechanism holds under three independent perturbations:** `log(MT routing mass) → MT loss` gives
+  Pearson **−0.877** across *selectors*, **−0.9775** across *constraint strength*, **−0.986** across
+  *seeds*. The incumbent maximises that quantity by construction, which is why nothing beats it.
 
 ## What remains
 

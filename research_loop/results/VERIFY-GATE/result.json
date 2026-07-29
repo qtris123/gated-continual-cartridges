@@ -1,0 +1,185 @@
+{
+  "id": "VERIFY-GATE",
+  "role": "verify",
+  "board_entry": "B-GATE",
+  "question": "MECH-INFOGATE closed B-GATE on ONE SEED PER ARM: redundancy@t32 lost acquisition by dMT +0.167 at own optima. Everything in this project that has been seed-varied has held, and the seed knob (AM_SEED_OFFSET, MECH-007) replaces ~30 of each document's 32 reference conversations. Does the gating NEGATIVE survive seed variation to the same standard the project's one positive result (MECH-SEED / VERIFY-OPTIMA) meets -- or does any offset flip the sign or drop dMT inside DIAG-NOISE's measured paired resolution?",
+  "variable_under_test": "AM_SEED_OFFSET in {0, 1000, 2000} crossed with SLOT_SELECTION in {redundancy, tfidf}, everything else at the project's best point (KEY_MODE=highest_attention, AM_KEY_REPOSITION=1, AM_ROPE_THETA=5000000, ENABLE_BETA=0, GRANULARITY=per_layer, USE_IDF=0, TOP_T=32, RIDGE_LAMBDA=1e-4, RIDGE_SCALE=spectral, DELTA_WEIGHT=1e-2, MAX_QUERIES_PER_HEAD=64, Phase-1 cache outputs/phase1_selfdistill_qwen512/cache_last.pt, MT data). Both splits at k in {8,10,12,16} for all six arms.",
+  "baseline_ref": "MECH-INFOGATE R32 (redundancy t32, offset 0) and C0_control (tfidf t32, offset 0); MECH-SEED B1/B2 + VERIFY-OPTIMA for the tfidf control at offsets 1000/2000; DIAG-NOISE paired resolution +-0.0494 MT / +-0.0539 QA (composite +-0.1055 / +-0.1967).",
+  "status": "done",
+  "numbers": {
+    "qa_forgetting_loss": 1.8851626237233481,
+    "mt_acquisition_loss": 2.4446427662054697,
+    "solve_s": 328.7,
+    "phase2_e2e_s": 521.0,
+    "gradient_steps": 0,
+    "_note": "qa/mt are the REDUNDANCY arm (the thing under test) averaged over the three seed offsets at each seed's own argmin: MT 2.43865/2.43268/2.46260 (mean 2.44464), QA 1.92471/1.84936/1.89141 (mean 1.88516). The tfidf control's own-argmin seed-mean is MT 2.26806 / QA 1.92030. solve_s and phase2_e2e_s are the means of the three NEW redundancy trainings (336.9/325.0/324.3 and 475/461/627 s); the tfidf arms were not retrained."
+  },
+  "headline": "THE GATING NEGATIVE SURVIVES. dMT (redundancy - tfidf) is POSITIVE -- i.e. redundancy loses acquisition -- at every one of the three seed offsets and at all 12 matched-k cells, and every single delta clears not only DIAG-NOISE's measured paired resolution (+-0.0494 MT) but the conservative composite (+-0.1055). At each arm's own per-seed argmin: +0.16663 / +0.16314 / +0.19997 (mean +0.17658, range 0.0368), i.e. 3.30x / 3.30x / 4.05x the resolution. The adversarial pairing -- redundancy's BEST seed against tfidf's WORST seed -- still gives +0.16066 (3.25x). B-GATE's closure is now held to the same standard as the project's one positive result.",
+  "gates": {
+    "redundancy_offset0_reproduces_MECH-INFOGATE_R32": {
+      "verdict": "GATE_PASS",
+      "n_cells": 8,
+      "all_exact_to_16_digits": true,
+      "expected_observed": {
+        "k8_QA": 1.930572748184204, "k8_MT": 2.5448672771453857,
+        "k10_QA": 1.9247082471847534, "k10_MT": 2.522254705429077,
+        "k12_QA": 1.9499645233154297, "k12_MT": 2.478079080581665,
+        "k16_QA": 1.9893748760223389, "k16_MT": 2.4386465549468994
+      },
+      "stronger_than_numeric": "all 16 cache-after-doc-*.pt are sha256-IDENTICAL to MECH-INFOGATE's R32 run directory, produced here from a frozen `git archive HEAD` snapshot with AM_SEED_OFFSET=0 EXPLICIT -- so this simultaneously re-proves MECH-007's default preservation and MECH-INFOGATE's redundancy arm, byte for byte, in a fresh process."
+    },
+    "tfidf_offsets_1000_2000_reproduce_MECH-SEED_and_VERIFY-OPTIMA": {
+      "verdict": "PASS",
+      "n_cells": 12,
+      "all_exact_to_16_digits": true,
+      "note": "k=10/12/16 on both splits at both offsets reproduce the published values to all 16 printed digits, on checkpoints that were REUSED (not retrained) and re-evaluated in THIS session, so the whole comparison sits on one harness path (DIAG-NOISE recorded up to 0.0065 between in-run and standalone eval)."
+    },
+    "new_measurements": "the only cells in this bundle that did not already exist are tfidf k=8 at offsets 1000 (MT 2.2756600379943848 / QA 1.8979462385177612) and 2000 (MT 2.2922542095184326 / QA 1.916549563407898), plus the entire redundancy off1000 and off2000 arms."
+  },
+  "per_offset_dMT_redundancy_minus_tfidf": {
+    "at_each_arms_own_per_seed_argmin": {
+      "0": {"redundancy": 2.4386465549468994, "redundancy_k": 16, "tfidf": 2.2720184326171875, "tfidf_k": 12, "dMT": 0.16662812232971191, "x_resolution": 3.372, "clears_paired": true, "clears_composite": true},
+      "1000": {"redundancy": 2.43268084526062, "redundancy_k": 10, "tfidf": 2.269538164138794, "tfidf_k": 12, "dMT": 0.16314268112182617, "x_resolution": 3.302, "clears_paired": true, "clears_composite": true},
+      "2000": {"redundancy": 2.4625985622406006, "redundancy_k": 16, "tfidf": 2.262629747390747, "tfidf_k": 12, "dMT": 0.19996881484985352, "x_resolution": 4.047, "clears_paired": true, "clears_composite": true},
+      "mean": 0.17657987276713052, "range": 0.036826133728027344, "all_same_sign": true,
+      "_comment": "the own-argmin form is the one VERIFY-OPTIMA established as the honest one; it is also the one MECH-INFOGATE reported (+0.16663 at offset 0), and this bundle reproduces that number exactly."
+    },
+    "at_matched_k": {
+      "8":  {"0": 0.21596479415893555, "1000": 0.22189402580261230, "2000": 0.32355737686157227},
+      "10": {"0": 0.20266532897949219, "1000": 0.15923619270324707, "2000": 0.20079636573791504},
+      "12": {"0": 0.206060648, "1000": 0.169179916, "2000": 0.203666925},
+      "16": {"0": 0.108143091, "1000": 0.137798071, "2000": 0.172489166},
+      "_note": "columns are seed offsets; every one of the 12 cells is positive (redundancy worse). Full-precision per-cell values, with both arms' losses, are in state/diagnostics/VERIFY-GATE.json under matched_k.",
+      "summary": {"n_cells": 12, "all_positive_redundancy_worse": true, "min": 0.10814309120178223, "max": 0.32355737686157227, "mean": 0.1934543251991272, "n_clearing_paired_resolution": 12, "n_clearing_composite": 12, "weakest_cell_x_resolution": 2.188}
+    }
+  },
+  "adversarial_pairing": {
+    "definition": "redundancy's BEST seed (its lowest own-argmin MT anywhere) against tfidf's WORST seed (its highest own-argmin MT) -- the least favourable pairing the data allows for the negative.",
+    "redundancy_best": {"offset": 1000, "k": 10, "MT": 2.43268084526062},
+    "tfidf_worst": {"offset": 0, "k": 12, "MT": 2.2720184326171875},
+    "dMT": 0.16066241264343262,
+    "x_resolution": 3.251,
+    "clears_paired": true,
+    "clears_composite": true,
+    "strictest_form": "redundancy's lowest MT at ANY (seed, k) in the evaluated set is the same 2.43268, so this pairing is already the strictest the data permits. The negative survives it."
+  },
+  "argmin_stability": {
+    "redundancy_MT_argmin_moves": true,
+    "redundancy_argmin_k_per_offset": [16, 10, 16],
+    "redundancy_gap_best_to_runner_up_x_resolution": [0.80, 0.12, 0.07],
+    "tfidf_MT_argmin_moves": false,
+    "tfidf_argmin_k_per_offset": [12, 12, 12],
+    "tfidf_gap_best_to_runner_up_x_resolution": [0.96, 0.08, 0.56],
+    "verdict": "the redundancy arm's argmin DOES move (k=16 -> k=10 -> k=16), exactly the phenomenon VERIFY-OPTIMA warned about -- but at every offset its best k beats its own runner-up by only 0.07x-0.80x the resolution, so the argmin is being selected out of noise rather than located. What is resolvable is the VALUE: redundancy's minimum sits at 2.4327-2.4626 (range 0.0299, BELOW the resolution) at every seed while tfidf's sits at 2.2626-2.2720 (range 0.0094). The two bands do not come close to touching. Note the incumbent's argmin, by contrast, is seed-STABLE at k=12 in all three."
+  },
+  "across_seed_spread": {
+    "redundancy_MT_at_own_argmin": {"values": [2.43865, 2.43268, 2.46260], "range": 0.02992, "x_resolution": 0.61},
+    "tfidf_MT_at_own_argmin": {"values": [2.27202, 2.26954, 2.26263], "range": 0.00939, "x_resolution": 0.19},
+    "redundancy_QA_at_own_argmin": {"values": [1.92471, 1.84936, 1.89141], "range": 0.07534, "x_resolution": 1.40},
+    "tfidf_QA_at_own_argmin": {"values": [1.94640, 1.89795, 1.91655], "range": 0.04845, "x_resolution": 0.90},
+    "MECH_SEED_reference": 0.0093886852264404,
+    "comparison": "MECH-SEED found the keys arm's across-seed MT spread at its operating point (k=12) was 0.0094. That arm IS this bundle's tfidf control, and it reproduces 0.00939 exactly. The redundancy arm is 3.2x noisier across seeds (0.0299) but still 0.61x the paired resolution. The effect (mean +0.1766) is 5.9x the NOISIER arm's own spread and 18.8x the incumbent's.",
+    "per_k_MT_ranges_redundancy": {"8": 0.11826, "10": 0.08957, "12": 0.03936, "16": 0.02395},
+    "per_k_MT_ranges_tfidf": {"8": 0.05324, "10": 0.04614, "12": 0.00939, "16": 0.04039},
+    "caveat": "the redundancy arm is markedly seed-noisier at SMALL k (k=8 range 0.118 = 2.4x the resolution) and settles by k=12-16. Its seed-stability is therefore a property of the late sequence, not of the whole curve."
+  },
+  "QA_axis": {
+    "dQA_at_own_per_seed_argmin": {"0": -0.02169, "1000": -0.04858, "2000": -0.02514, "mean": -0.03180, "range": 0.02689},
+    "all_same_sign_redundancy_better": true,
+    "n_offsets_clearing_paired_resolution": 0,
+    "max_x_resolution": 0.90,
+    "verdict": "redundancy is consistently BETTER on retention at every seed -- reproducing MECH-INFOGATE's -0.0217 -- but not one offset clears +-0.0539, so the QA half stays UNCONFIRMED. This is the same verdict MECH-INFOGATE reached and the same shape as the key-side result, whose QA half also never cleared."
+  },
+  "mass_and_routing": {
+    "_definitions": "MT routing mass = realised share of the 511 writable slots' MT routing mass captured by the ACTUAL per-document selections (DIAG-IMPORTANCE's selector_tradeoff_table definition). mass_on_S = attention mass on the UNION of written slots at eval-time geometry. ref_mass_on_S = the in-run quantity the solve reports (value_solve.py:146).",
+    "redundancy": {
+      "MT_routing_mass": {"0": 0.06615, "1000": 0.06687, "2000": 0.07602, "mean": 0.06968, "range": 0.00987},
+      "QA_fisher_exposed": {"0": 0.04437, "1000": 0.04201, "2000": 0.05239},
+      "mass_on_S_MT_evalgeom": {"0": 0.05018, "1000": 0.04888, "2000": 0.05024},
+      "mass_on_S_QA_evalgeom": {"0": 0.04854, "1000": 0.04735, "2000": 0.04859},
+      "selectivity_MT_over_QA": {"0": 1.03377, "1000": 1.03227, "2000": 1.03390},
+      "ref_mass_on_S_mean": {"0": 0.23241, "1000": 0.21540, "2000": 0.22768},
+      "am_mean_mse": {"0": 0.004275, "1000": 0.004200, "2000": 0.004647},
+      "v_absmax_max": {"0": 91.5, "1000": 67.5, "2000": 77.5}
+    },
+    "tfidf": {
+      "MT_routing_mass": {"0": 0.27989, "1000": 0.28016, "2000": 0.28366, "mean": 0.28124, "range": 0.00377},
+      "QA_fisher_exposed": {"0": 0.23889, "1000": 0.25690, "2000": 0.25010},
+      "mass_on_S_MT_evalgeom": {"0": 0.11900, "1000": 0.11650, "2000": 0.11563},
+      "mass_on_S_QA_evalgeom": {"0": 0.10974, "1000": 0.10741, "2000": 0.10658},
+      "selectivity_MT_over_QA": {"0": 1.08443, "1000": 1.08464, "2000": 1.08490},
+      "ref_mass_on_S_mean": {"0": 0.31363, "1000": 0.36150, "2000": 0.35870},
+      "am_mean_mse": {"0": 0.003941, "1000": 0.003528, "2000": 0.003484},
+      "v_absmax_max": {"0": 78.5, "1000": 77.0, "2000": 88.0}
+    },
+    "bandwidth_gap": "the incumbent captures 4.04x the MT routing mass of the redundancy gate, and that ratio is seed-stable (redundancy 0.0662/0.0669/0.0760 vs tfidf 0.2799/0.2802/0.2837; both arms' across-seed ranges are ~0.004-0.010, i.e. two orders below the gap).",
+    "selectivity_note": "the MT/QA mass ratio stays in the project's usual 1.03-1.09 band; redundancy is if anything LESS selective (1.033) than the incumbent (1.085), so the loss is bandwidth, not selectivity.",
+    "MECH_INFOGATE_relationship_rechecked": {
+      "pearson_log_MTroutingmass_vs_bestMT": -0.986,
+      "n_distinct_arms": 6,
+      "MECH-INFOGATE_reference": -0.877,
+      "reading": "MECH-INFOGATE measured -0.877 across its SIX SELECTORS at one seed. Measured instead across THREE SEEDS x TWO SELECTORS, the same relationship is -0.986. The bandwidth->acquisition link is not an artefact of which selectors were compared: it reappears when the seed is the thing that varies."
+    }
+  },
+  "diagnostics": {
+    "checkpoint_audit": {"n_evals": 40, "n_arm_k_cells": 20, "n_distinct_checkpoint_paths": 20, "all_evals_printed_their_intended_checkpoint": true, "duplicate_paths": 0, "duplicate_content_sha256": 0, "_meaning": "no two arms silently read the same cartridge, and every eval log contains the path it was given."},
+    "raw_arrays": "research_loop/state/diagnostics/VERIFY-GATE.json (per-offset per-k losses on both splits, matched-k and own-argmin tables, argmin-stability evidence, spreads, selection/mass per arm, provenance)",
+    "eval_sizes": {"MT_examples": 69, "QA_examples": 78},
+    "resolution_used": {"paired_MT": 0.0494, "paired_QA": 0.0539, "composite_MT": 0.1055, "composite_QA": 0.1967, "source": "DIAG-NOISE measured; the inherited +-0.15 rule of thumb was NOT used"}
+  },
+  "provenance": {
+    "repo_head_at_launch": "9d9f8acb0c43f53f5c321cc54d824d0e356f685e",
+    "repo_head_after": "3a22cad340f8b3736f7b8d35fa4997ec3eaff256",
+    "head_moved_during_the_run": true,
+    "snapshot_path": "/tmp/amsnap_verifygate",
+    "snapshot_manifest_before": "a897fe65b2ccd694e01f652b498ba1a9353853900ca738671f7143c2f7a45fd2",
+    "snapshot_manifest_after": "a897fe65b2ccd694e01f652b498ba1a9353853900ca738671f7143c2f7a45fd2",
+    "snapshot_manifest_identical": true,
+    "import_probe_from_tmp": "/tmp/amsnap_verifygate/cartridges",
+    "snapshot_excludes_the_live_edit": "grep -c constrained_mass in the snapshot's ranking.py = 0, so MECH-CONSTRAINED's in-flight MECH-009 work is provably absent from the code that ran",
+    "worktree_dirty_at_launch": ["cartridges/am/finetune.py", "cartridges/am/ranking.py", "examples/qasper2/train/continual_am_sparse.py"],
+    "gpu": "GPU 1, claimed via flock (gpu0 held by MECH-CONSTRAINED)",
+    "_load_bearing": "HEAD moved mid-run because the orchestrator committed another worker's edits. That is exactly the hazard RUNBOOK 9c-bis names, and the frozen snapshot made it inert -- the manifest is byte-identical before and after, and the offset-0 arm still came out sha256-identical to MECH-INFOGATE's."
+  },
+  "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/1xt7gc82",
+  "wandb_run_id": "1xt7gc82",
+  "wandb_group": "B-GATE",
+  "wandb_all_training_runs": {
+    "R_off0": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/1xt7gc82",
+    "R_off1000": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/94f57n1u",
+    "R_off2000": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/4yidlgiv",
+    "T_off1000": "REUSED checkpoints from MECH-SEED B1 (no new training run)",
+    "T_off2000": "REUSED checkpoints from MECH-SEED B2 (no new training run)",
+    "T_off0": "REUSED published k-curve from MECH-INFOGATE C0 (no new training, no new eval)"
+  },
+  "wandb_n_eval_runs": 40,
+  "artifacts": [
+    "research_loop/results/VERIFY-GATE/result.json",
+    "research_loop/results/VERIFY-GATE/curve.tsv",
+    "research_loop/results/VERIFY-GATE/rundirs.tsv",
+    "research_loop/results/VERIFY-GATE/arms_analysis.json",
+    "research_loop/results/VERIFY-GATE/ckpt_check.json",
+    "research_loop/results/VERIFY-GATE/hashes_R_off0.txt",
+    "research_loop/results/VERIFY-GATE/hashes_MECH-INFOGATE_R32.txt",
+    "research_loop/results/VERIFY-GATE/snapshot_manifest_before.txt",
+    "research_loop/results/VERIFY-GATE/snapshot_manifest_after.txt",
+    "research_loop/results/VERIFY-GATE/git_status_at_launch.txt",
+    "research_loop/results/VERIFY-GATE/git_status_after.txt",
+    "research_loop/results/VERIFY-GATE/wrapper.log",
+    "research_loop/results/VERIFY-GATE/launch_verify_gate.sh",
+    "research_loop/results/VERIFY-GATE/analyse_arms.py",
+    "research_loop/results/VERIFY-GATE/check_ckpts.py",
+    "research_loop/results/VERIFY-GATE/finalize.py",
+    "research_loop/state/diagnostics/VERIFY-GATE.json",
+    "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-04-34-continual_am_sparse/858e2a0b-7f5b-4073-99b7-1f303eb60513",
+    "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-24-07-continual_am_sparse/37bd2eb3-dff9-4a2f-b1c3-de1fc5c128c1",
+    "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-13-35-19-continual_am_sparse/0de275ec-28a6-4287-ba59-51ec93705f51"
+  ],
+  "command": "bash research_loop/results/VERIFY-GATE/launch_verify_gate.sh (frozen `git archive HEAD cartridges examples` snapshot at /tmp/amsnap_verifygate, PYTHONPATH + CARTRIDGES_DIR pinned there, import probed FROM /tmp; flock on GPU 1; 3 NEW AM Phase-2 trainings SLOT_SELECTION=redundancy x AM_SEED_OFFSET in {0,1000,2000}; 40 dual-split evals at k in {8,10,12,16} covering those 3 arms plus the tfidf control at offsets 1000/2000 on MECH-SEED's existing checkpoints). Post-hoc CPU: analyse_arms.py, check_ckpts.py, finalize.py. NO SOURCE EDITED, NOTHING COMMITTED.",
+  "reused_rather_than_re_run": [
+    "the tfidf control's ENTIRE offset-0 k-curve (MECH-INFOGATE C0_control: MT 2.32890/2.31959/2.27202/2.33050, QA 1.94640/1.96894/1.95601/2.03492) -- reused, not re-run, as the brief directed",
+    "the tfidf control's offset-1000/2000 CHECKPOINTS (MECH-SEED B1/B2) -- reused; the k-curves on them were RE-EVALUATED in this session so every number in the comparison shares one harness path, and all 12 previously-published cells came back exact"
+  ],
+  "observations": "VERIFY-GATE re-ran the decisive B-GATE contrast at two non-zero seed offsets and the gating negative SURVIVED every test the brief specified. GATES. The offset-0 redundancy arm, retrained from a frozen HEAD snapshot with AM_SEED_OFFSET=0 explicit, reproduced MECH-INFOGATE's published redundancy@t32 curve on all 8 cells to 16 digits AND produced 16/16 cache-after-doc-*.pt that are sha256-IDENTICAL to MECH-INFOGATE's R32 run directory -- so MECH-INFOGATE's arm is confirmed byte-for-byte in a fresh process, and MECH-007's default preservation is re-proved on a second mechanism. The tfidf control at offsets 1000/2000 reproduced all 12 previously-published cells (k=10/12/16, both splits) exactly. THE RESULT. dMT (redundancy - tfidf) is positive -- redundancy loses acquisition -- in all 12 matched-k cells and at all three offsets, and EVERY delta clears not just DIAG-NOISE's paired resolution of +-0.0494 but the conservative composite +-0.1055; the weakest cell anywhere is +0.108 (2.19x). At each arm's own per-seed argmin, the form VERIFY-OPTIMA established as the honest one: +0.16663 / +0.16314 / +0.19997, mean +0.17658, range 0.0368, i.e. 3.30x-4.05x the resolution. The offset-0 value reproduces MECH-INFOGATE's published +0.167 exactly. ADVERSARIAL PAIRING. Redundancy's best seed (offset 1000, k=10, MT 2.43268 -- which is also its lowest value at any (seed,k) in the evaluated set) against tfidf's worst seed (offset 0, k=12, MT 2.27202) still gives +0.16066, 3.25x the resolution and clearing the composite. ARGMIN STABILITY. The redundancy arm's MT argmin DOES move across seeds (k=16 -> 10 -> 16), exactly the instability VERIFY-OPTIMA flagged, but at every offset it beats its own runner-up by only 0.07x-0.80x the resolution, so the argmin is selected out of noise rather than located; the VALUE of its minimum is stable (2.4327-2.4626, range 0.0299, below the resolution). The incumbent's argmin, by contrast, is seed-STABLE at k=12 all three times. SPREAD. The tfidf arm reproduces MECH-SEED's 0.0094 across-seed MT spread exactly (same three checkpoints at k=12). The redundancy arm is 3.2x noisier (0.0299) but still 0.61x the resolution; the effect is 5.9x the noisier arm's own spread and 18.8x the incumbent's. QA. Redundancy is consistently BETTER on retention (-0.0217 / -0.0486 / -0.0251, same sign at every seed) but not one offset clears +-0.0539, so the QA half stays unconfirmed -- the same verdict MECH-INFOGATE reached. MECHANISM RE-CHECKED AT THE NEW SEEDS. Realised MT routing mass is redundancy 0.0662/0.0669/0.0760 vs tfidf 0.2799/0.2802/0.2837: a seed-stable 4.04x bandwidth gap whose across-seed ranges (0.004-0.010) are two orders below the gap itself. Across the 6 distinct arms log(MT routing mass) predicts best-MT at Pearson -0.986, versus the -0.877 MECH-INFOGATE measured across its six selectors -- so the bandwidth->acquisition link is not an artefact of which selectors were compared; it reappears when the SEED is what varies. mass_on_S at eval geometry is 0.0489-0.0502 (redundancy) vs 0.1156-0.1190 (tfidf) and MT/QA selectivity sits at 1.033 vs 1.085, so redundancy is if anything LESS selective -- the loss is bandwidth, not selectivity. HYGIENE. HEAD moved from 9d9f8ac to 3a22cad mid-run (the orchestrator committed another worker's edits); the frozen snapshot made that inert -- manifest byte-identical before and after, the live MECH-009 edit provably absent from the snapshot (grep constrained_mass = 0), import probed from /tmp. All 40 evals printed their intended checkpoint; the 20 (arm,k) cells map to 20 distinct paths with 20 distinct sha256s, so no two arms read the same cartridge. Cost: 3 new solves at 336.9/325.0/324.3 s, gradient_steps = 0 throughout. CAVEATS I WILL NOT ARGUE AWAY: (a) three offsets are three samples of a coarse instrument -- the ranges quoted are ranges of three, not confidence intervals; (b) the k-grid is {8,10,12,16}, so neither arm's true minimum over all 16 k is located, and the redundancy arm bottoms at the k=16 endpoint at two of three offsets, which is if anything generous to it; (c) the seed knob perturbs only the reference draw, so it remains a LOWER bound on total run-to-run variance; (d) the redundancy arm is genuinely seed-noisy at small k (k=8 range 0.118 = 2.4x the resolution), so its stability is a property of the late sequence.",
+  "interpretation_requested_by_the_brief_not_a_recommendation": "The brief's rule reads: if dMT stays positive and outside the resolution at every offset, the gating family is closed to the same standard the project's one positive result meets, and that is worth saying explicitly. dMT is positive and outside the resolution at every offset, in every one of the 12 matched-k cells, at every arm's own per-seed argmin, and under the adversarial best-vs-worst-seed pairing -- and it clears the conservative composite band everywhere too, which the key-side positive result does NOT manage on its QA axis. B-GATE's closure therefore now rests on fresh-process reproduction (byte-identical), a changed seed (two of them), a seed-varied control, and a measured cause (a 4.04x seed-stable bandwidth gap with Pearson -0.986 to loss). No offset flipped the sign; none dropped inside the band; the closest any cell came to the paired resolution was 2.19x it. The board's B-GATE closure does not need to be reopened."
+}
