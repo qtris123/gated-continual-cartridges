@@ -78,9 +78,15 @@
    `AM_KEY_REPOSITION=1`, θ=5e6), which is the current best point.
    **Prediction:** if the cascade is what closed-form is missing, MT should move materially below 2.33;
    if it does not, the gradient/closed-form gap is not cross-layer and the mission has a clean negative.
-1. **VERIFY-BEST** — MECH-005's point (QA 2.0349 / MT 2.3305) is the mission's best and is **one seed**
-   with ΔMT at the top edge of the noise band. Partly covered by DIAG-KEYCURVE's Part 2; if that returns
-   without genuine seed variation (no `SEED` knob exists — see RUNBOOK §9c), a small BUILD adds one.
+1. **MECH-SEED** ← *now a blocker for the mission's own confirmation standard.* DIAG-KEYCURVE's seed
+   probe established that **no result in this project has ever been seed-varied**: a `seed=7` CLI
+   override does **not** reach the config (stays 42), `pydrantic.main` is **never reached** in
+   `per_document` mode, and no `SEED` env knob exists. Every "reproduction" so far confirms plumbing only.
+   **The probe also found the thing worth varying:** `cartridges/am/continual.py:150` draws each
+   document's reference conversations via `limit_conversations(..., seed=doc_idx)` — and DIAG-PERDOC
+   measured that draw as worth **0.216** of spread on a per-document subset. **Build:** an opt-in
+   `AM_SEED_OFFSET` (default 0 ⇒ bit-identical) added to `doc_idx`, then re-run the best point at 2–3
+   offsets. Until this exists, **no PASS can be confirmed** (MISSION §3).
 2. **COMPOSE-K** — the value-only curve bottoms at k=12 and degrades 0.117 by k=16. If DIAG-KEYCURVE
    shows the keys arm has the same shape, its own minimum is the number to quote, not its endpoint.
 3. **MECH-METRIC** (LIT-009/010) — `C₀` from the old routing vectors' second moment instead of `w·I`.
