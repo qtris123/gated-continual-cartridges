@@ -187,9 +187,38 @@ the number that shows it. "It didn't help" never closes anything.
   only prints). The worker logged the cells via a parser under the no-edit rule; the losses are the
   harness's own, not recomputed. `EVAL_MODE=icl` also does **not** hang, unlike the cartridge path (§1).
 
-## 🥇 NEW BEST GRADIENT-FREE POINT — MECH-KEYS (2026-07-29): **QA 2.0349 / MT 2.3305**
-**The "keys collapse QA" folklore is FALSE in this setting. Every key arm beat the frozen control on
-BOTH axes — there is no trade curve to report, because QA *improved*.**
+## 🥇 BEST GRADIENT-FREE POINT — **k=12: QA 1.9560 / MT 2.2720** (MECH-KEYS + DIAG-KEYCURVE)
+> ⚠️ **CORRECTION (DIAG-KEYCURVE, 2026-07-29).** The headline below — *"beats frozen keys on BOTH
+> axes"* — **does not survive verification on the QA axis.** At matched k the mechanism-off control
+> gives ΔMT / ΔQA of −0.125/**+0.013** (k=8), −0.198/−0.118 (k=12), −0.164/−0.077 (k=14),
+> −0.199/−0.125 (k=16): **three of four ΔMT clear the ±0.15 band; not one ΔQA clears it at any k, and
+> at k=8 QA runs the wrong way.** Allowing each arm its own best measured k, keys (k=12) beats the
+> control's lowest measured MT by −0.182 **but is +0.023 WORSE on QA**.
+> **The MT gain is real; the QA gain is a sub-noise trend that disappears under a fair comparison.**
+> The orchestrator reported "both axes" last cycle — that was overstated, and this supersedes it.
+> Caveat the worker raised against its own comparison: the control was evaluated only at
+> k∈{8,12,14,16} and its minimum sits at the **edge** of that set, so its true minimum is **unlocated**
+> and the comparison currently favours the keys arm. → DIAG-CONTROLCURVE dispatched.
+
+**Best point k=12 = QA 1.9560 / MT 2.2720** — better than its own k=16 endpoint on both axes, but by
+only **0.058 MT / 0.079 QA, both deep inside the band**, so "k=12 dominates k=16" is *not resolvable*
+at this eval size on one seed. Against the bar: clears QA by **0.5640**, **falls 0.2520 short on MT**,
+and sits 0.3995 above the dense@4ep MT of 1.8725. It is 0.109 below ORACLE-WRITE's perfect value write
+(2.381) and 0.163 below the value-only k=12 minimum (2.4352).
+
+**Verification status:** the fresh-process re-run was **byte-identical** (all 16 snapshots, `am/mean_mse`,
+`|v|max`, evals to 16 digits) — that confirms **plumbing only**. **No seed variation is possible**: the
+worker *tested* rather than assumed, finding `pydrantic.main` is reached only in
+`AM_EXECUTION_MODE=train_loop`, so `seed=7` on argv is silently ignored in the canonical `per_document`
+path (`config.seed` stayed 42), and `continual.py:150` seeds the per-document draw with the constant
+`doc_idx`. **Every number in this project is one seed.**
+
+**"Not selectivity" holds across the whole sequence:** the MT/QA mass ratio spans only **1.0424–1.0545**
+over all 16 k and stays **below the untouched Phase-1 cartridge's own 1.0812 at every k**. And bandwidth
+is **anti-correlated with MT in the tail** — `mass_on_S` rises 0.2240 → 0.2430 from k=12 to k=16 while MT
+gets 0.058 *worse*. (Not like-for-like: the written union grows 32.0 → 87.6 slots/layer over the sequence.)
+
+**Superseded framing below (kept for provenance):**
 
 | arm (θ=5e6, β off, top32) | QA | MT | `mass_on_S` MT | **MT/QA ratio** | doc keys/32 | solve_s |
 |---|---|---|---|---|---|---|

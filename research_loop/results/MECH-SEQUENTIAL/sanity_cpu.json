@@ -1,0 +1,540 @@
+{
+  "device": "cpu",
+  "rope_theta": 5000000.0,
+  "cartridges_import_path": "/localhome/local-triv/gated-continual-cartridges_explore/cartridges",
+  "config": {
+    "fields_present": [
+      true,
+      true
+    ],
+    "defaults": [
+      0,
+      false
+    ],
+    "constructs_on": [
+      4,
+      true
+    ]
+  },
+  "arms": {
+    "off": {
+      "mean_mse": "0.027456531766802073",
+      "mse_per_layer": {
+        "0": "0.02790855150669813",
+        "1": "0.028749491088092327",
+        "2": "0.025476557202637196",
+        "3": "0.027691527269780636"
+      },
+      "n_queries": 512,
+      "k_sum": "-185.8980187014986",
+      "v_sum": "-31.03449063379776",
+      "k_absmax": "3.981527805328369",
+      "v_absmax": "4.9668097496032715",
+      "finite": true,
+      "extra_keys": [
+        "max_queries_per_head",
+        "n_queries_available_max",
+        "n_queries_available_min",
+        "n_queries_used_max",
+        "n_queries_used_min",
+        "ref_mass_on_S_per_layer",
+        "rope_theta",
+        "v_selected_absmax_after_per_layer"
+      ],
+      "mass_on_S": {
+        "0": "0.19531060755252838",
+        "1": "0.1898750737309456",
+        "2": "0.19756284356117249",
+        "3": "0.20432337373495102"
+      },
+      "onpolicy": null,
+      "onpolicy_events": null
+    },
+    "off_with_hook": {
+      "mean_mse": "0.027456531766802073",
+      "mse_per_layer": {
+        "0": "0.02790855150669813",
+        "1": "0.028749491088092327",
+        "2": "0.025476557202637196",
+        "3": "0.027691527269780636"
+      },
+      "n_queries": 512,
+      "k_sum": "-185.8980187014986",
+      "v_sum": "-31.03449063379776",
+      "k_absmax": "3.981527805328369",
+      "v_absmax": "4.9668097496032715",
+      "finite": true,
+      "extra_keys": [
+        "max_queries_per_head",
+        "n_queries_available_max",
+        "n_queries_available_min",
+        "n_queries_used_max",
+        "n_queries_used_min",
+        "ref_mass_on_S_per_layer",
+        "rope_theta",
+        "v_selected_absmax_after_per_layer"
+      ],
+      "mass_on_S": {
+        "0": "0.19531060755252838",
+        "1": "0.1898750737309456",
+        "2": "0.19756284356117249",
+        "3": "0.20432337373495102"
+      },
+      "onpolicy": null,
+      "onpolicy_events": null
+    },
+    "on_identity_g1": {
+      "mean_mse": "0.027456531766802073",
+      "mse_per_layer": {
+        "0": "0.02790855150669813",
+        "1": "0.028749491088092327",
+        "2": "0.025476557202637196",
+        "3": "0.027691527269780636"
+      },
+      "n_queries": 512,
+      "k_sum": "-185.8980187014986",
+      "v_sum": "-31.03449063379776",
+      "k_absmax": "3.981527805328369",
+      "v_absmax": "4.9668097496032715",
+      "finite": true,
+      "extra_keys": [
+        "max_queries_per_head",
+        "n_queries_available_max",
+        "n_queries_available_min",
+        "n_queries_used_max",
+        "n_queries_used_min",
+        "onpolicy",
+        "onpolicy_events",
+        "ref_mass_on_S_per_layer",
+        "rope_theta",
+        "v_selected_absmax_after_per_layer"
+      ],
+      "mass_on_S": {
+        "0": "0.19531060755252838",
+        "1": "0.1898750737309456",
+        "2": "0.19756284356117249",
+        "3": "0.20432337373495102"
+      },
+      "onpolicy": {
+        "group_size": 1,
+        "n_refreshes": 3,
+        "refresh_layers": [
+          1,
+          2,
+          3
+        ],
+        "refresh_s_total": 0.2112131118774414,
+        "doc_kv_refreshed": false,
+        "query_cos_mean": 1.0,
+        "query_cos_min": 0.9999997615814209,
+        "query_rel_l2_mean": 0.0,
+        "query_rel_l2_max": 0.0
+      },
+      "onpolicy_events": [
+        {
+          "layer": 1,
+          "group_size": 1,
+          "n_batches": 3,
+          "query_cos_mean": 1.0,
+          "query_cos_min": 0.9999998211860657,
+          "query_rel_l2": 0.0,
+          "doc_kv_refreshed": false,
+          "refresh_s": 0.07139277458190918
+        },
+        {
+          "layer": 2,
+          "group_size": 1,
+          "n_batches": 3,
+          "query_cos_mean": 1.0,
+          "query_cos_min": 0.9999998807907104,
+          "query_rel_l2": 0.0,
+          "doc_kv_refreshed": false,
+          "refresh_s": 0.06776976585388184
+        },
+        {
+          "layer": 3,
+          "group_size": 1,
+          "n_batches": 3,
+          "query_cos_mean": 1.0,
+          "query_cos_min": 0.9999997615814209,
+          "query_rel_l2": 0.0,
+          "doc_kv_refreshed": false,
+          "refresh_s": 0.07205057144165039
+        }
+      ]
+    },
+    "on_perturbed_g1": {
+      "mean_mse": "0.028764921706169844",
+      "mse_per_layer": {
+        "0": "0.02790855150669813",
+        "1": "0.03124996181577444",
+        "2": "0.026746374554932117",
+        "3": "0.029154798947274685"
+      },
+      "n_queries": 512,
+      "k_sum": "-185.8980187014986",
+      "v_sum": "-36.92455609782883",
+      "k_absmax": "3.981527805328369",
+      "v_absmax": "5.116428375244141",
+      "finite": true,
+      "extra_keys": [
+        "max_queries_per_head",
+        "n_queries_available_max",
+        "n_queries_available_min",
+        "n_queries_used_max",
+        "n_queries_used_min",
+        "onpolicy",
+        "onpolicy_events",
+        "ref_mass_on_S_per_layer",
+        "rope_theta",
+        "v_selected_absmax_after_per_layer"
+      ],
+      "mass_on_S": {
+        "0": "0.19531060755252838",
+        "1": "0.1883925348520279",
+        "2": "0.1976076066493988",
+        "3": "0.2009015455842018"
+      },
+      "onpolicy": {
+        "group_size": 1,
+        "n_refreshes": 3,
+        "refresh_layers": [
+          1,
+          2,
+          3
+        ],
+        "refresh_s_total": 0.21127915382385254,
+        "doc_kv_refreshed": false,
+        "query_cos_mean": 0.9508528113365173,
+        "query_cos_min": 0.9081499576568604,
+        "query_rel_l2_mean": 0.310570369164149,
+        "query_rel_l2_max": 0.34339892864227295
+      },
+      "onpolicy_events": [
+        {
+          "layer": 1,
+          "group_size": 1,
+          "n_batches": 3,
+          "query_cos_mean": 0.9705007076263428,
+          "query_cos_min": 0.9554628729820251,
+          "query_rel_l2": 0.24822834134101868,
+          "doc_kv_refreshed": false,
+          "refresh_s": 0.07175135612487793
+        },
+        {
+          "layer": 2,
+          "group_size": 1,
+          "n_batches": 3,
+          "query_cos_mean": 0.9413261413574219,
+          "query_cos_min": 0.9081499576568604,
+          "query_rel_l2": 0.3400838375091553,
+          "doc_kv_refreshed": false,
+          "refresh_s": 0.06676959991455078
+        },
+        {
+          "layer": 3,
+          "group_size": 1,
+          "n_batches": 3,
+          "query_cos_mean": 0.9407315850257874,
+          "query_cos_min": 0.9161970019340515,
+          "query_rel_l2": 0.34339892864227295,
+          "doc_kv_refreshed": false,
+          "refresh_s": 0.07275819778442383
+        }
+      ]
+    },
+    "on_perturbed_g2": {
+      "mean_mse": "0.02837703633122146",
+      "mse_per_layer": {
+        "0": "0.02790855150669813",
+        "1": "0.028749491088092327",
+        "2": "0.026746374554932117",
+        "3": "0.03010372817516327"
+      },
+      "n_queries": 512,
+      "k_sum": "-185.8980187014986",
+      "v_sum": "-35.54972163315506",
+      "k_absmax": "3.981527805328369",
+      "v_absmax": "5.299746513366699",
+      "finite": true,
+      "extra_keys": [
+        "max_queries_per_head",
+        "n_queries_available_max",
+        "n_queries_available_min",
+        "n_queries_used_max",
+        "n_queries_used_min",
+        "onpolicy",
+        "onpolicy_events",
+        "ref_mass_on_S_per_layer",
+        "rope_theta",
+        "v_selected_absmax_after_per_layer"
+      ],
+      "mass_on_S": {
+        "0": "0.19531060755252838",
+        "1": "0.1898750737309456",
+        "2": "0.1976076066493988",
+        "3": "0.2013571783900261"
+      },
+      "onpolicy": {
+        "group_size": 2,
+        "n_refreshes": 1,
+        "refresh_layers": [
+          2
+        ],
+        "refresh_s_total": 0.07353925704956055,
+        "doc_kv_refreshed": false,
+        "query_cos_mean": 0.9701277613639832,
+        "query_cos_min": 0.9588969945907593,
+        "query_rel_l2_mean": 0.2482874095439911,
+        "query_rel_l2_max": 0.2482874095439911
+      },
+      "onpolicy_events": [
+        {
+          "layer": 2,
+          "group_size": 2,
+          "n_batches": 3,
+          "query_cos_mean": 0.9701277613639832,
+          "query_cos_min": 0.9588969945907593,
+          "query_rel_l2": 0.2482874095439911,
+          "doc_kv_refreshed": false,
+          "refresh_s": 0.07353925704956055
+        }
+      ]
+    },
+    "on_perturbed_g4": {
+      "mean_mse": "0.027456531766802073",
+      "mse_per_layer": {
+        "0": "0.02790855150669813",
+        "1": "0.028749491088092327",
+        "2": "0.025476557202637196",
+        "3": "0.027691527269780636"
+      },
+      "n_queries": 512,
+      "k_sum": "-185.8980187014986",
+      "v_sum": "-31.03449063379776",
+      "k_absmax": "3.981527805328369",
+      "v_absmax": "4.9668097496032715",
+      "finite": true,
+      "extra_keys": [
+        "max_queries_per_head",
+        "n_queries_available_max",
+        "n_queries_available_min",
+        "n_queries_used_max",
+        "n_queries_used_min",
+        "ref_mass_on_S_per_layer",
+        "rope_theta",
+        "v_selected_absmax_after_per_layer"
+      ],
+      "mass_on_S": {
+        "0": "0.19531060755252838",
+        "1": "0.1898750737309456",
+        "2": "0.19756284356117249",
+        "3": "0.20432337373495102"
+      },
+      "onpolicy": null,
+      "onpolicy_events": null
+    },
+    "on_perturbed_dockv": {
+      "mean_mse": "0.028779505286365747",
+      "mse_per_layer": {
+        "0": "0.02790855150669813",
+        "1": "0.03127045091241598",
+        "2": "0.026768628507852554",
+        "3": "0.029170390218496323"
+      },
+      "n_queries": 512,
+      "k_sum": "-185.8980187014986",
+      "v_sum": "-39.34028479834342",
+      "k_absmax": "3.981527805328369",
+      "v_absmax": "5.124841690063477",
+      "finite": true,
+      "extra_keys": [
+        "max_queries_per_head",
+        "n_queries_available_max",
+        "n_queries_available_min",
+        "n_queries_used_max",
+        "n_queries_used_min",
+        "onpolicy",
+        "onpolicy_events",
+        "ref_mass_on_S_per_layer",
+        "rope_theta",
+        "v_selected_absmax_after_per_layer"
+      ],
+      "mass_on_S": {
+        "0": "0.19531060755252838",
+        "1": "0.1883925348520279",
+        "2": "0.1976076066493988",
+        "3": "0.2009015455842018"
+      },
+      "onpolicy": {
+        "group_size": 1,
+        "n_refreshes": 3,
+        "refresh_layers": [
+          1,
+          2,
+          3
+        ],
+        "refresh_s_total": 0.6115057468414307,
+        "doc_kv_refreshed": true,
+        "query_cos_mean": 0.9508528113365173,
+        "query_cos_min": 0.9081499576568604,
+        "query_rel_l2_mean": 0.310570369164149,
+        "query_rel_l2_max": 0.34339892864227295
+      },
+      "onpolicy_events": [
+        {
+          "layer": 1,
+          "group_size": 1,
+          "n_batches": 3,
+          "query_cos_mean": 0.9705007076263428,
+          "query_cos_min": 0.9554628729820251,
+          "query_rel_l2": 0.24822834134101868,
+          "doc_kv_refreshed": true,
+          "doc_v_rel_l2": 0.10007176548242569,
+          "refresh_s": 0.19542598724365234
+        },
+        {
+          "layer": 2,
+          "group_size": 1,
+          "n_batches": 3,
+          "query_cos_mean": 0.9413261413574219,
+          "query_cos_min": 0.9081499576568604,
+          "query_rel_l2": 0.3400838375091553,
+          "doc_kv_refreshed": true,
+          "doc_v_rel_l2": 0.14089247584342957,
+          "refresh_s": 0.22402000427246094
+        },
+        {
+          "layer": 3,
+          "group_size": 1,
+          "n_batches": 3,
+          "query_cos_mean": 0.9407315850257874,
+          "query_cos_min": 0.9161970019340515,
+          "query_rel_l2": 0.34339892864227295,
+          "doc_kv_refreshed": true,
+          "doc_v_rel_l2": 0.1404431164264679,
+          "refresh_s": 0.19205975532531738
+        }
+      ]
+    },
+    "_checks": {
+      "off_with_hook_bit_identical_to_off": true,
+      "on_identity_numerics_bit_identical_to_off": true,
+      "on_identity_adds_only_diagnostic_keys": [
+        "onpolicy",
+        "onpolicy_events"
+      ],
+      "on_perturbed_differs_from_off": true,
+      "on_perturbed_finite": true,
+      "off_has_no_onpolicy_key": true,
+      "extra_keys_off": [
+        "max_queries_per_head",
+        "n_queries_available_max",
+        "n_queries_available_min",
+        "n_queries_used_max",
+        "n_queries_used_min",
+        "ref_mass_on_S_per_layer",
+        "rope_theta",
+        "v_selected_absmax_after_per_layer"
+      ],
+      "extra_keys_on": [
+        "max_queries_per_head",
+        "n_queries_available_max",
+        "n_queries_available_min",
+        "n_queries_used_max",
+        "n_queries_used_min",
+        "onpolicy",
+        "onpolicy_events",
+        "ref_mass_on_S_per_layer",
+        "rope_theta",
+        "v_selected_absmax_after_per_layer"
+      ],
+      "refresh_layers_g1": [
+        1,
+        2,
+        3
+      ],
+      "refresh_layers_g2": [
+        2
+      ],
+      "refresh_layers_g4": null,
+      "identity_cos_is_one": 1.0,
+      "identity_rel_l2_is_zero": 0.0,
+      "perturbed_cos_mean": 0.9508528113365173,
+      "perturbed_rel_l2_mean": 0.310570369164149,
+      "dockv_flag": true,
+      "dockv_rel_l2": [
+        0.10007176548242569,
+        0.14089247584342957,
+        0.1404431164264679
+      ]
+    }
+  },
+  "fail_loud": {
+    "no_hook": "ValueError: onpolicy_layers=1 but no `onpolicy_refresh_fn` was passed to apply_document_am_write_to_cache -- the on-policy",
+    "wrong_shape": "RuntimeError: on-policy refresh at layer 1 changed the query shape: (1, 2, 24, 128) -> (1, 2, 12, 128)",
+    "empty_layer": "RuntimeError: on-policy refresh at layer 1 produced no reference queries; the write would fall back to nothing.",
+    "wrong_batch_count": "RuntimeError: on-policy refresh at layer 1 returned 1 query batches, expected 3 (the reference dataloader must be replayed d",
+    "nonfinite": "RuntimeError: on-policy refresh at layer 1 produced non-finite queries (1 of 6144).",
+    "not_a_tuple": "TypeError: onpolicy_refresh_fn must return (query_accumulator, doc_kv_or_None), got <class 'cartridges.am.query_accum.AMQ",
+    "bad_dockv_shape": "RuntimeError: on-policy doc-KV refresh changed shapes at layer 1: (2, 4000, 128)/(2, 4000, 128) -> (2, 5, 128)/(2, 5, 128)",
+    "all_raised": true
+  },
+  "off_vs_HEAD": {
+    "head_import_path": "/tmp/amsnap_mechseq_head/cartridges",
+    "head": {
+      "mean_mse": "0.027456531766802073",
+      "mse_per_layer": {
+        "0": "0.02790855150669813",
+        "1": "0.028749491088092327",
+        "2": "0.025476557202637196",
+        "3": "0.027691527269780636"
+      },
+      "n_queries": 512,
+      "k_sum": "-185.8980187014986",
+      "v_sum": "-31.03449063379776",
+      "k_absmax": "3.981527805328369",
+      "v_absmax": "4.9668097496032715",
+      "finite": true,
+      "extra_keys": [
+        "max_queries_per_head",
+        "n_queries_available_max",
+        "n_queries_available_min",
+        "n_queries_used_max",
+        "n_queries_used_min",
+        "ref_mass_on_S_per_layer",
+        "rope_theta",
+        "v_selected_absmax_after_per_layer"
+      ],
+      "mass_on_S": {
+        "0": "0.19531060755252838",
+        "1": "0.1898750737309456",
+        "2": "0.19756284356117249",
+        "3": "0.20432337373495102"
+      },
+      "onpolicy": null,
+      "onpolicy_events": null
+    },
+    "new_extra_keys": [
+      "max_queries_per_head",
+      "n_queries_available_max",
+      "n_queries_available_min",
+      "n_queries_used_max",
+      "n_queries_used_min",
+      "ref_mass_on_S_per_layer",
+      "rope_theta",
+      "v_selected_absmax_after_per_layer"
+    ],
+    "head_extra_keys": [
+      "max_queries_per_head",
+      "n_queries_available_max",
+      "n_queries_available_min",
+      "n_queries_used_max",
+      "n_queries_used_min",
+      "ref_mass_on_S_per_layer",
+      "rope_theta",
+      "v_selected_absmax_after_per_layer"
+    ],
+    "bit_identical": true
+  }
+}

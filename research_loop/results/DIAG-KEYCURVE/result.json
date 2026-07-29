@@ -1,0 +1,422 @@
+{
+  "id": "DIAG-KEYCURVE",
+  "role": "measure + verify",
+  "board_entry": "B-ROUTE (key side) / B-OVERWRITE",
+  "question": "Where on the 16-document sequence does MECH-KEYS' best arm (KEY_MODE=highest_attention + AM_KEY_REPOSITION=1, theta=5e6, beta off, top32) actually bottom -- the value-only curve bottoms at k=12 and then degrades by 0.117 to k=16, so the arm's reported k=16 endpoint may understate it -- and does the headline claim 'keys+reposition beats frozen keys on BOTH axes' survive a fresh-process re-run and a same-session mechanism-off control?",
+  "variable_under_test": "k = number of documents written (per-document cache snapshots of the EXISTING MECH-KEYS runs, nothing re-solved), plus KEY_MODE=highest_attention+reposition vs KEY_MODE=freeze at matched k. All else canonical top32, theta=5e6, ENABLE_BETA=0.",
+  "baseline_ref": "MECH-KEYS: keys+repos k=16 QA 2.034916400909424 / MT 2.330503463745117 (correctness gate); freeze control k=16 QA 2.15972 / MT 2.52963. Value-only curve from DIAG-SEQUENCE (KEY_MODE=freeze, theta=1e4).",
+  "status": "done",
+  "numbers": {
+    "qa_forgetting_loss": 1.9560121297836304,
+    "mt_acquisition_loss": 2.2720184326171875,
+    "solve_s": 343.15869879722595,
+    "phase2_e2e_s": 378,
+    "gradient_steps": 0,
+    "_note": "qa/mt are the arm's BEST point (k=12), newly located here. Its k=16 endpoint -- the number the board currently quotes -- is QA 2.034916400909424 / MT 2.330503463745117. solve_s / phase2_e2e_s are from the Part-2b fresh-process re-run; MECH-KEYS measured 271.96 / 641 for the same configuration. The two runs' outputs are BYTE-IDENTICAL, so the wall-clock difference is scheduling/contention on the box, not the computation."
+  },
+  "diagnostics": {
+    "correctness_gate_passed": true,
+    "correctness_gate": {
+      "expected_qa_k16": 2.034916400909424,
+      "observed_qa_k16": 2.034916400909424,
+      "expected_mt_k16": 2.330503463745117,
+      "observed_mt_k16": 2.330503463745117,
+      "qa_exact_match": true,
+      "mt_exact_match": true,
+      "note": "the k=16 snapshot is a DIFFERENT FILE from the run's cache_last.pt (cache-after-doc-015-*.pt vs cache-step16.pt) but must carry the same cartridge"
+    },
+    "keys_repos_mt_by_k": {
+      "1": 2.965111255645752,
+      "2": 2.6856672763824463,
+      "3": 2.5314693450927734,
+      "4": 2.4055702686309814,
+      "5": 2.4009695053100586,
+      "6": 2.346301555633545,
+      "7": 2.3156590461730957,
+      "8": 2.32890248298645,
+      "9": 2.31606125831604,
+      "10": 2.319589376449585,
+      "11": 2.2814929485321045,
+      "12": 2.2720184326171875,
+      "13": 2.298682928085327,
+      "14": 2.319815158843994,
+      "15": 2.3325002193450928,
+      "16": 2.330503463745117
+    },
+    "keys_repos_qa_by_k": {
+      "1": 1.913637638092041,
+      "2": 1.8658878803253174,
+      "3": 1.8607447147369385,
+      "4": 1.8669999837875366,
+      "5": 1.9200594425201416,
+      "6": 1.9135236740112305,
+      "7": 1.9160072803497314,
+      "8": 1.9463961124420166,
+      "9": 1.93601655960083,
+      "10": 1.968939185142517,
+      "11": 1.9373838901519775,
+      "12": 1.9560121297836304,
+      "13": 1.989310383796692,
+      "14": 2.015522003173828,
+      "15": 2.0397305488586426,
+      "16": 2.034916400909424
+    },
+    "control_freeze_mt_by_k": {
+      "8": 2.453585624694824,
+      "12": 2.4704575538635254,
+      "14": 2.4835116863250732,
+      "16": 2.529625177383423
+    },
+    "control_freeze_qa_by_k": {
+      "8": 1.9329710006713867,
+      "12": 2.074141263961792,
+      "14": 2.0921683311462402,
+      "16": 2.159724712371826
+    },
+    "argmin_mt_k": 12,
+    "argmin_mt": 2.2720184326171875,
+    "qa_at_argmin_mt": 1.9560121297836304,
+    "argmin_qa_k": 3,
+    "argmin_qa": 1.8607447147369385,
+    "mt_tail_rise_k12_to_k16": 0.05848503112792969,
+    "qa_tail_rise_k3_to_k16": 0.17417168617248535,
+    "mt_strictly_monotone_to_argmin": false,
+    "mt_strictly_monotone_after_argmin": false,
+    "mass_on_S_MT_by_k": {
+      "1": 0.10855186014572003,
+      "2": 0.13331013198508623,
+      "3": 0.13676093266112732,
+      "4": 0.1797902269512027,
+      "5": 0.18738299690303395,
+      "6": 0.18958629763122492,
+      "7": 0.18910336289457821,
+      "8": 0.2174641750380235,
+      "9": 0.220552866933738,
+      "10": 0.22118945346608396,
+      "11": 0.2211824918055855,
+      "12": 0.2239906619171961,
+      "13": 0.24039642102903194,
+      "14": 0.2421658422580448,
+      "15": 0.24251967374552297,
+      "16": 0.24302008119945334
+    },
+    "mass_on_S_QA_by_k": {
+      "1": 0.10294402931110738,
+      "2": 0.1271327285459628,
+      "3": 0.13032066328778286,
+      "4": 0.17222940270005016,
+      "5": 0.17975811666145058,
+      "6": 0.18115438258293445,
+      "7": 0.18133822744325528,
+      "8": 0.20710905753451328,
+      "9": 0.2108960372216744,
+      "10": 0.21193484166728585,
+      "11": 0.2120859162531419,
+      "12": 0.2143730533323378,
+      "13": 0.22967531009043407,
+      "14": 0.2301636759364606,
+      "15": 0.23011762392024204,
+      "16": 0.23122564051411448
+    },
+    "mt_over_qa_mass_ratio_by_k": {
+      "1": 1.0544745612945188,
+      "2": 1.0485901900303358,
+      "3": 1.0494186356243647,
+      "4": 1.0438997298522845,
+      "5": 1.0424174461948985,
+      "6": 1.0465454654094843,
+      "7": 1.0428212824223884,
+      "8": 1.0499983806926678,
+      "9": 1.04578952662782,
+      "10": 1.043667250396359,
+      "11": 1.0428909930142938,
+      "12": 1.0448638876731784,
+      "13": 1.0466794229400473,
+      "14": 1.0521462227814677,
+      "15": 1.0538943937191851,
+      "16": 1.0510083598822118
+    },
+    "mt_over_qa_mass_ratio_span_over_k": {
+      "min": 1.0424174461948985,
+      "max": 1.0544745612945188,
+      "span": 0.012057115099620264
+    },
+    "control_mt_over_qa_mass_ratio_range": {
+      "min": 1.039444581305268,
+      "max": 1.0449751039331998
+    },
+    "phase1_mt_over_qa_mass_ratio": 1.0812172259315458,
+    "total_cartridge_mass_MT_by_k": {
+      "1": 0.6221376282318185,
+      "2": 0.6397799209536363,
+      "3": 0.6379471255362862,
+      "4": 0.6423363539338526,
+      "5": 0.6497612939474897,
+      "6": 0.6525418578905778,
+      "7": 0.653411175765925,
+      "8": 0.6546848927986705,
+      "9": 0.6603280505682859,
+      "10": 0.6618760742867986,
+      "11": 0.6624294158950862,
+      "12": 0.6638079554618647,
+      "13": 0.6621760677235822,
+      "14": 0.6667776588195314,
+      "15": 0.6695515106069959,
+      "16": 0.671120359448509
+    },
+    "total_cartridge_mass_MT_control": {
+      "8": 0.5976259056116557,
+      "12": 0.596815199420477,
+      "14": 0.5915142178483721,
+      "16": 0.5930163347524487
+    },
+    "written_support_union_slots_per_layer_by_k": {
+      "1": 32.0,
+      "2": 45.638888888888886,
+      "3": 54.47222222222222,
+      "4": 61.333333333333336,
+      "5": 65.69444444444444,
+      "6": 69.55555555555556,
+      "7": 72.13888888888889,
+      "8": 74.41666666666667,
+      "9": 76.25,
+      "10": 78.36111111111111,
+      "11": 80.44444444444444,
+      "12": 82.44444444444444,
+      "13": 84.05555555555556,
+      "14": 85.27777777777777,
+      "15": 86.11111111111111,
+      "16": 87.58333333333333
+    },
+    "keys_vs_control_by_k": [
+      {
+        "k": 8,
+        "keys_qa": 1.9463961124420166,
+        "control_qa": 1.9329710006713867,
+        "d_qa": 0.013425111770629883,
+        "keys_mt": 2.32890248298645,
+        "control_mt": 2.453585624694824,
+        "d_mt": -0.12468314170837402,
+        "d_qa_clears_noise_band": false,
+        "d_mt_clears_noise_band": false
+      },
+      {
+        "k": 12,
+        "keys_qa": 1.9560121297836304,
+        "control_qa": 2.074141263961792,
+        "d_qa": -0.11812913417816162,
+        "keys_mt": 2.2720184326171875,
+        "control_mt": 2.4704575538635254,
+        "d_mt": -0.1984391212463379,
+        "d_qa_clears_noise_band": false,
+        "d_mt_clears_noise_band": true
+      },
+      {
+        "k": 14,
+        "keys_qa": 2.015522003173828,
+        "control_qa": 2.0921683311462402,
+        "d_qa": -0.07664632797241211,
+        "keys_mt": 2.319815158843994,
+        "control_mt": 2.4835116863250732,
+        "d_mt": -0.1636965274810791,
+        "d_qa_clears_noise_band": false,
+        "d_mt_clears_noise_band": true
+      },
+      {
+        "k": 16,
+        "keys_qa": 2.034916400909424,
+        "control_qa": 2.159724712371826,
+        "d_qa": -0.12480831146240234,
+        "keys_mt": 2.330503463745117,
+        "control_mt": 2.529625177383423,
+        "d_mt": -0.19912171363830566,
+        "d_qa_clears_noise_band": false,
+        "d_mt_clears_noise_band": true
+      }
+    ],
+    "keys_vs_control_at_each_arms_own_best_k": {
+      "keys_best": {
+        "k": 12,
+        "qa": 1.9560121297836304,
+        "mt": 2.2720184326171875
+      },
+      "control_best_MEASURED": {
+        "k": 8,
+        "qa": 1.9329710006713867,
+        "mt": 2.453585624694824
+      },
+      "control_k_measured": [
+        8,
+        12,
+        14,
+        16
+      ],
+      "control_minimum_is_NOT_located": "only k in {8,12,14,16} were evaluated for the freeze control, and its lowest MT is at the EDGE of that set (k=8), so the control's true minimum may lie at k<8 and this comparison is an UPPER bound on the control, i.e. it FAVOURS the keys arm",
+      "d_mt_at_own_bests": -0.18156719207763672,
+      "d_qa_at_own_bests": 0.023041129112243652
+    },
+    "vs_value_only_curve_mt": {
+      "1": {
+        "keys": 2.965111255645752,
+        "value_only": 3.7445480823516846,
+        "d": -0.7794368267059326
+      },
+      "4": {
+        "keys": 2.4055702686309814,
+        "value_only": 3.0338,
+        "d": -0.6282297313690184
+      },
+      "8": {
+        "keys": 2.32890248298645,
+        "value_only": 2.7099,
+        "d": -0.38099751701355
+      },
+      "12": {
+        "keys": 2.2720184326171875,
+        "value_only": 2.4352,
+        "d": -0.16318156738281253
+      },
+      "13": {
+        "keys": 2.298682928085327,
+        "value_only": 2.449,
+        "d": -0.1503170719146727
+      },
+      "14": {
+        "keys": 2.319815158843994,
+        "value_only": 2.455,
+        "d": -0.13518484115600593
+      },
+      "15": {
+        "keys": 2.3325002193450928,
+        "value_only": 2.5,
+        "d": -0.16749978065490723
+      },
+      "16": {
+        "keys": 2.330503463745117,
+        "value_only": 2.5524,
+        "d": -0.22189653625488281
+      }
+    },
+    "vs_mission_target": {
+      "target_qa": 2.52,
+      "target_mt": 2.02,
+      "qa_slack_at_best": 0.5639878702163696,
+      "mt_short_by_at_best": 0.2520184326171875
+    },
+    "vs_oracle_perfect_value_write_mt": -0.10898156738281228,
+    "vs_value_only_k12_minimum_mt": -0.16318156738281253,
+    "vs_dense_4ep_bar_mt": 0.39951843261718745,
+    "qa_vs_untouched_phase1_floor": -0.2827945947647095,
+    "phase1_anchor_reproduced": {
+      "qa": 2.23880672454834,
+      "mt": 3.7825491428375244,
+      "expected_qa": 2.23880672454834,
+      "expected_mt": 3.7825491428375244
+    },
+    "control_k16_reproduced_MECH_KEYS_standalone": {
+      "qa": 2.159724712371826,
+      "mt": 2.529625177383423,
+      "expected_qa": 2.159724712371826,
+      "expected_mt": 2.529625177383423
+    },
+    "verification": {
+      "claim_under_test": "KEY_MODE=highest_attention + AM_KEY_REPOSITION=1 beats KEY_MODE=freeze on BOTH axes",
+      "control_reference_MECH_KEYS_standalone": {
+        "qa": 2.15972,
+        "mt": 2.52963
+      },
+      "seed_variation": {
+        "available": false,
+        "evidence": {
+          "cartridges_import_path": "/tmp/amsnap_kcurve/cartridges",
+          "driver_import_path": "/tmp/amsnap_kcurve/examples/qasper2/train/continual_am_sparse.py",
+          "sys_argv_used": [
+            "continual_am_sparse.py",
+            "seed=7"
+          ],
+          "config_seed_after_cli_override": 42,
+          "config_seed_expected_if_override_worked": 7,
+          "cli_override_reached_config": false,
+          "execution_mode": "per_document",
+          "pydrantic_main_is_reached_for_this_mode": false,
+          "SEED_env_knob_exists": false,
+          "per_doc_reference_sampling_seed": "cartridges/am/continual.py:150 -> limit_conversations(..., seed=doc_idx) and build_reference_dataloader(..., seed=doc_idx): the reference draw is seeded by the DOCUMENT INDEX, a constant, not by config.seed"
+        },
+        "plain_statement": "NO seed variation happened, and none is possible without a code change. `continual_am_sparse.py` calls `pydrantic.main` ONLY when AM_EXECUTION_MODE=train_loop; the canonical per_document mode calls run_per_document_phase2(config) directly, so the RUNBOOK 9c `seed=<n>` CLI override is silently ignored (probe: config.seed stayed 42). There is no SEED env knob. And even if config.seed could be moved, the AM write would not change: cartridges/am/continual.py:150 seeds the per-document reference draw with `seed=doc_idx`, a constant. The re-run below is therefore a SAME-SEED, fresh-process reproduction and confirms plumbing + run-to-run determinism only."
+      },
+      "fresh_process_rerun": {
+        "run_dir": "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-02-13-34-continual_am_sparse/fa31c492-27aa-4fde-8341-21c7eab5fcf9",
+        "config_diff_vs_original_arm": "96c96\n< launch_id: 2026-07-28-23-37-22-continual_am_sparse\n---\n> launch_id: 2026-07-29-02-13-34-continual_am_sparse\n199c199\n< run_id: a20bc87b-e681-4122-90ed-24b3495f6849\n---\n> run_id: fa31c492-27aa-4fde-8341-21c7eab5fcf9\n226c226,227\n<   notes: first key-side arm; selectivity (MT/QA mass ratio) is the target metric\n---\n>   notes: W5 fresh-process reproduction of MECH-KEYS keys+reposition (QA 2.0349 / MT\n>     2.3305); no seed knob exists",
+        "config_diff_n_lines": 13,
+        "in_run_eval": {
+          "qa_forgetting": {
+            "name": "qa_forgetting",
+            "loss": 2.0349531173706055,
+            "perplexity": 7.651893376187829
+          },
+          "mt_acquisition": {
+            "name": "mt_acquisition",
+            "loss": 2.3290133476257324,
+            "perplexity": 10.267805778682588
+          }
+        },
+        "standalone_k16": {
+          "qa": 2.034916400909424,
+          "mt": 2.330503463745117
+        },
+        "standalone_at_keys_argmin_k": {
+          "k": 12,
+          "qa": 1.9560121297836304,
+          "mt": 2.2720184326171875
+        },
+        "delta_vs_original_k16": {
+          "qa": 0.0,
+          "mt": 0.0
+        },
+        "per_document_snapshot_bit_identity_vs_original": {
+          "snapshots_compared": 16,
+          "byte_identical": 16,
+          "all_byte_identical": true
+        }
+      }
+    },
+    "seed_knob_exists": false,
+    "all_evals_loaded_intended_checkpoint": true,
+    "per_arm_snapshot_distinctness": {
+      "keys_repos": {
+        "n_snapshots": 16,
+        "n_distinct_sha256": 16,
+        "all_distinct": true
+      },
+      "control": {
+        "n_snapshots": 16,
+        "n_distinct_sha256": 16,
+        "all_distinct": true
+      }
+    },
+    "n_evals_run": 46,
+    "concurrent_source_edits_during_run": "A CONCURRENT WORKER EDITED SOURCE MID-RUN AND THE PIN CAUGHT IT: cartridges/am/finetune.py (+181 lines), cartridges/am/continual.py (+45) and examples/qasper2/train/continual_am_sparse.py (+72) were modified in the working tree at 01:49-01:50 UTC (MECH-SEQUENTIAL), i.e. between this job's Part-1 evals (from 01:35) and its Part-2b re-run (02:13). All three files inside /tmp/amsnap_kcurve are byte-identical to HEAD=54fefa13, and the snapshot manifest sha256 is 9d13a49c76ebc1c289377d611eb472765c916ced68748d934b6a6f377960b7d1 both at launch and after the run. Unpinned, the re-run would have executed a half-finished edit."
+  },
+  "wandb_run_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/ukjy9uum",
+  "wandb_run_id": "ukjy9uum",
+  "wandb_all_runs": "research_loop/results/DIAG-KEYCURVE/wandb_runs.json (47 runs, group B-ROUTE, tagged `diagnostic` + `DIAG-KEYCURVE`)",
+  "wandb_rerun_train_url": "https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/aed3gypq",
+  "artifacts": [
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/DIAG-KEYCURVE/wrapper.log",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/DIAG-KEYCURVE/curve.tsv",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/DIAG-KEYCURVE/launch_keycurve.sh",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/DIAG-KEYCURVE/finalize.py",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/DIAG-KEYCURVE/seed_probe.py",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/DIAG-KEYCURVE/seed_probe.json",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/DIAG-KEYCURVE/config_diff.txt",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/DIAG-KEYCURVE/rerun_keys_repos.log",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/DIAG-KEYCURVE/route_mass.log",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/DIAG-KEYCURVE/wandb_runs.json",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/results/DIAG-KEYCURVE/evals",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/state/diagnostics/DIAG-KEYCURVE.json",
+    "/localhome/local-triv/gated-continual-cartridges_explore/research_loop/state/diagnostics/DIAG-KEYCURVE_route_mass.json",
+    "/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-02-13-34-continual_am_sparse/fa31c492-27aa-4fde-8341-21c7eab5fcf9/cache_last.pt"
+  ],
+  "command": "bash research_loop/results/DIAG-KEYCURVE/launch_keycurve.sh  (then finalize.py; seed_probe.py run separately on CPU)",
+  "observations": "1) CORRECTNESS GATE PASSED EXACTLY: the keys+reposition arm's k=16 snapshot re-evaluates to QA 2.034916400909424 / MT 2.330503463745117, matching MECH-KEYS' standalone numbers to all 16 printed digits, so the arm's identity is confirmed. The same-session freeze control and the untouched Phase-1 cartridge also reproduced to 16 digits (2.159724712371826 / 2.529625177383423 and 2.23880672454834 / 3.7825491428375244). 2) THE ARM DOES BOTTOM BELOW ITS k=16 ENDPOINT, at the SAME k=12 as the value-only curve: MT 2.2720184326171875 with QA 1.9560121297836304 there, i.e. better than its own k=16 point on BOTH axes by 0.058 MT / 0.079 QA -- but both of those margins sit deep INSIDE the +-0.15 band, so 'k=12 dominates k=16' is not resolvable for this arm from one seed. Shape: MT 2.9651 (k=1) -> 2.2720 (k=12) -> 2.3305 (k=16); the descent is NOT strictly monotone (k=8 is +0.013 above k=7, k=10 is +0.004 above k=9) and neither is the tail (k=16 is 0.002 below k=15). QA bottoms much earlier, at k=3 (1.8607), and rises 0.174 by k=16. 3) The keys arm sits below the value-only curve at EVERY measured k, and the gap is largest early: -0.779 at k=1, -0.628 at k=4, -0.381 at k=8, -0.163 at k=12, -0.222 at k=16. k=1/4/8/12/15/16 clear the +-0.15 band, k=13 (-0.150) sits exactly on its edge, and k=14 (-0.135) is inside it. Its k=12 minimum is 0.109 below ORACLE-WRITE's perfect value write (2.381) and 0.163 below the value-only k=12 minimum (2.4352). 4) VERSUS THE MECHANISM-OFF CONTROL, MEASURED IN THE SAME SESSION AT MATCHED k: dMT = -0.125 (k=8), -0.198 (k=12), -0.164 (k=14), -0.199 (k=16); dQA = +0.013 (k=8), -0.118 (k=12), -0.077 (k=14), -0.125 (k=16). Only three of the four dMT clear the 0.15 band; NOT ONE dQA clears it at any k, and at k=8 QA runs the wrong way. Allowing each arm its own best measured k, keys (k=12, MT 2.2720) beats the control's lowest measured MT (k=8, 2.4536) by -0.182 -- but is +0.023 WORSE on QA there. The control was only evaluated at k in {8,12,14,16} and its lowest MT is at the EDGE of that set, so its true minimum is not located and this comparison favours the keys arm. 5) VERIFICATION FOUND NOTHING TO KILL AND NOTHING TO CONFIRM BEYOND PLUMBING: the fresh-process re-run is BYTE-IDENTICAL to MECH-KEYS -- all 16 per-document snapshots byte-identical, mean am/mean_mse 0.0039414096599943195 and |v|max 74.0 identical, standalone evals identical to 16 digits, eval-time route mass identical to full precision -- with a config.yaml differing only in launch_id/run_id/wandb notes. NO SEED VARIATION HAPPENED AND NONE IS POSSIBLE without a code change: continual_am_sparse.py reaches pydrantic.main ONLY in AM_EXECUTION_MODE=train_loop, so the RUNBOOK 9c `seed=<n>` CLI override is silently ignored (probed: config.seed stayed 42), there is no SEED env knob, and cartridges/am/continual.py:150 seeds the per-document reference draw with `seed=doc_idx`, a constant. Every number here is one seed. 6) SELECTIVITY DOES NOT MOVE ANYWHERE ON THE CURVE, confirming MECH-KEYS' finding across all 16 k: the MT/QA eval-time mass ratio spans only 1.0424-1.0545 over k=1..16 (span 0.012) and stays BELOW the untouched Phase-1 cartridge's own 1.0812 at every k; the freeze control spans 1.0394-1.0450. Meanwhile mass_on_S climbs 0.1086 -> 0.2430 (control 0.0801 -> 0.0711) and total cartridge mass climbs 0.6221 -> 0.6711 (control 0.5976 -> 0.5930, Phase-1 0.5879). Bandwidth is anti-correlated with MT across the tail: mass_on_S rises from 0.2240 at the MT minimum to 0.2430 at k=16 while MT gets 0.058 worse. Caveat: the written support union grows with k (32.0 -> 87.6 slots/layer), so the per-k mass_on_S series is measured on a growing slot set and is not a like-for-like bandwidth series. 7) AGAINST THE MISSION BAR (QA <= 2.52 AND MT <= 2.02) the best point falls 0.2520 SHORT ON MT and clears QA by 0.5640; it is 0.3995 above the dense@4ep MT of 1.8725. QA at k=12 is 0.283 below the untouched Phase-1 floor. 8) Provenance: imports pinned to /tmp/amsnap_kcurve (git archive HEAD=54fefa13 of cartridges+examples); manifest sha256 9d13a49c... identical before and after; the repo HEAD moved 54fefa13 -> 46615cbc during the session across 3 commits, NONE of which touched cartridges/ or examples/. Import path verified as /tmp/amsnap_kcurve/cartridges from cwd=/tmp. One GPU claimed via flock (gpu0). All 47 evals loaded their intended checkpoint (path grepped from each eval log); all 16 snapshots per arm are pairwise sha256-distinct; the only sha256 collision among evaluated paths is the re-run's cache-after-doc-011 against MECH-KEYS' own, which is the reproduction result itself. 9) THE FROZEN-SNAPSHOT PIN WAS LOAD-BEARING, NOT HYGIENE: a concurrent worker (MECH-SEQUENTIAL) modified cartridges/am/finetune.py (+181 lines), cartridges/am/continual.py (+45) and examples/qasper2/train/continual_am_sparse.py (+72) in the working tree at 01:49-01:50 UTC -- between this job's Part-1 evals and its Part-2b re-run. All three files inside the snapshot are byte-identical to HEAD=54fefa13 and the manifest hash is unchanged, so no number here inherits those edits."
+}
