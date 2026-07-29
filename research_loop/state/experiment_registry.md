@@ -313,3 +313,43 @@ is **converting QA slack into acquisition headroom**, not reducing forgetting pe
   formulas + code paths, written for a human reproducing it)
 - Follow-up (gated on the result, NOT pre-approved): `MECH-INFOGATE` — implement the winning criteria as
   opt-in `SLOT_SELECTION` modes with a `top_t` sweep, trained runs logged to wandb under `B-GATE`.
+
+### DIAG-IMPORTANCE — RESULT (2026-07-29): the precondition HOLDS
+- **Actual:** Spearman(`tf_mass_qa`, `fisher`) = **0.579** pooled, CI [0.559, 0.613]; per-layer
+  0.666 ± 0.122 (0.471 @L5 → 0.924 @L35). Disattenuated 0.596/0.686 — **0.9 excluded by a wide margin**.
+  Gate: reproduces DIAG-ROUTING to 4–5 s.f. wandb `x1nzfrsh`, 692 s, `gradient_steps: 0`.
+- **`kl_loo` is NOT a distinct criterion** — exact LOO KL is `−log(1−w_j)`, monotone in the slot's own
+  attention weight; measured ρ = 0.968 with mass. **Do not rebuild it as a separate mode.**
+  `entropy` is near-orthogonal to Fisher (0.237), so it is not a proxy either.
+- **Best gradient-free proxy for Fisher: `redundancy`, ρ = −0.648** — no eval data, no backward pass,
+  one 512×512 inverse per layer.
+- Top-32 overlap with the incumbent: `tf_mass_qa` 83.3% · most-redundant 10.7% · contrast 1.0% ·
+  lowest-entropy 0.4% · lowest-Fisher 0.09% · lowest-`kl_loo` 0.00%.
+- Safe acquisition budget: attention **6.9%** → Fisher **62.9%** → redundancy **83.7%**.
+- QA Fisher is **concentrated** (top-32 of 511 hold 52.4% per layer; PR 64.3) vs attention diffuse (PR 113).
+- 🔴 **Measured Pareto trade at fixed budget:** incumbent 37.4% MT routing mass / 29.6% QA Fisher;
+  safest-quartile best-32 4.62% / 0.28% — **106× less QA exposure for 8.1× less MT bandwidth**, because
+  MT-wanted and QA-safe are **anti-aligned (intersection 11× below chance)**. `redundancy` is the only
+  metric at chance (7.33 vs 8.0) → 17.3% MT / 12.3% QA-Fisher.
+- **Interpretation:** headroom is real but sits on the **retention** axis (already 0.57 ahead of budget)
+  and is bought with **acquisition** bandwidth (the entire remaining deficit). ⇒ the only play the
+  geometry permits is the **reverse trade**: redundancy-gated selection at *larger* `top_t`.
+- Status: **done** | Artifacts: `results/DIAG-IMPORTANCE/{result.json,METRICS.md,measure_slot_importance.py}`,
+  `state/diagnostics/DIAG-IMPORTANCE.{json,npz}`
+
+### MECH-INFOGATE: does information-theoretic gating buy ACQUISITION?
+- Date: 2026-07-29 | Board entry: **B-GATE** | Role: build + test (GPU)
+- Research question: with retention 0.57 ahead of budget and MT 0.248 short, can a `redundancy`-gated
+  selector at **larger `top_t`** buy MT routing mass above the incumbent's 37.4% while holding QA-Fisher
+  exposure at or below its 29.6% — i.e. spend QA slack instead of MT deficit?
+- New selectors (opt-in, `SLOT_SELECTION=tfidf` stays default and bit-identical): **`redundancy`**
+  (gradient-free), **`fisher`** (cached diagnostic backward pass; `gradient_steps` still 0),
+  **`mass_x_redundancy`** (the direct attempt to beat the anti-alignment).
+- Arms: control tfidf@32 (gate: QA 2.0349/MT 2.3305 @k16, QA 1.9560/MT 2.2720 @k12) · redundancy @
+  {32,64,128} · mass_x_redundancy @ best · fisher@32 (expected to *lose* MT — the direct test of the
+  anti-alignment prediction). k-curve at k ∈ {8,10,12,16} per arm; every training run to wandb, group `B-GATE`.
+- Yardstick: DIAG-NOISE's **measured paired resolution ±0.049 MT / ±0.054 QA** (not the old ±0.15).
+- Expected: MT < 2.2720 at QA ≤ 2.52 ⇒ gating is a live acquisition lever. MT flat/worse at every `top_t`
+  ⇒ the anti-alignment binds and the gating family closes with a measured cause.
+- Status: **dispatched** | Artifacts: `results/MECH-INFOGATE/result.json`, `state/diagnostics/MECH-INFOGATE.json`,
+  MECH-008 in `mechanism_registry.md`, plus new selector definitions appended to `GLOSSARY.md`

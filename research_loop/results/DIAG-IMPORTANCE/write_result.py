@@ -94,6 +94,10 @@ diagnostics = {
     },
     "n_eval_examples": D["provenance"]["n_eval_examples"],
     "n_bootstrap": bo["n_bootstrap"],
+    "attenuation_corrected_spearman": D["attenuation_corrected_spearman"],
+    "selector_tradeoff_table": D["selector_tradeoff_table"],
+    "bandwidth_under_a_fisher_constraint": D["bandwidth_under_a_fisher_constraint"],
+    "joint_availability_mean_slots_per_layer": D["joint_availability"],
 }
 
 out = {

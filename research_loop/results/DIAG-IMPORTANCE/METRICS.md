@@ -201,6 +201,22 @@ slots (the direct analogue of the ~9% that DIAG-ROUTING's 0.914 overlap implies)
 **Concentration.** Per layer, the fraction of the metric's total mass carried by its top
 32 / 64 / 128 slots, plus the participation ratio `(Σx)²/Σx²`.
 
+**Attenuation correction.** `attenuation_corrected_spearman` divides each observed Spearman by
+`sqrt(rel_x · rel_y)`, where `rel` is the split-half reliability corrected to full sample size by
+Spearman–Brown (`2r/(1+r)`). It is an **upper bound** on the true correlation — the number to
+quote when asking "could the observed 0.58 really be a 0.9 blurred by noise?". `redundancy` is
+deterministic, so its reliability is 1.
+
+**Joint availability & the selector trade-off** (added read-only after the GPU run, from the npz;
+same data, no new forward passes). `joint_availability[want][safety]` counts, per layer, how many
+slots are simultaneously in the top-{32,64,128} of what the new task wants and in the safest
+{25%, 50%} of a QA-importance metric; the `chance_*` entries give the value expected if the two
+were independent. `selector_tradeoff_table` evaluates four concrete 32-slot-per-layer selectors on
+two axes at once: `frac_writable_MT_routing_mass` (write bandwidth — the share of the 511 writable
+slots' mean MT routing mass that the selection captures) and `frac_total_QA_Fisher_mass`
+(retention exposure — the share of that layer's total QA Fisher mass sitting in the selection).
+`bandwidth_under_a_fisher_constraint` is the same comparison stated as ratios.
+
 **Uncertainty.** `NBOOT` (default 500) bootstrap resamples **over eval examples** (QA and MT
 resampled independently), recomputing every metric from the per-example sufficient
 statistics and re-deriving the correlations, overlaps and budgets on each resample; 95%

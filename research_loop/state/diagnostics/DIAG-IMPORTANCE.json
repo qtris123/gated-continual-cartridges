@@ -3060,5 +3060,268 @@
       0.8834019966839216
     ]
   },
-  "wall_clock_total_s": 692.1478242874146
+  "wall_clock_total_s": 692.1478242874146,
+  "attenuation_corrected_spearman": {
+    "reliability_spearman_brown_QA": {
+      "tf_mass": 0.9898,
+      "entropy": 0.9829,
+      "kl_loo": 0.9894,
+      "fisher": 0.952
+    },
+    "tf_mass_qa__fisher_pooled": 0.5964,
+    "tf_mass_qa__fisher_perlayer": 0.6863,
+    "tf_mass_qa__kl_loo_pooled": 0.8369,
+    "tf_mass_qa__kl_loo_perlayer": 0.9782,
+    "tf_mass_qa__entropy_pooled": 0.413,
+    "note": "observed Spearman divided by sqrt(rel_x*rel_y); reliabilities are split-half Spearman corrected to full sample size by Spearman-Brown. An UPPER bound on the true correlation. redundancy is deterministic (reliability 1)."
+  },
+  "joint_availability": {
+    "tf_mass_mt": {
+      "tf_mass_qa": {
+        "n_slots_in_MTtop32_and_safest25pct": 0.0,
+        "chance_32_25": 8.0,
+        "n_slots_in_MTtop32_and_safest50pct": 0.0,
+        "chance_32_50": 16.0,
+        "n_slots_in_MTtop64_and_safest25pct": 0.0,
+        "chance_64_25": 16.0,
+        "n_slots_in_MTtop64_and_safest50pct": 0.0,
+        "chance_64_50": 32.0,
+        "n_slots_in_MTtop128_and_safest25pct": 0.0,
+        "chance_128_25": 32.0,
+        "n_slots_in_MTtop128_and_safest50pct": 0.08,
+        "chance_128_50": 64.0
+      },
+      "kl_loo": {
+        "n_slots_in_MTtop32_and_safest25pct": 0.0,
+        "chance_32_25": 8.0,
+        "n_slots_in_MTtop32_and_safest50pct": 0.0,
+        "chance_32_50": 16.0,
+        "n_slots_in_MTtop64_and_safest25pct": 0.0,
+        "chance_64_25": 16.0,
+        "n_slots_in_MTtop64_and_safest50pct": 0.0,
+        "chance_64_50": 32.0,
+        "n_slots_in_MTtop128_and_safest25pct": 0.03,
+        "chance_128_25": 32.0,
+        "n_slots_in_MTtop128_and_safest50pct": 0.72,
+        "chance_128_50": 64.0
+      },
+      "fisher": {
+        "n_slots_in_MTtop32_and_safest25pct": 0.72,
+        "chance_32_25": 8.0,
+        "n_slots_in_MTtop32_and_safest50pct": 3.58,
+        "chance_32_50": 16.0,
+        "n_slots_in_MTtop64_and_safest25pct": 2.42,
+        "chance_64_25": 16.0,
+        "n_slots_in_MTtop64_and_safest50pct": 9.39,
+        "chance_64_50": 32.0,
+        "n_slots_in_MTtop128_and_safest25pct": 5.64,
+        "chance_128_25": 32.0,
+        "n_slots_in_MTtop128_and_safest50pct": 20.69,
+        "chance_128_50": 64.0
+      },
+      "entropy": {
+        "n_slots_in_MTtop32_and_safest25pct": 1.42,
+        "chance_32_25": 8.0,
+        "n_slots_in_MTtop32_and_safest50pct": 4.53,
+        "chance_32_50": 16.0,
+        "n_slots_in_MTtop64_and_safest25pct": 4.5,
+        "chance_64_25": 16.0,
+        "n_slots_in_MTtop64_and_safest50pct": 13.11,
+        "chance_64_50": 32.0,
+        "n_slots_in_MTtop128_and_safest25pct": 13.67,
+        "chance_128_25": 32.0,
+        "n_slots_in_MTtop128_and_safest50pct": 39.44,
+        "chance_128_50": 64.0
+      },
+      "redundancy": {
+        "n_slots_in_MTtop32_and_safest25pct": 7.33,
+        "chance_32_25": 8.0,
+        "n_slots_in_MTtop32_and_safest50pct": 13.47,
+        "chance_32_50": 16.0,
+        "n_slots_in_MTtop64_and_safest25pct": 13.19,
+        "chance_64_25": 16.0,
+        "n_slots_in_MTtop64_and_safest50pct": 26.28,
+        "chance_64_50": 32.0,
+        "n_slots_in_MTtop128_and_safest25pct": 23.42,
+        "chance_128_25": 32.0,
+        "n_slots_in_MTtop128_and_safest50pct": 50.11,
+        "chance_128_50": 64.0
+      }
+    },
+    "ranker_tf_mt": {
+      "tf_mass_qa": {
+        "n_slots_in_MTtop32_and_safest25pct": 0.0,
+        "chance_32_25": 8.0,
+        "n_slots_in_MTtop32_and_safest50pct": 0.0,
+        "chance_32_50": 16.0,
+        "n_slots_in_MTtop64_and_safest25pct": 0.0,
+        "chance_64_25": 16.0,
+        "n_slots_in_MTtop64_and_safest50pct": 0.03,
+        "chance_64_50": 32.0,
+        "n_slots_in_MTtop128_and_safest25pct": 0.0,
+        "chance_128_25": 32.0,
+        "n_slots_in_MTtop128_and_safest50pct": 0.56,
+        "chance_128_50": 64.0
+      },
+      "kl_loo": {
+        "n_slots_in_MTtop32_and_safest25pct": 0.0,
+        "chance_32_25": 8.0,
+        "n_slots_in_MTtop32_and_safest50pct": 0.0,
+        "chance_32_50": 16.0,
+        "n_slots_in_MTtop64_and_safest25pct": 0.0,
+        "chance_64_25": 16.0,
+        "n_slots_in_MTtop64_and_safest50pct": 0.08,
+        "chance_64_50": 32.0,
+        "n_slots_in_MTtop128_and_safest25pct": 0.17,
+        "chance_128_25": 32.0,
+        "n_slots_in_MTtop128_and_safest50pct": 2.33,
+        "chance_128_50": 64.0
+      },
+      "fisher": {
+        "n_slots_in_MTtop32_and_safest25pct": 1.31,
+        "chance_32_25": 8.0,
+        "n_slots_in_MTtop32_and_safest50pct": 5.19,
+        "chance_32_50": 16.0,
+        "n_slots_in_MTtop64_and_safest25pct": 3.78,
+        "chance_64_25": 16.0,
+        "n_slots_in_MTtop64_and_safest50pct": 12.33,
+        "chance_64_50": 32.0,
+        "n_slots_in_MTtop128_and_safest25pct": 8.67,
+        "chance_128_25": 32.0,
+        "n_slots_in_MTtop128_and_safest50pct": 27.44,
+        "chance_128_50": 64.0
+      },
+      "entropy": {
+        "n_slots_in_MTtop32_and_safest25pct": 0.81,
+        "chance_32_25": 8.0,
+        "n_slots_in_MTtop32_and_safest50pct": 3.14,
+        "chance_32_50": 16.0,
+        "n_slots_in_MTtop64_and_safest25pct": 2.53,
+        "chance_64_25": 16.0,
+        "n_slots_in_MTtop64_and_safest50pct": 9.39,
+        "chance_64_50": 32.0,
+        "n_slots_in_MTtop128_and_safest25pct": 9.58,
+        "chance_128_25": 32.0,
+        "n_slots_in_MTtop128_and_safest50pct": 32.11,
+        "chance_128_50": 64.0
+      },
+      "redundancy": {
+        "n_slots_in_MTtop32_and_safest25pct": 8.06,
+        "chance_32_25": 8.0,
+        "n_slots_in_MTtop32_and_safest50pct": 14.33,
+        "chance_32_50": 16.0,
+        "n_slots_in_MTtop64_and_safest25pct": 14.53,
+        "chance_64_25": 16.0,
+        "n_slots_in_MTtop64_and_safest50pct": 27.83,
+        "chance_64_50": 32.0,
+        "n_slots_in_MTtop128_and_safest25pct": 25.56,
+        "chance_128_25": 32.0,
+        "n_slots_in_MTtop128_and_safest50pct": 52.75,
+        "chance_128_50": 64.0
+      }
+    },
+    "contrast": {
+      "tf_mass_qa": {
+        "n_slots_in_MTtop32_and_safest25pct": 10.67,
+        "chance_32_25": 8.0,
+        "n_slots_in_MTtop32_and_safest50pct": 19.83,
+        "chance_32_50": 16.0,
+        "n_slots_in_MTtop64_and_safest25pct": 20.36,
+        "chance_64_25": 16.0,
+        "n_slots_in_MTtop64_and_safest50pct": 38.58,
+        "chance_64_50": 32.0,
+        "n_slots_in_MTtop128_and_safest25pct": 38.67,
+        "chance_128_25": 32.0,
+        "n_slots_in_MTtop128_and_safest50pct": 73.92,
+        "chance_128_50": 64.0
+      },
+      "kl_loo": {
+        "n_slots_in_MTtop32_and_safest25pct": 9.75,
+        "chance_32_25": 8.0,
+        "n_slots_in_MTtop32_and_safest50pct": 19.25,
+        "chance_32_50": 16.0,
+        "n_slots_in_MTtop64_and_safest25pct": 18.97,
+        "chance_64_25": 16.0,
+        "n_slots_in_MTtop64_and_safest50pct": 37.72,
+        "chance_64_50": 32.0,
+        "n_slots_in_MTtop128_and_safest25pct": 37.03,
+        "chance_128_25": 32.0,
+        "n_slots_in_MTtop128_and_safest50pct": 73.06,
+        "chance_128_50": 64.0
+      },
+      "fisher": {
+        "n_slots_in_MTtop32_and_safest25pct": 5.22,
+        "chance_32_25": 8.0,
+        "n_slots_in_MTtop32_and_safest50pct": 12.78,
+        "chance_32_50": 16.0,
+        "n_slots_in_MTtop64_and_safest25pct": 11.81,
+        "chance_64_25": 16.0,
+        "n_slots_in_MTtop64_and_safest50pct": 27.64,
+        "chance_64_50": 32.0,
+        "n_slots_in_MTtop128_and_safest25pct": 25.61,
+        "chance_128_25": 32.0,
+        "n_slots_in_MTtop128_and_safest50pct": 57.92,
+        "chance_128_50": 64.0
+      },
+      "entropy": {
+        "n_slots_in_MTtop32_and_safest25pct": 13.86,
+        "chance_32_25": 8.0,
+        "n_slots_in_MTtop32_and_safest50pct": 23.81,
+        "chance_32_50": 16.0,
+        "n_slots_in_MTtop64_and_safest25pct": 24.64,
+        "chance_64_25": 16.0,
+        "n_slots_in_MTtop64_and_safest50pct": 44.78,
+        "chance_64_50": 32.0,
+        "n_slots_in_MTtop128_and_safest25pct": 42.39,
+        "chance_128_25": 32.0,
+        "n_slots_in_MTtop128_and_safest50pct": 83.0,
+        "chance_128_50": 64.0
+      },
+      "redundancy": {
+        "n_slots_in_MTtop32_and_safest25pct": 4.72,
+        "chance_32_25": 8.0,
+        "n_slots_in_MTtop32_and_safest50pct": 12.03,
+        "chance_32_50": 16.0,
+        "n_slots_in_MTtop64_and_safest25pct": 10.36,
+        "chance_64_25": 16.0,
+        "n_slots_in_MTtop64_and_safest50pct": 25.69,
+        "chance_64_50": 32.0,
+        "n_slots_in_MTtop128_and_safest25pct": 22.28,
+        "chance_128_25": 32.0,
+        "n_slots_in_MTtop128_and_safest50pct": 53.11,
+        "chance_128_50": 64.0
+      }
+    }
+  },
+  "bandwidth_under_a_fisher_constraint": {
+    "slots_per_layer": 511,
+    "safest_quartile_size": 127,
+    "mean_MTmass_captured_by_safest_quartile_fisher": 0.0789,
+    "mean_MTmass_captured_by_top32_tf_mass_mt": 0.3823,
+    "mean_MTmass_captured_by_best32_within_safest_quartile_fisher": 0.0462,
+    "mean_QAfisher_retained_by_that_set": 0.9972
+  },
+  "selector_tradeoff_table": {
+    "incumbent_ranker_tf_mt_top32": {
+      "frac_writable_MT_routing_mass": 0.3736,
+      "frac_total_QA_Fisher_mass": 0.2959,
+      "mean_redundancy_of_selected": 0.771
+    },
+    "mass_ranked_tf_mass_mt_top32": {
+      "frac_writable_MT_routing_mass": 0.3823,
+      "frac_total_QA_Fisher_mass": 0.3262,
+      "mean_redundancy_of_selected": 0.7679
+    },
+    "best32_within_safest_quartile_fisher": {
+      "frac_writable_MT_routing_mass": 0.0462,
+      "frac_total_QA_Fisher_mass": 0.0028,
+      "mean_redundancy_of_selected": 0.7902
+    },
+    "best32_within_most_redundant_quartile": {
+      "frac_writable_MT_routing_mass": 0.1731,
+      "frac_total_QA_Fisher_mass": 0.1234,
+      "mean_redundancy_of_selected": 0.8416
+    },
+    "_definition": "per layer: fraction of the 511 writable slots' mean MT routing mass captured by the 32 selected slots (write bandwidth), fraction of total QA diagonal-Fisher mass sitting in those same 32 slots (retention risk), and their mean redundancy. Higher bandwidth / lower Fisher is better."
+  }
 }

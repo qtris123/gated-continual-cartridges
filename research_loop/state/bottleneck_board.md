@@ -187,6 +187,52 @@ the number that shows it. "It didn't help" never closes anything.
   only prints). The worker logged the cells via a parser under the no-edit rule; the losses are the
   harness's own, not recomputed. `EVAL_MODE=icl` also does **not** hang, unlike the cartridge path (§1).
 
+## 🆕 B-GATE — DIAG-IMPORTANCE (2026-07-29): **attention mass does NOT capture importance**
+The human's precondition is **validated**: the incumbent TF ranker's assumption that attention mass ≈
+importance is **false**, by a wide margin. Gate passed — the pipeline reproduces DIAG-ROUTING to 4–5 s.f.
+(top-32 overlap 0.91417 vs 0.914; cosine 0.998989 vs 0.99899).
+
+- **Spearman(`tf_mass_qa`, `fisher`) = 0.579** pooled, CI [0.559, 0.613]; per-layer **0.666 ± 0.122**
+  (0.471 at L5 → 0.924 at L35). Disattenuated for split-half reliability it rises only to 0.596/0.686 —
+  **0.9 is excluded by a wide margin.** The gating family is **not** bounded by the correlation test.
+- ⚠️ **`kl_loo` is NOT an independent signal — this kills KL-divergence as a distinct criterion.**
+  Per-layer ρ = **0.968** with attention mass, exactly as the algebra predicts: the exact leave-one-out
+  KL is **−log(1−w_j)**, a monotone function of the slot's own attention weight. Ranking by LOO-KL *is*
+  ranking by attention mass. `entropy` is near-orthogonal to Fisher (0.237) and so is not a proxy either.
+- 🔑 **The best gradient-free proxy for Fisher is `redundancy`, ρ = −0.648** — and it needs **no eval
+  data and no backward pass**, just one 512×512 inverse per layer. That matters because Fisher requires a
+  diagnostic backward pass; redundancy keeps the whole selector purely linear-algebraic.
+- **Every importance selector picks a nearly disjoint set from the incumbent** (top-32 overlap):
+  `tf_mass_qa` 83.3% · **most-redundant 10.7%** · contrast 1.0% · lowest-entropy 0.4% ·
+  **lowest-Fisher 0.09%** · lowest-`kl_loo` 0.00%.
+- **Safe acquisition budget** (MT-wanted = per-layer top-32 by `tf_mass_mt`): attention **6.9%**
+  (reproducing the board's ~9%) → **Fisher 62.9%** [60.0, 67.0] → **redundancy 83.7%**.
+- **QA importance is concentrated:** top-32 of 511 slots hold **52.4%** of QA Fisher mass per layer
+  (top-64: 66.8%; participation ratio 64.3), while attention is diffuse (39.5%, PR 113). So a protective
+  gater genuinely has room.
+
+### 🔴 The decisive measurement — a directly measured Pareto trade, and it runs the wrong way for us
+| selector (32 slots/layer) | MT routing mass captured | QA Fisher mass exposed |
+|---|---|---|
+| **incumbent (attention)** | **37.4%** | **29.6%** |
+| best-32 within the safest QA-Fisher quartile | 4.62% | 0.28% |
+| **redundancy (at chance)** | 17.3% | 12.3% |
+
+**106× less QA exposure for 8.1× less write bandwidth** — because MT-wanted and QA-safe are
+**anti-aligned**: their intersection is **11× below chance** (0.72 slots/layer vs 8.0 expected).
+**`redundancy` is the only metric whose intersection with MT-wanted is *at* chance** (7.33 vs 8.0).
+
+⇒ **The headroom is real but sits on the RETENTION axis — which is already 0.57 ahead of budget — and it
+is bought with acquisition bandwidth, which is the entire remaining deficit.** Selecting for QA-safety at
+fixed `top_t` trades away the only axis we need.
+⇒ **The one play the geometry permits: run the trade in REVERSE.** Because `redundancy` is at chance, a
+redundancy-gated selector at **larger `top_t`** should buy MT bandwidth *above* the incumbent's 37.4%
+while holding QA Fisher exposure at or below its 29.6% — i.e. spend the QA slack rather than the MT
+deficit. At top_t=64 the linear projection is ~34.6% MT / 24.6% QA-Fisher; at 128, ~69% / ~49%.
+**That, not a protective gater at fixed budget, is what this measurement supports.** → MECH-INFOGATE.
+- Unresolved: ρ(`tf_mass_qa`, `contrast`), CI [−0.248, +0.085]. bf16 is not a limitation (fp32 control
+  ρ = 0.99966).
+
 ## ✅ MECH-SEED (2026-07-29): **the first seed-varied confirmation in this project's history**
 **The MT effect survives seed variance and is not marginal. The QA effect does not.**
 
