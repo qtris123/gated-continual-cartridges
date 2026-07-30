@@ -5,6 +5,8 @@ in-scope mechanism family with a measured cause (see `../2026-07-29-am-investiga
 
 | file | topic |
 |---|---|
+| **`DIGEST.md`** | ⭐ **start here** — every claim, its evidence, its source, in one file |
+| `00-CONSOLIDATED.md` | the action list: retraction, errors, ranked next steps |
 | `01-compressed-cache-cl.md` | continual learning on compressed caches / fixed-size KV memory |
 | `02-sparse-finetuning-cl.md` | sparse finetuning & continual update (parameter/slot isolation) |
 | `03-gating-mechanisms.md` | gating & routing mechanisms for CL on compressed KV |
