@@ -262,6 +262,9 @@ def compact_cache_am_phase1(
     strip_reference_system_prompt: bool = True,
     global_teacher_positions: bool = False,
     rope_theta: float = 10000.0,
+    nnls_iters: Optional[int] = None,
+    beta_w_lower: Optional[float] = None,
+    beta_w_upper: Optional[float] = None,
     local_rank="cuda",
 ) -> Tuple[TrainableCache, dict]:
     """Classic AM compaction Phase 1 over all QA documents.
@@ -272,9 +275,23 @@ def compact_cache_am_phase1(
        to reproduce the teacher's attention output on the reference queries.
     4. Assemble a TrainableCache with teacher-derived keys (and optional beta).
 
+    ``nnls_iters`` / ``beta_w_lower`` / ``beta_w_upper`` override the beta fit's
+    PGD budget and weight box; ``None`` keeps the per-mode reference default from
+    ``am.key_select`` (highest_attention: 2 iters, ``[e^-3, e^3]``; omp: 0 iters,
+    ``[1e-12, e^7]``).
+
     Returns (cartridge, stats). No Phase-2 stabilizers are used (one-shot compaction).
     """
     t0 = time.time()
+    beta_fit_kwargs = {
+        name: value
+        for name, value in (
+            ("n_iters" if key_select == "omp" else "nnls_iters", nnls_iters),
+            ("w_lower", beta_w_lower),
+            ("w_upper", beta_w_upper),
+        )
+        if value is not None
+    }
     n_layers = attn_config.n_layers
     n_kv_heads = attn_config.n_heads
     head_dim = attn_config.head_dim
@@ -414,10 +431,13 @@ def compact_cache_am_phase1(
                 queries = queries[idx]
 
             if key_select == "omp":
-                C1, beta, sel_idx = select_keys_omp(K_head, queries, num_tokens, head_dim)
+                C1, beta, sel_idx = select_keys_omp(
+                    K_head, queries, num_tokens, head_dim, **beta_fit_kwargs,
+                )
             else:
                 C1, beta, sel_idx = select_keys_highest_attention(
                     K_head, queries, num_tokens, head_dim, score_method="rms",
+                    **beta_fit_kwargs,
                 )
             if not enable_beta:
                 beta = torch.zeros(C1.shape[0], device=device, dtype=torch.float32)

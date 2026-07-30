@@ -10,6 +10,34 @@ import torch.nn.functional as F
 
 from cartridges.am.core import _attention_scores, _inv_sqrt_d
 
+# ---------------------------------------------------------------------------
+# NNLS box + iteration budget for the Phase-1 key-selection beta fit.
+#
+# These now follow the AM reference implementation's own algorithm configs
+# (`compaction/evaluation/configs/algorithms/`), which pair the box with the
+# iteration count as a single recipe per selection mode:
+#   highest_attention_keys.py -> nnls_iters=2, lower=exp(-3), upper=exp(3)
+#   summarize_then_compact.py -> nnls_iters=0, upper=exp(7)   (OMP; no lower,
+#                                which the reference `_nnls_pg` floors at 1e-12)
+# Paper backing: App. C.2 "Stabilizing beta" / Algorithm 3.
+#
+# PREVIOUS VALUES used by every Phase-1 experiment in this tree before
+# 2026-07-30 (kept here so old runs stay interpretable, and so a sweep can go
+# back by passing them explicitly):
+#   highest_attention: n_iters=200, lower=1e-12, upper=None
+#   omp:               n_iters=200, lower=1e-12, upper=None
+# With upper=None the fit is unbounded above and the lower bound of 1e-12 puts
+# a killed key at beta = log(1e-12) = -27.6, i.e. the "beta ~= -inf, key can no
+# longer contribute regardless of Cv" state App. C.2 introduces the box to
+# prevent (LIT-002).
+# ---------------------------------------------------------------------------
+HA_NNLS_ITERS = 2
+HA_W_LOWER = math.exp(-3.0)
+HA_W_UPPER = math.exp(3.0)
+OMP_NNLS_ITERS = 0
+OMP_W_LOWER = 1e-12
+OMP_W_UPPER = math.exp(7.0)
+
 
 def nnls_projected_gradient(
     Phi: torch.Tensor,
@@ -139,8 +167,16 @@ def select_keys_highest_attention(
     doc_key_start: Optional[int] = None,
     doc_rope_offset: Optional[int] = None,
     rope_theta: float = 10000.0,
+    nnls_iters: int = HA_NNLS_ITERS,
+    w_lower: float = HA_W_LOWER,
+    w_upper: Optional[float] = HA_W_UPPER,
 ) -> Tuple[torch.Tensor, torch.Tensor, list]:
     """Select top-t keys by attention score (highest-attention-keys AM).
+
+    Args:
+        nnls_iters / w_lower / w_upper: the beta fit's PGD budget and weight box.
+            Defaults are the reference config's ``nnls2_-3_3``; see the module
+            header for the previous (unbounded, 200-iteration) values.
 
     Returns:
         C1: (t, d) selected keys
@@ -175,8 +211,14 @@ def select_keys_highest_attention(
     exp_scores = torch.exp(scores - scores.max(dim=1, keepdim=True).values)
     target_mass = exp_scores.sum(dim=1)
     Phi = exp_scores[:, indices]
-    w = nnls_projected_gradient(Phi, target_mass, n_iters=200)
-    beta = torch.log(w.clamp(min=1e-12))
+    w = nnls_projected_gradient(
+        Phi,
+        target_mass,
+        n_iters=nnls_iters,
+        lower_bound=w_lower,
+        upper_bound=w_upper,
+    )
+    beta = torch.log(w.clamp(min=w_lower, max=w_upper))
 
     return C1, beta, indices
 
@@ -186,10 +228,12 @@ def select_keys_omp(
     queries: torch.Tensor,
     t: int,
     head_dim: int,
-    n_iters: int = 200,
+    n_iters: int = OMP_NNLS_ITERS,
     doc_key_start: Optional[int] = None,
     doc_rope_offset: Optional[int] = None,
     rope_theta: float = 10000.0,
+    w_lower: float = OMP_W_LOWER,
+    w_upper: Optional[float] = OMP_W_UPPER,
 ) -> tuple[torch.Tensor, torch.Tensor, list[int]]:
     """Greedy OMP key selection on attention-mass features (AM paper Algorithm 1).
 
@@ -197,6 +241,12 @@ def select_keys_omp(
         keys: (T, d) candidate keys
         queries: (n, d) reference queries
         t: number of keys to select
+        n_iters / w_lower / w_upper: the inner NNLS budget and weight box, used
+            both for the greedy residual solves and the final fit. Defaults are
+            the reference config's ``nnls0_-inf_7``; ``n_iters=0`` means clamped
+            least squares with no PGD refinement, so this also changes which
+            keys the greedy loop picks. See the module header for the previous
+            values.
 
     Returns:
         selected_keys: (t, d)
@@ -224,7 +274,13 @@ def select_keys_omp(
             col_scores = (phi.T @ target_mass).abs()
         else:
             phi_s = phi[:, selected]
-            w = nnls_projected_gradient(phi_s, target_mass, n_iters=n_iters)
+            w = nnls_projected_gradient(
+                phi_s,
+                target_mass,
+                n_iters=n_iters,
+                lower_bound=w_lower,
+                upper_bound=w_upper,
+            )
             residual = target_mass - phi_s @ w
             col_scores = (phi.T @ residual).abs()
             col_scores[selected] = -1.0
@@ -238,8 +294,14 @@ def select_keys_omp(
         selected.append(next_idx)
 
     phi_s = phi[:, selected]
-    w = nnls_projected_gradient(phi_s, target_mass, n_iters=n_iters)
-    beta = torch.log(w.clamp(min=1e-12))
+    w = nnls_projected_gradient(
+        phi_s,
+        target_mass,
+        n_iters=n_iters,
+        lower_bound=w_lower,
+        upper_bound=w_upper,
+    )
+    beta = torch.log(w.clamp(min=w_lower, max=w_upper))
     selected_keys = keys[selected]
     return selected_keys, beta, selected
 
