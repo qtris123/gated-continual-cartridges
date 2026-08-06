@@ -4,6 +4,8 @@ Reusable diagnostics for:
 - TF-IDF ranking vs absolute attention mass on selected support S
 - design-matrix conditioning and effective ridge λ
 - value-growth / reconstruction metrics across regularization variants
+
+Read-only: nothing here is part of a write. Sweeps import it directly.
 """
 
 from __future__ import annotations
@@ -13,11 +15,8 @@ from typing import Any, Optional
 
 import torch
 
-from cartridges.attention_matching import (
-    compute_attention_weights,
-    effective_ridge_lambda,
-    sparse_am_value_update,
-)
+from cartridges.am.components.objective import sparse_am_value_update
+from cartridges.am.core import compute_attention_weights, effective_ridge_lambda
 
 
 @dataclass

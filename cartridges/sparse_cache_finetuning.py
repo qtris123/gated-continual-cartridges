@@ -1010,7 +1010,7 @@ def collect_background_stats(
     scaling = cache.config.head_dim ** -0.5
 
     _cam = wrapped_model.module if is_ddp else wrapped_model
-    had_hooks = getattr(_cam, "_sparse_enabled", False) or getattr(_cam, "_am_enabled", False)
+    had_hooks = getattr(_cam, "_captured_queries", None) is not None
     if not had_hooks:
         captured, handles = install_query_capture_hooks(_cam.model)
         _cam._captured_queries = captured
