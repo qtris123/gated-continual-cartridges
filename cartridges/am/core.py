@@ -2,7 +2,12 @@
 
 Contains the low-level primitives shared by every AM solver:
 - scaled attention scores / weights / outputs (with optional doc-RoPE offset)
+- RoPE re-basing of post-RoPE keys and queries
 - effective ridge lambda computation and the ridge least-squares solve
+
+Nothing here knows about configs, caches, or stages: ``core`` is the only module
+both ``initial/`` and ``continual/`` may depend on without going through
+``components/``.
 """
 
 from __future__ import annotations
@@ -40,6 +45,35 @@ def _apply_rope_offset_to_queries(
     x2 = queries[..., head_dim // 2 :]
     rotated = torch.cat((-x2, x1), dim=-1)
     return queries * cos + rotated * sin
+
+
+def _rope_reposition(
+    keys: torch.Tensor,
+    from_pos: torch.Tensor,
+    to_pos: torch.Tensor,
+    head_dim: int,
+    rope_theta: float = 10000.0,
+) -> torch.Tensor:
+    """Rotate each post-RoPE key row from absolute ``from_pos`` to ``to_pos``.
+
+    Applies a per-row RoPE rotation by ``(to_pos - from_pos)`` so teacher keys,
+    baked at their scattered document positions, are re-based onto sequential
+    cartridge slot positions (KVFromText-consistent geometry) for eval.
+    """
+    device = keys.device
+    delta = (to_pos.to(torch.float32) - from_pos.to(torch.float32))  # (t,)
+    inv_freq = 1.0 / (
+        rope_theta
+        ** (torch.arange(0, head_dim, 2, device=device, dtype=torch.float32) / head_dim)
+    )
+    angle = delta[:, None] * inv_freq[None, :]  # (t, d/2)
+    emb = torch.cat([angle, angle], dim=-1)  # (t, d)
+    cos = emb.cos().to(keys.dtype)
+    sin = emb.sin().to(keys.dtype)
+    x1 = keys[..., : head_dim // 2]
+    x2 = keys[..., head_dim // 2 :]
+    rotated = torch.cat((-x2, x1), dim=-1)
+    return keys * cos + rotated * sin
 
 
 def _attention_scores(
