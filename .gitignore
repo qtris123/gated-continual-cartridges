@@ -211,4 +211,5 @@ continual_learning_via_sparse_memory_finetuning/
 data/longhealth/train/*.parquet
 data/qasper/train/*.parquet
 
-.research_loop/
+# Local-only research loop docs/results — keep off this branch
+research_loop/

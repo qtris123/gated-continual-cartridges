@@ -1,7 +1,0 @@
-arm	selector	top_t	run_dir	rc	wall_s	solve_s	wandb_url
-C0_control	tfidf	32	/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-07-17-36-continual_am_sparse/c28044a8-c9d7-452c-a18e-44117e5f6f7b	0	570	351.2	https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/jmgeslj3
-R32	redundancy	32	/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-07-52-51-continual_am_sparse/ef58d93f-2b0f-47b8-98a9-2fcde6f59484	0	488	312.4	https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/cfxq1ngg
-R64	redundancy	64	/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-08-30-06-continual_am_sparse/22f527c6-9ae9-413c-bbd5-35158d20f41d	0	362	330.8	https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/0j8yd1qm
-R128	redundancy	128	/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-09-00-16-continual_am_sparse/ad9eb878-6115-4a17-9ad2-cdfbf9edb4cf	0	497	357.9	https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/n8sypan6
-X32	mass_x_redundancy	32	/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-09-31-11-continual_am_sparse/92f25ada-3c40-46ee-915c-fa28933d66ef	0	354	327.7	https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/wbcf9pm2
-F32	fisher	32	/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-09-58-34-continual_am_sparse/5db1006a-2c9a-475e-9198-a512f59206d2	0	632	329.7	https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/47hn748u

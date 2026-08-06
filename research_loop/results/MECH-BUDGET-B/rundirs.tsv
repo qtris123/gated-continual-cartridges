@@ -1,6 +1,0 @@
-arm	top_t	nq	dw	run_dir	rc	phase2_e2e_s	wandb_url
-G_t32q64	32	64	1e-2	/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-10-21-50-continual_am_sparse/0c556c11-713d-4c66-b14a-14c3047724f8	0	574	https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/xfu5614b
-A_t128q512	128	512	1e-2	/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-11-07-10-continual_am_sparse/7196310f-2c1c-4abc-8b59-7a4ee4269be9	0	605	https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/424rot6v
-C_t64q512	64	512	1e-2	/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-11-52-04-continual_am_sparse/0fca508b-49f6-4e63-bb5d-7ce0ac766467	0	464	https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/4cnozrdx
-B_t256q1024	256	1024	1e-2	/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-24-30-continual_am_sparse/39f70bd3-d369-4706-9ec3-ec835af66006	0	438	https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/upo8xxdz
-D_t128q512dw	128	512	8e-2	/localhome/local-triv/gated-continual-cartridges_explore/outputs/2026-07-29-12-39-51-continual_am_sparse/36565688-f8ac-4567-9daa-aeedb2cd4a4a	0	480	https://wandb.ai/vqtri-purdue-university/SEACrowd/runs/1bdhvksd
