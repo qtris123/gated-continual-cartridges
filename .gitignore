@@ -210,3 +210,5 @@ continual_learning_via_sparse_memory_finetuning/
 # Large training parquet shards (>100 MB; exceed GitHub file size limit)
 data/longhealth/train/*.parquet
 data/qasper/train/*.parquet
+
+.research_loop/
