@@ -26,7 +26,7 @@ import torch
 from torch.utils.data import DataLoader
 from transformers import AutoTokenizer
 
-from cartridges.am.phase1 import compact_cache_am_phase1
+from cartridges.am.initial import compact_cache_am_phase1
 from cartridges.cache import AttnConfig
 from cartridges.datasets import DataSource, TrainDataset, LossEvalDataset
 from cartridges.models import FlexLlamaForCausalLM, FlexQwen3ForCausalLM, HFModelConfig

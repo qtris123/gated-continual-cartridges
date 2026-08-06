@@ -1,5 +1,8 @@
 # qasper2 scripts
 
+**Start here for Phase-2 AM:** [`AM_EXPERIMENTS.md`](AM_EXPERIMENTS.md) — the techniques implemented,
+the command line for each experiment group, and what each one found.
+
 Organized into four groups:
 
 | Folder | Purpose |

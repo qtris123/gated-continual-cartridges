@@ -15,30 +15,27 @@ from pathlib import Path
 import torch
 from transformers import AutoTokenizer
 
-from cartridges.am_reference_data import (
+from cartridges.am.components.queries import (
+    ReferenceQueries,
     build_reference_dataloader,
-    canonical_document_prompt,
     cleanup_reference_parquet,
+    full_paper_prompt,
     group_conversations_by_document,
     limit_conversations,
     load_conversations,
 )
-from cartridges.am_stability_probe import (
+from cartridges.am.components.teacher import (
+    compute_teacher_targets,
+    concat_teacher_kv,
+    prefill_document_kv_cache,
+)
+from cartridges.am.core import compute_attention_weights
+from cartridges.am.diagnostics import (
     DocProbeSummary,
     probe_sparse_solve,
     probe_tfidf_vs_absolute_mass,
     summarize_slot_mass_probes,
     summarize_solve_probes,
-)
-from cartridges.am_teacher import (
-    compute_teacher_targets,
-    concat_teacher_kv,
-    prefill_document_kv_cache,
-)
-from cartridges.attention_matching import compute_attention_weights
-from cartridges.attention_matching_finetuning import (
-    AttentionMatchingFinetuningConfig,
-    _collect_reference_queries,
 )
 from cartridges.cache import TrainableCache
 from cartridges.models import FlexQwen3ForCausalLM
@@ -123,6 +120,7 @@ def main():
     )
     out_dir.mkdir(parents=True, exist_ok=True)
 
+    qasper_topic = os.environ.get("AM_QASPER_TOPIC", "MT")
     max_docs = int(os.environ.get("PROBE_MAX_DOCS", "4"))
     max_ref = int(os.environ.get("MAX_REF_EXAMPLES_PER_DOC", "8"))
     top_t = int(os.environ.get("TOP_T", "64"))
@@ -146,20 +144,12 @@ def main():
     n_kv = attn_config.n_heads
     head_dim = attn_config.head_dim
 
-    cfg = AttentionMatchingFinetuningConfig(
-        enabled=True,
-        top_t=top_t,
-        granularity="per_layer",
-        use_idf=True,
-        background_indices_path=str(bg_stats),
+    # Only the query stage is reused; this probe does its own ranking and solving.
+    ref_queries = ReferenceQueries.Config(
+        max_ref_examples_per_doc=max_ref,
         queries_per_batch="all_tokens",
         max_queries_per_head=max_queries,
-        ridge_lambda=1e-4,
-        key_mode="freeze",
-        enable_beta=False,
-        target_mode="cartridge_plus_doc",
-        max_ref_examples_per_doc=max_ref,
-    )
+    ).instantiate()
     bg = BackgroundAccessTracker(num_batches=999999999, granularity="per_layer")
     bg.load(str(bg_stats))
     ranker = CacheTFIDFRanker(
@@ -177,7 +167,7 @@ def main():
     # Independent caches per regularization regime for recurrent multi-doc write.
     caches = {r["name"]: _clone_cache(str(phase1), device) for r in REGIMES}
     wrappeds = {
-        name: CacheAndModel(caches[name], model, am_config=cfg).to(device)
+        name: CacheAndModel(caches[name], model, capture_queries=True).to(device)
         for name in caches
     }
 
@@ -186,7 +176,7 @@ def main():
 
     for doc_idx, (doc_id, doc_convs) in enumerate(groups):
         slug = f"doc-{doc_idx:03d}"
-        system_prompt = canonical_document_prompt(doc_convs)
+        system_prompt = full_paper_prompt(doc_id, topic=qasper_topic)
         limited = limit_conversations(doc_convs, max_ref, seed=doc_idx)
         print(f"\n=== {slug} title={doc_id[:60]!r} n={len(limited)} ===")
 
@@ -206,15 +196,15 @@ def main():
         )
         loader, tmp = build_reference_dataloader(limited, tok, seed=doc_idx)
         try:
-            qacc, _, nbat = _collect_reference_queries(
+            qacc, _, nbat = ref_queries.collect(
                 wrapped,
                 cache,
                 loader,
-                cfg,
-                n_layers,
-                n_kv,
-                head_dim,
-                device,
+                granularity="per_layer",
+                n_layers=n_layers,
+                n_kv_heads=n_kv,
+                head_dim=head_dim,
+                device=device,
                 max_batches=len(loader),
             )
         finally:

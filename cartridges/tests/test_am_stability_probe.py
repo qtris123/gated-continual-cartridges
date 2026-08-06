@@ -4,11 +4,12 @@ from __future__ import annotations
 
 import torch
 
-from cartridges.am_stability_probe import (
+from cartridges.am.components.objective import sparse_am_value_update
+from cartridges.am.core import effective_ridge_lambda
+from cartridges.am.diagnostics import (
     probe_tfidf_vs_absolute_mass,
     summarize_slot_mass_probes,
 )
-from cartridges.attention_matching import effective_ridge_lambda, sparse_am_value_update
 
 
 def test_effective_ridge_lambda_spectral_floor():

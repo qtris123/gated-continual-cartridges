@@ -28,7 +28,7 @@ from cartridges.sparse_cache_finetuning import (
     SparseCacheFinetuningConfig,
     collect_background_stats,
 )
-from cartridges.attention_matching_finetuning import refine_cache_am_phase1
+from cartridges.am.initial import refine_cache_am_phase1
 from cartridges.train import TrainConfig, LossEvalConfig, CacheAndModel, evaluate_perplexity, save_cache
 from cartridges.utils import seed_everything, get_logger
 from cartridges.utils.wandb import WandBConfig, prepare_wandb

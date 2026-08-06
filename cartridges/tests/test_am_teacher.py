@@ -4,12 +4,12 @@ from __future__ import annotations
 
 import torch
 
-from cartridges.am_teacher import (
+from cartridges.am.components.teacher import (
     compute_teacher_mass,
     compute_teacher_targets,
     concat_teacher_kv,
 )
-from cartridges.attention_matching import compute_attention_output
+from cartridges.am.core import compute_attention_output
 
 HEAD_DIM = 16
 
@@ -46,7 +46,7 @@ def test_teacher_doc_rope_offset_changes_scores():
     queries = torch.randn(4, head_dim)
     k_t = torch.cat([k_c, k_d], dim=0)
 
-    from cartridges.attention_matching import _attention_scores
+    from cartridges.am.core import _attention_scores
 
     naive = (queries @ k_t.T).to(torch.float32) * (1.0 / head_dim) ** 0.5
     corrected = _attention_scores(

@@ -6,9 +6,9 @@ reconstruction MSE well below an all-random baseline, without needing a model.
 
 import torch
 
-from cartridges.am.compaction import compute_compaction_c2
+from cartridges.am.components.keys import select_keys_highest_attention
 from cartridges.am.core import compute_attention_output
-from cartridges.am.key_select import select_keys_highest_attention
+from cartridges.am.initial.compaction import compute_compaction_c2
 
 HEAD_DIM = 32
 T_TEACHER = 256

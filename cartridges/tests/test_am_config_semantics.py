@@ -1,32 +1,38 @@
-"""Config semantics for Phase 2 AM finetuning."""
+"""Config semantics for the Phase 2 AM write."""
 
 from __future__ import annotations
 
 import torch
 
-from cartridges.attention_matching_finetuning import (
-    AMQueryAccumulator,
-    AttentionMatchingFinetuningConfig,
-    _should_fit_beta,
-)
+from cartridges.am.components.beta import BetaFitter
+from cartridges.am.components.queries import AMQueryAccumulator
 
 
-def test_should_fit_beta_auto_for_key_rewrite():
-    config = AttentionMatchingFinetuningConfig(key_mode="omp", enable_beta=None)
-    assert _should_fit_beta(config) is True
+def _fitter(enabled) -> BetaFitter:
+    return BetaFitter.Config(enabled=enabled).instantiate()
+
+
+def test_should_fit_beta_auto_is_off_for_key_rewrite():
+    # B-SOLVE: beta is an INDEPENDENT axis from `key_mode`. The historical
+    # fallback (`key_mode != "freeze"`) silently switched the NNLS path on for
+    # every key experiment and made "beta with frozen keys" -- what B-ROUTE
+    # needs -- inexpressible. Unset now means OFF whatever the keys are doing.
+    assert _fitter(None).should_fit(key_mode="omp") is False
 
 
 def test_should_fit_beta_respects_explicit_disable():
-    config = AttentionMatchingFinetuningConfig(key_mode="omp", enable_beta=False)
-    assert _should_fit_beta(config) is False
+    assert _fitter(False).should_fit(key_mode="omp") is False
 
 
 def test_should_fit_beta_freeze_requires_explicit_enable():
-    config = AttentionMatchingFinetuningConfig(key_mode="freeze", enable_beta=None)
-    assert _should_fit_beta(config) is False
+    assert _fitter(None).should_fit(key_mode="freeze") is False
+    assert _fitter(True).should_fit(key_mode="freeze") is True
 
-    config = AttentionMatchingFinetuningConfig(key_mode="freeze", enable_beta=True)
-    assert _should_fit_beta(config) is True
+
+def test_beta_enabled_is_independent_of_key_mode():
+    for key_mode in ("freeze", "highest_attention", "omp"):
+        assert _fitter(True).should_fit(key_mode=key_mode) is True
+        assert _fitter(False).should_fit(key_mode=key_mode) is False
 
 
 def test_per_head_query_access_scores_preserve_kv_heads():

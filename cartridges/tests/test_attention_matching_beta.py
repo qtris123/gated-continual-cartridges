@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import torch
 
-from cartridges.attention_matching import refit_beta_nnls
-from cartridges.am_teacher import compute_teacher_log_mass
+from cartridges.am.components.beta import refit_beta_nnls
+from cartridges.am.components.teacher import compute_teacher_log_mass
 
 HEAD_DIM = 16
 N_KEYS = 8

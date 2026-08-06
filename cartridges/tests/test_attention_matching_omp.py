@@ -4,7 +4,10 @@ from __future__ import annotations
 
 import torch
 
-from cartridges.attention_matching import select_keys_highest_attention, select_keys_omp
+from cartridges.am.components.keys import (
+    select_keys_highest_attention,
+    select_keys_omp,
+)
 
 HEAD_DIM = 16
 N_KEYS = 20

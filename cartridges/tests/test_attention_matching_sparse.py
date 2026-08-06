@@ -5,13 +5,13 @@ from __future__ import annotations
 import pytest
 import torch
 
-from cartridges.attention_matching import (
-    compute_attention_output,
+from cartridges.am.components.objective import (
     guarded_sparse_am_value_update,
-    naive_compaction_c2_update,
     sparse_am_value_update,
 )
-from cartridges.attention_matching_finetuning import AMTargetAccumulator
+from cartridges.am.components.queries import AMTargetAccumulator
+from cartridges.am.core import compute_attention_output
+from cartridges.am.initial.compaction import naive_compaction_c2_update
 
 
 HEAD_DIM = 32
