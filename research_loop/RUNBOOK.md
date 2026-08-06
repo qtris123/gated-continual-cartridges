@@ -23,31 +23,30 @@ warm runs are ~1s. **Workers: launch every train/eval as a BACKGROUND job and po
 never run GPU work synchronously under a short (<300s) timeout — you WILL get false timeouts.**
 Do a throwaway warm-up import once per fresh machine before timing anything.
 
-## 0b. WANDB MANDATE — every GPU run is logged, cleanly (NON-NEGOTIABLE)
-**A GPU run with no wandb run URL is an invalid result.** It gets marked failed and re-run.
+## 0b. RESULTS ON DISK — every GPU run leaves a parseable record (NON-NEGOTIABLE)
+**A GPU run whose numbers cannot be re-read from disk is an invalid result.** It gets marked failed
+and re-run.
 
-- **Never** set `WANDB_MODE=disabled` or `WANDB_DISABLED=1`. Some historical
-  `research_loop/results/EXP-*/launch_exp*.sh` files hard-code `WANDB_MODE=disabled` — **do not copy
-  those lines into new launches.** The AM/initial wrapper scripts already default `WANDB_DISABLED=0`.
-- Project/entity come from the §0 env (`SEACrowd` / `vqtri-purdue-university`) via
-  `cartridges/utils/wandb.py::WandBConfig`. Confirm both are exported before launching.
+- ⚠️ **Wandb has been removed from the AM path** — `continual_am_sparse.py`, `eval_forgetting.py` and
+  `REPRODUCE_ALL.sh` no longer read `WANDB_GROUP` / `WANDB_NOTES` / `WANDB_DISABLED` or construct a
+  `WandBConfig`; they pass `wandb=None`, which every call site in `cartridges/train.py` already
+  guards. Phase-1, dense and sparse-gradient scripts still log to wandb. Historical entries in
+  `state/` cite wandb run URLs; those runs predate the removal. See `AM_CONFIG.md`
+  "Experiment logging".
 - **Naming contract** (so a human can navigate the project months later):
   ```bash
   RUN_NAME="<ID>_<short-slug>"          # e.g. EXP-014_keymode-highattn ; DIAG-003_route-mass
-  WANDB_GROUP="<board-entry-id>"        # e.g. B-ROUTE  — groups every run attacking one cause
-  WANDB_NOTES="<variable under test> vs <baseline ID>"
   ```
-  `continual_am_sparse.py` reads `WANDB_GROUP` / `WANDB_NOTES` / `WANDB_DISABLED` directly (L89, L561-571)
-  and adds config tags; `eval_forgetting.py` reads `RUN_NAME` / `WANDB_GROUP` / `WANDB_DISABLED`.
-- **What must land in wandb for a training/solve run:** both eval-split losses
-  (`eval_qasper_perplexity/loss` — the mean-CE, not `perplexity`), `am/mean_mse`, `am/top_t`,
-  `am/trainable_pct`, and the run config (the env-knob values). Diagnostic runs additionally log their
-  localizing scalars under a `diag/` prefix, tagged `diagnostic`.
-- **Capture the run URL** from the launch log (`wandb: 🚀 View run at …`) and put it in the bundle as
-  `wandb_run_url` + `wandb_run_id`. Cross-check with
-  `.cursor/skills/cartridges-experiment-investigation/scripts/fetch_wandb_data.py` if the log is noisy.
+  `RUN_NAME` names the run directory under `$CARTRIDGES_OUTPUT_DIR`.
+- **What must land on disk for a training/solve run:** `config.yaml` (the full resolved config, i.e.
+  every env-knob value that was in play), `phase2_summary.json` (both eval-split losses,
+  `mean_mse_last_doc`, `value_norms`, the regularization block), `per_document_am_stats.pt`, and the
+  per-document `am_doc_*.pt` payloads. Diagnostic runs additionally write their localizing scalars
+  into `research_loop/results/<ID>/`.
+- **Capture the run directory** from the launch log (`... Saved to <dir>`) and put it in the bundle as
+  `run_dir`.
 - ✅ The old `num_elements=0` / `nan` token-count bug in `evaluate_perplexity` was **fixed 2026-07-28**,
-  so the wandb `perplexity` field is no longer garbage — but **`Eval loss` (mean CE) is still the number
+  so the logged `perplexity` field is no longer garbage — but **`Eval loss` (mean CE) is still the number
   to report** (§1).
 
 ## 1. The task & the two axes ("task performance" here = perplexity)
@@ -57,16 +56,15 @@ continually writes new docs into it. Two eval splits, both scored as **mean cros
 - `data/qasper/eval/qasper_eval_QA.parquet` → **forgetting** (retention of Phase-1 knowledge)
 - `data/qasper/eval/qasper_eval_MT.parquet` → **acquisition** (new-doc learning)
 
-✅ **FIXED (2026-07-28):** the wandb `num_elements`/`num_system_and_user_tokens`/
+✅ **FIXED (2026-07-28):** the `num_elements`/`num_system_and_user_tokens`/
 `num_assistant_tokens`/`macro_loss` fields used to stay at their dead-init value (0 / `nan` /
 `None`) in `evaluate_perplexity` (`cartridges/train.py`), which made the accompanying
 `perplexity` field look like garbage (e.g. `exp(11.29)=80019` for a genuinely-broken July AM
 run, with `num_elements=0` as the tell). Root cause fixed: the counters are now actually
 incremented. **`Eval loss` (mean-CE) was never affected** — it used the correctly-accumulated
 `epoch_loss`/`epoch_denom` even before this fix — but it's still the primary number to read.
-Wandb logging is also **back on by default** (`WANDB_DISABLED=0` in the AM wrapper scripts;
-dense/sparse-grad scripts never disabled it — only individual one-off `launch_exp*.sh` files
-did, via an explicit `WANDB_MODE=disabled` override that new launches should drop).
+The AM path no longer logs anywhere but disk (§0b), so `Eval loss` is parsed off the log line and
+the eval metrics are mirrored into `phase2_summary.json`.
 
 ⚠️ **UNITS: the harness `Eval loss` is mean cross-entropy = ln(perplexity).** Many historical repo
 figures (RUNBOOK §8, notes, CSVs) are quoted in **perplexity**, NOT loss. `ppl = exp(loss)`. **Only
@@ -146,12 +144,13 @@ Set them as `VAR=val ... bash examples/qasper2/scripts/core/train_continual_am_s
 | Lever | ENV VARS (default) |
 |---|---|
 | **Gating** | `SLOT_SELECTION`∈{tfidf,attention_mass,residual_budget} (tfidf), `USE_IDF`(1), `IDF_PRIOR_WEIGHT`(0.0), `GRANULARITY`∈{global,per_layer,per_head} (per_layer), `TOP_T`(64), `MIN_TOP_T_PER_LAYER`(1), `IDF_SMOOTHING`(1.0), `IDF_TOP_K`(128) |
-| **Teacher targets** | `TARGET_MODE`∈{cartridge_plus_doc,self,…} (cartridge_plus_doc), `KEY_MODE`∈{freeze,highest_attention,omp} (freeze), `ENABLE_BETA`(unset), `BETA_FIT_SCOPE`(selected), `QUERIES_PER_BATCH`(all_tokens) |
+| **Teacher targets** | `KEY_MODE`∈{freeze,highest_attention,omp} (freeze), `AM_ROPE_THETA`(10000), `AM_KEY_REPOSITION`(0), `ENABLE_BETA`(unset), `BETA_FIT_SCOPE`(selected), `QUERIES_PER_BATCH`(all_tokens) |
 | **Support allocation** | `TOP_T`, `MIN_TOP_T_PER_LAYER` (residual_budget floor), `MAX_REF_EXAMPLES_PER_DOC`(32) |
 | **Regularization** | `RIDGE_LAMBDA`(1e-4), `RIDGE_SCALE`∈{spectral,frobenius,fixed} (spectral), `RIDGE_LAMBDA_MIN`(0.0), `DELTA_WEIGHT`(1e-2), `OLD_REFERENCE_WEIGHT`(1.0), `ENABLE_OLD_REFERENCE_GUARD`(0), `OLD_REF_DATA_PATH` |
-| Run/exec | `AM_EXECUTION_MODE`(per_document), `EPOCHS`(10), `GLOBAL_BATCH_SIZE`(32), `MAX_STEPS`(550), `EVAL_EVERY_N_STEPS`(15), `NUM_TOKENS`, `MODEL_NAME`(Qwen/Qwen3-4B-Instruct-2507), `RUN_NAME`, `WANDB_GROUP` |
-Config/code: `cartridges/am/finetune.py`, `cartridges/am/{value_solve,core,ranking,key_select}.py`,
-`cartridges/sparse_cache_finetuning.py` (`CacheTFIDFRanker`). A **W3 BUILD** worker is needed for any
+| Run/exec | `MODEL_NAME`(Qwen/Qwen3-4B-Instruct-2507), `RUN_NAME`, `SAVE_AFTER_EACH_DOCUMENT`(1), `MAX_QUERIES_PER_HEAD`(64), `AM_SEED_OFFSET`(0). Phase 2 is closed-form: it has no optimizer, epochs or batch size (see AM_CONFIG.md "Deleted"). |
+Config/code: `cartridges/am/continual/config.py::AMContinualConfig` (field-by-field reference:
+`research_loop/AM_CONFIG.md`), `cartridges/am/components/{slots,queries,teacher,keys,beta,objective}.py`,
+`cartridges/am/core.py`, `cartridges/sparse_cache_finetuning.py` (`CacheTFIDFRanker`). A **W3 BUILD** worker is needed for any
 mechanism outside this list — which, under the current mission, is where the answer is expected to be
 (MISSION §5, `state/literature_ledger.md`). See §9 for how to instrument these files.
 
@@ -190,8 +189,11 @@ if a MEASURE/TEST/VERIFY item is open and a GPU is idle, that is an orchestrator
     (sibling) config rejects → `Extra inputs are not permitted` at pydantic construction, crashing ALL runs.
     Before running an EDIT-based experiment: (a) set `PYTHONPATH="$CARTRIDGES_DIR:$PYTHONPATH"`, (b) verify with
     `python -c "import cartridges,os; print(os.path.dirname(cartridges.__file__))"` (must be `_explore`), and
-    (c) test the config CONSTRUCTS with the new field before a full run. Prefer making new kwargs OPT-IN and
-    passed CONDITIONALLY (`hasattr`) so stock runs never break.
+    (c) test the config CONSTRUCTS with the new field before a full run.
+    **The AM path no longer carries the conditional-kwarg workaround.** `AMContinualConfig` and the six stage
+    configs read their fields directly and the driver passes them unconditionally, so a sibling import now
+    fails loudly instead of silently running historical behaviour. Pin `PYTHONPATH`; do not reintroduce
+    `hasattr` guards there. (Elsewhere in the tree the old advice still stands.)
 11. **β / ENABLE_BETA is numerically broken (deferred).** The NNLS β-fit produces NaN / huge (~66.6) log-weights
     → rank-deficient value-solve (cholesky not-PD or lstsq NaN). Do NOT enable β without a deep numerical fix
     inside `refit_beta_nnls`. (EXP-005/005b/006 all failed.)
@@ -241,11 +243,15 @@ Read the target file before instrumenting; these are entry points, not a spec.
 ### 9a. Where the mechanism lives
 | what you want to see | look in |
 |---|---|
-| the closed-form solve itself (system built, ridge, solution) | `cartridges/am/value_solve.py`, `cartridges/am/core.py` |
-| slot selection / gating (TF-IDF, attention mass, budgets) | `cartridges/am/ranking.py`, `cartridges/sparse_cache_finetuning.py` |
-| key modes, OMP, β / NNLS mass matching | `cartridges/am/key_select.py` (`refit_beta_nnls`, `rewrite_keys_on_support`) |
-| the Phase-2 driver: targets, reference data, per-document loop | `cartridges/am/finetune.py` (`target_mode` handling ~L108-190, β calls ~L500-540) |
-| reference-query collection | `cartridges/am/query_accum.py`, `cartridges/am/reference_data.py`, `teacher.py` |
+| the closed-form solve itself (system built, ridge, solution) | `cartridges/am/components/objective.py`, `cartridges/am/core.py` |
+| slot selection / gating (TF-IDF, attention mass, budgets) | `cartridges/am/components/slots.py`, `cartridges/sparse_cache_finetuning.py` |
+| key modes, OMP | `cartridges/am/components/keys.py` (`select_keys_*`, `rewrite_keys_on_support`) |
+| β / NNLS mass matching | `cartridges/am/components/beta.py` (`refit_beta_nnls`, `nnls_projected_gradient`) |
+| the per-document write: teacher, keys, β, solve, diagnostics | `cartridges/am/continual/write.py` |
+| the Phase-2 run: document loop, checkpoints, evals | `cartridges/am/continual/run.py` |
+| reference-query collection and reference data | `cartridges/am/components/queries.py` |
+| Phase-1 cartridge construction | `cartridges/am/initial/{compaction,refine}.py` |
+| read-only probes (mass vs TF-IDF, solve conditioning) | `cartridges/am/diagnostics.py` |
 | the cache being written | `cartridges/cache.py` (`TrainableCache`) |
 | eval-time forward / scoring | `examples/qasper2/train/eval_forgetting.py`, `eval_icl.py`, `cartridges/train.py::evaluate_perplexity` |
 
@@ -262,8 +268,8 @@ Each of these is *deliberately cheating*; the point is what the ceiling implies,
 | **solve-quality** | solve the same objective iteratively (LSQR/CG) and compare to the closed form | **B-SOLVE** — a gap means numerics, not method |
 | **objective** | drive solve MSE toward 0 (unbounded support, `RIDGE_LAMBDA=0`) and watch CE | **B-OBJ** — MSE→0 with flat CE is the strongest possible evidence of objective mismatch |
 
-Log every oracle to wandb with `WANDB_GROUP=<board-entry-id>` and tag `oracle` — they are the most
-citable runs in the investigation.
+Give every oracle a `RUN_NAME=<board-entry-id>_oracle-<slug>` and keep its run directory — they are
+the most citable runs in the investigation.
 
 ### 9c. Seed control (needed for the confirmation standard)
 `continual_am_sparse.py` seeds via `config.seed` → `seed_everything` (L205/L306) and passes it to every

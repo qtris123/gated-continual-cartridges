@@ -91,6 +91,9 @@ below chance.** *The audit strengthens the negative.*
 - **N6 — `SLOT_SELECTION=random`** (~10 lines). **Nominated independently by threads 01 and 02.** Tests the
   mass law **6× outside its fit range**; MemoryLLM's actual policy; WISE argues random should *beat*
   importance here. Predictions differ across threads (2.40–2.58) — a real disagreement to resolve.
+  **Also the right null for TF-IDF:** if random ≈ incumbent (or beats it), the ranking signal is not buying
+  anything; if random lands where the mass law predicts (~2.54–2.58, i.e. clearly worse), TF/attention-mass
+  selection is load-bearing. Do this before further selector work.
 - **N7 — `CONTENTION-SWEEP`** (thread 05). Arms **D** disjoint-16 (511 slots partitioned; *never run* —
   DIAG-PERDOC tested **solo** writes, which conflates contention with the other 15 documents' presence),
   **P** incumbent, **S** one shared document-independent top-32. Falsifier: **D beats P by > ±0.049** kills

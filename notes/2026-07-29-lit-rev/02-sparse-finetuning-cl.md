@@ -817,6 +817,10 @@ matters.
 **Why:** it is the only single-variable arm that probes the law **6× outside** the range it was fit on,
 and WISE (L02-16) is a published argument that random can beat importance. If it lands on the line,
 the family is closed to the standard of the constraint dose-response.
+**Also the TF-IDF / attention-mass null:** random vs incumbent is the cleanest measurement of whether the
+ranking signal (TF, TF-IDF, attention mass) is actually helpful. If random ≈ or beats the incumbent,
+selection is not buying the gain; if random lands ~+0.29 worse as predicted, the mass-ranking policy
+is load-bearing. Run before further selector work.
 
 ### 3. Document-count scaling — is `k* ≈ 12` a capacity limit or a data artefact? (~3 GPU-hours)
 **Single variable:** number of documents written, `K ∈ {8, 16, 32}` from the same `SYNTH_DATA_PATH`,

@@ -21,7 +21,7 @@ When a definition here conflicts with the code, **the code wins** — fix this f
 
 | term | definition | where measured |
 |---|---|---|
-| **`mass_on_S`** | eval-time attention mass landing on the slots that were written (S = union of per-document selections). The quantity that bounds any value-only write. **Already computed at `cartridges/am/value_solve.py:146` and `finetune.py:628`** — it went unrecorded for the loop's first nine experiments. | DIAG-ROUTING, all later runs |
+| **`mass_on_S`** | eval-time attention mass landing on the slots that were written (S = union of per-document selections). The quantity that bounds any value-only write. **Already computed in `cartridges/am/components/objective.py` and recorded by `cartridges/am/continual/write.py`** — it went unrecorded for the loop's first nine experiments. | DIAG-ROUTING, all later runs |
 | **k-curve** | loss as a function of **k = number of documents written so far**, read off the `cache-after-doc-*.pt` snapshots the stock path already saves (`SAVE_AFTER_EACH_DOCUMENT=1`). Revealed that the reported k=16 endpoint is **not** the best point of a run. | DIAG-SEQUENCE, DIAG-KEYCURVE, DIAG-CONTROLCURVE |
 | **write-ceiling oracle** | replace the solved values with the **teacher's own KV for the document** — the best any value-only write could do. Answers "is the solve the problem, or the write?" | ORACLE-WRITE (MECH-001) |
 | **content-free control** | write documents from the *other* topic and evaluate MT. Any gain is content-free by construction. Measured 28.3–73.2% of the MT gain as content-free — **and full-context ICL shows 53.3%**, so it is a benchmark property, not an AM defect. | DIAG-CONTENT, D0-ICL |
@@ -40,15 +40,15 @@ When a definition here conflicts with the code, **the code wins** — fix this f
 
 | id | env flag | default | what it does | files |
 |---|---|---|---|---|
-| **MECH-001** | `AM_ORACLE_WRITE`, `AM_ORACLE_WRITE_ASSIGN` | off | writes the teacher's own document values into the selected slots instead of solving | `am/value_solve.py::oracle_teacher_value_write`, `am/finetune.py`, `am/continual.py` |
-| **MECH-002** | `MAX_QUERIES_PER_HEAD` | **64** | exposes the reference-query cap that was hard-coded (paper uses 16k–50k). Also makes `mass_on_S` emit from the `DELTA_WEIGHT` branch | `am/finetune.py`, `am/value_solve.py` |
+| **MECH-001** | `AM_ORACLE_WRITE`, `AM_ORACLE_WRITE_ASSIGN` | off | writes the teacher's own document values into the selected slots instead of solving | `am/components/objective.py::oracle_teacher_value_write`, `am/continual/write.py` |
+| **MECH-002** | `MAX_QUERIES_PER_HEAD` | **64** | exposes the reference-query cap that was hard-coded (paper uses 16k–50k). Also makes `mass_on_S` emit from the `DELTA_WEIGHT` branch | `am/components/queries.py`, `am/components/objective.py` |
 | **MECH-003** | `AM_ROPE_THETA` | **10000.0** | the rotary base used in the AM path. **The model's true value is 5000000** — the default is the historical (buggy) one, kept so old runs reproduce | `am/{core,teacher,key_select,finetune}.py` |
-| **MECH-004** | `AM_BETA_BOX`, `AM_NNLS_ITERS`, `AM_NNLS_DRIVER`, `AM_BETA_TARGET` | 3.0 / 2 / `gelsd` / residual | boxed NNLS for β + CPU `gelsd` warm start, and decouples `_should_fit_beta` from `key_mode` | `am/key_select.py`, `am/finetune.py` |
-| **MECH-005** | `AM_KEY_REPOSITION` | off | RoPE counter-rotation when a **document** key is installed into a cartridge slot. **Refuses to run without an explicit `AM_ROPE_THETA`** (rotating at 1e4 is worse than not correcting) | `am/key_select.py`, `am/finetune.py` |
-| **MECH-006** | `AM_ONPOLICY_LAYERS`, `AM_ONPOLICY_DOCKV` | off | on-policy layer-sequential re-extraction of reference queries (group size 4) | `am/finetune.py`, `am/continual.py` |
-| **MECH-007** | `AM_SEED_OFFSET` | 0 | offsets the per-document reference draw (`continual.py:150` seeds with the constant `doc_idx`). **Without this, seed variation is impossible** — `pydrantic.main` is never reached in `per_document` mode, so `seed=N` on argv is silently ignored | `am/continual.py` |
-| **MECH-008** | `SLOT_SELECTION` ∈ {`redundancy`,`fisher`,`mass_x_redundancy`}, `AM_SLOT_FISHER_PATH`, `AM_REDUNDANCY_RIDGE_REL`, `AM_MASS_REDUNDANCY_ALPHA` | `tfidf` / unset / 1e-6 / 0.5 | information-theoretic slot selection — pick the top-t slots by a *statistical* criterion instead of attention mass | `am/ranking.py`, `am/finetune.py`, `am/continual.py`, `examples/qasper2/train/continual_am_sparse.py` |
-| **MECH-009** | `SLOT_SELECTION=constrained_mass`, `AM_SAFE_FRACTION`, `AM_SAFE_METRIC` | `tfidf` / 1.0 / `redundancy` | **safety constraint + incumbent ranking**: keep only the safest `q` of slots per layer, then take the top-t by attention mass *inside* that set. `q=1.0` ≡ `attention_mass`; `q ≤ top_t/511` ≡ the pure safety selector | `am/ranking.py`, `am/finetune.py`, `examples/qasper2/train/continual_am_sparse.py` |
+| **MECH-004** | `AM_BETA_BOX`, `AM_NNLS_ITERS`, `AM_NNLS_DRIVER`, `AM_BETA_TARGET` | 3.0 / 2 / `gelsd` / residual | boxed NNLS for β + CPU `gelsd` warm start, and decouples `BetaFitter.should_fit` from `key_mode` | `am/components/beta.py` |
+| **MECH-005** | `AM_KEY_REPOSITION` | off | RoPE counter-rotation when a **document** key is installed into a cartridge slot. **Refuses to run without an explicit `AM_ROPE_THETA`** (rotating at 1e4 is worse than not correcting) | `am/components/keys.py`, `am/core.py::_rope_reposition` |
+| **MECH-006** | `AM_ONPOLICY_LAYERS`, `AM_ONPOLICY_DOCKV` | off | on-policy layer-sequential re-extraction of reference queries (group size 4) | `am/continual/write.py`, `am/continual/run.py` |
+| **MECH-007** | `AM_SEED_OFFSET` | 0 | offsets the per-document reference draw, which otherwise seeds with the constant `doc_idx`. **Without this, seed variation is impossible** — `config.seed` never reaches the draw, so `seed=N` on argv does not change it | `am/components/queries.py::ReferenceQueries.draw_seed` |
+| **MECH-008** | `SLOT_SELECTION` ∈ {`redundancy`,`fisher`,`mass_x_redundancy`}, `AM_SLOT_FISHER_PATH`, `AM_REDUNDANCY_RIDGE_REL`, `AM_MASS_REDUNDANCY_ALPHA` | `tfidf` / unset / 1e-6 / 0.5 | information-theoretic slot selection — pick the top-t slots by a *statistical* criterion instead of attention mass | `am/components/slots.py`, `examples/qasper2/train/continual_am_sparse.py` |
+| **MECH-009** | `SLOT_SELECTION=constrained_mass`, `AM_SAFE_FRACTION`, `AM_SAFE_METRIC` | `tfidf` / 1.0 / `redundancy` | **safety constraint + incumbent ranking**: keep only the safest `q` of slots per layer, then take the top-t by attention mass *inside* that set. `q=1.0` ≡ `attention_mass`; `q ≤ top_t/511` ≡ the pure safety selector | `am/components/slots.py`, `examples/qasper2/train/continual_am_sparse.py` |
 
 **Foot-gun that has bitten twice:** any new kwarg must be passed **conditionally** (`hasattr` guard). An
 unconditional one crashed every AM run via the sibling-`cartridges` import path (RUNBOOK §6.10).
@@ -57,7 +57,7 @@ unconditional one crashed every AM run via the sibling-`cartridges` import path 
 
 All three are **per-layer** (`GRANULARITY=per_layer` is enforced; they raise otherwise, because the
 priors are per-(layer, slot) arrays aggregated over all 32 query heads). All three default **off** —
-`SLOT_SELECTION=tfidf` is unchanged and bit-identical. Code: `cartridges/am/ranking.py`
+`SLOT_SELECTION=tfidf` is unchanged and bit-identical. Code: `cartridges/am/components/slots.py`
 (`compute_slot_redundancy`, `load_slot_fisher_scores`, `_rank_slot_prior_per_layer`).
 
 | mode | score | direction | inputs | cost |
@@ -82,7 +82,7 @@ MECH-INFOGATE's three selectors rank **by** a safety metric. DIAG-IMPORTANCE's p
 described something else — *mass-ranked **within** a safety constraint* — and its own table already
 listed that variant (`best32_within_safest_quartile_fisher` 4.62% MT mass; `best32_within_most_redundant_quartile`
 17.31%). `constrained_mass` **is** that variant, with the constraint strength exposed as a knob. Code:
-`cartridges/am/ranking.py::_rank_slot_prior_per_layer` (branch `constrained_mass`) + `_safety_prior`.
+`cartridges/am/components/slots.py::_rank_slot_prior_per_layer` (branch `constrained_mass`) + `_safety_prior`.
 
 Per layer *l*, with `n = 511` writable slots, `k = min(TOP_T, n)`, `q = AM_SAFE_FRACTION ∈ (0, 1]`:
 
@@ -139,29 +139,27 @@ index (columns include `board_entry` and `wandb_run_url`).
 # 0. environment (RUNBOOK §0)
 cd /localhome/local-triv/gated-continual-cartridges_explore
 export CARTRIDGES_DIR=$PWD CARTRIDGES_OUTPUT_DIR=$PWD/outputs
-export CARTRIDGES_WANDB_PROJECT=SEACrowd CARTRIDGES_WANDB_ENTITY=vqtri-purdue-university
 
 # 1. pin imports if anyone might be editing source (RUNBOOK §9c-bis)
 mkdir -p /tmp/snap && git archive HEAD cartridges examples | tar -x -C /tmp/snap
 export PYTHONPATH=/tmp/snap:$PYTHONPATH
 cd /tmp && python -c "import cartridges,os;print(os.path.dirname(cartridges.__file__))"; cd -
 
-# 2. the current best gradient-free point (MECH-005), wandb ON
+# 2. the current best gradient-free point (MECH-005)
 CUDA_VISIBLE_DEVICES=0 \
 PHASE1_CACHE_PATH=outputs/phase1_selfdistill_qwen512/cache_last.pt \
 SYNTH_DATA_PATH=data/qasper/train/qwen_qasper_MT_task_8192.parquet \
 TOP_T=32 GRANULARITY=per_layer SLOT_SELECTION=tfidf USE_IDF=0 \
 KEY_MODE=highest_attention AM_KEY_REPOSITION=1 AM_ROPE_THETA=5000000 \
 ENABLE_BETA=0 RIDGE_LAMBDA=1e-4 RIDGE_SCALE=spectral DELTA_WEIGHT=1e-2 \
-MAX_QUERIES_PER_HEAD=64 \
-WANDB_DISABLED=0 RUN_NAME=repro_best WANDB_GROUP=REPRO \
+MAX_QUERIES_PER_HEAD=64 RUN_NAME=repro_best \
 bash examples/qasper2/scripts/core/train_continual_am_sparse.sh
 
 # 3. evaluate — BOTH splits, and note the k-curve: the k=16 endpoint is NOT the best point.
 #    k=12 is the minimum; its snapshot is cache-after-doc-011-*.pt in the run dir.
 CHECKPOINT_PATH=<run_dir>/cache-after-doc-011-*.pt \
 EVAL_DATA_PATH=data/qasper/eval/qasper_eval_MT.parquet \
-WANDB_DISABLED=0 RUN_NAME=repro_best_MT \
+RUN_NAME=repro_best_MT \
 .venv/bin/python examples/qasper2/train/eval_forgetting.py
 # parse the `Eval loss` line, then KILL THE PID — the script hangs after printing (RUNBOOK §1)
 ```
@@ -170,14 +168,16 @@ WANDB_DISABLED=0 RUN_NAME=repro_best_MT \
 — six nominally identical runs gave byte-identical caches — so a re-run that differs means the config
 differs. To vary genuinely, set `AM_SEED_OFFSET` (MECH-007).
 
-### wandb conventions
-`WANDB_DISABLED=0` always. `RUN_NAME=<ID>_<slug>`, `WANDB_GROUP=<board-entry-id>` (e.g. `B-ROUTE`,
-`B-GATE`), `WANDB_NOTES="<variable under test> vs <baseline>"`, tag `diagnostic` for non-training runs.
-**A GPU run with no wandb URL is an invalid result and gets re-run** (RUNBOOK §0b).
-⚠️ Known gap: `eval_forgetting.py`'s **ICL branch** (`_run_icl`) never initialises wandb — it only prints.
+### logging conventions
+The AM path no longer logs to wandb — `continual_am_sparse.py` and `eval_forgetting.py` write to disk
+only (RUNBOOK §0b, AM_CONFIG.md "Experiment logging"), and `WANDB_*` env vars are ignored by them.
+`RUN_NAME=<ID>_<slug>` names the run directory. **A GPU run whose numbers cannot be re-read from disk
+is an invalid result and gets re-run.** Historical entries below cite wandb URLs from before the
+removal; those runs are still reproducible from their `config.yaml`.
 
 ## 5. Where state lives
 `state/bottleneck_board.md` (the live causal picture — read this first) · `state/results.csv` (numbers)
 · `state/experiment_registry.md` (EXP/DIAG/MECH entries) · `state/literature_ledger.md` (LIT-001…027,
-the imported mechanisms) · `state/mechanism_registry.md` (MECH-001…007, what was built and its verdict)
-· `state/diagnostics/` (raw per-layer arrays) · `notes/` + `JOURNAL.md` (durable narrative).
+the imported mechanisms) · `state/mechanism_registry.md` (MECH-001…009, what was built and its verdict)
+· `state/diagnostics/` (raw per-layer arrays) · `notes/` + `JOURNAL.md` (durable narrative)
+· `AM_CONFIG.md` (every field of `AMContinualConfig` and its six stage configs, and which are live).
