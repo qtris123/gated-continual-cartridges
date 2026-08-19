@@ -1,0 +1,37 @@
+{
+  "1": {
+    "text": "data/phases/qasper/phase1.txt",
+    "eval": "data/phases/qasper/phase1_eval.parquet",
+    "tokens": 103280,
+    "questions": 78,
+    "cumulative_tokens": 103280
+  },
+  "2": {
+    "text": "data/phases/qasper/phase2.txt",
+    "eval": "data/phases/qasper/phase2_eval.parquet",
+    "tokens": 76820,
+    "questions": 69,
+    "cumulative_tokens": 180100
+  },
+  "3": {
+    "text": "data/phases/qasper/phase3.txt",
+    "eval": "data/phases/qasper/phase3_eval.parquet",
+    "tokens": 82159,
+    "questions": 62,
+    "cumulative_tokens": 262259
+  },
+  "4": {
+    "text": "data/phases/qasper/phase4.txt",
+    "eval": "data/phases/qasper/phase4_eval.parquet",
+    "tokens": 89441,
+    "questions": 48,
+    "cumulative_tokens": 351700
+  },
+  "5": {
+    "text": "data/phases/qasper/phase5.txt",
+    "eval": "data/phases/qasper/phase5_eval.parquet",
+    "tokens": 108895,
+    "questions": 47,
+    "cumulative_tokens": 460595
+  }
+}
