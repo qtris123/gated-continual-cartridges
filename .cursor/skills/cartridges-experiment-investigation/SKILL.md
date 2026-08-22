@@ -172,10 +172,10 @@ See [WANDB_REFERENCE.md](WANDB_REFERENCE.md) for the full list of groups, run-na
 gated-continual-cartridges/
 ├── cartridges/sparse_cache_finetuning.py     # core algorithm (read this first)
 ├── cartridges/train.py                       # CosWithWarmup, eval cadence, do_step
-├── examples/<dataset>/scripts/train_initial_sparse.sh
-├── examples/<dataset>/scripts/train_continual_sparse.sh
-├── examples/<dataset>/scripts/eval_forgetting.sh   # post-hoc P1+P2 eval table
-├── examples/<dataset>/train/{initial,continual}_sparse.py
+├── examples/<dataset>/pipelines/train_initial_sparse.sh
+├── examples/<dataset>/pipelines/train_continual_sparse.sh
+├── examples/<dataset>/benchmarks/eval_forgetting.sh   # post-hoc P1+P2 eval table
+├── examples/shared/train/{initial,continual}_sparse_*.py
 ├── data/<dataset>/{train,eval}/*.parquet
 └── outputs/<timestamp>-<runtag>/<uuid>/
     ├── cache-step{N}.pt        # mid-training checkpoint(s) — keep these around

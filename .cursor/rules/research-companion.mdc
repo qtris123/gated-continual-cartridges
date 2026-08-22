@@ -129,7 +129,7 @@ Prototypical surprises in this project:
 ## Implementation Standards
 
 Before modifying code:
-1. Read the existing code path. Key files: `cartridges/sparse_cache_finetuning.py`, `cartridges/train.py`, `cartridges/cache.py`, `examples/qasper2/train/continual.py`.
+1. Read the existing code path. Key files: `cartridges/sparse_cache_finetuning.py`, `cartridges/train.py`, `cartridges/cache.py`, `examples/shared/train/continual_perplexity.py`.
 2. Identify assumptions about tensor shape, device, dtype, gradient flow, masking, and indexing.
 3. Add assertions or debug logs for critical assumptions.
 4. Prefer small, testable changes. Avoid large rewrites unless necessary.

@@ -66,7 +66,7 @@ PHASE2_DST="$REPO/outputs/refcart_phase2_qwen512/cache_last.pt"
 
 QA_EVAL="$REPO/data/qasper/eval/qasper_eval_QA.parquet"
 MT_EVAL="$REPO/data/qasper/eval/qasper_eval_MT.parquet"
-INIT_TEXT="$REPO/examples/qasper2/train/qwen_qasper_init_512.txt"
+INIT_TEXT="$REPO/data/qasper/init_text/qwen_qasper_init_512.txt"
 INIT_TEXT_ALT="$REPO/data/qasper/init_text/qasper_init_512.txt"
 
 ok()   { printf '  [ok]   %s\n' "$*"; }
@@ -265,7 +265,7 @@ cat <<EOF
     Phase-1  → $PHASE1_DST
 
   To regenerate synth instead of downloading:
-    bash examples/qasper2/scripts/synthesize_self_study.sh
+    bash examples/qasper/synthesize/self_study.sh
 EOF
 
 echo ""

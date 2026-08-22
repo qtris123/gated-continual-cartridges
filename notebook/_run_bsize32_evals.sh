@@ -12,8 +12,8 @@ mkdir -p "$RESULTS"
 
 source "$REPO/.venv/bin/activate"
 
-QA_EVAL=$REPO/examples/qasper2/qasper_eval_QA.parquet
-MT_EVAL=$REPO/examples/qasper2/qasper_eval_MT.parquet
+QA_EVAL=$REPO/data/qasper/eval/qasper_eval_QA.parquet
+MT_EVAL=$REPO/data/qasper/eval/qasper_eval_MT.parquet
 MODEL_NAME=meta-llama/Llama-3.2-3B-Instruct
 
 declare -A CKPTS=(
@@ -49,7 +49,7 @@ for label in "${!CKPTS[@]}"; do
     RUN_NAME="${label}__${phase}_eval" \
     BATCH_SIZE=8 \
     WANDB_GROUP="qasper - [bsize32 follow-up]" \
-    python3 "$REPO/examples/qasper2/train/eval_forgetting.py" \
+    python3 "$REPO/examples/shared/evaluate/forgetting.py" \
       >"$OUT/eval.log" 2>&1 &
     PIDS+=($!)
   done

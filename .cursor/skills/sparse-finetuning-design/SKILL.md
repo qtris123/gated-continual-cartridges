@@ -133,9 +133,9 @@ Scores are summed across all layers, all heads (with GQA head grouping), and all
 | `cartridges/sparse_cache_finetuning.py` | `SparseCacheFinetuningConfig`, `CacheAccessTracker`, `CacheTFIDFRanker`, `apply_gradient_mask_to_cache`, momentum helpers |
 | `cartridges/train.py` | Training loop — where masking, momentum, and optimizer step are orchestrated |
 | `cartridges/cache.py` | `TrainableCache` — holds `trainable_keys` and `trainable_values` as `nn.ParameterList` |
-| `examples/qasper2/train/continual.py` | Phase 2 config wired to env vars |
-| `examples/qasper2/scripts/core/train_continual.sh` | Single-experiment launcher |
-| `examples/qasper2/scripts/launch_all_experiments.sh` | Submits all 8 experiments as parallel SLURM jobs |
+| `examples/shared/train/continual_perplexity.py` | Phase 2 config wired to env vars |
+| `examples/qasper/pipelines/train_continual.sh` | Single-experiment launcher |
+| `examples/qasper/sweeps/pool_continual_sparse.sh` | Submits all 8 experiments as parallel SLURM jobs |
 
 ## What to Look for in Results
 

@@ -2,14 +2,14 @@
 
 Wandb entity/project: **`vqtri-purdue-university/SEACrowd`**
 (Verify by `wandb.Api().runs("vqtri-purdue-university/SEACrowd")` or by checking
-any `wandb-summary.json` under `examples/<dataset>/scripts/wandb/run-*/files/`.)
+any `wandb-summary.json` under `outputs/wandb/run-*/files/`.)
 
 Local wandb dirs (offline mirror of run files including `output.log`,
 `config.yaml`, `wandb-summary.json`, and saved `cache-step{N}.pt` /
 `bg_stats.pt`):
 
 ```
-gated-continual-cartridges/examples/<dataset>/scripts/wandb/run-<YYYYMMDD_HHMMSS-XXXX>/files/
+gated-continual-cartridges/outputs/wandb/run-<YYYYMMDD_HHMMSS-XXXX>/files/
 ```
 
 ---

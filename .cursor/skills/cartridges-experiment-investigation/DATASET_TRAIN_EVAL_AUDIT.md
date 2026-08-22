@@ -53,11 +53,11 @@ generalise from synth-trained cartridge → held-out eval:
     - assistant: `<answer>\n{rewritten answer}\n</answer>`
   - `system_prompt=""` — no paper text, no identity cue in the eval prompt.
   - Perplexity measured over the assistant tokens. Open-ended; no MCQ.
-  - Baked to `examples/qasper2/qasper_eval_{QA,MT}.parquet`.
+  - Baked to `data/qasper/eval/qasper_eval_{QA,MT}.parquet`.
 - **Generation eval** (`cartridges/benchmark/datasets.py::_load_qasper`):
   - Same HF dataset, same template, scored by exact / chrF against gold string.
 
-### Synth pipeline (`examples/qasper2/synthesize/self_study.py`)
+### Synth pipeline (`examples/shared/synth/self_study_vllm.py`)
 - `QASPERResource.sample_prompt` picks **one paper** from `TOPIC_TO_IDS[topic]`,
   picks a **random subset of sections** (`num_sections_per_paper = random.randint(1, len(paper.sections))`),
   wraps in `SYSTEM_PROMPT_TEMPLATE`:
@@ -66,7 +66,7 @@ generalise from synth-trained cartridge → held-out eval:
   <paper>{paper_template_with_sections}</paper>
   ```
 - 5 seed-prompt types mixed uniformly: `structuring / summarization / question /
-  use_case / creative` (see `examples/qasper2/synthesize/self_study.py:87` and
+  use_case / creative` (see `examples/shared/synth/self_study_vllm.py:87` and
   `cartridges/data/resources.py` for prompt strings).
 - `SelfStudySynthesizer`: Qwen3-4B, bot A (`user`) temp=0.6, bot B (`assistant`)
   temp=0.0, `prob_thinking=0.2`. Bot B sees the paper text in system prompt at
@@ -132,7 +132,7 @@ look like a real ppl drop with no content gain.
     (e.g. `<answer>\nVincristine\n</answer>`).
   - `system_prompt=""`. Identity tuple lives in the user message preamble.
 
-### Synth pipeline (`examples/longhealth/synthesize/self_study.py`)
+### Synth pipeline (`examples/shared/synth/self_study_vllm.py`)
 - `LongHealthResource.sample_prompt` (`resources.py:54`): pick a patient,
   pick `randint(min, max)` notes (default `[1, 5]`), wrap in
   `SYSTEM_PROMPT_TEMPLATE`:
@@ -228,14 +228,14 @@ delta, run one or more of these eval-only diagnostics:
 | QASPER paper IDs per topic | `cartridges/data/qasper/resources.py` | `TOPIC_TO_IDS` |
 | QASPER eval-question rewriting | `cartridges/data/qasper/rewrite.py` | `QUESTION_PROMPT`, `ANSWER_PROMPT`, `RewrittenQasperQuestion` |
 | QASPER eval-perplexity dataset | `cartridges/data/qasper/evals.py` | `QasperEvalDataset`, `PROMPT` |
-| QASPER eval parquet builder | `examples/qasper2/convert_hf_to_qasper_eval_mt_parquet.py` | `build_messages`, `hf_split_to_dataframe` |
+| QASPER eval parquet builder | `examples/maintenance/data/convert_qasper_eval_mt.py` | `build_messages`, `hf_split_to_dataframe` |
 | QASPER generation eval | `cartridges/benchmark/datasets.py` | `_load_qasper`, `_QASPER_PROMPT` |
 | QASPER synth resource | `cartridges/data/qasper/resources.py` | `QASPERResource`, `SYSTEM_PROMPT_TEMPLATE` |
-| QASPER synth driver | `examples/qasper2/synthesize/self_study.py` | seed prompts list (line 87) |
+| QASPER synth driver | `examples/shared/synth/self_study_vllm.py` | seed prompts list (line 87) |
 | LongHealth source loader | `cartridges/data/longhealth/utils.py` | `load_longhealth_dataset`, `LongHealthQuestion`, `LongHealthPatient` |
 | LongHealth eval (MCQ) | `cartridges/data/longhealth/evals.py` | `LongHealthMultipleChoiceGenerateDataset`, `wrap_question`, `score` |
 | LongHealth eval parquets | `data/longhealth/eval/patients_{01_to_10,11_to_20}.parquet` | 200 rows each |
 | LongHealth synth resource | `cartridges/data/longhealth/resources.py` | `LongHealthResource`, `SYSTEM_PROMPT_TEMPLATE` |
-| LongHealth synth driver | `examples/longhealth/synthesize/self_study.py` | `_DEFAULT_PATIENTS`, `_DEFAULT_SEED_PROMPTS` |
+| LongHealth synth driver | `examples/shared/synth/self_study_vllm.py` | `_DEFAULT_PATIENTS`, `_DEFAULT_SEED_PROMPTS` |
 | Shared self-study synthesizer | `cartridges/synthesizers/self_study.py` | `SelfStudySynthesizer`, `SYSTEM_PROMPT_TEMPLATE` |
 | Shared seed prompts | `cartridges/data/resources.py` | `SEED_PROMPT_REGISTRY`, `question_seed_prompt`, etc. |

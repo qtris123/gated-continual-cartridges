@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+# Phase 1: classic Attention Matching compaction (backprop-free).
+set -e
+
+export TORCH_CUDA_ARCH_LIST="${TORCH_CUDA_ARCH_LIST:-9.0}"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export CARTRIDGES_DIR="${CARTRIDGES_DIR:-$(cd "$SCRIPT_DIR/../../.." && pwd)}"
+export CARTRIDGES_OUTPUT_DIR="${CARTRIDGES_OUTPUT_DIR:-$CARTRIDGES_DIR/outputs}"
+
+CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-0}"
+MODEL_NAME="${MODEL_NAME:-Qwen/Qwen3-4B-Instruct-2507}"
+NUM_TOKENS="${NUM_TOKENS:-512}"
+KEY_SELECT="${KEY_SELECT:-highest_attention}"
+ENABLE_BETA="${ENABLE_BETA:-1}"
+RIDGE_LAMBDA="${RIDGE_LAMBDA:-1e-4}"
+RIDGE_SCALE="${RIDGE_SCALE:-spectral}"
+GRANULARITY="${GRANULARITY:-per_head}"
+QA_DATA_PATH="${QA_DATA_PATH:-$CARTRIDGES_DIR/data/qasper/train/qwen_qasper_QA_task_8192.parquet}"
+EVAL_DATA_PATH="${EVAL_DATA_PATH:-$CARTRIDGES_DIR/data/qasper/eval/qasper_eval_QA.parquet}"
+MAX_REF_BATCHES="${MAX_REF_BATCHES:-50}"
+MAX_QUERIES_PER_HEAD="${MAX_QUERIES_PER_HEAD:-64}"
+MAX_TEACHER_TOKENS="${MAX_TEACHER_TOKENS:-}"
+MAX_REF_EXAMPLES="${MAX_REF_EXAMPLES:-256}"
+QUERIES_PER_BATCH="${QUERIES_PER_BATCH:-all_tokens}"
+DISTRIBUTED_BACKEND="${DISTRIBUTED_BACKEND:-nccl}"
+RUN_NAME="${RUN_NAME:-qasper_phase1_am_compaction_${NUM_TOKENS}_${GRANULARITY}}"
+
+if [ -f "$CARTRIDGES_DIR/.venv/bin/activate" ]; then
+  source "$CARTRIDGES_DIR/.venv/bin/activate"
+fi
+
+echo "=== AM Phase 1 Compaction ==="
+echo "GPU:         $CUDA_VISIBLE_DEVICES"
+echo "Model:       $MODEL_NAME"
+echo "Tokens:      $NUM_TOKENS"
+echo "Key select:  $KEY_SELECT"
+echo "Beta:        $ENABLE_BETA"
+echo "Ridge:       $RIDGE_SCALE lambda=$RIDGE_LAMBDA"
+echo "Ref batches: $MAX_REF_BATCHES"
+echo "Granularity: $GRANULARITY"
+echo "============================="
+
+export CUDA_VISIBLE_DEVICES
+CARTRIDGES_DIR="$CARTRIDGES_DIR" \
+CARTRIDGES_OUTPUT_DIR="$CARTRIDGES_OUTPUT_DIR" \
+AM_DATASET=qasper \
+AM_QASPER_TOPIC=QA \
+QA_DATA_PATH="$QA_DATA_PATH" \
+EVAL_DATA_PATH="$EVAL_DATA_PATH" \
+NUM_TOKENS="$NUM_TOKENS" \
+KEY_SELECT="$KEY_SELECT" \
+ENABLE_BETA="$ENABLE_BETA" \
+RIDGE_LAMBDA="$RIDGE_LAMBDA" \
+RIDGE_SCALE="$RIDGE_SCALE" \
+MODEL_NAME="$MODEL_NAME" \
+MAX_REF_BATCHES="$MAX_REF_BATCHES" \
+MAX_QUERIES_PER_HEAD="$MAX_QUERIES_PER_HEAD" \
+MAX_TEACHER_TOKENS="$MAX_TEACHER_TOKENS" \
+MAX_REF_EXAMPLES="$MAX_REF_EXAMPLES" \
+QUERIES_PER_BATCH="$QUERIES_PER_BATCH" \
+GRANULARITY="$GRANULARITY" \
+DISTRIBUTED_BACKEND="$DISTRIBUTED_BACKEND" \
+RUN_NAME="$RUN_NAME" \
+WANDB_DISABLED="${WANDB_DISABLED:-0}" \
+WANDB_GROUP="${WANDB_GROUP:-}" \
+python "$CARTRIDGES_DIR/examples/shared/am/initial_compaction.py"
+
+echo "=== AM Phase 1 Compaction Done ==="
