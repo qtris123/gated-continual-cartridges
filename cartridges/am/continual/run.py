@@ -145,16 +145,17 @@ def run_documents(
     conversations = load_conversations(document_data_path)
     doc_groups = group_conversations_by_document(conversations)
     logger.info(
-        "Per-document AM: %d unique documents in %s (teacher prompts from QASPER "
-        "topic %s)",
+        "Per-document AM: %d unique documents in %s (teacher dataset=%s, "
+        "qasper_topic=%s, quality_phase=%s)",
         len(doc_groups),
         document_data_path,
+        stages.teacher.config.dataset,
         stages.teacher.config.qasper_topic,
+        stages.teacher.config.quality_phase,
     )
 
     # Resolve every document prompt up front: a title that does not exist in the
-    # configured QASPER topic must fail before the first write lands, not on
-    # document 7 with six documents already committed to the cartridge.
+    # configured dataset/phase must fail before the first write lands.
     doc_prompts = {
         document_id: stages.teacher.document_prompt(convs)
         for document_id, convs in doc_groups.items()

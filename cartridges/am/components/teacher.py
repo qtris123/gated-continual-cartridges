@@ -13,7 +13,7 @@ import torch
 import torch.nn as nn
 from pydrantic import ObjectConfig
 
-from cartridges.am.components.queries import document_key, full_paper_prompt
+from cartridges.am.components.queries import document_key, full_document_prompt
 from cartridges.am.core import _attention_scores, compute_attention_output
 from cartridges.cache import AttnConfig, TrainableCache
 from cartridges.initialization.tokenization_utils import MODEL_TO_SYSTEM_PROMPT_TOKENIZER
@@ -216,17 +216,24 @@ class TeacherTarget:
     class Config(ObjectConfig):
         _pass_as_config = True
 
+        # Backward-compatible default: all historical configs are QASPER.
+        dataset: str = "qasper"
         # Which QASPER topic to resolve document titles against. `all` searches
         # every topic in `TOPIC_TO_IDS` (titles are unique across them).
         qasper_topic: str = "MT"
+        # Required for QuALITY so a title cannot silently resolve in another phase.
+        quality_phase: Optional[int] = None
 
     def __init__(self, config: Config):
         self.config = config
 
     def document_prompt(self, conversations: list) -> str:
-        """The document text for one group of same-paper synthesis rows."""
-        return full_paper_prompt(
-            document_key(conversations[0]), topic=self.config.qasper_topic
+        """The complete document text for one synthesis document group."""
+        return full_document_prompt(
+            document_key(conversations[0]),
+            dataset=self.config.dataset,
+            qasper_topic=self.config.qasper_topic,
+            quality_phase=self.config.quality_phase,
         )
 
     def prefill(

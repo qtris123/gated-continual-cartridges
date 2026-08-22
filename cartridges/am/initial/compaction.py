@@ -28,7 +28,7 @@ from cartridges.am.components.queries import (
     AMQueryAccumulator,
     build_reference_dataloader,
     cleanup_reference_parquet,
-    full_paper_prompt,
+    full_document_prompt,
     group_conversations_by_document,
     limit_conversations,
     load_conversations,
@@ -252,7 +252,9 @@ def compact_cache_am_phase1(
     tokenizer,
     qa_data_path: str,
     attn_config: AttnConfig,
+    dataset: str = "qasper",
     qasper_topic: str = "QA",
+    quality_phase: Optional[int] = None,
     num_tokens: int = 512,
     key_select: Literal["highest_attention", "omp"] = "highest_attention",
     ridge_lambda: float = 1e-4,
@@ -280,8 +282,8 @@ def compact_cache_am_phase1(
        to reproduce the teacher's attention output on the reference queries.
     4. Assemble a TrainableCache with teacher-derived keys (and optional beta).
 
-    ``qasper_topic`` is the topic whose papers the document titles in
-    ``qa_data_path`` resolve against (``QA`` / ``MT`` / ``SA`` / ``all``).
+    ``dataset`` selects the complete-document resolver. Historical callers
+    default to QASPER; QuALITY callers must also provide ``quality_phase``.
 
     ``nnls_iters`` / ``beta_w_lower`` / ``beta_w_upper`` override the beta fit's
     PGD budget and weight box; ``None`` keeps the per-mode reference default from
@@ -316,14 +318,21 @@ def compact_cache_am_phase1(
 
     teacher_k: dict[int, list[torch.Tensor]] = {l: [] for l in range(n_layers)}
     teacher_v: dict[int, list[torch.Tensor]] = {l: [] for l in range(n_layers)}
-    per_doc_tokens: dict[int, int] = {l: 0 for l in range(n_layers)}
+    per_doc_tokens: dict[int, int] = {l: 0 for l in range(n_layers)} # tokens per layer
     teacher_pos_chunks: list[torch.Tensor] = []  # per-doc RoPE positions (layer-agnostic)
     doc_token_counts = []
     running_offset = 0
     for doc_idx, (doc_id, group) in enumerate(doc_groups.items()):
-        system_prompt = full_paper_prompt(doc_id, topic=qasper_topic)
+        # 1.1 Get the system prompt for the document
+        system_prompt = full_document_prompt(
+            doc_id,
+            dataset=dataset,
+            qasper_topic=qasper_topic,
+            quality_phase=quality_phase,
+        )
         if not system_prompt.strip():
             continue
+        # 1.2 Prefill the document into a teacher KV cache
         pos_offset = running_offset if global_teacher_positions else 0
         doc_kv = prefill_document_kv_cache(
             model=model,
@@ -337,6 +346,7 @@ def compact_cache_am_phase1(
         t_doc = doc_kv[0][0].shape[1]
         doc_token_counts.append(t_doc)
         appended_len = None
+        # 1.3 Append the teacher KV cache to the teacher KV caches across layers
         for layer_idx in range(n_layers):
             k_d, v_d = doc_kv[layer_idx]  # (n_kv_heads, T_doc, head_dim)
             if max_teacher_tokens is not None and per_doc_tokens[layer_idx] >= max_teacher_tokens:
@@ -356,7 +366,7 @@ def compact_cache_am_phase1(
                 torch.arange(pos_offset, pos_offset + appended_len, dtype=torch.long)
             )
             running_offset += appended_len
-
+    # 1.4 Concatenate the teacher KV caches across layers
     teacher_K = {l: torch.cat(teacher_k[l], dim=1) for l in range(n_layers)}
     teacher_V = {l: torch.cat(teacher_v[l], dim=1) for l in range(n_layers)}
     # Per-token absolute RoPE position within its source document (restarts per doc).
@@ -507,6 +517,9 @@ def compact_cache_am_phase1(
         "doc_token_counts": doc_token_counts,
         "num_tokens": num_tokens,
         "key_select": key_select,
+        "dataset": dataset,
+        "qasper_topic": qasper_topic,
+        "quality_phase": quality_phase,
         "enable_beta": bool(enable_beta),
         "rebake_key_positions": bool(rebake_key_positions),
         "strip_reference_system_prompt": bool(strip_reference_system_prompt),

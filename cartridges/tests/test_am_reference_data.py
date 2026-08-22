@@ -7,10 +7,14 @@ import hashlib
 import pytest
 
 from cartridges.am.components.queries import (
+    _quality_articles_by_title,
+    full_document_prompt,
     full_paper_prompt,
+    full_quality_prompt,
     group_conversations_by_system_prompt,
     limit_conversations,
 )
+from cartridges.am.components.teacher import TeacherTarget
 from cartridges.structs import Conversation
 
 # sha256 of every document prompt the teacher prefills, per topic. `T_doc` IS the
@@ -135,3 +139,35 @@ def test_full_paper_prompt_rejects_unknown_title():
 def test_full_paper_prompt_rejects_unknown_topic():
     with pytest.raises(ValueError, match="Unknown QASPER topic"):
         full_paper_prompt("anything", topic="NOPE")
+
+
+def test_quality_full_document_prompt_covers_complete_story():
+    title, article = next(iter(_quality_articles_by_title(1).items()))
+    prompt = full_quality_prompt(title, phase=1)
+    assert f"<title>{title}</title>" in prompt
+    assert article.text in prompt
+    assert prompt == full_document_prompt(
+        title, dataset="quality", quality_phase=1
+    )
+
+
+def test_quality_prompt_rejects_wrong_phase():
+    title = next(iter(_quality_articles_by_title(1)))
+    assert title not in _quality_articles_by_title(2)
+    with pytest.raises(KeyError, match="not in QuALITY phase 2"):
+        full_quality_prompt(title, phase=2)
+
+
+def test_quality_teacher_resolves_title_group():
+    title = next(iter(_quality_articles_by_title(1)))
+    convo = _convo(f"<story><title>{title}</title></story>")
+    teacher = TeacherTarget.Config(dataset="quality", quality_phase=1).instantiate()
+    assert teacher.document_prompt([convo]) == full_quality_prompt(title, phase=1)
+
+
+def test_quality_teacher_requires_phase():
+    title = next(iter(_quality_articles_by_title(1)))
+    convo = _convo(f"<story><title>{title}</title></story>")
+    teacher = TeacherTarget.Config(dataset="quality").instantiate()
+    with pytest.raises(ValueError, match="quality_phase is required"):
+        teacher.document_prompt([convo])

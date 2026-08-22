@@ -143,6 +143,65 @@ def full_paper_prompt(title: str, *, topic: str = "MT") -> str:
     )
 
 
+@lru_cache(maxsize=None)
+def _quality_articles_by_title(phase: int) -> dict[str, "object"]:
+    """Title -> complete QuALITY article for one declared phase."""
+    from cartridges.data.quality.resources import (
+        PHASE_TO_ARTICLE_IDS,
+        load_articles,
+    )
+
+    if phase not in PHASE_TO_ARTICLE_IDS:
+        raise ValueError(
+            f"Unknown QuALITY phase {phase}; expected one of "
+            f"{sorted(PHASE_TO_ARTICLE_IDS)}."
+        )
+    articles = load_articles(PHASE_TO_ARTICLE_IDS[phase])
+    by_title: dict[str, object] = {}
+    for article in articles.values():
+        if article.title in by_title:
+            raise ValueError(
+                f"Duplicate QuALITY title {article.title!r} in phase {phase}; "
+                "title-based synthesis rows would be ambiguous."
+            )
+        by_title[article.title] = article
+    return by_title
+
+
+def full_quality_prompt(title: str, *, phase: int) -> str:
+    """Complete QuALITY story prompt matching the resource used for synthesis."""
+    from cartridges.data.quality.resources import SYSTEM_PROMPT_TEMPLATE
+
+    articles = _quality_articles_by_title(phase)
+    article = articles.get(title)
+    if article is None:
+        raise KeyError(
+            f"Document title {title!r} is not in QuALITY phase {phase} "
+            f"({len(articles)} articles). The configured phase must match the "
+            "synthesis parquet."
+        )
+    return SYSTEM_PROMPT_TEMPLATE.format(story=article.to_string)
+
+
+def full_document_prompt(
+    title: str,
+    *,
+    dataset: str = "qasper",
+    qasper_topic: str = "MT",
+    quality_phase: Optional[int] = None,
+) -> str:
+    """Resolve a synthesis document key to the complete teacher prompt."""
+    if dataset == "qasper":
+        return full_paper_prompt(title, topic=qasper_topic)
+    if dataset == "quality":
+        if quality_phase is None:
+            raise ValueError("quality_phase is required when dataset='quality'")
+        return full_quality_prompt(title, phase=quality_phase)
+    raise ValueError(
+        f"Unsupported AM teacher dataset {dataset!r}; expected 'qasper' or 'quality'."
+    )
+
+
 def limit_conversations(
     conversations: list[Conversation],
     max_examples: Optional[int],
