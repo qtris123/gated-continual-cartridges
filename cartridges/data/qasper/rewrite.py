@@ -22,7 +22,7 @@ from cartridges.data.qasper.resources import TOPIC_TO_IDS
 DEFAULT_OUTPUT_DIR = "data/qasper"
 
 # Matches the user turn in the already-generated qasper_eval_{QA,MT,SA}.parquet,
-# copied from examples/qasper2/convert_hf_to_qasper_eval_mt_parquet.py so ASR and
+# copied from examples/qasper/convert_hf_to_qasper_eval_mt_parquet.py so ASR and
 # KG come out byte-compatible with the three that already exist.
 USER_MESSAGE_TEMPLATE = """Please write a succinct answer to the following question.
 You do not need to restate the paper name or answer in complete sentences.

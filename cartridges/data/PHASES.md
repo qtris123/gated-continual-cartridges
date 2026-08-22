@@ -75,7 +75,7 @@ Context windows the numbers are compared against, read from the model configs:
 | model | `max_position_embeddings` | notes |
 |---|---|---|
 | Qwen3-4B-Instruct-2507 | **262,144** | `rope_scaling=None` — native, not YaRN-extended |
-| Llama-3.2-3B-Instruct | **131,072** | per `experiments/scripts/baselines_common.sh` |
+| Llama-3.2-3B-Instruct | **131,072** | from the Hugging Face model config |
 
 Do not use `tokenizer.model_max_length` for this — Qwen3's tokenizer reports
 1,010,000, which is a tokenizer-file artifact, not a model capability.
@@ -289,7 +289,8 @@ A: WN18RR | FB15k-237 | YAGO3-10
 
 But the **eval set is not those raw questions**. `qasper/rewrite.py` rewrites each
 one with GPT-4.1 to be answerable closed-book — naming the paper, since the model
-sees a panel of 16 — and this is the format in `examples/qasper2/qasper_eval_*.parquet`:
+sees a panel of 16 — and this is the format in
+`data/qasper/eval/qasper_eval_*.parquet`:
 
 ```
 user:      Please write a succinct answer to the following question. You do not
@@ -566,33 +567,13 @@ from phase 3 onward.
 
 ---
 
-## Running the baselines on these phases
+## Materialized phase corpora
 
-The phase corpora are materialised for the baseline suite by
-
-```bash
-python experiments/baselines/export_phase_corpus.py --dataset longhealth
-```
-
-which writes `data/phases/<dataset>/phase<k>.txt` — the phase resource's
-`to_string()`, i.e. exactly the string the token counts above were measured on —
-and `phase<k>_eval.parquet` holding that phase's questions. The exporter prints
-the per-phase token and question counts, and they reproduce the tables above
-exactly; that is the check that the baselines consume the documented corpus.
-
-The baseline scripts then take `DOC_SET=<dataset>`, with `DOC_SEQ` defaulting to
-`p1 p2 p3 p4 p5`:
-
-```bash
-DOC_SET=longhealth ICL_CUMULATIVE=1 sbatch experiments/scripts/baseline_icl.sh
-```
-
-Supported for export: LongHealth, FinQA, QuALITY, TechQA. QASPER is not, pending
-its rewritten eval sets (below). Only `EVAL_MODE=logppl` is wired end to end —
-answers are normalised to text so cross-entropy is comparable across the five
-answer formats, but accuracy scoring still needs the per-dataset adapters (the
-built-in MCQ scorer is hardcoded to four choices A–D, whereas LongHealth is
-5-way). See `experiments/baselines/README.md`.
+Phase corpora live in `data/phases/<dataset>/phase<k>.txt`, with
+`phase<k>_eval.parquet` holding that phase's questions. The text is the phase
+resource's `to_string()`, including the wrappers used for the token counts
+above. Shared evaluation engines live under `examples/shared/evaluate/`;
+dataset-owned reference launchers live in each `examples/<dataset>/` tree.
 
 ## Still outstanding
 
@@ -603,7 +584,7 @@ built-in MCQ scorer is hardcoded to four choices A–D, whereas LongHealth is
   baselines 1 (dense sequential) and 2a (concatenated trained cartridges) on
   these streams; the in-context baselines need none, and AM (2b) runs today with
   `QUERY_SOURCE=repeat-prefill`.
-- **Per-dataset accuracy adapters** in `experiments/evaluate/cartridge.py`, so
-  the multiple-choice datasets can be scored on accuracy rather than only
-  log-perplexity.
+- **Broader phase-accuracy protocols.** `examples/shared/evaluate/generation_accuracy_matrix.py`
+  handles the current free-form multiple-choice option protocol; FinQA numeric
+  programs and free-form QASPER/TechQA judging still need dedicated protocols.
 - **Llama-3.2-3B token counts**, blocked on gated-repo access.

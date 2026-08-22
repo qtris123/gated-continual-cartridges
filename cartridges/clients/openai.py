@@ -11,6 +11,18 @@ from cartridges.clients.base import Client, ClientSample, ClientConfig, ClientRe
 from cartridges.clients.usage import Usage, num_tokens_from_messages_flexible
 from cartridges.utils import get_logger
 
+_TOKEN_ID_PREFIX = "token_id:"
+
+
+def _parse_server_token_id(token: str) -> Optional[int]:
+    if not token.startswith(_TOKEN_ID_PREFIX):
+        return None
+    try:
+        return int(token[len(_TOKEN_ID_PREFIX):])
+    except ValueError:
+        return None
+
+
 class OpenAIClient(Client):
     """This client works with any inference server that supports the OpenAI API.
     It is simply a wrapper around the OpenAI Python client that handles retrying and
@@ -68,6 +80,15 @@ class OpenAIClient(Client):
         # max length
         truncate_messages_and_retry: bool = True  
 
+        # Set this when the server is launched with `--return-tokens-as-token-ids`
+        # (vLLM). The server then reports every token as the string
+        # "token_id:{id}", which is the only way to recover true vocabulary ids over
+        # the OpenAI API -- it otherwise returns token text, and re-tokenizing text
+        # is not guaranteed to invert the model's own segmentation. Without this,
+        # top_logprobs token ids are filled with -1 and are unusable as
+        # distillation targets.
+        return_tokens_as_token_ids: bool = False
+
 
     def __init__(self, config: Config):
         """
@@ -123,6 +144,85 @@ class OpenAIClient(Client):
             
             self.logger.warning(f"Using character-based token estimation for {self.config.model_name}")
             return CharBasedTokenizer(self.config.model_name)
+
+    def _encode(self, text: str) -> Optional[List[int]]:
+        try:
+            return self.tokenizer.encode(text, add_special_tokens=False)
+        except TypeError:
+            # tiktoken encodings do not take add_special_tokens
+            return self.tokenizer.encode(text)
+        except Exception as e:
+            self.logger.warning(f"Failed to encode text for token ids: {e}")
+            return None
+
+    def _extract_with_token_ids(
+        self, content: List[Any]
+    ) -> tuple[Optional[List[int]], Optional[TopLogprobs]]:
+        """Recover true vocabulary ids from a server run with
+        `--return-tokens-as-token-ids`, and pack the top-k alternatives into the dense
+        [num_tokens, k] layout that `TopLogprobs.flatten` expects."""
+
+        token_ids = []
+        for entry in content:
+            token_id = _parse_server_token_id(entry.token)
+            if token_id is None:
+                self.logger.warning(
+                    f"return_tokens_as_token_ids is set but the server returned "
+                    f"{entry.token!r}, which is not of the form 'token_id:{{id}}'. "
+                    "Launch the server with --return-tokens-as-token-ids."
+                )
+                token_ids = None
+                break
+            token_ids.append(token_id)
+
+        rows_ids, rows_logprobs = [], []
+        for entry in content:
+            pairs = []
+            for alt in entry.top_logprobs or []:
+                alt_id = _parse_server_token_id(alt.token)
+                if alt_id is not None:
+                    pairs.append((alt_id, alt.logprob))
+            # flatten() reads cumulative mass left to right, so rows must be descending
+            pairs.sort(key=lambda pair: pair[1], reverse=True)
+            rows_ids.append([p[0] for p in pairs])
+            rows_logprobs.append([p[1] for p in pairs])
+
+        k = max((len(row) for row in rows_ids), default=0)
+        if k == 0:
+            return token_ids, None
+
+        # Padding matches FlatTopLogprobs.reconstruct: absent ids are -1, absent
+        # logprobs are -1000 so they contribute no probability mass.
+        ids_matrix = np.full((len(rows_ids), k), -1, dtype=np.int32)
+        logprobs_matrix = np.full((len(rows_logprobs), k), -1000.0, dtype=np.float32)
+        for row, (ids, logprobs) in enumerate(zip(rows_ids, rows_logprobs)):
+            ids_matrix[row, : len(ids)] = ids
+            logprobs_matrix[row, : len(logprobs)] = logprobs
+
+        return token_ids, TopLogprobs(logprobs=logprobs_matrix, token_ids=ids_matrix)
+
+    def _extract_without_token_ids(self, content: List[Any]) -> Optional[TopLogprobs]:
+        """Logprobs only, for servers that report token text. The ids are filled with
+        -1, so this is not usable for distillation."""
+
+        logprobs_list = []
+        for token in content:
+            token_logprobs = [token.logprob]
+            if token.top_logprobs:
+                token_logprobs.extend([t.logprob for t in token.top_logprobs])
+            logprobs_list.append(token_logprobs)
+
+        if not logprobs_list:
+            return None
+
+        max_len = max(len(row) for row in logprobs_list)
+        padded_logprobs = [
+            row + [-1000.0] * (max_len - len(row)) for row in logprobs_list
+        ]
+        return TopLogprobs(
+            logprobs=np.array(padded_logprobs, dtype=np.float32),
+            token_ids=np.full((len(padded_logprobs), max_len), -1, dtype=np.int32),
+        )
 
     async def chat(
         self,
@@ -247,37 +347,28 @@ class OpenAIClient(Client):
             
             # Extract token IDs if available from logprobs
             token_ids = None
-            top_logprobs = None
+            sample_top_logprobs = None
             
             if choice.logprobs and choice.logprobs.content:
-                # For now, we don't have token IDs from OpenAI API, but we can extract logprobs
-                
-                # Create logprobs matrix (simplified version)
-                logprobs_list = []
-                for token in choice.logprobs.content:
-                    token_logprobs = [token.logprob]
-                    if token.top_logprobs:
-                        token_logprobs.extend([t.logprob for t in token.top_logprobs])
-                    logprobs_list.append(token_logprobs)
-                
-                if logprobs_list:
-                    # Pad all rows to same length
-                    max_len = max(len(row) for row in logprobs_list)
-                    padded_logprobs = []
-                    for row in logprobs_list:
-                        padded_row = row + [-1000.0] * (max_len - len(row))
-                        padded_logprobs.append(padded_row)
-                    
-                    # Create TopLogprobs object - simplified since we don't have token IDs
-                    top_logprobs = TopLogprobs(
-                        logprobs=np.array(padded_logprobs, dtype=np.float32),
-                        token_ids=np.full((len(padded_logprobs), max_len), -1, dtype=np.int32)
+                if self.config.return_tokens_as_token_ids:
+                    token_ids, sample_top_logprobs = self._extract_with_token_ids(
+                        choice.logprobs.content
                     )
+                else:
+                    sample_top_logprobs = self._extract_without_token_ids(
+                        choice.logprobs.content
+                    )
+
+            if token_ids is None and self.config.return_tokens_as_token_ids:
+                # Logprobs were not requested for this call, so the server told us
+                # nothing about ids. Re-encoding the text is what the training dataset
+                # falls back to for messages that carry no token ids.
+                token_ids = self._encode(choice.message.content)
             
             responses.append(ClientSample(
                 text=choice.message.content,
                 token_ids=token_ids,
-                top_logprobs=top_logprobs,
+                top_logprobs=sample_top_logprobs,
             ))
         return ClientResponse(samples=responses, usage=usage)
 

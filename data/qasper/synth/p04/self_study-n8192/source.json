@@ -1,0 +1,11 @@
+{
+  "dataset": "qasper",
+  "stage": "p04",
+  "technique": "self_study-n8192",
+  "original_wrapper": "/localhome/local-triv/trivo-explore-research-work/outputs/2026-08-20-11-50-00-self_study_vllm",
+  "original_run_name": "qasper_self_study_ASR_n8192-0",
+  "qasper_topic": "ASR",
+  "data_synth_dir": "/localhome/local-triv/trivo-explore-research-work/data/qasper/synth/p04/self_study-n8192",
+  "artifact_path": "/localhome/local-triv/trivo-explore-research-work/data/qasper/synth/p04/self_study-n8192/artifact/dataset.parquet",
+  "train_parquet": "/localhome/local-triv/trivo-explore-research-work/data/qasper/train/qwen_qasper_ASR_task_8192.parquet"
+}

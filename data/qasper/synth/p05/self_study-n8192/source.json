@@ -1,0 +1,11 @@
+{
+  "dataset": "qasper",
+  "stage": "p05",
+  "technique": "self_study-n8192",
+  "original_wrapper": "/localhome/local-triv/trivo-explore-research-work/outputs/2026-08-20-12-39-17-self_study_vllm",
+  "original_run_name": "qasper_self_study_KG_n8192-0",
+  "qasper_topic": "KG",
+  "data_synth_dir": "/localhome/local-triv/trivo-explore-research-work/data/qasper/synth/p05/self_study-n8192",
+  "artifact_path": "/localhome/local-triv/trivo-explore-research-work/data/qasper/synth/p05/self_study-n8192/artifact/dataset.parquet",
+  "train_parquet": "/localhome/local-triv/trivo-explore-research-work/data/qasper/train/qwen_qasper_KG_task_8192.parquet"
+}

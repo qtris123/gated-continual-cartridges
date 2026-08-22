@@ -51,7 +51,8 @@ class SynthesizeConfig(RunConfig):
     # so that you can have about 128 - 256 conversations running per GPU at a time.
     batch_size: int
     max_num_batches_in_parallel: int
-    worker_timeout: int = 6 * 60  # only allow six minutes between completed batches
+    worker_timeout: int = 20 * 60  # seconds allowed between completed batches
+    batch_retries: int = 3  # retry a failed/empty batch before failing the run
 
     # --- BEGIN CONFIGURATIONS FOR LOGGING AND SAVING  ---
 
@@ -106,7 +107,7 @@ class SynthesizeConfig(RunConfig):
             _save_wandb_preview(all_rows)
 
         output_dir = self.run_dir / "artifact"
-        output_dir.mkdir()
+        output_dir.mkdir(exist_ok=True)
         final_output_path = output_dir / "dataset.parquet"
         write_conversations(all_rows, final_output_path)
 
@@ -184,14 +185,17 @@ class SynthesizeConfig(RunConfig):
                     break
                 
                 print(f"Processing batch {batch_idx}")
-                batch_rows = await _process_batch_async(
-                    batch_idx=batch_idx,
-                    total_batches=total_batches,
-                    synthesizer=synthesizer,
-                    config=self,
-                )
-                await results_queue.put((batch_idx, batch_rows))
-                logger.info(f"Batch {batch_idx} completed")
+                try:
+                    batch_rows = await _process_batch_async(
+                        batch_idx=batch_idx,
+                        total_batches=total_batches,
+                        synthesizer=synthesizer,
+                        config=self,
+                    )
+                    await results_queue.put((batch_idx, batch_rows))
+                    logger.info(f"Batch {batch_idx} completed")
+                except Exception as e:
+                    await results_queue.put((batch_idx, e))
                 batch_queue.task_done()
         
         
@@ -205,10 +209,18 @@ class SynthesizeConfig(RunConfig):
         completed_batches = 0
         with tqdm.tqdm(total=len(batches_to_process), desc="Processing batches", initial=0) as pbar:
             while completed_batches < len(batches_to_process):
-                batch_idx, batch_rows = await asyncio.wait_for(
+                batch_idx, payload = await asyncio.wait_for(
                     results_queue.get(),
                     timeout=self.worker_timeout
                 )
+                if isinstance(payload, Exception):
+                    for w in workers:
+                        w.cancel()
+                    await synthesizer.cleanup()
+                    raise RuntimeError(
+                        f"batch {batch_idx} failed after {self.batch_retries} retries"
+                    ) from payload
+                batch_rows = payload
                 all_rows.extend(batch_rows)
                 
                 # Save checkpoint immediately after batch completion
@@ -243,21 +255,34 @@ async def _process_batch_async(
         config.num_samples - batch_idx * config.batch_size,
     )
 
-    try:
-        convos = await synthesizer.sample_convos(batch_idx, batch_size, total_batches)
-    except Exception as e:  
-        logger.error(
-            f"\n{'='*60}\n"
-            f"Error processing batch {batch_idx + 1}/{total_batches}\n"
-            f"Exception Type: {type(e).__name__}\n"
-            f"Exception Message: {e}\n"
-            f"{'-'*60}\n"
-            f"Full Traceback:\n",
-            exc_info=True
-        )
-        return []
-
-    return convos
+    retries = max(1, int(getattr(config, "batch_retries", 3)))
+    last_error: Exception | None = None
+    for attempt in range(1, retries + 1):
+        try:
+            convos = await synthesizer.sample_convos(batch_idx, batch_size, total_batches)
+            if convos:
+                return convos
+            last_error = RuntimeError(
+                f"batch {batch_idx} returned 0 conversations (attempt {attempt}/{retries})"
+            )
+            logger.error("%s", last_error)
+        except Exception as e:
+            last_error = e
+            logger.error(
+                f"\n{'='*60}\n"
+                f"Error processing batch {batch_idx + 1}/{total_batches} "
+                f"(attempt {attempt}/{retries})\n"
+                f"Exception Type: {type(e).__name__}\n"
+                f"Exception Message: {e}\n"
+                f"{'-'*60}\n"
+                f"Full Traceback:\n",
+                exc_info=True
+            )
+        if attempt < retries:
+            await asyncio.sleep(min(2 ** attempt, 16))
+    raise last_error if last_error is not None else RuntimeError(
+        f"batch {batch_idx} failed"
+    )
 
 def _save_wandb_preview(rows: list[Conversation]):
     import random

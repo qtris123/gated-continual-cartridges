@@ -3,6 +3,7 @@ import random
 
 from cartridges.utils import get_logger
 from cartridges.data.resources import Resource, sample_seed_prompts, SEED_TYPES
+from cartridges.data.longhealth.phases import PHASE_TO_PATIENT_IDS
 from cartridges.data.longhealth.utils import load_longhealth_dataset
 logger = get_logger(__name__)
 
@@ -31,6 +32,7 @@ The patients medical record consists of {num_notes} notes included below.
 class LongHealthResource(Resource):
     class Config(Resource.Config):
         patient_ids: Optional[List[str]] = None
+        phase: Optional[int] = None
         max_notes_per_prompt: int = 1
         min_notes_per_prompt: int = 1
         max_chars_per_note: Optional[int] = None
@@ -39,7 +41,16 @@ class LongHealthResource(Resource):
     
     def __init__(self, config: Config):
         self.config = config
-        self.patients = load_longhealth_dataset(self.config.patient_ids)
+        patient_ids = config.patient_ids
+        if config.phase is not None:
+            if config.phase not in PHASE_TO_PATIENT_IDS:
+                raise ValueError(
+                    f"phase must be one of {sorted(PHASE_TO_PATIENT_IDS)}, got {config.phase}"
+                )
+            if patient_ids:
+                raise ValueError("set LongHealthResource.phase or patient_ids, not both")
+            patient_ids = PHASE_TO_PATIENT_IDS[config.phase]
+        self.patients = load_longhealth_dataset(patient_ids)
     
     def _chunk_note(self, note: str) -> List[str]:
         if self.config.max_chars_per_note is None or len(note) <= self.config.max_chars_per_note:

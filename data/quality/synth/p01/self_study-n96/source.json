@@ -1,0 +1,8 @@
+{
+  "dataset": "quality",
+  "stage": "p01",
+  "technique": "self_study-n96",
+  "original_wrapper": "/localhome/local-triv/trivo-explore-research-work/outputs/2026-08-21-04-40-53-self_study_vllm",
+  "original_run_name": "quality_p1_self_study_n96-0",
+  "data_synth_dir": "/localhome/local-triv/trivo-explore-research-work/data/quality/synth/p01/self_study-n96"
+}

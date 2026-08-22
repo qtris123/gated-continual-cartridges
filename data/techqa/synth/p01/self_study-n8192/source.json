@@ -1,0 +1,10 @@
+{
+  "dataset": "techqa",
+  "stage": "p01",
+  "technique": "self_study-n8192",
+  "original_wrapper": "/localhome/local-triv/trivo-explore-research-work/outputs/2026-08-21-17-02-25-self_study_vllm",
+  "original_run_name": "techqa_p1_self_study_n8192-0",
+  "data_synth_dir": "/localhome/local-triv/trivo-explore-research-work/data/techqa/synth/p01/self_study-n8192",
+  "artifact_path": "/localhome/local-triv/trivo-explore-research-work/data/techqa/synth/p01/self_study-n8192/artifact/dataset.parquet",
+  "train_parquet": "/localhome/local-triv/trivo-explore-research-work/data/techqa/train/qwen_techqa_p1_task_8192.parquet"
+}

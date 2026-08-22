@@ -70,6 +70,73 @@ def longhealth_mc(prediction: str, ground_truth: str, **kwargs) -> float:
     return 0.0
 
 
+def resolve_mc_option(
+    prediction: str,
+    options: list[str],
+) -> str | None:
+    """Resolve a free-form generation to one of the supplied option texts.
+
+    This is the phase-stream protocol from
+    ``faridlazuarda/gated-continual-cartridges@7c11bf1``.  Keeping the resolver
+    separate from the score makes malformed-answer rates auditable without
+    changing the baseline-compatible accuracy definition.
+    """
+    if not options:
+        return None
+    normalized_options = [option.strip().lower() for option in options]
+    text = _extract_answer_tag(prediction) or prediction
+    normalized_text = " ".join(text.lower().split())
+
+    def by_letter(letter: str) -> str | None:
+        index = ord(letter) - ord("a")
+        return normalized_options[index] if index < len(normalized_options) else None
+
+    chosen = None
+    letters = [
+        (match.start(), match.group(1))
+        for match in re.finditer(r"\(([a-e])\)", normalized_text)
+    ]
+    leading = re.match(r"^\(?([a-e])[\)\.\:]\s", normalized_text)
+    if leading:
+        letters.insert(0, (0, leading.group(1)))
+    if letters:
+        answer_at = normalized_text.rfind("answer")
+        after = [
+            letter
+            for position, letter in letters
+            if answer_at != -1 and position > answer_at
+        ]
+        chosen = by_letter(after[0] if after else letters[-1][1])
+
+    if chosen is None:
+        squashed = normalized_text.replace(" ", "")
+        mentions = [
+            (squashed.rfind(option.replace(" ", "")), option)
+            for option in normalized_options
+            if option.replace(" ", "") in squashed
+        ]
+        if mentions:
+            chosen = max(mentions)[1]
+
+    if chosen is None:
+        best = _find_best_match(normalized_text, normalized_options)
+        if SequenceMatcher(None, normalized_text, best).ratio() >= 0.5:
+            chosen = best
+
+    return options[normalized_options.index(chosen)] if chosen is not None else None
+
+
+def mc_options(prediction: str, ground_truth: str, **kwargs) -> float:
+    """Score MCQ generations against option text, not a fixed letter protocol."""
+    metadata: dict[str, Any] = kwargs.get("metadata", {})
+    raw_options = metadata.get("options")
+    options = [str(option) for option in raw_options] if raw_options is not None else []
+    chosen = resolve_mc_option(prediction, options)
+    if chosen is None:
+        return 0.0
+    return float(chosen.strip().lower() == ground_truth.strip().lower())
+
+
 # ---------------------------------------------------------------------------
 # Internal helpers
 # ---------------------------------------------------------------------------
@@ -135,4 +202,10 @@ SCORER_REGISTRY: dict[str, ScorerFn] = {
     "multiple_choice": multiple_choice,
     "yes_no": yes_no_match,
     "longhealth_mc": longhealth_mc,
+    "mc_options": mc_options,
+}
+
+CATEGORY_SCORERS: dict[str, ScorerFn] = {
+    "longhealth_mcq": mc_options,
+    "quality_mcq": mc_options,
 }

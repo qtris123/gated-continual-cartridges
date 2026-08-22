@@ -1,0 +1,110 @@
+_config_type:
+  _is_type: true
+  _module: cartridges.synthesize
+  _qualname: SynthesizeConfig
+batch_size: 32
+hf_repo_id: null
+launch_id: 2026-08-20-11-50-00-self_study_vllm
+max_num_batches_in_parallel: 8
+name: qasper_self_study_ASR_n8192_Qwen/Qwen3-4B-Instruct-2507_n8192
+num_samples: 8192
+output_dir: /localhome/local-triv/trivo-explore-research-work/outputs
+run_dir: /localhome/local-triv/trivo-explore-research-work/outputs/2026-08-20-11-50-00-self_study_vllm/qasper_self_study_ASR_n8192-0
+run_id: qasper_self_study_ASR_n8192-0
+save_wandb_preview: false
+script_id: self_study_vllm
+synthesizer:
+  _config_type:
+    _is_type: true
+    _module: cartridges.synthesizers.self_study
+    _qualname: SelfStudySynthesizer.Config
+  client:
+    _config_type:
+      _is_type: true
+      _module: cartridges.clients.openai
+      _qualname: OpenAIClient.Config
+    api_key: EMPTY
+    base_url: http://127.0.0.1:8000/v1
+    kwargs: {}
+    model_name: Qwen/Qwen3-4B-Instruct-2507
+    return_tokens_as_token_ids: true
+    show_progress_bar: false
+    target:
+      _is_type: true
+      _module: cartridges.clients.openai
+      _qualname: OpenAIClient
+    truncate_messages_and_retry: true
+  kwargs: {}
+  max_completion_tokens_a: 512
+  max_completion_tokens_b: 1024
+  max_rounds: 1
+  max_tool_tokens: 128
+  min_prob_mass: 0.99
+  num_top_logprobs: 20
+  prob_thinking: 0.2
+  resources:
+  - _config_type:
+      _is_type: true
+      _module: cartridges.data.qasper.resources
+      _qualname: QASPERResource.Config
+    include_year: false
+    kwargs: {}
+    seed_prompts:
+    - structuring
+    - summarization
+    - question
+    - use_case
+    - creative
+    target:
+      _is_type: true
+      _module: cartridges.data.qasper.resources
+      _qualname: QASPERResource
+    topic: ASR
+    year: null
+  system_prompt_template: '
+
+    You are in a conversation about the following user information.
+
+
+    <info>
+
+    {subcorpus}
+
+    </info>'
+  target:
+    _is_type: true
+    _module: cartridges.synthesizers.self_study
+    _qualname: SelfStudySynthesizer
+  temperature_a: 0.6
+  temperature_b: 0.0
+  tool_prompt_template: 'You need to respond to the following message:
+
+
+    <message>
+
+    {message}
+
+    </message>
+
+    {tools}'
+  tools: []
+  use_tools_a: false
+  use_tools_b: false
+upload_to_hf: false
+upload_to_wandb: false
+wandb:
+  _config_type:
+    _is_type: true
+    _module: cartridges.utils.wandb
+    _qualname: WandBConfig
+  entity: null
+  group: null
+  name: null
+  notes: null
+  project: cartridges
+  tags:
+  - qasper
+  - synthesis
+  - self_study
+  - ASR
+worker_timeout: 360
