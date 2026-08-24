@@ -15,7 +15,7 @@ This file is the **why** and the **code contract**. Do not copy PHASES.md here.
 | Resource tests (no vLLM) | `cartridges/tests/resources/test_phase_synth.py` |
 | AM grouping + teacher | `cartridges/am/components/queries.py` |
 | Prompt-byte pins | `cartridges/tests/test_am_reference_data.py` |
-| Materialized concat corpora | `data/phases/<ds>/phasek.txt` (built from each resource's `to_string()`) |
+| Materialized concat corpora | `data/<ds>/phases/phasek.txt` (built from each resource's `to_string()`) |
 
 `PHASES.md` "Still outstanding" is stale: QASPER ASR/KG evals and much of the
 synth pipeline exist. Treat the code + this skill as current; treat PHASES.md
@@ -69,7 +69,7 @@ real fails.
   Hashes pinned in `test_am_reference_data.py`.
 - **ID:** `<title>` — works with `document_key`.
 - **Eval:** rewritten by `qasper/rewrite.py` (names the paper); not raw HF QAs.
-  Paths: `data/phases/qasper/` and `data/qasper/eval/`.
+  Paths: `data/qasper/phases/` and `data/qasper/eval/`.
 
 ## QuALITY
 
@@ -81,7 +81,8 @@ real fails.
 - **AM:** `full_quality_prompt` needs `dataset=quality` **and** `quality_phase`.
   Default teacher is QASPER — wrong dataset → `KeyError`.
 - **Eval:** 4-way MCQ; gold is **1-based** `gold_label`. Optional `difficult`.
-  Files: `data/phases/quality/phase{1–5}_eval.parquet`.
+  Files: `data/quality/phases/phase{1–5}_eval.parquet`, plus
+  `phase{1–5}_eval_anchored.parquet` with the story named in each question.
 
 ## FinQA
 

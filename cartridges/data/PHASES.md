@@ -569,11 +569,13 @@ from phase 3 onward.
 
 ## Materialized phase corpora
 
-Phase corpora live in `data/phases/<dataset>/phase<k>.txt`, with
-`phase<k>_eval.parquet` holding that phase's questions. The text is the phase
-resource's `to_string()`, including the wrappers used for the token counts
-above. Shared evaluation engines live under `examples/shared/evaluate/`;
-dataset-owned reference launchers live in each `examples/<dataset>/` tree.
+Phase corpora live in `data/<dataset>/phases/phase<k>.txt`, with
+`phase<k>_eval.parquet` holding that phase's questions and
+`phase<k>_eval_anchored.parquet` (FinQA, QuALITY) holding the variant whose
+question stems name their source document. The text is the phase resource's
+`to_string()`, including the wrappers used for the token counts above. Shared
+evaluation engines live under `examples/shared/evaluate/`; dataset-owned
+reference launchers live in each `examples/<dataset>/` tree.
 
 ## Still outstanding
 

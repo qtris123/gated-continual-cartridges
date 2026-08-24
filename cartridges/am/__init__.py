@@ -28,7 +28,7 @@ from cartridges.am.components import (
     ValueObjective,
 )
 from cartridges.am.continual import AMContinualConfig, AMStages, run_am_continual
-from cartridges.am.initial import compact_cache_am_phase1, refine_cache_am_phase1
+from cartridges.am.initial import compact_cache_am_phase1
 
 __all__ = [
     # the six stages
@@ -44,5 +44,4 @@ __all__ = [
     "run_am_continual",
     # phase 1
     "compact_cache_am_phase1",
-    "refine_cache_am_phase1",
 ]

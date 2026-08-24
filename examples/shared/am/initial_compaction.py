@@ -4,8 +4,8 @@ Builds one large teacher KV cache from a QASPER or QuALITY phase, then compacts
 it to a NUM_TOKENS-slot cartridge by selecting teacher keys and ridge-fitting
 values to reproduce teacher attention outputs on reference queries.
 
-Unlike the legacy self-match Phase 1 (initial_am.py), keys are teacher-derived
-rather than init-text, and there are no Phase-2 stabilizers (one-shot compaction).
+Keys are teacher-derived rather than init-text, and there are no Phase-2
+stabilizers (one-shot compaction). KVFromText + self-match refine is deprecated.
 
 Usage:
     AM_DATASET=qasper AM_QASPER_TOPIC=QA \

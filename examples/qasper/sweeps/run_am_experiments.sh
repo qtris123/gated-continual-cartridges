@@ -51,15 +51,14 @@ log_result() {
   echo "$1" | tee -a "$RESULTS_DIR/results.log"
 }
 
-# --- Phase 1: AM init (GPU 1) ---
+# --- Phase 1: AM compaction (GPU 1) ---
 if [ "${SKIP_PHASE1:-0}" != "1" ]; then
-  log_result "=== EXP: Phase 1 AM init (GPU 1) ==="
+  log_result "=== EXP: Phase 1 AM compaction (GPU 1) ==="
   T0=$(date +%s)
   CUDA_VISIBLE_DEVICES=1 \
   NUM_TOKENS="$NUM_TOKENS" GRANULARITY="$GRANULARITY" \
-  AM_PASSES="$AM_PASSES" AM_MAX_BATCHES="$AM_MAX_BATCHES" \
   RUN_NAME="exp_am1_${NUM_TOKENS}_${GRANULARITY}" \
-  bash "$SCRIPT_DIR/../pipelines/train_initial_am.sh" 2>&1 | tee "$RESULTS_DIR/phase1_am.log"
+  bash "$SCRIPT_DIR/../pipelines/train_initial_am_compaction.sh" 2>&1 | tee "$RESULTS_DIR/phase1_am.log"
   T1=$(date +%s)
   log_result "Phase 1 AM wall-clock: $((T1-T0))s"
 

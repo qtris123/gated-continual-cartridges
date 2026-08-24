@@ -13,8 +13,8 @@ Only the question stem is rewritten — answers, MCQ options, metadata and the
 Conversation layout are preserved bit-for-bit, and outputs are NEW files so
 existing results stay comparable:
 
-    data/phases/<ds>/phase<k>_eval_anchored.parquet   rewritten eval set
-    data/phases/<ds>/rewrite_raw/phase<k>_questions.parquet  provenance
+    data/<ds>/phases/phase<k>_eval_anchored.parquet   rewritten eval set
+    data/<ds>/phases/rewrite_raw/phase<k>_questions.parquet  provenance
                                                      (old/new question pairs)
 
 Anchors:
@@ -125,7 +125,7 @@ async def rewrite_all(prompts: list[str]) -> list[str]:
 
 def process_phase(dataset: str, phase: int, limit: int | None,
                   titles: dict[str, str] | None) -> None:
-    phase_dir = Path("data/phases") / dataset
+    phase_dir = Path("data") / dataset / "phases"
     src = phase_dir / f"phase{phase}_eval.parquet"
     convos = read_conversations(str(src))
     if limit:

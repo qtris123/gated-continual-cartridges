@@ -33,7 +33,7 @@ P1_CACHE = (
 )
 
 EVALS = {
-    i: ROOT / f"data/phases/qasper/phase{i}_eval.parquet" for i in range(1, 6)
+    i: ROOT / f"data/qasper/phases/phase{i}_eval.parquet" for i in range(1, 6)
 }
 SYNTH = {
     4: ROOT / "data/qasper/train/qwen_qasper_ASR_task_8192.parquet",

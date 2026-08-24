@@ -20,7 +20,7 @@ export MODEL_NAME="${MODEL_NAME:-Qwen/Qwen3-4B-Instruct-2507}"
 
 mkdir -p "$RUNS" "$STATE"
 for phase in 1 2 3 4 5; do
-  eval_path="$ROOT/data/phases/quality/phase${phase}_eval.parquet"
+  eval_path="$ROOT/data/quality/phases/phase${phase}_eval.parquet"
   synth_path="$ROOT/data/quality/train/qwen_quality_p${phase}_task_8192.parquet"
   [ -f "$eval_path" ] || { echo "missing $eval_path" >&2; exit 2; }
   [ -f "$synth_path" ] || { echo "missing $synth_path" >&2; exit 2; }

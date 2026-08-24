@@ -386,7 +386,7 @@ def compact_cache_am_phase1(
     # they do not re-read the document in their own context).
     ref_convos = limit_conversations(conversations, max_ref_examples, seed=0)
     if strip_reference_system_prompt:
-        ref_convos = [dataclasses.replace(c, system_prompt="") for c in ref_convos]
+        ref_convos = [dataclasses.replace(c, system_prompt="") for c in ref_convos] # remove the system prompt field value
     ref_loader, ref_tmp = build_reference_dataloader(ref_convos, tokenizer, seed=0)
     try:
         query_acc = _collect_compaction_queries(
@@ -442,18 +442,22 @@ def compact_cache_am_phase1(
                 idx = torch.randperm(queries.shape[0], device=device)[:max_queries_per_head]
                 queries = queries[idx]
 
+            # 3.1 Select the keys for the compacted block
             if key_select == "omp":
                 C1, beta, sel_idx = select_keys_omp(
                     K_head, queries, num_tokens, head_dim, **beta_fit_kwargs,
                 )
-            else:
+            else: # highest_attention
                 C1, beta, sel_idx = select_keys_highest_attention(
                     K_head, queries, num_tokens, head_dim, score_method="rms",
                     **beta_fit_kwargs,
                 )
+
+            # 3.2 Compute the compaction C2 solve
             if not enable_beta:
                 beta = torch.zeros(C1.shape[0], device=device, dtype=torch.float32)
 
+            # 3.3 Fixing the RoPE positional information
             if rebake_key_positions:
                 # Re-base selected teacher keys onto sequential cartridge slot
                 # positions so eval-query↔cartridge RoPE geometry matches how a
@@ -463,12 +467,13 @@ def compact_cache_am_phase1(
                 to_pos = torch.arange(t_sel, device=device)
                 C1 = _rope_reposition(C1, from_pos, to_pos, head_dim, rope_theta=rope_theta)
 
+            # 3.4 Compute the compaction solve for the values
             C2 = compute_compaction_c2(
                 C1, beta, K_head, V_head, queries, head_dim,
                 ridge_lambda=ridge_lambda, ridge_scale=ridge_scale,
             )
 
-            # Reconstruction MSE vs teacher attention output on the queries.
+            # [DIAGNOSTIC] Reconstruction MSE vs teacher attention output on the queries.
             target = compute_attention_output(queries, K_head, V_head, head_dim)
             sC = (queries @ C1.T).to(torch.float32) * inv_sqrt_d + beta.to(torch.float32)
             approx = F.softmax(sC, dim=-1) @ C2.to(torch.float32)

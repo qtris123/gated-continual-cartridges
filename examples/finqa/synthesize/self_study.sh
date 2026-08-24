@@ -19,6 +19,12 @@ export PYTHONPATH="$CARTRIDGES_DIR:${PYTHONPATH:-}"
 export WANDB_MODE="${WANDB_MODE:-offline}"
 export TOKENIZERS_PARALLELISM=false
 export VLLM_LOGGING_LEVEL="${VLLM_LOGGING_LEVEL:-INFO}"
+# TrainDataset targets="logits" reads stored teacher logprobs and true vocab ids.
+# Neither is emitted unless the client asks and the server is started with
+# --return-tokens-as-token-ids, so both sides are pinned here.
+export SYNTH_NUM_TOP_LOGPROBS="${SYNTH_NUM_TOP_LOGPROBS:-20}"
+export SYNTH_RETURN_TOKEN_IDS="${SYNTH_RETURN_TOKEN_IDS:-1}"
+export SYNTH_MAX_COMPLETION_TOKENS_B="${SYNTH_MAX_COMPLETION_TOKENS_B:-2048}"
 
 cd "$CARTRIDGES_DIR"
 AM_PY="${AM_PY:-$CARTRIDGES_DIR/.venv/bin/python}"
@@ -35,6 +41,12 @@ MAX_MODEL_LEN="${MAX_MODEL_LEN:-32768}"
 GPU_UTIL="${GPU_UTIL:-0.85}"
 SKIP_VLLM="${SKIP_VLLM:-0}"
 KEEP_VLLM="${KEEP_VLLM:-0}"
+# FinQA logprobs occasionally contain NaN, which vLLM cannot encode as JSON: the
+# request 500s and the whole batch is lost. The wrapper scrubs non-finite floats.
+SERVER_MODULE="${SERVER_MODULE:-examples.shared.synth.vllm_nan_safe_server}"
+# Resume each phase into its own published run dir, so a top-up fills that
+# phase's gaps in place instead of every phase sharing one RESUME_DIR.
+AUTO_RESUME="${AUTO_RESUME:-1}"
 
 export CARTRIDGES_VLLM_URL="http://127.0.0.1:${PORT}/v1"
 
@@ -84,13 +96,14 @@ else
     exit 1
   fi
   echo "=== starting vllm (log -> $SERVER_LOG) ==="
-  "$AM_PY" -m vllm.entrypoints.openai.api_server \
+  "$AM_PY" -m "$SERVER_MODULE" \
     --model "$MODEL" \
     --served-model-name "$MODEL" \
     --port "$PORT" \
     --data-parallel-size "$DP_SIZE" \
     --max-model-len "$MAX_MODEL_LEN" \
     --gpu-memory-utilization "$GPU_UTIL" \
+    --return-tokens-as-token-ids \
     --disable-log-requests >"$SERVER_LOG" 2>&1 &
   SERVER_PID=$!
   echo "waiting for readiness (pid $SERVER_PID)..."
@@ -111,6 +124,12 @@ OVERALL_RC=0
 for phase in $PHASES; do
   RUN_NAME="finqa_p${phase}_self_study_n${NUM_SAMPLES}"
   SYNTH_LOG="$LOGDIR/synth_finqa_p${phase}_${STAMP}.log"
+  PHASE_DIR="$CARTRIDGES_DIR/data/finqa/synth/p0${phase}/self_study-n${NUM_SAMPLES}"
+  PHASE_RESUME="${RESUME_DIR:-}"
+  if [ -z "$PHASE_RESUME" ] && [ "$AUTO_RESUME" = "1" ] && [ -d "$PHASE_DIR" ]; then
+    PHASE_RESUME="$PHASE_DIR"
+  fi
+  [ -n "$PHASE_RESUME" ] && echo "resume dir: $PHASE_RESUME"
   echo "=== synthesizing finqa phase=$phase (log -> $SYNTH_LOG) ==="
   set +e
   "$AM_PY" "$CARTRIDGES_DIR/examples/shared/synth/self_study_vllm.py" \
@@ -123,7 +142,7 @@ for phase in $PHASES; do
     --max-num-batches "$MAX_NUM_BATCHES" \
     --prob-thinking "$PROB_THINKING" \
     --run-name "$RUN_NAME" \
-    ${RESUME_DIR:+--resume-dir "$RESUME_DIR"} >"$SYNTH_LOG" 2>&1
+    ${PHASE_RESUME:+--resume-dir "$PHASE_RESUME"} >"$SYNTH_LOG" 2>&1
   SYNTH_RC=$?
   set -e
   echo "phase $phase exit code: $SYNTH_RC"

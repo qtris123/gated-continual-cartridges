@@ -117,13 +117,16 @@ def build_synthesize_config(
     upload_to_wandb: bool = False,
     seed_prompts: Optional[Sequence[SEED_TYPES]] = None,
     docs_per_prompt: Optional[int] = None,
+    num_top_logprobs: Optional[int] = None,
+    return_token_ids: bool = False,
+    max_completion_tokens_b: int = 2048,
 ) -> SynthesizeConfig:
     if client is None:
         client = OpenAIClient.Config(
             model_name=model,
             base_url=base_url,
             api_key=os.environ.get("OPENAI_API_KEY", "EMPTY"),
-            return_tokens_as_token_ids=False,
+            return_tokens_as_token_ids=return_token_ids,
         )
     resource = build_resource_config(
         dataset,
@@ -144,7 +147,8 @@ def build_synthesize_config(
             prob_thinking=prob_thinking,
             tools=[],
             resources=[resource],
-            num_top_logprobs=None,
+            num_top_logprobs=num_top_logprobs,
+            max_completion_tokens_b=max_completion_tokens_b,
         ),
         num_samples=num_samples,
         batch_size=batch_size,
@@ -205,6 +209,34 @@ def _parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
         default=os.environ.get("RESUME_DIR"),
         help="Reuse this run directory so nonempty checkpoints are kept",
     )
+    parser.add_argument(
+        "--num-top-logprobs",
+        type=int,
+        default=(
+            int(os.environ["SYNTH_NUM_TOP_LOGPROBS"])
+            if os.environ.get("SYNTH_NUM_TOP_LOGPROBS")
+            else None
+        ),
+        help=(
+            "Store top-k teacher logprobs per token. Omit for off-policy AM runs; "
+            "set (e.g. 20) to match rows consumed by TrainDataset targets='logits'."
+        ),
+    )
+    parser.add_argument(
+        "--max-completion-tokens-b",
+        type=int,
+        default=int(os.environ.get("SYNTH_MAX_COMPLETION_TOKENS_B") or 2048),
+        help=(
+            "Cap on the assistant turn. At the old 1024, 47%% of QuALITY answers hit "
+            "the cap and ended mid-sentence; 2048 leaves headroom for long-form streams."
+        ),
+    )
+    parser.add_argument(
+        "--return-token-ids",
+        action="store_true",
+        default=os.environ.get("SYNTH_RETURN_TOKEN_IDS", "0") == "1",
+        help="Ask the server for 'token_id:N' tokens so top_logprobs carry true vocab ids.",
+    )
     return parser.parse_args(argv)
 
 
@@ -224,6 +256,9 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
         run_name=args.run_name,
         upload_to_wandb=args.upload_to_wandb,
         docs_per_prompt=args.docs_per_prompt,
+        num_top_logprobs=args.num_top_logprobs,
+        return_token_ids=args.return_token_ids,
+        max_completion_tokens_b=args.max_completion_tokens_b,
     )
     if args.resume_dir:
         from pathlib import Path

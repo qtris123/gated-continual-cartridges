@@ -5,7 +5,8 @@ Use this to reproduce the published baseline cartridges on HuggingFace, e.g.:
   - qtris123/llama_qasper-QA-task_8192_512_no-cartridge_10-epochs
   - qtris123/qwen_qasper-QA-task_8192_512_no-cartridge_10-epochs
 
-For AM or sparse Phase 2 pipelines, use initial_am.py / initial_sparse.py instead.
+For AM Phase 1, use examples/shared/am/initial_compaction.py. For sparse
+Phase 2, use the sparse training entrypoints, not KVFromText self-match refine.
 
 Usage:
     TEXT_PATH=data/qasper/init_text/qasper_init_512.txt \\

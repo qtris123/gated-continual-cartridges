@@ -148,10 +148,20 @@ class SynthesizeConfig(RunConfig):
             for checkpoint_file in sorted(checkpoint_dir.glob("batch_*.parquet")):
                 try:
                     batch_idx = int(checkpoint_file.stem.split("_")[1])
-                    completed_batch_indices.add(batch_idx)
-                    
+
                     df = pd.read_parquet(checkpoint_file)
+                    if df.empty:
+                        # A zero-row checkpoint is a batch that died under the old
+                        # swallow-and-continue path. Counting it as done would make the
+                        # resume inherit the gap forever, so regenerate it instead.
+                        logger.warning(
+                            f"Ignoring empty checkpoint {checkpoint_file.name}; "
+                            "batch will be regenerated"
+                        )
+                        continue
+
                     batch_rows = [Conversation.from_dict(row) for _, row in df.iterrows()]
+                    completed_batch_indices.add(batch_idx)
                     all_rows.extend(batch_rows)
                     logger.info(f"Resumed from checkpoint: batch {batch_idx} ({len(batch_rows)} samples)")
                 except Exception as e:

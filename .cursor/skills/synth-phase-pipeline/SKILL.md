@@ -15,8 +15,9 @@ Canonical writeup of splits: `cartridges/data/PHASES.md`. This skill is the
 **operational contract** between phase tables, synth rows, and AM writes.
 
 Repos: code and synth live in `trivo-explore-research-work`. Concatenated
-`data/phases/<ds>/phasek.txt` + `phasek_eval.parquet` also exist on
-`gated-continual-cartridges` (`feat/baseline-implementation`).
+`data/<ds>/phases/phasek.txt` + `phasek_eval.parquet` also exist on
+`gated-continual-cartridges` (`feat/baseline-implementation`), under the older
+top-level `data/phases/<ds>/` layout; the corpora are byte-identical.
 
 ## Hard rules
 
@@ -69,7 +70,8 @@ Outputs: `data/<dataset>/synth/p0N/self_study-n8192/` (`config.yaml`, artifact p
 AM trains on `data/<dataset>/train/qwen_<dataset>_pN_task_8192.parquet` (symlink to that artifact).
 QASPER train names use topics: `qwen_qasper_ASR_task_8192.parquet`.
 `outputs/synth/<dataset>` is a view of `data/<dataset>/synth`.
-`data/phases/` stays the ICL/eval export tree.
+`data/<dataset>/phases/` is that stream's ICL/eval export tree (corpus,
+`phasek_eval.parquet`, and `phasek_eval_anchored.parquet` for FinQA/QuALITY).
 
 ## Per-dataset units
 
