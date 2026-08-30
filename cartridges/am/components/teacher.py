@@ -41,6 +41,7 @@ def prefill_document_kv_cache(
     cartridge_cache: Optional[TrainableCache] = None,
     max_tokens: Optional[int] = None,
     position_offset: int = 0,
+    capture_device: Optional[torch.device] = None,
 ) -> dict[int, tuple[torch.Tensor, torch.Tensor]]:
     """Capture document KV while prefilling against the current cartridge.
 
@@ -49,6 +50,11 @@ def prefill_document_kv_cache(
     ``position_offset`` shifts the RoPE positions of this document so multiple
     documents can be prefilled separately yet carry globally-consistent absolute
     positions (avoids cross-document position collisions when concatenated).
+
+    ``capture_device`` receives each layer's KV as it comes off the hook. Left as
+    ``None`` the KV stays where the model computed it, which means all
+    ``n_layers`` of it is resident alongside the forward pass (1.3 GiB for a 8.9k
+    token paper on Qwen3-4B); callers that only want it off-device should say so.
     """
     device = torch.device(device)
     input_ids = _tokenize_system_prompt(tokenizer, system_prompt, max_tokens=max_tokens)
@@ -81,10 +87,12 @@ def prefill_document_kv_cache(
                     value_states = attn_mod.v_proj(hidden_states).view(hidden_shape).transpose(1, 2)
                     cos, sin = batch.position_embeddings
                     key_states = _apply_rotary_pos_emb(key_states, cos, sin)
-                    captured[idx] = (
-                        key_states[0].detach(),
-                        value_states[0].detach(),
-                    )
+                    k_out = key_states[0].detach()
+                    v_out = value_states[0].detach()
+                    if capture_device is not None:
+                        k_out = k_out.to(capture_device)
+                        v_out = v_out.to(capture_device)
+                    captured[idx] = (k_out, v_out)
 
             return hook_fn
 
@@ -107,6 +115,10 @@ def prefill_document_kv_cache(
                     use_cache=cartridge_cache is not None,
                     past_key_values=cartridge_cache,
                     mode="train",
+                    # KV comes off the hooks; the vocab projection is discarded. Keeping
+                    # every position costs seq_len x vocab (2.7 GiB for a 8.9k-token
+                    # QASPER paper on Qwen3) at the same moment the doc KV is live.
+                    logits_to_keep=1,
                 )
     finally:
         for handle in handles:

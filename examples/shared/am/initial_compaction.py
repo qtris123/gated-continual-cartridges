@@ -62,6 +62,27 @@ ENABLE_BETA = os.environ.get("ENABLE_BETA", "1") not in ("0", "false", "False")
 REBAKE_KEY_POSITIONS = os.environ.get("REBAKE_KEY_POSITIONS", "1") not in ("0", "false", "False")
 STRIP_REF_SYSTEM_PROMPT = os.environ.get("STRIP_REF_SYSTEM_PROMPT", "1") not in ("0", "false", "False")
 GLOBAL_TEACHER_POSITIONS = os.environ.get("GLOBAL_TEACHER_POSITIONS", "0") not in ("0", "false", "False")
+
+def _resolve_rope_theta() -> float:
+    """AM_ROPE_THETA -> float, accepting "model"/"auto" like `continual_write.py`.
+
+    Only consumed by the REBAKE_KEY_POSITIONS rotation. The default is the
+    historical hard-coded base, NOT the model's own (Qwen3-4B-Instruct-2507 =
+    5e6), matching AMContinualConfig.rope_theta so old runs stay reproducible --
+    but rebaking at a base the keys were not baked with rotates them off their
+    slot, so a corrected run must pass 5000000 or "model" explicitly.
+    """
+    raw = os.environ.get("AM_ROPE_THETA")
+    if raw is None:
+        return 10000.0
+    if raw.strip().lower() in ("model", "auto", "config"):
+        from transformers import AutoConfig
+
+        return float(AutoConfig.from_pretrained(MODEL_NAME).rope_theta)
+    return float(raw)
+
+
+AM_ROPE_THETA = _resolve_rope_theta()
 RIDGE_LAMBDA = float(os.environ.get("RIDGE_LAMBDA", "1e-4"))
 RIDGE_SCALE = os.environ.get("RIDGE_SCALE", "spectral")
 MAX_REF_BATCHES = int(os.environ.get("MAX_REF_BATCHES", "50"))
@@ -133,7 +154,9 @@ def run_am_compaction_phase1(config: TrainConfig):
         dataset, batch_size=1, collate_fn=_collate_first, num_workers=0,
     )
 
-    model = config.model.instantiate().to(local_rank).to(torch.bfloat16)
+    # Cast before the device move: the reverse order stages a full fp32 copy of the
+    # weights on the accelerator (16 GiB for Qwen3-4B) purely to throw it away.
+    model = config.model.instantiate().to(torch.bfloat16).to(local_rank)
     for p in model.parameters():
         p.requires_grad = False
 
@@ -164,6 +187,7 @@ def run_am_compaction_phase1(config: TrainConfig):
         rebake_key_positions=REBAKE_KEY_POSITIONS,
         strip_reference_system_prompt=STRIP_REF_SYSTEM_PROMPT,
         global_teacher_positions=GLOBAL_TEACHER_POSITIONS,
+        rope_theta=AM_ROPE_THETA,
         max_ref_batches=MAX_REF_BATCHES,
         queries_per_batch=QUERIES_PER_BATCH,
         max_queries_per_head=MAX_QUERIES_PER_HEAD,
@@ -239,6 +263,9 @@ def run_am_compaction_phase1(config: TrainConfig):
         "num_tokens": NUM_TOKENS,
         "key_select": KEY_SELECT,
         "enable_beta": ENABLE_BETA,
+        "rebake_key_positions": REBAKE_KEY_POSITIONS,
+        "global_teacher_positions": GLOBAL_TEACHER_POSITIONS,
+        "rope_theta": AM_ROPE_THETA,
         "ridge_lambda": RIDGE_LAMBDA,
         "ridge_scale": RIDGE_SCALE,
         "granularity": GRANULARITY,
@@ -252,6 +279,10 @@ def run_am_compaction_phase1(config: TrainConfig):
         f"- bg_stats: `{bg_path}`\n"
         f"- num_tokens: {NUM_TOKENS} | key_select: {KEY_SELECT} | beta: {ENABLE_BETA}\n"
         f"- ridge: {RIDGE_SCALE} lambda={RIDGE_LAMBDA}\n"
+        f"- rebake_key_positions: {REBAKE_KEY_POSITIONS} | "
+        f"global_teacher_positions: {GLOBAL_TEACHER_POSITIONS} | "
+        f"rope_theta: {AM_ROPE_THETA:g}\n"
+        f"- {compaction_stats.get('rope_note')}\n"
         f"- teacher tokens: {compaction_stats.get('T_teacher')} over "
         f"{compaction_stats.get('n_documents')} docs\n"
         f"- recon MSE mean/max: {compaction_stats.get('recon_mse_mean')} / "
@@ -307,6 +338,7 @@ config = TrainConfig(
     model=HFModelConfig(
         pretrained_model_name_or_path=MODEL_NAME,
         model_cls=_model_cls,
+        load_kwargs={"torch_dtype": "bfloat16"},
     ),
     optimizer="adam",
     lr=0.0,

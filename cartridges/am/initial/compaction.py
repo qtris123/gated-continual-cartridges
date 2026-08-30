@@ -272,6 +272,7 @@ def compact_cache_am_phase1(
     nnls_iters: Optional[int] = None,
     beta_w_lower: Optional[float] = None,
     beta_w_upper: Optional[float] = None,
+    teacher_kv_device: str = "cpu",
     local_rank="cuda",
 ) -> Tuple[TrainableCache, dict]:
     """Classic AM compaction Phase 1 over all QA documents.
@@ -289,6 +290,15 @@ def compact_cache_am_phase1(
     PGD budget and weight box; ``None`` keeps the per-mode reference default from
     ``am.components.keys`` (highest_attention: 2 iters, ``[e^-3, e^3]``; omp:
     0 iters, ``[1e-12, e^7]``).
+
+    ``rope_theta`` is only consumed by the ``rebake_key_positions`` rotation, and
+    that rotation lands on the intended slot **only** when it is the base the keys
+    were baked with. The default is the historical hard-coded value, not the
+    model's own base (Qwen3-4B-Instruct-2507 = 5e6) -- see MECH-003 / MECH-005.
+
+    ``teacher_kv_device`` holds the concatenated corpus KV off-accelerator; the
+    per-(layer, head) solve below pulls one layer back at a time, so the full
+    corpus never has to fit in device memory.
 
     Returns (cartridge, stats). No Phase-2 stabilizers are used (one-shot compaction).
     """
@@ -310,6 +320,19 @@ def compact_cache_am_phase1(
         model_dtype = next(model.parameters()).dtype
     except StopIteration:
         model_dtype = torch.bfloat16
+
+    model_rope_theta = getattr(getattr(model, "config", None), "rope_theta", None)
+    rope_theta_matches_model = (
+        model_rope_theta is None or abs(float(model_rope_theta) - rope_theta) < 1e-6
+    )
+    if rebake_key_positions and not rope_theta_matches_model:
+        logger.warning(
+            "rebake_key_positions=True with rope_theta=%s but the model's rotary base "
+            "is %s. Composing two RoPE rotations only lands on an absolute position "
+            "when both use the same base, so the rebaked keys will sit at no "
+            "well-defined position. Pass the model's base.",
+            rope_theta, model_rope_theta,
+        )
 
     # ---- 1. Build the teacher KV from all QA documents -------------------
     conversations = load_conversations(qa_data_path)
@@ -342,6 +365,7 @@ def compact_cache_am_phase1(
             device=local_rank,
             cartridge_cache=None,
             position_offset=pos_offset,
+            capture_device=teacher_kv_device,
         )
         t_doc = doc_kv[0][0].shape[1]
         doc_token_counts.append(t_doc)
@@ -357,8 +381,8 @@ def compact_cache_am_phase1(
                 if k_d.shape[1] > room:
                     k_d = k_d[:, :room]
                     v_d = v_d[:, :room]
-            teacher_k[layer_idx].append(k_d)
-            teacher_v[layer_idx].append(v_d)
+            teacher_k[layer_idx].append(k_d.to(teacher_kv_device))
+            teacher_v[layer_idx].append(v_d.to(teacher_kv_device))
             per_doc_tokens[layer_idx] += k_d.shape[1]
             appended_len = k_d.shape[1]
         if appended_len:
@@ -513,6 +537,26 @@ def compact_cache_am_phase1(
         value_absmax = max(float(v.detach().float().abs().max()) for v in values_out)
         key_absmax = max(float(k.detach().float().abs().max()) for k in keys_out)
 
+    teacher_pos_note = (
+        "Each doc prefilled at a running offset, so absolute RoPE positions are "
+        "unique corpus-wide."
+        if global_teacher_positions
+        else "Per-doc prefill at position 0; docs concatenated so absolute RoPE "
+        "positions overlap across docs (each doc self-consistent)."
+    )
+    if not rebake_key_positions:
+        rebake_note = "Keys installed at their teacher positions (no rebake)."
+    elif rope_theta_matches_model:
+        rebake_note = (
+            f"Selected keys rebaked onto sequential slots at rope_theta={rope_theta:g}, "
+            "matching the model's base."
+        )
+    else:
+        rebake_note = (
+            f"Selected keys rebaked at rope_theta={rope_theta:g} but the model's base "
+            f"is {model_rope_theta:g}, so the rebake does NOT land on the slot."
+        )
+
     mse_values = list(mse_per_layer.values())
     stats = {
         "value_absmax": value_absmax,
@@ -527,6 +571,10 @@ def compact_cache_am_phase1(
         "quality_phase": quality_phase,
         "enable_beta": bool(enable_beta),
         "rebake_key_positions": bool(rebake_key_positions),
+        "global_teacher_positions": bool(global_teacher_positions),
+        "rope_theta": float(rope_theta),
+        "model_rope_theta": None if model_rope_theta is None else float(model_rope_theta),
+        "rope_theta_matches_model": bool(rope_theta_matches_model),
         "strip_reference_system_prompt": bool(strip_reference_system_prompt),
         "ridge_lambda": ridge_lambda,
         "ridge_scale": ridge_scale,
@@ -535,10 +583,7 @@ def compact_cache_am_phase1(
         "recon_mse_max": float(max(mse_values)) if mse_values else None,
         "recon_mse_per_layer": {int(k): float(v) for k, v in mse_per_layer.items()},
         "wall_clock_s": time.time() - t0,
-        "rope_note": (
-            "Per-doc prefill at position 0; docs concatenated so absolute RoPE "
-            "positions overlap across docs (each doc self-consistent)."
-        ),
+        "rope_note": " ".join([teacher_pos_note, rebake_note]),
         "stabilizers": "none (one-shot compaction: no delta_weight, no old-ref guard)",
     }
     logger.info(

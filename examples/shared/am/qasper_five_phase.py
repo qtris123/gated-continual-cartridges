@@ -19,38 +19,29 @@ from pathlib import Path
 
 import yaml
 
+from examples.shared.am.continual_env import (
+    base_env as _base_env,
+    phase_eval_env,
+    spec,
+    stage_write_env,
+)
 from examples.shared.evaluate.cache_layout import publish_cache
 from examples.shared.paths import ROOT
 
 OUTPUTS = ROOT / "outputs"
 RUNS = OUTPUTS / "qasper_asr_kg_runs"
 STATE = OUTPUTS / "qasper_asr_kg_state"
-PYTHON = ROOT / ".venv/bin/python"
+PYTHON = Path(os.environ.get("CARTRIDGES_PYTHON") or sys.executable)
 CONTINUAL = ROOT / "examples/shared/am/continual_write.py"
 EVALUATOR = ROOT / "examples/shared/evaluate/cartridge_perplexity.py"
 P1_CACHE = (
     OUTPUTS / "caches" / "qasper" / "p01" / "selfdistill-qwen512" / "cache.pt"
 )
 
-EVALS = {
-    i: ROOT / f"data/qasper/phases/phase{i}_eval.parquet" for i in range(1, 6)
-}
-SYNTH = {
-    4: ROOT / "data/qasper/train/qwen_qasper_ASR_task_8192.parquet",
-    5: ROOT / "data/qasper/train/qwen_qasper_KG_task_8192.parquet",
-}
-TOPIC = {4: "ASR", 5: "KG"}
-
-
-def _truth(value) -> str:
-    return "1" if bool(value) else "0"
-
-
-def _path(value) -> str:
-    if not value:
-        return ""
-    path = Path(value)
-    return str(path if path.is_absolute() else ROOT / path)
+SPEC = spec("qasper")
+EVALS = {phase: SPEC.eval_path(phase) for phase in range(1, 6)}
+SYNTH = {phase: SPEC.synth_path(phase) for phase in range(1, 6)}
+TOPIC = dict(SPEC.topics)
 
 
 def _method_tag(cfg: dict) -> str:
@@ -122,42 +113,11 @@ def discover_lineages() -> list[dict]:
 
 
 def base_env(gpu: str) -> dict[str, str]:
-    env = os.environ.copy()
-    for name in list(env):
-        if name.startswith("EVAL_P") or name in {
-            "EVAL_DATA_PATH",
-            "EVAL_QA_PATH",
-            "EVAL_MT_PATH",
-            "EVAL_SA_PATH",
-        }:
-            env.pop(name)
-    env.update(
-        {
-            "CUDA_VISIBLE_DEVICES": gpu,
-            "CARTRIDGES_DIR": str(ROOT),
-            "CARTRIDGES_OUTPUT_DIR": str(RUNS),
-            "PYTHONPATH": str(ROOT),
-            "HF_HUB_OFFLINE": "1",
-            "HF_DATASETS_OFFLINE": "1",
-            "WANDB_DISABLED": "1",
-            "MODEL_NAME": "Qwen/Qwen3-4B-Instruct-2507",
-        }
-    )
-    return env
+    return _base_env(gpu, RUNS)
 
 
 def eval_env(env: dict[str, str], phases=range(1, 6)) -> dict[str, str]:
-    env = env.copy()
-    for phase in phases:
-        env[f"EVAL_P{phase}_PATH"] = str(EVALS[phase])
-        env[f"EVAL_P{phase}_NAME"] = {
-            1: "qa",
-            2: "mt",
-            3: "sa",
-            4: "asr",
-            5: "kg",
-        }[phase]
-    return env
+    return phase_eval_env(env, "qasper", phases)
 
 
 def valid_marker(path: Path, expected_metrics: set[str]) -> str | None:
@@ -172,10 +132,7 @@ def valid_marker(path: Path, expected_metrics: set[str]) -> str | None:
 
 
 def evaluate_cache(cache: str, marker: Path, gpu: str, phases) -> None:
-    expected = {
-        {1: "qa", 2: "mt", 3: "sa", 4: "asr", 5: "kg"}[phase]
-        for phase in phases
-    }
+    expected = {SPEC.task_names[phase] for phase in phases}
     if valid_marker(marker, expected):
         return
     env = eval_env(base_env(gpu), phases)
@@ -190,69 +147,15 @@ def evaluate_cache(cache: str, marker: Path, gpu: str, phases) -> None:
 
 
 def write_env(record: dict, input_cache: str, phase: int, gpu: str) -> dict[str, str]:
-    cfg = record["config"]
-    slots, queries = cfg["slots"], cfg["queries"]
-    keys, beta, objective = cfg["keys"], cfg["beta"], cfg["objective"]
-    env = eval_env(base_env(gpu))
-    env.update(
-        {
-            "PHASE1_CACHE_PATH": input_cache,
-            "SYNTH_DATA_PATH": str(SYNTH[phase]),
-            "AM_DATASET": "qasper",
-            "AM_QASPER_TOPIC": TOPIC[phase],
-            "TOP_T": str(slots["top_t"]),
-            "GRANULARITY": str(slots["granularity"]),
-            "SLOT_SELECTION": str(slots["slot_selection"]),
-            "USE_IDF": _truth(slots["use_idf"]),
-            "BG_STATS_PATH": _path(slots.get("background_indices_path")),
-            "IDF_TOP_K": str(slots["background_top_k_per_batch"]),
-            "IDF_SMOOTHING": str(slots["idf_smoothing"]),
-            "IDF_PRIOR_WEIGHT": str(slots.get("idf_prior_weight", 0.0)),
-            "MIN_TOP_T_PER_LAYER": str(slots.get("min_top_t_per_layer", 1)),
-            "AM_REDUNDANCY_RIDGE_REL": str(
-                slots.get("redundancy_ridge_rel", 1e-6)
-            ),
-            "AM_MASS_REDUNDANCY_ALPHA": str(
-                slots.get("mass_redundancy_alpha", 0.5)
-            ),
-            "MAX_REF_EXAMPLES_PER_DOC": str(queries["max_ref_examples_per_doc"]),
-            "QUERIES_PER_BATCH": str(queries["queries_per_batch"]),
-            "MAX_QUERIES_PER_HEAD": str(queries["max_queries_per_head"]),
-            "AM_SEED_OFFSET": str(queries.get("seed_offset", 0)),
-            "AM_ONPOLICY_LAYERS": str(queries.get("onpolicy_layers", 0)),
-            "AM_ONPOLICY_DOCKV": _truth(
-                queries.get("onpolicy_refresh_doc_kv", False)
-            ),
-            "AM_REF_BATCH_LIMIT": str(queries.get("ref_batch_limit", 5)),
-            "KEY_MODE": str(keys["key_mode"]),
-            "AM_KEY_REPOSITION": _truth(keys.get("key_reposition", False)),
-            "ENABLE_BETA": _truth(beta["enabled"]),
-            "BETA_FIT_SCOPE": str(beta.get("fit_scope", "selected")),
-            "AM_BETA_BOX": str(beta.get("beta_box", 3.0)),
-            "AM_NNLS_ITERS": str(beta.get("nnls_iters", 2)),
-            "AM_NNLS_DRIVER": str(beta.get("nnls_driver", "gelsd")),
-            "AM_BETA_TARGET": str(beta.get("target_mode", "residual")),
-            "RIDGE_LAMBDA": str(objective["ridge_lambda"]),
-            "RIDGE_SCALE": str(objective.get("ridge_scale", "spectral")),
-            "RIDGE_LAMBDA_MIN": str(objective.get("ridge_lambda_min", 0.0)),
-            "DELTA_WEIGHT": str(objective["delta_weight"]),
-            "ENABLE_OLD_REFERENCE_GUARD": _truth(
-                objective.get("enable_old_reference_guard", False)
-            ),
-            "OLD_REF_DATA_PATH": _path(objective.get("old_ref_data_path")),
-            "OLD_REF_MAX_EXAMPLES": str(
-                objective.get("old_ref_max_examples", 64)
-            ),
-            "OLD_REFERENCE_WEIGHT": str(
-                objective.get("old_reference_weight", 0.0)
-            ),
-            "AM_ROPE_THETA": str(cfg["rope_theta"]),
-            "SAVE_AFTER_EACH_DOCUMENT": "1",
-            "AM_COMPUTE_STATS": _truth(cfg.get("compute_update_stats", True)),
-            "RUN_NAME": f"QASPER_P{phase}_{record['tag']}",
-        }
+    return stage_write_env(
+        record["config"],
+        dataset="qasper",
+        phase=phase,
+        input_cache=input_cache,
+        run_name=f"QASPER_P{phase}_{record['tag']}",
+        gpu=gpu,
+        runs_dir=RUNS,
     )
-    return env
 
 
 def find_completed_run(run_name: str, started: float) -> Path:

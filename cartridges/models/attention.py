@@ -12,10 +12,23 @@ from cartridges.cache import TrainableCache
 # all sequences to the same length during training.
 # SE (07/22): The `mode="max-autotune-no-cudagraphs"` gives a ~2x speedup on 
 # backward running on a single A100.
+
+# `dynamic=False` costs one compiled variant per distinct sequence length, and the AM
+# document paths prefill each document at its own length (16 for a QASPER phase). Past
+# dynamo's recompile limit the call degrades to `sdpa_dense`, whose score matrix is
+# quadratic in the sequence length -- 10 GiB for one 8.9k-token paper -- so the failure
+# reads as an OOM, not as a compile miss. The default limit is 8.
+torch._dynamo.config.cache_size_limit = max(torch._dynamo.config.cache_size_limit, 64)
+
 flex_attention_train = torch.compile(flex_attention, dynamic=False, mode="max-autotune-no-cudagraphs")
 
 # # SE (07/25): For generation, we need to use `dynamic=True` to avoid a "PassManager::run failed" error
 flex_attention_generate = torch.compile(flex_attention, dynamic=True) 
+
+# Eager `create_block_mask` materialises the dense (Q_LEN, KV_LEN) mask before reducing
+# it to blocks: 0.75 GiB for one 8.9k-token document, against 0.008 GiB compiled, for a
+# bit-identical block mask.
+create_block_mask_compiled = torch.compile(create_block_mask)
 
 
 def repeat_kv(hidden_states: torch.Tensor, n_rep: int) -> torch.Tensor:
@@ -45,10 +58,9 @@ def create_block_mask_w_cache(
     def mask_func(_, _h, q_idx, kv_idx):
         return (kv_seq_ids[kv_idx] == -1) | ((seq_ids[q_idx] == kv_seq_ids[kv_idx]) & (q_idx + cache_len >= kv_idx))
     
-    block_mask = create_block_mask(
+    block_mask = create_block_mask_compiled(
         mask_func, B=1, H=1, Q_LEN=len(seq_ids), KV_LEN=len(seq_ids) + cache_len, 
         device=device,
-        # _compile=True
     )
     return block_mask
     # --- end build block mask ---

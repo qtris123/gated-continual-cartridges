@@ -4,7 +4,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="${CARTRIDGES_DIR:-$(cd "$SCRIPT_DIR/../../.." && pwd)}"
-PY="$ROOT/.venv/bin/python"
+PY="${CARTRIDGES_PYTHON:-${PY:-$ROOT/.venv/bin/python}}"
 RUNS="$ROOT/outputs/quality_5phase_runs"
 STATE="$ROOT/outputs/quality_5phase_state"
 GPU="${GPU:-3}"
@@ -100,10 +100,13 @@ else
   QA_DATA_PATH="$ROOT/data/quality/train/qwen_quality_p1_task_8192.parquet" \
   NUM_TOKENS="${NUM_TOKENS:-512}" \
   KEY_SELECT="${KEY_SELECT:-highest_attention}" \
-  ENABLE_BETA="${ENABLE_BETA:-1}" \
+  ENABLE_BETA="${ENABLE_BETA:-0}" \
   RIDGE_LAMBDA="${P1_RIDGE_LAMBDA:-1e-4}" \
   RIDGE_SCALE="${RIDGE_SCALE:-spectral}" \
   GRANULARITY="${P1_GRANULARITY:-per_head}" \
+  REBAKE_KEY_POSITIONS="${REBAKE_KEY_POSITIONS:-1}" \
+  AM_ROPE_THETA="${AM_ROPE_THETA:-model}" \
+  GLOBAL_TEACHER_POSITIONS="${GLOBAL_TEACHER_POSITIONS:-1}" \
   RUN_NAME="QUALITY_P1_AM_COMPACTION" \
   "$PY" "$ROOT/examples/shared/am/initial_compaction.py"
   P1_CACHE="$(record_latest '*-initial_am_compaction/*/summary.json' "$P1_MARKER" "$started")"

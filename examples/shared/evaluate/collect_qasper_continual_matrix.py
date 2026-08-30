@@ -85,22 +85,36 @@ def collect(technique: str) -> dict[str, dict[str, dict[str, Any]]]:
     return rows
 
 
-def continual_metrics(rows: dict[str, dict[str, dict[str, Any]]]) -> dict[str, Any]:
+def continual_metrics(
+    rows: dict[str, dict[str, dict[str, Any]]],
+    tasks: list[str] | None = None,
+    acquired_at: dict[str, str] | None = None,
+    stage_labels: dict[str, str] | None = None,
+) -> dict[str, Any]:
+    """Average-on-seen-tasks and end-of-stream forgetting.
+
+    Defaults describe the QASPER task stream; pass the three maps to score
+    another dataset's five-phase stream.
+    """
+    tasks = tasks or TASKS
+    acquired_at = acquired_at or ACQUIRED_AT
+    stage_labels = stage_labels or STAGE_LABELS
+
     def loss(stage: str, task: str) -> float | None:
         cell = rows.get(stage, {}).get(task)
         return cell["loss"] if cell else None
 
-    stages = list(STAGE_LABELS)
+    stages = list(stage_labels)
     seen_average = {}
     for index, stage in enumerate(stages):
-        seen = [task for task in TASKS if stages.index(ACQUIRED_AT[task]) <= index]
+        seen = [task for task in tasks if stages.index(acquired_at[task]) <= index]
         values = [loss(stage, task) for task in seen]
         seen_average[stage] = sum(values) / len(values) if all(values) else None
 
     final = stages[-1]
     forgetting = {}
-    for task in TASKS:
-        learned_at = ACQUIRED_AT[task]
+    for task in tasks:
+        learned_at = acquired_at[task]
         if learned_at == final:
             continue
         acquisition = loss(learned_at, task)
