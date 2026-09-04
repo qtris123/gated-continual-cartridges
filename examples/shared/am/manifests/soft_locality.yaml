@@ -1,0 +1,64 @@
+# Sweep manifest: single source of truth for the continual-AM selection sweeps.
+#
+# A "stream" is one axis of variation. Each arm is (axis value) + optional alias.
+#  - `axis`        : dotted recipe path to vary (must be a declared slot knob).
+#  - `base_recipe` : full recipe used for NEW arms; the generator overrides `axis`
+#                    (and any `fixed:` fields), writes outputs/recipes/<tag>.yaml.
+#  - `fixed`       : dotted recipe paths pinned for every arm in the stream.
+#  - `alias`       : an EXISTING on-disk tag; when present the arm resolves to it
+#                    (so historical runs are reused) instead of a derived tag.
+#  - derived tag   : when no alias, a deterministic structured tag is generated
+#                    from the selector + axis value (see sweep.py:derive_tag).
+#
+# `launch:` maps each dataset to its p01 cache POINTER; ONE launcher
+# (`python -m examples.shared.am.sweep launch`) invokes the shared `run_chain`
+# endpoint directly (no per-dataset `run_*_5x5_continual.sh` wrapper). Build the
+# p01 cache beforehand with `python -m examples.shared.am.build_p01 --dataset D`.
+# Each dataset provides either an explicit `p01_cache` file or a `p01_root` dir
+# (globbed for */*/cache_last.pt). Paths are relative to the repo root.
+#
+# To change a technique's values: edit `arms`. To add a NEW selector: add its
+# field to the relevant component Config (e.g. SlotSelector.Config in
+# cartridges/am/components/slots.py), point `base_recipe` at a recipe using it,
+# and add a stream here (any config field is a valid axis). Launch + analysis +
+# plots all read this file.
+
+name: soft_locality
+endpoint: run_chain
+method: am
+datasets: [quality, finqa, techqa, qasper]
+
+launch:
+  quality:
+    p01_cache: outputs/hf_p01/quality/cache_last.pt
+  finqa:
+    p01_root: outputs/finqa_p1_ropefix
+  techqa:
+    p01_root: outputs/techqa_p1_ropefix
+  qasper:
+    p01_cache: outputs/hf_p01/qasper/cache_last.pt
+
+streams:
+  top_t:
+    axis: slots.top_t
+    base_recipe: outputs/recipes/topt64.yaml
+    label_fmt: "t={value}"
+    arms:
+      - {value: 32,  alias: delta_ha_b0_idf0_ropefix_p01D}
+      - {value: 64,  alias: topt64_v1}
+      - {value: 128, alias: topt128_v1}
+      - {value: 256, alias: topt256_v1}
+      - {value: 512, alias: delta_ha_b0_idf0_ropefix_p01D_fullkv512}
+
+  lambda:
+    axis: slots.usage_penalty_lambda
+    base_recipe: outputs/recipes/soft_locality_l2.yaml
+    fixed: {slots.top_t: 32}
+    label_fmt: "λ={value}"
+    arms:
+      - {value: 0.0,  alias: delta_ha_b0_idf0_ropefix_p01D}   # penalty off == plain t=32
+      - {value: 0.5,  alias: soft_l0p5_v1}
+      - {value: 1.0,  alias: soft_l1_v1}
+      - {value: 2.0,  alias: soft_l2_v1}
+      - {value: 4.0,  alias: soft_l4_v1}
+      - {value: 16.0, alias: soft_l16_v1}

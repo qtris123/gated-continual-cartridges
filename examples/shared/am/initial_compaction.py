@@ -55,6 +55,8 @@ AM_DATASET = os.environ["AM_DATASET"].strip().lower()
 AM_QASPER_TOPIC = os.environ.get("AM_QASPER_TOPIC", "QA")
 AM_QUALITY_PHASE_ENV = os.environ.get("AM_QUALITY_PHASE")
 AM_QUALITY_PHASE = int(AM_QUALITY_PHASE_ENV) if AM_QUALITY_PHASE_ENV else None
+AM_PHASE_ENV = os.environ.get("AM_PHASE")
+AM_PHASE = int(AM_PHASE_ENV) if AM_PHASE_ENV else None
 NUM_TOKENS = int(os.environ.get("NUM_TOKENS", "512"))
 MODEL_NAME = os.environ.get("MODEL_NAME", "Qwen/Qwen3-4B-Instruct-2507")
 KEY_SELECT = os.environ.get("KEY_SELECT", "highest_attention")
@@ -104,12 +106,15 @@ RUN_NAME = os.environ.get(
 
 if not QA_DATA_PATH:
     raise ValueError("Set QA_DATA_PATH (phase-1 self-study parquet)")
-if AM_DATASET not in {"qasper", "quality"}:
+if AM_DATASET not in {"qasper", "quality", "finqa", "techqa"}:
     raise ValueError(
-        f"AM_DATASET={AM_DATASET!r} is unsupported; expected qasper or quality"
+        f"AM_DATASET={AM_DATASET!r} is unsupported; expected "
+        "qasper, quality, finqa, or techqa"
     )
 if AM_DATASET == "quality" and AM_QUALITY_PHASE is None:
     raise ValueError("AM_QUALITY_PHASE is required when AM_DATASET=quality")
+if AM_DATASET in {"finqa", "techqa"} and AM_PHASE not in range(1, 6):
+    raise ValueError("AM_PHASE (1..5) is required when AM_DATASET=finqa/techqa")
 
 _model_cls = FlexQwen3ForCausalLM if "qwen" in MODEL_NAME.lower() else FlexLlamaForCausalLM
 
@@ -179,6 +184,7 @@ def run_am_compaction_phase1(config: TrainConfig):
         dataset=AM_DATASET,
         qasper_topic=AM_QASPER_TOPIC,
         quality_phase=AM_QUALITY_PHASE,
+        phase=AM_PHASE,
         num_tokens=NUM_TOKENS,
         key_select=KEY_SELECT,
         ridge_lambda=RIDGE_LAMBDA,

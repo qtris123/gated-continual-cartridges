@@ -1,0 +1,32 @@
+# Experiment: naive selective-update capacity sweep (top_t = 32..512).
+#
+# Same shape as soft_locality's `top_t` stream, split out as its own experiment
+# manifest. Endpoint is run_chain (AM continual writes); build the per-dataset
+# p01 cache first with `python -m examples.shared.am.build_p01 --dataset D`.
+
+name: capacity_top_t
+endpoint: run_chain
+method: am
+datasets: [quality, finqa, techqa, qasper]
+
+launch:
+  quality:
+    p01_cache: outputs/hf_p01/quality/cache_last.pt
+  finqa:
+    p01_root: outputs/finqa_p1_ropefix
+  techqa:
+    p01_root: outputs/techqa_p1_ropefix
+  qasper:
+    p01_cache: outputs/hf_p01/qasper/cache_last.pt
+
+streams:
+  top_t:
+    axis: slots.top_t
+    base_recipe: outputs/recipes/topt64.yaml
+    label_fmt: "t={value}"
+    arms:
+      - {value: 32,  alias: delta_ha_b0_idf0_ropefix_p01D}
+      - {value: 64,  alias: topt64_v1}
+      - {value: 128, alias: topt128_v1}
+      - {value: 256, alias: topt256_v1}
+      - {value: 512, alias: delta_ha_b0_idf0_ropefix_p01D_fullkv512}

@@ -4,10 +4,17 @@ Loads a Phase 1 cartridge and applies one closed-form AM write per unique
 document in the MT parquet, with the writable slots chosen by TF-IDF (or one of
 the information-theoretic priors). No optimizer, no gradients.
 
+Recipes-as-config: the *write rule* (slots / queries / keys / beta / objective /
+rope_theta) is read from a resolved recipe YAML pointed at by ``$RECIPE_CONFIG``
+-- the serialized ``AMContinualConfig`` component tree. There is no env<->recipe
+bridge and no slot-knob registry: sweeping is a dotted-path override on that tree
+(see ``sweep._set_dotted``). Only *runtime inputs* (which cartridge, which data,
+which dataset/phase, where to write, which evals) come from the environment.
+
 Usage:
-    AM_DATASET=qasper AM_QASPER_TOPIC=MT \
+    RECIPE_CONFIG=/path/to/recipe.yaml \\
+    AM_DATASET=qasper AM_QASPER_TOPIC=MT \\
     PHASE1_CACHE_PATH=/path/to/cache_last.pt \\
-    BG_STATS_PATH=/path/to/bg_stats.pt \\
     SYNTH_DATA_PATH=data/qasper/train/qwen_qasper_MT_task_8192.parquet \\
     python examples/shared/am/continual_write.py
 
@@ -15,8 +22,10 @@ Field-by-field config reference: research_loop/AM_CONFIG.md.
 """
 
 import os
+from pathlib import Path
 
 import pydrantic
+import yaml
 
 from cartridges.am import (
     AMContinualConfig,
@@ -32,6 +41,7 @@ from cartridges.datasets import DataSource, LossEvalDataset
 from cartridges.models import FlexLlamaForCausalLM, FlexQwen3ForCausalLM, HFModelConfig
 from cartridges.train import LossEvalConfig
 from cartridges.utils import get_logger
+from examples.shared.paths import ROOT
 
 logger = get_logger(__name__)
 
@@ -47,12 +57,7 @@ class KVFromLocal(KVCacheFactory):
 
 
 def _flag(name: str, *, default: bool) -> bool:
-    """Parse a 0/1-style env flag. Unset -> ``default``; anything else raises.
-
-    The old driver spelled some of these `not in ("0", "false", "False")` and
-    others `in ("1", "true", "True")`, so a typo silently picked a side. It now
-    fails instead.
-    """
+    """Parse a 0/1-style runtime env flag. Unset -> ``default``; else raises."""
     raw = os.environ.get(name)
     if raw is None:
         return default
@@ -67,94 +72,103 @@ def _opt(name: str) -> str | None:
     return os.environ.get(name) or None
 
 
-# -- Required inputs ---------------------------------------------------------
+def _norm_path(value) -> str | None:
+    """A recipe path field, normalized ROOT-relative (mirrors the old bridge)."""
+    if not value:
+        return None
+    path = Path(str(value))
+    return str(path if path.is_absolute() else ROOT / path)
+
+
+# -- Recipe (the write rule) -------------------------------------------------
+RECIPE_CONFIG = os.environ.get("RECIPE_CONFIG")
+if not RECIPE_CONFIG:
+    raise SystemExit(
+        "continual_write requires $RECIPE_CONFIG pointing at a resolved recipe "
+        "YAML (the serialized AMContinualConfig write rule)."
+    )
+_recipe = yaml.safe_load(Path(RECIPE_CONFIG).read_text()) or {}
+_slots = _recipe.get("slots", {}) or {}
+_queries = _recipe.get("queries", {}) or {}
+_keys = _recipe.get("keys", {}) or {}
+_beta = _recipe.get("beta", {}) or {}
+_objective = _recipe.get("objective", {}) or {}
+
+# -- Slot selection (from recipe) --------------------------------------------
+TOP_T = int(_slots.get("top_t", 32))
+GRANULARITY = str(_slots.get("granularity", "per_layer"))
+SLOT_SELECTION = str(_slots.get("slot_selection", "tfidf"))
+BG_STATS_PATH = _norm_path(_slots.get("background_indices_path"))
+USE_IDF = bool(_slots.get("use_idf", True))
+IDF_SMOOTHING = float(_slots.get("idf_smoothing", 1.0))
+IDF_TOP_K = int(_slots.get("background_top_k_per_batch", 128))
+IDF_PRIOR_WEIGHT = float(_slots.get("idf_prior_weight", 0.0))
+MIN_TOP_T_PER_LAYER = int(_slots.get("min_top_t_per_layer", 1))
+AM_REDUNDANCY_RIDGE_REL = float(_slots.get("redundancy_ridge_rel", 1e-6))
+AM_MASS_REDUNDANCY_ALPHA = float(_slots.get("mass_redundancy_alpha", 0.5))
+AM_SLOT_FISHER_PATH = _norm_path(_slots.get("slot_fisher_path"))
+AM_SAFE_FRACTION = float(_slots.get("safe_fraction", 1.0))
+AM_SAFE_METRIC = str(_slots.get("safe_metric", "redundancy"))
+AM_USAGE_PENALTY_LAMBDA = float(_slots.get("usage_penalty_lambda", 0.0))
+AM_USAGE_PENALTY_MODE = str(_slots.get("usage_penalty_mode", "mult"))
+AM_USAGE_DECAY = float(_slots.get("usage_decay", 1.0))
+
+# -- Reference queries (from recipe) -----------------------------------------
+MAX_REF_EXAMPLES_PER_DOC = int(_queries.get("max_ref_examples_per_doc", 32))
+QUERIES_PER_BATCH = str(_queries.get("queries_per_batch", "all_tokens"))
+MAX_QUERIES_PER_HEAD = int(_queries.get("max_queries_per_head", 64))
+AM_SEED_OFFSET = int(_queries.get("seed_offset", 0))
+AM_ONPOLICY_LAYERS = int(_queries.get("onpolicy_layers", 0))
+AM_ONPOLICY_DOCKV = bool(_queries.get("onpolicy_refresh_doc_kv", False))
+AM_REF_BATCH_LIMIT = int(_queries.get("ref_batch_limit", 5))
+
+# -- Keys (from recipe) ------------------------------------------------------
+KEY_MODE = str(_keys.get("key_mode", "freeze"))
+AM_KEY_REPOSITION = bool(_keys.get("key_reposition", False))
+
+# -- Beta (from recipe) ------------------------------------------------------
+_beta_enabled = _beta.get("enabled")
+ENABLE_BETA = None if _beta_enabled is None else bool(_beta_enabled)
+BETA_FIT_SCOPE = str(_beta.get("fit_scope", "selected"))
+AM_BETA_BOX = float(_beta.get("beta_box", 3.0))
+AM_NNLS_ITERS = int(_beta.get("nnls_iters", 2))
+AM_NNLS_DRIVER = str(_beta.get("nnls_driver", "gelsd"))
+AM_BETA_TARGET = str(_beta.get("target_mode", "residual"))
+
+# -- Value solve (from recipe) -----------------------------------------------
+RIDGE_LAMBDA = float(_objective.get("ridge_lambda", 1e-4))
+RIDGE_SCALE = str(_objective.get("ridge_scale", "spectral"))
+RIDGE_LAMBDA_MIN = float(_objective.get("ridge_lambda_min", 0.0))
+DELTA_WEIGHT = float(_objective.get("delta_weight", 1e-2))
+ENABLE_OLD_REFERENCE_GUARD = bool(_objective.get("enable_old_reference_guard", False))
+OLD_REF_DATA_PATH = _norm_path(_objective.get("old_ref_data_path"))
+OLD_REF_MAX_EXAMPLES = int(_objective.get("old_ref_max_examples", 64))
+OLD_REFERENCE_WEIGHT = float(_objective.get("old_reference_weight", 1.0))
+AM_ORACLE_WRITE = bool(_objective.get("oracle_write", False))
+AM_ORACLE_WRITE_ASSIGN = str(_objective.get("oracle_write_assign", "mass_ranked"))
+
+# -- rope_theta / stats (from recipe) ----------------------------------------
+_ROPE_THETA_RAW = _recipe.get("rope_theta")
+AM_COMPUTE_STATS = bool(_recipe.get("compute_update_stats", True))
+
+# -- Required runtime inputs (per-invocation, NOT part of the recipe) ---------
 PHASE1_CACHE_PATH = os.environ["PHASE1_CACHE_PATH"]
 SYNTH_DATA_PATH = os.environ["SYNTH_DATA_PATH"]
 MODEL_NAME = os.environ.get("MODEL_NAME", "Qwen/Qwen3-4B-Instruct-2507")
 
-# -- Slot selection ----------------------------------------------------------
-TOP_T = int(os.environ.get("TOP_T", "64"))
-GRANULARITY = os.environ.get("GRANULARITY", "per_layer")
-SLOT_SELECTION = os.environ.get("SLOT_SELECTION", "tfidf")
-BG_STATS_PATH = _opt("BG_STATS_PATH")
-USE_IDF = _flag("USE_IDF", default=True)
-IDF_TOP_K = int(os.environ.get("IDF_TOP_K", "128"))
-IDF_SMOOTHING = float(os.environ.get("IDF_SMOOTHING", "1.0"))
-IDF_PRIOR_WEIGHT = float(os.environ.get("IDF_PRIOR_WEIGHT", "0.0"))
-MIN_TOP_T_PER_LAYER = int(os.environ.get("MIN_TOP_T_PER_LAYER", "1"))
-# MECH-008 / MECH-009 slot priors. Inert unless SLOT_SELECTION names a prior mode.
-AM_REDUNDANCY_RIDGE_REL = float(os.environ.get("AM_REDUNDANCY_RIDGE_REL") or "1e-6")
-AM_MASS_REDUNDANCY_ALPHA = float(os.environ.get("AM_MASS_REDUNDANCY_ALPHA") or "0.5")
-AM_SLOT_FISHER_PATH = _opt("AM_SLOT_FISHER_PATH")
-AM_SAFE_FRACTION = float(os.environ.get("AM_SAFE_FRACTION") or "1.0")
-AM_SAFE_METRIC = os.environ.get("AM_SAFE_METRIC") or "redundancy"
-
-# -- Reference queries -------------------------------------------------------
-MAX_REF_EXAMPLES_PER_DOC = int(os.environ.get("MAX_REF_EXAMPLES_PER_DOC", "32"))
-QUERIES_PER_BATCH = os.environ.get("QUERIES_PER_BATCH", "all_tokens")
-# B-CASCADE: reference queries per KV head fed to the solve. `n > top_t` makes
-# the system over-determined.
-MAX_QUERIES_PER_HEAD = int(os.environ.get("MAX_QUERIES_PER_HEAD", "64"))
-# MECH-007: shifts the per-document draw to `doc_idx + N`. This is the seed knob
-# this method actually has -- `config.seed` does not reach the per-document draw.
-AM_SEED_OFFSET = int(os.environ.get("AM_SEED_OFFSET") or "0")
-# LIT-006 / MECH-006: re-extract the reference queries from the UPDATED cache
-# every N layers (N=1 -> per layer). 0 keeps the historical single-pass write.
-AM_ONPOLICY_LAYERS = int(os.environ.get("AM_ONPOLICY_LAYERS") or "0")
-# Separately-testable second axis: also re-prefill the DOCUMENT KV against the
-# updated cartridge. The AM paper only re-extracts queries, so this defaults OFF.
-AM_ONPOLICY_DOCKV = _flag("AM_ONPOLICY_DOCKV", default=False)
-AM_REF_BATCH_LIMIT = int(os.environ.get("AM_REF_BATCH_LIMIT") or "5")
-
-# -- Teacher -----------------------------------------------------------------
-# B-ROPE / MECH-003. Accepts a float, or "model"/"auto" to read `rope_theta` off
-# the HF model config. Unset keeps the AM package's historical 10000.0.
-AM_ROPE_THETA_ENV = _opt("AM_ROPE_THETA")
+# -- Teacher routing (runtime: which dataset/phase this stage writes) ---------
 AM_DATASET = os.environ["AM_DATASET"].strip().lower()
-# Which QASPER topic the document titles resolve against ("QA"/"MT"/"SA"/"all").
-# The teacher prefills the full paper, so this must match SYNTH_DATA_PATH.
 AM_QASPER_TOPIC = os.environ.get("AM_QASPER_TOPIC", "MT")
 AM_QUALITY_PHASE_ENV = _opt("AM_QUALITY_PHASE")
 AM_QUALITY_PHASE = int(AM_QUALITY_PHASE_ENV) if AM_QUALITY_PHASE_ENV else None
+AM_PHASE_ENV = _opt("AM_PHASE")
+AM_PHASE = int(AM_PHASE_ENV) if AM_PHASE_ENV else None
 
-# -- Keys --------------------------------------------------------------------
-KEY_MODE = os.environ.get("KEY_MODE", "freeze")
-# B-ROPE hazard H2 / MECH-005: counter-rotate a document key back into the
-# cartridge frame when it is installed into a cartridge slot.
-AM_KEY_REPOSITION_ENV = _opt("AM_KEY_REPOSITION")
-AM_KEY_REPOSITION = _flag("AM_KEY_REPOSITION", default=False)
-
-# -- Beta --------------------------------------------------------------------
-ENABLE_BETA_ENV = os.environ.get("ENABLE_BETA")
-ENABLE_BETA = None if ENABLE_BETA_ENV is None else ENABLE_BETA_ENV in ("1", "true", "True")
-BETA_FIT_SCOPE = os.environ.get("BETA_FIT_SCOPE", "selected")
-# B-SOLVE / LIT-002 boxed NNLS. The paper's values, used whenever beta is on.
-AM_BETA_BOX = float(os.environ.get("AM_BETA_BOX") or "3.0")
-AM_NNLS_ITERS = int(os.environ.get("AM_NNLS_ITERS") or "2")
-AM_NNLS_DRIVER = os.environ.get("AM_NNLS_DRIVER") or "gelsd"
-AM_BETA_TARGET = os.environ.get("AM_BETA_TARGET") or "residual"
-
-# -- Value solve -------------------------------------------------------------
-RIDGE_LAMBDA = float(os.environ.get("RIDGE_LAMBDA", "1e-4"))
-RIDGE_SCALE = os.environ.get("RIDGE_SCALE", "spectral")
-RIDGE_LAMBDA_MIN = float(os.environ.get("RIDGE_LAMBDA_MIN", "0.0"))
-DELTA_WEIGHT = float(os.environ.get("DELTA_WEIGHT", "1e-2"))
-ENABLE_OLD_REFERENCE_GUARD = _flag("ENABLE_OLD_REFERENCE_GUARD", default=False)
-OLD_REF_DATA_PATH = _opt("OLD_REF_DATA_PATH")
-OLD_REF_MAX_EXAMPLES = int(os.environ.get("OLD_REF_MAX_EXAMPLES", "64"))
-OLD_REFERENCE_WEIGHT = float(os.environ.get("OLD_REFERENCE_WEIGHT", "1.0"))
-# B-ROUTE write-ceiling oracle (MECH-001), a diagnostic and not a write rule.
-AM_ORACLE_WRITE = _flag("AM_ORACLE_WRITE", default=False)
-AM_ORACLE_WRITE_ASSIGN = os.environ.get("AM_ORACLE_WRITE_ASSIGN", "mass_ranked")
-
-# -- Bookkeeping / eval ------------------------------------------------------
+# -- Bookkeeping / eval (runtime) --------------------------------------------
 SAVE_AFTER_EACH_DOCUMENT = _flag("SAVE_AFTER_EACH_DOCUMENT", default=True)
-AM_COMPUTE_STATS = _flag("AM_COMPUTE_STATS", default=True)
 EVAL_DATA_PATH = _opt("EVAL_DATA_PATH")
 EVAL_QA_PATH = _opt("EVAL_QA_PATH")
 EVAL_MT_PATH = _opt("EVAL_MT_PATH")
-# A third stage (QA -> MT -> SA) needs all three held out at once: MT stops being
-# the acquisition target and becomes a second retention probe.
 EVAL_SA_PATH = _opt("EVAL_SA_PATH")
 EVAL_PHASE_PATHS = [_opt(f"EVAL_P{i}_PATH") for i in range(1, 6)]
 RUN_NAME = os.environ.get(
@@ -170,48 +184,52 @@ def _fs_slug(s: str) -> str:
 
 
 def _resolve_rope_theta() -> float:
-    """AM_ROPE_THETA -> float. Unset keeps the AM package's historical default."""
-    if AM_ROPE_THETA_ENV is None:
+    """recipe rope_theta -> float. Accepts a number or "model"/"auto"/"config"."""
+    if _ROPE_THETA_RAW is None:
         return AMContinualConfig.model_fields["rope_theta"].default
-    if AM_ROPE_THETA_ENV.strip().lower() in ("model", "auto", "config"):
+    if isinstance(_ROPE_THETA_RAW, str) and _ROPE_THETA_RAW.strip().lower() in (
+        "model", "auto", "config",
+    ):
         from transformers import AutoConfig
 
         theta = float(AutoConfig.from_pretrained(MODEL_NAME).rope_theta)
     else:
-        theta = float(AM_ROPE_THETA_ENV)
+        theta = float(_ROPE_THETA_RAW)
     if not (theta > 0):
-        raise ValueError(f"AM_ROPE_THETA must be positive, got {theta}")
-    logger.info("B-ROPE: AM teacher rope_theta = %g (AM_ROPE_THETA=%s)", theta, AM_ROPE_THETA_ENV)
+        raise ValueError(f"rope_theta must be positive, got {theta}")
+    logger.info("B-ROPE: AM teacher rope_theta = %g", theta)
     return theta
+
+
+AM_ROPE_THETA = _resolve_rope_theta()
 
 
 def _validate() -> None:
     """Reject combinations that would run but not mean what they say."""
     if AM_KEY_REPOSITION and KEY_MODE == "freeze":
         raise ValueError(
-            "AM_KEY_REPOSITION=1 is meaningless with KEY_MODE=freeze (no key is "
-            "ever installed). Set KEY_MODE=highest_attention or omp."
+            "keys.key_reposition=true is meaningless with keys.key_mode=freeze "
+            "(no key is ever installed). Set key_mode=highest_attention or omp."
         )
-    if AM_KEY_REPOSITION and AM_ROPE_THETA_ENV is None:
+    if AM_KEY_REPOSITION and AM_ROPE_THETA == 10000.0:
         # The counter-rotation must use the model's own rotary base; doing it at
         # the AM package's historical 10000.0 while the model runs 5e6 would
         # replace one frame error with another (MECH-003 / B-ROPE).
         raise ValueError(
-            "AM_KEY_REPOSITION=1 requires AM_ROPE_THETA to be set explicitly "
-            "(use 5000000 / 'model' for Qwen3-4B-Instruct-2507); the counter-"
+            "keys.key_reposition=true requires rope_theta to be the model's own "
+            "base (use 5000000 / 'model' for Qwen3-4B-Instruct-2507); the counter-"
             "rotation is only correct in the model's own rotary frame."
         )
     if AM_ONPOLICY_LAYERS < 0:
-        raise ValueError(f"AM_ONPOLICY_LAYERS must be >= 0, got {AM_ONPOLICY_LAYERS}")
+        raise ValueError(f"queries.onpolicy_layers must be >= 0, got {AM_ONPOLICY_LAYERS}")
     if AM_ONPOLICY_DOCKV and AM_ONPOLICY_LAYERS <= 0:
         raise ValueError(
-            "AM_ONPOLICY_DOCKV=1 is meaningless without AM_ONPOLICY_LAYERS>0 "
-            "(nothing is ever re-extracted)."
+            "queries.onpolicy_refresh_doc_kv=true is meaningless without "
+            "onpolicy_layers>0 (nothing is ever re-extracted)."
         )
     if AM_SEED_OFFSET < 0:
-        raise ValueError(f"AM_SEED_OFFSET must be >= 0, got {AM_SEED_OFFSET}")
+        raise ValueError(f"queries.seed_offset must be >= 0, got {AM_SEED_OFFSET}")
     if AM_DATASET == "qasper":
-        # Local import: pulls in `datasets` and the HF cache.
         from cartridges.data.qasper.resources import TOPIC_TO_IDS
 
         if AM_QASPER_TOPIC not in TOPIC_TO_IDS and AM_QASPER_TOPIC != "all":
@@ -221,31 +239,31 @@ def _validate() -> None:
             )
     elif AM_DATASET == "quality":
         if AM_QUALITY_PHASE not in range(1, 6):
-            raise ValueError(
-                "AM_QUALITY_PHASE must be 1..5 when AM_DATASET=quality"
-            )
+            raise ValueError("AM_QUALITY_PHASE must be 1..5 when AM_DATASET=quality")
+    elif AM_DATASET in {"finqa", "techqa", "longhealth"}:
+        if AM_PHASE not in range(1, 6):
+            raise ValueError(f"AM_PHASE must be 1..5 when AM_DATASET={AM_DATASET}")
     else:
         raise ValueError(
-            f"AM_DATASET={AM_DATASET!r} is unsupported; expected qasper or quality"
+            f"AM_DATASET={AM_DATASET!r} is unsupported; expected "
+            "qasper, quality, finqa, techqa, or longhealth"
         )
     if ENABLE_OLD_REFERENCE_GUARD and not OLD_REF_DATA_PATH:
         raise ValueError(
-            "ENABLE_OLD_REFERENCE_GUARD=1 requires OLD_REF_DATA_PATH (QA parquet)"
+            "objective.enable_old_reference_guard=true requires old_ref_data_path"
         )
     needs_fisher = SLOT_SELECTION == "fisher" or (
         SLOT_SELECTION == "constrained_mass" and AM_SAFE_METRIC == "fisher"
     )
     if needs_fisher and not AM_SLOT_FISHER_PATH:
         raise ValueError(
-            f"SLOT_SELECTION={SLOT_SELECTION} (AM_SAFE_METRIC={AM_SAFE_METRIC}) "
-            "needs AM_SLOT_FISHER_PATH pointing at a cached (n_layers, n_slots) "
-            "diagonal-Fisher array. Generate one with "
-            "research_loop/results/MECH-INFOGATE/compute_slot_fisher.py -- it is a "
-            "DIAGNOSTIC backward pass (no optimizer, gradient_steps stays 0)."
+            f"slot_selection={SLOT_SELECTION} (safe_metric={AM_SAFE_METRIC}) needs "
+            "slots.slot_fisher_path pointing at a cached (n_layers, n_slots) "
+            "diagonal-Fisher array."
         )
     if AM_SLOT_FISHER_PATH and not os.path.exists(AM_SLOT_FISHER_PATH):
         raise FileNotFoundError(
-            f"AM_SLOT_FISHER_PATH={AM_SLOT_FISHER_PATH!r} does not exist."
+            f"slots.slot_fisher_path={AM_SLOT_FISHER_PATH!r} does not exist."
         )
 
 
@@ -269,11 +287,8 @@ def _build_loss_evals() -> list[LossEvalConfig]:
         ]
 
     qa_path, mt_path, sa_path = EVAL_QA_PATH, EVAL_MT_PATH, EVAL_SA_PATH
-    # Backward compat: a single EVAL_DATA_PATH means MT when neither is set.
     if EVAL_DATA_PATH and not qa_path and not mt_path:
         mt_path = EVAL_DATA_PATH
-    # `mt_acquisition` keeps its name in three-stage runs even though MT is then a
-    # retention probe, so the metric stays comparable with the two-stage runs.
     return [
         LossEvalConfig(
             dataset=LossEvalDataset.Config(
@@ -295,9 +310,6 @@ _validate()
 
 config = AMContinualConfig(
     name=RUN_NAME,
-    # pydrantic names the run folder `{timestamp}-{script_id}/…`; without this,
-    # script_id defaults to the file stem (`continual_am_sparse`) and RUN_NAME
-    # only appears as config.name / phase2_summary.run_name.
     script_id=_fs_slug(RUN_NAME),
     output_dir=os.environ.get("CARTRIDGES_OUTPUT_DIR", "."),
     model=HFModelConfig(
@@ -308,23 +320,26 @@ config = AMContinualConfig(
     ),
     kv_cache_initializer=KVFromLocal.Config(path=PHASE1_CACHE_PATH),
     document_data_path=SYNTH_DATA_PATH,
-    rope_theta=_resolve_rope_theta(),
+    rope_theta=AM_ROPE_THETA,
     slots=SlotSelector.Config(
         top_t=TOP_T,
         granularity=GRANULARITY,
         slot_selection=SLOT_SELECTION,
-        use_idf=USE_IDF and BG_STATS_PATH is not None,
         idf_smoothing=IDF_SMOOTHING,
         background_top_k_per_batch=IDF_TOP_K,
-        background_indices_path=BG_STATS_PATH,
-        num_background_batches=999999999,
-        redundancy_ridge_rel=AM_REDUNDANCY_RIDGE_REL,
-        mass_redundancy_alpha=AM_MASS_REDUNDANCY_ALPHA,
-        slot_fisher_path=AM_SLOT_FISHER_PATH,
-        safe_fraction=AM_SAFE_FRACTION,
-        safe_metric=AM_SAFE_METRIC,
         idf_prior_weight=IDF_PRIOR_WEIGHT,
         min_top_t_per_layer=MIN_TOP_T_PER_LAYER,
+        redundancy_ridge_rel=AM_REDUNDANCY_RIDGE_REL,
+        mass_redundancy_alpha=AM_MASS_REDUNDANCY_ALPHA,
+        safe_fraction=AM_SAFE_FRACTION,
+        safe_metric=AM_SAFE_METRIC,
+        usage_penalty_lambda=AM_USAGE_PENALTY_LAMBDA,
+        usage_penalty_mode=AM_USAGE_PENALTY_MODE,
+        usage_decay=AM_USAGE_DECAY,
+        use_idf=USE_IDF and BG_STATS_PATH is not None,
+        background_indices_path=BG_STATS_PATH,
+        num_background_batches=999999999,
+        slot_fisher_path=AM_SLOT_FISHER_PATH,
     ),
     queries=ReferenceQueries.Config(
         max_ref_examples_per_doc=MAX_REF_EXAMPLES_PER_DOC,
@@ -339,6 +354,7 @@ config = AMContinualConfig(
         dataset=AM_DATASET,
         qasper_topic=AM_QASPER_TOPIC,
         quality_phase=AM_QUALITY_PHASE,
+        phase=AM_PHASE,
     ),
     keys=KeyWriter.Config(
         key_mode=KEY_MODE,

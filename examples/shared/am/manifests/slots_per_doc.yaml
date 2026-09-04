@@ -1,0 +1,24 @@
+# Experiment: slots-per-document capacity probe
+# (replaces examples/techqa/experiments/slots_per_doc_sweep.py).
+#
+# Fixed 512-slot budget, varying the number of documents compacted into it
+# (fewer docs -> more slots/doc). The axis is a p01 (stage-1) knob, so the
+# endpoint is `build_p01`: each arm truncates the phase-1 synth parquet to
+# `p01.num_docs` rows (one row = one document) and compacts it, writing its p01
+# cache under outputs/experiments/slots_per_doc/<tag>/. Evaluate the resulting
+# caches with the cartridge_perplexity / accuracy wrappers.
+
+name: slots_per_doc
+endpoint: build_p01
+datasets: [techqa]
+
+streams:
+  num_docs:
+    axis: p01.num_docs
+    base_recipe: examples/shared/am/manifests/p01_armD.yaml
+    label_fmt: "docs={value}"
+    arms:
+      - {value: 8}
+      - {value: 24}
+      - {value: 48}
+      - {value: 92}

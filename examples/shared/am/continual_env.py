@@ -1,13 +1,14 @@
-"""Shared environment mapping for continual-AM stage runs.
+"""Shared environment for continual-AM stage runs (recipes-as-config).
 
-`continual_write.py` is configured entirely through environment variables. Two
-drivers need to build that environment — the QASPER ASR/KG resume and the
-general p01->p05 chain — and a replication across datasets is only meaningful if
-both build it the same way. So the recipe -> env mapping lives here once, and the
-only dataset-specific parts are isolated in `DATASETS`.
+`continual_write.py` reads its *write rule* from a resolved recipe YAML
+(``$RECIPE_CONFIG``); this module only assembles the *runtime* environment a
+stage needs -- clean CUDA/HF/model vars, the per-phase eval paths, the teacher
+routing, and the input cache / synth data / recipe pointer. The dataset-specific
+parts are isolated in `DATASETS`.
 
-A stage's *recipe* is read from a saved `config.yaml` rather than transcribed,
-so a lineage provably uses the same write rule as the run that produced it.
+The recipe is passed by pointer (a file), not transcribed into per-knob env
+vars, so a lineage provably uses the same write rule as the run that produced it
+and there is no env<->recipe bridge to drift.
 """
 
 from __future__ import annotations
@@ -23,13 +24,25 @@ MODEL_NAME = "Qwen/Qwen3-4B-Instruct-2507"
 
 @dataclass(frozen=True)
 class DatasetSpec:
-    """Where one dataset's five phases live, and how its teacher is selected."""
+    """Where one dataset's five phases live, and how its teacher is selected.
+
+    ``p01_method`` and ``scorer`` are per-dataset *facts* (Axis-A knowledge): how
+    this dataset's stage-1 cartridge is built (backprop-free ``compaction`` vs
+    gradient ``selfdistill``) and how its answers are scored (``logppl`` teacher-
+    forced perplexity vs ``mcq`` generation accuracy). They let the shared
+    endpoints (``build_p01``, ``sweep check``) dispatch without per-dataset code.
+    """
 
     name: str
     task_names: dict[int, str]
     synth_template: str
     # QASPER resolves documents by topic name; QuALITY by phase number.
     topics: dict[int, str] | None = None
+    # How stage-1 (p01) is built: "compaction" (arm-D, backprop-free) or
+    # "selfdistill" (KVFromText + gradient). All current 5x5 grids use compaction.
+    p01_method: str = "compaction"
+    # How this dataset's answers are scored: "logppl" or "mcq".
+    scorer: str = "logppl"
 
     def eval_path(self, phase: int) -> Path:
         return ROOT / f"data/{self.name}/phases/phase{phase}_eval.parquet"
@@ -42,8 +55,10 @@ class DatasetSpec:
         env = {"AM_DATASET": self.name}
         if self.topics:
             env["AM_QASPER_TOPIC"] = self.topics[phase]
-        else:
+        elif self.name == "quality":
             env["AM_QUALITY_PHASE"] = str(phase)
+        else:
+            env["AM_PHASE"] = str(phase)
         return env
 
 
@@ -58,6 +73,26 @@ DATASETS = {
         name="quality",
         task_names={phase: f"p{phase}" for phase in range(1, 6)},
         synth_template="data/quality/train/qwen_quality_p{key}_task_8192.parquet",
+    ),
+    "finqa": DatasetSpec(
+        name="finqa",
+        task_names={phase: f"p{phase}" for phase in range(1, 6)},
+        synth_template="data/finqa/train/qwen_finqa_p{key}_task_8192.parquet",
+    ),
+    "techqa": DatasetSpec(
+        name="techqa",
+        task_names={phase: f"p{phase}" for phase in range(1, 6)},
+        synth_template="data/techqa/train/qwen_techqa_p{key}_task_8192.parquet",
+    ),
+    # First-class 5-phase, phase-keyed dataset (patients 01-20, 4 per phase).
+    # Infra lives in cartridges/data/longhealth + data/longhealth/phases; only
+    # the synth train parquet + p01 kvcache remain to generate (a data task).
+    "longhealth": DatasetSpec(
+        name="longhealth",
+        task_names={phase: f"p{phase}" for phase in range(1, 6)},
+        synth_template="data/longhealth/train/qwen_longhealth_p{key}_task_8192.parquet",
+        p01_method="compaction",
+        scorer="mcq",
     ),
 }
 
@@ -109,65 +144,8 @@ def phase_eval_env(
     return env
 
 
-def _truth(value) -> str:
-    return "1" if bool(value) else "0"
-
-
-def _path(value) -> str:
-    if not value:
-        return ""
-    path = Path(value)
-    return str(path if path.is_absolute() else ROOT / path)
-
-
-def recipe_env(cfg: dict) -> dict[str, str]:
-    """Map a saved AMContinualConfig to the env `continual_write.py` reads."""
-    slots, queries = cfg["slots"], cfg["queries"]
-    keys, beta, objective = cfg["keys"], cfg["beta"], cfg["objective"]
-    return {
-        "TOP_T": str(slots["top_t"]),
-        "GRANULARITY": str(slots["granularity"]),
-        "SLOT_SELECTION": str(slots["slot_selection"]),
-        "USE_IDF": _truth(slots["use_idf"]),
-        "BG_STATS_PATH": _path(slots.get("background_indices_path")),
-        "IDF_TOP_K": str(slots["background_top_k_per_batch"]),
-        "IDF_SMOOTHING": str(slots["idf_smoothing"]),
-        "IDF_PRIOR_WEIGHT": str(slots.get("idf_prior_weight", 0.0)),
-        "MIN_TOP_T_PER_LAYER": str(slots.get("min_top_t_per_layer", 1)),
-        "AM_REDUNDANCY_RIDGE_REL": str(slots.get("redundancy_ridge_rel", 1e-6)),
-        "AM_MASS_REDUNDANCY_ALPHA": str(slots.get("mass_redundancy_alpha", 0.5)),
-        "MAX_REF_EXAMPLES_PER_DOC": str(queries["max_ref_examples_per_doc"]),
-        "QUERIES_PER_BATCH": str(queries["queries_per_batch"]),
-        "MAX_QUERIES_PER_HEAD": str(queries["max_queries_per_head"]),
-        "AM_SEED_OFFSET": str(queries.get("seed_offset", 0)),
-        "AM_ONPOLICY_LAYERS": str(queries.get("onpolicy_layers", 0)),
-        "AM_ONPOLICY_DOCKV": _truth(queries.get("onpolicy_refresh_doc_kv", False)),
-        "AM_REF_BATCH_LIMIT": str(queries.get("ref_batch_limit", 5)),
-        "KEY_MODE": str(keys["key_mode"]),
-        "AM_KEY_REPOSITION": _truth(keys.get("key_reposition", False)),
-        "ENABLE_BETA": _truth(beta["enabled"]),
-        "BETA_FIT_SCOPE": str(beta.get("fit_scope", "selected")),
-        "AM_BETA_BOX": str(beta.get("beta_box", 3.0)),
-        "AM_NNLS_ITERS": str(beta.get("nnls_iters", 2)),
-        "AM_NNLS_DRIVER": str(beta.get("nnls_driver", "gelsd")),
-        "AM_BETA_TARGET": str(beta.get("target_mode", "residual")),
-        "RIDGE_LAMBDA": str(objective["ridge_lambda"]),
-        "RIDGE_SCALE": str(objective.get("ridge_scale", "spectral")),
-        "RIDGE_LAMBDA_MIN": str(objective.get("ridge_lambda_min", 0.0)),
-        "DELTA_WEIGHT": str(objective["delta_weight"]),
-        "ENABLE_OLD_REFERENCE_GUARD": _truth(
-            objective.get("enable_old_reference_guard", False)
-        ),
-        "OLD_REF_DATA_PATH": _path(objective.get("old_ref_data_path")),
-        "OLD_REF_MAX_EXAMPLES": str(objective.get("old_ref_max_examples", 64)),
-        "OLD_REFERENCE_WEIGHT": str(objective.get("old_reference_weight", 0.0)),
-        "AM_ROPE_THETA": str(cfg["rope_theta"]),
-        "AM_COMPUTE_STATS": _truth(cfg.get("compute_update_stats", True)),
-    }
-
-
 def stage_write_env(
-    cfg: dict,
+    recipe_path: str,
     *,
     dataset: str,
     phase: int,
@@ -176,12 +154,17 @@ def stage_write_env(
     gpu: str,
     runs_dir: Path,
 ) -> dict[str, str]:
-    """The complete environment for one continual-AM stage write."""
+    """The complete runtime environment for one continual-AM stage write.
+
+    The write rule is passed by pointer: ``RECIPE_CONFIG`` names the resolved
+    recipe YAML that `continual_write.py` reads. Everything else here is a
+    per-invocation runtime input, not a config knob.
+    """
     env = phase_eval_env(base_env(gpu, runs_dir), dataset)
-    env.update(recipe_env(cfg))
     env.update(spec(dataset).teacher_env(phase))
     env.update(
         {
+            "RECIPE_CONFIG": str(recipe_path),
             "PHASE1_CACHE_PATH": str(input_cache),
             "SYNTH_DATA_PATH": str(spec(dataset).synth_path(phase)),
             "RUN_NAME": run_name,

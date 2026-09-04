@@ -1,0 +1,15 @@
+# Base p01 recipe (arm-D compaction) for build_p01 p01-axis sweeps.
+#
+# `sweep render` generates per-arm recipes by overriding the `p01.<field>` axis
+# on top of this base; `build_p01` reads the `p01:` section. These are the shared
+# arm-D constants (byte-identical across datasets) also defaulted in build_p01.py.
+p01:
+  num_tokens: 512
+  key_select: highest_attention
+  granularity: per_head
+  enable_beta: 0
+  rebake_key_positions: 1
+  rope_theta: model
+  global_teacher_positions: 1
+  ridge_lambda: 1e-4
+  ridge_scale: spectral

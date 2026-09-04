@@ -1,0 +1,24 @@
+# Experiment: p01 RoPE-base ablation (replaces qasper/pipelines/sweep_initial_am_rope.sh).
+#
+# The axis is a p01 (stage-1) knob, so the endpoint is `build_p01`: each arm
+# rebakes the selected keys at a different rotary base and writes its own p01
+# cache under outputs/experiments/p01_rope/<tag>/. Evaluate the resulting caches
+# with the accuracy / cartridge_perplexity wrappers.
+#
+# `sweep render` materializes each arm's recipe from p01_armD.yaml, overriding
+# `p01.rope_theta`.
+
+name: p01_rope
+endpoint: build_p01
+datasets: [qasper]
+
+streams:
+  rope_theta:
+    axis: p01.rope_theta
+    base_recipe: examples/shared/am/manifests/p01_armD.yaml
+    label_fmt: "theta={value}"
+    arms:
+      - {value: 10000}
+      - {value: 100000}
+      - {value: 1000000}
+      - {value: 5000000}
