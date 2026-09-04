@@ -61,6 +61,9 @@ data/<dataset>/eval/        benchmark eval sets (+ reference baselines)
 data/<dataset>/{{raw,init_text}}/  raw dumps
 data/CORRUPTION_AUDIT.json  known dirty synth phases (vLLM NaN-logprob incident)
 data/SYMLINKS.tsv           train/ + eval aliases, recreated by prepare_artifacts.sh
+checkpoint-shards/synth-checkpoints-<ds>.tar.zst  self-study batch_*.parquet
+                            generation batches (merged result = artifact/dataset.parquet),
+                            extracted back into data/ by prepare_artifacts.sh
 ```
 
 Datasets included: {", ".join(datasets) or "(none)"}.

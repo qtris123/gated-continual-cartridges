@@ -84,6 +84,18 @@ prepare_data() {
   mkdir -p "$DEST/data"
   cp -a "$snap/data/." "$DEST/data/"
   verify_manifest "$snap" "$snap/MANIFEST.tsv"
+  # extract synth checkpoint shards back into data/<ds>/synth/.../checkpoints/
+  if [[ -d "$snap/checkpoint-shards" ]]; then
+    if [[ -f "$snap/SHARDS.sha256" ]]; then
+      log "checking checkpoint shard sha256"
+      ( cd "$snap/checkpoint-shards" && sha256sum -c "$snap/SHARDS.sha256" ) || die "checkpoint shard checksum failed"
+    fi
+    for shard in "$snap"/checkpoint-shards/*.tar.zst; do
+      [[ -e "$shard" ]] || continue
+      log "extracting $(basename "$shard")"
+      zstd -dc "$shard" | tar -C "$DEST" -xf -   # paths are data/<ds>/.../checkpoints/...
+    done
+  fi
   # rehydrate symlinks (train/ aliases, qasper eval topic aliases, ...)
   local sl="$DEST/data/SYMLINKS.tsv"
   if [[ -f "$sl" ]]; then
