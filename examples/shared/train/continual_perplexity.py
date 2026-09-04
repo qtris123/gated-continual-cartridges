@@ -5,6 +5,10 @@ new synthetic data (e.g. MT task). This variant performs *dense* finetuning of
 the cache — every position is updated. For sparse TF-IDF Phase 2, use
 `train/continual_sparse.py` instead.
 
+Set ``BASELINE=1`` to reproduce the published no-cartridge baseline (adds the
+``baseline`` wandb tag and run-name default); this folds in the old
+``baseline_continual.py``.
+
 Usage:
     PHASE1_CACHE_PATH=/path/to/cache_last.pt \\
     SYNTH_DATA_PATH=/path/to/phase2_MT.parquet \\
@@ -50,6 +54,7 @@ class KVFromLocal(KVCacheFactory):
         return TrainableCache.from_pretrained(self.config.path, device="cuda")
 
 
+BASELINE = os.environ.get("BASELINE", "0") in ("1", "true", "True")
 PHASE1_CACHE_PATH = os.environ["PHASE1_CACHE_PATH"]
 SYNTH_DATA_PATH = os.environ["SYNTH_DATA_PATH"]
 EVAL_DATA_PATH = os.environ.get("EVAL_DATA_PATH", None)
@@ -61,7 +66,10 @@ GLOBAL_BATCH_SIZE = int(os.environ.get("GLOBAL_BATCH_SIZE", "32"))
 EVAL_EVERY_N_STEPS = int(os.environ.get("EVAL_EVERY_N_STEPS", "15"))
 SAVE_EVERY_N_STEPS = int(os.environ.get("SAVE_EVERY_N_STEPS", "256"))
 DISTRIBUTED_BACKEND = os.environ.get("DISTRIBUTED_BACKEND", "gloo")
-RUN_NAME = os.environ.get("RUN_NAME", "qasper_phase2")
+RUN_NAME = os.environ.get(
+    "RUN_NAME", "qasper_baseline_phase2" if BASELINE else "qasper_phase2"
+)
+_TAGS = ["train", "qasper", "phase2"] + (["baseline"] if BASELINE else [])
 
 _model_cls = FlexQwen3ForCausalLM if "qwen" in MODEL_NAME.lower() else FlexLlamaForCausalLM
 
@@ -110,7 +118,7 @@ config = TrainConfig(
     ),
     save_every_n_steps=SAVE_EVERY_N_STEPS,
     distributed_backend=DISTRIBUTED_BACKEND,
-    wandb=WandBConfig(tags=["train", "qasper", "phase2"]),
+    wandb=WandBConfig(tags=_TAGS),
     output_dir=os.environ.get("CARTRIDGES_OUTPUT_DIR", "."),
     name=RUN_NAME,
 )

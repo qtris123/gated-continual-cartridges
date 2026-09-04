@@ -60,10 +60,6 @@ def _classify_row(row: Dict[str, Any]) -> str:
         return f"icl_{row.get('context_topic', '?')}_raw"
     if "cartridge" in row:
         cart = row["cartridge"]
-        if "QA-task" in cart and "no-cartridge" in cart:
-            return "cartridge_p1"
-        if "MT-task" in cart:
-            return "cartridge_p2"
         return f"cartridge_{Path(cart).name}"
     return "unknown"
 

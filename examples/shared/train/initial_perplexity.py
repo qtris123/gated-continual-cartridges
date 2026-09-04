@@ -4,6 +4,10 @@ Standard Phase 1 training without sparse-finetuning machinery — use this when 
 do NOT plan to run sparse Phase 2 with TF-IDF later. For sparse Phase 2 prep, use
 `train/initial_sparse.py` instead, which collects background statistics.
 
+Set ``BASELINE=1`` to reproduce the published no-cartridge baseline cartridges
+(adds the ``baseline`` wandb tag and the 512-token/baseline run-name defaults);
+this folds in the old ``baseline_initial.py``.
+
 Usage:
     TEXT_PATH=/path/to/qasper_init_1024.txt \\
     SYNTH_DATA_PATH=/path/to/phase1_QA.parquet \\
@@ -38,10 +42,11 @@ from cartridges.models import FlexLlamaForCausalLM, FlexQwen3ForCausalLM, HFMode
 from cartridges.train import TrainConfig, LossEvalConfig
 from cartridges.utils.wandb import WandBConfig
 
+BASELINE = os.environ.get("BASELINE", "0") in ("1", "true", "True")
 TEXT_PATH = os.environ["TEXT_PATH"]
 SYNTH_DATA_PATH = os.environ["SYNTH_DATA_PATH"]
 EVAL_DATA_PATH = os.environ.get("EVAL_DATA_PATH", None)
-NUM_TOKENS = int(os.environ.get("NUM_TOKENS", "1024"))
+NUM_TOKENS = int(os.environ.get("NUM_TOKENS", "512" if BASELINE else "1024"))
 MODEL_NAME = os.environ.get("MODEL_NAME", "meta-llama/Llama-3.2-3B-Instruct")
 LR = float(os.environ.get("LR", "2e-2"))
 EPOCHS = int(os.environ.get("EPOCHS", "10"))
@@ -49,7 +54,10 @@ GLOBAL_BATCH_SIZE = int(os.environ.get("GLOBAL_BATCH_SIZE", "32"))
 EVAL_EVERY_N_STEPS = int(os.environ.get("EVAL_EVERY_N_STEPS", "50"))
 SAVE_EVERY_N_STEPS = int(os.environ.get("SAVE_EVERY_N_STEPS", "256"))
 DISTRIBUTED_BACKEND = os.environ.get("DISTRIBUTED_BACKEND", "gloo")
-RUN_NAME = os.environ.get("RUN_NAME", "qasper_phase1")
+RUN_NAME = os.environ.get(
+    "RUN_NAME", "qasper_baseline_phase1" if BASELINE else "qasper_phase1"
+)
+_TAGS = ["train", "qasper", "phase1"] + (["baseline"] if BASELINE else [])
 
 _model_cls = FlexQwen3ForCausalLM if "qwen" in MODEL_NAME.lower() else FlexLlamaForCausalLM
 
@@ -94,7 +102,7 @@ config = TrainConfig(
     ),
     save_every_n_steps=SAVE_EVERY_N_STEPS,
     distributed_backend=DISTRIBUTED_BACKEND,
-    wandb=WandBConfig(tags=["train", "qasper", "phase1"]),
+    wandb=WandBConfig(tags=_TAGS),
     output_dir=os.environ.get("CARTRIDGES_OUTPUT_DIR", "."),
     name=RUN_NAME,
 )

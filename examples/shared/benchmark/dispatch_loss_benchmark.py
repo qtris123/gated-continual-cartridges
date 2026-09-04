@@ -26,8 +26,6 @@ METHODS = [
     "icl_QA_plus_MT",
     "icl_MT_plus_QA",
     "icl_MT_plus_QA_cartridge",
-    "cartridge_p1",
-    "cartridge_p2",
 ]
 
 ICL_METHODS = {

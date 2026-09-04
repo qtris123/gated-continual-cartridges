@@ -52,8 +52,8 @@ from cartridges.train import CacheAndModel  # noqa: F401 (kept for API compatibi
 
 # Single source of truth for the full-context ICL scorer + context builder.
 import sys as _sys
-_sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "train"))
-from eval_icl import (  # noqa: E402
+_sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "evaluate"))
+from icl import (  # noqa: E402
     build_qasper_system_prompt,
     evaluate_loss_chunked,
     load_model_and_tokenizer,
