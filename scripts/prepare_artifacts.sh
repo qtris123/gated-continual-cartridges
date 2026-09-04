@@ -56,7 +56,8 @@ command -v zstd      >/dev/null 2>&1 || die "zstd not found (apt install zstd)."
 [[ -n "${HF_TOKEN:-}${HUGGING_FACE_HUB_TOKEN:-}" ]] || warn "no HF_TOKEN set; only works if the datasets are public."
 
 snapshot() {  # snapshot <repo> <subdir>  -> echoes local snapshot dir
-  local repo="$1" sub="$2" out="$DL/$sub"
+  local repo="$1" sub="$2"
+  local out="$DL/$sub"
   mkdir -p "$out"
   log "downloading $repo" >&2
   "$HF_BIN" download "$repo" --repo-type dataset --local-dir "$out" >&2
