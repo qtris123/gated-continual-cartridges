@@ -26,6 +26,15 @@ def main() -> None:
     parser.add_argument("--batch-size", type=int, default=16)
     parser.add_argument("--max-new-tokens", type=int, default=512)
     parser.add_argument("--temperature", type=float, default=0.0)
+    parser.add_argument(
+        "--answer-prime",
+        default="",
+        help=(
+            "Optional text pre-filled as the start of the assistant answer (e.g. "
+            "'Answer:'). Appended to every prompt after the generation prompt and "
+            "prepended to the generated text before scoring. Empty = free generation."
+        ),
+    )
     args = parser.parse_args()
 
     state_dir = Path(args.state_dir).resolve()
@@ -74,6 +83,7 @@ def main() -> None:
             "num_shots": 0,
             "prompt_variant": "phase-parquet-verbatim",
             "thinking": False,
+            "answer_prime": args.answer_prime,
         },
         "stages": stages,
         "eval_sets": eval_sets,

@@ -87,11 +87,11 @@ def _make_icl_run_dir(topic: str, eval_path: str) -> Path:
 
 
 def _run_icl():
-    """Full-context ICL eval (no cartridge) via the shared eval_icl library."""
+    """Full-context ICL eval (no cartridge) via the shared icl library."""
     import sys
 
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # allow sibling import
-    from eval_icl import run_icl_loss_eval
+    from icl import run_icl_loss_eval
 
     topic = os.environ["ICL_TOPIC"]
     prefill = int(os.environ.get("PREFILL_CHUNK_SIZE", "2048"))

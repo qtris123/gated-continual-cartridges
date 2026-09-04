@@ -21,7 +21,7 @@ from pathlib import Path
 
 import torch
 
-from examples.shared.am.continual_chain import RUN_DIRS
+from examples.shared.am.run_chain import RUN_DIRS
 
 
 def stage_counts(runs_dir, dataset: str, tag: str, phase: int) -> tuple[torch.Tensor, int]:

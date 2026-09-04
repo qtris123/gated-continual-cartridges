@@ -7,8 +7,9 @@ an independent directory, so workers can safely split stages across GPUs.
 
 Current supported protocol:
   freeform-mc-options-v1
-    Greedy free-form generation followed by the baseline-compatible
-    ``mc_options`` resolver used for QuALITY and LongHealth phase streams.
+    Greedy free-form generation scored per the eval row's ``category`` via
+    ``CATEGORY_SCORERS``: ``mc_options`` for the QuALITY/LongHealth MCQ streams
+    and ``numeric_match`` for FinQA's numeric answers.
 """
 
 from __future__ import annotations
@@ -33,6 +34,10 @@ from examples.shared.paths import ROOT as REPO_ROOT
 
 os.environ.setdefault("CARTRIDGES_DIR", str(REPO_ROOT))
 os.environ.setdefault("CARTRIDGES_OUTPUT_DIR", str(REPO_ROOT / "outputs"))
+# Decode eagerly: the compiled generate-path flex-attention kernels raise a Triton
+# illegal-memory-access on the short shapes decoding produces. Must be set before the
+# (deferred) `cartridges.models` import so attention.py reads it at module load.
+os.environ.setdefault("CARTRIDGES_EAGER_GENERATE", "1")
 
 from cartridges.benchmark.scorers import CATEGORY_SCORERS, resolve_mc_option
 from cartridges.cache import TrainableCache
@@ -145,6 +150,7 @@ def _tokenize_batch(
     tokenizer: AutoTokenizer,
     examples: list[EvalExample],
     device: torch.device,
+    prime_ids: list[int] | None = None,
 ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
     input_ids, sequence_ids, position_ids = [], [], []
     kwargs = {}
@@ -158,6 +164,12 @@ def _tokenize_batch(
             chat_template=MODEL_TO_CHAT_TEMPLATE.get(tokenizer.name_or_path),
             **kwargs,
         ).flatten().to(device)
+        if prime_ids:
+            # Pre-fill the start of the assistant answer (e.g. "Answer:") so decoding
+            # continues from it instead of choosing its own opening token.
+            ids = torch.cat(
+                [ids, torch.tensor(prime_ids, device=device, dtype=ids.dtype)]
+            )
         input_ids.append(ids)
         sequence_ids.append(torch.full_like(ids, sequence_id))
         position_ids.append(torch.arange(ids.numel(), device=device))
@@ -206,10 +218,23 @@ def _cell_metrics(
     expected_questions: int,
     wall_clock_s: float,
 ) -> dict[str, Any]:
-    correct = sum(float(record["score"]) for record in records)
-    difficult = [record for record in records if int(record.get("difficult", 0)) == 1]
+    # Records with score=None are "record-only" (no scorer for the category); they
+    # contribute generations but no metric, so accuracy is computed over scored rows.
+    scored = [record for record in records if record.get("score") is not None]
+    correct = sum(float(record["score"]) for record in scored)
+    difficult = [record for record in scored if int(record.get("difficult", 0)) == 1]
     difficult_correct = sum(float(record["score"]) for record in difficult)
-    unparsed = sum(record.get("resolved_option") is None for record in records)
+    # `resolved_option` / `unparsed` are MCQ-only diagnostics: a numeric task
+    # (FinQA) has no option list to resolve against, so counting its records as
+    # "unparsed" would report a meaningless 100% rate. Restrict the accounting
+    # to records that actually carry options.
+    mcq_records = [
+        record
+        for record in records
+        if (record.get("metadata") or {}).get("options")
+    ]
+    unparsed = sum(record.get("resolved_option") is None for record in mcq_records)
+    scorer_name = records[0].get("scorer", "mc_options") if records else "mc_options"
     complete = len(records) == expected_questions
     return {
         "schema_version": SCHEMA_VERSION,
@@ -217,7 +242,7 @@ def _cell_metrics(
         "dataset": plan["dataset"],
         "technique": plan["technique"],
         "protocol": plan["protocol"],
-        "scorer": "mc_options",
+        "scorer": scorer_name,
         "scorer_source": SCORER_SOURCE,
         "model": plan["model"],
         "stage_id": stage["id"],
@@ -231,11 +256,12 @@ def _cell_metrics(
         "decode": plan["decode"],
         "complete": complete,
         "num_expected": expected_questions,
-        "num_scored": len(records),
+        "num_recorded": len(records),
+        "num_scored": len(scored),
         "num_correct": int(correct),
-        "accuracy": correct / len(records) if records else None,
+        "accuracy": correct / len(scored) if scored else None,
         "num_unparsed": unparsed,
-        "unparsed_rate": unparsed / len(records) if records else None,
+        "unparsed_rate": unparsed / len(mcq_records) if mcq_records else None,
         "subgroups": {
             "difficult_1": {
                 "num_scored": len(difficult),
@@ -279,6 +305,12 @@ def _run_cell(
     existing = _read_records(generations_path, plan_hash, stage["id"], eval_set["id"])
     pending = [example for example in examples if example.question_id not in existing]
     batch_size = int(plan["decode"]["batch_size"])
+    answer_prime = str(plan["decode"].get("answer_prime", "") or "")
+    prime_ids = (
+        tokenizer(answer_prime, add_special_tokens=False)["input_ids"]
+        if answer_prime
+        else None
+    )
     started = time.time()
 
     with generations_path.open("a") as output:
@@ -289,7 +321,7 @@ def _run_cell(
         ):
             batch = pending[offset : offset + batch_size]
             input_ids, sequence_ids, position_ids = _tokenize_batch(
-                tokenizer, batch, device
+                tokenizer, batch, device, prime_ids=prime_ids
             )
             with torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
                 generated = flex_generate(
@@ -306,17 +338,29 @@ def _run_cell(
                 generated_text = tokenizer.decode(
                     generated.get(sequence_id, []), skip_special_tokens=True
                 )
+                if answer_prime:
+                    # The prime is part of the assistant's answer; include it so the
+                    # scorer and the stored generation reflect the full response.
+                    generated_text = answer_prime + generated_text
                 category = str(example.metadata.get("category", ""))
                 scorer = CATEGORY_SCORERS.get(category)
-                if scorer is None:
-                    raise ValueError(
-                        f"{cell_id}: category {category!r} has no registered scorer"
+                if scorer is not None:
+                    score = float(
+                        scorer(
+                            generated_text,
+                            example.reference_answer,
+                            metadata=example.metadata,
+                        )
                     )
-                score = scorer(
-                    generated_text,
-                    example.reference_answer,
-                    metadata=example.metadata,
-                )
+                    scorer_name = scorer.__name__
+                else:
+                    # Record-only: no scorer for this category (e.g. the free-form
+                    # techqa_freeform / qasper_freeform streams). Save the generation
+                    # with a null score so a metric (F1, etc.) can be computed later
+                    # from generated_answer+reference_answer; logppl stays the headline
+                    # number. This makes generation recording metric-agnostic.
+                    score = None
+                    scorer_name = "record_only"
                 options = [str(option) for option in example.metadata.get("options") or []]
                 resolved = resolve_mc_option(generated_text, options)
                 record = {
@@ -332,9 +376,9 @@ def _run_cell(
                     "generated_answer": generated_text,
                     "reference_answer": example.reference_answer,
                     "resolved_option": resolved,
-                    "score": float(score),
-                    "correct": float(score) == 1.0,
-                    "scorer": scorer.__name__,
+                    "score": score,
+                    "correct": (score == 1.0) if score is not None else None,
+                    "scorer": scorer_name,
                     "category": category,
                     "difficult": int(example.metadata.get("difficult", 0)),
                     "metadata": example.metadata,
@@ -360,9 +404,11 @@ def _run_cell(
         wall_clock_s=time.time() - started,
     )
     _atomic_json(metrics_path, metrics)
+    acc = metrics["accuracy"]
+    acc_str = f"{acc:.2%}" if acc is not None else "n/a (record-only)"
     print(
-        f"[cell] {cell_id}: accuracy={metrics['accuracy']:.2%} "
-        f"unparsed={metrics['num_unparsed']}/{metrics['num_scored']}"
+        f"[cell] {cell_id}: accuracy={acc_str} "
+        f"recorded={metrics['num_recorded']}/{metrics['num_expected']}"
     )
     return metrics
 

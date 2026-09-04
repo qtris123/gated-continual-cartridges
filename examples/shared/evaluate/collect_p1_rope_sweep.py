@@ -2,7 +2,7 @@
 """Tabulate the Phase-1 positional-encoding sweep from its per-arm summaries.
 
 Reads every ``summary.json`` under a sweep root (one subdirectory per arm, as laid
-out by ``examples/qasper/pipelines/sweep_initial_am_rope.sh``) and prints the
+out by the ``p01_rope`` sweep manifest run via ``build_p01``) and prints the
 positional configuration next to the eval losses, so the rotary base can be read
 against the metric it is supposed to move.
 

@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 from examples.shared.evaluate.cache_layout import (  # noqa: E402
     CACHES_ROOT,
