@@ -8,6 +8,9 @@ wandb/
 artifacts/
 outputs/**
 !outputs/
+# Hand-authored experiment recipe configs (small; referenced by manifests/drivers).
+!outputs/recipes/
+!outputs/recipes/**
 !outputs/cross-eval_longhealth-AvB-h100solo_longhealth-cartridge-eval-h100x1-w46kv-rlks7_20260421-204355/
 !outputs/cross-eval_longhealth-AvB-h100solo_longhealth-cartridge-eval-h100x1-w46kv-rlks7_20260421-204355/**
 !outputs/cross-eval_longhealth-initial-h100solo_1/

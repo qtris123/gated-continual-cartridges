@@ -1,0 +1,263 @@
+_config_type:
+  _is_type: true
+  _module: cartridges.am.continual.config
+  _qualname: AMContinualConfig
+beta:
+  _config_type:
+    _is_type: true
+    _module: cartridges.am.components.beta
+    _qualname: BetaFitter.Config
+  beta_box: 3.0
+  enabled: false
+  fit_scope: selected
+  kwargs: {}
+  nnls_driver: gelsd
+  nnls_iters: 2
+  target:
+    _is_type: true
+    _module: cartridges.am.components.beta
+    _qualname: BetaFitter
+  target_mode: residual
+compute_update_stats: true
+device: cuda
+document_data_path: data/qasper/train/qwen_qasper_SA_task_8192.parquet
+keep_last_n_saved: 1
+keys:
+  _config_type:
+    _is_type: true
+    _module: cartridges.am.components.keys
+    _qualname: KeyWriter.Config
+  key_mode: highest_attention
+  key_reposition: true
+  kwargs: {}
+  target:
+    _is_type: true
+    _module: cartridges.am.components.keys
+    _qualname: KeyWriter
+kv_cache_initializer:
+  _config_type:
+    _is_type: true
+    _module: __main__
+    _qualname: KVFromLocal.Config
+  kwargs: {}
+  num_frozen_tokens: 1
+  path: outputs/2026-08-19-14-23-01-ROPE_delta_highest_attention_b0_idf0/9e0cf06e-560a-454c-a5a2-17eca64b1f3a/cache_last.pt
+  target:
+    _is_type: true
+    _module: __main__
+    _qualname: KVFromLocal
+launch_id: 2026-08-19-15-18-23-SA3_ROPE_delta_highest_attention_b0_idf0
+loss_evals:
+- _config_type:
+    _is_type: true
+    _module: cartridges.train
+    _qualname: LossEvalConfig
+  dataset:
+    _config_type:
+      _is_type: true
+      _module: cartridges.datasets
+      _qualname: LossEvalDataset.Config
+    data_source:
+      _config_type:
+        _is_type: true
+        _module: cartridges.datasets
+        _qualname: DataSource
+      limit: null
+      path: data/qasper/eval/qasper_eval_QA.parquet
+      source_tag: null
+      type: local
+    is_wandb: false
+    kwargs: {}
+    packed_seq_length: 2048
+    packing_mode: pad
+    system_prompt: null
+    target:
+      _is_type: true
+      _module: cartridges.datasets
+      _qualname: LossEvalDataset
+    targets: tokens
+    user_prompt_prefix: null
+  name_for_wandb: qa_forgetting
+- _config_type:
+    _is_type: true
+    _module: cartridges.train
+    _qualname: LossEvalConfig
+  dataset:
+    _config_type:
+      _is_type: true
+      _module: cartridges.datasets
+      _qualname: LossEvalDataset.Config
+    data_source:
+      _config_type:
+        _is_type: true
+        _module: cartridges.datasets
+        _qualname: DataSource
+      limit: null
+      path: data/qasper/eval/qasper_eval_MT.parquet
+      source_tag: null
+      type: local
+    is_wandb: false
+    kwargs: {}
+    packed_seq_length: 2048
+    packing_mode: pad
+    system_prompt: null
+    target:
+      _is_type: true
+      _module: cartridges.datasets
+      _qualname: LossEvalDataset
+    targets: tokens
+    user_prompt_prefix: null
+  name_for_wandb: mt_acquisition
+- _config_type:
+    _is_type: true
+    _module: cartridges.train
+    _qualname: LossEvalConfig
+  dataset:
+    _config_type:
+      _is_type: true
+      _module: cartridges.datasets
+      _qualname: LossEvalDataset.Config
+    data_source:
+      _config_type:
+        _is_type: true
+        _module: cartridges.datasets
+        _qualname: DataSource
+      limit: null
+      path: data/qasper/eval/qasper_eval_SA.parquet
+      source_tag: null
+      type: local
+    is_wandb: false
+    kwargs: {}
+    packed_seq_length: 2048
+    packing_mode: pad
+    system_prompt: null
+    target:
+      _is_type: true
+      _module: cartridges.datasets
+      _qualname: LossEvalDataset
+    targets: tokens
+    user_prompt_prefix: null
+  name_for_wandb: sa_acquisition
+model:
+  _config_type:
+    _is_type: true
+    _module: cartridges.models.config
+    _qualname: HFModelConfig
+  attn_implementation: null
+  checkpoint_path: null
+  load_kwargs: {}
+  model_cls:
+    _is_type: true
+    _module: cartridges.models.qwen.modeling_qwen3
+    _qualname: FlexQwen3ForCausalLM
+  peft:
+    _config_type:
+      _is_type: true
+      _module: cartridges.models.config
+      _qualname: PeftConfig
+    adapter_non_linearity: relu
+    adapter_reduction_factor: 16
+    alpha: 16
+    bias: none
+    dropout: 0.0
+    enabled: false
+    encoder_dropout: 0.0
+    encoder_hidden_size: null
+    encoder_reparameterization_type: MLP
+    extra_params: {}
+    method: lora
+    num_virtual_tokens: 20
+    prefix_projection: false
+    prompt_tuning_init: null
+    prompt_tuning_init_text: null
+    r: 8
+    target_modules: null
+    task_type: CAUSAL_LM
+  pretrained_model_name_or_path: Qwen/Qwen3-4B-Instruct-2507
+  tuning_method: custom_prefix
+name: SA3_ROPE_delta_highest_attention_b0_idf0
+objective:
+  _config_type:
+    _is_type: true
+    _module: cartridges.am.components.objective
+    _qualname: ValueObjective.Config
+  delta_weight: 0.01
+  enable_old_reference_guard: false
+  kwargs: {}
+  old_ref_data_path: null
+  old_ref_max_examples: 64
+  old_reference_weight: 0.0
+  oracle_write: false
+  oracle_write_assign: mass_ranked
+  ridge_lambda: 0.0
+  ridge_lambda_min: 0.0
+  ridge_scale: spectral
+  target:
+    _is_type: true
+    _module: cartridges.am.components.objective
+    _qualname: ValueObjective
+output_dir: /localhome/local-triv/gated-continual-cartridges/outputs
+queries:
+  _config_type:
+    _is_type: true
+    _module: cartridges.am.components.queries
+    _qualname: ReferenceQueries.Config
+  kwargs: {}
+  max_queries_per_head: 64
+  max_ref_examples_per_doc: 32
+  onpolicy_layers: 0
+  onpolicy_refresh_doc_kv: false
+  queries_per_batch: all_tokens
+  ref_batch_limit: 5
+  seed_offset: 0
+  target:
+    _is_type: true
+    _module: cartridges.am.components.queries
+    _qualname: ReferenceQueries
+rope_theta: 5000000.0
+run_dir: /localhome/local-triv/gated-continual-cartridges/outputs/2026-08-19-15-18-23-SA3_ROPE_delta_highest_attention_b0_idf0/059d2151-c40c-4308-a7d9-207a94b3c422
+run_id: 059d2151-c40c-4308-a7d9-207a94b3c422
+save_after_each_document: true
+save_to_wandb: false
+script_id: SA3_ROPE_delta_highest_attention_b0_idf0
+seed: 42
+slots:
+  _config_type:
+    _is_type: true
+    _module: cartridges.am.components.slots
+    _qualname: SlotSelector.Config
+  background_indices_path: null
+  background_top_k_per_batch: 128
+  granularity: per_layer
+  idf_prior_weight: 0.0
+  idf_smoothing: 1.0
+  kwargs: {}
+  mass_redundancy_alpha: 0.5
+  min_top_t_per_layer: 1
+  num_background_batches: 999999999
+  redundancy_ridge_rel: 1.0e-06
+  safe_fraction: 1.0
+  safe_metric: redundancy
+  slot_fisher_path: null
+  slot_selection: tfidf
+  target:
+    _is_type: true
+    _module: cartridges.am.components.slots
+    _qualname: SlotSelector
+  top_t: 32
+  usage_decay: 1.0
+  usage_penalty_lambda: 1.0
+  usage_penalty_mode: mult
+  use_idf: false
+teacher:
+  _config_type:
+    _is_type: true
+    _module: cartridges.am.components.teacher
+    _qualname: TeacherTarget.Config
+  kwargs: {}
+  qasper_topic: SA
+  target:
+    _is_type: true
+    _module: cartridges.am.components.teacher
+    _qualname: TeacherTarget
+wandb: null

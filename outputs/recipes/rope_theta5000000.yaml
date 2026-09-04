@@ -1,0 +1,10 @@
+p01:
+  enable_beta: 0
+  global_teacher_positions: 1
+  granularity: per_head
+  key_select: highest_attention
+  num_tokens: 512
+  rebake_key_positions: 1
+  ridge_lambda: 1e-4
+  ridge_scale: spectral
+  rope_theta: 5000000
