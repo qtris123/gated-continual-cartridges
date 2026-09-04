@@ -213,3 +213,7 @@ data/qasper/train/*.parquet
 
 # Local-only research loop docs/results — keep off this branch
 research_loop/
+
+# HuggingFace artifact staging/download (local only)
+.hf_staging/
+.hf_download/
