@@ -8,7 +8,6 @@ optimizer, epochs, or batch-size fields, and dressing it up as one made
 
 from __future__ import annotations
 
-import os
 from dataclasses import dataclass
 
 from pydantic import Field
@@ -53,7 +52,9 @@ class AMContinualConfig(RunConfig):
     """
 
     name: str = "am_continual"
-    output_dir: str = os.environ.get("CARTRIDGES_OUTPUT_DIR", ".")
+    # Runtime output root; set explicitly by the endpoint (continual_write) rather
+    # than read from the environment at import time (recipes-as-config).
+    output_dir: str = "."
 
     model: ModelConfig
     kv_cache_initializer: KVCacheFactory.Config  # the Phase-1 cartridge

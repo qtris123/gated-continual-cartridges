@@ -235,6 +235,8 @@ class TeacherTarget:
         qasper_topic: str = "MT"
         # Required for QuALITY so a title cannot silently resolve in another phase.
         quality_phase: Optional[int] = None
+        # Five-phase index for the phase-keyed datasets (finqa, techqa).
+        phase: Optional[int] = None
 
     def __init__(self, config: Config):
         self.config = config
@@ -242,10 +244,11 @@ class TeacherTarget:
     def document_prompt(self, conversations: list) -> str:
         """The complete document text for one synthesis document group."""
         return full_document_prompt(
-            document_key(conversations[0]),
+            document_key(conversations[0], self.config.dataset),
             dataset=self.config.dataset,
             qasper_topic=self.config.qasper_topic,
             quality_phase=self.config.quality_phase,
+            phase=self.config.phase,
         )
 
     def prefill(

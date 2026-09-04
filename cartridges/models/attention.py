@@ -1,9 +1,19 @@
+import os
+
 import torch
 
 from typing import Optional, Union, Literal
 from torch.nn.attention.flex_attention import create_block_mask, flex_attention, BlockMask
 
 from cartridges.cache import TrainableCache
+
+# The compiled generate-path kernels (dynamic flex_attention + compiled
+# create_block_mask) hit a Triton "illegal memory access" on some torch/triton/GPU
+# combinations for the short shapes decoding produces (cartridge KV + a ~80-token
+# query). Generation shapes are tiny, so running that path eagerly is both cheap and
+# correct; training stays on the tuned compiled kernels. Opt in per-process (e.g. the
+# accuracy eval driver) with CARTRIDGES_EAGER_GENERATE=1.
+_EAGER_GENERATE = os.environ.get("CARTRIDGES_EAGER_GENERATE", "0") == "1"
 
 
 
@@ -16,19 +26,43 @@ from cartridges.cache import TrainableCache
 # `dynamic=False` costs one compiled variant per distinct sequence length, and the AM
 # document paths prefill each document at its own length (16 for a QASPER phase). Past
 # dynamo's recompile limit the call degrades to `sdpa_dense`, whose score matrix is
-# quadratic in the sequence length -- 10 GiB for one 8.9k-token paper -- so the failure
-# reads as an OOM, not as a compile miss. The default limit is 8.
-torch._dynamo.config.cache_size_limit = max(torch._dynamo.config.cache_size_limit, 64)
+# quadratic in the sequence length -- 10 GiB for one 8.9k-token paper, ~87 GiB for a
+# 26k-token TechQA technote -- so the failure reads as an OOM, not as a compile miss.
+# The default limit is 8. A single continual stage can prefill ~100 documents, each a
+# distinct length (and dynamo also recompiles on autocast-state changes), so 64 was not
+# enough for TechQA; keep the ceiling well above the per-stage document count.
+_DYNAMO_VARIANT_LIMIT = 1024
+torch._dynamo.config.cache_size_limit = max(
+    torch._dynamo.config.cache_size_limit, _DYNAMO_VARIANT_LIMIT
+)
+# `cache_size_limit` is the per-code-object ceiling (aliased to `recompile_limit` in
+# newer torch); `accumulated_cache_size_limit` caps variants across all guarded frames.
+if hasattr(torch._dynamo.config, "recompile_limit"):
+    torch._dynamo.config.recompile_limit = max(
+        torch._dynamo.config.recompile_limit, _DYNAMO_VARIANT_LIMIT
+    )
+if hasattr(torch._dynamo.config, "accumulated_cache_size_limit"):
+    torch._dynamo.config.accumulated_cache_size_limit = max(
+        torch._dynamo.config.accumulated_cache_size_limit, 8 * _DYNAMO_VARIANT_LIMIT
+    )
+if hasattr(torch._dynamo.config, "accumulated_recompile_limit"):
+    torch._dynamo.config.accumulated_recompile_limit = max(
+        torch._dynamo.config.accumulated_recompile_limit, 8 * _DYNAMO_VARIANT_LIMIT
+    )
 
 flex_attention_train = torch.compile(flex_attention, dynamic=False, mode="max-autotune-no-cudagraphs")
 
 # # SE (07/25): For generation, we need to use `dynamic=True` to avoid a "PassManager::run failed" error
-flex_attention_generate = torch.compile(flex_attention, dynamic=True) 
+flex_attention_generate = (
+    flex_attention if _EAGER_GENERATE else torch.compile(flex_attention, dynamic=True)
+)
 
 # Eager `create_block_mask` materialises the dense (Q_LEN, KV_LEN) mask before reducing
 # it to blocks: 0.75 GiB for one 8.9k-token document, against 0.008 GiB compiled, for a
 # bit-identical block mask.
-create_block_mask_compiled = torch.compile(create_block_mask)
+create_block_mask_compiled = (
+    create_block_mask if _EAGER_GENERATE else torch.compile(create_block_mask)
+)
 
 
 def repeat_kv(hidden_states: torch.Tensor, n_rep: int) -> torch.Tensor:

@@ -11,6 +11,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import subprocess
 import time
 from pathlib import Path
 from typing import Optional
@@ -34,6 +35,93 @@ from cartridges.train import CacheAndModel, evaluate_perplexity, save_cache
 from cartridges.utils import get_logger, seed_everything
 
 logger = get_logger(__name__)
+
+
+def _load_prior_slot_usage(sidecar_in: Optional[Path], shape) -> torch.Tensor:
+    """Prior cumulative per-slot write counts carried from earlier stages, or zeros.
+
+    Accepts either the canonical ``slots_written.pt`` (a dict with a
+    ``cumulative`` tensor) or the legacy ``slot_usage.pt`` (a bare cumulative
+    tensor). ``sidecar_in`` may name either; if it names the legacy file we also
+    look for a ``slots_written.pt`` sibling and prefer it. A shape mismatch is
+    ignored (a fresh lineage), never fatal.
+    """
+    zeros = torch.zeros(*shape, dtype=torch.float32)
+    if sidecar_in is None:
+        return zeros
+    sidecar_in = Path(sidecar_in)
+    candidates = []
+    sibling = sidecar_in.parent / "slots_written.pt"
+    if sibling.exists():
+        candidates.append(sibling)
+    if sidecar_in.exists() and sidecar_in != sibling:
+        candidates.append(sidecar_in)
+    for path in candidates:
+        obj = torch.load(path, map_location="cpu")
+        cumulative = obj["cumulative"] if isinstance(obj, dict) else obj
+        cumulative = cumulative.float()
+        if tuple(cumulative.shape) == tuple(shape):
+            logger.info(
+                "SLOT-USAGE: loaded prior cumulative from %s (writes=%.0f)",
+                path,
+                float(cumulative.sum().item()),
+            )
+            return cumulative
+        logger.warning(
+            "SLOT-USAGE: prior shape %s != expected %s; ignoring %s",
+            tuple(cumulative.shape),
+            tuple(shape),
+            path,
+        )
+    return zeros
+
+
+def _git_sha() -> Optional[str]:
+    """Best-effort short git SHA of the working tree; None if unavailable."""
+    try:
+        out = subprocess.run(
+            ["git", "rev-parse", "--short", "HEAD"],
+            cwd=Path(__file__).resolve().parent,
+            capture_output=True,
+            text=True,
+            timeout=5,
+        )
+        return out.stdout.strip() or None
+    except Exception:
+        return None
+
+
+def _write_run_meta(config, run_dir: Path, input_cache_path) -> None:
+    """Persist a self-describing identity for this stage next to its artifacts.
+
+    Records the fully-resolved slot config, a stable ``config_hash`` over it, the
+    input cache, and the git SHA, so any cache/matrix on disk can be traced to its
+    exact selection config WITHOUT the sweep manifest (the manifest is a
+    convenience index; this is ground truth).
+    """
+    def _jsonable(value):
+        return str(value) if isinstance(value, Path) else value
+
+    slots = config.slots
+    # Enumerate the slot-selection fields straight off the Config schema (no
+    # slot-knob registry): every selection hyperparameter is a declared field.
+    fields = [
+        f for f in type(slots).model_fields
+        if f not in ("target", "kwargs")
+    ]
+    slot_dump = {f: _jsonable(getattr(slots, f, None)) for f in sorted(fields)}
+    config_hash = hashlib.sha256(
+        json.dumps(slot_dump, sort_keys=True, default=str).encode()
+    ).hexdigest()[:12]
+    payload = {
+        "run_name": getattr(config, "name", None),
+        "input_cache": str(input_cache_path) if input_cache_path else None,
+        "slots": slot_dump,
+        "config_hash": config_hash,
+        "git_sha": _git_sha(),
+        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
+    }
+    (run_dir / "run_meta.json").write_text(json.dumps(payload, indent=2))
 
 
 def _doc_slug(system_prompt: str, index: int) -> str:
@@ -132,6 +220,7 @@ def run_documents(
     device: torch.device,
     run_dir: Optional[Path] = None,
     save_cache_fn=None,
+    usage_sidecar_in: Optional[Path] = None,
 ) -> dict:
     """Run one closed-form AM write per unique document (system_prompt group)."""
     n_layers = attn_config.n_layers
@@ -141,6 +230,44 @@ def run_documents(
 
     was_training = wrapped_model.training
     wrapped_model.eval()
+
+    # SLOT-USAGE / SLOT-GEOMETRY. Two artifacts, both derived from which slots
+    # each write selects:
+    #   * `stage_counts` -- per-(layer, slot) write count for THIS stage only.
+    #     Emitted ALWAYS (any selector) as `slots_written.pt`, so cross-stage
+    #     overlap/locality is a first-class output rather than a cache-diff hack.
+    #   * `usage` (penalty view) -- decayed cumulative usage from prior stages plus
+    #     this stage, fed to the SOFT-LOCALITY selector. Built only when
+    #     usage_penalty_lambda > 0; otherwise the selector is bit-identical.
+    # Both need per-layer granularity (positions_per_layer is layer-keyed).
+    usage_lambda = float(getattr(stages.slots.config, "usage_penalty_lambda", 0.0))
+    usage_decay = float(getattr(stages.slots.config, "usage_decay", 1.0))
+    track_usage = usage_lambda > 0.0
+    emit_slots = granularity == "per_layer"
+    if track_usage and not emit_slots:
+        raise ValueError(
+            "usage_penalty_lambda>0 requires granularity='per_layer'; got "
+            f"{granularity!r}."
+        )
+
+    stage_counts = None
+    prior_cumulative = None
+    usage_base = None  # decayed prior cumulative; penalty adds stage_counts on top
+    if emit_slots:
+        n_trainable = int(getattr(cache, "_num_trainable_tokens"))
+        stage_counts = torch.zeros(n_layers, n_trainable, dtype=torch.float32)
+        prior_cumulative = _load_prior_slot_usage(usage_sidecar_in, stage_counts.shape)
+        if track_usage:
+            usage_base = prior_cumulative * usage_decay
+            logger.info(
+                "SOFT-LOCALITY active: lambda=%.3g mode=%s decay=%.3g (prior writes=%.0f)",
+                usage_lambda,
+                stages.slots.config.usage_penalty_mode,
+                usage_decay,
+                float(prior_cumulative.sum().item()),
+            )
+    elif track_usage:  # pragma: no cover -- guarded above
+        pass
 
     conversations = load_conversations(document_data_path)
     doc_groups = group_conversations_by_document(conversations)
@@ -252,6 +379,7 @@ def run_documents(
                     else None
                 ),
                 step=doc_idx + 1,
+                usage=(usage_base + stage_counts) if track_usage else None,
             )
 
             # LIT-006 / MECH-006: on-policy, layer-sequential re-extraction. The
@@ -305,6 +433,11 @@ def run_documents(
             am_stats.step = doc_idx + 1
             doc_wall = time.time() - t_doc
 
+            # SLOT-GEOMETRY: record which slots this write touched (this stage).
+            if emit_slots and stage_counts is not None:
+                for layer_idx, positions in grad_mask.positions_per_layer.items():
+                    stage_counts[layer_idx, positions.long().cpu()] += 1.0
+
             doc_record = {
                 "doc_index": doc_idx,
                 "slug": slug,
@@ -345,6 +478,33 @@ def run_documents(
 
     if was_training:
         wrapped_model.train()
+
+    if emit_slots and stage_counts is not None and run_dir is not None:
+        cumulative = stage_counts.clone()
+        if prior_cumulative is not None:
+            cumulative = cumulative + prior_cumulative
+        torch.save(
+            {
+                "stage": stage_counts,  # this stage only (decay-independent)
+                "cumulative": cumulative,  # raw running total across stages
+                "n_layers": int(stage_counts.shape[0]),
+                "n_slots": int(stage_counts.shape[1]),
+                "usage_penalty_lambda": usage_lambda,
+                "usage_decay": usage_decay,
+            },
+            run_dir / "slots_written.pt",
+        )
+        # Back-compat: the SOFT-LOCALITY carry-over and legacy tooling read a bare
+        # cumulative tensor from `slot_usage.pt`.
+        torch.save(cumulative, run_dir / "slot_usage.pt")
+        logger.info(
+            "SLOT-GEOMETRY: saved slots_written.pt (this-stage distinct slots/layer="
+            "%.1f/%d, this-stage writes=%.0f, cumulative writes=%.0f)",
+            float((stage_counts > 0).float().sum(dim=1).mean().item()),
+            stage_counts.shape[1],
+            float(stage_counts.sum().item()),
+            float(cumulative.sum().item()),
+        )
 
     aggregate = {
         "n_documents": len(per_doc_stats),
@@ -436,6 +596,14 @@ def run_am_continual(config: AMContinualConfig) -> dict:
         save_cache(config, cache, optimizer_step=doc_step)
         cache.save(str(run_dir / f"cache-after-{slug}.pt"))
 
+    # SOFT-LOCALITY: carry per-slot usage across stages via a sidecar next to the
+    # input cache. The chain passes the previous stage's run_dir/cache_last.pt as
+    # the input cache, so its sibling slot_usage.pt is this stage's starting state.
+    input_cache_path = getattr(config.kv_cache_initializer, "path", None)
+    usage_sidecar_in = (
+        Path(input_cache_path).parent / "slot_usage.pt" if input_cache_path else None
+    )
+
     t0 = time.time()
     aggregate = run_documents(
         cache=cache,
@@ -449,6 +617,7 @@ def run_am_continual(config: AMContinualConfig) -> dict:
         device=device,
         run_dir=run_dir,
         save_cache_fn=save_after_document if config.save_after_each_document else None,
+        usage_sidecar_in=usage_sidecar_in,
     )
     wall_clock = time.time() - t0
     aggregate["wall_clock_s"] = wall_clock
@@ -508,6 +677,8 @@ def run_am_continual(config: AMContinualConfig) -> dict:
             indent=2,
         )
     )
+
+    _write_run_meta(config, run_dir, input_cache_path)
 
     save_cache(config, cache, optimizer_step=n_documents or 1)
     wrapped.remove_hooks()

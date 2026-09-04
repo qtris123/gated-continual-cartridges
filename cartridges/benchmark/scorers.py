@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 import re
 import string
 from collections import Counter
@@ -137,6 +138,52 @@ def mc_options(prediction: str, ground_truth: str, **kwargs) -> float:
     return float(chosen.strip().lower() == ground_truth.strip().lower())
 
 
+def numeric_match(prediction: str, ground_truth: str, **kwargs) -> float:
+    """Numeric answers (FinQA): compare the model's *concluding* number to the
+    gold value -- never intermediate quantities.
+
+    FinQA generations show their work, so scanning every number for a match
+    credits answers whose headline is wrong but whose scratch work happens to
+    contain the gold. Instead a single answer candidate is extracted, in
+    order of preference:
+
+      1. the first number after the final "answer" mention ("The answer is
+         47 (see page 42)" must resolve to 47, not the citation)
+      2. else the last number in the last number-bearing line
+      3. else the last number in the text
+
+    Normalisation: $ and thousands separators stripped; a trailing % divides
+    by 100; the candidate is accepted in either the percent or the fraction
+    convention (14.1 vs 0.141) since FinQA gold answers mix the two.
+    Tolerance is loose-relative (0.5%) to absorb the rounding FinQA gold
+    answers carry.
+    """
+    gt_vals = _extract_numbers(ground_truth)
+    if not gt_vals:
+        return contains_match(prediction, ground_truth)
+
+    pred = None
+    m = list(re.finditer(r'[Aa]nswer', prediction))
+    if m:
+        tail_vals = _extract_numbers(prediction[m[-1].end():])
+        if tail_vals:
+            pred = tail_vals[0]
+    if pred is None:
+        for line in reversed(prediction.splitlines()):
+            line_vals = _extract_numbers(line)
+            if line_vals:
+                pred = line_vals[-1]
+                break
+    if pred is None:
+        return 0.0
+
+    gt = gt_vals[-1]
+    for candidate in (pred, pred / 100.0, pred * 100.0):
+        if math.isclose(candidate, gt, rel_tol=5e-3, abs_tol=5e-4):
+            return 1.0
+    return 0.0
+
+
 # ---------------------------------------------------------------------------
 # Internal helpers
 # ---------------------------------------------------------------------------
@@ -187,6 +234,19 @@ def _extract_yes_no(text: str) -> str | None:
     return match.group(1).lower() if match else None
 
 
+def _extract_numbers(text: str) -> list[float]:
+    """All numbers in the text, $-signs and thousands separators stripped,
+    trailing % applied as /100."""
+    cleaned = text.replace("$", "").replace(",", "")
+    out = []
+    for m in re.finditer(r'(-?\d+(?:\.\d+)?)(\s*%)?', cleaned):
+        val = float(m.group(1))
+        if m.group(2):
+            val /= 100.0
+        out.append(val)
+    return out
+
+
 def _normalize_and_tokenize(text: str) -> list[str]:
     text = text.lower()
     text = text.translate(str.maketrans("", "", string.punctuation))
@@ -203,9 +263,11 @@ SCORER_REGISTRY: dict[str, ScorerFn] = {
     "yes_no": yes_no_match,
     "longhealth_mc": longhealth_mc,
     "mc_options": mc_options,
+    "numeric_match": numeric_match,
 }
 
 CATEGORY_SCORERS: dict[str, ScorerFn] = {
     "longhealth_mcq": mc_options,
     "quality_mcq": mc_options,
+    "finqa_numeric": numeric_match,
 }

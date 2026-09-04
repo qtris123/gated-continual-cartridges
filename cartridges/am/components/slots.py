@@ -636,6 +636,22 @@ class SlotSelector:
         idf_prior_weight: float = 0.0
         min_top_t_per_layer: int = 1
 
+        # Soft slot locality (SOFT-LOCALITY). A dynamic, self-referential penalty
+        # on slots this run has already written, applied to the selection score
+        # BEFORE top-k. `usage_penalty_lambda=0.0` is a bit-identical no-op (it
+        # multiplies every score by 1.0), so it recovers the incumbent selector
+        # exactly. Larger lambda pushes writes off already-used slots, sliding
+        # from full sharing (lambda=0, the observed collision) to hard isolation
+        # (lambda large). This is distinct from IDF, which is a STATIC background
+        # prior identical for every document; `usage` is updated online after
+        # every write. Requires granularity='per_layer'.
+        usage_penalty_lambda: float = 0.0
+        usage_penalty_mode: Literal["mult", "sub"] = "mult"
+        # Per-stage exponential fade of the accumulated usage counts, applied
+        # once when the stage loads the carried-over state. 1.0 = full memory
+        # (no decay); 0.0 = reset every stage (within-stage spreading only).
+        usage_decay: float = 1.0
+
     def __init__(self, config: Config):
         self.config = config
 
@@ -673,7 +689,9 @@ class SlotSelector:
         cache=None,
         old_access_scores: Optional[torch.Tensor] = None,
         step: int = 0,
+        usage: Optional[torch.Tensor] = None,
     ) -> tuple[GradientMask, TFIDFRankingInfo]:
+        access_scores = self._apply_usage_penalty(access_scores, usage)
         return rank_am_slots(
             access_scores,
             self.config.top_t,
@@ -683,4 +701,38 @@ class SlotSelector:
             step=step,
             # MECH-008 slot priors; ignored by every other selection.
             cache=cache,
+        )
+
+    def _apply_usage_penalty(
+        self,
+        access_scores: torch.Tensor,
+        usage: Optional[torch.Tensor],
+    ) -> torch.Tensor:
+        """Down-weight already-written slots before ranking (SOFT-LOCALITY).
+
+        Multiplicative penalty `score * (1 + usage) ** (-lambda)`. Applying it in
+        the access-score domain is exact for the `tfidf`/`attention_mass` paths:
+        their per-layer top-k is monotone in `access_scores`, so scaling by a
+        positive per-slot factor is equivalent to scaling the final `tf`/`tfidf`
+        selection score. `lambda<=0` or `usage is None` is a no-op.
+        """
+        lam = float(self.config.usage_penalty_lambda)
+        if lam <= 0.0 or usage is None:
+            return access_scores
+        if self.config.granularity != "per_layer":
+            raise ValueError(
+                "usage_penalty_lambda>0 requires granularity='per_layer'; got "
+                f"{self.config.granularity!r}."
+            )
+        u = usage.to(device=access_scores.device, dtype=access_scores.dtype)
+        if tuple(u.shape) != tuple(access_scores.shape):
+            raise ValueError(
+                f"usage shape {tuple(u.shape)} != access_scores shape "
+                f"{tuple(access_scores.shape)}; usage must be (n_layers, n_slots)."
+            )
+        if self.config.usage_penalty_mode == "mult":
+            return access_scores * torch.pow(1.0 + u, -lam)
+        raise NotImplementedError(
+            f"usage_penalty_mode={self.config.usage_penalty_mode!r} is not "
+            "implemented; use 'mult'."
         )

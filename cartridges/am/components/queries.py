@@ -48,29 +48,46 @@ def _extract_tag(text: str, tag: str) -> Optional[str]:
     return match.group(1).strip() if match else None
 
 
-def document_key(conversation: Conversation) -> str:
-    """Return a stable paper key despite randomized section subsets."""
+def document_key(conversation: Conversation, dataset: str = "qasper") -> str:
+    """Return a stable document key despite randomized context subsets.
+
+    QASPER/QuALITY synthesis rows carry a structural ``<title>`` and group by it.
+    FinQA/TechQA rows have no structural title and group documents with
+    ``<source>`` tags instead; critically, their document bodies (IBM technotes,
+    SEC filings) can themselves contain ``<title>``/HTML, so those datasets must
+    key on the first ``<source>`` rather than any ``<title>``. FinQA sources are
+    ``TICKER/YEAR/page.pdf`` (one company per row, so the ticker is the
+    document); TechQA sources are a single technote filename.
+    """
     prompt = conversation.system_prompt or ""
+    if dataset in ("finqa", "techqa"):
+        source = _extract_tag(prompt, "source")
+        if source:
+            source = source.strip()
+            return source.split("/")[0] if "/" in source else source
+        return prompt
     title = _extract_tag(prompt, "title")
     return title or prompt
 
 
 def group_conversations_by_document(
     conversations: list[Conversation],
+    dataset: str = "qasper",
 ) -> dict[str, list[Conversation]]:
-    """Group synthesis rows by paper title, not exact sampled section context."""
+    """Group synthesis rows by document, not exact sampled context subset."""
     groups: dict[str, list[Conversation]] = {}
     for convo in conversations:
-        key = document_key(convo)
+        key = document_key(convo, dataset)
         groups.setdefault(key, []).append(convo)
     return groups
 
 
 def group_conversations_by_system_prompt(
     conversations: list[Conversation],
+    dataset: str = "qasper",
 ) -> dict[str, list[Conversation]]:
     """Backward-compatible alias for document-level grouping."""
-    return group_conversations_by_document(conversations)
+    return group_conversations_by_document(conversations, dataset)
 
 
 @lru_cache(maxsize=None)
@@ -183,22 +200,112 @@ def full_quality_prompt(title: str, *, phase: int) -> str:
     return SYSTEM_PROMPT_TEMPLATE.format(story=article.to_string)
 
 
+@lru_cache(maxsize=None)
+def _finqa_pages_by_company(phase: int) -> dict[str, list]:
+    """Company ticker -> its FinQA pages for one phase, filename-sorted.
+
+    Cached like the QASPER loader because the compaction loop asks per document
+    and ``load_phase`` re-reads the cached JSON splits each call.
+    """
+    from cartridges.data.finqa.resources import load_phase
+
+    pages, _ = load_phase(phase)
+    by_company: dict[str, list] = {}
+    for page in pages:
+        by_company.setdefault(page.company, []).append(page)
+    return {
+        company: sorted(company_pages, key=lambda p: p.filename)
+        for company, company_pages in by_company.items()
+    }
+
+
+def full_finqa_prompt(company: str, *, phase: int) -> str:
+    """The complete FinQA filing prompt for one company in ``phase``.
+
+    Sourced from the FinQA resource, not the synthesis rows, whose system
+    prompts each carry only a RANDOM subset of the company's pages
+    (``finqa/resources.py::sample_prompt``). Mirrors ``SYSTEM_PROMPT_TEMPLATE``.
+    """
+    from cartridges.data.finqa.resources import FISCAL_YEAR, SYSTEM_PROMPT_TEMPLATE
+
+    by_company = _finqa_pages_by_company(phase)
+    pages = by_company.get(company)
+    if pages is None:
+        raise KeyError(
+            f"Company {company!r} is not in FinQA phase {phase} "
+            f"({len(by_company)} companies). The prompt is looked up by the "
+            "<source> ticker of the synthesis rows, so the phase must match the "
+            "synthesis parquet."
+        )
+    return SYSTEM_PROMPT_TEMPLATE.format(
+        year=FISCAL_YEAR, filings="\n".join(page.text for page in pages)
+    )
+
+
+@lru_cache(maxsize=None)
+def _techqa_notes_by_filename(phase: int) -> dict[str, object]:
+    """Technote filename -> ``Technote`` for one phase."""
+    from cartridges.data.techqa.resources import PHASE_TO_FILENAMES, load_corpus
+
+    if phase not in PHASE_TO_FILENAMES:
+        raise ValueError(
+            f"Unknown TechQA phase {phase}; expected one of "
+            f"{sorted(PHASE_TO_FILENAMES)}."
+        )
+    documents, _ = load_corpus()
+    notes: dict[str, object] = {}
+    for name in PHASE_TO_FILENAMES[phase]:
+        if name not in documents:
+            raise KeyError(f"TechQA technote {name!r} missing from corpus.")
+        notes[name] = documents[name]
+    return notes
+
+
+def full_techqa_prompt(filename: str, *, phase: int) -> str:
+    """The complete TechQA prompt for one technote in ``phase``."""
+    from cartridges.data.techqa.resources import SYSTEM_PROMPT_TEMPLATE
+
+    notes = _techqa_notes_by_filename(phase)
+    note = notes.get(filename)
+    if note is None:
+        raise KeyError(
+            f"Technote {filename!r} is not in TechQA phase {phase} "
+            f"({len(notes)} technotes). The phase must match the synthesis parquet."
+        )
+    return SYSTEM_PROMPT_TEMPLATE.format(documents=note.to_string)
+
+
 def full_document_prompt(
     title: str,
     *,
     dataset: str = "qasper",
     qasper_topic: str = "MT",
     quality_phase: Optional[int] = None,
+    phase: Optional[int] = None,
 ) -> str:
-    """Resolve a synthesis document key to the complete teacher prompt."""
+    """Resolve a synthesis document key to the complete teacher prompt.
+
+    ``phase`` carries the five-phase index for the phase-keyed datasets (finqa,
+    techqa); ``quality_phase`` is the QuALITY-specific alias kept for
+    backward-compatible configs.
+    """
     if dataset == "qasper":
         return full_paper_prompt(title, topic=qasper_topic)
     if dataset == "quality":
         if quality_phase is None:
             raise ValueError("quality_phase is required when dataset='quality'")
         return full_quality_prompt(title, phase=quality_phase)
+    if dataset == "finqa":
+        if phase is None:
+            raise ValueError("phase is required when dataset='finqa'")
+        return full_finqa_prompt(title, phase=phase)
+    if dataset == "techqa":
+        if phase is None:
+            raise ValueError("phase is required when dataset='techqa'")
+        return full_techqa_prompt(title, phase=phase)
     raise ValueError(
-        f"Unsupported AM teacher dataset {dataset!r}; expected 'qasper' or 'quality'."
+        f"Unsupported AM teacher dataset {dataset!r}; expected 'qasper', "
+        "'quality', 'finqa', or 'techqa'."
     )
 
 

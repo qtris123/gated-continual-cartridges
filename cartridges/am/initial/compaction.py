@@ -255,6 +255,7 @@ def compact_cache_am_phase1(
     dataset: str = "qasper",
     qasper_topic: str = "QA",
     quality_phase: Optional[int] = None,
+    phase: Optional[int] = None,
     num_tokens: int = 512,
     key_select: Literal["highest_attention", "omp"] = "highest_attention",
     ridge_lambda: float = 1e-4,
@@ -336,7 +337,7 @@ def compact_cache_am_phase1(
 
     # ---- 1. Build the teacher KV from all QA documents -------------------
     conversations = load_conversations(qa_data_path)
-    doc_groups = group_conversations_by_document(conversations)
+    doc_groups = group_conversations_by_document(conversations, dataset)
     logger.info("Compaction Phase 1: %d unique QA documents", len(doc_groups))
 
     teacher_k: dict[int, list[torch.Tensor]] = {l: [] for l in range(n_layers)}
@@ -352,6 +353,7 @@ def compact_cache_am_phase1(
             dataset=dataset,
             qasper_topic=qasper_topic,
             quality_phase=quality_phase,
+            phase=phase,
         )
         if not system_prompt.strip():
             continue
@@ -569,6 +571,7 @@ def compact_cache_am_phase1(
         "dataset": dataset,
         "qasper_topic": qasper_topic,
         "quality_phase": quality_phase,
+        "phase": phase,
         "enable_beta": bool(enable_beta),
         "rebake_key_positions": bool(rebake_key_positions),
         "global_teacher_positions": bool(global_teacher_positions),
