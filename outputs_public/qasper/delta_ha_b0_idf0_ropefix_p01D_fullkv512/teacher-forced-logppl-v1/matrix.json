@@ -1,0 +1,174 @@
+{
+  "dataset": "qasper",
+  "technique": "delta_ha_b0_idf0_ropefix_p01D_fullkv512",
+  "chain": "cache_last.pt p01 -> continual AM p02-p05",
+  "protocol": "teacher-forced-logppl-v1",
+  "metric": "teacher-forced mean token loss (natural log)",
+  "p01_cache": "/localhome/local-triv/gated-continual-cartridges/outputs/hf_p01/qasper/cache_last.pt",
+  "recipe_config": "/localhome/local-triv/gated-continual-cartridges/outputs/recipes/fullkv_topt512.yaml",
+  "recipe": {
+    "key_mode": "highest_attention",
+    "key_reposition": true,
+    "beta_enabled": false,
+    "top_t": 512,
+    "ridge_lambda": 0.0,
+    "delta_weight": 0.01,
+    "rope_theta": 5000000.0
+  },
+  "stage_caches": {
+    "p01": "/localhome/local-triv/gated-continual-cartridges/outputs/hf_p01/qasper/cache_last.pt",
+    "p02": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_runs/2026-08-30-15-57-32-QASPER_P2_delta_ha_b0_idf0_ropefix_p01D_fullkv512/6425b55f-c4cc-42ce-b287-2f5d856da6b7/cache-step16.pt",
+    "p03": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_runs/2026-08-30-16-05-45-QASPER_P3_delta_ha_b0_idf0_ropefix_p01D_fullkv512/825cf36a-67d8-4b55-af8e-5979c9a6c258/cache-step16.pt",
+    "p04": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_runs/2026-08-30-16-15-28-QASPER_P4_delta_ha_b0_idf0_ropefix_p01D_fullkv512/0016f242-0ec2-4f9d-a432-f0230a854e0f/cache-step16.pt",
+    "p05": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_runs/2026-08-30-16-26-00-QASPER_P5_delta_ha_b0_idf0_ropefix_p01D_fullkv512/ecfee052-2941-4fb1-a1ce-506bcba9876a/cache-step16.pt"
+  },
+  "task_order": [
+    "qa",
+    "mt",
+    "sa",
+    "asr",
+    "kg"
+  ],
+  "acquired_at": {
+    "qa": "p01",
+    "mt": "p02",
+    "sa": "p03",
+    "asr": "p04",
+    "kg": "p05"
+  },
+  "stage_labels": {
+    "p01": "after qa",
+    "p02": "after mt",
+    "p03": "after sa",
+    "p04": "after asr",
+    "p05": "after kg"
+  },
+  "cells": {
+    "p01": {
+      "qa": {
+        "loss": 4.0740275382995605,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p01.json"
+      },
+      "mt": {
+        "loss": 4.094959259033203,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p01.json"
+      },
+      "sa": {
+        "loss": 4.181217670440674,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p01.json"
+      },
+      "asr": {
+        "loss": 3.7362403869628906,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p01.json"
+      },
+      "kg": {
+        "loss": 3.942690372467041,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p01.json"
+      }
+    },
+    "p02": {
+      "qa": {
+        "loss": 4.036097526550293,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p02.json"
+      },
+      "mt": {
+        "loss": 3.927300214767456,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p02.json"
+      },
+      "sa": {
+        "loss": 4.034475803375244,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p02.json"
+      },
+      "asr": {
+        "loss": 3.761477470397949,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p02.json"
+      },
+      "kg": {
+        "loss": 3.8551080226898193,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p02.json"
+      }
+    },
+    "p03": {
+      "qa": {
+        "loss": 3.5346922874450684,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p03.json"
+      },
+      "mt": {
+        "loss": 3.4275834560394287,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p03.json"
+      },
+      "sa": {
+        "loss": 3.523146152496338,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p03.json"
+      },
+      "asr": {
+        "loss": 3.2999014854431152,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p03.json"
+      },
+      "kg": {
+        "loss": 3.388674020767212,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p03.json"
+      }
+    },
+    "p04": {
+      "qa": {
+        "loss": 3.6375179290771484,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p04.json"
+      },
+      "mt": {
+        "loss": 3.518312931060791,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p04.json"
+      },
+      "sa": {
+        "loss": 3.6157703399658203,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p04.json"
+      },
+      "asr": {
+        "loss": 3.3840291500091553,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p04.json"
+      },
+      "kg": {
+        "loss": 3.5046889781951904,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p04.json"
+      }
+    },
+    "p05": {
+      "qa": {
+        "loss": 3.5330088138580322,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p05.json"
+      },
+      "mt": {
+        "loss": 3.5200769901275635,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p05.json"
+      },
+      "sa": {
+        "loss": 3.573632001876831,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p05.json"
+      },
+      "asr": {
+        "loss": 3.357341766357422,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p05.json"
+      },
+      "kg": {
+        "loss": 3.43935489654541,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/delta_ha_b0_idf0_ropefix_p01D_fullkv512/p05.json"
+      }
+    }
+  },
+  "continual_metrics": {
+    "average_loss_on_seen_tasks": {
+      "p01": 4.0740275382995605,
+      "p02": 3.9816988706588745,
+      "p03": 3.495140631993612,
+      "p04": 3.5389075875282288,
+      "p05": 3.484682893753052
+    },
+    "forgetting_at_final_stage": {
+      "qa": -0.5410187244415283,
+      "mt": -0.4072232246398926,
+      "sa": 0.050485849380493164,
+      "asr": -0.0266873836517334
+    },
+    "mean_forgetting": -0.23111087083816528
+  }
+}

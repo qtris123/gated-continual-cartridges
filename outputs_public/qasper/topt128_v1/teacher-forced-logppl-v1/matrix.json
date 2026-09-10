@@ -1,0 +1,174 @@
+{
+  "dataset": "qasper",
+  "technique": "topt128_v1",
+  "chain": "cache_last.pt p01 -> continual AM p02-p05",
+  "protocol": "teacher-forced-logppl-v1",
+  "metric": "teacher-forced mean token loss (natural log)",
+  "p01_cache": "/localhome/local-triv/gated-continual-cartridges/outputs/hf_p01/qasper/cache_last.pt",
+  "recipe_config": "/localhome/local-triv/gated-continual-cartridges/outputs/recipes/topt128.yaml",
+  "recipe": {
+    "key_mode": "highest_attention",
+    "key_reposition": true,
+    "beta_enabled": false,
+    "top_t": 128,
+    "ridge_lambda": 0.0,
+    "delta_weight": 0.01,
+    "rope_theta": 5000000.0
+  },
+  "stage_caches": {
+    "p01": "/localhome/local-triv/gated-continual-cartridges/outputs/hf_p01/qasper/cache_last.pt",
+    "p02": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_runs/2026-09-03-08-11-18-QASPER_P2_topt128_v1/75150795-f996-4439-9400-940b3d975e5e/cache-step16.pt",
+    "p03": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_runs/2026-09-03-08-19-56-QASPER_P3_topt128_v1/b82da533-da10-4795-a3dd-a5f460c31e3a/cache-step16.pt",
+    "p04": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_runs/2026-09-03-08-28-50-QASPER_P4_topt128_v1/5103086d-dab9-480a-b96e-81ab037353a1/cache-step16.pt",
+    "p05": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_runs/2026-09-03-08-37-27-QASPER_P5_topt128_v1/af959e37-35ed-4b53-a89e-4f0e3f243925/cache-step16.pt"
+  },
+  "task_order": [
+    "qa",
+    "mt",
+    "sa",
+    "asr",
+    "kg"
+  ],
+  "acquired_at": {
+    "qa": "p01",
+    "mt": "p02",
+    "sa": "p03",
+    "asr": "p04",
+    "kg": "p05"
+  },
+  "stage_labels": {
+    "p01": "after qa",
+    "p02": "after mt",
+    "p03": "after sa",
+    "p04": "after asr",
+    "p05": "after kg"
+  },
+  "cells": {
+    "p01": {
+      "qa": {
+        "loss": 4.0740275382995605,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p01.json"
+      },
+      "mt": {
+        "loss": 4.094959259033203,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p01.json"
+      },
+      "sa": {
+        "loss": 4.181217670440674,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p01.json"
+      },
+      "asr": {
+        "loss": 3.7362403869628906,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p01.json"
+      },
+      "kg": {
+        "loss": 3.942690372467041,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p01.json"
+      }
+    },
+    "p02": {
+      "qa": {
+        "loss": 3.805445909500122,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p02.json"
+      },
+      "mt": {
+        "loss": 3.676647663116455,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p02.json"
+      },
+      "sa": {
+        "loss": 3.818760871887207,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p02.json"
+      },
+      "asr": {
+        "loss": 3.5442681312561035,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p02.json"
+      },
+      "kg": {
+        "loss": 3.652430295944214,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p02.json"
+      }
+    },
+    "p03": {
+      "qa": {
+        "loss": 3.4165401458740234,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p03.json"
+      },
+      "mt": {
+        "loss": 3.3164238929748535,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p03.json"
+      },
+      "sa": {
+        "loss": 3.425513505935669,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p03.json"
+      },
+      "asr": {
+        "loss": 3.1742143630981445,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p03.json"
+      },
+      "kg": {
+        "loss": 3.2900447845458984,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p03.json"
+      }
+    },
+    "p04": {
+      "qa": {
+        "loss": 3.578920602798462,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p04.json"
+      },
+      "mt": {
+        "loss": 3.499366521835327,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p04.json"
+      },
+      "sa": {
+        "loss": 3.605133533477783,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p04.json"
+      },
+      "asr": {
+        "loss": 3.3316166400909424,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p04.json"
+      },
+      "kg": {
+        "loss": 3.492919921875,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p04.json"
+      }
+    },
+    "p05": {
+      "qa": {
+        "loss": 3.621297597885132,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p05.json"
+      },
+      "mt": {
+        "loss": 3.6166067123413086,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p05.json"
+      },
+      "sa": {
+        "loss": 3.6928696632385254,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p05.json"
+      },
+      "asr": {
+        "loss": 3.4369351863861084,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p05.json"
+      },
+      "kg": {
+        "loss": 3.519371271133423,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_state/topt128_v1/p05.json"
+      }
+    }
+  },
+  "continual_metrics": {
+    "average_loss_on_seen_tasks": {
+      "p01": 4.0740275382995605,
+      "p02": 3.7410467863082886,
+      "p03": 3.3861591815948486,
+      "p04": 3.5037593245506287,
+      "p05": 3.5774160861968993
+    },
+    "forgetting_at_final_stage": {
+      "qa": -0.4527299404144287,
+      "mt": -0.060040950775146484,
+      "sa": 0.26735615730285645,
+      "asr": 0.10531854629516602
+    },
+    "mean_forgetting": -0.035024046897888184
+  }
+}

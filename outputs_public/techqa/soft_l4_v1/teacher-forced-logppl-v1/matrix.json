@@ -1,0 +1,174 @@
+{
+  "dataset": "techqa",
+  "technique": "soft_l4_v1",
+  "chain": "cache-step0.pt p01 -> continual AM p02-p05",
+  "protocol": "teacher-forced-logppl-v1",
+  "metric": "teacher-forced mean token loss (natural log)",
+  "p01_cache": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_p1_ropefix/2026-08-30-05-50-22-initial_am_compaction/da93f3b1-3a03-41e7-b246-b7d5f455c113/cache-step0.pt",
+  "recipe_config": "/localhome/local-triv/gated-continual-cartridges/outputs/recipes/soft_locality_l4.yaml",
+  "recipe": {
+    "key_mode": "highest_attention",
+    "key_reposition": true,
+    "beta_enabled": false,
+    "top_t": 32,
+    "ridge_lambda": 0.0,
+    "delta_weight": 0.01,
+    "rope_theta": 5000000.0
+  },
+  "stage_caches": {
+    "p01": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_p1_ropefix/2026-08-30-05-50-22-initial_am_compaction/da93f3b1-3a03-41e7-b246-b7d5f455c113/cache-step0.pt",
+    "p02": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_runs/2026-09-03-12-04-44-TECHQA_P2_soft_l4_v1/e8069857-04cd-4e11-a26b-2e9d9b33c62b/cache-step96.pt",
+    "p03": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_runs/2026-09-03-12-39-10-TECHQA_P3_soft_l4_v1/e0594397-39bf-4df7-9b34-55cd5dcb7c73/cache-step90.pt",
+    "p04": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_runs/2026-09-03-13-10-45-TECHQA_P4_soft_l4_v1/7a789750-9192-4491-b636-bc7b2d6f8c23/cache-step90.pt",
+    "p05": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_runs/2026-09-03-13-44-51-TECHQA_P5_soft_l4_v1/5204f0a9-3fd7-4fa2-b61c-111a73a54c79/cache-step96.pt"
+  },
+  "task_order": [
+    "p1",
+    "p2",
+    "p3",
+    "p4",
+    "p5"
+  ],
+  "acquired_at": {
+    "p1": "p01",
+    "p2": "p02",
+    "p3": "p03",
+    "p4": "p04",
+    "p5": "p05"
+  },
+  "stage_labels": {
+    "p01": "after p1",
+    "p02": "after p2",
+    "p03": "after p3",
+    "p04": "after p4",
+    "p05": "after p5"
+  },
+  "cells": {
+    "p01": {
+      "p1": {
+        "loss": 4.240541458129883,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p01.json"
+      },
+      "p2": {
+        "loss": 4.377735137939453,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p01.json"
+      },
+      "p3": {
+        "loss": 4.437889575958252,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p01.json"
+      },
+      "p4": {
+        "loss": 4.332569599151611,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p01.json"
+      },
+      "p5": {
+        "loss": 4.385256767272949,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p01.json"
+      }
+    },
+    "p02": {
+      "p1": {
+        "loss": 5.068130016326904,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p02.json"
+      },
+      "p2": {
+        "loss": 5.367718696594238,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p02.json"
+      },
+      "p3": {
+        "loss": 5.419221878051758,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p02.json"
+      },
+      "p4": {
+        "loss": 5.252058506011963,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p02.json"
+      },
+      "p5": {
+        "loss": 5.447361946105957,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p02.json"
+      }
+    },
+    "p03": {
+      "p1": {
+        "loss": 5.2496442794799805,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p03.json"
+      },
+      "p2": {
+        "loss": 5.576504230499268,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p03.json"
+      },
+      "p3": {
+        "loss": 5.5958709716796875,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p03.json"
+      },
+      "p4": {
+        "loss": 5.415892124176025,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p03.json"
+      },
+      "p5": {
+        "loss": 5.634664058685303,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p03.json"
+      }
+    },
+    "p04": {
+      "p1": {
+        "loss": 5.358502388000488,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p04.json"
+      },
+      "p2": {
+        "loss": 5.688891887664795,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p04.json"
+      },
+      "p3": {
+        "loss": 5.687662124633789,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p04.json"
+      },
+      "p4": {
+        "loss": 5.524017810821533,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p04.json"
+      },
+      "p5": {
+        "loss": 5.737434387207031,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p04.json"
+      }
+    },
+    "p05": {
+      "p1": {
+        "loss": 5.005879878997803,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p05.json"
+      },
+      "p2": {
+        "loss": 5.331859111785889,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p05.json"
+      },
+      "p3": {
+        "loss": 5.395690441131592,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p05.json"
+      },
+      "p4": {
+        "loss": 5.169514179229736,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p05.json"
+      },
+      "p5": {
+        "loss": 5.400918960571289,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/soft_l4_v1/p05.json"
+      }
+    }
+  },
+  "continual_metrics": {
+    "average_loss_on_seen_tasks": {
+      "p01": 4.240541458129883,
+      "p02": 5.217924356460571,
+      "p03": 5.4740064938863116,
+      "p04": 5.564768552780151,
+      "p05": 5.2607725143432615
+    },
+    "forgetting_at_final_stage": {
+      "p1": 0.7653384208679199,
+      "p2": -0.03585958480834961,
+      "p3": -0.2001805305480957,
+      "p4": -0.3545036315917969
+    },
+    "mean_forgetting": 0.043698668479919434
+  }
+}

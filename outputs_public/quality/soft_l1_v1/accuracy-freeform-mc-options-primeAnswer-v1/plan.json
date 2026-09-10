@@ -1,0 +1,87 @@
+{
+  "dataset": "quality",
+  "decode": {
+    "answer_prime": " Answer:",
+    "backend": "flex",
+    "batch_size": 16,
+    "max_new_tokens": 64,
+    "num_shots": 0,
+    "prompt_variant": "phase-parquet-verbatim",
+    "temperature": 0.0,
+    "thinking": false
+  },
+  "eval_sets": [
+    {
+      "id": "p01",
+      "label": "phase 1",
+      "path": "/localhome/local-triv/gated-continual-cartridges/data/quality/phases/phase1_eval.parquet",
+      "phase": 1
+    },
+    {
+      "id": "p02",
+      "label": "phase 2",
+      "path": "/localhome/local-triv/gated-continual-cartridges/data/quality/phases/phase2_eval.parquet",
+      "phase": 2
+    },
+    {
+      "id": "p03",
+      "label": "phase 3",
+      "path": "/localhome/local-triv/gated-continual-cartridges/data/quality/phases/phase3_eval.parquet",
+      "phase": 3
+    },
+    {
+      "id": "p04",
+      "label": "phase 4",
+      "path": "/localhome/local-triv/gated-continual-cartridges/data/quality/phases/phase4_eval.parquet",
+      "phase": 4
+    },
+    {
+      "id": "p05",
+      "label": "phase 5",
+      "path": "/localhome/local-triv/gated-continual-cartridges/data/quality/phases/phase5_eval.parquet",
+      "phase": 5
+    }
+  ],
+  "model": "Qwen/Qwen3-4B-Instruct-2507",
+  "output_dir": "/localhome/local-triv/gated-continual-cartridges/outputs/evaluations/quality/soft_l1_v1/accuracy-freeform-mc-options-primeAnswer-v1",
+  "protocol": "freeform-mc-options-v1",
+  "schema_version": 1,
+  "stages": [
+    {
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges/outputs/hf_p01/quality/cache_last.pt",
+      "id": "p01",
+      "index": 1,
+      "label": "after phase 1",
+      "state_path": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l1_v1/p01.json"
+    },
+    {
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_runs/2026-09-02-17-46-40-QUALITY_P2_soft_l1_v1/65fbac72-a427-4227-899b-b4e8abfc4333/cache-step7.pt",
+      "id": "p02",
+      "index": 2,
+      "label": "after phase 2",
+      "state_path": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l1_v1/p02.json"
+    },
+    {
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_runs/2026-09-02-17-53-10-QUALITY_P3_soft_l1_v1/99efa369-0296-4410-adf4-fd25834f5b25/cache-step7.pt",
+      "id": "p03",
+      "index": 3,
+      "label": "after phase 3",
+      "state_path": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l1_v1/p03.json"
+    },
+    {
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_runs/2026-09-02-17-59-22-QUALITY_P4_soft_l1_v1/dece04d4-80ce-40d7-bdb7-47520dc40a74/cache-step7.pt",
+      "id": "p04",
+      "index": 4,
+      "label": "after phase 4",
+      "state_path": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l1_v1/p04.json"
+    },
+    {
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_runs/2026-09-02-18-06-07-QUALITY_P5_soft_l1_v1/e965c588-e26b-47fe-9f07-462582426646/cache-step7.pt",
+      "id": "p05",
+      "index": 5,
+      "label": "after phase 5",
+      "state_path": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l1_v1/p05.json"
+    }
+  ],
+  "technique": "soft_l1_v1"
+}

@@ -1,0 +1,174 @@
+{
+  "dataset": "quality",
+  "technique": "topt128_v1",
+  "chain": "cache_last.pt p01 -> continual AM p02-p05",
+  "protocol": "teacher-forced-logppl-v1",
+  "metric": "teacher-forced mean token loss (natural log)",
+  "p01_cache": "/localhome/local-triv/gated-continual-cartridges/outputs/hf_p01/quality/cache_last.pt",
+  "recipe_config": "/localhome/local-triv/gated-continual-cartridges/outputs/recipes/topt128.yaml",
+  "recipe": {
+    "key_mode": "highest_attention",
+    "key_reposition": true,
+    "beta_enabled": false,
+    "top_t": 128,
+    "ridge_lambda": 0.0,
+    "delta_weight": 0.01,
+    "rope_theta": 5000000.0
+  },
+  "stage_caches": {
+    "p01": "/localhome/local-triv/gated-continual-cartridges/outputs/hf_p01/quality/cache_last.pt",
+    "p02": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_runs/2026-09-03-01-22-42-QUALITY_P2_topt128_v1/1eba014c-d9b7-412f-8f7c-fa298232348f/cache-step7.pt",
+    "p03": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_runs/2026-09-03-01-28-01-QUALITY_P3_topt128_v1/77c41ad4-425f-4807-a53c-2b1b1bcc2e83/cache-step7.pt",
+    "p04": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_runs/2026-09-03-01-33-43-QUALITY_P4_topt128_v1/bc090e97-f811-4bbc-abe5-a71697bd2de3/cache-step7.pt",
+    "p05": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_runs/2026-09-03-01-39-34-QUALITY_P5_topt128_v1/66ce1980-cdfd-4f7c-a651-4ff5c9af33c7/cache-step7.pt"
+  },
+  "task_order": [
+    "p1",
+    "p2",
+    "p3",
+    "p4",
+    "p5"
+  ],
+  "acquired_at": {
+    "p1": "p01",
+    "p2": "p02",
+    "p3": "p03",
+    "p4": "p04",
+    "p5": "p05"
+  },
+  "stage_labels": {
+    "p01": "after p1",
+    "p02": "after p2",
+    "p03": "after p3",
+    "p04": "after p4",
+    "p05": "after p5"
+  },
+  "cells": {
+    "p01": {
+      "p1": {
+        "loss": 2.3231558799743652,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p01.json"
+      },
+      "p2": {
+        "loss": 2.927072763442993,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p01.json"
+      },
+      "p3": {
+        "loss": 2.573949098587036,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p01.json"
+      },
+      "p4": {
+        "loss": 2.1492156982421875,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p01.json"
+      },
+      "p5": {
+        "loss": 3.1636977195739746,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p01.json"
+      }
+    },
+    "p02": {
+      "p1": {
+        "loss": 2.04123854637146,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p02.json"
+      },
+      "p2": {
+        "loss": 2.6030564308166504,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p02.json"
+      },
+      "p3": {
+        "loss": 2.25248646736145,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p02.json"
+      },
+      "p4": {
+        "loss": 1.9488673210144043,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p02.json"
+      },
+      "p5": {
+        "loss": 2.8074498176574707,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p02.json"
+      }
+    },
+    "p03": {
+      "p1": {
+        "loss": 1.8883907794952393,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p03.json"
+      },
+      "p2": {
+        "loss": 2.460925579071045,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p03.json"
+      },
+      "p3": {
+        "loss": 2.106362819671631,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p03.json"
+      },
+      "p4": {
+        "loss": 1.830155849456787,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p03.json"
+      },
+      "p5": {
+        "loss": 2.63596773147583,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p03.json"
+      }
+    },
+    "p04": {
+      "p1": {
+        "loss": 1.8087714910507202,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p04.json"
+      },
+      "p2": {
+        "loss": 2.4080443382263184,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p04.json"
+      },
+      "p3": {
+        "loss": 2.024366617202759,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p04.json"
+      },
+      "p4": {
+        "loss": 1.7585506439208984,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p04.json"
+      },
+      "p5": {
+        "loss": 2.5642025470733643,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p04.json"
+      }
+    },
+    "p05": {
+      "p1": {
+        "loss": 1.852805495262146,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p05.json"
+      },
+      "p2": {
+        "loss": 2.4433481693267822,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p05.json"
+      },
+      "p3": {
+        "loss": 2.053389072418213,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p05.json"
+      },
+      "p4": {
+        "loss": 1.8041287660598755,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p05.json"
+      },
+      "p5": {
+        "loss": 2.594154119491577,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/topt128_v1/p05.json"
+      }
+    }
+  },
+  "continual_metrics": {
+    "average_loss_on_seen_tasks": {
+      "p01": 2.3231558799743652,
+      "p02": 2.322147488594055,
+      "p03": 2.151893059412638,
+      "p04": 1.999933272600174,
+      "p05": 2.1495651245117187
+    },
+    "forgetting_at_final_stage": {
+      "p1": -0.47035038471221924,
+      "p2": -0.15970826148986816,
+      "p3": -0.05297374725341797,
+      "p4": 0.04557812213897705
+    },
+    "mean_forgetting": -0.15936356782913208
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "dataset": "finqa",
+  "technique": "soft_l0p5_v1",
+  "chain": "cache-step0.pt p01 -> continual AM p02-p05",
+  "protocol": "teacher-forced-logppl-v1",
+  "metric": "teacher-forced mean token loss (natural log)",
+  "p01_cache": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_p1_ropefix/2026-08-30-03-12-40-initial_am_compaction/24b75a60-e21a-43ce-bf3a-9e565fcb697f/cache-step0.pt",
+  "recipe_config": "/localhome/local-triv/gated-continual-cartridges/outputs/recipes/soft_locality_l0p5.yaml",
+  "recipe": {
+    "key_mode": "highest_attention",
+    "key_reposition": true,
+    "beta_enabled": false,
+    "top_t": 32,
+    "ridge_lambda": 0.0,
+    "delta_weight": 0.01,
+    "rope_theta": 5000000.0
+  },
+  "stage_caches": {
+    "p01": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_p1_ropefix/2026-08-30-03-12-40-initial_am_compaction/24b75a60-e21a-43ce-bf3a-9e565fcb697f/cache-step0.pt",
+    "p02": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_runs/2026-09-02-15-07-17-FINQA_P2_soft_l0p5_v1/31557980-4d74-454f-a5f0-90d9e5b57d9c/cache-step117.pt",
+    "p03": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_runs/2026-09-02-15-42-51-FINQA_P3_soft_l0p5_v1/4849ad78-c371-4f2e-936f-a7607eddbb05/cache-step146.pt",
+    "p04": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_runs/2026-09-02-16-23-13-FINQA_P4_soft_l0p5_v1/964880e3-6141-4cb0-b38c-4c849206ce09/cache-step112.pt",
+    "p05": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_runs/2026-09-02-16-56-16-FINQA_P5_soft_l0p5_v1/989be7f7-0290-4fc0-8aeb-884101472a9d/cache-step121.pt"
+  },
+  "task_order": [
+    "p1",
+    "p2",
+    "p3",
+    "p4",
+    "p5"
+  ],
+  "acquired_at": {
+    "p1": "p01",
+    "p2": "p02",
+    "p3": "p03",
+    "p4": "p04",
+    "p5": "p05"
+  },
+  "stage_labels": {
+    "p01": "after p1",
+    "p02": "after p2",
+    "p03": "after p3",
+    "p04": "after p4",
+    "p05": "after p5"
+  },
+  "cells": {
+    "p01": {
+      "p1": {
+        "loss": 5.371751308441162,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p01.json"
+      },
+      "p2": {
+        "loss": 5.628933906555176,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p01.json"
+      },
+      "p3": {
+        "loss": 5.1566925048828125,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p01.json"
+      },
+      "p4": {
+        "loss": 5.506677150726318,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p01.json"
+      },
+      "p5": {
+        "loss": 5.609118461608887,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p01.json"
+      }
+    },
+    "p02": {
+      "p1": {
+        "loss": 3.7872681617736816,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p02.json"
+      },
+      "p2": {
+        "loss": 4.015890121459961,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p02.json"
+      },
+      "p3": {
+        "loss": 3.7150652408599854,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p02.json"
+      },
+      "p4": {
+        "loss": 3.8843846321105957,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p02.json"
+      },
+      "p5": {
+        "loss": 3.858036756515503,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p02.json"
+      }
+    },
+    "p03": {
+      "p1": {
+        "loss": 2.897911787033081,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p03.json"
+      },
+      "p2": {
+        "loss": 2.9881911277770996,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p03.json"
+      },
+      "p3": {
+        "loss": 2.765737295150757,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p03.json"
+      },
+      "p4": {
+        "loss": 2.975405693054199,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p03.json"
+      },
+      "p5": {
+        "loss": 2.998408555984497,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p03.json"
+      }
+    },
+    "p04": {
+      "p1": {
+        "loss": 3.334928512573242,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p04.json"
+      },
+      "p2": {
+        "loss": 3.4261605739593506,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p04.json"
+      },
+      "p3": {
+        "loss": 3.22409725189209,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p04.json"
+      },
+      "p4": {
+        "loss": 3.397019386291504,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p04.json"
+      },
+      "p5": {
+        "loss": 3.3952512741088867,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p04.json"
+      }
+    },
+    "p05": {
+      "p1": {
+        "loss": 3.195072650909424,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p05.json"
+      },
+      "p2": {
+        "loss": 3.270718812942505,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p05.json"
+      },
+      "p3": {
+        "loss": 3.025398015975952,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p05.json"
+      },
+      "p4": {
+        "loss": 3.2122457027435303,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p05.json"
+      },
+      "p5": {
+        "loss": 3.268033027648926,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l0p5_v1/p05.json"
+      }
+    }
+  },
+  "continual_metrics": {
+    "average_loss_on_seen_tasks": {
+      "p01": 5.371751308441162,
+      "p02": 3.9015791416168213,
+      "p03": 2.883946736653646,
+      "p04": 3.3455514311790466,
+      "p05": 3.1942936420440673
+    },
+    "forgetting_at_final_stage": {
+      "p1": -2.1766786575317383,
+      "p2": -0.745171308517456,
+      "p3": 0.2596607208251953,
+      "p4": -0.18477368354797363
+    },
+    "mean_forgetting": -0.7117407321929932
+  }
+}

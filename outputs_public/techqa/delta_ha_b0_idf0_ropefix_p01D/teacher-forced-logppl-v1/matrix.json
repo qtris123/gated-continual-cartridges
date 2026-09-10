@@ -1,0 +1,174 @@
+{
+  "dataset": "techqa",
+  "technique": "delta_ha_b0_idf0_ropefix_p01D",
+  "chain": "cache-step0.pt p01 -> continual AM p02-p05",
+  "protocol": "teacher-forced-logppl-v1",
+  "metric": "teacher-forced mean token loss (natural log)",
+  "p01_cache": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_p1_ropefix/2026-08-30-05-50-22-initial_am_compaction/da93f3b1-3a03-41e7-b246-b7d5f455c113/cache-step0.pt",
+  "recipe_config": "/localhome/local-triv/gated-continual-cartridges/outputs/caches/qasper/p03/delta_ha_b0_idf0/run/config.yaml",
+  "recipe": {
+    "key_mode": "highest_attention",
+    "key_reposition": true,
+    "beta_enabled": false,
+    "top_t": 32,
+    "ridge_lambda": 0.0,
+    "delta_weight": 0.01,
+    "rope_theta": 5000000.0
+  },
+  "stage_caches": {
+    "p01": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_p1_ropefix/2026-08-30-05-50-22-initial_am_compaction/da93f3b1-3a03-41e7-b246-b7d5f455c113/cache-step0.pt",
+    "p02": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_runs/2026-08-30-07-35-03-TECHQA_P2_delta_ha_b0_idf0_ropefix_p01D/7b3df12c-0180-4753-aa49-ce88a41a7fdc/cache-step96.pt",
+    "p03": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_runs/2026-08-30-08-06-09-TECHQA_P3_delta_ha_b0_idf0_ropefix_p01D/d4b3bb55-3c74-454a-b4e4-c78300881375/cache-step90.pt",
+    "p04": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_runs/2026-08-30-08-40-27-TECHQA_P4_delta_ha_b0_idf0_ropefix_p01D/7c441b22-23da-443f-bdaa-b28a76876f98/cache-step90.pt",
+    "p05": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_runs/2026-08-30-09-18-14-TECHQA_P5_delta_ha_b0_idf0_ropefix_p01D/c9b62a6c-51c3-4e5e-a182-f33dc83dd9f2/cache-step96.pt"
+  },
+  "task_order": [
+    "p1",
+    "p2",
+    "p3",
+    "p4",
+    "p5"
+  ],
+  "acquired_at": {
+    "p1": "p01",
+    "p2": "p02",
+    "p3": "p03",
+    "p4": "p04",
+    "p5": "p05"
+  },
+  "stage_labels": {
+    "p01": "after p1",
+    "p02": "after p2",
+    "p03": "after p3",
+    "p04": "after p4",
+    "p05": "after p5"
+  },
+  "cells": {
+    "p01": {
+      "p4": {
+        "loss": 4.332569599151611,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p01.json"
+      },
+      "p2": {
+        "loss": 4.377735137939453,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p01.json"
+      },
+      "p1": {
+        "loss": 4.240541458129883,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p01.json"
+      },
+      "p3": {
+        "loss": 4.437889575958252,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p01.json"
+      },
+      "p5": {
+        "loss": 4.385256767272949,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p01.json"
+      }
+    },
+    "p02": {
+      "p2": {
+        "loss": 4.865176200866699,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p02.json"
+      },
+      "p1": {
+        "loss": 4.62299919128418,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p02.json"
+      },
+      "p3": {
+        "loss": 4.957467079162598,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p02.json"
+      },
+      "p4": {
+        "loss": 4.766979694366455,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p02.json"
+      },
+      "p5": {
+        "loss": 4.889370918273926,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p02.json"
+      }
+    },
+    "p03": {
+      "p1": {
+        "loss": 4.767416477203369,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p03.json"
+      },
+      "p3": {
+        "loss": 5.16805362701416,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p03.json"
+      },
+      "p4": {
+        "loss": 4.9019389152526855,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p03.json"
+      },
+      "p2": {
+        "loss": 5.050612926483154,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p03.json"
+      },
+      "p5": {
+        "loss": 5.087011337280273,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p03.json"
+      }
+    },
+    "p04": {
+      "p1": {
+        "loss": 4.965663909912109,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p04.json"
+      },
+      "p4": {
+        "loss": 5.163876533508301,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p04.json"
+      },
+      "p2": {
+        "loss": 5.266095161437988,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p04.json"
+      },
+      "p3": {
+        "loss": 5.348206520080566,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p04.json"
+      },
+      "p5": {
+        "loss": 5.341938018798828,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p04.json"
+      }
+    },
+    "p05": {
+      "p4": {
+        "loss": 4.905849456787109,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p05.json"
+      },
+      "p2": {
+        "loss": 5.056234836578369,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p05.json"
+      },
+      "p3": {
+        "loss": 5.17032527923584,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p05.json"
+      },
+      "p1": {
+        "loss": 4.755074977874756,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p05.json"
+      },
+      "p5": {
+        "loss": 5.111307144165039,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_state/delta_ha_b0_idf0_ropefix_p01D/p05.json"
+      }
+    }
+  },
+  "continual_metrics": {
+    "average_loss_on_seen_tasks": {
+      "p01": 4.240541458129883,
+      "p02": 4.7440876960754395,
+      "p03": 4.9953610102335615,
+      "p04": 5.185960531234741,
+      "p05": 4.999758338928222
+    },
+    "forgetting_at_final_stage": {
+      "p1": 0.514533519744873,
+      "p2": 0.19105863571166992,
+      "p3": 0.0022716522216796875,
+      "p4": -0.2580270767211914
+    },
+    "mean_forgetting": 0.11245918273925781
+  }
+}

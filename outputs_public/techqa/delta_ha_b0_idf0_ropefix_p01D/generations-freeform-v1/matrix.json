@@ -1,0 +1,61 @@
+{
+  "accuracy": [
+    [
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  ],
+  "dataset": "techqa",
+  "eval_ids": [
+    "p01",
+    "p02",
+    "p03",
+    "p04",
+    "p05"
+  ],
+  "model": "Qwen/Qwen3-4B-Instruct-2507",
+  "num_complete_cells": 25,
+  "num_expected_cells": 25,
+  "plan_hash": "62d4c7478ad1a13e6bfa21dbb0761eae8e969c09f7f051b3ed160a4839e1a757",
+  "protocol": "freeform-mc-options-v1",
+  "schema_version": 1,
+  "stage_ids": [
+    "p01",
+    "p02",
+    "p03",
+    "p04",
+    "p05"
+  ],
+  "technique": "delta_ha_b0_idf0_ropefix_p01D"
+}

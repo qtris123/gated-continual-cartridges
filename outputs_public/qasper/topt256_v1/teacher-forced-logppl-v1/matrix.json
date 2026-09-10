@@ -1,0 +1,174 @@
+{
+  "dataset": "qasper",
+  "technique": "topt256_v1",
+  "chain": "cache_last.pt p01 -> continual AM p02-p05",
+  "protocol": "teacher-forced-logppl-v1",
+  "metric": "teacher-forced mean token loss (natural log)",
+  "p01_cache": "/localhome/local-triv/gated-continual-cartridges/outputs/hf_p01/qasper/cache_last.pt",
+  "recipe_config": "/localhome/local-triv/gated-continual-cartridges/outputs/recipes/topt256.yaml",
+  "recipe": {
+    "key_mode": "highest_attention",
+    "key_reposition": true,
+    "beta_enabled": false,
+    "top_t": 256,
+    "ridge_lambda": 0.0,
+    "delta_weight": 0.01,
+    "rope_theta": 5000000.0
+  },
+  "stage_caches": {
+    "p01": "/localhome/local-triv/gated-continual-cartridges/outputs/hf_p01/qasper/cache_last.pt",
+    "p02": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_runs/2026-09-03-08-50-19-QASPER_P2_topt256_v1/28ca0438-84d5-4b22-af5c-554e5e4fd8bf/cache-step16.pt",
+    "p03": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_runs/2026-09-03-08-57-35-QASPER_P3_topt256_v1/fc2d9369-dbb1-4597-a2ad-427586e56063/cache-step16.pt",
+    "p04": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_runs/2026-09-03-09-16-31-QASPER_P4_topt256_v1/adca3597-8ef2-45ca-9194-e0783cad368e/cache-step16.pt",
+    "p05": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_runs/2026-09-03-09-25-08-QASPER_P5_topt256_v1/871690e5-36ca-468d-90c1-25f8dcee6f84/cache-step16.pt"
+  },
+  "task_order": [
+    "qa",
+    "mt",
+    "sa",
+    "asr",
+    "kg"
+  ],
+  "acquired_at": {
+    "qa": "p01",
+    "mt": "p02",
+    "sa": "p03",
+    "asr": "p04",
+    "kg": "p05"
+  },
+  "stage_labels": {
+    "p01": "after qa",
+    "p02": "after mt",
+    "p03": "after sa",
+    "p04": "after asr",
+    "p05": "after kg"
+  },
+  "cells": {
+    "p01": {
+      "qa": {
+        "loss": 4.0740275382995605,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p01.json"
+      },
+      "mt": {
+        "loss": 4.094959259033203,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p01.json"
+      },
+      "sa": {
+        "loss": 4.181217670440674,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p01.json"
+      },
+      "asr": {
+        "loss": 3.7362403869628906,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p01.json"
+      },
+      "kg": {
+        "loss": 3.942690372467041,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p01.json"
+      }
+    },
+    "p02": {
+      "qa": {
+        "loss": 3.906005382537842,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p02.json"
+      },
+      "mt": {
+        "loss": 3.7940759658813477,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p02.json"
+      },
+      "sa": {
+        "loss": 3.930751323699951,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p02.json"
+      },
+      "asr": {
+        "loss": 3.6434504985809326,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p02.json"
+      },
+      "kg": {
+        "loss": 3.737902879714966,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p02.json"
+      }
+    },
+    "p03": {
+      "qa": {
+        "loss": 3.4596712589263916,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p03.json"
+      },
+      "mt": {
+        "loss": 3.3643381595611572,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p03.json"
+      },
+      "sa": {
+        "loss": 3.4658665657043457,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p03.json"
+      },
+      "asr": {
+        "loss": 3.2209527492523193,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p03.json"
+      },
+      "kg": {
+        "loss": 3.326319456100464,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p03.json"
+      }
+    },
+    "p04": {
+      "qa": {
+        "loss": 3.623368263244629,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p04.json"
+      },
+      "mt": {
+        "loss": 3.517658233642578,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p04.json"
+      },
+      "sa": {
+        "loss": 3.6356163024902344,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p04.json"
+      },
+      "asr": {
+        "loss": 3.369518995285034,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p04.json"
+      },
+      "kg": {
+        "loss": 3.537992238998413,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p04.json"
+      }
+    },
+    "p05": {
+      "qa": {
+        "loss": 3.7047362327575684,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p05.json"
+      },
+      "mt": {
+        "loss": 3.6815574169158936,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p05.json"
+      },
+      "sa": {
+        "loss": 3.747854232788086,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p05.json"
+      },
+      "asr": {
+        "loss": 3.4604134559631348,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p05.json"
+      },
+      "kg": {
+        "loss": 3.4860711097717285,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/topt256_v1/p05.json"
+      }
+    }
+  },
+  "continual_metrics": {
+    "average_loss_on_seen_tasks": {
+      "p01": 4.0740275382995605,
+      "p02": 3.8500406742095947,
+      "p03": 3.4299586613972983,
+      "p04": 3.536540448665619,
+      "p05": 3.6161264896392824
+    },
+    "forgetting_at_final_stage": {
+      "qa": -0.3692913055419922,
+      "mt": -0.1125185489654541,
+      "sa": 0.28198766708374023,
+      "asr": 0.09089446067810059
+    },
+    "mean_forgetting": -0.027231931686401367
+  }
+}

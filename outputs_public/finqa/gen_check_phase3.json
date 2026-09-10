@@ -1,0 +1,125 @@
+{
+  "eval_path": "data/finqa/phases/phase3_eval.parquet",
+  "questions": [
+    "what was the net change in millions in unrecognized tax benefits from 2015 to 2016?",
+    "what percentage of the company's receivable balances in puerto rico as of december 31 , 2017 was past due?",
+    "what percent did the balance increase from the beginning of 2016 to the end of 2017?",
+    "as of december 31 2017 what is the ratio of receivables from brokers dealers and clearing organizations to payables to brokers dealers and clearing organizations?",
+    "what percent of total long-term debt is due after 2022?",
+    "in 2017 what was the percent of the total amortization expense that was due in 2019",
+    "what was the average weighted average common shares outstanding for diluted computations from 2015 to 2017",
+    "what is the percent change excess central bank balances from 2016 to 2017?",
+    "what was the ratio of the net properties held under capital leases in 2017 to 2016\\\\n",
+    "what was the change in defined contribution plans expenses for the u.s . between 2016 and 2017 in millions?"
+  ],
+  "golds": [
+    "-12",
+    "62%",
+    "51.15%",
+    ".85",
+    "49%",
+    "26.3%",
+    "302.8",
+    "-30.62",
+    "0.819",
+    "5.4"
+  ],
+  "results": {
+    "p01": [
+      {
+        "answer": "The provided text includes information about the company's financial performance and other financial information. The information provided in the financial statements is not sufficient to determine the net change in tax benefits from 2015"
+      },
+      {
+        "answer": "The provided text includes information about the company's financial statements and related disclosures. However, no information is provided regarding the percentage of receivables from Puerto Rico that are past due. Therefore, based on"
+      },
+      {
+        "answer": "The provided text includes information about the company's financial performance and other information related to the company's financial performance and financial position. The information provided in this report does not include a detailed analysis of the company"
+      },
+      {
+        "answer": "The provided text does not contain information on the ratio of receivables from brokers and dealers and clearing organizations. The information provided in the provided text does not include any information on the ratio of receiv"
+      },
+      {
+        "answer": "The provided text includes information about the financial statements and related disclosures for the year ended december 2017. the information provided in this report is not intended to be used to determine the total amount"
+      },
+      {
+        "answer": "The provided text does union of the information provided in the provided text does not include any information about the total amortization expense for 201 union of the information provided in the provided text does not"
+      },
+      {
+        "answer": "The provided text includes information about the financial information for the year ended december 2017. the information provided in this report is not a substitute for the information contained in the financial statements and related"
+      },
+      {
+        "answer": "The provided text does not contain information on the change in central bank balances or any information related to central bank balances. Therefore, the information provided does not include any information on central bank balances or any related"
+      },
+      {
+        "answer": "The provided text does not contain information about the ratio of net properties held under capital leases. The information provided in the provided text does not include the specific data on the ratio of net properties held under capital"
+      },
+      {
+        "answer": "The provided text does not contain information on the change in defined contribution plans expenses for 2017 and 2018. The information provided in the provided text does not include specific data"
+      }
+    ],
+    "p03": [
+      {
+        "answer": "what was the net change in millions in unrecognized tax benefits from 2015 to 2016?"
+      },
+      {
+        "answer": "what percentage of the company's receivable balances in the united states of america as of december 31 , 2017 were past due?"
+      },
+      {
+        "answer": "what is the total amount of the 2017 fiscal year?\nwhat is the total amount of the 2017 fiscal year?\nwhat is the total amount of the 20"
+      },
+      {
+        "answer": "as of december 31 2017 what is the ratio of receivables from brokers dealers and clearing organizations to payables to brokers dealers and clearing organizations?"
+      },
+      {
+        "answer": "what is the total amount of the 2022 fiscal year?\nwhat is the total amount of the 2022 fiscal year?\nwhat is the total amount of the 20"
+      },
+      {
+        "answer": "in 2017 what was the percent of the total amortization expense that was due in 2019"
+      },
+      {
+        "answer": "what was the average weighted average common shares outstanding for diluted computations from 2015 to 2017"
+      },
+      {
+        "answer": "what is the percent change in the 2017 fiscal year?"
+      },
+      {
+        "answer": "what was the ratio of the net properties held under capital leases in 2017 to 2016\\\\n"
+      },
+      {
+        "answer": "what was the change in defined contribution plans expenses for the u.s . between 2016 and 2017 in millions?"
+      }
+    ],
+    "p05": [
+      {
+        "answer": "the 2016 2016 2016 2016 2 2016 2016 2016 2"
+      },
+      {
+        "answer": "the 2017 2017\nthe 2017 2017\nthe 2 2017 2017\nthe"
+      },
+      {
+        "answer": "the 2016 to  2017\nthe 2016 to 2017\nthe 2016 to  2017"
+      },
+      {
+        "answer": "as of 2017 the 2017 2017 2017 2017 2 2017 2017"
+      },
+      {
+        "answer": "the 2022 2022\nthe 2022 2022\nthe 2 2022 2022\nthe"
+      },
+      {
+        "answer": "in 2017 what was the percent of the total amortization expense that was due in  2019\nin 2017 what was the percent of the total"
+      },
+      {
+        "answer": "the 2015 to  2017\nthe 2015 to 2017\nthe 2015 to  2017"
+      },
+      {
+        "answer": "the 2016 to  2017 2016 to 2017 2017 to 2018 2018"
+      },
+      {
+        "answer": "the 2017 to  2017\nthe 2017 to 2017\nthe 2017 to  2017"
+      },
+      {
+        "answer": "what was the change in the 2016 and  2017 2016 and 2 2016 and 2017 20"
+      }
+    ]
+  }
+}

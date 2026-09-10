@@ -1,0 +1,223 @@
+{
+  "eval_path": "data/finqa/phases/phase3_eval.parquet",
+  "questions": [
+    "what was the net change in millions in unrecognized tax benefits from 2015 to 2016?",
+    "what was the percentage change in revenues from 2016 to 2017 for transactions with related parties?",
+    "at the measurement point december 312016 what was the ratio of the booking holdings inc . to the nasdaqcomposite index",
+    "what is the percentage change in the balance of asset allocation from 2016 to 2017?",
+    "what was the change in billions of net outflows from dec . 31 , 2016 to dec . 31 , 2017?",
+    "what is the growth rate in consolidated revenues from 2016 to 2017?",
+    "what was the percent of the decline in amortization expense for other intangible assets from 2016 to 2017",
+    "what was the percentage change in the employee total matching contributions from 2015 to 2016",
+    "what percentage of average common equity attribution in 2017 is made up of institutional securities?",
+    "what portion of the total number of securities approved by security holders is issued?",
+    "what was the percentage change in free cash flow from 2016 to 2017?",
+    "what was the change in defined contribution plans expenses for the u.s . between 2016 and 2017 in millions?"
+  ],
+  "golds": [
+    "-12",
+    "18%",
+    "1.26",
+    "11.2%",
+    "31.8",
+    "-1.3%",
+    "-2.6%",
+    "57%",
+    "58%",
+    "32.0%",
+    "-4%",
+    "5.4"
+  ],
+  "results": {
+    "p01": [
+      {
+        "answer": "The provided text includes information about the company's financial performance and other financial information. The information provided in the financial statements is not sufficient to determine the net change in tax benefits from 2015 to 2016. The information provided does not include information about tax benefits or tax benefits from the release of tax contingencies. Therefore, the information provided does not provide sufficient information to determine the net change in tax benefits from 2015 to 2 only"
+      },
+      {
+        "answer": "The provided text does not contain any information on the percentage change in revenues from 2\nAnswer the following questions:\n1. What is the total amount of the total revenue from operations for the year ended December 31, 2 in 2017?\n2. What is the total revenue from operations for the year ended December 31, 2017?\nAnswer the following questions:\n1. What is the analysis of the financial information for the year"
+      },
+      {
+        "answer": "The provided text does not contain information about the ratio of the stock price of Booking Holdings, Inc. (the parent company of Booking.com. The information provided in the provided text does not include any information about the ratio of Booking Holdings, Inc. and the NASDAQ Composite Index. Therefore, no information is available regarding the ratio of Booking Holdings, Inc. to the NASDAQ Composite Index as of December 31, 2 to the information provided in the analysis.\n\nThe information"
+      },
+      {
+        "answer": "The provided text does not contain information on the percentage change in the balance of asset allocation from 201\nAnswer the following questions:\n1. What is the amount of the total revenue from operations for the year ended December 31, 2017?\n2. What is the total amount of the total revenue from operations for the year ended December 31, 2017?\nAnswer the following questions:\n1. What is the union of the"
+      },
+      {
+        "answer": "The question asks for the change in net outflows from the end of December 2 201\nAnswer the following questions:\n1. What is the amount of the net outflows from the company's operations in 201 union of the net outflows from operations for the year ended december 2010.\nAnswer: $1.2 billion.\n\nThe information provided in the data provided does not include any information about net outflows from operations for the year"
+      },
+      {
+        "answer": "The provided text does not contain information on the growth rate of consolidated revenues from 201 analysis of the data provided in the provided text, the information provided does not include any information on the growth rate of consolidated revenues from 201 union of the company's consolidated revenues from 201 data is not available in the provided text. The text does not provide any information on the growth rate of consolidated revenues from  most of the information provided in the text does not"
+      },
+      {
+        "answer": "The provided text does in the provided text does not contain any information about the change in amortization expense for the intangible assets from 201 data provided in the provided text does not include any information on the change in amortization expense for intangible assets from 201 union of the data provided in the provided text does not include information on the change in amortization expense for intangible assets from 2016 to 2017. Therefore,"
+      },
+      {
+        "answer": "The provided text does not contain any information about the percentage change in employee total matching contributions from 201\nAnswer the following questions:\n1. What is the total amount of the total revenue from the sale of products and services in 2017?\n2. What is the total amount of the total revenue from the sale of products and services in 2017?\nAnswer the following questions:\n1. What is the only one of the following statements is true"
+      },
+      {
+        "answer": "The provided text includes information about the financial information for the year ended december  2017. the information provided in this report does 100% of the information provided in the financial statements and related notes to the financial statements. the information in this report is not intended to be used as a substitute for the information contained in the financial statements and related notes to the financial statements. the information in this report is not intended to be used as a substitute for the information"
+      },
+      {
+        "answer": "The provided text includes information about the company's financial performance and other financial information. The information provided does 2017 financial statements and related disclosures. The information provided in this report is not a substitute for the financial statements and financial statements. The information in this report is not intended to be used as a substitute for the financial statements and financial statements in the 2017 annual report. The information in this report is not intended to be used as a substitute for the"
+      },
+      {
+        "answer": "The provided text does not contain information on the percentage change in free cash flow from 2 2016 to 2 2017. The information provided does and the information provided does not include any information about free cash flow or cash flows from operating activities. Therefore, the information provided does not include the information required to calculate the percentage change in free cash flow from 2 in 2016 to 2017. Therefore, the information"
+      },
+      {
+        "answer": "The provided text does not contain information on the change in defined contribution plans expenses for 2017 and 2018. The information provided in the provided text does not include specific data on the change in defined contribution plan expenses between 2016 and 2 in 2017. Therefore, the information provided does not include the specific data required to calculate the change in defined contribution plan expenses between 2016 and 201"
+      }
+    ],
+    "p02": [
+      {
+        "answer": "what is the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total"
+      },
+      {
+        "answer": "what is the total number of shares in the 2017 fiscal year?\nthe total number of shares in the 2017 fiscal year is 100000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "answer": "at the measurement point december 312016 what was the ratio of the booking holdings inc . to the nasdaqcomposite index\nthe 2016\nthe 2016\nthe 2016\nthe 2016\nthe 2016\nthe 2016\nthe 2016\nthe 2016\nthe 2016\nthe 20"
+      },
+      {
+        "answer": "what is the percentage change in the balance of asset allocation from 2016 to 2017?"
+      },
+      {
+        "answer": "what is the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total"
+      },
+      {
+        "answer": "what is the total number of shares in the 2017 fiscal year?\nthe total number of shares in the 2017 fiscal year is 100000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "answer": "what is the total amount of the 2017 and 2018 fiscal year 2017 and 2018 fiscal year 2018 and 2019 fiscal year 2019 and 2020 fiscal year 2020 and 2021 fiscal year 2021 and 2022 fiscal year 2022 and 2023"
+      },
+      {
+        "answer": "what is the total number of shares in the 2015 and 2016 fiscal year?\nthe total number of shares in the 2015 and 2016 fiscal year is 100% of the total number of shares in the 2015 and 2016 fiscal year.\nthe total number of shares in the 2015 and 2016 fiscal year is 100"
+      },
+      {
+        "answer": "the 2017\nthe 2017\nthe 2017\nthe 2017\nthe 2017\nthe 2017\nthe 2017\nthe 2017\nthe 2017\nthe 2017\nthe 2017\nthe 2017\nthe 2017\nthe 201"
+      },
+      {
+        "answer": "the total number of shares of stock in the 2020s\nthe total number of shares of stock in the 2020s\nthe total number of shares of stock in the 2020s\nthe total number of shares of stock in the 2020s\nthe total number of shares of stock in the 2020s\nthe total number of shares of stock in the 2020s"
+      },
+      {
+        "answer": "what is the total number of shares in the 2017 fiscal year?\nthe total number of shares in the 2017 fiscal year is 100000000000000000000000000000000000000000000000000000000000000"
+      },
+      {
+        "answer": "what is the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total amount of the total"
+      }
+    ],
+    "p03": [
+      {
+        "answer": "what was the net change in millions in unrecognized tax benefits from 2015 to 2016?"
+      },
+      {
+        "answer": "what was the percentage change in revenues from 2016 to 2017 for transactions with related parties?"
+      },
+      {
+        "answer": "at the measurement point december 312016 what was the ratio of the booking holdings inc . to the nasdaqcomposite index"
+      },
+      {
+        "answer": "what is the percentage change in the balance of asset allocation from 2016 to 2017?"
+      },
+      {
+        "answer": "what was the change in billions of net outflows from dec . 31 , 2016 to dec . 31 , 2017?"
+      },
+      {
+        "answer": "what is the growth rate in consolidated revenues from 2016 to 2017?"
+      },
+      {
+        "answer": "what was the percent of the decline in amortization expense for other intangible assets from 2016 to 2017"
+      },
+      {
+        "answer": "what was the percentage change in the employee total matching contributions from 2015 to 2016"
+      },
+      {
+        "answer": "what percentage of average common equity attribution in 2017 is made up of institutional securities?"
+      },
+      {
+        "answer": "what portion of the total number of securities approved by security holders is issued?"
+      },
+      {
+        "answer": "what was the percentage change in free cash flow from 2016 to 2017?"
+      },
+      {
+        "answer": "what was the change in defined contribution plans expenses for the u.s . between 2016 and 2017 in millions?"
+      }
+    ],
+    "p04": [
+      {
+        "answer": "the 2015 to 2016 period\nthe 2015 to 2016 period\nthe 2015 to 2016 period\nthe 2015 to 2016 period\nthe 2015 to 2016 period\nthe 2015 to 2016 period\nthe 2015 to 2016"
+      },
+      {
+        "answer": "the 2017 and 2018 fiscal year 2017 and 2018\nthe 2017 and 2018 fiscal year 2017 and 2018\nthe 2017 and 2018 fiscal year 2017 and 2018\nthe 2017 and 2018 fiscal year 201"
+      },
+      {
+        "answer": "the 2016 100% of the 2016 100% of the 2016 100% of the 2016 100% of the 2016 100% of the 2016 100% of the 2016 100% of the 2016 100% of"
+      },
+      {
+        "answer": "the 2017 and 2018 fiscal year 2017 and 2018\nthe 2017 and 2018 fiscal year 2017 and 2018\nthe 2017 and 2018 fiscal year 2017 and 2018\nthe 2017 and 2018 fiscal year 201"
+      },
+      {
+        "answer": "the 2017 fiscal year\nthe 2017 fiscal year\nthe 2017 fiscal year\nthe 2017 fiscal year\nthe 2017 fiscal year\nthe 2017 fiscal year\nthe 2017 fiscal year\nthe 2017 fiscal year\nthe 2017 fiscal year\nthe 2017 fiscal year\nthe 2017"
+      },
+      {
+        "answer": "the 2016 to 2017 period\nthe 2016 to 2017 period\nthe 2016 to 2017 period\nthe 2016 to 2017 period\nthe 2016 to 2017 period\nthe 2016 to 2017 period\nthe 2016 to 2017"
+      },
+      {
+        "answer": "the 2016 to 2017 period\nthe 2016 to 2017 period\nthe 2016 to 2017 period\nthe 2016 to 2017 period\nthe 2016 to 2017 period\nthe 2016 to 2017 period\nthe 2016 to 2017"
+      },
+      {
+        "answer": "the 2015 to 2016 period\nthe 2015 to 2016 period\nthe 2015 to 2016 period\nthe 2015 to 2016 period\nthe 2015 to 2016 period\nthe 2015 to 2016 period\nthe 2015 to 2016"
+      },
+      {
+        "answer": "the 2017 and 2018 fiscal year 2017 and 2018\nthe 2017 and 2018 fiscal year 2017 and 2018\nthe 2017 and 2018 fiscal year 2017 and 2018\nthe 2017 and 2018 fiscal year 201"
+      },
+      {
+        "answer": "the 2019 and 2020 fiscal year 2019 and 2020\nthe 2019 and 2020 fiscal year 2019 and 2020\nthe 2019 and 2020 fiscal year 2019 and 2020\nthe 2019 and 2020 fiscal year 201"
+      },
+      {
+        "answer": "the 2017 and 2018 fiscal year 2017 and 2018\nthe 2017 and 2018 fiscal year 2017 and 2018\nthe 2017 and 2018 fiscal year 2017 and 2018\nthe 2017 and 2018 fiscal year 201"
+      },
+      {
+        "answer": "the 2017 and 2018 fiscal year 2017 and 2018\nthe 2017 and 2018 fiscal year 2017 and 2018\nthe 2017 and 2018 fiscal year 2017 and 2018\nthe 2017 and 2018 fiscal year 201"
+      }
+    ],
+    "p05": [
+      {
+        "answer": "the 2016 2016 2016 2016 2 2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 20"
+      },
+      {
+        "answer": "the 2016 to  2017 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026 2027 2028 2029 2030 2031 2032 20"
+      },
+      {
+        "answer": "the 2016 2016 2016 2016 2 2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 20"
+      },
+      {
+        "answer": "the 2016 to  2017 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026 2027 2028 2029 2030 2031 2032 20"
+      },
+      {
+        "answer": "what was the change in billions of net outflows from dec . 31 , 2017?\nwhat was the change in billions of net outflows from dec . 31 , 2017?\nwhat was the change in billions of net outflows from dec . 31 , 2017?\nwhat was the change in billions of net outflows from dec . 31 , 2017?\nwhat was the change"
+      },
+      {
+        "answer": "the 2016 to  2017 2016 to 2017 2017 to 2018 2018 to 2019 2019 to 2020 2020 to 2021 2022 to 2023 2024 to 2025 2026 to"
+      },
+      {
+        "answer": "the 2016 to  2017 2017 2018 2019 2020 2021 2022 2023 2024 2025 2026 2027 2028 2029 2030 2031 2032 20"
+      },
+      {
+        "answer": "the 2016 2016 2016 2016 2 2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 2016 20"
+      },
+      {
+        "answer": "the 2017 2017\nthe 2017 2017\nthe 2 2017 2017\nthe 2017 2017\nthe 2017 2017\nthe 2017 2017\nthe 2017 2017\nthe 2017 201"
+      },
+      {
+        "answer": "the 2000s\nthe 2000s\nthe 2000s\nthe 2000s\nthe 2000s\nthe 2000s\nthe  2000s\nthe 2000s\nthe 2000s\nthe 2000s\nthe 2000s\nthe 2000s"
+      },
+      {
+        "answer": "the 2016 to  2017 2016 to 2017 2017 to 2018 2018 to 2019 2019 to 2020 2020 to 2021 2022 to 2023 2024 to 2025 2026 to"
+      },
+      {
+        "answer": "what was the change in the 2016 and  2017 2016 and 2 2016 and 2017 2016 and 2017 2016 and 2017 2016 and 2017 2016 and 2017 2016 and 2017 201"
+      }
+    ]
+  }
+}

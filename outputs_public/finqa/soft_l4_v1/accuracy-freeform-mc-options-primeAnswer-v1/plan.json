@@ -1,0 +1,87 @@
+{
+  "dataset": "finqa",
+  "decode": {
+    "answer_prime": " Answer:",
+    "backend": "flex",
+    "batch_size": 16,
+    "max_new_tokens": 64,
+    "num_shots": 0,
+    "prompt_variant": "phase-parquet-verbatim",
+    "temperature": 0.0,
+    "thinking": false
+  },
+  "eval_sets": [
+    {
+      "id": "p01",
+      "label": "phase 1",
+      "path": "/localhome/local-triv/gated-continual-cartridges/data/finqa/phases/phase1_eval.parquet",
+      "phase": 1
+    },
+    {
+      "id": "p02",
+      "label": "phase 2",
+      "path": "/localhome/local-triv/gated-continual-cartridges/data/finqa/phases/phase2_eval.parquet",
+      "phase": 2
+    },
+    {
+      "id": "p03",
+      "label": "phase 3",
+      "path": "/localhome/local-triv/gated-continual-cartridges/data/finqa/phases/phase3_eval.parquet",
+      "phase": 3
+    },
+    {
+      "id": "p04",
+      "label": "phase 4",
+      "path": "/localhome/local-triv/gated-continual-cartridges/data/finqa/phases/phase4_eval.parquet",
+      "phase": 4
+    },
+    {
+      "id": "p05",
+      "label": "phase 5",
+      "path": "/localhome/local-triv/gated-continual-cartridges/data/finqa/phases/phase5_eval.parquet",
+      "phase": 5
+    }
+  ],
+  "model": "Qwen/Qwen3-4B-Instruct-2507",
+  "output_dir": "/localhome/local-triv/gated-continual-cartridges/outputs/evaluations/finqa/soft_l4_v1/accuracy-freeform-mc-options-primeAnswer-v1",
+  "protocol": "freeform-mc-options-v1",
+  "schema_version": 1,
+  "stages": [
+    {
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_p1_ropefix/2026-08-30-03-12-40-initial_am_compaction/24b75a60-e21a-43ce-bf3a-9e565fcb697f/cache-step0.pt",
+      "id": "p01",
+      "index": 1,
+      "label": "after phase 1",
+      "state_path": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l4_v1/p01.json"
+    },
+    {
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_runs/2026-09-02-15-07-46-FINQA_P2_soft_l4_v1/513a8c06-84f1-4d32-9cf1-37d91e8e9ee0/cache-step117.pt",
+      "id": "p02",
+      "index": 2,
+      "label": "after phase 2",
+      "state_path": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l4_v1/p02.json"
+    },
+    {
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_runs/2026-09-02-15-41-56-FINQA_P3_soft_l4_v1/93edd241-bd65-4d4e-a75c-605e5cf18d7b/cache-step146.pt",
+      "id": "p03",
+      "index": 3,
+      "label": "after phase 3",
+      "state_path": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l4_v1/p03.json"
+    },
+    {
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_runs/2026-09-02-16-21-07-FINQA_P4_soft_l4_v1/23f3f471-d3d5-4fe3-8589-8e19b0115365/cache-step112.pt",
+      "id": "p04",
+      "index": 4,
+      "label": "after phase 4",
+      "state_path": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l4_v1/p04.json"
+    },
+    {
+      "cache_path": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_runs/2026-09-02-16-54-23-FINQA_P5_soft_l4_v1/c6c6c45a-4aae-4375-b6c6-335a90967e38/cache-step121.pt",
+      "id": "p05",
+      "index": 5,
+      "label": "after phase 5",
+      "state_path": "/localhome/local-triv/gated-continual-cartridges/outputs/finqa_5phase_state/soft_l4_v1/p05.json"
+    }
+  ],
+  "technique": "soft_l4_v1"
+}

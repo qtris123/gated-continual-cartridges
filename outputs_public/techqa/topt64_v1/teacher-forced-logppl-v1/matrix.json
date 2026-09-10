@@ -1,0 +1,174 @@
+{
+  "dataset": "techqa",
+  "technique": "topt64_v1",
+  "chain": "cache-step0.pt p01 -> continual AM p02-p05",
+  "protocol": "teacher-forced-logppl-v1",
+  "metric": "teacher-forced mean token loss (natural log)",
+  "p01_cache": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_p1_ropefix/2026-08-30-05-50-22-initial_am_compaction/da93f3b1-3a03-41e7-b246-b7d5f455c113/cache-step0.pt",
+  "recipe_config": "/localhome/local-triv/gated-continual-cartridges/outputs/recipes/topt64.yaml",
+  "recipe": {
+    "key_mode": "highest_attention",
+    "key_reposition": true,
+    "beta_enabled": false,
+    "top_t": 64,
+    "ridge_lambda": 0.0,
+    "delta_weight": 0.01,
+    "rope_theta": 5000000.0
+  },
+  "stage_caches": {
+    "p01": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_p1_ropefix/2026-08-30-05-50-22-initial_am_compaction/da93f3b1-3a03-41e7-b246-b7d5f455c113/cache-step0.pt",
+    "p02": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_runs/2026-09-03-08-11-44-TECHQA_P2_topt64_v1/475756b3-53da-4ea4-9d0a-c9681f618f44/cache-step96.pt",
+    "p03": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_runs/2026-09-03-09-16-30-TECHQA_P3_topt64_v1/40050b68-76ab-435e-8958-faf574b503d6/cache-step90.pt",
+    "p04": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_runs/2026-09-03-09-52-26-TECHQA_P4_topt64_v1/3234d9d2-6a94-41fe-a00d-85842c890eb8/cache-step90.pt",
+    "p05": "/localhome/local-triv/gated-continual-cartridges/outputs/techqa_5phase_runs/2026-09-03-10-29-42-TECHQA_P5_topt64_v1/ddb091d6-4afa-4022-95ed-425d0c887fb5/cache-step96.pt"
+  },
+  "task_order": [
+    "p1",
+    "p2",
+    "p3",
+    "p4",
+    "p5"
+  ],
+  "acquired_at": {
+    "p1": "p01",
+    "p2": "p02",
+    "p3": "p03",
+    "p4": "p04",
+    "p5": "p05"
+  },
+  "stage_labels": {
+    "p01": "after p1",
+    "p02": "after p2",
+    "p03": "after p3",
+    "p04": "after p4",
+    "p05": "after p5"
+  },
+  "cells": {
+    "p01": {
+      "p1": {
+        "loss": 4.240541458129883,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p01.json"
+      },
+      "p2": {
+        "loss": 4.377735137939453,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p01.json"
+      },
+      "p3": {
+        "loss": 4.437889575958252,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p01.json"
+      },
+      "p4": {
+        "loss": 4.332569599151611,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p01.json"
+      },
+      "p5": {
+        "loss": 4.385256767272949,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p01.json"
+      }
+    },
+    "p02": {
+      "p1": {
+        "loss": 4.31537389755249,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p02.json"
+      },
+      "p2": {
+        "loss": 4.531765937805176,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p02.json"
+      },
+      "p3": {
+        "loss": 4.694921016693115,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p02.json"
+      },
+      "p4": {
+        "loss": 4.408737659454346,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p02.json"
+      },
+      "p5": {
+        "loss": 4.563525676727295,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p02.json"
+      }
+    },
+    "p03": {
+      "p1": {
+        "loss": 4.631083965301514,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p03.json"
+      },
+      "p2": {
+        "loss": 4.903889179229736,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p03.json"
+      },
+      "p3": {
+        "loss": 5.0705132484436035,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p03.json"
+      },
+      "p4": {
+        "loss": 4.738755702972412,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p03.json"
+      },
+      "p5": {
+        "loss": 4.940882205963135,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p03.json"
+      }
+    },
+    "p04": {
+      "p1": {
+        "loss": 4.921351432800293,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p04.json"
+      },
+      "p2": {
+        "loss": 5.242432594299316,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p04.json"
+      },
+      "p3": {
+        "loss": 5.34816312789917,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p04.json"
+      },
+      "p4": {
+        "loss": 5.0506367683410645,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p04.json"
+      },
+      "p5": {
+        "loss": 5.284000396728516,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p04.json"
+      }
+    },
+    "p05": {
+      "p1": {
+        "loss": 5.035592079162598,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p05.json"
+      },
+      "p2": {
+        "loss": 5.365813732147217,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p05.json"
+      },
+      "p3": {
+        "loss": 5.425887584686279,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p05.json"
+      },
+      "p4": {
+        "loss": 5.192073345184326,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p05.json"
+      },
+      "p5": {
+        "loss": 5.401426315307617,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/techqa_5phase_state/topt64_v1/p05.json"
+      }
+    }
+  },
+  "continual_metrics": {
+    "average_loss_on_seen_tasks": {
+      "p01": 4.240541458129883,
+      "p02": 4.423569917678833,
+      "p03": 4.868495464324951,
+      "p04": 5.140645980834961,
+      "p05": 5.284158611297608
+    },
+    "forgetting_at_final_stage": {
+      "p1": 0.7950506210327148,
+      "p2": 0.834047794342041,
+      "p3": 0.3553743362426758,
+      "p4": 0.14143657684326172
+    },
+    "mean_forgetting": 0.5314773321151733
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "dataset": "qasper",
+  "technique": "soft_l1_v1",
+  "chain": "cache_last.pt p01 -> continual AM p02-p05",
+  "protocol": "teacher-forced-logppl-v1",
+  "metric": "teacher-forced mean token loss (natural log)",
+  "p01_cache": "/localhome/local-triv/gated-continual-cartridges/outputs/hf_p01/qasper/cache_last.pt",
+  "recipe_config": "/localhome/local-triv/gated-continual-cartridges/outputs/recipes/soft_locality_l1.yaml",
+  "recipe": {
+    "key_mode": "highest_attention",
+    "key_reposition": true,
+    "beta_enabled": false,
+    "top_t": 32,
+    "ridge_lambda": 0.0,
+    "delta_weight": 0.01,
+    "rope_theta": 5000000.0
+  },
+  "stage_caches": {
+    "p01": "/localhome/local-triv/gated-continual-cartridges/outputs/hf_p01/qasper/cache_last.pt",
+    "p02": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_runs/2026-09-03-09-37-36-QASPER_P2_soft_l1_v1/0ec02c6b-0765-4318-ba16-347bb455141e/cache-step16.pt",
+    "p03": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_runs/2026-09-03-13-20-57-QASPER_P3_soft_l1_v1/9a711b21-44ac-4a65-9ebd-f8b5235d6828/cache-step16.pt",
+    "p04": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_runs/2026-09-03-13-29-22-QASPER_P4_soft_l1_v1/f0a4e795-1702-4caa-abc8-4413a92b4921/cache-step16.pt",
+    "p05": "/localhome/local-triv/gated-continual-cartridges/outputs/qasper_asr_kg_runs/2026-09-03-13-38-00-QASPER_P5_soft_l1_v1/19dbd827-e69a-4dbb-91b3-da22f19767e8/cache-step16.pt"
+  },
+  "task_order": [
+    "qa",
+    "mt",
+    "sa",
+    "asr",
+    "kg"
+  ],
+  "acquired_at": {
+    "qa": "p01",
+    "mt": "p02",
+    "sa": "p03",
+    "asr": "p04",
+    "kg": "p05"
+  },
+  "stage_labels": {
+    "p01": "after qa",
+    "p02": "after mt",
+    "p03": "after sa",
+    "p04": "after asr",
+    "p05": "after kg"
+  },
+  "cells": {
+    "p01": {
+      "qa": {
+        "loss": 4.0740275382995605,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p01.json"
+      },
+      "mt": {
+        "loss": 4.094959259033203,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p01.json"
+      },
+      "sa": {
+        "loss": 4.181217670440674,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p01.json"
+      },
+      "asr": {
+        "loss": 3.7362403869628906,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p01.json"
+      },
+      "kg": {
+        "loss": 3.942690372467041,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p01.json"
+      }
+    },
+    "p02": {
+      "qa": {
+        "loss": 4.373532772064209,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p02.json"
+      },
+      "mt": {
+        "loss": 4.2309160232543945,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p02.json"
+      },
+      "sa": {
+        "loss": 4.374422550201416,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p02.json"
+      },
+      "asr": {
+        "loss": 4.114520072937012,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p02.json"
+      },
+      "kg": {
+        "loss": 4.171833038330078,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p02.json"
+      }
+    },
+    "p03": {
+      "qa": {
+        "loss": 4.099554538726807,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p03.json"
+      },
+      "mt": {
+        "loss": 3.95632004737854,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p03.json"
+      },
+      "sa": {
+        "loss": 4.077467441558838,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p03.json"
+      },
+      "asr": {
+        "loss": 3.892505645751953,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p03.json"
+      },
+      "kg": {
+        "loss": 3.925959587097168,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p03.json"
+      }
+    },
+    "p04": {
+      "qa": {
+        "loss": 4.133628845214844,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p04.json"
+      },
+      "mt": {
+        "loss": 4.049607276916504,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p04.json"
+      },
+      "sa": {
+        "loss": 4.158559322357178,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p04.json"
+      },
+      "asr": {
+        "loss": 3.8829493522644043,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p04.json"
+      },
+      "kg": {
+        "loss": 3.989800214767456,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p04.json"
+      }
+    },
+    "p05": {
+      "qa": {
+        "loss": 4.225443363189697,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p05.json"
+      },
+      "mt": {
+        "loss": 4.273343563079834,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p05.json"
+      },
+      "sa": {
+        "loss": 4.316253185272217,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p05.json"
+      },
+      "asr": {
+        "loss": 4.058526515960693,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p05.json"
+      },
+      "kg": {
+        "loss": 4.080451965332031,
+        "source": "/localhome/local-triv/gcc-frozen/outputs/qasper_asr_kg_state/soft_l1_v1/p05.json"
+      }
+    }
+  },
+  "continual_metrics": {
+    "average_loss_on_seen_tasks": {
+      "p01": 4.0740275382995605,
+      "p02": 4.302224397659302,
+      "p03": 4.0444473425547285,
+      "p04": 4.056186199188232,
+      "p05": 4.190803718566895
+    },
+    "forgetting_at_final_stage": {
+      "qa": 0.15141582489013672,
+      "mt": 0.04242753982543945,
+      "sa": 0.2387857437133789,
+      "asr": 0.17557716369628906
+    },
+    "mean_forgetting": 0.15205156803131104
+  }
+}

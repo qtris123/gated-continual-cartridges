@@ -1,0 +1,223 @@
+{
+  "eval_path": "data/techqa/phases/phase1_eval.parquet",
+  "questions": [
+    "User environment variables no longer getting picked up after upgrade to 4.1.1.1 or 4.1.1.2?\n\n\n\nHave you found that after upgrade to Streams 4.1.1.1 or 4.1.1.2, that environment variables set in your .bashrc are no longer being set? For example ODBCINI is not set for the database toolkit and you get\n\n     An SQL operation failed. The SQL state is 08003, the SQL code\n     is 0 and the SQL message is [unixODBC][Driver\n     Manager]Connnection does not exist.\n",
+    "ODM 8.7 TeamServer users active authoring rules and they get kicked out - transaction timeout or session timeout?\n\nSome of my users are being kicked out of TeamServer while actively authoring rules. What value would be controlling this behavior? Session timeout is at it's default 30 minutes. Does transaction timeout come in to play here or is there a different setting that might be causing this. Thanks. ",
+    "Unexpected instance name for SQL Server agent after FP10\n\n\n\nHello,\n\non a new server I have installed SQL Server agent 6.31 FP10 and then tried to create an instance. On the server we run a single instance of SQL Server (default instance) so I would expect it to be discovered with the server hostname as it was in the past. But the \"Configure Database Agents\u201d pane discovers and shows one instance with name \u201cMSSQLSERVER\u201d instead of the machine hostname.\n\nThere are no errors in the OQ_LocalConfig.log file. Why does it happen ?",
+    "Why the Portal 7.0.0.2 - CF29 upgrade is failing ?\n\nWhy the Portal 7.0.0.2 - CF29 upgrade is failing ?",
+    "Why does my login fail when I use the ltpa-usrnm attribute?\n\nYou use a Domino server as your LDAP, and the login attribute you want to use is ltpa-usrnm. This is acceptable, as the login attribute can be set accordingly in the wimconfig.xml. When the search string is built for the login, it is in the form, cn=username, o=orgname.\n\nThis cause the following exception to the returned:\n\n[3/30/16 9:56:03:453 CDT] 000000f7 exception E com.ibm.ws.wim.adapter.ldap.LdapConnection getAttributes CWWIM4520E The 'javax.naming.InvalidNameException: \"CN=username/O=orgname\": [LDAP: error code 34 - Invalid DN Syntax]; remaining name '\"CN=username/O=orgname'\"; ",
+    "Help with Security Bulletin: Vulnerability in Apache Commons FileUpload affects WSRR (CVE-2016-1000031)\n\nI need to understand details regarding Security Bulletin: Vulnerability in Apache Commons FileUpload affects IBM WebSphere Service Registry and Repository (CVE-2016-1000031). Where can I find this information?",
+    "How do I identify people in scope across Matters in Atlas?\n\nHow do I identify people in scope across Matters in Atlas? ",
+    "OMNIBUS   nco_p_mttrapd : Malformed traps\n\nHow can you determine why the MTTrapd [SNMP] probe drops traps? ",
+    "Does @LocalNodeAlias=\"\" will affect ITNM failover health check events?.\n\nCustomization in nco_p_monitor.rules with @LocalNodeAlias=\"empty\", after that both Primary and Backup started health check fail event, how to resolve that. ",
+    "Limitations of sylog-TCP log target using DataPower Gateways\n\nI am trying to configure a log target using type syslog-TCP. It seems that the payload is getting truncated when I try to record custom logs to it using log-action. Why is this? How can I workaround it. ",
+    "Can we create Match design specification db in xmeta\n\nCould you please let me know if we can create schema for Match design\nspecification database in xmeta db.",
+    "Why are the users unable to login to Web GUI 8.1 after I modify timeout to 2147483647 in security.xml file ?\n\n\n\nI followed the Web GUI 8.1 reference guide here to switching off the session timeout\n\nhttp://www-01.ibm.com/support/knowledgecenter/SSSHTQ_8.1.0/com.ibm.netcool_OMNIbus.doc_8.1.0/webtop/wip/task/web_adm_settimeout.html\n\nAfter I edited /config/cells/JazzSMNode01Cell/security.xml file, modified timeout setting to 2147483647, users are not able to login anymore."
+  ],
+  "golds": [
+    "To work around the issue, set environment variables that are needed by the application directly in the instance with:  * \n   \n * streamtool setproperty\n * -d <domain> -i <instance>\n   --application-ev <VARIABLE NAME>=<VARIABLE VALUE>",
+    "If you perform time consuming operations in large repositories, you can increase the timeout value in the web.xml file of the RTS/DC EAR file (jrules-teamserver-<appserver>.ear\\teamserver.war\\WEB-INF) by changing the value of the property ilog.rules.teamserver.transaction.timeout.",
+    "Abstract: Default instance of SQL Server is identified as 'MSSQLSERVER' \ninstead of hostname.\nAdditional Information: The default instance of SQL server used to get \nconfigured with hostname and not MSSQLSERVER. \nIn an environment, where there was default instance and \na named instance having same name as hostname had issues \nin configuration.",
+    "To resolve the issue increase the was.notification.timeout to 1200 (seconds) in WP DeploymentService either from WebSphere Admin Console or Dmgr. \nIf the property is not listed under custom properties, please add the above property.\n\nRe-run the upgrade-profile task to proceed with migration.",
+    "You need to set a custom property using the following\n   command\n   \n   $AdminTask configureAdminWIMUserRegistry {-customProperties\n   {\"com.ibm.ws.wim.registry.allowDNPrincipalNameAsLiteral\n   =true\"} }\n   \n   When this property is set, VMM determines whether the login\n   name ends with a baseEntry. If the login name does not end\n   with a baseEntry it is not treated as a DN and the login is\n   successful.\n   \n   The fix for this APAR is currently targeted for inclusion in\n   fix packs 8.0.0.4 and 8.5.0.1.",
+    "CVEID: CVE-2016-1000031 [http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-1000031]\nDESCRIPTION: Apache Commons FileUpload, as used in certain products, could allow a remote attacker to execute arbitrary code on the system, caused by deserialization of untrusted data in DiskFileItem class of the FileUpload library. A remote attacker could exploit this vulnerability to execute arbitrary code under the context of the current process.\nCVSS Base Score: 9.8\nCVSS Temporal Score: See https://exchange.xforce.ibmcloud.com/vulnerabilities/117957 [https://exchange.xforce.ibmcloud.com/vulnerabilities/117957] for the current score\nCVSS Environmental Score*: Undefined\nCVSS Vector: (CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H)",
+    "REP_PEOPLE_INSCOPE_VW view has information about people in scope. You can create a query by joining the view with REP_MATTER_VW, REP_REQUEST_VW, REP_NOTICES_VW and REP_PERSON_VW views.",
+    "Traps can be dropped during high loading, so ensure that the traps are being dropped from specific devices under normal load. \n\nUse snoop, tcpdump or Wireshark to capture the traps that are being dropped on the probe servers port, as defined in the property file.",
+    "The value for m_Domain is taken from the value for Node (@Node) in alerts.status for the health check event. If you have altered the inserted value for @Node, either by modifying the nco_p_ncpmonitor.rules file or by some other method such as an Automation or Impact policy, then the resulting update for state.domains will fail. Ensure that the rules governing the modification of @Node allow for the value of @Node to remain unchanged for health check events.",
+    "Configure a server daemon to listen and capture the DataPower devices events.",
+    "You should start from an empty Database; using the default XMETA Database is not recommended because it can become corrupt.",
+    "1. On DASH server, navigate to <JazzSM Home>/profile/config/cells/JazzSMNode01Cell/applications/isc.ear/deployments/isc/isclite.war/WEB-INF\n\n\n2. Take a backup of consoleProperties.xml\n\n\n3. Open consoleProperties.xml in edit-mode.\n\n\n4. Search for \"LTPAFIX\" and change the value from \"true\" to \"false\"."
+  ],
+  "results": {
+    "p01": [
+      {
+        "answer": "The issue you're describing is related to the configuration of environment variables in the IBM WebSphere Application Server (WAS (WebSphere Application Server). The issue described in the question is related to environment variables not being set correctly in the environment.\n\nThe issue described in the knowledge base is related to a configuration issue where environment variables are not being set correctly. The issue described in the document is related to the issue where environment variables are not being set correctly in the environment. The issue described"
+      },
+      {
+        "answer": "The issue you're describing is related to the issue where users are being logged out of the WebSphere Application Server (WAS (WebSphere Application Server) and IBM WebSphere Application Server (WAS) is not working properly. The issue is that the user is unable to log in to the system. The user is unable to log in to the WebSphere Application Server (WAS) and the user is unable to log in to the server.\n\nThe issue described in the question"
+      },
+      {
+        "answer": "The issue you're describing is related to the configuration of the IBM WebSphere Application Server (WAS (WebSphere Application Server) and IBM WebSphere Application Server (WAS) and the IBM Application Server (WAS) and the IBM WebSphere Application Server (WAS) and IBM WebSphere Application Server (WAS). The issue described in the question is related to the issue where the system identifies the server name as \"MSSQLSERVER, which is not the correct"
+      },
+      {
+        "answer": "The issue you are experiencing is related to a missing or missing file in the IBM WebSphere Application Server (WIPR) and the IBM Support Portal is not available.  The issue is related to the IBM Support Center. The issue is related to the IBM Support Center.  The user is asking about a specific issue related to the IBM Support Center.\n\nThe user is asking about a specific issue related to the IBM Support Center. The user is asking about a specific issue related to"
+      },
+      {
+        "answer": "The error message you provided in the question is related to a specific error message that occurs when attempting to authenticate to a server. The error message indicates that the user is unable to log in to the system due to a failure to authenticate due to a missing or missing user account or user account.\n\nThe error message indicates that the user is unable to log in due to a missing or missing user account or user account. The error message indicates that the user is unable to log in due to"
+      },
+      {
+        "answer": "The provided text is not related to the topic of the question. The question is about the 1 version of the IBM Security and Security Updates.\n\nThe user's question is: \"How can I find information about the security issue related to the IBM Security and Security Updates?\n\nThe user's question is about finding information about a specific security issue related to IBM Security and Security Updates.\n\nThe user has asked for information about a specific security issue related to IBM Security and Security Updates. The user"
+      },
+      {
+        "answer": "The question you asked is not related to the topic of identifying users in the IBM Security Manager (IBM Security Manager (IBM Security Manager) or IBM Security Manager (ISV) or IBM Security Manager (ISV) products. The question is asking about identifying users in the system.\n\nThe user's question is asking about identifying users in the IBM Security Manager (IBM Security Manager.\n\nThe user's question is asking about identifying users in the IBM Security Manager.\n\nThe user's question is asking"
+      },
+      {
+        "answer": "The error message \"No such file or file found in the file system.  The file is not found.  The error message indicates that the file is not found.  The error message indicates that the file is not found.  The error message indicates that the system is unable to find the file that is referenced in the error message.  The error message indicates that the file is not found.  The error message indicates that the file is not found.  The error message"
+      },
+      {
+        "answer": "The provided text is not related to the topic of the question. The question is about the process of resolving the 100% of the issue described in the document.\n\nThe user's question is: \"How to resolve the issue where the application is not working properly.\n\nThe user has requested information about how to resolve an issue where the application is not working properly.\n\nThe user has requested information about the\nThe user has requested information about the question: \"How to resolve the"
+      },
+      {
+        "answer": "The issue you're describing is related to the truncation of log messages in the log file. The issue you're describing is related to the application's logging mechanism. The issue you're describing is related to the length of the message body. The issue is that the message body is being truncated when the message is sent to the log file. The issue is that the message body is being truncated when the message is sent to the log file. The issue is that the message body is"
+      },
+      {
+        "answer": "The provided content provided in the provided text is not related to the content of the original question. The question is asking whether it is possible to create a database schema for a database that is used to store data about the configuration of a database. The user's question is asking whether it is possible to create a database schema for a database that stores information about the configuration of a database.\n\nThe user's question is asking whether it is possible to create a database schema for a database that stores"
+      },
+      {
+        "answer": "The issue you've described is related to a known issue where users are unable to log in to the IBM WebSphere Application Server (WAS (WebSphere Application Server) or IBM WebSphere Application Server (WIB) or IBM WebSphere Application Server (WIB) or IBM WebSphere Application Server (W100000001.\n\nThe issue described in the question is related to a specific issue where users are unable to log in to the IBM WebSphere"
+      }
+    ],
+    "p02": [
+      {
+        "answer": "The following is a list of the following:\n- 1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1"
+      },
+      {
+        "answer": "The following is a list of the following:\n- 1. 100% of the time, the system is not supported by the following:\n- 1. 100% of the time, the system is not supported by the following:\n- 1. 100% of the time, the system is not supported by the following:\n- 1. 100% of the time, the system is not supported by the following"
+      },
+      {
+        "answer": "The following is a 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the"
+      },
+      {
+        "answer": "The following is a 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the"
+      },
+      {
+        "answer": "The following is a list of the following: \nThe following is a list of the following: \nThe following is a list of the following: \nThe following is a list of the following: \nThe following is a list of the following: \nThe following is a list of the following: \nThe following is a list of the following: \nThe following is a list of the following: \nThe following is a list of the following: \nThe following is a list of"
+      },
+      {
+        "answer": "The following is a list of the following:\n- 1. The 1000031 is a valid and valid for the 1000031. The 1000031 is a valid and valid for the 1000031. The 1000031 is a valid and valid for the 1000031. The 100003"
+      },
+      {
+        "answer": "The following is a 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the"
+      },
+      {
+        "answer": "The following is a 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the"
+      },
+      {
+        "answer": "The following is a 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the"
+      },
+      {
+        "answer": "The following is a 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the"
+      },
+      {
+        "answer": "The following is a 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the"
+      },
+      {
+        "answer": "The following is a list of the following: \nThe following is a list of the following: \nThe following is a list of the following: \nThe following is a list of the following: \nThe following is a list of the following: \nThe following is a list of the following: \nThe following is a list of the following: \nThe following is a list of the following: \nThe following is a list of the following: \nThe following is a list of"
+      }
+    ],
+    "p03": [
+      {
+        "answer": "- 1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1."
+      },
+      {
+        "answer": "- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0"
+      },
+      {
+        "answer": "- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0"
+      },
+      {
+        "answer": "- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0"
+      },
+      {
+        "answer": "- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0"
+      },
+      {
+        "answer": "- 1. 1000031\n- 1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1"
+      },
+      {
+        "answer": "- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0"
+      },
+      {
+        "answer": "- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0"
+      },
+      {
+        "answer": "- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n-  1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0"
+      },
+      {
+        "answer": "- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0"
+      },
+      {
+        "answer": "- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0"
+      },
+      {
+        "answer": "- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0"
+      }
+    ],
+    "p04": [
+      {
+        "answer": "- 1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1.1."
+      },
+      {
+        "answer": "- 1.000001\n- 1.000001\n- 1.000001\n- 1.000001\n- 1.000001\n- 1.000001\n- 1.000001\n- 1.000001\n- 1.0000"
+      },
+      {
+        "answer": "- 1.001\n- 1.001\n- 1.001\n- 1.001\n- 1.001\n- 1.001\n- 1.001\n- 1.001\n- 1.001\n- 1.001\n- 1.001\n- 1.001"
+      },
+      {
+        "answer": "The 100% of the following:\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n-  1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n-"
+      },
+      {
+        "answer": "- 1.000000\n- 1.000000\n- 1.000000\n- 1.000000\n- 1.00000\n- 1.000000\n- 1.000000\n- 1.000000\n-  1.0000"
+      },
+      {
+        "answer": "- 1.000031\n- 1.000031\n- 1.000031\n- 1.000031\n- 1.000031\n- 1.000031\n- 1.000031\n- 1.000031\n- 1.0000"
+      },
+      {
+        "answer": "The following is a new version of the: \n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- \n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0"
+      },
+      {
+        "answer": "- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- \n1.0\n- 1.0\n- 1.0\n-  1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1."
+      },
+      {
+        "answer": "- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- \n 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1."
+      },
+      {
+        "answer": "- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0\n- 1.0"
+      },
+      {
+        "answer": "The following is a 100% \n- 1.00001\n- 1.00001\n- 1.00001\n-  1.00001\n- 1.00001\n- 1.00001\n- 1.00001\n- 1.00001\n- 1.0"
+      },
+      {
+        "answer": "The 100% of the following:\n- 1.000000\n- 1.000000\n- 1.000000\n- 1.000000\n- 1.00000\n- 1.000000\n- 1.000000\n- 1.000000"
+      }
+    ],
+    "p05": [
+      {
+        "answer": "The 100% of the 100% of the 100% of the 100% of the 100% of the 1\n 1.000000\n 1.000000\n 1.000000\n 1.000000\n 1.000000\n 1.0000"
+      },
+      {
+        "answer": "The 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 1\n 1.000000\n 1.000000\n 1.000000\n 1.000000\n 1.000000"
+      },
+      {
+        "answer": "The 100% of the 100% of the 100% of the 100% of the \n\nThe 100% of the 100% of the  100% of the 1\n\nThe 100% of the 100% of the 100% of the 100% of the 100% of the"
+      },
+      {
+        "answer": "1.000000\n 1.000000\n 1.000000\n 1.000000\n  1.000000\n 1.000000\n 1.000000\n 1.000000\n 1.000000\n 1.00"
+      },
+      {
+        "answer": "The 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the  100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 10"
+      },
+      {
+        "answer": "The 1000031\n- 1000031\n- 1000031\n- 1000031\n- 1000031\n-  1000031\n- 1000031\n- 1000031\n- 1000031\n- 100"
+      },
+      {
+        "answer": "The 100% of the 100% of the 100% of the 100% of the 100% of the 1\nThe 100% of the 100% of the 100% of the \n\n\n\n\n\n\n\n\n\n 1.000000\n 1.000000\n 1.0"
+      },
+      {
+        "answer": "The 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the  100% of the 100% of the 100% of the 100% of the 100% of the 10"
+      },
+      {
+        "answer": "The 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the  100% of the 100% of the 100% of the 100% of the 1\n 1.000000\n 1.000000"
+      },
+      {
+        "answer": "The 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the  100% of the 100% of the 1\n 1.000000\n 1.000000"
+      },
+      {
+        "answer": "The following is a new version of the same\n 1.000000\n 1.000000\n 1.000000\n 1.000000\n 1.000000\n 1.000000\n 1.000000\n 1.000000\n \n 1.0"
+      },
+      {
+        "answer": "The 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 1\nThe 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the"
+      }
+    ]
+  }
+}

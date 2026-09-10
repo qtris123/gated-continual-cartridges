@@ -1,0 +1,43 @@
+{
+  "accuracy": 0.2786885245901639,
+  "cache_path": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_runs/2026-09-02-18-31-15-QUALITY_P4_soft_l4_v1/19d81f1d-8fc8-4d56-bcf9-aaf6b129d187/cache-step7.pt",
+  "complete": true,
+  "dataset": "quality",
+  "decode": {
+    "answer_prime": " Answer:",
+    "backend": "flex",
+    "batch_size": 16,
+    "max_new_tokens": 64,
+    "num_shots": 0,
+    "prompt_variant": "phase-parquet-verbatim",
+    "temperature": 0.0,
+    "thinking": false
+  },
+  "eval_id": "p03",
+  "eval_label": "phase 3",
+  "eval_path": "/localhome/local-triv/gated-continual-cartridges/data/quality/phases/phase3_eval.parquet",
+  "eval_phase": 3,
+  "model": "Qwen/Qwen3-4B-Instruct-2507",
+  "num_correct": 34,
+  "num_expected": 122,
+  "num_scored": 122,
+  "num_unparsed": 0,
+  "plan_hash": "39968abebc13ac82019d1da06f1fcc1b0498067b1cde22a48fbf747c4edc24ef",
+  "protocol": "freeform-mc-options-v1",
+  "schema_version": 1,
+  "scorer": "mc_options",
+  "scorer_source": "faridlazuarda/gated-continual-cartridges@7c11bf1:mc_options",
+  "stage_id": "p04",
+  "stage_index": 4,
+  "stage_label": "after phase 4",
+  "subgroups": {
+    "difficult_1": {
+      "accuracy": 0.24242424242424243,
+      "num_correct": 16,
+      "num_scored": 66
+    }
+  },
+  "technique": "soft_l4_v1",
+  "unparsed_rate": 0.0,
+  "wall_clock_s": 187.0933563709259
+}

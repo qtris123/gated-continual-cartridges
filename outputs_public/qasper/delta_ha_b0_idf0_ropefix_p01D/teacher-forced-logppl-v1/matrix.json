@@ -1,0 +1,175 @@
+{
+  "dataset": "qasper",
+  "technique": "delta_ha_b0_idf0_ropefix_p01D",
+  "chain": "cache_last.pt p01 -> continual AM p02-p05 (selective top_t=32)",
+  "protocol": "teacher-forced-logppl-v1",
+  "metric": "teacher-forced mean token loss (natural log)",
+  "p01_cache": "/localhome/local-triv/gated-continual-cartridges/outputs/hf_p01/qasper/cache_last.pt",
+  "recipe_config": "(user-provided selective run; recipe as ropefix delta_ha_b0_idf0 top_t=32)",
+  "recipe": {
+    "key_mode": "highest_attention",
+    "key_reposition": true,
+    "beta_enabled": false,
+    "top_t": 32,
+    "ridge_lambda": 0.0,
+    "delta_weight": 0.01,
+    "rope_theta": 5000000.0
+  },
+  "stage_caches": {
+    "p01": "/localhome/local-triv/gated-continual-cartridges/outputs/hf_p01/qasper/cache_last.pt",
+    "p02": "(external)",
+    "p03": "(external)",
+    "p04": "(external)",
+    "p05": "(external)"
+  },
+  "task_order": [
+    "qa",
+    "mt",
+    "sa",
+    "asr",
+    "kg"
+  ],
+  "acquired_at": {
+    "qa": "p01",
+    "mt": "p02",
+    "sa": "p03",
+    "asr": "p04",
+    "kg": "p05"
+  },
+  "stage_labels": {
+    "p01": "after qa",
+    "p02": "after mt",
+    "p03": "after sa",
+    "p04": "after asr",
+    "p05": "after kg"
+  },
+  "cells": {
+    "p01": {
+      "qa": {
+        "loss": 4.075,
+        "source": "user-provided selective run"
+      },
+      "mt": {
+        "loss": 4.095,
+        "source": "user-provided selective run"
+      },
+      "sa": {
+        "loss": 4.182,
+        "source": "user-provided selective run"
+      },
+      "asr": {
+        "loss": 3.738,
+        "source": "user-provided selective run"
+      },
+      "kg": {
+        "loss": 3.941,
+        "source": "user-provided selective run"
+      }
+    },
+    "p02": {
+      "qa": {
+        "loss": 4.221,
+        "source": "user-provided selective run"
+      },
+      "mt": {
+        "loss": 4.034,
+        "source": "user-provided selective run"
+      },
+      "sa": {
+        "loss": 4.204,
+        "source": "user-provided selective run"
+      },
+      "asr": {
+        "loss": 3.923,
+        "source": "user-provided selective run"
+      },
+      "kg": {
+        "loss": 3.99,
+        "source": "user-provided selective run"
+      }
+    },
+    "p03": {
+      "qa": {
+        "loss": 3.87,
+        "source": "user-provided selective run"
+      },
+      "mt": {
+        "loss": 3.715,
+        "source": "user-provided selective run"
+      },
+      "sa": {
+        "loss": 3.848,
+        "source": "user-provided selective run"
+      },
+      "asr": {
+        "loss": 3.639,
+        "source": "user-provided selective run"
+      },
+      "kg": {
+        "loss": 3.631,
+        "source": "user-provided selective run"
+      }
+    },
+    "p04": {
+      "qa": {
+        "loss": 3.895,
+        "source": "user-provided selective run"
+      },
+      "mt": {
+        "loss": 3.761,
+        "source": "user-provided selective run"
+      },
+      "sa": {
+        "loss": 3.9,
+        "source": "user-provided selective run"
+      },
+      "asr": {
+        "loss": 3.601,
+        "source": "user-provided selective run"
+      },
+      "kg": {
+        "loss": 3.712,
+        "source": "user-provided selective run"
+      }
+    },
+    "p05": {
+      "qa": {
+        "loss": 3.888,
+        "source": "user-provided selective run"
+      },
+      "mt": {
+        "loss": 3.848,
+        "source": "user-provided selective run"
+      },
+      "sa": {
+        "loss": 3.936,
+        "source": "user-provided selective run"
+      },
+      "asr": {
+        "loss": 3.677,
+        "source": "user-provided selective run"
+      },
+      "kg": {
+        "loss": 3.706,
+        "source": "user-provided selective run"
+      }
+    }
+  },
+  "continual_metrics": {
+    "average_loss_on_seen_tasks": {
+      "p01": 4.075,
+      "p02": 4.1274999999999995,
+      "p03": 3.811,
+      "p04": 3.78925,
+      "p05": 3.811
+    },
+    "forgetting_at_final_stage": {
+      "qa": -0.18700000000000028,
+      "mt": -0.18599999999999994,
+      "sa": 0.08800000000000008,
+      "asr": 0.07600000000000007
+    },
+    "mean_forgetting": -0.05225000000000002
+  },
+  "note": "Selective top_t=32 continual AM. Cells transcribed from a user-provided run executed outside this machine. NOTE: the p01 row here is a SEPARATE evaluation pass from the full-KV run's p01 (same p01 cartridge), so the two p01 rows differ by eval variance (~1e-3). finqa/techqa reuse one shared p01 eval, so their p01 rows are identical across scenarios."
+}

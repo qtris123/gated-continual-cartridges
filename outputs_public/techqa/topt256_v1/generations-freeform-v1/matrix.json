@@ -1,0 +1,61 @@
+{
+  "accuracy": [
+    [
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  ],
+  "dataset": "techqa",
+  "eval_ids": [
+    "p01",
+    "p02",
+    "p03",
+    "p04",
+    "p05"
+  ],
+  "model": "Qwen/Qwen3-4B-Instruct-2507",
+  "num_complete_cells": 25,
+  "num_expected_cells": 25,
+  "plan_hash": "2c4efa7dcf2721f0d531ef6f3fd8dec45487898308d9b455d20137296067291b",
+  "protocol": "freeform-mc-options-v1",
+  "schema_version": 1,
+  "stage_ids": [
+    "p01",
+    "p02",
+    "p03",
+    "p04",
+    "p05"
+  ],
+  "technique": "topt256_v1"
+}

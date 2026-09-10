@@ -1,0 +1,174 @@
+{
+  "dataset": "quality",
+  "technique": "soft_l16_v1",
+  "chain": "cache_last.pt p01 -> continual AM p02-p05",
+  "protocol": "teacher-forced-logppl-v1",
+  "metric": "teacher-forced mean token loss (natural log)",
+  "p01_cache": "/localhome/local-triv/gated-continual-cartridges/outputs/hf_p01/quality/cache_last.pt",
+  "recipe_config": "/localhome/local-triv/gated-continual-cartridges/outputs/recipes/soft_locality_l16.yaml",
+  "recipe": {
+    "key_mode": "highest_attention",
+    "key_reposition": true,
+    "beta_enabled": false,
+    "top_t": 32,
+    "ridge_lambda": 0.0,
+    "delta_weight": 0.01,
+    "rope_theta": 5000000.0
+  },
+  "stage_caches": {
+    "p01": "/localhome/local-triv/gated-continual-cartridges/outputs/hf_p01/quality/cache_last.pt",
+    "p02": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_runs/2026-09-02-18-17-28-QUALITY_P2_soft_l16_v1/e56ad0d6-9dff-47a1-bf1b-ee326438b8ac/cache-step7.pt",
+    "p03": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_runs/2026-09-02-18-25-13-QUALITY_P3_soft_l16_v1/bd0fbff0-60eb-44dc-8821-7d4728981a60/cache-step7.pt",
+    "p04": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_runs/2026-09-02-18-31-25-QUALITY_P4_soft_l16_v1/bf9533b1-a1a3-4622-887c-b71c8eff8f2b/cache-step7.pt",
+    "p05": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_runs/2026-09-02-18-36-41-QUALITY_P5_soft_l16_v1/ae3d0e1b-8e40-4a2b-83dd-ed4e37601cbc/cache-step7.pt"
+  },
+  "task_order": [
+    "p1",
+    "p2",
+    "p3",
+    "p4",
+    "p5"
+  ],
+  "acquired_at": {
+    "p1": "p01",
+    "p2": "p02",
+    "p3": "p03",
+    "p4": "p04",
+    "p5": "p05"
+  },
+  "stage_labels": {
+    "p01": "after p1",
+    "p02": "after p2",
+    "p03": "after p3",
+    "p04": "after p4",
+    "p05": "after p5"
+  },
+  "cells": {
+    "p01": {
+      "p1": {
+        "loss": 2.3231558799743652,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p01.json"
+      },
+      "p2": {
+        "loss": 2.927072763442993,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p01.json"
+      },
+      "p3": {
+        "loss": 2.573949098587036,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p01.json"
+      },
+      "p4": {
+        "loss": 2.1492156982421875,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p01.json"
+      },
+      "p5": {
+        "loss": 3.1636977195739746,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p01.json"
+      }
+    },
+    "p02": {
+      "p1": {
+        "loss": 2.0741946697235107,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p02.json"
+      },
+      "p2": {
+        "loss": 2.691472053527832,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p02.json"
+      },
+      "p3": {
+        "loss": 2.3385958671569824,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p02.json"
+      },
+      "p4": {
+        "loss": 2.0060818195343018,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p02.json"
+      },
+      "p5": {
+        "loss": 2.8699653148651123,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p02.json"
+      }
+    },
+    "p03": {
+      "p1": {
+        "loss": 2.0091822147369385,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p03.json"
+      },
+      "p2": {
+        "loss": 2.6206088066101074,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p03.json"
+      },
+      "p3": {
+        "loss": 2.266589641571045,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p03.json"
+      },
+      "p4": {
+        "loss": 1.9469372034072876,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p03.json"
+      },
+      "p5": {
+        "loss": 2.789196014404297,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p03.json"
+      }
+    },
+    "p04": {
+      "p1": {
+        "loss": 1.8775800466537476,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p04.json"
+      },
+      "p2": {
+        "loss": 2.453939437866211,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p04.json"
+      },
+      "p3": {
+        "loss": 2.1373043060302734,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p04.json"
+      },
+      "p4": {
+        "loss": 1.8106651306152344,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p04.json"
+      },
+      "p5": {
+        "loss": 2.622939109802246,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p04.json"
+      }
+    },
+    "p05": {
+      "p1": {
+        "loss": 2.0103299617767334,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p05.json"
+      },
+      "p2": {
+        "loss": 2.580718994140625,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p05.json"
+      },
+      "p3": {
+        "loss": 2.2491331100463867,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p05.json"
+      },
+      "p4": {
+        "loss": 1.9407072067260742,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p05.json"
+      },
+      "p5": {
+        "loss": 2.7386958599090576,
+        "source": "/localhome/local-triv/gated-continual-cartridges/outputs/quality_5phase_state/soft_l16_v1/p05.json"
+      }
+    }
+  },
+  "continual_metrics": {
+    "average_loss_on_seen_tasks": {
+      "p01": 2.3231558799743652,
+      "p02": 2.3828333616256714,
+      "p03": 2.2987935543060303,
+      "p04": 2.0698722302913666,
+      "p05": 2.3039170265197755
+    },
+    "forgetting_at_final_stage": {
+      "p1": -0.31282591819763184,
+      "p2": -0.11075305938720703,
+      "p3": -0.017456531524658203,
+      "p4": 0.13004207611083984
+    },
+    "mean_forgetting": -0.0777483582496643
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "eval_path": "data/techqa/phases/phase1_eval.parquet",
+  "questions": [
+    "User environment variables no longer getting picked up after upgrade to 4.1.1.1 or 4.1.1.2?\n\n\n\nHave you found that after upgrade to Streams 4.1.1.1 or 4.1.1.2, that environment variables set in your .bashrc are no longer being set? For example ODBCINI is not set for the database toolkit and you get\n\n     An SQL operation failed. The SQL state is 08003, the SQL code\n     is 0 and the SQL message is [unixODBC][Driver\n     Manager]Connnection does not exist.\n",
+    "Is Java 8 supported for EJBDeploy on WebSphere Application Server 8.5.5.9 or later?\n\nIs Java 8 supported for EJBDeploy on WebSphere Application Server 8.5.5.9 or later?",
+    "Help with Security Bulletin: A security vulnerability has been identified in WebSphere Application Server shipped with WebSphere Service Registry and Repository (CVE-2017-1681)\n\nI need to understand details regarding Security Bulletin: A security vulnerability has been identified in WebSphere Application Server shipped with WebSphere Service Registry and Repository (CVE-2017-1681). Is WAS Liberty affected?",
+    "Is there a limit to the number of items that can be listed within an \"in\" list as part of a where clause?\n\nIs there a limit to the number of items that can be listed within an \"in\" list as part of a where clause? ",
+    "How to proceed when jextract utility is throwing an OutOfMemory error ?\n\n\n\nI was getting a crash and was told to provide a \"jextracted core dump\". I ran the jextract command as instructed:\n\n/java/jre/bin/jextract [CORE_PATH]\n\nbut I am getting now an OutOfMemory error when jextract itself is running so I cannot proceed with the original crash investigation.",
+    "Why are the users unable to login to Web GUI 8.1 after I modify timeout to 2147483647 in security.xml file ?\n\n\n\nI followed the Web GUI 8.1 reference guide here to switching off the session timeout\n\nhttp://www-01.ibm.com/support/knowledgecenter/SSSHTQ_8.1.0/com.ibm.netcool_OMNIbus.doc_8.1.0/webtop/wip/task/web_adm_settimeout.html\n\nAfter I edited /config/cells/JazzSMNode01Cell/security.xml file, modified timeout setting to 2147483647, users are not able to login anymore."
+  ],
+  "golds": [
+    "To work around the issue, set environment variables that are needed by the application directly in the instance with:  * \n   \n * streamtool setproperty\n * -d <domain> -i <instance>\n   --application-ev <VARIABLE NAME>=<VARIABLE VALUE>",
+    "Please note that in WebSphere Application Server 8.5.5.x and below, the tool can only deploy Java EE applications compiled with a JDK level of 7 or below. To deploy JDK 8 compiled web applications, please upgrade to WebSphere Application Server V9.",
+    "This vulnerability affects the following versions and releases of IBM WebSphere Application Server: \n\n * Liberty",
+    "The short answer is no limit.\n\n\nBy default we create a virtual table for any \"in list\" with more than 5 values.\n\nThe only limitation with large \"in list\" statements would be the memory needed to compile the query. If the query is too complex, you can potentially run out of memory, but that will not affect other sessions since this happens inside the postgres process assigned to that session. The parameter that is responsible for this behaviour is inlist_threshold and it is safe to increase this value to 100, but not more.",
+    "Sometimes the core dump is much larger than the default heap size can manage, and the recommendation is to increase the heap size using the -J-Xmx option.",
+    "1. On DASH server, navigate to <JazzSM Home>/profile/config/cells/JazzSMNode01Cell/applications/isc.ear/deployments/isc/isclite.war/WEB-INF\n\n\n2. Take a backup of consoleProperties.xml\n\n\n3. Open consoleProperties.xml in edit-mode.\n\n\n4. Search for \"LTPAFIX\" and change the value from \"true\" to \"false\"."
+  ],
+  "results": {
+    "p01": [
+      {
+        "answer": "The issue you're describing is related to the configuration of environment variables in the IBM WebSphere Application Server (WAS (WebSphere Application Server). The issue described in the question is related to environment variables not being set correctly in the environment.\n\nThe issue described in the knowledge base is related to a configuration issue where environment variables are not being set correctly. The issue described in the document is related to the"
+      },
+      {
+        "answer": "The provided text is not related to the 100% accurate. The provided text does 1. The user has requested information about the version of the product that is being referenced in the provided text.\n\nThe user has requested information about the version of the product that supports Java 8. The user has requested information about the support for Java 8 (JDK 8 (JDK"
+      },
+      {
+        "answer": "The provided text is not related to the question asked in the question. The provided text does information about the version of the software and the issue with the IBM Security and Security Advisory (S1000000100000001.\n\nThe user's question is: \"How to find the correct version of the IBM Security Manager (IBM Security Manager) to use for"
+      },
+      {
+        "answer": "The question you asked is not related to the functionality of the IBM WebSphere Application Server (WAS (WebSphere Application Server) or IBM WebSphere Application Server (WAS). The question is asking about the maximum number of items that can be included in a WHERE clause in a SQL query.\n\nThe user's question is: \"Is there a limit on the number of items in a WHERE clause?"
+      },
+      {
+        "answer": "The issue you're experiencing is related to the \"jextract command. The error message \"java.lang.OutOfMemoryError: java.lang.OutOfMemoryError: java.lang.OutOfMemoryError: java.lang.OutOfMemoryError: java.lang.OutOfMemoryError: java.lang.OutOfMemoryError: java.lang.OutOfMemoryError: Cannot find the file or file not found\n\nThe error message you"
+      },
+      {
+        "answer": "The issue you've described is related to a known issue where users are unable to log in to the IBM WebSphere Application Server (WAS (WebSphere Application Server) or IBM WebSphere Application Server (WIB) or IBM WebSphere Application Server (WIB) or IBM WebSphere Application Server (W100000001.\n\nThe issue described in the question is related"
+      }
+    ],
+    "p05": [
+      {
+        "answer": "The 100% of the 100% of the 100% of the 100% of the 100% of the 1\n 1.000000\n 1.000000\n 1.000000\n 1.000000"
+      },
+      {
+        "answer": "The 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the  100% of the 100% of the"
+      },
+      {
+        "answer": "The 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 1"
+      },
+      {
+        "answer": "The 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the  100% of the 100% of the 100% of the 100% of the 1\nThe 100"
+      },
+      {
+        "answer": "The 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 1"
+      },
+      {
+        "answer": "The 100% of the 100% of the 100% of the 100% of the 100% of the 100% of the 1\nThe 100% of the 100% of the 100% of the 100% of the 100%"
+      }
+    ]
+  }
+}
