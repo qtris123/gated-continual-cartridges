@@ -12,11 +12,16 @@ The pipeline systematically sweeps over **sub-KV cache budgets** ($1024 \to 2048
 | **4096** | **256** | 6.25% | Initial Compaction ($N=4096$) | Continual 5-stage chain ($t=256$) | **Active Sweep** |
 
 Each arm executes the canonical experimental setting:
-- **Value Compaction:** Closed-form attention-output matching with $\lambda_\Delta = 0.01$ and ridge regularization $\lambda_{\text{ridge}} = 0.0$.
+- **Stage 1 (Initial Compaction / p01):** Closed-form Arm-D compaction with spectral ridge regularization $\lambda_{\text{ridge}} = 10^{-4}$ (`p01.ridge_lambda: 1e-4`, `p01.ridge_scale: spectral`). This regularizes the underdetermined least-squares system ($N_{\text{queries}} \le 64 \ll S$) and ensures unqueried slot values decay stably rather than diverging.
+- **Stages 2–5 (Continual AM / p02–p05):** Closed-form attention-output delta matching with trust-region weight $\lambda_\Delta = 0.01$ (`objective.delta_weight: 0.01`) and $\lambda_{\text{ridge}} = 0.0$ (the $\lambda_\Delta$ term acts as the $L_2$ anchor against prior values).
 - **Key Selection:** Highest-attention key selection (`key_mode: highest_attention`).
 - **Attention Bias:** No attention-bias fitting (`beta.enabled: false`, `enable_beta: 0`).
 - **Positional Integrity:** Fixed RoPE repositioning (`key_reposition: true`, `rebake_key_positions: 1`, `rope_theta: 5e6`).
 - **Multi-Stage Chain:** Phase 1 initial compaction ($S$ slots) followed by Phases 2–5 continual AM updates ($t$ selective writes per layer per document) and 5×5 held-out evaluations.
+
+> [!NOTE]
+> **Why Phase 1 requires $\lambda_{\text{ridge}} = 10^{-4}$ while Stages 2–5 use $\lambda_{\text{ridge}} = 0.0$:**
+> In continual AM (Stages 2–5), the objective includes a quadratic penalty anchoring the new values to the previous stage's values ($\lambda_\Delta \|V_S - V_{S,\text{orig}}\|^2$). In Phase 1, there is no prior cartridge or $\lambda_\Delta$ anchor; setting `p01.ridge_lambda: 0` removes all regularization from `torch.linalg.lstsq(driver="gels")`, causing unconstrained slot values to fit noise and blow up. Setting $\lambda_{\text{ridge}} = 10^{-4}$ uses the dual Cholesky solve $W = X^T(XX^T + \lambda I)^{-1}Y$, keeping unqueried slots well-conditioned and stable.
 
 ---
 

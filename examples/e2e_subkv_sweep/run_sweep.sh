@@ -166,8 +166,8 @@ for i in "${!BUDGETS[@]}"; do
   # 1. Generate size-specific recipe YAML matching canonical experiments (e.g. fullkv_topt512.yaml)
   cat <<EOF > "$RECIPE"
 # Auto-generated for sub-KV cache sweep (Budget=$SIZE, top_t=$TOP_T)
-# Matches fullkv_topt512.yaml and topt*.yaml:
-# - Attention-output matching: delta_weight=0.01, ridge_lambda=0.0
+# - Stage 1 (p01): Arm-D compaction with spectral ridge_lambda=1e-4
+# - Stages 2-5 (p02-p05): Continual delta matching with delta_weight=0.01, ridge_lambda=0.0
 # - Highest-attention keys: key_mode=highest_attention, key_reposition=true
 # - No attention-bias: beta.enabled=false
 # - Fixed RoPE repositioning: rope_theta=5000000.0
@@ -179,7 +179,7 @@ p01:
   rebake_key_positions: 1
   rope_theta: model
   global_teacher_positions: 1
-  ridge_lambda: 0
+  ridge_lambda: 1e-4
   ridge_scale: spectral
   max_queries_per_head: 64
   max_ref_batches: 50
