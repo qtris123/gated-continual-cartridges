@@ -155,6 +155,33 @@ bash examples/e2e_subkv_sweep/run_sweep.sh \
   --gpu 0
 ```
 
+### Sweeping Over Multiple Datasets
+
+To run the sweep sequentially across multiple datasets (e.g. `qasper`, `quality`, `finqa`, `techqa`):
+
+```bash
+for DATASET in qasper quality finqa techqa; do
+  echo "======================================================================"
+  echo " Starting E2E sweep for: $DATASET"
+  echo "======================================================================"
+  bash examples/e2e_subkv_sweep/run_sweep.sh --dataset "$DATASET" --gpu 0
+done
+```
+
+Or fan them out in parallel if multiple GPUs are available:
+
+```bash
+bash examples/e2e_subkv_sweep/run_sweep.sh --dataset qasper  --gpu 0 > qasper_sweep.log 2>&1 &
+bash examples/e2e_subkv_sweep/run_sweep.sh --dataset quality --gpu 1 > quality_sweep.log 2>&1 &
+wait
+```
+
+> [!TIP]
+> **Running with an AI Agent:**
+> You can prompt the AI agent directly:
+> *"Run the sub-KV sweep over datasets `qasper`, `quality`, `finqa` on GPU 0 in the background."*
+> The agent will launch the dataset loop as a background task, monitor the execution logs, and notify you when the 5×5 matrices are ready.
+
 ### Running in Background (`tmux` / `nohup`)
 Because the sweep across 3 budget sizes processes 5 stages per size, it is recommended to run inside `tmux` or with `nohup`:
 
