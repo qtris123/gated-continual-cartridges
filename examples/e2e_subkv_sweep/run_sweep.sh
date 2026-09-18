@@ -179,7 +179,7 @@ p01:
   rebake_key_positions: 1
   rope_theta: model
   global_teacher_positions: 1
-  ridge_lambda: 1e-4
+  ridge_lambda: 0
   ridge_scale: spectral
   max_queries_per_head: 64
   max_ref_batches: 50
