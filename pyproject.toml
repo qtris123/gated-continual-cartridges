@@ -12,6 +12,7 @@ dependencies = [
     "openai",
     "datasets",
     "transformers>=4.49.0,<=4.55",
+    "huggingface-hub>=0.34.0,<1.0.0",
     "numpy",
     "einops",
     "tqdm",

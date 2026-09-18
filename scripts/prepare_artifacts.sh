@@ -43,15 +43,44 @@ REPO_DATA="${REPO_DATA:-${HF_USER}/gated-continual-cartridges-data}"
 REPO_CACHES="${REPO_CACHES:-${HF_USER}/gated-continual-cartridges-caches}"
 REPO_RESULTS="${REPO_RESULTS:-${HF_USER}/gated-continual-cartridges-results}"
 
-HF_BIN="${HF_BIN:-$DEST/.venv/bin/hf}"; command -v "$HF_BIN" >/dev/null 2>&1 || HF_BIN="hf"
-PY="${PY:-$DEST/.venv/bin/python}";     command -v "$PY"     >/dev/null 2>&1 || PY="python3"
+# Robust discovery for HF CLI and Python
+if [[ -z "${HF_BIN:-}" ]]; then
+  if command -v hf >/dev/null 2>&1; then
+    HF_BIN="hf"
+  elif command -v huggingface-cli >/dev/null 2>&1; then
+    HF_BIN="huggingface-cli"
+  elif [[ -x "$DEST/.venv/bin/hf" ]]; then
+    HF_BIN="$DEST/.venv/bin/hf"
+  elif [[ -x "$DEST/.venv/bin/huggingface-cli" ]]; then
+    HF_BIN="$DEST/.venv/bin/huggingface-cli"
+  elif [[ -n "${CONDA_PREFIX:-}" ]] && [[ -x "$CONDA_PREFIX/bin/hf" ]]; then
+    HF_BIN="$CONDA_PREFIX/bin/hf"
+  elif [[ -n "${CONDA_PREFIX:-}" ]] && [[ -x "$CONDA_PREFIX/bin/huggingface-cli" ]]; then
+    HF_BIN="$CONDA_PREFIX/bin/huggingface-cli"
+  else
+    HF_BIN="hf"
+  fi
+fi
+
+if [[ -z "${PY:-}" ]]; then
+  if [[ -n "${CARTRIDGES_PYTHON:-}" ]] && [[ -x "$CARTRIDGES_PYTHON" ]]; then
+    PY="$CARTRIDGES_PYTHON"
+  elif [[ -x "$DEST/.venv/bin/python" ]]; then
+    PY="$DEST/.venv/bin/python"
+  elif [[ -n "${CONDA_PREFIX:-}" ]] && [[ -x "$CONDA_PREFIX/bin/python" ]]; then
+    PY="$CONDA_PREFIX/bin/python"
+  else
+    PY="$(command -v python3 || command -v python)"
+  fi
+fi
+
 DL="$DEST/.hf_download"
 
 log()  { printf '\033[1;34m[prepare]\033[0m %s\n' "$*"; }
 warn() { printf '\033[1;33m[prepare][warn]\033[0m %s\n' "$*"; }
 die()  { printf '\033[1;31m[prepare][err]\033[0m %s\n' "$*"; exit 1; }
 
-command -v "$HF_BIN" >/dev/null 2>&1 || die "hf CLI not found (pip install huggingface_hub)."
+command -v "$HF_BIN" >/dev/null 2>&1 || die "Hugging Face CLI ($HF_BIN) not found (pip install huggingface_hub)."
 command -v zstd      >/dev/null 2>&1 || die "zstd not found (apt install zstd)."
 [[ -n "${HF_TOKEN:-}${HUGGING_FACE_HUB_TOKEN:-}" ]] || warn "no HF_TOKEN set; only works if the datasets are public."
 
@@ -107,6 +136,11 @@ prepare_data() {
       mkdir -p "$(dirname "$abs")"
       ln -sfn "$target" "$abs"
     done < "$sl"
+  fi
+  # Ensure dataset phase directory aliases exist
+  if [[ -d "$DEST/data/phases/qasper" && ! -d "$DEST/data/qasper/phases" ]]; then
+    mkdir -p "$DEST/data/qasper"
+    ln -sfn ../phases/qasper "$DEST/data/qasper/phases"
   fi
   log "data ready under $DEST/data"
 }
