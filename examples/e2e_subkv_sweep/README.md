@@ -17,16 +17,16 @@ $$\text{access\_score}' = \text{access\_score} \times (1 + \text{usage})^\lambda
 
 ### Sweep Matrix ($\lambda$ Arms)
 
-We sweep $\lambda \in [0.0, 0.25, 0.5, 0.75, 1.0, 2.0]$ over all 5 continual stages for both **QuALITY** and **QASPER**:
+We sweep $\lambda \in [0.0, 0.25, 0.5, 1.0, 2.0, 4.0]$ over all 5 continual stages for both **QuALITY** and **QASPER**:
 
 | Arm | $\lambda$ | Tag / Label | Behavior | Status |
 | :---: | :---: | :--- | :--- | :--- |
 | **1** | **0.0** | `overlap_lam0` | Baseline (standard selection, no overlap bonus) | Ready |
 | **2** | **0.25** | `overlap_lam0p25` | Mild overlap incentive | Ready |
 | **3** | **0.5** | `overlap_lam0p5` | Moderate overlap incentive | Ready |
-| **4** | **0.75** | `overlap_lam0p75` | Strong overlap incentive | Ready |
-| **5** | **1.0** | `overlap_lam1` | Proportional overlap incentive | Ready |
-| **6** | **2.0** | `overlap_lam2` | Aggressive overlap incentive | Ready |
+| **4** | **1.0** | `overlap_lam1` | Proportional overlap incentive | Ready |
+| **5** | **2.0** | `overlap_lam2` | Strong overlap incentive | Ready |
+| **6** | **4.0** | `overlap_lam4` | Aggressive overlap incentive | Ready |
 
 - **Sub-KV Cache Budget:** $S = 1024$ slots (Phase 1 initial compaction built once per dataset and reused across all $\lambda$ arms).
 - **Update Budget ($\text{top\_t}$):** $t = 64$ slots per layer per document (6.25% proportional write ratio).
@@ -79,7 +79,7 @@ The automated runner script is located at [`examples/e2e_subkv_sweep/run_sweep.s
 
 ### Quick Start (Run Both Datasets on GPU 0)
 
-To sweep over all $\lambda \in [0, 0.25, 0.5, 0.75, 1.0, 2.0]$ across 5 stages for both **QuALITY** and **QASPER**:
+To sweep over all $\lambda \in [0, 0.25, 0.5, 1.0, 2.0, 4.0]$ across 5 stages for both **QuALITY** and **QASPER**:
 
 ```bash
 bash examples/e2e_subkv_sweep/run_sweep.sh --gpu 0
@@ -152,7 +152,7 @@ Usage: examples/e2e_subkv_sweep/run_sweep.sh [options]
 Options:
   --datasets <list>    Comma-separated datasets: quality, qasper (default: quality,qasper)
   --dataset <name>     Single dataset alias: quality or qasper
-  --lambdas <list>     Comma-separated lambda values for overlap bonus (default: 0.0,0.25,0.5,0.75,1.0,2.0)
+  --lambdas <list>     Comma-separated lambda values for overlap bonus (default: 0.0,0.25,0.5,1.0,2.0,4.0)
   --budget <size>      Sub-KV cache budget for Phase 1 (default: 1024)
   --top-t <int>        Proportional top-t updates per layer (default: 64)
   --gpu <id>           GPU index for compaction writes (default: 0)
@@ -198,4 +198,4 @@ cat outputs/evaluations/qasper/overlap_lam0/teacher-forced-logppl-v1/matrix.csv
 
 - **Diagonal ($p_i, p_i$):** Acquisition performance on phase $i$ immediately after writing phase $i$.
 - **Lower Triangle ($p_j, p_i$ where $j > i$):** Retention on phase $i$ after subsequent phases have been written.
-- **Comparison:** Compare $j > i$ cells across $\lambda = 0.0 \to 2.0$ to see whether encouraging slot overlap improves retention against catastrophic forgetting.
+- **Comparison:** Compare $j > i$ cells across $\lambda = 0.0 \to 4.0$ to see whether encouraging slot overlap improves retention against catastrophic forgetting.

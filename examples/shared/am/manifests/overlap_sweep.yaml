@@ -24,6 +24,6 @@ streams:
       - {value: 0.0,  alias: overlap_lam0}
       - {value: 0.25, alias: overlap_lam0p25}
       - {value: 0.5,  alias: overlap_lam0p5}
-      - {value: 0.75, alias: overlap_lam0p75}
       - {value: 1.0,  alias: overlap_lam1}
       - {value: 2.0,  alias: overlap_lam2}
+      - {value: 4.0,  alias: overlap_lam4}

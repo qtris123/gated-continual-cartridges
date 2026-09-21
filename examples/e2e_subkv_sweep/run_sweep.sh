@@ -14,7 +14,7 @@
 #   bash examples/e2e_subkv_sweep/run_sweep.sh [options]
 #
 # Examples:
-#   # Run default sweep (lambda: 0, 0.25, 0.5, 0.75, 1.0, 2.0) on Quality and QASPER on GPU 0:
+#   # Run default sweep (lambda: 0, 0.25, 0.5, 1.0, 2.0, 4.0) on Quality and QASPER on GPU 0:
 #   bash examples/e2e_subkv_sweep/run_sweep.sh --gpu 0
 #
 #   # Run on single dataset (e.g. Quality):
@@ -31,7 +31,7 @@ cd "$ROOT"
 
 # Defaults
 DATASETS_STR="quality,qasper"
-LAMBDAS_STR="0.0,0.25,0.5,0.75,1.0,2.0"
+LAMBDAS_STR="0.0,0.25,0.5,1.0,2.0,4.0"
 BUDGET=1024
 TOP_T=64
 GPU="${GPU:-0}"
@@ -56,7 +56,7 @@ Options:
   -h, --help           Show this help message
 
 Examples:
-  # Run overlap sweep on Quality and QASPER (default lambdas: 0, 0.25, 0.5, 0.75, 1.0, 2.0):
+  # Run overlap sweep on Quality and QASPER (default lambdas: 0, 0.25, 0.5, 1.0, 2.0, 4.0):
   bash examples/e2e_subkv_sweep/run_sweep.sh --gpu 0
 
   # Run on Quality only:
