@@ -1,0 +1,29 @@
+# Sweep manifest for continual-AM overlap bonus sweep.
+# Evaluates encouraging slot reuse across stages: score * (1 + usage)^lambda.
+
+name: overlap_sweep
+endpoint: run_chain
+method: am
+datasets: [quality, qasper]
+
+launch:
+  quality:
+    p01_cache: outputs/hf_p01/quality/cache_last.pt
+    p01_root: outputs/experiments/overlap_sweep_quality/budget1024/p01
+  qasper:
+    p01_cache: outputs/hf_p01/qasper/cache_last.pt
+    p01_root: outputs/experiments/overlap_sweep_qasper/budget1024/p01
+
+streams:
+  lambda:
+    axis: slots.usage_penalty_lambda
+    base_recipe: outputs/recipes/subkv_sweep/e2e_budget1024_topt64.yaml
+    fixed: {slots.top_t: 64}
+    label_fmt: "λ={value}"
+    arms:
+      - {value: 0.0,  alias: overlap_lam0}
+      - {value: 0.25, alias: overlap_lam0p25}
+      - {value: 0.5,  alias: overlap_lam0p5}
+      - {value: 0.75, alias: overlap_lam0p75}
+      - {value: 1.0,  alias: overlap_lam1}
+      - {value: 2.0,  alias: overlap_lam2}
