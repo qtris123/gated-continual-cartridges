@@ -34,6 +34,7 @@ BUDGET_ARG=""
 BUDGETS_STR="1024,2048,4096"
 TOP_TS_STR="64,128,256"
 MAX_QUERIES_ARG=""
+DELTA_WEIGHT_ARG=""
 FORCE=0
 DRY_RUN=0
 EVAL_ACCURACY=0
@@ -52,6 +53,7 @@ Options:
   --budgets <list>     Comma-separated sub-KV cache budgets (default: $BUDGETS_STR)
   --top-ts <list>      Comma-separated proportional top-t values (default: $TOP_TS_STR)
   --max-queries-per-head <N> Max queries per head (default: 1024)
+  --delta-weight <val> Explicit delta_weight (default: linearly scaled with max queries: 0.16 for 1024)
   --eval-accuracy      Run additional 5x5 text generation accuracy evaluation (for QuALITY/LongHealth MCQ)
   --force              Rebuild and overwrite existing cache/eval artifacts
   --dry-run            Print execution plan without running
@@ -85,6 +87,7 @@ while [[ $# -gt 0 ]]; do
     --top-ts)    TOP_TS_STR="$2"; shift 2 ;;
     --top-t)     TOP_TS_STR="$2"; shift 2 ;;
     --max-queries-per-head) MAX_QUERIES_ARG="$2"; shift 2 ;;
+    --delta-weight) DELTA_WEIGHT_ARG="$2"; shift 2 ;;
     --eval-accuracy) EVAL_ACCURACY=1; shift ;;
     --force)     FORCE=1; shift ;;
     --dry-run)   DRY_RUN=1; shift ;;
@@ -233,15 +236,22 @@ for p in range(1, 6):
     MAX_QUERIES_PER_HEAD="1024"
   fi
 
+  if [[ -n "$DELTA_WEIGHT_ARG" ]]; then
+    DELTA_WEIGHT="$DELTA_WEIGHT_ARG"
+  else
+    # Linearly scale delta_weight: lambda_Delta = 0.01 * (N_q / 64) -> 0.16 for 1024 queries
+    DELTA_WEIGHT=$(awk -v q="$MAX_QUERIES_PER_HEAD" 'BEGIN { v = 0.01 * (q / 64); printf "%g\n", v }')
+  fi
+
   echo ""
-  echo ">>> [Arm $((i+1))/${#BUDGETS[@]}] Budget=$SIZE, top_t=$TOP_T, max_queries_per_head=$MAX_QUERIES_PER_HEAD (Tag: $TAG) <<<"
+  echo ">>> [Arm $((i+1))/${#BUDGETS[@]}] Budget=$SIZE, top_t=$TOP_T, max_queries_per_head=$MAX_QUERIES_PER_HEAD, delta_weight=$DELTA_WEIGHT (Tag: $TAG) <<<"
   echo "    Log file: $SWEEP_LOG"
 
   # 1. Generate size-specific recipe YAML matching canonical experiments (e.g. fullkv_topt512.yaml)
   cat <<EOF > "$RECIPE"
 # Auto-generated for sub-KV cache sweep (Model=$MODEL_NAME, Budget=$SIZE, top_t=$TOP_T, max_queries_per_head=$MAX_QUERIES_PER_HEAD)
 # - Stage 1 (p01): Arm-D compaction with spectral ridge_lambda=1e-4
-# - Stages 2-5 (p02-p05): Continual delta matching with delta_weight=0.01, ridge_lambda=0.0
+# - Stages 2-5 (p02-p05): Continual delta matching with delta_weight=$DELTA_WEIGHT, ridge_lambda=0.0
 # - Highest-attention keys: key_mode=highest_attention, key_reposition=true
 # - No attention-bias: beta.enabled=false
 # - Fixed RoPE repositioning: rope_theta=$ROPE_THETA_VAL
@@ -301,7 +311,7 @@ queries:
   seed_offset: 0
 
 objective:
-  delta_weight: 0.01
+  delta_weight: $DELTA_WEIGHT
   ridge_lambda: 0.0
   ridge_lambda_min: 0.0
   ridge_scale: spectral

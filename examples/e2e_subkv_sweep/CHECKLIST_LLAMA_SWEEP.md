@@ -23,9 +23,9 @@ This sweep evaluates continual memory retention and acquisition on **Llama 3.2 3
 | **QuALITY** (`quality`) | Long-document story QA (5 phases) | **Multiple-Choice Text Generation Accuracy** (`mcq` 5×5 matrix) + Log-Perplexity | `--eval-accuracy` |
 
 > [!NOTE]
-> **Query Ceiling & Regularization Scaling**: All recipes and runner commands execute with `max_queries_per_head=1024` (updated from 16,384). To preserve identical relative regularization strength to the original baseline of `delta_weight=0.01` with 64 queries, `delta_weight` ($\lambda_\Delta$) scales linearly with the actual number of reference queries $N_q$ used in each `(layer, KV-head)` solve:
-> $$\lambda_\Delta = 0.01 \times \frac{N_q}{64}$$
-> where $N_q = \text{queries.shape}[0]$ after any query subsampling (or the actual count if all available queries are used). If $N_q = 1024$, $\lambda_\Delta = 0.16$; if $N_q = 64$, $\lambda_\Delta = 0.01$.
+> **Query Ceiling & Regularization Scaling**: All recipes and runner commands execute with `max_queries_per_head=1024` (updated from 16,384). To preserve identical relative regularization strength to the original baseline of `delta_weight=0.01` with 64 queries, `delta_weight` is explicitly set to `0.16` in `run_sweep.sh`:
+> $$\lambda_\Delta = 0.01 \times \frac{1024}{64} = 0.16$$
+> This value is explicitly written into and logged in each experiment's recipe YAML under `objective.delta_weight: 0.16`, keeping the configuration transparent and reproducible without any implicit dynamic runtime mechanisms. Can also be overridden via `--delta-weight <val>`.
 
 ---
 

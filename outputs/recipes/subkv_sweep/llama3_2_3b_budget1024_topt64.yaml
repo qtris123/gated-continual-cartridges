@@ -1,6 +1,6 @@
 # Auto-generated for sub-KV cache sweep (Model=meta-llama/Llama-3.2-3B-Instruct, Budget=1024, top_t=64, max_queries_per_head=1024)
 # - Stage 1 (p01): Arm-D compaction with spectral ridge_lambda=1e-4
-# - Stages 2-5 (p02-p05): Continual delta matching with delta_weight=0.01, ridge_lambda=0.0
+# - Stages 2-5 (p02-p05): Continual delta matching with delta_weight=0.16, ridge_lambda=0.0
 # - Highest-attention keys: key_mode=highest_attention, key_reposition=true
 # - No attention-bias: beta.enabled=false
 # - Fixed RoPE repositioning: rope_theta=model
@@ -60,7 +60,7 @@ queries:
   seed_offset: 0
 
 objective:
-  delta_weight: 0.01
+  delta_weight: 0.16
   ridge_lambda: 0.0
   ridge_lambda_min: 0.0
   ridge_scale: spectral

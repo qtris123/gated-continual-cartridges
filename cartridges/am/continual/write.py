@@ -192,7 +192,6 @@ def apply_document_am_write_to_cache(
     # B-CASCADE diagnostics (read-only; never touch the solution).
     solve_mass_on_S: dict[int, list[float]] = {}
     solve_v_absmax: dict[int, list[float]] = {}
-    solve_delta_weights: list[float] = []
     n_queries_available: list[int] = []
     n_queries_used: list[int] = []
     # LIT-006 on-policy layer-sequential re-extraction (off unless BOTH the config
@@ -454,8 +453,6 @@ def apply_document_am_write_to_cache(
                     solve_v_absmax.setdefault(layer_idx, []).append(
                         stats["v_selected_absmax_after"]
                     )
-            if stats.get("delta_weight") is not None:
-                solve_delta_weights.append(float(stats["delta_weight"]))
 
             with torch.no_grad():
                 if stages.keys.enabled:
@@ -478,7 +475,6 @@ def apply_document_am_write_to_cache(
         n_queries_used=n_queries_used,
         solve_mass_on_S=solve_mass_on_S,
         solve_v_absmax=solve_v_absmax,
-        solve_delta_weights=solve_delta_weights,
         onpolicy_events=onpolicy_events,
         onpolicy_group=onpolicy_group,
         key_rewrite_info=key_rewrite_info,
@@ -507,7 +503,6 @@ def _build_extra(
     n_queries_used: list[int],
     solve_mass_on_S: dict[int, list[float]],
     solve_v_absmax: dict[int, list[float]],
-    solve_delta_weights: Optional[list[float]] = None,
     onpolicy_events: list[dict],
     onpolicy_group: int,
     key_rewrite_info: list[dict],
@@ -545,10 +540,6 @@ def _build_extra(
         extra["v_selected_absmax_after_per_layer"] = {
             l: max(v) for l, v in solve_v_absmax.items() if v
         }
-    if solve_delta_weights:
-        extra["delta_weight_min"] = min(solve_delta_weights)
-        extra["delta_weight_max"] = max(solve_delta_weights)
-        extra["delta_weight_mean"] = sum(solve_delta_weights) / len(solve_delta_weights)
     if onpolicy_events:
         # LIT-006 / MECH-006.
         extra["onpolicy"] = {
