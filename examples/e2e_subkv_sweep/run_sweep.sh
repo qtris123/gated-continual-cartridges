@@ -322,6 +322,7 @@ EOF
     if (( EVAL_ACCURACY )); then
       echo "    [dry-run] Would run 5x5 generation accuracy evaluation for tag $TAG"
     fi
+    echo "    [dry-run] Would record slot frequency artifacts under outputs/evaluations/$DATASET/$TAG/slot_frequency"
     continue
   fi
 
@@ -380,9 +381,19 @@ EOF
       echo "    Warning: matrix.json not found at $MAT_JSON (check log)"
     fi
 
-    # 4. Optional Step 3: Generation Accuracy Matrix (for QuALITY/LongHealth MCQ)
+    # 4. Step 3: Record Slot Frequency and Geometry Artifacts
+    echo "--- Step 3: Record Slot Frequency Artifacts ($DATASET, $TAG) ---"
+    SLOT_FREQ_DIR="$ROOT/outputs/evaluations/$DATASET/$TAG/slot_frequency"
+    "$PY" -m examples.shared.am.record_slot_frequency \
+      --dataset "$DATASET" \
+      --tag "$TAG" \
+      --output-dir "$SLOT_FREQ_DIR" 2>&1 | tee -a "$SWEEP_LOG" || {
+        echo "    Notice: Slot frequency recording produced warnings or was skipped (check log)"
+      }
+
+    # 5. Optional Step 4: Generation Accuracy Matrix (for QuALITY/LongHealth MCQ)
     if (( EVAL_ACCURACY )); then
-      echo "--- Step 3: Generation Accuracy Matrix ($DATASET, $TAG) ---"
+      echo "--- Step 4: Generation Accuracy Matrix ($DATASET, $TAG) ---"
       ACC_LOG="$LOGDIR/acc_${DATASET}_${TAG}_${TS}.log"
       bash "$ROOT/examples/shared/evaluate/run_accuracy.sh" "$DATASET" "$TAG" "$EVAL_GPUS" 2>&1 | tee -a "$ACC_LOG"
       ACC_JSON="$ROOT/outputs/evaluations/$DATASET/$TAG/accuracy-freeform-mc-options-primeAnswer-v1/matrix.json"

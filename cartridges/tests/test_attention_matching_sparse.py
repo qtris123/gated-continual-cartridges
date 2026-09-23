@@ -6,6 +6,7 @@ import pytest
 import torch
 
 from cartridges.am.components.objective import (
+    ValueObjective,
     guarded_sparse_am_value_update,
     sparse_am_value_update,
 )
@@ -273,3 +274,33 @@ class TestAMTargetAccumulator:
 
         expected = target[0, 2:4].reshape(-1, 5)
         assert torch.equal(head_1, expected)
+
+
+class TestValueObjectiveQueryScaling:
+    def test_delta_weight_scales_linearly_with_queries(self):
+        obj = ValueObjective(ValueObjective.Config(delta_weight=0.01))
+        keys, values, _ = _random_kv_queries(seed=42)
+        selected = torch.arange(TOP_T)
+
+        for n_q, expected_lambda in [(64, 0.01), (1024, 0.16), (512, 0.08), (32, 0.005)]:
+            queries = torch.randn(n_q, HEAD_DIM)
+            _, stats = obj.solve(keys, values, queries, selected)
+            assert "delta_weight" in stats
+            assert abs(stats["delta_weight"] - expected_lambda) < 1e-6
+
+    def test_zero_delta_weight_stays_zero(self):
+        obj = ValueObjective(ValueObjective.Config(delta_weight=0.0))
+        keys, values, _ = _random_kv_queries(seed=42)
+        selected = torch.arange(TOP_T)
+        queries = torch.randn(128, HEAD_DIM)
+        _, stats = obj.solve(keys, values, queries, selected)
+        assert stats["delta_weight"] == 0.0
+
+    def test_explicit_delta_weight_override(self):
+        obj = ValueObjective(ValueObjective.Config(delta_weight=0.01))
+        keys, values, _ = _random_kv_queries(seed=42)
+        selected = torch.arange(TOP_T)
+        queries = torch.randn(1024, HEAD_DIM)
+        _, stats = obj.solve(keys, values, queries, selected, delta_weight=0.05)
+        assert abs(stats["delta_weight"] - 0.05) < 1e-6
+

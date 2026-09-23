@@ -67,7 +67,7 @@ def sparse_am_value_update(
 
     selected_indices = selected_indices.to(device=device, dtype=torch.long)
     if selected_indices.numel() == 0:
-        return values.clone(), {"mse": 0.0, "n_queries": n, "n_selected": 0}
+        return values.clone(), {"mse": 0.0, "n_queries": n, "n_selected": 0, "delta_weight": delta_weight}
 
     # Full-cache attention weights (n, T)
     alpha = compute_attention_weights(queries, keys, head_dim, attention_bias=attention_bias)
@@ -93,7 +93,7 @@ def sparse_am_value_update(
     t = X.shape[1]
 
     if t == 0:
-        return values.clone(), {"mse": 0.0, "n_queries": n, "n_selected": 0}
+        return values.clone(), {"mse": 0.0, "n_queries": n, "n_selected": 0, "delta_weight": delta_weight}
 
     X_solve = X.to(torch.float32)
     Y_solve = residual
@@ -133,6 +133,7 @@ def sparse_am_value_update(
             "n_selected": t,
             "residual_norm": None,
             "effective_ridge_lambda": eff_lam,
+            "delta_weight": delta_weight,
         }
 
     # Keys are frozen during sparse AM, so the attention weights are unchanged.
@@ -155,6 +156,7 @@ def sparse_am_value_update(
         "v_selected_absmean_before": v_old.abs().mean().item(),
         "v_selected_absmean_after": v_new.abs().mean().item(),
         "v_delta_absmax": (v_new - v_old).abs().max().item(),
+        "delta_weight": delta_weight,
     }
     return new_values, stats
 
@@ -271,6 +273,7 @@ def oracle_teacher_value_write(
         "mass_on_S_mean": mass_on_S.mean().item(),
         "teacher_doc_mass_mean": teacher_doc_mass_mean,
         "assign": assign,
+        "delta_weight": 0.0,
     }
     if compute_stats:
         if targets is None:
@@ -329,6 +332,7 @@ def guarded_sparse_am_value_update(
             "n_queries_new": new_queries.shape[0],
             "n_queries_old": 0 if old_queries is None else old_queries.shape[0],
             "n_selected": 0,
+            "delta_weight": delta_weight,
         }
 
     selected_mask = torch.zeros(T, dtype=torch.bool, device=device)
@@ -395,6 +399,7 @@ def guarded_sparse_am_value_update(
         "n_queries_new": new_queries.shape[0],
         "n_queries_old": 0 if old_queries is None else old_queries.shape[0],
         "n_selected": selected_mask.sum().item(),
+        "delta_weight": delta_weight,
     }
     if compute_stats:
         # Attention mass the reference queries put on the written slots S. This is
@@ -465,7 +470,8 @@ class ValueObjective:
         # frobenius -> x ||X||_F^2 / k, fixed/absolute -> as-is.
         ridge_scale: Literal["spectral", "frobenius", "fixed", "absolute"] = "spectral"
         ridge_lambda_min: float = 0.0
-        delta_weight: float = 0.0  # trust region; the canonical driver default is 1e-2
+        delta_weight: float = 0.0  # trust region; base weight scaled linearly by (N_q / 64)
+        scale_delta_by_queries: bool = True
 
         # Old-reference guard: stack old-task (QA) queries into the solve to hold
         # Phase-1 behaviour, scaled as sqrt(weight) on those rows. Inert unless the
@@ -503,6 +509,7 @@ class ValueObjective:
         n_cartridge_keys: Optional[int] = None,
         doc_rope_offset: Optional[int] = None,
         rope_theta: Optional[float] = None,
+        delta_weight: Optional[float] = None,
         compute_stats: bool = True,
     ) -> Tuple[torch.Tensor, dict]:
         """Dispatch to the write rule this config selects.
@@ -510,7 +517,7 @@ class ValueObjective:
         Precedence, matching the historical branch order:
 
         1. ``oracle_write``                       -> ``oracle_teacher_value_write``
-        2. old-reference guard OR ``delta_weight > 0``
+        2. old-reference guard OR ``eff_delta_weight > 0``
                                                   -> ``guarded_sparse_am_value_update``
         3. otherwise                              -> ``sparse_am_value_update``
 
@@ -524,6 +531,22 @@ class ValueObjective:
         """
         cfg = self.config
         use_old_guard = cfg.enable_old_reference_guard and has_old_reference
+
+        if delta_weight is None:
+            # Scale delta_weight linearly with the actual number of queries N_q used:
+            #   lambda_delta = base_delta_weight * (N_q / 64)
+            # where N_q = queries.shape[0] after any query subsampling (or actual count if all used).
+            base_delta = float(cfg.delta_weight)
+            if base_delta > 0:
+                eff_delta_weight = (
+                    base_delta * (queries.shape[0] / 64.0)
+                    if cfg.scale_delta_by_queries
+                    else base_delta
+                )
+            else:
+                eff_delta_weight = 0.0
+        else:
+            eff_delta_weight = float(delta_weight)
 
         if cfg.oracle_write:
             return oracle_teacher_value_write(
@@ -541,7 +564,7 @@ class ValueObjective:
                 compute_stats=compute_stats,
             )
 
-        if use_old_guard or cfg.delta_weight > 0:
+        if use_old_guard or eff_delta_weight > 0:
             return guarded_sparse_am_value_update(
                 keys, values, queries, selected_indices,
                 old_queries=old_queries,
@@ -552,7 +575,7 @@ class ValueObjective:
                 ridge_scale=cfg.ridge_scale,
                 ridge_lambda_min=cfg.ridge_lambda_min,
                 old_reference_weight=cfg.old_reference_weight if use_old_guard else 0.0,
-                delta_weight=cfg.delta_weight,
+                delta_weight=eff_delta_weight,
                 compute_stats=compute_stats,
                 attention_bias=attention_bias,
             )
@@ -564,6 +587,7 @@ class ValueObjective:
             ridge_lambda=cfg.ridge_lambda,
             ridge_scale=cfg.ridge_scale,
             ridge_lambda_min=cfg.ridge_lambda_min,
+            delta_weight=eff_delta_weight,
             compute_stats=compute_stats,
             attention_bias=attention_bias,
         )
