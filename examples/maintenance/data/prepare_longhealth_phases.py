@@ -20,13 +20,9 @@ import pyarrow.parquet as pq
 
 ROOT = Path(__file__).resolve().parent.parent.parent.parent
 
-PHASE_TO_PATIENT_IDS = {
-    1: ["patient_01", "patient_02", "patient_11", "patient_12"],
-    2: ["patient_03", "patient_04", "patient_13", "patient_14"],
-    3: ["patient_05", "patient_06", "patient_15", "patient_16"],
-    4: ["patient_07", "patient_08", "patient_17", "patient_18"],
-    5: ["patient_09", "patient_10", "patient_19", "patient_20"],
-}
+import sys
+sys.path.insert(0, str(ROOT))
+from cartridges.data.longhealth.phases import PHASE_TO_PATIENT_IDS
 
 FULL_STRING_TEMPLATE = """\
 <patient-record-{patient_id}>

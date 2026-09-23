@@ -44,11 +44,11 @@ NUM_PHASES = 5
 PATIENTS_PER_PHASE = 4
 
 PHASE_TO_PATIENT_IDS: Dict[int, List[str]] = {
-    1: ["patient_01", "patient_02", "patient_11", "patient_12"],
-    2: ["patient_03", "patient_04", "patient_13", "patient_14"],
-    3: ["patient_05", "patient_06", "patient_15", "patient_16"],
-    4: ["patient_07", "patient_08", "patient_17", "patient_18"],
-    5: ["patient_09", "patient_10", "patient_19", "patient_20"],
+    1: ["patient_01", "patient_02", "patient_03", "patient_04"],
+    2: ["patient_05", "patient_06", "patient_07", "patient_08"],
+    3: ["patient_09", "patient_10", "patient_11", "patient_12"],
+    4: ["patient_13", "patient_14", "patient_15", "patient_16"],
+    5: ["patient_17", "patient_18", "patient_19", "patient_20"],
 }
 
 

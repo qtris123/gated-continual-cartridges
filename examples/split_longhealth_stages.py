@@ -238,24 +238,12 @@ def build_stages(
     output_root: Path,
 ) -> None:
     """
-    Construct five stages.
-
-    Stage i contains:
-
-        low:
-            2*(i-1)+1
-            2*(i-1)+2
-
-        high:
-            corresponding patients + 10
-
-    Therefore:
-
-        p01 -> 1, 2, 11, 12
-        p02 -> 3, 4, 13, 14
-        p03 -> 5, 6, 15, 16
-        p04 -> 7, 8, 17, 18
-        p05 -> 9, 10, 19, 20
+    Construct five stages with sequential patients:
+        p01 -> 1, 2, 3, 4
+        p02 -> 5, 6, 7, 8
+        p03 -> 9, 10, 11, 12
+        p04 -> 13, 14, 15, 16
+        p05 -> 17, 18, 19, 20
     """
 
     print("\nBuilding stages...")
@@ -266,19 +254,11 @@ def build_stages(
         # Patient IDs for this stage
         # -------------------------------------------------------------
 
-        low_start = 2 * (stage_idx - 1) + 1
+        stage_start = 4 * (stage_idx - 1) + 1
+        expected_stage_ids = set(range(stage_start, stage_start + 4))
 
-        low_ids = {
-            low_start,
-            low_start + 1,
-        }
-
-        high_ids = {
-            low_start + 10,
-            low_start + 11,
-        }
-
-        expected_stage_ids = low_ids | high_ids
+        low_ids = {pid for pid in expected_stage_ids if pid <= 10}
+        high_ids = {pid for pid in expected_stage_ids if pid > 10}
 
         stage_name = f"p{stage_idx:02d}"
 
@@ -289,57 +269,25 @@ def build_stages(
         )
 
         # -------------------------------------------------------------
-        # Filter both source datasets
+        # Filter source datasets
         # -------------------------------------------------------------
 
-        low_stage = select_patients(
-            low_ds,
-            low_ids,
-        )
+        stage_parts = []
+        if low_ids:
+            low_stage = select_patients(low_ds, low_ids).remove_columns("_patient_id")
+            print(f"  low-source rows:  {len(low_stage):,}")
+            stage_parts.append(low_stage)
+        if high_ids:
+            high_stage = select_patients(high_ds, high_ids).remove_columns("_patient_id")
+            print(f"  high-source rows: {len(high_stage):,}")
+            if stage_parts:
+                high_stage = make_compatible_for_concat(stage_parts[0], high_stage)
+            stage_parts.append(high_stage)
 
-        high_stage = select_patients(
-            high_ds,
-            high_ids,
-        )
-
-        print(
-            f"  low-source rows:  {len(low_stage):,}"
-        )
-        print(
-            f"  high-source rows: {len(high_stage):,}"
-        )
-
-        # -------------------------------------------------------------
-        # Remove helper column
-        # -------------------------------------------------------------
-
-        low_stage = low_stage.remove_columns(
-            "_patient_id"
-        )
-
-        high_stage = high_stage.remove_columns(
-            "_patient_id"
-        )
-
-        # -------------------------------------------------------------
-        # Make schemas compatible
-        # -------------------------------------------------------------
-
-        high_stage = make_compatible_for_concat(
-            low_stage,
-            high_stage,
-        )
-
-        # -------------------------------------------------------------
-        # Merge both halves
-        # -------------------------------------------------------------
-
-        stage_ds = concatenate_datasets(
-            [
-                low_stage,
-                high_stage,
-            ]
-        )
+        if len(stage_parts) == 1:
+            stage_ds = stage_parts[0]
+        else:
+            stage_ds = concatenate_datasets(stage_parts)
 
         # -------------------------------------------------------------
         # Validate stage contents
