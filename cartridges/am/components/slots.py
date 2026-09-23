@@ -708,12 +708,13 @@ class SlotSelector:
         access_scores: torch.Tensor,
         usage: Optional[torch.Tensor],
     ) -> torch.Tensor:
-        """Adjust slot selection scores based on prior usage.
+        """Down-weight already-written slots before ranking (SOFT-LOCALITY).
 
-        When lambda > 0 and exponent is positive (+lam), already-written slots
-        receive a multiplicative bonus `score * (1 + usage) ** (lambda)` to
-        encourage overlapping/slot reuse across stages. `lambda <= 0` or
-        `usage is None` is a no-op.
+        Multiplicative penalty `score * (1 + usage) ** (-lambda)`. Applying it in
+        the access-score domain is exact for the `tfidf`/`attention_mass` paths:
+        their per-layer top-k is monotone in `access_scores`, so scaling by a
+        positive per-slot factor is equivalent to scaling the final `tf`/`tfidf`
+        selection score. `lambda<=0` or `usage is None` is a no-op.
         """
         lam = float(self.config.usage_penalty_lambda)
         if lam <= 0.0 or usage is None:
@@ -730,8 +731,7 @@ class SlotSelector:
                 f"{tuple(access_scores.shape)}; usage must be (n_layers, n_slots)."
             )
         if self.config.usage_penalty_mode == "mult":
-            # Reversed exponent (+lam): encourage reusing previously written slots across stages
-            return access_scores * torch.pow(1.0 + u, lam)
+            return access_scores * torch.pow(1.0 + u, -lam)
         raise NotImplementedError(
             f"usage_penalty_mode={self.config.usage_penalty_mode!r} is not "
             "implemented; use 'mult'."
