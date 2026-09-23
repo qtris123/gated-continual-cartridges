@@ -6,10 +6,11 @@ This guide provides instructions for running the **End-to-End Sub-KV Cache Compa
 
 ## 1. Background & Comparison with Qwen
 
-In the original Qwen sweep ([`README.md`](README.md)), we evaluated continual memory compaction across varying **sub-KV cache budgets** ($S = 1024, 2048, 4096$) with a proportional **6.25% update budget** ($t = 64, 128, 256$):
+In the Llama 3.2 3B sweep, we evaluate continual memory compaction across **sub-KV cache budgets** ($S = 512, 1024, 2048, 4096$) with a proportional **6.25% update budget** ($t = 32, 64, 128, 256$):
 
 | Budget ($S$) | Update Budget $\text{top\_t}$ ($t$) | Ratio ($t / S$) | Stage 1 (Initial) | Stages 2–5 (Continual AM) |
 | :---: | :---: | :---: | :--- | :--- |
+| **512** | **32** | 6.25% | Closed-form Arm-D ($N=512$) | Continual 5-stage chain ($t=32$) |
 | **1024** | **64** | 6.25% | Closed-form Arm-D ($N=1024$) | Continual 5-stage chain ($t=64$) |
 | **2048** | **128** | 6.25% | Closed-form Arm-D ($N=2048$) | Continual 5-stage chain ($t=128$) |
 | **4096** | **256** | 6.25% | Closed-form Arm-D ($N=4096$) | Continual 5-stage chain ($t=256$) |
@@ -145,7 +146,7 @@ bash examples/e2e_subkv_sweep/run_sweep_llama.sh \
 
 ### Running in the Background (`nohup` / `tmux`)
 
-The full 3-arm sweep takes a few hours to complete. Run inside `tmux` or using `nohup`:
+The full 4-arm sweep takes a few hours to complete. Run inside `tmux` or using `nohup`:
 
 ```bash
 nohup bash examples/e2e_subkv_sweep/run_sweep_llama.sh --dataset qasper --gpu 0 > llama_sweep_qasper.log 2>&1 &
