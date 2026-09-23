@@ -35,6 +35,7 @@ BUDGETS_STR="1024,2048,4096"
 TOP_TS_STR="64,128,256"
 FORCE=0
 DRY_RUN=0
+EVAL_ACCURACY=0
 
 usage() {
   cat <<EOF
@@ -49,6 +50,7 @@ Options:
   --budget <size>      Single sub-KV cache budget to sweep across multiple top-ts (e.g. 16384)
   --budgets <list>     Comma-separated sub-KV cache budgets (default: $BUDGETS_STR)
   --top-ts <list>      Comma-separated proportional top-t values (default: $TOP_TS_STR)
+  --eval-accuracy      Run additional 5x5 text generation accuracy evaluation (for QuALITY/LongHealth MCQ)
   --force              Rebuild and overwrite existing cache/eval artifacts
   --dry-run            Print execution plan without running
   -h, --help           Show this help message
@@ -60,8 +62,8 @@ Examples:
   # Run on Llama 3.2 3B:
   bash examples/e2e_subkv_sweep/run_sweep.sh --model meta-llama/Llama-3.2-3B-Instruct --dataset qasper --gpu 0
 
-  # Sweep top-ts for a single budget (e.g. 16384 slots):
-  bash examples/e2e_subkv_sweep/run_sweep.sh --budget 16384 --top-ts 1024,4096,8192 --dataset qasper --gpu 0
+  # Sweep top-ts for a single budget (e.g. 16384 slots) on QuALITY with MCQ accuracy:
+  bash examples/e2e_subkv_sweep/run_sweep.sh --budget 16384 --top-ts 1024,4096,8192 --dataset quality --eval-accuracy --gpu 0
 
   # Run across multiple datasets:
   bash examples/e2e_subkv_sweep/run_sweep.sh --datasets qasper,quality --gpu 0
@@ -80,6 +82,7 @@ while [[ $# -gt 0 ]]; do
     --budgets)   BUDGETS_STR="$2"; shift 2 ;;
     --top-ts)    TOP_TS_STR="$2"; shift 2 ;;
     --top-t)     TOP_TS_STR="$2"; shift 2 ;;
+    --eval-accuracy) EVAL_ACCURACY=1; shift ;;
     --force)     FORCE=1; shift ;;
     --dry-run)   DRY_RUN=1; shift ;;
     -h|--help)   usage ;;
@@ -307,6 +310,9 @@ EOF
     echo "    [dry-run] Wrote recipe to $RECIPE"
     echo "    [dry-run] Would build Phase 1 cache under $P1_ROOT"
     echo "    [dry-run] Would run continual chain p02-p05 with tag $TAG"
+    if (( EVAL_ACCURACY )); then
+      echo "    [dry-run] Would run 5x5 generation accuracy evaluation for tag $TAG"
+    fi
     continue
   fi
 
@@ -360,9 +366,20 @@ EOF
 
     MAT_JSON="$ROOT/outputs/evaluations/$DATASET/$TAG/teacher-forced-logppl-v1/matrix.json"
     if [[ -f "$MAT_JSON" ]]; then
-      echo "    Successfully generated matrix: $MAT_JSON"
+      echo "    Successfully generated perplexity matrix: $MAT_JSON"
     else
       echo "    Warning: matrix.json not found at $MAT_JSON (check log)"
+    fi
+
+    # 4. Optional Step 3: Generation Accuracy Matrix (for QuALITY/LongHealth MCQ)
+    if (( EVAL_ACCURACY )); then
+      echo "--- Step 3: Generation Accuracy Matrix ($DATASET, $TAG) ---"
+      ACC_LOG="$LOGDIR/acc_${DATASET}_${TAG}_${TS}.log"
+      bash "$ROOT/examples/shared/evaluate/run_accuracy.sh" "$DATASET" "$TAG" "$EVAL_GPUS" 2>&1 | tee -a "$ACC_LOG"
+      ACC_JSON="$ROOT/outputs/evaluations/$DATASET/$TAG/accuracy-freeform-mc-options-primeAnswer-v1/matrix.json"
+      if [[ -f "$ACC_JSON" ]]; then
+        echo "    Successfully generated accuracy matrix: $ACC_JSON"
+      fi
     fi
   done
 done
