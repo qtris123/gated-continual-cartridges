@@ -51,7 +51,7 @@ Options:
   --budget <size>      Single sub-KV cache budget to sweep across multiple top-ts (e.g. 16384)
   --budgets <list>     Comma-separated sub-KV cache budgets (default: $BUDGETS_STR)
   --top-ts <list>      Comma-separated proportional top-t values (default: $TOP_TS_STR)
-  --max-queries-per-head <N> Max queries per head (default: top_t * 8)
+  --max-queries-per-head <N> Max queries per head (default: 16384)
   --eval-accuracy      Run additional 5x5 text generation accuracy evaluation (for QuALITY/LongHealth MCQ)
   --force              Rebuild and overwrite existing cache/eval artifacts
   --dry-run            Print execution plan without running
@@ -230,7 +230,7 @@ for p in range(1, 6):
   if [[ -n "$MAX_QUERIES_ARG" ]]; then
     MAX_QUERIES_PER_HEAD="$MAX_QUERIES_ARG"
   else
-    MAX_QUERIES_PER_HEAD=$(( TOP_T * 8 ))
+    MAX_QUERIES_PER_HEAD="16384"
   fi
 
   echo ""

@@ -224,10 +224,15 @@ bash examples/e2e_subkv_sweep/run_sweep.sh --dataset qasper --dry-run
 ```
 Options:
   --dataset <name>     Dataset name: qasper, quality, finqa, techqa (default: qasper)
+  --datasets <list>    Comma-separated dataset names to run sequentially
+  --model <path>       Base model ID or path (default: Qwen/Qwen3-4B-Instruct-2507)
   --gpu <id>           GPU index for compaction writes (default: 0)
   --eval-gpus <list>   GPU index or comma-separated list for evaluations (default: same as --gpu)
+  --budget <size>      Single sub-KV cache budget to sweep across multiple top-ts (e.g. 16384)
   --budgets <list>     Comma-separated sub-KV cache budgets (default: 1024,2048,4096)
   --top-ts <list>      Comma-separated proportional top-t values (default: 64,128,256)
+  --max-queries-per-head <N> Upper ceiling on reference queries sampled per head (default: 16384)
+  --eval-accuracy      Run additional 5x5 text generation accuracy evaluation (for QuALITY/LongHealth MCQ)
   --force              Rebuild and overwrite existing cache/eval artifacts
   --dry-run            Print execution plan without executing
   -h, --help           Show help message
