@@ -249,12 +249,7 @@ class DatasetBatch:
     topk_logprobs: Optional[torch.Tensor] = None
     topk_token_ids: Optional[torch.Tensor] = None
     topk_token_idxs: Optional[torch.Tensor] = None
-
-    @property
-    def valid_len(self) -> int:
-        if hasattr(self, "token_counts") and hasattr(self.token_counts, "num_tokens"):
-            return min(int(self.token_counts.num_tokens), int(self.input_ids.shape[0]))
-        return int(self.input_ids.shape[0])
+    valid_len: Optional[int] = None
 
 
 def msg(content, role: Literal["user"] | Literal["assistant"] | Literal["system"]):
@@ -452,6 +447,8 @@ class TrainDataset(Dataset):
         topk_logprobs = torch.cat(topk_logprobs, dim=0)
         topk_token_idxs = torch.cat(topk_token_idxs, dim=0)
 
+        valid_len = min(len(input_ids), self.config.packed_seq_length)
+
         if len(input_ids) > self.config.packed_seq_length:
             # if the input ids are longer than the sequence length, 
             # we need to truncate them
@@ -484,6 +481,7 @@ class TrainDataset(Dataset):
             topk_token_idxs=topk_token_idxs,
             metadata=metadatas,
             token_counts=token_counts,
+            valid_len=valid_len,
         )
 
 class LossEvalDataset(TrainDataset):

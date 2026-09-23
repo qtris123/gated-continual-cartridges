@@ -223,9 +223,7 @@ def _collect_compaction_queries(
                     batch_count += 1
                     continue
                 valid_len = getattr(batch, "valid_len", None)
-                if valid_len is None and hasattr(batch, "token_counts"):
-                    valid_len = min(getattr(batch.token_counts, "num_tokens", seq_ids.shape[0]), seq_ids.shape[0])
-                elif valid_len is None:
+                if valid_len is None:
                     valid_len = seq_ids.shape[0]
 
                 # Store raw per-layer queries without needing a cartridge for

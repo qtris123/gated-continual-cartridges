@@ -653,9 +653,7 @@ def collect_reference_queries(
             seq_ids = batch.element_ids.to(device)
             position_ids = batch.position_ids.to(device)
             valid_len = getattr(batch, "valid_len", None)
-            if valid_len is None and hasattr(batch, "token_counts"):
-                valid_len = min(getattr(batch.token_counts, "num_tokens", input_ids.shape[0]), input_ids.shape[0])
-            elif valid_len is None:
+            if valid_len is None:
                 valid_len = input_ids.shape[0]
 
             wrapped_model(
