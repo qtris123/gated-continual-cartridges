@@ -33,6 +33,7 @@ EVAL_GPUS="${EVAL_GPUS:-$GPU}"
 BUDGET_ARG=""
 BUDGETS_STR="1024,2048,4096"
 TOP_TS_STR="64,128,256"
+MAX_QUERIES_ARG=""
 FORCE=0
 DRY_RUN=0
 EVAL_ACCURACY=0
@@ -50,6 +51,7 @@ Options:
   --budget <size>      Single sub-KV cache budget to sweep across multiple top-ts (e.g. 16384)
   --budgets <list>     Comma-separated sub-KV cache budgets (default: $BUDGETS_STR)
   --top-ts <list>      Comma-separated proportional top-t values (default: $TOP_TS_STR)
+  --max-queries-per-head <N> Max queries per head (default: top_t * 8)
   --eval-accuracy      Run additional 5x5 text generation accuracy evaluation (for QuALITY/LongHealth MCQ)
   --force              Rebuild and overwrite existing cache/eval artifacts
   --dry-run            Print execution plan without running
@@ -82,6 +84,7 @@ while [[ $# -gt 0 ]]; do
     --budgets)   BUDGETS_STR="$2"; shift 2 ;;
     --top-ts)    TOP_TS_STR="$2"; shift 2 ;;
     --top-t)     TOP_TS_STR="$2"; shift 2 ;;
+    --max-queries-per-head) MAX_QUERIES_ARG="$2"; shift 2 ;;
     --eval-accuracy) EVAL_ACCURACY=1; shift ;;
     --force)     FORCE=1; shift ;;
     --dry-run)   DRY_RUN=1; shift ;;
@@ -224,13 +227,19 @@ for p in range(1, 6):
     P1_ROOT="$ROOT/outputs/experiments/subkv_sweep_${DATASET}/${P1_PREFIX}budget${SIZE}/p01"
     SWEEP_LOG="$LOGDIR/${DATASET}_${TAG}_${TS}.log"
 
+  if [[ -n "$MAX_QUERIES_ARG" ]]; then
+    MAX_QUERIES_PER_HEAD="$MAX_QUERIES_ARG"
+  else
+    MAX_QUERIES_PER_HEAD=$(( TOP_T * 8 ))
+  fi
+
   echo ""
-  echo ">>> [Arm $((i+1))/${#BUDGETS[@]}] Budget=$SIZE, top_t=$TOP_T (Tag: $TAG) <<<"
+  echo ">>> [Arm $((i+1))/${#BUDGETS[@]}] Budget=$SIZE, top_t=$TOP_T, max_queries_per_head=$MAX_QUERIES_PER_HEAD (Tag: $TAG) <<<"
   echo "    Log file: $SWEEP_LOG"
 
   # 1. Generate size-specific recipe YAML matching canonical experiments (e.g. fullkv_topt512.yaml)
   cat <<EOF > "$RECIPE"
-# Auto-generated for sub-KV cache sweep (Model=$MODEL_NAME, Budget=$SIZE, top_t=$TOP_T)
+# Auto-generated for sub-KV cache sweep (Model=$MODEL_NAME, Budget=$SIZE, top_t=$TOP_T, max_queries_per_head=$MAX_QUERIES_PER_HEAD)
 # - Stage 1 (p01): Arm-D compaction with spectral ridge_lambda=1e-4
 # - Stages 2-5 (p02-p05): Continual delta matching with delta_weight=0.01, ridge_lambda=0.0
 # - Highest-attention keys: key_mode=highest_attention, key_reposition=true
@@ -246,7 +255,7 @@ p01:
   global_teacher_positions: 1
   ridge_lambda: 1e-4
   ridge_scale: spectral
-  max_queries_per_head: 64
+  max_queries_per_head: $MAX_QUERIES_PER_HEAD
   max_ref_batches: 50
   max_ref_examples: 256
   queries_per_batch: all_tokens
@@ -283,7 +292,7 @@ beta:
   target_mode: residual
 
 queries:
-  max_queries_per_head: 64
+  max_queries_per_head: $MAX_QUERIES_PER_HEAD
   max_ref_examples_per_doc: 32
   onpolicy_layers: 0
   onpolicy_refresh_doc_kv: false
