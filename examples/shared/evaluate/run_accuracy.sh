@@ -60,3 +60,4 @@ for p in "${pids[@]}"; do wait "$p"; done
 # Summarize into matrix.json / matrix.csv.
 $PY examples/shared/evaluate/generation_accuracy_matrix.py --plan "$PLAN" --summarize-only
 echo "=== accuracy matrix done: ${OUT_DIR}/matrix.json ==="
+echo "=== generations recorded in: ${OUT_DIR}/cells/*/generations.jsonl ==="
