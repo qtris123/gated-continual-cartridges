@@ -249,11 +249,16 @@ All outputs are structured deterministically:
    - Saved under `outputs/{DATASET}_5phase_runs/` and `outputs/{DATASET}_5phase_state/`.
 4. **Execution Logs:**
    - Saved in `logs/e2e_subkv_sweep/{DATASET}_e2e_budget{SIZE}_topt{TOP_T}_{TIMESTAMP}.log`.
-5. **5×5 Evaluation Matrices:**
-   - Location: `outputs/evaluations/{DATASET}/e2e_budget{SIZE}_topt{TOP_T}/teacher-forced-logppl-v1/`
+5. **5×5 Perplexity Evaluation Matrices:**
+   - Location: `outputs/evaluations/{DATASET}/{TAG}/teacher-forced-logppl-v1/`
    - Files:
      - `matrix.json`: Full metrics, backward/forward transfer, and config summary.
      - `matrix.csv`: Tabular 5×5 matrix where rows are stages (p01–p05) and columns are evaluation phases (p1–p5).
+6. **5×5 Generation Accuracy & Recorded Generations (with `--eval-accuracy`):**
+   - Location: `outputs/evaluations/{DATASET}/{TAG}/accuracy-freeform-mc-options-primeAnswer-v1/`
+   - Files:
+     - `matrix.csv` / `matrix.json`: Tabular 5×5 MCQ accuracy matrix.
+     - `cells/stage-p{i}__eval-p{j}/generations.jsonl`: **Full raw recorded generations for every single question**, containing the prompt, generated answer, reference answer, parsed option, score, correctness, and metadata.
 
 ### Inspecting the 5×5 Matrix
 
