@@ -1,4 +1,4 @@
-# Auto-generated for sub-KV cache sweep (Model=Qwen/Qwen3-4B-Instruct-2507, Budget=16384, top_t=4096, max_queries_per_head=16384)
+# Auto-generated for sub-KV cache sweep (Model=Qwen/Qwen3-4B-Instruct-2507, Budget=16384, top_t=4096, max_queries_per_head=1024)
 # - Stage 1 (p01): Arm-D compaction with spectral ridge_lambda=1e-4
 # - Stages 2-5 (p02-p05): Continual delta matching with delta_weight=0.01, ridge_lambda=0.0
 # - Highest-attention keys: key_mode=highest_attention, key_reposition=true
@@ -14,7 +14,7 @@ p01:
   global_teacher_positions: 1
   ridge_lambda: 1e-4
   ridge_scale: spectral
-  max_queries_per_head: 16384
+  max_queries_per_head: 1024
   max_ref_batches: 50
   max_ref_examples: 256
   queries_per_batch: all_tokens
@@ -51,7 +51,7 @@ beta:
   target_mode: residual
 
 queries:
-  max_queries_per_head: 16384
+  max_queries_per_head: 1024
   max_ref_examples_per_doc: 32
   onpolicy_layers: 0
   onpolicy_refresh_doc_kv: false

@@ -1,0 +1,18 @@
+# Auto-generated Phase 1 initial compaction recipe (Budget=1024)
+p01:
+  num_tokens: 1024
+  key_select: highest_attention
+  granularity: per_head
+  enable_beta: 0
+  rebake_key_positions: 1
+  rope_theta: model
+  global_teacher_positions: 1
+  ridge_lambda: 1e-4
+  ridge_scale: spectral
+  max_queries_per_head: 64
+  max_ref_batches: 50
+  max_ref_examples: 256
+  queries_per_batch: all_tokens
+  strip_ref_system_prompt: 1
+  num_bg_batches: 64
+  seed: 42

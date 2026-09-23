@@ -231,7 +231,7 @@ Options:
   --budget <size>      Single sub-KV cache budget to sweep across multiple top-ts (e.g. 16384)
   --budgets <list>     Comma-separated sub-KV cache budgets (default: 1024,2048,4096)
   --top-ts <list>      Comma-separated proportional top-t values (default: 64,128,256)
-  --max-queries-per-head <N> Upper ceiling on reference queries sampled per head (default: 16384)
+  --max-queries-per-head <N> Upper ceiling on reference queries sampled per head (default: 1024)
   --eval-accuracy      Run additional 5x5 text generation accuracy evaluation (for QuALITY/LongHealth MCQ)
   --force              Rebuild and overwrite existing cache/eval artifacts
   --dry-run            Print execution plan without executing
