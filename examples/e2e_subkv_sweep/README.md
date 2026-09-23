@@ -10,6 +10,7 @@ The pipeline systematically sweeps over **sub-KV cache budgets** ($1024 \to 2048
 | **1024** | **64** | 6.25% | Initial Compaction ($N=1024$) | Continual 5-stage chain ($t=64$) | **Active Sweep** |
 | **2048** | **128** | 6.25% | Initial Compaction ($N=2048$) | Continual 5-stage chain ($t=128$) | **Active Sweep** |
 | **4096** | **256** | 6.25% | Initial Compaction ($N=4096$) | Continual 5-stage chain ($t=256$) | **Active Sweep** |
+| **16384** | **1024, 4096, 8192** | 6.25%, 25%, 50% | Initial Compaction ($N=16384$) | Continual 5-stage chain ($t \in \{1024, 4096, 8192\}$) | **Top-t Capacity Sweep** |
 
 Each arm executes the canonical experimental setting:
 - **Stage 1 (Initial Compaction / p01):** Closed-form Arm-D compaction with spectral ridge regularization $\lambda_{\text{ridge}} = 10^{-4}$ (`p01.ridge_lambda: 1e-4`, `p01.ridge_scale: spectral`). This regularizes the underdetermined least-squares system ($N_{\text{queries}} \le 64 \ll S$) and ensures unqueried slot values decay stably rather than diverging.
@@ -154,6 +155,25 @@ bash examples/e2e_subkv_sweep/run_sweep.sh \
   --top-ts 64,128 \
   --gpu 0
 ```
+
+### Sweeping Top-t for 16,384-Slot Budget
+
+To sweep over selective write budgets $t \in \{1024, 4096, 8192\}$ for a fixed 16,384-slot sub-KV cache:
+
+```bash
+# Using the dedicated convenience wrapper (Qwen 3 4B on QASPER):
+bash examples/e2e_subkv_sweep/run_sweep_16k.sh --gpu 0
+
+# For Llama 3.2 3B:
+bash examples/e2e_subkv_sweep/run_sweep_16k.sh --model meta-llama/Llama-3.2-3B-Instruct --gpu 0
+
+# Or via run_sweep.sh directly:
+bash examples/e2e_subkv_sweep/run_sweep.sh --budget 16384 --top-ts 1024,4096,8192 --gpu 0
+```
+
+> [!TIP]
+> **Phase 1 Reuse Optimization:**
+> Phase 1 initial compaction ($S=16384$) is executed once during Arm 1 ($t=1024$). Subsequent arms ($t=4096, 8192$) detect and reuse `cache_last.pt` directly, saving substantial compute time.
 
 ### Sweeping Over Multiple Datasets
 

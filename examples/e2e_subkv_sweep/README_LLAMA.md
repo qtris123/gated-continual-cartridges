@@ -151,6 +151,16 @@ bash examples/e2e_subkv_sweep/run_sweep_llama.sh \
   --eval-gpus 0,1
 ```
 
+### Option D: Sweeping Top-t for 16,384-Slot Budget
+To run the 16,384-slot budget sweep ($t \in \{1024, 4096, 8192\}$) on Llama 3.2 3B:
+```bash
+# Single dataset (e.g. QASPER):
+bash examples/e2e_subkv_sweep/run_sweep_16k.sh --model meta-llama/Llama-3.2-3B-Instruct --dataset qasper --gpu 0
+
+# Multiple datasets sequentially:
+bash examples/e2e_subkv_sweep/run_sweep_16k.sh --model meta-llama/Llama-3.2-3B-Instruct --datasets qasper,quality --gpu 0
+```
+
 ### Running in the Background (`nohup` / `tmux`)
 
 The full 4-arm sweep takes a few hours to complete. Run inside `tmux` or using `nohup`:

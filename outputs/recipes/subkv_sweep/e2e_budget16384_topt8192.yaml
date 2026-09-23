@@ -1,0 +1,74 @@
+# Auto-generated for sub-KV cache sweep (Model=Qwen/Qwen3-4B-Instruct-2507, Budget=16384, top_t=8192)
+# - Stage 1 (p01): Arm-D compaction with spectral ridge_lambda=1e-4
+# - Stages 2-5 (p02-p05): Continual delta matching with delta_weight=0.01, ridge_lambda=0.0
+# - Highest-attention keys: key_mode=highest_attention, key_reposition=true
+# - No attention-bias: beta.enabled=false
+# - Fixed RoPE repositioning: rope_theta=5000000.0
+p01:
+  num_tokens: 16384
+  key_select: highest_attention
+  granularity: per_head
+  enable_beta: 0
+  rebake_key_positions: 1
+  rope_theta: model
+  global_teacher_positions: 1
+  ridge_lambda: 1e-4
+  ridge_scale: spectral
+  max_queries_per_head: 64
+  max_ref_batches: 50
+  max_ref_examples: 256
+  queries_per_batch: all_tokens
+  strip_ref_system_prompt: 1
+  num_bg_batches: 64
+  seed: 42
+
+slots:
+  top_t: 8192
+  granularity: per_layer
+  slot_selection: tfidf
+  use_idf: false
+  safe_fraction: 1.0
+  safe_metric: redundancy
+  usage_penalty_lambda: 0.0
+  min_top_t_per_layer: 1
+  background_top_k_per_batch: 128
+  idf_prior_weight: 0.0
+  idf_smoothing: 1.0
+  mass_redundancy_alpha: 0.5
+  num_background_batches: 999999999
+  redundancy_ridge_rel: 1.0e-06
+
+keys:
+  key_mode: highest_attention
+  key_reposition: true
+
+beta:
+  enabled: false
+  fit_scope: selected
+  beta_box: 3.0
+  nnls_driver: gelsd
+  nnls_iters: 2
+  target_mode: residual
+
+queries:
+  max_queries_per_head: 64
+  max_ref_examples_per_doc: 32
+  onpolicy_layers: 0
+  onpolicy_refresh_doc_kv: false
+  queries_per_batch: all_tokens
+  ref_batch_limit: 5
+  seed_offset: 0
+
+objective:
+  delta_weight: 0.01
+  ridge_lambda: 0.0
+  ridge_lambda_min: 0.0
+  ridge_scale: spectral
+  enable_old_reference_guard: false
+  old_ref_data_path: null
+  old_ref_max_examples: 64
+  old_reference_weight: 0.0
+  oracle_write: false
+  oracle_write_assign: mass_ranked
+
+rope_theta: 5000000.0

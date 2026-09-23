@@ -30,6 +30,7 @@ DATASETS_STR=""
 MODEL_NAME="${MODEL_NAME:-Qwen/Qwen3-4B-Instruct-2507}"
 GPU="${GPU:-0}"
 EVAL_GPUS="${EVAL_GPUS:-$GPU}"
+BUDGET_ARG=""
 BUDGETS_STR="1024,2048,4096"
 TOP_TS_STR="64,128,256"
 FORCE=0
@@ -45,6 +46,7 @@ Options:
   --dataset <name>     Single dataset: qasper, quality, finqa, techqa (default: $DATASET_DEFAULT)
   --gpu <id>           GPU index for compaction writes (default: $GPU)
   --eval-gpus <list>   GPU index or comma-separated list for evaluations (default: $EVAL_GPUS)
+  --budget <size>      Single sub-KV cache budget to sweep across multiple top-ts (e.g. 16384)
   --budgets <list>     Comma-separated sub-KV cache budgets (default: $BUDGETS_STR)
   --top-ts <list>      Comma-separated proportional top-t values (default: $TOP_TS_STR)
   --force              Rebuild and overwrite existing cache/eval artifacts
@@ -58,11 +60,11 @@ Examples:
   # Run on Llama 3.2 3B:
   bash examples/e2e_subkv_sweep/run_sweep.sh --model meta-llama/Llama-3.2-3B-Instruct --dataset qasper --gpu 0
 
+  # Sweep top-ts for a single budget (e.g. 16384 slots):
+  bash examples/e2e_subkv_sweep/run_sweep.sh --budget 16384 --top-ts 1024,4096,8192 --dataset qasper --gpu 0
+
   # Run across multiple datasets:
   bash examples/e2e_subkv_sweep/run_sweep.sh --datasets qasper,quality --gpu 0
-
-  # Include 512 (e.g. 512/32, 1024/64, 2048/128, 4096/256):
-  bash examples/e2e_subkv_sweep/run_sweep.sh --budgets 512,1024,2048,4096 --top-ts 32,64,128,256
 EOF
   exit 0
 }
@@ -74,8 +76,10 @@ while [[ $# -gt 0 ]]; do
     --dataset)   DATASET="$2"; shift 2 ;;
     --gpu)       GPU="$2"; shift 2 ;;
     --eval-gpus) EVAL_GPUS="$2"; shift 2 ;;
+    --budget)    BUDGET_ARG="$2"; shift 2 ;;
     --budgets)   BUDGETS_STR="$2"; shift 2 ;;
     --top-ts)    TOP_TS_STR="$2"; shift 2 ;;
+    --top-t)     TOP_TS_STR="$2"; shift 2 ;;
     --force)     FORCE=1; shift ;;
     --dry-run)   DRY_RUN=1; shift ;;
     -h|--help)   usage ;;
@@ -91,13 +95,38 @@ else
   DATASETS=("$DATASET_DEFAULT")
 fi
 
-# Resolve Python executable
+IFS=',' read -r -a TOP_TS <<< "$TOP_TS_STR"
+
+if [[ -n "$BUDGET_ARG" ]]; then
+  BUDGETS=()
+  for _ in "${TOP_TS[@]}"; do
+    BUDGETS+=("$BUDGET_ARG")
+  done
+else
+  IFS=',' read -r -a BUDGETS <<< "$BUDGETS_STR"
+  if [[ "${#BUDGETS[@]}" -eq 1 && "${#TOP_TS[@]}" -gt 1 ]]; then
+    SINGLE_BUDGET="${BUDGETS[0]}"
+    BUDGETS=()
+    for _ in "${TOP_TS[@]}"; do
+      BUDGETS+=("$SINGLE_BUDGET")
+    done
+  fi
+fi
+
+if [[ "${#BUDGETS[@]}" -ne "${#TOP_TS[@]}" ]]; then
+  echo "Error: Number of budgets (${#BUDGETS[@]}) must match number of top_ts (${#TOP_TS[@]})." >&2
+  exit 1
+fi
 if [[ -n "${CARTRIDGES_PYTHON:-}" ]]; then
   PY="$CARTRIDGES_PYTHON"
 elif [[ -x "$ROOT/.venv/bin/python" ]]; then
   PY="$ROOT/.venv/bin/python"
 elif [[ -n "${CONDA_PREFIX:-}" ]] && [[ -x "$CONDA_PREFIX/bin/python" ]]; then
   PY="$CONDA_PREFIX/bin/python"
+elif [[ -x "$HOME/.conda/envs/rocky9/2024.09/cartridges/bin/python" ]]; then
+  PY="$HOME/.conda/envs/rocky9/2024.09/cartridges/bin/python"
+elif [[ -x "$HOME/.conda/envs/cartridges/bin/python" ]]; then
+  PY="$HOME/.conda/envs/cartridges/bin/python"
 else
   PY="$(command -v python3 || command -v python)"
 fi
@@ -117,14 +146,6 @@ elif [[ "$MODEL_NAME" =~ [Qq]wen ]]; then
 else
   MODEL_SLUG="$(basename "$MODEL_NAME" | tr '[:upper:]' '[:lower:]')"
   ROPE_THETA_VAL="model"
-fi
-
-IFS=',' read -r -a BUDGETS <<< "$BUDGETS_STR"
-IFS=',' read -r -a TOP_TS <<< "$TOP_TS_STR"
-
-if [[ "${#BUDGETS[@]}" -ne "${#TOP_TS[@]}" ]]; then
-  echo "Error: Number of budgets (${#BUDGETS[@]}) must match number of top_ts (${#TOP_TS[@]})." >&2
-  exit 1
 fi
 
 LOGDIR="$ROOT/logs/e2e_subkv_sweep"
@@ -189,14 +210,16 @@ for p in range(1, 6):
   for i in "${!BUDGETS[@]}"; do
     SIZE="${BUDGETS[$i]}"
   TOP_T="${TOP_TS[$i]}"
-  if [[ "$MODEL_SLUG" == "qwen3_4b" ]]; then
-    TAG="e2e_budget${SIZE}_topt${TOP_T}"
-  else
-    TAG="${MODEL_SLUG}_budget${SIZE}_topt${TOP_T}"
-  fi
-  RECIPE="$RECIPEDIR/${TAG}.yaml"
-  P1_ROOT="$ROOT/outputs/experiments/subkv_sweep_${DATASET}/${TAG}/p01"
-  SWEEP_LOG="$LOGDIR/${DATASET}_${TAG}_${TS}.log"
+    if [[ "$MODEL_SLUG" == "qwen3_4b" ]]; then
+      TAG="e2e_budget${SIZE}_topt${TOP_T}"
+      P1_PREFIX=""
+    else
+      TAG="${MODEL_SLUG}_budget${SIZE}_topt${TOP_T}"
+      P1_PREFIX="${MODEL_SLUG}_"
+    fi
+    RECIPE="$RECIPEDIR/${TAG}.yaml"
+    P1_ROOT="$ROOT/outputs/experiments/subkv_sweep_${DATASET}/${P1_PREFIX}budget${SIZE}/p01"
+    SWEEP_LOG="$LOGDIR/${DATASET}_${TAG}_${TS}.log"
 
   echo ""
   echo ">>> [Arm $((i+1))/${#BUDGETS[@]}] Budget=$SIZE, top_t=$TOP_T (Tag: $TAG) <<<"
@@ -287,27 +310,39 @@ EOF
     continue
   fi
 
-  # 2. Step 1: Initial Compaction (Phase 1)
-  echo "--- Step 1: Initial Compaction (p01, $SIZE slots) ---"
-  BUILD_ARGS=(
-    --dataset "$DATASET"
-    --recipe-config "$RECIPE"
-    --p1-root "$P1_ROOT"
-    --gpu "$GPU"
-  )
-  if (( FORCE )); then
-    BUILD_ARGS+=(--force)
-  fi
+    # 2. Step 1: Initial Compaction (Phase 1)
+    P01_CACHE="$(find "$P1_ROOT" -name "cache_last.pt" 2>/dev/null | head -1 || true)"
+    if [[ -z "$P01_CACHE" ]]; then
+      LEGACY_P1="$ROOT/outputs/experiments/subkv_sweep_${DATASET}/${TAG}/p01"
+      P01_CACHE="$(find "$LEGACY_P1" -name "cache_last.pt" 2>/dev/null | head -1 || true)"
+      if [[ -n "$P01_CACHE" ]]; then
+        P1_ROOT="$LEGACY_P1"
+      fi
+    fi
 
-  "$PY" "$ROOT/examples/shared/am/build_p01.py" "${BUILD_ARGS[@]}" 2>&1 | tee -a "$SWEEP_LOG"
+    if [[ -n "$P01_CACHE" && -f "$P01_CACHE" && $FORCE -eq 0 ]]; then
+      echo ">>> Found existing Phase 1 cache for $DATASET ($SIZE slots): $P01_CACHE (skipping build) <<<"
+    else
+      echo "--- Step 1: Initial Compaction (p01, $SIZE slots) ---"
+      BUILD_ARGS=(
+        --dataset "$DATASET"
+        --recipe-config "$RECIPE"
+        --p1-root "$P1_ROOT"
+        --gpu "$GPU"
+      )
+      if (( FORCE )); then
+        BUILD_ARGS+=(--force)
+      fi
 
-  # Find generated or existing p01 cache
-  P01_CACHE="$(find "$P1_ROOT" -name "cache_last.pt" 2>/dev/null | head -1 || true)"
-  if [[ -z "$P01_CACHE" || ! -f "$P01_CACHE" ]]; then
-    echo "Error: Failed to find p01 cache under $P1_ROOT" >&2
-    exit 1
-  fi
-  echo "    P01 Cache ready: $P01_CACHE"
+      "$PY" "$ROOT/examples/shared/am/build_p01.py" "${BUILD_ARGS[@]}" 2>&1 | tee -a "$SWEEP_LOG"
+
+      P01_CACHE="$(find "$P1_ROOT" -name "cache_last.pt" 2>/dev/null | head -1 || true)"
+      if [[ -z "$P01_CACHE" || ! -f "$P01_CACHE" ]]; then
+        echo "Error: Failed to find p01 cache under $P1_ROOT" >&2
+        exit 1
+      fi
+      echo "    P01 Cache ready: $P01_CACHE"
+    fi
 
   # 3. Step 2: Continual Compaction (Phases 2 to 5)
   echo "--- Step 2: Continual Compaction (Stages p02-p05, top_t=$TOP_T) ---"

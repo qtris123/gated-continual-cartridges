@@ -1,0 +1,33 @@
+# Experiment: top_t capacity sweep for 16,384-slot sub-KV cache budget.
+#
+# Sweeps over top_t in {1024, 4096, 8192} for Qwen/Qwen3-4B-Instruct-2507.
+# Endpoint is run_chain (AM continual writes across stages p02-p05).
+# Build the 16384-slot p01 cache first with:
+#   bash examples/e2e_subkv_sweep/run_sweep_16k.sh --gpu 0
+# or:
+#   python -m examples.shared.am.build_p01 --dataset D --recipe-config outputs/recipes/subkv_sweep/e2e_budget16384_topt1024.yaml
+
+name: capacity_top_t_16k
+endpoint: run_chain
+method: am
+datasets: [qasper, quality, finqa, techqa]
+
+launch:
+  qasper:
+    p01_root: outputs/experiments/subkv_sweep_qasper/budget16384/p01
+  quality:
+    p01_root: outputs/experiments/subkv_sweep_quality/budget16384/p01
+  finqa:
+    p01_root: outputs/experiments/subkv_sweep_finqa/budget16384/p01
+  techqa:
+    p01_root: outputs/experiments/subkv_sweep_techqa/budget16384/p01
+
+streams:
+  top_t:
+    axis: slots.top_t
+    base_recipe: outputs/recipes/subkv_sweep/e2e_budget16384_topt1024.yaml
+    label_fmt: "t={value}"
+    arms:
+      - {value: 1024, alias: e2e_budget16384_topt1024}
+      - {value: 4096, alias: e2e_budget16384_topt4096}
+      - {value: 8192, alias: e2e_budget16384_topt8192}
