@@ -250,6 +250,12 @@ class DatasetBatch:
     topk_token_ids: Optional[torch.Tensor] = None
     topk_token_idxs: Optional[torch.Tensor] = None
 
+    @property
+    def valid_len(self) -> int:
+        if hasattr(self, "token_counts") and hasattr(self.token_counts, "num_tokens"):
+            return min(int(self.token_counts.num_tokens), int(self.input_ids.shape[0]))
+        return int(self.input_ids.shape[0])
+
 
 def msg(content, role: Literal["user"] | Literal["assistant"] | Literal["system"]):
     return {"content": content, "role": role}

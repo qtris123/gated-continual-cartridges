@@ -402,27 +402,31 @@ class AMQueryAccumulator:
         cache: nn.Module,
         scaling: float,
         seq_ids: torch.Tensor,
+        valid_len: Optional[int] = None,
     ):
         """Extract queries and TF scores from captured post-RoPE queries."""
         with torch.no_grad():
-            unique_ids = seq_ids.unique()
+            if valid_len is not None:
+                valid_len = min(int(valid_len), seq_ids.shape[0])
+            else:
+                valid_len = seq_ids.shape[0]
+
             if self.queries_per_batch == "last_token":
+                valid_seq_ids = seq_ids[:valid_len]
+                unique_ids = valid_seq_ids.unique()
                 token_indices = []
                 for uid in unique_ids:
-                    positions = (seq_ids == uid).nonzero(as_tuple=True)[0]
+                    positions = (valid_seq_ids == uid).nonzero(as_tuple=True)[0]
                     token_indices.append(positions[-1].item())
                 token_indices_t = torch.tensor(token_indices, device=seq_ids.device)
             else:
-                token_indices_t = None
+                token_indices_t = torch.arange(valid_len, device=seq_ids.device)
 
             for layer_idx, q in captured_queries.items():
                 if layer_idx >= self.n_layers:
                     continue
                 # q: (1, n_q_heads, seq_len, head_dim)
-                if self.queries_per_batch == "last_token":
-                    q_sel = q[:, :, token_indices_t, :]
-                else:
-                    q_sel = q
+                q_sel = q[:, :, token_indices_t, :]
 
                 self._queries[layer_idx].append(q_sel.detach().cpu())
 
@@ -432,10 +436,7 @@ class AMQueryAccumulator:
                 n_q_heads = q.shape[1]
                 groups = n_q_heads // n_kv_heads
 
-                if self.queries_per_batch == "last_token":
-                    q_for_score = q[:, :, token_indices_t, :]
-                else:
-                    q_for_score = q
+                q_for_score = q_sel
 
                 q_grouped = q_for_score.view(1, n_kv_heads, groups, -1, q_for_score.shape[-1])
                 q_mean = q_grouped.mean(dim=2)  # (1, n_kv_heads, n_tokens, d)
@@ -510,13 +511,21 @@ class AMTargetAccumulator:
     def reset(self):
         self._targets = {l: [] for l in range(self.n_layers)}
 
-    def accumulate_from_hooks(self, captured_targets: dict[int, torch.Tensor]):
+    def accumulate_from_hooks(
+        self,
+        captured_targets: dict[int, torch.Tensor],
+        valid_len: Optional[int] = None,
+    ):
         with torch.no_grad():
             for layer_idx, target in captured_targets.items():
                 if layer_idx >= self.n_layers:
                     continue
                 # target: (1, n_q_heads, n_tokens, head_dim)
-                self._targets[layer_idx].append(target.detach().cpu())
+                if valid_len is not None:
+                    t_sel = target[:, :, :valid_len, :]
+                else:
+                    t_sel = target
+                self._targets[layer_idx].append(t_sel.detach().cpu())
 
     def get_layer_head_targets(
         self,
@@ -643,6 +652,11 @@ def collect_reference_queries(
             input_ids = batch.input_ids.to(device)
             seq_ids = batch.element_ids.to(device)
             position_ids = batch.position_ids.to(device)
+            valid_len = getattr(batch, "valid_len", None)
+            if valid_len is None and hasattr(batch, "token_counts"):
+                valid_len = min(getattr(batch.token_counts, "num_tokens", input_ids.shape[0]), input_ids.shape[0])
+            elif valid_len is None:
+                valid_len = input_ids.shape[0]
 
             wrapped_model(
                 input_ids=input_ids,
@@ -656,6 +670,7 @@ def collect_reference_queries(
                     cache,
                     scaling=head_dim ** -0.5,
                     seq_ids=seq_ids,
+                    valid_len=valid_len,
                 )
 
             if target_acc is not None:
@@ -671,7 +686,7 @@ def collect_reference_queries(
                         past_key_values=None,
                     )
                     if teacher_captured:
-                        target_acc.accumulate_from_hooks(teacher_captured)
+                        target_acc.accumulate_from_hooks(teacher_captured, valid_len=valid_len)
                 finally:
                     for handle in teacher_handles:
                         handle.remove()

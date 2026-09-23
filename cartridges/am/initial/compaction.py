@@ -222,21 +222,28 @@ def _collect_compaction_queries(
                 if not captured:
                     batch_count += 1
                     continue
+                valid_len = getattr(batch, "valid_len", None)
+                if valid_len is None and hasattr(batch, "token_counts"):
+                    valid_len = min(getattr(batch.token_counts, "num_tokens", seq_ids.shape[0]), seq_ids.shape[0])
+                elif valid_len is None:
+                    valid_len = seq_ids.shape[0]
+
                 # Store raw per-layer queries without needing a cartridge for
                 # access scores (compaction does not use TF access scores).
-                unique_ids = seq_ids.unique()
                 if queries_per_batch == "last_token":
+                    valid_seq_ids = seq_ids[:valid_len]
+                    unique_ids = valid_seq_ids.unique()
                     token_indices = [
-                        (seq_ids == uid).nonzero(as_tuple=True)[0][-1].item()
+                        (valid_seq_ids == uid).nonzero(as_tuple=True)[0][-1].item()
                         for uid in unique_ids
                     ]
                     tok_idx = torch.tensor(token_indices, device=seq_ids.device)
                 else:
-                    tok_idx = None
+                    tok_idx = torch.arange(valid_len, device=seq_ids.device)
                 for layer_idx, q in captured.items():
                     if layer_idx >= n_layers:
                         continue
-                    q_sel = q[:, :, tok_idx, :] if tok_idx is not None else q
+                    q_sel = q[:, :, tok_idx, :]
                     query_acc._queries[layer_idx].append(q_sel.detach().cpu())
                 batch_count += 1
     finally:
