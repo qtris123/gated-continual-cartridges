@@ -110,36 +110,43 @@ print("Model ready!")
 
 ## 4. Running the Sweep
 
-### Option A: Using the Dedicated Llama Runner (`run_sweep_llama.sh`)
+### Supported Datasets
+The pipeline supports the following 5-phase continual benchmarks registered in `continual_env.py`:
+- `qasper` (**default**): Question answering across NLP papers (5 tasks: QA, MT, SA, ASR, KG).
+- `quality`: Long-document reading comprehension (5 phases).
+- `finqa`: Financial table and text analysis (5 company cohorts).
+- `techqa`: Technical customer support documentation (5 technote cohorts).
 
-A dedicated convenience script [`run_sweep_llama.sh`](run_sweep_llama.sh) is provided with Llama defaults:
-
+### Option A: Run Single Dataset
 ```bash
-# Run on GPU 0 for QASPER:
-bash examples/e2e_subkv_sweep/run_sweep_llama.sh --dataset qasper --gpu 0
+# Run on default dataset (QASPER) on GPU 0:
+bash examples/e2e_subkv_sweep/run_sweep_llama.sh --gpu 0
 
-# Run on Quality:
+# Run on QuALITY:
 bash examples/e2e_subkv_sweep/run_sweep_llama.sh --dataset quality --gpu 0
+
+# Run on FinQA:
+bash examples/e2e_subkv_sweep/run_sweep_llama.sh --dataset finqa --gpu 0
+
+# Run on TechQA:
+bash examples/e2e_subkv_sweep/run_sweep_llama.sh --dataset techqa --gpu 0
 ```
 
-### Option B: Using the General Runner (`run_sweep.sh`)
-
-You can also invoke `run_sweep.sh` explicitly specifying `--model`:
-
+### Option B: Run Multiple Datasets in One Command
+Use `--datasets` with a comma-separated list to run sweeps across multiple datasets sequentially:
 ```bash
-bash examples/e2e_subkv_sweep/run_sweep.sh \
-  --model meta-llama/Llama-3.2-3B-Instruct \
-  --dataset qasper \
-  --gpu 0
+# Run on both QASPER and QuALITY:
+bash examples/e2e_subkv_sweep/run_sweep_llama.sh --datasets qasper,quality --gpu 0
+
+# Run across all 4 benchmarks:
+bash examples/e2e_subkv_sweep/run_sweep_llama.sh --datasets qasper,quality,finqa,techqa --gpu 0
 ```
 
 ### Option C: Multi-GPU Evaluation Fan-Out
-
 To accelerate evaluation by fanning out the 5 per-stage held-out evaluations across multiple GPUs:
-
 ```bash
 bash examples/e2e_subkv_sweep/run_sweep_llama.sh \
-  --dataset qasper \
+  --datasets qasper,quality \
   --gpu 0 \
   --eval-gpus 0,1
 ```

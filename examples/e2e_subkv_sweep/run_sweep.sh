@@ -24,7 +24,9 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$ROOT"
 
 # Defaults
-DATASET="qasper"
+DATASET_DEFAULT="qasper"
+DATASET=""
+DATASETS_STR=""
 MODEL_NAME="${MODEL_NAME:-Qwen/Qwen3-4B-Instruct-2507}"
 GPU="${GPU:-0}"
 EVAL_GPUS="${EVAL_GPUS:-$GPU}"
@@ -39,7 +41,8 @@ Usage: $0 [options]
 
 Options:
   --model <id>         HuggingFace model ID (default: $MODEL_NAME)
-  --dataset <name>     Dataset name: qasper, quality, finqa, techqa (default: $DATASET)
+  --datasets <list>    Comma-separated datasets: qasper, quality, finqa, techqa
+  --dataset <name>     Single dataset: qasper, quality, finqa, techqa (default: $DATASET_DEFAULT)
   --gpu <id>           GPU index for compaction writes (default: $GPU)
   --eval-gpus <list>   GPU index or comma-separated list for evaluations (default: $EVAL_GPUS)
   --budgets <list>     Comma-separated sub-KV cache budgets (default: $BUDGETS_STR)
@@ -55,6 +58,9 @@ Examples:
   # Run on Llama 3.2 3B:
   bash examples/e2e_subkv_sweep/run_sweep.sh --model meta-llama/Llama-3.2-3B-Instruct --dataset qasper --gpu 0
 
+  # Run across multiple datasets:
+  bash examples/e2e_subkv_sweep/run_sweep.sh --datasets qasper,quality --gpu 0
+
   # Include 512 (e.g. 512/32, 1024/64, 2048/128, 4096/256):
   bash examples/e2e_subkv_sweep/run_sweep.sh --budgets 512,1024,2048,4096 --top-ts 32,64,128,256
 EOF
@@ -64,6 +70,7 @@ EOF
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --model)     MODEL_NAME="$2"; shift 2 ;;
+    --datasets)  DATASETS_STR="$2"; shift 2 ;;
     --dataset)   DATASET="$2"; shift 2 ;;
     --gpu)       GPU="$2"; shift 2 ;;
     --eval-gpus) EVAL_GPUS="$2"; shift 2 ;;
@@ -75,6 +82,14 @@ while [[ $# -gt 0 ]]; do
     *) echo "Unknown argument: $1" >&2; usage ;;
   esac
 done
+
+if [[ -n "$DATASETS_STR" ]]; then
+  IFS=',' read -r -a DATASETS <<< "$DATASETS_STR"
+elif [[ -n "$DATASET" ]]; then
+  DATASETS=("$DATASET")
+else
+  DATASETS=("$DATASET_DEFAULT")
+fi
 
 # Resolve Python executable
 if [[ -n "${CARTRIDGES_PYTHON:-}" ]]; then
@@ -104,13 +119,6 @@ else
   ROPE_THETA_VAL="model"
 fi
 
-# Ensure data/qasper/phases symlink exists if data/phases/qasper exists
-if [[ "$DATASET" == "qasper" && ! -d "$ROOT/data/qasper/phases" && -d "$ROOT/data/phases/qasper" ]]; then
-  echo "Ensuring data/qasper/phases -> ../phases/qasper symlink"
-  mkdir -p "$ROOT/data/qasper"
-  ln -sfn ../phases/qasper "$ROOT/data/qasper/phases"
-fi
-
 IFS=',' read -r -a BUDGETS <<< "$BUDGETS_STR"
 IFS=',' read -r -a TOP_TS <<< "$TOP_TS_STR"
 
@@ -123,9 +131,17 @@ LOGDIR="$ROOT/logs/e2e_subkv_sweep"
 RECIPEDIR="$ROOT/outputs/recipes/subkv_sweep"
 mkdir -p "$LOGDIR" "$RECIPEDIR"
 
-# Preflight data check
-MISSING_DATA=0
-if ! "$PY" -c "
+for DATASET in "${DATASETS[@]}"; do
+  # Ensure data/qasper/phases symlink exists if data/phases/qasper exists
+  if [[ "$DATASET" == "qasper" && ! -d "$ROOT/data/qasper/phases" && -d "$ROOT/data/phases/qasper" ]]; then
+    echo "Ensuring data/qasper/phases -> ../phases/qasper symlink"
+    mkdir -p "$ROOT/data/qasper"
+    ln -sfn ../phases/qasper "$ROOT/data/qasper/phases"
+  fi
+
+  # Preflight data check
+  MISSING_DATA=0
+  if ! "$PY" -c "
 import sys
 from examples.shared.am.continual_env import spec
 s = spec('$DATASET')
@@ -140,38 +156,38 @@ for p in range(1, 6):
         print(f'Missing synth data file: {sp}', file=sys.stderr)
         sys.exit(1)
 " 2>&1; then
-  MISSING_DATA=1
-fi
-
-if (( MISSING_DATA )); then
-  echo ""
-  echo "======================================================================"
-  echo " Notice: Dataset files for '$DATASET' are not fully hydrated on this host."
-  echo " To download all required training/eval data from Hugging Face, run:"
-  echo "     bash scripts/prepare_artifacts.sh --which data"
-  echo "======================================================================"
-  echo ""
-  if (( ! DRY_RUN )); then
-    echo "Aborting run due to missing data. Run with --dry-run to preview plan." >&2
-    exit 1
+    MISSING_DATA=1
   fi
-fi
 
-TS="$(date +%Y%m%d_%H%M%S)"
+  if (( MISSING_DATA )); then
+    echo ""
+    echo "======================================================================"
+    echo " Notice: Dataset files for '$DATASET' are not fully hydrated on this host."
+    echo " To download all required training/eval data from Hugging Face, run:"
+    echo "     bash scripts/prepare_artifacts.sh --which data"
+    echo "======================================================================"
+    echo ""
+    if (( ! DRY_RUN )); then
+      echo "Aborting run due to missing data for '$DATASET'. Run with --dry-run to preview plan." >&2
+      exit 1
+    fi
+  fi
 
-echo "======================================================================"
-echo " Starting E2E Continual Compaction Sweep"
-echo " Model:     $MODEL_NAME (Slug: $MODEL_SLUG)"
-echo " Dataset:   $DATASET"
-echo " GPU:       $GPU (Evals: $EVAL_GPUS)"
-echo " Python:    $PY"
-echo " Budgets:   ${BUDGETS[*]}"
-echo " Top-Ts:    ${TOP_TS[*]}"
-echo " Root:      $ROOT"
-echo "======================================================================"
+  TS="$(date +%Y%m%d_%H%M%S)"
 
-for i in "${!BUDGETS[@]}"; do
-  SIZE="${BUDGETS[$i]}"
+  echo "======================================================================"
+  echo " Starting E2E Continual Compaction Sweep"
+  echo " Model:     $MODEL_NAME (Slug: $MODEL_SLUG)"
+  echo " Dataset:   $DATASET"
+  echo " GPU:       $GPU (Evals: $EVAL_GPUS)"
+  echo " Python:    $PY"
+  echo " Budgets:   ${BUDGETS[*]}"
+  echo " Top-Ts:    ${TOP_TS[*]}"
+  echo " Root:      $ROOT"
+  echo "======================================================================"
+
+  for i in "${!BUDGETS[@]}"; do
+    SIZE="${BUDGETS[$i]}"
   TOP_T="${TOP_TS[$i]}"
   if [[ "$MODEL_SLUG" == "qwen3_4b" ]]; then
     TAG="e2e_budget${SIZE}_topt${TOP_T}"
@@ -307,17 +323,18 @@ EOF
 
   "$PY" "$ROOT/examples/shared/am/run_chain.py" "${CHAIN_ARGS[@]}" 2>&1 | tee -a "$SWEEP_LOG"
 
-  MAT_JSON="$ROOT/outputs/evaluations/$DATASET/$TAG/teacher-forced-logppl-v1/matrix.json"
-  if [[ -f "$MAT_JSON" ]]; then
-    echo "    Successfully generated matrix: $MAT_JSON"
-  else
-    echo "    Warning: matrix.json not found at $MAT_JSON (check log)"
-  fi
+    MAT_JSON="$ROOT/outputs/evaluations/$DATASET/$TAG/teacher-forced-logppl-v1/matrix.json"
+    if [[ -f "$MAT_JSON" ]]; then
+      echo "    Successfully generated matrix: $MAT_JSON"
+    else
+      echo "    Warning: matrix.json not found at $MAT_JSON (check log)"
+    fi
+  done
 done
 
 echo ""
 echo "======================================================================"
-echo " All arms completed successfully at $(date)!"
-echo " Results available in: outputs/evaluations/$DATASET/"
+echo " All datasets and arms completed successfully at $(date)!"
+echo " Results available in: outputs/evaluations/{${DATASETS[*]}}/"
 echo " Logs stored in:        $LOGDIR/"
 echo "======================================================================"

@@ -12,8 +12,14 @@
 #   bash examples/e2e_subkv_sweep/run_sweep_llama.sh [options]
 #
 # Examples:
-#   # Run default 4-arm sweep (512, 1024, 2048, 4096) on GPU 0 for QASPER:
-#   bash examples/e2e_subkv_sweep/run_sweep_llama.sh --dataset qasper --gpu 0
+#   # Run on default dataset (QASPER) on GPU 0:
+#   bash examples/e2e_subkv_sweep/run_sweep_llama.sh --gpu 0
+#
+#   # Run on specific dataset (e.g. quality, finqa, techqa):
+#   bash examples/e2e_subkv_sweep/run_sweep_llama.sh --dataset quality --gpu 0
+#
+#   # Run on multiple datasets sequentially:
+#   bash examples/e2e_subkv_sweep/run_sweep_llama.sh --datasets qasper,quality --gpu 0
 #
 #   # Run with separate eval GPU:
 #   bash examples/e2e_subkv_sweep/run_sweep_llama.sh --dataset quality --gpu 0 --eval-gpus 1
