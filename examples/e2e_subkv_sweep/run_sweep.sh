@@ -25,6 +25,7 @@ cd "$ROOT"
 
 # Defaults
 DATASET="qasper"
+MODEL_NAME="${MODEL_NAME:-Qwen/Qwen3-4B-Instruct-2507}"
 GPU="${GPU:-0}"
 EVAL_GPUS="${EVAL_GPUS:-$GPU}"
 BUDGETS_STR="1024,2048,4096"
@@ -37,6 +38,7 @@ usage() {
 Usage: $0 [options]
 
 Options:
+  --model <id>         HuggingFace model ID (default: $MODEL_NAME)
   --dataset <name>     Dataset name: qasper, quality, finqa, techqa (default: $DATASET)
   --gpu <id>           GPU index for compaction writes (default: $GPU)
   --eval-gpus <list>   GPU index or comma-separated list for evaluations (default: $EVAL_GPUS)
@@ -47,8 +49,11 @@ Options:
   -h, --help           Show this help message
 
 Examples:
-  # Run default sweep (1024/64, 2048/128, 4096/256) on GPU 0 for QASPER:
+  # Run default sweep (1024/64, 2048/128, 4096/256) on GPU 0 for QASPER (Qwen):
   bash examples/e2e_subkv_sweep/run_sweep.sh --dataset qasper --gpu 0
+
+  # Run on Llama 3.2 3B:
+  bash examples/e2e_subkv_sweep/run_sweep.sh --model meta-llama/Llama-3.2-3B-Instruct --dataset qasper --gpu 0
 
   # Include 512 (e.g. 512/32, 1024/64, 2048/128, 4096/256):
   bash examples/e2e_subkv_sweep/run_sweep.sh --budgets 512,1024,2048,4096 --top-ts 32,64,128,256
@@ -58,6 +63,7 @@ EOF
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
+    --model)     MODEL_NAME="$2"; shift 2 ;;
     --dataset)   DATASET="$2"; shift 2 ;;
     --gpu)       GPU="$2"; shift 2 ;;
     --eval-gpus) EVAL_GPUS="$2"; shift 2 ;;
@@ -85,6 +91,18 @@ export PYTHONPATH="$ROOT${PYTHONPATH:+:$PYTHONPATH}"
 export CARTRIDGES_PYTHON="$PY"
 export CARTRIDGES_DIR="${CARTRIDGES_DIR:-$ROOT}"
 export CARTRIDGES_OUTPUT_DIR="${CARTRIDGES_OUTPUT_DIR:-$ROOT/outputs}"
+export MODEL_NAME="$MODEL_NAME"
+
+if [[ "$MODEL_NAME" =~ [Ll]lama ]]; then
+  MODEL_SLUG="llama3_2_3b"
+  ROPE_THETA_VAL="model"
+elif [[ "$MODEL_NAME" =~ [Qq]wen ]]; then
+  MODEL_SLUG="qwen3_4b"
+  ROPE_THETA_VAL="5000000.0"
+else
+  MODEL_SLUG="$(basename "$MODEL_NAME" | tr '[:upper:]' '[:lower:]')"
+  ROPE_THETA_VAL="model"
+fi
 
 # Ensure data/qasper/phases symlink exists if data/phases/qasper exists
 if [[ "$DATASET" == "qasper" && ! -d "$ROOT/data/qasper/phases" && -d "$ROOT/data/phases/qasper" ]]; then
@@ -143,6 +161,7 @@ TS="$(date +%Y%m%d_%H%M%S)"
 
 echo "======================================================================"
 echo " Starting E2E Continual Compaction Sweep"
+echo " Model:     $MODEL_NAME (Slug: $MODEL_SLUG)"
 echo " Dataset:   $DATASET"
 echo " GPU:       $GPU (Evals: $EVAL_GPUS)"
 echo " Python:    $PY"
@@ -154,7 +173,11 @@ echo "======================================================================"
 for i in "${!BUDGETS[@]}"; do
   SIZE="${BUDGETS[$i]}"
   TOP_T="${TOP_TS[$i]}"
-  TAG="e2e_budget${SIZE}_topt${TOP_T}"
+  if [[ "$MODEL_SLUG" == "qwen3_4b" ]]; then
+    TAG="e2e_budget${SIZE}_topt${TOP_T}"
+  else
+    TAG="${MODEL_SLUG}_budget${SIZE}_topt${TOP_T}"
+  fi
   RECIPE="$RECIPEDIR/${TAG}.yaml"
   P1_ROOT="$ROOT/outputs/experiments/subkv_sweep_${DATASET}/${TAG}/p01"
   SWEEP_LOG="$LOGDIR/${DATASET}_${TAG}_${TS}.log"
@@ -165,12 +188,12 @@ for i in "${!BUDGETS[@]}"; do
 
   # 1. Generate size-specific recipe YAML matching canonical experiments (e.g. fullkv_topt512.yaml)
   cat <<EOF > "$RECIPE"
-# Auto-generated for sub-KV cache sweep (Budget=$SIZE, top_t=$TOP_T)
+# Auto-generated for sub-KV cache sweep (Model=$MODEL_NAME, Budget=$SIZE, top_t=$TOP_T)
 # - Stage 1 (p01): Arm-D compaction with spectral ridge_lambda=1e-4
 # - Stages 2-5 (p02-p05): Continual delta matching with delta_weight=0.01, ridge_lambda=0.0
 # - Highest-attention keys: key_mode=highest_attention, key_reposition=true
 # - No attention-bias: beta.enabled=false
-# - Fixed RoPE repositioning: rope_theta=5000000.0
+# - Fixed RoPE repositioning: rope_theta=$ROPE_THETA_VAL
 p01:
   num_tokens: $SIZE
   key_select: highest_attention
@@ -238,7 +261,7 @@ objective:
   oracle_write: false
   oracle_write_assign: mass_ranked
 
-rope_theta: 5000000.0
+rope_theta: $ROPE_THETA_VAL
 EOF
 
   if (( DRY_RUN )); then

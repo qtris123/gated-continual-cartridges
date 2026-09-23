@@ -19,7 +19,7 @@ from pathlib import Path
 
 from examples.shared.paths import ROOT
 
-MODEL_NAME = "Qwen/Qwen3-4B-Instruct-2507"
+MODEL_NAME = os.environ.get("MODEL_NAME", "Qwen/Qwen3-4B-Instruct-2507")
 
 
 @dataclass(frozen=True)
@@ -123,10 +123,10 @@ def base_env(gpu: str, runs_dir: Path) -> dict[str, str]:
             "CARTRIDGES_DIR": str(ROOT),
             "CARTRIDGES_OUTPUT_DIR": str(runs_dir),
             "PYTHONPATH": str(ROOT),
-            "HF_HUB_OFFLINE": "1",
-            "HF_DATASETS_OFFLINE": "1",
+            "HF_HUB_OFFLINE": os.environ.get("HF_HUB_OFFLINE", "1"),
+            "HF_DATASETS_OFFLINE": os.environ.get("HF_DATASETS_OFFLINE", "1"),
             "WANDB_DISABLED": "1",
-            "MODEL_NAME": MODEL_NAME,
+            "MODEL_NAME": os.environ.get("MODEL_NAME", MODEL_NAME),
         }
     )
     return env
