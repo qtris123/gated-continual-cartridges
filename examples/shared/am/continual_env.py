@@ -49,7 +49,16 @@ class DatasetSpec:
 
     def synth_path(self, phase: int) -> Path:
         key = self.topics[phase] if self.topics else phase
-        return ROOT / self.synth_template.format(key=key)
+        primary = ROOT / self.synth_template.format(key=key)
+        if primary.exists():
+            return primary
+        fallback = (
+            ROOT
+            / f"data/{self.name}/synth/p{phase:02d}/self_study-n8192/artifact/dataset.parquet"
+        )
+        if fallback.exists():
+            return fallback
+        return primary
 
     def teacher_env(self, phase: int) -> dict[str, str]:
         env = {"AM_DATASET": self.name}

@@ -45,8 +45,8 @@ Usage: $0 [options]
 
 Options:
   --model <id>         HuggingFace model ID (default: $MODEL_NAME)
-  --datasets <list>    Comma-separated datasets: qasper, quality, finqa, techqa
-  --dataset <name>     Single dataset: qasper, quality, finqa, techqa (default: $DATASET_DEFAULT)
+  --datasets <list>    Comma-separated datasets: qasper, quality, finqa, techqa, longhealth
+  --dataset <name>     Single dataset: qasper, quality, finqa, techqa, longhealth (default: $DATASET_DEFAULT)
   --gpu <id>           GPU index for compaction writes (default: $GPU)
   --eval-gpus <list>   GPU index or comma-separated list for evaluations (default: $EVAL_GPUS)
   --budget <size>      Single sub-KV cache budget to sweep across multiple top-ts (e.g. 16384)
@@ -329,7 +329,7 @@ EOF
     echo "    [dry-run] Wrote recipe to $RECIPE"
     echo "    [dry-run] Would build Phase 1 cache under $P1_ROOT"
     echo "    [dry-run] Would run continual chain p02-p05 with tag $TAG"
-    if (( EVAL_ACCURACY )); then
+    if (( EVAL_ACCURACY )) || [[ "$DATASET" == "longhealth" ]]; then
       echo "    [dry-run] Would run 5x5 generation accuracy evaluation for tag $TAG"
     fi
     echo "    [dry-run] Would record slot frequency artifacts under outputs/evaluations/$DATASET/$TAG/slot_frequency"
@@ -402,7 +402,7 @@ EOF
       }
 
     # 5. Optional Step 4: Generation Accuracy Matrix (for QuALITY/LongHealth MCQ)
-    if (( EVAL_ACCURACY )); then
+    if (( EVAL_ACCURACY )) || [[ "$DATASET" == "longhealth" ]]; then
       echo "--- Step 4: Generation Accuracy Matrix ($DATASET, $TAG) ---"
       ACC_LOG="$LOGDIR/acc_${DATASET}_${TAG}_${TS}.log"
       bash "$ROOT/examples/shared/evaluate/run_accuracy.sh" "$DATASET" "$TAG" "$EVAL_GPUS" 2>&1 | tee -a "$ACC_LOG"

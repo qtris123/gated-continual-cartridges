@@ -8,6 +8,7 @@ import pytest
 
 from cartridges.am.components.queries import (
     _quality_articles_by_title,
+    document_key,
     full_document_prompt,
     full_paper_prompt,
     full_quality_prompt,
@@ -171,3 +172,21 @@ def test_quality_teacher_requires_phase():
     teacher = TeacherTarget.Config(dataset="quality").instantiate()
     with pytest.raises(ValueError, match="quality_phase is required"):
         teacher.document_prompt([convo])
+
+
+def test_longhealth_document_key_extraction():
+    convo = _convo("Below is a section of Jane's medical record (ID: patient_01).\nThey were born on...")
+    assert document_key(convo, dataset="longhealth") == "patient_01"
+
+
+def test_longhealth_full_document_prompt():
+    prompt = full_document_prompt("patient_01", dataset="longhealth", phase=1)
+    assert "patient_01" in prompt
+    assert "<text_0>" in prompt
+    assert "</text_0>" in prompt
+
+
+def test_longhealth_prompt_rejects_wrong_phase():
+    with pytest.raises(KeyError, match="not in LongHealth phase 2"):
+        full_document_prompt("patient_01", dataset="longhealth", phase=2)
+

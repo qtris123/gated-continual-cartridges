@@ -135,7 +135,8 @@ def mc_options(prediction: str, ground_truth: str, **kwargs) -> float:
     chosen = resolve_mc_option(prediction, options)
     if chosen is None:
         return 0.0
-    return float(chosen.strip().lower() == ground_truth.strip().lower())
+    gt = _extract_answer_tag(ground_truth) or ground_truth
+    return float(chosen.strip().lower() == gt.strip().lower())
 
 
 def numeric_match(prediction: str, ground_truth: str, **kwargs) -> float:

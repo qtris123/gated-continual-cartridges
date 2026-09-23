@@ -60,6 +60,11 @@ def document_key(conversation: Conversation, dataset: str = "qasper") -> str:
     document); TechQA sources are a single technote filename.
     """
     prompt = conversation.system_prompt or ""
+    if dataset == "longhealth":
+        m = re.search(r"\bID:\s*(patient_\d+)\b", prompt, flags=re.IGNORECASE)
+        if m:
+            return m.group(1).lower()
+        return prompt
     if dataset in ("finqa", "techqa"):
         source = _extract_tag(prompt, "source")
         if source:
@@ -275,6 +280,49 @@ def full_techqa_prompt(filename: str, *, phase: int) -> str:
     return SYSTEM_PROMPT_TEMPLATE.format(documents=note.to_string)
 
 
+def full_longhealth_prompt(patient_id: str, *, phase: Optional[int] = None) -> str:
+    """The complete medical record prompt for one LongHealth patient."""
+    from cartridges.data.longhealth.phases import PHASE_TO_PATIENT_IDS
+    from cartridges.data.longhealth.resources import NOTE_TEMPLATE, SYSTEM_PROMPT_TEMPLATE
+    from cartridges.data.longhealth.utils import load_longhealth_dataset
+
+    # Validate phase constraint if supplied
+    if phase is not None:
+        if phase not in PHASE_TO_PATIENT_IDS:
+            raise ValueError(
+                f"Unknown LongHealth phase {phase}; expected one of "
+                f"{sorted(PHASE_TO_PATIENT_IDS)}."
+            )
+        allowed_patients = PHASE_TO_PATIENT_IDS[phase]
+        if patient_id not in allowed_patients:
+            raise KeyError(
+                f"Patient {patient_id!r} is not in LongHealth phase {phase} "
+                f"({allowed_patients}). The phase must match the synthesis parquet."
+            )
+
+    patients = {p.patient_id: p for p in load_longhealth_dataset([patient_id])}
+    patient = patients.get(patient_id)
+    if patient is None:
+        raise KeyError(f"Patient {patient_id!r} missing from LongHealth dataset.")
+
+    note_keys = sorted(
+        patient.texts.keys(),
+        key=lambda k: int(re.search(r"\d+", k).group()) if re.search(r"\d+", k) else k,
+    )
+    notes = "\n".join(
+        NOTE_TEMPLATE.format(note_id=nid, text=patient.texts[nid])
+        for nid in note_keys
+    )
+    return SYSTEM_PROMPT_TEMPLATE.format(
+        name=patient.name,
+        patient_id=patient.patient_id,
+        birthday=patient.birthday,
+        diagnosis=patient.diagnosis,
+        num_notes=len(patient.texts),
+        notes=notes,
+    )
+
+
 def full_document_prompt(
     title: str,
     *,
@@ -286,7 +334,7 @@ def full_document_prompt(
     """Resolve a synthesis document key to the complete teacher prompt.
 
     ``phase`` carries the five-phase index for the phase-keyed datasets (finqa,
-    techqa); ``quality_phase`` is the QuALITY-specific alias kept for
+    techqa, longhealth); ``quality_phase`` is the QuALITY-specific alias kept for
     backward-compatible configs.
     """
     if dataset == "qasper":
@@ -303,9 +351,11 @@ def full_document_prompt(
         if phase is None:
             raise ValueError("phase is required when dataset='techqa'")
         return full_techqa_prompt(title, phase=phase)
+    if dataset == "longhealth":
+        return full_longhealth_prompt(title, phase=phase)
     raise ValueError(
         f"Unsupported AM teacher dataset {dataset!r}; expected 'qasper', "
-        "'quality', 'finqa', or 'techqa'."
+        "'quality', 'finqa', 'techqa', or 'longhealth'."
     )
 
 
