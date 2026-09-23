@@ -20,7 +20,7 @@ This sweep evaluates continual memory retention and acquisition on **Llama 3.2 3
 | **QASPER** (`qasper`) | 5 NLP tasks (QA, MT, SA, ASR, KG) | Teacher-forced Log-Perplexity (`logppl` 5×5 matrix) | Default |
 | **TechQA** (`techqa`) | Technical support technotes (5 cohorts) | Teacher-forced Log-Perplexity (`logppl` 5×5 matrix) | Default |
 | **FinQA** (`finqa`) | Financial reports & tables (5 cohorts) | Teacher-forced Log-Perplexity (`logppl` 5×5 matrix) | Default |
-| **QuALITY** (`quality`) | Long-document story QA (5 phases) | Teacher-forced Log-Perplexity (`logppl` 5×5 matrix) | Default |
+| **QuALITY** (`quality`) | Long-document story QA (5 phases) | **Multiple-Choice Option Generation Accuracy** (`mcq` 5×5 matrix) + Log-Perplexity | `--eval-accuracy` (auto-enabled) |
 | **LongHealth** (`longhealth`) | Clinical patient records (5 cohorts, patients 01–20) | **Multiple-Choice Option Generation Accuracy** (`mcq` 5×5 matrix) + Log-Perplexity | `--eval-accuracy` (auto-enabled) |
 
 ### LongHealth 5-Stage Patient Mapping (Sequential)
@@ -149,7 +149,7 @@ Track your execution progress:
 - [ ] Run pre-flight dataset verification script (all 5 datasets `[OK]`).
 - [ ] Run `--dry-run` to verify recipe generation and execution plans.
 
-### Log-Perplexity Sweeps (`qasper`, `techqa`, `finqa`, `quality`)
+### Log-Perplexity Sweeps (`qasper`, `techqa`, `finqa`)
 - [ ] Launch QASPER sweep (`budget 512, top 128` & `budget 8192, top 2048`).
   - [ ] Verify `outputs/evaluations/qasper/llama3_2_3b_budget512_topt128/teacher-forced-logppl-v1/matrix.csv`
   - [ ] Verify `outputs/evaluations/qasper/llama3_2_3b_budget8192_topt2048/teacher-forced-logppl-v1/matrix.csv`
@@ -159,11 +159,14 @@ Track your execution progress:
 - [ ] Launch FinQA sweep (`budget 512, top 128` & `budget 8192, top 2048`).
   - [ ] Verify `outputs/evaluations/finqa/llama3_2_3b_budget512_topt128/teacher-forced-logppl-v1/matrix.csv`
   - [ ] Verify `outputs/evaluations/finqa/llama3_2_3b_budget8192_topt2048/teacher-forced-logppl-v1/matrix.csv`
-- [ ] Launch QuALITY sweep (`budget 512, top 128` & `budget 8192, top 2048`).
-  - [ ] Verify `outputs/evaluations/quality/llama3_2_3b_budget512_topt128/teacher-forced-logppl-v1/matrix.csv`
-  - [ ] Verify `outputs/evaluations/quality/llama3_2_3b_budget8192_topt2048/teacher-forced-logppl-v1/matrix.csv`
 
-### Generation Accuracy Sweep (`longhealth`)
+### Multiple-Choice Option Generation Accuracy Sweeps (`quality`, `longhealth`)
+- [ ] Launch QuALITY sweep with MCQ generation accuracy evaluation (`budget 512, top 128` & `budget 8192, top 2048`).
+  - [ ] Verify logppl: `outputs/evaluations/quality/llama3_2_3b_budget512_topt128/teacher-forced-logppl-v1/matrix.csv`
+  - [ ] Verify logppl: `outputs/evaluations/quality/llama3_2_3b_budget8192_topt2048/teacher-forced-logppl-v1/matrix.csv`
+  - [ ] Verify accuracy: `outputs/evaluations/quality/llama3_2_3b_budget512_topt128/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv`
+  - [ ] Verify accuracy: `outputs/evaluations/quality/llama3_2_3b_budget8192_topt2048/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv`
+  - [ ] Verify individual predictions: `outputs/evaluations/quality/*/accuracy-freeform-mc-options-primeAnswer-v1/cells/*/generations.jsonl`
 - [ ] Launch LongHealth sweep with MCQ generation accuracy evaluation (`budget 512, top 128` & `budget 8192, top 2048`).
   - [ ] Verify logppl: `outputs/evaluations/longhealth/llama3_2_3b_budget512_topt128/teacher-forced-logppl-v1/matrix.csv`
   - [ ] Verify logppl: `outputs/evaluations/longhealth/llama3_2_3b_budget8192_topt2048/teacher-forced-logppl-v1/matrix.csv`
@@ -182,25 +185,25 @@ Track your execution progress:
 
 ### Strategy 1: Recommended Batch Execution (2 Sequential Runs)
 
-#### Batch 1: Run Logppl Benchmarks (`qasper`, `techqa`, `finqa`, `quality`)
-Runs both arms ($S=512, t=128$ and $S=8192, t=2048$) sequentially across QASPER, TechQA, FinQA, and QuALITY on GPU 0:
+#### Batch 1: Run Logppl Benchmarks (`qasper`, `techqa`, `finqa`)
+Runs both arms ($S=512, t=128$ and $S=8192, t=2048$) sequentially across QASPER, TechQA, and FinQA on GPU 0:
 
 ```bash
-# Description: Execute 25% update ratio sweeps across qasper, techqa, finqa, quality sequentially on GPU 0
+# Description: Execute 25% update ratio sweeps across qasper, techqa, finqa sequentially on GPU 0
 bash examples/e2e_subkv_sweep/run_sweep_llama.sh \
-  --datasets qasper,techqa,finqa,quality \
+  --datasets qasper,techqa,finqa \
   --budgets 512,8192 \
   --top-ts 128,2048 \
   --gpu 0
 ```
 
-#### Batch 2: Run LongHealth with Generation Accuracy Evaluation
-Runs both arms on LongHealth, executing the 5×5 teacher-forced logppl evaluation followed by the 5×5 free-form MCQ generation accuracy matrix evaluation:
+#### Batch 2: Run Multiple-Choice Accuracy Benchmarks (`quality`, `longhealth`)
+Runs both arms on QuALITY and LongHealth, executing the 5×5 teacher-forced logppl evaluation followed by the 5×5 free-form MCQ generation accuracy matrix evaluation:
 
 ```bash
-# Description: Execute LongHealth sweep (25% ratio) with held-out text generation accuracy matrix on GPU 0
+# Description: Execute QuALITY and LongHealth sweeps (25% ratio) with held-out text generation accuracy matrix on GPU 0
 bash examples/e2e_subkv_sweep/run_sweep_llama.sh \
-  --dataset longhealth \
+  --datasets quality,longhealth \
   --budgets 512,8192 \
   --top-ts 128,2048 \
   --eval-accuracy \
@@ -243,13 +246,14 @@ bash examples/e2e_subkv_sweep/run_sweep_llama.sh \
   --gpu 0
 ```
 
-#### 4. QuALITY (Logppl)
-> **Description**: Runs both arms on QuALITY long-form stories.
+#### 4. QuALITY (Logppl + Generation Accuracy)
+> **Description**: Runs both arms on QuALITY long-form stories and scores multiple-choice questions across all 5 continual stages.
 ```bash
 bash examples/e2e_subkv_sweep/run_sweep_llama.sh \
   --dataset quality \
   --budgets 512,8192 \
   --top-ts 128,2048 \
+  --eval-accuracy \
   --gpu 0
 ```
 
@@ -271,9 +275,9 @@ bash examples/e2e_subkv_sweep/run_sweep_llama.sh \
 If multiple GPUs are available (e.g. GPU 0 for compaction writes, GPUs 0, 1, 2, 3 for evaluations):
 
 ```bash
-# Description: Accelerate held-out 5x5 accuracy evaluations by fanning out across GPUs 0, 1, 2, 3
+# Description: Accelerate held-out 5x5 accuracy evaluations for QuALITY and LongHealth across GPUs 0, 1, 2, 3
 bash examples/e2e_subkv_sweep/run_sweep_llama.sh \
-  --dataset longhealth \
+  --datasets quality,longhealth \
   --budgets 512,8192 \
   --top-ts 128,2048 \
   --eval-accuracy \
@@ -290,14 +294,14 @@ Always test that recipe generation, paths, and arguments are valid without launc
 ```bash
 # Description: Dry-run preview for logppl benchmarks (25% update ratio)
 bash examples/e2e_subkv_sweep/run_sweep_llama.sh \
-  --datasets qasper,techqa,finqa,quality \
+  --datasets qasper,techqa,finqa \
   --budgets 512,8192 \
   --top-ts 128,2048 \
   --dry-run
 
-# Description: Dry-run preview for LongHealth with accuracy (25% update ratio)
+# Description: Dry-run preview for QuALITY and LongHealth with accuracy (25% update ratio)
 bash examples/e2e_subkv_sweep/run_sweep_llama.sh \
-  --dataset longhealth \
+  --datasets quality,longhealth \
   --budgets 512,8192 \
   --top-ts 128,2048 \
   --eval-accuracy \
@@ -313,28 +317,28 @@ Because full sweeps take several hours, launch them in persistent background ses
 #### Using `tmux` (Recommended)
 ```bash
 # 1. Create a persistent session
-tmux new -s llama_longhealth
+tmux new -s llama_mcq_sweep
 
 # 2. Inside tmux, export HF_TOKEN and run
 export HF_TOKEN="hf_..."
-bash examples/e2e_subkv_sweep/run_sweep_llama.sh --dataset longhealth --budgets 512,8192 --top-ts 128,2048 --eval-accuracy --gpu 0
+bash examples/e2e_subkv_sweep/run_sweep_llama.sh --datasets quality,longhealth --budgets 512,8192 --top-ts 128,2048 --eval-accuracy --gpu 0
 
 # 3. Detach from session: Press Ctrl+B, then D
 # 4. Re-attach anytime:
-tmux attach -t llama_longhealth
+tmux attach -t llama_mcq_sweep
 ```
 
 #### Using `nohup`
 ```bash
 nohup bash examples/e2e_subkv_sweep/run_sweep_llama.sh \
-  --dataset longhealth \
+  --datasets quality,longhealth \
   --budgets 512,8192 \
   --top-ts 128,2048 \
   --eval-accuracy \
-  --gpu 0 > logs_longhealth_sweep.out 2>&1 &
+  --gpu 0 > logs_mcq_sweep.out 2>&1 &
 
 # Monitor execution:
-tail -f logs_longhealth_sweep.out
+tail -f logs_mcq_sweep.out
 ```
 
 ---
@@ -349,10 +353,10 @@ For any dataset (`{dataset}` $\in$ `qasper`, `techqa`, `finqa`, `quality`, `long
    - CSV format: `outputs/evaluations/{dataset}/{tag}/teacher-forced-logppl-v1/matrix.csv`
    - JSON summary: `outputs/evaluations/{dataset}/{tag}/teacher-forced-logppl-v1/matrix.json`
 
-2. **LongHealth MCQ Accuracy Matrix**:
-   - CSV format: `outputs/evaluations/longhealth/{tag}/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv`
-   - JSON summary: `outputs/evaluations/longhealth/{tag}/accuracy-freeform-mc-options-primeAnswer-v1/matrix.json`
-   - Individual generated predictions: `outputs/evaluations/longhealth/{tag}/accuracy-freeform-mc-options-primeAnswer-v1/cells/*/generations.jsonl`
+2. **Multiple-Choice Option Generation Accuracy Matrix** (`quality`, `longhealth`):
+   - CSV format: `outputs/evaluations/{dataset}/{tag}/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv`
+   - JSON summary: `outputs/evaluations/{dataset}/{tag}/accuracy-freeform-mc-options-primeAnswer-v1/matrix.json`
+   - Individual generated predictions: `outputs/evaluations/{dataset}/{tag}/accuracy-freeform-mc-options-primeAnswer-v1/cells/*/generations.jsonl`
 
 3. **Slot Frequency & Overlap Geometry Artifacts**:
    - PyTorch tensor archive: `outputs/evaluations/{dataset}/{tag}/slot_frequency/slot_frequency.pt`
@@ -381,8 +385,14 @@ column -s, -t outputs/evaluations/qasper/llama3_2_3b_budget512_topt128/teacher-f
 column -s, -t outputs/evaluations/qasper/llama3_2_3b_budget8192_topt2048/teacher-forced-logppl-v1/matrix.csv
 ```
 
-#### View LongHealth MCQ Accuracy 5×5 Matrix
+#### View MCQ Accuracy 5×5 Matrix (`quality` & `longhealth`)
 ```bash
+# View Arm 1 (512/128) QuALITY accuracy:
+column -s, -t outputs/evaluations/quality/llama3_2_3b_budget512_topt128/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv
+
+# View Arm 2 (8192/2048) QuALITY accuracy:
+column -s, -t outputs/evaluations/quality/llama3_2_3b_budget8192_topt2048/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv
+
 # View Arm 1 (512/128) LongHealth accuracy:
 column -s, -t outputs/evaluations/longhealth/llama3_2_3b_budget512_topt128/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv
 

@@ -402,7 +402,7 @@ EOF
       }
 
     # 5. Optional Step 4: Generation Accuracy Matrix (for QuALITY/LongHealth MCQ)
-    if (( EVAL_ACCURACY )) || [[ "$DATASET" == "longhealth" ]]; then
+    if (( EVAL_ACCURACY )) || [[ "$DATASET" == "longhealth" ]] || [[ "$DATASET" == "quality" ]]; then
       echo "--- Step 4: Generation Accuracy Matrix ($DATASET, $TAG) ---"
       ACC_LOG="$LOGDIR/acc_${DATASET}_${TAG}_${TS}.log"
       bash "$ROOT/examples/shared/evaluate/run_accuracy.sh" "$DATASET" "$TAG" "$EVAL_GPUS" 2>&1 | tee -a "$ACC_LOG"
