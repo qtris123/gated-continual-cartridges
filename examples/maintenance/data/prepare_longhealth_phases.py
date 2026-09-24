@@ -108,14 +108,15 @@ def build_phase_evals() -> None:
 
         for pid in patient_ids:
             p_bench = bench_data[pid]
+            patient_info = (
+                f"ID {pid}, Name: {p_bench['name']}, "
+                f"Birthday: {p_bench['birthday']}, Diagnosis: {p_bench['diagnosis']}"
+            )
             for q in p_bench["questions"]:
                 qid = f"{pid}_{q['No']}"
                 if qid not in rows_by_qid:
                     raise KeyError(f"Question {qid} not found in eval source tables")
-                source_row = rows_by_qid[qid]
 
-                # User prompt
-                user_msg = source_row["messages"][0]
                 correct_text = q["correct"]
                 options = [
                     q["answer_a"],
@@ -124,6 +125,19 @@ def build_phase_evals() -> None:
                     q["answer_d"],
                     q["answer_e"],
                 ]
+                option_letters = ["a", "b", "c", "d", "e"]
+
+                # Build Quality-style prompt: question + lettered options, no CoT suffix.
+                # The "Answer:" anchor is prepended at decode time by run_accuracy.sh.
+                options_block = "\n".join(
+                    f"({option_letters[i]}) {opt}" for i, opt in enumerate(options)
+                )
+                user_content = (
+                    f"Please answer the question below about the following patient: {patient_info}"
+                    f"\n\n<question>\n{q['question']}\n</question>"
+                    f"\n\n<options>\n{options_block}\n</options>"
+                    f"\nOutput only the letter of the correct option (e.g. (a), (b), (c), (d), or (e)) along with the content of the option."
+                )
 
                 # Ensure category: "longhealth_mcq" and options list are in metadata
                 meta = {
@@ -137,7 +151,7 @@ def build_phase_evals() -> None:
                 phase_rows.append(
                     {
                         "messages": [
-                            {"role": "user", "content": user_msg["content"]},
+                            {"role": "user", "content": user_content},
                             {"role": "assistant", "content": correct_text},
                         ],
                         "system_prompt": "",

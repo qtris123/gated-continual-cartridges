@@ -253,11 +253,7 @@ def _load_longhealth(
     patient_ids = subset.split(",") if subset else None
     patients = load_longhealth_dataset(patient_ids)
 
-    cot_prompt = (
-        "You should first think step by step. Then give your final answer "
-        "exactly as it appears in the options. Your output should be in the "
-        "following format: \n<thinking> {YOUR_THOUGHT_PROCESS} </thinking> "
-    )
+    OPTION_LETTERS = ["a", "b", "c", "d", "e"]
 
     items: list[BenchmarkItem] = []
     for patient in patients:
@@ -266,12 +262,15 @@ def _load_longhealth(
             f"Birthday: {patient.birthday}, Diagnosis: {patient.diagnosis}"
         )
         for question in patient.questions:
-            options_text = (
-                f"{question.answer_a}\n"
-                f"{question.answer_b}\n"
-                f"{question.answer_c}\n"
-                f"{question.answer_d}\n"
-                f"{question.answer_e}"
+            raw_options = [
+                question.answer_a,
+                question.answer_b,
+                question.answer_c,
+                question.answer_d,
+                question.answer_e,
+            ]
+            options_text = "\n".join(
+                f"({OPTION_LETTERS[i]}) {opt}" for i, opt in enumerate(raw_options)
             )
 
             if prompt_template is not None:
@@ -285,8 +284,9 @@ def _load_longhealth(
                     "Please answer the question below about the following patient: "
                     f"{patient_info}"
                     f"\n\n<question>\n{question.question}\n</question>"
-                    f"\n\n<options>\n{options_text}\n</options>\n{cot_prompt}"
-                    f"\n\n<answer>\n{{YOUR_ANSWER}}\n</answer>"
+                    f"\n\n<options>\n{options_text}\n</options>"
+                    f"\nOutput only the letter of the correct answer (e.g. (a), (b), (c), (d), or (e))."
+                    f"\n\nAnswer:"
                 )
 
             items.append(BenchmarkItem(

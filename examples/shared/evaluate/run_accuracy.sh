@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 # Build + run the freeform-mc-options primeAnswer accuracy matrix for one lineage
 # tag, fanning the 5 stages across GPUs. Matches the baseline protocol exactly
-# (max_new_tokens=64, temp=0, answer_prime=" Answer:") so numbers are comparable
+# (max_new_tokens=32, temp=0, answer_prime=" Answer:") so numbers are comparable
 # across arms.
+# NOTE: 32 tokens is sufficient since the prompt now requests only the answer
+# letter + option content (e.g. "(a) Polatuzumab vedotin"), with no CoT.
 #
 # Usage: run_accuracy.sh <dataset> <tag> <gpu_csv>
 #   run_accuracy.sh quality soft_l1_v1 0,1,2,3
@@ -38,7 +40,7 @@ $PY examples/shared/evaluate/build_generation_matrix_plan.py \
   --state-dir "$STATE_DIR" --state-template 'p{phase:02d}.json' \
   --eval-template "data/${DS}/phases/phase{phase}_eval.parquet" \
   --output-dir "$OUT_DIR" --plan-out "$PLAN" \
-  --phases 1 2 3 4 5 --batch-size 16 --max-new-tokens 64 --temperature 0.0 \
+  --phases 1 2 3 4 5 --batch-size 16 --max-new-tokens 32 --temperature 0.0 \
   --answer-prime ' Answer:'
 
 # Fan the five stages across the provided GPUs.
