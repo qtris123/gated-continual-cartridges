@@ -702,6 +702,7 @@ def collect_reference_queries(
     batch_limit: int,
     collect_teacher_targets: bool = False,
     flex_target_cache: Optional[nn.Module] = None,
+    eval_aligned_queries: bool = False,
 ) -> tuple[AMQueryAccumulator, Optional[AMTargetAccumulator], int]:
     """Collect reference queries (and optional flex teacher targets) from a dataloader.
 
@@ -737,7 +738,7 @@ def collect_reference_queries(
             if valid_len is None:
                 valid_len = input_ids.shape[0]
 
-            if flex_target_cache is not None:
+            if flex_target_cache is not None or eval_aligned_queries:
                 # Same queries phase 1 fits: the question at eval positions,
                 # with no cartridge in the forward. Cartridge-conditioned
                 # queries sit in the old cartridge's representation, and a
@@ -897,6 +898,7 @@ class ReferenceQueries:
         max_batches: Optional[int] = None,
         collect_teacher_targets: bool = False,
         flex_target_cache: Optional[nn.Module] = None,
+        eval_aligned_queries: bool = False,
     ) -> tuple[AMQueryAccumulator, Optional[AMTargetAccumulator], int]:
         """Run the loader through the model and accumulate its post-RoPE queries.
 
@@ -919,4 +921,5 @@ class ReferenceQueries:
             ),
             collect_teacher_targets=collect_teacher_targets,
             flex_target_cache=flex_target_cache,
+            eval_aligned_queries=eval_aligned_queries,
         )

@@ -28,7 +28,11 @@ export MODEL_NAME="${MODEL_NAME:-Qwen/Qwen3-4B-Instruct-2507}"
 
 DS="$1"; TAG="$2"; GPUS="${3:-0}"
 PROTO=accuracy-freeform-mc-options-primeAnswer-v1
-STATE_DIR="outputs/${DS}_5phase_state/${TAG}"
+# continual_chain writes qasper state under qasper_asr_kg_state; the rest use *_5phase_state.
+case "$DS" in
+  qasper) STATE_DIR="outputs/qasper_asr_kg_state/${TAG}" ;;
+  *)      STATE_DIR="outputs/${DS}_5phase_state/${TAG}" ;;
+esac
 OUT_DIR="outputs/evaluations/${DS}/${TAG}/${PROTO}"
 PLAN="${OUT_DIR}/plan.json"
 mkdir -p logs "$OUT_DIR"

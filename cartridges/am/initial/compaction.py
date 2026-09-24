@@ -205,7 +205,13 @@ def _capture_post_rope_kv(model, input_ids: torch.Tensor, device) -> dict[int, t
             def _hook(module, args, output):
                 hidden = args[0].hidden_states
                 shape = (*hidden.shape[:-1], -1, attn_mod.head_dim)
-                keys = attn_mod.k_proj(hidden).view(shape).transpose(1, 2)
+                projected = attn_mod.k_proj(hidden).view(shape)
+                # Qwen3 RMS-normalizes K before RoPE. Skipping it leaves deep-layer
+                # keys unnormalized (absmax ~80), the value solve blows up, and
+                # phase-1 eval loss sits near 13 nats.
+                if hasattr(attn_mod, "k_norm"):
+                    projected = attn_mod.k_norm(projected)
+                keys = projected.transpose(1, 2)
                 values = attn_mod.v_proj(hidden).view(shape).transpose(1, 2)
                 cos, sin = args[0].position_embeddings
                 keys = _apply_rotary_pos_emb(keys, cos, sin)
@@ -286,6 +292,7 @@ def _collect_flex_phase1_queries(
     num_tokens: int,
     queries_per_batch: str,
     device,
+    collect_targets: bool = True,
 ):
     """Question-only queries at eval positions, targets from the document cache.
 
@@ -321,7 +328,11 @@ def _collect_flex_phase1_queries(
         # real tokens' attention matches the unpadded question.
         bucket = max(int(ids.numel()) for ids in encoded)
         bucket = max(128, ((bucket + 127) // 128) * 128)
-        doc_cache = cache_from_layer_kv(attn_config, local_docs[doc_id], device=device)
+        doc_cache = (
+            cache_from_layer_kv(attn_config, local_docs[doc_id], device=device)
+            if collect_targets
+            else None
+        )
         try:
             for ids in encoded:
                 ids = ids.to(device)
@@ -343,7 +354,11 @@ def _collect_flex_phase1_queries(
                 q_pos = torch.arange(num_tokens, num_tokens + span, device=device)
                 y_pos = torch.arange(span, device=device)
                 q_cap = _forward_capture(model, ids, q_pos, None, "query", seq)
-                y_cap = _forward_capture(model, ids, y_pos, doc_cache, "target", seq)
+                y_cap = (
+                    _forward_capture(model, ids, y_pos, doc_cache, "target", seq)
+                    if collect_targets
+                    else {}
+                )
                 for layer_idx, query in q_cap.items():
                     if layer_idx >= n_layers:
                         continue
@@ -623,20 +638,50 @@ def compact_cache_am_phase1(
             "system-role turns so the cartridge, not an in-prompt document, "
             "has to carry the paper."
         )
-    query_acc, target_acc, n_ref_batches = _collect_flex_phase1_queries(
-        model,
-        tokenizer,
-        ref_groups,
-        local_docs,
-        attn_config,
-        num_tokens,
-        queries_per_batch,
-        local_rank,
-    )
+    # Qwen3 qk-norm cannot fit queries placed at ``num_tokens + i``. Both the
+    # flex residual and the analytical softmax of those queries leave deep-layer
+    # recon mse around 20 and eval loss around 13 nats. The published Qwen
+    # matrices used question-only queries at the dataloader's own positions.
+    from cartridges.am.components.teacher import model_uses_qk_norm
+    use_flex_targets = not model_uses_qk_norm(model)
+    query_position_offset = int(num_tokens)
+    if use_flex_targets:
+        query_acc, target_acc, n_ref_batches = _collect_flex_phase1_queries(
+            model,
+            tokenizer,
+            ref_groups,
+            local_docs,
+            attn_config,
+            num_tokens,
+            queries_per_batch,
+            local_rank,
+            collect_targets=True,
+        )
+    else:
+        if strip_reference_system_prompt:
+            ref_convos = [dataclasses.replace(c, system_prompt="") for c in ref_convos]
+        ref_loader, ref_tmp = build_reference_dataloader(ref_convos, tokenizer, seed=0)
+        try:
+            query_acc = _collect_compaction_queries(
+                model,
+                ref_loader,
+                n_layers,
+                n_kv_heads,
+                queries_per_batch,
+                max_ref_batches,
+                attn_config,
+                local_rank,
+            )
+        finally:
+            cleanup_reference_parquet(ref_tmp)
+        target_acc = None
+        n_ref_batches = getattr(query_acc, "_n_ref_batches", 0)
+        query_position_offset = 0
     logger.info(
-        "Flex targets collected for %d reference conversations (position offset %d)",
+        "Reference queries collected for %d batches (flex_targets=%s, position offset %d)",
         n_ref_batches,
-        num_tokens,
+        use_flex_targets,
+        query_position_offset,
     )
 
     # ---- 3. Compact per (layer, KV head) ---------------------------------
@@ -672,12 +717,14 @@ def compact_cache_am_phase1(
             queries = query_acc.get_layer_head_queries(
                 layer_idx, head_idx, n_q_heads=n_q_heads, n_kv_heads=n_kv_heads,
             ).to(device=device, dtype=dtype)
-            flex_targets = target_acc.get_layer_head_targets(
-                layer_idx, head_idx, n_q_heads=n_q_heads, n_kv_heads=n_kv_heads,
-            ).to(device=device, dtype=torch.float32)
+            flex_targets = None
+            if use_flex_targets:
+                flex_targets = target_acc.get_layer_head_targets(
+                    layer_idx, head_idx, n_q_heads=n_q_heads, n_kv_heads=n_kv_heads,
+                ).to(device=device, dtype=torch.float32)
             if queries.numel() == 0:
                 continue
-            if flex_targets.shape[0] != queries.shape[0]:
+            if flex_targets is not None and flex_targets.shape[0] != queries.shape[0]:
                 raise RuntimeError(
                     f"Flex targets ({flex_targets.shape[0]}) are not aligned with "
                     f"queries ({queries.shape[0]}) at layer {layer_idx} head {head_idx}"
@@ -685,7 +732,8 @@ def compact_cache_am_phase1(
             if queries.shape[0] > max_queries_per_head:
                 idx = torch.randperm(queries.shape[0], device=device)[:max_queries_per_head]
                 queries = queries[idx]
-                flex_targets = flex_targets[idx]
+                if flex_targets is not None:
+                    flex_targets = flex_targets[idx]
 
             # 3.1 Select the keys for the compacted block
             if key_select == "omp":
@@ -720,8 +768,11 @@ def compact_cache_am_phase1(
                 targets=flex_targets,
             )
 
-            # Reconstruction MSE against the in-context flex attention output.
-            target = flex_targets
+            # Reconstruction MSE against the target the solve just fitted.
+            if flex_targets is None:
+                target = compute_attention_output(queries, K_head, V_head, head_dim)
+            else:
+                target = flex_targets
             sC = (queries @ C1.T).to(torch.float32) * inv_sqrt_d + beta.to(torch.float32)
             approx = F.softmax(sC, dim=-1) @ C2.to(torch.float32)
             layer_mses.append(F.mse_loss(approx, target).item())
@@ -803,8 +854,8 @@ def compact_cache_am_phase1(
         "ridge_lambda": ridge_lambda,
         "ridge_scale": ridge_scale,
         "n_ref_batches": n_ref_batches,
-        "flex_targets": True,
-        "query_position_offset": int(num_tokens),
+        "flex_targets": use_flex_targets,
+        "query_position_offset": int(query_position_offset),
         "recon_mse_mean": float(sum(mse_values) / max(len(mse_values), 1)) if mse_values else None,
         "recon_mse_max": float(max(mse_values)) if mse_values else None,
         "recon_mse_per_layer": {int(k): float(v) for k, v in mse_per_layer.items()},

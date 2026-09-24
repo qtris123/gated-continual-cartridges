@@ -20,6 +20,25 @@ from cartridges.initialization.tokenization_utils import MODEL_TO_SYSTEM_PROMPT_
 from cartridges.sparse_cache_finetuning import _apply_rotary_pos_emb
 
 
+def model_uses_qk_norm(model) -> bool:
+    """True for Qwen3, whose attention RMS-normalizes Q and K per head.
+
+    A flex target taken from a second forward (document in the residual) is
+    not a linear function of the question-only queries in the deep layers.
+    Fitting it produced reconstruction MSE above 1 and eval loss around 13
+    nats. The analytical attention of those same queries is the fittable
+    target.
+    """
+    inner = getattr(model, "model", None)
+    layers = getattr(inner, "layers", None) if inner is not None else None
+    if layers is None:
+        layers = getattr(model, "layers", None)
+    if not layers:
+        return False
+    attn = getattr(layers[0], "self_attn", None)
+    return attn is not None and hasattr(attn, "q_norm")
+
+
 def eval_aligned_system_ids(tokenizer, content: str) -> torch.Tensor:
     """Token ids of ``content`` as the eval chat template's system message.
 

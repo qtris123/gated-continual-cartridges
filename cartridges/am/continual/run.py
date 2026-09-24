@@ -376,7 +376,12 @@ def run_documents(
             )
             prefill_s = time.time() - t_prefill
 
-            flex_cache = _flex_teacher_cache(cache, doc_kv)
+            # Qwen3 qk-norm: a second-forward flex target, and queries shifted
+            # by the cartridge length, both eval near 13 nats. Use the
+            # dataloader positions and analytical attention, matching phase 1.
+            from cartridges.am.components.teacher import model_uses_qk_norm
+            qk_norm = model_uses_qk_norm(model)
+            flex_cache = None if qk_norm else _flex_teacher_cache(cache, doc_kv)
             query_acc, target_acc, batch_count = stages.queries.collect(
                 wrapped_model,
                 cache,
