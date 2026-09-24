@@ -20,16 +20,71 @@ from cartridges.initialization.tokenization_utils import MODEL_TO_SYSTEM_PROMPT_
 from cartridges.sparse_cache_finetuning import _apply_rotary_pos_emb
 
 
+def eval_aligned_system_ids(tokenizer, content: str) -> torch.Tensor:
+    """Token ids of ``content`` as the eval chat template's system message.
+
+    Llama's ``apply_chat_template`` inserts a BOS token plus a dated preamble
+    (``Cutting Knowledge Date`` / ``Today Date``). Eval questions are tokenized
+    with the message converter, which does not. Document keys have to use that
+    same prefix or the continual write fits a different prompt than phase 1 and
+    eval.
+    """
+    from cartridges.datasets import MODEL_TO_MESSAGE_CONVERTER
+    from cartridges.structs import Conversation
+
+    converter = MODEL_TO_MESSAGE_CONVERTER[tokenizer.name_or_path.lower()]
+
+    def _msg(role: str, text: str) -> Conversation.Message:
+        return Conversation.Message(content=text, role=role, token_ids=None)
+
+    joint = converter(
+        [_msg("system", content), _msg("user", "."), _msg("assistant", ".")],
+        retokenize=True,
+        tokenizer=tokenizer,
+    )
+    tail = converter(
+        [_msg("user", "."), _msg("assistant", ".")],
+        retokenize=True,
+        tokenizer=tokenizer,
+    )
+    ids = joint.input_ids.reshape(-1)
+    tail_ids = tail.input_ids.reshape(-1)
+    if (
+        tail_ids.numel() == 0
+        or ids.numel() <= tail_ids.numel()
+        or not torch.equal(ids[-tail_ids.numel() :], tail_ids)
+    ):
+        raise RuntimeError(
+            "Eval chat template system turn is not a stable prefix; "
+            "cannot align in-context targets with question-only queries."
+        )
+    return ids[: ids.numel() - tail_ids.numel()].contiguous()
+
+
 def _tokenize_system_prompt(
     tokenizer,
     system_prompt: str,
     max_tokens: Optional[int] = None,
 ) -> torch.Tensor:
     model_key = tokenizer.name_or_path.lower()
-    if model_key not in MODEL_TO_SYSTEM_PROMPT_TOKENIZER:
-        raise ValueError(f"No system-prompt tokenizer registered for {tokenizer.name_or_path}")
-    fn = MODEL_TO_SYSTEM_PROMPT_TOKENIZER[model_key]
-    return fn(tokenizer=tokenizer, content=system_prompt, max_tokens=max_tokens)
+    from cartridges.datasets import MODEL_TO_MESSAGE_CONVERTER
+
+    if model_key in MODEL_TO_MESSAGE_CONVERTER:
+        # Same system turn eval and phase 1 use. The legacy chat-template
+        # tokenizer adds a BOS token and a date preamble the questions never see.
+        ids = eval_aligned_system_ids(tokenizer, system_prompt)
+    else:
+        if model_key not in MODEL_TO_SYSTEM_PROMPT_TOKENIZER:
+            raise ValueError(
+                f"No system-prompt tokenizer registered for {tokenizer.name_or_path}"
+            )
+        ids = MODEL_TO_SYSTEM_PROMPT_TOKENIZER[model_key](
+            tokenizer=tokenizer, content=system_prompt, max_tokens=max_tokens
+        ).reshape(-1)
+        return ids
+    if max_tokens is not None and ids.numel() > max_tokens:
+        ids = torch.cat([ids[: max_tokens - 1], ids[-1:]])
+    return ids.reshape(1, -1)
 
 
 def prefill_document_kv_cache(
@@ -128,6 +183,35 @@ def prefill_document_kv_cache(
         if layer_idx not in captured:
             raise RuntimeError(f"Document prefill produced no KV at layer {layer_idx}")
     return captured
+
+
+def cache_from_layer_kv(
+    attn_config: AttnConfig,
+    layer_kv: dict[int, tuple[torch.Tensor, torch.Tensor]],
+    *,
+    device: torch.device | str,
+) -> TrainableCache:
+    """Build a cartridge whose tokens are the captured per-layer KV.
+
+    ``layer_kv[layer]`` is ``(K, V)`` with shape ``(n_kv_heads, T, head_dim)``
+    or ``(1, n_kv_heads, T, head_dim)``. Sequence ids are the cartridge id, so
+    every query can attend to every token.
+    """
+    keys: list[torch.Tensor] = []
+    values: list[torch.Tensor] = []
+    for layer_idx in range(attn_config.n_layers):
+        k, v = layer_kv[layer_idx]
+        if k.dim() == 3:
+            k = k.unsqueeze(0)
+            v = v.unsqueeze(0)
+        keys.append(k.detach().to(device=device).contiguous())
+        values.append(v.detach().to(device=device).contiguous())
+    return TrainableCache(
+        config=attn_config,
+        init_keys=keys,
+        init_values=values,
+        num_frozen_tokens=0,
+    ).to(device)
 
 
 def concat_teacher_kv(

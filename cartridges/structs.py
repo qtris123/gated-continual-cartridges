@@ -80,10 +80,10 @@ class Conversation:
                 Conversation.Message(
                     content=message["content"],
                     role=message["role"],
-                    token_ids=message["token_ids"],
+                    token_ids=message.get("token_ids"),
                     top_logprobs=(
                         FlatTopLogprobs(**message["top_logprobs"])
-                        if message["top_logprobs"] is not None
+                        if message.get("top_logprobs") is not None
                         else None
                     ),
                 )

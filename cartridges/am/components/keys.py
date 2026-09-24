@@ -58,6 +58,7 @@ def select_keys_highest_attention(
     nnls_iters: int = HA_NNLS_ITERS,
     w_lower: float = HA_W_LOWER,
     w_upper: Optional[float] = HA_W_UPPER,
+    fit_beta: bool = True,
 ) -> Tuple[torch.Tensor, torch.Tensor, list]:
     """Select top-t keys by attention score (highest-attention-keys AM).
 
@@ -94,6 +95,10 @@ def select_keys_highest_attention(
     indices = top_idx.tolist()
 
     C1 = keys[indices]
+    if not fit_beta:
+        # Callers that zero or discard beta (phase 1 with beta off, key rewrite)
+        # were paying a (n x t) least squares whose result was thrown away.
+        return C1, torch.zeros(C1.shape[0], device=keys.device, dtype=torch.float32), indices
 
     # NNLS for beta (mass matching)
     exp_scores = torch.exp(scores - scores.max(dim=1, keepdim=True).values)
@@ -205,6 +210,7 @@ def rewrite_keys_on_support(
     doc_rope_offset: Optional[int] = None,
     rope_theta: float = 10000.0,
     reposition: bool = False,
+    doc_baked_pos_base: Optional[int] = None,
     info: Optional[dict] = None,
 ) -> torch.Tensor:
     """Replace cartridge key rows at selected_indices using teacher candidates.
@@ -254,6 +260,7 @@ def rewrite_keys_on_support(
             doc_key_start=doc_key_start,
             doc_rope_offset=doc_rope_offset,
             rope_theta=rope_theta,
+            fit_beta=False,
         )
     elif mode == "omp":
         new_k, _, sel_idx = select_keys_omp(
@@ -295,10 +302,26 @@ def rewrite_keys_on_support(
         # float32 so the bf16 cache does not eat the rotation.
         rows = new_k[from_doc].to(torch.float32)
         m = (sel_src[from_doc] - doc_key_start).to(torch.float32)
+        if doc_baked_pos_base is None:
+            # Historical analytical frame: the key was treated as baked at m
+            # and the teacher query was rotated forward by T_doc.
+            to_pos = m - float(doc_rope_offset)
+        else:
+            # Keys were baked at ``doc_baked_pos_base + m``. A clean prefill
+            # uses base 0. Land the key on the slot it is about to occupy,
+            # the same rebase phase 1 uses.
+            slot = selected_indices.to(device=device, dtype=torch.float32)
+            if slot.shape[0] != new_k.shape[0]:
+                raise RuntimeError(
+                    "rewrite_keys_on_support: selected slots "
+                    f"({slot.shape[0]}) != rewritten keys ({new_k.shape[0]})"
+                )
+            to_pos = slot[from_doc]
+            m = m + float(doc_baked_pos_base)
         rebased = _rope_reposition(
             rows,
             from_pos=m,
-            to_pos=m - float(doc_rope_offset),
+            to_pos=to_pos,
             head_dim=head_dim,
             rope_theta=rope_theta,
         )
@@ -317,7 +340,10 @@ def rewrite_keys_on_support(
         new_k[from_doc] = rebased.to(new_k.dtype)
         if info is not None:
             info["n_repositioned"] = int(from_doc.sum().item())
-            info["rope_delta"] = -float(doc_rope_offset)
+            info["rope_delta"] = (
+                None if doc_baked_pos_base is not None else -float(doc_rope_offset)
+            )
+            info["doc_baked_pos_base"] = doc_baked_pos_base
 
     out = keys.clone()
     out[selected_indices] = new_k.to(device=device, dtype=dtype)
@@ -359,6 +385,7 @@ class KeyWriter:
         doc_key_start: Optional[int] = None,
         doc_rope_offset: Optional[int] = None,
         rope_theta: float,
+        doc_baked_pos_base: Optional[int] = None,
         info: Optional[dict] = None,
     ) -> torch.Tensor:
         return rewrite_keys_on_support(
@@ -372,5 +399,6 @@ class KeyWriter:
             doc_rope_offset=doc_rope_offset,
             rope_theta=rope_theta,
             reposition=self.config.key_reposition,
+            doc_baked_pos_base=doc_baked_pos_base,
             info=info,
         )

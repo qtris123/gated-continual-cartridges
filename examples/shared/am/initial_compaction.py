@@ -23,7 +23,14 @@ import uuid
 from datetime import datetime
 from pathlib import Path
 
+os.environ.setdefault("OMP_NUM_THREADS", "8")
+os.environ.setdefault("MKL_NUM_THREADS", "8")
+os.environ.setdefault("OPENBLAS_NUM_THREADS", "8")
+os.environ.setdefault("OMP_WAIT_POLICY", "PASSIVE")
+
 import torch
+
+torch.set_num_threads(int(os.environ.get("OMP_NUM_THREADS", "8")))
 from torch.utils.data import DataLoader
 from transformers import AutoTokenizer
 

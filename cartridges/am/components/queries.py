@@ -17,6 +17,7 @@ import random
 import re
 import tempfile
 from functools import lru_cache
+from logging import getLogger
 from typing import Literal, Optional
 
 import torch
@@ -25,10 +26,12 @@ from pydrantic import ObjectConfig
 from torch.utils.data import DataLoader
 from transformers import PreTrainedTokenizerFast
 
-from cartridges.datasets import DataSource, TrainDataset
+from cartridges.datasets import DataSource, TrainDataset, stored_token_ids_need_retokenize
 from cartridges.models.attention import flex_attention_forward
 from cartridges.sparse_cache_finetuning import _apply_rotary_pos_emb
 from cartridges.structs import Conversation, read_conversations, write_conversations
+
+logger = getLogger(__name__)
 
 
 # ======================================================================================
@@ -391,11 +394,18 @@ def build_reference_dataloader(
         tmp.close()
 
     write_conversations(conversations, tmp_path)
+    targets = "tokens" if stored_token_ids_need_retokenize(conversations, tokenizer) else "logits"
+    if targets == "tokens":
+        logger.info(
+            "Reference token ids do not match %s; retokenizing query text",
+            getattr(tokenizer, "name_or_path", tokenizer),
+        )
     dataset = TrainDataset.Config(
         data_sources=[DataSource(path=tmp_path, type="local")],
         top_k_logits=top_k_logits,
         packed_seq_length=packed_seq_length,
         packing_mode=packing_mode,
+        targets=targets,
     ).instantiate(tokenizer=tokenizer, seed=seed)
 
     loader = DataLoader(
@@ -645,6 +655,18 @@ def install_teacher_attention_capture_hooks(model: nn.Module) -> tuple[dict, lis
                     cos, sin = batch.position_embeddings
                     query_states = _apply_rotary_pos_emb(query_states, cos, sin)
                     key_states = _apply_rotary_pos_emb(key_states, cos, sin)
+                    # The real layer prepends the cartridge before flex. Recomputing
+                    # from the current tokens alone drops that context, so a cached
+                    # document would not appear in the captured target.
+                    past = getattr(batch, "past_key_values", None)
+                    if past is not None and past.num_tokens() > 0:
+                        key_states, value_states = past.update(
+                            key_states,
+                            value_states,
+                            batch.seq_ids,
+                            idx,
+                            skip_append=True,
+                        )
 
                     attn_output = flex_attention_forward(
                         attn_mod,
@@ -679,8 +701,17 @@ def collect_reference_queries(
     device: torch.device,
     batch_limit: int,
     collect_teacher_targets: bool = False,
+    flex_target_cache: Optional[nn.Module] = None,
 ) -> tuple[AMQueryAccumulator, Optional[AMTargetAccumulator], int]:
-    """Collect reference queries (and optional legacy teacher targets) from a dataloader."""
+    """Collect reference queries (and optional flex teacher targets) from a dataloader.
+
+    When ``flex_target_cache`` is set, each batch is forwarded a second time
+    against that cache and the pre-``o_proj`` attention outputs are stored in
+    the same token order as the queries. Those outputs are the in-context
+    teacher (document visible). The analytical ``qK^T`` target is a poor
+    substitute on Llama 3, whose RoPE makes a document-only softmax unlike
+    the residual the model actually uses.
+    """
     query_acc = AMQueryAccumulator(
         granularity=granularity,
         queries_per_batch=queries_per_batch,
@@ -690,7 +721,7 @@ def collect_reference_queries(
     )
     target_acc = (
         AMTargetAccumulator(n_layers=n_layers, n_kv_heads=n_kv_heads)
-        if collect_teacher_targets
+        if collect_teacher_targets or flex_target_cache is not None
         else None
     )
     batch_count = 0
@@ -706,11 +737,30 @@ def collect_reference_queries(
             if valid_len is None:
                 valid_len = input_ids.shape[0]
 
-            wrapped_model(
-                input_ids=input_ids,
-                seq_ids=seq_ids,
-                position_ids=position_ids,
-            )
+            if flex_target_cache is not None:
+                # Same queries phase 1 fits: the question at eval positions,
+                # with no cartridge in the forward. Cartridge-conditioned
+                # queries sit in the old cartridge's representation, and a
+                # write fit to those queries did not survive eval (one
+                # QuALITY story: fresh compaction 1.91 nats, continual
+                # write 4.13).
+                query_positions = position_ids + int(cache.num_cartridge_tokens())
+                if wrapped_model._captured_queries is not None:
+                    wrapped_model._captured_queries.clear()
+                wrapped_model.model(
+                    input_ids=input_ids,
+                    seq_ids=seq_ids,
+                    position_ids=query_positions,
+                    use_cache=False,
+                    past_key_values=None,
+                    mode="train",
+                )
+            else:
+                wrapped_model(
+                    input_ids=input_ids,
+                    seq_ids=seq_ids,
+                    position_ids=position_ids,
+                )
             captured_q = wrapped_model.get_captured_queries()
             if captured_q:
                 query_acc.accumulate_from_hooks(
@@ -721,7 +771,36 @@ def collect_reference_queries(
                     valid_len=valid_len,
                 )
 
-            if target_acc is not None:
+            if flex_target_cache is not None and target_acc is not None:
+                # The document occupies 0..T-1. Unshifted position_ids make the
+                # model add T, so the question starts at T, the same forward
+                # phase 1 uses. Subtracting T lands the question on top of the
+                # document; that RoPE collision raised the teacher loss from
+                # 1.4 to 6.3 on a QuALITY story.
+                flex_position_ids = position_ids
+                teacher_captured, teacher_handles = install_teacher_attention_capture_hooks(
+                    wrapped_model.model
+                )
+                try:
+                    flex_target_cache.clear()
+                    wrapped_model.model(
+                        input_ids=input_ids,
+                        seq_ids=seq_ids,
+                        position_ids=flex_position_ids,
+                        use_cache=True,
+                        past_key_values=flex_target_cache,
+                        mode="train",
+                    )
+                    if teacher_captured:
+                        target_acc.accumulate_from_hooks(
+                            teacher_captured, valid_len=valid_len
+                        )
+                finally:
+                    for handle in teacher_handles:
+                        handle.remove()
+                    flex_target_cache.clear()
+
+            elif target_acc is not None:
                 teacher_captured, teacher_handles = install_teacher_attention_capture_hooks(
                     wrapped_model.model
                 )
@@ -817,6 +896,7 @@ class ReferenceQueries:
         device: torch.device,
         max_batches: Optional[int] = None,
         collect_teacher_targets: bool = False,
+        flex_target_cache: Optional[nn.Module] = None,
     ) -> tuple[AMQueryAccumulator, Optional[AMTargetAccumulator], int]:
         """Run the loader through the model and accumulate its post-RoPE queries.
 
@@ -838,4 +918,5 @@ class ReferenceQueries:
                 max_batches if max_batches is not None else self.config.ref_batch_limit
             ),
             collect_teacher_targets=collect_teacher_targets,
+            flex_target_cache=flex_target_cache,
         )

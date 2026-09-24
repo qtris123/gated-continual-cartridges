@@ -41,21 +41,32 @@ $PY examples/shared/evaluate/build_generation_matrix_plan.py \
   --phases 1 2 3 4 5 --batch-size 16 --max-new-tokens 64 --temperature 0.0 \
   --answer-prime ' Answer:'
 
-# Fan the five stages across the provided GPUs.
+# Fan the five stages across the provided GPUs. A single GPU runs the stages
+# one after another; stacking five long-context generations on one device OOMs.
 IFS=',' read -r -a GPU_ARR <<< "$GPUS"
 NG=${#GPU_ARR[@]}
-pids=()
-i=0
-for phase in 1 2 3 4 5; do
-  sid=$(printf 'p%02d' "$phase")
-  g=${GPU_ARR[$(( i % NG ))]}
-  CUDA_VISIBLE_DEVICES="$g" $PY examples/shared/evaluate/generation_accuracy_matrix.py \
-    --plan "$PLAN" --stages "$sid" \
-    > "logs/acc_${DS}_${TAG}_${sid}.log" 2>&1 &
-  pids+=($!)
-  i=$(( i + 1 ))
-done
-for p in "${pids[@]}"; do wait "$p"; done
+if (( NG <= 1 )); then
+  g=${GPU_ARR[0]:-0}
+  for phase in 1 2 3 4 5; do
+    sid=$(printf 'p%02d' "$phase")
+    CUDA_VISIBLE_DEVICES="$g" $PY examples/shared/evaluate/generation_accuracy_matrix.py \
+      --plan "$PLAN" --stages "$sid" \
+      > "logs/acc_${DS}_${TAG}_${sid}.log" 2>&1
+  done
+else
+  pids=()
+  i=0
+  for phase in 1 2 3 4 5; do
+    sid=$(printf 'p%02d' "$phase")
+    g=${GPU_ARR[$(( i % NG ))]}
+    CUDA_VISIBLE_DEVICES="$g" $PY examples/shared/evaluate/generation_accuracy_matrix.py \
+      --plan "$PLAN" --stages "$sid" \
+      > "logs/acc_${DS}_${TAG}_${sid}.log" 2>&1 &
+    pids+=($!)
+    i=$(( i + 1 ))
+  done
+  for p in "${pids[@]}"; do wait "$p"; done
+fi
 
 # Summarize into matrix.json / matrix.csv.
 $PY examples/shared/evaluate/generation_accuracy_matrix.py --plan "$PLAN" --summarize-only
