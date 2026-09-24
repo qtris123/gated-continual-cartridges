@@ -6,7 +6,7 @@ This document provides a complete checklist, environment setup guide, dataset hy
 
 ## 1. Overview & Experimental Configuration
 
-This ablation evaluates continual memory retention and acquisition on **Qwen 3 4B** for the LongHealth benchmark (the missing dataset in the Qwen suite). 
+This ablation evaluates continual memory retention and acquisition on **Qwen 3 4B** for the LongHealth benchmark (the missing dataset in the Qwen suite), matching the naming conventions of the Llama sweeps (`qwen3_4b_budget...` $\leftrightarrow$ `llama3_2_3b_budget...`).
 
 All 4 runs use a fixed sub-KV cache budget $S = 512$, sweeping over update budgets $\text{top\_t} \in \{32, 64\}$ across two query ceiling and delta regularization regimes:
 
@@ -17,10 +17,10 @@ All 4 runs use a fixed sub-KV cache budget $S = 512$, sweeping over update budge
 
 | Arm | Sub-KV Budget ($S$) | Update Budget $\text{top\_t}$ ($t$) | Update Ratio ($t / S$) | Max Queries ($N_q$) | Regularization ($\lambda_\Delta$) | Tag Suffix | Lineage / Tag Identifier |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| **Arm 1 (A1)** | **512** | **32** | 6.25% | **64** | **0.01** | `_q64` | `e2e_budget512_topt32_q64` |
-| **Arm 2 (A2)** | **512** | **64** | 12.50% | **64** | **0.01** | `_q64` | `e2e_budget512_topt64_q64` |
-| **Arm 3 (B1)** | **512** | **32** | 6.25% | **1024** | **0.16** | `_q1024` | `e2e_budget512_topt32_q1024` |
-| **Arm 4 (B2)** | **512** | **64** | 12.50% | **1024** | **0.16** | `_q1024` | `e2e_budget512_topt64_q1024` |
+| **Arm 1 (A1)** | **512** | **32** | 6.25% | **64** | **0.01** | `_q64` | `qwen3_4b_budget512_topt32_q64` |
+| **Arm 2 (A2)** | **512** | **64** | 12.50% | **64** | **0.01** | `_q64` | `qwen3_4b_budget512_topt64_q64` |
+| **Arm 3 (B1)** | **512** | **32** | 6.25% | **1024** | **0.16** | `_q1024` | `qwen3_4b_budget512_topt32_q1024` |
+| **Arm 4 (B2)** | **512** | **64** | 12.50% | **1024** | **0.16** | `_q1024` | `qwen3_4b_budget512_topt64_q1024` |
 
 ### Key Scientific Questions Addressed by this Ablation
 1. **Query Ceiling & Regularization**: Does scaling reference queries from 64 to 1024 with proportional regularization ($\lambda_\Delta = 0.16$) improve acquisition while preserving clinical record retention across stages?
@@ -184,31 +184,31 @@ Track your execution progress:
 
 ### Group A: Baseline Regime (`q64`, $\lambda_\Delta = 0.01$)
 - [ ] **Launch Group A Sweep**: Budget 512, top-t 32 and 64, max queries 64, delta weight 0.01 (`--tag-suffix _q64`).
-- [ ] **Arm 1 (`e2e_budget512_topt32_q64`) Results**:
-  - [ ] Verify logppl: `outputs/evaluations/longhealth/e2e_budget512_topt32_q64/teacher-forced-logppl-v1/matrix.csv`
-  - [ ] Verify accuracy: `outputs/evaluations/longhealth/e2e_budget512_topt32_q64/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv`
-  - [ ] Verify generations: `outputs/evaluations/longhealth/e2e_budget512_topt32_q64/accuracy-freeform-mc-options-primeAnswer-v1/cells/*/generations.jsonl`
-  - [ ] Verify slot frequency: `outputs/evaluations/longhealth/e2e_budget512_topt32_q64/slot_frequency/summary.json`
-- [ ] **Arm 2 (`e2e_budget512_topt64_q64`) Results**:
-  - [ ] Verify logppl: `outputs/evaluations/longhealth/e2e_budget512_topt64_q64/teacher-forced-logppl-v1/matrix.csv`
-  - [ ] Verify accuracy: `outputs/evaluations/longhealth/e2e_budget512_topt64_q64/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv`
-  - [ ] Verify generations: `outputs/evaluations/longhealth/e2e_budget512_topt64_q64/accuracy-freeform-mc-options-primeAnswer-v1/cells/*/generations.jsonl`
-  - [ ] Verify slot frequency: `outputs/evaluations/longhealth/e2e_budget512_topt64_q64/slot_frequency/summary.json`
+- [ ] **Arm 1 (`qwen3_4b_budget512_topt32_q64`) Results**:
+  - [ ] Verify logppl: `outputs/evaluations/longhealth/qwen3_4b_budget512_topt32_q64/teacher-forced-logppl-v1/matrix.csv`
+  - [ ] Verify accuracy: `outputs/evaluations/longhealth/qwen3_4b_budget512_topt32_q64/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv`
+  - [ ] Verify generations: `outputs/evaluations/longhealth/qwen3_4b_budget512_topt32_q64/accuracy-freeform-mc-options-primeAnswer-v1/cells/*/generations.jsonl`
+  - [ ] Verify slot frequency: `outputs/evaluations/longhealth/qwen3_4b_budget512_topt32_q64/slot_frequency/summary.json`
+- [ ] **Arm 2 (`qwen3_4b_budget512_topt64_q64`) Results**:
+  - [ ] Verify logppl: `outputs/evaluations/longhealth/qwen3_4b_budget512_topt64_q64/teacher-forced-logppl-v1/matrix.csv`
+  - [ ] Verify accuracy: `outputs/evaluations/longhealth/qwen3_4b_budget512_topt64_q64/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv`
+  - [ ] Verify generations: `outputs/evaluations/longhealth/qwen3_4b_budget512_topt64_q64/accuracy-freeform-mc-options-primeAnswer-v1/cells/*/generations.jsonl`
+  - [ ] Verify slot frequency: `outputs/evaluations/longhealth/qwen3_4b_budget512_topt64_q64/slot_frequency/summary.json`
 
 ---
 
 ### Group B: Scaled Regime (`q1024`, $\lambda_\Delta = 0.16$)
 - [ ] **Launch Group B Sweep**: Budget 512, top-t 32 and 64, max queries 1024, delta weight 0.16 (`--tag-suffix _q1024`).
-- [ ] **Arm 3 (`e2e_budget512_topt32_q1024`) Results**:
-  - [ ] Verify logppl: `outputs/evaluations/longhealth/e2e_budget512_topt32_q1024/teacher-forced-logppl-v1/matrix.csv`
-  - [ ] Verify accuracy: `outputs/evaluations/longhealth/e2e_budget512_topt32_q1024/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv`
-  - [ ] Verify generations: `outputs/evaluations/longhealth/e2e_budget512_topt32_q1024/accuracy-freeform-mc-options-primeAnswer-v1/cells/*/generations.jsonl`
-  - [ ] Verify slot frequency: `outputs/evaluations/longhealth/e2e_budget512_topt32_q1024/slot_frequency/summary.json`
-- [ ] **Arm 4 (`e2e_budget512_topt64_q1024`) Results**:
-  - [ ] Verify logppl: `outputs/evaluations/longhealth/e2e_budget512_topt64_q1024/teacher-forced-logppl-v1/matrix.csv`
-  - [ ] Verify accuracy: `outputs/evaluations/longhealth/e2e_budget512_topt64_q1024/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv`
-  - [ ] Verify generations: `outputs/evaluations/longhealth/e2e_budget512_topt64_q1024/accuracy-freeform-mc-options-primeAnswer-v1/cells/*/generations.jsonl`
-  - [ ] Verify slot frequency: `outputs/evaluations/longhealth/e2e_budget512_topt64_q1024/slot_frequency/summary.json`
+- [ ] **Arm 3 (`qwen3_4b_budget512_topt32_q1024`) Results**:
+  - [ ] Verify logppl: `outputs/evaluations/longhealth/qwen3_4b_budget512_topt32_q1024/teacher-forced-logppl-v1/matrix.csv`
+  - [ ] Verify accuracy: `outputs/evaluations/longhealth/qwen3_4b_budget512_topt32_q1024/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv`
+  - [ ] Verify generations: `outputs/evaluations/longhealth/qwen3_4b_budget512_topt32_q1024/accuracy-freeform-mc-options-primeAnswer-v1/cells/*/generations.jsonl`
+  - [ ] Verify slot frequency: `outputs/evaluations/longhealth/qwen3_4b_budget512_topt32_q1024/slot_frequency/summary.json`
+- [ ] **Arm 4 (`qwen3_4b_budget512_topt64_q1024`) Results**:
+  - [ ] Verify logppl: `outputs/evaluations/longhealth/qwen3_4b_budget512_topt64_q1024/teacher-forced-logppl-v1/matrix.csv`
+  - [ ] Verify accuracy: `outputs/evaluations/longhealth/qwen3_4b_budget512_topt64_q1024/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv`
+  - [ ] Verify generations: `outputs/evaluations/longhealth/qwen3_4b_budget512_topt64_q1024/accuracy-freeform-mc-options-primeAnswer-v1/cells/*/generations.jsonl`
+  - [ ] Verify slot frequency: `outputs/evaluations/longhealth/qwen3_4b_budget512_topt64_q1024/slot_frequency/summary.json`
 
 ---
 
@@ -224,12 +224,14 @@ Track your execution progress:
 
 ### Strategy 1: Sequential Group Execution (Recommended for Single GPU)
 
+You can launch using the convenience wrapper `run_sweep_qwen.sh` (or `run_sweep.sh`):
+
 #### Batch 1: Run Group A (Baseline: $N_q=64, \lambda_\Delta=0.01$)
 Executes Arm 1 ($t=32$) and Arm 2 ($t=64$) sequentially on GPU 0:
 
 ```bash
 # Group A: Baseline (64 queries, delta_weight=0.01) on top-t 32 and 64
-bash examples/e2e_subkv_sweep/run_sweep.sh \
+bash examples/e2e_subkv_sweep/run_sweep_qwen.sh \
   --dataset longhealth \
   --budget 512 \
   --top-ts 32,64 \
@@ -245,7 +247,7 @@ Executes Arm 3 ($t=32$) and Arm 4 ($t=64$) sequentially on GPU 0:
 
 ```bash
 # Group B: Scaled (1024 queries, delta_weight=0.16) on top-t 32 and 64
-bash examples/e2e_subkv_sweep/run_sweep.sh \
+bash examples/e2e_subkv_sweep/run_sweep_qwen.sh \
   --dataset longhealth \
   --budget 512 \
   --top-ts 32,64 \
@@ -264,7 +266,7 @@ If multiple GPUs are available, you can run all 4 arms concurrently:
 
 #### Arm 1 (GPU 0): Budget 512, top-t 32, $N_q=64, \lambda_\Delta=0.01$
 ```bash
-bash examples/e2e_subkv_sweep/run_sweep.sh \
+bash examples/e2e_subkv_sweep/run_sweep_qwen.sh \
   --dataset longhealth \
   --budget 512 \
   --top-t 32 \
@@ -277,7 +279,7 @@ bash examples/e2e_subkv_sweep/run_sweep.sh \
 
 #### Arm 2 (GPU 1): Budget 512, top-t 64, $N_q=64, \lambda_\Delta=0.01$
 ```bash
-bash examples/e2e_subkv_sweep/run_sweep.sh \
+bash examples/e2e_subkv_sweep/run_sweep_qwen.sh \
   --dataset longhealth \
   --budget 512 \
   --top-t 64 \
@@ -290,7 +292,7 @@ bash examples/e2e_subkv_sweep/run_sweep.sh \
 
 #### Arm 3 (GPU 2): Budget 512, top-t 32, $N_q=1024, \lambda_\Delta=0.16$
 ```bash
-bash examples/e2e_subkv_sweep/run_sweep.sh \
+bash examples/e2e_subkv_sweep/run_sweep_qwen.sh \
   --dataset longhealth \
   --budget 512 \
   --top-t 32 \
@@ -303,7 +305,7 @@ bash examples/e2e_subkv_sweep/run_sweep.sh \
 
 #### Arm 4 (GPU 3): Budget 512, top-t 64, $N_q=1024, \lambda_\Delta=0.16$
 ```bash
-bash examples/e2e_subkv_sweep/run_sweep.sh \
+bash examples/e2e_subkv_sweep/run_sweep_qwen.sh \
   --dataset longhealth \
   --budget 512 \
   --top-t 64 \
@@ -322,7 +324,7 @@ To accelerate the held-out MCQ generation accuracy evaluations across all availa
 
 ```bash
 # Run Group A with evaluation fanned out across GPUs 0,1,2,3
-bash examples/e2e_subkv_sweep/run_sweep.sh \
+bash examples/e2e_subkv_sweep/run_sweep_qwen.sh \
   --dataset longhealth \
   --budget 512 \
   --top-ts 32,64 \
@@ -334,7 +336,7 @@ bash examples/e2e_subkv_sweep/run_sweep.sh \
   --eval-gpus 0,1,2,3
 
 # Run Group B with evaluation fanned out across GPUs 0,1,2,3
-bash examples/e2e_subkv_sweep/run_sweep.sh \
+bash examples/e2e_subkv_sweep/run_sweep_qwen.sh \
   --dataset longhealth \
   --budget 512 \
   --top-ts 32,64 \
@@ -354,7 +356,7 @@ Always test recipe generation and execution plans before committing GPU compute:
 
 ```bash
 # Dry-run Group A
-bash examples/e2e_subkv_sweep/run_sweep.sh \
+bash examples/e2e_subkv_sweep/run_sweep_qwen.sh \
   --dataset longhealth \
   --budget 512 \
   --top-ts 32,64 \
@@ -364,7 +366,7 @@ bash examples/e2e_subkv_sweep/run_sweep.sh \
   --dry-run
 
 # Dry-run Group B
-bash examples/e2e_subkv_sweep/run_sweep.sh \
+bash examples/e2e_subkv_sweep/run_sweep_qwen.sh \
   --dataset longhealth \
   --budget 512 \
   --top-ts 32,64 \
@@ -383,7 +385,7 @@ bash examples/e2e_subkv_sweep/run_sweep.sh \
 tmux new -s qwen_ablation
 
 # Inside tmux:
-bash examples/e2e_subkv_sweep/run_sweep.sh \
+bash examples/e2e_subkv_sweep/run_sweep_qwen.sh \
   --dataset longhealth \
   --budget 512 \
   --top-ts 32,64 \
@@ -400,7 +402,7 @@ tmux attach -t qwen_ablation
 
 #### Using `nohup`
 ```bash
-nohup bash examples/e2e_subkv_sweep/run_sweep.sh \
+nohup bash examples/e2e_subkv_sweep/run_sweep_qwen.sh \
   --dataset longhealth \
   --budget 512 \
   --top-ts 32,64 \
@@ -419,39 +421,39 @@ tail -f logs_group_a.out
 
 ### Result File Locations
 
-All 4 arms produce isolated output directories:
+All 4 arms produce isolated output directories matching the `qwen3_4b_budget...` structure:
 
 | Arm | Tag Identifier | Accuracy Matrix Path | Log-Perplexity Matrix Path |
 | :--- | :--- | :--- | :--- |
-| **Arm 1** | `e2e_budget512_topt32_q64` | `outputs/evaluations/longhealth/e2e_budget512_topt32_q64/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv` | `outputs/evaluations/longhealth/e2e_budget512_topt32_q64/teacher-forced-logppl-v1/matrix.csv` |
-| **Arm 2** | `e2e_budget512_topt64_q64` | `outputs/evaluations/longhealth/e2e_budget512_topt64_q64/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv` | `outputs/evaluations/longhealth/e2e_budget512_topt64_q64/teacher-forced-logppl-v1/matrix.csv` |
-| **Arm 3** | `e2e_budget512_topt32_q1024` | `outputs/evaluations/longhealth/e2e_budget512_topt32_q1024/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv` | `outputs/evaluations/longhealth/e2e_budget512_topt32_q1024/teacher-forced-logppl-v1/matrix.csv` |
-| **Arm 4** | `e2e_budget512_topt64_q1024` | `outputs/evaluations/longhealth/e2e_budget512_topt64_q1024/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv` | `outputs/evaluations/longhealth/e2e_budget512_topt64_q1024/teacher-forced-logppl-v1/matrix.csv` |
+| **Arm 1** | `qwen3_4b_budget512_topt32_q64` | `outputs/evaluations/longhealth/qwen3_4b_budget512_topt32_q64/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv` | `outputs/evaluations/longhealth/qwen3_4b_budget512_topt32_q64/teacher-forced-logppl-v1/matrix.csv` |
+| **Arm 2** | `qwen3_4b_budget512_topt64_q64` | `outputs/evaluations/longhealth/qwen3_4b_budget512_topt64_q64/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv` | `outputs/evaluations/longhealth/qwen3_4b_budget512_topt64_q64/teacher-forced-logppl-v1/matrix.csv` |
+| **Arm 3** | `qwen3_4b_budget512_topt32_q1024` | `outputs/evaluations/longhealth/qwen3_4b_budget512_topt32_q1024/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv` | `outputs/evaluations/longhealth/qwen3_4b_budget512_topt32_q1024/teacher-forced-logppl-v1/matrix.csv` |
+| **Arm 4** | `qwen3_4b_budget512_topt64_q1024` | `outputs/evaluations/longhealth/qwen3_4b_budget512_topt64_q1024/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv` | `outputs/evaluations/longhealth/qwen3_4b_budget512_topt64_q1024/teacher-forced-logppl-v1/matrix.csv` |
 
 ### Quick Commands to View Accuracy Matrices
 ```bash
 # Arm 1: top_t 32, q64
-column -s, -t outputs/evaluations/longhealth/e2e_budget512_topt32_q64/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv
+column -s, -t outputs/evaluations/longhealth/qwen3_4b_budget512_topt32_q64/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv
 
 # Arm 2: top_t 64, q64
-column -s, -t outputs/evaluations/longhealth/e2e_budget512_topt64_q64/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv
+column -s, -t outputs/evaluations/longhealth/qwen3_4b_budget512_topt64_q64/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv
 
 # Arm 3: top_t 32, q1024
-column -s, -t outputs/evaluations/longhealth/e2e_budget512_topt32_q1024/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv
+column -s, -t outputs/evaluations/longhealth/qwen3_4b_budget512_topt32_q1024/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv
 
 # Arm 4: top_t 64, q1024
-column -s, -t outputs/evaluations/longhealth/e2e_budget512_topt64_q1024/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv
+column -s, -t outputs/evaluations/longhealth/qwen3_4b_budget512_topt64_q1024/accuracy-freeform-mc-options-primeAnswer-v1/matrix.csv
 ```
 
 ### Quick Commands to View Slot Overlap & Retention Metrics
 ```bash
 # View Jaccard overlap matrices across stages:
-column -s, -t outputs/evaluations/longhealth/e2e_budget512_topt32_q64/slot_frequency/jaccard_overlap.csv
-column -s, -t outputs/evaluations/longhealth/e2e_budget512_topt32_q1024/slot_frequency/jaccard_overlap.csv
+column -s, -t outputs/evaluations/longhealth/qwen3_4b_budget512_topt32_q64/slot_frequency/jaccard_overlap.csv
+column -s, -t outputs/evaluations/longhealth/qwen3_4b_budget512_topt32_q1024/slot_frequency/jaccard_overlap.csv
 
 # Inspect summary JSON:
-cat outputs/evaluations/longhealth/e2e_budget512_topt32_q64/slot_frequency/summary.json
-cat outputs/evaluations/longhealth/e2e_budget512_topt32_q1024/slot_frequency/summary.json
+cat outputs/evaluations/longhealth/qwen3_4b_budget512_topt32_q64/slot_frequency/summary.json
+cat outputs/evaluations/longhealth/qwen3_4b_budget512_topt32_q1024/slot_frequency/summary.json
 ```
 
 ---

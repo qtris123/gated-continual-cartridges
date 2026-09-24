@@ -222,13 +222,8 @@ for p in range(1, 6):
   for i in "${!BUDGETS[@]}"; do
     SIZE="${BUDGETS[$i]}"
   TOP_T="${TOP_TS[$i]}"
-    if [[ "$MODEL_SLUG" == "qwen3_4b" ]]; then
-      TAG="e2e_budget${SIZE}_topt${TOP_T}${TAG_SUFFIX}"
-      P1_PREFIX=""
-    else
-      TAG="${MODEL_SLUG}_budget${SIZE}_topt${TOP_T}${TAG_SUFFIX}"
-      P1_PREFIX="${MODEL_SLUG}_"
-    fi
+    TAG="${MODEL_SLUG}_budget${SIZE}_topt${TOP_T}${TAG_SUFFIX}"
+    P1_PREFIX="${MODEL_SLUG}_"
     RECIPE="$RECIPEDIR/${TAG}.yaml"
     P1_ROOT="$ROOT/outputs/experiments/subkv_sweep_${DATASET}/${P1_PREFIX}budget${SIZE}${TAG_SUFFIX}/p01"
     SWEEP_LOG="$LOGDIR/${DATASET}_${TAG}_${TS}.log"
