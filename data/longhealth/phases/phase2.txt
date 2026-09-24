@@ -1,0 +1,4208 @@
+Below is a panel of patient records.
+
+<patient-record-patient_05>
+Below is patient John Miller's medical record (ID: patient_05). 
+They were born on 1961-07-04 00:00:00 and have the following diagnosis: Cerebral glioblastoma.
+The patients medical record consists of 7 notes included below.
+<notes>
+<text_0>
+**Dear colleague, **
+
+Patient: Miller, John, born 04/07/1961
+
+We report to you about our common patient, Mr. John Miller, who is in
+our inpatient treatment since 07/30/2019.
+
+**Diagnoses:**
+
+\- Suspected right cerebral glioblastoma (first diagnosis)
+
+\- Symptoms: Aphasia, passive confusion
+
+**Patient history: **
+
+Mr. Miller was admitted as an emergency. He was on the phone with a
+friend when he suddenly began to exhibit speech difficulties and
+struggled to find the right words. Consequently, his friend called 911.
+
+Upon the ambulance\'s arrival, Mr. Miller was disoriented and exhibited
+aggressive behavior. There was evidence of a torn door. He had blood on
+his right forearm and around his mouth, but there were no indications of
+a tongue bite or urinary incontinence.
+
+Upon admission, Mr. Miller was coherent and showed no speech issues. He
+attributed a mild weakness in his right arm to pre-existing pain in the
+upper arm. An immediate CT scan revealed a mass suggestive of a
+glioblastoma in the right cerebral hemisphere, leading to a
+neurosurgical consultation.
+
+Given the possibility of an epileptic seizure, Mr. Miller was
+hospitalized and started on Levetiracetam. He is currently unaware of
+his regular medications but takes antihypertensives and diabetes
+medications, among others. His friend and brother have been notified and
+are ensuring that a detailed medication list is provided.
+
+After a brief stay in ward ABC, Mr. Miller was transferred to the
+neurosurgery team for further evaluation and treatment. We appreciate
+the prompt transfer and are available for any further inquiries.
+
+Planned Procedures:
+
+-Schedule EEG
+
+-Clarify routine medications
+
+**Surgery Report**
+
+**Diagnosis:** Suspected HGG (high-grade glioma) of the right hemisphere
+
+**Procedure:** Microsurgical navigation-guided resection of the tumor
+with intraoperative neuromonitoring (stable MEPs) and intraoperative MRI
+using 5-ALA. Pathology samples taken (Preliminary: HGG; Final to be
+confirmed). Resection was followed by duragen placement, watertight
+dural closure, and multilayer wound closure, with skin sutures.
+
+**Time:**
+
+-Start: 11:12 am
+
+-Finish: 3:54 pm
+
+-Duration: 4 hours 42 minutes
+
+**Assessment:**
+
+Mr. Miller presented with a seizure characterized by speech disturbance
+and disorientation. Imaging revealed a significant right hemispheral
+mass, likely representing a high-grade brain tumor. The need for
+surgical resection was determined following discussions at our
+interdisciplinary tumor board. After being informed about the procedure,
+alternative treatments, the operation\'s urgency, benefits, and
+potential risks, Mr. Miller provided written consent following ample
+time for consideration and the opportunity to ask further questions.
+
+**Procedure Details:**
+
+The patient was positioned supine with his head secured in a Nova clamp.
+Navigation data were read, followed by skin preparation, and the
+surgical field was sterilized and draped. An arch-shaped incision was
+made, followed by hemostasis, deep tissue dissection, placement of a
+burr hole, and the creation of a large bone flap over the lesion. The
+bone flap was then elevated. Multiple washings were performed, followed
+by dural opening under microscopic visualization. A corticotomy was
+carried out with bipolar forceps, CUSA, and suction to progressively
+reduce the tumor, utilizing 5-ALA fluorescence and continuous
+neurophysiological monitoring. An intraoperative MRI showed residual
+tumor, prompting further resection. Hemostasis was achieved, and the
+wound was closed using tabotamp, followed by duragen placement and dural
+suturing. The bone flap was refixed using Dogbone plates. The wound area
+was irrigated extensively once more, followed by subcutaneous and skin
+sutures.
+
+**Date:** 10/01/2019
+
+**Clinical Indication:**Suspected recurrence of GBM in the right
+hemisphere
+
+**Requested Imaging:**cMRI with or without contrast + DTI.
+
+**Findings:***Imaging Modality (GE 3.0T):* 3D FLAIR, DTI, SWI, T2\*
+perfusion, 3D T1 with and without contrast, 3D T2,
+subtraction.Following resection of a right hemispheric glioblastoma in
+08/19, and compared to the last two scans (external: 07/19, internal:
+08/19), there is a notable expansion of the prior detected flair
+hyperintense regions. These now span from the right parietal-subcortical
+area across the right basal ganglia to the right temporo-occipital/right
+temporal pole. Specifically, at the dorsocranial edge of the resection
+cavity, the hyperintense regions appear to have grown since 08/19. These
+coincide with hyperperfused regions in the T2\* perfusion. Linear SWI
+signal changes are suggestive of mild post-surgical bleeding. No
+significant postoperative hemorrhage or territorial ischemia is
+detected. A normal venous sinus drainage is observed. Right temporal
+horn appears congested, possibly due to CSF trapping.
+
+**Assessment:**
+
+Following the resection of the right hemispheric glioblastoma in 08/19:
+
+-Markedly progressive flair edema and evolving barrier disturbance.
+Regions especially towards the dorsal side of the resection cavity show
+this alongside associated hyperperfusion. With the recent PET imaging
+from 10/19, there is an indication of progressive disease as per RANO
+criteria.
+
+-Long-term progressive congestion of the right temporal horn, likely CSF
+trapping.
+
+**Surgery Report****Diagnosis:**Tumor recurrence after resection of a
+glioblastoma (IDH wild type, WHO CNS grade 4) of the right hemisphere in
+08/2019. The patient underwent combined radiochemotherapy at the local
+clinical center.
+
+**Procedure:**Navigated, microsurgical resection supported by 5-ALA,
+with stable MEPs through the previous right temporal access. iMRI
+conducted between 11:10 and 11:50. Used Duragen/TachoSil, dog bones for
+closure, followed by layered wound closure and skin sutures.
+
+**Timing:**
+
+-Incision: 09:23 am on 10/12/19
+
+-Suture: 12:32 pm on 10/12/19
+
+**Assessment:**The patient had previously undergone surgery for a
+glioblastoma and a recurrence was detected on imaging. The tumor board
+had already deliberated on the surgery. The patient was informed about
+the surgical procedure, particularly about conducting an extensive
+resection caudally without impacting function post-mapping. The patient
+consented, understanding the potential for longer progression-free
+survival.
+
+**Procedure Details:**The patient was placed in a supine position with
+the head turned to the side and fixed using the Noras clamp. The right
+shoulder was padded. The surgical area was prepared by trimming hair
+around the previous scar, followed by sterilization and draping. After a
+team time-out, prophylactic antibiotics were administered. The previous
+scar was reopened and old plates were removed. The microscope was then
+swung into position and the dura was opened. Navigation proceeded
+beneath the labbé vein, with tumor resection as guided by ALA
+fluorescence. Post-tumor removal, extensive hemostasis was achieved
+using absorbent cotton and TABOTAMP. Intraoperative MRI confirmed a
+complete resection of the tumor. The dura was sealed using DuraGen,
+ensuring a watertight closure. The bone flap was reinserted, followed by
+subcutaneous suturing, skin suturing, and sterile dressing of the wound.
+
+
+
+</text_0>
+<text_1>
+**Dear colleague, **
+
+We write to update you regarding our shared patient, Mr. John Miller,
+born on 07/04/1961, who visited us on 12/02/2019.
+
+**Diagnosis:**Glioblastoma recurrence, IDH 1 wild type.
+
+**Tumor Location:**Right hemisphere including temporal regions.
+
+**Clinical History & Treatment:**
+
+-07/2019: Mr. Miller experienced speech disturbances and confusion.
+
+-08/01/2019: Brain PET-MRI revealed a suspected malignancy in the right
+hemisphere, including temporal areas.
+
+-08/11/2019: Glioblastoma was resected at our facility.
+
+-08-09/2019: He underwent adjuvant radiochemotherapy (43.4 at 2.7 Gy
+with a boost of 52.4 Gy at 3 Gy) and Temodal treatment at the local
+clinical center.
+
+-10/01/2019: cMRI with suspected recurrence.
+
+-10/12/2019: A recurrent resection was performed at our facility.
+
+-11/02/2019: Postoperative brain MRI showed no suspected tumor remnants.
+
+**Recent Evaluation (12/01/2019):**Mr. Miller visited our facility with
+his brother. Our assessment, based on CTCAE criteria, indicated that he
+is in a fair but stable general and nutritional health (KPS 70-80%,
+weight undisclosed, height 175 cm). Neurological and general evaluations
+revealed a degree of aphasia, mainly with word-finding difficulty, and
+short-term memory impairment. However, he remains fully oriented and
+independent in daily life.
+
+**Additional Observations:**
+
+His surgical wound has healed well.
+
+**Pre-existing Conditions:** Arterial hypertension, Diabetes Mellitus
+Type II
+
+**Allergies:** None
+
+**Current Medications:** Antihypertensive drugs and insulin.
+
+Postoperatively, Mr. Miller remains in good health. A recent brain MRI
+noted that the suspected recurring GBM lesion near the superior border
+of the surgical site was entirely resected. Furthermore, CT scans at the
+anterior medial and lateral edges suggest that a complete resection was
+most likely achieved.
+
+Given the presumed complete resection of the glioblastoma recurrence, we
+have recommended Mr. Miller for a neuro-oncology review and a follow-up
+with PET-MRI in three months.
+
+**Next Steps:**
+
+-He has a scheduled appointment in neuro-oncology on 01/23/2020 at 10:00
+AM.
+
+-A follow-up PET-MRI is set for 01/29/2020 at 12:45 PM. We have advised
+Mr. Miller to fast for 4 hours prior and to bring a referral from his
+primary care physician, along with a recent creatinine test result.
+
+-A review of these findings will be held in our outpatient department on
+01/30/2020 at 2:00 PM.
+
+Thank you for your continued care and collaboration. Please do not
+hesitate to reach out for any additional information.
+
+Warm regards,
+
+
+</text_1>
+<text_2>
+**Dear colleague, **
+
+Regarding our mutual patient, Mr. John Miller, born 04/07/1961:
+
+**Diagnosis**:
+
+Glioblastoma recurrence, IDH 1 wild type
+
+**Tumor Location**:
+
+Right hemisphere/temporal.
+
+**Medical History**:
+
+07/2019: Onset of speech arrest and confusion.
+
+08/2019: PET brain MRI indicated a suspected malignant mass in the right
+hemisphere
+
+08/11/2019: Glioblastoma resection performed in our neurosurgery
+department.
+
+08-09/2019: He underwent adjuvant radiochemotherapy (43.4 at 2.7 Gy with
+a boost of 52.4 Gy at 3 Gy) and Temodal treatment at the local clinical
+center.
+
+10/12/2019: A recurrent resection was performed at our facility.
+
+11/02/2019: Postoperative brain MRI showed no suspected tumor remnants.
+
+Mr. Miller came in on 12/01/2019 with his brother. Clinical examination
+findings are as follows:
+
+-General health: Stable with reduced vitality.
+
+-Nutritional status: Stable (KPS 70-80%, weight in kg, height 169 cm).
+
+-No evident motor, sensory, visual, or cranial nerve deficits.
+
+-Neurocognitive deficits: Short-term memory issues.
+
+-Aphasia: Grade II (mainly word-finding disorders). The patient is fully
+oriented and independent in daily life.
+
+-No evidence of recurrence in PET-MRI. Next imaging scheduled in
+03/2020.
+
+**Past Medical Conditions**:
+
+-Hypertension
+
+-Type II Diabetes Mellitus
+
+**Allergies**: None.
+
+**Medications**:
+
+-Antihypertensive medications
+
+-Insulin
+
+Best Regards,
+
+
+
+</text_2>
+<text_3>
+**Dear colleague, **
+
+Updating you on our mutual patient, Mr. John Miller, born 04/07/1961:
+
+**Diagnosis**:
+
+Recurrent Glioblastoma, IDH 1 wild type (ICD-10: 71.8).
+
+**Molecular Pathology**:
+
+No p.R132H mutation in IDH.
+
+No combined 1p/19q loss.
+
+Suspected CDKN2A/B deletion.
+
+**Medical History**:
+
+No pain or B symptoms.
+
+Intermittent dizziness and headaches since the last check-up.
+
+**Neurological Findings**:
+
+Patient is alert and oriented.
+
+Weight: 80 kg (total loss: 15 kg), Height: 175 cm.
+
+Karnofsky Performance Score: 80%.
+
+Motor function and sensory assessments were unremarkable.
+
+**Allergies**: None.
+
+**Medications**:
+
+Lisinopril 10mg once daily in the morning
+
+Bisoprolol 2.5mg once daily at bedtime
+
+Januvia 50mg twice daily
+
+Allopurinol 100mg once daily in the morning
+
+Ezetimibe 10mg once daily at bedtime
+
+Levetiracetam 1000mg once daily in the morning Insulin as per regimen
+
+**Secondary Diagnoses**:
+
+Hypertension
+
+Type II Diabetes Mellitus
+
+**Medical Course**:
+
+Details from 07/2019 through 03/2020 provided, including surgeries,
+radiochemotherapies, and diagnostics.
+
+In summary, Mr. Miller\'s glioblastoma diagnosis in 07/2019 led to
+various treatments, including radiochemotherapy and surgeries. His
+recent PET/MRI on 01/2020 indicates potential recurrent areas.
+
+Best regards,
+
+**Patient:** John Miller
+
+**DOB:** 04/07/1961
+
+**Admission Date:** 04/11/2020
+
+**Discharge Date:** 04/18/2020
+
+**Admission Diagnosis:**
+
+Recurrent tumor in the hippocampal region and along the prior resection
+cavity.
+
+History of glioblastoma (IDH wild type, WHO CNS grade 4) in the right
+hemisphere, resected on 08/2019.
+
+History of combined radiochemotherapy with Temodar (Temozolomide) from
+August to September 2019 at the local clinical center.
+
+Subsequent first re-resection in 10/2019.
+
+**Presenting Complaint:**
+
+Mr. Miller presented to the neurosurgical outpatient department
+accompanied by his wife. Recent imaging indicated a potential recurrence
+of the glioblastoma. The neuro-oncological board on 04/12/2020
+recommended a re-resection.
+
+**Physical eon Admission:**
+
+Alert, oriented x4, cooperative.
+
+Non-fluent aphasia.
+
+Cranial nerves intact.
+
+No sensory or motor deficits in the extremities.
+
+Surgical scar clean and dry.
+
+No signs of neurogenic bladder or rectal dysfunction.
+
+KPSS 70%.
+
+**Medications on Admission:**
+
+-Lisinopril 10mg daily
+
+-Bisoprolol 2.5mg nightly
+
+-Januvia 50mg twice daily
+
+-Allopurinol 100mg daily
+
+-Atorvastatin 40mg nightly
+
+-Ezetimibe 10mg nightly
+
+-Levetiracetam 1000mg twice daily
+
+-Actraphane insulin as prescribed
+
+**Surgical Intervention (04/12/2020):**
+
+Navigated microsurgical resection of tumor spots assisted with 5-ALA.
+Stable MEPs were maintained. An intraoperative MRI (iMRI) was utilized.
+Post-resection, the surgical area was managed using Tabotamp, Duragen,
+TachoSil, and dog-bone plates, concluding with layered wound closure.
+
+**Postoperative Course:**
+
+Uncomplicated recovery.
+
+Post-op MRI showed no residual tumor.
+
+Surgical site remained clean, dry, and showed no signs of infection or
+irritation.
+
+**Discharge Diagnosis:**
+
+Recurrence of known glioblastoma, WHO CNS grade 4.
+
+**Interdisciplinary Neuro-oncological Tumor Board Recommendation
+(04/20/2020):**
+
+Molecular tumor board review.
+
+Offer reinitiation of Temozolomide chemotherapy.
+
+**Physical Examination on Discharge:**
+
+Similar to admission, with suture in place and wound site in good
+condition.
+
+KPSS 70%.
+
+**Medications on Discharge:**
+
+-Allopurinol 100mg daily (morning)
+
+-Atorvastatin 40mg nightly (evening)
+
+-Bisoprolol 2.5mg nightly (evening)
+
+-Ezetimibe 10mg nightly (evening)
+
+-Sitagliptin (Januvia) 50mg twice daily (morning and evening)
+
+-Levetiracetam (Keppra) 1000mg twice daily (morning and evening)
+
+-Lisinopril 10mg daily (morning)
+
+-Acetaminophen 500mg as needed for pain or fever
+
+-Actraphane insulin as prescribed
+
+**Surgery Report **
+
+**Diagnosis**:
+
+Tumor recurrence in the right hippocampal region and along the resection
+cavity post glioblastoma resection on 8/11/2019.
+
+Previous treatments include radiochemotherapy at our clinic. Local
+therapy center (from August to September 2019) and re-resection on
+10/12/2019.
+
+**Surgery Type**:
+
+Re-opening of the temporal region with navigation, microsurgery using
+5-ALA assistance, iMRI, and re-resection, among other procedures.
+
+**Procedure Details**:
+
+Start: 11:50 pm on 04/12/2020
+
+End: 4:00 pm on 04/12/2020
+
+Duration: 4 hours 10 minutes.
+
+**Assessment**:
+
+Evidence of recurrent glioblastoma areas warranted another biopsy and
+resection. After informing Mr. Miller about the procedure\'s risks and
+benefits, he provided written consent.
+
+**Operation**:
+
+Details on the positioning, pre-operative preparations, resection, and
+post-operative procedures are provided.
+
+Best regards,
+
+MEDICAL HISTORY:
+
+Mr. Miller underwent surgery because of tumor recurrence in the right
+hemisphere last November to treat a right temporal glioblastoma. He
+presented to our private outpatient clinic due to a wound complication,
+specifically a wound dehiscence measuring about 1 cm. On closer
+examination, pus was noted. Despite being symptom-free otherwise, a
+consultation with Dr. Doe was scheduled. After discussion, it was
+decided to clean the wound, trim the deteriorated wound edges, and clean
+the bone flap with an antibiotic solution before reinserting it. The
+patient was thoroughly educated about the nature and risks of the
+procedure and gave consent.
+
+OPERATION:
+
+The patient was placed in a supine position. The hair surrounding the
+surgical site was trimmed, followed by skin disinfection and sterile
+draping. The bicoronal skin incision was reopened. Deteriorated wound
+edges were excised and the wound was extensively cleaned with
+irrigation. The bone flap was removed and immersed in a Refobacin
+solution. The epidural pannus tissue was removed. The dura was
+completely sutured. Multiple samples were collected both subgaleally and
+epidurally. A sponge was applied, followed by the reinsertion of the
+bone flap using a dog bone miniplate fixation and local application of
+vancomycin powder. A subgaleal drain was placed, and the skin was closed
+using Donati continuous sutures. A sterile staple dressing was applied,
+and the patient was transferred to recovery.
+
+CLINICAL NOTES:
+
+Epidural pannus suggestive of infection. Past surgical history includes
+glioblastoma removal in 8/11/2019 and subsequent surgeries because of
+recurrence, the last of these in 04/12/2020. Nature and type of growth?
+
+MACROSCOPIC EXAMINATION:
+
+Fixed tissue samples measuring 1.2 x 1.0 x 0.4 cm were entirely
+embedded.
+
+STAINING: 1 block, Hematoxylin & Eosin (HE), Periodic Acid Schiff (PAS).
+
+MICROSCOPIC EXAMINATION:
+
+Histology shows entirely necrotic tissue and some bony fragments. No
+microorganisms were detected in the PAS stain.
+
+FINDINGS:
+
+Fully necrotic tissue. No signs of inflammation or malignancy in the
+available samples.
+
+OPERATIVE REPORT:
+
+Diagnosis: Wound healing disruption high on the forehead, following a
+resection of recurrent gioblastoma in the right hemisphere in
+04/12/2020.
+
+Procedure: Wound revision, thorough wound cleaning, reinsertion of the
+autologous bone flap.
+
+Time of incision: 3:30 PM, 06/01/2020
+
+Time of suture completion: 4:35, 06/01/2020
+
+Duration: 65 minutes
+
+PATIENT HISTORY:
+
+The patient had two prior surgeries with our team. The most recent was a
+revision due to a wound healing complication. The patient was informed
+about the procedure\'s nature, extent, risks, and potential outcomes,
+and was given ample opportunity to ask questions. After thoughtful
+consideration, written consent was obtained.
+
+OPERATION:
+
+The patient was positioned supine with the head in a neutral position.
+The surgical area was sterilized and draped. Antibiotic prophylaxis was
+administered, and a timeout procedure was conducted. The old wound was
+reopened and slightly extended by about 1 cm in both directions. The
+bone flap was removed, inspected, and cleaned. It was then reinserted
+after refreshing the bone edges. The wound edges were refreshed, and the
+wound was irrigated again before closure.
+
+SUMMARY:
+
+Successful wound revision without complications for a wound healing
+complication post-glioblastoma surgery.
+
+CLINICAL NOTES:
+
+Complication in wound healing after glioblastoma removal and radiation
+therapy. Possible inflammation? Evaluate for pus. Nature and type of
+growth?
+
+MACROSCOPIC EXAMINATION:
+
+Subcutaneous tissue samples, 1.2 x 1.0 x 0.4 cm, were completely
+embedded after being cut into two.
+
+Epidural tissue samples, 5.6 x 5.3 x 1.0 cm, were partially embedded.
+
+STAINING: 2 blocks, Hematoxylin & Eosin (HE), Periodic Acid Schiff
+(PAS).
+
+MICROSCOPIC EXAMINATION:
+
+Histology displays connective tissue surrounded by a pronounced
+inflammatory infiltrate, comprised of neutrophils, lymphocytes, and
+numerous eosinophils. Additionally, budding capillaries were seen. No
+specific findings in the PAS stain.
+
+Histologically, connective tissue infiltrated by predominantly
+lymphocytic inflammation was observed. Eosinophils and abundant necrotic
+tissue were also seen. Additionally, polarizable material was noted,
+occasionally engulfed by multinucleated giant cells. Hemorrhagic signs
+were indicated by hemosiderin deposits. No specific findings in the PAS
+stain.
+
+FINDINGS:
+
+1 & 2. Soft tissue displays acute phlegmonous inflammation and chronic
+granulating inflammation.
+
+**Brief report (07/15/2020): **
+
+Diagnosis: superficial wound healing disorder and symptomatic, simple
+focal epileptic seizure dated 06/01/2020.
+
+Wound healing disorder right parietal at the site of previous right-side
+glioblastoma, last revision 04/12/2020.
+
+-Single right body focal seizure 04/20/2020, single generalized seizure
+05/12/2020
+
+-Previous resection on 10/12/2019
+
+-Wound healing disorder with subsequent wound revision (06/2020)
+
+-Last cMRI on 05/03/2020: no recurrence observed.
+
+Secondary diagnoses:
+
+Hypothyroidism
+
+Surgery type: injection of Ropivacaine, smear for microbiology,
+readaptation of three small wound dehiscence, tobacco bag suture,
+overlay polyhexanide gel, plaster application
+
+Instructions: Return next Tuesday for wound check. Sutures to remain in
+place for 10 days. Check microbiology results on Thursday. Clinically,
+no signs of infection observed.
+
+Surgical report:
+
+Diagnosis: superficial wound healing disorder and symptomatic, simple
+focal epileptic seizure dated 04/20/2020.
+
+ASSESSMENT:
+
+The patient was presented at the emergency unit after observing a small
+wound dehiscence after the aforementioned surgery for a wound healing
+disorder. The treating surgeon recommended a second local wound revision
+attempting to readapt the wound with a minor surgery. The patient
+provided written consent for the procedure. The intervention was
+conducted with standard coagulation parameters.
+
+SURGERY:
+
+Sterile preparation and draping of the surgical area. Initial injection
+of Ropivacaine. This was followed by swab collection for microbiology.
+The wound edges were excised and the wound dehiscence was readapted
+using a tobacco bag suture. Afterward, polyhexanide gel was applied,
+followed by a sterile plaster dressing.
+
+Surgery report:
+
+Diagnosis: significant scalp wound healing disorder in the prior
+surgical access area post-resection and irradiation of a glioblastoma
+multiforme.
+
+Operating time: 49 minutes
+
+
+</text_3>
+<text_4>
+**Dear colleague, **
+
+we report on Mr. Miller, John, born 04/07/1961, who was in our inpatient
+treatment from 09/12/2020 to 10/07/2020.
+
+Discharge diagnosis: Recurrence of the pre-described glioblastoma right
+insular, WHO CNS grade 4 (IDH wild type, MGMT methylated).
+
+Physical examination on admission:
+
+Patient awake, fully oriented, cooperative. Non-fluent aphasia. Speech
+clear and fluent. Latent left hemisymptomatic with strength grades 4+/5,
+stance and gait unsteady. Cranial nerve status regular. Scar conditions
+non-irritant except for frontal superficial erosion at frontal wound
+pole of pterional approach. Karnofsky 70%.
+
+Medication on Admission:
+
+Levothyroxine sodium 50 μg/1 pc (Synthroid® 50 micrograms, tablets)
+1-0-0-0
+
+Lorazepam 0.5 mg/1 pc (Ativan® 0.5 mg, tablets) 1-1-1-1
+
+Lacosamide 100 mg/1 pc (Vimpat® 100 mg film-coated tablets) 1-0-1-0
+
+**Imaging: **
+
+cMRI +/- contrast agent dated 09/15/2020: There is a contrast enhancing
+formation on the right temporo-mesial with approach to the insular
+cistern with suspected tumor recurrence.
+
+PET dated 09/10/2020 (external): Significant tracer multinodulation with
+active areas in the islet region is seen.
+
+**Surgery of 09/18/2020: **
+
+Reopening of existing skin incision and extension of craniotomy
+cranially, microsurgical navigated tumor resection right insular (IONM:
+MEP waste lower extremity with incomplete recovery) CUSA; extensive
+hemostasis, intraoperative MRI, sutures, reimplantation of bone flap
+with multilayer wound closure. Skin suture.
+
+Histopathological report:
+
+Recurrence of pre-described glioblastoma, WHO CNS grade 4 (IDH wild
+type, MGMT methylated).
+
+Course:
+
+The patient initially presented postoperatively with left hemiplegia in
+the sense of SMA. This regressed significantly during the inpatient
+stay. Postoperative imaging revealed a regular resection finding. In
+case of a possible adjustment disorder, the patient was treated with
+sertraline and lorazepam. The wound was dry and non-irritant during the
+inpatient stay. The patient received regular physiotherapeutic exercise.
+The patient\'s case was discussed in our neuro-oncological tumor board
+on 09/29/2020, where the decision was made for adjuvant definitive
+radiochemotherapy. An inpatient transfer was offered by the colleagues
+of radiotherapy.
+
+Procedure:
+
+We transfer Mr. Miller today in good clinical general condition to your
+further treatment and thank you for the kind takeover. We ask for
+regular wound controls as well as regular ECG controls to exclude a
+QTc-time prolongation under sertraline. Furthermore, the medication with
+lorazepam should be further phased out in the course of time. In case of
+acute neurological deterioration, a re-presentation in our neurosurgical
+outpatient clinic or surgical emergency room is possible at any time.
+
+Clinical examination findings at discharge:
+
+Patient awake, fully oriented, cooperative. Speech clear and fluent.
+Cranial nerve status without pathological findings. Hemiparesis
+left-sided strength grade 4/5, right-sided no sensorimotor deficit.
+Stance and gait unsteady. Non-fluent aphasia. Wound dry, without
+irritation. Karnofsky 70%.
+
+**Medication at Discharge:**
+
+Levothyroxine sodium 50 μg (Synthroid® 50 micrograms, tablets) 1-0-0-0
+
+Lorazepam 0.5 mg (Ativan® 0.5 mg, tablets) as needed
+
+Lacosamide 100 mg (Vimpat® 100 mg film-coated tablets) 1-0-1-0
+
+Acetaminophen 500 mg (Tylenol® 500 mg tablets) 1-1-1-1
+
+Sertraline 50 mg (Zoloft® 50 mg film-coated tablets) by regimen
+
+**Magnetic Resonance Imaging (MRI) Report**
+
+Date of Examination: 02/02/2021
+
+Clinical Indication: Multifocal glioblastoma WHO grade IV, IDH wild
+type, MGMT methylated.
+
+Clinical Query: Hemiparesis on the right side. Is there a structural
+correlate? Tumor progression?
+
+**Previous Imaging**: Multiple prior studies. The most recent contrasted
+MRI was on 09/15/2020.
+
+**Findings**:
+
+**Imaging Device**: GE 3T; Protocol: 3D FLAIR, 3D T1 Mprage with and
+without contrast, SWI, DWI, 3D T2, axial T2\*, perfusion, DTI.
+
+1.  **Report: **
+
+    Known multimodal pretreated GBM since 2019, recently post-surgical
+    resection for tumor progression in the frontotemporal region on
+    09/18/2020. Also noted is a post-surgical resection of additional
+    foci in the right insular region. The resection cavity in the right
+    frontal, insular, and temporal regions appears unchanged in size and
+    configuration. Residual blood products are noted within.
+
+    There are increased areas of contrast enhancement compared to the
+    immediate post-operative images. There is a minor growth in a
+    nodular enhancement posterior to the right middle cerebral artery.
+    Adjacent to this, there\'s a new nodular enhancement, which could be
+    a postoperative reactive change or a new tumor lesion.
+
+    Ongoing diffusion abnormalities are observed in the right caput
+    nuclei caudatus, putamen, and globus pallidus, especially pronounced
+    in posterior sections.
+
+    Persistent FLAIR-hyperintense peritumoral edema in the right
+    hemisphere remains unchanged. The midline shift is approximately 9mm
+    to the left, which remains unchanged.
+
+    Post-operative swelling and fluid accumulation are noted at the
+    surgical entry point. The bone flap is in place. The width of both
+    the internal and external CSF spaces remains constant, with no
+    evidence of obstruction.
+
+    The orbital contents are symmetrical. Paranasal sinuses and mastoid
+    air cells are aerated appropriately.
+
+**Impression**:
+
+Residual tumor segments along the right middle cerebral artery showing
+growth. Adjacent to it, a new nodular area of contrast enhancement
+suggests either a postoperative change or a new tumor lesion.
+
+Previously identified ischemic changes in the right caput nuclei
+caudatus, putamen, and globus pallidus. Persistent brain edema with a
+leftward midline shift of approximately 9mm remains unchanged.
+
+
+</text_4>
+<text_5>
+**Dear colleague, **
+
+Herewith we report on our common patient Mr. John Miller, born
+04/07/1961, who was at our clinic between 02/04/2021 to 04/22/2021.
+
+-Recurrent manifestation of a glioblastoma
+
+-Stage: WHO CNS grade 4
+
+**Histology:**
+
+Recurrence of the pre-described glioblastoma, WHO CNS grade 4.
+
+Molecular pathological findings:
+
+IDH status: no p.R132H mutation (immunohistochemical).
+
+ATRX: preservation of nuclear expression (immunohistochemical).
+
+p53: technically not evaluable (immunohistochemical).
+
+1p/19q status: no combined loss (850k methylation analysis).
+
+CDKN2A/B: Deleted (850k methylation analysis).
+
+MGMT promoter: Methylated (850k methylation analysis).
+
+Tumor localization: Islet/frontal right
+
+Secondary diagnoses:
+
+Symptomatic epilepsy
+
+Hypothyroidism
+
+Nausea
+
+Leukopenia I° (CTCAE)
+
+Anemia II° (CTCAE)
+
+Previous course / therapies:
+
+08/2019: PET brain MRI indicated a suspected malignant mass in the right
+hemisphere
+
+08/11/2019: Glioblastoma resection performed in our neurosurgery
+department.
+
+08-09/2019: He underwent adjuvant radiochemotherapy (43.4 at 2.7 Gy with
+a boost of 52.4 Gy at 3 Gy) and Temodal treatment at the local clinical
+center.
+
+10/12/2019: A recurrent resection was performed at our facility.
+
+11/02/2019: Postoperative brain MRI showed no suspected tumor remnants.
+
+03/2020: Suspected recurrence
+
+04/2020: Revision surgery
+
+06-07/2020 Wound revisions and flap plasty for atrophic wound healing
+disorder
+
+02/2021: Suspected recurrence with new FLAIR-positive tumor
+manifestation insular on the right side. Stereotactic biopsy with
+evidence of glioblastoma.
+
+Pathology: Renewed manifestation of a glioblastoma.
+
+Recommended radiochemotherapy.
+
+According to the interdisciplinary neuro-oncology board of 01/26/2021,
+we gave the indication for adjuvant radiochemotherapy for the recurrence
+of glioblastoma.
+
+**Radiochemotherapy: **
+
+Technique:
+
+1\) Percutaneous intensity-modulated radiotherapy was administered to the
+former recurrence tumor region in the frontal/insular right after CT-
+and MRI-guided radiation planning with 6 MV-photons in helical
+tomotherapy technique with a single dose of 2 Gy up to a total dose of
+60 Gy with 5 fractions per week. Daily position controls by CT.
+
+2\) Subsequently, local dose saturation of the macroscopic tumor remnant
+was performed.
+
+Insular right stereotactic ablative radiosurgery at the gamma knee to
+saturate the macroscopic GammaKnife (Cobalt-60: 1.17 MeV and 1.33 MeV
+photons) in mask fixation after CT- and MRI-guided radiotherapy planning
+under image-guided setting (ConeBeam-CT) with a dose of 6 Gy in 2 Gy
+single dose to the 68% isodose up to a total cumulative dose of 66 Gy.
+
+Chemotherapy:
+
+Concurrent chemotherapy with 75mg/m²KOF temozolomide daily (120 mg
+daily).
+
+Absolute dose: 5000 mg.
+
+Treatment Period:
+
+Radiotherapy 03/09/2021 -- 04/21/2021
+
+Chemotherapy 03/09/2021 -- 04/21/2021
+
+**Course under therapy:**
+
+We took over Mr. Miller on 03/06/2021 in reduced general and slightly
+reduced nutritional condition (Kanofsky index: 70 %, BMI: 18.5 kg/m²)
+from the Clinic for Neurosurgery for adjuvant re-radiochemotherapy on
+our radiooncology ward. At the time of admission, the patient had arm
+
+right hemiparesis (strength grades arm: 2/5, leg: 3/5). The patient was
+ambulatory with assistance. Cranial nerve status was unremarkable.
+Headache, nausea or dizziness were denied.
+
+On 09/03/2021, combined re-radiochemotherapy was initiated.
+
+During the course of therapy with temozolomide, mild nausea occurred,
+which was treated with ondansetron 4mg as needed and dimenhydrinate
+Sustained-release tablets 150 mg as needed. Under this treatment the
+symptoms clearly regressed. Mild constipation was treated. Laboratory
+tests revealed mild leukopenia I° and anemia II° (CTCAE).
+
+Otherwise, the re-radiochemotherapy was very well tolerated overall.
+
+Mr. Miller received physiotherapeutic exercise and psychotherapy during
+the entire physiotherapeutic training and psycho-oncological support.
+Under the physiotherapeutic treatment, his motor skills improved
+significantly. At the end of the therapy, the patient was also mobile
+outside the
+
+house without any aids.
+
+On 04/22/2021 we discharged Mr. Miller to the outpatient care by his
+family doctor.
+
+04/11/2021: MR brain post contrast
+
+After renewed radiochemotherapy for a glioblastoma recurrence, a
+residual suspicious barrier disturbance adjacent to the adjacent to the
+right cerebral artery. Stable nodular contrast enhancement
+
+Postoperative/reactive changes as described above. MR perfusion
+sequences show residual, contrast-absorbing tumor portions along the
+right A. cerebri media. Lateral to this, new nodular contrast-absorbing
+lesion, possibly postoperative reactive change. Previously known
+ischemia at the right caput nuclei caudatii, putamen, and globus
+pallidus. Unchanged medullary edema with midline shift to the left by
+approximately 9mm.
+
+Last lab:
+
+MCHC 29.4 g/dL (32 - 36) 04/20/2021
+
+MCH 25 pg (27 - 32) 04/20/2021
+
+Leukocytes 3.32 G/l (4.0 - 9.0) 04/20/2021
+
+Hematocrit 31.6 % (37 - 43) 04/20/2021
+
+Hemoglobin 9.3 g/dL (12 - 16) 04/20/2021
+
+Erythrocytes 3.7 T/l (4.1 - 5.4) 04/20/2021
+
+Uric acid 2.2 mg/dl (2.5 - 5.5) 04/20/2021
+
+**Further Procedure:**
+
+Further skin care and behavior regarding side effects were explained to
+the patient in detail.
+
+A first radiooncological control appointment was scheduled for
+06/05/2021 at 12:00 AM in our outpatient clinic. Prior to this, on
+06/02/2021 at 10:30 AM, an imaging exam (brain MRI) is scheduled.
+
+A further neuro-oncological connection is planned close to home via the
+treating oncologist.
+
+After radiation therapy, we recommend annual ophthalmological check-ups
+and annual endocrinologic.
+
+with testing of the hypothalamic-pituitary hormone axes.
+
+
+</text_5>
+<text_6>
+**Dear colleague, **
+
+This is a report on our mutual patient, Mr. John Miller, born
+04/07/1961:
+
+Diagnosis:
+
+Recurrent manifestation of glioblastoma
+
+WHO CNS grade 4
+
+Tumor localization: Right isle/frontal
+
+Secondary diagnoses: Symptomatic epilepsy
+
+Hypothyroidism Previous
+
+Treatments / Therapies
+
+Resection and revisions
+
+Adjuvant radiochemotherapy
+
+Two wound revisions and flap plasty for atrophic wound healing disorder
+
+New FLAIR-positive tumor manifestation insular on the right side
+(02/2021)
+
+Stereotactic biopsy with histopathology with evidence of glioblastoma
+
+Tumor Board: Recommended new radiochemotherapy up to a total dose of 60
+Gy à 2 Gy single dose. Subsequent local dose saturation of the
+macroscopic tumor remnant as radiosurgery on GammaKnife with a dose of 6
+Gy à 2 Gy single dose (\@68% isodose).
+
+03-4/2021 Repeat stereotactic RTx in the area of the basal ganglia and
+the resection cavity right frontal on the Gamma Knife with 46 Gy à 2 Gy;
+3 doses of Bevacizumab 7.5 mg/kg i.v.
+
+**Summary:**
+
+On 07/03/2023, we conducted an initial telephone follow-up with the
+patient, Mr. Miller, for a radio-oncology consultation. Presently, Mr.
+Miller is undergoing rehabilitation, from which he feels he is deriving
+substantial benefits. His recent radiotherapy was well-received without
+any complications. Since the onset of his symptoms, there have been no
+new developments. Symptoms related to intracranial pressure or new
+neurological deficits were denied. Fortunately, while on anticonvulsant
+therapy with Lacosamide, Mr. Miller experienced no epileptic seizures.
+His skin condition is normal. However, Mr. Miller did mention some
+cognitive challenges that minimally impact his daily activities,
+alongside feelings of fatigue and grade I CTCAE symptoms. The cMRI scan
+from 06/02/2021 revealed a notable reduction in the barrier disturbance
+of the right-sided basal ganglia. This was accompanied by small, mildly
+hyperperfused residual findings near the third ventricle. Moreover, the
+pinpoint contrast enhancement in the left parietal lobe appeared
+unchanged, suggesting it is a scarring reaction. In collaboration with
+the neurooncology team, Mr. Miller has discussed starting chemotherapy.
+The next imaging assessment is scheduled for mid-September. We have also
+scheduled another radio-oncologic follow-up with Mr. Miller for
+September 28th, per his preference, via telephone. For patient safety,
+Mr. Miller is prohibited from operating private or commercial vehicles
+for 3 months post-intracerebral radiotherapy. This duration may extend
+if there are existing or progressing brain conditions. Following
+radiotherapy, we are mandated by the Radiation Protection Act to
+facilitate regular checks. Hence, we encourage enrollment in the
+aftercare calendar, prompt reporting of any significant findings, and
+attendance of scheduled follow-ups. Alongside these, regular oncological
+check-ups by specialist practitioners are mandatory. Mr. Miller has been
+duly informed of all these requirements.
+
+</text_6>
+</notes>
+</patient-record-patient_05>
+
+<patient-record-patient_06>
+Below is patient Paul Doe's medical record (ID: patient_06). 
+They were born on 1965-08-08 00:00:00 and have the following diagnosis: Hypopharynx carcinoma.
+The patients medical record consists of 8 notes included below.
+<notes>
+<text_0>
+**Dear colleague, ****Dear colleague, **
+
+ 
+
+We are writing to provide an update regarding Mr. Paul Doe, born on
+08/08/1965, who was treated in our clinic from 05/28/14 to 06/20/14.
+
+ 
+
+**Diagnoses: **
+
+-   pT1, pN0 (0/21, ECE negative), cM0, Pn0, G2, RX, L0, V0, left
+    midline tongue carcinoma
+
+-   Arterial hypertension
+
+-   Status post liver surgery 2013
+
+-   Status post endoprosthetic hip treatment
+
+-   Idiopathic thrombocytopenia
+
+-   Non-insulin-dependent diabetes mellitus type II
+
+-   Hypothyroidism
+
+-   Nicotine abuse
+
+<!-- -->
+
+-   Panendoscopy with sampling on 04/14/2014 and 04/26/2014
+
+ 
+
+**Current Presentation**: With histologically confirmed carcinoma in the
+region of the base of the tongue on the left side, Mr. Doe presents for
+surgical treatment of the findings. In accordance with the tumor board
+decision, resection is performed via a lateral pharyngotomy and neck
+dissection on both sides.
+
+ 
+
+**Physical Examination:** Patient in stable general condition (85 kg,
+188 cm). MUST score: 0, pain NRS 8/10 intermittent (adjusted with
+Acetaminophen) \| fatigue I°, dysphagia I° \| aspiration 0°, ulcer 0°,
+trismus 0°, taste disturbance I°, xerostomia I°, osteonecrosis 0°,
+hypothyroidism I° (L-thyroxine increased to 150 μg 1-0-0), hoarseness
+0°, hearing loss 0° (subjectively reduced), dyspnea: 0°, pneumonitis 0°,
+nausea/vomiting 0°.
+
+No suspicious lymph nodes palpable \| movement restrictions 0°,
+subcutaneous fibrosis: I°, hyperpigmentation: I° cervical, mucositis 0°,
+lymphedema I° (lymphatic drainage prescribed), telangiectasia 0°.
+
+A tumorous mass can be inspected at the base of the left tongue. Tongue
+mobility is unremarkable.
+
+**CT chest, abdomen, pelvis on 05/28/14:**
+
+Emphasized mediastinal as well as abdominal lymph
+nodes.** **Vasosclerosis. Otherwise, there is no evidence for the
+presence of distant metastases with a suspected base of tongue
+carcinoma. Liver cirrhosis.
+
+ 
+
+**CT neck on 06/11/14:**
+
+Suspected left tongue base carcinoma crossing midline with extension
+into the left vallecula and compression of the left piriform sinus with
+suspected lymph node metastases in levels I-III ipsilateral.
+Contralateral prominent but not certainly suspicious lymph nodes. The
+prominent structure on the left supraclavicular side can also be
+interpreted as circumscribed cystiform ectasia of the thoracic duct.
+
+ 
+
+**Ultrasound abdomen on 06/15/14:**
+
+Image of liver cirrhosis status post cholecystectomy.
+Hepatosplenomegaly. Moderate aortic sclerosis.
+
+ 
+
+**X-ray pap swallow on 06/17/14:**
+
+Clear tracheal aspiration in the absence of epiglottis envelope. The
+cough reflex is preserved. Otherwise, essentially unremarkable
+swallowing act. 
+
+ 
+
+**Histology**: Invasive, moderately differentiated, squamous cell
+carcinoma with keratinization of the medial left base of the tongue,
+maximum extent 1.0 cm. Carcinoma- and dysplasia-free biopsies of the
+left tonsil, the oropharyngeal tumor/tongue base on the left, deep
+resection of the tumor, lower tonsillar pole transition on the left
+tongue base, tongue base on the left and medial left tongue base, as
+well as median tongue base.
+
+Metastasis-free lymph nodes in Neck-dissection Level IIa to IV on the
+left (0/16), Neck-dissection Level IIb on the left (0/1), and
+Neck-dissection Level II to IV on the right (0/3), occasionally with
+lymphofollicular hyperplasia. Carcinoma-free bone of the left lateral
+thigh of the hyoid.
+
+**Final UICC classification:** pT1. pN0 (0/21). L0. V0. Pn0. G2. RX.
+
+ 
+
+**Therapy and Progression**: After the usual clinical and laboratory
+preparations, we performed the above-mentioned therapy on 05/29/14 in
+intubation anesthesia without complications. For perioperative infection
+prophylaxis, the patient received intravenous antibiotic therapy with
+Ampicillin and Sulbactam 3g three times daily for the duration of his
+hospital stay.
+
+During this procedure, the left lingual artery was interrupted
+prophylactically. No postoperative bleeding and no wound healing
+disturbances occurred.
+
+A porridge swallow examination showed no evidence of a fistula. On the
+following day, the patient was decannulated in consultation with the
+colleagues of the speech therapy. After this, a food build-up was
+carried out in cooperation with speech therapists. At the time of
+discharge, the patient was receiving regular oral nutrition. The stoma
+continued to shrink. The patient was monitored, and if necessary, the
+tracheostoma was closed with local anesthesia. Histological findings
+were pT1. Due to an RX status, adjuvant radiotherapy will be performed
+as decided by the tumor board. A prophylactic presentation at the
+colleagues of the MKG as a preparatory measure for the upcoming
+radiotherapy. We asked for a control re-presentation in our outpatient
+clinic on 06/26/14 at 3:00 PM. Further controls take place at the half
+and at the end of the radiotherapy and further in 4-6 weeks rhythm. In
+case of acute complaints, an immediate re-presentation is possible at
+any time.
+
+ 
+
+**Type of surgery**: Lateral pharyngotomy with resection of the base of
+the tongue on the left as well as selective neck dissection on both
+sides level II-IV with ligature of the lingual artery on the left side,
+creation of a stable tracheostoma and tonsillectomy on the left side.
+
+**Surgery report: **First, tracheotomy in a typical manner. A horizontal
+incision was made on the skin, positioned approximately two transverse
+finger widths above the jugulum. Subsequently, the subcutaneous tissue
+and the platysma colli were incised. To facilitate access to the
+trachea, the laryngeal muscles were carefully displaced to the side. The
+thyroid isthmus was undermined and clamped bilaterally. A precise
+transection of the thyroid isthmus followed, with both halves of the
+thyroid gland being meticulously sutured using 0- Vicryl. The thyroid
+halves were repositioned to expose the trachea. A visceral tracheotomy
+was performed, and re-intubation was achieved utilizing a U-tube. The
+surgical procedure then transitioned to a neck dissection on the left
+side. This phase began with an incision along the anterior edge of the
+sternocleidomastoid muscle. The subcutaneous tissue and platysma colli
+were carefully cut, with due respect to the auricularis magnus nerve.
+Dissection continued dorsally along the sternocleidomastoid muscle to
+reach the anterior border of the trapezius muscle. Further exposure
+involved the accessorius nerve in a cranialward direction, with
+preservation of this neural structure. Dissection proceeded along the
+cervical vascular sheath, revealing the common carotid artery, internal
+jugular vein, and vagus nerve up to the digastric muscle. Below this
+level, exposure of the hypoglossal nerve was achieved.
+
+Successive dissection involved the lymph node fat package, progressing
+from level II to level IV in a cranial to caudal and ventral to dorsal
+direction. Throughout this process, careful attention was paid to
+sparing the aforementioned neural and vascular structures. Subsequently,
+access to the lateral pharyngectomy area was gained, allowing
+visualization of the external carotid artery along with its branches,
+including the superior thyroid artery, superior laryngeal artery, and
+lingual artery. Notably, the lingual artery was interrupted during this
+stage.
+
+Further exploration revealed the superior laryngeal nerve and
+hypoglossal nerve intersecting in a loop above the internal carotid
+artery and externally below the external jugular vein. Additional
+dissection in a ventral direction followed. The hypoglossal nerve was
+prepared meticulously. Exposure of the hyoid bone was achieved, with a
+posterior resection of half of the hyoid bone. Importantly, the
+hypoglossal nerve was spared during this procedure. Subsequent to these
+steps, the lateral pharynx wall was opened, exposing the base of the
+hyoid. The next phase of the procedure involved enoral tumor
+tonsillectomy on the left side. Starting from the left side, the
+surgical team identified the tonsil capsule at the anterior palatal arch
+using a Henke spatula. The upper tonsillar pole was then dislodged and
+dissected with the Rosenblatt instrument, proceeding from cranial to
+caudal. Hemostasis was meticulously achieved through swab pressure and
+electrocautery. The excised tonsil tissue was sent for frozen section
+examination for further analysis.
+
+**Frozen Section Report: **No evidence of malignancy was found. The
+resection was carried out at the junction of the caudal tonsillar pole
+and the base of the tongue. At this location, tissue from the base of
+the tongue was resected and sent for a frozen section examination, which
+revealed no indication of malignancy. Subsequently, a medial resection
+of the base of the tongue was performed, confirming the presence of
+squamous cell carcinoma in the frozen section analysis. Mucosal suturing
+with inverting sutures was then conducted. On the left side, a neck
+dissection procedure was performed. The dissection extended along the
+sternocleidomastoid muscle, reaching dorsally to the anterior border of
+the trapezius muscle. This approach allowed for cranial exposure of the
+accessorius nerve while sparing the same. Dissection continued along the
+cervical vascular sheath, exposing the common carotid artery, internal
+jugular vein, and the vagus nerve up to the digastric muscle. Below
+this, the hypoglossal nerve was exposed. Subsequently, the lymph node
+fat package was dissected systematically from level II to level IV,
+progressing from cranial to caudal and ventral to dorsal, while
+carefully preserving the mentioned structures. The surgical procedure
+concluded with the placement of a drain, subcutaneous suturing, and skin
+suturing.
+
+**Frozen section report:** Invasive squamous cell carcinoma.
+
+ 
+
+**Microscopy:**
+
+Even after paraffin embedding, mucosal cross-sections show a covering of
+stratified, non-keratinizing squamous epithelium with occasional
+significant stratification disturbances extending into superficial cell
+layers. This transitions into invasive growth with solid clusters of
+polygonal tumor cells, some of which exhibit identifiable intercellular
+bridges. The cell nuclei are enlarged, round to oval, with occasional
+small nucleoli and mild to moderate nuclear pleomorphism. Dyskeratosis
+is observed in some areas.
+
+**Lab results upon Discharge: **
+
+  **Parameter**        **Result**              **Reference Range**
+  -------------------- ----------------------- -----------------------
+  Sodium               141 mEq/L               135 - 145 mEq/L
+  Potassium            4.7 mEq/L               3.5 - 5.0 mEq/L
+  Creatinine           1.0 mg/dL               0.7 - 1.3 mg/dL
+  Calcium              9.04 mg/dL              8.8 - 10.6 mg/dL
+  GFR (MDRD)           \> 60 mL/min/1.73m\^2   \> 60 mL/min/1.73m\^2
+  GFR (CKD-EPI,CREA)   80 mL/min/1.73m\^2      \> 90 mL/min/1.73m\^2
+  C-reactive protein   1.0 mg/dL               \< 0.5 mg/dL
+
+
+</text_0>
+<text_1>
+**Dear colleague, **
+
+We are writing to provide an update regarding Mr. Paul Doe, born on
+08/08/1965, who presented to our outpatient clinic on 09/14/2014.
+
+**Diagnosis: **Tongue base Carcinoma ICD-10: C01, stage: pT1 pN0 (0/21)
+L0 V0 Pn0 G2 RX
+
+**Other Diagnoses:**
+
+-   Arterial hypertension
+
+-   Diabetes mellitus type II
+
+-   Status post liver surgery 2013
+
+-   Status post endoprosthetic hip treatment
+
+-   Hypothyroidism
+
+-   Oral thrush
+
+-   Hypacusis
+
+-   Since 03/2014: Odynophagia
+
+<!-- -->
+
+-   05/14/2014: Panendoscopy, biopsy, and initial diagnosis of left
+    tongue base carcinoma.
+
+-   05/29/2014: Tumor resection and selective neck dissection LI-III
+
+**Histology:**
+
+Invasive, moderately differentiated, squamous cell carcinoma with
+keratinization of the medial left base of the tongue, maximum extent 1.0
+cm. Carcinoma- and dysplasia-free biopsies of the left tonsil, the
+oropharyngeal tumor/tongue base on the left, deep resection of the
+tumor, lower tonsillar pole transition on the left tongue base, tongue
+base on the left and medial left tongue base, as well as median tongue
+base.
+
+Metastasis-free lymph nodes in Neck-dissection Level IIa to IV on the
+left (0/16), Neck-dissection Level IIb on the left (0/1), and
+Neck-dissection Level II to IV on the right (0/3), occasionally with
+lymphofollicular hyperplasia. Carcinoma-free bone of the left lateral
+thigh of the hyoid.
+
+**Final UICC classification:** min pT1, pN0 (0/21). L0. V0. Pn0. G2. RX.
+
+**Current Radiotherapy:**
+
+**Indication**: According to the decision made by the interdisciplinary
+tumor board for head and neck tumors, it was determined by our medical
+team that, in the postoperative condition following the resection of a
+tongue base carcinoma with an unclear resection status, there is an
+indication for radiation therapy of the former tumor site.
+
+**Technique:** Percutaneous radiotherapy of the former primary tumor
+region with 6-MeVPhotons, in Rapid-Arc technique, with a single dose of
+2 Gy up to a total dose of 60 Gy.
+
+**Radiotherapy 07/27/2014 - 09/06/2014:**
+
+During the course of radiotherapy, the patient experienced enoral
+mucositis (grade II according to CTCAE) leading to subsequent
+odynophagia and dysphagia. We managed these symptoms with oral rinses
+and initiated pain management using Acetaminophen, resulting in an
+acceptable reduction of pain over time. At the end of the therapy, the
+patient\'s general condition remained stable (ECOG performance status:
+70%). Second-degree mucositis enoral persisted, causing ongoing
+dysphagia and odynophagia. Additionally, the patient exhibited localized
+radiodermatitis (grade II according to CTCAE) within the radiation
+field. The patient did not report xerostomia or dysgeusia.
+
+**Current Recommendations:**
+
+The patient received comprehensive instructions on continued skincare
+and side-effect management. An initial follow-up appointment with the
+radio-oncology team has been scheduled in our outpatient clinic. We
+kindly request the patient to provide a renewed referral for
+radiotherapy on the day of the appointment.
+
+The ongoing oncological treatment plan will be determined by the
+patient\'s Ear, Nose, and Throat specialists. Regular follow-up
+examinations are strongly recommended. Additionally, for patients who
+have completed radiation therapy in the ENT region, we advise lifelong
+adherence to fluoride prophylaxis and antibiotic therapy during any
+dental procedures.
+
+
+</text_1>
+<text_2>
+**Dear colleague, **
+
+We report about our patient, Mr. Doe, born on 08/08/1965, who presented
+to our outpatient clinic for phoniatrics and pedaudiology on 10/10/2014.
+
+**Diagnoses: **
+
+-   Tongue base carcinoma ICD-10: C01, stage: pT1 pN0 (0/21) L0 V0 Pn0
+    G2 RX
+
+-   Since 03/2014: Odynophagia
+
+-   05/14/2014: Panendoscopy, biopsy, and initial diagnosis of left
+    tongue base carcinoma.
+
+-   05/29/2014: Tumor resection and selective neck dissection LI-III
+
+**Other Diagnoses:**
+
+-   Arterial hypertension
+
+-   Diabetes mellitus type II
+
+-   Status post liver surgery 2013
+
+-   Status post endoprosthetic hip treatment
+
+-   Hypothyroidism
+
+-   Oral thrush
+
+-   Hypacusis
+
+**Medical History: **We may kindly assume the detailed history as known.
+
+**Phoniatrics: Fiberoptic endoscopic swallow examination:**
+
+Tongue motor function is well preserved, sensitivity of lip and tongue
+laterally equal,
+
+Mucous membranes non-irritant on all sides. Tracheal mucosa
+non-irritant, no evidence of saliva intratracheal. Neopharynx
+inconspicuous, air bubbles visible above Provox outlet on pressing
+attempt. Tongue retraction slightly limited. Velopharyngeal closure
+good.
+
+**Therapy and Course:** After completion of the adjuvant radiotherapy
+approximately 6 weeks ago, phonation via the Provox voice prosthesis was
+no longer possible after this had initially worked after the operation.
+Additionally, there were issues with regurgitation of ingested
+substances, regardless of their consistency. In some cases, nasal
+penetration with fluids occurred. There were no indications of
+aspiration. A self-assessment, involving the use of blue-colored liquid,
+revealed no signs of leakage from the Provox device.
+
+**Current Recommendations:** Oncological follow-up in 12 months.
+
+
+</text_2>
+<text_3>
+**Dear colleague, **
+
+We report about our patient, Mr. Doe, born on 08/08/1965 who presented
+at our outpatient clinic for radio-oncological follow-up on 10/09/2020.
+
+**Diagnoses: **
+
+-   Tongue base Carcinoma ICD-10: C01, stage: pT1 pN0 (0/21) L0 V0 Pn0
+    G2 RX
+
+-   Since 03/2014: Odynophagia
+
+-   05/14/2014: Panendoscopy, biopsy, and initial diagnosis of left
+    tongue base carcinoma.
+
+-   05/29/2014: Tumor resection and selective neck dissection LI-III
+
+**Other Diagnoses:**
+
+-   Arterial hypertension
+
+-   Diabetes mellitus type II
+
+-   Status post liver surgery 2013
+
+-   Status post endoprosthetic hip treatment
+
+-   Hypothyroidism
+
+-   Oral thrush
+
+-   Hypacusis
+
+ 
+
+**Current Presentation: **The patient presented to our general
+outpatient clinic for a radio-oncological follow-up on 10/09/2020 in the
+presence of his wife.
+
+**Physical Examination**: Patient in stable general condition (85 kg,188
+cm). MUST score: 0, pain NRS 8/10 intermittent (adjusted with
+Acetaminophen) \| fatigue I°, dysphagia I° \| aspiration 0°, ulcer 0°,
+trismus 0°, taste disturbance I°, xerostomia I°, osteonecrosis 0°,
+hypothyroidism I°, hoarseness 0°, hearing loss 0° (subjectively
+reduced), dyspnea: 0°, pneumonitis 0°, nausea/vomiting 0°.
+
+No suspicious lymph nodes palpable \| movement restrictions 0°,
+subcutaneous fibrosis: I°, hyperpigmentation: I° cervical, mucositis 0°,
+lymphedema I° (lymphatic drainage prescribed), telangiectasia 0°.
+
+**MRI scan of the neck from 10/09/2020:** 
+
+Clear post-therapeutic changes in the resection and radiation area after
+adjuvant RTx following tumor resection with laryngectomy for extensive
+recurrence of oropharyngeal cancer. 
+
+Size constant, but still clearly accentuated lymph nodes in level Ib/IIa
+on the left. Regredience of seroma formation under the left
+sternocleidomastoid muscle.
+
+**Current Recommendations: **Primary oncological care and follow-up,
+including imaging, will be provided by the ENT clinic according to the
+guidelines. A re-appointment for a further radio-oncological follow-up
+at the follow-up appointment at the Radiation Therapy Tumor Therapy
+Center has been scheduled. After head and neck radiation therapy,
+regular fluoridation of the teeth and guideline-based antibiotic
+prophylaxis is required prior to major dental procedures. We also
+recommend temporomandibular joint opening exercises to prevent
+temporomandibular joint fibrosis and consecutive temporomandibular joint
+opening obstruction. We also refer to regular control of thyroid
+function parameters and, if necessary, initiation of substitution
+therapy after radiotherapy to the neck.
+
+
+</text_3>
+<text_4>
+**Dear colleague, **
+
+We hereby report on our patient Mr. Paul Doe, born 08/08/1965 for
+radio-oncological follow-up on 09/24/2021.
+
+**Diagnoses: **
+
+-   Tongue base carcinoma ICD-10: C01, stage: pT1 pN0 (0/21) L0 V0 Pn0
+    G2 RX
+
+-   Since 03/2014: Odynophagia
+
+-   05/14/2014: Panendoscopy, biopsy, and initial diagnosis of left
+    tongue base carcinoma.
+
+-   05/29/2014: Tumor resection and selective neck dissection LI-III
+
+**Other Diagnoses:**
+
+-   Arterial hypertension
+
+-   Diabetes mellitus type II
+
+-   Status post liver surgery 2013
+
+-   Status post endoprosthetic hip treatment
+
+-   Hypothyroidism
+
+-   Oral thrush
+
+-   Hypacusis
+
+**Current Presentation: **The patient presented to our general
+outpatient clinic for radio-oncological follow-up on 09/24/2021. 
+
+**Physical Examination: **Patient in reduced general condition (KPS 60%,
+86 kg,188 cm). Weight loss 0°, MUST score: 0, pain VAS 1-2/10, fatigue
+I°, dysphagia I° with solid food (liquids occasionally flow out of the
+nose again when swallowing), aspiration 0°, ulcer 0°, trismus 0°, taste
+disorder I° (present in approx. 80%), xerostomia I°, osteonecrosis 0°,
+hypothyroidism II°, hoarseness II°, hearing loss, I°, dyspnea: 0°,
+pneumonitis 0°, nausea/vomiting 0°.
+
+No suspicious lymph nodes palpable, movement restrictions I° head
+reclination restricted with tension and pain, subcutaneous fibrosis: I°,
+hyperpigmentation: I°, mucositis 0°, lymphedema I° (lymphatic drainage),
+telangiectasia 0°.
+
+**MR neck plain + contrast agent on 09/24/2021**:
+
+[Technique]{.underline}: STIR triplanar, T1 ax -/+ contrast agent, T1
+mDixon cor after
+
+contrast agent.
+
+[Findings]{.underline}: Known status post tumor resection with
+laryngectomy for extensive recurrence of oropharyngeal Carcinoma;
+Follow-up after RTx. Somewhat increasing swelling of nasopharynx to
+oropharynx. From the uvula the swelling is stable. As far as can be
+assessed, no clear recurrence-specific tissue proliferation or contrast
+uptake. Unchanged accentuated lymph nodes in level Ib/IIa on the left
+(one exemplary measured lymph node borderline large, idem to preliminary
+examination). Mastoid cells minimally displaced on the left. Moderate
+degenerative changes of the cervical spine. Assessment. Increasing
+swelling of the naso- to oropharynx. Neopharynx unchanged swollen. No
+evidence of malignancy-suspicious lymph nodes.
+
+**CT scan of the thorax on 09/24/2021**:
+
+Size-constant visualization of interlobar oval compaction in the left
+upper lobe corresponding to an interlobar lymph node. New to the
+previous examination, two small nodular condensations appear, basal in
+the right and in the left lower lobe, differentially inflammatory;
+follow-up is recommended. Unchanged the prominent mediastinal lymph
+nodes, constant in size and number.
+
+**Current Recommendations:**
+
+Primary oncologic care and follow-up including imaging will take place
+via the ENT clinic on 01/14/22 at 11:00 AM. A re-appointment for the
+next radio-oncological follow-up has been arranged for 01/14/2022 at
+1:00 PM in our radiotherapy outpatient clinic in the Tumor Therapy
+Center.
+
+**Lab results upon Discharge:**
+
+**Hematology**
+
+  **Parameter **   **Result**    **Reference**
+  ---------------- ------------- -----------------------
+  WBC              6,900 /μL     4,500 - 11,000 /μL
+  RBC              2.7M /μL      4.5M - 5.9M /μL
+  Hemoglobin       8.2 g/dL      14 - 18 g/dL
+  Hematocrit       25.1 %        40 - 48 %
+  MCH              31.27 pg      27 - 33 pg
+  MCV              94 fL         82 - 92 fL
+  MCHC             32.7 g/dL     32 - 36 g/dL
+  Platelets        638,000 /μL   150,000 - 450,000 /μL
+
+**Serum chemistry**
+
+  **Parameter **   **Result**   **Reference**
+  ---------------- ------------ -----------------
+  Sodium           144 mEq/L    135 - 145 mEq/L
+  Potassium        4.8 mEq/L    3.5 - 5.0 mEq/L
+  Creatinine       1.3 mg/dL    0.7 - 1.3 mg/dL
+  ALT              21 U/L       10 - 50 U/L
+  eGFR             55 mL/min    \> 90 mL/min
+  CRP              2.9 mg/dL    \< 0.5 mg/dL
+
+**Coagulation**
+
+  **Parameter **   **Result**   **Reference**
+  ---------------- ------------ ---------------
+  PT               93 %         70 - 120 %
+  INR              1.1          0.8 - 1.2
+  aPTT             31 sec       26 - 37 sec
+
+**Thyroid hormones**
+
+  **Parameter **   **Result**    **Reference**
+  ---------------- ------------- ------------------
+  TSH              1.16 μIU/mL   0.4 - 4.2 μIU/mL
+  fT3              2.38 pg/mL    2.3 - 4.2 pg/mL
+  fT4              1.70 ng/dL    0.9 - 1.7 ng/dL
+
+
+</text_4>
+<text_5>
+**Dear colleague, **
+
+We are reporting on Mr. Paul Doe, born on 08/08/1965, who was admitted
+to our hospital from 01/10/2022 to 01/27/2022.
+
+**Diagnosis**: Metachronous pulmonary metastatic squamous cell carcinoma
+
+**Diagnoses: **
+
+-   Tongue base Carcinoma ICD-10: C01, stage: pT1 pN0 (0/21) L0 V0 Pn0
+    G2 RX
+
+-   Since 03/2014 Odynophagia
+
+-   05/14/2014 Panendoscopy, biopsy, and initial diagnosis of left
+    tongue base carcinoma.
+
+-   05/29/2014 Tumor resection and selective neck dissection LI-III
+
+**Other Diagnoses:**
+
+-   Arterial hypertension
+
+-   Diabetes mellitus type II
+
+-   Status post liver surgery 2013
+
+-   Status post endoprosthetic hip treatment
+
+-   Hypothyroidism
+
+-   Oral thrush
+
+-   Hypacusis
+
+**Planned Surgical Procedure:**
+
+-   Perioperative bronchoscopy
+
+-   Left-sided video-assisted thoracoscopic surgery
+
+-   Pleurolysis
+
+-   Anatomical upper lobe resection
+
+-   Systematic mediastinal, hilar, and interlobar lymph node dissection
+
+-   Placement of double chest drains
+
+**Medical History**: Mr. Paul Doe initially presented with a diagnosis
+of pT1, pN0 (0/21, ECE negative), cM0, Pn0, G2, RX, L0, V0, left midline
+tongue carcinoma. Panendoscopy with specimen collection on 04/14/2014
+and 04/26/2014 confirmed carcinoma.
+
+Surgical resection was performed via lateral pharyngotomy and neck
+dissection. Histology confirmed squamous cell carcinoma. He subsequently
+received radiotherapy.
+
+During a follow-up CT examination, a suspicious lesion was identified in
+the lung, which raised concerns regarding the possibility of metastasis
+originating from the previously diagnosed left midline tongue carcinoma
+(pT1, pN0, G2, RX).
+
+**Current Presentation:** Mr. Doe was admitted for further examination
+and treatment to assess the behavior and extent of the lesion.
+Clinically, Mr. Doe was in stable general condition and had no symptoms
+suggestive of B symptoms.
+
+**Therapy and Progression**: The above-mentioned procedure was performed
+without complications on 01/10/2022. Histologically, the final resection
+specimen confirmed the presence of a 2.9 cm squamous cell carcinoma,
+consistent with a metastatic recurrence of the previously known
+hypopharyngeal carcinoma. The dissected lymph nodes were free of tumor.
+The postoperative course was uneventful. In the absence of any
+complications, surgical sutures were removed on day 10 after surgery. A
+current chest X-ray showed a regular postoperative outcome with
+sufficient expansion of the left lobe. Further monitoring is recommended
+by the treating colleagues in this regard. Mr. Doe is also connected to
+the radiation therapy team for ongoing follow-up.
+
+If there are any complications or questions, please contact the relevant
+ward or reach out to our Central Patient Management. Outside regular
+working hours, you can contact the on-call colleague in the Abdominal
+Surgery department for assistance.
+
+For further information on the patient\'s discharge management, treating
+providers are available for inquiries from Monday to Friday, 9 AM to 7
+PM, as well as on weekends and holidays from 10 AM to 2 PM.
+
+Mr. Doe was discharged from the hospital on 01/27/2022.
+
+**Addition:**
+
+**Histology Report:** Resected left upper lobe specimen with a 2.9 cm
+solid carcinoma. The histological picture is consistent with a
+metastasis from the previously diagnosed non-keratinizing squamous cell
+carcinoma. There were focal vascular invasions. No pleural invasion was
+observed. The resection was complete, with all dissected lymph nodes
+showing no tumor involvement.
+
+**Chest X-ray, anterior-posterior view from 01/21/2022**:
+
+[Clinical Information:]{.underline} History of VATS with wedge
+resection, yesterday\'s drain removal
+
+[Question:]{.underline} Follow-up, pneumothorax after drain removal?
+Infiltrates? Atelectasis?
+
+[Findings:]{.underline} Left chest drainage tube has been removed. Left
+apical pneumothorax line, measuring approximately 2.3 cm. Continued
+extensive shadowing of the left upper field, most likely postoperative,
+infiltrate cannot be definitively ruled out. Slightly hypotransparent
+left lung in comparison, most likely due to residual postoperative
+reduced ventilation. No effusion. Widened cardiac silhouette. Regression
+of dystelectasis in the right lower field. No acute signs of pulmonary
+venous congestion. Trachea is mid-positioned and not stenosed.
+Left-sided port catheter still in place.
+
+[Summary]{.underline}: Left apical corax with a width of 2.3 cm.
+Continued extensive shadowing of the left upper field, most likely
+postoperative, with infiltrate not definitively excluded. Residual
+postoperative reduced ventilation on the left side. Regression of
+dystelectasis in the right lower field. No effusion. No acute signs of
+pulmonary venous congestion. Follow-up recommended.
+
+**Examinations Chest X-ray, anterior-posterior view from 01/23/2022:**
+
+[Question]{.underline}**:** Follow-up.
+
+[Findings]{.underline}: Left apical pneumothorax, measuring
+approximately 1.4 cm. Extensive shadowing in projection onto the left
+upper lobe, differentials include postoperative changes, incipient
+infiltrate not excluded. Dystelectasis of the right lower field. No
+evidence of pleural effusion or acute pulmonary venous congestion.
+Cardiomegaly. Indwelling chest drainage with the catheter tip projecting
+onto the left upper lobe. Well-positioned port catheter tip projecting
+onto the right atrial entrance plane. No evidence of pleural effusion.
+Assessment Left apical pneumothorax, measuring approximately 1.4 cm,
+with indwelling left chest drainage. Extensive shadowing in projection
+onto the left upper lobe, differentials include postoperative changes,
+incipient infiltrate not excluded. Dystelectasis of the right lower
+field. No significant pleural effusion. No acute pulmonary venous
+congestion. Cardiomegaly.
+
+**Chest X-ray, anterior-posterior view from 01/25/2022**
+
+[Previous Examinations]{.underline}: Appearance of a diffuse
+postoperative shadow in the left upper field. No evidence of pleural
+effusion, inflammatory infiltrate, or pulmonary venous congestion.
+
+[Findings]{.underline}: Left-sided chest port with the tip projecting
+onto the superior vena cava. The upper mediastinum is narrow, the
+trachea is mid-positioned and patent.
+
+[Assessment]{.underline}: The pneumothorax appears to be largely
+resolved.
+
+**Urinanalysis**:
+
+Material: Urine, midstream sample collected on 01/11/2022
+
+-   Antimicrobial inhibitors negative
+
+-   No evidence of growth-inhibiting substances in the sample material.
+
+-   Colony Count (CFU) / mL \<1,000, Assessment: A low colony count
+    typically does not support a urinary tract infection.
+
+-   Epithelial cells (microscopic) \<20 epithelial cells/μL
+
+-   Leukocytes (microscopic) \<20 leukocytes/μL
+
+-   Microorganisms (microscopic) 20-100 microorganisms/μL Pathogen
+    Enterococci
+
+**Lab values upon Discharge: **
+
+  **Parameter**        **Result**            **Reference Range**
+  -------------------- --------------------- ---------------------
+  Sodium               141 mEq/L             135 - 145 mEq/L
+  Potassium            4.7 mEq/L             3.5 - 5.0 mEq/L
+  Creatinine           1.1 mg/dL             0.7 - 1.3 mg/dL
+  Calcium              10.4 mg/dL            8.8 - 10.6 mg/dL
+  eGFR (MDRD)          \> 60 mL/min/1.73m²   \> 60 mL/min/1.73m²
+  eGFR (CKD-EPI)       85 mL/min/1.73m²      \> 90 mL/min/1.73m²
+  C-Reactive Protein   5.0 mg/dL             \< 0.5 mg/dL
+
+
+</text_5>
+<text_6>
+**Dear colleague, **
+
+We are reporting on Mr. Paul Doe, born on 08/08/1965, who presented to
+our surgical outpatient clinic on 01/24/2022.
+
+**Diagnoses**: Metachronous pulmonary metastatic squamous cell carcinoma
+at the base of the tongue.
+
+**Surgical Procedure from 01/11/2022:**
+
+-   Perioperative bronchoscopy
+
+-   Left-sided video-assisted thoracoscopic surgery
+
+-   Pleurolysis
+
+-   Anatomical upper lobe resection
+
+-   Systematic mediastinal, hilar, and interlobar lymph node dissection
+
+-   Placement of double chest drains
+
+**Previous Diagnoses and Therapies:**
+
+-   Recurrent oropharyngeal carcinoma ICD-10: C01
+
+-   Stage: rpT2 rpN2(2/24, ECE -) L1 V0 Pn0 G2 R0
+
+-   Tumor localization: base of tongue, crossing midline
+
+-   Since 04/2014: Odynophagia
+
+-   04/14/2014: Panendoscopy, biopsy and initial diagnosis of left
+    tongue base carcinoma.
+
+-   05/29/2014: Tumor resection and selective neck dissection LI-III
+
+-   08-10/2015: radiotherapy of former PTR with 60 Gy à 2 Gy.
+
+-   OSAS with CPAP incompliance
+
+<!-- -->
+
+-   Liver cirrhosis with alcohol abuse
+
+-   Non-insulin-dependent diabetes mellitus type II
+
+-   Arterial hypertension
+
+-   History of endoprosthetic hip treatment
+
+-   Hypothyroidism
+
+-   Oral thrush
+
+-   Hypacusis
+
+**Current Presentation:** Mr. Doe presented for postoperative follow-up
+after his left-sided videothoracoscopic upper lobe resection due to
+previously diagnosed pulmonary metastatic hypopharyngeal carcinoma.
+
+**Medical History:** The patient\'s general condition is good. He is
+currently on intermittent as-needed analgesia with Acetaminophen. The
+final resection specimen histologically confirmed the presence of a 2.9
+cm squamous cell carcinoma, consistent with a metastatic recurrence of
+the previously known hypopharyngeal carcinoma. The dissected lymph nodes
+were free of tumor.
+
+**Therapy and Progression**: During the follow-up appointment, Mr. Doe
+underwent a clinical examination and a chest X-ray to assess his
+postoperative condition. The examination revealed no new concerning
+findings, and Mr. Doe continued to remain in stable general condition.
+His surgical incision site was inspected, showing signs of satisfactory
+healing without any signs of infection or complications.
+
+Furthermore, Mr. Doe\'s lung function was evaluated through spirometry,
+which indicated adequate pulmonary function post-surgery. He was also
+provided with personalized recommendations for respiratory exercises to
+optimize his lung function during the recovery period.
+
+**Current Recommendations:**
+
+-   Mr. Doe is connected to the radiation therapy team for ongoing
+    follow-up.
+
+
+</text_6>
+<text_7>
+**Dear colleague, **
+
+We are reporting on Mr. Paul Doe, born on 08/08/1965, who presented to
+our surgical outpatient clinic on 01/24/2022.
+
+**Diagnoses**: Metachronous pulmonary metastatic squamous cell carcinoma
+at the base of the tongue.
+
+**Surgery on 01/11/2022:**
+
+-   Left-sided video-assisted thoracoscopic surgery
+
+-   Anatomical upper lobe resection
+
+-   Systematic mediastinal, hilar, and interlobar lymph node dissection
+
+**Previous Diagnoses and Therapies:**
+
+-   Recurrent oropharyngeal carcinoma ICD-10: C01
+
+-   Stage: rpT2 rpN2(2/24, ECE -) L1 V0 Pn0 G2 R0
+
+-   Tumor localization: base of tongue, crossing midline
+
+-   Since 04/2014: Odynophagia
+
+-   04/14/2014: Panendoscopy, biopsy and initial diagnosis of left
+    tongue base carcinoma.
+
+-   05/29/2014: Tumor resection and selective neck dissection LI-III
+
+-   08-10/2015 Radiotherapy of former PTR with 60 Gy à 2 Gy.
+
+**Other Diagnoses:**
+
+-   OSAS with CPAP incompliance
+
+-   Liver cirrhosis with alcohol abuse
+
+-   Non-insulin-dependent diabetes mellitus type II
+
+-   Arterial hypertension
+
+-   History of endoprosthetic hip treatment
+
+-   Hypothyroidism
+
+-   Oral thrush
+
+-   Hypacusis
+
+**Current Presentation:** Mr. Doe presented for routine follow-up.
+Clinically, he remains in stable general condition, with no signs of
+B-symptoms.
+
+**Medical History**: The surgical procedure performed on 01/11/2022
+involved perioperative bronchoscopy, left VATS, pleurolysis, anatomical
+upper lobe resection, systematic mediastinal, hilar, and interlobar
+lymph node dissection, as well as the placement of double chest drains.
+Histologically, the final resection specimen confirmed a 2.9 cm solid
+carcinoma, consistent with metastasis from the previously diagnosed
+squamous cell carcinoma. Lymph nodes dissected during the procedure were
+tumor-free. Mr. Doe\'s postoperative course was uneventful, and surgical
+sutures were removed on day 10 after surgery.
+
+**Physical Examination:** Patient in good general condition. Weight loss
+0°, MUST score: 0, pain VAS 1-2/10, fatigue I°, dysphagia I° with solid
+food (liquids occasionally flow out of the nose again when swallowing),
+aspiration 0°, ulcer 0°, trismus 0°, taste disorder I° (present in
+approx. 80%), xerostomia I°, osteonecrosis 0°, hypothyroidism II°,
+hoarseness II°, hearing loss, I°, dyspnea: 0°, pneumonitis 0°,
+nausea/vomiting 0°.
+
+No suspicious lymph nodes palpable, movement restrictions I° head
+reclination restricted with tension and pain, subcutaneous fibrosis: I°,
+hyperpigmentation: I°, mucositis 0°, lymphedema I° (lymphatic drainage),
+telangiectasia 0°.
+
+**Current Recommendations:** Mr. Doe is advised to continue his
+follow-up appointments.
+
+**Lab results upon Discharge:**
+
+  **Parameter**                    **Results**    **Reference Range**
+  -------------------------------- -------------- ---------------------
+  Neutrophils                      72.2 %         42.0-77.0 %
+  Lymphocytes                      8.6 %          20.0-44.0 %
+  Monocytes                        11.6 %         2.0-9.5 %
+  Basophils                        1.4 %          0.0-1.8 %
+  Eosinophils                      6.0 %          0.5-5.5 %
+  Immature Granulocytes            0.2 %          0.0-1.0 %
+  Sodium                           137 mEq/L      136-145 mEq/L
+  Potassium                        4.2 mEq/L      3.5-4.5 mEq/L
+  Calcium                          9.24 mg/dL     8.8-10.2 mg/dL
+  Chloride                         100 mEq/L      98-107 mEq/L
+  Creatinine                       1.27 mg/dL     0.70-1.20 mg/dL
+  BUN                              48 mg/dL       17-48 mg/dL
+  Uric Acid                        5.2 mg/dL      3.6-8.2 mg/dL
+  CRP                              0.8 mg/L       \< 5.0 mg/L
+  PSA                              2.31 ng/mL     \< 4.40 ng/mL
+  ALT                              12 U/L         \< 41 U/L
+  AST                              38 U/L         \< 50 U/L
+  Alkaline Phosphatase             115 U/L        40-130 U/L
+  GGT                              20 U/L         8-61 U/L
+  LDH                              335 U/L        135-250 U/L
+  Testosterone                     \<0.03 ng/mL   1.32-8.92 ng/mL
+  TSH                              1.42 mIU/L     0.27-4.20 mIU/L
+  Hemoglobin                       10.1 g/dL      12.5-17.2 g/dL
+  Hematocrit                       28.5 %         37.0-49.0 %
+  RBC                              3.3 M/µL       4.0-5.6 M/µL
+  WBC                              4.98 K/µL      3.90-10.50 K/µL
+  Platelets                        281 K/µL       150-370 K/µL
+  MCV                              85.6 fL        80.0-101.0 fL
+  MCH                              30.3 pg        27.0-34.0 pg
+  MCHC                             35.4 g/dL      31.5-36.0 g/dL
+  MPV                              9.2 fL         7.0-12.0 fL
+  RDW                              13.4 %         11.5-15.0 %
+  Absolute Neutrophils             3.59 K/µL      1.50-7.70 K/µL
+  Absolute Immature Granulocytes   0.010 K/µL     \< 0.050 K/µL
+  Absolute Lymphocytes             0.43 K/µL      1.10-4.50 K/µL
+  Absolute Monocytes               0.58 K/µL      0.10-0.90 K/µL
+  Absolute Eosinophils             0.30 K/µL      0.02-0.50 K/µL
+  Absolute Basophils               0.07 K/µL      0.00-0.20 K/µL
+  Reticulocytes                    31.3 K/µL      25.0-105.0 K/µL
+  Reticulocyte %                   0.94 %         0.50-2.00 %
+  Ret-Hb                           33.9 pg        28.5-34.5 pg
+  PT                               112 %          \> 78 %
+  INR                              0.95           \< 1.25
+  aPTT                             30.2 sec.      25.0-38.0 sec.
+
+</text_7>
+</notes>
+</patient-record-patient_06>
+
+<patient-record-patient_07>
+Below is patient Linda Mayer's medical record (ID: patient_07). 
+They were born on 1948-12-01 00:00:00 and have the following diagnosis: Breast carcinoma.
+The patients medical record consists of 7 notes included below.
+<notes>
+<text_0>
+**Dear colleague, **
+
+We report to you about Mrs. Linda Mayer, born on 01/12/1948, who
+presented to our outpatient clinic on 07/13/19.
+
+**Diagnoses:**
+
+-   BIRADS IV, recommended biopsy during breast diagnostics.
+
+-   Left breast carcinoma: iT1b; iN0; MX; ER: 12/12; PR: 2/12; Her-2:
+    neg; Ki67: 15%.
+
+**Other Diagnoses: **
+
+-   Status post apoplexy
+
+-   Status post cataract surgery
+
+-   Status post right hip total hip replacement (THR)
+
+-   Pemphigus vulgaris under azathioprine therapy
+
+-   Osteoporosis
+
+-   Obesity with a BMI of 35
+
+-   Undergoing immunosuppressive therapy with prednisolone
+
+**Family History:**
+
+-   Sister deceased at age 39 from breast cancer.
+
+-   Mother and grandmother (maternal and paternal) were diagnosed with
+    breast cancer.
+
+**Medical History:** The CT thorax report indicates the presence of
+inflammatory foci, warranting further follow-up. The relevant data was
+documented and presented during the tumor conference. Subsequently, a
+telephone conversation was conducted with the patient to discuss the
+next steps.
+
+**Tumor board decision from 07/13/2019:**
+
+**Imaging: **
+
+1)  MRI examination detected a unifocal lesion on the left external
+    aspect, measuring approximately 2.4 cm in size.
+
+2)  CT scan (thorax/abdomen 07/12/2019) revealed a previously known
+    liver lesion, likely a hemangioma. No evidence of metastases was
+    identified. Nonspecific, small foci were observed in the lungs,
+    likely indicative of post-inflammatory changes.
+
+**Recommendations:**
+
+1.  If no metastasis (M0): Fast-track BRCA testing is recommended.
+
+2.  If BRCA testing returns negative: Proceed with a selective excision
+    of the left breast after ultrasound-guided fine needle marking and
+    sentinel lymph node biopsy on the left side. Additionally, perform
+    Endopredict analysis on the surgical specimen.
+
+**Current Medication: **
+
+  **Medication**                  **Dosage**   **Route**   **Frequency**
+  ------------------------------- ------------ ----------- ---------------
+  Aspirin                         100mg        Oral        1-0-0
+  Simvastatin (Zocor)             40mg         Oral        0-1-0
+  Haloperidol (Haldol)            100mg        Oral        ½-0-½
+  Zopiclone (Imovane)             7.5mg        Oral        0-0-1
+  Trazodone (Desyrel)             100mg        Oral        0-0-½-
+  Calcium Supplement (Caltrate)   500mg        Oral        1-0-1
+  Nystatin (Bio-Statin)           As advised   Oral        1-1-1-1
+  Pantoprazole (Protonix)         40mg         Oral        1-0-0
+  Prednisolone (Prelone)          40mg         Oral        As advised
+  Tramadol/Naloxone (Ultram)      50/4mg       Oral        1-0-1
+  Acyclovir (Zovirax)             800mg        Oral        1-1-1
+
+**Mammography and Tomosynthesis from 07/8/2019:**
+
+[Findings]{.underline}**: **During the inspection and palpation, no
+significant findings were noted on either side. Some areas with higher
+mammographic density were observed, which slightly limited the
+assessment. However, during the initial examination, a small
+architectural irregularity was identified on the outer left side. This
+irregularity appeared as a small, roundish compression measuring
+approximately 6mm and was visible only in the medio-lateral oblique
+image, with a nipple distance of 8cm. Apart from this discovery, there
+were no other suspicious focal findings on either side. No clustered or
+irregular microcalcifications were detected. Additionally, a long-term,
+unchanged observation noted some asymmetry with denser breast tissue
+present on both sides, particularly on the outer aspects. Sonographic
+evaluation posed challenges due to the mixed echogenic glandular tissue.
+As a possible corresponding feature to the questionable architectural
+irregularity on the outer left side, a blurred, echo-poor area with a
+vertical alignment measuring about 7x5mm was identified. Importantly, no
+other suspicious focal findings were observed, and there was no evidence
+of enlarged lymph nodes in the axilla on both sides.
+
+[Assessment]{.underline}**:** The observed finding on the left side
+presents an uncertain nature, categorized as BIRADS IVb. In contrast,
+the finding on the right side appears benign, categorized as BIRADS II.
+To gain a more conclusive understanding of the left-sided finding, we
+recommend a histological assessment through a sonographically guided
+high-speed punch biopsy. An appointment has been scheduled with the
+patient to proceed with this biopsy and obtain a definitive
+diagnosis.Formularbeginn
+
+Formularende**Current Recommendations:**\
+A fast-track decision will be made regarding tumor genetics, and the
+patient will be notified of the appointment via telephone. The patient
+should bring the pathology blocks from Fairview Clinic on the day of
+blood collection for genetic testing, along with a referral for an
+Endopredict test. A multidisciplinary team meeting will be convened
+after the Endopredict test and genetic testing results are available. If
+there is persistence or worsening of symptoms, we strongly advise the
+patient to seek immediate re-evaluation. Additionally, outside of
+regular office hours, the patient can seek assistance at the emergency
+care unit in case of emergency.
+
+**MRI from 07/11/2019:**
+
+[Technique:]{.underline} Breast MRI (3T scanner) with dedicated mammary
+surface coil: 
+
+[Findings:]{.underline} The overall contrast enhancement was observed
+bilaterally to evaluate the Grade II findings. There was low to moderate
+small-spotted contrast enhancement with slightly limited assessability.
+The contrast dynamics revealed a patchy, confluent, blurred, and
+elongated contrast enhancement, corresponding to the primary lesion,
+which measured approximately 2.4 cm on the lower left exterior. Single
+spicules were noted, and the lesion appeared hypointense in T1w imaging.
+No suspicious focal findings with contrast enhancement were detected on
+the right side. Small axillary lymph nodes were observed on the left
+side, but they did not appear suspicious based on MR morphology.
+Additionally, there were no suspicious lymph nodes on the right side.
+
+[Assessment:]{.underline} An unifocal primary lesion measuring
+approximately 2.4 cm in diameter was identified on the lower left
+exterior. It exhibited patchy confluent enhancement and architectural
+disturbance, with single spicules. No evidence of suspicious lymph nodes
+was found. The left side is categorized as BIRADS 6, indicating a high
+suspicion of malignancy, while the right side is categorized as BIRADS
+2, indicating a benign finding.
+
+
+</text_0>
+<text_1>
+**Dear colleague, **
+
+We are writing to provide you with an update on the medical condition of
+Mrs. Linda Mayer, born on 01/12/1948, who attended our outpatient clinic
+on 08/02/2019.
+
+**Diagnoses:**
+
+-   Vacuum-assisted biopsy-confirmed ductal carcinoma in situ (DCIS) of
+    the right breast (17mm)
+
+-   Histological grade G3, estrogen receptor (ER) and progesterone
+    receptor (PR) negative.
+
+-   Postmenopausal for the past eight years.
+
+-   Previous surgical history includes an appendectomy.
+
+-   Allergies: Hay fever
+
+ 
+
+**Current Presentation**: The patient sought consultation following a
+confirmed diagnosis of DCIS (Ductal Carcinoma In Situ) in the right
+breast, which was determined through a vacuum-assisted biopsy.
+
+**Physical Examination**: Upon physical examination, there is evidence
+of a post-intervention hematoma located in the upper right quadrant of
+the right breast. However, the clip from the biopsy is not clearly
+visible. A sonographic examination of the right axilla reveals no
+abnormalities.
+
+**Current Recommendations:**
+
+-   Imaging studies have been conducted.
+
+-   A case presentation is scheduled for our mammary conference
+    tomorrow.
+
+-   Subsequently, planning for surgery will commence, including the
+    evaluation of sentinel lymph nodes following a right mastectomy and
+    axillary lymph node dissection.
+
+
+</text_1>
+<text_2>
+**Dear colleague, **
+
+We are writing to provide an update regarding Mrs. Linda Mayer, born on
+01/12/1948, who received outpatient care at our facility on 08/29/2019.
+
+**Diagnoses:**
+
+-   Vacuum-assisted biopsy-confirmed ductal carcinoma in situ (DCIS) of
+    the right breast, measuring 17mm in size, classified as Grade 3, and
+    testing negative for estrogen receptors (ER) and progesterone
+    receptors (PR).
+
+-   Mrs. Mayer has been postmenopausal for eight years.
+
+-   Notable allergy: Hay fever
+
+**Tumor Board Decision:** Mammography imaging revealed a clip associated
+with a focal finding in the right breast adjacent to calcifications.
+
+[Recommendation]{.underline}: Proceed with sentinel lymph node
+evaluation after right mastectomy, including clip localization on the
+right side.
+
+**Current Presentation**: During the patient\'s recent outpatient visit,
+an extensive pre-operative consultation was conducted. This discussion
+covered the indications for the surgery, details of the surgical
+process, potential alternative options, as well as general and specific
+risks associated with the procedure. These risks included the
+possibility of an aesthetically suboptimal outcome and the chance of
+encountering an R1 situation. The patient did not have any further
+questions and provided written consent for the procedure.
+
+**Physical Examination:** Both breasts appear normal upon inspection and
+palpation. The right axilla shows no abnormalities.
+
+**Medical History:** Mrs. Linda Mayer presented to our clinic with a
+vacuum biopsy-confirmed DCIS of the right breast for therapeutic
+intervention. The decision for surgery was reached following a
+comprehensive review by our interdisciplinary breast board. After an
+extensive discussion of the procedure\'s scope, associated risks, and
+alternative options, the patient provided informed consent for the
+proposed surgery.
+
+**Preoperative Procedure:** Sonographic and mammographic fine needle
+marking of the remaining findings and the clip in the right breast.
+
+**Surgical Report:** Team time-out conducted with colleagues of
+anesthesia. Patient positioned in the supine position. Surgical site
+disinfection and sterile draping. Marking of the incision site.
+
+A semicircular incision was made laterally on the right breast.
+Visualization and dissection along the marking wire towards the marked
+finding. Excision of the marked findings, with a safety margin of
+approximately 1-2 cm. The excised specimen measured approximately 4 x 5
+x 3 cm. Markings using standard protocol (green thread cranially, blue
+thread ventrally). The excised specimen was sent for preparation
+radiography. Hemostasis was meticulously ensured. Insertion of a 10Ch
+Blake drain into the segmental cavity, followed by suturing.
+Verification of a blood-dry wound cavity. Preparation radiography
+included the marked area and the marking wires. The excised material was
+transferred to our pathology colleagues for histological examination.
+Subdermal and intracutaneous sutures with Monocryl 3/0 in a continuous
+manner. Application of Steristrips and dressing. Instruments, swabs, and
+cloths were accounted for per the nurse\'s checklist. The patient was
+correctly positioned throughout the operation. The anesthesiologic
+course was without significant problems. A thorax compression bandage
+was applied in the operating room as a preventive measure against
+bleeding.
+
+**Postoperative Procedure:** Pain management, thrombosis prophylaxis,
+application of a pressure dressing, drainage under suction.
+
+**Examinations:** **Digital Mammography performed on 08/29/2019**
+
+[Clinical indication]{.underline}: DCIS right
+
+[Question]{.underline}: Please send specimen + Mx-FNM
+
+**Findings**: Sonographically guided wire marking of the maximum
+microcalcification group measuring about 12 mm. Local hematoma cavity
+and inset clip marking directly cranial to the finding. Stitch direction
+from lateral to medial. The wire is positioned with the tip caudal to
+the clip in close proximity to the microcalcification. Additional
+marking of the focal localization on the skin. Documentation of the wire
+course in two planes.
+
+-   Telephone discussion of findings with the surgeon.
+
+-   Preparation radiography and preparation sonography are recommended.
+
+-   Marking wire and suspicious focal findings centrally included in the
+    preparation.
+
+-   Intraoperative report of findings has been conveyed to the surgeon.
+
+**Current Recommendations:**
+
+-   Scheduled for inpatient admission on ward 22 tomorrow.
+
+-   Right breast mastectomy with sentinel lymph node evaluation.
+
+
+</text_2>
+<text_3>
+**Dear colleague, **
+
+We are writing to update you on the clinical course of Mrs. Linda Mayer,
+born on 01/12/1948, who was under our inpatient care from 08/30/2019 to
+09/12/2019.
+
+**Diagnosis:** Vacuum-assisted biopsy confirmed Ductal Carcinoma In Situ
+(DCIS) in the right breast, measuring 17mm, Grade 3, ER/PR negative.
+
+**Tumor Board Decision (07/13/2019):**
+
+[Imaging:]{.underline} Clip identified in focal lesion in the right
+breast, adjacent to calcifications.
+
+[Recommendation]{.underline}**:** Spin Echo following fine-needle
+localization with mammography-guided control of the clip in the right
+breast.
+
+[Subsequent Recommendation (08/27/2019):]{.underline} Radiation therapy
+to the right breast. Regular follow-up is advised.
+
+**Medical History:** Ms. Linda Mayer presented to our facility on
+08/30/2019 for the aforementioned surgical procedure. After a
+comprehensive discussion regarding the surgical plan, potential risks,
+and possible complications, the patient consented to proceed. The
+surgery was executed without complications on 09/01/2019. The
+postoperative course was unremarkable, allowing for Ms. Mayer\'s
+discharge on 09/12/2019 in stable condition and with no signs of wound
+irritation.
+
+**Histopathological Findings (09/01/2019):**
+
+The resected segment from the right breast showed a maximum necrotic
+zone of 1.6 cm with foreign body reaction, chronic resorptive
+inflammation, fibrosis, and residual hemorrhage. These findings
+primarily correspond to the pre-biopsy site. Surrounding this were areas
+of DCIS with solid and cribriform growth patterns and comedonecrosis,
+WHO Grade 3, Nuclear Grade 3, with a reconstructed extent of 3.5 cm.
+Resection margins were as follows: ventral 0.15 cm, caudal 0.2 cm,
+dorsal 0.4 cm, with remaining margins exceeding 0.5 cm. TNM
+Classification (8th Edition, 2017): pTis (DCIS), R0, G3. Additional
+immunohistochemical studies are underway to determine hormone receptor
+status; a supplementary report will follow.
+
+**Postoperative Plan:**
+
+The patient was educated on standard postoperative care and the
+importance of immediate re-evaluation for any persistent or worsening
+symptoms. Radiation therapy to the right breast is planned, along with
+regular follow-up appointments.
+
+Should you have any questions or require further clarification, we are
+readily available. For urgent concerns outside of regular office hours,
+emergency care is available at the Emergency Department.
+
+**Internal Histopathological Findings Report**
+
+**Clinical Data:** DCIS in the right breast (17 mm), Grade 3, ER/PR
+negative.
+
+**Macroscopic Examination:**
+
+The resected mammary segment from the right breast, marked with dual
+threads and containing a fine-needle marker inserted ventro-laterally,
+measures 4.5 x 5.5 x 3 cm (HxWxD) and weighs 35 grams. The specimen was
+sectioned from medial to lateral into 14 lamellae. The cut surface
+predominantly shows yellowish, lobulated mammary parenchyma with sparse
+striated whitish glandular components. A DCIS-suspected area, up to 2.1
+cm in size, is evident caudally and centro-ventrally (from lamellae
+4-10), displaying both reddish-hemorrhagic and whitish-nodular
+indurations. Minimal distances from the suspicious area to the resection
+margins are as follows: cranial 2 cm, caudal 0.2 cm, dorsal 0.2 cm,
+ventral 0.1 cm, medial 1.6 cm, lateral 2.5 cm. The suspect area was
+completely embedded. Ink markings: green/cranial, yellow/caudal,
+blue/ventral, black/dorsal.
+
+**Microscopic Examination:**
+
+Histological sections of the mammary parenchyma reveal fibro-lipomatous
+stroma and glandular lobules with a two-layered epithelial lining. In
+lamellae 3-6 and 11, solid and cribriform epithelial proliferations are
+evident. Cells are cuboidal with variably enlarged, predominantly
+moderately pleomorphic, round to oval nuclei. Comedo-like necroses are
+occasionally observed in secondary lumina. Microscopic distances to the
+deposition margins are consistent with the macroscopic findings. The
+surrounding stroma in lamellae 6-9 shows extensive geographic adipose
+tissue necrosis, multinucleated foreign body-type giant cells, foamy
+cell macrophages, collagen fiber proliferation, and fresh hemorrhages.
+
+**Supplemental Immunohistochemical Findings
+(09/04/2019):** **Microscopy:** In the meantime, the material was
+further processed as announced.
+
+Here, the previously described intraductal epithelial growths, each with
+negative staining reaction for the estrogen and progesterone receptor
+(with regular external and internal control reaction).
+
+ 
+
+**Critical Findings:**
+
+Resected mammary segment with paracentral, max. 1.6 cm necrotic zone
+with foreign body reaction, chronic resorptive. Chronic resorptive
+inflammation, fibrosis, and hemorrhage remnants (primarily corresponding
+to the pre-biopsy site), and surrounding portions of ductal carcinoma in
+situ. Ductal carcinoma in situ, solid and rib-shaped growth type with
+comedonecrosis, WHO grade 3, nuclear grade 3. The resection was locally
+complete with the following Safety margins: ventral 0.15 cm, caudal 0.2
+cm, dorsal 0.4 cm, and the remaining sedimentation margins more than 0.5
+cm.
+
+TNM classification (8th edition 2017): pTis (DCIS), R0, G3.
+
+[Hormone receptor status:]{.underline}
+
+-   Estrogen receptor: negative (0%).
+
+-   Progesterone receptor: negative (0%).
+
+ 
+
+ 
+
+
+</text_3>
+<text_4>
+**Dear colleague, **
+
+We are writing to provide an update regarding Mrs. Linda Mayer, born on
+01/12/1948, who received outpatient treatment on 27/09/2019.
+
+**Diagnoses**: Left breast carcinoma; iT1c; iN0; MX; ER:12/12; PR:2/12;
+Her-2: neg; Ki67:15%, BRCA 2 mutation.
+
+**Other Diagnoses**:
+
+-   Hailey-Hailey disease - currently regressing under prednisolone.
+
+-   History of apoplexy in 2016 with no residuals
+
+-   Depressive episodes
+
+-   Right hip total hip replacement
+
+-   History of left adnexectomy in 1980 due to extrauterine pregnancy
+
+-   Tubal sterilization in 1988.
+
+-   Uterine curettage (Abrasio) in 2004
+
+-   Hysterectomy in 2005
+
+**Allergies**: Hay fever
+
+**Imaging**:
+
+-   CT revealed a cystic lesion in the liver, not suspicious for
+    metastasis. Granulomatous, post-inflammatory changes in the lung.
+
+-   An MRI of the left breast showed a unifocal lesion on the outer left
+    side with a 2.4 cm extension.
+
+**Histology: **Gene score of 6.5, indicating a high-risk profile (pT2 or
+pN1) if BRCA negative.
+
+**Recommendation**: If BRCA negative, SE left mamma after ultrasound-FNM
+with correlation in Mx and SLNB on the left.
+
+**Current Presentation**: Mrs. Linda Mayer presented for pre-operative
+evaluation for left mastectomy. BRCA testing confirmed a BRCA2 mutation,
+warranting bilateral subcutaneous mastectomy and SLNB on the left.
+Reconstruction with implants and mesh is planned, along with a breast
+lift as requested by the patient.
+
+**Macroscopy:**
+
+**Left Subcutaneous Mastectomy (Blue/Ventral, Green/Cranial):**
+
+-   Specimen Size: 17 x 15 x 6 cm (Height x Width x Depth), Weight: 410
+    g
+
+-   Description: Dual filament-labeled subcutaneous mastectomy specimen
+
+-   Specimen Workup: 27 lamellae from lateral to medial
+
+-   Tumor-Suspect Area (Lamellae 17-21): Max. 1.6 cm, white dermal,
+    partly blurred
+
+-   Margins from Tumor Area: Ventral 0.1 cm, Caudal 1 cm, Dorsal 1.2 cm,
+    Cranial \> 5 cm, Lateral \> 5 cm, Medial \> 2 cm
+
+-   Remaining Mammary Parenchyma: Predominantly yellowish lipomatous
+    with focal nodular appearance
+
+-   Ink Markings: Cranial/Green, Caudal/Yellow, Ventral/Blue,
+    Dorsal/Black
+
+    -   A: Lamella 17 - Covers dorsal and caudal
+
+    -   B: Lamella 18 - Covers ventral
+
+    -   C: Lamella 19 - Covers ventral
+
+    -   D: Blade 21 - Covers ventral
+
+    -   E: Lamella 20 - Reference cranial
+
+    -   F: Lamella 16 - Immediately laterally following mammary
+        parenchyma
+
+    -   G: Blade 22 - Reference immediately medial following mammary
+        tissue
+
+    -   H: Lamella 12 - Central section
+
+    -   I: Lamella 8 - Documented section top/outside
+
+    -   J: Lamella 3 - Vestigial section below/outside
+
+    -   K: Lamella 21 - White-nodular imposing area
+
+    -   L: Lamella 8 - Further section below/outside with nodular area
+
+    -   M: Lateral border lamella perpendicularly
+
+    -   N: Medial border lamella perpendicular (Exemplary)
+
+**Second Sentinel Lymph Node on the Left:**
+
+-   Specimen: Maximum of 6 cm of fat tissue resectate with 1 to 2 cm of
+    lymph nodes and smaller nodular indurations.
+
+-   A, B: One lymph node each divided
+
+-   C: Further nodular indurations
+
+**Palpable Lymph Nodes Level I:**
+
+-   Specimen: One max. 4.5 cm large fat resectate with nodular
+    indurations up to 1.5 cm in size
+
+-   A: One nodular induration divided
+
+-   B: Further nodular indurated portions
+
+**Right Subcutaneous Mastectomy:**
+
+-   Specimen: Double thread-labeled 450 g subcutaneous mastectomy
+    specimen
+
+-   Assumed Suture Markings: Blue (Ventral) and Green (Cranial)
+
+-   Dorsal Fascia Intact
+
+-   [Specimen Preparation:]{.underline} 16 lamellae from medial to
+    lateral
+
+-   Predominantly yellowish lobulated with streaky, beige, impinging
+    strands of tissue
+
+-   Isolated hemorrhages in the parenchyma
+
+-   Ink Markings: Green = Cranial, Yellow = Caudal, Blue = Ventral,
+    Black = Dorsal
+
+<!-- -->
+
+-   A: Medial border lamella perpendicular (Exemplary)
+
+-   B: Lamella 5 with reference ventrally (below inside)
+
+-   C: Lamella 8 with reference ventrally (below inside)
+
+-   D: Lamella 6 with ventral and dorsal reference (upper inside)
+
+-   E: Blade 8 with ventral and dorsal cover (top inside)
+
+-   F: Blade 11 with cover dorsal and caudal (bottom outside)
+
+-   G: Blade 13 with dorsal cover (bottom outside)
+
+-   H: Blade 10 with ventral and dorsal cover (top outside)
+
+-   I: Lamella 14 with reference cranial and dorsal and bleeding in
+    (upper outer)
+
+-   J: Lateral border lamella perpendicular (Exemplary)
+
+**Microscopy:**
+
+1\) In the tumor-suspicious area, a blurred large fibrosis zone with
+star-shaped extensions is visible. Intercalated are single-cell and
+stranded epithelial cells with a high nuclear-cytoplasmic ratio. The
+nuclei are monomorphic with finely dispersed chromatin, at most, very
+isolated mitoses. Adjacent distended glandular ducts with a discohesive
+cell proliferate with the same cytomorphology. Sporadically, preexistent
+glandular ducts are sheared disc-like by the infiltrative tumor cells.
+Samples from the nodular area of lamella 21 show areas of cell-poor
+hyaline sclerosis with partly ectatically dilated glandular ducts.
+
+2\) Second lymph node with partial infiltrates of the neoplasia described
+above. The cells here are relatively densely packed. Somewhat increased
+mitoses. In the lymph nodes, iron deposition is also in the sinus
+histiocytes.
+
+3\) Lymph nodes with partly sparse iron deposition. No epithelial foreign
+infiltrates.
+
+4\) Regular mammary gland parenchyma. No tumor infiltrates. Part of the
+glandular ducts are slightly cystically dilated.
+
+**Preliminary Critical Findings Report: **
+
+Left breast carcinoma measuring max 1.6 cm diagnosed as moderately
+differentiated invasive lobular carcinoma, B.R.E. score 6 (3+2+1, G2).
+Presence of tumor-associated and peritumoral lobular carcinoma in situ.
+Resection status indicates locally complete excision of both invasive
+and non-invasive carcinoma; minimal margins as follows: ventral \<0.1
+cm, caudal 0.2 cm, dorsal 0.8 cm, remaining margins ≥0.5 cm. Nodal
+status reveals max 0.25 cm metastasis in 1/5 nodes, 0/2 additional
+nodes, without extracapsular spread. Right mammary gland from
+subcutaneous mastectomy shows tumor-free parenchyma.
+
+**TNM classification (8th ed. 2017):** pT1c, pTis (LCIS), pN1a, G2, L0,
+V0, Pn0, R0. Investigations to determine tumor biology were initiated.
+Addendum follows.
+
+**Supplementary findings on 10/07/2019**
+
+Editing: immunohistochemistry:** **
+
+Estrogen receptor, Progesterone receptor, Her2neu, MIB-1 (block 1D).
+
+**Critical Findings Report:** Breast carcinoma on the left with a 1.6 cm
+invasive lobular carcinoma, moderately differentiated, with a B.R.E.
+score of 6 (3+2+1, G2). Additionally, tumor-associated and peritumoral
+lobular carcinoma in situ are noted. Resection status confirms locally
+complete excision of both invasive and non-invasive carcinomas; minimal
+resection margins are ventral \<0.1 cm, caudal (LCIS) 0.2 cm, dorsal 0.8
+cm, and all other margins ≥0.5 cm. Nodal assessment reveals a single
+metastasis with a maximum dimension of 0.25 cm among 7 lymph nodes,
+specifically found in 1/5 nodes, with no additional metastasis in 0/2
+nodes and no extracapsular extension. Contralateral right mammary gland
+from subcutaneous mastectomy is tumor-free.
+
+Tumor biology of the invasive carcinoma demonstrates strong positive
+estrogen receptor expression in 100% of tumor cells, strong positive
+progesterone receptor expression in 1% of tumor cells, negative HER2/neu
+status (Score 1+), and a Ki67 (MIB-1) proliferation index of 25%.
+
+**TNM classification (8th Edition 2017):** pT1c, pTis (LCIS), pN1a (1/7
+ECE-, sn), G2, L0, V0, Pn0, R0.
+
+**Surgery Report (Vac Change + Irrigation)**: Indication for VAC change.
+After a detailed explanation of the procedure, its risks, and
+alternatives, the patient agrees to the proposed procedure.
+
+The course of surgery: Proper positioning in a supine position. Removal
+of the VAC sponge. A foul odor appears from the wound cavity. Careful
+disinfection of the surgical area. Sterile draping. Detailed inspection
+of the wound conditions. Wound debridement with removal of fibrin
+coatings and freshening of the wound. Resection of necrotic material in
+places with sharp spoon. Followed by extensive Irrigation of the entire
+wound bed and wound edges using 1 l Polyhexanide solution. Renewed VAC
+sponge application according to standard.
+
+**Postoperative procedure**: Pain medication, thrombosis prophylaxis,
+continuation of antibiotic therapy. In the case of abundant
+Staphylococcus aureus and isolated Pseudomosas in the smear and still
+clinical suspected infection, extension of antibiotic treatment to
+Meropenem.
+
+**Surgery Report: Implant Placement**
+
+**Type of Surgery:** Implant placement and wound closure.
+
+**Report:** After infection and VAC therapy, clean smears and planning
+of reinsertion. Informed consent. Intraoperative consults: Anesthesia.
+
+**Course of Surgery:** Team time out. Removal VAC sponge. Disinfection
+and covering. Irrigation of the wound cavity with Serasept. Blust
+irrigation. Fixation cranially and laterally with 4 fixation sutures
+with Vircryl 2-0. Choice of trial implant. Temporary insertion. Control
+in sitting and lying positions. Choice of the implant. Repeated
+disinfection. Change of gloves. Insertion of the implant into the
+pocket. Careful hemostasis. Insertion of a Blake drain into the wound
+cavity. Suturing of the drainage. Subcutaneous sutures with Monocryl
+3-0.
+
+**Type of Surgery:** Prophylactic open Laparoscopy, extensive
+adhesiolysis
+
+**Type of Anesthesia:** ITN
+
+**Report:** Patient presented for prophylactic right adnexectomy in the
+course of hysterectomy and left adnexectomy due to genetic burden.
+Intraoperatively, secondary wound closure was to be performed in the
+case of a right mammary wound weeping more than one year
+postoperatively. The patient agreed to the planned procedure in writing
+after receiving detailed information about the extent, the risks, and
+the alternatives.
+
+**Course of the Operation:** Team time out with anesthesia colleagues.
+Flat lithotomy positioning, disinfection, and sterile draping. Placement
+of permanent transurethral catheter. Subumbilical incision and
+dissection onto the fascia. Opening of the fascia and suturing of the
+same. Exposure of the peritoneum and opening of the same. Insertion of
+the 10-mm optic trocar. Insertion of three additional trocars into the
+lower abdomen (left and center right, each 5mm; right 10mm). The
+following situation is seen: when the camera is inserted from the
+umbilical region, an extensive adhesion is seen. Only by changing the
+camera to the right lower bay is extensive adhesiolysis possible. The
+omentum is fused with the peritoneum and the serosa of the uterus. Upper
+abdomen as far as visible inconspicuous.
+
+After hysterectomy and adnexectomy on the left side, adnexa on the right
+side atrophic and inconspicuous. The peritoneum is smooth as far as can
+be seen.
+
+Visualization of the right adnexa and the suspensory ligament of ovary.
+
+Coagulation of the suspensory ligament of ovary ligament after
+visualization of the ureter on the same side. Stepwise dissection of the
+adnexa from the pelvic wall.
+
+Recovery via endobag. Hemostasis. Inspection of the situs.
+
+Removal of instrumentation under vision and draining of
+pneumoperitoneum.
+
+Closure of the abdominal fascia at the umbilicus and right lower
+abdomen. Suturing of the skin with Monocryl 3/0. Compression bandage at
+each trocar insertion site. Inspection of the right mamma. In the area
+of the surgical scar laterally/externally, 2-3 small epithelium-lined
+pore-like openings are visible; here, on pressure, discharge of rather
+viscous/sebaceous, non-odorous, or purulent fluid. No dehiscence is
+visible, suspected. fistula ducts to the implant cavity. After
+consultation with the mamma surgeon, a two-stage procedure was planned
+for the treatment of the fistula tracts. Correct positioning and
+inconspicuous anesthesiological course. Instrumentation, swabs, and
+cloths complete according to the operating room nurse. Postoperative
+procedures include analgesia, mobilization, thrombosis prophylaxis, and
+waiting for histology.
+
+**Internal Histopathological Report** 
+
+[Clinical information/question]{.underline}: Fistula formation mammary
+right. Dignity?
+
+[Macroscopy]{.underline}**:** Skin spindle from scar mammary right: fix.
+a 2.4 cm long, stranded skin-subcutaneous excidate. Lamellation and
+complete embedding.
+
+[Processing]{.underline}**:** 1 block, HE
+
+[Microscopy]{.underline}**:** Histologic skin/subcutaneous
+cross-sections with overlay by a multilayered keratinizing squamous
+epithelium. The dermis with few inset regular skin adnexal structures,
+sparse to moderately dense mononuclear-dominated inflammatory
+infiltrates, and proliferation of cell-poor, fiber-rich collagenous
+connective tissue.
+
+**Critical Findings Report:** 
+
+Skin spindle on scar mamma right: skin/subcutaneous resectate with
+fibrosis and chronic inflammation. To ensure that all findings are
+recorded, the material will be further processed. A follow-up report
+will follow.
+
+[Microscopy]{.underline}**:** In the meantime, the material was further
+processed as announced. The van Gieson stain showed extensive
+proliferation of collagenous and, in some places elastic fibers. Also in
+the additional immunohistochemical staining against no evidence of
+atypical epithelial infiltrates.
+
+**Lab results upon Discharge:**
+
+  **Parameter**                    **Results**   **Reference Range**
+  -------------------------------- ------------- ---------------------
+  Sodium                           141 mEq/L     132-146 mEq/L
+  Potassium                        4.2 mEq/L     3.4-4.5 mEq/L
+  Creatinine                       0.82 mg/dL    0.50-0.90 mg/dL
+  Estimated GFR (eGFR CKD-EPI)     \>90          \-
+  Total Bilirubin                  0.21 mg/dL    \< 1.20 mg/dL
+  Albumin                          4.09 g/dL     3.5-5.2 g/dL
+  CRP                              7.8 mg/L      \< 5.0 mg/L
+  Haptoglobin                      108 mg/dL     30-200 mg/dL
+  Ferritin                         24 µg/L       13-140 µg/L
+  ALT                              24 U/L        \< 31 U/L
+  AST                              37 U/L        \< 35 U/L
+  Gamma-GT                         27 U/L        5-36 U/L
+  Lactate Dehydrogenase            244 U/L       135-214 U/L
+  25-OH-Vitamin D3                 91.7 nmol/L   50.0-150.0 nmol/L
+  Hemoglobin                       11.1 g/dL     12.0-15.6 g/dL
+  Hematocrit                       40.0%         35.5-45.5%
+  Red Blood Cells                  3.5 M/uL      3.9-5.2 M/uL
+  White Blood Cells                2.41 K/uL     3.90-10.50 K/uL
+  Platelets                        142 K/uL      150-370 K/uL
+  MCV                              73.0 fL       80.0-99.0 fL
+  MCH                              23.9 pg       27.0-33.5 pg
+  MCHC                             32.7 g/dL     31.5-36.0 g/dL
+  MPV                              10.7 fL       7.0-12.0 fL
+  RDW-CV                           14.8%         11.5-15.0%
+  Absolute Neutrophils             1.27 K/uL     1.50-7.70 K/uL
+  Absolute Immature Granulocytes   0.000 K/uL    \< 0.050 K/uL
+  Absolute Lymphocytes             0.67 K/uL     1.10-4.50 K/uL
+  Absolute Monocytes               0.34 K/uL     0.10-0.90 K/uL
+  Absolute Eosinophils             0.09 K/uL     0.02-0.50 K/uL
+  Absolute Basophils               0.04 K/uL     0.00-0.20 K/uL
+  Free Hemoglobin                  5.00 mg/dL    \< 20.00 mg/dL
+
+
+</text_4>
+<text_5>
+**Dear colleague, **
+
+We would like to provide an update on Mrs. Linda Mayer, born on
+01/12/1948, who received inpatient care at our facility from 01/01/2021
+to 01/14/2021.
+
+**Diagnosis:** Hailey-Hailey disease.
+
+-   Upon admission, the patient was under treatment with Acitretin 25mg.
+
+**Other Diagnoses**:
+
+-   History of apoplexy in 2016 with no residuals
+
+-   Depressive episodes
+
+-   Right hip total hip replacement
+
+-   History of left adnexectomy in 1980 die to extrauterine pregnancy
+
+-   Tubal sterilization in 1988.
+
+-   Uterine curettage in 2004
+
+-   Hysterectomy in 2005
+
+**Medical History:** Mrs. Linda Mayer was referred to our hospital for
+the management of Hailey-Hailey disease after assessment in our
+outpatient clinic. She reported a worsening of painful skin erosions on
+her neck and inner thighs over a span of approximately 3 weeks.
+Itchiness was not reported. Prior attempts at treatment, including the
+topical use of Fucicort, Prednisolone with Octenidine, and Polidocanol
+gel, had provided limited relief. She denied any other physical
+complaints, dyspnea, B symptoms, infections, or irregularities in stool
+and micturition.
+
+Her history revealed the initial onset of Hailey-Hailey disease,
+initially presenting as itching followed by skin erosions, which
+subsequently healed with scarring. The diagnosis was established at the
+Fairview Clinic. Previous therapeutic interventions included systemic
+cortisone shock therapy, as-needed application of Fucicort ointment, and
+axillary laser therapy.
+
+**Family History:**
+
+-   Father: Hailey-Hailey Disease (M. Hailey-Hailey)
+
+-   Mother and Sister: Breast carcinoma
+
+**Psychosocial History:** Socially, Ms. Linda Mayer is described as a
+retiree, having previously worked as a nurse.
+
+**Physical Examination on Admission:**
+
+Height: 16 cm, Body Weight: 80.0 kg, BMI: 29.7
+
+**Physical Examination Findings:**
+
+Generally stable condition with increased nutritional status. Her
+consciousness was unremarkable, and cranial mobility was free. Ocular
+mobility was regular, with prompt pupillary reflexes to accommodation
+and light. She exhibited a normal heart rate, and cardiac and pulmonary
+examinations were unremarkable. No heart murmurs were detected. Renal
+bed and spine were not palpable. Further internal and orienting
+neurological examinations revealed no pathological findings.
+
+**Skin Findings on Admission:** Sharp erosions, approximately 10x10 cm
+in size, with a livid-erythematous base, partly crusty, were observed on
+the neck and proximal inner thighs.
+
+In the axillary regions on both sides, there were marginal,
+livid-erythematous, well-demarcated plaques interspersed with scarring
+strands, more pronounced on the right side.
+
+Skin type II.
+
+Mucous membranes appeared normal. Dermographism was noted to be ruber.
+
+  **Medication **                **Dosage**   **Frequency**
+  ------------------------------ ------------ -------------------------------
+  Prednisolone (Deltasone)       5 mg         1.5-0-0-0-0-0
+  Aspirin (Bayer)                100 mg       0-1-0-0-0-0
+  Simvastatin (Zocor)            40 mg        0-0-0-0-1
+  Pantoprazole (Protonix)        45.1 mg      1-0-0-0-0
+  Acitretin (Soriatane)          25 mg        1-0-0-0-0
+  Tetrabenazine (Xenazine)       111 mg       0.25-0.25-0.25-0.25-0.25-0.25
+  Letrozole (Femara)             2.5 mg       0-0-1-0
+  Risedronate Sodium (Actonel)   35 mg        1-0-0-0-0
+  Acetaminophen (Tylenol)        500 mg       0-1-0-1
+  Naloxone (Narcan)              8.8 mg       1-0-1-0
+  Eszopiclone (Lunesta)          7.5 mg       0-0-1-0
+
+**Other Findings:** MRSA Smears:
+
+-   Nasal Smear: Normal flora, no MRSA.
+
+-   Throat Swab: Normal flora, no MRSA.
+
+-   Non-lesional Skin Smear: Normal flora.
+
+-   Lesional Skin Swab: Abundant Pseudomonas aeruginosa, abundant
+    Klebsiella oxytoca, and abundant Serratia sp., sensitive to
+    piperacillin-tazobactam.
+
+**Therapy and Progression:** Mrs. Linda Mayer was admitted on 01/01/2021
+as an inpatient for a refractory exacerbation of previously diagnosed
+Hailey-Hailey disease. On admission, both bacteriological and
+mycological smears were conducted, which indicated abundant levels of
+Pseudomonas aeruginosa, Klebsiella oxytoca, and Serratia sp. Lab tests
+showed a CRP level of 2.83 mg/dL and a leukocyte count of 8.8 G/L.
+
+Initial topical therapy consisted of Zinc oxide ointment, Clotrimazole
+paste, and Triamcinolone Acetonide shake lotion. Treatment was modified
+on 01/04/2021 to include Clotrimazole (Lotrimin) paste in the mornings
+and methylprednisolone emulsion in the evenings. Starting on 01/08,
+eosin aqueous solution was introduced for application on the thighs,
+serving antiseptic and drying purposes. A hydrophilic prednicarbate
+cream at 0.25% concentration, combined with octenidine at 0.1%, was
+applied to the neck and thighs twice daily, also starting on 01/08. For
+showering, octenidine-based wash lotion was utilized. Additionally, Mrs.
+Linda Mayer received an emulsifying ointment as part of her treatment.
+
+
+</text_5>
+<text_6>
+**Dear colleague, **
+
+We are providing an update on our patient Mrs. Linda Mayer, born on
+01/12/1948, who presented to our outpatient clinic on 09/22/2021.
+
+**Diagnoses:** M. Hailey-Hailey
+
+**Medical History:**
+
+-   Diagnosis of M. Hailey-Hailey at the Fairview Clinic
+
+<!-- -->
+
+-   Treatment involved systemic steroid shock therapy, laser therapy,
+    and the initiation of Acitretin in October 2021, with no observed
+    improvement.
+
+<!-- -->
+
+-   A dermabrasion procedure was scheduled on 03/18/2021, during a
+    previous inpatient admission.
+
+-   Acitretin 25mg has been administered daily, with favorable outcomes
+    noted when using Triamcinolone/Triclosan or Prednisolone +
+    Octenidine.
+
+-   A history of mastectomy with Vacuum-Assisted Closure (VAC) has
+    resulted in breast erosion.
+
+**Skin Findings:**
+
+-   Erythematous and partially mottled lesions have been identified in
+    the axillary and inguinal regions, with some scarring observed in
+    the axillary area.
+
+-   On 04/28/2021, somewhat erosive plaques were noted in the inguinal
+    regions.
+
+-   As of 05/05/2021 discrete erosions are currently present on both
+    forearms.
+
+**Current Recommendations:**
+
+-   Inpatient admission is scheduled for September 2021.
+
+-   The prescribed treatment plan includes topical prednicarbate
+    (Dermatop) 0.25% with Octenidine 0.1%, per NRF 11.145, in a 50g
+    container, to be applied once daily for 1-2 weeks.
+
+-   Hydrocortisone 5% in a suitable base, 200g, is to be applied daily.
+
+-   The regimen also includes prednicarbate (Dermatop) combined with
+    Octenidine.
+
+-   Acitretin will be continued temporarily.
+
+-   A follow-up appointment in the outpatient clinic is scheduled for
+    three months from now.
+
+-   Discontinuation of Acitretin.
+
+-   It is recommended to avoid the use of compresses on the erosions to
+    prevent constant trauma.
+
+-   Topical therapy with petrolatum-based wound ointment and sterile
+    compresses.
+
+</text_6>
+</notes>
+</patient-record-patient_07>
+
+<patient-record-patient_08>
+Below is patient Laura Miller's medical record (ID: patient_08). 
+They were born on 1967-03-04 00:00:00 and have the following diagnosis: Liver cirrhosis.
+The patients medical record consists of 5 notes included below.
+<notes>
+<text_0>
+**Dear colleague, **
+
+
+We are writing to report on the outpatient treatment of Mrs. Laura
+Miller, born on 04/03/1967, on 05/22/2020.
+
+**Diagnosis**: Osteoporotic vertebral body sintering (lumbar vertebra 2
+and thoracic vertebra 8).
+
+**Medical History**: Mrs. Miller presents with pain in her back, legs
+radiating, after fall on the back 6 weeks ago. The complaints were
+progressive with intermittent paresthesia in both legs.
+
+**Other Diagnoses** (not fully collectible):
+
+-   Status post apoplexy
+
+**Current Medication (**not ascertainable):
+
+-   Blood pressure medication
+
+-   Osteoporosis medication
+
+-   No anticoagulation.
+
+**Physical Examination: Lumbar spine:** Skin without pathological
+findings. No redness, no evidence of infection.
+
+Tapping pain over thoracic spine/lumbar spine, no compression pain, no
+torsion pain, no pressure pain over spinous process.
+
+Radiation of pain into the right and left leg, paravertebral muscle
+hardness.
+
+No paresthesias in the genital area, no breech anesthesia, no peripheral
+neurologic deficits, No bladder or rectal dysfunction.
+
+Peripheral Circulation/Motor function/Sensitivity intact.
+
+Strength grade on all sides: Hip Flex/Ex: 5/5, Knee Flex/Ex: 5/5,
+
+Foot extensor muscles of the lower leg/flexor muscles of the lower leg:
+3/5.
+
+Big toe extensor muscles of the lower leg/big toe flexor muscles of the
+lower leg: 2/5.
+
+**Thoracic Spine 2 levels from 05/22/2020, Lumbar spine in 2 planes from
+05/22/2020:**
+
+Clinical indication: Status post fall
+
+Question: new fracture?
+
+Preliminary images: none comparable
+
+**Findings**
+
+1\) [Thoracic Spine]{.underline}: Multiple thoracic vertebral bodies
+exhibit decreased height, most notably at the central region where a
+measurement of approximately 17 mm suggests significant height loss and
+potential acute fracture. Additionally, there are endplate impressions
+in individual vertebrae of the lower thoracic spine. Aortic sclerosis is
+present, along with degenerative changes throughout the thoracic
+vertebrae. The osseous structure presents osteoporotic features. A
+suspected hemangioma is identified in a vertebral body of the lower
+thoracic spine.
+
+2\) [Lumbar Spine]{.underline}: In a presumed five-segment lumbar spine,
+the L1 vertebra shows a subtle reduction in height with a questionable
+endplate impression. Osteoporotic features are evident in the bony
+structure.
+
+**Assessment:** Multiple fractures are evident in both thoracic
+vertebrae and the first lumbar vertebra, some of which may be acute. MRI
+is recommended for further evaluation. Osseous structure displays
+pronounced osteoporotic features.
+
+Grade III esophageal varices present without definitive high-risk
+stigmata. Varices also noted at the gastroesophageal junction,
+classified as GOV 1 according to Sarin\'s classification. Band ligation
+of the varices is not performed, as no unambiguous source of bleeding is
+identifiable and a significant portion of the stomach remains outside
+the field of view.
+
+**Recommendation**: Terlipressin, monitor surveillance, Erythromycin
+
+**Computed Tomography Thoracic spine from 05/22/2020:**
+
+Fracture at the base plate of lumbar vertebra 2 with involvement of the
+posterior margin. Left lateral, no significant reduction in height of
+the vertebral body. No tension of the spine.
+
+Suspicion of new small fracture also at the cover plate at thoracic
+vertebra 8.
+
+Multiple, older, osteoporotic compression fractures at the thoracic
+spine and
+
+upper lumbar spine.
+
+**Additional Finding:**
+
+Liver cirrhosis with multiple nodules, low ascites, and portal vein
+congestion. Splenomegaly. If not already known, further workup of liver
+lesions is recommended. Hydrops of the gallbladder.
+
+**Current Recommendations**: There is a general indication for admission
+of the patient and further diagnostics before surgical treatment of the
+fractures. Mrs. Miller is generally opposed to surgical care. She was
+thoroughly informed about the risks (progression, cross-section, death).
+
+Re-presentation with current bone densitometry and update of
+osteoporosis medication, as well as current holospinal MRI. In the
+meantime, analgesia as needed using Acetaminophen 500mg 1-1-1 under
+gastric protection.
+
+**Esophagogastroduodenoscopy from 05/22/2020:**
+
+[Esophagus]{.underline}: Unobstructed intubation of the esophageal
+opening was achieved under direct visualization. In the upper third of
+the esophagus, multiple prominent varices protrude into the lumen,
+unaltered by air insufflation. In the middle third, there are areas with
+whitish overlying material that do not resemble the typical white nipple
+sign. Despite meticulous inspection, no active bleeding sites were
+identified. The Z-line reveals isolated minor erosions. Cardiac
+sphincter closure is complete.
+
+[Stomach]{.underline}: Full distension of the gastric lumen was
+accomplished with air insufflation. The major curvature of the stomach
+contained food mixed with hematin. The mucosal surface was similarly
+coated with hematin, but no active bleeding was discernible in the
+visualized areas. Peristaltic movement was widespread. Upon
+retroflexion, pronounced varices were noted near the cardiac region on
+the lesser curvature. The pylorus was unremarkable and easily
+traversable.
+
+[Duodenum]{.underline}: Adequate distension of the duodenal bulb was
+achieved, providing a clear view up to the descending part of the
+duodenum. Overall, the mucosa appeared normal with minor remnants of
+hematin, and no source of bleeding was identified.
+
+
+</text_0>
+<text_1>
+**Dear colleague, **
+
+We report to you about Mrs. Laura Miller, born on 04/03/1967, who was in
+our inpatient treatment from 05/27/2020 to 06/22/2020.
+
+**Diagnoses**: Initial diagnosis of hepatocellular carcinoma.
+
+-   MRI liver: disseminated HCC foci in all segments, the largest foci
+    is localized in segments 5 / 7 / 8
+
+-   Hydropic, decompensated liver cirrhosis Child B, first diagnosis:
+    05/20, ethyltoxic genesis
+
+-   Anemia requiring transfusion
+
+-   EGD of 05/28/20: sophageal varices III° without risk signs, rubber
+    band ligation; cardia varices I°, Histoacryl injection
+
+-   EGD of 06/13/20: Residual varices in the esophagus, application of 3
+    rubber band ligations, injection of 0.5 ml. Histoacryl; portal
+    hypertensive gastropathy
+
+-   Transfusion of 2 ECs
+
+-   Fresh osteoporotic thoracic vertebra 8 fracture
+
+-   Kyphoplasty thoracic vertebra 8 under C-arm fluoroscopy
+
+-   Portal hypertension with bypass circuits
+
+-   Splenomegaly
+
+-   Cholecystolithiasis
+
+-   Arterial hypertension
+
+-   Osteoporosis
+
+-   Status post stroke
+
+-   Allergies: None known
+
+**Physical Examination:** Patient in mildly reduced general and normal
+nutritional status (BMI 20.3).
+
+-   Lungs: Vesicular breath sound, no pathological secondary sounds.
+    SpO2 96%.
+
+-   Heart: Pure, rhythmic. Systolic with maximum at Erb\'s point and
+    continuation into the carotids. HR: 87/min. BP: 124/54mmHg
+
+-   Abdomen: Lively bowel sounds, no tenderness, no guarding, no
+    resistance, no peritonism. Soft abdomen. Liver not enlarged,
+    palpable. Renal bed not palpable.
+
+-   Extremities: Edema of the lower extremities on both sides, foot
+    pulses bilaterally well palpable.
+
+-   Spine: No tap pain.
+
+-   Orienting neurological examination: Right leg weakness, known
+    paresis of the extensor muscles of the lower leg/flexor muscles of
+    the lower leg.
+
+**Therapy and Progression:** Mrs. Miller was taken over for suspected
+upper GI bleeding. Initially, the patient had presented with increasing
+back pain since approximately 6 weeks at status post fall in the Park
+Clinic on 04/26/2020. The patient was known there for her stroke in
+2016. On the day of admission to the Park Clinic, normochromic
+normocytic anemia (Hemoglobin 3 g/dL) was noticed, which is why the
+transfer to our clinic was made.
+
+On inpatient admission, the patient presented in slightly reduced
+general condition. She reported having black stools once. In addition,
+Ms. Miller had coffee ground-like emesis once. Dyspnea, angina pectoris
+complaints, and B symptoms were denied. There were no problems with
+micturition. Recently, there were no abnormalities in bowel movements.
+So far, no colonoscopy has been performed. There were no known
+intestinal diseases in the family.
+
+[Noxae]{.underline}: Ex-nicotine use (since 1996, previously cumulative
+ca. 3 PY), occasional alcohol consumption (probably abstinent for about
+5 years).
+
+Laboratory results showed that the patient had elevated infectious
+parameters. The
+
+urinalysis was unremarkable. X-ray chest showed no clear picture of
+pneumonia. In a first emergency esophagogastroduodenoscopy on
+05/28/2020, esophageal varices °III were found without clear signs of
+risk. Furthermore, varices in the area of the cardia (GOV 1 after Sarin)
+were seen. When the source of bleeding was inconclusive, it was referred
+to a banding initially waived. In a renewed esophagogastroduodenoscopy
+in the morning of 05/30/2020, 2 ampoules of Histoacryl were applied to
+the cardia varices. In addition, the picture of an incipient
+portal-hypertensive gastropathy. Antibiotic intravenous therapy with
+ceftriaxone was initiated. At 06/13/2020, a
+re-esophagogastroduodenoscopy took place, during which a renewed twofold
+banding of the esophageal varices was performed with injection of 0.5 ml
+Histoacryl. Abdominal ultrasound showed a picture of liver cirrhosis
+with splenomegaly and perihepatic ascites. In addition, the liver showed
+multiple echo-poor nodes in the right lobe and a suspicious
+2.4x3.6x4.4cm echo-poor area with a halo in SII. This was followed by an
+MRI of the liver, in which the HCC in segment II was confirmed by
+imaging.
+
+Multiple additional arterial hypervascularized areas/round foci in all
+liver lobes without definite washout. There is no evidence of suspicious
+nodular changes on CT chest/abdomen/pelvis. At an in-house liver
+conference, systemic therapy (Lenvatinib or Sorafenib in Child B7) was
+recommended.
+
+Due to the back pain, a holospinal MRI was performed, which showed a
+subacute cover plate compression fracture in the thoracic vertebra 8 as
+well as multiple older compression fractures of the thoracic spine and
+upper lumbar spine. The colleagues of neurosurgery were consulted, who
+gave the indication for surgery. On 06/14/2020, the planned surgery with
+kyphoplasty thoracic vertebra 8 under C-arm fluoroscopy could be
+performed without complications. Postoperatively, the patient remained
+circulatory stable.
+
+Due to auscultatory suspicion of aortic valve stenosis, further
+clarification was performed by cardiac echography, showing no
+higher-grade valvular vitiation.
+
+We are transferring Mrs. Miller in improved general condition to the
+Senior Citizens\' Residence Seaview. If you have any questions, please
+do not hesitate to contact us.
+
+**Addition:**
+
+**Ultrasound of the upper abdomen on 05/27/2020:**
+
+Limited assessable due to meteorism.
+
+**Liver**: Liver dimensions are within normal limits, measuring 15.9 cm
+in the craniocaudal axis. Echotexture demonstrates inhomogeneous
+granularity. There is hepatic margin convexity and nodular surface
+appearance. Rarification of hepatic veins. Segment III reveals two
+hypoechoic lesions measuring 3 cm and 1 cm in diameter. Portal vein
+demonstrates orthograde flow with a maximum velocity of 17 cm/s.
+
+**Gallbladder:** Gallbladder is partially contracted; its wall appears
+unremarkable without sonographic evidence of cholecystitis. No
+tenderness elicited upon sonographic examination.
+
+**Biliary Tract**: Intrahepatic bile ducts are patent. Common hepatic
+duct measures 6 mm in diameter. Common bile duct appears transiently
+dilated up to 9 mm and is otherwise unremarkable as far as can be
+visualized prepapillary.
+
+**Pancreas**: Limited visualization of the pancreas; however, the
+visible parenchyma appears homogeneously echoic.
+
+**Spleen**: Spleen is enlarged, measuring 13 x 4 cm, with homogeneous
+parenchyma.
+
+**Kidneys**: Kidneys are morphologically unremarkable, without evidence
+of pelvicalyceal system dilation.
+
+**Abdominal Vessels**: Aorta is partially visualized and appears within
+normal calibers.
+
+Intestinal/Peritoneal Cavity: No evidence of free intraperitoneal fluid.
+
+Urinary Bladder/Genitalia: Urinary bladder is adequately distended,
+appearing unremarkable upon limited assessment. Uterus is not
+visualized.
+
+**Virology from 05/28/2020:**
+
+-   SARS CoV-2 PCR PCR negative Geq/ml
+
+-   Findings: No detection of SARS-CoV-2 by PCR in the submitted
+    material.
+
+**Chest X-ray a.p. from 05/28/2020:**
+
+Limited assessability in supine position, malrotation. The diaphragmatic
+crests are smooth. The marginal sinuses are free of effusions and
+calluses. Heart and mediastinum lie cryptically. The aorta is sclerosed.
+Cranialization of the vessels as well as slightly elevated vascular
+markings in the supine position, especially in the right upper field.
+Dystelectasis on the right. Sharply defined vertical shadowing in the
+left upper field. The upper mediastinum is narrow, the trachea is in the
+midline and is not constricted. Degenerative changes in the cervical
+spine. Overlying foreign material.
+
+**Assessment**: Sharply defined vertical shadowing in the left upper
+field. Dystelectasis on the right side. Conventional radiographic
+examination No evidence of a mass. No effusion.
+
+**Esophagogastroduodenoscopy of 05/28/2020:**
+
+**Esophagus**: Successful intubation of the esophageal orifice under
+direct visualization. Multiple intraluminal protrusions noted in the
+upper third of the esophagus. Non-collapsible variceal strands observed
+upon air insufflation, beginning from the middle third. Whitish
+proliferations seen at multiple sites, not consistent with typical white
+nipple signs. No evidence of active bleeding on close inspection. Z-line
+observed with isolated minor erosions. Cardiac sphincter fully
+competent.
+
+**Stomach**: Gastric lumen fully distended under air insufflation.
+Corpus predominantly contains hematin-laden food remnants. Mucosal
+surface also stained with hematin but without visible active bleeding.
+Peristalsis noted throughout. Distinct coronary vasculature observed on
+the lesser curvature. Pylorus unremarkable, offering no resistance to
+passage.
+
+**Duodenum**: Bulbus duodeni well-formed. Pars descendens duodeni
+visualized clearly. Overall mucosa appears unremarkable, with scattered
+hematin remnants observed without an identifiable bleeding source.
+
+**Assessment**: Esophageal varices graded as °III, with no definitive
+high-risk stigmata. Varices also noted in the cardia, classified as GOV
+1 according to Sarin\'s classification. Ligation of varices was not
+performed due to the absence of an identifiable bleeding source and
+incomplete visualization of the gastric lumen.
+
+**Ultrasound of the abdomen on 05/29/2020:**
+
+**Quality of Exam**: Limited due to patient non-cooperation and
+meteorism.
+
+**Liver**: Liver size is paradoxically reported both as normal at 15.9
+cm and enlarged at 18.7 cm. Margins are rounded. Echotexture is markedly
+inhomogeneous with nodular surface. Multiple hypoechoic nodules are
+present in the right lobe, along with a suspicious hypoechoic area
+measuring 2.4 x 3.6 x 4.4 cm with peripheral halo in segment II. Hepatic
+veins are rarified. Portal vein shows orthograde flow with a vmax of 28
+cm/s.
+
+**Gallbladder**: Morphologically unremarkable with no wall thickening.
+Cholelithiasis noted with concretions measuring at least 2 to 1.6 cm.
+
+**Biliary Tract:** Intrahepatic bile ducts are not dilated; Common
+hepatic duct measures up to 8.5 mm and common bile duct measures 6.6 mm
+in diameter.
+
+**Pancreas**: Partially visualized; adequacy of assessment is
+compromised.
+
+**Spleen**: Enlarged with homogeneous internal echotexture.
+
+**Kidneys**: Morphologically unremarkable; no evidence of
+hydronephrosis.
+
+**Abdominal Vessels:** Aorta is not dilated.
+
+**Gastrointestinal**: Perihepatic ascites noted. Both small and large
+intestines appear unremarkable upon limited assessment.
+
+**Urinary Bladder/Genitalia:** Bladder is moderately filled and
+unremarkable in shape and size.
+
+**Assessment**: Limited study due to patient non-cooperation and
+meteorism. Findings are suggestive of liver cirrhosis and grade I
+ascites. Additional findings include suspected hepatic space-occupying
+lesions, splenomegaly, and cholelithiasis. Mild dilation of DHC and DC
+observed without signs of intrahepatic cholestasis.
+
+**Virology from 06/01/2020:**
+
+  **Parameter**   **Result**   **Interpretation**
+  --------------- ------------ --------------------
+  Anti HAV IgG    0.73         negative
+  Anti HAV IgM    \<0.1        negative
+
+**Interpretation:** Serologically no evidence of fresh or expired
+infection with
+
+Hepatitis A virus, no immunity.
+
+  **Parameter**   **Result**   **Interpretation**
+  --------------- ------------ --------------------
+  HBs antigen     0.21         negative
+  Anti HBs        \<0.1        negative
+  Anti HBc        0.1          negative
+
+**Interpretation:** Serologically no evidence of acute, chronic or
+expired Hepatitis B virus infection. No immunity.
+
+  **Parameter**   **Result**   **Interpretation**
+  --------------- ------------ --------------------
+  Anti HCV        0.06         negative
+
+**Interpretation:** Serologically no evidence of hepatitis C virus
+infection. At possible fresh infection resubmission in 2-4 weeks and HCV
+PCR recommended.
+
+**MRI total spine plain from 06/04/2020:**
+
+**Technique**: T2 Dixon Sagittal and T2 Axial MRI Sequences. Coverage
+extends from the craniocervical junction to the sacrum.
+
+**Findings:**
+
+**General Spine:** Full extent from craniocervical junction to sacrum
+visualized. Conus medullaris appropriately located at T12-L1 level.
+Myelon demonstrates uniform width and homogeneous signal. Evaluation of
+thoracolumbar transition and lumbar spine is compromised by artifact
+superimposition from ascites.
+
+**Cervical Spine:** Irregular alignment of the posterior vertebral body
+margins noted, with evidence of disc protrusions and ligamentum flavum
+hypertrophy. Focal T2 hyperintensity observed at C5 level. No evidence
+of prevertebral soft tissue proliferation.
+
+**Thoracic Spine**: Maintained alignment of the posterior vertebral body
+margins. Multiple anterior endplate compression fractures noted at T5,
+T8, T9, T11, T12 levels. Focal T2 hyperintensity near the anterior
+endplate of T8 involving the posterior margin, indicative of a
+non-displaced fracture without spinal canal compromise. Hypertrophic
+facet joint arthrosis at T10-T11 levels resulting in relative spinal
+narrowing. Bilateral pleural effusions noted, more pronounced on the
+right, with a maximum width of approximately 2 cm. No evidence of
+significant neuroforaminal stenosis.
+
+**Lumbar Spine:** Maintained alignment of posterior vertebral body
+margins. Known anterior endplate compression fractures at L1 and
+baseplate compression fracture at L2. No evidence of pathological T2
+edema within the vertebral bodies, although assessment is limited due to
+superimposed artifacts from ascites. Spinal canal dimensions appear
+adequate throughout. Moderate fatty degeneration of sacral bone noted.
+
+**Assessment**: Evaluation limited due to ascites-related artifacts.
+Subacute anterior endplate compression fracture at T8, along with
+several other likely older compression fractures in the thoracic and
+upper lumbar spine. Bilateral pleural effusions observed. Multiple
+neuroforaminal narrowings as detailed above.
+
+**MR Liver plain + contast agent from 06/06/2020**
+
+**Findings:**
+
+1)  [Lesion 1]{.underline}
+
+-   Size of the lesion 41 mm
+
+-   Segment 2
+
+-   Behavior arterial strongly enriching: yes
+
+-   Portal venous early washing out: yes
+
+-   Pseudocapsule: yes
+
+-   Behavior delayed leaching: yes
+
+-   pseudocapsule macrovascular invasion: no
+
+2)  [Lesion 2]{.underline}
+
+-   Size of the lesion 104 mm
+
+-   Segment 5 / 7 / 8
+
+-   Behavior arterial strongly enriching: yes
+
+-   Portal venous early washing out: no
+
+-   Pseudocapsule: no
+
+-   Behavior delayed washing out: no
+
+-   Pseudocapsule: no
+
+-   Macrovascular invasion: yes
+
+**Comments:**
+
+-   MRI with Gadovist intravenous.
+
+-   Multiple other satellite foci in all liver segments.
+
+-   Signs of liver cirrhosis with nodular liver parenchyma and
+    hypertrophy of the left lobe.
+
+-   Cholecystolithiasis and gallbladder hydrops. No cholestasis.
+
+-   Varices of the esophagus and fundus. Splenomegaly. Ascites. Pleural
+    effusions on both sides.
+
+-   Lymph node (approximately 8 mm) between the small curvature of the
+    Stomach and S1 of the liver.
+
+-   Axial hernia.
+
+**Assessment:** Milan fulfilled**.** Dissiminated HCC foci in all
+segments, the largest foci being in segments 5 / 7 / 8 localized. Portal
+hypertension with bypass circulation and splenomegaly. Ascites and
+pleural effusions.
+
+**Microbiology from 06/09/2020:**
+
+[Material]{.underline}: Ascites in blood culture bottles
+
+[Microscopic]{.underline}: No cells, no germs
+
+-   Anaerobic culture negative after 48 hours
+
+-   So far, no growth in the anaerobic cultures. The cultures are
+    incubated for a total of 5 days. In case of growth of anaerobes we
+    will send you a follow-up report.
+
+-   No growth after 48 hours
+
+**Esophagogastroduodenoscopy of 06/11/2020:**
+
+**Esophagus**: In the distal esophagus, multiple band-like ulcerations
+as well as residual varices with risk signs that may not completely pass
+air insufflation. Z-line without erosions.
+
+**Stomach**: Mosaic-like occupancy of the gastric mucosa. With inversion
+the
+
+known small-curved lateral cardiavarii, which is hard on palpation with
+closed forceps after histoacryl injection. Directly next to it, another
+cardiavarice can now be seen, which has not yet been injected with
+histoacryl and is soft on palpation.
+
+**Duodenum**: Endoscopic therapy: Injection of 0.5 mL Histoacryl (+0.5
+mL Lipoidol) in the new cardiavarice. Application of 3 rubber band
+ligatures to the residual varices in the esophagus.
+
+**Assessment:** Residual varices in the esophagus, application of 3
+rubber band ligations; portal hypertensive gastropathy
+
+**Spine-whole: 2 planes from 06/13/2020**
+
+The perpendicular of C7 protrudes about 15 mm laterally to the left of
+sacral vertebra 1 in the anterior-posterior image and about 9.3 cm in
+front of sacral vertebra 1 in the lateral ray path. Slight left convex
+scoliosis thoracolumbally with thoracic counter-swing (Cobb angle \< 10°
+in each case). The lungs are unremarkable as far as technically
+assessable.
+
+**Assessment**: decompensated positive sagittal spinal imbalance. There
+is no relevant lateral trunk overhang.
+
+**Critical Findings Report:**
+
+A conspicuous single cell population of cells with partial signet ring
+cell character is detected in the smears. A cell block is prepared from
+the remaining liquid material for further typing of these cells. A
+follow-up report will follow.
+
+**Thoracic spine in 2 planes from 06/15/2020:**
+
+**Findings**: Thoracic vertebra 8: Post-kyphoplasty status with notable
+improvement in vertebral height, now measuring 21 mm compared to a
+preoperative height of 13 mm. Mild straightening of the vertebral column
+observed at this level.
+
+Thoracic vertebra 9: Known older anterior endplate collapse.
+
+Thoracolumbar spine: Multisegmental height reduction in vertebral bodies
+consistent with osteoporotic changes. No signs of contrast
+extravasation.
+
+Additional Finding: Pre-existing calcified structure projecting onto the
+left upper abdomen; likely unrelated to current surgical site.
+
+**Assessment**: Unremarkable postoperative imaging following kyphoplasty
+of T8. No evidence of postoperative sintering or newly identifiable
+fractures. Overall, the surgical intervention appears successful in
+increasing vertebral height and stabilizing the fracture site.
+
+**CT Chest/Abdomen/Pelvis with contrast agent from 06/18/2020:**
+
+**Technique**: Multislice spiral CT of the chest, abdomen, and pelvis
+was performed post-bolus intravenous injection of 120 ml of Imeron 400.
+Imaging conducted in arterial, portal venous, and venous phases. Oral
+contrast agent administered with Micropaque 1:7 in water and Gastrolux
+1:33 in water. Thin-slice reconstructions and secondary coronal and
+sagittal reformats were performed.
+
+**Chest**: Presence of struma nodosa. Bilateral minor pleural effusions
+with adjacent atelectasis, more pronounced on the right and extending
+into the interlobar region. No signs of infiltrative changes. Isolated
+small nodular opacities in the right lung. Few small bullae noted.
+Mediastinal lymph nodes mildly enlarged up to 0.5 cm; axillary and hilar
+nodes are not enlarged. No pericardial effusion observed.
+
+**Abdomen/Pelvis**: Known esophageal and fundal varices present. Liver
+demonstrates nodular changes in the context of known Child-Pugh B stage
+cirrhosis. A solid hepatic cellular carcinoma lesion in segment II and
+diffuse HCC nodules in segments V/VII/VIII visualized, corroborating
+prior MRI findings. They show pronounced arterial enhancement and
+central washout. Splenomegaly noted. Adrenal glands unremarkable. Renal
+and urinary systems are inconspicuous. No intestinal motility
+abnormalities detected. Marked ascites present; no pathologically
+enlarged abdominal lymph nodes noted upon limited assessment.
+
+**Skeletal**: Moderate coxarthrosis bilaterally. An old, minimally
+displaced fracture of the right 7th rib noted. Advanced degenerative
+changes in thoracic vertebrae 10, 12, and lumbar spine.
+Post-vertebroplasty status at thoracic vertebra 9. Hemangioma at
+thoracic vertebra 11.
+
+**Assessment**:
+
+-   Marked ascites in the setting of liver cirrhosis with multifocal HCC
+    lesions, as corroborated by prior MRI. No evidence of extrahepatic
+    or lymphatic spread.
+
+-   Bilateral minor pleural effusions with associated atelectasis.
+
+-   Skeletal findings include moderate coxarthrosis and degenerative
+    changes in the spine.
+
+Overall, the scan provides vital information that aligns with and
+elaborates upon existing clinical and imaging data.
+
+**Histology**:
+
+**Pathology from 06/19/2020:**
+
+[Clinical Data:]{.underline} Hepatocellular carcinoma, hydropic
+decompensated liver cirrhosis Child B,
+
+[Extraction date:]{.underline} 06/13/2020
+
+[Material:]{.underline} 1 Liquid material 7 ml light yellow
+
+[Editing]{.underline}: Papanicolaou and MGG staining
+
+\+ Protein precipitation
+
+\+ Erythrocytes
+
+\+ Lymphocytes
+
+(+) Granulocytes Eosinophils
+
+\+ Histiocytic cell forms
+
+\+ Mesothelium
+
+\+ Active mesothelium
+
+**Other**: Single mononuclear cells with large, eccentric nuclei with
+nucleoli and a narrow cytoplasmic space, partly with signet ring cells.
+
+**Supplementary findings from 06/19/2020**
+
+[Processing]{.underline}: Cell block, HE
+
+**Microscopic:**
+
+As announced, from the remaining liquid material a cell block was
+prepared. In the HE stain only isolated evidence of mononuclear Cells
+and some blood. No cell atypia.
+
+**Critical Findings Report:** After examination of the remaining liquid
+material in the cell block no Extension of the initial findings in the
+absence of further diagnostic cell material. The finding is thus based
+exclusively on the Smear material:
+
+-   Detection of a single-cell population consisting of cells with
+    partial signet ring cell character. Differentially it could be The
+    mesothelium may be a reactive change of the approaching mesothelium.
+    Cells of an epithelial neoplasia are not visible on the present
+    material. to be ruled out with certainty.
+
+**Diagnostic classification:** Suspicious
+
+**Current Recommendations:**
+
+-   An appointment at our outpatient clinic to start therapy was
+    organized for 06/26/2020.
+
+-   An appointment for a health department check-up with varicose vein
+    status survey and, if necessary, repeat rubber band ligation has
+    been scheduled for 07/22/2020. Please come to the endoscopy on this
+    day at 08:30 am fasting with current lab results. incl. coagulation,
+    signed consent form as well as SARS-CoV-2 PCR not older than 48h.
+
+
+</text_1>
+<text_2>
+**Dear colleague, **
+
+We report to you on Mrs. Laura Miller, born 04/03/1967, whom we examined
+on 06/08/2020 in the course of a consultation.
+
+**Consilar Request:**
+
+-   Liver cirrhosis, Child-Pugh B, ethyltoxic genesis
+
+-   HCC
+
+-   Laboratory albumin: 2.6
+
+-   Nutritional advice requested
+
+**Nutritional counseling in cirrhosis of the liver:**
+
+-   Albumin at 2.6
+
+-   70kg at admission (stable weight in recent years).
+
+-   Height: 1.72m
+
+-   BMI falsified by ascites
+
+-   Patient reports that she always a \"bad eater\"
+
+-   She reports to eat less due to numerous medication intake
+
+-   Patient is noticeably overwhelmed and seems very burdened by
+    diagnosis
+
+**Assessment:**
+
+-   Protein malnutrition with inadequate oral nutrition
+
+-   Patient appears desperate and overwhelmed, questionable compliance
+
+**Recommendations: **
+
+-   High-calorie food for more choices (already ordered)
+
+-   High-calorie drinks (contains more protein)
+
+-   Incorporate protein-rich snacks such as yogurt, sippy cups,
+    crispbread
+
+-   with cheese.
+
+-   A high-energy, high-protein food choice was made with the patient\'s
+    discussed in detail
+
+-   Contact details were handed out
+
+
+</text_2>
+<text_3>
+**Dear colleague, **
+
+We are writing to inform you about Mrs. Laura Miller, born on
+04/03/1967, who was under our inpatient care from 08/21/2020 to
+08/23/2020.
+
+**Diagnoses**:
+
+-   MRI of the liver: disseminated HCC foci in all segments, the largest
+    foci is localized in segments 5 / 7 / 8
+
+<!-- -->
+
+-   Hydropic, decompensated liver cirrhosis Child B, first diagnosis:
+    05/20, ethyltoxic genesis
+
+-   Anemia requiring transfusion
+
+-   EGD of 05/28/20: esophageal varices III° without risk signs, rubber
+    band ligation; cardia varices I°, Histoacryl injection
+
+-   EGD of 06/13/20: residual varices in the esophagus, application of 3
+    rubber band ligations, injection of 0.5 ml. Histoacryl; portal
+    hypertensive gastropathy
+
+-   Transfusion of 2 ECs
+
+-   Fresh osteoporotic thoracic vertebra 8 fracture
+
+-   Kyphoplasty thoracic vertebra 8 under C-arm fluoroscopy
+
+-   Portal hypertension with bypass circuits
+
+-   Splenomegaly
+
+-   Cholecystolithiasis
+
+-   Arterial hypertension
+
+-   Osteoporosis
+
+-   Status post stroke
+
+-   Allergies: None known
+
+**Current Presentation:** Mrs. Miller presented electively for
+gastroscopy for variceal screening with continuation of banding therapy
+due to esophageal variceal bleeding.
+
+**Medical History**: For a detailed medical history, we refer to
+previous reports from our department. In summary, we present a liver
+cirrhosis due to ethyl toxicity leading to the development of multifocal
+HCC. Similar to the liver board decision of 06/13/20, a recommendation
+for systemic therapy with Lenvatinib or Sorafenib was made in the
+setting of partially compensated Child B7 cirrhosis with multifocal HCC
+in both lobes of the liver.
+
+**Therapy and Course:** Upon admission, the patient was in
+age-appropriate general condition and largely symptom-free. There were
+no signs of acute infection, jaundice, encephalopathic symptoms, or GI
+bleeding. No irregularities in bowel movements or urination were
+reported. The patient denied abdominal pain and dyspnea. There were no
+known allergies.
+
+On the day of admission, an uncomplicated gastroscopy was performed,
+including the application of 4 rubber band ligations for residual
+esophageal varices. Post-interventional pain was adequately controlled
+with double-standard doses of Pantoprazole and intravenous analgesic
+therapy. The further inpatient course was uneventful, and the patient
+tolerated the post-interventional diet without signs of GI bleeding.
+
+Based on laboratory findings and clinical evaluation, particularly with
+regressed ascites, a compensated Child A6 cirrhosis was confirmed.
+Therefore, a re-presentation at our interdisciplinary liver board was
+initiated for discussion of potential treatment options in the context
+of compensated liver function.
+
+As per the consensus recommendation from the liver board, a follow-up
+gastroscopy is scheduled within the next two weeks. Depending on the
+variceal status, systemic therapy with Atezolizumab/Bevacizumab or
+Lenvatinib will follow.
+
+Throughout the monitoring period, the patient remained stable in terms
+of circulation and hemoglobin levels. Therefore, on 08/23/20, we
+discharged Mrs. Miller for outpatient follow-up care. The patient was
+thoroughly informed about reasons that necessitate immediate
+re-presentation. Please note the listed procedural appointments.
+
+**Physical Examination:** Awake, alert, oriented
+
+-   Heart: Regular heart tones, no murmurs
+
+-   Lungs: Clear vesicular breath sounds, no crackles or wheezes
+
+-   Abdomen: Soft, non-tender, no masses, normal bowel sounds in all
+    quadrants, palpable firm liver edge under the rib cage, no palpable
+    spleen enlargement, non-painful renal angle
+
+-   Extremities: Good peripheral pulses, no edema
+
+-   Neurology: No focal neurological deficits.
+
+**EGD on 08/21/2020:**
+
+**Findings:**
+
+**Esophagus**: Unobstructed intubation of the esophagus under direct
+vision. Multiple variceal cords and scarring changes due to banding were
+observed in the lower half of the esophagus. Z-line at 35 cm
+diaphragmatic passage at 39 cm. Two variceal cords extend along the
+small curve into the stomach, two of the varices show alarm signs (red
+spots). 4 rubber band ligations were performed.
+
+**Stomach**: In the proximal corpus a picture of portal hypertensive
+gastropathy, otherwise unremarkable. No fundus varices.
+
+**Duodenum**: Good unfolding of the duodenal bulb, contact-sensitive
+mucosa. Good insight into the descending part of the duodenum. Overall,
+unremarkable mucosa.
+
+**Assessment:** Esophageal varices, Gastroesophageal varices Type I.
+Banding therapy.
+
+**Current Recommendations:**
+
+-   Regular clinical and laboratory checks by the primary care
+    physician.
+
+-   In case of fever, acute deterioration of the general condition, or
+    clinical signs of bleeding such as melena or hematemesis, we request
+    immediate re-presentation, even at night and on weekends, through
+    our interdisciplinary emergency department.
+
+-   Decision of the liver board: Improvement of liver function with
+    alcohol abstinence, but also progression of multifocal HCC over 2
+    months without tumor-specific therapy. Consensus: Repeat EGD in 7-14
+    days, depending on variceal status, Atezolizumab/Bevacizumab, or
+    Lenvatinib.
+
+-   Follow-up appointment on 09/11/20 in our HCC outpatient clinic for
+    clinical control and explanation of the EGD.
+
+-   Follow-up in our endoscopy for EGD to determine variceal status and
+    possible banding -\> Please bring a COVID PCR test (maximum 48 hours
+    old) for inpatient admission.
+
+If complaints persist or worsen, we recommend immediate re-presentation.
+
+
+</text_3>
+<text_4>
+**Dear colleague, **
+
+We are writing to inform you about Mrs. Laura Miller, born on
+04/03/1967, who was under our inpatient care from 09/18/2020 to
+09/20/2020.
+
+**Diagnoses:**
+
+-   4-time banding therapy with 4 rubber band ligations for residual
+    esophageal varices without alarm signs
+
+-   Hepatocellular Carcinoma (HCC)
+
+-   MR Liver: Disseminated HCC lesions in all segments, with the largest
+    lesion located in segments 5/7/8
+
+-   Decompensated cirrhosis of the liver (Child B) since 05/20 due to
+    ethyltoxic origin.
+
+-   Transfusion-dependent anemia due to a history of variceal bleeding.
+
+-   Osteoporotic thoracic vertebral fracture of vertebra BWK8 (OF3) with
+    kyphoplasty.
+
+-   Portal hypertension with portosystemic collaterals
+
+-   Splenomegaly
+
+-   Cholelithiasis
+
+-   Arterial hypertension
+
+-   Osteoporosis
+
+-   History of stroke (2016)
+
+-   Allergies: Amalgam
+
+**Presentation:** Mrs. Miller\'s elective presentation was for a
+follow-up examination for known esophageal varices.
+
+**Medical History:** For a detailed medical history, please refer to
+previous reports from our department. In summary, in June 2020, the
+patient was diagnosed with decompensated liver cirrhosis attributed to
+ethyltoxicity. MR imaging showed multifocal HCC. According to the liver
+board decision on 06/15/20, initial therapy was recommended with
+Lenvatinib or Sorafenib for partially compensated Child B7 cirrhosis
+with multifocal HCC in both liver lobes. Despite improvement in liver
+function with alcohol cessation, there was a short-term progression of
+multifocal HCC without tumor-specific therapy, leading to a
+recommendation for a repeat variceal screening on 08/28/20. Depending on
+the findings, therapy with Atezolizumab/Bevacizumab or Lenvatinib was
+advised. The last EGD was performed on 08/21/20, revealing esophageal
+varices with alarm signs, and a 4-time banding was performed.
+
+**Physical Examination upon Admission:** Blood pressure: 80/150 mmHg,
+heart rate 88/min, temperature 36.4°C, SpO2 97% in room air.
+
+Patient in good general condition and normal mental status. Mrs. Miller
+is fully oriented. Pupils are equal and reactive.
+
+-   Cardiovascular: Clear heart sounds, no murmurs.
+
+-   Lungs: Equal breath sounds bilaterally, no crackles, resonant
+    percussion.
+
+-   Abdomen: Soft, non-tender, no masses, normal bowel sounds in all
+    quadrants, liver and spleen not palpable.
+
+-   Extremities: No edema, good peripheral pulses. No focal neurological
+    deficits.
+
+**Course and Therapy:** On the day of admission, the EGD was performed
+without complications. Residual varices without warning signs were
+observed, and a 4-time rubber band ligation was performed. Portal
+hypertensive gastropathy was also diagnosed. After the procedure, the
+patient was transferred to our gastroenterological normal ward.
+
+The post-interventional course was uneventful. There were no clinical or
+laboratory signs of post-interventional bleeding. The diet was
+reintroduced without any issues. Therefore, on 09/20/2020, we discharged
+Mrs. Miller for outpatient care. We request a follow-up appointment at
+our in-house HCC outpatient clinic. Additionally, we request a follow-up
+EGD with variceal control.
+
+</text_4>
+</notes>
+</patient-record-patient_08>

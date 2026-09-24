@@ -89,17 +89,27 @@ def resolve_mc_option(
     normalized_text = " ".join(text.lower().split())
 
     def by_letter(letter: str) -> str | None:
-        index = ord(letter) - ord("a")
+        if letter in "12345":
+            index = int(letter) - 1
+        elif "a" <= letter <= "e":
+            index = ord(letter) - ord("a")
+        else:
+            return None
         return normalized_options[index] if index < len(normalized_options) else None
 
     chosen = None
+    # 1. First check the option label (letters a-e or numbers 1-5)
     letters = [
         (match.start(), match.group(1))
-        for match in re.finditer(r"\(([a-e])\)", normalized_text)
+        for match in re.finditer(r"\(([a-e1-5])\)", normalized_text)
     ]
-    leading = re.match(r"^\(?([a-e])[\)\.\:]\s", normalized_text)
+    leading = re.search(r"^(?:answer:\s*)?\(?([a-e1-5])(?:\.|\)|\:|\s)", normalized_text)
     if leading:
-        letters.insert(0, (0, leading.group(1)))
+        letters.insert(0, (leading.start(1), leading.group(1)))
+    if not letters:
+        exact = re.search(r"^(?:answer:\s*)?\(?([a-e1-5])\)?$", normalized_text)
+        if exact:
+            letters.append((exact.start(1), exact.group(1)))
     if letters:
         answer_at = normalized_text.rfind("answer")
         after = [
@@ -109,6 +119,7 @@ def resolve_mc_option(
         ]
         chosen = by_letter(after[0] if after else letters[-1][1])
 
+    # 2. Fallback: check option content (exact substring, then fuzzy similarity)
     if chosen is None:
         squashed = normalized_text.replace(" ", "")
         mentions = [

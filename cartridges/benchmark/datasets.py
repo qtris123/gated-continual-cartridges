@@ -253,11 +253,7 @@ def _load_longhealth(
     patient_ids = subset.split(",") if subset else None
     patients = load_longhealth_dataset(patient_ids)
 
-    cot_prompt = (
-        "You should first think step by step. Then give your final answer "
-        "exactly as it appears in the options. Your output should be in the "
-        "following format: \n<thinking> {YOUR_THOUGHT_PROCESS} </thinking> "
-    )
+    OPTION_LETTERS = ["a", "b", "c", "d", "e"]
 
     items: list[BenchmarkItem] = []
     for patient in patients:
@@ -266,12 +262,15 @@ def _load_longhealth(
             f"Birthday: {patient.birthday}, Diagnosis: {patient.diagnosis}"
         )
         for question in patient.questions:
-            options_text = (
-                f"{question.answer_a}\n"
-                f"{question.answer_b}\n"
-                f"{question.answer_c}\n"
-                f"{question.answer_d}\n"
-                f"{question.answer_e}"
+            raw_options = [
+                question.answer_a,
+                question.answer_b,
+                question.answer_c,
+                question.answer_d,
+                question.answer_e,
+            ]
+            options_text = "\n".join(
+                f"({OPTION_LETTERS[i]}) {opt}" for i, opt in enumerate(raw_options)
             )
 
             if prompt_template is not None:
@@ -285,8 +284,9 @@ def _load_longhealth(
                     "Please answer the question below about the following patient: "
                     f"{patient_info}"
                     f"\n\n<question>\n{question.question}\n</question>"
-                    f"\n\n<options>\n{options_text}\n</options>\n{cot_prompt}"
-                    f"\n\n<answer>\n{{YOUR_ANSWER}}\n</answer>"
+                    f"\n\n<options>\n{options_text}\n</options>"
+                    f"\nOutput only the letter of the correct option (e.g. (a), (b), (c), (d), or (e)) along with the content of the option."
+                    f"\n\nAnswer:"
                 )
 
             items.append(BenchmarkItem(
@@ -304,6 +304,102 @@ def _load_longhealth(
                     ],
                 },
             ))
+
+    rng = random.Random(seed)
+    rng.shuffle(items)
+    return items
+
+
+@register_dataset("quality")
+def _load_quality(
+    *,
+    dataset_path: Optional[str] = None,
+    subset: Optional[str] = None,
+    split: str = "validation",
+    num_few_shot: int = 0,
+    prompt_template: Optional[str] = None,
+    seed: int = 42,
+) -> list[BenchmarkItem]:
+    """Load QuALITY using the same MCQ prompt format as LongHealth.
+
+    ``subset`` can be a comma-separated list of article IDs (e.g. "51651,22867")
+    or phase indices (e.g. "1" or "phase1"). If omitted, all phase articles are loaded.
+    """
+    from datasets import load_dataset
+    from cartridges.data.quality.resources import (
+        QUALITY_DATASET,
+        PHASE_TO_ARTICLE_IDS,
+        load_articles,
+    )
+
+    hf_name = dataset_path or QUALITY_DATASET
+    OPTION_LETTERS = ["a", "b", "c", "d"]
+
+    wanted_article_ids: Optional[set[str]] = None
+    if subset:
+        parts = [p.strip() for p in subset.split(",")]
+        phase_ids: set[str] = set()
+        for p in parts:
+            p_clean = p.lower().replace("phase", "")
+            if p_clean.isdigit() and int(p_clean) in PHASE_TO_ARTICLE_IDS:
+                phase_ids.update(PHASE_TO_ARTICLE_IDS[int(p_clean)])
+            else:
+                phase_ids.add(p)
+        wanted_article_ids = phase_ids
+
+    articles = load_articles(list(wanted_article_ids) if wanted_article_ids else None)
+    ds = load_dataset(hf_name, split=split)
+
+    items: list[BenchmarkItem] = []
+    for row in ds:
+        aid = str(row["article_id"])
+        if wanted_article_ids and aid not in wanted_article_ids:
+            continue
+        if aid not in articles:
+            continue
+
+        article = articles[aid]
+        story_info = f"Title: {article.title}, Author: {article.author}"
+
+        raw_options = list(row["options"])
+        options_text = "\n".join(
+            f"({OPTION_LETTERS[i]}) {opt}" for i, opt in enumerate(raw_options)
+        )
+        raw_label = row.get("gold_label")
+        if raw_label is None or raw_label == "":
+            raw_label = row.get("writer_label", 1)
+        # QuALITY gold_label is 1-indexed (1 to 4)
+        correct_idx = int(raw_label) - 1
+        if not (0 <= correct_idx < len(raw_options)):
+            correct_idx = 0
+        correct_text = raw_options[correct_idx]
+
+        if prompt_template is not None:
+            formatted = prompt_template.format(
+                story_info=story_info,
+                question=row["question"],
+                options=options_text,
+            )
+        else:
+            formatted = (
+                "Please answer the question below about the following story: "
+                f"{story_info}"
+                f"\n\n<question>\n{row['question']}\n</question>"
+                f"\n\n<options>\n{options_text}\n</options>"
+                f"\nOutput only the letter of the correct option (e.g. (a), (b), (c), or (d)) along with the content of the option."
+                f"\n\nAnswer:"
+            )
+
+        items.append(BenchmarkItem(
+            prompt=formatted,
+            ground_truth=correct_text,
+            metadata={
+                "question_id": str(row.get("question_unique_id") or row.get("question_id")),
+                "article_id": aid,
+                "options": raw_options,
+                "label": correct_idx,
+            },
+        ))
 
     rng = random.Random(seed)
     rng.shuffle(items)

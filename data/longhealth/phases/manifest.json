@@ -1,0 +1,67 @@
+{
+  "1": {
+    "text": "data/longhealth/phases/phase1.txt",
+    "eval": "data/longhealth/phases/phase1_eval.parquet",
+    "tokens": 25821,
+    "questions": 80,
+    "cumulative_tokens": 25821,
+    "patients": [
+      "patient_01",
+      "patient_02",
+      "patient_03",
+      "patient_04"
+    ]
+  },
+  "2": {
+    "text": "data/longhealth/phases/phase2.txt",
+    "eval": "data/longhealth/phases/phase2_eval.parquet",
+    "tokens": 21022,
+    "questions": 80,
+    "cumulative_tokens": 46843,
+    "patients": [
+      "patient_05",
+      "patient_06",
+      "patient_07",
+      "patient_08"
+    ]
+  },
+  "3": {
+    "text": "data/longhealth/phases/phase3.txt",
+    "eval": "data/longhealth/phases/phase3_eval.parquet",
+    "tokens": 21802,
+    "questions": 80,
+    "cumulative_tokens": 68645,
+    "patients": [
+      "patient_09",
+      "patient_10",
+      "patient_11",
+      "patient_12"
+    ]
+  },
+  "4": {
+    "text": "data/longhealth/phases/phase4.txt",
+    "eval": "data/longhealth/phases/phase4_eval.parquet",
+    "tokens": 21122,
+    "questions": 80,
+    "cumulative_tokens": 89767,
+    "patients": [
+      "patient_13",
+      "patient_14",
+      "patient_15",
+      "patient_16"
+    ]
+  },
+  "5": {
+    "text": "data/longhealth/phases/phase5.txt",
+    "eval": "data/longhealth/phases/phase5_eval.parquet",
+    "tokens": 21308,
+    "questions": 80,
+    "cumulative_tokens": 111075,
+    "patients": [
+      "patient_17",
+      "patient_18",
+      "patient_19",
+      "patient_20"
+    ]
+  }
+}

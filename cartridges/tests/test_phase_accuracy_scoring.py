@@ -34,6 +34,19 @@ def test_mc_options_uses_final_parenthesized_choice():
     assert resolve_mc_option(prediction, OPTIONS) == OPTIONS[3]
 
 
+def test_mc_options_accepts_numeric_option():
+    assert resolve_mc_option("(3) Gamma is the correct explanation.", OPTIONS) == OPTIONS[2]
+    assert resolve_mc_option("3. Gamma is the correct explanation.", OPTIONS) == OPTIONS[2]
+    assert resolve_mc_option("Answer: (2)", OPTIONS) == OPTIONS[1]
+    assert resolve_mc_option("Answer: 1", OPTIONS) == OPTIONS[0]
+
+
+def test_mc_options_option_first_over_conflicting_content():
+    # Model specifies option (b), even though text mentions Alpha (option a)
+    prediction = "Answer: (b) Alpha is mentioned here."
+    assert resolve_mc_option(prediction, OPTIONS) == OPTIONS[1]
+
+
 def test_mc_options_rejects_unparseable_output():
     prediction = "I cannot determine the answer from the supplied information."
     assert resolve_mc_option(prediction, OPTIONS) is None

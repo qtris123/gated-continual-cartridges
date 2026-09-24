@@ -1,0 +1,4299 @@
+Below is a panel of patient records.
+
+<patient-record-patient_17>
+Below is patient Brian Carter's medical record (ID: patient_17). 
+They were born on 04/24/1956 and have the following diagnosis: ARDS.
+The patients medical record consists of 5 notes included below.
+<notes>
+<text_0>
+**Dear colleague, **
+
+We are reporting on our mutual patient, Mr. Brian Carter, born on
+04/24/1956, who was under our inpatient care from 09/28/2021 to
+09/30/2021.
+
+**Diagnosis**: ARDS in the context of a COVID-19 infection
+
+**Other Diagnoses:**
+
+-   Left eye pigment epithelium clumping, suggestive of a history of
+    retinal central serous chorioretinopathy
+
+-   Uveitis
+
+-   Bronchial asthma
+
+-   Arterial hypertension
+
+-   Depression
+
+**Current Presentation:** Mr. Carter presented to our facility on foot
+on 09/28/2021 with a five-day history of slowly progressive dyspnea, dry
+cough, and non-apoplectic, holocentral headache. His initial room air
+saturation was 78%, which improved to 86% with 10 liters of oxygen.
+Arterial blood gas analysis revealed an oxygenation disorder with a paO2
+of 50 mmHg, prompting the initiation of NIV therapy, under which Mr.
+Carter remained hemodynamically stable. CT imaging showed bilateral
+interstitial pneumonia with COVID-typical infiltrates. Both a rapid test
+in the initial care unit and one from his primary care physician were
+negative for COVID-19. Therefore, we admitted Mr. Carter to our
+intensive care unit for further evaluation.
+
+**Medication upon Admission:**
+
+  **Medication**             **Dosage**   **Frequency**
+  -------------------------- ------------ ---------------
+  Prednisone (Deltasone)     5 mg         1-0-0
+  Methotrexate (Trexall)     25 mg        1-0-0
+  Candesartan (Atacand)      4 mg         1-0-0
+  Quetiapine (Seroquel)      300 mg       0-0-1
+  Amitriptyline (Elavil)     25 mg        0-0-1
+  Citalopram (Celexa)        40 mg        1-0-0
+  Montelukast (Singulair)    10 mg        1-0-0
+  Desloratadine (Clarinex)   5 mg         1-0-0
+
+**Physical Examination:**
+
+[Neurology]{.underline}: Alert and cooperative
+
+[Cardiovascular/Abdominal Examination]{.underline}: Severely impaired
+oxygenation improved with NIV; Sinus rhythm at 80 beats per minute
+
+[Abdomen]{.underline}: Surgical abdomen
+
+[Renal System:]{.underline} Urination initially scant, then polyuria
+Others.
+
+**Therapy and Progression:** Upon admission, Mr. Carter was alert,
+cooperative, and hemodynamically stable despite significant oxygenation
+impairment. Temporary improvement was achieved with differentiated NIV
+mask ventilation. On 09/30, there was a further deterioration in
+oxygenation with an increase in respiratory rate and escalation of
+ventilator settings, leading to the decision to intubate. A tolerable
+ventilation situation was achieved with an oxygenation index of 125. Due
+to radiological suspicion of atypical pneumonia, we initiated empirical
+anti-infective therapy with Piperacillin/Tazobactam, Clarithromycin, and
+Cotrimoxazole. Microbiological test results were pending at the time of
+transfer. We also initiated mucolytic therapy with Ambroxol. The
+pre-existing immunosuppressive therapy with Prednisolone was
+discontinued and switched to Dexamethasone 10 mg. At the time of
+transfer, Mr. Carter was hemodynamically stable with low catecholamine
+doses (0.07 µg/kg/min). A central venous catheter was placed, and
+enteral or parenteral nutrition had not yet been initiated. Diuresis was
+sufficient after a single dose of 20 mg furosemide, with retention
+parameters within the normal range. Prophylactic anticoagulation with
+heparin 500 U/h was initiated.
+
+**Status at Transfer**:
+
+[Neurology]{.underline}: RASS -5 under Propofol and Sufentanil sedation
+
+[Cardiovascular]{.underline}: Normal sinus rhythm, noradrenaline (NA)
+0.07; Hemoglobin 12.8 g/dL
+
+[Lungs]{.underline}: Adequate decarboxylation with borderline
+oxygenation: paO2 87.6 under FiO2 0.7; PEEP 16; PEAK 27
+
+[Abdomen]{.underline}: Soft abdomen, no nutrition initiated
+
+[Renal System]{.underline}: Normal urine output without stimulation.
+Retention values within normal range. Clear urine.
+
+[Access]{.underline}: CVC placed on 09/30, left radial artery catheter
+placed on 09/30.
+
+
+</text_0>
+<text_1>
+**Dear colleague, **
+
+We are reporting on our patient, Mr. Brian Carter, born on 04/24/1956,
+who was under our inpatient care from 09/30/2021 to 10/13/2021.
+
+**Diagnosis:** ARDS due to COVID-19 pneumonia with superinfection by
+Aspergillus fumigatus
+
+**Other Diagnoses:**
+
+-   Left eye pigment epithelium clumping, suggestive of a history of
+    retinal central serous chorioretinopathy
+
+-   Rheumatoid arthritis
+
+-   Uveitis
+
+-   Bronchial asthma
+
+-   Arterial hypertension
+
+-   Depression
+
+**Medical History:** The patient was admitted from the emergency
+department, presenting with dyspnea and confirmed SARS-CoV-2 infection.
+After initial management in the intensive care unit, a non-invasive
+ventilation (NIV) trial was attempted, followed by successful
+intubation. The patient was then transferred to the Intensive Care Unit.
+
+**Therapy and Progression:** Upon admission, the patient was sedated,
+intubated, and controlled on mechanical ventilation with mild
+catecholamine support. Due to oxygenation impairment despite
+lung-protective ventilation and inhaled supportive NO therapy,
+conservative ARDS therapy was initiated, including positioning therapy
+(a total of 9 prone positions). After stabilization of gas exchange with
+positioning therapy, sedation and ventilation weaning were performed.
+Gas exchange and oxygenation are currently stable under BIPAP
+ventilation (PiP 25 mbar, PEEP 13 mbar, breathing rate 18/min). The
+patient, under reduced analgosedation with Sufentanil and Clonidine,
+exhibits a sufficient awakening response, is adequately responsive, and
+follows commands with reduced muscle strength.
+
+The home medication of Methotrexate and Prednisolone for uveitis was
+discontinued upon admission. The patient received Dexamethasone for 10
+days initially and, starting from 11/10, prednisolone with prophylactic
+Cotrimoxazole therapy.
+
+Upon detection of Aspergillus in tracheobronchial secretions, antifungal
+therapy with Voriconazole and Caspofungin (until target Voriconazole
+levels were achieved) was initiated. The initially started antimicrobial
+therapy with Piperacillin + Tazobactam was escalated to Meropenem on
+10/05/2021 due to worsening infection parameters and progression of
+infiltrates on X-ray. Infection parameters have been fluctuating, and
+fever is not currently observed. Diuresis is qualitatively and
+quantitatively within normal limits, and retention parameters are within
+the normal range.
+
+Anticoagulation was administered in therapeutic doses using
+low-molecular-weight heparin.
+
+Enteral nutrition is provided through a nasogastric tube, and the
+patient has regular bowel movements.
+
+**Physical Examination:**
+
+[Neurology]{.underline}: Analgosedated, GCS 10, pupils equal and
+reactive, limb movement prompt, follows commands with reduced strength
+
+[Lungs]{.underline}: Intubated with BIPAP 25/13, FiO2 0.4
+
+[Cardiovascular]{.underline}: Normal sinus rhythm, noradrenaline 0.05
+
+[Abdomen]{.underline}: Obese, no tenderness, abdomen soft, oral intake
+via a nasogastric tube, regular bowel movements
+
+[Diuresis]{.underline}: Normal urine output, retention parameters within
+normal limits
+
+Skin/Wounds: Some pressure sores from positioning (see nursing handover
+sheet)
+
+[Mobilization]{.underline}: Not conducted
+
+**Imaging:**
+
+**Bedside Chest X-ray from 10/11/2021:**
+
+[Clinical information, question, justifying indication:]{.underline}
+COVID pneumonia, insertion of a central venous catheter (CVC)
+
+**Assessment**: Comparison with 10/05/21: Endotracheal tube identical,
+gastric tube seen extending well into the abdomen, left CVC currently
+positioned in the brachiocephalic vein region, right CVC via internal
+jugular vein with tip in superior vena cava. No pneumothorax, no
+effusions, increasing consolidation of infiltrates in the right lower
+lobe and retrocardially on the left without significant cavitation as
+far as can be assessed. Left heart without significant central
+congestion.
+
+
+</text_1>
+<text_2>
+**Dear colleague, **
+
+We are reporting on our patient, Mr. Brian Carter, born on 04/24/1956,
+who was under intensive care treatment from 09/28/2021 to 10/12/2021 and
+in our intensive care unit from 10/13/2021 to 10/21/2021.
+
+**Diagnoses:**
+
+-   COVID-19 with severe ARDS
+
+-   Symptoms began on 09/24/2021 with progressive dyspnea, cough, and
+    headache
+
+-   Initial detection of SARS-CoV-2 on 09/28/2021 in nasopharyngeal swab
+
+-   Dexamethasone from 09/29 to 10/8/2021
+
+-   Prone positioning from 09/18 to 10/8
+
+-   Intubation on 09/30, initial extubation on 10/13
+
+-   Pulmonary superinfection with detection of Aspergillus fumigatus
+
+-   Voriconazole therapy since 10/7/2021
+
+-   Bacteremia with detection of Staphylococcus aureus in blood culture
+    on 10/19/21
+
+-   Flucloxacillin since 10/21/2021
+
+-   Thrombophlebitis of the right forearm
+
+**Other Diagnoses:**
+
+-   Left eye pigment epithelium clumping, suggestive of a history of
+    retinal central serous chorioretinopathy
+
+-   Rheumatoid arthritis
+
+-   Uveitis
+
+-   Bronchial asthma
+
+-   Arterial hypertension
+
+-   Depression
+
+**Medical History:** The initial hospital admission of the patient was
+through our emergency department due to severe respiratory insufficiency
+in the context of COVID-19 pneumonia.
+
+**Current Medication:**
+
+  **Medication**             **Dosage**   **Frequency**
+  -------------------------- ------------ ---------------
+  Prednisone (Deltasone)     5 mg         1-0-0
+  Methotrexate (Trexall)     25 mg        1-0-0
+  Candesartan (Atacand)      4 mg         1-0-0
+  Quetiapine (Seroquel)      300 mg       0-0-1
+  Amitriptyline (Elavil)     25 mg        0-0-1
+  Citalopram (Celexa)        40 mg        1-0-0
+  Montelukast (Singulair)    10 mg        1-0-0
+  Desloratadine (Clarinex)   5 mg         1-0-0
+
+**Physical Examination:**
+
+[Skin/Mucous Membranes]{.underline}: Warm, Skin Perfusion: Good
+perfusion, Edema: Lower legs
+
+[Head]{.underline}: Mobility: Active and passive free movement, Tongue:
+Moist
+
+[Thorax]{.underline}: Auscultation: Clear bilaterally
+
+[Abdomen]{.underline}: Soft, no guarding, Bowel Sounds: Sparse
+peristalsis, Tenderness: None
+
+[Neurology]{.underline}: Pupil Shape: Round, Pupil Size: Moderate, Light
+Reaction: Both sides +++
+
+Alertness: Awake
+
+**ECG on admission:** Tachycardic sinus rhythm with 107/min, Left type,
+P-wave normally configured, normal PQ interval, no pathological Q as in
+Pardee-Q, narrow QRS, regular R progression, R/S transition in V3/4, no
+S persistence, no ST segment changes, no discordant T-negatives.
+
+**Therapy and Progression:** Despite intensified oxygen therapy with
+nasal high-flow and mask CPAP, adequate oxygenation could not be
+achieved, and the patient was intubated on 09/29/21. Leading oxygenation
+impairment led to lung-protective ventilation with inhaled supportive NO
+therapy and conservative ARDS therapy, including positioning therapy (a
+total of 9 prone positions, 16 hours each, from 09/29/21 to 10/8/21).
+
+Due to elevated procalcitonin, the patient received empirical antibiotic
+treatment with Piperacillin/Tazobactam starting from 10/2/21, which was
+escalated to Meropenem on 10/5/21 and continued until 10/14/21.
+
+After the detection of Aspergillus in tracheobronchial secretions and
+BAL, the patient received Voriconazole since 10/7/2021 (treatment
+duration formally 4-6 weeks). Most recently, the level was
+subtherapeutic, so the dose was adjusted to 2 x 400 mg daily.
+
+The immunosuppressive therapy with Methotrexate and Prednisolone for
+rheumatoid arthritis was switched to Dexamethasone (09/29 to 10/8) and,
+since 10/09, Prednisolone monotherapy. After controlling the fungal
+infection, a rheumatology re-consultation was planned. Furthermore,
+subtherapeutic anticoagulation with Fraxiparine was initiated for the
+prevention of thrombotic complications in the context of COVID-19.
+
+Under this treatment regimen, gas exchange continuously improved, and on
+10/12/21, the patient was transferred with low catecholamine
+requirements for ventilation and sedation weaning. Mr. Carter was
+extubated on 12/13/21 and now maintains good oxygenation with less than
+3L oxygen via nasal cannula. Delirium symptoms after extubation
+completely regressed within a few days.
+
+Severe dysphagia was observed after invasive ventilation, leading to a
+speech therapy consultation. Oral feeding is currently not possible, so
+Mr. Carter is receiving parenteral nutrition. As a result, there was a
+paravasate in the upper right extremity with painful erythema. Adequate
+pain control was achieved with local cooling and Piritramide as needed.
+Due to continued dietary restrictions, a central venous catheter was
+placed on 10/20/2021 for parenteral nutrition.
+
+We request continued speech therapy treatment.
+
+On 10/21/21, Staphylococcus aureus was detected in blood culture, so we
+initiated the administration of Flucloxacillin. The MRSA rapid test was
+negative.
+
+We are transferring Mr. Carter on 10/21/21 in stable condition, awake,
+and appropriately responsive for further treatment. We appreciate the
+transfer of our patient and are available for any further questions.
+
+**Current Recommendations:**
+
+-   Continuation of antifungal therapy for a total of at least 4-6 weeks
+
+-   Voriconazole level measurement
+
+-   Speech therapy consultation
+
+-   Rheumatology re-consultation
+
+-   Follow-up blood cultures upon detection of Staph. aureus
+
+
+</text_2>
+<text_3>
+**Dear colleague, **
+
+We are reporting on Mr. Brian Carter, born on 04/24/1956, who was under
+our inpatient care from 10/21/2021 to 11/08/2021.
+
+**Diagnoses:**
+
+-   COVID-19 with severe ARDS
+
+-   Symptoms began on 09/24/2021 with progressive dyspnea, cough, and
+    headache
+
+-   Initial detection of SARS-CoV-2 on 09/28/2021 in nasopharyngeal swab
+
+-   Dexamethasone from 09/29 to 10/8/2021
+
+-   Prone positioning from 09/18 to 10/8 and NO therapy
+
+-   Intubation on 09/30, initial extubation on 10/13
+
+-   Reporting to the health department by the referring physician
+
+-   Pulmonary superinfection with detection of Aspergillus fumigatus
+
+-   Voriconazole therapy since 10/7/2021
+
+-   Bacteremia with detection of Staphylococcus aureus in blood culture
+    on 10/19/21
+
+-   Flucloxacillin since 10/21/2021
+
+-   Thrombophlebitis of the right forearm
+
+**Other Diagnoses:**
+
+-   Left eye pigment epithelium clumping, suggestive of a history of
+    retinal central serous chorioretinopathy
+
+-   Rheumatoid arthritis
+
+-   Uveitis
+
+-   Bronchial asthma
+
+-   Arterial hypertension
+
+-   Depression
+
+**Current Presentation:** Transfer for continuation of antimicrobial
+therapy for MSSA bacteremia. Transesophageal echocardiogram planned for
+tomorrow. Cleared for full diet by speech therapy today. Patient
+mobilized to standing position for the first time today. Overall,
+mobility is significantly limited, but the patient can mobilize to the
+edge of the bed independently. No pain, no fever, mild cough without
+sputum. No shortness of breath. Mood is significantly depressed, but
+this is a known issue. Before COVID-19, he was heavily affected by
+rheumatoid arthritis.
+
+**Medical History:** The patient was transferred to our COVID ward after
+a positive SARS-CoV-2 RNA PCR test in the naso-oropharyngeal swab and
+respiratory failure. On physical examination, he had a reduced general
+condition. Respiratory rate was 24/min, and oxygen saturation was 97% on
+4 L/min of O2 via nasal cannula. Oxygen supply of 4 L via nasal cannula
+could not be reduced during the course. A chest X-ray performed on 11/21
+showed increasingly loosened infiltrates in the left basal region and a
+minimal effusion at the base.
+
+A SARS-CoV-2 RNA PCR test from 11/10/2020 was negative, so Mr. Carter
+was no longer in isolation.
+
+Due to the detection of Aspergillus fumigatus in bronchoalveolar lavage,
+intravenous Voriconazole therapy initiated on 10/07/2021 was continued
+and was planned to be adjusted according to drug level monitoring.
+Additionally, Staph. aureus was identified in a blood culture, and
+Staph. epidermidis. Antibiotic therapy with Cefazolin was started on
+10/22 and was to be continued for a total of 14 days after the first
+negative blood culture. The central venous catheter, likely the source
+of infection, was removed on 10/22, and microbiological examination of
+the catheter tip indicated suspicion of Staphylococci. To rule out
+endocarditis, a transesophageal echocardiogram was scheduled for 10/24.
+Mr. Carter has already been informed about this intervention, and
+Fraxiparine was to be paused on the evening of 10/24 and the morning of
+10/27, with the patient kept fasting.
+
+There is also a known history of rheumatoid arthritis, which was treated
+on an outpatient basis with Methotrexate and Prednisolone. Due to the
+current infection, Methotrexate was paused, and after consultation with
+the rheumatologists, it was decided to continue with prednisolone 5mg.
+After complete pulmonary recovery, a rheumatology re-consultation was
+planned, and the resumption of methotrexate was considered.
+
+Upon admission, the patient had significant dysphagia, which improved
+during the course. A flexible endoscopic swallowing examination
+performed on 10/24/2021 by speech therapists and phoniatrics revealed a
+normal swallow reflex. Mr. Carter can now resume a regular diet.
+
+**Physical Examination:** Weight: 83 kg, Height: 182 cm. Temperature:
+36.5°C, Heart rate: 80/min, Respiratory rate: 25/min, Blood pressure:
+130/80 mmHg, Oxygen saturation: 98% with 2 L/min O2
+
+[Skin/mucous membranes:]{.underline} No edema, no skin abnormalities.
+Central venous catheter exit site on the neck is unremarkable.
+
+[Head/neck:]{.underline} Own teeth, intact mucous membranes
+
+[Heart]{.underline}: Rhythmic, tachycardic up to 100/min, clear heart
+sounds, no murmurs
+
+[Lungs]{.underline}: Bilateral vesicular breath sounds, no adventitious
+sounds
+
+[Abdomen]{.underline}: Soft, active bowel sounds, no tenderness, no
+resistance
+
+[Lymph nodes:]{.underline} Cervical, axillary nodes not palpable
+
+[Vessels]{.underline}: Foot pulses palpable
+
+[Musculoskeletal:]{.underline} Muscle strength reduced due to CIP/CIM.
+Can mobilize to the bedside independently
+
+[Basic neurological examination:]{.underline} Alert, oriented, friendly
+
+[Psychological state]{.underline}: Depressed mood
+
+**Therapy and Progression:** The emergency presentation of Mr. Carter
+was on 09/28/2021 due to severe dyspnea and respiratory insufficiency.
+After direct transfer to Intensive Care Unit, despite intensified oxygen
+therapy with nasal high flow and mask CPAP, adequate oxygenation could
+not be achieved, leading to intubation on 10/29/21.
+
+Lung-protective ventilation was initiated due to leading oxygenation
+impairment, with inhalational supportive NO therapy and conservative
+ARDS therapy, including positional changes (a total of 9 sessions of 16
+hours each from 09/29/21 to 10/08/21). Due to elevated PCT levels, the
+patient received empiric antibiotic therapy with
+Piperacillin/Tazobactam, escalated to Meropenem. Voriconazole was
+initiated on 10/07/2021 after the detection of Aspergillus in
+tracheobronchial secretions and BAL (intended treatment duration 4-6
+weeks).
+
+Subtherapeutic anticoagulation with Fraxiparine was administered for the
+prevention of thrombotic complications in the context of COVID-19. Under
+this treatment regimen, gas exchange steadily improved, and on 10/12/21,
+the patient was transferred with low catecholamine requirements for
+weaning from mechanical ventilation and sedation. There, he was
+extubated on 10/13/21.
+
+After extubation, severe dysphagia was observed, and speech therapy was
+consulted. Oral diet is currently not possible, so Mr. Carter is on
+parenteral nutrition. This led to a paravasate in the right upper
+extremity with painful erythema. Adequate pain control was achieved with
+local cooling and subcutaneous Piritramide, as needed.
+
+**Lab results:**
+
+  **Parameter**                           **Result**   **Reference Range**
+  --------------------------------------- ------------ ---------------------
+  Absolute Reticulocytes                  0.01/nL      \< 0.01/nL
+  Sodium                                  138 mEq/L    136-145 mEq/L
+  Potassium                               4.3 mEq/L    3.5-4.5 mEq/L
+  Creatinine                              0.61 mg/dL   0.70-1.20 mg/dL
+  Estimated GFR                           \>90         \>90
+  BUN                                     23 mg/dL     17-48 mg/dL
+  Total Bilirubin                         0.18 mg/dL   \< 1.20 mg/dL
+  C-Reactive Protein                      4.1 mg/L     \< 5.0 mg/L
+  Troponin-T                              6.1 ng/L     \< 14 ng/L
+  ALT                                     50 U/L       \< 41 U/L
+  AST                                     40 U/L       \< 50 U/L
+  Alkaline Phosphatase                    111 U/L      40-130 U/L
+  Gamma-GT                                200 U/L      8-61 U/L
+  Free Triiodothyronine (T3)              2.3 ng/L     2.00-4.40 ng/L
+  Free Thyroxine (T4)                     14.2 ng/L    9.30-17.00 ng/L
+  Thyroid Stimulating Hormone (TSH)       4.1 mIU/L    0.27-4.20 mIU/L
+  Hemoglobin                              11.6 g/dL    13.5-17.0 g/dL
+  Hematocrit                              34.5%        39.5-50.5%
+  Red Blood Cells                         3.7 M/µL     4.3-5.8 M/µL
+  White Blood Cells                       9.56 K/µL    3.90-10.50 K/µL
+  Platelets                               280 K/µL     150-370 K/µL
+  MCV                                     92.5 fL      80.0-99.0 fL
+  MCH                                     31.1 pg      27.0-33.5 pg
+  MCHC                                    33.6 g/dL    31.5-36.0 g/dL
+  MPV                                     8.9 fL       7.0-12.0 fL
+  RDW-CV                                  14.0%        11.5-15.0%
+  Prothrombin Time                        89%          78-123%
+  INR                                     1.09         0.90-1.25
+  Activated Partial Thromboplastin Time   25.3 sec.    22.0-29.0 sec.
+
+**Imaging:**
+
+**Chest X-ray bedside on 09/29/2021:** CT scan of the chest from
+9/28/2021 is available for comparison. Tracheal tube tip supracarinal.
+Central venous catheter (CVC) via right internal jugular vein, tip in
+the confluence of veins. Gastric tube tip infradiaphragmatic. Patchy
+confluent bilateral lung infiltrates, mainly perihilar, left and right
+upper and lower fields. No significant changes compared to the previous
+day. Small bilateral pleural effusions. No pneumothorax in the lying
+position. Left-sided heart prominence with mild stasis/capillary leak.
+
+**Chest X-ray bedside on 10/3/2021:**
+
+[Findings]{.underline}: Compared to 09/29/2021. Tracheal tube with tip
+approximately 4 cm above the carina. Gastric tube slightly retracted,
+tip located just below the diaphragm. Central venous catheter via the
+right internal jugular vein, currently with the tip in the superior vena
+cava. Regression and loosening of infiltrates (mainly in the lower
+fields on both sides). No significant effusion or pneumothorax. No
+substantial volume overload.
+
+**Chest X-ray bedside on 10/6/2021:**
+
+[Findings]{.underline}: Compared to the previous examination on
+11/4/2020. New central venous catheter (CVC) from the left internal
+jugular vein with tip in the confluence. No pneumothorax in the lying
+position, no large pleural effusions. Progressive infiltrates in the
+right lower field, perihilar regions on both sides. No significant
+central stasis. Heart not enlarged, mediastinum slim.
+
+**Chest X-ray bedside on 10/11/2021:**
+
+[Findings]{.underline}: Compared to 10/5/2021. Tracheal tube and gastric
+tube as before. Left CVC with the tip currently in the region of the
+brachiocephalic vein, right CVC via the internal jugular vein with the
+tip in the superior vena cava. No pneumothorax, no effusions, increasing
+consolidation of infiltrates in the right lower field and retrocardial
+left with no significant cavitation. Left-biased heart without
+significant central congestion.
+
+**Chest X-ray bedside on 10/16/2021:**
+
+[Findings]{.underline}: Compared to previous examinations on 10/11/2021.
+Heart borderline enlarged. Mediastinum, as far as can be assessed from
+slightly rotated images, appears central and slim. Increasing
+consolidation in the right lower lobe and left lower lobe, which is well
+compatible with pneumonic infiltrates. At most, a small pleural effusion
+on the left. No pneumothorax in the lying position. No signs of
+significant congestion. Right jugular catheter projecting into the
+superior vena cava. Tracheal tube and left jugular catheter have been
+removed since the last examination.
+
+**Chest X-ray bedside on 10/20/2021:**
+
+[Findings]{.underline}: Compared to the examination on 10/16/2021. In
+the course of known COVID pneumonia, there is an increasingly loosened
+appearance of infiltrates in the left basal region. A small effusion
+continues to drain basally. Otherwise, no significant changes in the
+short-term follow-up. Right jugular catheter projecting into the
+superior vena cava, as before.
+
+**EKG on 10/27/2021:** Normal sinus rhythm, 86/min. Indeterminate axis.
+PQ interval: 108ms QRS duration: 108ms. QTc interval: 484ms. Peripheral
+low voltage. Delayed R progression up to and including V3. RS transition
+in V4. No significant ST-T wave changes.
+
+**Ultrasound Abdomen on 11/01/2021:**
+
+[Reason for referral:]{.underline} History of COVID, Aspergillosis
+
+[Liver]{.underline}: Vertical diameter in the midclavicular line on the
+right is 120 mm.
+
+[Biliary tract]{.underline}: Well visualized. No abnormalities in the
+intrahepatic and extrahepatic bile ducts. Maximum width of the common
+bile duct is 3 mm.
+
+[Gallbladder]{.underline}: Well visualized. Normal findings.
+
+[Pancreas]{.underline}: Maximum diameters - Head: 17 mm, Body: 12 mm,
+Tail: 15 mm. Well visualized. Normal findings.
+
+[Spleen]{.underline}: Normal size, normal homogeneous internal echo
+pattern, no focal changes, hilum is free. Organ size: 120 mm x 38 mm.
+
+[Right kidney:]{.underline} Partially assessable, as far as
+recognizable, parenchymal edge is age-appropriate, smooth organ contour,
+no urinary obstruction, no stones. Size: 120 mm x 45 mm, parenchymal
+thickness 21 mm.
+
+[Left kidney:]{.underline} Partially assessable, as far as recognizable,
+parenchymal edge is age-appropriate, smooth organ contour, no urinary
+obstruction, no stones. Size: 115 mm x 61 mm, parenchymal thickness 19
+mm.
+
+[Bladder:]{.underline} Well visualized, orthotopically located, normal
+wall proportions, no pathological echo structures in the lumen, normal
+organ size.
+
+[Abdominal vessels:]{.underline} Normal findings.
+
+[Abdominal lymph nodes:]{.underline} No evidence of enlarged lymph nodes
+in the subphrenic region.
+
+[Peritoneum]{.underline}: No free fluid.
+
+[Color duplex sonography of the portal vein:]{.underline} Orthograde
+flow, no evidence of thrombosis.
+
+[Assessment]{.underline}: In the right lower lobe cranial-lateral
+(segment VII), there is an entirely echo-free cystic structure with a
+slightly lobulated contour. There is no \"double wall,\" and there are
+no features suggestive of Echinococcus. This is most likely a congenital
+cyst. The overall structure, architecture, and texture of the liver are
+normal, with no other focal abnormalities. In the rest of the abdomen,
+there are no other pathological findings.
+
+**Cardiology Consultation on 10/29/2021:**
+
+**Medical History:** The patient reports thoracic complaints following
+the intensive care unit stay post-COVID. These pains have been noticed
+with mild exertion and are described as retrosternal with radiation to
+the left chest. This last occurred on Sunday afternoon, lasting for
+approximately 1 hour and then spontaneously resolving at rest. This pain
+cannot be induced by a change in position, coughing, or deep
+inspiration. Dyspnea is continuously present, and the patient still
+requires oxygen. Dyspnea worsens when lying down.
+
+**Cardiovascular risk factors**: Mildly elevated blood pressure
+(hypertension) since May of this year, managed with half a tablet
+according to self-measurements (averaging 120/80 mmHg, rarely in the
+130s). Lipid profile checked by the general practitioner earlier this
+year, presumably with good results. No known diabetes. Former smoker
+until 2007, but it is difficult to estimate the pack-years, as smoking
+occurred on occasions and during stressful times, less than 15
+pack-years. No family history of cardiovascular diseases.
+Uveitis/scleritis/episcleritis managed with 10mg MTX per week and 5 mg p
+
+Prednisolone orally daily, well-controlled without recurrence.
+
+**Physical Examination**: Lungs with moist rales bilaterally. Cardiac
+examination with faint heart sounds. Regular heart rate of 80/min. No
+pericardial rub. Pale-gray skin color. Respiratory rate of 15/min while
+sitting. Radial pulses palpable bilaterally. Groin pulses not examined.
+Allen\'s test operable on the right, borderline on the left.
+
+**ECG**: tachycardic sinus rhythm with a heart rate of 109/min, left
+axis deviation, regular R-wave progression in chest leads, mild
+S-persistence in V6, no significant ST-T wave changes.
+
+**Transthoracic and transesophageal echocardiography on 11/27/2020**:
+
+[Kinetics]{.underline}: Hypokinesia of the lateral and anterior walls,
+otherwise normokinetic and synergistic. Systolic function (right
+ventricle): TAPSE 18 mm (\> 16 mm), RV-S\' 17.6 cm/s (\> 10 cm/s).
+
+[Valves]{.underline}: Mitral valve - Delicate leaflets, good opening
+motion, no significant insufficiency. Lambl\'s excrescences on the
+atrial side. Small fluttering structure at the subvalvular apparatus,
+compatible with chordae tendineae. Aortic valve - Tricuspid, delicate
+valve. Functionally intact (AV Vmax 1.0 m/s). Tricuspid valve -
+Morphologically normal. Mild insufficiency. TR Vmax 1.9 m/s, sPAP 15
+mmHg + CVP. Pulmonic valve - Morphologically and functionally normal.
+
+[Other Findings:]{.underline} No pericardial effusion. Small Persistent
+Foramen Ovale. Left atrial appendage free of intracavitary thrombi at
+60°/90°/150°. Thoracic aorta with smooth-walled plaques, no dissections
+or thrombi.
+
+[Assessment]{.underline}: No structures suggestive of endocarditis. No
+relevant valvular abnormalities. Incidentally, there is a moderately
+reduced LVEF with wall motion abnormalities in the RIVA (right
+ventricular anterior) region. We request a cardiology consultation and
+further diagnostics.
+
+**Phoniatric Consultation on 10/24/2021:**
+
+[Medical History:]{.underline} Patient with a history of COVID
+pneumonia, twice tested negative. Currently, the patient has Aspergillus
+and pneumonia. Previously, the patient was in the ICU and intubated for
+two weeks due to COVID. Following speech therapy for dysphagia, a
+flexible endoscopic evaluation of swallowing (FEES) is requested.
+
+[Findings]{.underline}: FEES reveals a normal configuration of the
+larynx with good mobility of the tongue and lips. Normal gross mobility
+of the vocal cords during phonation and respiration transitions. Full
+glottic closure appears complete. Flexible transnasal swallow evaluation
+(FEES) with blue dye: Sufficient oral bolus control for liquids, purees,
+and solids. No drooling or leakage. Swallow reflex present. Voluntary
+initiation of the swallow act is possible. Side-by-side swallowing of
+test substances over the valleculae without evidence of
+pre-/intra-/post-deglutitive penetration or aspiration for all test
+consistencies. Rosenbeck\'s Penetration-Aspiration Scale score: 1
+(Minimal retention in the valleculae with puree, which can be completely
+cleared by swallowing). Normal sensitivity, strong cough reflex. No
+nasal regurgitation.
+
+[Assessment]{.underline}: Normal swallowing function.
+
+[Current Recommendations:]{.underline} Able to consume regular diet and
+thin liquids, as well as medications with water.
+
+**Therapy and Progression:** The patient was admitted for further
+treatment. Upon admission, the patient was in a reduced general
+condition with significant mobility limitations.
+
+Staphylococcus aureus was detected in a blood culture, leading to a
+transesophageal echocardiogram (TEE) on 11/26/2020. No vegetations were
+found, but a moderate hypokinesia of the left ventricle in the RIVA area
+was observed. Cardiac enzymes were within normal limits. This was
+interpreted as post-COVID myocarditis, differential diagnosis myocardial
+injury in severe ARDS, coronary artery disease, or mixed picture.
+
+In consultation with the cardiology colleagues, a cautious heart failure
+medication regimen with beta-blockers and ACE inhibitors was initiated.
+We recommend an elective coronary angiography in the future. Currently,
+the patient was symptom-free with low cardiac markers and a normal ECG,
+so acute diagnostic procedures were not indicated.
+
+The antibiotic therapy with Cefazolin was continued until 11/05/2021
+(last sterile blood cultures from 10/24/2021). Staphylococcus
+epidermidis detected in the blood culture on 10/20/21 and at the tip of
+the central venous catheter on 10/22/21 were considered
+catheter-associated. The catheter was immediately removed. The patient
+did not develop a fever during the hospital stay. Inflammatory markers
+improved over time.
+
+An abdominal ultrasound was performed due to an unclear liver lesion,
+which was found to be a congenital cyst. Echinococcus serology was
+negative.
+
+In consultation with the psychiatric colleagues, Quetiapine medication
+was cautiously resumed for known depression, but it had to be
+discontinued later due to significant QTc prolongation. Long-term oxygen
+therapy of 2 liters was indicated.
+
+Our ophthalmology colleagues recommended the resumption of MTX therapy
+given the patient\'s stable vision. We request this therapy be initiated
+and an outpatient follow-up appointment in ophthalmology arranged after
+the patient completes rehabilitation.
+
+With physiotherapy, the patient achieved mobilization up to walking.
+Swallowing and articulation difficulties also significantly improved.
+
+**Medication upon Discharge:**
+
+  **Medication**                     **Dosage**      **Frequency**                  **Route**
+  ---------------------------------- --------------- ------------------------------ ------------
+  Metoprolol Succinate (Toprol XL)   23.8 mg         1-0-1-0                        Oral
+  Dicloxacillin Sodium (Dynapen)     2176 mg         1-1-1-0                        Oral
+  Voriconazole (Vfend)               200 mg          2-0-2-0                        Oral
+  Acetaminophen (Tylenol)            500 mg          As needed                      Oral
+  Ipratropium Bromide (Atrovent)     0.26 mg/2 ml    6-0-0-0                        Inhalation
+  Albuterol Sulfate (ProAir)         1.5 mg/2.5 ml   6-0-0-0                        Inhalation
+  Amitriptyline (Elavil)             28.3 mg         0-0-1-0                        Oral
+  Citalopram (Celexa)                50 mg           1-0-0-0                        Oral
+  Melatonin                          2 mg            0-0-2-0                        Oral
+  Montelukast (Singulair)            10 mg           1-0-0-0                        Oral
+  Pantoprazole (Protonix)            45 mg           0-0-1-0                        Oral
+  Eplerenone (Inspra)                25 mg           1-0-0-0                        Oral
+  Ramipril (Altace)                  2.5 mg          0-0-1-0                        Oral
+  Folic Acid                         5 mg            0-0-1-0 48h after MTX intake   Oral
+  Methotrexate (Trexall)             15 mg           1-0-0-0 Once a Week            Oral
+
+
+</text_3>
+<text_4>
+**Dear colleague, **
+
+We thank you for referring your patient, Mr. Brian Carter, born on
+04/24/1956 to our outpatient care on 02/03/2022.
+
+**Diagnoses**: Suspected Post-Intensive-Care Syndrome with:
+
+-   Dysphagia
+
+-   ICU-acquired weakness
+
+-   Depressive mood, anxiety
+
+**Other Diagnoses:**
+
+-   COVID-19 with severe ARDS
+
+-   Symptoms began on 09/24/2021 with progressive dyspnea, cough, and
+    headache
+
+-   Initial detection of SARS-CoV-2 on 09/28/2021 in nasopharyngeal swab
+
+-   Dexamethasone from 09/29 to 10/8/2021
+
+-   Prone positioning from 09/18 to 10/8 and NO therapy
+
+-   Intubation on 09/30, initial extubation on 10/13
+
+-   Reporting to the health department by the referring physician
+
+-   Pulmonary superinfection with detection of Aspergillus fumigatus
+
+-   Voriconazole therapy since 10/7/2021
+
+-   Bacteremia with detection of Staphylococcus aureus in blood culture
+    on 10/19/21
+
+-   Flucloxacillin since 10/21/2021
+
+-   Thrombophlebitis of the right forearm
+
+-   Left eye pigment epithelium clumping, suggestive of a history of
+    retinal central serous chorioretinopathy
+
+<!-- -->
+
+-   Rheumatoid arthritis
+
+-   Uveitis
+
+-   Bronchial asthma
+
+-   Arterial hypertension
+
+-   Depression
+
+**Medical History:** Mr. Carter was treated in the intensive care unit
+for a total of 24 days in September and October 2021 due to COVID-19.
+Following intensive care treatment, he underwent neurological
+rehabilitation from 11/08/2021 to 01/18/2022, with the following
+rehabilitation results: \"Mr. I. benefited well from the therapies.
+Particularly, physiotherapy helped regain confidence in walking. During
+treatment, breathing difficulties improved, and oxygen supplementation
+was no longer necessary.\" An antidepressant therapy with Mirtazapine
+was initiated for sleep disorders and mood swings, resulting in a
+reduction in sleep disturbances.
+
+**Assessment**: Since the illness, Mr. Carter reports general fatigue,
+quick fatigue, and weakness, especially in the lower extremities. He is
+currently not undergoing physiotherapy or any other treatments.
+Regarding psychopharmacological therapy, the patient has been seeing a
+psychiatrist once a month based on anamnesis. After a short exertion, he
+experiences dyspnea and regularly needs to take breaks. Room air
+saturation was at 94%. Physical examination revealed significant
+expiratory wheezing and prolonged expiration bilaterally. Furthermore,
+the patient reports cognitive impairments with marked forgetfulness and
+difficulty concentrating. This is evident in the reduced results of the
+MiniCog (2/3 words, normal clock, 4 points) and animal naming tests
+(correct single naming of 10 animals, 3 points). Additionally, the
+patient reports an exacerbation of symptoms of depression known since
+2011, including sadness, fatigue, sleep disturbances, and anxiety. These
+worsened during the ICU stay. The current medication includes Citalopram
+40 mg and Mirtazapine 7.5 mg, which have somewhat improved previously
+worsened sleep disturbances. Psychotherapy is not currently taking place
+but is strongly recommended.
+
+Dysphagia diagnosed during the intensive care unit stay has slightly
+improved, allowing Mr. Carter to consume regular food again. However, he
+still experiences dysphagia and coughing during each meal. An
+appointment at the swallowing clinic has been scheduled by us (see
+below).
+
+**Current Recommendations:**
+
+As swallowing difficulties persist, an appointment has been scheduled at
+our local swallowing clinic. We also recommend a pulmonary evaluation.
+Contact has already been made, and the colleagues from Pulmonology will
+get in touch with Mr. Carter. Furthermore, due to a previously existing
+depressive mood with currently exacerbated symptoms, we recommend
+connecting the patient with an outpatient psychotherapist. Some
+therapists have already been suggested by the patient\'s general
+practitioner, and we strongly recommend further contact. A prescription
+for physiotherapy has been issued for pronounced muscle weakness and
+suspected ICU-acquired weakness. Further physiotherapeutic engagement
+with the general practitioner\'s assistance is urgently required.
+
+**Lab results upon Discharge:**
+
+  **Parameter**           **Results**   **Reference Range**
+  ----------------------- ------------- ---------------------
+  Neutrophils             49.0 %        42.0-77.0 %
+  Lymphocytes             31.9 %        20.0-44.0 %
+  Monocytes               7.2 %         2.0-9.5 %
+  Basophils               0.7 %         0.0-1.8 %
+  Eosinophils             10.8 %        0.5-5.5 %
+  Immature Granulocytes   0.4 %         0.0-1.0 %
+  Sodium                  139 mEq/L     136-145 mEq/L
+  Potassium               3.5 mEq/L     3.5-4.5 mEq/L
+  Creatinine              0.99 mg/dL    0.70-1.20 mg/dL
+  BUN                     25 mg/dL      17-48 mg/dL
+  Total Bilirubin         0.45 mg/dL    \< 1.20 mg/dL
+  CRP                     3.9 mg/dL     \< 5.0 mg/dL
+  ALT                     21 U/L        \< 41 U/L
+  AST                     20 U/L        \< 50 U/L
+  Alkaline Phosphatase    65 U/L        40-130 U/L
+  Gamma-GT                38 U/L        8-61 U/L
+  LDH                     160 U/L       135-250 U/L
+  Lipase                  20 U/L        13-60 U/L
+  Procalcitonin           0.03 µg/L     \< 0.50 µg/L
+  Hemoglobin              13.2 g/dL     13.5-17.0 g/dL
+  Hematocrit              44.2 %        39.5-50.5 %
+  Red Blood Cells         5.2 M/µL      4.3-5.8 M/µL
+  White Blood Cells       7.62 K/µL     3.90-10.50 K/µL
+  Platelets               281 K/µL      150-370 K/µL
+
+</text_4>
+</notes>
+</patient-record-patient_17>
+
+<patient-record-patient_18>
+Below is patient David Romero's medical record (ID: patient_18). 
+They were born on 02/16/1942 and have the following diagnosis: Cardiomyopathy.
+The patients medical record consists of 11 notes included below.
+<notes>
+<text_0>
+**Dear colleague, **
+
+We would like to report to you about our patient, Mr. David Romero, born
+on 02/16/1942, who was under our inpatient care from 03/25/2016 to
+03/30/2016.
+
+**Diagnoses:**
+
+-   Suspected myocarditis
+
+-   Uncomplicated biopsy, pending results
+
+-   LifeVest has been adjusted
+
+-   Left ventricular ejection fraction of 28%
+
+-   Chronic hepatitis C
+
+-   Status post hepatitis A
+
+-   Post-antiviral therapy
+
+-   Exclusion of relevant coronary artery disease
+
+**Medical History:** The patient was admitted with suspected myocarditis
+due to a significantly impaired pump function noticed during outpatient
+visits. Anamnestically, the patient reported experiencing fatigue and
+exertional dyspnea since mid-December, with no recollection of a
+preceding infection. Antiviral therapy with Interferon/Ribavirin for
+chronic Hepatitis C had been ongoing since November. An outpatient
+evaluation had excluded relevant coronary artery disease.
+
+**Current Presentation:** Suspected inflammatory/dilated cardiomyopathy,
+Indication for biopsy
+
+**Physical Examination:** The patient is fully oriented with good
+general condition and normal mental state. Dry skin and mucous
+membranes, normal breathing, no cyanosis. Cranial nerves are grossly
+intact, no focal neurological deficits, good muscle strength and
+sensitivity all around. Clear, rhythmic heart sounds, with a 2/6
+systolic murmur at the apex. Lungs are evenly ventilated without rales.
+Resonant percussion. Soft and supple abdomen without guarding, spleen
+and liver not palpable. Normal bowel sounds.
+
+**Coronary Angiography**: Globally significantly impaired left
+ventricular function (EF: 28%)
+
+[Myocardial biopsy:]{.underline} Uncomplicated retrieval of LV
+endomyocardial biopsies
+
+[Recommendation]{.underline}: A conservative medical approach is
+recommended, and further therapeutic decisions will depend on the
+histological, immunohistological, and molecular biological examination
+results of the now-retrieved myocardial biopsies.
+
+[Procedure]{.underline}: Femoral closure system is applied, 6 hours of
+bed rest, administration of 100 mg/day of Aspirin for 4 weeks following
+left ventricular heart biopsy.
+
+**Echocardiography before Heart Catheterization**:
+
+Performed in sinus rhythm. Satisfactory ultrasound condition.
+
+[Findings]{.underline}: Moderately dilated left ventricle (LVDd 64mm).
+Markedly reduced systolic LV function (EF 28%). Global longitudinal
+strain (2D speckle tracking): -8.6%.
+
+Regional wall motion abnormalities: despite global hypokinesia, the
+posterolateral wall (basal) contracts best. Diastolic dysfunction Grade
+1 (LV relaxation disorder) (E/A 0.7) (E/E\' mean 13.8). No LV
+hypertrophy. Morphologically age-appropriate heart valves. Moderately
+dilated left atrium (LA Vol. 71ml). Mild mitral valve insufficiency
+(Grade 1 on a 3-grade scale). Normal-sized right ventricle. Moderately
+reduced RV function Normal-sized right atrium. Minimal tricuspid valve
+insufficiency (Grade 0-1 on a 3-grade scale). Systolic pulmonary artery
+pressure in the normal range (systolic PAP 27mmHg).
+
+No thrombus detected. Minimal pericardial effusion, circular, maximum
+2mm, no hemodynamic relevance.
+
+**Echocardiography after Heart Catheterization:**
+
+[Indication]{.underline}: Follow-up on pericardial effusion.
+
+[Examination]{.underline}: TTE at rest, including duplex and
+quantitative determination of parameters. [Echocardiographic
+Finding:]{.underline} Regarding pericardial effusion, the status is the
+same. Circular effusion, maximum 2mm.
+
+**ECG after Heart Catheterization:**
+
+76/min, sinus rhythm, complete left bundle branch block.
+
+**Summary:** On 03/26/2016, biopsy and left heart catheterization were
+successfully performed without complications. Here, too, the patient
+exhibited a significantly impaired pump function, currently at 28%.
+
+**Therapy and Progression:**
+
+Throughout the inpatient stay, the patient remained cardiorespiratorily
+stable at all times. Malignant arrhythmias were ruled out via telemetry.
+After the intervention, echocardiography showed no pericardial effusion.
+The results of the endomyocardial biopsies are still pending. An
+appointment for results discussion and evaluation of further procedures
+at our facility should be scheduled in 3 weeks. Following the biopsy,
+Aspirin 100 as specified should be given for 4 weeks. We intensified the
+ongoing heart failure therapy and added Spironolactone to the
+medication, recommending further escalation based on hemodynamic
+tolerability.
+
+**Current Recommendations:** Close cardiological follow-up examinations,
+electrolyte monitoring, and echocardiography are advised. Depending on
+the left ventricular ejection fraction\'s course, the implantation of an
+ICD or ICD/CRT system should be considered after 3 months. On the day of
+discharge, we initiated the adjustment of a Life Vest, allowing the
+patient to return home in good general condition.
+
+**Medication upon Discharge: **
+
+  **Medication **              **Dosage **   **Frequency**
+  ---------------------------- ------------- ---------------
+  Aspirin                      100 mg        1-0-0
+  Ramipril (Altace)            2.5 mg        1-0-1
+  Carvedilol (Coreg)           12.5 mg       1-0-1
+  Torasemide (Torem)           5 mg          1-0-0
+  Spironolactone (Aldactone)   25 mg         1-0-0
+  L-Thyroxine (Synthroid)      50 µg         1-0-0
+
+**Lab results upon Discharge:**
+
+  **Parameter**            **Results**   **Reference Range**
+  ------------------------ ------------- ---------------------
+  Absolute Erythroblasts   0.01/nL       \< 0.01/nL
+  Sodium                   134 mEq/L     136-145 mEq/L
+  Potassium                4.5 mEq/L     3.5-4.5 mEq/L
+  Creatinine (Jaffé)       1.25 mg/dL    0.70-1.20 mg/dL
+  Urea                     50 mg/dL      17-48 mg/dL
+  Total Bilirubin          1.9 mg/dL     \< 1.20 mg/dL
+  CRP                      4.1 mg/L      \< 5.0 mg/L
+  Troponin-T               78 ng/L       \< 14 ng/L
+  ALT                      67 U/L        \< 41 U/L
+  AST                      78 U/L        \< 50 U/L
+  Alkaline Phosphatase     151 U/L       40-130 U/L
+  gamma-GT                 200 U/L       8-61 U/L
+  Free Triiodothyronine    2.3 ng/L      2.00-4.40 ng/L
+  Free Thyroxine           14.2 ng/L     9.30-17.00 ng/L
+  TSH                      4.1 mU/L      0.27-4.20 mU/L
+  Hemoglobin               11.6 g/dL     13.5-17.0 g/dL
+  Hematocrit               34.5%         39.5-50.5%
+  Erythrocytes             3.7 /pL       4.3-5.8/pL
+  Leukocytes               9.56/nL       3.90-10.50/nL
+  MCV                      92.5 fL       80.0-99.0 fL
+  MCH                      31.1 pg       27.0-33.5 pg
+  MCHC                     33.6 g/dL     31.5-36.0 g/dL
+  MPV                      8.9 fL        7.0-12.0 fL
+  RDW-CV                   14.0%         11.5-15.0%
+  Quick                    89%           78-123%
+  INR                      1.09          0.90-1.25
+  PTT Actin-FS             25.3 sec.     22.0-29.0 sec.
+
+
+</text_0>
+<text_1>
+**Dear colleague, **
+
+We are reporting on the pending findings of the myocardial biopsies
+taken from Mr. David Romero, born on 02/16/1942 on 03/26/2016 due to the
+deterioration of LV function from 40% to 28% after interferon therapy
+for HCV infection.
+
+**Diagnoses:**
+
+-   Suspected myocarditis
+
+-   LifeVest
+
+-   Left ventricular ejection fraction of 28%
+
+-   Chronic hepatitis C
+
+-   Status post hepatitis A
+
+-   Post-antiviral therapy
+
+-   Exclusion of relevant coronary artery disease
+
+**Current Medication:**
+
+  **Medication **              **Dosage **   **Frequency**
+  ---------------------------- ------------- ---------------
+  Aspirin                      100 mg        1-0-0
+  Ramipril (Altace)            2.5 mg        1-0-1
+  Carvedilol (Coreg)           12.5 mg       1-0-1
+  Torasemide (Torem)           5 mg          1-0-0
+  Spironolactone (Aldactone)   25 mg         1-0-0
+  L-Thyroxine (Synthroid)      50 µg         1-0-0
+
+**Myocardial Biopsy on 01/27/2014:**
+
+[Molecular Biology:]{.underline}
+
+PCR examinations performed under the question of myocardial infection
+with cardiotropic pathogens yielded a positive detection of HCV-specific
+RNA in myocardial tissue without quantification possibility
+(methodically determined). Otherwise, there was no evidence of
+myocardial infection with enteroviruses, adenoviruses, Epstein-Barr
+virus, Human Herpes Virus Type 6 A/B, or Erythrovirus genotypes 1/2 in
+the myocardium.
+
+[Assessment]{.underline}: Positive HCV-mRNA detection in myocardial
+tissue. This positive test result does not unequivocally prove an
+infection of myocardial cells, as contamination of the tissue sample
+with HCV-infected peripheral blood cells cannot be ruled out in chronic
+hepatitis.
+
+**Histology and Immunohistochemistry**:
+
+Unremarkable endocardium, normal cell content of the interstitium with
+only isolated lymphocytes and histiocytes in the histologically examined
+samples. Quantitatively, immunohistochemically examined native
+preparations showed borderline high CD3-positive lymphocytes with a
+diffuse distribution pattern at 10.2 cells/mm2. No increased
+perforin-positive cytotoxic T cells. The expression of cell adhesion
+molecules is discreetly elevated. Otherwise, only slight perivascular
+but no interstitial fibrosis. Cardiomyocytes are properly arranged and
+slightly hypertrophied (average diameter around 23 µm), the surrounding
+capillaries are unremarkable. No evidence of acute
+inflammation-associated myocardial cell necrosis (no active myocarditis)
+and no interstitial scars from previous myocyte loss. No lipomatosis.
+
+[Assessment:]{.underline} Based on the myocardial biopsy findings, there
+is positive detection of HCV-RNA in the myocardial tissue samples, with
+the possibility of tissue contamination with HCV-infected peripheral
+blood cells. Significant myocardial inflammatory reaction cannot be
+documented histologically and immunohistochemically. In the endocardial
+samples, apart from mild hypertrophy of properly arranged
+cardiomyocytes, there are no significant signs of myocardial damage
+(interstitial fibrosis or scars from previous myocyte loss). Therefore,
+the present findings do not indicate the need for specific further
+antiviral or anti-inflammatory therapy, and the existing heart failure
+medication can be continued unchanged. If LV function impairment
+persists for an extended period, there is an indication for
+antiarrhythmic protection of the patient using an ICD.
+
+
+</text_1>
+<text_2>
+**Dear colleague, **
+
+We thank you for referring your patient Mr. David Romero, born on
+02/16/1942, to us for echocardiographic follow-up on 05/04/2016.
+
+**Diagnoses:**
+
+-   Dilatated cardiomyopathy
+
+-   LifeVest
+
+-   Left ventricular ejection fraction of 28%
+
+-   Chronic Hepatitis C
+
+-   Status post Hepatitis A
+
+-   Post-antiviral therapy
+
+-   Exclusion of relevant coronary artery disease
+
+-   Type 2 diabetes mellitus
+
+-   Hypothyroidism
+
+**Current Medication:**
+
+  **Medication **              **Dosage **   **Frequency**
+  ---------------------------- ------------- ---------------
+  Aspirin                      100 mg        1-0-0
+  Ramipril (Altace)            2.5 mg        1-0-1
+  Carvedilol (Coreg)           12.5 mg       1-0-1
+  Torem (Torasemide)           5 mg          1-0-0
+  Spironolactone (Aldactone)   25 mg         1-0-0
+  L-Thyroxine (Synthroid)      50 µg         1-0-0
+
+**Physical Examination:** The patient is fully oriented with good
+general condition and normal mental state. Dry skin and mucous
+membranes, normal breathing, no cyanosis. Cranial nerves are grossly
+intact, no focal neurological deficits, good muscle strength and
+sensitivity all around. Clear, rhythmic heart sounds, with a 2/6
+systolic murmur at the apex. Lungs are evenly ventilated without rales.
+Resonant percussion. Soft and supple abdomen without pressure pain,
+spleen and liver not palpable. Normal bowel sounds.
+
+**Echocardiography: M-mode and 2-dimensional.**
+
+The left ventricle measures approximately 65/56 mm (normal up to 56 mm).
+
+The right atrium and right ventricle are of normal dimensions.
+
+Global progressive reduction in contractility, morphologically
+unremarkable.
+
+In Doppler echocardiography, normal heart valves are observed.
+
+Mitral valve insufficiency Grade I.
+
+[Assessment]{.underline}: Dilated cardiomyopathy with slightly reduced
+left ventricular function. MI I TII °, PAP 23 mm Hg + CVP. No more
+pulmonary embolism detectable.
+
+**Summary:**
+
+Currently, the cardiac situation is stable, LVEDD slightly decreasing.
+
+
+</text_2>
+<text_3>
+**Dear colleague, **
+
+We thank you for referring your patient, Mr. David Romero, born on
+02/16/1942 to us for echocardiographic follow-up on 06/15/2016.
+
+**Diagnoses:**
+
+-   Dilatated cardiomyopathy
+
+-   LifeVest
+
+-   Left ventricular ejection fraction of 28%
+
+-   Chronic Hepatitis C
+
+-   Status post Hepatitis A
+
+-   Post-antiviral therapy
+
+-   Exclusion of relevant coronary artery disease
+
+-   Type 2 diabetes mellitus
+
+-   Hypothyroidism
+
+**Medication upon Admission:**
+
+  **Medication **              **Dosage **   **Frequency**
+  ---------------------------- ------------- ---------------
+  Aspirin                      100 mg        1-0-0
+  Ramipril (Altace)            2.5 mg        1-0-1
+  Carvedilol (Coreg)           12.5 mg       1-0-1
+  Torasemide (Torem)           5 mg          1-0-0
+  Spironolactone (Aldactone)   25 mg         1-0-0
+  L-Thyroxine (Synthroid)      50 µg         1-0-0
+
+**Physical Examination:** The patient is fully oriented with good
+general condition and normal mental state. Dry skin and mucous
+membranes, normal breathing, no cyanosis. Cranial nerves are grossly
+intact, no focal neurological deficits, good muscle strength and
+sensitivity all around. Clear, rhythmic heart sounds, with a 2/6
+systolic murmur at the apex. Lungs are evenly ventilated without rales.
+Resonant percussion. Soft and supple abdomen without guarding, spleen
+and liver not palpable. Normal bowel sounds.
+
+**Echocardiography from 06/15/2016**: Good ultrasound conditions.
+
+The left ventricle is dilated to approximately 65/57 mm (normal up to 56
+mm). The left atrium is dilated to 48 mm. Normal thickness of the left
+ventricular myocardium. Ejection fraction is around 28%. Heart valves
+show normal flow velocities.
+
+**Summary:**
+
+Currently, the cardiac situation is stable, LVEDD slightly decreasing,
+potassium and creatinine levels were obtained. If EF remains this low,
+an ICD may be indicated.
+
+**Lab results from 06/15/2016:**
+
+  **Parameter**                       **Result**   **Reference Range**
+  ----------------------------------- ------------ ---------------------
+  Reticulocytes                       0.01/nL      \< 0.01/nL
+  Sodium                              135 mEq/L    136-145 mEq/L
+  Potassium                           4.8 mEq/L    3.5-4.5 mEq/L
+  Creatinine                          1.34 mg/dL   0.70-1.20 mg/dL
+  BUN                                 49 mg/dL     17-48 mg/dL
+  Total Bilirubin                     1.9 mg/dL    \< 1.20 mg/dL
+  C-reactive Protein                  4.1 mg/L     \< 5.0 mg/L
+  Troponin-T                          78 ng/L      \< 14 ng/L
+  ALT                                 67 U/L       \< 41 U/L
+  AST                                 78 U/L       \< 50 U/L
+  Alkaline Phosphatase                151 U/L      40-130 U/L
+  gamma-GT                            200 U/L      8-61 U/L
+  Free Triiodothyronine (T3)          2.3 ng/L     2.00-4.40 ng/L
+  Free Thyroxine (T4)                 14.2 ng/L    9.30-17.00 ng/L
+  Thyroid Stimulating Hormone (TSH)   4.1 mU/L     0.27-4.20 mU/L
+  Hemoglobin                          11.6 g/dL    13.5-17.0 g/dL
+  Hematocrit                          34.5%        39.5-50.5%
+  Red Blood Cell Count                3.7 M/µL     4.3-5.8 M/µL
+  White Blood Cell Count              9.56 K/µL    3.90-10.50 K/µL
+  Platelet Count                      280 K/µL     150-370 K/µL
+  MC                                  92.5 fL      80.0-99.0 fL
+  MCH                                 31.1 pg      27.0-33.5 pg
+  MCHC                                33.6 g/dL    31.5-36.0 g/dL
+  MPV                                 8.9 fL       7.0-12.0 fL
+  RDW-CV                              14.0%        11.5-15.0%
+  Quick                               89%          78-123%
+  INR                                 1.09         0.90-1.25
+  Partial Thromboplastin Time         25.3 sec.    22.0-29.0 sec.
+
+
+</text_3>
+<text_4>
+**Dear colleague, **
+
+We are reporting to you about Mr. David Romero, born on 02/16/1942, who
+presented himself at our Cardiology University Outpatient Clinic on
+06/30/2016.
+
+**Diagnoses:**
+
+-   Dilated cardiomyopathy
+
+-   Exclusion of coronary heart diseases
+
+-   Myocardial biopsy showed no inflammation
+
+-   Left bundle branch block
+
+-   Severely impaired left ventricular (LV) function (ejection fraction
+    around 30%)
+
+-   LifeVest
+
+-   Planned CRT-D implantation
+
+-   Chronic Hepatitis C
+
+-   Type 2 diabetes
+
+**Current Medication:**
+
+  **Medication **              **Dosage **      **Frequency**
+  ---------------------------- ---------------- ---------------
+  Aspirin                      100 mg/tablet    1-0-0
+  Ramipril (Altace)            2.5 mg/tablet    1-0-1
+  Carvedilol (Coreg)           12.5 mg/tablet   1-0-1
+  Torasemide (Torem)           5 mg/tablet      1-0-0
+  Spironolactone (Aldactone)   25 mg/tablet     1-0-0
+  L-Thyroxine (Synthroid)      50 µg/tablet     1-0-0
+
+**Echocardiography on 06/30/2016:** In sinus rhythm. Adequate ultrasound
+window.
+
+Moderately dilated left ventricle (LVDd 63mm). Significantly reduced
+systolic LV function (EF biplane 29%). No LV hypertrophy.
+
+**ECG on 06/30/2016:** Sinus rhythm, regular tracing, heart rate 69/min,
+complete left bundle branch block, QRS 135 ms, ERBS with left bundle
+branch block.
+
+**Assessment**: Mr. Romero presents himself for the follow-up assessment
+of known dilated cardiomyopathy. He currently reports minimal dyspnea.
+Coronary heart disease has been ruled out. No virus was detected
+bioptically. However, the recent echocardiography still shows severely
+impaired LV function.
+
+**Current Recommendations:** Given the presence of left bundle branch
+block, there is an indication for CRT-D implantation. For this purpose,
+we have scheduled a pre-admission appointment, with the implantation
+planned for 07/04/2016. We kindly request a referral letter. The
+LifeVest should continue to be worn until the implantation, despite the
+pressure sores on the thorax.
+
+
+</text_4>
+<text_5>
+**Dear colleague, **
+
+We would like to report to you about our patient, Mr. David Romero, born
+on 02/16/1942, who was in our inpatient care from 07/04/2016 to
+07/06/2016.
+
+**Diagnoses:**
+
+-   Dilated cardiomyopathy
+
+-   Exclusion of coronary heart diseases
+
+-   Myocardial biopsy showed no inflammation
+
+-   Left bundle branch block
+
+-   Severely impaired left ventricular (LV) function (ejection fraction
+    around 30%)
+
+-   LifeVest
+
+-   Planned CRT-D implantation
+
+-   Chronic Hepatitis C
+
+-   Type 2 diabetes
+
+**Medication upon Admission:**
+
+  **Medication **              **Dosage **   **Frequency**
+  ---------------------------- ------------- ---------------
+  Aspirin                      100 mg        1-0-0
+  Ramipril (Altace)            2.5 mg        1-0-1
+  Carvedilol (Coreg)           12.5 mg       1-0-1
+  Torem (Torasemide)           5 mg          1-0-0
+  Spironolactone (Aldactone)   25 mg         1-0-0
+  L-Thyroxine (Synthroid)      50 µg         1-0-0
+  Sitagliptin (Januvia)        100 mg        1-0-0
+  Insulin glargine (Lantus)                  0-0-20IE
+
+**Current Presentation:** The current admission was elective for CRT-D
+implantation in dilated cardiomyopathy with severely impaired LV
+function despite full heart failure medication and complete left bundle
+branch block. Please refer to previous medical records for a detailed
+history. On 07/05/2016, a CRT-ICD system was successfully implanted. The
+peri- and post-interventional course was uncomplicated. Pneumothorax was
+ruled out post-interventionally. The wound conditions are
+irritation-free. The ICD card was given to the patient. We request
+outpatient follow-up on the above-mentioned date for wound inspection
+and CRT follow-up. Please adjust the known cardiovascular risk factors.
+
+**Findings:**
+
+**ECG upon Admission:** Sinus rhythm 66/min, PQ 176ms, QRS 126ms, QTc
+432ms, Complete left bundle branch block with corresponding excitation
+regression disorder.
+
+**Procedure**: Implantation of a CRT-D with left ventricular multipoint
+pacing left pectoral. Smooth triple puncture of the lateral left
+subclavian vein and implantation of an active single-coil electrode in
+the RV apex with very good electrical values. Trouble-free probing of
+the CS and direct venography using a balloon occlusion catheter.
+Identification of a suitable lateral vein and implantation of a
+quadripolar electrode (Quartet, St. Jude Medical) with very good
+electrical values. No phrenic stimulation up to 10 volts in all
+polarities. Finally, implantation of an active P/S electrode in the
+right atrial roof with equally very good electrical values. Connection
+to the device and submuscular implantation. Wound irrigation and layered
+wound closure with absorbable suture material. Finally, extensive
+testing of all polarities of the LV electrode and activation of
+multipoint pacing. Final setting of the ICD.
+
+**Chest X-ray on 07/05/2016:**
+
+[Clinical status, question, justifying indication:]{.underline} History
+of CRT-D implantation. Question about lead position, pneumothorax?
+
+**Findings**: New CRT-D unit left pectoral with leads projected onto the
+right ventricle, the right atrium, and the sinus coronarius. No
+pneumothorax.
+
+Normal heart size. No pulmonary congestion. No diffuse infiltrates. No
+pleural effusions.
+
+**ECG at Discharge:** Continuous ventricular PM stimulation, HR: 66/min.
+
+**Current Recommendations:**
+
+-   We request a follow-up appointment in our Pacemaker Clinic. Please
+    provide a referral slip.
+
+-   We ask for the protection of the left arm and avoidance of
+    elevations \> 90 degrees. Self-absorbing sutures have been used.
+
+-   We request regular wound checks.
+
+
+</text_5>
+<text_6>
+**Dear colleague, **
+
+We thank you for referring your patient, Mr. David Romero, born on
+02/16/1942, who presented to our Cardiological University Outpatient
+Clinic on 08/26/2016.
+
+**Diagnoses:**
+
+-   Dilated cardiomyopathy
+
+-   Exclusion of coronary heart diseases
+
+-   Myocardial biopsy showed no inflammation
+
+-   Left bundle branch block
+
+-   Severely impaired left ventricular (LV) function
+
+-   LifeVest
+
+-   CRT-D implantation
+
+-   Chronic Hepatitis C
+
+-   Type 2 diabetes
+
+**Current Medication:**
+
+  **Medication **              **Dosage **   **Frequency**
+  ---------------------------- ------------- ---------------
+  Aspirin                      100 mg        1-0-0
+  Ramipril (Altace)            2.5 mg        1-0-1
+  Carvedilol (Coreg)           12.5 mg       1-0-1
+  Torem (Torasemide)           5 mg          1-0-0
+  Spironolactone (Aldactone)   25 mg         1-0-0
+  L-Thyroxine (Synthroid)      50 µg         1-0-0
+  Sitagliptin (Januvia)        100 mg        1-0-0
+  Insulin glargine (Lantus)                  0-0-20IE
+
+**Current Presentation**: Slightly increasing exertional dyspnea, no
+coronary heart disease.
+
+**Cardiovascular Risk Factors:**
+
+-   Family history: No
+
+-   Smoking: No
+
+-   Hypertension: No
+
+-   Diabetes: Yes
+
+-   Dyslipidemia: Yes
+
+**Physical Examination:** The patient is fully oriented with good
+general condition and normal mental state. Dry skin and mucous
+membranes, normal breathing, no cyanosis. Cranial nerves are grossly
+intact, no focal neurological deficits, good muscle strength and
+sensitivity all around. Clear, rhythmic heart sounds, with a 2/6
+systolic murmur at the apex. Lungs are evenly ventilated without rales.
+Resonant percussion. Soft and supple abdomen without pressure pain,
+spleen and liver not palpable. Normal bowel sounds.
+
+**Findings**:
+
+**Resting ECG:** Sinus rhythm, 83 bpm. Blood pressure: 120/70 mmHg.
+
+**Echocardiography: M-mode and 2-dimensional**
+
+Left ventricle dimensions: Approximately 57/45 mm (normal up to 56 mm),
+moderately dilated
+
+-   Right atrium and right ventricle: Normal dimensions
+
+-   Normal thickness of left ventricular muscle
+
+-   Globally, mild reduction in contractility
+
+-   Heart valves: Morphologically normal
+
+-   Doppler-Echocardiography: No significant valve regurgitation
+
+**Assessment**: Mildly dilated cardiomyopathy with slightly reduced left
+ventricular function. Ejection fraction at 45 - 50%. Mild diastolic
+dysfunction. Mild tricuspid regurgitation, pulmonary artery pressure 22
+mm Hg, and left ventricular filling pressure slightly increased.
+
+**Stress Echocardiography: Stress echocardiography with exercise test**
+
+-   Stress test protocol: Treadmill exercise test
+
+-   Reason for stress test: Exertional dyspnea
+
+-   Quality of the ultrasound: Good
+
+-   Initial workload: 50 watts
+
+-   Maximum workload achieved: 150 Watt
+
+-   Blood pressure response: Systolic BP increased from 112/80 mmHg to
+    175/90 mmHg
+
+-   Heart rate response: Increased from 71bpm to 124bpm
+
+-   Exercise terminated due to leg pain
+
+**Resting ECG:** Sinus rhythm**.** No significant changes during
+exercise
+
+**Echocardiography at rest:** Normokinesis of all left ventricular
+segments EF: 45 - 50%
+
+**Echocardiography during exercise:** Increased contractility and wall
+thickening of all segments
+
+[Summary]{.underline}: No dynamic wall motion abnormalities. No evidence
+of exercise-induced myocardial ischemia
+
+**Carotid Doppler Ultrasound:** Both common carotid arteries are
+smooth-walled**.** Intima-media thickness: 0.8 mm**.** Small plaque in
+the carotid bulb on both sides**.** Normal flow in the internal and
+external carotid arteries**.** Normal dimensions and flow in the
+vertebral arteries
+
+**Summary:** Non-obstructive carotid plaques**.** Indicated to lower LDL
+to below 1.8 mmol/L
+
+**Summary:**
+
+-   Stress echocardiography shows no evidence of ischemia, EF \>45-50%
+
+-   Carotid duplex shows minimal non-obstructive plaques
+
+-   Increase Simvastatin to 20 mg, target LDL-C \< 1.8 mmol/L
+
+
+</text_6>
+<text_7>
+**Dear colleague, **
+
+We would like to inform you about the results of the cardiac
+catheterization of Mr. David Romero, born on 02/16/1942 performed by us
+on 08/10/2022.
+
+**Diagnoses:**
+
+-   Dilated cardiomyopathy
+
+-   Exclusion of coronary heart diseases
+
+-   Myocardial biopsy showed no inflammation
+
+-   Left bundle branch block
+
+-   Severely impaired left ventricular (LV) function
+
+-   LifeVest
+
+-   CRT-D implantation
+
+-   Chronic Hepatitis C
+
+-   Type 2 diabetes
+
+**Procedure:** Right femoral artery puncture. Left ventriculography with
+a 5F pigtail catheter in the right anterior oblique projection. Coronary
+angiography with 5F JL4.0 and 5F JR 4.0 catheters. End-diastolic
+pressure in the left ventricle within the normal range, measured in
+mmHg. No pathological pressure gradient across the aortic valve.
+
+**Coronary angiography:**
+
+-   Unremarkable left main stem.
+
+-   The left anterior descending (LAD) artery shows mild wall changes,
+    with a maximum stenosis of 20-\<30%.
+
+-   The robust right coronary artery (RCA) is stenosed proximally by
+    30-40%, subsequently ectatic and then stenosed to 40-\<50% distally.
+    Slow contrast clearance. The right coronary artery is also stenosed
+    up to 30%.
+
+-   Left-dominant coronary circulation.
+
+**Assessment**: Diffuse coronary atherosclerosis with less than 50%
+stenosis in the RCA and evidence of endothelial dysfunction.
+
+**Current Recommendations:**
+
+-   Initiation of Ranolazine
+
+-   Additional stress myocardial perfusion scintigraphy
+
+
+</text_7>
+<text_8>
+**Dear colleague, **
+
+We would like to inform you about the results of the Myocardial
+Perfusion Scintigraphy performed on our patient, Mr. David Romero, born
+on 02/16/1942, on 09/23/2022.
+
+**Diagnoses:**
+
+-   Dilated cardiomyopathy
+
+-   Exclusion of coronary heart diseases
+
+-   Myocardial biopsy showed no inflammation
+
+-   Left bundle branch block
+
+-   Severely impaired left ventricular (LV) function (ejection fraction
+    around 30%)
+
+-   LifeVest
+
+-   CRT-D implantation
+
+-   Chronic Hepatitis C
+
+-   Type 2 diabetes
+
+**Physical Examination:** The patient is fully oriented with good
+general condition and normal mental state. Dry skin and mucous
+membranes, normal breathing, no cyanosis. Cranial nerves are grossly
+intact, no focal neurological deficits, good muscle strength and
+sensitivity all around. Clear, rhythmic heart sounds, with a 2/6
+systolic murmur at the apex. Lungs are evenly ventilated without rales.
+Resonant percussion. Soft and supple abdomen without guarding, spleen
+and liver not palpable. Normal bowel sounds.
+
+**Myocardial Perfusion Scintigraphy:**
+
+The myocardial perfusion scintigraphy was conducted using 365 MBq of
+99m-Technetium MIBI during pharmacological stress and 383 MBq of
+99m-Technetium MIBI at rest.
+
+[Technique]{.underline}: Initially, the patient was pharmacologically
+stressed with the intravenous administration of 400 µg of Regadenoson
+over 20 seconds, accompanied by ergometer exercise at 50 W.
+Subsequently, the intravenous injection of the radiopharmaceutical was
+performed. The maximum blood pressure achieved during the stress phase
+was 143/84 mm Hg, and the maximum heart rate reached was 102 beats per
+minute.
+
+Approximately 60 minutes later, ECG-triggered acquisition of a
+360-degree SPECT study was conducted with reconstructions of short and
+long-axis slices.
+
+Due to inhomogeneities in the myocardial wall segments during stress,
+rest images were acquired on another examination day. Following the
+intravenous injection of the radiopharmaceutical, ECG-triggered
+acquisition of a 360-degree SPECT study was performed, including
+short-axis and long-axis slices, approximately 60 minutes later.
+
+[Clinical Information:]{.underline} Known coronary heart disease (RCA
+50%). ICD/CRT pacemaker.
+
+[Findings]{.underline}: No clear perfusion defects are seen in the
+scintigraphic images acquired after pharmacologic exposure to
+Regadenoson. This finding remains unchanged in the scintigraphic images
+acquired at rest.
+
+Quantitative analysis shows a normal-sized ventricle with a normal left
+ventricular ejection fraction (LVEF) of 53% under exercise conditions
+and 47% at rest (EDV 81 mL). There are no clear wall motion
+abnormalities. In the gated SPECT analysis, there are no definite wall
+motion abnormalities observed in both stress and rest conditions.
+
+**Quantitative Scoring:**
+
+-   SSS (Summed Stress Score): 3 (4.4%)
+
+-   SRS (Summed Rest Score): 0 (0.0%)
+
+-   SDS (Summed Difference Score): 3 (4.4%)
+
+**Assessment**: No evidence of myocardial perfusion defects with
+Regadenoson stress or at rest. Normal ventricular size and function with
+no significant wall motion abnormalities.
+
+
+</text_8>
+<text_9>
+**Dear colleague, **
+
+We would like to report on our patient, Mr. David Romero, born on
+02/16/1942, who was under our inpatient care from 05/20/2023 to
+05/21/2023.
+
+**Diagnoses:**
+
+-   Dilated cardiomyopathy
+
+-   Exclusion of coronary heart diseases
+
+-   Myocardial biopsy showed no inflammation
+
+-   Left bundle branch block
+
+-   Severely impaired left ventricular (LV) function
+
+-   LifeVest
+
+-   CRT-D implantation
+
+-   Chronic Hepatitis C
+
+-   Type 2 diabetes
+
+**Medical History:** The patient was admitted for device replacement due
+and upgrading to a CRT-P pacemaker. At admission, the patient reported
+no complaints of fever, cough, dyspnea, chest pain, or melena.
+
+**Physical Examination:** The patient is fully oriented with good
+general condition and normal mental state. Dry skin and mucous
+membranes, normal breathing, no cyanosis. Cranial nerves are grossly
+intact, no focal neurological deficits, good muscle strength and
+sensitivity all around. Clear, rhythmic heart sounds, with a 2/6
+systolic murmur at the apex. Lungs are evenly ventilated without rales.
+Resonant percussion. Soft and supple abdomen without guarding, spleen
+and liver not palpable. Normal bowel sounds.
+
+**Medication upon Admission**
+
+  **Medication**              **Dosage**     **Frequency**
+  --------------------------- -------------- ----------------------
+  Insulin glargine (Lantus)   450 E/1.5 ml   0-0-0-6-8 IU
+  Insulin lispro (Humalog)    300 E/3 ml     5-8 IU-5-8 IU-5-8 IU
+  Levothyroxine (Synthroid)   100 mcg        1-0-0-0
+  Colecalciferol              12.5 mcg       2-0-0-0
+  Atorvastatin (Lipitor)      21.7 mg        0-0-1-0
+  Amlodipine (Norvasc)        6.94 mg        1-0-0-0
+  Ramipril (Altace)           5 mg           1-0-0-0
+  Torasemide (Torem)          5 mg           0-0-0.5-0
+  Carvedilol (Coreg)          25 mg          0.5-0-0.5-0
+  Simvastatin (Zocor)         40 mg          0-0-0.5-0
+  Aspirin                     100 mg         1-0-0-0
+
+**Therapy and Progression:** The patient\'s current admission was
+elective for the implantation of a 3-chamber CRT-D device due to device
+depletion. The procedure was performed without complications on
+05/20/2023. The post-interventional course was uneventful. The
+implantation site showed no irritation or significant hematoma at the
+time of discharge, and no pneumothorax was detected on X-ray.
+
+To protect the surgical wound, we request dry wound dressing for the
+next 10 days and clinical wound checks. Suture removal is not necessary
+with absorbable suture material. We advise against arm elevation for the
+next 4 weeks, avoiding heavy lifting on the side of the device pocket
+and gradual, pain-adapted full range of motion after 4 weeks.
+
+**Current Recommendations:** We kindly request an outpatient follow-up
+appointment in our Pacemaker Clinic.
+
+**Medication upon Discharge:**
+
+  **Medication **               **Dosage **     **Frequency**
+  ----------------------------- --------------- -----------------------
+  Insulin glargine (Lantus)     450 E./1.5 ml   0-0-0-/6-8 IU
+  Insulin lispro (Humalog)      300 E./3 ml     5-8 IU/-5-8 IU/5-8 IU
+  Levothyroxine (Synthroid)     100 µg          1-0-0-0
+  Colecalciferol (Vitamin D3)   12.5 µg         2-0-0-0
+  Atorvastatin (Lipitor)        21.7 mg         0-0-1-0
+  Amlodipine (Norvasc)          6.94 mg         1-0-0-0
+  Ramipril (Altace)             5 mg            1-0-0-0
+  Torasemide (Torem)            5 mg            0-0-0.5-0
+  Carvedilol (Coreg)            25 mg           0.5-0-0.5-0
+  Simvastatin (Zocor)           40 mg           0-0-0.5-0
+  Aspirin                       100 mg          1-0-0-0
+  Colecalciferol                12.5 µg         2-0-0-0
+
+**Addition: Findings:**
+
+**ECG at Discharge:** Sinus rhythm, ventricular pacing, QRS 122ms, QTc
+472ms
+
+**Rhythm Examination on 05/20/2023:**
+
+[Results:]{.underline} Replacement of a 3-chamber CRT-D device (new:
+SJM/Abbott Quadra Assura) due to impending battery depletion:
+Uncomplicated replacement. Tedious freeing of the submuscular device and
+proximal lead portions using a plasma blade. Extraction of the old
+device. Connection to the new device. Avoidance of device fixation in
+the submuscular position. Hemostasis by electrocauterization. Layered
+wound closure. Skin closure with absorbable intracutaneous sutures. End
+adjustment of the CRT-D device is complete. [Procedure]{.underline}:
+Compression of the wound with a sandbag and local cooling. First
+outpatient follow-up in 8 weeks through our pacemaker clinic (please
+schedule an appointment before discharge). Postoperative chest X-ray is
+not necessary. Cefuroxime 1.5 mg again tonight.
+
+**Transthoracic Echocardiography on 05/18/2023**
+
+**Results:** Globally mildly impaired systolic LV function. Diastolic
+dysfunction Grade 1 (LV relaxation disorder).
+
+-   Right Ventricle: Normal-sized right ventricle. Normal RV function.
+    Pulmonary arterial pressure is normal.
+
+-   Left Atrium: Slightly dilated left atrium.
+
+-   Right Atrium: Normal-sized right atrium.
+
+-   Mitral Valve: Morphologically unremarkable. Minimal mitral valve
+    regurgitation.
+
+-   Aortic Valve: Mildly sclerotic aortic valve cusps. No aortic valve
+    insufficiency. No aortic valve stenosis (AV PGmax 7 mmHg).
+
+-   Tricuspid Valve: Delicate tricuspid valve leaflets. Minimal
+    tricuspid valve regurgitation (TR Pmax 26 mmHg).
+
+-   Pulmonary Valve: No pulmonary valve insufficiency. Pericardium: No
+    pericardial effusion.
+
+**Assessment**: Examination in sinus rhythm with bundle branch block.
+Moderate ultrasound windows. Normal-sized left ventricle (LVED 54 mm)
+with mildly reduced systolic LV function (EF biplan 55%) with mildly
+reduced contractility without regional emphasis. Mild LV hypertrophy,
+predominantly septal, without obstruction. Diastolic dysfunction Grade 1
+(E/A 0.47) with a normal LV filling index (E/E\' mean 3.5). Slightly
+sclerotic aortic valve without stenosis, no AI. Slightly dilated left
+atrium (LAVI 31 ml/m²). Minimal MI. Normal-sized right ventricle with
+normal function. Normal-sized right atrium (RAVI 21 ml/m²). Minimal TI.
+As far as assessable, systolic PA pressure is within the normal range.
+The IVC cannot be viewed from the subcostal angle. No thrombi are
+visible. As far as assessable, no pericardial effusion is visible.
+
+**Chest X-ray in two planes on 05/20/2023: **
+
+[Clinical Information, Question, Justification:]{.underline} Post CRT
+device replacement. Inquiry about position, pneumothorax.
+
+[Findings]{.underline}: No pneumothorax following CRT device
+replacement.
+
+
+</text_9>
+<text_10>
+**Dear colleague, **
+
+We are writing to provide an update on Mr. David Romero, born on
+02/16/1942, who presented at our Rhythm Clinic on 09/29/2023.
+
+**Diagnoses:**
+
+-   Dilated cardiomyopathy
+
+-   Exclusion of coronary heart diseases
+
+-   Myocardial biopsy showed no inflammation
+
+-   Left bundle branch block
+
+-   Severely impaired left ventricular (LV) function
+
+-   LifeVest
+
+-   CRT-D implantation
+
+-   Chronic Hepatitis C
+
+-   Type 2 diabetes
+
+**Current Medication:**
+
+  **Medication**                **Dosage**         **Frequency**
+  ----------------------------- ------------------ ---------------
+  Lantus (Insulin glargine)     450 Units/1.5 mL   0-0-0-/6-8
+  Humalog (Insulin lispro)      300 Units/3 mL     5-8/0/5-8/5-8
+  Levothyroxine (Synthroid)     100 mcg            1-0-0-0
+  Vitamin D3 (Colecalciferol)   12.5 mcg           2-0-0-0
+  Lipitor (Atorvastatin)        21.7 mg            0-0-1-0
+  Norvasc (Amlodipine)          6.94 mg            1-0-0-0
+  Altace (Ramipril)             5 mg               1-0-0-0
+  Demadex (Torasemide)          5 mg               0-0-0.5-0
+  Coreg (Carvedilol)            25 mg              0.5-0-0.5-0
+  Zocor (Simvastatin)           40 mg              0-0-0.5-0
+  Aspirin                       100 mg             1-0-0-0
+  Vitamin D3 (Colecalciferol)   12.5 mcg           2-0-0-0
+
+**Measurement Results:**
+
+Battery/Capacitor: Status: OK, Voltage: 8.4V
+
+-   Right Atrial: 375 Ohms 3.80 mV 0.375 V 0.50 ms
+
+-   Right Ventricular: 388 Ohms 11.80 mV 0.750 V 0.50 ms
+
+-   Left Ventricular: 350 Ohms 0.625 V 0.50 ms
+
+-   Defibrillation Impedance: Right Ventricular: 48 Ohms
+
+**Implant Settings:**
+
+-   Bradycardia Setting: Mode: DDD
+
+-   Tachycardia Settings: Zone Detection Interval (ms) Detection Beats
+    ATP Shocks Details Status
+
+    -   VFVF 260 ms 30 /
+
+    -   VTVT1 330 ms 55 /
+
+<!-- -->
+
+-   Probe Settings: Lead Sensitivity Sensing Polarity/Vector
+    Amplification/Pulse Width Stimulation Polarity/Vector Auto Amplitude
+    Control
+
+    -   Right Atrial: 0.30 mV Bipolar/ 1.375 V/0.50 ms Bipolar/
+
+    -   Right Ventricular: Bipolar/ 2.000 V/0.50 ms Bipolar/
+
+    -   Left Ventricular: 2.000 V/0.50 ms tip 1 - RV Coil
+
+**Assessment:**
+
+-   Routine visit with normal device function.
+
+-   Normal sinus rhythm with a heart rate of 65/min.
+
+-   Balanced heart rate histogram with a plateau at 60-70 bpm.
+
+-   Wound conditions are unremarkable.
+
+-   Battery status: OK.
+
+-   Atrial probe: Intact
+
+-   Right ventricular probe: Intact
+
+-   Left ventricular probe: Intact
+
+-   A follow-up appointment for the patient is requested in 6 months.
+
+**Lab results:**
+
+  **Parameter**                       **Result**   **Reference Range**
+  ----------------------------------- ------------ ---------------------
+  Reticulocytes                       0.01/nL      \< 0.01/nL
+  Sodium                              137 mEq/L    136-145 mEq/L
+  Potassium                           4.2 mEq/L    3.5-4.5 mEq/L
+  Creatinine                          1.34 mg/dL   0.70-1.20 mg/dL
+  BUN                                 49 mg/dL     17-48 mg/dL
+  Total Bilirubin                     1.8 mg/dL    \< 1.20 mg/dL
+  C-reactive Protein                  5.9 mg/L     \< 5.0 mg/L
+  ALT                                 67 U/L       \< 41 U/L
+  AST                                 78 U/L       \< 50 U/L
+  Alkaline Phosphatase                151 U/L      40-130 U/L
+  Gamma-Glutamyl Transferase          200 U/L      8-61 U/L
+  Free Triiodothyronine (T3)          2.3 ng/L     2.00-4.40 ng/L
+  Free Thyroxine (T4)                 14.2 ng/L    9.30-17.00 ng/L
+  Thyroid Stimulating Hormone (TSH)   4.1 mU/L     0.27-4.20 mU/L
+  Hemoglobin                          11.6 g/dL    13.5-17.0 g/dL
+  Hematocrit                          34.5%        39.5-50.5%
+  Red Blood Cell Count                3.7 M/µL     4.3-5.8 M/µL
+  White Blood Cell Count              9.56 K/µL    3.90-10.50 K/µL
+  MCV                                 92.7 fL      80.0-99.0 fL
+  MCH                                 31.8 pg      27.0-33.5 pg
+  MCHC                                33.9 g/dL    31.5-36.0 g/dL
+  MPV                                 8.9 fL       7.0-12.0 fL
+  RDW-CV                              14.2%        11.5-15.0%
+  Quick                               89%          78-123%
+  INR                                 1.09         0.90-1.25
+  Partial Thromboplastin Time         25.3 sec.    22.0-29.0 sec.
+
+</text_10>
+</notes>
+</patient-record-patient_18>
+
+<patient-record-patient_19>
+Below is patient Emil Nilsson's medical record (ID: patient_19). 
+They were born on 2004-04-12 00:00:00 and have the following diagnosis: Hypoplastic Left Heart Syndrome.
+The patients medical record consists of 6 notes included below.
+<notes>
+<text_0>
+**Dear colleague, **
+
+We are reporting on the inpatient stay of our patient, Emil Nilsson,
+born on 12/04/2004, who was under our inpatient care from 01/26/05 to
+02/02/05.
+
+**Diagnoses:**
+
+-   Upper respiratory tract infection
+
+-   Hypoplastic Left Heart Syndrome
+
+-   Persistent foramen ovale
+
+-   Persistent ductus arteriosus botalli (under Prostaglandin E1
+    Infusion)
+
+-   Dysplasia of the mitral valve
+
+-   Damus-Kaye-Stansel procedure and aortopulmonary anastomosis on the
+    right (modified BT-Shunt)
+
+-   Secondary thoracic closure
+
+-   Tricuspid valve insufficiency
+
+-   Mild aortic valve insufficiency
+
+**Medical History:** Emil has a Hypoplastic Left Heart Syndrome. The
+corrective procedure, including the Damus-Kaye-Stansel and
+Blalock-Taussig Anastomosis, took place three months ago. Under the
+current medication, the cardiac situation has been stable. He has shown
+satisfactory weight gain. Emil is the first child of parents with
+healthy hearts. An external nursing service provides home care every two
+days. The parents feel confident in the daily care of the child,
+including the placement of gastric tubes.
+
+**Current Presentation:** Since the evening before admission, Emil had
+elevated temperatures up to 40°C with a slight runny nose. No coughing,
+no diarrhea, no vomiting. After an outpatient visit to the treating
+pediatrician, Emil was referred to our hospital due to the complex
+cardiac history. Admission for the Glenn procedure is scheduled for
+01/20/05.
+
+**Physical Examination:** Stable appearance and condition. Pinkish skin
+color, good skin turgor.
+
+-   Cardiovascular: Rhythmic, 3/6 systolic murmur auscultated on the
+    left parasternal side, radiating to the back.
+
+-   Respiratory: Bilateral vesicular breath sounds, no rales.
+
+-   Abdomen: Soft and unremarkable, no hepatosplenomegaly, no
+    pathological resistances.
+
+-   ENT exam, except for runny nose, unremarkable.
+
+-   Good spontaneous motor skills with cautious head control.
+
+-   Current Weight: 4830 g; Current Length: 634cm. Transcutaneous Oxygen
+    Saturation: 78%.
+
+-   Blood Pressure Measurement (mmHg): Left Upper Arm 89/56 (66), Right
+    Upper Arm 90/45
+
+**Current Medication:**
+
+  **Medication**                    **Dosage**   **Frequency**
+  --------------------------------- ------------ ---------------
+  Captopril (Capoten)               2 mg         1-1-1
+  Carvedilol (Coreg)                0.2 mg       1-0-1
+  Furosemide (Lasix)                4 mg         1-1-1-1
+  Spironolactone (Aldactone)        10 mg        1-0-0-0
+  Hydrochlorothiazide (Microzide)   2 mg         1-0-1
+  Aspirin                           10 mg        1-0-0
+  Omeprazole (Prilosec)             2.5 mg       1-0-1
+  Vitamin D (Drisdol)               500 IU       Once daily
+
+**ECG on 01/27/2006:** Sinus rhythm, heart rate 83/min, sagittal type.
+P: 60 ms, PQ: 100 ms, QRS: 80 ms, QT: 260 ms. T-wave negative in V1 and
+V2, biphasic in V3, positive from V4 onward, no arrhythmias. Signs of
+right ventricular hypertrophy.
+
+**Echocardiography on 01/27/2006:** Satisfactory function of the
+morphological right ventricle, small hypoplastic left ventricle with
+minimal contractility. Hypoplastic mitral and original aortic valve
+barely opening. Regular flow profile in the neoaorta. Aortic arch and
+Blalock-Taussig shunt not optimally visible due to restlessness. Trivial
+tricuspid valve insufficiency.
+
+**Chest X-ray on 01/28/2006:** Widened heart shadow, cardiothoracic
+ratio 0.5. Slight diffuse increase in markings on the right lung, no
+signs of pulmonary congestion. Hilum delicate. Recesses visible, no
+effusion. No localized infiltrations. No pneumothorax.
+
+**Therapy and Progression:** Based on the clinical and paraclinical
+picture of a pulmonary infection, we treated Emil with intravenous
+Cefuroxime for five days, along with daily physical therapy. Under this
+treatment, Emil's condition improved rapidly, with no auscultatory lung
+abnormalities. CRP and leukocyte count reduced. No fever. In the course
+of treatment, Emil had temporary diarrhea, which was well managed with
+adequate fluid substitution.
+
+We were able to discharge Emil in a significantly improved and stable
+general condition on the fifth day of treatment, with a weight of 5060
+g. Transcutaneous oxygen saturations were consistently between 70%
+(during infection) and 85%.
+
+Three days later, the mother presented the child again at the emergency
+department due to vomiting after each meal and diarrhea. After changing
+the gastric tube and readmission here, there was no more vomiting, and
+feeding was feasible. Three to four stools of adequate consistency
+occurred daily. Cardiac medication remained unchanged.
+
+**Medication upon Discharge:**
+
+  **Medication**                    **Dosage**   **Frequency**
+  --------------------------------- ------------ ---------------
+  Captopril (Capoten)               2 mg         1-0-1
+  Carvedilol (Coreg)                0.2 mg       1-0-1
+  Furosemide (Lasix)                4 mg         1-1-1-1
+  Spironolactone (Aldactone)        10 mg        1-0-0-0
+  Hydrochlorothiazide (Microzide)   2 mg         1-0-1
+  Aspirin                           10 mg        1-0-0
+  Omeprazole (Prilosec)             2.5 mg       1-0-1
+  Vitamin D (Drisdol)               500 IU       Once daily
+
+
+</text_0>
+<text_1>
+**Dear colleague, **
+
+We are reporting on the inpatient stay of your patient Emil Nilsson,
+born on 12/04/2004, who received inpatient care from 01/20/2005 to
+01/27/2005.
+
+**Diagnoses:**
+
+-   Hypoplastic Left Heart Syndrome
+
+-   Persistent foramen ovale
+
+-   Persistent ductus arteriosus botalli (under Prostaglandin E1
+    Infusion)
+
+-   Dysplasia of the mitral valve
+
+-   Damus-Kaye-Stansel Procedure and aortopulmonary anastomosis on the
+    right (modified BT-Shunt)
+
+-   Secondary thoracic closure
+
+-   Tricuspid valve insufficiency
+
+-   Mild aortic valve insufficiency
+
+**Current Presentation:** Bidirectional Glenn Anastomosis, enlargement
+of the pulmonary trunk, and closure of BT shunt
+
+**Medical History:** We kindly assume that you are familiar with the
+detailed medical history.
+
+**Medication upon Admission:**
+
+  **Medication**                    **Dosage**   **Frequency**
+  --------------------------------- ------------ ---------------
+  Captopril (Capoten)               2 mg         1-0-1
+  Carvedilol (Coreg)                0.2 mg       1-0-1
+  Furosemide (Lasix)                4 mg         1-1-1-1
+  Spironolactone (Aldactone)        10 mg        1-0-0-0
+  Hydrochlorothiazide (Microzide)   2 mg         1-0-1
+  Aspirin                           10 mg        1-0-0
+  Omeprazole (Prilosec)             2.5 mg       1-0-1
+  Vitamin D                         500 IU       Once daily
+
+**Physical Examination:** Stable general condition, no fever. Gastric
+tube.
+
+Unremarkable sternotomy scar, dry. Drains in situ, unremarkable.
+
+[Heart]{.underline}: Rhythmic heart action, 2/6 systolic murmur audible
+left parasternal.
+
+[Lungs]{.underline}: Bilateral vesicular breath sounds, no additional
+sounds.
+
+[Abdomen]{.underline}: Soft liver 1.5 cm below the costal margin. No
+pathological resistances.
+
+Pulses palpable on all sides.
+
+[Current weight:]{.underline} 4765 g; current length: 62 cm; head
+circumference: 37 cm.
+
+Transcutaneous oxygen saturation: 85%.
+
+[Blood pressure (mmHg):]{.underline} Left arm 91/65 (72), right arm
+72/55 (63).
+
+**Echocardiography on 01/21/2005 and 01/27/2005:**
+
+Global mildly impaired function of the morphologically right systemic
+ventricle with satisfactory contractility. Minimal tricuspid
+insufficiency with two small jets (central and septal), Inflow merged
+Vmax 0.9 m/s. DKS anastomosis well visible, aortic VTI 14-15 cm. Free
+flow in Glenn with breath-variable flow pattern, Vmax 0.5 m/s. No
+pleural effusions, good diaphragmatic mobility bilaterally, no
+pericardial effusion. Isthmus optically free with Vmax 1.8 m/s.
+
+**Speech Therapy Consultation on 01/23/2005:**
+
+No significant orofacial disorders. Observation of drinking behavior
+recommended initially. Stimulation of sucking with various pacifiers.
+Instruction given to the father.
+
+**Therapy and Progression:** On 02/15/2006, the BT shunt was severed and
+a bidirectional Glenn Anastomosis was created, along with an enlargement
+of the pulmonary artery. The course was uncomplicated with swift
+extubation and transfer to the intermediate care unit on the second
+postoperative day. Timely removal of drains and pacemaker wires. The
+child remained clinically stable throughout the stay. The child\'s own
+drinking performance is satisfactory, with varying amounts of fluid
+intake between 60 and 100 ml per meal. The tube feeding is well
+tolerated, no vomiting, and discharged without a tube. Stool normal. IV
+antibiotics were continued until 01/22/2005. Transition from
+heparinization to daily Aspirin. Inhalation was also stopped during the
+course with a stable clinical condition.
+
+Due to persistently elevated mean pressures of 70 to 80 mmHg and limited
+global contractility of the morphologically right systemic ventricle, we
+increased both Carvedilol and Captopril medication. Blood pressures have
+changed only slightly. Therefore, we request an outpatient long-term
+blood pressure measurement and, if necessary, further medication
+optimization. Echocardiographically, we observed impaired but
+satisfactory contractility of the right systemic ventricle with only
+minimal tricuspid valve insufficiency, as well as a well-functioning
+Glenn Anastomosis. No insufficiency of the neoaortic valve with a VTI of
+15 cm. No pericardial effusion or pleural effusions upon discharge.
+
+A copy of the summary has been sent to the involved external home care
+service for further outpatient care.
+
+**Medication upon Discharge:**
+
+  **Medication**               **Dosage**   **Frequency**
+  ---------------------------- ------------ ---------------
+  Captopril (Capoten)          2 mg         1-0-1
+  Carvedilol (Coreg)           0.2 mg       1-0-1
+  Spironolactone (Aldactone)   10 mg        1-0-0-0
+  Iron Supplement              4 drops      1-0-1
+  Omeprazole (Prilosec)        2.5 mg       1-0-1
+  Vitamin D                    500 IU       Once daily
+  Aspirin                      10 mg        1-0-0
+
+
+</text_1>
+<text_2>
+**Dear colleague, **
+
+We are reporting to you about the inpatient stay of our patient, Emil
+Nilsson, born on 12/04/2004. He was admitted to our ward from 03/01/2008
+to 03/10/2008.
+
+**Diagnoses:**
+
+-   Hypoplastic Left Heart Syndrome
+
+-   Persistent foramen ovale
+
+-   Persistent ductus arteriosus botalli (under Prostaglandin E1
+    Infusion)
+
+-   Dysplasia of the mitral valve
+
+-   Damus-Kaye-Stansel Procedure and aortopulmonary anastomosis on the
+    right (modified BT-Shunt)
+
+-   Secondary thoracic closure
+
+-   Tricuspid valve insufficiency
+
+-   Mild aortic valve insufficiency
+
+**Current Presentation:** Inpatient admission for dental rehabilitation
+under intubation anesthesia
+
+**Medical History:** We may kindly assume that you are familiar with the
+medical history. Prior to the planned Fontan completion, dental
+rehabilitation under intubation anesthesia was required due to the
+patient\'s carious dental status, which led to the scheduled inpatient
+admission.
+
+**Physical Examination:** Friendly toddler in stable general condition,
+pale skin color, central cyanosis, no edema.
+
+-   ENT unremarkable, large tonsils, no cervical lymphadenopathy.
+
+-   Heart: Heart sounds clear, rhythmic, 1/6 systolic murmur with a
+    point of maximal intensity over the 3rd intercostal space on the
+    left.
+
+-   Lungs: Bilateral equal ventilation, vesicular breath sounds.
+
+-   Initial neurological examination unremarkable.
+
+-   Current weight: 12.4 kg; current body length: 93 cm.
+
+-   Percutaneous oxygen saturation: 76%.
+
+-   Blood pressure (mmHg): Right upper arm 117/50, left upper arm
+    110/57, right lower leg 134/55, left lower leg 146/71.
+
+**Medication upon Admission:**
+
+  **Medication**        **Dosage**   **Frequency**
+  --------------------- ------------ -----------------------------------------------
+  Captopril (Capoten)   2 mg         1-1-1
+  Carvedilol (Coreg)    0.2 mg       1-0-1
+  Aspirin               10 mg        1-0-0 (discontinued 10 days before admission)
+
+**ECG at Admission:** Sinus rhythm, heart rate 84/min, sagittal type. P
+wave 50 ms, PQ interval 120 ms, QRS duration 80 ms, QT interval 360 ms,
+QTc interval 440 ms, R/S transition in V4, T wave positive in V3 to V6.
+Persistent S wave in V4 to V6 -1.1 mV, no extrasystoles in the rhythm
+strip.
+
+**Consultation with Maxillofacial Surgery on 02/03/2008:**
+
+Timely wound conditions, clot at positions 55, 65, 84 in situ, Aspirin
+may be resumed today, further treatment by the Southern Dental Clinic.
+
+**Treatment and Progression:** Upon admission, the necessary
+pre-interventional diagnostics were performed. Dental rehabilitation
+(extraction and fillings) was performed without complications under
+intubation anesthesia on 03/02/2008. After anesthesia, the child
+experienced pronounced restlessness, requiring a single sedation with
+intravenous Midazolam. The child\'s behavior improved over time, and the
+wound conditions were unremarkable. Discharge on 03/03/2008 after
+consultation with our maxillofacial surgeon into outpatient follow-up
+care. We request pediatric cardiology and dental follow-up checks.
+
+**Medication upon Discharge:**
+
+  **Medication**        **Dosage**   **Frequency**
+  --------------------- ------------ ---------------
+  Captopril (Capoten)   2 mg         1-1-1
+  Carvedilol (Coreg)    0.2 mg       1-0-1
+  Aspirin               25 mg        1-0-0
+
+**Lab results upon Discharge:**
+
+  **Parameter**                                   **Results**     **Reference Range**
+  ----------------------------------------------- --------------- ---------------------
+  Calcium                                         2.33 mEq/L      2.10-2.55 mEq/L
+  Phosphorus                                      1.12 mEq/L      0.84-1.45 mEq/L
+  Osmolality                                      286 mOsm/kg     280-300 mOsm/kg
+  Iron                                            20.4 µg/dL      4.8-24.7 µg/dL
+  Transferrin Saturation                          28.3%           16.0-45.0%
+  Magnesium                                       1.84 mg/dL      1.5-2.3 mg/dL
+  Creatinine                                      0.84 mg/dL      0.70-1.20 mg/dL
+  Estimated GFR (eGFR CKD-EPI)                    132 mL/min      
+  Estimated GFR (eGFR Cystatin)                   \>90.0 mL/min   
+  Blood Urea Nitrogen (BUN)                       29 mg/dL        18-45 mg/dL
+  Total Bilirubin                                 0.97 mg/dL      \<1.20 mg/dL
+  Direct Bilirubin                                0.34 mg/dL      \<0.30 mg/dL
+  Immunoglobulin G                                11.42 g/L       5.49-15.84 g/L
+  Immunoglobulin A                                1.94 g/L        0.61-3.48 g/L
+  Immunoglobulin M                                0.65 g/L        0.50-1.90 g/L
+  Cystatin C                                      0.93 mg/L       0.50-1.00 mg/L
+  Transferrin                                     2.89 g/L        
+  Ferritin                                        54.2 ng/mL      14.0-152.0 ng/mL
+  Total Cholesterol                               110 mg/dL       82-192 mg/dL
+  Triglycerides                                   64 mg/dL        
+  Apolipoprotein A1                               0.91 g/L        1.04-2.02 g/L
+  ALT                                             37 U/L          \<41 U/L
+  AST                                             33 U/L          \<50 U/L
+  Alkaline Phosphatase                            138 U/L         55-149 U/L
+  Butyrylcholinesterase (Pseudo-Cholinesterase)   5.62 kU/L       5.32-12.92 kU/L
+  GLDH                                            3.1 U/L         \<6.4 U/L
+  Gamma-GT                                        96 U/L          8-61 U/L
+  LDH                                             184 U/L         135-250 U/L
+  Parathyroid Hormone                             55.0 pg/mL      15.0-65.0 pg/mL
+  25-OH-Vitamin D3                                10.9 ng/mL      20.0-50.0 ng/mL
+  Free Thyroxine                                  17.90 ng/dL     9.50-16.40 ng/dL
+  TSH                                             3.56 mIU/mL     0.50-4.30 mIU/mL
+
+
+</text_2>
+<text_3>
+**Dear colleague, **
+
+We are reporting about the inpatient stay of our patient, Emil Nilsson,
+born on 12/04/2004. He was admitted to our ward from 07/02/2008 to
+07/23/2008.
+
+**Diagnoses:**
+
+-   Hypoplastic Left Heart Syndrome
+
+-   Persistent foramen ovale
+
+-   Persistent ductus arteriosus botalli (under Prostaglandin E1
+    Infusion)
+
+-   Dysplasia of the mitral valve
+
+-   Damus-Kaye-Stansel Procedure and aortopulmonary anastomosis on the
+    right (modified BT-Shunt)
+
+-   Secondary thoracic closure
+
+-   Tricuspid valve insufficiency
+
+-   Mild aortic valve insufficiency
+
+**Current Presentation:** Planned admission for Fontan Procedure
+
+**Medical History:** We may assume that you are familiar with the
+detailed medical history.
+
+**Physical Examination:** Friendly toddler in stable general condition,
+pale skin color, central cyanosis, no edema.
+
+-   ENT unremarkable, large tonsils, no cervical lymphadenopathy.
+
+-   Heart: Heart sounds clear, rhythmic, 1/6 systolic murmur with a
+    point of maximal intensity over the 3rd intercostal space on the
+    left.
+
+-   Lungs: Bilateral equal ventilation, vesicular breath sounds. Initial
+    neurological examination unremarkable.
+
+-   Percutaneous oxygen saturation: 77%.
+
+-   Blood pressure (mmHg): Right upper arm 124/60, left upper arm
+    112/59, right lower leg 134/55, left lower leg 146/71.
+
+**Medication upon Admission:**
+
+  **Medication**         **Dosage**   **Frequency**
+  ---------------------- ------------ ---------------
+  Captopril (Capoten®)   2 mg         1-1-1
+  Carvedilol (Coreg®)    0.2 mg       1-0-1
+  Aspirin                25 mg        1-0-0
+
+**Surgical Report:**
+
+Median Sternotomy, dissection of adhesions to access the anterior aspect
+of the heart, cannulation for extracorporeal circulation with bicaval
+cannulation. Further preparation of the heart, followed by clamping of
+the inferior vena cava towards the heart. Cutting the vessel, suturing
+the cardiac end, and then anastomosis of the inferior vena cava with an
+18mm Gore-Tex prosthesis, which is subsequently tapered and sutured to
+the central pulmonary artery in an open anastomosis technique.
+Resumption of ventilation, smooth termination of extracorporeal
+circulation. Placement of 2 drains. Layered wound closure.
+Transesophageal Echocardiogram shows good biventricular function. The
+patient is transferred back to the ward with ongoing catecholamine
+support.
+
+**ECG on 07/02/2008:** Sinus rhythm, heart rate 76/min, steep type, PQ
+interval 140 ms, QRS duration 110 ms, QT interval 340 ms, QTc 385 mmHg.
+ST depression, descending in V2+V3. T-wave positivity from V2. No
+extrasystoles. No pauses.
+
+**Therapy and Progression:**
+
+The patient was admitted for a planned Fontan procedure on 07/02/2008.
+The procedure was performed without complications. An extracardiac
+conduit without overflow was created. Postoperatively, there was a rapid
+recovery. Extubation took place 2 hours after the procedure. Peri- and
+postoperative antibiotic treatment with Cefuroxim was administered.
+Bilateral pleural effusions were drained using thoracic drains, which
+were subsequently changed to pigtail drains after transfer to the
+general ward. Daily aspiration of the pleural effusions was performed.
+These effusions decreased over time, and the drains were removed on
+07/14/2008. No further pleural effusions occurred. A minimal pericardial
+effusion and ascites were still present. Diuretic therapy was initially
+continued but could be significantly reduced by the time of discharge.
+Echocardiography showed a favorable postoperative result. Monitoring of
+vital signs and consciousness did not reveal any abnormalities. However,
+the ECG showed occasional idioventricular rhythms during bradycardia.
+Oxygen saturation ranged between 95% and 100%. Scarring revealed a
+dehiscence in the middle third and apical region. Regular dressing
+changes and disinfection of the affected wound area were performed.
+After consulting with our pediatric surgical colleagues, glucose was
+locally applied. There was no fever. Antibiotic treatment was
+discontinued after the removal of the pigtail drain, and the
+postoperatively increased inflammatory parameters had already returned
+to normal. The patient received physiotherapy, and their general
+condition improved daily. We were thus able to discharge Emil on
+07/23/2008.
+
+**Current Recommendations:**
+
+-   We recommend regular wound care with Octinisept.
+
+-   Follow-up in the pediatric cardiology outpatient clinic.
+
+**Medication upon Discharge:**
+
+  **Medication**        **Dosage**   **Frequency**
+  --------------------- ------------ ---------------
+  Captopril (Capoten)   2 mg         1-1-1
+  Carvedilol (Coreg)    0.2 mg       1-0-1
+  Aspirin               25 mg        1-0-0
+
+**Lab results upon Discharge:**
+
+  **Parameter**                   **Result**      **Reference Range**
+  ------------------------------- --------------- ---------------------
+  Calcium                         2.54 mEq/L      2.10-2.55 mEq/L
+  Phosphate                       1.42 mEq/L      0.84-1.45 mEq/L
+  Osmolality                      298 mOsm/kg     280-300 mOsm/kg
+  Iron                            20.6 µmol/L     4.8-24.7 µmol/L
+  Transferrin Saturation          34 %            16.0-45.0 %
+  Magnesium                       0.61 mEq/L      0.62-0.91 mEq/L
+  Creatinine                      0.84 mg/dL      0.70-1.20 mg/dL
+  Estimated GFR (eGFR CKD-EPI)    132 mL/min      
+  Estimated GFR (eGFR Cystatin)   \>90.0 mL/min   
+  Urea                            29 mg/dL        18-45 mg/dL
+  Total Bilirubin                 0.97 mg/dL      \<1.20 mg/dL
+  Direct Bilirubin                0.34 mg/dL      \<0.30 mg/dL
+  Immunoglobulin G                11.42 g/L       5.49-15.84 g/L
+  Immunoglobulin A                1.94 g/L        0.61-3.48 g/L
+  Immunoglobulin M                0.65 g/L        0.50-1.90 g/L
+  Cystatin C                      0.93 mg/L       0.50-1.00 mg/L
+  Transferrin                     2.89 g/L        
+  Ferritin                        54.2 µg/L       14.0-152.0 µg/L
+  Total Cholesterol               110 mg/dL       82-192 mg/dL
+  Apolipoprotein A1               0.91 g/L        1.04-2.02 g/L
+  ALT                             37 U/L          \<41 U/L
+  AST                             33 U/L          \<50 U/L
+  Alkaline Phosphatase            139 U/L         55-149 U/L
+  GLDH                            3.5 U/L         \<6.4 U/L
+  Gamma-GT                        24 U/L          8-61 U/L
+  LDH                             145 U/L         135-250 U/L
+  Parathyroid Hormone             57.2 ng/L       15.0-65.0 ng/L
+  25-OH-Vitamin D3                34.2 nmol/L     50.0-150.0 nmol/L
+
+
+</text_3>
+<text_4>
+**Dear colleague, **
+
+We are reporting to you about the inpatient stay of our patient, Emil
+Nilsson, born on 12/04/2004, who was admitted to our clinic from
+10/20/2021 to 10/22/2021.
+
+**Diagnoses:**
+
+-   Hypoplastic Left Heart Syndrome
+
+-   Persistent foramen ovale
+
+-   Persistent ductus arteriosus botalli (under Prostaglandin E1
+    Infusion)
+
+-   Dysplasia of the mitral valve
+
+-   Damus-Kaye-Stansel Procedure and aortopulmonary anastomosis on the
+    right (modified BT-Shunt)
+
+-   Secondary thoracic closure
+
+-   Tricuspid valve insufficiency
+
+-   Mild aortic valve insufficiency
+
+-   Status post Glenn procedure
+
+-   Fontan conduit retrocardial narrowing, extended hepatic vein
+    window/VCI
+
+-   Chronic liver congestion with mild fibrosis (sonography)
+
+**Procedures**: Diagnostic cardiac catheterization in analgosedation on
+10/20/2021.
+
+**Medical History:** We kindly assume that the detailed medical history
+is known to you and refer to previous medical reports from our clinic.
+The current admission is based on a referral from the outpatient
+pediatric cardiologist for a diagnostic cardiac catheterization to
+evaluate Fontan hemodynamics in the context of desaturation during a
+stress test. Emil reports feeling subjectively well, but during school
+sports, he can only run briefly before experiencing palpitations and
+dyspnea. Emil attends a special needs school. He is currently free from
+infection and fever.
+
+**Medication upon Admission:**
+
+  **Medication**        **Dosage**   **Frequency**
+  --------------------- ------------ ---------------
+  Captopril (Capoten)   2 mg         1-1-1
+  Carvedilol (Coreg)    0.2 mg       1-0-1
+  Aspirin               25 mg        1-0-0
+
+**Physical Examination:** Emil is in good general condition and slim
+build, with no signs of infection.
+
+-   Cardiac status: Rhythmic heart action, 2/6 systolic murmur.
+
+-   Pulse status: Normal.
+
+-   Lungs: Bilateral equal ventilation, vesicular breath sounds, no
+    rales.
+
+-   Abdomen: Soft, no hepatosplenomegaly. Unremarkable sternal scars. No
+    signs of cardiopulmonary decompensation.
+
+-   Current weight: 47 kg; current height: 169 cm.
+
+-   Pulse oximetry oxygen saturation: 95%.
+
+-   Blood pressure (mmHg): Right upper arm 132/94, left upper arm
+    121/98, right lower leg 158/94, left lower leg 156/94.
+
+**Lab results:**
+
+  **Parameter**                   **Result**      **Reference Range**
+  ------------------------------- --------------- ---------------------
+  Calcium                         2.38 mEq/L      2.10-2.55 mEq/L
+  Phosphate                       1.19 mEq/L      0.84-1.45 mEq/L
+  Osmolality                      282 mOsm/Kg     280-300 mOsm/Kg
+  Iron                            20.0 µg/dL      4.8-24.7 µg/dL
+  Transferrin Saturation          28.1 %          16.0-45.0 %
+  Magnesium                       0.79 mEq/L      0.62-0.91 mEq/L
+  Creatinine                      0.81 mg/dL      0.70-1.20 mg/dL
+  Estimated GFR (eGFR CKD-EPI)    131 mL/min      
+  Estimated GFR (eGFR Cystatin)   \>90.0 mL/min   
+  Urea (BUN)                      27 mg/dL        18-45 mg/dL
+  Total Bilirubin                 0.92 mg/dL      \<1.20 mg/dL
+  Direct Bilirubin                0.38 mg/dL      \<0.30 mg/dL
+  Immunoglobulin G                11.47 g/L       5.49-15.84 g/L
+  Immunoglobulin A                1.99 g/L        0.61-3.48 g/L
+  Immunoglobulin M                0.61 g/L        0.50-1.90 g/L
+  Cystatin C                      0.95 mg/L       0.50-1.00 mg/L
+  Transferrin                     2.83 g/L        
+  Ferritin                        54.5 µg/L       14.0-152.0 µg/L
+  Total Cholesterol               110 mg/dL       82-192 mg/dL
+  Triglycerides                   62 mg/dL        
+  Apolipoprotein A1               0.94 g/L        1.04-2.02 g/L
+  ALT (GPT)                       35 U/L          \<41 U/L
+  AST (GOT)                       32 U/L          \<50 U/L
+  Alkaline Phosphatase            135 U/L         55-149 U/L
+  Pseudo-Cholinesterase           5.65 kU/L       5.32-12.92 kU/L
+  GLDH                            3.7 U/L         \<6.4 U/L
+  Gamma-GT                        89 U/L          8-61 U/L
+  LDH                             184 U/L         135-250 U/L
+  Parathyroid Hormone             55.0 pg/mL      15.0-65.0 pg/mL
+  25-OH-Vitamin D3                10.9 ng/mL      50.0-150.0 ng/mL
+  Free Thyroxine                  17.90 ng/dL     9.50-16.40 ng/dL
+  TSH                             3.56 mIU/L      0.50-4.30 mIU/L
+
+**ECG on 10/20/21:** Sinus rhythm, heart rate 79/min, steep type, PQ
+interval 140 ms, QRS duration 110 ms, QT interval 340 ms, QTc 385 mmHg.
+ST depression, descending in V2+V3. T-wave positivity from V2. No
+extrasystoles. No pauses.
+
+**ECG on 11/20/2021:** Sinus rhythm, heart rate 70/min, left type,
+inverted RS wave in lead I, PQ 160, QRS 100 ms, QT 340 ms, QTc 390 ms.
+
+ST depression, descending in V1+V2, T-wave positivity from V2,
+isoelectric in V5/V6, S-wave persistence until V6. Intraventricular
+conduction disorder. No extrasystoles. No pauses.
+
+**Holter monitor from 11/21/2021:** Normal heart rate spectrum, min 64
+bpm, median 81 bpm, max 102 bpm, no intolerable bradycardia or pauses,
+monomorphic ventricular extrasystole in 0.5% of QRS complexes, no
+couplets or salvos.
+
+**Echocardiography on 10/20/2021:** Poor ultrasound conditions, TI I+°,
+good RV function, no LV cavity, aortic arch normal. No pulmonary
+embolism after catheterization.
+
+**Abdominal Ultrasound on 10/20/2021:** Borderline enlarged liver with
+extremely hypoechoic basic structure, wide hepatic veins extending into
+second-order branches, and a barely compressible wide inferior vena
+cava. The basic architecture is preserved, the ventral contour is
+smooth, no nodularity. No suspicious focal lesions, no portal vein
+thrombosis, no ascites, no splenomegaly.
+
+[Measurement values as follows:]{.underline}
+
+ATI damping coefficient (as always in congestion livers) very low,
+sometimes below 0.45 dB/cm/MHz, thus certainly no steatosis.
+
+Elastography with good measurement quality (IQR=0.22) with 1.9 m/s or
+10.9 kPa with significantly elevated values (attributed to all
+conventional elastography, including Fibroscan, measurement error in
+congestion livers).
+
+Dispersion measurement (parametrized not for fibrosis, but for
+viscosity, here therefore the congestion component) in line with the
+images at 18 (m/s)/kHz, significantly elevated, thus corroborating that
+the elastography values are too high.
+
+In the synopsis of the different parameterizations as well as the
+overall image, mild fibrosis at a low F2 level.
+
+[Other Status]{.underline}:
+
+No enlargement of intra- and extrahepatic bile ducts. Normal-sized
+gallbladder with echo-free lumen and delicate wall. The pancreas is well
+defined, with homogeneous parenchyma; no pancreatic duct dilation, no
+focal lesions. The spleen is homogeneous and not enlarged. Both kidneys
+are orthotopic and normal in size. The parenchymal rim is not narrowed.
+The non-bridging bile duct is closed, no evidence of stones. The
+moderately filled bladder is unremarkable. No pathological findings in
+the pelvis. No enlarged lymph nodes along the large vessels, no free
+fluid.
+
+[Result:]{.underline} Morphologically and parametrically (after
+downgrading the significantly elevated elastography value due to
+congestion), there is evidence of chronic congestive liver with mild
+fibrosis (low F2 level).
+
+Otherwise, an unremarkable abdominal overview.
+
+**Cardiac Angiography and Catheterization on 10/20/2021:**
+
+[X-ray data]{.underline}: 5.50 min / 298.00 cGy\*cm²
+
+[Medication]{.underline}: 4 mg Acetaminophen (5 mg/5 mL, 5 mL/amp); 4000
+IU Heparin RATIO (25000 IU/5 ml, 5 mL/IJF); 156 mg Propofol 1% MCT (200
+mg/20 mL, 20 mL/amp); 5 mg/ml, 5 mL/vial)
+
+[Contrast agent:]{.underline} 105 ml Iomeron 350
+
+[Puncture site]{.underline}: Right femoral vein (Terumo Pediatric Sheath
+5F 7 cm).
+
+Right femoral artery (Terumo Pediatric Sheath 5F 7 cm).
+
+[Vital Parameters:]{.underline}
+
+-   Height: 169.0 cm
+
+-   Weight: 47.00 kg
+
+-   Body surface area: 1.44 m²
+
+-   
+
+[Catheter course]{.underline}**:** Puncture of the above-mentioned
+vessels under analgosedation and local anesthesia. Performance of
+oximetry, pressure measurements, and angiographies. After completing the
+examination, removal of the sheaths, Angioseal 6F AFC right, manual
+compression until hemostasis, and application of a pressure bandage.
+Transfer of the patient in a cardiopulmonary stable condition to the
+post-interventional intensive care unit 24i for heparinization and
+monitor monitoring.
+
+[Pressure values (mmHg):]{.underline}
+
+-   VCI: 8 mmHg
+
+-   VCS: 9 mmHg
+
+-   RV: 103/0-8 syst/diast-edP mmHg
+
+-   RPA: 8 syst/diast mmHg
+
+-   LPA: 8 syst/diast mmHg
+
+-   AoAsc 103/63 (82) syst/diast mmHg
+
+-   AoDesc 103/61 (81) syst/diast mmHg
+
+-   PCW left: 6 mmHg
+
+-   PCW right: 6 mmHg
+
+[Summary]{.underline}**:** Uncomplicated arterial and venous puncture,
+5F right femoral arterial sheath, cannulation of VCI, VCS up to V.
+anonyma, LPA and RPA with 5F wedge and 5F pigtail catheters. Retrograde
+aorta to atretic AoV and via Neo-AoV (PV) into RV. Low pressures, Fontan
+8 mmHg, TPG 2 mmHg with wedge 6 mmHg, max. RVedP 8 mmHg. No shunt
+oximetrically, CI 2.7 l/min/m2. No gradient across Neo-AoV and arch.
+Angiographically no veno-venous collaterals, no MAPCA. Glenn wide, LPA
+and RPA stenosis-free, well-developed, rapid capillary phase and
+pulmonary vein return to LA/RA. Fontan tunnel centrally constricted to
+12.5 mm, to VCI 18 mm. Satisfactory function of the hypertrophic right
+systemic ventricle, mild TI. No Neo-AI, native AoV without flow, normal
+coronary arteries, wide DKS, aortic arch without any stenosis.
+
+**Abdominal Ultrasound on 10/21/2022: **
+
+[Clinical Information, Question, Justification:]{.underline} Post-Fontan
+procedure. Evaluation for chronic congestive liver.
+
+[Findings]{.underline}: Moderately enlarged liver with an extremely
+hypoechoic texture, which is typical for congestive livers. There are
+dilated liver veins extending into the second-order branches and a
+barely compressible wide inferior vena cava. The basic architecture of
+the liver is preserved, and the contour is smooth without nodularity. On
+the high-frequency scan, there are subtle but significant periportal
+cuffing enhancements throughout the liver, consistent with mild
+fibrosis. No suspicious focal lesions, no portal vein thrombosis, no
+ascites, and no splenomegaly are observed. Measurement values as
+follows: ATI damping coefficient (as usual in congestive livers) is very
+low, sometimes less than 0.45 dB/cm/MHz, indicating no steatosis. Shear
+wave elastography with good measurement quality (IQR=0.22) shows a
+velocity of 1.9 m/s or 10.9 kPa, which are significantly higher values
+(attributable to measurement errors inherent in all conventional
+elastography techniques, including Fibroscan, in congestive livers).
+Dispersion measurement (parameters not indicating fibrosis but
+viscosity, which in this case represents congestion) corresponds to the
+images, with a significantly high 18 (m/s)/kHz, thus supporting that the
+shear wave elastography values are too high (and should be lower).
+Overall, a mild fibrosis at a low F2 level is evident based on the
+synopsis of various parameterizations and the overall image impression.
+
+[Other findings:]{.underline} No dilation of intrahepatic and
+extrahepatic bile ducts. The gallbladder is of normal size with anechoic
+lumen and a delicate wall. The pancreas is well-defined with homogeneous
+parenchyma, no dilation of the pancreatic duct, and no focal lesions.
+The spleen is homogeneous and not enlarged. Both kidneys are and of
+normal size. The parenchymal rim is not narrowed. No evidence of stones
+in the renal collecting system. The moderately filled bladder is
+unremarkable. No pathological findings in the small pelvis. No enlarged
+lymph nodes along major vessels, and no free fluid. Conclusion:
+Morphologically and parametrically (after downgrading the significantly
+elevated elastography values due to congestion), the findings are
+consistent with chronic congestive liver with mild fibrosis. Otherwise,
+the abdominal overview is unremarkable.
+
+[Assessment]{.underline}: Very good findings after Norwood I-III, no
+current need for intervention. In the long term, there may be an
+indication for BAP/stent expansion of the central conduit constriction.
+The routine blood test for Fontan patients showed no abnormalities;
+vitamin D supplementation may be recommended in case of low levels. A
+cardiac MRI with flow measurement in the Fontan tunnel is initially
+recommended, followed by a decision on intervention in that area.
+
+We kindly remind you of the unchanged necessity of endocarditis
+prophylaxis in case of all bacteremias and dental restorations. An
+appropriate certificate is available for Emil, and the family is
+well-informed about the indication and the existence of the certificate.
+A LIMAX examination can only be performed in an inpatient setting, which
+was not possible during this stay due to organizational reasons. This
+should be done in the next inpatient stay.
+
+**Summary**: We are discharging Emil in good general condition and slim
+build, with no signs of infection. Puncture site is unremarkable.
+Cardiac status: Rhythmic heart action, no pathological heart sounds.
+Pulse status is normal. Lungs: Clear. Abdomen: Soft.
+
+Pulse oximetry oxygen saturation: 93%
+
+Blood pressure measurement (mmHg): 117/74
+
+**Current Recommendations:**
+
+-   Cardiac MRI in follow-up, appointment will be communicated, possibly
+    including LIMAX
+
+-   Vitamin D supplementation
+
+**Medication upon Discharge:**
+
+  **Medication**        **Dosage**   **Frequency**
+  --------------------- ------------ ---------------
+  Captopril (Capoten)   2 mg         1-1-1
+  Carvedilol (Coreg)    0.2 mg       1-0-1
+  Aspirin               25 mg        1-0-0
+
+**Lab results upon Discharge:**
+
+  **Parameter**            **Result**     **Reference Range**
+  ------------------------ -------------- ---------------------
+  Calcium                  2.34 mEq/L     2.10-2.55 mEq/L
+  Phosphate                1.20 mEq/L     0.84-1.45 mEq/L
+  Osmolality               285 mosmo/Kg   280-300 mosmo/Kg
+  Iron                     20.0 µmol/L    4.8-24.7 µmol/L
+  Transferrin Saturation   28.1%          16.0-45.0%
+  Magnesium                0.77 mEq/L     0.62-0.91 mEq/L
+  Creatinine (Jaffé)       0.85 mg/dL     0.70-1.20 mg/dL
+  Urea                     26 mg/dL       18-45 mg/dL
+  Total Bilirubin          0.97 mg/dL     \<1.20 mg/dL
+  Direct Bilirubin         0.33 mg/dL     \<0.30 mg/dL
+  Immunoglobulin G         11.44 g/L      5.49-15.84 g/L
+  Immunoglobulin A         1.95 g/L       0.61-3.48 g/L
+  Immunoglobulin M         0.62 g/L       0.50-1.90 g/L
+  Cystatin C               0.96 mg/L      0.50-1.00 mg/L
+  Transferrin              2.87 g/L       \-
+  Ferritin                 54.5 µg/L      14.0-152.0 µg/L
+  Total Cholesterol        110 mg/dL      82-192 mg/dL
+  Triglycerides            64 mg/dL       \-
+  Apolipoprotein A1        0.96 g/L       1.04-2.02 g/L
+  GPT                      36 U/L         \<41 U/L
+  GOT                      35 U/L         \<50 U/L
+  Alkaline Phosphatase     135 U/L        55-149 U/L
+  Pseudo-Cholinesterase    5.64 kU/L      5.32-12.92 kU/L
+  GLDH                     3.2 U/L        \<6.4 U/L
+  Gamma-GT                 92 U/L         8-61 U/L
+  LDH                      180 U/L        135-250 U/L
+  Parathyroid Hormone      55.0 ng/L      15.0-65.0 ng/L
+  25-OH-Vitamin D3         10.9 nmol/L    50.0-150.0 nmol/L
+  Free Thyroxine           17.90 ng/L     9.50-16.40 ng/L
+  TSH                      3.56 mU/L      0.50-4.30 mU/L
+
+
+</text_4>
+<text_5>
+**Dear colleague, **
+
+We are reporting about the examination of our patient, Emil Nilsson,
+born on 12/04/2004, who presented to our outpatient clinic on
+12/10/2021.
+
+**Diagnoses:**
+
+-   Hypoplastic Left Heart Syndrome
+
+-   Persistent foramen ovale
+
+-   Persistent ductus arteriosus botalli (under Prostaglandin E1
+    Infusion)
+
+-   Dysplasia of the mitral valve
+
+-   Damus-Kaye-Stansel Procedure and aortopulmonary anastomosis on the
+    right (modified BT-Shunt)
+
+-   Secondary thoracic closure
+
+-   Tricuspid valve insufficiency
+
+-   Mild aortic valve insufficiency
+
+-   Status post Glenn procedure
+
+-   Fontan conduit retrocardial narrowing, extended hepatic vein
+    window/VCI
+
+-   Chronic liver congestion with mild fibrosis (sonography)
+
+**Procedures**: Cardiac MRI.
+
+**Medical History:** We kindly assume that the detailed medical history
+is known to you and refer to previous medical reports from our clinic.
+The current presentation is based on a referral from the outpatient
+pediatric cardiologist for a Cardiac MRI. Emil reports feeling
+subjectively well.
+
+**Physical Examination:** Emil is in good general condition and slim
+build, with no signs of infection.
+
+-   Cardiac status: Rhythmic heart action, 2/6 systolic murmur.
+
+-   Pulse status: Normal.
+
+-   Lungs: Bilateral equal ventilation, vesicular breath sounds, no
+    rales.
+
+-   Abdomen: Soft, no hepatosplenomegaly. Unremarkable sternal scars. No
+    signs of cardiopulmonary decompensation.
+
+-   Current weight: 47 kg; current height: 169 cm.
+
+-   Pulse oximetry oxygen saturation: 95%.
+
+-   Blood pressure (mmHg): Right upper arm 132/94, left upper arm
+    121/98, right lower leg 158/94, left lower leg 156/94.
+
+**Cardiac MRI on 03/02/2022:**
+
+[Clinical Information, Question, Justification:]{.underline} Hypoplastic
+Left Heart Syndrome, Fontan procedure, congestive liver, retrocardiac
+Fontan tunnel narrowing, VCI dilation, Fontan tunnel flow pathology?
+
+[Technique]{.underline}: 1.5 Tesla MRI. Localization scan.
+Transverse/coronal T2 HASTE. Cine Fast Imaging with Steady-State
+Precession functional assessment in short-axis view, two-chamber view,
+four-chamber view, and three-chamber view. Flow quantifications of the
+right and left pulmonary arteries, main pulmonary artery, superior vena
+cava, and inferior vena cava using through-plane phase-contrast
+gradient-echo measurement. Contrast-enhanced MR angiography.
+
+[Findings]{.underline}: No prior images for comparison available.
+Anatomy: Hypoplastic left heart with DKS (Damus-Kaye-Stansel)
+anastomosis, dilated and hypertrophied right ventricle, broad ASD. No
+focal wall thinning or outpouchings. No intracavitary thrombi detected.
+No pericardial effusion. Descending aorta on the left side. Status post
+total cavopulmonary anastomosis with slight tapering between the LPA and
+the anastomosis at 7 mm, LPA 11 mm, RPA 14 mm. No pleural effusions. No
+evidence of confluent pulmonary infiltrates in the imaged lung regions.
+Congestive liver. Cine MRI: The 3D volumetry shows a normal global RVEF
+in the setting of Fontan procedure. No regional wall motion
+abnormalities. Mild tricuspid valve prolapse with minor regurgitation
+jet.
+
+**Volumetry: **
+
+[1) Left Ventricle:]{.underline}
+
+-   Left Ventricle Absolute Normalized LV-EF: 29 %
+
+    LV-EDV: 6 ml 4.2 mL/m²
+
+<!-- -->
+
+-   LV-ESV: 4 ml 3 mL/m²
+
+-   LV-SV: 2 ml 1 mL/m²
+
+-   Cardiac Output: 0.1 L/min 0.1 L/min*m² *
+
+[2) Right Ventricle:]{.underline}
+
+-   Right Ventricle maximum flow velocity: 109 cm/s
+
+-   Antegrade volume 50 mL
+
+-   Retrograde volume 2 mL
+
+-   Regurgitation fraction 4 %
+
+[3) Right Pulmonary Artery: ]{.underline}
+
+-   Right Pulmonary Artery maximum flow velocity: 27 cm/s
+
+<!-- -->
+
+-   Antegrade volume: 14 mL
+
+-   Retrograde volume: 0 mL
+
+-   Regurgitation fraction: 0 %
+
+-   CAVE: Right upper pulmonary artery not captured
+
+[4) Left Pulmonary Artery:]{.underline}
+
+-   Maximum flow velocity: 33 cm/s
+
+-   Antegrade volume: 18 mL
+
+-   Retrograde volume: 0 mL
+
+-   Regurgitation fraction: 0 %
+
+[5) Inferior Vena Cava:]{.underline}
+
+-   Maximum flow velocity: 38 cm/s
+
+-   Antegrade volume: 30 mL
+
+-   Retrograde volume: 0 mL
+
+-   Regurgitation fraction: 0 %
+
+[6) Fontan Tunnel:]{.underline}
+
+-   Maximum flow velocity: 53 cm/s
+
+-   Antegrade volume 31: mL
+
+-   Retrograde volume: 0 mL
+
+-   Regurgitation fraction: 0 %
+
+[7) Superior Vena Cava]{.underline}:
+
+-   Maximum flow velocity: 23 cm/s
+
+-   Antegrade volume: 16 mL
+
+-   Retrograde volume: 0 mL
+
+-   Regurgitation fraction: 0 %
+
+[Assessment:]{.underline} In the setting of status post Total
+Cavopulmonary Anastomosis with DKS anastomosis for hypoplastic left
+heart, there is good right ventricular systolic function with only
+minimal ejection above the aortic valve.
+
+Slight tapering of the baffles up to 13 mm compared to VCI up to 21 mm
+without evidence of stenosis or major baffle leakage.
+
+Morphologically, slight tapering between the LPA and the anastomosis
+with essentially balanced flow between the LPA and RPA.
+
+Mild tricuspid valve prolapse with discrete insufficiency.
+
+Hepatomegaly with signs of chronic congestion.
+
+</text_5>
+</notes>
+</patient-record-patient_19>
+
+<patient-record-patient_20>
+Below is patient Hilary Sanders's medical record (ID: patient_20). 
+They were born on 08/24/1976 and have the following diagnosis: Common Variable Immunodeficiency Syndrome.
+The patients medical record consists of 7 notes included below.
+<notes>
+<text_0>
+**Dear colleague, **
+
+We are writing to provide an update on the examination results of our
+patient Mrs. Hilary Sanders, born on 08/24/1976, who presented to our
+outpatient clinic on 10/09/2016.
+
+**Diagnoses:**
+
+-   Common Variable Immunodeficiency Syndrome (CVID)
+
+-   Complete IgG deficiency
+
+-   Complete IgM deficiency
+
+-   Complete IgA deficiency
+
+-   Recurrent respiratory infections
+
+-   Idiopathic thombocytopenic purpura
+
+-   Arterial hypertension
+
+-   Initiation of subcutaneous immunoglobulin substitution therapy with
+    human immunoglobulin
+
+**Medical History:** Mrs. Sanders presented with suspected previously
+undiagnosed immunodeficiency. There were no reports of frequent
+infections during childhood and adolescence. No increased herpes
+infections. No history of pneumonia, meningitis, or other serious
+infections.
+
+**Current Presentation:** Mrs. Sanders has experienced recurrent
+respiratory infections (bronchitis, pharyngitis) for about 3 years.
+
+**Physical Examination:** She reported joint pain in the left knee and
+numbness below the shoulder blade. A tendency to bruise easily. No
+mucosal lesions, recurrent axillary lymph node swelling. No recurrent
+fevers. No B-symptoms. No resting dyspnea, no subjective heart rhythm
+disturbances, no syncope, no peripheral edema, or other signs of
+cardiopulmonary decompensation.
+
+**Immunological Diagnostics:**
+
+-   Immunoglobulins including subclasses: IgA, IgG, IgM, and all IgG
+    subclasses were reduced.
+
+-   Numerically unremarkable monocytes and granulocytes, lymphocytopenia
+    with reduced B- and NK-cells, normal CD4/CD8 ratio.
+
+-   B-lymphocyte subpopulation with numerically reduced B-cells.
+
+-   Monocytic HLA-DR expression (immune competence marker) within the
+    normal range.
+
+-   No evidence of acute or chronic T-cell activation.
+
+-   IL-6, LBP (Lipopolysaccharide-Binding Protein), and IL-8
+    post-erylysis were unremarkable, elevated s-IL-2.
+
+-   Monocytic TNF-alpha secretion after 4h LPS stimulation was
+    unremarkable.
+
+-   T-cell function after 24h polyvalent ConA stimulation: TNF-alpha,
+    IFN-gamma, IL-2, IL-4 unremarkable
+
+**Assessment**: In the immunological diagnostics, as in previous
+outpatient findings, a reduction in all major immunoglobulin classes and
+subclasses was observed. Cellular immune status revealed lymphocytopenia
+with reduced B- and natural killer-cells.
+
+Further cellular immune status, including the complement system and
+soluble mediators, showed no significant abnormalities except for an
+elevated soluble IL-2 receptor. Given the unremarkable monocytic
+TNF-alpha secretion after LPS stimulation, a significant Toll-like
+Receptor 4 defect is unlikely. An antibody response to Tetanus Toxoid
+was demonstrated in a vaccine titer test. Protective
+pneumococcal-specific antibodies could not be detected. There were no
+abnormalities in autoimmune diagnostics.
+
+Immunofixation showed no evidence of monoclonal gammopathy.
+Hypogammaglobulinemia due to enteral or renal protein loss is unlikely
+in the presence of normal albumin.
+
+Overall, the picture is consistent with Common Variable
+Immunodeficiency. Formally, CVID is defined by a reduction in the major
+immunoglobulin class IgG, with accompanying reduction in IgA and/or IgM,
+in the absence of normal or impaired vaccine response. Due to very low
+immunoglobulin levels and planned travel, determination of vaccine
+response was currently omitted in the absence of therapeutic
+consequence. After stable substitution, specific vaccine antibody levels
+can be determined before or after vaccination, with the assumption that
+stable antibody concentrations exist due to continuous immunoglobulin
+substitution.
+
+According to B-cell differentiation, it corresponds to Type Ib according
+to the Freiburg Classification and Type B+smB-CD21lo according to the
+Euro Classification. The classification is clinically relevant, as Type
+Ia is associated with increased immunocytopenias (especially ITP and
+AIH) and splenomegaly. In CVID with a high proportion (\>10%) of CD-21
+low B-cells, increased granulomatous diseases and splenomegaly have also
+been observed.
+
+The indication for immunoglobulin substitution therapy exists because of
+recurrent infections. The form of substitution therapy (intravenous. vs.
+subcutaneous) is primarily based on patient preferences, but also on
+medical conditions (concomitant diseases such as thrombocytopenia,
+convenience, insurance, etc.).
+
+**Current Recommendations:**
+
+We propose to initiate immunoglobulin substitution therapy with Hizentra
+20% (subcutaneous) at a dose of 200 ml once a week on Tuesdays. Further
+information and training on subcutaneous immunoglobulin substitution
+therapy will be provided by a home care nursing service.
+
+Mrs. Sanders will remain under regular medical supervision with close
+monitoring of clinical symptoms, laboratory parameters, and the
+effectiveness of immunoglobulin substitution therapy. Any unexpected
+side effects or changes in her condition should be reported immediately.
+
+**Lab results:**
+
+  **Parameter**                           **Results**     **Reference Range**
+  --------------------------------------- --------------- ---------------------
+  Sodium                                  141 mEq/L       132-146 mEq/L
+  Potassium                               4.2 mEq/L       3.4-4.5 mEq/L
+  Calcium                                 2.41 mg/dL      2.15-2.50 mg/dL
+  Inorganic Phosphate                     1.00 mg/dL      0.87-1.45 mg/dL
+  Selenium                                0.79 µmol/L     0.60-1.50 µmol/L
+  Zinc                                    10.1 µmol/L     9.0-22.0 µmol/L
+  Creatinine                              0.75 mg/dL      0.50-0.90 mg/dL
+  Estimated GFR (eGFR CKD-EPI)            \>90 mL/min     \>90 mL/min
+  Total Bilirubin                         0.37 mg/dL      \< 1.20 mg/dL
+  Albumin                                 4.55 g/dL       3.50-5.20 g/dL
+  Total Protein                           6.3 g/dL        6.4-8.3 g/dL
+  Albumin Fraction                        71.8%           55.8-66.1%
+  A1-Globulin                             5.1%            2.9-4.9%
+  A2-Globulin in Serum                    10.7%           7.1-11.8%
+  ß-Globulin in Serum                     9.2%            8.4-13.1%
+  Gamma-Globulin in Serum                 3.2%            11.1-18.8%
+  Immunoglobulin G                        514 mg/dL       700-1600 mg/dL
+  Immunoglobulin A                        14 mg/dL        70-400 mg/dL
+  Immunoglobulin M                        19 mg/dL        40-230 mg/dL
+  Immunoglobulin E                        90 kU/L         0.0-100.0 kU/L
+  IgG 1                                   299.5 mg/dL     280-800 mg/dL
+  IgG 2                                   162.7 mg/dL     115-570 mg/dL
+  IgG 3                                   49.1 mg/dL      24-125 mg/dL
+  IgG 4                                   4.0 mg/dL       5.2-125 mg/dL
+  Serum Immunofixation                                    
+  CRP                                     4.8 mg/L        \< 5.0 mg/L
+  C3 Complement                           980 mg/L        900-1800 mg/L
+  C4 Complement                           120 mg/L        100-400 mg/L
+  ß-2-Microglobulin                       3.6 mg/L        0.8-2.2 mg/L
+  HBs Antigen                             Negative        
+  HBc Antibody                            Negative        
+  HBs Antibody                            Negative        
+  Ferritin                                56 µg/L         13-140 µg/L
+  ALT (GPT)                               33 U/L          \< 31 U/L
+  AST (GOT)                               29 U/L          \< 35 U/L
+  Alkaline Phosphatase                    84 U/L          35-105 U/L
+  Creatine Kinase                         90 U/L          \< 167 U/L
+  CK-MB                                   8.3 U/L         \< 24.0 U/L
+  Gamma-GT                                40 U/L          5-36 U/L
+  LDH                                     204 U/L         135-214 U/L
+  Lipase                                  50 U/L          13-60 U/L
+  Cortisol                                306.6 nmol/L    64.0-327.0 nmol/L
+  25-OH-Vitamin D3                        65.3 nmol/L     50.0-150.0 nmol/L
+  1.25-OH-Vitamin D3                      134 pmol/L      18.0-155.0 pmol/L
+  TSH                                     1.42 mU/L       0.27-4.20 mU/L
+  Vitamin B12                             770 pg/mL       191-663 pg/mL
+  Folic Acid                              14.6 ng/mL      4.6-18.7 ng/mL
+  Hemoglobin                              13.9 g/dL       12.0-15.6 g/dL
+  Hematocrit                              41.0%           35.5-45.5%
+  Erythrocytes                            5.2 M/uL        3.9-5.2 M/uL
+  Leukocytes                              4.13 K/uL       3.90-10.50 K/uL
+  Platelets                               174 K/uL        150-370 K/uL
+  MCV                                     80.0 fL         80.0-99.0 fL
+  MCH                                     26.7 pg         27.0-33.5 pg
+  MCHC                                    33.6 g/dL       31.5-36.0 g/dL
+  RDW-CV                                  13.7%           11.5-15.0%
+  Absolute Neutrophils                    2.87 K/uL       1.50-7.70 K/uL
+  Absolute Immature Granulocytes          0.010 K/uL      \< 0.050 K/uL
+  Absolute Lymphocytes                    0.71 K/uL       1.10-4.50 K/uL
+  Absolute Monocytes                      0.42 K/uL       0.10-0.90 K/uL
+  Absolute Eosinophils                    0.09 K/uL       0.02-0.50 K/uL
+  Absolute Basophils                      0.03 K/uL       0.00-0.20 K/uL
+  HbA1c                                   4.9%            \< 6.0%
+  HbA1c (IFCC)                            30.1 mmol/mol   \< 42.0
+  HBV Serology Result                     Negative        
+  HIV1/2 Antibodies, P24 Antigen          Negative        
+  Hepatitis C Virus Antibodies in Serum   Negative        
+
+**Dear colleague,**
+
+We report the examination results of Mrs. Hilary Sanders, born on
+08/24/1976 who presented at our outpatient clinic on 03/04/2017.
+
+**Diagnoses:**
+
+-   Common Variable Immunodeficiency Syndrome (CVID)
+
+-   Complete IgG deficiency
+
+-   Complete IgM deficiency
+
+-   Complete IgA deficiency
+
+-   Recurrent respiratory infections
+
+-   Idiopathic thombocytopenic purpura
+
+-   Arterial hypertension
+
+-   Initiation of subcutaneous immunoglobulin substitution therapy human
+    immunoglobulin
+
+**Immunological Diagnostics:**
+
+-   Immunoglobulins including subclasses: IgA, IgG, IgM, and all
+    IgG-Subclasses were reduced.
+
+-   Numerically unremarkable monocytes and granulocytes, lymphocytopenia
+    with reduced B- and natural killer-cells, normal CD4/CD8 ratio.
+
+-   B-lymphocyte subpopulation with numerically reduced B cells.
+
+-   Monocytic HLA-DR expression within the normal range.
+
+-   No evidence of acute or chronic T-cell activation.
+
+-   IL-6, LBP (Lipopolysaccharide-Binding Protein), and IL-8
+    post-erylysis were unremarkable, elevated s-IL-2.
+
+-   Monocytic TNF-alpha secretion after 4h LPS stimulation was
+    unremarkable.
+
+**Assessment**: In the immunological diagnostics, as in previous
+outpatient findings, a reduction in all major immunoglobulin classes and
+subclasses was observed. Cellular immune status revealed lymphocytopenia
+with reduced B- and natural killer-cells. The further cellular immune
+status, including the complement system and soluble mediators, showed no
+significant abnormalities except for an elevated soluble IL-2 receptor.
+
+**Current Presentation:** Mrs. Sanders was again provided with detailed
+information about her condition and the planned course of action. We
+scheduled an appointment to initiate regular subcutaneous immunoglobulin
+therapy.
+
+**Medical History:** Mrs. Sanders received her first dose of Hizentra
+20% subcutaneously as immunoglobulin substitution therapy for CVID. The
+administration was well-tolerated initially, with no evidence of
+significant local or systemic side effects. Mrs. Sanders was once again
+informed about possible risks (especially hypersensitivity reactions)
+and advised to contact us immediately in case of questions,
+uncertainties, or any abnormalities. The dosing for the first four weeks
+was 3x20mL Hizentra 20% subcutaneously, and from the fifth week onward,
+it was changed to either 1x40mL or 2x20mL Hizentra 20% subcutaneously
+per week.
+
+In the past days, Mrs. Sanders has been experiencing a cold: runny nose,
+cough (green-yellow), difficulty clearing mucus, slight fever, sinus
+inflammation, sore throat, difficulty speaking, and swallowing problems.
+There was no improvement.
+
+**Physical Examination:** Reddened throat, no exudates, non-swollen
+cervical lymph nodes, lung examination showed bronchitis-like breathing
+sounds, no rales.
+
+**Therapy and Progression**: Today\'s CRP is not elevated. IgGs are
+still below normal. We recommended increasing immunoglobulin
+substitution during the infection. The patient had difficulty finding a
+suitable injection site on her abdomen. However, she reported that the
+secretions were gradually becoming lighter, so she decided to wait with
+the antibiotic and only use it if there was no improvement.
+
+The patient has been receiving 3x20mL Hizentra 20% per week since her
+last visit. She complained of developing skin hardening at the injection
+sites, so a slower infusion time was discussed. She has been
+experiencing a strong cough for several weeks without fever. No rales or
+signs of pleuritis were detected on auscultation. No abnormalities were
+observed on the chest X-ray. Laboratory results now show normal IgG
+levels, so the dose was reduced to 2x20mL per week. A CT scan of the
+thorax and abdominal ultrasound were requested.
+
+**Chest X-ray in two planes from 03/04/2017:**
+
+[Findings/Assessment:]{.underline} No previous images are available for
+comparison. Upper mediastinum and heart appear normal, with no central
+congestion. No pneumothorax, effusions, confluent infiltrates, or
+significant focal lesions.
+
+**Abdominal ultrasound on 03/04/2017:**
+
+Hepatosplenomegaly and retroperitoneal lymphadenopathy up to 26mm.
+
+**CT Chest/Abdomen/ from 03/04/2017:**
+
+[Methodology]{.underline}: Digital overview radiographs. After
+intravenous injection of contrast agent a 16-row CT scan of the thorax
+and entire abdomen was performed in the venous contrast phase, with
+primary data set reconstruction at a thickness of 1.25 mm. Multiplanar
+reconstructions were created.
+
+[Findings]{.underline}: A conventional radiographic pre-image from
+11/18/2014 is available for comparison.
+
+[Thorax]{.underline}: Normal lung parenchyma with normal vascular
+markings. Small, sometimes hazy, sometimes nodular densities measuring
+up to 4mm in both lower lobes and the left upper lobe. Small
+pleura-adjacent density in the right lower lobe. No evidence of
+confluent infiltrates. No pleural effusion or pneumothorax. Normal heart
+size and configuration. Normal diameter of the thoracic aorta and
+pulmonary trunk. Increased number and enlarged retroclavicular lymph
+nodes on the right and left, axillary on both sides measuring up to 30mm
+in diameter. Trachea and esophagus displayed normally. No hiatus hernia.
+Thyroid and neck soft tissues were unremarkable, as far as depicted.
+Normal thoracic soft tissue mantle. No soft tissue emphysema.
+
+[Abdomen]{.underline}: Hepatomegaly with morphologically normal liver
+parenchyma. No portal vein thrombosis. Gallbladder is unremarkable with
+no calculi. Intrahepatic and extrahepatic bile ducts are not dilated.
+Pancreas is normally lobulated and structured, with no dilation of the
+pancreatic duct. Splenomegaly. Accessory spleen measuring approximately
+20 mm in diameter. Splenic parenchyma is homogeneously contrasted in the
+venous phase. Kidneys are orthotopically positioned, normal size with no
+side differences, and contrasted equally on both sides. Two regularly
+configured hypodense lesions in the left kidney, suggestive of
+uncomplicated renal cysts. No dilation of the urinary tract, and no
+evidence of stones. Adrenal glands are not visualized. Increased and
+enlarged mesenteric, pararaortic, parailiacal, and inguinal lymph nodes
+up to 30 mm in size. Gastrointestinal tract is displayed normally, as
+far as assessable. Normal representation of major abdominal vessels. No
+free intraperitoneal fluid or air.
+
+[Osseous structures:]{.underline} No evidence of suspicious osseous
+destruction. Normal soft tissue mantle.
+
+[Assessment:]{.underline} Intrapulmonary multifocal, sometimes hazy,
+sometimes nodular densities, differential diagnosis includes atypical
+pneumonia. Thoracoabdominal lymphadenopathy. Hepatosplenomegaly without
+suspicious lesions.
+
+**Current Recommendations:**
+
+-   Outpatient follow-up for discussion of findings
+
+-   Continue regular subcutaneous immunoglobulin administration with
+    current regimen of Hizentra 20% 2x20mL/week
+
+-   Lung function test
+
+-   Gastroscopy
+
+-   In case of acute infection: increase immunoglobulin administration
+
+-   Abdominal ultrasound: annually
+
+-   H. pylori testing, e.g., breath test or H. pylori antigen in stool:
+    annually Seasonal influenza vaccination: annually
+
+**Lab results upon discharge:**
+
+  **Parameter**          **Results**   **Reference Range**
+  ---------------------- ------------- ---------------------
+  Total Protein          6.3 g/dL      6.4-8.3 g/dL
+  Albumin Fraction       71.8%         55.8-66.1%
+  A1-Globulin            5.1%          2.9-4.9%
+  Gamma-Globulin         3.2%          11.1-18.8%
+  Immunoglobulin G       188 mg/dL     700-1600 mg/dL
+  Immunoglobulin A       11 mg/dL      70-400 mg/dL
+  Immunoglobulin M       12 mg/dL      40-230 mg/dL
+  IgG Subclass 1         113 mg/dL     280-800 mg/dL
+  IgG Subclass 2         49.1 mg/dL    115-570 mg/dL
+  IgG Subclass 4         \<0.0 mg/dL   5.2-125 mg/dL
+  aPCP-IgG               7.32 mg/dL    10.00-191.20 mg/dL
+  aPCP-IgG2              2.74 mg/dL    4.70-89.40 mg/dL
+  ß-2-Microglobulin      3.6 mg/L      0.8-2.2 mg/L
+  LDH                    224 U/L       135-214 U/L
+  Vitamin B12            708 pg/mL     191-663 pg/mL
+  Erythrocytes           5.3 M/uL      3.9-5.2 M/uL
+  Platelets              129 K/uL      150-370 K/uL
+  MCV                    78.0 fL       80.0-99.0 fL
+  MCH                    25.1 pg       27.0-33.5 pg
+  Absolute Lymphocytes   0.91 K/uL     1.10-4.50 K/uL
+
+
+</text_0>
+<text_1>
+**Dear colleague, **
+
+We are reporting on Mrs. Hilary Sanders, born on 08/24/1976, who
+presented to our Immunodeficiency Clinic on 10/06/2017.
+
+**Diagnoses:**
+
+-   Common Variable Immunodeficiency Syndrome (CVID)
+
+-   Complete IgG deficiency
+
+-   Complete IgM deficiency
+
+-   Complete IgA deficiency
+
+-   Leukopenia and lymphopenia
+
+-   Recurrent respiratory infections
+
+-   Idiopathic thombocytopenic purpura
+
+-   Hepatosplenomegaly
+
+-   Thoracoabdominal, inguinal, and axillary lymphadenopathy
+
+-   Arterial hypertension
+
+-   Initiation of subcutaneous immunoglobulin substitution therapy human
+    immunoglobulin
+
+**Medical History:** Mrs. Sanders first presented herself to our clinic,
+with suspected undiagnosed immunodeficiency. Regular subcutaneous
+immunoglobulin therapy with Hizentra 20% (2x20mL/week) has been
+well-tolerated. Initially, there were frequent upper respiratory tract
+infections with sore throat and cough. In the absence of fever, a
+one-time course of Cotrim was prescribed for 7 days due to sinusitis. We
+discussed Mrs. Sanders' medical history in detail, including the recent
+CT findings. She has been informed about the necessity of vigilance in
+case of unclear and especially persistent lymph node swellings.
+Regarding the inguinal and axillary lymph nodes measuring up to 30mm in
+diameter found on CT, we recommend an observational approach with
+regular sonographic monitoring. There have been no significant changes
+in laboratory parameters, with good IgG levels during ongoing
+substitution therapy and known moderate leukopenia and lymphopenia.
+During the next appointment, an additional lung function test, including
+diffusion measurement, will be conducted
+
+**Current Recommendations:**
+
+-   Outpatient follow-up, including lung function test
+
+-   Continue regular subcutaneous immunoglobulin administration with
+    current regimen of Hizentra 20% (2x20mL/week).
+
+-   Current gastroscopy.
+
+<!-- -->
+
+-   In case of acute infection: increase immunoglobulin administration.
+
+-   Administer targeted, sufficiently long, and high-dose antibiotic
+    therapy if bacterial infections require treatment.
+
+-   Ideally, obtain material for microbiological diagnostics.
+
+-   In case of increasing diarrhea, consider outpatient stool
+    examinations, including Giardia lamblia and Cryptosporidium.
+
+-   Abdominal ultrasound: annually.
+
+-   Lung function test, including diffusion measurement: annually.
+
+-   H. pylori testing, e.g., breath test or H. pylori antigen in stool:
+    annually.
+
+-   Gastroscopy: approximately every 2-3 years, depending on previous
+    findings or H. pylori testing
+
+-   Chest X-ray or CT thorax: if clinical symptoms or lung function
+    abnormalities are observed.
+
+-   Seasonal influenza vaccination: annually.
+
+**Lab results upon Discharge:**
+
+  **Parameter**                    **Results**   **Reference Range**
+  -------------------------------- ------------- ---------------------
+  Sodium                           141 mEq/L     132-146 mEq/L
+  Potassium                        4.1 mEq/L     3.4-4.5 mEq/L
+  Creatinine (Jaffé)               0.82 mg/dL    0.50-0.90 mg/dL
+  Estimated GFR (eGFR CKD-EPI)     \>90          \-
+  Total Bilirubin                  0.21 mg/dL    \< 1.20 mg/dL
+  Albumin                          4.09 g/dL     3.5-5.2 g/dL
+  Immunoglobulin G                 1025 mg/dL    700-1600 mg/dL
+  Immunoglobulin A                 16 mg/dL      70-400 mg/dL
+  Immunoglobulin M                 28 mg/dL      40-230 mg/dL
+  Free Lambda Light Chains         5.86          5.70-26.30
+  Free Kappa Light Chains          6.05          3.30-19.40
+  Kappa/Lambda Ratio               1.03          0.26-1.65
+  IgG Subclass 1                   580.9 mg/dL   280-800 mg/dL
+  IgG Subclass 2                   340.7 mg/dL   115-570 mg/dL
+  IgG Subclass 3                   50.9 mg/dL    24-125 mg/dL
+  IgG Subclass 4                   5.7 mg/dL     5.2-125 mg/dL
+  CRP                              7.3 mg/L      \< 5.0 mg/L
+  Haptoglobin                      108 mg/dL     30-200 mg/dL
+  Ferritin                         24 µg/L       13-140 µg/L
+  ALT                              24 U/L        \< 31 U/L
+  AST                              37 U/L        \< 35 U/L
+  Gamma-GT                         27 U/L        5-36 U/L
+  Lactate Dehydrogenase            244 U/L       135-214 U/L
+  25-OH-Vitamin D3                 91.7 nmol/L   50.0-150.0 nmol/L
+  Hemoglobin                       13.1 g/dL     12.0-15.6 g/dL
+  Hematocrit                       40.0%         35.5-45.5%
+  Red Blood Cells                  5.5 M/uL      3.9-5.2 M/uL
+  White Blood Cells                2.41 K/uL     3.90-10.50 K/uL
+  Platelets                        142 K/uL      150-370 K/uL
+  MCV                              73.0 fL       80.0-99.0 fL
+  MCH                              23.9 pg       27.0-33.5 pg
+  MCHC                             32.7 g/dL     31.5-36.0 g/dL
+  MPV                              10.7 fL       7.0-12.0 fL
+  RDW-CV                           14.8%         11.5-15.0%
+  Absolute Neutrophils             1.27 K/uL     1.50-7.70 K/uL
+  Absolute Immature Granulocytes   0.000 K/uL    \< 0.050 K/uL
+  Absolute Lymphocytes             0.67 K/uL     1.10-4.50 K/uL
+  Absolute Monocytes               0.34 K/uL     0.10-0.90 K/uL
+  Absolute Eosinophils             0.09 K/uL     0.02-0.50 K/uL
+  Absolute Basophils               0.04 K/uL     0.00-0.20 K/uL
+  Free Hemoglobin                  5.00 mg/dL    \< 20.00 mg/dL
+
+**Abdominal Ultrasound on 10/06/2017:**
+
+[Liver]{.underline}: Measures 19 cm in the MCL, homogeneous parenchyma,
+no focal lesions.
+
+[Gallbladder/Biliary Tract:]{.underline} No evidence of calculi, no
+signs of inflammation, no congestion.
+
+[Spleen]{.underline}: Measures 14 cm in diameter, homogeneous. Accessory
+spleen measures 16 mm at the hilus.
+
+[Pancreas]{.underline}: Morphologically unremarkable, as far as visible
+due to intestinal gas overlay, no evidence of space-occupying processes.
+
+Retroperitoneum: No signs of aneurysms. Enlarged retroperitoneal and
+iliac lymph nodes, measuring up to approximately 2.5 cm in diameter.
+
+[Kidneys]{.underline}: Both kidneys are of normal size (right 4.3 x 11.8
+cm, left 4.6 cm x 11.9 cm). No congestion, no evidence of calculi
+(stones), no evidence of space-occupying processes.
+
+[Bladder]{.underline}: Smoothly defined and normally configured.
+Minimally filled.
+
+[Uterus]{.underline}: Size within the normal range, homogeneous.
+
+No ascites.
+
+[Assessment:]{.underline} Evidence of enlarged lymph nodes up to 2.5 cm
+retroperitoneal and iliac. Compared to previous findings, a slight
+decrease in splenomegaly.
+
+
+</text_1>
+<text_2>
+**Dear colleague, **
+
+We are reporting on the examination results of our patient, Mrs. Hilary
+Sanders, born on 08/24/1976, who presented herself in our
+Immunodeficiency Clinic on 02/10/2018.
+
+**Diagnoses:**
+
+-   Common Variable Immunodeficiency Syndrome (CVID)
+
+-   Complete IgG deficiency
+
+-   Complete IgM deficiency
+
+-   Complete IgA deficiency
+
+-   Recurrent respiratory infections
+
+-   Idiopathic thombocytopenic purpura
+
+-   Arterial hypertension
+
+-   Initiation of subcutaneous immunoglobulin substitution therapy human
+    immunoglobulin
+
+**Medical History:** For a detailed medical history, please refer to our
+previous medical records.
+
+**Therapy and Progression:** Ongoing diarrhea in the morning, often
+recurring in the afternoon. No melena, no fresh blood. Resolving
+respiratory infection, positive influenza.
+
+Currently, IgG levels remain within the target range. An increased need
+for immunoglobulins is expected, especially in the third trimester of
+pregnancy. Therefore, we recommend close monitoring with us during
+pregnancy. Ferritin levels have further declined, indicating the need
+for iron substitution. Anamnestically, there is an intolerance to oral
+iron preparations.
+
+**Recommendations:**
+
+-   Outpatient follow-up
+
+-   Early follow-up in case of infections or persistent diarrhea
+
+-   Continue regular subcutaneous immunoglobulin therapy, currently with
+    Hizentra 20% 2x20mL/week
+
+-   In case of increasing diarrhea, conduct outpatient stool
+    examinations, including testing for Giardia lamblia and
+    Cryptosporidium
+
+-   Pulmonary function tests including diffusion measurement: annually
+
+-   Helicobacter pylori (HP) testing: e.g., breath test or HP antigen in
+    stool: annually
+
+-   Gastroscopy: approximately every 2-3 years, depending on previous
+    findings and HP testing
+
+-   Chest X-ray or chest CT: in case of abnormal clinical presentation
+    or pulmonary function
+
+-   Annual seasonal influenza vaccination
+
+
+</text_2>
+<text_3>
+**Dear colleague, **
+
+We are writing to provide an update on Mrs. Hilary Sanders, born on
+08/24/1976, who presented to our outpatient Immunodeficiency Clinic on
+04/12/2018.
+
+**Diagnoses:**
+
+-   Common Variable Immunodeficiency Syndrome (CVID)
+
+-   Complete IgG deficiency
+
+-   Complete IgM deficiency
+
+-   Complete IgA deficiency
+
+-   Recurrent respiratory infections
+
+-   Idiopathic thombocytopenic purpura
+
+-   Arterial hypertension
+
+-   Initiation of subcutaneous immunoglobulin substitution therapy human
+    immunoglobulin
+
+-   Suspected CVID Enteropathy
+
+**Medical History:** For a detailed medical history, please refer to our
+previous medical records.
+
+**Therapy and Progression:** Respiratory infection with symptoms for 3-4
+weeks. No antibiotics. No significant infections since then. Hizentra
+3x20 mL with good tolerance.
+
+IgG levels remain within the target range; therefore, we recommend
+continuing the current treatment unchanged.
+
+Since the last visit, mild upper respiratory tract infections. No fever
+(except for one episode of sinusitis), no antibiotics. SCIG treatment
+unchanged with 3x20mL/week of Hizentra ®.
+
+Mrs. Sanders continues to experience watery diarrhea about 5-7 times
+daily. No blood in stools, no pain, no vomiting, no nausea. There has
+been no clear association with specific foods observed. Current weight:
+69kg.
+
+We discussed further diagnostic steps. Initially, outpatient endoscopic
+diagnostics should be performed.
+
+**Current Recommendations:**
+
+-   Outpatient follow-up in three months
+
+-   Continue SCIG treatment as is
+
+-   External upper gastrointestinal endoscopy and colonoscopy (please
+    return with findings)
+
+-   In case of increasing diarrhea, conduct outpatient stool
+    examinations, including testing for Giardia lamblia and
+    Cryptosporidium
+
+-   Abdominal ultrasound: annually
+
+-   Pulmonary function tests including diffusion measurement: annually
+
+-   Helicobacter pylori testing: e.g., breath test or Helicobacter
+    pylori antigen in stool: annually
+
+-   Gastroscopy: approximately every 2-3 years, depending on previous
+    findings and Helicobacter pylori testing
+
+-   Chest X-ray or chest CT: in case of abnormal clinical presentation
+    or pulmonary function
+
+-   Annual seasonal influenza vaccination
+
+
+</text_3>
+<text_4>
+**Dear colleague, **
+
+We are writing to provide an update on Mrs. Hilary Sanders, born on
+08/24/1976, who presented to our outpatient Immunodeficiency Clinic on
+02/18/2019.
+
+**Diagnoses:**
+
+-   Common Variable Immunodeficiency Syndrome (CVID)
+
+-   Complete IgG deficiency
+
+-   Complete IgM deficiency
+
+-   Complete IgA deficiency
+
+-   Recurrent respiratory infections
+
+-   Idiopathic thombocytopenic purpura
+
+-   Arterial hypertension
+
+-   Initiation of subcutaneous immunoglobulin substitution therapy human
+    immunoglobulin
+
+-   Suspected CVID Enteropathy
+
+**Medical History:** For a detailed medical history, please refer to our
+previous medical records.
+
+**Therapy and Progression:** Respiratory infections with symptoms for 7
+weeks. No antibiotics. No significant infections since then. Hizentra
+3x20 mL with good tolerance. Continued diarrhea, approximately 6 times a
+day, without weight loss. IgG levels remain within the target range;
+therefore, we recommend continuing the current treatment unchanged.
+
+We discussed further diagnostic steps. Initially, outpatient endoscopic
+diagnostics should be performed.
+
+**Current Recommendations:**
+
+-   Outpatient follow-up in three months
+
+-   Continue treatment as is
+
+-   External upper gastrointestinal endoscopy (and colonoscopy (please
+    return with findings)
+
+-   In case of increasing diarrhea, conduct outpatient stool
+    examinations, including testing for Giardia lamblia and
+    Cryptosporidium
+
+-   Abdominal ultrasound: annually
+
+-   Pulmonary function tests including diffusion measurement: annually
+
+-   Helicobacter pylori (HP) testing: e.g., breath test or HP antigen in
+    stool: annually
+
+-   Gastroscopy: approximately every 2-3 years, depending on previous
+    findings and HP testing
+
+-   Chest X-ray or chest CT: in case of abnormal clinical presentation
+    or pulmonary function
+
+-   Annual seasonal influenza vaccination
+
+
+</text_4>
+<text_5>
+**Dear colleague, **
+
+We are writing to provide summary on the clinical course of Mrs. Hilary
+Sanders, born on 08/24/1976, who presented at our outpatient
+Immunodeficiency Clinic.
+
+**Diagnoses:**
+
+-   Common Variable Immunodeficiency Syndrome (CVID)
+
+-   Complete IgG deficiency
+
+-   Complete IgM deficiency
+
+-   Complete IgA deficiency
+
+-   Recurrent respiratory infections
+
+-   Idiopathic thombocytopenic purpura
+
+-   Arterial hypertension
+
+-   Initiation of subcutaneous immunoglobulin substitution therapy human
+    immunoglobulin
+
+-   Suspected CVID Enteropathy
+
+-   Iron-deficiency anemia
+
+**Medical History:** For a detailed medical history, please refer to our
+previous medical records.
+
+**Therapy and Progression:** Overall stable condition. No longer
+experiencing cough. Persistent fatigue. Upcoming appointment with the
+Gastroenterology department next week. There is again an indication for
+iron substitution.
+
+**Update on 11/15/2019: Laboratory results from 11/15/2019:**
+Transaminase elevation, Protein 18, markedly elevated BNP. However, IgA
+is at 0.5 (otherwise not detectable), IgG subclasses within normal
+range. Findings do not align. Patient informed by phone, returning for
+further evaluation today; also screening for Hepatitis A, B, C, and E,
+EBV, CMV, TSH, coagulation. No shortness of breath, no edema, no
+abdominal enlargement, stable weight at 69 kg. In case of worsening
+symptoms, shortness of breath, or fever, immediate referral to the
+emergency department recommended.
+
+**02/12/2020:** The patient is doing reasonably well. She has had a mild
+cold for about 2 weeks, no fever, but nasal congestion and
+yellowish-green sputum. No other infections. No antibiotics prescribed.
+She has adapted to her gastrointestinal issues. An appointment with the
+Gastroenterology department. She is currently working from home.
+Medication: no new medications, only Cuvitru 20mL 3x weekly. Weight
+remains stable at 67 kg. The last lung function test was in the summer
+of this year and was within normal limits. Imaging has not been
+performed recently. Gastroscopy and colonoscopy have not been conducted
+for some time.
+
+**04/14/2020:** Referral to Gastroenterology at is recommended for
+persistent abdominal symptoms.
+
+**10/24/2020:** The patient has mostly avoided social contacts due to
+the pandemic. She continues to experience digestive problems (food
+intolerances, diarrhea, flatulence). She has less stamina. Few
+infections in the past year, at most a minor cold. No significant
+infections. Hizentra injections remain unchanged at 20 mL 3 times a
+week.
+
+**03/22/2021:** Constant colds since December 2020. One-time antibiotic
+treatment in October 2019. Subcutaneous Immunoglobulin therapy remains
+unchanged at 20 mL 3 times weekly.
+
+**09/19/2021:** She feels disoriented and very tired, more so than
+usual. Difficulty maintaining a steady gaze. No steroid therapy was
+administered. CT showed enlarged lymph nodes. Diarrhea, especially in
+the morning, 3-4 times a day, additional bowel movements with meals,
+sometimes watery. No fever, no infections. Hizentra injections continued
+unchanged.
+
+**Summary**: IgG levels are currently within the target range, so we
+recommend continuing immunoglobulin substitution therapy without
+changes. The antibody response (SARS-CoV-2 (S-Ag) IgG ELISA) to the
+Covid-19 vaccination is, as expected, negative. However, there is a
+positive detection of SARS-CoV-2 (N-Ag) IgG ELISA, as expected in the
+case of viral contact (not vaccination). We consider this to be an
+unspecific reaction and recommend further monitoring at the next
+follow-up appointment. With a platelet count currently at 55 K/uL, we
+recommend a short-term blood count check with us or your primary care
+physician.
+
+Due to the immunodeficiency, a lack of antibody response to vaccination
+was expected. In the medium term, passive protection through
+immunoglobulin substitution therapy will play a role. This is contingent
+on a significant portion of plasma donors having antibodies against
+SARS-CoV2. There is a multi-month delay from the time of donation to the
+release of the preparations, so we anticipate that meaningful protection
+through immunoglobulin products will not be expected. An exact prognosis
+in this regard is not possible.
+
+**Current Recommendations:**
+
+-   Outpatient follow-up in three months
+
+-   Consultation with Gastroenterology
+
+-   Continue SCIG treatment as is
+
+-   External upper gastrointestinal endoscopy and colonoscopy (please
+    return with findings)
+
+-   In case of increasing diarrhea, conduct outpatient stool
+    examinations, including testing for Giardia lamblia and
+    Cryptosporidium
+
+-   Abdominal ultrasound: annually
+
+-   Pulmonary function tests including diffusion measurement: annually
+
+-   Helicobacter pylori (HP) testing: e.g., breath test or HP antigen in
+    stool: annually
+
+-   Gastroscopy: approximately every 2-3 years, depending on previous
+    findings and HP testing
+
+-   Chest X-ray or chest CT: in case of abnormal clinical presentation
+    or pulmonary function
+
+-   Annual seasonal influenza vaccination
+
+
+</text_5>
+<text_6>
+**Dear colleague, **
+
+We are providing you with an update regarding our patient Mrs. Hilary
+Sanders, born on 08/24/1976. She was under our inpatient care from
+03/29/2023 to 04/05/2023.
+
+**Diagnoses:**
+
+-   Suspected CVID-Associated enteropathy
+
+-   Known hepatosplenomegaly with a borderline enlarged portal vein, no
+    significant portocaval shunts. Multiple liver lesions, possibly
+    hemangiomas further evaluation if not already done.
+
+-   Known retroperitoneal and iliac lymphadenopathy, likely related to
+    the underlying condition.
+
+-   Known changes in the lower lung bases, likely associated with the
+    underlying condition, e.g., ILD. Refer to previous examinations.
+
+-   Capsule endoscopy: Incomplete capsule enteroscopy with no evidence
+    of inflammatory changes. Some hyperemia and blurry vascular pattern
+    observed in the visible colon.
+
+-   CVID-Associated Hepatopathy in the Form of Nodular Regenerative
+    Hyperplasia
+
+**Other Diagnoses:** Common Variable Immunodeficiency Syndrome (CVID)
+with:
+
+-   Complete IgG deficiency
+
+-   Complete IgM deficiency
+
+-   Complete IgA deficiency
+
+-   Leukopenia and lymphopenia
+
+-   Initiation of subcutaneous immunoglobulin substitution therapy with
+    Hizentra 20%
+
+-   Infectious manifestations: Frequent respiratory tract infections
+
+-   Non-Infectious manifestations:
+
+    -   ITP (Immune Thrombocytopenia)
+
+    -   Hepatosplenomegaly
+
+    -   Lymphadenopathy in supraclavicular, infraclavicular,
+        thoracoabdominal, inguinal, and axillary regions
+
+    -   Suspected Granulomatous-Lymphocytic Interstitial Lung Disease in
+        CVID
+
+<!-- -->
+
+-   Iron-deficiency anemia
+
+**Pysical Examination:** Patient in normal general condition and
+nutritional status (175 cm, 65.8 kg. No resting dyspnea.
+
+[Neuro (grossly orienting):]{.underline} awake, oriented to
+time/place/person/situation, No evidence of focal neurological deficit.
+No meningism.
+
+[Head/neck]{.underline}: pharynx non-irritable. Moist, rosy mucous
+membranes. Tongue occupied.
+
+[Skin]{.underline}: intact, turgor normal, no icterus, no cyanosis.
+
+[Thorax]{.underline}: normal configuration, no spinal palpitation, renal
+bed clear.
+
+[Lung]{.underline}: vesicular breath sound bds, no accessory sounds,
+sonorous tapping sound bds.
+
+[Cor]{.underline}: Cardiac action pure, rhythmic, no vitia typical
+murmurs.
+
+[Abdomen]{.underline}: regular bowel sounds, soft abdominal wall, no
+tenderness, no resistances, no hepatosplenomegaly.
+
+[Extremities]{.underline}: no edema. Feet warm. Dorsalis pedis +/+ and
+posterior tibial artery +/+.
+
+**Current Presentation:** The patient was admitted for further
+evaluation of suspected CVID-associated enteropathy, as she had been
+experiencing chronic diarrhea for the past three years. On admission,
+the patient reported an overall good general and nutritional condition.
+She described her current subjective well-being as good but mentioned
+having chronic diarrhea for the past three years, with up to 7 bowel
+movements per day. The stools were watery without any signs of blood.
+There were no indications of infection, such as fever, chills, dysuria,
+hematuria, cough, sputum, or dyspnea. She also experienced intermittent
+left-sided upper abdominal pain, primarily postprandially. She had a
+good appetite.
+
+On the day of admission, an esophagogastroduodenoscopy was performed,
+which revealed erythematous antral gastritis. Additionally, there was an
+approximately 1 cm irregular mucosal area at the corpus-antrum junction
+on the greater curvature side. A magnetic resonance imaging scan showed
+no evidence of inflamed bowel loops, ruling out chronic inflammatory
+bowel disease or celiac disease. To further investigate, a capsule
+endoscopy was performed, with results pending at the time of discharge.
+Hypovitaminosis B12 and folate deficiency were ruled out. However,
+iron-deficiency anemia was confirmed, and the patient had already
+scheduled an outpatient appointment for iron substitution. Serum levels
+of vitamin B6 and zinc were pending at discharge.
+
+Due to a moderate increase in transaminases and evidence of
+hepatosplenomegaly, we decided, after detailed explanation and with the
+patient\'s consent, to perform a sonographically guided liver biopsy in
+addition to the planned endoscopy. The differential diagnosis included
+CVID-associated hepatopathy. The biopsy was successfully conducted ,
+without any post-interventional bleeding. Histology revealed mild acute
+hepatitis and nodular regenerative hyperplasia.This finding could be
+consistent with changes in CVID-associated hepatopathy. Granulomas were
+not observed. With only slightly elevated liver values, a trial therapy
+with budesonide was initiated, and clinical (diarrhea?) and laboratory
+(transaminases?) follow-up will be performed in the outpatient setting.
+
+We discharged Mrs. Sanders in a cardiopulmonarily stable condition.
+
+[Current Recommendations:]{.underline}
+
+-   Follow-up in the gastroenterological outpatient clinic
+
+**Esophagogastroduodenoscopy (EGD) on 04/01/2023:** Introduction of the
+gastroscope in a left lateral position. Visualized up to the descending
+part of the duodenum. Unremarkable upper esophageal sphincter. Normal
+motility and mucosa in the upper, middle, and distal esophagus. The
+Z-line is sharply demarcated in the hiatus. The cardia closes
+sufficiently. The stomach expands normally in all parts under air
+insufflation. Multiple glandular cysts \< 8 mm in size in the fundus and
+corpus. Approximately 1 cm irregular mucosal area at the corpus-antrum
+junction on the greater curvature side. Streaky redness of the mucosa in
+the antrum. Unremarkable mucosa in the bulb. Unremarkable mucosa in the
+descending part of the duodenum. Step biopsies performed.
+
+[Summary]{.underline}: Erythematous antral gastritis. Approximately 1 cm
+irregular mucosal area at the corpus-antrum junction on the greater
+curvature side, suggestive of inflammation. Multiple glandular cysts
+observed in the fundus and corpus.
+
+[Abdominal MRI on 04/02/2023:]{.underline}
+
+[Clinical information, questions, and justification for the
+exam]{.underline}: Chronic diarrhea, suspected CVID-associated
+enteropathy, differential diagnosis of celiac disease, and inflammatory
+bowel disease (IBD). Assessment of malignancy.
+
+Technique: After oral administration of mannitol solution and injection
+of 40 mg Buscopan, a 3-Tesla abdominal MRI was performed.
+
+[Findings]{.underline}: Multiple nodular consolidations and opacities
+detected in the lower basal lung segments, measuring 7 x 4 mm, for
+example, in the right lateral lower lobe (Series 18, Image 3).
+Additionally, streaky-reticular changes observed. Left diaphragmatic
+elevation. Liver globally enlarged and smooth-bordered with several
+lesions showing mild to moderately hyperintense signals in T2-weighted
+images and hypointense signals in T1-weighted images. These lesions
+demonstrated increased enhancement in the early contrast phases,
+especially those at the periphery, and more diffuse enhancement in the
+late phases. For example, a lesion measuring 12 x 11 mm in Segment 2, a
+lesion measuring 8 mm in Segment 8 and a lesion measuring 21 x 13 mm in
+Segment 7. The portal vein measures borderline wide, up to 15 mm in
+diameter. Gallbladder is unremarkable without evidence of stones. Intra-
+and extrahepatic bile ducts are not dilated. Spleen significantly
+enlarged, measuring 14 cm in pole-to-pole distance and 7.2 cm in
+transverse diameter, homogeneous enhancement in native phases and late
+contrast phase. Large accessory spleen located hilarly. Bilateral
+adrenal glands appear slender. Pancreas displays typical appearance with
+no ductal dilatation. Both kidneys are in orthotopic position, with
+unremarkable cortical cysts on the right side. No signs of urinary
+obstruction. The urinary bladder is moderately filled. No free fluid.
+Adequate dilation of small bowel loops. No evidence of significant bowel
+obstruction. No thickened bowel walls or increased post-contrast signal
+in the bowel loops. Cystic lesion in the right ovary measuring 17 x 11
+mm consistent with a corpus luteum cyst. Multiple enlarged
+retroperitoneal lymph nodes observed, for example, paracaval node with a
+short-axis diameter of 14 mm and right iliacoexternal node with a
+short-axis diameter of 14.5 mm No evidence of enlarged mesenteric or
+inguinal lymph nodes.
+
+</text_6>
+</notes>
+</patient-record-patient_20>

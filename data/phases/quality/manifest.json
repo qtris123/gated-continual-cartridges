@@ -1,0 +1,67 @@
+{
+  "1": {
+    "eval": "data/quality/phases/phase1_eval.parquet",
+    "questions": 124,
+    "articles": [
+      "51651",
+      "22867",
+      "26843",
+      "24161",
+      "50103",
+      "31599",
+      "62569"
+    ]
+  },
+  "2": {
+    "eval": "data/quality/phases/phase2_eval.parquet",
+    "questions": 128,
+    "articles": [
+      "22590",
+      "61434",
+      "51656",
+      "31282",
+      "22524",
+      "22579",
+      "49897"
+    ]
+  },
+  "3": {
+    "eval": "data/quality/phases/phase3_eval.parquet",
+    "questions": 122,
+    "articles": [
+      "23791",
+      "22876",
+      "51350",
+      "61263",
+      "51609",
+      "61139",
+      "51361"
+    ]
+  },
+  "4": {
+    "eval": "data/quality/phases/phase4_eval.parquet",
+    "questions": 126,
+    "articles": [
+      "51433",
+      "51296",
+      "51344",
+      "53269",
+      "22218",
+      "27492",
+      "51650"
+    ]
+  },
+  "5": {
+    "eval": "data/quality/phases/phase5_eval.parquet",
+    "questions": 122,
+    "articles": [
+      "51256",
+      "24275",
+      "51351",
+      "51699",
+      "50969",
+      "51274",
+      "51267"
+    ]
+  }
+}

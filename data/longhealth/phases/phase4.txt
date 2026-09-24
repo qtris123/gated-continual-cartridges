@@ -1,0 +1,3843 @@
+Below is a panel of patient records.
+
+<patient-record-patient_13>
+Below is patient Ben Harder's medical record (ID: patient_13). 
+They were born on 1940-02-08 00:00:00 and have the following diagnosis: Prostate cancer .
+The patients medical record consists of 6 notes included below.
+<notes>
+<text_0>
+**Dear colleague, **
+
+We are reporting on Mr. Ben Harder, born on 08/02/1940, who was admitted
+to our hospital from 12/17/2015 to 12/27/2015.
+
+**Diagnoses:**
+
+-   Prostate carcinoma pT3b pN1 R1 L0 V0, Gleason: 4 + 5 = 9
+
+-   Urine extravasation
+
+-   Persistent lymphatic leakage
+
+**Other Diagnoses:**
+
+-   Arterial hypertension
+
+-   Status post excision on the nose with suspicion of basal cell
+    carcinoma
+
+-   Status post laparoscopic cholecystectomy
+
+-   Retropubic radical prostatectomy without nerve preservation and with
+    bilateral pelvic lymphadenectomy was performed on 12/17/2015.
+
+**Medication upon Admission:**
+
+  **Medication**            **Dosage**    **Frequency**
+  ------------------------- ------------- ---------------------------------------------------
+  Valsartan (Diovan)        160 mg        1-0-1
+  Aspirin                   100 mg        1-0-1
+  Simvastatin (Zocor)       15 mg         0-0-1
+  Doxazosin (Cardura)       1 mg          0-0-1
+  Enoxaparin (Lovenox)      0.6 mL s.c.   Administer subcutaneously for a total of 4 weeks.
+  Acetaminophen (Tylenol)   500 mg        1-1-1 (for 4 days)
+
+**Histopathology:**
+
+1.  2 adenocarcinoma metastases in 2 out of 4 lymph nodes, left external
+    iliac region.
+
+2.  3 adenocarcinoma metastases in 3 out of 6 lymph nodes, right pelvic
+    region.
+
+3.  7 adenocarcinoma metastases in 7 out of 7 lymph nodes, right lumbar
+    para-aortic region.
+
+4.  Acinar adenocarcinoma of the prostate is observed bilaterally, with
+    a Gleason score of 4 (70%) + 5 (25%) = 9 and a tertiary Gleason
+    grade of 3 (5%) according to the modified Gleason grading of the
+    ISUP 2005. The tumor is multifocal and encompasses the entire
+    prostate with a maximum extrapolated tumor extension of 60 mm. There
+    is extracapsular tumor growth, with focal involvement at the dorsal
+    right base. Vascular invasion is not noted, but perineural invasion
+    is extensive. Both seminal vesicles are heavily infiltrated, and the
+    resection margin of the left seminal vesicle is involved. Before
+    tissue embedding, the margins of the specimen show focal
+    infiltration by the tumor, in the right anterior region near the
+    base (section 7) with a total contact area of 2 mm wide, and the
+    primary Gleason grade at the positive margin is 4. In addition to
+    the carcinoma, other prostatic tissue shows features of myoglandular
+    hyperplasia and high-grade prostatic intraepithelial neoplasia
+    (HGPIN). The prostatic urethra is free of tumors or dysplasia.
+
+5.  **Tumor classification:** pT3bpN1(12/17), R1L0V0, Gleason: 4 + 5 = 9
+
+**Medical History:** Mr. Harder was admitted for open prostatectomy due
+to biopsy-confirmed prostate carcinoma.
+
+Initial PSA value: 5.42 ng/ml. Gleason score of biopsy: 4+5=9 in 11 out
+of 12 biopsy samples. Clinical tumor stage: cT2c PSMA PET-CT + MRI from
+12/23/2015: Left capsular penetration without rectal infiltration.
+Seminal vesicles are infiltrated on both sides. Evidence of multiple
+lymph nodes; intrapelvic locoregional and two lymph nodes on the right
+parailiacal and lumbar interaortocaval region.
+
+TRUS: 88 cc Digital Rectal Examination: Abnormal findings on the left
+side
+
+**Physical Examination:** The patient is in good general condition, has
+a lean nutritional status, and reports feeling well. The abdomen is
+soft, with no tenderness, masses, resistance, or guarding, and the
+external genitalia are unremarkable.
+
+**Ultrasound upon admission:** Both kidneys are not dilated and show no
+space-occupying lesions. The bladder is minimally filled and appears
+unremarkable to the extent assessable.
+
+**Pretherapeutic Tumor Conference:** The findings were discussed
+interdisciplinary, and the possible treatment options were explained.
+The patient opted for radical prostatectomy.
+
+**Therapy and Progression:** The above-mentioned procedure was performed
+without complications. The postoperative course was uneventful. Blood
+transfusions were not required. Unfortunately, a cystogram on revealed
+extravasation, requiring the indwelling catheter to be retained. The
+wound drain was lifted once with serum-identical creatinine values and
+retained with persistent output (approximately 400 ml daily). Both
+kidneys were not dilated, and there were no signs of lymphocele or
+hematoma in the pelvic region on ultrasound. A follow-up rehabilitation
+treatment has been organized through our social services. We discharged
+the patient with absorbable intracutaneous sutures for further
+outpatient care.
+
+**Current Recommendations:** The patient was discharged with a permanent
+catheter and will present on 01/03/2016 for cystogram and possibly
+catheter removal. If catheter removal is indicated, we recommend
+considering a trial of voiding with subsequent admission if the
+cystogram is normal. The wound drain was also retained, and we request
+documentation of output. If output regresses and remains persistently \<
+30-40 ml, and there is no ultrasound evidence of lymphocele, it could be
+removed on an outpatient basis or during the follow-up appointment.
+
+We recommend the first PSA check 6 -- 8 weeks postoperatively, followed
+by quarterly intervals. If the PSA level does not reach the zero range
+or rises again from the zero range, the patient can be offered
+radiotherapy of the prostatic bed and lymphatic drainage pathways in
+combination with a 2-year hormonal ablative therapy as an individual
+therapeutic trial. Alternatively, primary hormonal ablative therapy is
+an option. If the PSA level reaches the zero range, the patient may be
+offered adjuvant hormonal ablative therapy for 2 years, possibly
+combined with radiotherapy. Additional findings will be discussed in our
+post-therapeutic conference. In case of changes in the recommended
+procedure mentioned above, we will inform you again.
+
+**Course of the lab results:**
+
+  **Parameter**               **12/18/15**    **12/19/15**     **12/20/15**    **12/23/15**   **Reference Range**
+  --------------------------- --------------- ---------------- --------------- -------------- ---------------------
+  Sodium                      135 mEq/L       138 mEq/L                                       136-145 mEq/L
+  Potassium                   5.1 mEq/L       4.4 mEq/L                                       3.4-4.5 mEq/L
+  Creatinine (Jaffe method)   0.93 mg/dL      1.05 mg/dL                                      0.70-1.20 mg/dL
+  Estimated GFR (eGFR)        83              65                                              
+  Hemoglobin                  11.4 g/dL       12.4 g/dL                                       12.5-17.2 g/dL
+  Hematocrit                  0.323 L/L       0.361 L/L                                       0.370-0.490 L/L
+  Red Blood Cells             3.8 x10\^12/L   4.3 x10\^12/L    4.2 x10\^12/L                  4.0-5.7 x10\^12/L
+  White Blood Cells           9.57 x10\^9/L   11.51 x10\^9/L   9.65 x10\^9/L                  3.90-10.50 x10\^9/L
+  Platelets                   216 x10\^9/L    239 x10\^9/L     285 x10\^9/L                   150-370 x10\^9/L
+  MCV                         88.1 fL         86.0 fL          88.3 fL                        80.0-101.0 fL
+  MCH                         30.2 pg         30.1 pg          29.5 pg                        27.0-34.0 pg
+  MCHC                        34.5 g/dL       35.3 g/dL        33.8 g/dL                      31.5-36.0 g/dL
+  MPV                         10.2 fL         10.4 fL          10.3 fL                        7.0-12.0 fL
+  RDW-CV                      12.1%           12.2%            12.8%                          11.6-14.4%
+
+
+</text_0>
+<text_1>
+**Dear colleague, **
+
+We report to you about Mr. Ben Harder, born on 08/02/1940 who received
+inpatient treatment from 01/13/2016 to 01/19/2016.
+
+**Diagnosis:** Urinary Tract Infection in Patient with indwelling
+catheter
+
+**Other Diagnoses:**
+
+-   Prostate carcinoma pT3b pN1 R1 L0 V0, Gleason: 4 + 5 = 9
+
+-   Urine extravasation
+
+-   Persistent lymphatic leakage
+
+-   Arterial hypertension
+
+-   History of excision on the nose with suspicion of basal cell
+    carcinoma
+
+-   History of laparoscopic cholecystectomy
+
+**Medication upon Admission: **
+
+  **Medication (Brand)**         **Dosage**   **Frequency**
+  ------------------------------ ------------ ---------------
+  Aspirin                        100 mg       1-0-0-0
+  Candesartan (Atacand)          16 mg        1-0-1-0
+  Chlorthalidone (Hygroton)      25 mg        0.5-0-0-0
+  Multivitamin                   \-           1-1-0-0
+  Hawthorn Herb                  450 mg       1-1-1-0
+  Selenium                       999 mcg      0-0-1-0
+  Zinc                           157 mg       0-1-0-0
+  Vitamin D3 (Cholecalciferol)   20 mg        0-1-0-0
+  Vitamin B complex              0.5 mg       1-0-0-0
+  Vitamin E                      200 IU       1-0-1-0
+  Vitamin A                      \-           0-2-0-0
+  Lercanidipine                  10 mg        0.5-0-0.5-0
+  Thiamine                       200 mg       1x/Week
+  Pyridoxine                     25 mg        2-3x/Week
+
+**Current presentation:** Mr. Harder returned to our clinic on
+01/13/2016, complaining of new-onset symptoms including increased
+urgency and frequency of urination, discomfort, lower abdominal pain,
+and fever. Given his recent surgery and indwelling catheter, concerns
+were raised about a possible urinary tract infection.
+
+**Clinical Examination:** On physical examination, Mr. Harder appeared
+unwell. He had a temperature of 38.8°C, elevated heart rate
+(tachycardia), and mild lower abdominal tenderness on palpation. The
+indwelling urinary catheter was in situ, and no signs of catheter
+dislodgment or leakage were observed.
+
+**Ultrasound of the Abdomen upon admission:** Bilateral, no urinary
+transport obstruction, approximately 4x2 cm-sized fluid collection noted
+in the right inguinal area, suggestive of possible lymphocele.
+
+**CT Scan Abdomen/Pelvic from 01/13/2016:** The liver displays a smooth
+contour, with homogeneous parenchymal contrast enhancement, and no
+evidence of focal intrahepatic lesions. There is no indication of
+intrahepatic or extrahepatic cholestasis. History of previous
+cholecystectomy with an accentuated common hepatic duct. Spleen,
+pancreas, and adrenal glands appear unremarkable. Both orthotopically
+located kidneys exhibit simultaneous and equal contrast enhancement. No
+intrarenal structural abnormalities or signs of urinary obstruction are
+observed. The colonic frame and small intestine show adequate perfusion,
+without focal wall thickening. The stomach is distended. The urinary
+bladder contains a catheter. Two intraluminal air pockets are seen.
+Known circumferential, uniform bladder wall thickening from previous
+examinations. No free intrabdominal air is detected. No evidence of
+ascites. Bilateral iliac and inguinal operative clips from prior
+lymphadenectomy. Right iliac region shows a serous fluid collection
+measuring approximately 3 x 2 cm. Para-aortic lymph nodes, up to 14 mm
+in size, are consistent with findings from previous evaluations. No
+suspicious malignancy-related bone destruction is noted. A drainage tube
+has been placed through the right lower abdominal wall, with its tip
+located in the left pelvic area.
+
+**Assessment:** No evidence of abscess formation. A lymphocele measuring
+approximately 3 x 2 cm is noted in the right iliac region, without signs
+of acute inflammation.
+
+**Microbiological Examination**
+
+**Material**: Catheter Urine Examination Request: Identification of
+Pathogens and Resistance Results: Organism 1: Growth of 100,000 CFU/mL
+Enterococcus faecalis Possible ICD-10 Coding Suggestion: Enterococci as
+Pathogen.
+
+-   Acute Cystitis
+
+-   Pyelonephritis
+
+-   Urinary Tract Infection related to Catheter/Implant
+
+-   Urinary Tract Infection, Unspecified Location
+
+**Antibiogram**
+
+-   Gentamicin HL: S
+
+-   Levofloxacin: R 1
+
+-   Teicoplanin: S \<=0.5
+
+-   Ampicillin: S \<=2
+
+-   Piperacillin: S
+
+-   Ampicillin/Sulbactam: S \<=2
+
+-   Piperacillin/Tazobactam: S
+
+-   Imipenem: S \<=1
+
+-   Cefuroxim: R \>=64
+
+-   Gentamicin: R
+
+-   Cotrimoxazole: R \<=10
+
+-   Ciprofloxacin: R \<=0.5
+
+-   Vancomycin: S 2
+
+-   Linezolid: S 2
+
+-   Tigecyclin: S \<=0.12
+
+**Therapy and Progression:** After CT morphological exclusion of an
+abscess formation or retention, the wound drainage was removed under
+antibiotic coverage. Initially, empirical antibiotic therapy with
+Cefuroxim was administered, followed by targeted treatment with oral
+Unacid based on resistance testing. The drainage insertion site healed
+primarily. The bladder catheter was removed, after which urination was
+free of residual urine. The patient has primary continence. We
+discharged the patient to further outpatient treatment, with the patient
+reporting subjective well-being.
+
+Mr. Harder showed gradual clinical improvement after initiating
+antibiotic therapy. His fever subsided, and lower abdominal tenderness
+diminished. The IV fluids were discontinued, and he remained on oral
+antibiotics.
+
+**Urine Culture Results:** The urine culture results returned positive
+for Escherichia coli (E. coli), a common uropathogen. The sensitivity
+profile indicated susceptibility to ciprofloxacin.
+
+**Follow-Up:** Mr. Harder was closely monitored for the duration of his
+antibiotic course. He was advised to complete the full course of
+antibiotics and maintain adequate hydration. The urinary catheter was
+removed on the fifth day of hospitalization after demonstrating improved
+urine output and resolution of symptoms. No further complications
+related to the catheter removal were observed.
+
+**Current Recommendations:**
+
+1.  Please refer to the previous discharge letter for the procedure
+    regarding prostate cancer.
+
+2.  He was educated on the signs and symptoms of UTIs and instructed to
+    seek prompt medical attention if symptoms recurred.
+
+**\
+**
+
+
+</text_1>
+<text_2>
+**Dear colleague, **
+
+Thank you for assigning Mr. Ben Harder, born on 08/02/1940 to the PET/CT
+combination scanner examination on 12/11/2022.
+
+**Diagnoses:**
+
+-   Initial diagnosis of prostate cancer in December 2015, confirmed by
+    prostate biopsy.
+
+-   Tumor detected in 11 out of 12 biopsy samples
+
+-   Maximum Gleason score of 9
+
+-   Preoperative PSA level: 5.42 ng/ml
+
+-   In the initial PET/CT examination (preoperative) on 12/23/2015
+    evidence of prostate cancer extending beyond the capsule in both
+    prostatic lobes was found.
+
+-   Infiltration of the left seminal vesicles and beginning infiltration
+    of the right seminal vesicles
+
+-   Multiple retroperitoneal lymph node metastases and bilateral pelvic
+    lymph nodes.
+
+-   Radical prostatectomy
+
+-   Current PSA level: 1.23 ng/ml
+
+-   Radiation therapy planned at our facility
+
+**Technique**: To expedite renal-urinary activity elimination, the
+patient was adequately hydrated. The examination was conducted using the
+PET/CT combination scanner BIOGRAPH 64 with CT parameters set at 120 kV
+and 1 mm slice thickness. PET emission data were acquired with 5 bed
+positions on a radiation therapy-compatible table for whole-body
+examination in the caudocranial direction with transverse slices at 3.0
+mm intervals over the same axial range as the CT scan. Iterative
+reconstruction was performed. A whole-body scan was conducted 90 minutes
+after the administration of 278 MBq Ga-68-PSMA (prostate-specific
+membrane antigen). Transmissions-corrected and non-corrected PET scans,
+CT scans, fusion images, and the determination of the SUV value
+(standard uptake value, a measure of activity uptake per volume) were
+used for evaluation.
+
+**PET Findings:** The 3D whole-body images documented in 3 planes using
+PET and PET/CT technology showed the following changes compared to the
+prior examination on 12/23/2015:
+
+-   Post-radical prostatectomy, there is diffuse activity accumulation
+    in the region dorsal to the bladder, on the left side.
+
+-   Regarding the known retroperitoneal lymph node metastases, the
+    following changes were observed: New retrocrural nodule on the
+    right. SUV 6.6, diameter: 6 mm.
+
+-   Known interaortocaval lymph node, dorsally at the level of L3/4,
+    showed increased metabolic activity from SUV 4.7 to 11.5. Slightly
+    increased in size, measuring 7 to 8 mm. Additionally, two new
+    metabolically active nodules cranially, up to the level of L2/3.
+
+-   Slightly increased metabolic activity in the known right iliaca
+    communis lymph node, located between the fifth lumbar vertebra and
+    the psoas muscle, from 4.0 to 4.6, with the same size of 5 mm.
+
+-   Progressive enlargement of the known confluent lymph nodes on the
+    right parailiacal externa proximal side, now having a combined size
+    of 10 x 26 mm (width x height), previously individual nodules of 10
+    and 12 mm. SUV 18.2, previously max 11.5.
+
+-   New paraaortic lymph nodes on the left, mostly small, SUV 11.2.
+
+-   Newly added lymph nodes in both biiliac communal areas. Maximum size
+    on the left is 15 mm, SUV 17.2.
+
+-   New retrocrural lymph node on the right, measuring 6 mm, SUV 6.6.
+
+-   Known lymph node on the right perirectal, slightly progressive from
+    8 to 10 mm. SUV 6.9, previously 6.4.
+
+-   Known lymph node on the left iliaca externa not currently
+    verifiable, possibly postoperative scarring.
+
+-   Newly added focus in the bone at the level of the spinous
+    process/dorsal arch of the fifth lumbar vertebra. In CT, a 7 mm
+    focal sclerosis is noted. Normal activity accumulation in the soft
+    tissues of the neck, axillae, and chest. Physiological accumulation
+    in the parenchymal upper abdominal organs. Kidneys and urinary tract
+    appear functionally normal. Whole-body CT following bolus-like
+    peripheral venous machine injection of 100 ml of Optiray 350: No
+    suspicious lymph nodes in the cervical, axillary, or mediastinal
+    regions. Normal-sized thyroid gland. No pleuropulmonary infiltrates
+    or round lesions. Scarred changes in the left lower lobe.
+    Normal-sized liver without focal lesions. Spleen, pancreas, adrenal
+    glands, and kidneys appear regular. No urinary obstruction..
+
+**Results**: In the postoperative PET/CT compared to the preoperative
+examination on, there is now malignancy-typical PSMA receptor binding in
+the former prostate lodge, indicating a local recurrence. Progression of
+retroperitoneal lymph node metastases, with further extension cranially,
+extending to the interaortocaval region up to the level of L2/3. Newly
+added metastases on the left paraaortic and biiliac communal areas.
+Progression of known right iliaca externa lymph node metastases. The
+left iliaca externa nodule is not verifiable, likely removed. New small
+retrocrural nodule on the right. New osteosclerotic metastasis in the
+dorsal arch of LWK 5. Minimal activity accumulation in the 8th rib on
+the right lateral aspect. A developing metastasis cannot be conclusively
+ruled out here. We kindly request information on the patient\'s further
+clinical course (submission of medical reports, etc.).
+
+**Lab results**
+
+  **Parameter**          **Results**   **Reference Range**
+  ---------------------- ------------- ---------------------
+  Glucose (Plasma)       91 mg/dL      55-100 mg/dL
+  Alkaline Phosphatase   93 U/L        \< 130 U/L
+  Total Cholesterol      152 mg/dL     \< 200 mg/dL
+  LDL-Cholesterol        89 mg/dL      \< 130 mg/dL
+  HDL-Cholesterol        50 mg/dL      40-60 mg/dL
+  Non-HDL Cholesterol    101.8 mg/dL   \< 200 mg/dL
+  Triglycerides          64 mg/dL      \< 150 mg/dL
+  White Blood Cells      4.1 K/uL      4.5-11 K/uL
+  Red Blood Cells        4.68 M/uL     4.0-5.5 M/uL
+  Hemoglobin             13.6 g/dL     12.5-17.2 g/dL
+  Hematocrit             39.5%         37.0-49.0%
+  MCH                    29.1 pg       27.0-34.0 pg
+  MCHC                   34.4 g/dL     31.5-36.0 g/dL
+  MCV                    84.4 fL       80.0-101.0 fL
+  RDW                    13.0%         11.6-14.4%
+  Platelets              238 K/uL      150-370 K/uL
+
+**\
+**
+
+
+</text_2>
+<text_3>
+**Dear colleague, **
+
+We are writing to provide an update on Mr. Ben Harder, born on
+08/02/1940, who received inpatient treatment at our facility from
+06/23/2023 to 06/26/2023.
+
+**Diagnosis:**
+
+Prostate Cancer pT3b pN1 R1 L0 V0 Gleason Score: 4 + 5 = 9 (Initial
+diagnosis in December 2015)
+
+-   History of Retropubic Radical Prostatectomy without nerve
+    preservation and with bilateral pelvic lymph node dissection on
+    November 16, 2015. Currently, lymph node and bone metastasis
+
+**Other Diagnoses:**
+
+-   History of Retropubic Radical Prostatectomy without nerve
+    preservation and with bilateral pelvic lymph node dissection on
+    November 16, 2015.
+
+-   Prostate Cancer pT3b pN1 R1 L0 V0, Gleason Score: 4 + 5 = 9
+
+-   Initial PSA (Prostate-Specific Antigen) level of 4.8 ng/ml
+
+-   Subsequent treatments included Docetaxel, Cabazitaxel, and 4 cycles
+    of Lutetium-Radioligand Therapy.
+
+-   12/2022, a subdiaphragmatic lymph node was punctured at Sea Clinic,
+    followed by radiation therapy of the lymph node metastasis.
+    Radiation was discontinued after 11 sessions due to dyspnea and
+    Grade 3 esophagitis.
+
+-   Notable PSA levels include 5.42 ng/ml in 10/2015, PSA undetectable
+    in 07/2019 (PSA 0.01 ng/ml, Testosterone 0.00 ng/ml), PSA rising in
+    11/2019 (PSA \> 0.03 ng/ml), PSA 0.16 ng/ml in 01/2020, PSA 0.06
+    ng/ml in 02/ 2020 (with undetectable Testosterone and Ostease 31),
+    and various other PSA values during the course of treatment.
+
+-   Imaging studies confirmed bone metastasis in the ilium and sacrum in
+    03/2020. A CT scan of the pelvis revealed these metastases, as well
+    as sclerosis of the sacrum and dorsal vertebral arches of L5.
+
+-   Further treatments included Zometa, Trenantone, and radiotherapy.
+
+-   An MRI of the lumbar spine in 02/2021 showed intraspinal soft tissue
+    structures with compression of the dural sac, along with extensive
+    predominantly sclerotic bone metastasis from L4 to S1.
+
+-   Surgical intervention included a decompressive hemilaminectomy with
+    microsurgical tumor resection from the epidural space in 02/2021,
+    followed by postoperative radiation therapy to the lumbar spine in
+    04/2021.
+
+-   Cabazitaxel therapy commenced in 07/2021, and a CT scan in 09/2021
+    showed morphologically progressive bone metastasis in the lumbar
+    spine.
+
+-   The patient received Lutetium PSMA-Therapy cycles in 04/2022,
+    06/2022, 08/2022, and 10/2022. A PSMA-PET-CT scan in 11/2022
+    indicated a very good partial remission in bone metastases but
+    progressive mediastinal lymph node metastasis.
+
+-   Radiotherapy was administered to the mediastinal lymph nodes but
+    discontinued after 11 sessions due to side effects
+
+-   In 04/2023, the patient underwent a re-challenge with Cabazitaxel
+    for one cycle but had to discontinue chemotherapy due to
+    polyneuropathy and cramps.
+
+-   A CT scan of the chest and abdomen in 04/2023 showed similar
+    findings, including two new sclerosis sites in the thoracic spine
+    (thora 11 and 12) with possible post-radiation changes.
+
+-   PSA level in 05/2023 was 0.48 ng/ml.
+
+-   Genetic sequencing revealed no therapeutic consequences.
+
+-   A PSMA-PET-CT in 06/2023 scan indicated new extensive metastasis in
+    the sacrum and diffuse lung metastases, accompanied by a PSA level
+    of 1.35 ng/ml.
+
+-   Arterial Hypertension
+
+-   Chronic Kidney Insufficiency
+
+**Medications on Admission:**
+
+  **Medication **              **Dosage**   **Frequency**
+  ---------------------------- ------------ ---------------
+  Candesartan (Atacand)        16 mg        1-0-1-0
+  Aspirin                      100 mg       1-0-0-0
+  Chlorthalidone (Thalitone)   25 mg        1-0-0-0
+
+**Physical Examination:** The patient was in good general condition and
+had normal orientation to all qualities. There were no edemas, dyspnea,
+fever, or cough.
+
+**Medical History:** Mr. Hader presents himself for the 1st cycle of RLT
+with Ac-225-PSMA/Lu-177-I&T-PSMA for lymph node and bone metastatic
+prostate cancer on an inpatient basis. In the presence of progressive
+imaging findings under guideline-compliant therapy, the indication for
+RLT tandem therapy was confirmed according to the tumor conference on.
+Upon admission, the patient reports feeling well, denies any B-symptoms.
+There is no fever or nausea, and the weight is currently stable. There
+has been a tendency to fall for some time. The rest of the medical
+history is assumed to be known.
+
+**Neurological Consultation on 06/25/2023: **
+
+Clinically neurological examination revealed a polyneuropathy syndrome
+of the lower extremities, predominantly on the right side, as well as a
+known right-sided foot drop. In summary, we consider the falls to be
+multifactorial due to foot weakness as well as polyneuropathy syndrome
+with impaired proprioception as the cause of the balance disorder.
+Recommended further procedure: In the presence of a known PNP syndrome
+that has occurred during chemotherapy, consider outpatient neurological
+evaluation and objectification by means of Electromyography and
+polyneuropathy laboratory tests.
+
+**Salivary Gland Scintigraphy on 06/26/2023**
+
+**Assessment**: Normal function of the submandibular and parotid glands
+bilaterally.
+
+Post-therapeutic imaging with Lu-177-PSMA imaging using
+SPECT/low-dose-CT
+
+**Assessment:** Consistent with the PET-CT, there is no tracer uptake in
+the area of the prostate. Intensive accumulation of the therapeutic
+agent in the area of lymph node metastases, especially mediastinal.
+Corresponding to the PET/CT, there are clear focal tracer accumulations
+in the left upper lobe of the lung in the area of nodular or diffuse
+tissue condensations, possibly metastases or, secondarily,
+post-inflammatory. Intensive tracer uptake in the area of known bone
+metastases from the previous examination. No newly appearing
+tracer-enhancing lesions. In addition, physiological accumulation in the
+organ systems involved in tracer metabolism and excretion. NB: Small
+pleural effusions on both sides. Known pronounced peribronchial cuffs in
+the upper lobes on both sides, possibly scarred, or indicative of
+pulmonary venous congestion. Known atrophic kidney on the right.
+
+**Current Recommendations:**
+
+-   Blood count checks and determination of kidney and liver parameters
+    1, 2, 4, and 8 weeks after therapy
+
+-   Outpatient neurologic assessment for the evaluation of
+    polyneuropathy
+
+-   PSA determination 6-8 weeks after therapy
+
+-   Appointment for a 2nd cycle of radioligand therapy
+    (Ac-225-/Lu-177-PSMA)
+
+**Lab results upon Discharge**
+
+  **Parameter**                      **Results**   **Reference Range**
+  ---------------------------------- ------------- ---------------------
+  Neutrophils (%)                    72.2 %        42.0-77.0 %
+  Lymphocytes (%)                    8.6 %         20.0-44.0 %
+  Monocytes (%)                      11.6 %        2.0-9.5 %
+  Basophils (%)                      1.4 %         0.0-1.8 %
+  Eosinophils (%)                    6.0 %         0.5-5.5 %
+  Immature Granulocytes (%)          0.2 %         0.0-1.0 %
+  Sodium                             137 mEq/L     136-145 mEq/L
+  Potassium                          4.2 mEq/L     3.5-4.5 mEq/L
+  Calcium                            2.31 mEq/L    2.20-2.55 mEq/L
+  Chloride                           100 mEq/L     98-107 mEq/L
+  Creatinine                         1.27 mg/dL    0.70-1.20 mg/dL
+  BUN                                48 mg/dL      17-48 mg/dL
+  Uric Acid                          5.2 mg/dL     3.6-8.2 mg/dL
+  C-reactive Protein                 0.8 mg/L      \< 5.0 mg/L
+  PSA                                2.31 µg/L     \< 4.40 µg/L
+  ALT                                12 U/L        \< 41 U/L
+  AST                                38 U/L        \< 50 U/L
+  Alkaline Phosphatase               115 U/L       40-130 U/L
+  Gamma-GT                           20 U/L        8-61 U/L
+  LDH                                335 U/L       135-250 U/L
+  Testosterone                       \<0.03 µg/L   1.32-8.92 µg/L
+  TSH                                1.42 mU/L     0.27-4.20 mU/L
+  Hemoglobin                         10.1 g/dL     12.5-17.2 g/dL
+  Hematocrit                         0.285 L/L     0.370-0.490 L/L
+  RBC                                3.3 /pL       4.0-5.6 /pL
+  WBC                                4.98 /nL      3.90-10.50 /nL
+  Platelets                          281 /nL       150-370 /nL
+  MCV                                85.6 fL       80.0-101.0 fL
+  MCH                                30.3 pg       27.0-34.0 pg
+  MCHC                               35.4 g/dL     31.5-36.0 g/dL
+  MPV                                9.2 fL        7.0-12.0 fL
+  RDW                                13.4 %        11.5-15.0 %
+  Neutrophils (Absolute)             3.59 /nL      1.50-7.70 /nL
+  Immature Granulocytes (Absolute)   0.010 /nL     \< 0.050 /nL
+  Lymphocytes (Absolute)             0.43 /nL      1.10-4.50 /nL
+  Monocytes (Absolute)               0.58 /nL      0.10-0.90 /nL
+  Eosinophils (Absolute)             0.30 /nL      0.02-0.50 /nL
+  Basophils (Absolute)               0.07 /nL      0.00-0.20 /nL
+  Reticulocytes                      31.3 /nL      25.0-105.0 /nL
+  Reticulocyte (%)                   0.94 %        0.50-2.00 %
+  Reticulocyte Production Index      0.3           \-
+  Ret-Hb                             33.9 pg       28.5-34.
+
+
+</text_3>
+<text_4>
+**Dear colleague, **
+
+We would like to report on our mutual patient, Mr. Ben Harder, born on
+08/02/1940, who presented himself to our outpatient clinic on 1/8/2023.
+
+**Diagnoses:**
+
+-   Prostate cancer pT3b pN1 R1 L0 V0, Gleason: 4 + 5 = 9 (initial
+    diagnosis in 11/2015)
+
+-   History of retropubic radical prostatectomy without nerve
+    preservation and with pelvic lymphadenectomy bilaterally on
+    11/16/2015
+
+-   Currently, there are lymph node and bone metastases
+
+-   History of retropubic radical prostatectomy without nerve
+    preservation and with pelvic lymphadenectomy bilaterally
+
+-   Prostate cancer pT3b pN1 R1 L0 V0, Gleason: 4 + 5 = 9
+
+-   Initial PSA level was 4.8 ng/ml
+
+-   History of Docetaxel therapy
+
+-   History of Cabazitaxel therapy
+
+-   History of 4 cycles of Lutetium-Radioligand therapy
+
+-   Subsequently, radiation therapy was initiated for the lymph node
+    metastasis but discontinued after 11 sessions due to dyspnea and G3
+    esophagitis.
+
+-   Arterial hypertension
+
+-   Chronic renal insufficiency
+
+-   Type 2 diabetes mellitus
+
+**Treatment and Progression:** The patient presents for a second opinion
+on his prostate cancer, which has metastasized to the bones and lymph
+nodes and has become castration-resistant. He recently received
+Lutetium-Radioligand therapy. Genetic sequencing from the tissue biopsy
+did not reveal any significant gene mutations. The patient wishes to
+undergo further evaluation for the diagnosis of relevant genetic
+mutations. A previously punctured subdiaphragmatic lymph node metastasis
+has not yet undergone genetic testing, which may be justified based on
+the available data and publications in specific cases. A chemotherapy
+session with Cabazitaxel is planned for the end of January in the
+treating urological practice. In cases of DNA repair gene alterations, a
+platinum combination could also be considered. Further possible
+diagnostic and therapeutic steps were discussed with the patient. An
+application for a repeat genetic sequencing will be submitted by our
+colleagues from the genetics department.
+
+**Current Recommendations:**
+
+-   Application for genetic sequencing for the punctured lymph node
+    metastasis through the genetics department and DNA-med
+
+-   Subsequent re-genetic sequencing of the subdiaphragmatic lymph node
+    metastasis for relevant mutations
+
+-   After receiving the results, a follow-up appointment can be
+    scheduled in our uro-oncology outpatient clinic.
+
+.
+
+**\
+**
+
+
+</text_4>
+<text_5>
+**Dear colleague, **
+
+We are reporting to you regarding the inpatient stay of our patient Mr.
+Ben Harder, born on 08/02/1940. He was under our care from 09/16/2023 to
+09/23/2023.
+
+**Diagnosis**: Prostate Cancer pT3b pN1 R1 L0 V0
+
+-   Gleason Score: 4 + 5 = 9
+
+-   Postoperative status following retropubic radical prostatectomy
+    without nerve preservation and with pelvic lymphadenectomy.
+
+-   Currently presenting with lymph node and bone metastases, mCRPC
+    (metastatic castration-resistant prostate cancer)
+
+-   Initial PSA level: 4.8 ng/ml
+
+**Previous Treatment and Course:**
+
+-   History of Retropubic Radical Prostatectomy without nerve
+    preservation and with bilateral pelvic lymph node dissection on
+
+-   Prostate Cancer pT3b pN1 R1 L0 V0, Gleason Score: 4 + 5 = 9
+
+-   Initial PSA (Prostate-Specific Antigen) level of 4.8 ng/ml
+
+-   Subsequent treatments included Docetaxel, Cabazitaxel, and 4 cycles
+    of Lutetium-Radioligand Therapy.
+
+-   12/2022, a subdiaphragmatic lymph node was punctured at Sea Clinic,
+    followed by radiation therapy of the lymph node metastasis.
+    Radiation was discontinued after 11 sessions due to dyspnea and
+    Grade 3 esophagitis.
+
+-   Notable PSA levels include 5.42 ng/ml in 10/2015, PSA undetectable
+    in 07/2019 (PSA 0.01 ng/ml, Testosterone 0.00 ng/ml), PSA rising in
+    11/2019 (PSA \> 0.03 ng/ml), PSA 0.16 ng/ml in 01/2020, PSA 0.06
+    ng/ml in 02/ 2020 (with undetectable Testosterone and Ostease 31),
+    and various other PSA values during the course of treatment.
+
+-   Imaging studies confirmed bone metastasis in the ilium and sacrum in
+    03/2020. A CT scan of the pelvis revealed these metastases, as well
+    as sclerosis of the sacrum and dorsal vertebral arches of L5.
+
+-   Further treatments included Zometa, Trenantone, and radiotherapy.
+
+-   An MRI of the lumbar spine in 02/2021 showed intraspinal soft tissue
+    structures with compression of the dural sac, along with extensive
+    predominantly sclerotic bone metastasis from L4 to S1.
+
+-   Surgical intervention included a decompressive hemilaminectomy with
+    microsurgical tumor resection from the epidural space in 02/2021,
+    followed by postoperative radiation therapy to the lumbar spine in
+    04/2021.
+
+-   Cabazitaxel therapy commenced in 07/2021, and a CT scan in 09/2021
+    showed morphologically progressive bone metastasis in the lumbar
+    spine.
+
+-   The patient received Lutetium PSMA-Therapy cycles in 04/2022,
+    06/2022, 08/2022, and 10/2022. A PSMA-PET-CT scan in 11/2022
+    indicated a very good partial remission in bone metastases but
+    progressive mediastinal lymph node metastasis.
+
+-   Radiotherapy was administered to the mediastinal lymph nodes but
+    discontinued after 11 sessions due to side effects in 01/2023.
+
+-   In 04/2023, the patient underwent a re-challenge with Cabazitaxel
+    for one cycle but had to discontinue chemotherapy due to
+    polyneuropathy and cramps.
+
+-   A CT scan of the chest and abdomen in 04/2023 showed similar
+    findings, including two new sclerosis sites in the thoracic spine
+    with possible post-radiation changes.
+
+-   PSA level in 05/2023 was 0.48 ng/ml.
+
+-   Genetic sequencing revealed no therapeutic consequences.
+
+-   A PSMA-PET-CT scan indicated new extensive metastasis in the sacrum
+    and diffuse lung metastases, accompanied by a PSA level of 1.35
+    ng/ml.
+
+-   Current PET-CT not available. Recommendations for further treatment
+    options are as follows, based on externally described
+    image-morphological progression in the recent CT:
+
+    1.  Actinium-225-PSMA Therapy (Lu-177 Tandem Therapy), provided that
+        all vital metastases are PSMA-positive (mandatory exclusion of
+        post-renal urinary flow obstruction)
+
+    2.  Alternatively, consider initiating therapy with Abiraterone +
+        Prednisolone or a Cabazitaxel re-challenge (if there was a
+        favorable response to the last 2 cycles of Cabazitaxel
+
+    3.  Evaluation of pre-screening for CAR-T cell studies in oncology
+        at CBF (contact will be made)
+
+**Other Diagnoses:**
+
+-   Arterial Hypertension
+
+-   Chronic Kidney Insufficiency
+
+-   Type 2 Diabetes Mellitus
+
+**Current Presentation:** Mr. Ben Harder is presenting for his 2nd cycle
+of Radioligand Therapy (RLT) with Ac-225-PSMA/Lu-177-I&T-PSMA for lymph
+node and bone metastatic prostate cancer. In light of progressive
+image-morphological findings despite guideline-compliant treatment, the
+indication for RLT tandem therapy was determined in the tumor
+conference.
+
+**Medical History:** Mr. Harder reports that after the last treatment
+cycle, he experienced pronounced fatigue symptoms. He particularly
+struggled with climbing stairs and walking longer distances. However, he
+managed to fully recover from these symptoms through targeted training.
+Additionally, he developed pain in the area of the right ribcage
+following the last treatment cycle. The pain occurs intermittently and
+is accompanied by increased salivation and nausea, sometimes leading to
+vomiting. Mr. Ben Harder also reports newly developed swallowing
+difficulties. He feels that food gets stuck in his throat after
+swallowing.
+
+**Therapy and Progression:**
+
+In the case of Mr. Ben Harder, due to metastatic prostate cancer with
+radiographic progression despite previous guideline-recommended therapy,
+according to the recommendations, there was an indication for the 2nd
+radioligand therapy with Ac-225-PSMA/Lu-177-I&T-PSMA. The
+post-therapeutic imaging showed targeted accumulation of the therapeutic
+agent within the tumor. The therapy was administered due to elevated
+renal retention parameters with reduced activity of Lu-177-PSMA. The
+course of therapy and the entire hospital stay were uncomplicated, so we
+can now transition the patient to your outpatient care. We recommend
+close laboratory monitoring (blood count, liver and kidney parameters)
+at 1, 2, 4, and 8 weeks, as well as a PSA determination 6-8 weeks after
+therapy.
+
+In the case of significant fatigue symptoms after the 1st cycle of
+tandem RLT, if there are blood count changes indicating a decrease in
+hemoglobin levels and recurrent fatigue symptoms, the administration of
+erythropoietin or the indication for blood product transfusion should be
+considered. Depending on the PSA value 6 weeks post-therapy and the
+findings of the PSMA-PET/CT, the further course of action will be
+determined in the interdisciplinary Tumor Conference.
+
+If the patient desires, they can seek a second opinion on further
+therapeutic procedures in the specialized clinic of the Uro-Oncology
+colleagues. In case of pronounced rib pain, if requested by the patient,
+the possibility of undergoing radiation therapy can be evaluated. To do
+so, Mr. Harder can schedule an appointment at the Radio-Oncology clinic.
+Psycho-oncological counseling has been offered to the patient.
+
+**Medication upon Discharge:**
+
+  **Medication **                  **Dosage**   **Frequency**
+  -------------------------------- ------------ ---------------
+  Aspirin                          100 mg       1-0-0-0
+  Candesartan Cilexetil (Atacan)   16 mg        1-0-1-0
+  Chlorthalidone (Hygroton)        25 mg        0.5-0-0-0
+  Multi-Vitamin                    \-           1-1-0-0
+  Hawthorn Herb                    450 mg       1-1-1-0
+  Sodium Selenite                  999 µg       0-0-1-0
+  Zinc                             157 mg       0-1-0-0
+  Vitamin D3 (Cholecalciferol)     20 mg        0-1-0-0
+  Vitamin B Complex                0.5 mg       1-0-0-0
+  Vitamin E                        200 IU       1-0-1-0
+  Vitamin A                        \-           0-2-0-0
+  Lercanidipine                    10 mg        0.5-0-0.5-0
+  Vitamin B1                       200 mg       1x/Week
+  Vitamin B6                       25 mg        2-3x/Week
+
+**Lab results upon Discharge:**
+
+  **Parameter**                    **Results**          **Reference Range**
+  -------------------------------- -------------------- ---------------------
+  Neutrophils %                    80.3 %               42.0-77.0 %
+  Lymphocytes %                    6.7 %                20.0-44.0 %
+  Monocytes %                      8.9 %                2.0-9.5 %
+  Basophils %                      1.3 %                0.0-1.8 %
+  Eosinophils %                    2.4 %                0.5-5.5 %
+  Immature Granulocytes %          0.4 %                0.0-1.0 %
+  I:T Ratio                        0.005                
+  HFLC Absolute                    0.0 /µL              
+  Sodium                           140 mEq/L            136-145 mEq/L
+  Potassium                        3.9 mEq/L            3.5-4.5 mEq/L
+  Calcium                          9.36 mg/dL           8.8-10.2 mg/dL
+  Chloride                         102 mEq/L            98-107 mEq/L
+  Creatinine                       1.25 P+ mg/dL        0.70-1.20 mg/dL
+  Estimated GFR                    52 mL/min/1.73m\^2   
+  BUN (Urea)                       44 mg/dL             17-48 mg/dL
+  Uric Acid                        3.8 mg/dL            3.6-8.2 mg/dL
+  CRP                              1.3 mg/L             \< 5.0 mg/L
+  PSA                              2.98 ng/mL           \< 4.4 ng/mL
+  ALT (GPT)                        22 U/L               \< 41 U/L
+  AST (GOT)                        49 U/L               \< 50 U/L
+  Alkaline Phosphatase             114 U/L              40-130 U/L
+  Gamma-GT                         19 U/L               8-61 U/L
+  LDH                              404 P+ U/L           135-250 U/L
+  Testosterone                     \<0.03 P- ng/mL      1.32-8.92 ng/mL
+  TSH                              1.14 mIU/L           0.27-4.20 mIU/L
+  Complete Blood Count                                  
+  Differential Count                                    
+  Hemoglobin                       10.6 g/dL            12.5-17.2 g/dL
+  Hematocrit                       30.5 %               37.0-49.0 %
+  RBC                              3.4 M/µL             4.0-5.6 M/µL
+  WBC                              5.49 K/µL            3.90-10.50 K/µL
+  Platelets                        279 K/µL             150-370 K/µL
+  MCV                              88.7 fL              80.0-101.0 fL
+  MCH                              30.8 pg              27.0-34.0 pg
+  MCHC                             34.8 g/dL            31.5-36.0 g/dL
+  MPV                              10.1 fL              7.0-12.0 fL
+  RDW-CV                           14.1 %               11.5-15.0 %
+  Absolute Neutrophils             4.41 K/µL            1.50-7.70 K/µL
+  Absolute Immature Granulocytes   0.020 K/µL           \< 0.050 K/µL
+  Absolute Lymphocytes             0.37 K/µL            1.10-4.50 K/µL
+  Absolute Monocytes               0.49 K/µL            0.10-0.90 K/µL
+  Absolute Eosinophils             0.13 K/µL            0.02-0.50 K/µL
+  Absolute Basophils               0.07 K/µL            0.00-0.20 K/µL
+  Reticulocytes                    37.8 K/µL            25.0-105.0 K/µL
+  Reticulocyte Percentage          1.10 %               0.50-2.00 %
+  Reticulocyte Production Index    0.4                  
+  Ret-Hb                           35.0 pg              28.5-34.5 pg
+  Prothrombin Time                 117 %                \> 78 %
+  INR                              0.94                 \< 1.25
+  aPTT                             30.2 sec             25.0-38.0 sec
+
+</text_5>
+</notes>
+</patient-record-patient_13>
+
+<patient-record-patient_14>
+Below is patient John Havers's medical record (ID: patient_14). 
+They were born on 05/29/1953 and have the following diagnosis: Liposarcoma.
+The patients medical record consists of 7 notes included below.
+<notes>
+<text_0>
+**Dear colleague, **
+
+We are reporting on our patient, John Havers, born on 05/29/1953, who
+received an MRI of the right proximal thigh for further clarification of
+a potential tumor.
+
+**MRI of the right thigh, plain and with contrast agent, on
+02/19/2017:**
+
+[Technique]{.underline}: Surface coil, localization scan, coronal T1 SE,
+transverse, coronal, sagittal T2 TSE with fat suppression. After
+intravenous contrast administration, T1-TSE transverse and T1-TSE FS
+(coronal, T2 TSE FS coronal as an additional fat-saturated sequence in
+the same section level for exploring relevant edema).
+
+[Findings]{.underline}: Normal bone marrow signal consistent with age.
+No signs of fractures. Coexistence of moderate degenerative changes in
+the hip joints, more pronounced on the right than on the left. Mild
+activation of the muscles in the left proximal adductor region. Ventral
+to the gracilis muscle and dorsal to the sartorius muscle at the level
+of the middle third of the right thigh is a subfascial intermuscular
+oval mass lesion with a high-signal appearance on T2-weighted images and
+a low-signal appearance on T1-weighted images. It is partially septated,
+well-demarcated, and shows strong contrast enhancement. No evidence of
+blood degradation products. Dimensions are 35 x 45 x 40 mm. No evidence
+of suspiciously enlarged lymph nodes. Other assessed soft tissues are
+unremarkable for the patient\'s age.
+
+[Assessment]{.underline}: Overall, a high suspicion of a mucinous mass
+lesion in the region of the right adductor compartment. Differential
+Diagnosis: Mucinous liposarcoma. Further histological evaluation is
+strongly recommended.
+
+**Current Recommendations:** Presentation at the clinic for surgery for
+further differential diagnostic clarification.
+
+
+</text_0>
+<text_1>
+**Dear colleague, **
+
+We are reporting on our patient, John Havers, born on 05/29/1953. He was
+under our inpatient care from 03/10/2017 to 03/12/2017.
+
+**Diagnosis:** Soft tissue tumor of the right proximal thigh
+
+**Other Diagnoses:**
+
+-   Arterial hypertension
+
+-   Non-insulin-dependent diabetes mellitus
+
+-   Coronary artery disease with stent placement
+
+-   Nicotine abuse (80-100 pack-years)
+
+-   Arterial hypertension
+
+-   Status post apoplexy
+
+-   Status post cataract surgery
+
+-   Status post right hip total hip replacement
+
+-   Status post Polypectomy for polyposis coli (minimal dysplasia)
+
+-   Status post appendectomy
+
+-   M. Meniere
+
+**Allergies**: Hay fever
+
+**Treatment**: Incisional biopsy on 03/10/2017
+
+**Histology:**
+
+[Microscopy]{.underline}: (Hematoxylin and Eosin staining):
+Histologically, an infiltrate of a mesenchymal neoplasm is evident in a
+section prepared by us and stained with HE. There are areas with an
+estimated tumor percentage of approximately 90% that were selected and
+labeled for molecular pathology analysis.
+
+[Molecular Pathology]{.underline}: After macrodissection of labeled
+tumor areas from unstained consecutive sections, RNA was extracted and
+analyzed using focused next-generation sequencing technology. The
+analysis was performed using FusioPlex Sarcoma v2 assays, allowing
+detection of fusions in 63 genes.
+
+**Medical History:** We may kindly assume that you are familiar with Mr.
+Havers's medical history. The patient presented to our surgery clinic
+due to a mass in the right proximal thigh. The swelling was first
+noticed approximately 3 months ago and has shown significant enlargement
+since. The patient subsequently consulted a general surgeon, who
+referred him to our center after performing an MRI, suspecting an
+intramuscular liposarcoma. After presenting the case to our
+interdisciplinary tumor board, the decision was made to perform an
+incisional biopsy. The patient was admitted for the above procedure on
+03/10/2017.
+
+**Physical Examination:** On clinical examination, a patient in slightly
+reduced general and nutritional status was observed. Approximately 6 x 7
+x 4 cm-sized tumor in the right proximal thigh, well mobile,
+intramuscular. Numbness in both legs at L5/S1.
+
+No change in skin color. No fluctuation or redness. The rest of the
+clinical examination was unremarkable.
+
+**Treatment and Progression:** Following routine preoperative
+preparations and informed consent, the above-mentioned procedure was
+performed under general anesthesia on 03/10/2017. The intraoperative and
+postoperative courses were uncomplicated.
+
+Initial mild swelling regressed over time. The inserted drainage was
+removed on the second postoperative day. The patient mobilized
+independently on the ward. Pain management was provided as needed.
+
+With the patient\'s subjective well-being and inconspicuous wound
+conditions, we were able to discharge Mr. Havers on 03/12/2017 for
+outpatient follow-up.
+
+**Current Recommendations:**
+
+-   Suture material to be shortened on the 14th postoperative day.
+
+-   Follow-up appointments in our outpatient clinic
+
+**Medication upon Discharge:**
+
+  **Medication**                         **Dosage**   **Frequency**
+  -------------------------------------- ------------ ---------------
+  Empagliflozin (Jardiance)              10 mg        1-0-0-0
+  Metformin Hydrochloride (Glucophage)   1000 mg      1-0-1-0
+  Atorvastatin Calcium (Lipitor)         21.7 mg      0-0-1-0
+  Metoprolol Tartrate (Lopressor)        50 mg        0.5-0-0.5-0
+  Aspirin                                100 mg       1-0-0-0
+  Pantoprazole Sodium (Protonix)         22.6 mg      1-0-0-0
+
+**Lab results upon Discharge: **
+
+  **Parameter**          **Results**   **Reference Range**
+  ---------------------- ------------- ---------------------
+  Sodium                 138 mEq/L     136-145 mEq/L
+  Potassium              4.9 mEq/L     3.5-4.5 mEq/L
+  Creatinine             0.81 mg/dL    0.70-1.20 mg/dL
+  Estimated GFR          \-            \-
+  Urea                   38 mg/dL      17-48 mg/dL
+  C-Reactive Protein     2.6 mg/dL     \< 5.0 mg/dL
+  Complete Blood Count   \-            \-
+  Hemoglobin             16.7 g/dL     13.5-17.0 g/dL
+  Hematocrit             49.5%         39.5-50.5%
+  Erythrocytes           5.2 M/µL      4.3-5.8 M/µL
+  Leukocytes             10.07 K/µL    3.90-10.50 K/µL
+  Platelets              167 K/µL      150-370 K/µL
+  MCV                    95.4 fL       80.0-99.0 fL
+  MCH                    32.2 pg       27.0-33.5 pg
+  MCHC                   33.7 g/dL     31.5-36.0 g/dL
+  MPV                    11.7 fL       7.0-12.0 fL
+  RDW-CV                 12.6%         11.5-15.0%
+  Prothrombin Time       120%          78-123%
+  INR                    0.94          0.90-1.25
+  aPTT                   30.1 sec      25.0-38.0 sec
+
+**Addition: Histology Report:**
+
+[Microscopy:]{.underline} (Hematoxylin and Eosin staining):
+Histologically, infiltrates of a mesenchymal neoplasm can be seen in a
+section we prepared. Below this are areas estimated to contain 90%
+tumor, which have been selected and labeled for molecular pathological
+analysis.
+
+[Molecular Pathology:]{.underline} After macrodissection of the marked
+tumor areas from unstained consecutive sections, RNA was extracted and
+analyzed using focused Next-Generation Sequencing technology. The
+examination was performed using the FusioPlex Sarcoma v2 Assays, that
+allows for the detection of fusions involving 63 genes.
+
+[Diagnosis:]{.underline}
+
+1.  Incisional biopsy from a myxoid liposarcoma, Grade 1 according to
+    FNCLCC (Sum score 2 + 0 + 1 = 3), with the detection of a FUS: DDIT3
+    fusion transcript (right adductor compartment).
+
+2.  Predominantly mature fatty tissue as well as fascial tissue.
+
+-   In addition to previous reports, myxoid neoplasm is characterized by
+    minimal cell density/round cell areas, here less than 25%, according
+    to FNCLCC (=2 points for tumor differentiation).
+
+-   No evidence of necrosis (=0 points).
+
+-   2 mitotic figures in 10 high-power fields (=1 point).
+
+-   Total score is 2 + 0 + 1 = 3, corresponding to Grade 1 according to
+    FNCLCC.
+
+[Diagnosis]{.underline}
+
+1.  Incisional biopsy from a myxoid liposarcoma (right adductor
+    compartment).
+
+2.  Predominantly mature fatty tissue as well as fascial tissue
+    (subcutaneous).
+
+[Comment]{.underline}: The present biopsy material corresponds to Grade
+1 according to FNCLCC. A supplementary report follows.
+
+**Supplementary Report from: 03/29/2017:**
+
+[Clinical Information:]{.underline} Suspected liposarcoma of the right
+proximal thigh. Encapsulated subfascial tumor, palpably indurated.
+Adipose tissue adjacent to the tumor, macroscopically lighter and finer
+than the subcutaneous adipose tissue towards the skin.
+
+[Material]{.underline}: Microscopy and Molecular Pathology Interphase
+FISH analysis using a two-color break-apart probe to examine a
+chromosomal break in the FUS gene (chromosome 16p11.2) and in the DDIT3
+gene (chromosome 12q13.3-q14.1).
+
+Interphase FISH analysis reveals a specific break event in the FUS gene
+(FUS-FISH positive). This indicates the presence of a FUS translocation.
+Similarly, in interphase FISH analysis, a specific break event is
+detectable in the DDIT3 gene (DDIT3-FISH positive), indicating the
+presence of a DDIT3 translocation.
+
+[Diagnosis:]{.underline} Incisional biopsy from a myxoid liposarcoma of
+the right adductor compartment.
+
+Predominantly mature fatty tissue as well as fascial tissue.
+
+[Comment]{.underline}: The cytogenetic findings are indicative of a
+myxoid liposarcoma. Technical validation by RNA sequencing will be
+provided in a supplemental report. This does not affect the above
+diagnosis.
+
+**Supplementary Report from: 03/18/2017:**
+
+[Microscopy: MDM2, S100:]{.underline} Partial weak expression of S100
+protein by the lesional cells, occasionally including pre-existing
+adipocytes. No abnormal expression of MDM2. No abnormal expression of
+MDM2 in mature adipose tissue.
+
+[Diagnosis:]{.underline} Incisional biopsy from a myxoid liposarcoma of
+the right adductor compartment.
+
+Predominantly mature fatty tissue as well as fascial tissue.
+
+**Main Report from: 03/18/2017**
+
+[Clinical Information:]{.underline} Suspected liposarcoma of the right
+proximal thigh, as per MRI 02/19/2017. Encapsulated subfascial tumor,
+palpably indurated located in the right adductor compartment. Adipose
+tissue adjacent to the tumor, macroscopically lighter and finer than the
+subcutaneous adipose tissue towards the skin.
+
+[Macroscopy:]{.underline}
+
+Tumor: Brown, nodular piece of tissue, 20 x 14 x 10 mm, with smooth and
+rough surface. Cut surface shiny and mottled, sometimes gray, sometimes
+brown.
+
+Subcutaneous adipose tissue: A piece of adipose tissue, 25 x 20 x 5 mm.
+
+[Microscopy:]{.underline}
+
+Moderately cell dense mesenchymal proliferation with a myxoid matrix.
+Predominantly round nuclei, moderately dense nuclear chromatin, slight
+pleomorphism. Occasional adipocytic cells with univacuolar cytoplasm.
+
+Partially dense, ribbon-like connective tissue as well as mature
+univacuolar adipose tissue.
+
+[Diagnosis:]{.underline}
+
+Incisional biopsy suspected of a myxoid liposarcoma. Predominantly
+mature fatty tissue as well as fascial tissue.
+
+
+</text_1>
+<text_2>
+**Dear colleague, **
+
+We would like to inform you about our patient Mr. John Havers, born on
+05/29/1953, who was admitted to our hospital from 03/29/2017 to
+04/05/2017.
+
+**Diagnoses**:
+
+-   Myxoid liposarcoma on the right medial thigh, pT2 pNX L0 V0 Pn0 G1
+    R0, Stage IB
+
+-   Incisional biopsy on 03/10/2017
+
+**Other Diagnoses:**
+
+-   Arterial hypertension
+
+-   Non-insulin-dependent diabetes mellitus
+
+-   Coronary artery disease with stent placement
+
+-   Nicotine abuse (80-100 pack-years)
+
+-   Arterial hypertension
+
+-   Status post apoplexy
+
+-   Status post cataract surgery
+
+-   Status post right hip total hip replacement
+
+-   Status post Polypectomy for polyposis coli (minimal dysplasia)
+
+-   Status post appendectomy
+
+-   M. Meniere
+
+**Allergies**: Hay fever
+
+**Current Presentation**: Neoplasm of uncertain or unknown behavior.
+
+**Treatment**: On 04/01/2017, en bloc tumor excision with removal of the
+old biopsy scar, partial resection of the M. gracilis, fibers of the M.
+sartorius and M. adductor longus, and ligation of the V. saphena magna
+was performed.
+
+**Histology from 04/11/2017**
+
+Clinical Information: Myxoid liposarcoma, localized in the right thigh.
+
+[Macroscopy Tumor, right thigh]{.underline}: A triple surgical resection
+was performed, removing skin and subcutaneous tissue and the underlying
+soft tissue and muscle. The size of the excised skin spindle was 130 x
+45 mm with a resection depth of up to 48 mm. A wound 25 mm long and 6 mm
+wide was noted on the skin surface. The muscle attached
+laterally/dorsally measured 75 x 25 x 6 mm. Two nodules were noted on
+the cut surface. The larger nodule, located in the subcutaneous tissue,
+measured 33 mm (proximal/distal) x 36 mm (anterior/dorsal) x 30 mm. Its
+distance from the proximal preparation cap was 26 mm, from the distal
+preparation cap more than 60 mm, from the ventral soft tissue 20 mm, and
+from the dorsal soft tissue 3 mm, with less than 1 mm basal extension.
+Superficially, it was surrounded by a delicate capsule. A separate
+nodule measuring 20 mm (proximal/distal) x 24 mm (ventral/dorsal) x 20
+mm was found immediately ventro-distal to the first nodule. This nodule
+was located more than 40 mm from the proximal preparation cap, more than
+50 mm from the distal preparation cap, 12 mm ventrally, 11 mm dorsally,
+and 5 mm basally. Consequently, the maximum size of the tumor from
+proximal to distal was 53 mm. No macroscopic necrotic areas were evident
+on the cut surface of the nodule. However, partial necrosis of the
+subcutaneous fatty tissue in the vicinity of the described wound was
+observed.
+
+[Microscopy HE, PAS:]{.underline} Histomorphologically, there is a
+moderately cell-dense proliferation with a significant myxoid matrix in
+the area of the two confluent nodules, with a maximum diameter of 53 mm.
+There are also areas with relative cell poverty. Within the myxoid
+matrix, there are blood vessels with a distinct growth pattern referred
+to as the \"chicken wire pattern.\" No clear tumor necroses are evident.
+The tumor cell nuclei have a round configuration with moderately dense
+chromatin. Apoptotic figures are increased. The number of mitoses is
+low.The lesion was completely removed with a minimal margin of 0.5 mm
+from the posterior resection edge. In the superficial subcutaneous
+tissue, there is a band-like necrosis directly related to superficial
+granulation tissue. The included skin spindle shows regular epidermal
+covering and a largely unremarkable dermis.
+
+[Diagnosis]{.underline}: Skin/subcutaneous excision with a maximum 53 mm
+myxoid liposarcoma that was completely removed (minimum distance to
+posterior cutoff plane 0.5 mm).
+
+[Comment]{.underline}: In view of the present morphology and knowledge
+of the molecular pathological examination results with proven break
+events in the FUS gene and DDIT3 gene as part of interphase FISH
+analysis, the diagnosed condition is myxoid liposarcoma.
+
+According to the FNCLCC grading scheme, this corresponds to grade 1:
+Histological type: 2 points + mitotic index 1 point + necrosis index 0
+points = 3 points.
+
+ICD-O-3 tumor classification: Myxoid liposarcoma TNM (8th edition): pT2
+pNX L0 V0 Pn0 G1 R0
+
+**Medical History:** We assume that you are familiar with Mr. Havers's
+medical history, and we refer to our previous correspondence.
+
+**Physical Examination:** Patient in good general condition. Oriented in
+all aspects. No cyanosis. No edema. Warm and dry skin. Normal nasal and
+pharyngeal findings. Pupils round, equal, and react promptly to light
+bilaterally. Moist tongue. Pharynx and buccal mucosa unremarkable. No
+jugular vein distension. No carotid bruits heard. Palpation of lymph
+nodes unremarkable. Palpation of the thyroid gland unremarkable, freely
+movable. Lungs: Normal chest shape, moderately mobile, vesicular breath
+sounds.
+
+Heart: Regular heart action, normal rate; heart sounds clear, no
+pathological sounds. Abdomen: Peristalsis and bowel sounds normal in all
+quadrants; soft abdomen, no tenderness, no palpable masses, liver and
+spleen not palpable due to limited access, non-tender kidneys.
+
+Normal peripheral pulses; joints freely movable. Strength, motor
+function, and sensation are unremarkable.
+
+**Therapy and Progression**: The patient presented to our surgical
+clinic because of a mass in the right proximal thigh. The swelling was
+first noticed about 3 months ago and has increased significantly in size
+since then. MRI findings raised suspicion of a liposarcoma. After
+consultation in the interdisciplinary tumor board, the indication for
+incisional biopsy was performed on 03/10/2017. The histopathological
+examination confirmed the presence of a myxoid liposarcoma, leading to
+the decision for en bloc excision. The patient was extensively informed
+about the procedure and the risks and gave his consent. The patient was
+admitted for the procedure on 03/29/2017.
+
+Upon clinical examination, a patient in good general and nutritional
+condition was noted. Other general clinical findings were unremarkable.
+A wound healing disorder of 2 cm was observed in the area of the wound
+after incisional biopsy.
+
+**Sarcoma Tumor Board Recommendation dated 03/11/2017:** R0 G1 finding,
+standard sarcoma follow-up.
+
+**Procedure**: Following standard preoperative preparations and informed
+consent, the aforementioned procedure was performed on 03/01/2017 under
+general anesthesia. The intraoperative and postoperative course was
+uneventful.
+
+On the first postoperative day, there was slight swelling in the
+affected area, which gradually subsided. Analgesia was sufficient with
+Acetaminophen as needed. Thrombosis prophylaxis was administered with
+subcutaneous Enoxaparin 0.4 mL. The patient mobilized independently on
+the ward. The inserted drainage could not be removed so far due to
+excessive drainage output. During the hospital stay, a staging CT of the
+chest and abdomen was performed. No thoracoabdominal metastases were
+detected.
+
+**Summary**: With a good subjective well-being and unremarkable wound
+conditions, Mr. Havers was discharged on 04/05/2017 for further
+outpatient care. Clinical examination reveals slight swelling of the
+wound area. The wound is not dehiscent and shows no signs of irritation.
+The patient is mobilizing independently.
+
+**CT Chest/Abdomen/Pelvis from 04/01/2017: **
+
+[Clinical Information, Question, Justification]{.underline}: Liposarcoma
+of the thigh. Staging.
+
+[Technique]{.underline}: Digital overview radiographs. Following
+intravenous contrast agent administration (100 ml Xenetix), CT of the
+chest and entire abdomen in the venous contrast phase. Reconstruction of
+the primary dataset with a slice thickness of 0.625 mm. Multiplanar
+reconstruction. Total DLP: 885 mGy\*cm.
+
+[Findings]{.underline}: There are no prior images available for
+comparison.
+
+[Chest]{.underline}: Lungs are evenly ventilated and normally developed
+bilaterally. No pneumothorax on either side. Minimal right-sided pleural
+effusion. Mild basilar hypoventilation, particularly in the right lower
+lobe. Calcified granuloma in the apical right lower lobe. No suspicious
+pulmonary nodules.
+
+Heart shows enlargement of the left ventricle and left atrium. Coronary
+artery sclerosis. Atherosclerosis of the aortic arch. No pericardial
+effusion. Aorta and pulmonary trunk have normal diameters. No central
+pulmonary artery embolism. No pathologically enlarged mediastinal or
+hilar lymph nodes. Symmetric appearance of the neck soft tissues.
+Thyroid gland without focal lesions. Axillary lymph nodes are of normal
+size.
+
+[Abdomen]{.underline}: Liver is of normal size and has a smooth contour.
+No signs of cholestasis. No portal vein thrombosis. No suspicious
+intrahepatic lesions. Gallbladder appears normal. Common bile duct is
+not dilated. Spleen is not enlarged. Pancreas shows regular lobulation,
+and there is no dilatation of the pancreatic duct. Both kidneys are free
+from urinary tract obstruction. No solid intrarenal masses. Few renal
+cysts. Adrenal glands appear unremarkable. Urinary bladder shows no
+focal wall thickening. Prostate is not enlarged. Advanced
+atherosclerosis of the abdominal aorta and pelvic vessels. History of
+stenting of the left external iliac artery with no reocclusion.
+Mesenteric, para-aortic, and parailiac lymph nodes are not
+pathologically enlarged. No free intraperitoneal fluid or air is
+detected. Osseous Structures: Degenerative changes in the spine. No
+evidence of suspicious osseous destruction suggestive of tumors. Soft
+tissue mantle appears unremarkable.
+
+**Assessment**: No thoracoabdominal metastases.
+
+**Current Recommendations**:
+
+-   Regular wound inspections and dressing changes.
+
+-   Documentation of drainage output and removal if the output is \<20
+    ml/24 hours, expected removal on 04/23/2017 at our outpatient
+    clinic.
+
+-   Removal of sutures is not required for absorbable sutures.
+
+-   According to the tumor board decision dated 04/11/2017, we recommend
+    regular follow-up according to the schedule.
+
+**Sarcoma Follow-up Schedule Stage I**
+
+-   Local Follow-up:
+
+    1.  MRI right thigh: Years 1-5: every 6 months
+
+    2.  Years 6-10: every 12 months
+
+-   Pulmonary Follow-up:
+
+    3.  Chest X-ray, CT chest with contrast agent Years 1-5: every 6
+        months in alternation
+
+    4.  Years 6-10: every 12 months in alternation
+
+**Medication upon Discharge:**
+
+  **Medication**                         **Dosage**   **Frequency**
+  -------------------------------------- ------------ -------------------
+  Aspirin                                100 mg       1-0-0-0
+  Atorvastatin (Lipitor)                 20 mg        0-0-1-0
+  Enoxaparin (Lovenox)                   Variable     0-0-1-0
+  Empagliflozin (Jardiance)              10 mg        1-0-0-0
+  Metformin Hydrochloride (Glucophage)   1000 mg      1-0-1-0
+  Metoprolol Tartrate (Lopressor)        50 mg        0.5-0-0.5-0
+  Acetaminophen (Tylenol)                500 mg       2-2-2-2 if needed
+  Pantoprazole (Protonix)                20 mg        1-0-0-0
+
+**Lab results upon Discharge:**
+
+  **Parameter**                               **Results**   **Reference Range**
+  ------------------------------------------- ------------- ---------------------
+  Sodium                                      137 mEq/L     136-145 mEq/L
+  Potassium                                   4.4 mEq/L     3.5-4.5 mEq/L
+  Creatinine                                  0.74 mg/dL    0.70-1.20 mg/dL
+  Blood Urea Nitrogen                         33 mg/dL      17-48 mg/dL
+  C-Reactive Protein                          1.7 mg/dL     \< 5.0 mg/dL
+  Thyroid-Stimulating Hormone                 3.58 mIU/L    0.27-4.20 mIU/L
+  Hemoglobin                                  16.5 g/dL     13.5-17.0 g/dL
+  Hematocrit                                  49.3%         39.5-50.5%
+  Red Blood Cells                             5.2 M/µL      4.3-5.8 M/µL
+  White Blood Cells                           9.63 K/µL     3.90-10.50 K/µL
+  Platelets                                   301 K/µL      150-370 K/µL
+  Mean Corpuscular Volume                     95.7 fL       80.0-99.0 fL
+  Mean Corpuscular Hemoglobin                 32.0 pg       27.0-33.5 pg
+  Mean Corpuscular Hemoglobin Concentration   33.5 g/dL     31.5-36.0 g/dL
+  Mean Platelet Volume                        10.4 fL       7.0-12.0 fL
+  Red Cell Distribution Width                 12.1%         11.6-14.4%
+  Activated Partial Thromboplastin Time       32.4 sec      25.0-38.0 sec
+
+
+</text_2>
+<text_3>
+**Dear colleague, **
+
+We are writing to provide an update on our patient Mr. John Havers, born
+on 05/29/1953, who presented to our outpatient surgery clinic on
+04/23/2017.
+
+**Diagnosis**: Myxoid liposarcoma, right medial thigh, pT2 pNX L0 V0 Pn0
+G1 R0, Stage IB
+
+-   Following incisional biopsy
+
+-   After en bloc tumor excision with removal of the previous biopsy
+    scar, partial resection of the gracilis, sartorius and adductor
+    longus muscles and ligation of the great saphenous vein.
+
+**Other Diagnoses:**
+
+-   Arterial hypertension
+
+-   Non-insulin-dependent diabetes mellitus
+
+-   Coronary artery disease with stent placement
+
+-   Nicotine abuse (80-100 pack-years)
+
+-   Arterial hypertension
+
+-   Status post apoplexy
+
+-   Status post cataract surgery
+
+-   Status post right hip total hip replacement
+
+-   Status post Polypectomy for polyposis coli (minimal dysplasia)
+
+-   Status post appendectomy
+
+-   M. Meniere
+
+**Allergies**: Hay fever
+
+**Medical History:** We kindly assume that you are familiar with the
+patient\'s detailed medical history and refer to our previous discharge
+letter.
+
+**Current Presentation:** The patient presented today for a follow-up
+visit in our clinic. He reported no complaints. The Redon drain has not
+produced any secretions in the last 2 days.
+
+Clinical examination revealed uneventful wound conditions with applied
+Steri-strips. There is no evidence of infection. The Redon drain
+contains serous wound secretions.
+
+Procedure: The Redon drain is being removed today. With nearly fully
+healed wound conditions, we recommend initiating scar massage with fatty
+topical products in the near future.
+
+**MRI of the Right Thigh on** 04/23/2017**:**
+
+[Clinical Background, Question, Justification:]{.underline} Sarcoma
+follow-up for myxoid liposarcoma on the right medial thigh, pT2 pNX L0
+V0 Pn0 G1 R0, Stage IB. Recurrence? Regional behavior? Lymph nodes?
+
+[Technique]{.underline}: 3 Tesla MRI of the right thigh, both plain and
+after the administration of 8 ml of Gadovist intravenously. Supine
+position, surface coil.
+
+Sequences: TIRM coronal and axial, T2-TSE coronal and axial, T1 VIBE
+Dixon axial, EPI-DWI with ADC map axial, T1-Starvibe vascular images
+plain and post-contrast axial with subtraction images, T1-TSE FS
+post-contrast coronal.
+
+[Findings]{.underline}: Minor FLAIR hyperintense streaky signal
+alteration in the surgical area, most likely scar-related, with slight
+diffusion restriction and streaky contrast enhancement. No evidence of a
+recurrent suspicious substrate. No nodular contrast enhancement.
+Slightly accentuated inguinal lymph nodes on the right, most likely
+reactive. Unremarkable visualization of the remaining soft tissue.
+Normal bone marrow signal. Bladder filled. Unremarkable representation
+of the imaged pelvic organs.
+
+[Assessment]{.underline}: Following the resection of a myxoid
+liposarcoma on the right medial thigh, there is a regular postoperative
+finding. No indication of local recurrence.
+
+**Chest X-ray in Two Planes on 04/23/2017: **
+
+[Clinical Background, Question, Justification]{.underline}: Myxoid
+liposarcoma of the right thigh, initial diagnosis in 2022. Follow-up.
+Metastases?
+
+[Findings]{.underline}: No corresponding prior images for comparison.
+The upper mediastinum is centrally located and not widened. Hila are
+free. No acute congestion. No confluent pneumonic infiltrate. No
+evidence of larger intrapulmonary lesions. A 7 mm spot shadow is noted
+right suprahilar, primarily representing a vascular structure. No
+effusions. No pneumothorax.
+
+**Current Recommendations:** The patient would like to continue
+follow-up care with us, so we scheduled an MRI control appointment to
+assess the possibility of local recurrence. On this day, a two-view
+chest X-ray is also required.
+
+**We recommend the following follow-up schedule:**
+
+-   Local Follow-up:
+
+    5.  MRI right thigh: Years 1-5: every 6 months
+
+    6.  Years 6-10: every 12 months
+
+-   Pulmonary Follow-up:
+
+    7.  Chest X-ray, CT chest with contrast agent Years 1-5: every 6
+        months in alternation
+
+    8.  Years 6-10: every 12 months in alternation
+
+
+</text_3>
+<text_4>
+**Dear colleague, **
+
+We are writing to provide an update on our patient Mr. John Havers, born
+on 05/29/1953, who presented for tumor follow-up on 02/10/2018, in our
+outpatient surgery clinic for a discussion of findings.
+
+**Diagnosis**: Myxoid liposarcoma on the right medial thigh, pT2 pNX L0
+V0 Pn0 G1 R0, Stage IB
+
+-   Following incisional biopsy
+
+-   After en bloc tumor excision with removal of the previous biopsy
+    scar, partial resection of the gracilis, sartorius and adductor
+    longus muscles and ligation of the great saphenous vein.
+
+**Other Diagnoses:**
+
+-   Arterial hypertension
+
+-   Non-insulin-dependent diabetes mellitus
+
+-   Coronary artery disease with stent placement
+
+-   Nicotine abuse (80-100 pack-years)
+
+-   Arterial hypertension
+
+-   Status post apoplexy
+
+-   Status post cataract surgery
+
+-   Status post right hip total hip replacement
+
+-   Status post Polypectomy for polyposis coli (minimal dysplasia)
+
+-   Status post appendectomy
+
+-   M. Meniere
+
+**Summary**: Clinically, there is a regular postoperative finding on the
+right thigh.
+
+The control MRI with contrast of the right thigh on 04/23/2017 revealed
+morphologically:
+
+-   No evidence of a local-regional recurrence.
+
+-   In pulmonary follow-up using conventional chest X-ray on 04/23/2017,
+    no signs of pulmonary metastasis were detected.
+
+**Current Recommendations:** Sarcoma Follow-up Schedule Stage I
+
+-   Local Follow-up:
+
+    9.  MRI right thigh: Years 1-5: every 6 months
+
+    10. Years 6-10: every 12 months
+
+-   Pulmonary Follow-up:
+
+    11. Chest X-ray, CT chest with contrast agent Years 1-5: every 6
+        months in alternation
+
+    12. Years 6-10: every 12 months in alternation
+
+
+</text_4>
+<text_5>
+**Dear colleague, **
+
+We are reporting to you on our patient Mr. John Havers, born on
+05/29/1953, who presented himself on **08/01/2018** at our outpatient
+surgery clinic for a discussion of findings as part of tumor follow-up.
+
+**Diagnosis**: Myxoid liposarcoma, right medial thigh, pT2 pNX L0 V0 Pn0
+G1 R0, Stage IB
+
+-   Post-incision biopsy
+
+-   After en bloc tumor excision with removal of the previous biopsy
+    scar, partial resection of the gracilis, sartorius and adductor
+    longus muscles and ligation of the great saphenous vein.
+
+**Other Diagnoses:**
+
+-   Arterial hypertension
+
+-   Non-insulin-dependent diabetes mellitus (NIDDM)
+
+-   Coronary artery disease (CAD) with stent placement
+
+-   Nicotine abuse (80-100 pack-years)
+
+-   Arterial hypertension
+
+-   Status post apoplexy
+
+-   Status post cataract surgery
+
+-   Status post right hip total hip replacement (THR)
+
+-   Status post Polypectomy for polyposis coli (minimal dysplasia)
+
+-   Status post appendectomy
+
+-   M. Meniere
+
+**Summary**: Clinically, there is a normal postoperative condition in
+the right thigh.
+
+**MRI of the Right Thigh on 08/01/2018:**
+
+[Clinical Background, Question, Justification:]{.underline} Sarcoma
+follow-up for myxoid liposarcoma on the right medial thigh. Progress
+assessment.
+
+[Method]{.underline}: 1.5 Tesla. Localization sequences. TIRM and T2 TSE
+coronal. TIRM, T2 TSE, VIBE DIXON, and RESOLVE-DWI axial. StarVIBE FS
+before and after contrast + subtraction. T1 TSE FS coronal after
+contrast.
+
+[Findings]{.underline}: Comparison with MRI from 04/23/2017.
+Post-resection of a myxoid liposarcoma in the proximal medial right
+thigh soft tissue. In the surgical area, there is no evidence of a
+suspicious nodular, contrast-affine lesion, and no evidence of
+malignancy-suspected diffusion restriction. Slight scar-related changes
+in the access path. Otherwise, unremarkable presentation of soft tissues
+and included bony structures. No inguinal lymphadenopathy. Assessment:
+For myxoid liposarcoma, there has been consistent evidence since
+02/2018:
+
+**Chest CT on 08/01/2018**:
+
+[Clinical Background, Question, Justification: Liposarcoma on the thigh.
+Staging.]{.underline} After risk history assessment, oral and written
+explanation of contrast agent application and examination procedure, as
+well as potential risks of the examination (see also informed consent
+form). Written patient consent.
+
+[Method]{.underline}: Digital overview radiographs. After intravenous
+contrast agent administration (80 ml of Imeron), CT of the chest in
+venous contrast phase, reconstruction of the primary dataset with a
+slice thickness of 0.625 mm. Total DLP 185 mGy\*cm.
+
+[Findings]{.underline}: For comparison, there is a CT of the
+chest/abdomen/pelvis from 04/01/2018. No evidence of suspicious
+pulmonary nodules. Several partly calcified micronodules bipulmonary,
+especially in the right lower lobe (ex. S303/IMA179). Partial
+underventilation bipulmonary. No pleural effusion. No evidence of
+pathologically enlarged lymph nodes. Constant calcified right hilar
+lymph nodes. Calcifying aortic sclerosis along with coronary sclerosis.
+Hepatic steatosis. Individual renal cysts. Slightly shrunken left
+adrenal gland. Degenerative changes of the axial skeleton without
+evidence of a malignancy-suspected osseous lesion.
+
+[Assessment]{.underline}: No evidence of a new thoracic tumor
+manifestation.
+
+**Recommendations:** Sarcoma Follow-up
+
+-   Local Follow-up:
+
+    13. MRI right thigh: Years 1-5: every 6 months
+
+    14. Years 6-10: every 12 months
+
+-   Pulmonary Follow-up:
+
+    15. Chest X-ray, CT chest with contrast agent Years 1-5: every 6
+        months in alternation
+
+    16. Years 6-10: every 12 months in alternation
+
+**Lab results upon Discharge: **
+
+  **Parameter**                                  **Results**   **Reference Range**
+  ---------------------------------------------- ------------- ---------------------
+  Sodium                                         138 mEq/L     136-145 mEq/L
+  Potassium                                      4.9 mEq/L     3.5-4.5 mEq/L
+  Creatinine                                     0.81 mg/dL    0.70-1.20 mg/dL
+  Estimated GFR                                  \-            \-
+  Blood Urea Nitrogen                            38 mg/dL      17-48 mg/dL
+  C-Reactive Protein                             2.6 mg/dL     \< 5.0 mg/dL
+  Hemoglobin                                     16.7 g/dL     13.5-17.0 g/dL
+  Hematocrit                                     49.5%         39.5-50.5%
+  RBC                                            5.2 M/µL      4.3-5.8 M/µL
+  WBC                                            10.07 K/µL    3.90-10.50 K/µL
+  Platelets                                      167 K/µL      150-370 K/µL
+  MCV                                            95.4 fL       80.0-99.0 fL
+  MCH                                            32.2 pg       27.0-33.5 pg
+  MCHC                                           33.7 g/dL     31.5-36.0 g/dL
+  MPV                                            11.7 fL       7.0-12.0 fL
+  RDW-CV                                         12.6%         11.5-15.0%
+  Prothrombin Time                               120%          78-123%
+  International Normalized Ratio (INR)           0.94          0.90-1.25
+  Activated Partial Thromboplastin Time (aPTT)   30.1 sec      25.0-38.0 sec
+
+
+</text_5>
+<text_6>
+**Dear colleague, **
+
+We are writing to provide an update on our patient Mr. John Havers, born
+on 05/29/1953, who was admitted to our clinic from 08/14/2023 to
+09/02/2023.
+
+**Diagnosis:** Pulmonary Metastasis from Myxoid Liposarcoma
+
+-   Myxoid liposarcoma on the right medial thigh, pT2 pNX L0 V0 Pn0 G1
+    R0, Stage IB
+
+<!-- -->
+
+-   Post-incision biopsy
+
+-   After en bloc tumor excision with removal of the previous biopsy
+    scar, partial resection of the gracilis, sartorius and adductor
+    longus muscles and ligation of the great saphenous vein.
+
+**Other Diagnoses:**
+
+-   Arterial hypertension
+
+-   Non-insulin-dependent diabetes mellitus (NIDDM)
+
+-   Coronary artery disease (CAD) with stent placement
+
+-   Nicotine abuse (80-100 pack-years)
+
+-   Arterial hypertension
+
+-   Status post apoplexy
+
+-   Status post cataract surgery
+
+-   Status post right hip total hip replacement (THR)
+
+-   Status post Polypectomy for polyposis coli (minimal dysplasia)
+
+-   Status post appendectomy
+
+-   M. Meniere
+
+**Medical History:** Mr. Havers has been under our care for myxoid
+liposarcoma, which was previously excised from his right medial thigh.
+He had a stable postoperative course and was scheduled for regular
+follow-up to monitor for any potential recurrence or metastasis.
+
+**Current Presentation:** During a follow-up appointment on 08/14/2023,
+Mr. Havers complained of mild shortness of breath, occasional coughing,
+and intermittent chest discomfort. He reported no significant weight
+loss but noted a decrease in his overall energy levels. Physical
+examination revealed decreased breath sounds in the right lung base.
+
+**Physical Examination:** Patient in adequate general condition.
+Oriented in all aspects. No cyanosis. No edema. Warm and dry skin.
+Normal nasal and pharyngeal findings. Pupils round, equal, and react
+promptly to light bilaterally. Moist tongue. Pharynx and buccal mucosa
+unremarkable. No jugular vein distension. No carotid bruits heard.
+Palpation of lymph nodes unremarkable. Palpation of the thyroid gland
+unremarkable, freely movable. Lungs: Normal chest shape, moderately
+mobile, decreased breath sounds in the right lung base. Heart: Regular
+heart action, normal rate; heart sounds clear, no pathological sounds.
+Abdomen: Peristalsis and bowel sounds normal in all quadrants; soft
+abdomen, markedly obese, no tenderness, no palpable masses, liver and
+spleen not palpable due to limited access, non-tender kidneys. Normal
+peripheral pulses; joints freely movable. Strength, motor function, and
+sensation is unremarkable.
+
+**Chest X-ray (08/14/2023):** A chest X-ray was performed, which
+revealed a suspicious opacity in the right lower lung field.
+
+**CT Chest (08/16/2023):** In light of the chest X-ray findings, a
+contrast-enhanced CT scan of the chest was conducted to obtain more
+detailed information. The CT imaging demonstrated a well-defined,
+irregularly shaped lesion in the right lower lobe of the lung, measuring
+approximately 2.5 cm in diameter. The lesion exhibited characteristics
+highly suggestive of a metastatic deposit. There were no other
+significant abnormalities noted in the chest.
+
+**Histology (08/21/2023):** Based on the CT findings, a CT-guided core
+needle biopsy of the pulmonary lesion was performed to confirm the
+nature of the lesion. Histopathological examination of the biopsy
+specimen confirmed the presence of myxoid liposarcoma cells in the
+pulmonary lesion. Immunohistochemical staining for MDM2 and CDK4
+supported the diagnosis of metastatic myxoid liposarcoma.
+
+**Treatment Discussion:** Given the diagnosis of a pulmonary metastasis
+from myxoid liposarcoma, the case was reviewed in the interdisciplinary
+tumor board. The consensus decision was to pursue surgical resection of
+the pulmonary metastasis, as it remained localized and resectable. The
+patient and his family were informed of the treatment options and
+associated risks, and they provided informed consent for the procedure.
+
+**Surgery Report (08/29/2023):** Mr. Havers underwent a right lower
+lobectomy with lymph node dissection to remove the pulmonary metastasis.
+The procedure was performed by our thoracic surgery team and was
+completed without any immediate complications. Intraoperative frozen
+section analysis confirmed the presence of metastatic myxoid liposarcoma
+in the resected lung tissue.
+
+**Postoperative Course:** Mr. Havers postoperative course was
+uneventful, and he demonstrated good respiratory recovery. He was
+managed with adequate pain control and underwent chest physiotherapy to
+prevent postoperative complications. Pathological examination of the
+resected lung tissue confirmed the presence of metastatic myxoid
+liposarcoma, with clear surgical margins.
+
+**Current Recommendations:**
+
+1.  **Follow-up:** A strict follow-up plan should be established for Mr.
+    Havers to monitor for any potential recurrence or new metastatic
+    lesions. This should include regular clinical assessments, chest
+    imaging, and other relevant investigations.
+
+**Medication upon Discharge:**
+
+  **Medication **                   **Dosage**   **Frequency**
+  --------------------------------- ------------ ---------------
+  Empagliflozin (Jardiance)         10 mg        1-0-0-0
+  Metformin (Glucophage)            1000 mg      1-0-1-0
+  Atorvastatin (Lipitor)            20 mg        0-0-1-0
+  Metoprolol Tartrate (Lopressor)   50 mg        0.5-0-0.5-0
+  Aspirin                           100 mg       1-0-0-0
+  Pantoprazole (Protonix)           20 mg        1-0-0-0
+
+**Lab results upon Discharge: **
+
+  **Parameter**         **Results**   **Reference Range**
+  --------------------- ------------- ---------------------
+  Sodium                135 mEq/L     136-145 mEq/L
+  Potassium             4.4 mEq/L     3.5-4.5 mEq/L
+  Creatinine            0.82 mg/dL    0.70-1.20 mg/dL
+  Estimated GFR         \-            \-
+  Blood Urea Nitrogen   39 mg/dL      17-48 mg/dL
+  C-Reactive Protein    2.5 mg/dL     \< 5.0 mg/dL
+  Hemoglobin            16.6 g/dL     13.5-17.0 g/dL
+  Hematocrit            49.4 %        39.5-50.5 %
+  RBC                   5.1 M/µL      4.3-5.8 M/µL
+  WBC                   10.04 K/µL    3.90-10.50 K/µL
+  Platelets             166 K/µL      150-370 K/µL
+  MCV                   95.2 fL       80.0-99.0 fL
+  MCH                   32.6 pg       27.0-33.5 pg
+  MCHC                  33.2 g/dL     31.5-36.0 g/dL
+  MPV                   11.4 fL       7.0-12.0 fL
+  RDW-CV                12.5 %        11.5-15.0 %
+  Prothrombin Time      122 %         78-123 %
+  INR                   0.99          0.90-1.25
+  aPTT                  30.1 sec      25.0-38.0 sec
+
+</text_6>
+</notes>
+</patient-record-patient_14>
+
+<patient-record-patient_15>
+Below is patient George Davies's medical record (ID: patient_15). 
+They were born on 07/25/1979 and have the following diagnosis: Galactosemia.
+The patients medical record consists of 6 notes included below.
+<notes>
+<text_0>
+**Dear colleague, **
+
+We are reporting on the patient Mr. George Davies, born on 07/25/1979,
+who was admitted to our inpatient care from 04/09/2009 to 04/23/2009.
+
+**Diagnoses:**
+
+-   Bronchopneumonia
+
+-   Classic Galactosemia
+
+**Medical History:** The patient has a known diagnosis of galactosemia
+(dietetically managed). For the past week, he has been experiencing
+daily fevers up to 39°C, especially in the evenings and at night. He has
+been heavily congested with yellowish-tinged sputum. The patient also
+had difficulty sleeping through the night due to coughing fits, along
+with excessive nighttime sweating, as reported by the father. He has had
+a decreased appetite, resulting in a weight loss of 5 kg. He has
+experienced frequent nausea but no vomiting, and there has been no
+diarrhea. He has also complained of occasional headaches and neck pain.
+He visited the family doctor, where he was prescribed a mucolytic
+medication.
+
+**Physical Examination:** Good general condition, with a lean build.
+Skin color rosy. Mucous membranes moist. No pathological skin
+manifestations. Pupils isochoric and react to light. Oropharynx
+unremarkable. Tympanic membranes bilaterally reflective. No cervical
+lymphadenopathy. Heart: Regular and rhythmic. Lungs: Clear breath sounds
+bilaterally, diminished breath sounds on the left base. Abdomen: Soft,
+non-tender, no masses, no hepatosplenomegaly, active peristalsis, no
+signs of meningeal irritation, no exacerbation of headaches with bending
+forward. Weight: 67 kg.
+
+**Chest X-ray (posteroanterior view) dated 04/09/2009:**
+
+**Findings:** In the lower left lung, there is a patchy area of reduced
+transparency with partial obscuration of the heart contour. Mildly
+increased markings caudal to the right hilum: Left-sided
+bronchopneumonia with accompanying effusion on the left. The mediastinum
+is not widened. Heart size is within normal limits. Equal ventilation of
+both lungs. No pneumothorax detected.
+
+Please note that this translation is for informational purposes and
+should not replace professional medical advice or interpretation.
+
+**Treatment and Progression:** The patient was admitted due to
+bronchopneumonia. He received intravenous therapy with Cefuroxime and
+additional inhalation therapy with Sodium Chloride 0.9%. Oxygen
+supplementation was never required. His fever subsided rapidly, and his
+condition improved significantly, allowing for his discharge today in a
+satisfactory state for outpatient follow-up care. We recommend
+continuing the Cefuroxime therapy until 09/10/2009. Laboratory results
+showed an elevated creatinine level, and we request an outpatient
+follow-up for further evaluation.
+
+**Current Recommendations:**
+
+-   Follow-up appointment in the metabolic clinic on 09/20/09.
+
+-   Outpatient creatinine level check.
+
+**Medication upon Discharge:**
+
+-   Cefuroxime axetil 2 x 500 mg daily orally.
+
+**Neuropsychological findings**
+
+**Self-assessment**: Mr. Davies reported not noticing any significant
+deterioration in his memory. His ability to concentrate remained
+essentially unchanged. Additionally, he stated that previous occasional
+word-finding difficulties had improved. Currently, after completing
+twelve years of education, he works part-time as a nursing assistant. He
+still resides with his parents.
+
+[Behavioral Observation]{.underline}: During the neuropsychological
+assessment, Mr. Davies was cooperative, communicative, and friendly. He
+understood instructions well and executed them appropriately.
+
+[Neuropsychological Assessment Performed Procedures:]{.underline} Test
+battery for attention assessment, subtests Alertness and Divided
+Attention;
+
+Wechsler Memory Scale -- Revised Version, subtests Forward and Backward
+Digit Span; Verbal Learning and Memory Test by Rey, Rey-Osterrieth
+Complex Figure Test Form B; Multiple-Choice Vocabulary Intelligence Test
+(MWT-A, by Lehrl).
+
+Attention In testing simple visual reactions, Mr. Davies exhibited
+borderline reaction times with poor stability (245 ms, reaction time
+median for tonic alertness; 52 ms, standard deviation for tonic
+alertness). However, when provided with a warning stimulus, he
+demonstrated normative performance with appropriate stability (212 ms,
+reaction time median for phasic alertness; 45 ms, standard deviation for
+phasic alertness). In the Divided Attention subtest, the subject must
+simultaneously attend to both a visual and an auditory stimulus and
+respond to a defined critical stimulus constellation. Mr. Davies
+responded moderately to the visual stimuli (825 ms) and as expected to
+the auditory stimuli (575 ms). However, the qualitative performance was
+inadequate, with 2 omissions and 13 incorrect responses.
+
+[Memory Short-term/Working Memory:]{.underline} The retention of verbal
+information in short-term memory (Forward Digit Span) was average (raw
+score 6). Mental manipulation of these briefly held contents (Backward
+Digit Span) fell below expectations (raw score 3). Verbal Learning and
+Memory: In the VLMT, 15 unrelated words are learned over 5 learning
+trials. Mr. Davies demonstrated consistent learning (words in trials 1
+to 5: 7-9-12-15-15) with an adequate span (raw score 7). The overall
+learning performance matched age-related expectations (raw score 58).
+After interference (remembering 7 words from an interference list), he
+recalled all 15 words, and after a 30-minute retention interval, he
+could also recall all 15 items. Two intrusions occurred during the
+learning trials. Recognition performance was maximal.
+
+[Figural Memory Performance]{.underline}: Immediate reproduction of a
+complex geometric figure following error-free copying was average (raw
+score 22.5,). After an approximately 30-minute retention interval,
+performance remained within the normal range (raw score 21.5).
+
+[Orientation and Knowledge:]{.underline} Orientation was intact in all
+aspects. The patient could correctly answer questions regarding
+situation and person, time, and place. He could name well-known public
+figures and correctly place important historical events in time. Level
+of [Intelligence and Problem Solving:]{.underline}In the MWT-A, four
+fictitious words and one correctly spelled word are presented in a row,
+and the task is to identify the correct word. Since this assesses
+crystalline intelligence, which typically remains intact even after
+brain damage, this parameter is used to estimate the premorbid
+intellectual level. Mr. Davies achieved an average result here (raw
+score 22). In logical-analytical thinking (LPS, subtest 3), which can be
+used as an estimate for current fluid intelligence, his performance also
+matched age-related expectations (raw score 19). In the Color-Word
+Interference Test, a highly automated response tendency must be
+suppressed in favor of a new behavior. This demand was completed within
+an appropriate time frame (143 seconds).
+
+[Evaluation of Cognitive Status:]{.underline} The neuropsychological
+assessment revealed a patient oriented in all aspects, with an education
+level estimated as average and corresponding ability for
+logical-analytical thinking. Information processing speed was slightly
+reduced under monotonous conditions but could be improved with external
+stimulation. During dual-task demands, numerous incorrect responses were
+observed. Short-term retention of information and its mental
+manipulation (working memory aspect) were below average. Learning new
+verbal content was quite possible, and the long-term retention
+performance for newly learned material exceeded age-related
+expectations. Figural content was retained within the norm. Increased
+vulnerability to interference was present. In summary, within an average
+level of intelligence, the patient exhibited limited attention and
+working memory capacity but otherwise demonstrated age-appropriate
+performance. The degree of impairment was mild.
+
+
+</text_0>
+<text_1>
+**Dear colleague, **
+
+We are reporting on the patient Mr. George Davies, born on 07/25/1979,
+who presented at our outpatient clinic on 08/27/2016.
+
+**Diagnoses:**
+
+-   Galactosemia
+
+-   Osteopenia
+
+    -   Last bone density measurement
+
+        -   Lumbar spine T-score: -0.8
+
+        -   Left proximal femur T-score: -1.4
+
+        -   Right proximal femur T-score: -1.5
+
+<!-- -->
+
+-   Vitamin D deficiency
+
+-   Status post appendectomy
+
+-   Status post elbow fracture left arm
+
+**Molecular Genetic Diagnosis:** The molecular genetic analysis of the
+uridyltransferase gene with the detection of a homozygous mutation
+confirms the diagnosis. The exact mutation is available in the
+patient\'s file.
+
+**Medical History:** The patient is the first child of
+non-consanguineous parents. After an uneventful pregnancy, he was
+delivered by secondary cesarean section due to prolonged labor. Birth
+weight was 4030 g, Apgar scores were 9-9-10. Postnatally, there was an
+amnion infection syndrome, followed by hyperbilirubinemia and
+hepatopathy, leading to the diagnosis of classical galactosemia in the
+newborn screening on the 7th day of life. Normalization of liver
+function parameters was achieved after initiating a lactose-free and
+galactose-restricted diet. Since diagnosis, the patient has been under
+the care of the Metabolic Clinic. In the course of development, there
+were delays in fine and gross motor skills and, notably, in speech
+development. In childhood, there were recurrent upper respiratory
+infections and gastroenteritis, with the surgical insertion of ear
+tubes. In 2006, an age-appropriate alpha EEG was recorded. In 2009, the
+HAWIK IV intelligence test showed a total IQ of 76 with normal language
+comprehension (IQ 42), reduced perception-based logical thinking (IQ
+84), and working memory (IQ 77), as well as significantly reduced
+processing speed (IQ 68). Despite adherence to the dietary regimen,
+metabolic control has remained stable. Osteopenia was detected in the
+lumbar spine and both femurs. Abdominal sonography showed normal
+findings. Neuropsychological testing revealed restricted attention and
+working memory capacities despite average intelligence. The extent of
+impairments was considered mild. Ophthalmologically, apart from mild
+myopic astigmatism, there were no abnormalities, and glasses or contact
+lenses were recommended. He has completed his intermediate examination
+and intends to pursue training as a nurse.
+
+**Therapy and Progression:** Mr. Davies has classical galactosemia with
+complete loss of galactose-1-phosphate uridyltransferase activity,
+confirmed both enzymatically and molecularly. Despite good metabolic
+control and excellent compliance, developmental delays typical of
+classical galactosemia have occurred, including speech development
+disorder. The patient\'s general condition is good. He adheres to a
+lactose-free and galactose-restricted diet, with disease-specific
+laboratory parameters (galactose-1-phosphate and galactitol) within
+target ranges. Additionally, there are no signs of liver dysfunction. A
+bone density measurement revealed osteopenia in both femurs, with a
+slight deterioration compared to the previous examination. To prevent
+the development of overt osteoporosis, the importance of regular intake
+of vitamin D (20.000 I.U. once a week) and sufficient calcium intake,
+e.g., through calcium-rich mineral water, was discussed with the
+patient. Supplementation was initiated for low folate levels, and the
+result will be monitored during follow-up. The annual check-ups have
+been discussed with the patient.
+
+  **Medication**               **Dosage**                                       **Frequency**
+  ---------------------------- ------------------------------------------------ -------------------
+  Vitamin D3 (Drisdol)         20.000 IU                                        1 tablet per week
+  Calcium-rich mineral water   Aim for a total of 1,500 mg calcium intake/day   As needed
+  Folic Acid                   15 mg                                            1-0-0
+
+**Lab results:**
+
+  **Parameter**                           **Result**     **Reference Range**
+  --------------------------------------- -------------- ---------------------
+  Neutrophils                             76.2%          42.0-77.0%
+  Lymphocytes                             22.2%          20.0-44.0%
+  Monocytes                               9.8%           2.0-9.5%
+  Basophils                               1.42%          0.0-1.8%
+  Eosinophils                             5.4%           0.5-5.5%
+  Immature Granulocytes                   0.2%           0.0-1.0%
+  Sodium                                  136 mEq/L      136-145 mEq/L
+  Potassium                               4.1 mEq/L      3.5-4.5 mEq/L
+  Calcium                                 9.32 mg/dL     8.8-10.2 mg/dL
+  Chloride                                104 mEq/L      98-107 mEq/L
+  Creatinine                              1.22 mg/dL     0.70-1.20 mg/dL
+  BUN                                     45 mg/dL       17-48 mg/dL
+  Uric Acid                               5.3 mg/dL      3.6-8.2 mg/dL
+  CRP                                     0.6 mg/L       \< 5.0 mg/L
+  PSA                                     2.21 ng/mL     \< 4.40 ng/mL
+  ALT                                     12 U/L         \< 41 U/L
+  AST                                     37 U/L         \< 50 U/L
+  Alkaline Phosphatase                    114 U/L        40-130 U/L
+  Gamma-GT                                20 U/L         8-61 U/L
+  LDH                                     244 U/L        135-250 U/L
+  Testosterone                            \<0.03 ng/mL   1.32-8.92 ng/mL
+  TSH                                     1.42 mIU/L     0.27-4.20 mIU/L
+  Hemoglobin                              12.7 g/dL      12.5-17.2 g/dL
+  Hematocrit                              28.5%          37.0-49.0%
+  Red Blood Cells                         4.2 M/µL       4.0-5.6 M/µL
+  White Blood Cells                       4.98 K/µL      3.90-10.50 K/µL
+  Platelets                               281 K/µL       150-370 K/µL
+  MCV                                     85.6 fL        80.0-101.0 fL
+  MCH                                     30.3 pg        27.0-34.0 pg
+  MCHC                                    35.4 g/dL      31.5-36.0 g/dL
+  MPV                                     9.2 fL         7.0-12.0 fL
+  RDW                                     13.6%          11.5-15.0%
+  Neutrophils Absolute                    3.53 K/µL      1.50-7.70 K/µL
+  Immature Granulocytes Absolute          0.010 K/µL     \< 0.050 K/µL
+  Lymphocytes Absolute                    0.44 K/µL      1.10-4.50 K/µL
+  Monocytes Absolute                      0.58 K/µL      0.10-0.90 K/µL
+  Eosinophils Absolute                    0.30 K/µL      0.02-0.50 K/µL
+  Basophils Absolute                      0.07 K/µL      0.00-0.20 K/µL
+  Reticulocytes                           31.3 K/µL      25.0-105.0 K/µL
+  Reticulocyte %                          0.94%          0.50-2.00%
+  Reticulocyte Production Index           0.3            \-
+  Ret-Hb                                  33.9 pg        28.5-34.5 pg
+  Prothrombin Time                        112%           \> 78%
+  INR                                     0.95           \< 1.25
+  Activated Partial Thromboplastin Time   30.2 sec.      25.0-38.0 sec.
+
+
+</text_1>
+<text_2>
+**Dear colleague, **
+
+We are reporting to you about our patient, Mr. George Davies, born on
+07/25/1979, who was under our outpatient care on 05/01/2017.
+
+**Diagnoses:**
+
+-   Galactosemia
+
+-   Osteopenia
+
+    -   Last bone density measurement
+
+        -   Lumbar spine T-score: -0.8
+
+        -   Left proximal femur T-score: -1.4
+
+        -   Right proximal femur T-score: -1.5
+
+<!-- -->
+
+-   Vitamin D deficiency
+
+-   Status post appendectomy
+
+-   Status post elbow fracture left arm
+
+**Molecular Genetic Diagnosis:** The molecular genetic analysis of the
+uridyltransferase gene with evidence of a homozygous mutation confirms
+the diagnosis. The exact mutation is on file.
+
+**Medical History:** The patient is the first child of
+non-consanguineous parents. After an uneventful pregnancy, he was born
+via secondary cesarean section due to prolonged labor. Birth weight was
+4030 g, Apgar scores were 9-9-10. Postnatally, there was amnion
+infection syndrome, followed by hyperbilirubinemia and hepatopathy.
+Classic galactosemia was detected in the newborn screening on the 7th
+day of life. Normalization of liver function parameters occurred after
+the initiation of a lactose-free and galactose-poor diet. Since the
+diagnosis, the patient has been under the care of the Metabolic Clinic.
+Subsequently, he experienced developmental delays in fine and gross
+motor skills, particularly in speech development. In childhood, he had
+recurrent upper respiratory tract infections and gastroenteritis, and
+ear tubes were surgically inserted.
+
+In 2006, there was an age-appropriate alpha EEG, and in 2009, in the
+HAWIK IV intelligence test, he had an overall IQ of 76 with normal
+language comprehension (IQ 42), reduced perception-based logical
+thinking (IQ 84), reduced working memory (IQ 77), and significantly
+reduced processing speed (IQ 68). He maintained stable metabolic control
+with the diet. In 02/15, osteopenia was detected in the lumbar spine,
+left femur, and right femur during diagnostics. Abdominal sonography
+showed normal findings. Neuropsychological testing at an average
+intelligence level revealed restricted attention and working memory
+capacities but otherwise age-appropriate performance. The degree of
+impairment was mild. On the ophthalmological side, apart from myopic
+astigmatism in both eyes, there were regular ophthalmological findings.
+The patient was recommended glasses or contact lenses. He has completed
+his intermediate examination and aims to complete an apprenticeship as a
+nurse.
+
+Despite good metabolic control and excellent compliance, he experienced
+typical developmental delays associated with classical galactosemia,
+including speech development disorders. His general condition is good.
+The patient adheres to a lactose-free and galactose-poor diet, and
+currently, the disease-specific laboratory parameters of
+galactose-1-phosphate and galactitol are within target ranges. There are
+no signs of liver dysfunction. The remaining laboratory parameters were
+unremarkable. To prevent overt osteoporosis, we discussed with the
+patient the importance of regularly taking vitamin D (20,000 I.U. once a
+week) and ensuring an adequate calcium intake, for example, through
+calcium-rich mineral water. The annual check-ups have been discussed
+with the patient.
+
+**Current lab results:**
+
+  **Parameter**             **Result**     **Reference Range**
+  ------------------------- -------------- ---------------------
+  Taurine EDTA              104.7 µmol/L   54.0-210.0 µmol/L
+  Aspartic Acid             4.3 µmol/L     1.0-25.0 µmol/L
+  Glutamic Acid             33.1 µmol/L    10.0-131.0 µmol/L
+  Hydroxyproline            14.2 µmol/L    \<35.0 µmol/L
+  Threonine                 154.5 µmol/L   60.0-255.0 µmol/L
+  Asparagine                52.3 µmol/L    35.0-74.0 µmol/L
+  Glutamine                 577.3 µmol/L   205.0-756.0 µmol/L
+  Proline                   244.6 µmol/L   \<329.0 µmol/L
+  Glycine                   239.1 µmol/L   151.0-490.0 µmol/L
+  Alanine                   347.1 µmol/L   177.0-583.0 µmol/L
+  Citrulline                49.4 µmol/L    12.0-55.0 µmol/L
+  Alpha-Aminobutyric Acid   19.5 µmol/L    5.0-41.0 µmol/L
+  Cystine                   16.8 µmol/L    5.0-82.0 µmol/L
+  Cystathionine             0.1 µmol/L     \<3.0 µmol/L
+  Methionine                24.0 µmol/L    13.0-42.0 µmol/L
+  Tyrosine                  68.5 µmol/L    34.0-112.0 µmol/L
+  Phenylalanine             57.8 µmol/L    35.0-85.0 µmol/L
+  Tryptophan                42.9 µmol/L    10.0-140.0 µmol/L
+  Histidine                 81.4 µmol/L    72.0-142.0 µmol/L
+  3-Methylhistidine         3.9 µmol/L     \<8.0 µmol/L
+  1-Methylhistidine         14.2 µmol/L    \<39.0 µmol/L
+  Ornithine                 69.7 µmol/L    48.0-195.0 µmol/L
+  Lysine                    183.5 µmol/L   110.0-282.0 µmol/L
+  Arginine                  87.2 µmol/L    15.0-128.0 µmol/L
+  Alanine/Lysine Ratio      1.9            \<3.0
+  Valine                    210.4 µmol/L   119.0-336.0 µmol/L
+  Allo-Isoleucine           1.9 µmol/L     \<5.0 µmol/L
+  Isoleucine                63.1 µmol/L    30.0-108.0 µmol/L
+  Leucine                   117.9 µmol/L   72.0-201.0 µmol/L
+  Serine                    147.4 µmol/L   68.0-181.0 µmol/L
+
+  **Parameter**          **Results**   **Reference Range**
+  ---------------------- ------------- ---------------------
+  Sodium                 143 mEq/L     136-145 mEq/L
+  Potassium              3.6 mEq/L     3.4-4.5 mEq/L
+  Calcium                2.40 mEq/L    2.15-2.50 mEq/L
+  Chloride               100 mEq/L     98-107 mEq/L
+  Inorganic Phosphate    0.94 mEq/L    0.87-1.45 mEq/L
+  Magnesium              0.84 mEq/L    0.66-1.07 mEq/L
+  Glucose in Fluoride    89 mg/dL      60-110 mg/dL
+  Creatinine (Jaffé)     1.07 mg/dL    0.70-1.20 mg/dL
+  ALT                    \< 41 U/L     12 U/L
+  AST                    \< 50 U/L     38 U/L
+  Alkaline Phosphatase   40-130 U/L    115 U/L
+  Gamma-GT               8-61 U/L      20 U/L
+
+**Current Medication:**
+
+  **Medication **                       **Dosage**                                       **Frequency**
+  ------------------------------------- ------------------------------------------------ ---------------------------
+  Vitamin D3 (Drisdol)                  20.000 IU                                        1 tablet per week
+  Calcium supplements (e.g. Caltrate)   Aim for a total of 1,500 mg calcium intake/day   
+  Folic acid                            15 mg                                            Once daily in the morning
+
+
+</text_2>
+<text_3>
+**Dear colleague, **
+
+We would like to report on our shared patient, Mr. George Davies, born
+on 07/25/1979
+
+He presented at our Center for Rare Metabolic Diseases on 07/05/2018.
+
+**Diagnoses:**
+
+-   Galactosemia
+
+-   Osteopenia
+
+    -   Last bone density measurement
+
+        -   Lumbar spine T-score: -0.8
+
+        -   Left proximal femur T-score: -1.4
+
+        -   Right proximal femur T-score: -1.5
+
+<!-- -->
+
+-   Vitamin D deficiency
+
+-   Status post appendectomy
+
+-   Status post elbow fracture left arm
+
+**Molecular Genetic Diagnosis:** Molecular genetic analysis of the
+uridyltransferase gene confirmed a homozygous mutation, confirming the
+diagnosis. The exact mutation is documented in the patient\'s records.
+
+**Medical History:** The patient is the first child of
+non-consanguineous parents. He was born via secondary cesarean section
+after a prolonged labor, with a birth weight of 4030 grams and Apgar
+scores of 9-9-10. Postnatally, he had amnion infection syndrome,
+followed by hyperbilirubinemia and hepatopathy. Classic galactosemia was
+diagnosed through newborn screening on the 7th day of life.
+Normalization of liver function parameters occurred after the initiation
+of a lactose-free and low-galactose diet. Since diagnosis, the patient
+has been monitored at the Metabolic Clinic. In the course of his
+development, he experienced delays in fine and gross motor skills,
+especially in language development. In childhood, he had recurrent upper
+respiratory infections and gastroenteritis, requiring the insertion of
+ear tubes. In 2006, he had an age-appropriate alpha EEG, and in 2009, he
+scored an overall IQ of 76 in the HAWIK IV intelligence test. This
+included normal language comprehension (IQ 42), reduced perception-based
+logical thinking (IQ 84), reduced working memory (IQ 77), and
+significantly reduced processing speed (IQ 68). Despite adhering to the
+diet, his metabolic parameters remained stable. In February 2015, a
+diagnosis of osteopenia was made for his lumbar spine and both femurs.
+Abdominal sonography was normal. Neuropsychological testing revealed
+slightly limited attention and working memory capacity, with otherwise
+age-appropriate performance. Ophthalmological examination showed no
+abnormalities except for mild myopic astigmatism, for which glasses or
+contact lenses were recommended.
+
+**Current Recommendations:** Mr. Davies has classic galactosemia with
+complete loss of Galactose-1-Phosphate Uridyltransferase activity,
+confirmed both enzymatically and molecularly. Despite good metabolic
+control and excellent compliance, he has experienced developmental
+delays, particularly in language development, characteristic of classic
+galactosemia. His overall condition is currently good. He adheres to a
+lactose-free and low-galactose diet, resulting in his disease-specific
+laboratory parameters (Galactose-1-Phosphate and Galactitol) being
+within the target range. Additionally, there are no signs of liver
+dysfunction or ocular changes. However, there is a minimal deficiency in
+folate and vitamin D. We recommend supplementation with a lactose-free
+folate preparation. We also plan to monitor thyroid parameters due to
+latent hypothyroidism. His 2018 bone density measurement revealed
+osteopenia in both femurs, which has slightly worsened compared to the
+previous assessment. To prevent the development of manifest
+osteoporosis, we discussed the importance of regular vitamin D
+supplementation (20.000 IU once a week) and adequate calcium intake,
+such as through calcium-rich mineral water or mature cheese.
+
+
+</text_3>
+<text_4>
+**Dear colleague, **
+
+We would like to report on our patient, Mr. George Davies, born on
+07/25/1979. He presented at our Center for Rare Metabolic Diseases on
+06/14/2019.
+
+**Diagnoses:**
+
+-   Galactosemia
+
+-   Osteopenia
+
+    -   Last bone density measurement
+
+        -   Lumbar spine T-score: -0.8
+
+        -   Left proximal femur T-score: -1.4
+
+        -   Right proximal femur T-score: -1.5
+
+<!-- -->
+
+-   Vitamin D deficiency
+
+-   Status post appendectomy
+
+-   Status post elbow fracture left arm
+
+**Molecular Genetic Diagnosis:** Molecular genetic analysis of the
+uridyltransferase gene confirmed a homozygous mutation, confirming the
+diagnosis. The exact mutation is documented in the patient\'s records.
+
+**Medical History**: The patient is the first child of
+non-consanguineous parents. He was born via secondary cesarean section
+after a prolonged labor, with a birth weight of 4030 grams and Apgar
+scores of 9-9-10. Postnatally, he had amnion infection syndrome,
+followed by hyperbilirubinemia and hepatopathy. Classic galactosemia was
+diagnosed through newborn screening on the 7th day of life.
+Normalization of liver function parameters occurred after the initiation
+of a lactose-free and low-galactose diet. In the course of his
+development, he experienced delays in fine and gross motor skills,
+especially in language development. In childhood, he had recurrent upper
+respiratory infections and gastroenteritis, requiring the insertion of
+ear tubes. In 2006, he had an age-appropriate alpha EEG, and in 2009, he
+scored an overall IQ of 76 in the HAWIK IV intelligence test. This
+included normal language comprehension (IQ 42), reduced perception-based
+logical thinking (IQ 84), reduced working memory (IQ 77), and
+significantly reduced processing speed (IQ 68). Despite adhering to the
+diet, his metabolic parameters remained stable. In January 2013, a
+diagnosis of osteopenia was made for his lumbar spine and both femurs.
+Abdominal sonography was normal. Neuropsychological testing revealed
+slightly limited attention and working memory capacity, with otherwise
+age-appropriate performance. Ophthalmological examination showed no
+abnormalities except for mild myopic astigmatism, for which glasses or
+contact lenses were recommended.
+
+**Summary**: Mr. Davies has classic galactosemia with a loss of
+Galactose-1-Phosphate Uridyltransferase activity, confirmed both
+enzymatically and molecularly. Despite good metabolic control and
+excellent compliance, he has experienced developmental delays,
+particularly in language development. Currently, the patient reports
+occasional back tension, but his overall condition is good. He follows a
+lactose-free and low-galactose diet, which has kept disease-specific
+laboratory parameters, especially free Galactose, within therapeutic
+target ranges. The rest of the laboratory diagnostics were pleasingly
+unremarkable. Osteodensitometry in 2018 revealed osteopenia in both
+femurs. The findings have slightly worsened compared to previous bone
+density measurements in the femur area. A repeat bone density
+measurement is scheduled for 2020. To prevent manifest osteoporosis, we
+discussed the importance of regular vitamin D supplementation (20.000 IU
+once a week) and adequate calcium intake, such as through calcium-rich
+mineral water or mature cheese. The annual check-ups have been discussed
+with the patient.
+
+**Current lab results:**
+
+  **Parameter**                                  **Reference Range**   **Result**
+  ---------------------------------------------- --------------------- --------------
+  Neutrophils                                    42.0-77.0 %           72.2 %
+  Lymphocytes                                    20.0-44.0 %           20.2 %
+  Monocytes                                      2.0-9.5 %             9.8 %
+  Basophils                                      0.0-1.8 %             1.2 %
+  Eosinophils                                    0.5-5.5 %             6.0 %
+  Immature Granulocytes                          0.0-1.0 %             0.2 %
+  Sodium                                         136-145 mEq/L         137 mEq/L
+  Potassium                                      3.5-4.5 mEq/L         4.2 mEq/L
+  Calcium                                        8.8-10.2 mg/dL        9.24 mg/dL
+  Chloride                                       98-107 mEq/L          100 mEq/L
+  Creatinine                                     0.70-1.20 mg/dL       1.10 mg/dL
+  BUN (Blood Urea Nitrogen)                      17-48 mg/dL           45 mg/dL
+  Uric Acid                                      3.6-8.2 mg/dL         5.2 mg/dL
+  CRP                                            \< 5.0 mg/L           0.8 mg/L
+  PSA                                            \< 4.40 ng/mL         2.31 ng/mL
+  ALT                                            \< 41 U/L             12 U/L
+  AST                                            \< 50 U/L             38 U/L
+  Alkaline Phosphatase                           40-130 U/L            115 U/L
+  Gamma-GT                                       8-61 U/L              20 U/L
+  LDH                                            135-250 U/L           335 U/L
+  Testosterone                                   1.32-8.92 ng/mL       \<0.03 ng/mL
+  TSH                                            0.27-4.20 mIU/L       1.42 mIU/L
+  Hemoglobin                                     12.5-17.2 g/dL        10.1 g/dL
+  Hematocrit                                     37.0-49.0 %           28.5 %
+  Red Blood Cells                                4.0-5.6 M/uL          3.3 M/uL
+  White Blood Cells                              3.90-10.50 K/uL       4.98 K/uL
+  Platelets                                      150-370 K/uL          281 K/uL
+  MCV                                            80.0-101.0 fL         85.6 fL
+  MCH                                            27.0-34.0 pg          30.3 pg
+  MCHC                                           31.5-36.0 g/dL        35.4 g/dL
+  MPV                                            7.0-12.0 fL           9.2 fL
+  RDW                                            11.5-15.0 %           13.4 %
+  Neutrophils Absolute                           1.50-7.70 K/uL        3.59 K/uL
+  Immature Granulocytes Absolute                 \< 0.050 K/uL         0.010 K/uL
+  Lymphocytes Absolute                           1.10-4.50 K/uL        0.43 K/uL
+  Monocytes Absolute                             0.10-0.90 K/uL        0.58 K/uL
+  Eosinophils Absolute                           0.02-0.50 K/uL        0.30 K/uL
+  Basophils Absolute                             0.00-0.20 K/uL        0.07 K/uL
+  Reticulocytes                                  25.0-105.0 K/uL       31.3 K/uL
+  Reticulocyte                                   0.50-2.00 %           0.94 %
+  Ret-Hb                                         28.5-34.5 pg          33.9 pg
+  PT                                             \> 78 %               112 %
+  INR                                            \< 1.25               0.95
+  aPTT (Activated Partial Thromboplastin Time)   25.0-38.0 sec.        30.2 sec.
+
+**Current Medication:**
+
+  **Medication (Brand Name)**           **Dosage**                                       **Frequency**
+  ------------------------------------- ------------------------------------------------ ---------------------------
+  Vitamin D3 (Drisdol)                  20.000 IU                                        1 tablet per week
+  Calcium supplements (e.g. Caltrate)   Aim for a total of 1,500 mg calcium intake/day   
+  Folic acid                            15 mg                                            Once daily in the morning
+
+
+</text_4>
+<text_5>
+**Dear colleague, **
+
+We would like to provide a summary of the clinical course of our
+patient, Mr. George Davies, born on 07/25/1979. He presented at our
+Center for Rare Metabolic Diseases on 01/26/2020.
+
+**Diagnoses:**
+
+-   Galactosemia
+
+-   Osteopenia
+
+    -   Last bone density measurement
+
+        -   Lumbar spine T-score: -0.8
+
+        -   Left proximal femur T-score: -1.4
+
+        -   Right proximal femur T-score: -1.5
+
+<!-- -->
+
+-   Vitamin D deficiency
+
+-   Status post appendectomy
+
+-   Status post elbow fracture left arm
+
+**Molecular Genetic Diagnosis:** Molecular genetic analysis of the
+uridyltransferase gene confirmed a homozygous mutation, confirming the
+diagnosis. The exact mutation is documented in the patient\'s records.
+
+**Medical History:** The patient is the first child of
+non-consanguineous parents. He was born via secondary cesarean section
+after a prolonged labor, with a birth weight of 4030 grams and Apgar
+scores of 9-9-10. Postnatally, he had amnion infection syndrome,
+followed by hyperbilirubinemia and hepatopathy. Classic galactosemia was
+diagnosed through newborn screening on the 7th day of life.
+Normalization of liver function parameters occurred after the initiation
+of a lactose-free and low-galactose diet. Since diagnosis, the patient
+has been monitored at the Metabolic Clinic. In the course of his
+development, he experienced delays in fine and gross motor skills,
+especially in language development. In childhood, he had recurrent upper
+respiratory infections and gastroenteritis, requiring the insertion of
+ear tubes. In 2006, he had an age-appropriate alpha EEG, and in 2009, he
+scored an overall IQ of 76 in the HAWIK IV intelligence test. This
+included normal language comprehension (IQ 42), reduced perception-based
+logical thinking (IQ 84), reduced working memory (IQ 77), and
+significantly reduced processing speed (IQ 68). Despite adhering to the
+diet, his metabolic parameters remained stable. In January 2013, a
+diagnosis of osteopenia was made for his lumbar spine and both femurs.
+Abdominal sonography was normal. Neuropsychological testing revealed
+slightly limited attention and working memory capacity, with otherwise
+age-appropriate performance. Ophthalmological examination showed no
+abnormalities except for mild myopic astigmatism, for which glasses or
+contact lenses were recommended.
+
+**Physical Examination on 02/12/2020:** Blood Pressure: 120/87 mmHg
+Heart Rate: 68/min Height: 175 cm Weight: 84.6 kg
+
+**Current Presentation**: Mr. Davies has classic galactosemia with a
+loss of Galactose-1-Phosphate Uridyltransferase activity, confirmed both
+enzymatically and molecularly. Despite good metabolic control and
+excellent compliance, he has experienced developmental delays,
+particularly in language development. Clinically, the patient reports a
+stable overall condition, although he can become overwhelmed in
+stressful situations. He follows a lactose-free and low-galactose diet,
+which has kept disease-specific laboratory parameters, especially
+Galactose-1 Phosphate and Galactitol, within therapeutic target ranges.
+Laboratory chemistry shows no signs of liver dysfunction. A mild vitamin
+D deficiency was noted. Abdominal sonography revealed a minimally
+enlarged liver without signs of hepatic steatosis, otherwise
+unremarkable. The current bone density measurement showed osteopenia in
+both femurs, with slight improvement compared to the previous
+measurement in 2018. To prevent manifest osteoporosis, we discussed the
+importance of regular vitamin D supplementation (20,000 IU once a week)
+and adequate calcium intake, such as through calcium-rich mineral water
+or mature cheese.
+
+**Eye Examination:**
+
+-   03/09/2015: Known, unchanged myopia in both eyes. Otherwise, a
+    regular ophthalmological examination with no evidence of cataracts.
+
+-   03/20/2017: During today\'s examination, the known and essentially
+    unchanged myopic astigmatism was observed, with an otherwise regular
+    ophthalmological examination.
+
+-   2018: Not performed.
+
+-   2020: Unremarkable ophthalmological examination with known myopia in
+    both eyes.
+
+**Upper Abdominal Ultrasound:**
+
+-   01/20/2015: Unremarkable sonographic findings of the abdomen.
+
+-   04/16/2017: Unremarkable sonographic findings of the upper abdomen,
+    particularly no hepatomegaly, hepatic steatosis, space-occupying
+    lesions, or kidney stones.
+
+-   04/16/2018: Unremarkable sonographic findings of the abdomen,
+    especially no relevant hepatosplenomegaly and no hepatic steatosis.
+
+-   01/12/2018: Unremarkable sonographic findings of the abdomen, mild
+    hepatomegaly without signs of hepatic steatosis.
+
+**Bone Density Measurement on 05/02/2016:**
+
+**Results:** Previous examination data from 2013 are available.
+
+-   Lumbar Spine Bone Density: 1.148 g/cm2 (94% of age-appropriate
+    reference) with a T-score of -0.8
+
+-   Left Proximal Femur Bone Density: 0.911 g/cm2 (83% of
+    age-appropriate reference) with a T-score of -1.4
+
+-   Right Proximal Femur Bone Density: 0.890 g/cm2 (81% of
+    age-appropriate reference) with a T-score of -1.5
+
+Definition by the World Health Organization for Osteoporosis and
+Osteopenia in white women: Normal: T-score at or above -1.0 SD;
+Osteopenia: T-score between -1.0 and -2.5 SD; Osteoporosis: T-score at
+or below -2.5 SD (WHO definitions apply only when using a reference
+database of healthy young white women for T-score determination).
+
+[Changes compared to the previous examination:]{.underline}
+
+-   Lumbar Spine (LWS): +6.0%
+
+-   Left Proximal Femur: -2.5%
+
+-   Right Proximal Femur: -1.7% Assessment: Bone density in both
+    proximal femurs is below the age-appropriate norm, indicating
+    osteopenia according to T-score analysis. Bone density in the lumbar
+    spine is within the normal range according to T-score analysis.
+    Compared to the previous examination, bone density has increased in
+    the lumbar spine and decreased in the proximal femurs.
+
+**Bone Density Measurement on 12/01/2020: **
+
+[Clinical Background and Indication:]{.underline} Galactosemia. Known
+osteopenia, requesting bone density measurement.
+
+[Results: ]{.underline}
+
+-   Lumbar Spine (L1-L4) Bone Density: 1.190 g/cm2 (97% of
+    age-appropriate reference) with a T-score of -0.3
+
+-   Lumbar Spine (L2-L4) Bone Density: 1.216 g/cm2 (97% of
+    age-appropriate reference) with a T-score of -0.2
+
+-   Left Proximal Femur Bone Density: 0.915 g/cm2 (83% of
+    age-appropriate reference) with a T-score of -1.3
+
+-   Right Proximal Femur Bone Density: 0.907 g/cm2 (82% of
+    age-appropriate reference) with a T-score of -1.4
+
+Definition by the World Health Organization for Osteoporosis and
+Osteopenia in white men: Normal: T-score at or above -1.0 SD;
+Osteopenia: T-score between -1.0 and -2.5 SD; Osteoporosis: T-score at
+or below -2.5 SD (WHO definitions apply only when using a reference
+database of healthy young white men for T-score determination).
+
+Changes compared to the previous examination:
+
+-   Lumbar Spine: +6.2%
+
+-   Left Proximal Femur: +0.4%
+
+-   Right Proximal Femur: +1.9%
+
+Trabecular Bone Score (TBS) T-score for Lumbar Spine (L1-L4): 1.454
+(0.0)
+
+[Assessment:]{.underline}
+
+-   Bone density in the proximal femora remains below the
+    age-appropriate norm, consistent with osteopenia according to
+    T-score analysis.
+
+-   Lumbar spine bone density remains within the normal range.
+
+-   Compared to the previous examination on 04.07.2018, there is an
+    increase in bone density in the lumbar
+
+**Outpatient Sonography Report Assessment:**
+
+[Assessment:]{.underline} The liver remains minimally enlarged without
+hepatic steatosis. Gallbladder stones persist with concrements showing
+no signs of irritation or cholestasis.
+
+**Abdominal Sonography 12/02/2020:**
+
+[Clinical Background and Indication]{.underline}: Galactosemia. Liver
+size? Steatosis? Liver function? Kidney stones?
+
+Results: Several previous examinations are available, most recently the
+abdominal sonography from 01/12/2020.
+
+Minimal liver enlargement with homogeneous parenchyma and no steatosis.
+No suspicious focal lesions indicative of malignancy. Hepatic veins are
+patent. Portal vein with antegrade flow. Gallbladder and bile ducts
+continue to show sludge-like concrements with no signs of inflammation.
+No intrahepatic or extrahepatic cholestasis, and the common bile duct
+(DHC) is not dilated. Spleen measures 12 cm in pole-to-pole distance,
+appears homogeneous. The pancreas is not adequately assessable due to
+intestinal gas interference. Both kidneys are of normal size with no
+evidence of concrements or suspicious solid masses. No evidence of
+urinary obstruction. Retroperitoneum is difficult to assess due to
+intestinal gas interference and constitutional factors. The urinary
+bladder is properly configured and adequately filled. No ascites is
+observed.
+
+[Assessment:]{.underline} The liver remains minimally enlarged without
+hepatic steatosis. Gallbladder stones persist with concrements showing
+no signs of irritation or cholestasis.
+
+**Current Medication:**
+
+  **Medication **                       **Dosage**                                       **Frequency**
+  ------------------------------------- ------------------------------------------------ ---------------------------
+  Vitamin D3 (Drisdol)                  20.000 IU                                        1 tablet per week
+  Calcium supplements (e.g. Caltrate)   Aim for a total of 1,500 mg calcium intake/day   
+  Folic acid                            15 mg                                            Once daily in the morning
+
+</text_5>
+</notes>
+</patient-record-patient_15>
+
+<patient-record-patient_16>
+Below is patient John Chapman's medical record (ID: patient_16). 
+They were born on 11/16/1994 and have the following diagnosis: Polytrauma.
+The patients medical record consists of 4 notes included below.
+<notes>
+<text_0>
+**Dear colleague, **
+
+We are reporting on our shared patient, Mr. John Chapman, born on
+11/16/1994, who received emergency treatment at our clinic on
+04/03/2017.
+
+**Diagnoses**:
+
+-   Severe open traumatic brain injury with fractures of the cranial
+    vault, mastoid, and skull base
+
+-   Dissection of the distal internal carotid artery on both sides
+
+-   Subarachnoid hemorrhage involving both hemispheres and extending
+    into the basal cisterns
+
+-   Aspiration pneumonia
+
+**Other Diagnoses: **
+
+-   Status post rib fracture 2005
+
+-   Status post appendectomy 2006
+
+-   Status post distal radius fracture 2008
+
+-   Status post elbow fracture 20010
+
+**Procedure**: External ventricular drain (EVD) placement.
+
+**Medical History:** Admission through the emergency department as a
+polytrauma alert. The patient was involved in a motocross accident,
+where he jumped, fell, and landed face-first. He was intubated at the
+scene, and either during or before intubation, aspiration occurred. No
+issues with airway, breathing, or circulation (A, B, or C problems) were
+noted. A CT scan performed in the emergency department revealed an open
+traumatic brain injury with fractures of the cranial vault, mastoid, and
+skull base, as well as dissection of both carotid arteries. Upon
+admission, we encountered an intubated and sedated patient with a
+Richmond Agitation-Sedation Scale (RASS) score of -4. He was
+hemodynamically stable at all times.
+
+**Current Recommendations:**
+
+-   Regular checks of vigilance, laboratory values and microbiological
+    findings.
+
+-   Careful balancing
+
+
+</text_0>
+<text_1>
+**Dear colleague, **
+
+We report on Mr. John Chapman, born on 11/16/1994, who was admitted to
+our Intensive Care Unit from 04/03/2017 to 05/01/2017.
+
+**Diagnoses:**
+
+-   Open severe traumatic brain injury with fractures of the skull
+    vault, mastoid, and skull base
+
+-   Dissection of the distal ACI on both sides
+
+-   Subarachnoid hemorrhage involving both hemispheres and extending
+    into basal cisterns
+
+-   Infarct areas in the border zone between MCA-ACA on the right
+    frontal and left parietal sides
+
+-   Malresorptive hydrocephalus
+
+<!-- -->
+
+-   Rhabdomyolysis
+
+-   Aspiration pneumonia
+
+**Other Diagnoses: **
+
+-   Status post rib fracture in 2005
+
+-   Status post appendectomy in 2006
+
+-   Status post distal radius fracture in 2008
+
+-   Status post elbow fracture in 20010
+
+**Surgical Procedures:**
+
+-   04/03/2017: Placement of external ventricular drain
+
+-   04/08/2017: Placement of an intracranial pressure monitoring
+    catheter
+
+-   04/13/2017: Surgical tracheostomy
+
+-   05/01/2017: Left ventriculoperitoneal shunt placement
+
+**Medical History:** The patient was admitted through the emergency
+department as a polytrauma alert. The patient had fallen while riding a
+motocross bike, landing face-first after jumping. He was intubated at
+the scene. Aspiration occurred either during or before intubation. No
+problems with breathing or circulation were noted. The CT performed in
+the emergency department showed an open traumatic brain injury with
+fractures of the skull vault, mastoid, and skull base, as well as
+dissection of the carotid arteries on both sides and bilateral
+subarachnoid hemorrhage.
+
+Upon admission, the patient was sedated and intubated, with a Richmond
+Agitation-Sedation Scale (RASS) score of -4, and was hemodynamically
+stable under controlled ventilation.
+
+**Therapy and Progression:**
+
+[Neurology]{.underline}: Following the patient\'s admission, an external
+ventricular drain was placed. Reduction of sedation had to be
+discontinued due to increased intracranial pressure. A right pupil size
+greater than the left showed no intracranial correlate. With
+persistently elevated intracranial pressure, intensive intracranial
+pressure therapy was initiated using deeper sedation, administration of
+hyperosmolar sodium, and cerebrospinal fluid drainage, which normalized
+intracranial pressure. Intermittently, there were recurrent intracranial
+pressure peaks, which could be treated conservatively. Transcranial
+Doppler examinations showed normal flow velocities. Microbiological
+samples from cerebrospinal fluid were obtained when the patient had
+elevated temperatures, but no bacterial growth was observed. Due to the
+inability to adequately monitor intracranial pressure via the external
+ventricular drain, an intracranial pressure monitoring catheter was
+placed to facilitate adequate intracranial pressure monitoring. In the
+perfusion computed tomography, progressive edema with increasingly
+obstructed external ventricular spaces and previously known infarcts in
+the border zone area were observed. To ensure appropriate intracranial
+pressure monitoring, a Tuohy drain was inserted due to cerebrospinal
+fluid buildup on 04/21/2017. After the initiation of antibiotic therapy
+for suspected ventriculitis, the intracranial pressure monitoring
+catheter was removed on 04/20/2017. Subsequently, a liquorrhea
+developed, leading to the placement of a Tuohy drain. After successful
+antibiotic treatment of ventriculitis, a ventriculoperitoneal shunt was
+placed on 05/01/2017 without complications, and the Tuohy drain was
+removed. Radiological control confirmed the correct positioning. The
+patient gradually became more alert. Both pupils were isochoric and
+reacted to light. All extremities showed movement, although the patient
+only intermittently responded to commands. On 05/01/2017, a VP shunt was
+placed on the left side without complications. Currently, the patient is
+sedated with continuous clonidine at 60µg/h.
+
+**Hemodynamics**: To maintain cerebral perfusion pressure in the
+presence of increased intracranial pressure, circulatory support with
+vasopressors was necessary. Echocardiography revealed preserved cardiac
+function without wall motion abnormalities or right heart strain,
+despite the increasing need for noradrenaline support. As the patient
+had bilateral carotid dissection, a therapy with Aspirin 100mg was
+initiated. On 04/16/2017, clinical examination revealed right\>left leg
+circumference difference and redness of the right leg. Utrasound
+revealed a long-segment deep vein thrombosis in the right leg, extending
+from the pelvis (proximal end of the thrombus not clearly delineated) to
+the lower leg. Therefore, Heparin was increased to a therapeutic dose.
+Heparin therapy was paused on postoperative day 1, and prophylactic
+anticoagulation started, followed by therapeutic anticoagulation on
+postoperative day 2. The patient was switched to subcutaneous Lovenox.
+
+**Pulmonary**: Due to the history of aspiration in the prehospital
+setting, a bronchoscopy was performed, revealing a moderately obstructed
+bronchial system with several clots. As prolonged sedation was
+necessary, a surgical tracheostomy was performed without complications
+on 04/13/2017. Subsequently, we initiated weaning from mechanical
+ventilation. The current weaning strategy includes 12 hours of
+synchronized intermittent mandatory ventilation (SIMV) during the night,
+with nighttime pressure support ventilation (DuoPAP: Ti high 1.3s,
+respiratory rate 11/min, Phigh 11 mbar, PEEP 5 mbar, Psupport 5 mbar,
+trigger 4l, ramp 50 ms, expiratory trigger sensitivity 25%).
+
+**Abdomen**: FAST examinations did not reveal any signs of
+intra-abdominal trauma. Enteral feeding was initiated via a gastric
+tube, along with supportive parenteral nutrition. With forced bowel
+movement measures, the patient had regular bowel movements. On
+04/17/2017, a complication-free PEG (percutaneous endoscopic
+gastrostomy) placement was performed due to the potential long-term need
+for enteral nutrition. The PEG tube is currently being fed with tube
+feed nutrition, with no bowel movement for the past four days.
+Additionally, supportive parenteral nutrition is being provided.
+
+**Kidney**: Initially, the patient had polyuria without confirming
+diabetes insipidus, and subsequently, adequate diuresis developed.
+Retention parameters were within the normal range. As crush parameters
+increased, a therapy involving forced diuresis was initiated, resulting
+in a significant reduction of crush parameters.
+
+**Infection Course:** Upon admission, with elevated infection parameters
+and intermittently febrile temperatures, empirical antibiotic therapy
+was initiated for suspected pneumonia using Piperacillin/Tazobactam.
+Staphylococcus capitis was identified in blood cultures, and
+Staphylococcus aureus was found in bronchial lavage. Both microbes were
+sensitive to the current antibiotic therapy, so treatment with
+Piperacillin/Tazobactam continued. Additionally, Enterobacter cloacae
+was identified in tracheobronchial secretions during the course, also
+sensitive to the ongoing antibiotic therapy. On 05/17, the patient
+experienced another fever episode with elevated infection parameters and
+right lower lobe infiltrates in the chest X-ray. After obtaining
+microbiological samples, antibiotic therapy was switched to Meropenem
+for suspected pneumonia. Microbiological findings from cerebrospinal
+fluid indicated gram-negative rods. Therefore, antibiotic therapy was
+adjusted to Ciprofloxacin in accordance with susceptibility testing due
+to suspected ventriculitis, and the Meropenem dose was increased. This
+led to a reduction in infection parameters. Finally, microbiological
+examination of cerebrospinal fluid, blood cultures, and urine revealed
+no pathological findings. Infection parameters decreased. We recommend
+continuing antibiotic therapy until 05/02/2017.
+
+**Anti-Infective Course: **
+
+-   Piperacillin/Tazobactam 04/03/2017-04/16/2017: Staph. Capitis in
+    Blood Culture Staph. Aureus in Bronchial Lavage
+
+-   Meropenem 04/16/2017-present (increased dose since 04/18) CSF:
+    gram-negative rods in Blood Culture: Pseudomonas aeruginosa
+    Acinetobacter radioresistens
+
+-   Ciprofloxacin 04/18/2017-present CSF: gram-negative rods in Blood
+    Culture: Pseudomonas aeruginosa, Acinetobacter radioresistens
+
+**Weaning Settings:** Weaning Stage 6: 12-hour synchronized intermittent
+mandatory ventilation (SIMV) with DuoPAP during the night (Thigh 1.3s,
+respiratory rate 11/min, Phigh 11 mbar, PEEP 5 mbar, Psupport 5 mbar,
+trigger 4l, ramp 50 ms, expiratory trigger sensitivity 25%).
+
+**Status at transfer:** Currently, Mr. Chapman is monosedated with
+Clonidine. He spontaneously opens both eyes and spontaneously moves all
+four extremities. Pupils are bilaterally moderately dilated, round and
+sensitive to light. There is bulbar divergence. Circulation is stable
+without catecholamine therapy. He is in the process of weaning,
+currently spontaneous breathing with intermittent CPAP. Renal function
+is sufficient, enteral nutrition via PEG with supportive parenteral
+nutrition is successful.
+
+**Current Medication:**
+
+  **Medication**                       **Dosage**       **Frequency**
+  ------------------------------------ ---------------- ---------------
+  Bisoprolol (Zebeta)                  2.5 mg           1-0-0
+  Ciprofloxacin (Cipro)                400 mg           1-1-1
+  Meropenem (Merrem)                   4 g              Every 4 hours
+  Morphine Hydrochloride (MS Contin)   10 mg            1-1-1-1-1-1
+  Polyethylene Glycol 3350 (MiraLAX)   13.1 g           1-1-1
+  Acetaminophen (Tylenol)              1000 mg          1-1-1-1
+  Aspirin                              100 mg           1-0-0
+  Enoxaparin (Lovenox)                 30 mg (0.3 mL)   0-0-1
+  Enoxaparin (Lovenox)                 70 mg (0.7 mL)   1-0-1
+
+**Lab results:**
+
+  **Parameter**        **Results**   **Reference Range**
+  -------------------- ------------- ---------------------
+  Creatinine (Jaffé)   0.42 mg/dL    0.70-1.20 mg/dL
+  Urea                 31 mg/dL      17-48 mg/dL
+  Total Bilirubin      0.35 mg/dL    \< 1.20 mg/dL
+  Hemoglobin           7.6 g/dL      13.5-17.0 g/dL
+  Hematocrit           28%           39.5-50.5%
+  Red Blood Cells      3.5 M/uL      4.3-5.8 M/uL
+  White Blood Cells    10.35 K/uL    3.90-10.50 K/uL
+  Platelets            379 K/uL      150-370 K/uL
+  MCV                  77.2 fL       80.0-99.0 fL
+  MCH                  24.1 pg       27.0-33.5 pg
+  MCHC                 32.5 g/dL     31.5-36.0 g/dL
+  MPV                  11.3 fL       7.0-12.0 fL
+  RDW-CV               17.7%         11.5-15.0%
+  Quick                54%           78-123%
+  INR                  1.36          0.90-1.25
+  aPTT                 32.8 sec      25.0-38.0 sec
+
+**Addition: Radiological Findings**
+
+[Clinical Information and Justification:]{.underline} Suspected deep
+vein thrombosis (DVT) on the right leg.
+
+[Special Notes:]{.underline} Examination at the bedside in the intensive
+care unit, no digital image archiving available.
+
+[Findings]{.underline}: Confirmation of a long-segment deep venous
+thrombosis in the right leg, starting in the pelvis (proximal end not
+clearly delineated) and extending to the lower leg.
+
+Visible Inferior Vena Cava without evidence of thrombosis.
+
+The findings were communicated to the treating physician.
+
+**Full-Body Trauma CT on 04/03/2017:**
+
+[Clinical Information and Justification:]{.underline} Motocross
+accident. Polytrauma alert. Consequences of trauma? Informed consent:
+Emergency indication. Recommended monitoring of kidney and thyroid
+laboratory parameters.
+
+**Findings**: CCT: Dissection of the distal internal carotid artery on
+both sides (left 2-fold).
+
+Signs of generalized elevated intracranial pressure.
+
+Open skull-brain trauma with intracranial air inclusions and skull base
+fracture at the level of the roof of the ethmoidal/sphenoidal sinuses
+and clivus (in a close relationship to the bilateral internal carotid
+arteries) and the temporal
+
+**CT Head on 04/16/2017:**
+
+[Clinical Information and Justification:]{.underline} History of skull
+fracture, removal of EVD (External Ventricular Drain). Inquiry about the
+course.
+
+[Findings]{.underline}: Regression of ventricular system width (distance
+of SVVH currently 41 mm, previously 46 mm) with residual liquor caps,
+indicative of regressed hydrocephalus. Interhemispheric fissure in the
+midline. No herniation.
+
+Complete regression of subdural hematoma on the left, tentorial region.
+
+Known defect areas on the right frontal lobe where previous catheters
+were inserted.
+
+Progression of a newly hypodense demarcated cortical infarct on the
+left, postcentral.
+
+Known bilateral skull base fractures involving the petrous bone, with
+secretion retention in the mastoid air cells bilaterally. Minimal
+secretion also in the sphenoid sinuses.
+
+Postoperative bone fragments dislocated intracranially after right
+frontal trepanation.
+
+**Chest X-ray on 04/24/2017.**
+
+[Clinical Information and Justification:]{.underline} Mechanically
+ventilated patient. Suspected pneumonia. Question about infiltrates.
+
+[Findings]{.underline}: Several previous images for comparison, last one
+from 08/20/2021.
+
+Persistence of infiltrates in the right lower lobe. No evidence of new
+infiltrates. Removal of the tracheal tube and central venous catheter
+with a newly inserted tracheal cannula. No evidence of pleural effusion
+or pneumothorax.
+
+**CT Head on 04/25/2017:**
+
+[Clinical Information and Justification:]{.underline} Severe traumatic
+brain injury with brain edema, one External Ventricular Drain removed,
+one parenchymal catheter removed; Follow-up.
+
+[Findings]{.underline}: Previous images available, CT last performed on
+04/09/17, and MRI on 04/16/17.
+
+Massive cerebrospinal fluid (CSF) stasis supra- and infratentorially
+with CSF pressure caps at the ventricular and cisternal levels with
+completely depleted external CSF spaces, differential diagnosis:
+malresorptive hydrocephalus. The EVD and parenchymal catheter have been
+completely removed.
+
+No evidence of fresh intracranial hemorrhage. Residual subdural hematoma
+on the left, tentorial. Slight regression of the cerebellar tonsils.
+
+Increasing hypodensity of the known defect zone on the right frontal
+region, differential diagnosis: CSF diapedesis. Otherwise, the status is
+the same as for the other defects.
+
+Secretion in the sphenoid sinus and mastoid cells bilaterally, known
+bilateral skull base fractures.
+
+**Bedside Chest X-ray on 04/262017:**
+
+[Clinical Information and Justification]{.underline}: Respiratory
+insufficiency. Inquiry about cardiorespiratory status.
+
+[Findings]{.underline}: Previous image from 08/17/2021.
+
+Left Central Venous Catheter and gastric tube in unchanged position.
+
+Persistent consolidation in the right para-hilar region, differential
+diagnosis: contusion or partial atelectasis. No evidence of new
+pulmonary infiltrates. No pleural effusion. No pneumothorax. No
+pulmonary congestion.
+
+**Brain MRI on 04/26/2017:**
+
+[Clinical Information and Justification:]{.underline} Severe skull-brain
+trauma with skull calvarium, mastoid, and skull base fractures.
+Assessment of infarct areas/edema for rehabilitation planning.
+
+[Findings:]{.underline} Several previous examinations available.
+
+Persistent small sulcal hemorrhages in both hemispheres (left \> right)
+and parenchymal hemorrhage on the left frontal with minimal perifocal
+edema.
+
+Narrow subdural hematoma on the left occipital extending tentorially (up
+to 2 mm).
+
+No current signs of hypoxic brain damage. No evidence of fresh ischemia.
+
+Slightly regressed ventricular size. No herniation. Unchanged placement
+of catheters on the right frontal side. Mastoid air cells blocked
+bilaterally due to known bilateral skull base fractures, mucosal
+swelling in the sphenoid and ethmoid sinuses. Polypous mucosal swelling
+in the left maxillary sinus. Other involved paranasal sinuses and
+mastoids are clear.
+
+**Bedside Chest X-ray on 04/27/2017:**
+
+[Clinical Information and Justification:]{.underline} Tracheal cannula
+placement. Inquiry about the position.
+
+[Findings]{.underline}: Images from 04/03/2017 for comparison.
+
+Tracheal cannula with tip projecting onto the trachea. No pneumothorax.
+
+Regressing infiltrate in the right lower lung field. No leaking pleural
+effusions.
+
+Left ubclavian central venous catheter with tip projecting onto the
+superior vena cava. Gastric tube in situ.
+
+**CT Head on 04/28/2017:**
+
+[Clinical Information and Justification:]{.underline} Open head injury,
+bilateral subarachnoid hemorrhage (SAH), EVD placement. Inquiry about
+herniation.
+
+[Findings]{.underline}: Comparison with the last prior examination from
+the previous day.
+
+Generalized signs of cerebral edema remain constant, slightly
+progressing with a somewhat increasing blurred cortical border,
+particularly high frontal.
+
+Essentially constant transtentorial herniation of the midbrain and low
+position of the cerebellar tonsils. Marked reduction of inner CSF spaces
+and depleted external CSF spaces, unchanged position of the ventricular
+drainage catheter with the tip in the left lateral ventricle.
+
+Constant small parenchymal hemorrhage on the left frontal and constant
+SDH at the tentorial edge on both sides. No evidence of new intracranial
+space-occupying hemorrhage.
+
+Slightly less distinct demarcation of the demarcated infarcts/defect
+zones, e.g., on the right frontal region, differential diagnosis:
+fogging.
+
+**CT Head Angiography with Perfusion on 04/28/2017:**
+
+[Clinical Information and Justification]{.underline}: Post-traumatic
+head injury, rising intracranial pressure, bilateral internal carotid
+artery dissection. Inquiry about intracranial bleeding, edema course,
+herniation, brain perfusion.
+
+[Emergency indication:]{.underline} Vital indication. Recommended
+monitoring of kidney and thyroid laboratory parameters. Consultation
+with the attending physician from and the neuroradiology service was
+conducted.
+
+[Technique]{.underline}: Native moderately of the neurocranium. CT
+angiography of brain-supplying cervical intracranial vessels during
+arterial contrast agent phase and perfusion imaging of the neurocranium
+after intravenous injection of a total of 140 ml of Xenetix-350. DLP
+Head 502.4 mGy*cm. DLP Body 597.4 mGy*cm.
+
+[Findings]{.underline}: Previous images from 08/11/2021 and the last CTA
+of the head/neck from 04/03/2017 for comparison.
+
+[Brain]{.underline}: Constant bihemispheric and cerebellar brain edema
+with a slit-like appearance of the internal and completely compressed
+external ventricular spaces. Constant compression of the midbrain with
+transtentorial herniation and a constant tonsillar descent.
+
+Increasing demarcation of infarct areas in the border zone of MCA-ACA on
+the right frontal, possibly also on the left frontal. Predominantly
+preserved cortex-gray matter contrast, sometimes discontinuous on both
+frontal sides, differential diagnosis: artifact-related, differential
+diagnosis: disseminated infarct demarcations/contusions.
+
+Unchanged placement of the ventricular drainage from the right frontal
+with the catheter tip in the left lateral ventricle anterior horn.
+
+Constant subdural hematoma tentorial and posterior falx. Increasingly
+vague delineation of the small frontal parenchymal hemorrhage. No new
+space-occupying intracranial bleeding.
+
+No evidence of secondary dislocation of the skull base fracture with
+constant fluid collections in the paranasal sinuses and mastoid air
+cells. Hematoma possible, cerebrospinal fluid leakage possible.
+
+[CT Angiography Head/Neck]{.underline}: Constant presentation of
+bilateral internal carotid artery dissection.
+
+No evidence of higher-grade vessel stenosis or occlusion of the
+brain-supplying intracranial arteries.
+
+Moderately dilated venous collateral circuits in the cranial soft
+tissues on both sides, right \> left. Moderately dilated ophthalmic
+veins on both sides, right \> left.
+
+No evidence of sinus or cerebral venous thrombosis. Slight perfusion
+deficits in the area of the described infarct areas and contusions.
+
+No evidence of perfusion mismatches in the perfusion imaging.
+
+Unchanged presentation of the other documented skeletal segments.
+
+Additional Note: Discussion of findings with the responsible medical
+colleagues on-site and by telephone, as well as with the neuroradiology
+service by telephone, was conducted.
+
+**CT Head on 04/30/2017:**
+
+[Clinical Information and Justification]{.underline}: Open head injury
+following a motorcycle accident.. Inquiry about rebleeding, edema, EVD
+displacement.
+
+[Findings and Assessment:]{.underline} CT last performed on 04/05/2017
+for comparison.
+
+Constant narrow subdural hematoma on both sides, tentorial and posterior
+parasagittal. Constant small parenchymal hemorrhage on the left frontal.
+No new intracranial bleeding.
+
+Progressively demarcated infarcts on the right frontal and left
+parietal.
+
+Slightly progressive compression of the narrow ventricles as an
+indication of progressive edema. Completely depleted external CSF spaces
+with the ventricular drain catheter in the left lateral ventricle.
+Increasing compression of the midbrain due to transtentorial herniation,
+progressive tonsillar descent of 6 mm.
+
+Fracture of the skull base and the petrous part of the temporal bone on
+both sides without significant displacement. Hematoma in the mastoid and
+sphenoid sinuses and the maxillary sinus.
+
+**CT Head on 05/01/2017:**
+
+[Clinical Information and Justification:]{.underline} Open skull-brain
+trauma. Inquiry about CSF stasis, bleeding, edema.
+
+[Findings]{.underline}: CT last performed on 04/05/17 for comparison.
+
+Completely regressed subarachnoid hemorrhages on both sides. Minimal SDH
+components on the tentorial edges bilaterally (left more than right,
+with a 3 mm margin width). No new intracranial bleeding. Continuously
+narrow inner ventricular system and narrow basal cisterns. The fourth
+ventricle is unfolded. Narrow external CSF spaces and consistently
+swollen gyration with global cerebral edema.
+
+Better demarcated circumscribed hypodensity in the centrum semiovale on
+the right (Series 3, Image 176) and left (Series 3, Image 203);
+Differential diagnosis: fresh infarcts due to distal ACI dissections.
+Consider repeat vascular imaging. No midline shift. No herniation.
+
+Regressing intracranial air inclusions. Fracture of the skull base and
+the petrous part of the temporal bone on both sides without significant
+displacement. Hematoma in the maxillary, sphenoidal, and ethmoidal
+sinuses.
+
+**Consultation Reports:**
+
+**1) Consultation with Ophthalmology on 04/03/2017**
+
+[Patient Information:]{.underline}
+
+-   Motorbike accident, heavily contaminated eyes.
+
+-   Request for assessment.
+
+**Diagnosis:** Motorbike accident
+
+**Findings:** Patient intubated, unresponsive. In cranial CT, the
+eyeball appears intact, no retrobulbar hematoma. Intraocular pressure:
+Right/left within the normal range. Eyelid margins of both eyes crusty
+with sand, inferiorly in the lower lid sac, and on the upper lid with
+sand. Lower lid somewhat chemotic. Slight temporal hyperemia in the left
+eyelid angle. Both eyes have erosions, small, multiple, superficial.
+Lower conjunctival sac clean. Round pupils, anisocoria right larger than
+left. Left iris hyperemia, no iris defects in the direct light. Lens
+unremarkable. Reduced view of the optic nerve head due to miosis,
+somewhat pale, rather sharp-edged, central neuroretinal rim present,
+central vessels normal. Left eye, due to narrow pupil, limited view,
+optic nerve head not visible, central vessels normal, no retinal
+hemorrhages.
+
+**Assessment:** Eyelid and conjunctival foreign bodies removed. Mild
+erosions in the lower conjunctival sac. Right optic nerve head somewhat
+pale, rather sharp-edged.
+
+**Current Recommendations:**
+
+-   Antibiotic eye drops three times a day for both eyes.
+
+-   Ensure complete eyelid closure.
+
+**2) Consultation with Craniomaxillofacial (CMF) Surgery on 04/05/2017**
+
+**Patient Information:**
+
+-   Motorbike accident with severe open traumatic brain injury with
+    fractures of the cranial vault, mastoid, and skull base
+
+<!-- -->
+
+-   Request for assessment.
+
+-   Patient with maxillary fracture.
+
+**Findings:** According to the responsible attending physician,
+\"minimal handling in case of decompensating intracranial pressure\" is
+indicated. Therefore, currently, a cautious approach is suggested
+regarding surgical intervention for the radiologically hardly displaced
+maxillary fracture. Re-consultation is possible if there are changes in
+the clinical outcome.
+
+**Assessment:** Awaiting developments.
+
+**3) Consultation with Neurology on 04/06/2017**
+
+**Patient Information:**
+
+-   Brain edema following a severe open traumatic brain injury with
+    fractures of the cranial vault, mastoid, and skull base
+
+<!-- -->
+
+-   Request for assessment.
+
+-   Traumatic subarachnoid hemorrhage, intracranial artery dissection,
+    and various other injuries.
+
+**Findings:** Patient comatose, intubated, sedated. Isocoric pupils. No
+light reaction in either eye. No reaction to pain stimuli for
+vestibulo-ocular reflex and oculomotor responses. Babinski reflex
+negative.
+
+**Assessment:** Long-term ventilation due to a history of intracerebral
+bleeding and skull base fracture. No response to pain stimuli or light
+reactions in the eyes.
+
+**Procedure/Therapy Suggestion:** Monitoring of patient condition.
+
+**4) Consultation with ENT on 04/16/2017**
+
+**Patient Information:** Tracheostomy tube change.
+
+**Findings:** Tracheostomy tube change performed. Stoma unremarkable.
+Trachea clear up to the bifurcation. Sutures in place.
+
+**Assessment:** Re-consultation on 08/27/2021 for suture removal.
+
+**5) Consultation with Neurology on 04/22/2017**
+
+**Patient Information:** Adduction deficit., Request for assessment.
+
+**Findings:** Long-term ventilation due to a history of intracerebral
+bleeding and skull base fracture. Adduction deficit in the right eye and
+horizontal nystagmus.
+
+**Assessment:** Suspected mesencephalic lesion due to horizontal
+nystagmus, but no diagnostic or therapeutic action required.
+
+**6) Consultation with ENT on 04/23/2017**
+
+**Patient Information:** Suture removal. Request for assessment.
+
+**Findings:** Tracheostomy site unremarkable. Sutures trimmed, and skin
+sutures removed.
+
+**Assessment:** Procedure completed successfully.
+
+Please note that some information is clinical and may not include
+specific dates or recommendations for further treatment.
+
+**Antibiogram:**
+
+  **Antibiotic**            **Organism 1 (Pseudomonas aeruginosa)**   **Organism 2 (Acinetobacter radioresistens)**
+  ------------------------- ----------------------------------------- -----------------------------------------------
+  Aztreonam                 I (4.0)                                   \-
+  Cefepime                  I (2.0)                                   \-
+  Cefotaxime                \-                                        \-
+  Amikacin                  S (\<=2.0)                                S (4.0)
+  Ampicillin                \-                                        \-
+  Piperacillin              I (\<=4.0)                                \-
+  Piperacillin/Tazobactam   I (8.0)                                   \-
+  Imipenem                  I (2.0)                                   S (\<=0.25)
+  Meropenem                 S (\<=0.25)                               S (\<=0.25)
+  Ceftriaxone               \-                                        \-
+  Ceftazidime               I (4.0)                                   \-
+  Gentamicin                . (\<=1.0)                                S (\<=1.0)
+  Tobramycin                S (\<=1.0)                                S (\<=1.0)
+  Cotrimoxazole             \-                                        S (\<=20.0)
+  Ciprofloxacin             I (\<=0.25)                               I (0.5)
+  Moxifloxacin              \-                                        \-
+  Fosfomycin                \-                                        \-
+  Tigecyclin                \-                                        \-
+
+\"S\" means Susceptible
+
+\"I\" means Intermediate
+
+\".\" indicates not specified
+
+\"-\" means Resistant
+
+
+</text_1>
+<text_2>
+**Dear colleague, **
+
+We are reporting on our mutual patient, Mr. John Chapman, born on
+11/16/1994, who presented himself to our Outpatient Clinic from
+08/08/2018.
+
+**Diagnoses**:
+
+-   Right abducens Nerve Palsy and Facial Nerve Palsy
+
+-   Lagophthalmos with corneal opacities due to eyelid closure deficit
+
+-   Left Abducens Nerve Palsy with slight compensatory head leftward
+    rotation and preferred leftward gaze
+
+-   Bilateral disc swelling
+
+-   Suspected left cavernous internal carotid artery aneurysm following
+    traumatic ICA dissection
+
+-   History of shunt explantation due to dysfunction and right-sided
+    re-implantation (Codman, current pressure setting 12 cm H2O)
+
+-   History of left VP shunt placement (programmable
+    ventriculoperitoneal shunt, initial pressure setting 5/25 cm H2O,
+    adjusted to 3 cm H2O before discharge)
+
+-   Malresorptive hydrocephalus
+
+-   History of severe open head injury in a motocross accident with
+    multiple skull fractures and distal dissection
+
+**Procedure**: We conducted the following preoperative assessment:
+
+-   Visual acuity: Distant vision: Right eye: 0.5, Left eye: 0.8p
+
+-   Eye position: Fusion/Normal with significant esotropia in the right
+    eye; no fusion reflex observed
+
+-   Ocular deviation: After CT, at distance, esodeviation simulating
+    alternating 100 prism diopters (overcorrection); at near,
+    esodeviation simulating alternating 90 prism diopters
+
+-   Head posture: Fusion/Normal with leftward head turn of 5-10 degrees
+
+-   Correspondence: Bagolini test shows suppression at both distance and
+    near fixation
+
+-   Motility: Right eye abduction limited to 25 degrees from the
+    midline, abduction in up and down gaze limited to 30 degrees from
+    midline; left eye abduction limited to 30 degrees
+
+-   Binocular functions: Bagolini test shows suppression in the right
+    eye at both distance and near fixation; Lang I negative
+
+**Current Presentation:** Mr. Chapman presented himself today in our
+neurovascular clinic, providing an MRI of the head.
+
+**Medical History:** The patient is known to have a pseudoaneurysm of
+the cavernous left internal carotid artery following traumatic carotid
+dissection in 04/2017, along with ipsilateral abducens nerve palsy.
+
+**Physical Examination:** Patient in good general condition. Oriented in
+all aspects. No cyanosis. No edema. Warm and dry skin. Normal nasal and
+pharyngeal findings. Pupils round, equal, and react promptly to light
+bilaterally. Moist tongue. Pharynx and buccal mucosa unremarkable. No
+jugular vein distension. No carotid bruits heard. Palpation of lymph
+nodes unremarkable. Palpation of the thyroid gland unremarkable, freely
+movable. Lungs: Normal chest shape, moderately mobile, vesicular breath
+sounds. Heart: Regular heart action, normal rate; heart sounds clear, no
+pathological sounds. Abdomen: Peristalsis and bowel sounds normal in all
+quadrants; soft abdomen, no tenderness, no palpable masses, liver and
+spleen not palpable due to limited access, non-tender kidneys. Normal
+peripheral pulses; joints freely movable. Strength, motor function, and
+sensation are unremarkable.
+
+**Therapy and Progression:** The pseudoaneurysm has shown slight
+enlargement in the recent follow-up imaging and remains partially
+thrombosed. The findings were discussed on during a neurovascular board
+meeting, where a recommendation for endovascular treatment was made,
+which the patient has not yet pursued. Since Mr. Chapman has not been
+able to decide on treatment thus far, it is advisable to further
+evaluate this still asymptomatic condition through a diagnostic
+angiography. This examination would also help in better planning any
+potential intervention. Mr. Chapman agreed to this course of action, and
+we will provide him with a timely appointment for the angiography.
+
+**Lab results upon Discharge:**
+
+  **Parameter**        **Results**   **Reference Range**
+  -------------------- ------------- ---------------------
+  Creatinine (Jaffé)   0.44 mg/dL    0.70-1.20 mg/dL
+  Urea                 31 mg/dL      17-48 mg/dL
+  Total Bilirubin      0.35 mg/dL    \< 1.20 mg/dL
+  Hemoglobin           7.8 g/dL      13.5-17.0 g/dL
+  Hematocrit           28%           39.5-50.5%
+  Red Blood Cells      3.5 M/uL      4.3-5.8 M/uL
+  White Blood Cells    10.35 K/uL    3.90-10.50 K/uL
+  Platelets            379 K/uL      150-370 K/uL
+  MCV                  77.2 fL       80.0-99.0 fL
+  MCH                  24.1 pg       27.0-33.5 pg
+  MCHC                 32.5 g/dL     31.5-36.0 g/dL
+  MPV                  11.3 fL       7.0-12.0 fL
+  RDW-CV               17.7%         11.5-15.0%
+  Quick                54%           78-123%
+  INR                  1.36          0.90-1.25
+  aPTT                 32.8 sec      25.0-38.0 sec
+
+
+</text_2>
+<text_3>
+**Dear colleague, **
+
+We are reporting on our patient, Mr. John Chapman, born on 11/16/1994,
+who was under our inpatient care from 05/25/2019 to 05/26/2019.
+
+**Diagnoses: **
+
+-   Pseudoaneurysm of the cavernous left internal carotid artery
+    following traumatic carotid dissection
+
+-   Abducens nerve palsy.
+
+-   History of severe open head trauma with fractures of the cranial
+    vault, mastoid, and skull base. Distal ICA dissection bilaterally.
+    Bilateral hemispheric subarachnoid hemorrhage extending into the
+    basal cisterns.mInfarct areas in the MCA-ACA border zones, right
+    frontal, and left parietal. Malresorptive hydrocephalus.
+
+<!-- -->
+
+-   Rhabdomyolysis.
+
+-   History of aspiration pneumonia.
+
+-   Suspected Propofol infusion syndrome.
+
+**Current Presentation:** For cerebral digital subtraction angiography
+of the intracranial vessels. The patient presented with stable
+cardiopulmonary conditions.
+
+**Medical History**: The patient was admitted for the evaluation of a
+pseudoaneurysm of the supra-aortic vessels. Further medical history can
+be assumed to be known.
+
+**Physical Examination:** Patient in good general condition. Oriented in
+all aspects. No cyanosis. No edema. Warm and dry skin. Normal nasal and
+pharyngeal findings. Pupils round, equal, and react promptly to light
+bilaterally. Moist tongue. Pharynx and buccal mucosa unremarkable. No
+jugular vein distension. No carotid bruits heard. Palpation of lymph
+nodes unremarkable. Palpation of the thyroid gland unremarkable, freely
+movable. Lungs: Normal chest shape, moderately mobile, vesicular breath
+sounds. Heart: Regular heart action, normal rate; heart sounds clear, no
+pathological sounds. Abdomen: Peristalsis and bowel sounds normal in all
+quadrants; soft abdomen, no tenderness, no palpable masses, liver and
+spleen not palpable due to limited access, non-tender kidneys. Normal
+peripheral pulses; joints freely movable. Strength, motor function, and
+sensation are unremarkable.
+
+**Supra-aortic angiography on 05/25/2019:**
+
+[Clinical context, question, justifying indication:]{.underline}
+Pseudoaneurysm of the left ICA. Written consent was obtained for the
+procedure. Anesthesia, Medications: Procedure performed under local
+anesthesia. Medications: 500 IU Heparin in 500 mL NaCl for flushing.
+[Methodology]{.underline}: Puncture of the right common femoral artery
+under local anesthesia. 4F sheath, 4F vertebral catheter. Serial
+angiographies after selective catheterization of the internal carotid
+arteries. Uncomplicated manual intra-arterial contrast medium injection
+with a total of 50 mL of Iomeron 300. Post-interventional closure of the
+puncture site by manual compression. Subsequent application of a
+circular pressure bandage.
+
+[Technique]{.underline}: Biplanar imaging technique, area dose product
+1330 cGy x cm², fluoroscopy time 3:43 minutes.
+
+[Findings]{.underline}: The perfused portion of the partially thrombosed
+cavernous aneurysm of the left internal carotid artery measures 4 x 2
+mm. No evidence of other vascular pathologies in the anterior
+circulation.
+
+[Recommendation]{.underline}: In case of post-procedural bleeding,
+immediate manual compression of the puncture site and notification of
+the on-call neuroradiologist are advised.
+
+-   Pressure bandage to be kept until 2:30 PM. Bed rest until 6:30 PM.
+
+-   Follow-up in our Neurovascular Clinic
+
+**Addition: Doppler ultrasound of the right groin on 05/26/2019:**
+
+[Clinical context, question, justifying indication:]{.underline} Free
+fluid? Hematoma?
+
+[Findings]{.underline}: A CT scan from 04/05/2017 is available for
+comparison. No evidence of a significant hematoma or an aneurysm in the
+right groin puncture site. No evidence of an arteriovenous fistula.
+Normal flow profiles of the femoral artery and vein. No evidence of
+thrombosis.
+
+**Treatment and Progression:** Pre-admission occurred on 05/24/2019 due
+to a medically justified increase in risk for DSA of intracranial
+vessels. After appropriate preparation, the angiography was performed on
+05/25/2019. The puncture site was managed with a pressure bandage. In
+the color Doppler sonographic control the following day, neither a
+puncture aneurysm nor an arteriovenous fistula was detected. On
+05/25/2019, we discharged the patient in good subjective condition for
+your outpatient follow-up care.
+
+**Current Recommendations:** Outpatient follow-up
+
+**Lab results:**
+
+  **Parameter**           **Reference Range**   **Result**
+  ----------------------- --------------------- -------------
+  Sodium                  136-145 mEq/L         141 mEq/L
+  Potassium               3.5-4.5 mEq/L         4.9 mEq/L
+  Chloride                98-107 mEq/L          100 mEq/L
+  Osmolality              280-300 mOsm/kg       290 mOsm/kg
+  Glucose in Fluoride     60-110 mg/dL          76 mg/dL
+  Creatinine (Jaffé)      0.70-1.20 mg/dL       0.98 mg/dL
+  CRP                     \< 5.0 mg/L           4.5 mg/L
+  Triglycerides           \< 150 mg/dL          119 mg/dL
+  Creatine Kinase         \< 190 U/L            142 U/L
+  Free Triiodothyronine   2.00-4.40 ng/L        3.25 ng/L
+  Free Thyroxine          9.30-17.00 ng/L       14.12 ng/L
+  TSH Basal               0.27-4.20 mU/L        1.65 mU/L
+  Hemoglobin              13.5-17.0 g/dL        14.3 g/dL
+  Hematocrit              39.5-50.5%            43.4%
+  Erythrocytes            4.3-5.8 M/uL          5.6 M/uL
+  Leukocytes              3.90-10.50 K/uL       10.25 K/uL
+  Platelets               150-370 K/uL          198 K/uL
+  MCV                     80.0-99.0 fL          83.2 fL
+  MCH                     27.0-33.5 pg          28.1 pg
+  MCHC                    31.5-36.0 g/dL        33.4 g/dL
+  MPV                     7.0-12.0 fL           11.6 fL
+  RDW-CV                  11.5-15.0%            13.5%
+  Quick                   \> 78%                90%
+  INR                     \< 1.25               1.07
+  aPTT                    25.0-38.0 sec         36.1 sec
+
+</text_3>
+</notes>
+</patient-record-patient_16>

@@ -19,6 +19,7 @@ outputs/**
 !outputs/swapping_20260422_185334_local/**
 _data/
 gated-continual-cartridges/data/
+data/*/synth/
 
 # C extensions
 *.so

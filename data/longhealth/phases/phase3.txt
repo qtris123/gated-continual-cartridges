@@ -1,0 +1,4070 @@
+Below is a panel of patient records.
+
+<patient-record-patient_09>
+Below is patient Paul Wells's medical record (ID: patient_09). 
+They were born on 1953-02-04 00:00:00 and have the following diagnosis: Hepatocellular carcinoma.
+The patients medical record consists of 6 notes included below.
+<notes>
+<text_0>
+**Dear colleague, **
+
+We report to you on Mr. Paul Wells, born on 04/02/1953, who was in our
+inpatient treatment from 07/26/2019 to 07/28/2019.
+
+**Diagnoses:** Suspected multifocal HCC segment IV, VII/VIII, first
+diagnosed: 07/19.
+
+-   COPD, current severity level Gold III.
+
+-   Pulmonary emphysema, respiratory partial insufficiency with home
+    oxygen.
+
+-   Postnasal drip syndrome
+
+**Current Presentation:** The elective presentation of Mr. Wells was
+made in accordance with the decision of the interdisciplinary liver
+board of 07/20/2019 for further diagnostics in the case of multiple
+malignoma-specific hepatic space demands.
+
+**Medical History: **In brief, Mr. Wells presented to the Medical Center
+St. Luke's with persistent right-sided pain in the upper abdomen.
+Computer tomography showed multiple intrahepatic masses of the right
+liver lobe (SIV, SVII/VIII). For diagnostic clarification of the
+malignoma-specific findings, the patient was presented to our liver
+outpatient clinic. The tumor marker diagnostics have not been
+conclusive. Analogous to the recommendation of the liver board, a liver
+puncture, staging, and endoscopic exclusion of a primary in the
+gastrointestinal tract should be initiated.
+
+**Physical Examination:** Physical examination reveals an alert patient.
+
+-   Oral mucosa: Moist and rosy, no plaques typical of thrush, no
+    plaques typical of herpes.
+
+-   Hear: Heart sounds pure, rhythmic, normofrequency.
+
+-   Lungs: Laterally attenuated breath sound with wheezing.
+
+-   Abdomen: Abdomen soft, regular bowel sounds over all 4 quadrants, no
+    defensive tension, no resistances, diffuse pressure pain over the
+    upper abdomen. No renal tap pain, no spinal tap pain. Spleen
+    palpable under the costal arch.
+
+-   Extremities: No edema, freely movable
+
+-   Neurology: GCS 15, pupils directly and indirectly reactive to light,
+    no flapping tremor. No meningism.
+
+**Therapy and Progression:** Mr. Wells presented an age-appropriate
+general status and cardiopulmonary stability. Anamnestically, there was
+no evidence of an acute infection. Skin or scleral icterus and pruritus
+were denied. No B symptoms. No stool changes, no dysuria. There would be
+regular alcohol consumption of about 3-4 beers a day, as well as
+nicotine abuse (120 PY). The general performance in COPD Gold grade III
+was strongly limited, with a walking distance reduced to 100m due to
+dyspnea. He had a home oxygen demand with 4L/min O2 during the day, up
+to 6L/min under load. At night, 2L/min O2. The last colonoscopy was
+performed 4 years ago, with no anamnestic abnormalities. No known
+allergies. Family history is positive for colorectal cancer (mother).
+
+Clinical examination revealed the typical auscultation findings of
+advanced COPD with attenuated breath sounds bilateral, with
+hyperinflation and clear wheezing. Otherwise, there were no significant
+findings. Laboratory chemistry did not reveal any higher-grade
+abnormalities. On the day of admission, after detailed clarification,
+the patient was able to undergo the complication-free sonographically
+guided puncture of the liver cavity in SIV. Thereby, two punch cylinders
+were preserved for histopathological processing. Histologically, the
+findings presented as infiltrates of a macrotrabecular and
+pseudoglandular growing, well-differentiated hepatocellular carcinoma
+(G1). The postinterventional course was unremarkable. In particular, no
+clinical or laboratory signs were found for bleeding.
+
+CT staging revealed a size constant known in the short term.
+Hypervascularized hepatic space demands in both lobes of the liver
+without further malignancy suspect thoracoabdominal tumor detection and
+without metastasis aspects. MR also revealed the large, partly exophytic
+growing, partly centrally hemorrhaged HCC lesions in S3/4 and S7/8 to
+the illustration. In addition, complete enforcement of the left lobe of
+the liver was evident with smaller satellites and macroinvasion of the
+left portal vein branch. There was a low cholestasis of the left biliary
+system. Gastroscopy and colonoscopy were also performed. Here, a reflux
+esophagitis, sigmoid diverticulosis, multiple colonic diverticula, and a
+4mm polyp were removed from the sigmoid colon to prevent bleeding; a
+hemoclip was applied. Histologically, no adenoma was found. An
+appointment to discuss the findings in our HCC outpatient clinic has
+been arranged. We recommend further therapy preparation and the
+performance of an echocardiography.
+
+We were able to discharge Mr. Wells on 7/28/19.
+
+**Addition:**
+
+**Ultrasound on 07/26/2019 10:15 AM:**
+
+-   Indication: Targeted liver puncture for suspected metastatic liver
+    malignancy
+
+-   Organ puncture: Quick: 114%, PTT: 28 s, and platelets: 475 G/L. A
+    valid declaration of consent is available. According to the patient,
+    he does not receive antiplatelet drugs.
+
+-   In segment IV, an approximately 8.3 x 6 cm echo-depleted mass with
+    central cystic fusion is accessible in the dorsal position of a
+    sonographically guided puncture at 6.5 cm puncture depth. After
+    extensive skin disinfection, local anesthesia with 10 mL Mecaine 1%
+    and puncture incision with a scalpel. Repeated puncture with 18 G
+    Magnum needles is performed. Two approximately 1 cm fragile whitish
+    cylinders obtained for histologic examination. Band-aid dressing.
+
+-   **Assessment:** Hepatic space demand
+
+**MRI of the liver plain + contrast agent from 07/26/2019 1:15 PM:**
+
+**Technique**: Coronary and axial T2 weighted sequences, axial
+diffusion-weighted EPI sequence with ADC map (b: 0, 50, 300 and 600
+s/mmÇ), axial dynamic T1 weighted sequences with Dixon fat suppression
+and (liver-specific) contrast agent (Dotagraf/Primovist); slice
+thickness: 4 mm. Premedication with 2 mL Buscopan.
+
+**Liver**: Centrally hemorrhagic masses observed in liver segments 4, 7,
+and 8 demonstrate T2 hyperintensity, marked diffusion restriction,
+arterial phase enhancement, and venous phase washout. These
+characteristics are congruent with histopathological diagnosis of
+hepatocellular carcinoma. The largest lesion in segment 4 exhibits
+pronounced exophytic growth but no evidence of organ invasion. Notably,
+branches of the mammary arteries penetrate directly into the tumor.
+Diffusion-weighted imaging further reveals disseminated foci throughout
+the entire left hepatic lobe. Disruption of the peripheral left portal
+vein branch indicative of macrovascular invasion, accompanied by
+peripheral cholestasis in the left biliary system.
+
+**Biliary Tract:** Bile ducts are emphasized on both left and right
+sides, with no evidence of mechanical obstruction in drainage. The
+common hepatic duct remains non-dilated.
+
+**Pancreas and Spleen:** Both organs exhibit no abnormalities.
+
+**Kidneys:** Normal signal characteristics observed.
+
+**Bone Marrow:** Signal behavior is within normal limits.
+
+Assessment: Radiological features highly suggestive of hepatocellular
+carcinoma in liver segments 4, 7, and 8, with evidence of macrovascular
+invasion and peripheral cholestasis in the left biliary system. No signs
+of organ invasion or biliary obstruction. Pancreas, spleen, kidneys, and
+bone marrow appear unremarkable.
+
+**Assessment:**
+
+Large liver lesions, some exophytic and some centrally hemorrhagic, are
+observed in segments 3/4 and 7/8.
+
+In addition, the left lobe of the liver is completely involved with
+smaller satellite lesions and macroinvasion of the left portal branch.
+Mild cholestasis of the left biliary system is noted.
+
+Dilated bile ducts are also found on the right side with no apparent
+mechanical obstruction to outflow.
+
+**CT Chest/Abdomen/Pelvis with contrast agent from 07/27/2019 2:00 PM:**
+
+**Clinical Indication:** Evaluation of an unclear liver lesion
+(approximately 9 cm) in a patient with severe COPD. No prior
+liver-related medical history.
+
+**Question:** Are there any suspicious lesions in the liver?
+
+**Pre-recordings:** Previous external CT abdomen dated 09/13/2021.
+
+**Findings:**
+
+**Technique:** CT imaging involved a multi-line spiral CT through the
+chest, abdomen, and pelvis in the venous contrast phase. Oral contrast
+agent with Gastrolux 1:33 in water was administered. Thin-layer
+reconstructions and coronary and sagittal secondary reconstructions were
+performed.
+
+**Chest:** No axillary or mediastinal lymphadenopathy is observed. There
+is marked coronary sclerosis, as well as calcification of the aortic and
+mitral valves. Nonspecific nodules smaller than 2 mm are noted in the
+posterolateral lower lobe on the right side and lateral middle lobe. No
+pneumonic infiltrates are observed. There is reduced aeration with
+presumed additional scarring changes at the base of the lung
+bilaterally, along with centrilobular emphysema.
+
+**Abdomen:** Known exophytic liver lesions are confirmed, with
+involvement in segment III extending to the subhepatic region (0.1 cm
+extension) and a 6 cm lesion in segment VIII. Further spotty
+hypervascularized lesions are observed throughout the left lobe of the
+liver. No pathological dilatation of intra- or extrahepatic bile ducts
+is seen, and there is no evidence of portal vein thrombosis. There are
+no pathologically enlarged lymph nodes at the hepatic portal,
+retroperitoneal, or inguinal regions. No ascites or pneumoperitoneum is
+noted. There is no pancreatic duct congestion, and the spleen is not
+enlarged. Additionally, there is a Bosniak 1 left renal cyst measuring
+3.6 cm. Pronounced sigmoid diverticulosis is observed, with no evidence
+of other masses in the gastrointestinal tract. Skeletal imaging reveals
+no malignancy-specific osteodestructions but shows ventral pontifying
+spondylophytes of the thoracic spine with no fractures.
+
+**Assessment:**
+
+Short-term size-constant known hypervascularized hepatic space lesions
+are present in both lobes of the liver.
+
+No other malignancy-susceptible thoracoabdominal tumor evidence is
+found, and there are no metastasis-specific lymph nodes.
+
+**Gastroscopy from 07/28/2019**
+
+**Findings:**
+
+**Esophagus:** Unobstructed intubation of the esophageal orifice under
+visualization. Mucosa appears inconspicuous, with the Z-line at 37 cm
+and measuring less than 5 mm. Small mucosal lesions are observed but do
+not straddle mucosal folds.
+
+**Stomach:** The gastric lumen is completely distended under air
+insufflation. There are streaky changes in the antrum, while the fundus
+and cardia appear regular on inversion. The pylorus is inconspicuous and
+passable.
+
+**Duodenum:** Good development of the bulbus duodeni is noted, with good
+insight into the pars descendens duodeni. The mucosa appears overall
+inconspicuous.
+
+**Assessment:** Findings suggest reflux esophagitis (Los Angeles
+Classification Grade A) and antrum gastritis.
+
+**Colonoscopy from 07/28/2019**
+
+**Findings:**
+
+**Colon:** Some residual fluid contamination is noted in the sigmoid
+(Boston Bowel Preparation Scale \[BBPS\] 8). There is pronounced sigmoid
+diverticulosis, along with multiple colonic diverticula. A 4mm polyp in
+the lower sigma (Paris IIa, NICE 1) is observed and ablated with a cold
+snare, with hemoclip application for bleeding prophylaxis. Other mucosal
+findings appear inconspicuous, with normal vascular markings. There is
+no indication of inflammatory or malignant processes.
+
+**Maximum Insight:** Terminal ileum.
+
+**Anus:** Inspection of the anal region reveals no pathological
+findings. Palpation is inconspicuous, and the mucosa is smooth and
+displaceable, with no resistance and no blood on the glove.
+
+**Assessment:** Polypectomy was performed for sigmoid diverticulosis and
+a colonic diverticulum, with histology revealing minimally hyperplastic
+colorectal mucosa and no evidence of malignancy.
+
+**Pathology from 08/27/2019**
+
+**Clinical Information/Question:**
+
+**Macroscopy:** Unclear liver tumor: numerous tissue samples up to a
+maximum of 0.7 cm in size. Complete embedding.
+
+Processing: One tissue block processed and stained with Hematoxylin and
+Eosin (H&E), Gomori\'s trichrome, Iron stain, Diastase Periodic
+Acid-Schiff (D-PAS), and Van Gieson stain.
+
+**Microscopic Findings:**
+
+-   Liver architecture is presented in fragmented liver core biopsies
+    with observable lobular structures and two included portal fields.
+
+-   Hepatic trabeculae are notably wider than the typical 2-3 cell
+    width, featuring the formation of druse-like luminal structures.
+
+-   Sinusoidal dilatation is markedly observed.
+
+-   Hepatocytes show mildly enlarged nuclei with minimal cytologic
+    atypia and isolated mitotic figures.
+
+-   Gomori staining reveals a notable, partial loss of the fine
+    reticulin fiber network.
+
+-   Adjacent areas show fibrosed liver parenchyma containing hemosiderin
+    pigmentation.
+
+-   No significant evidence of parenchymal fatty degeneration is
+    observed.
+
+**Assessment**: Histologic features indicative of marked sinusoidal
+dilatation, trabecular widening, and partial loss of reticulin network,
+alongside minimally atypical hepatocytes and fibrosed parenchyma with
+hemosiderin pigment. No significant hepatic fat degeneration noted.
+
+
+</text_0>
+<text_1>
+**Dear colleague, **
+
+We would like to report on Paul Wells, born on 04/02/1953, who was under
+our outpatient treatment on 08/24/2019.
+
+**Diagnoses:**
+
+-   Multifocal HCC (Hepatocellular Carcinoma) involving segments IV,
+    VII/VIII, with portal vein invasion, classified as BCLC C, diagnosed
+    in July 2019.
+
+-   Extensive HCC lesions, some exophytic and others centrally
+    hemorrhagic, in segments S3/4 and S7/8, complete involvement of the
+    left liver lobe with smaller satellite lesions, and macrovascular
+    invasion of the left portal vein.
+
+-   Histology from 07/27/2019: A well-differentiated hepatocellular
+    carcinoma (G1) with a macrotrabecular and pseudoglandular growth
+    pattern.
+
+-   Decision from the Liver Tumor Board on 08/18/2019: Recommending
+    systemic therapy.
+
+-   Initiation of Atezolizumab/Bevacizumab on 08/24/2019
+
+-   Liver fibrosis: Elevated alcohol consumption (3-4 beers/day).
+
+**Other Diagnoses:**
+
+-   COPD with a current severity level of Gold III.
+
+-   Pulmonary emphysema.
+
+-   Respiratory partial insufficiency requiring home oxygen therapy.
+
+-   Postnasal Drip Syndrome.
+
+-   History of nicotine use (120 pack-years).
+
+-   Hypertension (high blood pressure).
+
+**Medical History:** Mr. Wells presented with persistent right upper
+abdominal pain and was initially treated at St. Luke\'s Medical Center.
+CT scans revealed multiple intrahepatic lesions in the right liver lobe
+(SIV, SVII/VIII). Short-term follow-up CT staging revealed a known,
+size-stable, hypervascularized hepatic lesion in both lobes of the
+liver, with no evidence of other thoracoabdominal malignancies or
+suspicious lymph nodes. MRI also confirmed the presence of large HCC
+lesions, some exophytic and others centrally hemorrhagic, in segments
+S3/4 and S7/8, along with complete infiltration of the left liver lobe
+with smaller satellite lesions and macroinvasion of the left portal
+vein. There was mild cholestasis in the left biliary system.
+
+**Current Recommendations: **
+
+-   Liver function remains good based on laboratory tests.
+
+-   Mr. Wells has been extensively informed about systemic therapy
+    options with Atezolizumab/Bevacizumab and the possibility of
+    alternative therapy with a tyrosine kinase inhibitor.
+
+-   The decision has been made to initiate standard first-line therapy
+    with Atezolizumab/Bevacizumab. Detailed information regarding
+    potential side effects has been provided, with particular emphasis
+    on the need for immediate medical evaluation in case of signs of
+    gastrointestinal bleeding (blood in stool, black tarry stool, or
+    vomiting blood) or worsening pulmonary symptoms.
+
+-   The patient has been strongly advised to abstain from alcohol
+    completely.
+
+-   A follow-up evaluation through liver MRI and CT has been scheduled
+    for January 4, 2020, at our HCC (Hepatocellular Carcinoma) clinic.
+    The exact appointment time will be communicated to the patient
+    separately.
+
+-   We are available for any questions or concerns.
+
+-   In case of persistent or worsening symptoms, we recommend an
+    immediate follow-up appointment.
+
+
+</text_1>
+<text_2>
+**Dear colleague, **
+
+We would like to provide an update regarding Mr. Paul Wells, born on
+04/02/1953, who was under our inpatient care from 08/13/2020 to
+08/14/2020.
+
+**Medical History:**
+
+We assume familiarity with Mr. Wells\'s comprehensive medical history as
+described in the previous referral letter. At the time of admission, he
+reported significantly reduced physical performance due to his known
+severe COPD. Following the consensus of the Liver Board, we admitted Mr.
+Wells for a SIRT simulation.
+
+**Current Presentation:** Mr. Wells is a 66-year-old patient with normal
+consciousness and reduced general condition. He is largely compensated
+on 3 liters of oxygen per minute. His abdomen is soft with regular
+peristalsis. A palpable tumor mass in the right upper abdomen is noted.
+
+**DSA Coeliac-Mesenteric on 08/13/2020:**
+
+-   Uncomplicated SIRT simulation.
+
+-   Catheter position 1: Right hepatic artery.
+
+-   Catheter position 2: Left hepatic artery.
+
+-   Catheter position 3: Liver segment arteries 4a/4b.
+
+-   Uncomplicated and technically successful embolization of parasitic
+    tumor supply from the inferior and superior epigastric arteries.
+
+**Perfusion Scintigraphy of the Liver and Lungs, including SPECT/CT on
+08/13/2020:**
+
+-   The liver/lung shunt volume is 9.4%.
+
+-   There is intense radioactivity accumulation in multiple lesions in
+    both the right and left liver lobes.
+
+**Therapy and Progression:** On 08/13/2020, we performed a DSA
+coeliac-mesenteric angiography on Mr. Wells, administering a total of
+approximately 159 MBq Tc99m-MAA into the liver\'s arterial circulation
+(simulation). This procedure revealed that a significant portion of
+radioactivity would reach the lung parenchyma during therapy, posing a
+risk of worsening his already compromised lung function. In view of
+these comorbidities, SIRT was not considered a viable treatment option.
+Therefore, an interdisciplinary decision was made during the conference
+to recommend systemic therapy. With an uneventful course, we discharged
+Mr. Wells in stable general condition on 08/14/2020.
+
+
+</text_2>
+<text_3>
+**Dear colleague, **
+
+We are reporting on Paul Wells, born on 04/02/1953, who presented to our
+interdisciplinary clinic for Hepato- and Cholangiocellular Tumors on
+10/24/2020.
+
+**Diagnoses:**
+
+-   Multifocal HCC Segment with portal vein invasion, BCLC C, first
+    diagnosed 07/19
+
+-   Large, partly exophytic, partly centrally hemorrhagic HCC lesions in
+    S3/4 and S7/8, complete infiltration of the left lateral lobe with
+    smaller satellites, macrovascular invasion of the left portal vein.
+
+-   Histology on 07/27/2019: Macrotrabecular and pseudoglandular growth
+    of well-differentiated hepatocellular carcinoma (G1).
+
+-   Histology from 07/27/2019: A well-differentiated hepatocellular
+    carcinoma (G1) with a macrotrabecular and pseudoglandular growth
+    pattern.
+
+-   Decision from the Liver Tumor Board on 08/18/2019: Recommending
+    systemic therapy.
+
+-   Initiation of Atezolizumab/Bevacizumab on 08/24/2019.
+
+-   Liver fibrosis: Elevated alcohol consumption (3-4 beers/day).
+
+-   CT in 01/2020: Very good tumor response.
+
+-   Re-administration of Atezolizumab/Bevacizumab on 01/25/2022 and
+    02/16/2022, followed by a treatment pause due to limited tolerance.
+
+-   CT from 02/2020 to 08/2020: Continuously regressing tumor findings.
+
+-   Liver fibrosis: Increased C2 consumption (3-4 beers/day).
+
+**Other Diagnoses:**
+
+-   Suspected Polyneuropathy or Restless Legs Syndrome
+
+-   COPD, current severity Gold III.
+
+-   Pulmonary emphysema
+
+-   Respiratory partial insufficiency with home oxygen
+
+-   Postnasal-Drip Syndrome
+
+-   History of nicotine abuse (120 py)
+
+-   Transient worsening of lung function with steroid requirement after
+    Atezolizumab/Bevacizumab administrations
+
+-   History of severe pneumonia (Medical Center St. Luke's) in 10/2019
+
+-   Pneumogenic sepsis with detection of Streptococcus pneumoniae
+
+-   Arterial hypertension
+
+-   Atrial fibrillation
+
+-   Treatment with Apixaban
+
+-   Reflux esophagitis Grade A (Esophagogastroduodenoscopy in 08/2019).
+
+**Current Presentation**: Mr. Wells presented to discuss follow-up after
+systemic therapy with Atezolizumab/Bevacizumab due to his impaired
+general condition.
+
+**Medical History:** For detailed medical history, please refer to the
+previous medical reports. In summary, Mr. Wells presented in 07/2019
+with persistent right upper abdominal pain. A CT scan showed multiple
+intrahepatic lesions in the right liver lobe (SIV, SVII/VIII). MR
+imaging also revealed large, partly exophytic, partly centrally
+hemorrhagic HCC lesions in S3/4 and S7/8. There was complete
+infiltration of the left liver lobe with smaller satellites and
+macroinvasion of the left portal vein branch. Histology confirmed a
+well-differentiated hepatocellular carcinoma (G1). There is no known
+underlying liver disease, but peritumoral liver fibrosis was observed
+histologically. Mr. Wells reported increased alcohol consumption of 3-4
+beers per day.
+
+Due to comorbidities and a large tumor with a relatively high liver-lung
+shunt, SIRT simulation was initially attempted but found to be an
+unsuitable treatment option. Therefore, our interdisciplinary liver
+tumor board recommended systemic therapy. After comprehensive
+counseling, treatment with Atezolizumab/Bevacizumab commenced on
+08/24/2019.
+
+The therapy had to be paused after a single administration due to a
+substantial increase in transaminases (GPT 164 U/L, GOT 151 U/L),
+suspected to be associated with immunotherapy-induced hepatitis. With
+only minimal improvement in transaminases, Prednisolone therapy was
+initiated on and tapered successfully after significant transaminase
+regression. However, before the next planned administration, the patient
+experienced severe pneumonic sepsis, requiring hospitalization on
+10/2019. Following discharge, there was a recurrent infection requiring
+inpatient antibiotic therapy.
+
+Staging examinations in 01/2020 showed a very good tumor response.
+Subsequently, Atezolizumab/Bevacizumab was re-administered on 01/23/2020
+and 02/14/2020. However, in the following days, the patient experienced
+significant side effects, including oral burning, appetite and weight
+loss, low blood pressure, and worsening pulmonary status. Steroid
+treatment improved the pulmonary situation, but due to poor tolerance,
+therapy was paused after 02/14/2020.
+
+Currently, Mr. Wells reports a satisfactory general condition, although
+his pulmonary function remains limited but stable.
+
+**Summary:** Laboratory results from external testing on 01/02/2020
+indicate excellent liver function, with transaminases within normal
+range. The latest CT examination shows continued tumor regression.
+However, MRI quality is limited due to the patient\'s inability to hold
+their breath adequately. Given the excellent tumor response and previous
+significant side effects, it was decided to continue the treatment pause
+until the next tumor staging.
+
+**Current Recommendations:** A follow-up imaging appointment has been
+scheduled for four months from now. We kindly request you send the
+latest CT images (Chest/Abdomen/Pelvis, including dynamic liver CT) and
+current blood values to our HCC clinic. Due to limited assessability,
+another MRI is not advisable.
+
+We remain at your disposal for any further inquiries. In case of
+persistent or worsened symptoms, we recommend prompt reevaluation.
+
+**Medication upon discharge:**
+
+  **Medication**                        **Dosage**   **Frequency**
+  ------------------------------------- ------------ -------------------------
+  Ipratropium/Fenoterol (Combivent)     As needed    As needed
+  Beclomethasone/Formoterol (Fostair)   6+200 mcg    2-0-2
+  Tiotropium (Spiriva)                  2.5 mcg      2-0-0
+  Prednisolone (Prelone)                5 mg         2-0-0 (or as necessary)
+  Pantoprazole (Protonix)               40 mg        1-0-0
+  Fenoterol                             0.1 mg       As needed
+  Apixaban (Eliquis)                    5 mg         On hold
+  Olmesartan (Benicar)                  20 mg        1-0-0
+
+Lab results upon Discharge:
+
+  **Parameter**                 **Results**   **Reference Range**
+  ----------------------------- ------------- ---------------------
+  Sodium (Na)                   144 mEq/L     134-145 mEq/L
+  Potassium (K)                 3.7 mEq/L     3.4-5.2 mEq/L
+  Calcium (Ca)                  2.37 mEq/L    2.15-2.65 mEq/L
+  Chloride (Cl)                 106 mEq/L     95-112 mEq/L
+  Inorganic Phosphate (PO4)     0.93 mEq/L    0.8-1.5 mEq/L
+  Transferrin Saturation        20 %          16-45 %
+  Magnesium                     0.78 mEq/L    0.75-1.06 mEq/L
+  Creatinine                    1.88 mg/dL    \<1.2 mg/dL
+  GFR                           36 mL/min     \<90 mL/min
+  BUN                           60 mg/dL      14-46 mg/dL
+  Uric Acid                     4.6 mg/dL     3.0-6.9 mg/dL
+  Total Bilirubin               0.5 mg/dL     \<1 mg/dL
+  Albumin                       4.0 g/dL      3.6-5.0 g/dL
+  Total Protein                 6.8 g/dL      6.5-8.7 g/dL
+  CRP                           0.19 mg/dL    \<0.5 mg/dL
+  Transferrin                   269 mg/dL     200-360 mg/dL
+  Ferritin                      110 mcg/L     30-300 mcg/L
+  ALT                           339 U/L       \<45 U/L
+  AST                           424 U/L       \<50 U/L
+  GGT                           904 U/L       \<55 U/L
+  Lipase                        61 U/L        \<70 U/L
+  Thyroid-Stimulating Hormone   0.54 mIU/L    0.27-4.20 mIU/L
+  Hemoglobin                    14.5 g/dL     14.0-17.5 g/dL
+  Hematocrit                    43 %          40-52 %
+  Red Blood Cells               4.60 M/µL     4.6-6.2 M/µL
+  White Blood Cells             8.78 K/µL     4.5-11.0 K/µL
+  Platelets                     205 K/µL      150-400 K/µL
+  MCV                           94 fL         81-100 fL
+  MCH                           31.5 pg       27-34 pg
+  MCHC                          33.5 g/dL     32.4-35.0 g/dL
+  MPV                           11 fL         7-12 fL
+  RDW                           14.8 %        11.9-14.5 %
+  Neutrophils                   3.72 K/µL     1.8-7.7 K/µL
+  Lymphocytes                   2.37 K/µL     1.4-3.7 K/µL
+  Monocytes                     0.93 K/µL     0.2-1.0 K/µL
+  Eosinophils                   1.67 K/µL     \<0.7 K/µL
+  Basophils                     0.09 K/µL     0.01-0.10 K/µL
+  Erythroblasts                 Negative      \<0.01 K/µL
+  Antithrombin Activity         85 %          80-120 %
+
+
+</text_3>
+<text_4>
+**Dear colleague, **
+
+We are reporting an update of the medical condition of Mr. Paul Wells
+born on 04/02/1953, who presented for a follow up in our outpatient
+clinic on 11/20/2020.
+
+**Diagnoses:**
+
+-   Multifocal HCC Segment with portal vein invasion, BCLC C, first
+    diagnosed 07/19
+
+-   Large, partly exophytic, partly centrally hemorrhagic HCC lesions in
+    S3/4 and S7/8, complete infiltration of the left lateral lobe with
+    smaller satellites, macrovascular invasion of the left portal vein.
+
+-   Histology on 07/27/2019: Macrotrabecular and pseudoglandular growth
+    of well-differentiated hepatocellular carcinoma (G1).
+
+-   SIRT simulation: No feasible SIRT.
+
+-   Liver Tumor Board decision on 08/18/2019: Systemic therapy.
+
+-   Atezolizumab/Bevacizumab since 10/26/2021, with a pause starting on
+    09/17/2019, due to transaminase elevation.
+
+-   CT in 01/2020: Very good tumor response.
+
+-   Re-administration of Atezolizumab/Bevacizumab
+
+-   CT from 02/2020 to 08/2020: Continuously regressing tumor findings.
+
+-   Liver fibrosis: Increased alcohol consumption (3-4 beers/day).
+
+**Other diagnoses:**
+
+-   COPD, current severity Gold III.
+
+-   Pulmonary emphysema.
+
+-   Respiratory partial insufficiency with home oxygen.
+
+-   Postnasal-Drip Syndrome.
+
+-   History of nicotine abuse (120 py).
+
+-   Transient worsening of lung function with steroid requirement after
+    Atezolizumab/Bevacizumab administrations
+
+-   Pneumogenic sepsis with detection of Streptococcus pneumonia
+
+-   Arterial hypertension.
+
+-   Atrial fibrillation
+
+-   Treatment with Apixaban.
+
+-   Reflux esophagitis LA Grade A (Esophagogastroduodenoscopy in
+    08/2019).
+
+**Medical History:** Mr. Wells initially presented with right upper
+abdominal pain, which led to the discovery of multiple intrahepatic
+masses in liver segments IV, VII/VIII. Subsequent investigations
+confirmed the diagnosis of HCC. He also suffers from chronic obstructive
+pulmonary disease (COPD), emphysema, and respiratory insufficiency
+requiring home oxygen therapy. Previous investigations and treatments
+were documented in detail in our previous medical records.
+
+**Physical Examination:**
+
+-   General Appearance: Alert, cooperative, and oriented.
+
+-   Vital Signs: Stable blood pressure, heart rate, respiratory rate,
+    and temperature. Oxygen Saturation (SpO2): Within the normal range.
+
+-   Respiratory System: Normal chest symmetry, no accessory muscle use.
+    Clear breath sounds, no wheezing or crackles. Regular respiratory
+    rate.
+
+-   Cardiovascular System: Regular heart rate and rhythm, no murmurs.
+    Strong radial and pedal pulses bilaterally. No lower extremity
+    edema.
+
+-   Gastrointestinal System: Soft, nontender abdomen. Bowel sounds
+    present in all quadrants. Spleen palpable under the costal arch.
+
+-   Neurological Examination: Alert and oriented. Cranial nerves, motor,
+    sensory, reflexes, coordination and gait normal. No focal
+    neurological deficits.
+
+-   Skin and Mucous Membranes: Intact skin, no rashes or lesions. Moist
+    oral mucosa without lesions.
+
+-   Extremities: No edema. Full range of motion in all joints. Normal
+    capillary refill.
+
+-   Lymphatic System:
+
+-   No palpable lymphadenopathy.
+
+**MRI Liver (plain + contrast agent) on 11/20/2020 09:01 AM.**
+
+-   Imaging revealed stable findings in the liver. The previously
+    identified HCC lesions in segments IV, VII/VIII, including their
+    size and characteristics, remained largely unchanged. There was no
+    evidence of new lesions or metastases. Detailed MRI imaging provided
+    valuable insight into the nature of the lesions, their vascularity,
+    and possible effects on adjacent structures.
+
+**CT Chest/Abdomen/Pelvis with contrast agent on 11/20/2020 12:45 PM.**
+
+-   Thoracoabdominal CT scan showed the same results as the previous
+    examination. Known space-occupying lesions in the liver remained
+    stable, and there was no evidence of malignancy or metastasis
+    elsewhere in the body. The examination also included a thorough
+    evaluation of the thoracic and pelvic regions to rule out possible
+    metastasis.
+
+**Gastroscopy on 11/20/2020 13:45 PM.**
+
+-   Gastroscopy follow-up confirmed the previous diagnosis of reflux
+    esophagitis (Los Angeles classification grade A) and antral
+    gastritis. These findings were consistent with previous
+    investigations. It is important to note that while these findings
+    are unrelated to HCC, they contribute to Mr. Wells\' overall medical
+    profile and require ongoing treatment.
+
+**Colonoscopy on 11/20/2020 15:15 PM.**
+
+-   Colonoscopy showed that the sigmoid colon polyp, which had been
+    removed during the previous examination, had not recurred. No new
+    abnormalities or malignancies were detected in the gastrointestinal
+    tract. This examination provides assurance that there is no
+    concurrent colorectal malignancy complicating Mr. Wells\' medical
+    condition.
+
+**Pulmonary Function Testing:**
+
+Mr. Wells\' COPD, emphysema, and respiratory insufficiency were
+evaluated in detail. Pulmonary function tests confirmed his current
+severity score of Gold III, indicating advanced COPD. Despite the
+chronic nature of his disease, there has been no significant
+deterioration since the last assessment.
+
+**Oxygen Therapy:**
+
+As previously documented, Mr. Wells requires home oxygen therapy. His
+oxygen requirements have been constant, with no significant increase in
+oxygen requirements during daily activities or at rest. This stability
+in his oxygen demand is encouraging and indicates effective management
+of his respiratory disease.
+
+**Overall Assessment:** Based on the results of recent follow-up, Mr.
+Paul Wells\' hepatocellular carcinoma (HCC) has not progressed
+significantly. The previously noted HCC lesions have remained stable in
+terms of size and characteristics. In addition, there is no evidence of
+malignancy elsewhere in his thoracoabdominal region.
+
+Mr. Wells\' COPD, emphysema, and respiratory insufficiency, which is
+being treated with home oxygen therapy, have also not changed
+significantly during this follow-up period. His cardiopulmonary
+condition remains well controlled, with no acute deterioration.
+
+Psychosocially, Mr. Wells continues to demonstrate resilience and
+actively participates in his care. His strong support system continues
+to contribute to his overall well-being.
+
+Additional monitoring and follow-up appointments have been scheduled to
+ensure continued management of Mr. Wells\' health. In addition,
+discussions continue regarding potential treatment options and
+interventions to provide him with the best possible care.
+
+**Current Recommendations:** In light of the stability observed in Mr.
+Wells\' HCC and overall medical condition, we recommend the following
+steps for his continued care:
+
+1.  Regular Follow-up: Maintain a schedule of regular follow-up
+    appointments to monitor the status of the HCC, cardiopulmonary
+    function, and other associated conditions.
+
+2.  Lifestyle-Modification
+
+
+</text_4>
+<text_5>
+**Dear colleague, **
+
+We report to you about Mr. Paul Wells born on 04/02/1953 who received
+inpatient treatment from 02/04/2021 to 02/12/2021.
+
+**Diagnosis**: Community-Acquired Pneumonia (CAP)
+
+**Previous Diagnoses and Treatment:**
+
+-   Multifocal HCC Segment with portal vein invasion, BCLC C, first
+    diagnosed 07/19
+
+-   Large, partly exophytic, partly centrally hemorrhagic HCC lesions in
+    S3/4 and S7/8, complete infiltration of the left lateral lobe with
+    smaller satellites, macrovascular invasion of the left portal vein.
+
+-   Histology on 07/27/2019: Macrotrabecular and pseudoglandular growth
+    of well-differentiated hepatocellular carcinoma (G1).
+
+-   SIRT simulation attempt on 08/13/2019: No feasible SIRT.
+
+-   Liver Tumor Board decision on 08/18/2019: Systemic therapy.
+
+-   Atezolizumab/Bevacizumab since 10/26/2021, with a pause starting on
+    09/17/2019, due to transaminase elevation (up to 4x ULN).
+
+-   CT in 01/2020: Very good tumor response.
+
+-   Re-administration of Atezolizumab/Bevacizumab on 01/25/2022 and
+    02/16/2022, followed by a treatment pause due to limited tolerance.
+
+-   CT from 02/2020 to 08/2020: Continuously regressing tumor findings.
+
+-   Liver fibrosis: Increased C2 consumption (3-4 beers/day).
+
+-   Suspected PNP DD RLS (Restless Legs Syndrome).
+
+<!-- -->
+
+-   COPD, current severity Gold III.
+
+-   Pulmonary emphysema.
+
+-   Respiratory partial insufficiency with home oxygen.
+
+-   Postnasal-Drip Syndrome.
+
+-   History of nicotine abuse (120 py).
+
+-   Transient worsening of lung function with steroid requirement after
+    Atezolizumab/Bevacizumab administrations
+
+-   Pneumogenic sepsis with Streptococcus pneumoniae detection.
+
+-   History of unclear infection vs. pneumonia in 10/2019-01/2020.
+
+-   Arterial hypertension.
+
+-   Atrial fibrillation
+
+-   Treatment with Apixaban.
+
+-   Reflux esophagitis LA Grade A (Esophagogastroduodenoscopy in
+    08/2019).
+
+**Medical History:** For detailed medical history, please refer to the
+previous medical reports. In summary, Mr. Wells presented in 07/2019
+with persistent right upper abdominal pain. A CT scan showed multiple
+intrahepatic lesions in the right liver lobe (SIV, SVII/VIII). MR
+imaging also revealed large, partly exophytic, partly centrally
+hemorrhagic HCC lesions in S3/4 and S7/8. There was complete
+infiltration of the left liver lobe with smaller satellites and
+macroinvasion of the left portal vein branch. Histology confirmed a
+well-differentiated hepatocellular carcinoma (G1). There is no known
+underlying liver disease, but peritumoral liver fibrosis was observed
+histologically. Mr. Wells reported increased alcohol consumption of 3-4
+beers per day.
+
+Due to comorbidities and a large tumor with a relatively high liver-lung
+shunt, SIRT simulation was initially attempted but found to be an
+unsuitable treatment option. Therefore, our interdisciplinary liver
+tumor board recommended systemic therapy. After comprehensive
+counseling, treatment with Atezolizumab/Bevacizumab commenced on
+08/24/2019.
+
+Currently, Mr. Wells complains about progressively worsening respiratory
+symptoms, which included shortness of breath, productive cough with
+yellow-green sputum, pleuritic chest pain, fever, and chills, spanning a
+period of five days.
+
+**Physical Examination:**
+
+Temperature: 38.6°C, Blood Pressure: 140/80 mm Hg, Heart Rate: 110 beats
+per minute Respiratory Rate: 30 breaths per minute, Oxygen Saturation
+(SpO2): 88% on room air
+
+Breath Sounds: Auscultation revealed diminished breath sounds and coarse
+crackles, notably in the right lower lobe.
+
+The patient further reported pleuritic chest pain localized to the right
+lower chest.
+
+**Therapy and Progression:**
+
+During his hospitalization, Mr. Wells was in stable cardiopulmonary
+condition. We initiated an empiric antibiotic therapy with intravenous
+Ceftriaxone and Azithromycin to treat community-acquired pneumonia
+(CAP). Oxygen supplementation was provided to maintain adequate oxygen
+saturation levels, and pain management strategies were implemented to
+alleviate pleuritic chest pain. Additionally, pulmonary hygiene measures
+and chest physiotherapy were applied to facilitate sputum clearance.
+Frequent respiratory treatments with bronchodilators were administered
+to mitigate airway obstruction, and continuous monitoring of vital
+signs, oxygen saturation, and respiratory status was carried out.
+Throughout his hospital stay, Mr. Wells exhibited gradual clinical
+improvement, marked by several positive developments. These included the
+resolution of fever, improved oxygen saturation levels, and a follow-up
+chest X-ray demonstrating the resolution of the right lower lobe
+consolidation. Furthermore, antibiotic therapy was adjusted based on
+sputum culture results, which identified Streptococcus pneumoniae as the
+causative pathogen. Mr. Wells continued to receive supportive care and
+respiratory interventions.
+
+We were thus able to discharge Mr. Wells in a good general condition.
+
+</text_5>
+</notes>
+</patient-record-patient_09>
+
+<patient-record-patient_10>
+Below is patient Peter Rudolph's medical record (ID: patient_10). 
+They were born on 05/26/1954 and have the following diagnosis: Renal cell carcinoma.
+The patients medical record consists of 8 notes included below.
+<notes>
+<text_0>
+**Dear colleague, **
+
+We would like to inform you about our patient, Mr. Peter Rudolph, born
+on 05/26/1954, who was under our care from 01/16/2019 to 01/17/2019.
+
+**Diagnosis**: Suspected malignant mass at pyeloureteral junction/left
+renal pelvis and suspicious paraaortic lymph nodes.
+
+**Other Diagnoses:**
+
+-   Atrial fibrillation: Post-ablation in 2013
+
+-   pTCA stenting in 2010 for acute myocardial infarction
+
+-   Suspected soft tissue rheumatism, currently no complaints
+
+-   Laparoscopic cholecystectomy in 2012
+
+-   Tonsillectomy
+
+-   Obesity
+
+**Procedure:** Diagnostic ureterorenoscopy on the left with biopsy and
+left DJ stent placement on 01/16/2019.
+
+**Current Presentation:** Elective presentation for further endoscopic
+evaluation of the unclear mass in the pyeloureteral junction area
+involving the proximal ureter and renal pelvis. Additionally, abnormal
+lymph nodes were observed in external imaging. The patient reports
+occasional mild discomfort in the left upper abdomen.
+
+**Physical Examination:** Soft abdomen, no pressure pain.
+
+**CT Thorax (Plain) from 01/16/2019:**
+
+Presence of axillary and mediastinal lymph nodes with borderline
+enlarged lymph nodes ventral to the tracheal bifurcation (approximately
+10 mm).
+
+Calcification of aortic valves. Aortic and coronary sclerosis.
+
+No suspicious lesions detected within the lungs. No pleural effusions.
+No infiltrates.
+
+History of cholecystectomy.
+
+Known soft tissue density formation in the left renal hilum from the
+previous examination.
+
+The assessment of other upper abdominal organs that were visible and
+could be evaluated natively was unremarkable.
+
+No evidence of suspicious retrocrural lymph nodes. Vascular sclerosis.
+
+**Skeletal Assessment:** Degenerative changes in the spine. No evidence
+of suspicious lesions.
+
+**Assessment:** No definitive evidence of metastatic lesions in the
+lungs. Increased presence of mediastinal lymph nodes, some borderline
+enlarged, ventral to the tracheal bifurcation. Differential diagnosis
+includes nonspecific findings or lymph node metastases, which cannot be
+excluded based solely on CT morphology.
+
+**Main Diagnosis and Main Procedure from the Surgical Report:**
+
+-   Surgical Diagnosis: Unclear proximal ureter tumor on the left
+
+-   Unclear tumor in the left renal pelvis
+
+-   Surgical Procedure: Diagnostic ureterorenoscopy on the left
+
+-   Biopsy of the left ureter
+
+-   Retrograde urography on the left
+
+-   DJ catheter placement on the left
+
+-   Diagnostic urethroscopy
+
+**Procedure:**
+
+The patient underwent a diagnostic ureterorenoscopy, which proceeded
+without complications. During the procedure, a total of eight biopsies
+were successfully obtained from the ureter for histological evaluation.
+Cytological samples were also collected from both the ureter and renal
+pelvis. Although there was a stenosing tumor present, endoscopic passage
+into the renal pelvis was successfully accomplished.
+
+Following the diagnostic procedure, a left-sided double-J catheter was
+placed under radiographic control. Additionally, a urinary catheter was
+inserted. It was observed that the initial urine output appeared
+hemorrhagic, but it subsequently cleared to a normal coloration.
+
+For post-procedural management, plans are in place for the DJ catheter
+to be removed, the timing of which will be guided by improvements in the
+color of the urine as well as the patient\'s overall clinical status. A
+sonogram will be performed prior to discharge as part of routine
+follow-up. Moreover, the patient has been scheduled for counseling to
+address the significantly elevated PSA values noted in recent lab tests.
+
+**Diagnosis:** Unclear proximal ureter tumor on the left. Unclear tumor
+in the left renal pelvis
+
+**Type of Surgery:**
+
+-   Diagnostic ureterorenoscopy on the left
+
+-   Biopsy of the left ureter
+
+-   Retrograde urography on the left
+
+-   DJ catheter placement on the left
+
+-   Diagnostic urethroscopy
+
+**Anesthesia Type:** Laryngeal mask
+
+**Report:** Indication: Unclear mass in the left renal pelvis. Elective
+diagnostic ureterorenoscopy for further assessment. Written consent is
+obtained. The urine is sterile. The procedure is conducted under
+antibacterial prophylaxis with Ampicillin/Sulbactam 3g.
+
+1.  Standard preparation, lithotomy position on the X-ray unit, sterile
+    scrubbing/disinfection, and sterile draping by nursing staff.
+    Verification and approval.
+
+2.  Anesthesiology and urology discussion. Surgery clearance. Antibiotic
+    administration.
+
+3.  Initial urethroscopy was unremarkable, with no signs of tumors.
+
+4.  Semi-rigid ureterorenoscopy with a 6.5/8.5 continuous-flow
+    ureterorenoscopy. Unremarkable ureterorenoscopy of the entire ureter
+    until just before the pyeloureteral junction, where a papillary
+    stenotic constriction was encountered, impeding further passage with
+    the endoscope. Cytology collection (20 mL) was performed. Retrograde
+    urography was conducted to visualize the proximal collecting system,
+    and biopsies were obtained from the accessible portions, with 8
+    biopsies taken using an access sheath. Even with flexible
+    Viperscope, further passage was not feasible.
+
+5.  A DJ catheter was inserted under radiographic guidance over a
+    guidewire. Collection of irrigation cytology (5 ml) from the renal
+    pelvis.
+
+6.  Insertion of a DJ catheter (7/28 Vortek) over the indwelling wire
+    and endoscope under radiographic control. Documentation of images.
+
+7.  Placement of a permanent catheter. Urine initially appeared bloody
+    but cleared rapidly.
+
+**Conclusion:** Uncomplicated diagnostic ureterorenoscopy with biopsy of
+the ureter (8 biopsies taken), cytology collection from the ureter and
+renal pelvis, and endoscopic passage into the renal pelvis in the
+presence of a stenosing tumor. DJ catheter placement on the left.
+Endoscopic assessment of the urinary bladder and distal ureter revealed
+no abnormalities. Follow-up steps:
+
+-   Removal of the urinary catheter based on urine appearance and
+    patient vigilance.
+
+-   Sonography before discharge.
+
+-   Further steps determined by histology.
+
+-   Recommend evaluation and clarification of the significantly elevated
+    PSA value.
+
+**Internal Cytological Report Clinical Details: Sample Date: 01/16/2019
+**
+
+1.  Left ureter (100 mL colorless, clear)
+
+2.  Left renal pelvis (50 mL brown) (Papanicolaou staining)
+
+Both materials contain increased urinary sediment, along with
+granulocytes, erythrocytes, and urothelial cells from various layers
+with multi-nuclear surface cells. Material 1 also shows papillary
+arrangements of urothelial cells, some of which have peripheral
+hyperchromatic cell nuclei and altered nuclear-plasma ratios. Material 2
+shows individual papillary urothelial cell arrangements with similar
+nuclear quality, hyperchromasia, and eccentric placement within the
+cytoplasm, as well as nuclear rounding. Numerous individual urothelial
+cells are also present with significantly rounded and enlarged cell
+nuclei, frequently in a peripheral location with hyperchromasia.
+
+**Critical Findings Report:**
+
+1.  Detection of a papillary-structured urothelial population with
+    nuclear changes, which may be related to instrumentation. Malignant
+    urothelial proliferation cannot be definitively ruled out.
+
+2.  Abundant cell material with papillary and single atypical urothelia,
+    highly suspicious for urothelial carcinoma cells.
+
+**Diagnostic Classification:** Suspicious
+
+**Internal Histopathological Report**
+
+**Clinical Details/Question:** Endoscopic suspicion of urothelial
+carcinoma.
+
+**Macroscopy:**
+
+1.  Left proximal ureter: Unfixed nephrectomy specimen measuring 9.2 x
+    6.5 x 5.2 cm with a maximum 4 cm wide perirenal fat tissue and
+    maximum 1 cm wide perihilar fat tissue. Also, a 5 cm long ureter,
+    max 1 cm hilar vessels, and a 2.1 x 1.3 x 0.8 cm adrenal gland at
+    the upper pole of the kidney. On the sections at the renal hilum,
+    there is a maximum 4.3 cm grayish induration. No clear infiltration
+    of vessels by the induration is visible macroscopically. No
+    connection between the induration and the adrenal gland. The minimal
+    distance from the induration to the specimen edge at the renal hilum
+    is focally \< 0.1 cm. Furthermore, the renal pelvis system is
+    dilated, and there is a maximum 0.4 cm grayish indurated nodule in
+    the perirenal fat tissue.
+
+**Therapy and Progression:** After thorough preparation and patient
+counseling, we successfully performed the above procedure on 01/16/2019
+without complications. Intraoperatively, a stenotic process reaching the
+proximal ureter was observed, preventing passage into the renal pelvis.
+Cytology and biopsy were obtained, and a left DJ stent was placed. The
+postoperative course was uneventful. We were able to remove the
+transurethral catheter upon clearing of urine and discharged the patient
+to your outpatient care.
+
+**Current Recommendations:**
+
+-   We request regular follow-up urological evaluations.
+
+-   Given the histological findings and highly suspicious radiological
+    findings for a malignant mass, we recommend performing an isotope
+    renogram to assess separate kidney function. An appointment has been
+    scheduled for 03/05/2019. We ask the patient to visit our
+    preoperative outpatient clinic on the same day to prepare for left
+    nephroureterectomy.
+
+-   The surgical procedure is scheduled for 03/20/2019.
+
+-   In case of acute urological symptoms, immediate reevaluation is
+    welcome at any time.
+
+
+</text_0>
+<text_1>
+**Dear colleague, **
+
+We would like to report to you regarding our mutual patient Mr. Peter
+Rudolph, born on 05/26/1954, who was under our care from 03/17/2019 to
+04/01/2019.
+
+**Diagnosis:** Urothelial carcinoma of the renal pelvis, high grade,
+maximum size 4.3 cm. TNM Classification (8th edition, 2017): pT3, pN0
+(0/11), M1 (ADR), Pn1, L1, V1.
+
+**Other Diagnoses:**
+
+-   Atrial fibrillation: History of ablation in 2013
+
+-   History of pTCA stenting in 2010 due to acute myocardial infarction
+
+-   Suspected soft tissue rheumatism
+
+-   History of laparoscopic cholecystectomy in 2012
+
+-   History of tonsillectomy
+
+-   Obesity
+
+**Procedures:** Open left nephroureterectomy with lymphadenectomy on
+03/18/2019.
+
+**Histology: Critical Findings Report:**
+
+[Renal pelvis carcinoma (left kidney):]{.underline} Extensive
+infiltration of a high-grade urothelial carcinoma in the renal pelvis
+with infiltration of the renal parenchyma and perihilar adipose tissue,
+maximum size 4.3 cm (1.). In the included adrenal tissue, central
+evidence of small carcinoma infiltrates, to be interpreted as distant
+metastasis (M1) with no macroscopic evidence of direct infiltration and
+central localization.
+
+[Resection Status]{.underline}: Carcinoma-free resection margins of the
+proximal left ureter and ureter with mild florid urocystitis at the
+ureteral orifice. Margin-forming carcinoma infiltrates at the main
+preparation hilar near the renal vein, with the cranial hilar resection
+margins I and II being carcinoma-free.
+
+[Nodal Status:]{.underline} Eleven metastasis-free lymph nodes in the
+submissions as follows: 0/1 (2.), 0/3 (4.), 0/6 (5.), 0/1 (6.).
+
+Final TNM Classification (8th edition, 2017): pT3, pN0(0/11), M1 (ADR),
+Pn1, L1, V1.
+
+**Current Presentation:** The patient was electively scheduled for the
+above-mentioned procedure. The patient does not report any complaints in
+the urological field.
+
+**Physical Examination:** Abdomen is soft, no tenderness. Both renal
+beds are free.
+
+**Fast Track Report on 03/18/2019: **
+
+**Microscopy:** Histologically, there are extensive infiltrations of a
+carcinoma growing in large solid formations with focal necrosis and
+highly pleomorphic cell nuclei. In block 1A, there is a section of a
+urothelium-lined duct structure with a transition from normal epithelium
+to highly atypical epithelium and invasive carcinoma infiltrates. Broad
+infiltration into adjacent fat tissue and renal parenchyma is observed.
+Focal perineural sheath infiltration.
+
+**Critical Findings**: Left renal pelvis carcinoma: Extensive
+infiltrates of high-grade urothelial carcinoma in the renal pelvis,
+infiltrating the renal parenchyma and perihilar fat tissue, max 4.3 cm
+(1.). No direct infiltration of the accompanying adrenal gland is found.
+Isolated abnormal cells in the adrenal gland parenchyma, which will be
+further characterized to exclude the smallest carcinoma extensions. An
+update will be provided after the completion of investigations.
+
+**Resection Status:** Carcinoma-free resection margins of the proximal
+left ureter with mild florid urocystitis near the ureteral orifice.
+Carcinoma-forming infiltrates on the main specimen hilus near the renal
+vein, but postresected cranial hili I and II were free of carcinoma.
+
+**Nodal status**: Eleven metastasis-free lymph nodes in the submissions
+as follows: 0/1 (2nd.), 0/3 (4.), 0/6 (5.), 0/1 (6.).
+
+TNM classification (8th edition 2017): pT3, pN0 (0/11), Pn1, L1, V1.
+
+**Urinanalysis from 03/20/2019**
+
+**Material: Urine, Midstream Collected on 10/13/2020 at 00:00**
+
+-   Antimicrobial Agents: Negative. No evidence of growth-inhibiting
+    substances in the sample material.
+
+-   Bacterial Count per ml: 1,000 - 10,000
+
+-   Assessment: Bacterial counts of 1000 CFU/mL or higher can be
+    clinically relevant, especially with corresponding clinical
+    symptoms, especially in pure cultures of uropathogenic
+    microorganisms from midstream urine or single-catheter urine, along
+    with concomitant leukocyturia.
+
+-   Epithelial Cells (microscopic): \<20 epithelial cells/μL
+
+-   Leukocytes (microscopic): \<20 leukocytes/μL
+
+-   Microorganisms (microscopic): \<20 microorganisms/μL
+
+**Pathogen:** Citrobacter koseri
+
+**Antibiogram:**
+
+-   Cefalexin: Susceptible (S) with a minimum inhibitory concentration
+    (MIC) of 8
+
+-   Ampicillin/Amoxicillin: Resistant (R) with MIC \>=32
+
+-   Amoxicillin+Clavulanic Acid: Susceptible (S) with MIC of 8
+
+-   Piperacillin+Tazobactam: Susceptible (S) with MIC \<=4
+
+-   Cefotaxime: Susceptible (S) with MIC \<=1
+
+-   Ceftazidime: Susceptible (S) with MIC of 0.25
+
+-   Cefepime: Susceptible (S) with MIC \<=0.12
+
+-   Meropenem: Susceptible (S) with MIC \<=0.25
+
+-   Ertapenem: Susceptible (S) with MIC \<=0.5
+
+-   Cotrimoxazole: Susceptible (S) with MIC \<=20
+
+-   Gentamicin: Susceptible (S) with MIC \<=1
+
+-   Ciprofloxacin: Susceptible (S) with MIC \<=0.25
+
+-   Levofloxacin: Susceptible (S) with MIC \<=0.12
+
+-   Fosfomycin: Susceptible (S) with MIC \<=16
+
+**Therapy and Progression:** After thorough preparation and patient
+education, we performed the above-mentioned procedure on 03/18/2019,
+without complications. The postoperative course was uneventful except
+for prolonged milky secretion from the indwelling wound drainage. Prior
+to catheter removal, a single instillation of Mitomycin was
+administered. Regular examinations were unremarkable. We discharged Mr.
+Rudolph on 04/01/2019, in good general condition after removal of the
+drainage, following an unremarkable final examination, for your esteemed
+outpatient follow-up.
+
+**Current Recommendations:**
+
+-   We request regular follow-up urological appointments. The first one
+    should take place within one week after discharge.
+
+-   Based on the histopathological findings with evidence of a
+    metastasis in the adrenal tissue, we recommend the administration of
+    adjuvant chemotherapy with Gemcitabine/Cisplatin. The patient wishes
+    for a local connection, which was initiated during the inpatient
+    stay.
+
+-   Anticoagulation: Following the recommendations of the current
+    guideline for prophylaxis of venous thromboembolism, we advise
+    continuing anticoagulation with low molecular weight heparins for a
+    total of 4 - 5 weeks post-operation after urological procedures in
+    the abdominal and pelvic area.
+
+-   With the current single kidney situation, we recommend regular
+    nephrological follow-up examinations.
+
+-   In case of acute urological complaints, immediate re-presentation
+    is, of course, welcome.
+
+
+</text_1>
+<text_2>
+**Dear colleague, **
+
+We are writing to inform you about our patient Mr. Peter Rudolph, born
+on 05/26/1954, who was under treatment at our outpatient clinic on
+04/20/2020.
+
+**Diagnosis:** Newly hepatic and previously known adrenal metastasized,
+locally advanced urothelial carcinoma of the left renal pelvis
+(diagnosed in 03/19).
+
+**Previous Diagnoses and Treatment:**
+
+-   03/19: Left nephroureterectomy with the detection of urothelial
+    carcinoma of the renal pelvis, pT3, pN0 (0/11), M1 (ADR), pn1, L1,
+    V1, high-grade. 04 - 07/19: Four cycles of adjuvant chemotherapy
+    with Gemcitabine/Cisplatin.
+
+-   Newly emerged, progressively enlarging liver metastasis in Segment 6
+    and Segment 7, in relation to the previously known adrenal
+    metastasized and locally advanced urothelial carcinoma of the renal
+    pelvis, following left nephroureterectomy and four cycles of
+    adjuvant chemotherapy with Gemcitabine/Cisplatin. Suspected
+    activation of a rheumatic disease.
+
+**Other Diagnoses:**
+
+-   2013: Atrial fibrillation with ablation
+
+-   2010: pTCA stenting for acute myocardial infarction/CHD
+
+-   Suspected activated soft tissue rheumatism (currently under
+    Prednisolone pulse therapy)
+
+-   Unclear thyroid nodule
+
+-   2012: Laparoscopic cholecystectomy
+
+-   Tonsillectomy (date unknown)
+
+-   01/2019: Left psoas abscess with detection of multisensitive
+    Staphylococcus aureus
+
+**Current Presentation:** Mr. Rudolph presents electively with current
+imaging in our uro-oncological outpatient clinic for treatment and
+discussion of the further therapy plan.
+
+**Medical History:** In March 2019, Mr. Rudolph underwent a
+nephroureterectomy with the detection of urothelial carcinoma of the
+renal pelvis. Subsequently, four cycles of adjuvant chemotherapy with
+Gemcitabine/Cisplatin were performed due to the detection of locally
+advanced urothelial carcinoma with primary metastasis to the left
+adrenal gland. The chemotherapy was well-tolerated. In the summer, the
+patient presented with abdominal pain, and subsequently, an extensive
+psoas abscess was detected during our inpatient treatment. Planned
+follow-up examinations have taken place since then, but the current
+imaging now suggests a newly emerged hepatic metastasis.
+
+**Therapy and Progression**: Mr. Rudolph is in a satisfactory general
+condition. Bowel movements are unremarkable with 1-2 well-formed stools
+per day. Urinary frequency is up to 5-6 times a day with one episode of
+nocturia. There is no urinary hesitancy. Currently, the patient
+complains of an activation of his previously unclarified rheumatic
+disease. He describes increasing pain with swelling in the left distal
+ankle more than the right. Additionally, the patient complains of
+painful right knee, and a total endoprosthesis on this side was
+apparently planned but postponed due to the current COVID-19 pandemic.
+Furthermore, the patient reports pain in the distal and proximal
+interphalangeal joints of both hands. Externally, the general
+practitioner initiated a short-term cortisone pulse therapy with 3-day
+intervals (initial dose 100mg) due to suspicion of soft tissue
+rheumatism a week ago. Under this treatment, the pain has progressively
+improved, and the patient is currently almost symptom-free. Otherwise,
+there is a good social network, and no nursing care is required.
+
+The urological findings indicate a newly emerged hepatic metastasis in
+relation to the previously known adrenal metastasized, locally advanced
+urothelial carcinoma of the left renal pelvis, following
+nephroureterectomy and four cycles of adjuvant chemotherapy with
+Gemcitabine/Cisplatin. Due to the newly emerged metastasis within one
+year after successful Cisplatin therapy, platinum resistance is
+presumed. Therefore, the indication for initiating a second-line therapy
+with the immune checkpoint inhibitor Pembrolizumab, Atezolizumab, or
+Nivolumab now exists. A comprehensive explanation was provided, with a
+particular focus on risks and side effects. Special attention was given
+to the exacerbation of pre-existing rheumatic complaints, and it was
+strongly advised that the patient consult a rheumatologist before
+initiating systemic therapy with an immune checkpoint inhibitor. As the
+patient is already well-connected to the outpatient oncologist and has a
+long commute, the initiation of local therapy was discussed with the
+patient. Telephonically, the patient has already been connected to the
+mentioned practice. Therapy initiation is planned for this week and will
+be communicated to the patient separately.
+
+**Current Recommendations:**
+
+-   We request the initiation of systemic therapy with an immune
+    checkpoint inhibitor (Pembrolizumab, Atezolizumab, or Nivolumab).
+    The first follow-up staging examination should take place after 4
+    cycles of therapy using CT of the chest/abdomen/pelvis.
+
+-   Prior to initiating systemic therapy, we recommend consultation with
+    a local rheumatologist for further evaluation of rheumatic symptoms.
+
+-   In particular, if systemic therapy with an immune checkpoint
+    inhibitor is initiated despite existing rheumatic symptoms, regular
+    follow-up and clinical monitoring should be closely observed.
+
+-   Regarding the externally initiated high-dose Prednisolone course, we
+    recommend a rapid tapering, so that after reaching a threshold dose
+    of 10mg/day, immune checkpoint inhibitor therapy can be initiated.
+
+-   In the event of acute complications or side effects, immediate
+    medical evaluation may be necessary. In particular, the need for
+    timely high-dose cortisone therapy with Prednisolone was emphasized
+    if it is an immune-associated side effect.
+
+-   If immune checkpoint inhibitor therapy is not feasible, the
+    discussion of re-induction with Gemcitabine/Cisplatin or alternative
+    therapy with Vinflunine as a second-line treatment should be
+    considered.
+
+**Current Medication: **
+
+  **Medication **           **Dosage**   **Frequency**
+  ------------------------- ------------ ---------------------
+  Aspirin                   100 mg       1-0-0
+  Bisoprolol (Zebeta)       50 mg        1/2-0-0
+  Pantoprazole (Protonix)   40 mg        1-0-0
+  Prednisolone (Prelone)    80 mg        According to scheme
+
+
+</text_2>
+<text_3>
+**Dear colleague, **
+
+We are reporting on our patient, Mr. Peter Rudolph, born on 05/26/1954,
+who was under our inpatient care from 11/04/2020 to 11/05/2020.
+
+**Diagnosis**: Hepatic, lymphatic, and adrenal metastasized, locally
+advanced urothelial carcinoma of the left renal pelvis (diagnosed in
+03/19).
+
+**Other Diagnoses:**
+
+-   03/19: Left nephroureterectomy with the detection of urothelial
+    carcinoma of the renal pelvis and adrenal metastasis, pT3, pN0,
+    (0/11), M1 (ADR), pn1, L1, V1, high-grade.
+
+-   04/19 - 07/19: Four cycles of adjuvant chemotherapy with
+    Gemcitabine/Cisplatin.
+
+-   04/20: Newly emerged liver metastasis in Segment 6 and Segment 7.
+
+-   05/20 - 09/20: 10 cycles of immunotherapy with Nivolumab 240 mg
+    q14d.
+
+-   2013: Atrial fibrillation with ablation
+
+<!-- -->
+
+-   2010: pTCA stenting for acute myocardial infarction/CHD.
+
+-   Suspected activated soft tissue rheumatism (currently under
+    Prednisolone pulse therapy).
+
+-   Unclear thyroid nodule.
+
+-   2012: Laparoscopic cholecystectomy.
+
+-   Tonsillectomy (date unknown).
+
+-   01/2019: Left psoas abscess with detection of multisensitive
+    Staphylococcus aureus.
+
+**Intervention**: CT-guided liver biopsy on 11/04/2020.
+
+**Current Presentation:** Mr. Rudolph presents electively in our
+urological clinic for the aforementioned procedure. Under immunotherapy
+with Nivolumab 240 mg q14d, there has been significant disease
+progression. A CT-guided liver biopsy was initially discussed with Mr.
+Rudolph for further therapy evaluation. At the time of admission, the
+patient is in good general condition.
+
+**Therapy and Progression:** Following appropriate patient information
+and preparation, we performed the above procedure without complications.
+Postoperatively, there were no complications. We were able to discharge
+Mr. Rudolph in good general condition after unremarkable laboratory
+checks on 11/05/2020.
+
+**Current Recommendations:**
+
+-   We request a follow-up visit with the outpatient urologist within 1
+    week of discharge for clinical monitoring.
+
+-   We recommend switching the systemic therapy to Vinflunine. The
+    patient can have this done locally through his outpatient urologist.
+
+-   Further sequencing will be conducted through our interdisciplinary
+    molecular tumor board, and the patient will be informed of this in
+    due course.
+
+-   In case of symptoms or complications (especially fever over 38.5°C,
+    chills, or flank pain), an immediate return to our clinic is welcome
+    at any time.
+
+
+</text_3>
+<text_4>
+**Dear colleague, **
+
+We are providing you with an update on our patient, Mr. Peter Rudolph,
+born on 05/26/1954, who presented himself at our outpatient clinic on
+06/29/2021.
+
+**Diagnosis**: Hepatic, lymphatic, and adrenal metastasized, locally
+advanced urothelial carcinoma of the left renal pelvis (diagnosed in
+03/19).
+
+**Other Diagnoses:**
+
+-   03/19: Left nephroureterectomy with the detection of urothelial
+    carcinoma of the renal pelvis and adrenal metastasis (pT3, pN0,
+    (0/11), M1 (ADR), pn1, L1, V1, high-grade)
+
+-   04/19 - 07/19: Four cycles of adjuvant chemotherapy with
+    Gemcitabine/Cisplatin
+
+-   04/20: Initial diagnosis of liver metastases in Segment 6 and
+    Segment 7
+
+-   05/20 - 09/20: 10 cycles of immunotherapy with Nivolumab 240 mg
+    q14d.
+
+-   10/20 - 06/21: Third-line chemotherapy with Vinflunin (external),
+    resulting in hepatic progression
+
+-   01/21: Molecular tumor board: no evidence of a molecular target
+
+-   2013: Atrial fibrillation with ablation
+
+<!-- -->
+
+-   2010: pTCA stenting for acute myocardial infarction/CHD
+
+-   Soft tissue rheumatism
+
+-   Unclear thyroid nodule
+
+-   2012: Laparoscopic cholecystectomy
+
+-   Tonsillectomy (date unknown)
+
+-   01/2019: Left psoas abscess with detection of multisensitive
+    Staphylococcus aureus
+
+**Current Presentation:** Mr. Rudolph presented to out outpatient clinic
+on 06/29/2021, accompanied by his wife, in subjectively satisfactory
+condition. Given the negative PDL1 status and FGFR mutation status
+observed in our institution\'s molecular tumor board, Mr. Rudolph was
+now presented to us for reevaluation and discussion of further
+procedures.
+
+**External CT Thorax dated 06/07/2021: **
+
+**Findings:** The last relevant preliminary examination was conducted on
+03/03/2021. Currently, well-ventilated lungs bilaterally without
+tumor-typical findings or infiltrates. The bronchial system is clear. No
+pathologically enlarged lymph nodes in the mediastinum, hilar region, or
+axillae. Relatively pronounced atherosclerotic vascular calcifications,
+otherwise unremarkable imaging of the major pulmonary and mediastinal
+vessels. Normal dimensions of the cardiac chambers. No pericardial
+effusion or pleural effusion. Thyroid and esophagus appear normal. No
+osteolysis or spinal canal stenosis.
+
+**Assessment**: Continued absence of thoracic metastases.
+
+**External CT Abdomen dated 06/07/2021: **
+
+**Findings:** Comparison with CT Abdomen dated 03/03/2021. Significant
+progression of numerous, some large liver metastases in both liver
+lobes. For example, a formerly 4.2 x 2.5 cm measuring metastasis
+subcapsular in liver segment 7 has now increased to 5.8 x 3.6 cm. A
+formerly 1.2 x 1.1 cm measuring metastasis in liver segment 4a has
+increased to 3.3 x 2.4 cm. Portal vein and hepatic veins are properly
+contrasted. Post-cholecystectomy status. Unremarkable adrenal glands.
+Post-left nephrectomy. The right kidney is unremarkable. The spleen is
+unremarkable. The pancreas appears normal. Diverticula of the sigmoid
+and colon. No suspicious inguinal, iliac, retroperitoneal, or mesenteric
+lymph nodes.
+
+Assessment: Significant progression of numerous, some large liver
+metastases. Otherwise, no organ metastases. No lymph node metastases.
+Post-left nephrectomy.
+
+**Assessment**: The urological examination findings indicate progressive
+hepatic metastasized urothelial carcinoma originating from the left
+renal pelvis, despite third-line chemotherapy with Vinflunin. The
+findings were thoroughly discussed in the urological-interdisciplinary
+conference on 06/29/2021.
+
+[Recommendations for further procedures include:]{.underline}
+
+1.  Chemotherapy with Gemcitabine and Paclitaxel.
+
+2.  A best-supportive-care strategy with symptom-oriented approach and
+    possible palliative medical support.
+
+3.  After approval, a targeted therapy with Enfortumab Vedotin could be
+    considered if further tumor-specific treatment is desired.
+
+These recommendations were discussed with Mr. Rudolph and his wife
+during an outpatient uro-oncology consultation. Mr. Rudolph demonstrated
+adequate orientation regarding his medical condition, given the overall
+limited therapeutic options. A final decision on one of the proposed
+alternatives was not reached collectively, although Mr. Rudolph tended
+towards a watchful waiting approach due to perceived significant side
+effects from the previous third-line chemotherapy with Vinflunin.
+Therefore, we left the final recommendation open with a tendency towards
+the best-supportive-care strategy. A local palliative medicine
+outpatient connection was also recommended. According to the patient,
+there is a living will and a power of attorney for healthcare decisions
+in place.
+
+We have already provided feedback to the attending oncologist by phone.
+
+**Current Recommendations:**
+
+-   In the presence of apparent treatment fatigue in the patient, a
+    best-supportive-care strategy with a symptom-oriented approach and
+    potential initiation of chemotherapy with Gemcitabine and Paclitaxel
+    could be considered at the current time in an individualized
+    setting.
+
+-   We request the continuation of uro-oncological care by the attending
+    oncologist.
+
+-   After the medication Enfortumab-Vedotin is approved, a discussion of
+    this therapy can take place, depending on the patient\'s overall
+    condition and the desire for further tumor-specific treatment.
+
+**Medication upon Discharge: **
+
+  **Medication **           **Dosage**   **Frequency**
+  ------------------------- ------------ ---------------------
+  Aspirin                   100 mg       1-0-0
+  Bisoprolol (Zebeta)       50 mg        1/2-0-0
+  Pantoprazole (Protonix)   40 mg        1-0-0
+  Prednisolone (Prelone)    80 mg        According to scheme
+
+
+</text_4>
+<text_5>
+**Dear colleague, **
+
+We are reporting on the examination conducted on Mr. Rudolph, born on
+05/26/1954 on 08/26/2021.
+
+**Diagnosis**: Stenosis of the left subclavian artery
+
+**Other Diagnoses:**
+
+-   03/19: Left nephroureterectomy with the detection of urothelial
+    carcinoma of the renal pelvis and adrenal metastasis, pT3, pN0,
+    (0/11), M1 (ADR), pn1, L1, V1, high-grade
+
+-   04/19 - 07/19: Four cycles of adjuvant chemotherapy with
+    Gemcitabine/Cisplatin
+
+-   04/20: Newly emerged liver metastasis in Segment 6 and Segment 7
+
+-   05/20 - 09/20: 10 cycles of immunotherapy with Nivolumab 240 mg q14d
+
+<!-- -->
+
+-   2013: Atrial fibrillation with ablation
+
+-   2010: pTCA stenting for acute myocardial infarction/CHD
+
+-   Suspected activated soft tissue rheumatism (currently under
+    Prednisolone pulse therapy)
+
+-   Unclear thyroid nodule
+
+-   2012: Laparoscopic cholecystectomy
+
+-   Tonsillectomy
+
+-   01/2019: Left psoas abscess with detection of multisensitive
+    Staphylococcus aureus
+
+**Clinical Findings:**
+
+[Fist Closure Test:]{.underline} Color Doppler sonography of the
+shoulder-arm arteries: Bilateral triphasic flow in the subclavian
+arteries. Bilateral triphasic flow in the brachial arteries, even with
+arm elevation. Left vertebral artery shows orthograde flow, no flow
+reversal during overhead work.
+
+[Conclusion]{.underline}: Clinically and duplex sonographically, no
+subclavian stenosis can be demonstrated.
+
+Both hands are warm and rosy and show intact sensory-motor function. No
+hand claudication or dizziness provoked during overhead work.
+
+Pulse status: Bilateral palpable radial and ulnar arteries. Blood
+pressure on the right 160 mmHg systolic, on the left 190 mmHg systolic.
+
+Duplex: Bilateral subclavian arteries show triphasic flow. Bilateral
+brachial arteries show triphasic flow, even with arm elevation. Left
+vertebral artery demonstrates orthograde flow, with no flow reversal
+during overhead work.
+
+**Current Recommenations: **
+
+The evaluation is performed to assess a potential left subclavian
+stenosis with blood pressure side differences. Dizziness or arm
+claudication, especially during overhead work, is denied.
+
+
+</text_5>
+<text_6>
+**Dear colleague, **
+
+We report to you about Mr. Peter Rudolph, born on 05/26/1954, who was in
+our inpatient treatment from 02/22/2022 to 02/29/2022.
+
+**Diagnosis**: Symptomatic incisional hernia in the area of the old
+laparotomy scar (status post left nephroureterectomy in 03/19.
+
+**Other Diagnoses:**
+
+-   03/19: Left nephroureterectomy with the detection of urothelial
+    carcinoma of the renal pelvis and adrenal metastasis, pT3, pN0,
+    (0/11), M1 (ADR), pn1, L1, V1, high-grade
+
+-   04/19 - 07/19: Four cycles of adjuvant chemotherapy with
+    Gemcitabine/Cisplatin
+
+-   04/20: Newly emerged liver metastasis in Segment 6 and Segment 7
+
+-   05/20 - 09/20: 10 cycles of immunotherapy with Nivolumab 240 mg q14d
+
+<!-- -->
+
+-   2013: Atrial fibrillation with ablation
+
+-   2010: pTCA stenting for acute myocardial infarction/CHD
+
+-   Suspected activated soft tissue rheumatism (currently under
+    Prednisolone pulse therapy)
+
+-   Unclear thyroid nodule
+
+-   2012: Laparoscopic cholecystectomy
+
+-   Tonsillectomy
+
+-   01/2019: Left psoas abscess with detection of multisensitive
+    Staphylococcus aureus
+
+**Operation:** Alloplastic Incisional Hernia Repair in intubation
+anesthesia on 02/23/2022.
+
+**Current Presentation:** The patient was admitted for elective surgery
+after indications were assessed and preoperative preparation was
+conducted in our clinic for the above-mentioned diagnosis.
+
+**Therapy and Progression:** Following routine preoperative
+preparations, comprehensive informed consent, and premedication, we
+performed the aforementioned procedure on 02/23/2022 in uncomplicated
+ITN. There were no intraoperative complications.
+
+The postoperative inpatient course progressed normally with dry and
+non-irritated wound conditions. The drainage was timely removed as the
+drainage volume decreased. Full mobilization and intensive respiratory
+therapy exercises were initiated on the first postoperative day. Regular
+clinical and laboratory check-ups indicated a normal healing process.
+The diet was well tolerated, and the wounds healed primarily. We
+discharged Mr. Rudolph for further outpatient care on 02/29/2022.
+
+**Histology**: Skin/subcutaneous resection with scar fibrosis.
+Fibrolipomatous hernial sac with obstructed vessels. No evidence of
+malignancy.
+
+**Medication upon Admission:**
+
+  **Medication **       **Dosage**   **Frequency**
+  --------------------- ------------ ---------------
+  Aspirin               100 mg       1-0-0
+  Bisoprolol (Zebeta)   50 mg        1/2-0-0
+
+**Procedure:** From a surgical perspective, we request wound
+inspections. To prevent recurrence, avoid lifting heavy objects (\>5 kg)
+for the next 8-12 weeks. Please consistently wear the abdominal binder
+during the wound healing period (14 days). Additionally, avoid excessive
+abdominal pressure, especially during bowel movements.
+
+**Surgical Report: **
+
+**Diagnoses:**
+
+-   Extensive incisional hernia in the area of the transverse upper
+    abdominal laparotomy scar, with a history of: Left
+    nephroureterectomy with the detection of urothelial carcinoma of the
+    renal pelvis and adrenal metastasis, pT3, pN0, (0/11), M1 (ADR),
+    pn1, L1, V1, high-grade.
+
+-   04/19 - 07/19: Four cycles of adjuvant chemotherapy with
+    Gemcitabine/Cisplatin.
+
+-   04/20: Newly emerged liver metastasis in Segment 6 and Segment 7.
+
+-   05/20 - 09/20: 10 cycles of immunotherapy with Nivolumab 240 mg
+    q14d.
+
+**Type of Surgery:** Incisional Hernia Repair with Optilene Mesh (30 x
+30 cm), Adhesiolysis of the intestine
+
+**Anesthesia Type:** Intubation anesthesia
+
+**Report**: **Indication**: Mr. Rudolph presents with an extensive
+incisional hernia following a history of nephrectomy and pancreatic
+resection for clear cell renal cell carcinoma. The indication for hernia
+repair with mesh was made.
+
+**Operation**: The procedure was performed with the patient in a supine
+position and in ITN. Sterile preparation, draping, and perioperative
+antibiotic prophylaxis with Ampicillin/Sulbactam 3g were administered.
+Initially, a skin incision was made to the left of the existing
+transverse upper abdominal laparotomy scar, and a sparing spindly
+excision of the scar was performed. Dissection into the depth revealed
+the first hernia sac. This sac was dissected free and opened. Further
+lateral to the left, a very large additional hernia sac was found. This
+one was also completely dissected free and opened. The two hernia
+defects were connected only by a narrow isthmus of thinned abdominal
+wall fascia, which was cut, and the two hernia defects were united.
+Furthermore, another hernia sac was found laterally to the right in the
+area of the scar. Thus, the scar was opened across its entire width by
+extending the skin incision to the right. The right lateral hernia sac
+was also dissected free and opened. Now, the hernia sacs were removed
+one after the other (histology specimens). The epifascial adipose tissue
+was then mobilized so that the abdominal wall fascia was exposed and
+could serve as the base for the mesh to be placed. The three hernia
+defects were then closed with a total of three continuous sutures using
+Vicryl. This was done after the abdominal wall fascia was also dissected
+free intra-abdominally, where the intestines or large mesh adhered to
+the abdominal wall. After the hernia defects were now closed, the 30x30
+cm Optilene mesh was introduced after thorough irrigation and careful
+electrocoagulation for hemostasis. It was fixed tightly but without
+tension at the edges with Ethibond sutures of size 0. Subsequently, a
+Palisade suture was placed around the closed hernia defects using
+Prolene size 0 in a continuous technique. Final irrigation and
+hemostasis were performed. Four 12 Redon drains were placed in the
+wound, led out, and sutured. Subcutaneous sutures were made with Vicryl
+2-0. Skin sutures were placed with Nylon 3-0, followed by a sterile
+wound compression dressing.
+
+**Internal Histopathological Report**
+
+**Macroscopy:**
+
+-   Skin spindle: Fixed. Skin spindle measuring 9 x 0.5 x 1.5 cm with a
+    centrally located, slightly raised, and indurated scar.
+
+-   Hernia sac I: Fixed. Cap-shaped serosal lamella measuring 8 x 7.5 x
+    2 cm with a bulging cord-like fibrosis. The serosa is smooth and
+    shiny.
+
+-   Hernia sac II: Fixed. A 15 x 3 x 0.5 cm large, reddish-livid serosal
+    specimen with focal indurations, petechial hemorrhages, and adhesion
+    strands. Multiple cross-sections embedded.
+
+-   Hernia sac III: Fixed. A 3.5 x 1 x 0.3 cm serosal lamella with
+    scarred fibrosis. Processing: Blocks: 4, H&E. Microscopy:
+
+-   Skin/subcutaneous resection with scar fibrosis of the adjacent
+    stroma. 2-4. Fibrolipomatous tissue, superficially peritonealized.
+    Markedly congested blood vessels.
+
+**Critical Findings Report:** Skin/subcutaneous resection with scar
+fibrosis. 2-4. Fibrolipomatous hernia sac tissue with congested blood
+vessels. No evidence of malignancy.
+
+
+</text_6>
+<text_7>
+**Dear colleague, **
+
+We are writing to provide an update regarding Mr. Peter Rudolph, born on
+05/26/1954, who presented to our surgical outpatient clinic on
+03/04/2022.
+
+**Diagnoses**: Status post umbilical hernia repair 10 days ago.
+
+-   Extensive incisional hernia in the area of the transverse upper
+    abdominal laparotomy scar, with a history of: Left
+    nephroureterectomy with the detection of urothelial carcinoma of the
+    renal pelvis and adrenal metastasis, pT3, pN0, (0/11), M1 (ADR),
+    pn1, L1, V1, high-grade.
+
+-   04/19 - 07/19: Four cycles of adjuvant chemotherapy with
+    Gemcitabine/Cisplatin.
+
+-   04/20: Newly emerged liver metastasis in Segment 6 and Segment 7.
+
+-   05/20 - 09/20: 10 cycles of immunotherapy with Nivolumab 240 mg
+    q14d.
+
+**Medical History:** In March 2019, Mr. Rudolph underwent a
+nephroureterectomy with the detection of urothelial carcinoma of the
+renal pelvis. Subsequently, four cycles of adjuvant chemotherapy with
+Gemcitabine/Cisplatin were performed due to the detection of locally
+advanced urothelial carcinoma with primary metastasis to the left
+adrenal gland. The chemotherapy was well-tolerated overall. On
+02/22/2022, Mr. Rudolph presented with an extensive incisional hernia
+following a history of left nephroureterectomy. The indication for
+hernia repair with mesh was made.
+
+**Physical Examination**: Unremarkable scar, sutures in place.
+
+**Current Recommendation**: Follow-up appointment scheduled for Thursday
+(12th postoperative day) for suture removal and progress assessment.
+
+</text_7>
+</notes>
+</patient-record-patient_10>
+
+<patient-record-patient_11>
+Below is patient Bruno Hurley's medical record (ID: patient_11). 
+They were born on 12/24/1965 and have the following diagnosis: AML.
+The patients medical record consists of 4 notes included below.
+<notes>
+<text_0>
+**Dear colleague, **
+
+We are reporting on Mr. Bruno Hurley, born on 12/24/1965, who has been
+under our outpatient treatment since 02/11/2020.
+
+**Diagnoses:**
+
+-   Refractory tuberculosis
+
+-   Manifestations: Open pulmonary tuberculosis, lymph node tuberculosis
+    (cervical, hilar, mediastinal), liver tuberculosis
+
+**Imaging:**
+
+-   11/01/19 Chest CT: Mediastinal lymph node conglomerate centrally
+    with poststenotic infiltrates on both sides. Splenomegaly.
+
+-   11/04/19 Bronchoscopy: Large mediastinal and right hilar lymphomas.
+    Subcritical constriction of right segmental bronchi. EBUS-TBNA LK4R
+    and 10/11R.
+
+**Microbiology:**
+
+-   11/04/19 Tracheobronchial Secretions: Microscopic detection of
+    acid-fast rods, cultural detection of Mycobacterium tuberculosis,
+    phenotypically no evidence of resistance.
+
+**Therapy:**
+
+-   Initial omission of pyrazinamide due to pancytopenia.
+
+-   Moxifloxacin: 11/10/19-11/20/19
+
+-   Pyrazinamide: 11/20/19-02/11/20
+
+-   Ethambutol: 11/08/19-02/11/20
+
+-   Rifampicin since: 11/08/19
+
+-   Isoniazid since: 11/08/19
+
+-   Levofloxacin since: 02/11/20
+
+-   Immunomodulatory therapy for low basal interferon / interferon
+    levels (ACTIMMUNE®)
+
+**Microbiology:**
+
+-   01/20/20 Sputum: Cultural detection of Mycobacterium tuberculosis:
+    Phenotypically no evidence of resistance.
+
+-   01/02/20 Sputum: Last cultural detection of Mycobacterium
+    tuberculosis.
+
+-   06/15/20 BAL: Occasional acid-fast rods, 16S-rRNA-PCR: M.
+    tuberculosis complex, no cultural evidence of Mycobacteria.
+
+-   06/15/20 Lung biopsy: Occasional acid-fast rods, no cultural
+    evidence of Mycobacteria.
+
+-   03/12/21 Sputum: first sputum without acid-fast rods, consistently
+    microscopically negative sputum samples since then.
+
+**Histology:**
+
+-   07/16/21: Mediastinal lymph node biopsy: Histologically no evidence
+    of malignancy/lymphoma.
+
+**Other Diagnoses: **
+
+-   Secondary Acute Myeloid Leukemia with Myelodysplastic Syndrome
+
+-   Blood count at initial diagnosis: 15% blasts, erythrocyte
+    substitution required.
+
+**Therapy:**
+
+-   12/20-03/21 TB therapy
+
+-   02/20-01/21 TB therapy: RMP + INH + FQ
+
+-   01/21-04/21 RMP + INH + FQ + Actimmune® 04/22 CT: Regressive
+    findings of pulmonary TB changes, regressive cervical lymph nodes,
+    mediastinal LAP, and liver lesions size-stable; Sputum: No acid-fast
+    rods detected for the first time since 03/21.
+
+-   BM aspiration: Secondary AML.
+
+**Current Presentation:** Admission for allogeneic stem cell
+transplantation
+
+Pathogen Location / Material of Detection or Infection Month/Year or
+Last Detection
+
+-   HIV Serology: Negative - 11/19
+
+-   Mycobacterium tuberculosis Complex: Bronchoalveolar Lavage,
+    Tracheobronchial Secretion, Sputum - 11/19
+
+**Medical History:** We took over Mr. Hurley for the continuation of TB
+therapy on 11/02/20. His hospital admission took place at the end of
+October 2019 due to neutropenic fever. The patient reported temperatures
+up to 39°C for the past 3 days. Since 08/19, the patient has been
+receiving hematological-oncological treatment for MDS. The colleagues
+from hematology performed a repeat bone marrow aspiration before
+transferring to Station 12. The blast percentage was significantly
+reduced. HLA typing of the brother for allogeneic stem cell
+transplantation planning had already been done in the summer of 2019.
+After a chest CT revealed extensive mediastinal lymphomas with
+compression of the bronchial tree bilaterally and post-stenotic
+infiltrates, a bronchoscopy was performed. M. tuberculosis was cultured
+from sputum and TBS. An EBUS-guided lymph node biopsy was histologically
+processed, revealing granulomatous inflammation and molecular evidence
+of the M. tuberculosis complex. On 11/08/19, a four-drug
+anti-tuberculosis therapy was initiated, initially with Moxifloxacin
+instead of Pyrazinamide due to pancytopenia. Moxifloxacin was replaced
+by Pyrazinamide on 11/20/19. The four-drug therapy was continued for a
+total of 3 months due to prolonged microscopic evidence of acid-fast
+rods in follow-up sputum samples. Isoniazid dosage was adjusted after
+peak level control (450 mg q24h), as was Rifampicin dose (900 mg q24h).
+On 01/02/20, Mycobacterium tuberculosis was last cultured in a sputum
+sample. Nevertheless, acid-fast rods continued to be detected in the
+sputum. Due to the lack of culturability of mycobacteria, Mr. Hurley was
+discharged to home care after consultation with the Tuberculosis Welfare
+Office.
+
+**Allergies**: None known. Toxic Substances: Smoking: Non-smoker;
+Alcohol: No; Drugs: No
+
+**Social History:** Originally from Brazil, has been living in the US
+for 8 years. Lives with his partner.
+
+**Current lab results:**
+
+  **Parameter**                            **Results**    **Reference Range**
+  ---------------------------------------- -------------- ---------------------
+  ConA-Induced Cytokines (Th1/Th2)                        
+  Interleukin 10                           10 pg/mL       \< 364 pg/mL
+  Interferon Gamma                                        265-6781 pg/mL
+  Interleukin 2                            74 pg/mL       43-374 pg/mL
+  Interleukin 4                            13 pg/mL       \< 34 pg/mL
+  Interleukin 5                            3 pg/mL        \< 55 pg/mL
+  Naive CD45RA+CCR7+ (% of CD8+)           6.35 %         8.22-59.58 %
+  TEMRA CD45RA+CCR7- (% of CD8+)           50.44 %        7.32-55.99 %
+  Central Memory CD45RA-CCR7+ (% of CD)    2.60 %         1.67-5.84 %
+  Effector Memory CD45RA-CCR7- (% of CD)   40.60 %        22.52-62.25 %
+  Naive CD45RA+ (% of CD4+)                26.26 %        17.46-60.24 %
+  TEMRA CD45RA+ CCR7- (% of CD4+)          1.26 %         2.74-15.54 %
+  Central Memory CD45RA-CCR7+ (% of CD)    34.21 %        16.40-33.41 %
+  Effector Memory CD45RA-CCR7- (% of CD)   38.28 %        17.38-40.38 %
+  Granulocytes                             0.60 abs./nL   3.00-6.50 abs./nL
+  Granulocytes (relative)                  45 %           50-80 %
+  Lymphocytes                              0.57 abs./nL   1.50-3.00 abs./nL
+  Lymphocytes (relative)                   43 %           20-40 %
+  Monocytes                                0.13 abs./nL   \<0.50 abs./nL
+  Monocytes (relative)                     10 %           2-10 %
+  NK Cells                                 0.16 abs./nL   0.10-0.40 abs./nL
+  NK Cells (% of Lymphocytes)              29             5-25
+  γ/δ TCR+ T-Cells (relative)              2 %            \< 10 %
+  α/β TCR+ T-Cells (relative)              98 %           \>90 %
+  CD19+ B-Cells (% of Lymphocytes)         3 %            5-25 %
+  CD4/CD8 Ratio                            0.9 %          1.1-3.0 %
+  CD8-CD4-T-Cells (% of T-Cells)           5.86 %         \< 15.00 %
+  CD8+CD4+-T-Cells (% of T-Cells)          0.74 %         \< 10.00 %
+  CD3+ T-Cells                             0.38 abs./nL   0.90-2.20 abs./nL
+
+  **Parameter**                                      **Results**      **Reference Range**
+  -------------------------------------------------- ---------------- ---------------------
+  Complete Blood Count (EDTA)                                         
+  Hemoglobin                                         6.6 g/dL         13.5-17.0 g/dL
+  Hematocrit                                         19.0 %           39.5-50.5 %
+  Erythrocytes                                       2.3 x 10\^6/uL   4.3-5.8 x 10\^6/uL
+  Platelets                                          61 x 10\^3/uL    150-370 x 10\^3/uL
+  MCV (Mean Corpuscular Volume)                      81.5 fL          80.0-99.0 fL
+  MCH (Mean Corpuscular Hemoglobin)                  28.3 pg          27.0-33.5 pg
+  MCHC (Mean Corpuscular Hemoglobin Concentration)   34.7 g/dL        31.5-36.0 g/dL
+  MPV (Mean Platelet Volume)                         10.4 fL          7.0-12.0 fL
+  RDW-CV (Red Cell Distribution Width-CV)            12.7 %           11.5-15.0 %
+
+  **Parameter**              **Results**   **Reference Range**
+  -------------------------- ------------- ---------------------
+  Other Investigations                     
+  QFT-TB Gold plus TB1       0.11 IU/mL    \<0.35 IU/mL
+  QFT-TB Gold plus TB2       0.07 IU/mL    \<0.35 IU/mL
+  QFT-TB Gold plus Mitogen   3.38 IU/mL    \>0.50 IU/mL
+  QFT-TB Gold plus Result    Negative      
+
+**Lung Aspiration from 06/15/20:** Examination Request: Acid-fast rods
+(Microscopy + Culture) **Microscopic Findings:**
+
+-   Auramine stain: Occasionally, acid-fast rods Result: No growth of
+    Mycobacterium sp. after 12 weeks of incubation.
+
+2.  Forceps Biopsy Exophytic Trachea: One piece of tissue. Microscopy:
+    HE, PAS, Giemsa, Diagnosis:
+
+3.  Predominantly blood clot and necrotic material alongside sparsely
+    altered lymphatic tissue due to sampling (EBUS-TBNA LK 7 as
+    indicated).
+
+4.  Components of a granulation tissue polyp (Forceps Biopsy Exophytic
+    Trachea as indicated). Comment: The finding in 1. continues to be
+    suspicious of a mycobacterial infection. We are conducting molecular
+    pathological examinations in this regard and will report again.
+
+> [Comment]{.underline}: Detection of mycobacterial DNA of the M.
+> tuberculosis complex type. No evidence of atypical mycobacteria. No
+> evidence of malignancy.
+
+**Current Medication:**
+
+  **Medication**            **Dosage**   **Frequency**
+  ------------------------- ------------ ---------------
+  Rifampin (Rifadin)        600 mg       1-0-0
+  Isoniazid (Nydrazid)      500 mg       1-0-0
+  Levofloxacin (Levaquin)   450 mg       1-0-1
+
+**\
+**
+
+
+</text_0>
+<text_1>
+**Dear colleague, **
+
+We report to you about our patient Mr. Bruno Hurley, born on 12/24/1965.
+
+Who has received inpatient treatment from 07/17/2021 to 09/03/2021.
+
+**Diagnoses**:
+
+-   Acute Myeloid Leukemia with Myelodysplasia-Related Changes (AML-MRC)
+
+<!-- -->
+
+-   Myelodysplastic Syndrome EB-2, diagnosed in July 2010. Blood count
+    at initial diagnosis: 15% blasts, erythrocyte transfusion-dependent.
+    Cytogenetics: 46,XY \[1\]; 47,XY,+Y,i(21)(q10)\[15\];
+    47,XY,+Y,trp(21)(q11q22)\[4\]. Molecular genetics: Mutations in
+    RUNX1, SF3B1. IPSS-R: 7 (very high risk).
+
+-   In 08/2020, diagnosed with Myelodysplastic Syndrome with ring
+    sideroblasts.
+
+-   Received transfusions of 2 units of red blood cells every 3-4 weeks
+    to maintain hemoglobin between 4-6 g/dL.
+
+-   Bone marrow biopsy showed MDS-EB2 with 14.5% blasts.
+
+-   Initiated Azacitidine treatment (2x 75 mg subcutaneously, days 1-5 +
+    8-9 every 4 weeks) as an outpatient.
+
+-   10/23/2019: Hospitalized for fever during neutropenia.
+
+-   12/06/2019: Diagnosed with tuberculosis - positive Tbc-PCR in
+    tracheobronchial secretions, acid-fast bacilli in tracheobronchial
+    secretions, histological confirmation from EBUS biopsy of a
+    conglomerate of melted lymph nodes from 11/03/2019.
+
+-   01/2021: Bone marrow biopsy showed secondary AML with 26% blasts.
+
+-   03/2021: Started Venetoclax/Vidaza.
+
+-   05/2021: Bone marrow biopsy showed 0.8% myeloid blasts coexpressing
+    CD117 and CD7. Cytology showed 6% blasts.
+
+-   05/2021: Started the 4th cycle of Vidaza/Venetoclax.
+
+-   06/17/2022: Started the 5th cycle of Vidaza/Venetoclax.
+
+-   07/29/2021: Underwent allogeneic stem cell transplantation from a
+    HLA-identical unrelated donor (10/10 antigen match) for AML-MRC in
+    first complete remission (CR). Conditioning regimen included
+    Treosulfan 12g/m2, Fludarabin 5x 30 mg/m2, ATG 3x 10 mg/kg.
+
+**Other Diagnoses:**
+
+-   Persistent tuberculosis with lymph node swelling since June 2020.
+
+-   Open lung tuberculosis diagnosed in November 2019.
+
+    -   Location: CT of the chest showed central mediastinal lymph node
+        conglomerate with post-stenotic infiltrates bilaterally,
+        splenomegaly.
+
+    -   Bronchoscopy on December 5, 2020, showed large mediastinal and
+        right hilar lymph nodes, subcritical narrowing of right
+        segmental bronchi. EBUS-TBNA
+
+    -   CT Chest/Neck on 02/05/2020: Regression of pulmonary
+        infiltrates, enlargement of necrotic lymph nodes in the upper
+        mediastinum and infraclavicular on the right (compressing the
+        internal jugular vein/esophagus).
+
+    -   Culture confirmation of Mycobacterium tuberculosis,
+        pansensitive: Tracheobronchial secretion
+
+    -   Initiated antituberculous combination therapy
+
+**Current Presentation:** Admission for allogeneic stem cell
+transplantation from a HLA-identical unrelated donor (10/10 antigen
+match) for AML-MRC in first complete remission.
+
+**Medical History:** In 2019, Mr. Hurley was diagnosed with
+Myelodysplastic Syndrome EB-2. Starting from September 2019, he received
+Azacitidine therapy. In December 2020, he was diagnosed with open lung
+tuberculosis, which was challenging to treat due to his dysfunctional
+immune system. In January 2021, his MDS progressed to AML-MRC with 26%
+blasts. After treatment with Venetoclax/Vidaza, he achieved remission in
+May 2021. Tuberculosis remained largely under control.
+
+Due to AML-MRC, he was recommended for allogeneic stem cell
+transplantation from a HLA-identical unrelated donor. At the time of
+admission for transplantation, he was largely asymptomatic. He
+occasionally experienced mild dry cough but denied fever, night sweats,
+or weight loss. The admission and counseling were conducted with
+translation assistance from his life partner due to limited proficiency
+in English.
+
+**Allergies**: None
+
+**Transfusion History**: Currently requires transfusions every 14 days.
+Both red blood cell and platelet transfusions have been tolerated
+without problems.
+
+**Abdominal CT from 01/20/2021:**
+
+**Findings**: Significant peripancreatic fluid accumulation in the upper
+abdominal area with a somewhat indistinct border between the pancreatic
+tissue, particularly in the pancreatic head region. Evidence of
+inflammation affecting the stomach and duodenum. No presence of free air
+or indications of hollow organ perforation. No conclusive signs of a
+well-defined abscess. Moreover, the other parenchymal abdominal organs,
+especially those lacking focal abnormalities suggestive of neoplastic or
+inflammatory conditions, displayed normal appearances. The gallbladder
+showed no notable issues, and there were no radiopaque concretions
+observed. Both the intra- and extrahepatic bile ducts appeared
+adequately dilated. Abdominal hollow organs exhibited unremarkable and
+normal appearances without corresponding contrast and dilation. The
+appendix appeared within normal parameters. Abdominal lymph nodes showed
+no unusual findings. Some degree of aortic vasosclerosis was noted. The
+depiction of the included lung portions revealed no abnormalities.
+
+**Results**: Findings indicative of acute pancreatitis, most likely of
+an exudative nature. No signs of hollow organ perforation were detected,
+and there was no definitive evidence of an abscess (as far as could be
+determined from native imaging).
+
+**Summary**: The patient was admitted to our hospital through the
+emergency department with the symptoms described above. With typical
+upper abdominal pain and significantly elevated serum lipase levels, we
+diagnosed acute pancreatitis. This diagnosis was corroborated by
+peripancreatic fluid and ill-defined organ involvement in the abdominal
+CT scan. There were no laboratory or anamnestic indications of a biliary
+origin. The patient denied excessive alcohol consumption.
+
+**Medication upon Admission:**
+
+  **Medication**            **Dosage**   **Frequency**
+  ------------------------- ------------ ---------------
+  Rifampin (Rifadin)        600 mg       1-0-0
+  Isoniazid (Nydrazid)      500 mg       1-0-0
+  Levofloxacin (Levaquin)   450 mg       1-0-1
+
+**Physical Examination:** General: Oriented in all qualities, in good
+general condition with normal body weight (75 kg, 187 cm) Vital signs at
+admission: Heart rate 63/min, Blood pressure 110/78 mmHg. Temperature at
+admission 36.8 °C, Oxygen saturation 100% on room air. Skin and mucous
+membranes: Dry skin, normal skin color, normal skin turgor. No scleral
+icterus, non-irritated conjunctiva. Normal oral mucosa, moist tongue
+without coating, no ulcers or thrush. Heart: Normal heart sounds,
+rhythmic, regular rate, no pathological heart murmurs heard on
+auscultation. Lungs: Resonant percussion sound, clear breath sounds
+bilaterally, no wheezing, no prolonged expiration. Abdomen: Unremarkable
+scar tissue, normal bowel sounds in all quadrants, soft, non-tender, no
+guarding, liver and spleen not enlarged. Vascular: Central and
+peripheral pulses palpable, no jugular vein distention, no peripheral
+edema, extremities warm with no significant difference in size. Lymph
+nodes: Palpable cervical swelling, inguinal and axillary lymph nodes
+unremarkable. Neurology: Grossly neurologically unremarkable.
+
+On 08/22/2021, a four-lumen central venous catheter was placed in the
+right internal jugular vein without complications. During the
+conditioning regimen, the patient received the following:
+
+  **Medication**                                 **Dosage**             **Frequency**
+  ---------------------------------------------- ---------------------- -------------------------
+  Fludarabine (Fludara)                          30 mg/m² (5x 57 mg)    07/23/2023 - 07/27/2023
+  Treosulfan (Ovastat)                           12 g/m² (3x 22.9 g)    07/23/2023 - 07/25/2023
+  Anti-Thymocyte Globulin (ATG, Thymoglobulin)   10 mg/kg (3x 700 mg)   07/23/2023 - 07/28/2023
+
+**Antiemetic Therapy:**
+
+The antiemetic therapy included Ondansetron, Aprepitant, and
+Dexamethasone, and the conditioning regimen was well tolerated.
+
+**Prophylaxis of Graft-Versus-Host Disease (GvHD):**
+
+  **Substances**   **Start Date**   **Day -2**   **Day 1**
+  ---------------- ---------------- ------------ -----------
+  Cyclosporine     08/28/2022                    
+  Mycophenolate                     07/30/2021   
+
+  **Stem Cell Source**   **Date**     **CD34/kg KG**   **CD45/kg KG**   **CD3/kg KG**   **Volume**
+  ---------------------- ------------ ---------------- ---------------- --------------- ------------
+  PBSCT                  07/29/2021   7.39 x10\^6      8.56 x10\^8      260.7 x10\^6    194 ml
+
+**Summary:** Mr. Hurley was admitted for allogeneic stem cell
+transplantation from a HLA-identical unrelated donor for AML-MRC. The
+conditioning regimen with Treosulfan, Fludarabin, and ATG was well
+tolerated, and the transplantation proceeded without complications.
+
+**Toxicities:** There was an adverse event-related increase in bilirubin
+levels, reaching a maximum of 2.68 mg/dL. Elevated ALT levels, up to a
+maximum of 53 U/L, were observed.
+
+**Acute Graft-Versus-Host Disease (GvHD):** Signs of GvHD were not
+observed until the time of discharge.
+
+**Medication upon Discharge:**Formularbeginn
+
+  **Medication **                    **Dosage**   **Frequency**
+  ---------------------------------- ------------ ------------------------------------------------
+  Acyclovir (Zovirax)                500 mg       1-0-1-0
+  Entecavir (Baraclude)              0.5 mg       1-0-0-0
+  Rifampin (Rifadin)                 600 mg       1.5-0-0-0
+  Isoniazid/Pyridoxine (Nydrazid)    300 mg       2-0-0-0
+  Levofloxacin (Levaquin)            500 mg       1-0-1-0
+  Mycophenolate Mofetil (CellCept)   500 mg       2-0-2-0
+  Folic Acid                         5 mg         1-0-0-0
+  Magnesium                          \--          3-3-3-0
+  Pantoprazole (Protonix)            40 mg        1-0-0-0 (before a meal)
+  Ursodeoxycholic Acid (Actigall)    250 mg       1-1-1-0
+  Cyclosporine (Sandimmune) 100 mg   100 mg       4-0-4-0
+  Cyclosporine (Sandimmune) 50 mg    50 mg        4-0-4-0 (based on TDM, last dose 400 mg 1-0-1)
+  Cyclosporine (Sandimmune) 10 mg    10 mg        4-0-4-0 (based on TDM, last dose 400 mg 1-0-1)
+
+**Current Recommendations: **
+
+1.  Bone marrow puncture on Day +60, +120, and +360 post-transplantation
+    (including MRD and chimerism) and Day +180 depending on MRD and
+    chimerism progression.
+
+2.  Continuation of immunosuppressive therapy with ciclosporin adjusted
+    to achieve target levels of around 150 ng/ml, for a minimum of 3
+    months post-transplantation. Immunosuppression with mycophenolate
+    mofetil will be continued until Day +40.
+
+3.  Prophylaxis with Aciclovir must continue for 6 weeks after
+    discontinuation of immunosuppression at a dosage of 15-20 mg/kg/day
+    (divided into 2 doses). Dose adjustment based on renal function may
+    be necessary.
+
+4.  Pneumocystis pneumonia prophylaxis through monthly Pentamidine
+    inhalation or administration of Cotrim forte 960mg must continue at
+    least until immunosuppression is discontinued or until an absolute
+    CD4+ T-cell count exceeds \>200/µL in peripheral blood. Cotrim forte
+    960mg has not been started when leukocytes are \<2/nL.
+
+5.  Weekly monitoring of CMV and EBV viral loads through quantitative
+    PCR from EDTA blood.
+
+6.  Timing of antituberculous medication intake:
+
+-   Take Rifampicin and Isoniazid in the morning on an empty stomach, 30
+    minutes before breakfast.
+
+-   Take levofloxacin with a 2-hour gap from divalent cations (Mg2+,
+    strongly calcium-rich foods).
+
+**Lab results upon Discharge:**
+
+  **Parameter**                  **Result**           **Reference Range**
+  ------------------------------ -------------------- ---------------------
+  Cyclosporine                   127.00 ng/mL         \--
+  Sodium                         141 mEq/L            136-145 mEq/L
+  Potassium                      4.1 mEq/L            3.5-4.5 mEq/L
+  Glucose                        108 mg/dL            60-110 mg/dL
+  Creatinine                     0.65 mg/dL           0.70-1.20 mg/dL
+  Estimated GFR (eGFR CKD-EPI)   111 mL/min/1.73 m²   \--
+  Urea                           26 mg/dL             17-48 mg/dL
+  Total Bilirubin                0.35 mg/dL           \<1.20 mg/dL
+
+**Complete Blood Count **
+
+  **Parameter**   **Results**       **Reference Range**
+  --------------- ----------------- -----------------------
+  Hemoglobin      9.5 g/dL          13.5-17.0 g/dL
+  Hematocrit      28.2%             39.5-50.5%
+  Erythrocytes    3.2 x 10\^6/µL    4.3-5.8 x 10\^6/µL
+  Leukocytes      1.47 x 10\^3/µL   3.90-10.50 x 10\^3/µL
+  Platelets       193 x 10\^3/µL    150-370 x 10\^3/µL
+  MCV             88.7 fL           80.0-99.0 fL
+  MCH             29.9 pg           27.0-33.5 pg
+  MCHC            33.7 g/dL         31.5-36.0 g/dL
+  MPV             9.8 fL            7.0-12.0 fL
+  RDW-CV          18.9%             11.5-15.0%
+
+
+</text_1>
+<text_2>
+**Dear colleague, **
+
+We report on Mr. Bruno Hurley, born on 12/24/1965, who was under our
+inpatient care from 2/20/2022, to 02/24/2022.
+
+**Diagnoses:**
+
+-   Acute Pancreatitis, possibly medication-related under antitubercular
+    therapy.
+
+-   Current medications include Entecavir, Rifampicin, and
+    Isoniazid/Pyridoxin, which have been paused after consultation with
+    the infectious disease team.
+
+**Other Diagnoses:**
+
+-   Acute Myeloid Leukemia with Myelodysplasia-Related Changes (AML-MRC)
+
+-   Myelodysplastic Syndrome EB-2
+
+-   Allogeneic stem cell transplantation
+
+-   EBV Reactivation (Treated with immunoglobulins for 3 days)
+
+-   Persistent Tuberculosis with lymph node swelling
+
+-   Open Lung Tuberculosis - Initial Diagnosis
+
+-   Antitubercular combination therapy since (Moxifloxacin, Pyrazinamid,
+    Ethambutol, Rifampicin, Isoniazid).
+
+-   Rectal colonization with 4-MRGN.
+
+**Medical History:** The patient presented via ambulance from his
+workplace. The patient reported sudden onset upper abdominal pain,
+mainly in the epigastric region, accompanied by nausea and vomiting. He
+also experienced watery diarrhea once today. He had lunch around noon,
+consisting noodles. There was no fever, cough, sputum production,
+dyspnea, or urinary abnormalities. He has been taking daily
+antitubercular combination therapy, including Rifampicin, for open
+tuberculosis. The patient denied alcohol consumption and weight loss.
+
+  **Medication**                            **Dosage**   **Frequency**
+  ----------------------------------------- ------------ ----------------------------
+  Acyclovir (Zovirax)                       400 mg       1-0-1
+  Entecavir (Baraclude)                     0.5 mg       1-0-0
+  Rifampin (Rifadin)                        600 mg       1.5-0-0
+  Isoniazid/Pyridoxine (Nydrazid)           300 mg       1-0-1
+  Pantoprazole (Protonix)                   40 mg        1-0-0
+  Trimethoprim/Sulfamethoxazole (Bactrim)   960 mg       1 tablet, on Mon, Wed, Fri
+  Methylprednisolone (Medrol)               0.79 mg      As needed
+  Prednisolone                              4 mg         As needed
+
+**Allergies:** None
+
+**Physical Exam:**
+
+Vital Signs: Blood Pressure 178/90 mmHg, Pulse 85/min, SpO2 89%,
+Temperature 36.7°C, Respiratory Rate 20/min.
+
+Clinical Status: Upon initial examination, a reduced general condition.
+
+Cardiovascular: Heart sounds were normal, rhythm was regular, and no
+murmurs were heard.
+
+Respiratory: Vesicular breath sounds, sonorous percussion.
+
+Abdominal: Sluggish peristalsis, soft abdominal walls, guarding and
+tenderness in the epigastrium, liver and spleen not palpable, no free
+fluid.
+
+Extremities: Minimal edema.
+
+**ECG Findings:** ECG on admission showed normal sinus rhythm (69/min),
+normal ST intervals, R/S transition in V3/V4, and no significant
+abnormalities.
+
+´
+
+**Medication upon Discharge:**
+
+  **Medication **                           **Dosage**   **Frequency**
+  ----------------------------------------- ------------ ----------------------------
+  Acyclovir (Zovirax)                       400 mg       1-0-1
+  Entecavir (Baraclude)                     0.5 mg       PAUSED
+  Rifampin (Rifadin)                        600 mg       PAUSED
+  Isoniazid/Pyridoxine (Nydrazid)           300 mg       PAUSED
+  Pantoprazole (Protonix)                   40 mg        1-0-0
+  Trimethoprim/Sulfamethoxazole (Bactrim)   960 mg       1 tablet, on Mon, Wed, Fri
+  Methylprednisolone (Medrol)               0.79 mg      As needed (as needed)
+  Prednisolone                              4 mg         As needed (as needed)
+  Tramadol (Ultram)                         50 mg        1 tablet, every 6 hours
+
+  **Parameter**             **Results**       **Reference Range**
+  ------------------------- ----------------- -----------------------
+  White Blood Cells (WBC)   5.0 x 10\^9/L     3.7 - 9.9 x 10\^9/L
+  Hemoglobin                14.0 g/dL         13.6 - 17.5 g/dL
+  Hematocrit                40%               40 - 53%
+  Red Blood Cells (RBC)     4.00 x 10\^12/L   4.4 - 5.9 x 10\^12/L
+  MCV                       99 fL             80 - 96 fL
+  MCH                       32.8 pg           28.3 - 33.5 pg
+  MCHC                      33.1 g/dL         31.5 - 34.5 g/dL
+  Platelets                 161 x 10\^9/L     146 - 328 x 10\^9/L
+  Absolute Neutrophils      3.7 x 10\^9/L     1.8 - 6.2 x 10\^9/L
+  Absolute Monocytes        0.31 x 10\^9/L    0.25 - 0.85 x 10\^9/L
+  Absolute Eosinophils      0.03 x 10\^9/L    0.03 - 0.44 x 10\^9/L
+  Absolute Basophils        0.01 x 10\^9/L    0.01 - 0.08 x 10\^9/L
+  Absolute Lymphocytes      0.9 x 10\^9/L     1.1 - 3.2 x 10\^9/L
+  Immature Granulocytes     0.0 x 10\^9/L     0.0 x 10\^9/L
+
+
+</text_2>
+<text_3>
+**Dear colleague, **
+
+We are writing to inform you on our patient, Mr. Hurley, who presented
+to our outpatient clinic on 07/12/2022.
+
+**Diagnoses:**
+
+-   Acute Pancreatitis, possibly medication-related under antitubercular
+    therapy.
+
+-   Current medications include Entecavir, Rifampicin, and
+    Isoniazid/Pyridoxin, which have been paused after consultation with
+    the infectious disease team.
+
+**Other Diagnoses:**
+
+-   Acute Myeloid Leukemia with Myelodysplasia-Related Changes (AML-MRC)
+
+-   Myelodysplastic Syndrome EB-2
+
+-   Allogeneic stem cell transplantation
+
+-   EBV Reactivation (Treated with immunoglobulins for 3 days)
+
+-   Persistent Tuberculosis with lymph node swelling
+
+-   Open Lung Tuberculosis - Initial Diagnosis
+
+-   Antitubercular combination therapy since (Moxifloxacin, Pyrazinamid,
+    Ethambutol, Rifampicin, Isoniazid).
+
+-   Rectal colonization with 4-MRGN.
+
+**Current Presentation:** Presented with a referral from outpatient
+oncologist for suspected recurrent AML, with DD GvHD ITP in the setting
+of progressive pancytopenia, primarily thrombocytopenia. The patient is
+in good general condition, denying acute symptoms, particularly no rash,
+diarrhea, dyspnea, or fever.
+
+**Physical Examination:** Alert, oriented, no signs of respiratory
+distress, heart sounds regular, abdomen soft, no tenderness, no skin
+rashes, especially no signs of GvHD, no edema.
+
+-   Heart Rate (HR): 130/85
+
+-   Temperature (Temp): 36.7°C
+
+-   Oxygen Saturation (SpO2): 97
+
+-   Respiratory Rate (AF): 12
+
+-   Pupillary Response: 15
+
+**Imaging (CT):**
+
+-   [11/04/19 CT Chest/Abdomen/Pelvis ]{.underline}
+
+-   [01/04/20 Chest CT:]{.underline} Marked necrotic lymph nodes hilar
+    right with bronchus and vascular stenosis. Significant increasing
+    pneumonic infiltrates predominantly on the right.
+
+-   [02/05/20 Neck/Chest CT]{.underline}: Regression of pulmonary
+    infiltrates, but increased size of necrotic lymph nodes, especially
+    in the upper mediastinum and right infraclavicular with slit-like
+    compression of the right internal jugular vein and the esophagus.
+
+-   [06/07/20 Neck/Chest CT]{.underline}: Size-stable necrotic lymph
+    node conglomerate infraclavicular right, dimensioned axially up to
+    about 6 x 2 cm, with ongoing slit-shaped compression of the right
+    internal jugular vein. Hypoplastic mastoid cells left, idem.
+    Progressive, partly new and large-volume consolidations with
+    adjacent ground glass infiltrates on the right in the anterior, less
+    posterior upper lobe and perihilar. Inhomogeneous, partially reduced
+    contrast of consolidated lung parenchyma, broncho pneumogram
+    preserved dorsally only.
+
+-   [10/02/20 Neck/Chest/Abdomen/Pelvis CT:]{.underline} Size-regressive
+    consolidating infiltrate in the right upper lobe and adjacent
+    central lower lobe with increasing signs of liquefaction.
+    Progressive right pleural effusion and progressive signs of
+    pulmonary volume load. Regressive cervical, mediastinal, and right
+    hilar lymphadenopathy. Ongoing central hilar conglomerates that
+    compress the central hilar structures. Partly constant, partly
+    regressive presentation of known tuberculosis-suspected liver
+    lesions.
+
+-   [12/02/20 CT Chest/Abdomen/Pelvis]{.underline}.
+
+-   [01/20/2021 Abdominal CT.]{.underline}
+
+-   [02/23/21 Neck/Chest CT:]{.underline} Slightly regressive/nodular
+    fibrosing infiltrate in the right upper lobe and adjacent central
+    lower lobe with continuing significant residual findings. Within the
+    infiltrate, larger poorly perfused areas with cavitations and
+    scarred bronchiectasis. Increasing, partly patchy densities on the
+    left basal region, differential diagnoses include infiltrates and
+    ventilation disorders. Essentially constant cervical, mediastinal,
+    and hilar lymphadenopathy. Constant liver lesions in the upper
+    abdomen, differential diagnoses include TB manifestations and cystic
+    changes.
+
+-   [06/12/21 Neck/Chest/Abdomen/Pelvis CT:]{.underline} Improved
+    ventilation with regressive necrotic TB manifestations perihilar,
+    now only subtotal lobar atelectasis. Essentially constant necrotic
+    lymph node manifestations cervical, mediastinal, and right hilar,
+    exemplarily suprasternal right or right paratracheal. Narrow right
+    pleural effusion. Medium-term constant hypodense liver lesions
+    (regressive).
+
+**Patient History:** Known to have AML with myelodysplastic changes,
+first diagnosed 01/2021, myelodysplastic syndrome EB-2, fist diagnoses
+07/2019, and history of allogeneic stem cell transplantation.
+
+**Treatment and Progression:** Patient is hemodynamically stable, vital
+signs within normal limits, afebrile. In good general condition,
+clinical examination unremarkable, especially no skin GvHD signs. Venous
+blood gas: Acid-base status balanced, electrolytes within normal range.
+Laboratory findings show pancytopenia, Hb 11.3 g/dL, thrombocytopenia
+29/nL, leukopenia 1.8/nL, atypical lymphocytes described as \"resembling
+CLL,\" no blasts noted. Consultation with Hemato/Oncology confirmed no
+acute need for hospitalization. Follow-up in the Hemato-Oncological
+Clinic in September.
+
+**Imaging:**
+
+**CT Chest/Abdomen/Pelvis on 11/04/19:**
+
+**Assessment:** In comparison with 10/23/19: In today\'s
+contrast-enhanced examination, a newly unmasked large tumor is noted in
+the right pulmonary hilum with encasement of the conduits of the right
+lung lobe. Differential diagnosis includes a lymph node conglomerate,
+central bronchial carcinoma, or, less likely, an inflammatory lesion.
+Multiple suspicious malignant enlarged mediastinal lymph nodes,
+particularly on the right paratracheal and infracarinal regions.
+
+Short-term progression of peribronchovascular consolidation in the right
+upper lobe and multiple new subsolid micronodules bilaterally.
+Differential diagnosis includes inflammatory lesions, especially in the
+presence of known neutropenia, which could raise suspicion of fungal
+infection.
+
+Intraabdominally, there is an image suggestive of small bowel subileus
+without a clearly defined mechanical obstruction.
+
+Density-elevated and ill-defined cystic lesion in the left upper pole of
+the kidney. Primary consideration is a hemorrhaged or thickened cyst,
+but ultimately, the nature of the lesion remains uncertain.
+
+**CT Chest on 01/04/20:** Significant necrotic hilar lymph nodes on the
+right with bronchial and vascular stenosis. Marked progression of
+pulmonary infiltrates, particularly on the right, still compatible with
+superinfection in the context of known active tuberculosis
+
+**CT Chest from 02/05/20**: Marked necrotic lymph nodes hilar right with
+bronchial and vascular stenosis. Significantly increasing pneumonia-like
+infiltrates, particularly on the right, still compatible with
+superinfection in the context of known open tuberculosis.
+
+**Neck/Chest CT from 06/07/20:** Size-stable necrotic lymph node
+conglomerate infraclavicular right, dimensioned axially up to about 6 x
+2 cm, with ongoing slit-shaped compression of the right internal jugular
+vein. Hypoplastic mastoid cells left, idem. Progressive, partly new and
+large-volume consolidations with adjacent ground glass infiltrates on
+the right in the anterior, less posterior upper lobe and perihilar.
+Inhomogeneous, partially reduced contrast of consolidated lung
+parenchyma, broncho pneumogram preserved dorsally only.
+
+**Neck Ultrasound from 08/14/2020:** Clinical History, Question,
+Justifying Indication: Follow-up of cervical lymph nodes in
+tuberculosis.
+
+**Findings/Assessment:** Neck Lymph Node Ultrasound from 05/20/2020 for
+comparison. As in the previous examination, evidence of two
+significantly enlarged supraclavicular lymph nodes on the right, both
+showing a decrease in size compared to the previous examination: The
+more medial node measures 2.9 x 1.6 cm compared to the previous 3.7 x
+1.7 cm, while the more laterally located lymph node measures 3.3 x 1.4
+cm compared to the previous 4.2 x 1.5 cm. The more medial lymph node
+appears centrally hypoechoic, indicative of partial liquefaction, while
+the more lateral lymph node has a rather solid appearance. No other
+pathologically enlarged lymph nodes detected in the cervical region.
+
+**CT Neck/Chest/Abdomen/Pelvis from 10/02/2020:** Assessment: Compared
+to the previous examination from 06/07/2020, there is evidence of
+regression in findings: Size regression of consolidating infiltrate in
+the right upper lobe and the adjacent central lower lobe, albeit with
+increasing signs of cavitation. Progressive right pleural effusion and
+progressive signs of pulmonary volume overload. Regression of cervical,
+mediastinal, and right hilar lymphadenopathy. Persistent centrally
+liquefying lymph node conglomerates in the right hilar region,
+compressing central hilar structures. Some findings remain stable, while
+others have regressed. No evidence of new manifestations.
+
+**CT Chest/Abdomen/Pelvis from 12/02/20:** Assessment: Compared to
+10/02/20: In today\'s contrast examination, a newly unmasked large tumor
+is located right pulmonary hilar, encasing the conduits of the right
+lung lobe; Differential diagnosis includes lymph node conglomerate,
+central bronchial carcinoma, and a distant possibility of inflammatory
+lesions. Multiple suspiciously enlarged mediastinal lymph nodes,
+especially right paratracheal and infracarinal. In a short time,
+progressive peribronchovascular consolidations in the right upper lobe
+and multiple new subsolid micronodules bilaterally; Differential
+diagnosis includes inflammatory lesions, potentially fungal in the
+context of known neutropenia. Intra-abdominally, there is a picture of
+small bowel subileus without discernible mechanical obstruction.
+Corresponding symptoms? Densely elevated and ill-defined cystic lesion
+in the upper pole of the left kidney; Differential diagnosis primarily
+includes a hemorrhaged/thickened cyst, ultimately with uncertain
+malignancy.
+
+**Chest in two planes on 04/23/2021:** **Findings/Assessment:** In
+comparison with the corresponding prior images, most recently on
+08/14/2020. Also refer to CT Neck and Chest on 01/23/2021. The heart is
+enlarged with a leftward emphasis, but there are no signs of acute
+congestion. Extensive consolidation projecting onto the right mid-field,
+with a long-term trend toward regression but still clearly demarcated.
+No pneumothorax. No pleural effusion. Known lymph nodes in the
+mediastinum/hilum. Degenerative spinal changes.
+
+**Neck/Chest CT on 02/23/21:** Slightly regressive/nodular fibrosing
+infiltrate in the right upper lobe and adjacent central lower lobe with
+continuing significant residual findings. Within the infiltrate, larger
+poorly perfused areas with cavitations and scarred bronchiectasis.
+Increasing, partly patchy densities on the left basal region,
+differential diagnoses include infiltrates and ventilation disorders.
+Essentially constant cervical, mediastinal, and hilar lymphadenopathy.
+Constant liver lesions in the upper abdomen, differential diagnoses
+include TB manifestations and cystic changes.
+
+**CT Neck/Chest/Abdomen/Pelvis from 06/12/2021**: CT from 02/23/2021
+available for comparison. Neck/Chest: Improved right upper lobe (ROL)
+ventilation with regressive necrotic TB manifestations peri-hilar, now
+only with subtotal lobar atelectasis. Essentially stable necrotic lymph
+node manifestations in the cervical, mediastinal, and right hilar
+regions, for example, supraclavicular on the right (18 mm, previously
+30.1 Im 21.2) or right paratracheal (18 mm, previously 30.1 Im 33.8).
+Narrow right pleural effusion, same as before. No pneumothorax. Heart
+size normal. No pericardial effusion. Abdomen: Mid-term stable hypodense
+liver lesions (regressing since 07/2021).
+
+**Treatment and Progression:** Due to the extensive findings and the
+untreatable immunocompromising underlying condition, we decided to
+switch from a four-drug TB therapy to a three-drug therapy after nearly
+3 months. In addition to rifampicin and isoniazid, levofloxacin was
+initiated. Despite very good therapy adherence, acid-fast bacilli
+continued to be detected microscopically in sputum samples without
+culture confirmation of mycobacteria, even after discharge. Furthermore,
+the radiological findings worsened. In April 2020, liver lesions were
+identified in the CT that had not been described up to that point, and
+pulmonary and mediastinal changes increased. Clinically, right cervical
+lymphadenopathy also progressed in size. Due to a possible immune
+reaction, a therapy with prednisolone was attempted for several weeks,
+which did not lead to improvement. In June 2020, Mr. Hurley was
+readmitted for bronchoscopy with BAL and EBUS-guided biopsy to rule out
+differential diagnoses. An NTM-NGS-PCR was performed on the BAL, which
+did not detect DNA from nontuberculous mycobacteria. Histologically,
+predominantly necrotic material was found in the lymph node tissue, and
+molecular pathological analysis detected DNA from the M. tuberculosis
+complex. There were no indications of malignancy. In addition,
+whole-genome sequencing of the most recently cultured mycobacteria was
+performed, and latent resistance genes were also ruled out. Other
+pathogens, including fungi, were likewise not detected. Aspergillus
+antigen in BAL and serum was also negative. We continued the three-drug
+therapy with Rifampicin, Isoniazid, and Levofloxacin. Mr. Hurley
+developed an increasing need for red blood cell transfusions due to
+myelodysplastic syndrome and began receiving regular transfusions from
+his outpatient hematologist-oncologist in the summer of 2020. In a
+repeat CT control in October 2020, increasing necrotic breakdown of the
+right upper and middle lobes was observed, as well as progressive
+ipsilateral pleural effusion and persistent mediastinal lymphadenopathy
+and liver lesions. Mr. Hurley was referred to the immunology colleagues
+to discuss additional immunological treatment options. After extensive
+immune deficiency assessment, a low basal interferon-gamma level was
+noted in the setting of lymphopenia due to MDS. In an immunological
+conference, the patient was thoroughly discussed, and a trial of
+interferon-gamma therapy in addition to antituberculous therapy was
+discussed due to a low basal interferon-gamma level and a negative
+Quantiferon test. After approval of an off-label application, we began
+Actimmune® injections in January 2021 after extensive patient education.
+Mr. Hurley learned to self-administer the subcutaneous injections and
+initially tolerated the treatment well. Due to continuous worsening of
+the blood count, a bone marrow puncture was performed again on an
+outpatient basis by the attending hematologist-oncologist, and secondary
+AML was diagnosed. Since February 2021, Mr. Hurley has received
+Azacitidine and regular red blood cell and platelet concentrates. After
+3 months of Actimmune® therapy, sputum no longer showed acid-fast
+bacilli in March 2021, and radiologically, the left pleural effusion had
+completely regressed, and the infiltrates had decreased. Actimmune® was
+discontinued after 3 months. Towards the end of Actimmune® therapy, Mr.
+Hurley developed pronounced shoulder arthralgia and pain in the upper
+thoracic spine. Fractures were ruled out. With pain therapy, the pain
+became tolerable and gradually improved. Arthralgia and myalgia are
+common side effects of interferon-gamma. Due to the demonstrable
+therapeutic response, we presented Mr. Hurley, along with an
+interpreter, at the Department of Hematology and Oncology to discuss
+further therapeutic options for AML in the context of the hematological
+and infectious disease situation. After extensive explanation of the
+disease situation, the risks of aggressive AML therapy in the presence
+of unresolved tuberculosis, and the consequences of palliative AML
+therapy. Mr. Hurley agreed to allogeneic stem cell transplantation after
+some consideration. On an outpatient basis, the cytostatic therapy with
+Azacitidine was expanded to include Venetoclax. Antituberculous therapy
+with rifampicin, isoniazid, and levofloxacin was continued. Regular
+sputum checks remained consistently microscopically negative until
+complete AML remission was achieved. Mr. will be admitted for allogeneic
+stem cell transplantation in July 2021. A repeat CT in June 2021
+confirmed continued regression of the tuberculosis findings.
+Antituberculous therapy will be continued indefinitely.
+
+**CT Neck/Chest/Abdomen/Pelvis on 06/12/2022:** CT for comparison.
+Neck/Chest: Improved right lung upper lobe ventilation with regressing
+necrotic tuberculosis manifestations, now with only subtotal lobar
+atelectasis. Essentially constant necrotic lymph node manifestations in
+the cervical, mediastinal, and right hilar regions, as exemplified by
+the right supraclavicular (18 mm, SE 301 HU 212) or right paratracheal
+(18 mm, SE 301 HU 338) nodes. Narrow pleural effusion on the right,
+likewise. No pneumothorax. The heart is not enlarged. No pericardial
+effusion. Abdomen: Medium-term constant hypodense liver lesions
+(regressing)
+
+**Current Recommendations:** Continue antituberculous therapy without a
+defined endpoint. Sputum checks during allogeneic stem cell
+transplantation every 1-2 weeks. In case of clinical signs of persistent
+infection, perform early CT scans of the neck, chest, and abdomen.
+Follow-up appointment in our infectious diseases outpatient clinic after
+allogeneic stem cell transplantation.
+
+</text_3>
+</notes>
+</patient-record-patient_11>
+
+<patient-record-patient_12>
+Below is patient Alan Fisher's medical record (ID: patient_12). 
+They were born on 1953-09-12 00:00:00 and have the following diagnosis: Chronic kidney disease.
+The patients medical record consists of 6 notes included below.
+<notes>
+<text_0>
+**Dear colleague, **
+
+We are reporting to you regarding our patient, Mr. Alan Fisher, born on
+12/09/1953. He was under our inpatient care from 04/19/2009 to
+04/28/2009.
+
+**Diagnoses:**
+
+-   Progressive deterioration of renal transplant function (creeping
+    creatinine) without evidence of biopsy-proven rejection
+
+-   Isovolumetric tubular epithelial vacuolization
+
+**Other Diagnoses:**
+
+-   History of renal transplantation on 10/25/1995
+
+-   Dual immunosuppression with Cyclosporin A/Steroid since 10/1995
+
+-   Terminal renal insufficiency due to chronic pyelonephritis and
+    nephrolithiasis
+
+-   Chronic hemodialysis from 09-10/1995
+
+-   Right laparoscopic nephrectomy on 03/2007 due to suspected renal
+    cell carcinoma, histologically not confirmed
+
+-   Incisional hernia after nephrectomy, diagnosed on 07/2007
+
+-   Secondary hyperparathyroidism
+
+-   Coronary artery disease, CAD-3:
+
+    -   Previous anterior wall infarction in 1989, treated with
+        thrombolysis and PTCA
+
+    -   PTCA + stent in the right coronary artery (RIVA) in 05/1995
+
+    -   PTCA + drug-eluting stent (DES) in RIVA on 05/15/2005
+
+    -   PTCA + Genous (anti CD34+ Antibody-coated) in RIVA on 08/14/2006
+
+    -   Remaining: 75% stenosis in D1 and occlusion of the small RCA
+        (last cardiac catheterization on 03/24/2008)
+
+    -   Stress echocardiography planned for 01/09 if ischemia is
+        detected, followed by bypass surgery if necessary
+
+-   Right superficial femoral artery profundaplasty on 03/11/2007
+
+-   Permanent atrial fibrillation, diagnosed in 03/07, unsuccessful
+    cardioversion on 03/2008, anticoagulated with Marcumar
+
+-   Arterial hypertension
+
+-   Hyperlipoproteinemia, possible dose-dependent Fluvastatin
+    intolerance
+
+-   COPD GOLD Stage II
+
+-   Mild sleep apnea syndrome in 01/2005
+
+-   Massive diverticulosis (last colonoscopy on 07/2008)
+
+-   History of Hepatitis B infection
+
+-   Cholecystolithiasis
+
+**Medical History:** Mr. Fisher was admitted for a renal transplant
+biopsy due to progressive deterioration of transplant function (creeping
+creatinine). His recent creatinine values had increased to around 1.4 --
+1.6 mg/dL, while they had previously been around 1.1 mg/dL.
+
+**Therapy and Progression:** Following appropriate preparation and
+informed consent, a complication-free transplant puncture was performed.
+The biopsy showed isometric tubular epithelial vacuolization without
+significant findings. This was followed by adjustment of Cyclosporin-A
+levels and the addition of a lymphocyte proliferation inhibitor to the
+existing immunosuppressive dual therapy. There was a significant
+increase in Cyclosporin-A levels at one point due to accidental double
+dosing by the patient, but levels returned to the target range. This
+might explain the current rise in creatinine. Another explanation could
+be recurrent hypotensive blood pressure dysregulations, leading to the
+discontinuation of Minoxidile medication. For chronic atrial
+fibrillation, anticoagulation therapy with Marcumar was restarted during
+hospitalization and should be continued as an outpatient according to
+the target INR. Low molecular weight heparin administration could be
+discontinued.
+
+**Physical Examination:** Patient in good general condition. Oriented in
+all aspects. No dyspnea. No cyanosis. No edema. Warm and dry skin.
+Normal nasal and pharyngeal findings. Pupils round, equal, and react
+promptly to light bilaterally. Moist tongue. Pharynx and buccal mucosa
+unremarkable. No jugular vein distension. No carotid bruits heard.
+Palpation of lymph nodes unremarkable. Palpation of the thyroid gland
+unremarkable, freely movable.
+
+Lungs: Normal chest shape, moderately mobile, resonant percussion sound,
+vesicular breath sounds bilaterally, no wheezing or crackles heard.
+
+Heart: Irregular heart action, normal rate; heart sounds clear, no
+pathological sounds. Abdomen: Peristalsis and bowel sounds normal in all
+quadrants; soft abdomen, markedly obese, no tenderness, no palpable
+masses, liver and spleen not palpable due to limited access, non-tender
+kidneys. Large reducible incisional hernia on the right side following
+nephrectomy.
+
+Extremities: Occluded fistula on the right forearm. Normal peripheral
+pulses; joints freely movable. Strength, motor function, and sensation
+are unremarkable.
+
+**Kidney Biopsy on 04/19/2009:** Complication-free biopsy of the
+transplant kidney.
+
+Findings: Erythematous macules.
+
+Recommendation: Follow-up in 3 months.
+
+**Ultrasound of Transplant Kidney on 04/20/2009:** Transplant kidney
+well visualized, located in the left iliac fossa, measurable,
+oval-shaped. Parenchymal echogenicity normal, normal corticomedullary
+differentiation. No evidence of arteriovenous fistula or hematoma after
+kidney biopsy.
+
+**Pathological-anatomical assessment on 04/19/2009:**
+
+**Macroscopic Findings:** Singular Nodule Identified: Dimensions
+measuring 8 mm.
+
+**Microscopic Examination:**
+
+Sampled Tissue: Renal cortex
+
+Identified Components:
+
+-   Glomeruli: Nine observed
+
+-   Interlobular Artery: One segment present
+
+-   Absence of medullary tissue
+
+**Diagnostic Observations:** There were no signs of inflammation or
+scarring in the renal cortex. The glomeruli appeared normocellular, and
+no signs of inflammation or pathological changes were observed in them.
+The peritubular capillaries were free of inflammation, and the specific
+test for C4d staining yielded negative results. The arterioles within
+the tissue had thin walls, and there was no evidence of inflammation in
+this vascular component.
+
+The interlobular artery was also thin-walled and showed no evidence of
+inflammation.
+
+A notable finding was extensive damage to the tubular epithelium. The
+damage was characterized by isometric microvesicular cytoplasmic
+transformation, which exceeded 80%. Importantly, there was no evidence
+of cell necrosis and only minimal flattening of cells was observed. In
+addition, no pathological imprints, microcalcifications, or nuclear
+inclusion bodies were observed in the tubular epithelium.
+
+**Summary:** The predominant pathological finding in this case is
+substantial tubular damage. Consequently, it is highly advisable to
+closely monitor immunosuppression levels in the patient\'s management.
+Further comprehensive evaluation is strongly recommended to determine
+the underlying cause of the observed tubular damage and to address the
+clinical question concerning the presence of Chronic Allograft
+Nephropathy or the potential involvement of an infection in the clinical
+presentation.
+
+**Chest X-ray (2 views) on 04/22/2009:**
+
+[Findings]{.underline}: No pneumothorax, no effusion. No evidence of
+pneumonia. No focal findings. Left-biased heart without decompensation.
+Mediastinum centrally positioned, not widened. Unremarkable depiction of
+central hilar structures. Thoracic hyperkyphosis.
+
+**Current Recommenations:** We request regular outpatient monitoring of
+retention parameters (initially every 2-3 weeks) and are available for
+further questions at the provided telephone number.
+
+**Lab results upon Discharge**
+
+  **Parameter**                                  **Results**   **Reference Range**
+  ---------------------------------------------- ------------- ---------------------
+  Sodium                                         144 mEq/L     134-145 mEq/L
+  Potassium                                      3.7 mEq/L     3.4-5.2 mEq/L
+  Calcium                                        9.48 mg/dL    8.6-10.6 mg/dL
+  Chloride                                       106 mEq/L     95-112 mEq/L
+  Phosphorus                                     2.88 mg/dL    2.5-4.5 mg/dL
+  Transferrin Saturation                         20 %          16-45 %
+  Magnesium                                      1.9 mg/dL     1.8-2.6 mg/dL
+  Creatinine                                     1.88 mg/dL    \<1.2 mg/dL
+  Glomerular Filtration Rate                     36 mL/min     \>90 mL/min
+  BUN (Blood Urea Nitrogen)                      60 mg/dL      14-46 mg/dL
+  Uric Acid                                      4.6 mg/dL     3.0-6.9 mg/dL
+  Total Bilirubin                                0.5 mg/dL     \<1 mg/dL
+  Albumin                                        4.0 g/dL      3.6-5.0 g/dL
+  Total Protein                                  6.8 g/dL      6.5-8.7 g/dL
+  C-Reactive Protein                             0.19 mg/dL    \<0.5 mg/dL
+  Transferrin                                    269 mg/dL     200-360 mg/dL
+  Ferritin                                       110 ng/mL     30-300 ng/mL
+  ALT (Alanine Aminotransferase)                 17 U/L        \<45 U/L
+  AST (Aspartate Aminotransferase)               20 U/L        \<50 U/L
+  Alkaline Phosphatase                           119 U/L       40-129 U/L
+  GGT (Gamma-Glutamyltransferase)                94 U/L        \<55 U/L
+  Lipase                                         61 U/L        \<70 U/L
+  TSH (Thyroid-Stimulating Hormone)              0.54 mIU/L    0.27-4.20 mIU/L
+  Hemoglobin                                     14.5 g/dL     14.0-17.5 g/dL
+  Hematocrit                                     43%           40-52%
+  Red Blood Cells                                4.60 M/uL     4.6-6.2 M/uL
+  White Blood Cells                              8.78 K/uL     4.5-11.0 K/uL
+  Platelets                                      205 K/uL      150-400 K/uL
+  MCV                                            94 fL         81-100 fL
+  MCH                                            31.5 pg       27-34 pg
+  MCHC                                           33.5 g/dL     32.4-35.0 g/dL
+  MPV                                            11 fL         7-12 fL
+  RDW                                            14.8 %        11.9-14.5 %
+  Neutrophils                                    3.72 K/uL     1.8-7.7 K/uL
+  Lymphocytes                                    2.37 K/uL     1.4-3.7 K/uL
+  Monocytes                                      0.93 K/uL     0.2-1.0 K/uL
+  Eosinophils                                    1.67 K/uL     \<0.7 K/uL
+  Basophils                                      0.09 K/uL     0.01-0.10 K/uL
+  Nucleated Red Blood Cells                      Negative      \<0.01 K/uL
+  APTT (Activated Partial Thromboplastin Time)   45.1 sec      26-40 sec
+  Antithrombin Activity                          85 %          80-120 %
+
+**Medication upon discharge**
+
+  **Medication **                  **Dosage**   **Frequency**
+  -------------------------------- ------------ ---------------
+  Cyclosporine (Neoral)            1 mg         1-0-1
+  Mycophenolic Acid (Myfortic)     180 mg       1-0-1
+  Prednisone (Deltasone)           5 mg         1-0-0
+  Aspirin                          81 mg        1-0-0
+  Candesartan (Atacand)            16 mg        0-0-1
+  Metoprolol (Lopressor)           50 mg        1-1-1-1
+  Isosorbide Dinitrate (Isordil)   60 mg        1-0-0
+  Torsemide (Demadex)              10 mg        As directed
+  Ranitidine (Zantac)              300 mg       0-0-1
+  Fluvastatin (Lescol)             20 mg        0-0-1
+  Allopurinol (Zyloprim)           100 mg       0-1-0
+  Tamsulosin (Flomax)              0.4 mg       1-0-0
+
+
+</text_0>
+<text_1>
+**Dear colleague, **
+
+We are writing to provide an update on our patient, Mr. Alan Fisher,
+born on 12/09/1953.
+
+He was under our inpatient care from 10/02/2018 to 10/03/2018.
+
+**Diagnoses:**
+
+-   Urosepsis
+
+-   Acute postrenal kidney failure
+
+**Other Diagnoses:**
+
+-   History of renal transplantation on 10/25/1995
+
+-   Dual immunosuppression with Cyclosporin A/Steroid since 10/1995
+
+-   Terminal renal insufficiency due to chronic pyelonephritis and
+    nephrolithiasis
+
+-   Chronic hemodialysis from 09-10/1995
+
+-   Right laparoscopic nephrectomy on 03/2007 due to suspected renal
+    cell carcinoma, histologically not confirmed
+
+-   Incisional hernia after nephrectomy, diagnosed on 07/2007
+
+-   Secondary hyperparathyroidism
+
+-   Coronary artery disease, CAD-3:
+
+    -   Previous anterior wall infarction in 1989, treated with
+        thrombolysis and PTCA
+
+    -   PTCA + stent in the right coronary artery (RIVA) in 05/1995
+
+    -   PTCA + drug-eluting stent (DES) in RIVA on 05/15/2005
+
+    -   PTCA + Genous (anti CD34+ Antibody-coated) in RIVA on 08/14/2006
+
+    -   Remaining: 75% stenosis in D1 and occlusion of the small RCA
+        (last cardiac catheterization on 03/24/2008)
+
+    -   Stress echocardiography planned for 01/09 if ischemia is
+        detected, followed by bypass surgery if necessary
+
+-   Right superficial femoral artery profundaplasty on 03/11/2007
+
+-   Permanent atrial fibrillation, diagnosed in 03/07, unsuccessful
+    cardioversion on 03/2008, anticoagulated with Marcumar
+
+-   Arterial hypertension
+
+-   Hyperlipoproteinemia, possible dose-dependent Fluvastatin
+    intolerance
+
+-   COPD GOLD Stage II
+
+-   Mild sleep apnea syndrome in 01/2005
+
+-   Massive diverticulosis (last colonoscopy on 07/2008)
+
+-   History of Hepatitis B infection
+
+-   Cholecystolithiasis
+
+**Previous Surgeries:** Previous prostate vesiculectomy with regional
+lymphadenectomy
+
+**Planned procedure:** Urethro-cystoscopy with catheter placement for
+urethral stricture
+
+**Medical History:** The patient was admitted through our emergency
+department upon referral by the outpatient urologist due to suspicion of
+a urethral stricture. Mr. Fisher reports a worsening urinary retention
+for approximately 6 months. Despite multiple unsuccessful attempts at
+catheter placement, ureterocystoscopy with catheter insertion was
+performed. Intraoperatively, purulent cystitis and a bladder outlet
+obstruction were observed.
+
+Mr. Fisher regularly attends follow-up examinations for his history of
+kidney transplantation in 1995 and previous prostate vesiculectomy with
+regional lymphadenectomy in 01/2018.
+
+**Physical Examination:** Neurology: RASS 0, alert, CAM-ICU negative, no
+new focal neurology
+
+Lungs: Bilateral air entry, no rales or wheezing, sufficient gas
+exchange on 2L/O2 Cardiovascular: Normal sinus rhythm, normotensive on
+0.01 µg/kg/min NA
+
+Abdomen: Soft, no guarding, sparse peristalsis, advanced oral diet,
+regular bowel movements
+
+Diuresis: Normal urine output, retention values within normal range,
+goal: balanced fluid status
+
+Skin/Wounds: Non-irritated, no peripheral edema
+
+**Therapy and Progression**: We received Mr. Fisher, who was awake and
+spontaneously breathing under a 2L O2 mask via nasal cannula, to our
+intensive care unit due to urosepsis. To maintain an adequate
+circulation, low-dose catecholamine therapy was required but could be
+discontinued on the first postoperative day. Pulmonary function remained
+stable with intensive non-invasive ventilation and breathing training.
+
+Given his immunosuppression, we escalated the intraoperatively initiated
+anti-infective therapy from Ceftriaxone to Piperacillin/Tazobactam.
+Pneumococcal and Legionella rapid tests were negative. Following
+appropriate volume resuscitation and diuretic therapy with Furosemide,
+diuresis became sufficient. Oral diet progression occurred without
+complications. Anticoagulation was initially in prophylactic dosing with
+Heparin and later switched to therapeutic dosing with Enoxaparin.
+
+**Current Recommendations:**
+
+-   Switch unfractionated Heparin to Fragmin
+
+-   baseline Crea 2mg/dL, target CyA level: 50-60ng/mL, Myfortic
+    continued.
+
+-   Urological care of the stricture in progress, leave catheter until
+    then.
+
+-   Mobilization
+
+**Medication upon Discharge:**
+
+  **Medication (Brand)**             **Dosage**   **Frequency**
+  ---------------------------------- ------------ ---------------
+  Torsemide (Demadex)                10 mg        1-1-0-0
+  Prednisone (Deltasone)             5 mg         1-1-0-0
+  Pantoprazole (Protonix)            20 mg        1-1-0-0
+  Mycophenolate Mofetil (CellCept)   360 mg       1-0-1-0
+  Metoprolol Succinate (Toprol-XL)   100 mg       1-0-1-0
+  Magnesium Oxide                    400 mg       1-0-0-0
+  Ciclosporin (Neoral)               100 mg       60-0-70-0
+  Candesartan (Atacand)              16 mg        0-0.5-0-0
+  Atorvastatin (Lipitor)             40 mg        0-0-0-1
+  Allopurinol (Zyloprim)             100 mg       1-0-0-0
+  Aspirin                            81 mg        1-0-0-0
+  Paracetamol (Tylenol)              500 mg       As needed
+
+
+</text_1>
+<text_2>
+**Dear colleague, **
+
+We are reporting to you about our patient, Mr. Alan Fisher, born on
+12/09/1953.
+
+He was under our inpatient care from 11/04/2018 to 11/12/2018.
+
+**Current Symptoms:** Decreased diuresis, rising creatinine, frustrating
+catheterization.
+
+**Diagnoses:**
+
+-   Acute on chronic graft failure
+
+<!-- -->
+
+-   Creatinine increased from 1.56 mg/dL to a maximum of 2.35 mg/dL.
+
+-   Likely postrenal origin due to urethral stricture; sonographically,
+    Grade II urinary stasis with urinary retention and residual urine
+    formation.
+
+-   Frustrating catheterization due to urethral stricture
+
+-   Urethro-cystoscopy with bougie and catheter placement
+
+-   Parainfectious component in purulent cystitis with urosepsis
+
+-   Discharged with indwelling catheter
+
+-   Inpatient readmission to the colleagues in Urology for internal
+    urethrotomy
+
+**Other Diagnoses:**
+
+-   History of renal transplantation on 10/25/1995
+
+-   Dual immunosuppression with Cyclosporin A/Steroid since 10/1995
+
+-   Terminal renal insufficiency due to chronic pyelonephritis and
+    nephrolithiasis
+
+-   Chronic hemodialysis from 09-10/1995
+
+-   Right laparoscopic nephrectomy on 03/2007 due to suspected renal
+    cell carcinoma, histologically not confirmed
+
+-   Incisional hernia after nephrectomy, diagnosed on 07/2007
+
+-   Secondary hyperparathyroidism
+
+-   Coronary artery disease, CAD-3:
+
+    -   Previous anterior wall infarction in 1989, treated with
+        thrombolysis and PTCA
+
+    -   PTCA + stent in the right coronary artery (RIVA) in 05/1995
+
+    -   PTCA + drug-eluting stent (DES) in RIVA on 05/15/2005
+
+    -   PTCA + Genous (anti CD34+ Antibody-coated) in RIVA on 08/14/2006
+
+    -   Remaining: 75% stenosis in D1 and occlusion of the small RCA
+        (last cardiac catheterization on 03/24/2008)
+
+    -   Stress echocardiography planned for 01/09 if ischemia is
+        detected, followed by bypass surgery if necessary
+
+-   Right superficial femoral artery profundaplasty on 03/11/2007
+
+-   Permanent atrial fibrillation, diagnosed in 03/07, unsuccessful
+    cardioversion on 03/2008, anticoagulated with Marcumar
+
+-   Arterial hypertension
+
+-   Hyperlipoproteinemia, possible dose-dependent Fluvastatin
+    intolerance
+
+-   COPD GOLD Stage II
+
+-   Mild sleep apnea syndrome in 01/2005
+
+-   Massive diverticulosis (last colonoscopy on 07/2008)
+
+-   History of Hepatitis B infection
+
+-   Cholecystolithiasis
+
+**Medical History:** The patient was admitted through our emergency
+department upon referral by an outpatient urologist due to suspected
+urethral stricture. Mr. Fisher reports increasing difficulty urinating
+for approximately 6 months. He has to \"squeeze out\" his bladder
+completely. Frustrating catheterization was performed due to urinary
+retention. Intraoperatively, purulent cystitis and bladder outlet
+stenosis were observed. Mr. Fisher regularly undergoes follow-up
+examinations for a history of kidney transplantation in 1995 and a
+prostate vesiculectomy with regional lymphadenectomy in 01/2018.
+
+**Vegetative Findings:** The patient had a bowel movement 4 days ago,
+indwelling catheter irritation (3L of diuresis the previous day), no
+nausea/vomiting, no fever or night sweats, weight loss of 30kg from
+February to April 2020.
+
+**Physical Capacity:** Limited, can still climb 2 stairs but needs to
+take a break due to shortness of breath.
+
+**Physical Examination:** Temperature 37.4°C, Blood pressure 128/72
+mmHg; Pulse 72/min; Respiratory rate 15/min, O2 saturation under 2L O2:
+96%
+
+Awake, alert, cooperative, oriented to time, place, person, and
+situation.
+
+[Head/Neck:]{.underline} Non-tender nerve exit points; Clear paranasal
+sinuses; moist and pink mucous membranes; unremarkable dentition; moist
+and glossy tongue; non-palpable thyroid enlargement.
+
+[Chest]{.underline}: Normal configuration; Non-tender spine; free renal
+beds bilaterally.
+
+[Heart]{.underline}: Rhythmic, clear heart sounds, normal rate, no
+splitting; non-distended jugular veins. [Lungs]{.underline}: Vesicular
+breath sounds; Resonant percussion note; no adventitious sounds; no
+stridor; normal chest expansion.
+
+[Abdomen]{.underline}: Protuberant, known incisional hernia, normal
+peristalsis in all quadrants; soft; no pathological resistance; no
+tenderness; liver palpable below the costal margin; spleen not palpable.
+
+[Lymph nodes:]{.underline} No pathologically enlarged cervical nodes
+palpable; axillary and inguinal nodes not palpable.
+
+Skin: No pathological skin findings.
+
+[Extremities:]{.underline} Warm; mild bilateral ankle edema.
+
+[Pulse status (right/left):]{.underline} A. carotis +/+, A. radialis
++/+, A. femoralis +/+, A. tibialis post. +/+, A. dorsalis ped. +/+
+
+[Neurological]{.underline}: Oriented and unremarkable.
+
+**Therapy and Progression:** The patient was admitted through our
+emergency department upon referral by an outpatient urologist due to
+suspected urethral stricture, which had been causing increasingly
+difficult urination for approximately 6 months. Sonography showed Grade
+II urinary stasis with urinary retention and residual urine. Frustrating
+catheterization was performed, followed by ureterocystoscopy with bougie
+and catheter placement. Intraoperatively, purulent cystitis and bladder
+outlet stenosis were observed. Laboratory tests revealed acute kidney
+transplant failure, with creatinine increasing from 1.56 mg/dL to 2.35
+mg/dL, along with significantly elevated infection parameters: CRP up to
+186 mg/dL, PCT 12.82 µg/L, and leukocytosis of 21.6/nL. After obtaining
+blood cultures, empirical antibiotic therapy with Ceftriaxone was
+initiated. Upon detecting Pseudomonas aeruginosa, therapy was switched
+to Piperacillin/Tazobactam on 12/06/20 and continued until 12/13/20.
+Under this treatment, infection parameters significantly improved, and
+Mr. Fisher remained afebrile. Kidney retention parameters also decreased
+to a discharge creatinine of 2.05 mg/dL. Regarding the urethral
+stricture, he was initially discharged with an indwelling catheter. A
+follow-up appointment for internal urethrotomy and potentially Allium
+stent placement was scheduled for 4 weeks later. During the hospital
+stay, ciclosporin levels remained within the target range. Following
+prostate vesiculectomy earlier in the year, anticoagulation was switched
+from Enoxaparin to Apixaban 2.5 mg twice daily, and Aspirin therapy was
+discontinued.
+
+**Recommendations**: We recommend regular monitoring of kidney retention
+parameters and infection parameters. Regarding the urethral stricture,
+the patient will be discharged with an indwelling catheter. We scheduled
+a follow-up with colleagues in Urology for internal urethrotomy and
+potentially Allium stent placement. Pause oral anticoagulation with
+Apixaban one day before inpatient admission.
+
+**Medication upon Discharge:**
+
+  **Medication**                     **Dosage**   **Frequency**
+  ---------------------------------- ------------ ---------------
+  Apixaban (Eliquis)                 2.5 mg       1-0-1-0
+  Ciclosporin (Neoral)               100 mg       60-0-70-0
+  Mycophenolic Acid (Myfortic)       360 mg       1-0-1-0
+  Prednisone (Deltasone)             5 mg         1-0-0-0
+  Metoprolol Succinate (Toprol-XL)   95 mg        1-0-1-0
+  Candesartan (Atacand)              8 mg         0-1-0-0
+  Torsemide (Demadex)                10 mg        1-1-0-0
+  Atorvastatin (Lipitor)             40 mg        0-0-0-1
+  Pantoprazole (Protonix)            20 mg        1-0-0-0
+  Vitamin D3 (Cholecalciferol)       20,000 IU    Pause
+  Magnesium Oxide                    400 mg       1-0-0-0
+
+
+</text_2>
+<text_3>
+**Dear colleague, **
+
+We are reporting to you regarding our patient, Mr. Alan Fisher, born on
+12/09/1953, who was under outpatient care on 07/01/2019.
+
+**Current Symptoms:** Pain on the left side at rib level**,** Dyspnea
+
+**Diagnoses:**
+
+-   Infection of unclear origin
+
+    -   CT Thorax and Abdomen showed no focus
+
+    -   Urine dipstick and cultures were bland
+
+    -   Antibiotics: Meropenem from 06/11/2019 to 06/19/2019
+
+-   Acute Transplant Dysfunction
+
+    -   Serum Creatinine: 2.4 -\> 4.5 -\> 2.6 mg/dl
+
+    -   Renal ultrasound: 123 x 54 x 24 mm, not dilated, some areas of
+        increased echogenicity, no twinkling, no acoustic shadowing, no
+        signs of urolithiasis.
+
+**Other Diagnoses:**
+
+-   History of renal transplantation on 10/25/1995
+
+-   Dual immunosuppression with Cyclosporin A/Steroid since 10/1995
+
+-   Terminal renal insufficiency due to chronic pyelonephritis and
+    nephrolithiasis
+
+-   Chronic hemodialysis from 09-10/1995
+
+-   Right laparoscopic nephrectomy on 03/2007 due to suspected renal
+    cell carcinoma, histologically not confirmed
+
+-   Incisional hernia after nephrectomy, diagnosed on 07/2007
+
+-   Secondary hyperparathyroidism
+
+-   Coronary artery disease, CAD-3:
+
+    -   Previous anterior wall infarction in 1989, treated with
+        thrombolysis and PTCA
+
+    -   PTCA + stent in the right coronary artery (RIVA) in 05/1995
+
+    -   PTCA + drug-eluting stent (DES) in RIVA on 05/15/2005
+
+    -   PTCA + Genous (anti CD34+ Antibody-coated) in RIVA on 08/14/2006
+
+    -   Remaining: 75% stenosis in D1 and occlusion of the small RCA
+        (last cardiac catheterization on 03/24/2008)
+
+    -   Stress echocardiography planned for 01/09 if ischemia is
+        detected, followed by bypass surgery if necessary
+
+-   Right superficial femoral artery profundaplasty on 03/11/2007
+
+-   Permanent atrial fibrillation, diagnosed in 03/07, unsuccessful
+    cardioversion on 03/2008, anticoagulated with Marcumar
+
+-   Arterial hypertension
+
+-   Hyperlipoproteinemia, possible dose-dependent Fluvastatin
+    intolerance
+
+-   COPD GOLD Stage II
+
+-   Mild sleep apnea syndrome in 01/2005
+
+-   Massive diverticulosis (last colonoscopy on 07/2008)
+
+-   History of Hepatitis B infection
+
+-   Cholecystolithiasis
+
+**Medical History:** Initial presentation was at the local emergency
+department on referral from the primary care physician for suspected
+acute coronary syndrome. Mr. Fisher described left-sided rib pain, which
+was related to breathing and pressure, as well as dyspnea for a few
+days. Laboratory tests showed acute-on-chronic kidney failure and
+elevated infection parameters. A urine dipstick test was negative for
+nitrites and leukocytes. Chest CT ruled out pulmonary pathology, and
+acute coronary syndrome was also excluded. Mr. Fisher reported a urinary
+tract infection about 4 weeks ago, which was treated with antibiotics as
+an outpatient.
+
+**Physical Examination:** Alert, oriented, cooperative, and responsive
+to time, place, person, and situation
+
+[Head/Neck:]{.underline} Non-tender nerve exit points; clear nasal
+sinuses; moist pink mucous membranes; unremarkable dental status; moist
+tongue
+
+[Chest]{.underline}: Normal configuration; no tenderness in the spine;
+both renal beds free
+
+[Heart]{.underline}: Arrhythmic heart sounds, pure, tachycardic, not
+split
+
+[Lungs]{.underline}: Vesicular breath sounds; somewhat decreased breath
+sounds bilaterally; no adventitious sounds; no stridor
+
+[Abdomen]{.underline}: Regular peristalsis in all quadrants; soft; right
+lower abdomen notably distended with increased vascular markings, liver
+and spleen not palpable, transplant kidney non-tender
+
+[Lymph Nodes:]{.underline} No pathologically enlarged cervical lymph
+nodes palpable
+
+[Skin]{.underline}: No pathological skin findings
+
+[Extremities:]{.underline} Warm; no edema; cyanosis of toes bilaterally
+after prolonged leg dependency
+
+-   Pulse status (right/left): Carotid artery +/+, Radial artery +/+,
+    Posterior tibial artery +/+
+
+-   Neurology: Normal cranial nerves; round, moderately dilated pupils;
+    prompt bilateral pupillary light reflex; no sensory or motor
+    deficits; ubiquitous muscle strength 5/5
+
+**Therapy and Progression:** We admitted the patient for further
+diagnosis and treatment. Initially suspected acute coronary syndrome was
+ruled out. Laboratory results showed elevated retention and infection
+parameters. With volume substitution, we achieved baseline creatinine
+levels again. The transplant kidney appeared non-dilated and
+well-perfused. For the infection, the patient received the mentioned
+imaging studies, which did not reveal any definitive findings. Our urine
+analyses and cultures also showed bland results. It should be noted that
+prior outpatient treatment for suspected urinary tract infection was
+likely with cotrimoxazole. Ultimately, considering the recent
+antibiograms, we decided on a calculated antibiotic therapy with
+Meropenem. This led to a significant improvement in infection
+parameters. The last measured Ciclosporin level was slightly
+subtherapeutic, so we adjusted the dosage accordingly. We recommend
+follow-up with the primary care physician.
+
+**Chest CT on 06/10/2019:**
+
+[Clinical Information, Question, Justification]{.underline}: Patient
+with a history of kidney transplantation. Bursting pain on both sides at
+the ribcage. Cough. Elevated inflammatory markers. Question about
+infiltrates, pleural effusion, congestion.
+
+[Technique]{.underline}: Digital overview radiographs. Plain 80-line CT
+of the chest. MPR (Multiplanar reconstruction). DLP (Dose-Length
+Product) 120.6 mGy\*cm.
+
+[Findings]{.underline}: No previous images available for comparison.
+Symmetric thyroid. Minimal pericardial effusion, accentuated at the
+base, measuring up to 8 mm in width (Series 5, Image 293). Coronary
+atherosclerosis. No pathologically enlarged lymph nodes in the
+mediastinum, axilla, or hilum on plain images. Multisegmental calcified
+(micro)nodules. No suspicious pulmonary nodules indicative of
+malignancy. No pneumonic infiltrates. No pleural effusions. No
+pneumothorax. No pulmonary venous congestion. Delicate scar tissue at
+the bases bilaterally. Small axial hiatal hernia. Rounded soft tissue
+structure in the right adrenal space (Series 5, measuring 411 x 10 mm).
+Incidentally captured at the image margins is a shrunken left kidney.
+Spondylosis deformans of the thoracic spine. Interpretation: No
+pneumonic infiltrates. No pleural effusions. No pulmonary venous
+congestion. Minimal pericardial effusion. Multisegmental calcified
+(micro)nodules, likely post-inflammatory.
+
+**Abdomen/Pelvis CT on 06/14/2019:**
+
+[Clinical Information, Question, Justification:]{.underline} Acute
+kidney failure. Question regarding kidney or ureteral stones.
+
+[Technique]{.underline}: Plain 80-line CT of the abdomen. MPR. DLP 947
+mGy\*cm. Findings and [Interpretation:]{.underline}
+
+The left transplant kidney shows pelvic dilation with an expanded renal
+pelvis and ureter (hydronephrosis grade II) but no evidence of stones.
+Status post-right nephrectomy. Shrunken left kidney. Known large,
+broad-based right-sided abdominal wall weakness with prolapsed
+intestinal loops and mesenteric fat tissue without evidence of
+incarceration. No ileus. Diverticulosis of the sigmoid colon. Small
+axial hiatal hernia. No free or encapsulated fluid or free air in the
+abdomen with the right diaphragmatic dome not fully visualized.
+
+Cholecystolithiasis. No cholestasis. Vascular sclerosis. No
+lymphadenopathy. Bilaterally aerated lung bases captured without change.
+Unchanged irregularly thickened and coarsely structured right iliac
+bone, consistent with Paget\'s disease.
+
+**Recommendations:**
+
+Ciclosporin level monitoring
+
+**Medication upon discharge:**
+
+  **Medication **                    **Dosage**   **Frequency**
+  ---------------------------------- ------------ ---------------
+  Atorvastatin (Lipitor)             40 mg        0-0-0-1
+  Candesartan Cilexetil (Atacand)    8 mg         0-1-0-0
+  Prednisone (Deltasone)             5 mg         1-0-0-0
+  Vitamin D3 (Cholecalciferol)       20,000 IU    1 x/week
+  Apixaban (Eliquis)                 2.5 mg       1-0-1-0
+  Magnesium Oxide                    400 mg       1-0-0-0
+  Metoprolol Succinate (Toprol-XL)   95 mg        1-0-1-0
+  Mycophenolic Acid (Myfortic)       360 mg       1-0-1-0
+  Pantoprazole (Protonix)            20 mg        1-0-0-0
+  Ciclosporin (Neoral)               100 mg       70-0-70-0
+
+
+</text_3>
+<text_4>
+**Dear colleague, **
+
+We would like to inform you about our patient, Mr. Alan Fisher, born on
+12/09/1953, who was under our inpatient care from 02/19/2020 to
+03/01/2020.
+
+**Current Symptoms:** Decreased general condition, weakness,
+decompensation
+
+**Diagnosis**: Acute episode of recurrent urinary tract infection with
+detection of E. faecalis, E. faecium, and Enterobacter cloacae in urine
+(blood cultures sterile).
+
+**Other Diagnoses:**
+
+-   History of renal transplantation on 10/25/1995
+
+-   Dual immunosuppression with Cyclosporin A/Steroid since 10/1995
+
+-   Terminal renal insufficiency due to chronic pyelonephritis and
+    nephrolithiasis
+
+-   Chronic hemodialysis from 09-10/1995
+
+-   Right laparoscopic nephrectomy on 03/2007 due to suspected renal
+    cell carcinoma, histologically not confirmed
+
+-   Incisional hernia after nephrectomy, diagnosed on 07/2007
+
+-   Secondary hyperparathyroidism
+
+-   Coronary artery disease, CAD-3:
+
+    -   Previous anterior wall infarction in 1989, treated with
+        thrombolysis and PTCA
+
+    -   PTCA + stent in the right coronary artery (RIVA) in 05/1995
+
+    -   PTCA + drug-eluting stent (DES) in RIVA on 05/15/2005
+
+    -   PTCA + Genous (anti CD34+ Antibody-coated) in RIVA on 08/14/2006
+
+    -   Remaining: 75% stenosis in D1 and occlusion of the small RCA
+        (last cardiac catheterization on 03/24/2008)
+
+    -   Stress echocardiography planned for 01/09 if ischemia is
+        detected, followed by bypass surgery if necessary
+
+-   Right superficial femoral artery profundaplasty on 03/11/2007
+
+-   Permanent atrial fibrillation, diagnosed in 03/07, unsuccessful
+    cardioversion on 03/2008, anticoagulated with Marcumar
+
+-   Arterial hypertension
+
+-   Hyperlipoproteinemia, possible dose-dependent Fluvastatin
+    intolerance
+
+-   COPD GOLD Stage II
+
+-   Mild sleep apnea syndrome in 01/2005
+
+-   Massive diverticulosis (last colonoscopy on 07/2008)
+
+-   History of Hepatitis B infection
+
+-   Cholecystolithiasis
+
+**Medical History:** The patient was admitted through our internal
+medicine emergency department. He presented with worsening general
+condition and increasing weakness, following the recommendation of our
+local nephrological telemedicine. He particularly noticed the increasing
+weakness when getting up, describing his legs as feeling like rubber. He
+also experienced shortness of breath. His walking distance was greater
+than 100 meters. There was no fever, chills, nausea, vomiting, dysuria,
+or changes in bowel movements. Before the outpatient visit, the patient
+had collected urine for 24 hours, totaling 1700 ml, with a fluid intake
+of approximately 2 liters. His blood pressure at home was approximately
+120/60 mmHg. In the emergency department, he had negative urinary
+dipstick results and a non-specific chest X-ray. Blood and urine
+cultures were obtained, and he was subsequently transferred to our
+general ward. No angina pectoris symptoms. The patient had normal bowel
+movements, specifically no melena, and no blood-tinged stools. Urine was
+described as clear and light.
+
+**Physical Examination:** Alert, oriented, cooperative, oriented to
+time, place, person, and situation. Height 179 cm; Weight 114 kg
+
+[Head/neck:]{.underline} No tender nerve exit points; Clear nasal
+sinuses; No tenderness over the skull; Mucous membranes pink and moist;
+Dental status is rehabilitated; Tongue moist and glossy
+[Thorax]{.underline}: Normally shaped; Spine without tenderness; Renal
+regions free of tenderness
+
+[Heart]{.underline}: Heart sounds are faint, arrhythmic, clear, regular
+rate, no splitting of heart sounds; Jugular veins are not distended
+
+[Lungs]{.underline}: Faint vesicular breath sounds; Resonant percussion
+note; Dullness on the left, no added sounds; No stridor; Normal breath
+excursion
+
+[Abdomen]{.underline}: Large right abdominal wall hernia, normal
+peristalsis in all quadrants; Soft; No pathological resistances; No
+tenderness (especially not over the left lower abdomen)
+
+[Skin status:]{.underline} No pathological skin findings
+
+Extremities: Warm; Mild edema.
+
+[Neurology:]{.underline} Alert. No focal deficits
+
+**Treatment and Progression:** The patient was admitted through our
+emergency department due to a decrease in general condition and
+weakness, accompanied by significantly elevated laboratory infection
+parameters and slightly worsened retention parameters (Creatinine max
+3.4 mg/dL compared to the current baseline of 3 mg/dL). Upon admission,
+apart from a known and persistent leukocyturia since 2020, there were no
+indications of any other infectious focus. We were able to detect
+Enterobacter cloacae and Enterococcus faecalis in the urine, and we
+initially treated the patient with intravenous Tazobactam. Blood
+cultures remained sterile. The patient\'s general condition improved
+within a few days, along with a regression of infection parameters.
+
+For further investigation of recurrent urinary tract infections (UTIs)
+and in the context of a history of urethral stricture treatment in
+February 2021 with bougienage of the urethra one year ago, a urological
+consultation was arranged. During this consultation, there was suspicion
+of a recurrence of the urethral stricture due to a significant residual
+urine volume of 175 ml. A scheduled readmission for repeat surgical
+management was set for May 16, 2022. Due to the lack of normalization of
+elevated infection parameters and significant residual urine, a urinary
+catheter was inserted. Subsequently, Enterococcus faecium was detected,
+and we continued treatment with oral Linezolid after the completion of
+intravenous antibiotic therapy.
+
+The antibiotic treatment was planned to continue on an outpatient basis
+for a total of 10 days. We kindly request an outpatient follow-up to
+monitor infection parameters next week. The urinary catheter will be
+maintained until the urological follow-up appointment, and the patient
+has been provided with a prescription for medication.
+
+Furthermore, the patient exhibited atrial tachyarrhythmia. We reduced
+the heart rate using Digoxin, as the patient was already on maximum
+beta-blocker therapy. The atrial tachyarrhythmia significantly improved
+under this treatment.
+
+Additionally, there was a non-puncture-worthy pleural effusion and a
+chronic pericardial effusion, which was not hemodynamically relevant.
+There were no clinical indications of pericarditis.
+
+**Current Recommendations:**
+
+1.  Inpatient admission to Urology Department.
+
+2.  Outpatient laboratory monitoring and referral issuance by the
+    primary care physician.
+
+
+</text_4>
+<text_5>
+**Dear colleague, **
+
+We are reporting on mutual patient, Mr. Alan Fisher, born on 12/09/1953,
+who was under our inpatient care from 03/14/2020 to 03/15/2020.
+
+**Diagnoses**: Anastomotic stricture following history of prostatectomy
+and history of urethrotomy interna.
+
+**Other Diagnoses:**
+
+-   History of renal transplantation on 10/25/1995
+
+-   Dual immunosuppression with Cyclosporin A/Steroid since 10/1995
+
+-   Terminal renal insufficiency due to chronic pyelonephritis and
+    nephrolithiasis
+
+-   Chronic hemodialysis from 09-10/1995
+
+-   Right laparoscopic nephrectomy on 03/2007 due to suspected renal
+    cell carcinoma, histologically not confirmed
+
+-   Incisional hernia after nephrectomy, diagnosed on 07/2007
+
+-   Secondary hyperparathyroidism
+
+-   Coronary artery disease, CAD-3:
+
+    -   Previous anterior wall infarction in 1989, treated with
+        thrombolysis and PTCA
+
+    -   PTCA + stent in the right coronary artery (RIVA) in 05/1995
+
+    -   PTCA + drug-eluting stent (DES) in RIVA on 05/15/2005
+
+    -   PTCA + Genous (anti CD34+ Antibody-coated) in RIVA on 08/14/2006
+
+    -   Remaining: 75% stenosis in D1 and occlusion of the small RCA
+        (last cardiac catheterization on 03/24/2008)
+
+    -   Stress echocardiography planned for 01/09 if ischemia is
+        detected, followed by bypass surgery if necessary
+
+-   Right superficial femoral artery profundaplasty on 03/11/2007
+
+-   Permanent atrial fibrillation, diagnosed in 03/07, unsuccessful
+    cardioversion on 03/2008, anticoagulated with Marcumar
+
+-   Arterial hypertension
+
+-   Hyperlipoproteinemia, possible dose-dependent Fluvastatin
+    intolerance
+
+-   COPD GOLD Stage II
+
+-   Mild sleep apnea syndrome in 01/2005
+
+-   Massive diverticulosis (last colonoscopy on 07/2008)
+
+-   History of Hepatitis B infection
+
+-   Cholecystolithiasis
+
+**Procedure**:
+
+-   Urethrotomy interna according to Sachse
+
+-   Calculated intravenous antibiotic therapy with Meropenem starting on
+    03/14/2020
+
+-   Extension of therapy to include antifungal treatment with
+    Fluconazole on 03/15/2020
+
+**Medical History:** The patient presents with a recurrence of
+symptomatic urethral stricture at the anastomosis site following
+prostatectomy. The main symptoms are frequent urination, dysuria, and
+residual urine formation up to 175 ml. In January 2019, urethrotomy
+interna was already performed. Since the last hospitalization due to a
+urinary tract infection, the patient has had a continuous
+catheterization.
+
+**Physical Examination:** Patient in a reduced general condition and
+obese nutritional status. The abdomen is soft, without signs of
+resistance or pain. Kidney beds on both sides are indolent.
+
+**Urine Diagnostics**: Urine dipstick: Leukocytes 500, Nitrite negative,
+Erythrocytes 50
+
+**Microbiology**: Candida in urine, collected by the general
+practitioner on 03/11/2020.
+
+**Chest X-ray in two planes on 02/19/2020:**
+
+[Clinical Information, Question, Justification for the
+Examination]{.underline}: Deterioration of general condition. History of
+recurrent sepsis. History of lung transplantation. Infiltrates?
+
+**Findings**: The heart is shifted to the left and has a mitral
+configuration. No signs of acute congestion. The mediastinum shows no
+signs of emphysema, is centrally located, and of normal width. No active
+pneumonia in the ventilated lung regions. Progressive costophrenic angle
+effusion on the left. No pleural effusion on the right, as far as can be
+assessed. No pneumothorax. Degenerative changes in the spine.
+Hyperkyphosis of the thoracic spine.
+
+**Therapy and Progression:** The above-mentioned procedure was performed
+without complication. Scar tissue at the level of the bladder sphincter
+was incised. The postoperative course was uneventful. The transurethral
+indwelling catheter was removed on the 19th postoperative day. At the
+time of discharge, the patient could urinate without residual urine with
+a good urinary stream. We discharged the patient on 03/19/2020 for
+further outpatient care.
+
+**Medication upon Discharge:**
+
+  **Medication **                          **Dosage**          **Frequency**
+  ---------------------------------------- ------------------- ------------------
+  Magnesium Oxide                          400 mg              1-0-0-0
+  Atorvastatin (Lipitor)                   43.3 mg             0-0-1-0
+  Candesartan Cilexetil (Atacand)          16 mg               1-1-0-1
+  Prednisone (Deltasone)                   5 mg                1-0-0-0
+  Vitamin D3 (Cholecalciferol, oily)       20,000 IU           1x every 2 weeks
+  Apixaban (Eliquis)                       2.5 mg              1-0-1-0
+  Metoprolol Succinate (Toprol-XL)         95 mg               1-0-1-0
+  Mycophenolic Acid (Myfortic)             385 mg              1-0-1-0
+  Pantoprazole (Protonix)                  22.6 mg             1-0-0-0
+  Piperacillin/Tazobactam (Zosyn)          4.17 g and 0.54 g   1-1-1-0
+  Cyclosporine, microemulsified (Neoral)   10 mg               1-0-1-0
+  Cyclosporine, microemulsified (Neoral)   50 mg               1-0-1-0
+  Torsemide (Demadex)                      10 mg               2-1-0-0
+
+**Lab results upon Discharge:**
+
+  **Parameter**                               **Results**        **Reference Range**
+  ------------------------------------------- ------------------ ---------------------
+  Sodium                                      141 mEq/L          136-145 mEq/L
+  Potassium                                   3.9 mEq/L          3.5-4.5 mEq/L
+  Creatinine                                  3.02 mg/dL         0.70-1.20 mg/dL
+  Estimated GFR (eGFR)                        19 mL/min/1.73m²   \-
+  Total Bilirubin                             0.73 mg/dL         \< 1.20 mg/dL
+  Direct Bilirubin                            0.41 mg/dL         \< 0.30 mg/dL
+  C-reactive Protein                          78.3 mg/dL         \< 5.0 mg/dL
+  Alanine Aminotransferase                    35 U/L             \< 41 U/L
+  Aspartate Aminotransferase                  33 U/L             \< 50 U/L
+  Alkaline Phosphatase                        273 U/L            40-130 U/L
+  Gamma-Glutamyl Transferase                  184 U/L            8-61 U/L
+  Lipase                                      102 U/L            13-60 U/L
+  Hemoglobin                                  12.3 g/dL          12.5-17.2 g/dL
+  Hematocrit                                  39.0%              37.0-49.0%
+  Red Blood Cells                             4.2 M/uL           4.0-5.6 M/uL
+  White Blood Cells                           10.41 K/uL         3.90-10.50 K/uL
+  Platelets                                   488 K/uL           150-370 K/uL
+  Mean Corpuscular Volume                     92.4 fL            80.0-101.0 fL
+  Mean Corpuscular Hemoglobin                 29.1 pg            27.0-34.0 pg
+  Mean Corpuscular Hemoglobin Concentration   31.5 g/dL          31.5-36.0 g/dL
+  Mean Platelet Volume                        10.3 fL            7.0-12.0 fL
+  Red Cell Distribution Width                 13.5%              11.5-15.0%
+
+</text_5>
+</notes>
+</patient-record-patient_12>
