@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Materialize LongHealth 5-phase eval parquets, corpora, and train symlinks.
 
-Splits:
-  Phase 1: patient_01, patient_02, patient_11, patient_12 (80 questions)
-  Phase 2: patient_03, patient_04, patient_13, patient_14 (80 questions)
-  Phase 3: patient_05, patient_06, patient_15, patient_16 (80 questions)
-  Phase 4: patient_07, patient_08, patient_17, patient_18 (80 questions)
-  Phase 5: patient_09, patient_10, patient_19, patient_20 (80 questions)
+Splits (sequential patient grouping):
+  Phase 1: patient_01, patient_02, patient_03, patient_04 (80 questions)
+  Phase 2: patient_05, patient_06, patient_07, patient_08 (80 questions)
+  Phase 3: patient_09, patient_10, patient_11, patient_12 (80 questions)
+  Phase 4: patient_13, patient_14, patient_15, patient_16 (80 questions)
+  Phase 5: patient_17, patient_18, patient_19, patient_20 (80 questions)
 """
 
 from __future__ import annotations

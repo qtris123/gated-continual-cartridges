@@ -1,8 +1,9 @@
 """Phase 1: classic Attention Matching compaction (backprop-free).
 
-Builds one large teacher KV cache from a QASPER or QuALITY phase, then compacts
-it to a NUM_TOKENS-slot cartridge by selecting teacher keys and ridge-fitting
-values to reproduce teacher attention outputs on reference queries.
+Builds one large teacher KV cache from a QASPER, QuALITY, FinQA, TechQA, or
+LongHealth phase, then compacts it to a NUM_TOKENS-slot cartridge by selecting
+teacher keys and ridge-fitting values to reproduce teacher attention outputs on
+reference queries.
 
 Keys are teacher-derived rather than init-text, and there are no Phase-2
 stabilizers (one-shot compaction). KVFromText + self-match refine is deprecated.
@@ -106,15 +107,17 @@ RUN_NAME = os.environ.get(
 
 if not QA_DATA_PATH:
     raise ValueError("Set QA_DATA_PATH (phase-1 self-study parquet)")
-if AM_DATASET not in {"qasper", "quality", "finqa", "techqa"}:
+if AM_DATASET not in {"qasper", "quality", "finqa", "techqa", "longhealth"}:
     raise ValueError(
         f"AM_DATASET={AM_DATASET!r} is unsupported; expected "
-        "qasper, quality, finqa, or techqa"
+        "qasper, quality, finqa, techqa, or longhealth"
     )
 if AM_DATASET == "quality" and AM_QUALITY_PHASE is None:
     raise ValueError("AM_QUALITY_PHASE is required when AM_DATASET=quality")
-if AM_DATASET in {"finqa", "techqa"} and AM_PHASE not in range(1, 6):
-    raise ValueError("AM_PHASE (1..5) is required when AM_DATASET=finqa/techqa")
+if AM_DATASET in {"finqa", "techqa", "longhealth"} and AM_PHASE not in range(1, 6):
+    raise ValueError(
+        f"AM_PHASE (1..5) is required when AM_DATASET={AM_DATASET!r}"
+    )
 
 _model_cls = FlexQwen3ForCausalLM if "qwen" in MODEL_NAME.lower() else FlexLlamaForCausalLM
 

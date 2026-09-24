@@ -427,7 +427,7 @@ def main() -> None:
             f"beta={cfg['beta']['enabled']} top_t={cfg['slots']['top_t']} "
             f"ridge={cfg['objective']['ridge_lambda']} "
             f"delta={cfg['objective']['delta_weight']} "
-            f"rope_theta={cfg['rope_theta']:g}"
+            f"rope_theta={cfg['rope_theta']}"
         )
     else:
         grad = cfg.get("gradient", {}) if isinstance(cfg, dict) else {}

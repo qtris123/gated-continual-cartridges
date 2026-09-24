@@ -20,13 +20,13 @@ data/longhealth/
     ├── p04/
     └── p05/
 
-Stage mapping:
+Stage mapping (sequential patient grouping):
 
-p01: patient_01, patient_02, patient_11, patient_12
-p02: patient_03, patient_04, patient_13, patient_14
-p03: patient_05, patient_06, patient_15, patient_16
-p04: patient_07, patient_08, patient_17, patient_18
-p05: patient_09, patient_10, patient_19, patient_20
+p01: patient_01, patient_02, patient_03, patient_04
+p02: patient_05, patient_06, patient_07, patient_08
+p03: patient_09, patient_10, patient_11, patient_12
+p04: patient_13, patient_14, patient_15, patient_16
+p05: patient_17, patient_18, patient_19, patient_20
 
 Requirements:
 
