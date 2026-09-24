@@ -35,6 +35,7 @@ BUDGETS_STR="1024,2048,4096"
 TOP_TS_STR="64,128,256"
 MAX_QUERIES_ARG=""
 DELTA_WEIGHT_ARG=""
+TAG_SUFFIX=""
 FORCE=0
 DRY_RUN=0
 EVAL_ACCURACY=0
@@ -54,6 +55,7 @@ Options:
   --top-ts <list>      Comma-separated proportional top-t values (default: $TOP_TS_STR)
   --max-queries-per-head <N> Max queries per head (default: 1024)
   --delta-weight <val> Explicit delta_weight (default: linearly scaled with max queries: 0.16 for 1024)
+  --tag-suffix <str>   Suffix to append to lineage tag and p01 root (e.g. _q64, _q1024)
   --eval-accuracy      Run additional 5x5 text generation accuracy evaluation (for QuALITY/LongHealth MCQ)
   --force              Rebuild and overwrite existing cache/eval artifacts
   --dry-run            Print execution plan without running
@@ -88,6 +90,7 @@ while [[ $# -gt 0 ]]; do
     --top-t)     TOP_TS_STR="$2"; shift 2 ;;
     --max-queries-per-head) MAX_QUERIES_ARG="$2"; shift 2 ;;
     --delta-weight) DELTA_WEIGHT_ARG="$2"; shift 2 ;;
+    --tag-suffix) TAG_SUFFIX="$2"; shift 2 ;;
     --eval-accuracy) EVAL_ACCURACY=1; shift ;;
     --force)     FORCE=1; shift ;;
     --dry-run)   DRY_RUN=1; shift ;;
@@ -220,14 +223,14 @@ for p in range(1, 6):
     SIZE="${BUDGETS[$i]}"
   TOP_T="${TOP_TS[$i]}"
     if [[ "$MODEL_SLUG" == "qwen3_4b" ]]; then
-      TAG="e2e_budget${SIZE}_topt${TOP_T}"
+      TAG="e2e_budget${SIZE}_topt${TOP_T}${TAG_SUFFIX}"
       P1_PREFIX=""
     else
-      TAG="${MODEL_SLUG}_budget${SIZE}_topt${TOP_T}"
+      TAG="${MODEL_SLUG}_budget${SIZE}_topt${TOP_T}${TAG_SUFFIX}"
       P1_PREFIX="${MODEL_SLUG}_"
     fi
     RECIPE="$RECIPEDIR/${TAG}.yaml"
-    P1_ROOT="$ROOT/outputs/experiments/subkv_sweep_${DATASET}/${P1_PREFIX}budget${SIZE}/p01"
+    P1_ROOT="$ROOT/outputs/experiments/subkv_sweep_${DATASET}/${P1_PREFIX}budget${SIZE}${TAG_SUFFIX}/p01"
     SWEEP_LOG="$LOGDIR/${DATASET}_${TAG}_${TS}.log"
 
   if [[ -n "$MAX_QUERIES_ARG" ]]; then
