@@ -98,13 +98,71 @@ Hydrate missing dataset shards from Hugging Face:
 bash scripts/prepare_artifacts.sh --which data
 ```
 
-### Step 2: LongHealth Preparation
-Ensure the 5-phase LongHealth eval parquets and train symlinks are materialized:
+> [!IMPORTANT]
+> `prepare_artifacts.sh --which data` covers QASPER, TechQA, FinQA, and QuALITY synth/eval parquets. It does **NOT** cover LongHealth synth parquets — those must be generated locally using Step 2 below. If you skip Step 2, the pre-flight check will fail with `[FAIL] longhealth: Missing synth phases: [1, 2, 3, 4, 5]`.
+
+### Step 2: Generate LongHealth Synth Parquets
+The LongHealth self-study training parquets (`data/longhealth/synth/p0{1..5}/`) are **not stored in git or the HF dataset repo**. They must be generated locally by downloading the raw LongHealth source from Hugging Face and splitting into sequential patient stages:
+
+```bash
+# Downloads raw LongHealth data from HF and builds sequential 5-stage synth parquets.
+# Requires HF read access (HF_TOKEN is sufficient; the raw LongHealth sources are gated).
+# Estimated runtime: ~5-10 minutes depending on download speed.
+python3 examples/split_longhealth_stages.py \
+  --no-upload \
+  --keep-local data/longhealth
+```
+
+This produces:
+```
+data/longhealth/synth/
+├── p01/self_study-n8192/artifact/dataset.parquet   # patients 01-04
+├── p02/self_study-n8192/artifact/dataset.parquet   # patients 05-08
+├── p03/self_study-n8192/artifact/dataset.parquet   # patients 09-12
+├── p04/self_study-n8192/artifact/dataset.parquet   # patients 13-16
+└── p05/self_study-n8192/artifact/dataset.parquet   # patients 17-20
+```
+
+Verify the outputs contain the expected patients:
+```bash
+python3 -c "
+import pyarrow.parquet as pq, re
+from pathlib import Path
+for stage in ['p01','p02','p03','p04','p05']:
+    pq_path = Path(f'data/longhealth/synth/{stage}/self_study-n8192/artifact/dataset.parquet')
+    if not pq_path.exists():
+        print(f'{stage}: MISSING'); continue
+    df = pq.read_table(pq_path).to_pandas()
+    ids = set()
+    for msg_list in df['messages']:
+        for m in msg_list:
+            ids.update(re.findall(r'patient_\d+', str(m.get('content', ''))))
+    print(f'{stage}: {len(df)} rows | patients: {sorted(ids)}')
+"
+```
+
+### Step 3: LongHealth Phase Eval Preparation
+Materialize the 5-phase LongHealth eval parquets and train symlinks:
 ```bash
 python3 examples/maintenance/data/prepare_longhealth_phases.py
 ```
 
-### Step 3: Run Pre-Flight Dataset Verification
+### Step 4: Purge Any Stale LongHealth Chain Artifacts
+
+> [!CAUTION]
+> `run_chain.py`'s stage-reuse check (`valid_marker`) only verifies that a `cache_last.pt` file exists and eval metrics are present. It does **not** fingerprint the recipe, input cache, patient split, or synth parquets. If any LongHealth chain artifacts exist from a previous run with the old interleaved patient mapping (01,02,11,12 / 03,04,13,14 / …) or different config, they will be **silently reused**, producing invalid results.
+>
+> Before launching any LongHealth sweep on this machine, always run:
+```bash
+rm -rf \
+  outputs/experiments/subkv_sweep_longhealth/ \
+  outputs/longhealth_5phase_state/ \
+  outputs/longhealth_5phase_runs/ \
+  outputs/evaluations/longhealth/
+```
+> This is safe: all LongHealth outputs are fully reproducible from the sweep command.
+
+### Step 5: Run Pre-Flight Dataset Verification
 Execute this check script to verify that all 5 eval phases and 5 training synth files exist for all 5 target datasets:
 
 ```bash
@@ -128,7 +186,7 @@ for ds in datasets:
         print(f'[OK] {ds}: all 5 eval and 5 synth parquets found.')
 
 if not all_ok:
-    print('\nAction required: Run `bash scripts/prepare_artifacts.sh --which data`')
+    print('\nAction required: see Steps 1-3 above')
     sys.exit(1)
 print('\nAll 5 datasets ready for sweep execution!')
 "
@@ -141,11 +199,13 @@ print('\nAll 5 datasets ready for sweep execution!')
 Track your execution progress:
 
 ### Pre-Flight
-- [ ] Export `HF_TOKEN` with access to `meta-llama/Llama-3.2-3B-Instruct`.
+- [ ] Export `HF_TOKEN` with access to `meta-llama/Llama-3.2-3B-Instruct` and the raw LongHealth HF datasets.
 - [ ] Verify local Python environment and editable install (`pip install -e .`).
 - [ ] Pre-cache Llama 3.2 3B weights locally.
-- [ ] Hydrate dataset artifacts (`scripts/prepare_artifacts.sh --which data`).
-- [ ] Prepare LongHealth phases (`python3 examples/maintenance/data/prepare_longhealth_phases.py`).
+- [ ] Hydrate dataset artifacts for QASPER/TechQA/FinQA/QuALITY (`bash scripts/prepare_artifacts.sh --which data`).
+- [ ] Generate LongHealth synth parquets (`python3 examples/split_longhealth_stages.py --no-upload --keep-local data/longhealth`).
+- [ ] Prepare LongHealth phase eval parquets (`python3 examples/maintenance/data/prepare_longhealth_phases.py`).
+- [ ] **Purge any stale LongHealth chain artifacts** (`rm -rf outputs/experiments/subkv_sweep_longhealth/ outputs/longhealth_5phase_state/ outputs/longhealth_5phase_runs/ outputs/evaluations/longhealth/`).
 - [ ] Run pre-flight dataset verification script (all 5 datasets `[OK]`).
 - [ ] Run `--dry-run` to verify recipe generation and execution plans.
 
