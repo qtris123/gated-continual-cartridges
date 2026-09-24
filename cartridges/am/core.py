@@ -22,6 +22,40 @@ def _inv_sqrt_d(head_dim: int) -> float:
     return (1.0 / head_dim) ** 0.5
 
 
+# When set, rebake and doc-offset rotations use this model's RoPE frequencies
+# instead of a vanilla ``rope_theta`` schedule. Llama 3 divides its low-frequency
+# bands by the scaling factor (32 for Llama 3.2); a vanilla rotation then leaves
+# post-RoPE keys off the slot the model will score them at.
+_BOUND_INV_FREQ: Optional[torch.Tensor] = None
+
+
+def bind_model_rope(model) -> torch.Tensor:
+    """Bind rebake / doc-offset rotations to ``model``'s rotary frequencies."""
+    global _BOUND_INV_FREQ
+    rotary = getattr(model, "rotary_emb", None)
+    if rotary is None and hasattr(model, "model"):
+        rotary = getattr(model.model, "rotary_emb", None)
+    if rotary is None or not hasattr(rotary, "inv_freq"):
+        raise RuntimeError(f"{type(model).__name__} has no rotary_emb.inv_freq")
+    inv = rotary.inv_freq.detach().to(dtype=torch.float32, device="cpu").contiguous()
+    _BOUND_INV_FREQ = inv
+    return inv
+
+
+def _rope_inv_freq(head_dim: int, rope_theta: float, device) -> torch.Tensor:
+    if _BOUND_INV_FREQ is not None:
+        freq = _BOUND_INV_FREQ.to(device=device)
+        if freq.numel() != head_dim // 2:
+            raise RuntimeError(
+                f"bound RoPE inv_freq has {freq.numel()} bands, expected {head_dim // 2}"
+            )
+        return freq
+    return 1.0 / (
+        rope_theta
+        ** (torch.arange(0, head_dim, 2, device=device, dtype=torch.float32) / head_dim)
+    )
+
+
 def _apply_rope_offset_to_queries(
     queries: torch.Tensor,
     offset: int,
@@ -33,10 +67,7 @@ def _apply_rope_offset_to_queries(
         return queries
     device = queries.device
     dtype = queries.dtype
-    inv_freq = 1.0 / (
-        rope_theta
-        ** (torch.arange(0, head_dim, 2, device=device, dtype=torch.float32) / head_dim)
-    )
+    inv_freq = _rope_inv_freq(head_dim, rope_theta, device)
     freqs = float(offset) * inv_freq
     emb = torch.cat([freqs, freqs], dim=-1)
     cos = emb.cos().to(dtype=dtype).view(1, -1)
@@ -62,10 +93,7 @@ def _rope_reposition(
     """
     device = keys.device
     delta = (to_pos.to(torch.float32) - from_pos.to(torch.float32))  # (t,)
-    inv_freq = 1.0 / (
-        rope_theta
-        ** (torch.arange(0, head_dim, 2, device=device, dtype=torch.float32) / head_dim)
-    )
+    inv_freq = _rope_inv_freq(head_dim, rope_theta, device)
     angle = delta[:, None] * inv_freq[None, :]  # (t, d/2)
     emb = torch.cat([angle, angle], dim=-1)  # (t, d)
     cos = emb.cos().to(keys.dtype)
@@ -168,6 +196,31 @@ def compute_attention_output(
     return weights @ values.to(torch.float32)
 
 
+def _spectral_norm(X: torch.Tensor, iters: int = 40) -> torch.Tensor:
+    """Largest singular value of ``X`` by power iteration.
+
+    Matches ``torch.linalg.matrix_norm(X, ord=2)`` without the full SVD. The
+    phase-1 design matrix is about ``1024 x 8192`` per head, and that SVD is a
+    CPU-bound minute; the ridge only needs ``sigma_max``.
+    """
+    Xf = X.detach().float()
+    _, k = Xf.shape
+    v = torch.randn(k, device=Xf.device, dtype=torch.float32)
+    v = v / v.norm().clamp_min(1e-12)
+    sigma = Xf.new_zeros(())
+    for _ in range(iters):
+        u = Xf.mv(v)
+        sigma_new = u.norm()
+        if float(sigma_new) <= 1e-12:
+            return sigma_new
+        v = Xf.t().mv(u)
+        v = v / v.norm().clamp_min(1e-12)
+        if float(torch.abs(sigma_new - sigma)) <= 1e-6 * float(sigma_new):
+            return sigma_new
+        sigma = sigma_new
+    return sigma
+
+
 def effective_ridge_lambda(
     X: torch.Tensor,
     ridge_lambda: float = 1e-4,
@@ -180,7 +233,7 @@ def effective_ridge_lambda(
     n, k = X.shape
     if ridge_scale == "spectral":
         try:
-            lam = ridge_lambda * (torch.linalg.matrix_norm(X, ord=2) ** 2).item()
+            lam = ridge_lambda * (_spectral_norm(X) ** 2).item()
         except Exception:
             lam = ridge_lambda * (
                 (torch.linalg.matrix_norm(X, ord="fro") ** 2) / max(k, 1)

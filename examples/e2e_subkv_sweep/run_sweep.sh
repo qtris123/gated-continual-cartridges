@@ -20,6 +20,14 @@
 
 set -euo pipefail
 
+# One chain per GPU. Leave the other cores free so seven chains do not each
+# pin every CPU and starve the GPU launch threads.
+export OMP_NUM_THREADS="${OMP_NUM_THREADS:-8}"
+export MKL_NUM_THREADS="${MKL_NUM_THREADS:-8}"
+export OPENBLAS_NUM_THREADS="${OPENBLAS_NUM_THREADS:-8}"
+export NUMEXPR_NUM_THREADS="${NUMEXPR_NUM_THREADS:-8}"
+export OMP_WAIT_POLICY="${OMP_WAIT_POLICY:-PASSIVE}"
+
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$ROOT"
 

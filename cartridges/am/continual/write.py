@@ -154,6 +154,7 @@ def apply_document_am_write_to_cache(
     head_dim: int,
     old_query_accumulator: Optional[AMQueryAccumulator] = None,
     old_target_bank: Optional[dict[tuple[int, int], torch.Tensor]] = None,
+    target_accumulator: Optional["AMTargetAccumulator"] = None,
     onpolicy_refresh_fn: Optional[
         Callable[[int, int], tuple[AMQueryAccumulator, Optional[dict]]]
     ] = None,
@@ -272,15 +273,37 @@ def apply_document_am_write_to_cache(
             )
             k_doc = k_doc_layer[head_idx].to(device=device, dtype=keys.dtype)
             v_doc = v_doc_layer[head_idx].to(device=device, dtype=values.dtype)
+            # The support is filled with this document's keys only. A short
+            # note cannot occupy top_t slots; the highest-attention prefix is
+            # rewritten and the rest of the cartridge stays as it was.
+            n_doc_keys = int(k_doc.shape[0])
+            if selected_full.numel() > n_doc_keys:
+                selected_full = selected_full[:n_doc_keys]
 
             queries = query_accumulator.get_layer_head_queries(
                 layer_idx, head_idx,
                 n_q_heads=n_q_heads_actual,
                 n_kv_heads=n_kv_heads,
             )
+            flex_targets = None
+            if target_accumulator is not None:
+                flex_targets = target_accumulator.get_layer_head_targets(
+                    layer_idx, head_idx,
+                    n_q_heads=n_q_heads_actual,
+                    n_kv_heads=n_kv_heads,
+                )
+                if flex_targets.numel() == 0:
+                    flex_targets = None
             if queries.numel() == 0:
                 continue
             queries = queries.to(device=device, dtype=keys.dtype)
+            if flex_targets is not None:
+                flex_targets = flex_targets.to(device=device, dtype=torch.float32)
+                if flex_targets.shape[0] != queries.shape[0]:
+                    raise RuntimeError(
+                        f"Flex targets ({flex_targets.shape[0]}) are not aligned with "
+                        f"queries ({queries.shape[0]}) at layer {layer_idx} head {head_idx}"
+                    )
 
             # How many reference queries the accumulator could actually supply for
             # this (layer, head) BEFORE the subsample — this is the hard ceiling on
@@ -290,6 +313,8 @@ def apply_document_am_write_to_cache(
             if queries.shape[0] > max_queries_per_head:
                 idx = torch.randperm(queries.shape[0], device=device)[:max_queries_per_head]
                 queries = queries[idx]
+                if flex_targets is not None:
+                    flex_targets = flex_targets[idx]
 
             n_queries_used.append(int(queries.shape[0]))
             total_queries += queries.shape[0]
@@ -342,14 +367,19 @@ def apply_document_am_write_to_cache(
                 "doc_rope_offset": doc_rope_offset,
                 "rope_theta": rope_theta,
             }
-            targets = stages.teacher.targets(
-                queries,
-                k_teacher,
-                v_teacher,
-                head_dim,
-                attention_bias=teacher_bias,
-                **teacher_rope_kwargs,
-            )
+            if flex_targets is not None:
+                # In-context flex outputs. The analytical qK^T target does not
+                # match the residual Llama 3 uses once the document is visible.
+                targets = flex_targets
+            else:
+                targets = stages.teacher.targets(
+                    queries,
+                    k_teacher,
+                    v_teacher,
+                    head_dim,
+                    attention_bias=teacher_bias,
+                    **teacher_rope_kwargs,
+                )
             target_log_mass = stages.teacher.log_mass(
                 queries,
                 k_teacher,
@@ -359,12 +389,13 @@ def apply_document_am_write_to_cache(
             )
 
             if stages.keys.enabled:
-                # Non-selected cartridge keys remain fixed. Compact only the
-                # replaceable old support plus the new document into S.
-                candidate_keys = torch.cat(
-                    [original_keys[selected_full], k_doc],
-                    dim=0,
-                )
+                # Select the new document's keys, as phase 1 does. Mixing the
+                # old cartridge keys into the pool keeps the previous story in
+                # the slots this question attends: rewriting every slot that
+                # way still scored 4.1 nats, against 1.9 for a document-only
+                # compaction of the same story. Slots outside this support
+                # stay as they are.
+                candidate_keys = k_doc
                 rewrite_info: dict = {"layer": layer_idx, "head": head_idx}
                 keys = stages.keys.write(
                     keys,
@@ -372,9 +403,12 @@ def apply_document_am_write_to_cache(
                     candidate_keys,
                     queries,
                     head_dim=head_dim,
-                    doc_key_start=selected_full.numel(),
+                    doc_key_start=0,
                     doc_rope_offset=doc_rope_offset,
                     rope_theta=rope_theta,
+                    # Clean prefill bakes document keys at m. Rebase onto the
+                    # destination slot, the same move phase 1 uses.
+                    doc_baked_pos_base=0,
                     info=rewrite_info,
                 )
                 key_rewrite_info.append(rewrite_info)

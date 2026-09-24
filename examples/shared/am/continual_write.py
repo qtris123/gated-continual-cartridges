@@ -24,6 +24,11 @@ Field-by-field config reference: research_loop/AM_CONFIG.md.
 import os
 from pathlib import Path
 
+os.environ.setdefault("OMP_NUM_THREADS", "8")
+os.environ.setdefault("MKL_NUM_THREADS", "8")
+os.environ.setdefault("OPENBLAS_NUM_THREADS", "8")
+os.environ.setdefault("OMP_WAIT_POLICY", "PASSIVE")
+
 import pydrantic
 import yaml
 

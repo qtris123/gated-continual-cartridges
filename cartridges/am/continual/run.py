@@ -27,8 +27,10 @@ from cartridges.am.components.queries import (
     load_conversations,
     load_old_reference_bank,
 )
+from cartridges.am.components.teacher import cache_from_layer_kv
 from cartridges.am.continual.config import AMContinualConfig, AMStages
 from cartridges.am.continual.write import apply_document_am_write_to_cache
+from cartridges.am.core import bind_model_rope
 from cartridges.cache import AttnConfig, TrainableCache
 from cartridges.sparse_cache_finetuning import CacheTFIDFRanker
 from cartridges.train import CacheAndModel, evaluate_perplexity, save_cache
@@ -122,6 +124,19 @@ def _write_run_meta(config, run_dir: Path, input_cache_path) -> None:
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
     }
     (run_dir / "run_meta.json").write_text(json.dumps(payload, indent=2))
+
+
+def _flex_teacher_cache(cache: TrainableCache, doc_kv: dict) -> TrainableCache:
+    """Document KV alone, in the phase-1 geometry.
+
+    Prefill does not attend to the cartridge, so these keys sit at positions
+    0..T-1. A question forwarded against this cache starts just after the
+    document and can read it (measured NLL 1.4). Concatenating the cartridge
+    in front of the document drops the document's attention mass to about
+    0.07 and the teacher loss above the no-document baseline.
+    """
+    sample = next(iter(doc_kv.values()))[0]
+    return cache_from_layer_kv(cache.config, doc_kv, device=sample.device)
 
 
 def _doc_slug(system_prompt: str, index: int) -> str:
@@ -347,17 +362,22 @@ def run_documents(
         t_doc = time.time()
         try:
             t_prefill = time.time()
+            # Clean document KV at positions 0..T-1. Prefilling against the
+            # cartridge bakes keys the question will not read: the cartridge
+            # takes the attention mass and the teacher loss rises above the
+            # no-document baseline.
             doc_kv = stages.teacher.prefill(
                 model,
                 tokenizer,
                 system_prompt,
                 attn_config=cache.config,
                 device=device,
-                cartridge_cache=cache,
+                cartridge_cache=None,
             )
             prefill_s = time.time() - t_prefill
 
-            query_acc, _, batch_count = stages.queries.collect(
+            flex_cache = _flex_teacher_cache(cache, doc_kv)
+            query_acc, target_acc, batch_count = stages.queries.collect(
                 wrapped_model,
                 cache,
                 doc_loader,
@@ -367,7 +387,9 @@ def run_documents(
                 head_dim=head_dim,
                 device=device,
                 max_batches=len(doc_loader),
+                flex_target_cache=flex_cache,
             )
+            del flex_cache
 
             grad_mask, ranking_info = stages.slots.select(
                 query_acc.get_access_scores(),
@@ -414,7 +436,7 @@ def run_documents(
                             system_prompt,
                             attn_config=cache.config,
                             device=device,
-                            cartridge_cache=cache,
+                            cartridge_cache=None,
                         )
                     return fresh_acc, fresh_kv
 
@@ -428,6 +450,7 @@ def run_documents(
                 head_dim=head_dim,
                 old_query_accumulator=old_query_acc,
                 old_target_bank=old_target_bank,
+                target_accumulator=target_acc,
                 onpolicy_refresh_fn=onpolicy_refresh_fn,
             )
             am_stats.step = doc_idx + 1
@@ -531,6 +554,21 @@ def _init_model_and_cache(config: AMContinualConfig, device):
     model = config.model.instantiate().to(device).to(torch.bfloat16)
     for param in model.parameters():
         param.requires_grad = False
+    bound = bind_model_rope(model)
+    head_dim = (
+        model.config.head_dim
+        if hasattr(model.config, "head_dim")
+        else model.config.hidden_size // model.config.num_attention_heads
+    )
+    vanilla = 1.0 / (
+        float(config.rope_theta)
+        ** (torch.arange(0, head_dim, dtype=torch.float32)[::2] / head_dim)
+    )
+    logger.info(
+        "RoPE write bound to model frequencies (ratio to vanilla theta min=%.4f max=%.4f)",
+        float((bound / vanilla).min()),
+        float((bound / vanilla).max()),
+    )
 
     attn_config = AttnConfig(
         n_layers=model.config.num_hidden_layers,

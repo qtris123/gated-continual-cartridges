@@ -27,6 +27,37 @@ os.environ["TOKENIZERS_PARALLELISM"] = "true"
 
 logger = get_logger(__name__)
 
+
+def stored_token_ids_need_retokenize(
+    conversations: list[Conversation],
+    tokenizer: PreTrainedTokenizerFast,
+) -> bool:
+    """True when stored ids are not this tokenizer's encoding of the text.
+
+    Self-study parquets keep the synthesizer's token ids (Qwen). Those ids
+    index past Llama's embedding table, so a Llama run has to encode the
+    message text itself.
+    """
+    vocab = len(tokenizer)
+    checked = 0
+    for convo in conversations:
+        for message in convo.messages:
+            ids = message.token_ids
+            if ids is None or len(ids) == 0:
+                continue
+            id_list = [int(i) for i in ids]
+            if any(i < 0 or i >= vocab for i in id_list):
+                return True
+            content = (message.content or "").strip()
+            if not content or checked >= 3:
+                continue
+            decoded = tokenizer.decode(id_list, skip_special_tokens=True)
+            norm = lambda text: "".join(ch for ch in text.lower() if ch.isalnum())[:48]
+            if norm(decoded) != norm(content):
+                return True
+            checked += 1
+    return False
+
 BOS_TOKEN_ID = 128000
 EOS_TOKEN_ID = 128009
 START_HEADER_ID = 128006
@@ -333,11 +364,19 @@ class TrainDataset(Dataset):
         for source in self.config.data_sources:
             data.extend(_prepare_data_source(source))
 
+        retokenize = self.config.targets == "tokens" or stored_token_ids_need_retokenize(
+            data, self.tokenizer
+        )
+        if retokenize and self.config.targets != "tokens":
+            logger.info(
+                "Stored token ids do not match %s; retokenizing",
+                self.tokenizer.name_or_path,
+            )
         elements = []
         for row in data:
             elements.append(MODEL_TO_MESSAGE_CONVERTER[self.tokenizer.name_or_path.lower()](
                 row.messages,
-                retokenize=self.config.targets == "tokens",
+                retokenize=retokenize,
                 tokenizer=self.tokenizer,
             ))
 

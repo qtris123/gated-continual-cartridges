@@ -26,23 +26,31 @@ from cartridges.am.components.keys import (
 )
 from cartridges.am.components.queries import (
     AMQueryAccumulator,
+    AMTargetAccumulator,
     build_reference_dataloader,
     cleanup_reference_parquet,
     full_document_prompt,
     group_conversations_by_document,
+    install_teacher_attention_capture_hooks,
     limit_conversations,
     load_conversations,
 )
-from cartridges.am.components.teacher import prefill_document_kv_cache
+from cartridges.am.components.teacher import cache_from_layer_kv, prefill_document_kv_cache
+from cartridges.datasets import MODEL_TO_MESSAGE_CONVERTER
+from cartridges.structs import Conversation
 from cartridges.am.core import (
     _inv_sqrt_d,
     _ridge_lstsq,
     _rope_reposition,
+    bind_model_rope,
     compute_attention_output,
     compute_attention_weights,
 )
 from cartridges.cache import AttnConfig, TrainableCache
-from cartridges.sparse_cache_finetuning import install_query_capture_hooks
+from cartridges.sparse_cache_finetuning import (
+    _apply_rotary_pos_emb,
+    install_query_capture_hooks,
+)
 
 logger = getLogger(__name__)
 
@@ -103,16 +111,24 @@ def compute_compaction_c2(
     head_dim: int,
     ridge_lambda: float = 1e-4,
     ridge_scale: str = "spectral",
+    targets: Optional[torch.Tensor] = None,
 ) -> torch.Tensor:
     """Standard compaction C2 solve (valid when compacted block replaces full block).
 
     softmax(qK^T)V ≈ softmax(qC1^T + beta) C2
+
+    ``targets``, when given, replace ``softmax(qK^T)V``. Phase-1 passes the
+    in-context flex attention output: on Llama 3 the analytical document-only
+    softmax is a different vector from the residual the model actually uses.
     """
     inv_sqrt_d = _inv_sqrt_d(head_dim)
 
-    sK = (queries @ keys.T).to(torch.float32) * inv_sqrt_d
-    attn_K = F.softmax(sK, dim=-1)
-    Y = attn_K @ values.to(torch.float32)
+    if targets is None:
+        sK = (queries @ keys.T).to(torch.float32) * inv_sqrt_d
+        attn_K = F.softmax(sK, dim=-1)
+        Y = attn_K @ values.to(torch.float32)
+    else:
+        Y = targets.to(torch.float32)
 
     sC = (queries @ C1.T).to(torch.float32) * inv_sqrt_d + beta.to(torch.float32)
     X = F.softmax(sC, dim=-1)
@@ -170,6 +186,181 @@ def compact_kv_head(
 # ======================================================================================
 # Corpus-level compaction
 # ======================================================================================
+def _chat_system_prefix_ids(tokenizer, content: str) -> torch.Tensor:
+    """Token ids of ``content`` as the eval chat template's system message."""
+    from cartridges.am.components.teacher import eval_aligned_system_ids
+
+    return eval_aligned_system_ids(tokenizer, content)
+
+
+def _capture_post_rope_kv(model, input_ids: torch.Tensor, device) -> dict[int, tuple[torch.Tensor, torch.Tensor]]:
+    """Post-RoPE K and V for one document, shaped ``(n_kv_heads, T, head_dim)``."""
+    input_ids = input_ids.to(device)
+    captured: dict[int, tuple[torch.Tensor, torch.Tensor]] = {}
+    handles = []
+    for layer_idx, layer in enumerate(model.model.layers):
+        attn = layer.self_attn
+
+        def _make(idx, attn_mod):
+            def _hook(module, args, output):
+                hidden = args[0].hidden_states
+                shape = (*hidden.shape[:-1], -1, attn_mod.head_dim)
+                keys = attn_mod.k_proj(hidden).view(shape).transpose(1, 2)
+                values = attn_mod.v_proj(hidden).view(shape).transpose(1, 2)
+                cos, sin = args[0].position_embeddings
+                keys = _apply_rotary_pos_emb(keys, cos, sin)
+                captured[idx] = (
+                    keys[0].detach().to("cpu", torch.bfloat16),
+                    values[0].detach().to("cpu", torch.bfloat16),
+                )
+
+            return _hook
+
+        handles.append(attn.register_forward_hook(_make(layer_idx, attn)))
+    try:
+        with torch.no_grad(), torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
+            model(
+                input_ids=input_ids,
+                seq_ids=torch.zeros_like(input_ids),
+                position_ids=torch.arange(input_ids.numel(), device=input_ids.device),
+                use_cache=False,
+                mode="train",
+            )
+    finally:
+        for handle in handles:
+            handle.remove()
+    return captured
+
+
+def _shift_key_positions(keys, src_start: int, dst_start: int, head_dim: int, rope_theta: float):
+    """Move post-RoPE keys from positions ``src_start`` to ``dst_start``."""
+    if src_start == dst_start:
+        return keys
+    length = keys.shape[1]
+    from_pos = torch.arange(src_start, src_start + length, device=keys.device)
+    to_pos = torch.arange(dst_start, dst_start + length, device=keys.device)
+    return torch.stack(
+        [
+            _rope_reposition(
+                keys[head].float(), from_pos, to_pos, head_dim, rope_theta=rope_theta
+            ).to(keys.dtype)
+            for head in range(keys.shape[0])
+        ],
+        0,
+    )
+
+
+def _forward_capture(model, input_ids, position_ids, cache, kind: str, seq_ids=None):
+    if kind == "query":
+        captured, handles = install_query_capture_hooks(model)
+    else:
+        captured, handles = install_teacher_attention_capture_hooks(model)
+    if seq_ids is None:
+        seq_ids = torch.zeros_like(input_ids)
+    try:
+        if cache is not None:
+            cache.clear()
+        with torch.no_grad(), torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
+            model(
+                input_ids=input_ids,
+                seq_ids=seq_ids,
+                position_ids=position_ids,
+                use_cache=cache is not None,
+                past_key_values=cache,
+                mode="train",
+            )
+    finally:
+        for handle in handles:
+            handle.remove()
+        if cache is not None:
+            cache.clear()
+    return captured
+
+
+def _collect_flex_phase1_queries(
+    model,
+    tokenizer,
+    ref_groups: dict,
+    local_docs: dict,
+    attn_config: AttnConfig,
+    num_tokens: int,
+    queries_per_batch: str,
+    device,
+):
+    """Question-only queries at eval positions, targets from the document cache.
+
+    Queries are captured at ``num_tokens + local_pos`` because eval adds the
+    cartridge length to ``position_ids``. Targets are the flex attention outputs
+    of those same tokens when the document KV is visible.
+    """
+    converter = MODEL_TO_MESSAGE_CONVERTER[tokenizer.name_or_path.lower()]
+    n_layers = attn_config.n_layers
+    query_acc = AMQueryAccumulator(
+        granularity="per_layer",
+        queries_per_batch="all_tokens",
+        n_layers=n_layers,
+        n_kv_heads=attn_config.n_heads,
+        device=device,
+    )
+    target_acc = AMTargetAccumulator(n_layers=n_layers, n_kv_heads=attn_config.n_heads)
+    n_used = 0
+    for doc_id, convos in ref_groups.items():
+        if doc_id not in local_docs:
+            logger.warning("No teacher KV for reference document %s", doc_id)
+            continue
+        encoded = []
+        for convo in convos:
+            messages = [m for m in convo.messages if m.role != "system"]
+            if not messages:
+                continue
+            elem = converter(list(messages), retokenize=True, tokenizer=tokenizer)
+            encoded.append(elem.input_ids)
+        if not encoded:
+            continue
+        # One flex shape per document. Padding uses a different seq id, so the
+        # real tokens' attention matches the unpadded question.
+        bucket = max(int(ids.numel()) for ids in encoded)
+        bucket = max(128, ((bucket + 127) // 128) * 128)
+        doc_cache = cache_from_layer_kv(attn_config, local_docs[doc_id], device=device)
+        try:
+            for ids in encoded:
+                ids = ids.to(device)
+                length = int(ids.numel())
+                if length < bucket:
+                    pad = torch.zeros(bucket - length, dtype=ids.dtype, device=device)
+                    ids = torch.cat([ids, pad])
+                    seq = torch.cat([
+                        torch.zeros(length, dtype=torch.long, device=device),
+                        torch.ones(bucket - length, dtype=torch.long, device=device),
+                    ])
+                else:
+                    seq = torch.zeros(length, dtype=torch.long, device=device)
+                if queries_per_batch == "last_token":
+                    token_idx = slice(length - 1, length)
+                else:
+                    token_idx = slice(0, length)
+                span = int(ids.numel())
+                q_pos = torch.arange(num_tokens, num_tokens + span, device=device)
+                y_pos = torch.arange(span, device=device)
+                q_cap = _forward_capture(model, ids, q_pos, None, "query", seq)
+                y_cap = _forward_capture(model, ids, y_pos, doc_cache, "target", seq)
+                for layer_idx, query in q_cap.items():
+                    if layer_idx >= n_layers:
+                        continue
+                    query_acc._queries[layer_idx].append(query[:, :, token_idx, :].detach().cpu())
+                for layer_idx, target in y_cap.items():
+                    if layer_idx >= n_layers:
+                        continue
+                    target_acc._targets[layer_idx].append(target[:, :, token_idx, :].detach().cpu())
+                n_used += 1
+        finally:
+            del doc_cache
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+    query_acc._n_ref_batches = n_used
+    return query_acc, target_acc, n_used
+
+
 def _collect_compaction_queries(
     model,
     dataloader,
@@ -327,6 +518,16 @@ def compact_cache_am_phase1(
     except StopIteration:
         model_dtype = torch.bfloat16
 
+    bound = bind_model_rope(model)
+    vanilla = 1.0 / (
+        float(rope_theta)
+        ** (torch.arange(0, head_dim, 2, dtype=torch.float32) / head_dim)
+    )
+    logger.info(
+        "RoPE rebake bound to model frequencies (ratio to vanilla theta min=%.4f max=%.4f)",
+        float((bound / vanilla).min()),
+        float((bound / vanilla).max()),
+    )
     model_rope_theta = getattr(getattr(model, "config", None), "rope_theta", None)
     rope_theta_matches_model = (
         model_rope_theta is None or abs(float(model_rope_theta) - rope_theta) < 1e-6
@@ -351,6 +552,8 @@ def compact_cache_am_phase1(
     teacher_pos_chunks: list[torch.Tensor] = []  # per-doc RoPE positions (layer-agnostic)
     doc_token_counts = []
     running_offset = 0
+    # Unrotated (positions 0..T-1) KV, one entry per document, for flex targets.
+    local_docs: dict[str, dict[int, tuple[torch.Tensor, torch.Tensor]]] = {}
     for doc_idx, (doc_id, group) in enumerate(doc_groups.items()):
         # 1.1 Get the system prompt for the document
         system_prompt = full_document_prompt(
@@ -362,24 +565,22 @@ def compact_cache_am_phase1(
         )
         if not system_prompt.strip():
             continue
-        # 1.2 Prefill the document into a teacher KV cache
+        # 1.2 Prefill in the eval chat format so keys live at positions 0..T-1,
+        # the geometry a question attends to when this KV is the cartridge.
         pos_offset = running_offset if global_teacher_positions else 0
-        doc_kv = prefill_document_kv_cache(
-            model=model,
-            tokenizer=tokenizer,
-            system_prompt=system_prompt,
-            attn_config=attn_config,
-            device=local_rank,
-            cartridge_cache=None,
-            position_offset=pos_offset,
-            capture_device=teacher_kv_device,
-        )
+        prefix_ids = _chat_system_prefix_ids(tokenizer, system_prompt)
+        doc_kv = _capture_post_rope_kv(model, prefix_ids, local_rank)
+        local_docs[doc_id] = doc_kv
         t_doc = doc_kv[0][0].shape[1]
         doc_token_counts.append(t_doc)
         appended_len = None
         # 1.3 Append the teacher KV cache to the teacher KV caches across layers
         for layer_idx in range(n_layers):
             k_d, v_d = doc_kv[layer_idx]  # (n_kv_heads, T_doc, head_dim)
+            if pos_offset:
+                k_d = _shift_key_positions(
+                    k_d, 0, pos_offset, head_dim, rope_theta
+                )
             if max_teacher_tokens is not None and per_doc_tokens[layer_idx] >= max_teacher_tokens:
                 appended_len = 0
                 continue
@@ -408,32 +609,35 @@ def compact_cache_am_phase1(
         T_teacher, doc_token_counts,
     )
 
-    # ---- 2. Collect QA reference queries ---------------------------------
-    # Reference queries must match the EVAL distribution: QASPER eval questions
-    # carry NO document (empty system prompt), so questions sit at low positions
-    # and rely entirely on the cartridge. We therefore strip the in-context
-    # document from the reference conversations so captured queries are
-    # question-only at low positions (classic AM: queries attend to the teacher,
-    # they do not re-read the document in their own context).
+    # ---- 2. Collect QA reference queries and in-context flex targets -------
+    # Eval questions carry no document and sit at positions ``num_tokens + i``
+    # (the model adds the cartridge length). The value target is the flex
+    # attention output of those tokens when this document's KV is visible,
+    # which is the residual that actually predicts the answer. The analytical
+    # document-only softmax is a different vector on Llama 3.
     ref_convos = limit_conversations(conversations, max_ref_examples, seed=0)
-    if strip_reference_system_prompt:
-        ref_convos = [dataclasses.replace(c, system_prompt="") for c in ref_convos] # remove the system prompt field value
-    ref_loader, ref_tmp = build_reference_dataloader(ref_convos, tokenizer, seed=0)
-    try:
-        query_acc = _collect_compaction_queries(
-            model,
-            ref_loader,
-            n_layers,
-            n_kv_heads,
-            queries_per_batch,
-            max_ref_batches,
-            attn_config,
-            local_rank,
+    ref_groups = group_conversations_by_document(ref_convos, dataset)
+    if not strip_reference_system_prompt:
+        logger.warning(
+            "strip_reference_system_prompt=False; question queries still drop "
+            "system-role turns so the cartridge, not an in-prompt document, "
+            "has to carry the paper."
         )
-    finally:
-        cleanup_reference_parquet(ref_tmp)
-
-    n_ref_batches = getattr(query_acc, "_n_ref_batches", 0)
+    query_acc, target_acc, n_ref_batches = _collect_flex_phase1_queries(
+        model,
+        tokenizer,
+        ref_groups,
+        local_docs,
+        attn_config,
+        num_tokens,
+        queries_per_batch,
+        local_rank,
+    )
+    logger.info(
+        "Flex targets collected for %d reference conversations (position offset %d)",
+        n_ref_batches,
+        num_tokens,
+    )
 
     # ---- 3. Compact per (layer, KV head) ---------------------------------
     keys_out: list[torch.Tensor] = []
@@ -443,6 +647,7 @@ def compact_cache_am_phase1(
     device = torch.device(local_rank) if not isinstance(local_rank, str) else local_rank
 
     for layer_idx in range(n_layers):
+        logger.info("Compaction solve layer %d/%d", layer_idx + 1, n_layers)
         K_T = teacher_K[layer_idx].to(device=device, dtype=model_dtype)  # (n_kv_heads, T, d)
         V_T = teacher_V[layer_idx].to(device=device, dtype=model_dtype)
         dtype = model_dtype
@@ -467,11 +672,20 @@ def compact_cache_am_phase1(
             queries = query_acc.get_layer_head_queries(
                 layer_idx, head_idx, n_q_heads=n_q_heads, n_kv_heads=n_kv_heads,
             ).to(device=device, dtype=dtype)
+            flex_targets = target_acc.get_layer_head_targets(
+                layer_idx, head_idx, n_q_heads=n_q_heads, n_kv_heads=n_kv_heads,
+            ).to(device=device, dtype=torch.float32)
             if queries.numel() == 0:
                 continue
+            if flex_targets.shape[0] != queries.shape[0]:
+                raise RuntimeError(
+                    f"Flex targets ({flex_targets.shape[0]}) are not aligned with "
+                    f"queries ({queries.shape[0]}) at layer {layer_idx} head {head_idx}"
+                )
             if queries.shape[0] > max_queries_per_head:
                 idx = torch.randperm(queries.shape[0], device=device)[:max_queries_per_head]
                 queries = queries[idx]
+                flex_targets = flex_targets[idx]
 
             # 3.1 Select the keys for the compacted block
             if key_select == "omp":
@@ -481,6 +695,7 @@ def compact_cache_am_phase1(
             else: # highest_attention
                 C1, beta, sel_idx = select_keys_highest_attention(
                     K_head, queries, num_tokens, head_dim, score_method="rms",
+                    fit_beta=enable_beta,
                     **beta_fit_kwargs,
                 )
 
@@ -502,10 +717,11 @@ def compact_cache_am_phase1(
             C2 = compute_compaction_c2(
                 C1, beta, K_head, V_head, queries, head_dim,
                 ridge_lambda=ridge_lambda, ridge_scale=ridge_scale,
+                targets=flex_targets,
             )
 
-            # [DIAGNOSTIC] Reconstruction MSE vs teacher attention output on the queries.
-            target = compute_attention_output(queries, K_head, V_head, head_dim)
+            # Reconstruction MSE against the in-context flex attention output.
+            target = flex_targets
             sC = (queries @ C1.T).to(torch.float32) * inv_sqrt_d + beta.to(torch.float32)
             approx = F.softmax(sC, dim=-1) @ C2.to(torch.float32)
             layer_mses.append(F.mse_loss(approx, target).item())
@@ -587,6 +803,8 @@ def compact_cache_am_phase1(
         "ridge_lambda": ridge_lambda,
         "ridge_scale": ridge_scale,
         "n_ref_batches": n_ref_batches,
+        "flex_targets": True,
+        "query_position_offset": int(num_tokens),
         "recon_mse_mean": float(sum(mse_values) / max(len(mse_values), 1)) if mse_values else None,
         "recon_mse_max": float(max(mse_values)) if mse_values else None,
         "recon_mse_per_layer": {int(k): float(v) for k, v in mse_per_layer.items()},
